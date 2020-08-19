@@ -140,44 +140,41 @@ $LANDO composer config repositories.${INSTALL_PROFILE_NAME} '{"type": "path", "u
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
 
-#if [ -a "${DEST_DIR}/package-lock.json" ]; then
-#  # Delete the package.lock file directory.
-#  echo "Deleting: ${DEST_DIR}/package-lock.json"
-#  rm -Rf $DEST_DIR/package-lock.json
-#fi
-#
-#if [ -a "${DEST_DIR}/.stylelintrc.json" ] ; then
-#  echo "Deleting ${DEST_DIR}/.stylelintrc.json and replacing with the dsitribution's copy.";
-#  # Remove the stylelintrc file.
-#  rm -Rf $DEST_DIR/.stylelintrc.json
-#fi
+if [ -a "${DEST_DIR}/package-lock.json" ]; then
+  # Delete the package.lock file directory.
+  echo "Deleting: ${DEST_DIR}/package-lock.json"
+  rm -Rf $DEST_DIR/package-lock.json
+fi
+
+if [ -a "${DEST_DIR}/.stylelintrc.json" ] ; then
+  echo "Deleting ${DEST_DIR}/.stylelintrc.json and replacing with the distribution's copy.";
+  # Remove the stylelintrc file.
+  rm -Rf $DEST_DIR/.stylelintrc.json
+fi
 
 # Copy the distribution .stylintrc.json file to the app.
-#cp $BASE_DIR/.stylelintrc.json $DEST_DIR
+cp $BASE_DIR/.stylelintrc.json $DEST_DIR
 
-#if [ -a "${DEST_DIR}/gulpfile.js" ]; then
-#  # Delete the gulpfile.js file directory.
-#  echo "Deleting: ${DEST_DIR}/gulpfile.js"
-#  rm -Rf $DEST_DIR/gulpfile.js
-#fi
+if [ -a "${DEST_DIR}/gulpfile.js" ]; then
+  # Delete the gulpfile.js file directory.
+  echo "Deleting: ${DEST_DIR}/gulpfile.js"
+  rm -Rf $DEST_DIR/gulpfile.js
+fi
 
 # Copy the distribution gulpfile.js file to the app.
-#cp $BASE_DIR/gulpfile.js $DEST_DIR
+cp $BASE_DIR/gulpfile.js $DEST_DIR
 
-#echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install gulp@4.0"
-#$LANDO npm install gulp@4.0
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install gulp@4.0"
+$LANDO npm install gulp@4.0
 
-#echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install gulp-sourcemaps"
-#$LANDO npm install gulp-sourcemaps
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install gulp-sourcemaps"
+$LANDO npm install gulp-sourcemaps
 
-#echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install stylelint-a11y"
-#$LANDO npm install stylelint-a11y
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install"
+$LANDO npm install
 
-#echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install"
-#$LANDO npm install
-
-#echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO gulp-distro"
-#$LANDO gulp-distro
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO gulp-distro"
+$LANDO gulp-distro
 
 # Install the profile.
 cd ${DOCROOT}
