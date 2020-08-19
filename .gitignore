@@ -1,0 +1,29 @@
+# Drupal
+/libraries
+/modules/contrib
+/themes/contrib
+
+# Compiled assets
+/**/*.css
+/**/*.js
+!/**/*.es6.js
+!/gulpfile.js
+/**/*.map
+
+# Project dependencies
+/node_modules
+/vendor
+
+# Project test results
+/tests/**/results
+
+# PHPStorm
+.idea
+
+# Distribution specifics
+/web
+/libraries
+composer.lock
+
+# Mac
+.DS_Store
