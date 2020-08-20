@@ -22,7 +22,6 @@
 
 # Distribution specifics
 /web
-/libraries
 composer.lock
 
 # Mac
