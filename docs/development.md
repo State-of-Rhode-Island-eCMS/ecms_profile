@@ -1,0 +1,78 @@
+# Development for the custom ecms_profile
+Development of the ecms_profile can be started by cloning this repository and
+running the following script:
+```bash
+./scripts/develop.sh
+```
+
+This script will create a new lando environment and symlink the repository into
+the `web/profiles/custom/ecms_profile` directory.
+
+This new environment will be located one directory above your 
+repository directory like this:
+
+```
+- ecms_profile/
+- develop-ecms-profile/
+```
+
+## Adding dependencies
+This is the installation profile and does not contain Lando, therefore, you 
+shouldn’t prefix any terminal commands with "Lando" within this repo. 
+For example, if you need an additional module use: 
+```bash
+composer require drupal/module --no-update
+```
+
+The repo should NOT contain a `composer.lock` file (hence the --no-update flag)
+and one should not be committed when creating a pull request 
+(why it's in the .gitignore). If a module needs to be installed to the profile,
+require it with composer but use the --no-update flag to keep the command 
+from creating a composer.lock file.
+To enable a module on the distribution install, add it to the 
+`ecms_profile.info.yml` file as a dependency.
+
+Config files for the profile are stored in the `config/install` directory. 
+If config files pertain to an existing custom module, then the yml file
+should live within that module’s config/install directory. 
+Note: Always run the config-clean shell script below to remove UUIDs.
+
+## Scripts
+
+This repo has two shell scripts that can be run:
+
+### Starting a development environment
+```bash
+./scripts/develop.sh
+```
+This will spin up a local environment with Lando that is based on 
+Oomph’s Drupal scaffold and will symlink the profile's 
+repository to the Lando environment. 
+
+### Cleaning configuration
+```bash
+./scripts/clean-config.sh
+```
+Removes UUIDs from config files.
+As you develop locally, there may be some configuration changes needed. 
+When you add config files to the profile repository, be sure to run this 
+shell script to remove the UUIDs.
+
+## Get a local spun up for the distribution
+1. Download and install Lando if you haven’t already. 
+   The team is using the latest stable release `https://github.com/lando/lando`
+2. Clone the profile repository:
+   `git@github.com:State-of-Rhode-Island-eCMS/ecms_profile.git`
+3. Change directories into the ecms_profile and run `./scripts/develop.sh`.
+   This will create a new Lando enabled directory labeled 
+   "develop-ecms-profile" directly above your cloned repository.
+   _This process can take upwards of 30 minutes on macOS_. 
+4. Once complete, change into the "develop-ecms-profile" and test run 
+   `lando gulp build` and it should build without error.
+5. You can log into the newly spun up website with user: admin / pass: admin.
+   `https://develop-ecms-profile.lndo.site/` 
+
+With the distribution site now fully installed, you can make your code updates
+from within the main "ecms_profile" repository directory.
+Changes will show in your demo site "develop-ecms-profile" 
+as the distro is symlinked. 

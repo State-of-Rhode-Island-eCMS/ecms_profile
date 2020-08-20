@@ -1,0 +1,46 @@
+# Runs and tests the develop.sh script
+---
+name: Test deploy.sh
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+    name: develop.sh
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prepare environment for Lando use
+        run: |
+          mkdir -p ~/.ssh
+
+      - name: Install Lando
+        run: |
+          pushd /tmp
+          wget https://files.devwithlando.io/lando-stable.deb
+          sudo dpkg -i --ignore-depends=docker-ce lando-stable.deb
+          popd
+
+      - name: Run the development script
+        run: ./scripts/develop.sh
+
+      - name: Check coding standards.
+        run: |
+          cd ../develop-ecms-profile
+          lando phpcs web/profiles/contrib/ecms_profile
+
+      - name: Run unit tests.
+        run: |
+          cd ../develop-ecms-profile
+          lando phpunit
+
+      - name: Run gulp validate.
+        run: |
+          cd ../develop-ecms-profile
+          lando gulp-distro validate
