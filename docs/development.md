@@ -33,7 +33,6 @@ To enable a module on the distribution install, add it to the
 `ecms_profile.info.yml` file as a dependency.
 
 Config files for the profile are stored in the `config/install` directory. 
-Config files for the profile are stored in the `config/install` directory. 
 If config files pertain to an existing custom module, then the yml file
 should live within that module’s config/install directory. 
 Note: Always run the config-clean shell script below to remove UUIDs.
