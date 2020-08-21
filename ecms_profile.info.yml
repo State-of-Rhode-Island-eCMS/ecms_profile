@@ -16,4 +16,4 @@ dependencies:
 
 # Theme dependencies for the distribution.
 themes:
-  - bartik
+  - claro
