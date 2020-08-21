@@ -2,3 +2,18 @@ name: Rhode Island eCMS System
 type: profile
 description: "Drupal installation profile for the State of Rhode Island's eCMS system"
 core_version_requirement: ^9
+
+# Define this as a distribution.
+distribution:
+  name: Rhode Island eCMS System
+
+  install:
+    theme: seven
+
+# Module dependencies for the distribution.
+dependencies:
+  - acsf
+
+# Theme dependencies for the distribution.
+themes:
+  - bartik
