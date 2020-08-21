@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- Added the [ACSF module](https://www.drupal.org/project/acsf) as a required dependency.
 
 ### Changed
 
