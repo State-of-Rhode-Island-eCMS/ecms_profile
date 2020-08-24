@@ -130,6 +130,9 @@ fi
 # Start the app with lando.
 $LANDO start
 
+# Remove the coffee module as it currently breaks unit testing.
+$LANDO composer remove drupal/coffee
+
 # Update composer packages from the scaffold.
 $LANDO composer update
 
