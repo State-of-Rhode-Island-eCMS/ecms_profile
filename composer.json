@@ -51,8 +51,8 @@
     "zaporylie/composer-drupal-optimizations": "^1.0"
   },
   "require-dev": {
+    "behat/mink-goutte-driver": "^1.2",
     "phpunit/phpunit": "^8",
-    "symfony/phpunit-bridge": "^5.1",
-    "behat/mink-goutte-driver": "^1.2"
+    "symfony/phpunit-bridge": "^5.1"
   }
 }
