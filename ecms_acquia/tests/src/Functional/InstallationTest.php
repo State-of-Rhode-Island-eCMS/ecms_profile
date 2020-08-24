@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\ecms_base\Functional;
+namespace Drupal\Tests\ecms_acquia\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
@@ -10,12 +10,12 @@ use Drupal\Tests\BrowserTestBase;
  * Tests that installation finished correctly and known resources are available.
  *
  * @group ecms
- * @group ecms_base
+ * @group ecms_acquia
  *
  */
 class InstallationTest extends BrowserTestBase {
 
-  protected $profile = 'ecms_base';
+  protected $profile = 'ecms_acquia';
 
   protected $defaultTheme = 'stark';
 
@@ -30,10 +30,10 @@ class InstallationTest extends BrowserTestBase {
     $this->drupalGet('admin/modules');
     $this->assertSession()->statusCodeEquals(200);
 
-    $this->assertSession()->checkboxNotChecked('edit-modules-acsf-enable');
-    $this->assertSession()->checkboxNotChecked('edit-modules-acsf-duplication-enable');
-    $this->assertSession()->checkboxNotChecked('edit-modules-acsf-theme-enable');
-    $this->assertSession()->checkboxNotChecked('edit-modules-acsf-variables-enable');
+    $this->assertSession()->checkboxChecked('edit-modules-acsf-enable');
+    $this->assertSession()->checkboxChecked('edit-modules-acsf-duplication-enable');
+    $this->assertSession()->checkboxChecked('edit-modules-acsf-theme-enable');
+    $this->assertSession()->checkboxChecked('edit-modules-acsf-variables-enable');
   }
 
 }

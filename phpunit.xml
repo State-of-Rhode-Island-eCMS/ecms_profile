@@ -28,7 +28,6 @@
             <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Unit</directory>
         </testsuite>
         <testsuite name="functionaltest">
-<!--            <directory>/app/web/profiles/contrib/*/modules/custom/*/tests/src/Functional</directory>-->
             <directory>/app/web/profiles/contrib/ecms_profile/*/tests/src/Functional</directory>
         </testsuite>
     </testsuites>
@@ -42,8 +41,11 @@
     <!-- Filter for coverage reports. -->
     <filter>
         <whitelist>
-            <directory>/app/web/profiles/contrib/ecms_profile/*/modules/tests/src/Unit</directory>
-            <directory>/app/web/profiles/contrib/ecms_profile/*/modules/tests/src/Functional</directory>
+            <directory>/app/web/profiles/contrib/ecms_profile/*</directory>
+            <exclude>
+                <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
+                <directory>/app/web/profiles/contrib/ecms_profile/*/tests</directory>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
