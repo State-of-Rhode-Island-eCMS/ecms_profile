@@ -6,7 +6,8 @@ set -eo pipefail
 # Move up a level starting from the scripts directory.
 BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"
 APP_NAME="develop-ecms-profile"
-INSTALL_PROFILE_NAME="ecms_profile"
+INSTALL_PROFILE_NAME="ecms_base"
+INSTALL_PROFILE_DIRECTORY="ecms_profile"
 REPOSITORY_NAME="rhodeislandecms/ecms_profile"
 
 COMPOSER="$(which composer)"
@@ -110,18 +111,18 @@ else
   appserver:
     overrides:
       volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_NAME
+        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
   nodejs:
     overrides:
       volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_NAME
+        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
 tooling:
   phpunit:
     service: appserver
-    cmd: vendor/bin/phpunit --configuration /$INSTALL_PROFILE_NAME/phpunit.xml
+    cmd: vendor/bin/phpunit --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
   gulp-distro:
     service: nodejs
-    cmd: cd /$INSTALL_PROFILE_NAME && npm install
+    cmd: cd /$INSTALL_PROFILE_DIRECTORY && npm install
 config:
   xdebug: true" >> ${DEST_DIR}/.lando.local.yml
 fi
@@ -136,7 +137,7 @@ echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
 echo "--------------------------------------------------"
 
-$LANDO composer config repositories.${INSTALL_PROFILE_NAME} '{"type": "path", "url": "/'${INSTALL_PROFILE_NAME}'", "options": {"symlink": true}}'
+$LANDO composer config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "/'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
 
