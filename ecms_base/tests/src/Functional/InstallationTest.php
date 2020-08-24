@@ -21,7 +21,7 @@ class InstallationTest extends BrowserTestBase {
 
 
   /**
-   * Test the home page is loading.
+   * Test the the ACSF modules are not installed.
    */
   public function testLandingPage() {
     $account = $this->drupalCreateUser(['administer modules']);
