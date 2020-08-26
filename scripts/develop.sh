@@ -123,6 +123,9 @@ tooling:
   gulp-distro:
     service: nodejs
     cmd: cd /$INSTALL_PROFILE_DIRECTORY && npm install
+  phpcs:
+    service: appserver
+    cmd: vendor/bin/phpcs --standard=/$INSTALL_PROFILE_DIRECTORY/phpcs.xml
 config:
   xdebug: true" >> ${DEST_DIR}/.lando.local.yml
 fi
