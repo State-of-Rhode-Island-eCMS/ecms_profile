@@ -4,7 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_acquia\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+// Require the all profiles abstract class since autoload doesn't work.
+require_once dirname(__FILE__) . '/../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+
+use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 
 /**
  * Tests that installation finished correctly and known resources are available.
@@ -13,17 +16,26 @@ use Drupal\Tests\BrowserTestBase;
  * @group ecms_acquia
  *
  */
-class InstallationTest extends BrowserTestBase {
+class InstallationTest extends AllProfileInstallationTestsAbstract {
 
+  /**
+   * The profile to install.
+   *
+   * @var string
+   */
   protected $profile = 'ecms_acquia';
 
+  /**
+   * The theme to test with.
+   *
+   * @var string
+   */
   protected $defaultTheme = 'stark';
-
 
   /**
    * Test that the ACSF modules are installed.
    */
-  public function testLandingPage() {
+  public function testAcsfModulesEnabled(): void {
     $account = $this->drupalCreateUser(['administer modules']);
     $this->drupalLogin($account);
 

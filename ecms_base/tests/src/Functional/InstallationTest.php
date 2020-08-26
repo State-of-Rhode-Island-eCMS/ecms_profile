@@ -4,26 +4,37 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_base\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+// Require the all profiles abstract class since autoloading doesn't work.
+require_once dirname(__FILE__) . '/../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+
+use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 
 /**
  * Tests that installation finished correctly and known resources are available.
  *
  * @group ecms
  * @group ecms_base
- *
  */
-class InstallationTest extends BrowserTestBase {
-
-  protected $profile = 'ecms_base';
-
-  protected $defaultTheme = 'stark';
-
+class InstallationTest extends AllProfileInstallationTestsAbstract {
 
   /**
-   * Test the the ACSF modules are not installed.
+   * The profile to install.
+   *
+   * @var string
    */
-  public function testLandingPage() {
+  protected $profile = 'ecms_base';
+
+  /**
+   * The theme to test with.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * Test that the ACSF modules are not installed.
+   */
+  public function testAcsfModulesDisabled(): void {
     $account = $this->drupalCreateUser(['administer modules']);
     $this->drupalLogin($account);
 
