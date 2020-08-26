@@ -13,18 +13,20 @@ use Drupal\Tests\BrowserTestBase;
  * Class AllProfileInstallationTestsAbstract
  *
  * This class defines common tests between all profiles and should be extended
- * for each installation test.
+ * for installation testing. Autoloading doesn't work, so it will need to be
+ * required with:
+ * require_once dirname(__FILE__) . '/../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
  *
  * @package Drupal\Tests\ecms_profile\Functional
  */
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
   /**
-   * Override the default drupalLogin.
+   * Override the default drupalLogin method.
    *
-   * The openid_connect modules is configured to disable the user/login route.
-   * This method updates the route supplied to use the ?showcore
-   * query parameter, bypassing the OIDC restriction.
+   * The openid_connect modules is configured to alter the user.login route and
+   * remove the standard drupal login form. This method updates the route
+   * to use the ?showcore query parameter, bypassing the OIDC restriction.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    */
