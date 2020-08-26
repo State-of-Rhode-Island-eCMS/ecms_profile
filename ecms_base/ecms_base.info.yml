@@ -35,6 +35,7 @@ dependencies:
   - quickedit
   - responsive_image
   - rdf
+  - scheduler
   - search
   - shortcut
   - taxonomy
