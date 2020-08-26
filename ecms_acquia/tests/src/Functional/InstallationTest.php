@@ -14,7 +14,6 @@ use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
  *
  * @group ecms
  * @group ecms_acquia
- *
  */
 class InstallationTest extends AllProfileInstallationTestsAbstract {
 
