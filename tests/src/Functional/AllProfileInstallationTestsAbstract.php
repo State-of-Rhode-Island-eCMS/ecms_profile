@@ -10,12 +10,15 @@ use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Class AllProfileInstallationTestsAbstract
+ * Class AllProfileInstallationTestsAbstract.
  *
  * This class defines common tests between all profiles and should be extended
  * for installation testing. Autoloading doesn't work, so it will need to be
  * required with:
- * require_once dirname(__FILE__) . '/../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+ * ```
+ * require_once dirname(__FILE__)
+ *   . '/../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+ * ```
  *
  * @package Drupal\Tests\ecms_profile\Functional
  */
@@ -29,6 +32,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * to use the ?showcore query parameter, bypassing the OIDC restriction.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
+   *   The drupal account interface to login with.
    */
   protected function drupalLogin(AccountInterface $account): void {
     if ($this->loggedInUser) {
@@ -53,7 +57,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Test the openid_connect module is installed properly.
    */
-  public function testOpenIDConnect(): void {
+  public function testOpenIdConnect(): void {
     $this->drupalGet('user/login');
     $this->assertSession()->buttonExists('edit-openid-connect-client-generic-login');
     $this->assertSession()->fieldNotExists('name');
