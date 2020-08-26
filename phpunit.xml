@@ -27,7 +27,6 @@
             <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Unit</directory>
         </testsuite>
         <testsuite name="functional">
-            <directory>/app/web/profiles/contrib/ecms_profile/tests/src/Functional</directory>
             <directory>/app/web/profiles/contrib/ecms_profile/*/tests/src/Functional</directory>
         </testsuite>
     </testsuites>
