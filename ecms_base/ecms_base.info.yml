@@ -47,3 +47,35 @@ dependencies:
 themes:
   - bartik
   - claro
+
+# Modules to install to support the profile.
+install:
+  - admin_toolbar
+  - block
+  - block_content
+  - breakpoint
+  - ckeditor
+  - content_moderation
+  - datetime
+  - dblog
+  - editor
+  - field
+  - field_ui
+  - file
+  - filter
+  - image
+  - link
+  - media
+  - node
+  - path
+  - path_alias
+  - scheduler
+  - system
+  - taxonomy
+  - text
+  - toolbar
+  - update
+  - user
+  - views
+  - views_ui
+  - workflows
