@@ -123,6 +123,9 @@ tooling:
   gulp-distro:
     service: nodejs
     cmd: cd /$INSTALL_PROFILE_DIRECTORY && npm install
+  phpcs:
+    service: appserver
+    cmd: vendor/bin/phpcs --standard=/$INSTALL_PROFILE_DIRECTORY/phpcs.xml
 config:
   xdebug: true" >> ${DEST_DIR}/.lando.local.yml
 fi
@@ -146,6 +149,8 @@ echo "--------------------------------------------------"
 $LANDO composer config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "/'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
+# Update the lock file to ensure core patches applied.
+$LANDO composer update --lock
 
 if [ -a "${DEST_DIR}/package-lock.json" ]; then
   # Delete the package.lock file directory.

@@ -14,7 +14,6 @@
         <!-- Example SIMPLETEST_BASE_URL value: http://localhost -->
         <env name="SIMPLETEST_BASE_URL" value="http://appserver/"/>
         <!-- Example SIMPLETEST_DB value: mysql://username:password@localhost/databasename#table_prefix -->
-<!--        <env name="SIMPLETEST_DB" value="mysql://drupal9:drupal9@database:3306/drupal9"/>-->
         <env name="SIMPLETEST_DB" value="sqlite://appserver/sites/default/files/db.sqlite"/>
         <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
         <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
@@ -27,7 +26,7 @@
         <testsuite name="unit">
             <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Unit</directory>
         </testsuite>
-        <testsuite name="functionaltest">
+        <testsuite name="functional">
             <directory>/app/web/profiles/contrib/ecms_profile/*/tests/src/Functional</directory>
         </testsuite>
     </testsuites>
@@ -45,12 +44,12 @@
             <exclude>
                 <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
                 <directory>/app/web/profiles/contrib/ecms_profile/*/tests</directory>
+                <directory>/app/web/profiles/contrib/ecms_profile/tests</directory>
             </exclude>
         </whitelist>
     </filter>
     <logging>
         <log type="coverage-html" target="tests/phpunit/results/html"/>
-        <log type="coverage-clover" target="tests/phpunit/results/coverage.xml"/>
         <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
     </logging>
 </phpunit>
