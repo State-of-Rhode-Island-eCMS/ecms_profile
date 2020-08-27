@@ -3,10 +3,44 @@ type: profile
 description: "Drupal installation profile for the State of Rhode Island's eCMS system"
 core_version_requirement: ^9
 
+install:
+  - big_pipe
+  - block
+  - block_content
+  - breakpoint
+  - ckeditor
+  - color
+  - config
+  - contextual
+  - datetime
+  - dynamic_page_cache
+  - editor
+  - field_ui
+  - file
+  - help
+  - history
+  - image
+  - menu_link_content
+  - menu_ui
+  - node
+  - options
+  - path
+  - page_cache
+  - quickedit
+  - rdf
+  - search
+  - shortcut
+  - taxonomy
+  - toolbar
+  - tour
+  - views
+  - views_ui
+
 # Module dependencies for the distribution.
 dependencies:
   - openid_connect
 
 # Theme dependencies for the distribution.
 themes:
+  - bartik
   - claro
