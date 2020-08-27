@@ -8,6 +8,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\SchemaCheckTestTrait;
 
 /**
  * Class AllProfileInstallationTestsAbstract.
@@ -23,6 +24,8 @@ use Drupal\Tests\BrowserTestBase;
  * @package Drupal\Tests\ecms_profile\Functional
  */
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
+
+  use SchemaCheckTestTrait;
 
   /**
    * Override the default drupalLogin method.
@@ -88,6 +91,20 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-always-save-userinfo');
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
+  }
+
+  /**
+   * Ensure the configuration installed properly.
+   */
+  public function testConfigInstall(): void {
+    // Ensure all configuration imported.
+    $names = $this->container->get('config.storage')->listAll();
+    /** @var \Drupal\Core\Config\TypedConfigManagerInterface $typed_config */
+    $typed_config = $this->container->get('config.typed');
+    foreach ($names as $name) {
+      $config = $this->config($name);
+      $this->assertConfigSchema($typed_config, $name, $config->get());
+    }
 
   }
 
