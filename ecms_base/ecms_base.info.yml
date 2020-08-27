@@ -4,7 +4,7 @@ description: "Drupal installation profile for the State of Rhode Island's eCMS s
 core_version_requirement: ^9
 
 # Module dependencies for the distribution.
-# Modules that sub-profiles need should be listed here and _not_ in install.
+# Modules that sub-profiles need must be listed here and_not in install.
 dependencies:
   - big_pipe
   - block
