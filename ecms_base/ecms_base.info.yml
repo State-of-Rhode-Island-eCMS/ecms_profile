@@ -11,6 +11,7 @@ install:
   - ckeditor
   - color
   - config
+  - content_moderation
   - contextual
   - datetime
   - dynamic_page_cache
@@ -20,6 +21,8 @@ install:
   - help
   - history
   - image
+  - media
+  - media_library
   - menu_link_content
   - menu_ui
   - node
@@ -27,6 +30,7 @@ install:
   - path
   - page_cache
   - quickedit
+  - responsive_image
   - rdf
   - search
   - shortcut
