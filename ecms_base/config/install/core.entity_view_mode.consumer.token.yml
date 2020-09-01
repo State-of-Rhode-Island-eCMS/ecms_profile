@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - consumers
+    - lightning_core
+third_party_settings:
+id: consumer.token
+label: Token
+targetEntityType: consumer
+cache: true

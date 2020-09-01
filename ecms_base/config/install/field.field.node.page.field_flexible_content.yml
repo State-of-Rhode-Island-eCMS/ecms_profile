@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_flexible_content
+    - node.type.page
+    - paragraphs.paragraphs_type.phone
+  module:
+    - entity_reference_revisions
+id: node.page.field_flexible_content
+field_name: field_flexible_content
+entity_type: node
+bundle: page
+label: 'Flexible Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 1
+    target_bundles:
+      phone: phone
+    target_bundles_drag_drop:
+      content:
+        weight: 4
+        enabled: false
+      media:
+        weight: 5
+        enabled: false
+      phone:
+        enabled: true
+        weight: 6
+field_type: entity_reference_revisions

@@ -51,7 +51,10 @@ themes:
 
 # Modules to install to support the profile.
 install:
+  - address
   - admin_toolbar
+  - allowed_formats
+  - auto_entitylabel
   - block
   - block_content
   - breakpoint
@@ -60,6 +63,8 @@ install:
   - datetime
   - dblog
   - editor
+  - entity_reference_revisions
+  - features
   - field
   - field_ui
   - file
@@ -68,8 +73,11 @@ install:
   - link
   - media
   - node
+  - office_hours
+  - paragraphs
   - path
   - path_alias
+  - responsive_image
   - scheduler
   - system
   - taxonomy

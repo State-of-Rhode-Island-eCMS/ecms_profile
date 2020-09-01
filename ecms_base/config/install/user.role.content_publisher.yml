@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+id: content_publisher
+label: 'Content Publisher'
+weight: 5
+is_admin: null
+permissions:
+  - 'create landing_page content'
+  - 'create press_release content'
+  - 'delete all revisions'
+  - 'delete any audio_file media'
+  - 'delete any document media'
+  - 'delete any image media'
+  - 'delete any landing_page content'
+  - 'delete any location content'
+  - 'delete any media'
+  - 'delete any notification content'
+  - 'delete any page content'
+  - 'delete any person content'
+  - 'delete any press_release content'
+  - 'delete any video media'
+  - 'delete any video_file media'
+  - 'edit any audio_file media'
+  - 'edit any document media'
+  - 'edit any landing_page content'
+  - 'edit any location content'
+  - 'edit any notification content'
+  - 'edit any page content'
+  - 'edit any person content'
+  - 'edit any press_release content'
+  - 'edit any video media'
+  - 'edit any video_file media'
+  - 'revert all revisions'
+  - 'update any media'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition review'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view own unpublished content'

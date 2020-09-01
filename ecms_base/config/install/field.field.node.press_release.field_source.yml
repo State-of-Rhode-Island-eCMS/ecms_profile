@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_source
+    - node.type.press_release
+  module:
+    - text
+id: node.press_release.field_source
+field_name: field_source
+entity_type: node
+bundle: press_release
+label: Source
+description: 'Optional agency and press contact information'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

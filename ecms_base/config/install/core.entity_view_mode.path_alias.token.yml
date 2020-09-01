@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - path_alias
+third_party_settings:
+id: path_alias.token
+label: Token
+targetEntityType: path_alias
+cache: true

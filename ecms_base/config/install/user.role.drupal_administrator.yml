@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+id: drupal_administrator
+label: 'Drupal Administrator'
+weight: 3
+is_admin: null
+permissions:
+  - 'access contextual links'
+  - 'administer block_content display'
+  - 'administer blocks'
+  - 'administer contact forms'
+  - 'administer contact_message display'
+  - 'administer contact_message fields'
+  - 'administer crop'
+  - 'administer crop types'
+  - 'administer media'
+  - 'administer media display'
+  - 'administer meta tags'
+  - 'administer node display'
+  - 'bypass node access'
+  - 'create landing_page content'
+  - 'create press_release content'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'edit any landing_page content'
+  - 'edit any location content'
+  - 'edit any notification content'
+  - 'edit any page content'
+  - 'edit any person content'
+  - 'edit any press_release content'
+  - 'revert all revisions'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition review'
+  - 'use text format javascript'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view own unpublished content'

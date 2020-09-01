@@ -1,11 +1,12 @@
-name: ''
-mail: ''
+name: 'ecms_profile Distribution'
+mail: admin@localhost
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /node
+  front: /user/login
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en
 default_langcode: en
+mail_notification: ''

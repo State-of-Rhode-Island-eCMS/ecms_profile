@@ -70,9 +70,21 @@ shell script to remove the UUIDs.
 4. Once complete, change into the "develop-ecms-profile" and test run 
    `lando gulp build` and it should build without error.
 5. You can log into the newly spun up website with user: admin / pass: admin.
-   `https://develop-ecms-profile.lndo.site/` 
+   `https://develop-ecms-profile.lndo.site/user/login?showcore=1` 
 
 With the distribution site now fully installed, you can make your code updates
 from within the main "ecms_profile" repository directory.
 Changes will show in your demo site "develop-ecms-profile" 
 as the distro is symlinked. 
+
+### Feature branches
+When making changes to the "ecms_profile" repository in a feature branch, you may
+have to update the composer.json package version in the "develop-ecms-profile" to
+point to your feature branch.
+```json
+"require": {
+        "rhodeislandecms/ecms_profile": "dev-feature-branch-name",
+    },
+```
+This will be the case if you update any requirements, such as a new module. Composer
+won't be aware of the changes unless it's looking at the updated dependencies.

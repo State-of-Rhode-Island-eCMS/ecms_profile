@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact
+    - lightning_core
+third_party_settings:
+id: contact_message.token
+label: Token
+targetEntityType: contact_message
+cache: true

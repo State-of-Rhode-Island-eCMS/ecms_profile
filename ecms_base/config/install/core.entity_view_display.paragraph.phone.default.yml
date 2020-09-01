@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.phone.field_extension
+    - field.field.paragraph.phone.field_phone_number
+    - paragraphs.paragraphs_type.phone
+id: paragraph.phone.default
+targetEntityType: paragraph
+bundle: phone
+mode: default
+content:
+  field_extension:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_phone_number:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  search_api_excerpt: true

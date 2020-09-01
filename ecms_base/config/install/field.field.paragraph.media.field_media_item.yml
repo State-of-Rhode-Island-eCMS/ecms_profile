@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_item
+    - media.type.audio_file
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - media.type.video_file
+    - paragraphs.paragraphs_type.media
+id: paragraph.media.field_media_item
+field_name: field_media_item
+entity_type: paragraph
+bundle: media
+label: 'Media Item'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      audio_file: audio_file
+      image: image
+      remote_video: remote_video
+      video: video
+      video_file: video_file
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: audio_file
+field_type: entity_reference

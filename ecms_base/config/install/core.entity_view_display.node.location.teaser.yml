@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.location.body
+    - field.field.node.location.field_address
+    - field.field.node.location.field_hours
+    - field.field.node.location.field_phone_numbers
+    - node.type.location
+  module:
+    - user
+id: node.location.teaser
+targetEntityType: node
+bundle: location
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_address: true
+  field_hours: true
+  field_phone_numbers: true
+  search_api_excerpt: true

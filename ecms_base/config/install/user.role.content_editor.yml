@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+third_party_settings:
+id: content_editor
+label: 'Content Editor'
+weight: 4
+is_admin: null
+permissions:
+  - 'create press_release content'
+  - 'edit own landing_page content'
+  - 'edit own location content'
+  - 'edit own notification content'
+  - 'edit own page content'
+  - 'edit own person content'
+  - 'edit own press_release content'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition review'
+  - 'view own unpublished content'

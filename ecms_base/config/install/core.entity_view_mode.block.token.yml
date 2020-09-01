@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block
+    - lightning_core
+third_party_settings:
+id: block.token
+label: Token
+targetEntityType: block
+cache: true
