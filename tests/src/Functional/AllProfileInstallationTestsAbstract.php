@@ -108,4 +108,17 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
   }
 
+  /**
+   * Ensure the webform requirement installed properly.
+   */
+  public function testWebformInstall(): void {
+    $account = $this->drupalCreateUser(['administer webform']);
+    $this->drupalLogin($account);
+
+    // Ensure the form configuration page is available.
+    $this->drupalGet('admin/structure/webform');
+    $this->assertSession()->statusCodeEquals(200);
+
+  }
+
 }

@@ -53,6 +53,7 @@
     "drupal/acsf": "^2.67",
     "drupal/core-recommended": "^9",
     "drupal/openid_connect": "1.x-dev",
+    "drupal/webform": "^6.0",
     "drush/drush": "^10.0",
     "zaporylie/composer-drupal-optimizations": "^1.0"
   },
