@@ -11,15 +11,9 @@ dependencies:
     - address
     - entity_reference_revisions
     - office_hours
-    - panelizer
     - text
     - user
-third_party_settings:
-  panelizer:
-    enable: false
-    custom: false
-    allow: false
-    default: default
+third_party_settings: {  }
 id: node.location.default
 targetEntityType: node
 bundle: location

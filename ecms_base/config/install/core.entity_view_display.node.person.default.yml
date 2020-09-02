@@ -13,14 +13,8 @@ dependencies:
     - node.type.person
   module:
     - entity_reference_revisions
-    - panelizer
     - user
-third_party_settings:
-  panelizer:
-    enable: false
-    custom: false
-    allow: false
-    default: default
+third_party_settings: {  }
 id: node.person.default
 targetEntityType: node
 bundle: person

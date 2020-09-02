@@ -7,15 +7,9 @@ dependencies:
     - node.type.landing_page
   module:
     - metatag
-    - panelizer
     - text
     - user
-third_party_settings:
-  panelizer:
-    enable: false
-    custom: false
-    allow: false
-    default: default
+third_party_settings: {  }
 id: node.landing_page.default
 targetEntityType: node
 bundle: landing_page

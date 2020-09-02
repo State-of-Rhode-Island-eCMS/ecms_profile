@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - lightning_core
     - media
 third_party_settings:
 id: media.token

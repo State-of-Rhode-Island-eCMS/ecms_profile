@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - lightning_core
     - shortcut
 third_party_settings:
 id: shortcut.token

@@ -4,7 +4,6 @@ dependencies:
   config:
     - core.entity_form_mode.media.media_browser
     - field.field.media.video.field_media_in_library
-    - field.field.media.video.field_media_video_embed_field
     - media.type.video
   module:
     - path

@@ -63,6 +63,7 @@ install:
   - datetime
   - dblog
   - editor
+  - entity_embed
   - entity_reference_revisions
   - features
   - field
@@ -70,8 +71,11 @@ install:
   - file
   - filter
   - image
+  - image_widget_crop
   - link
   - media
+  - metatag
+  - moderation_dashboard
   - node
   - office_hours
   - paragraphs

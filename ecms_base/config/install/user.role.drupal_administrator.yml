@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  module:
-    - lightning_core
+dependencies: {  }
 third_party_settings:
 id: drupal_administrator
 label: 'Drupal Administrator'
