@@ -47,5 +47,4 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
-  field_media_video_embed_field: true
   uid: true

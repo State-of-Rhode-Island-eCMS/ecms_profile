@@ -21,17 +21,6 @@ content:
       timezone: ''
     third_party_settings: {  }
     region: content
-  field_media_video_embed_field:
-    type: video_embed_field_video
-    weight: 3
-    label: hidden
-    settings:
-      responsive: true
-      width: 854
-      height: 480
-      autoplay: true
-    third_party_settings: {  }
-    region: content
   name:
     label: hidden
     type: string
