@@ -1,7 +1,6 @@
 langcode: en
 status: true
 dependencies: {  }
-third_party_settings:
 id: drupal_administrator
 label: 'Drupal Administrator'
 weight: 3

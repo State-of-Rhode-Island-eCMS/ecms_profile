@@ -9,7 +9,6 @@ dependencies:
   module:
     - metatag
     - user
-third_party_settings: {  }
 id: node.landing_page.full
 targetEntityType: node
 bundle: landing_page

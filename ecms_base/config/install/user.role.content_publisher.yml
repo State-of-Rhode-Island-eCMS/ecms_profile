@@ -1,7 +1,6 @@
 langcode: en
 status: true
 dependencies: {  }
-third_party_settings:
 id: content_publisher
 label: 'Content Publisher'
 weight: 5

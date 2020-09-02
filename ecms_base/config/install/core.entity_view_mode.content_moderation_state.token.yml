@@ -3,7 +3,6 @@ status: true
 dependencies:
   module:
     - content_moderation
-third_party_settings:
 id: content_moderation_state.token
 label: Token
 targetEntityType: content_moderation_state

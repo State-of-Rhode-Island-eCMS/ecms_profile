@@ -6,7 +6,6 @@ dependencies:
     - media.type.audio_file
     - media.type.image
     - media.type.remote_video
-    - media.type.video
     - media.type.video_file
     - paragraphs.paragraphs_type.media
 id: paragraph.media.field_media_item
@@ -26,7 +25,6 @@ settings:
       audio_file: audio_file
       image: image
       remote_video: remote_video
-      video: video
       video_file: video_file
     sort:
       field: _none

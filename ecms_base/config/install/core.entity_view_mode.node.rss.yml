@@ -3,7 +3,6 @@ status: false
 dependencies:
   module:
     - node
-third_party_settings:
 id: node.rss
 label: RSS
 targetEntityType: node

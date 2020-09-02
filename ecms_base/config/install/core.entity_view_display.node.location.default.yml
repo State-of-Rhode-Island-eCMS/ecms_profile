@@ -13,7 +13,6 @@ dependencies:
     - office_hours
     - text
     - user
-third_party_settings: {  }
 id: node.location.default
 targetEntityType: node
 bundle: location

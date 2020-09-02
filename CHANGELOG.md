@@ -13,8 +13,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - Added the [ACSF module](https://www.drupal.org/project/acsf) as a required dependency.
 - Added the [openid_connect](https://www.drupal.org/project/openid_connect) module as a dependency.
 - Added required modules/configuration based on the standard installation profile.
+- Added config and modules for publishing workflows.
 
 ### Changed
+- Updated installation requirements for the standard installation profile.
 
 ### Deprecated
 

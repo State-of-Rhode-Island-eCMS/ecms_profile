@@ -3,7 +3,6 @@ status: false
 dependencies:
   module:
     - node
-third_party_settings:
 id: node.search_index
 label: 'Search index'
 targetEntityType: node

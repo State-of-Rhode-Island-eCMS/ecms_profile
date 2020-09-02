@@ -1,7 +1,6 @@
 langcode: en
 status: true
 dependencies: {  }
-third_party_settings:
 id: content_editor
 label: 'Content Editor'
 weight: 4

@@ -16,6 +16,7 @@ dependencies:
     - content_moderation
     - paragraphs
     - path
+    - scheduler
 id: node.person.default
 targetEntityType: node
 bundle: person
@@ -107,6 +108,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
@@ -131,6 +138,12 @@ content:
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   promote: true

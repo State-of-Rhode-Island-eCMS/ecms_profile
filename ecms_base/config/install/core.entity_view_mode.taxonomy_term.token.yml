@@ -3,7 +3,6 @@ status: true
 dependencies:
   module:
     - taxonomy
-third_party_settings:
 id: taxonomy_term.token
 label: Token
 targetEntityType: taxonomy_term

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.drupal_administrator
+  module:
+    - user
+id: user_add_role_action.drupal_administrator
+label: 'Add the Drupal Administrator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: drupal_administrator
