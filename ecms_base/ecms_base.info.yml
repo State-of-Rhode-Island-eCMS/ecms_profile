@@ -50,6 +50,10 @@ dependencies:
 install:
   - ecms_notification
 
+# Install the required features.
+install:
+  - ecms_notification
+
 # Theme dependencies for the distribution.
 themes:
   - bartik
