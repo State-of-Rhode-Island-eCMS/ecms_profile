@@ -40,7 +40,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    */
   public function testAllTheThings(): void {
     // Run our profile tests only.
-    $this->testAcsfModulesDisabled();
+    $this->ensureAcsfModulesDisabled();
 
     // Run all of the global tests.
     $this->globalTests();
@@ -49,7 +49,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   /**
    * Test that the ACSF modules are not installed.
    */
-  private function testAcsfModulesDisabled(): void {
+  private function ensureAcsfModulesDisabled(): void {
     $account = $this->drupalCreateUser(['administer modules']);
     $this->drupalLogin($account);
 

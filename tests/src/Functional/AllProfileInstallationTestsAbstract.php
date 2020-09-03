@@ -62,15 +62,15 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * a single Drupal installation.
    */
   public function globalTests(): void {
-    $this->testOpenIdConnect();
-    $this->testNotificationFeatureInstalled();
-    $this->testConfigInstall();
+    $this->ensureOpenIdConnect();
+    $this->ensureNotificationFeatureInstalled();
+    $this->ensureConfigInstall();
   }
 
   /**
    * Test the openid_connect module is installed properly.
    */
-  private function testOpenIdConnect(): void {
+  private function ensureOpenIdConnect(): void {
     $this->drupalGet('user/login');
     $this->assertSession()->buttonExists('edit-openid-connect-client-generic-login');
     $this->assertSession()->fieldNotExists('name');
@@ -107,7 +107,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Test whether the ecms_notification feature installed properly.
    */
-  private function testNotificationFeatureInstalled(): void {
+  private function ensureNotificationFeatureInstalled(): void {
     $account = $this->drupalCreateUser(['create notification content']);
     $this->drupalLogin($account);
 
@@ -120,7 +120,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Ensure the configuration installed properly.
    */
-  private function testConfigInstall(): void {
+  private function ensureConfigInstall(): void {
     // Ensure all configuration imported.
     $names = $this->container->get('config.storage')->listAll();
     /** @var \Drupal\Core\Config\TypedConfigManagerInterface $typed_config */
