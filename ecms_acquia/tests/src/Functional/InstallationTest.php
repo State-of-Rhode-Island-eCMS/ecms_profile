@@ -61,6 +61,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxChecked('edit-modules-acsf-duplication-enable');
     $this->assertSession()->checkboxChecked('edit-modules-acsf-theme-enable');
     $this->assertSession()->checkboxChecked('edit-modules-acsf-variables-enable');
+    $this->drupalLogout($account);
   }
 
 }

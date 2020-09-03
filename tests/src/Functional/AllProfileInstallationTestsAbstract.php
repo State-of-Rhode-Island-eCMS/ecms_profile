@@ -6,6 +6,7 @@ namespace Drupal\Tests\ecms_profile\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\SchemaCheckTestTrait;
@@ -58,10 +59,32 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   }
 
   /**
-   * Combine all the private tests into one method
+   * Override the default drupalLogout method.
+   *
+   * @see \Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract::drupalLogin()
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   */
+  protected function drupalLogout(): void {
+    // Make a request to the logout page, and redirect to the user page, the
+    // idea being if you were properly logged out you should be seeing a login
+    // screen.
+    $assert_session = $this->assertSession();
+    $destination = Url::fromRoute('user.page')->toString();
+    $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]]));
+    $assert_session->buttonExists('edit-openid-connect-client-generic-login');
+
+    // @see BrowserTestBase::drupalUserIsLoggedIn()
+    unset($this->loggedInUser->sessionId);
+    $this->loggedInUser = FALSE;
+    \Drupal::currentUser()->setAccount(new AnonymousUserSession());
+  }
+
+  /**
+   * Combine all the private tests into one method.
    *
    * This will combine all tests into one to keep the tests in one Drupal
-   * installation.
+   * installation. Otherwise, each test function re-installs Drupal.
    */
   public function globalTests(): void {
     $this->ensureOpenIdConnect();
@@ -103,7 +126,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-always-save-userinfo');
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
-    $this->drupalLogout();
+
+    $this->drupalLogout($account);
   }
 
   /**
@@ -116,7 +140,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     // Ensure the notification entity add formis available.
     $this->drupalGet('node/add/notification');
     $this->assertSession()->statusCodeEquals(200);
-    $this->drupalLogout();
+    $this->drupalLogout($account);
   }
 
   /**
