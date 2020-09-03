@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - Added the [openid_connect](https://www.drupal.org/project/openid_connect) module as a dependency.
 - Added required modules/configuration based on the standard installation profile.
 - RIG-32: Added the webform requirement and installed by default.
+- RIG-15: Added the Notification content type as a feature and the editorial workflow.
 
 ### Changed
 
