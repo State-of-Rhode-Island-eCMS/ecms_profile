@@ -1,0 +1,16 @@
+name: Notification
+description: 'Provides Notification content type and related configuration.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - content_moderation
+  - datetime
+  - field
+  - menu_ui
+  - node
+  - path
+  - user
+  - workflows
+package: eCMS
+version: 9.x-1.0
+core: 8.x
