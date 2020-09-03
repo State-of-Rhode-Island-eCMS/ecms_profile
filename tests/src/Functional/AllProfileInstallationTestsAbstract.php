@@ -58,9 +58,19 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   }
 
   /**
+   * Combine all the private tests into one method so they all get run under
+   * a single Drupal installation.
+   */
+  public function globalTests(): void {
+    $this->testOpenIdConnect();
+    $this->testNotificationFeatureInstalled();
+    $this->testConfigInstall();
+  }
+
+  /**
    * Test the openid_connect module is installed properly.
    */
-  public function testOpenIdConnect(): void {
+  private function testOpenIdConnect(): void {
     $this->drupalGet('user/login');
     $this->assertSession()->buttonExists('edit-openid-connect-client-generic-login');
     $this->assertSession()->fieldNotExists('name');
@@ -91,12 +101,26 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-always-save-userinfo');
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_notification feature installed properly.
+   */
+  private function testNotificationFeatureInstalled(): void {
+    $account = $this->drupalCreateUser(['create notification content']);
+    $this->drupalLogin($account);
+
+    // Ensure the notification entity add formis available.
+    $this->drupalGet('node/add/notification');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
   }
 
   /**
    * Ensure the configuration installed properly.
    */
-  public function testConfigInstall(): void {
+  private function testConfigInstall(): void {
     // Ensure all configuration imported.
     $names = $this->container->get('config.storage')->listAll();
     /** @var \Drupal\Core\Config\TypedConfigManagerInterface $typed_config */

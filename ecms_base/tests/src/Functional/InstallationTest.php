@@ -32,9 +32,24 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   protected $defaultTheme = 'stark';
 
   /**
+   * Run all available tests.
+   *
+   * This combines all of the functional tests into one allowing for only one
+   * Drupal installation. This shuold significantly increase the speed of
+   * all of the tests.
+   */
+  public function testAllTheThings(): void {
+    // Run our profile tests only.
+    $this->testAcsfModulesDisabled();
+
+    // Run all of the global tests.
+    $this->globalTests();
+  }
+
+  /**
    * Test that the ACSF modules are not installed.
    */
-  public function testAcsfModulesDisabled(): void {
+  private function testAcsfModulesDisabled(): void {
     $account = $this->drupalCreateUser(['administer modules']);
     $this->drupalLogin($account);
 
@@ -45,6 +60,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxNotChecked('edit-modules-acsf-duplication-enable');
     $this->assertSession()->checkboxNotChecked('edit-modules-acsf-theme-enable');
     $this->assertSession()->checkboxNotChecked('edit-modules-acsf-variables-enable');
+    $this->drupalLogout();
   }
 
 }
