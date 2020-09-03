@@ -58,8 +58,10 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   }
 
   /**
-   * Combine all the private tests into one method so they all get run under
-   * a single Drupal installation.
+   * Combine all the private tests into one method
+   *
+   * This will combine all tests into one to keep the tests in one Drupal
+   * installation.
    */
   public function globalTests(): void {
     $this->ensureOpenIdConnect();
