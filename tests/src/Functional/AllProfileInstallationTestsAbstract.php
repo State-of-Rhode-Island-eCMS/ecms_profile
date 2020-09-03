@@ -72,6 +72,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $assert_session = $this->assertSession();
     $destination = Url::fromRoute('user.page')->toString();
     $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]]));
+
+    // Assert the openid button on logout.
     $assert_session->buttonExists('edit-openid-connect-client-generic-login');
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
@@ -85,6 +87,9 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    *
    * This will combine all tests into one to keep the tests in one Drupal
    * installation. Otherwise, each test function re-installs Drupal.
+   *
+   * Tests in extending classes should call the $this->globalTests() to
+   * include these tests in their profile tests.
    */
   public function globalTests(): void {
     $this->ensureOpenIdConnect();
