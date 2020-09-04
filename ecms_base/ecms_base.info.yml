@@ -50,6 +50,7 @@ dependencies:
 install:
   - ecms_notification
   - ecms_press_release
+  - ecms_location
 
 # Theme dependencies for the distribution.
 themes:
