@@ -95,6 +95,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureOpenIdConnect();
     $this->ensureNotificationFeatureInstalled();
     $this->ensurePressReleaseFeatureInstalled();
+    $this->ensurePersonFeatureInstalled();
     $this->ensureLocationFeatureInstalled();
     $this->ensureConfigInstall();
   }
@@ -173,6 +174,43 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     // Ensure the location entity add form is available.
     $this->drupalGet('node/add/location');
     $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_person feature installed properly.
+   */
+  private function ensurePersonFeatureInstalled(): void {
+    $account = $this->drupalCreateUser([
+      'create person content',
+      'create terms in person_taxonomy',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the notification entity add formis available.
+    $this->drupalGet('node/add/person');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $fields = [
+      'field_person_first_name[0][value]' => 'Test',
+      'field_person_last_name[0][value]' => 'User',
+      'field_person_job_title[0][value]' => 'Developer',
+    ];
+
+    // Check that the required fields exist in the form.
+    foreach ($fields as $key => $value) {
+      $this->assertFieldByName($key);
+    }
+
+    $this->drupalPostForm('node/add/person', $fields, 'Save');
+
+    // Ensure the auto entity label tokens were applied.
+    $this->assertText('Person Test User has been created.');
+
+    // Ensure the taxonomy is accessible.
+    $this->drupalGet('admin/structure/taxonomy/manage/person_taxonomy/add');
+    $this->assertSession()->statusCodeEquals(200);
+
     $this->drupalLogout();
   }
 
