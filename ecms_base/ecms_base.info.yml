@@ -53,6 +53,7 @@ install:
 # Install the required features.
 install:
   - ecms_notification
+  - ecms_press_release
 
 # Theme dependencies for the distribution.
 themes:
