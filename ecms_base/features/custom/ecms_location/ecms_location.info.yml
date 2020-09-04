@@ -1,0 +1,16 @@
+name: Location
+description: 'Provides Location content type and related configuration. Manage building and office locations.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - address
+  - field
+  - menu_ui
+  - node
+  - office_hours
+  - path
+  - telephone
+  - text
+  - user
+package: eCMS
+version: 9.x-1.0
