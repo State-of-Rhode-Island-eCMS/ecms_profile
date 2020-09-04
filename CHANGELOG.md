@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - Added required modules/configuration based on the standard installation profile.
 - RIG-32: Added the webform requirement and installed by default.
 - RIG-15: Added the Notification content type as a feature and the editorial workflow.
+- RIG-33: Added the press release content type as a feature.
 
 ### Changed
 
