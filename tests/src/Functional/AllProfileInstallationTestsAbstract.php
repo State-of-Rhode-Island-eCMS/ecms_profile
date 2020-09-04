@@ -156,7 +156,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser(['create press_release content']);
     $this->drupalLogin($account);
 
-    // Ensure the notification entity add formis available.
+    // Ensure the press release entity add form is available.
     $this->drupalGet('node/add/press_release');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalLogout();
