@@ -170,7 +170,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser(['create location content']);
     $this->drupalLogin($account);
 
-    // Ensure the notification entity add formis available.
+    // Ensure the location entity add form is available.
     $this->drupalGet('node/add/location');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalLogout();
