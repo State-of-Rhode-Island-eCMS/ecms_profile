@@ -1,0 +1,115 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.person.field_person_category
+    - field.field.node.person.field_person_email
+    - field.field.node.person.field_person_fax
+    - field.field.node.person.field_person_first_name
+    - field.field.node.person.field_person_job_title
+    - field.field.node.person.field_person_last_name
+    - field.field.node.person.field_person_middle_initial
+    - field.field.node.person.field_person_phone
+    - field.field.node.person.field_person_photo
+    - field.field.node.person.field_person_prefix
+    - field.field.node.person.field_person_suffix
+    - node.type.person
+  module:
+    - user
+id: node.person.default
+targetEntityType: node
+bundle: person
+mode: default
+content:
+  field_person_category:
+    weight: 111
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_person_email:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_person_fax:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_person_first_name:
+    weight: 104
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_person_job_title:
+    weight: 109
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_person_last_name:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_person_middle_initial:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_person_phone:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_person_photo:
+    type: entity_reference_entity_view
+    weight: 110
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_person_prefix:
+    weight: 107
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_person_suffix:
+    weight: 108
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
