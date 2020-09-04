@@ -94,6 +94,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   public function globalTests(): void {
     $this->ensureOpenIdConnect();
     $this->ensureNotificationFeatureInstalled();
+    $this->ensurePressReleaseFeatureInstalled();
     $this->ensureConfigInstall();
   }
 
@@ -145,7 +146,20 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     // Ensure the notification entity add form is available.
     $this->drupalGet('node/add/notification');
     $this->assertSession()->statusCodeEquals(200);
-    $this->drupalLogout($account);
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_press_release feature installed properly.
+   */
+  private function ensurePressReleaseFeatureInstalled(): void {
+    $account = $this->drupalCreateUser(['create press_release content']);
+    $this->drupalLogin($account);
+
+    // Ensure the notification entity add formis available.
+    $this->drupalGet('node/add/press_release');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
   }
 
   /**
