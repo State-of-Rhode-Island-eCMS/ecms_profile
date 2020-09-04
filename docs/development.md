@@ -76,3 +76,7 @@ With the distribution site now fully installed, you can make your code updates
 from within the main "ecms_profile" repository directory.
 Changes will show in your demo site "develop-ecms-profile" 
 as the distro is symlinked. 
+
+## Features
+Certain configuration should be managed with the Features module. 
+[Additional features documentation is available here](./features.md).
