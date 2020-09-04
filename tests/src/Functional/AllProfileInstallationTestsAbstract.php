@@ -95,6 +95,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureOpenIdConnect();
     $this->ensureNotificationFeatureInstalled();
     $this->ensurePressReleaseFeatureInstalled();
+    $this->ensureLocationFeatureInstalled();
     $this->ensureConfigInstall();
   }
 
@@ -158,6 +159,19 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Ensure the press release entity add form is available.
     $this->drupalGet('node/add/press_release');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_location feature installed properly.
+   */
+  private function ensureLocationFeatureInstalled(): void {
+    $account = $this->drupalCreateUser(['create location content']);
+    $this->drupalLogin($account);
+
+    // Ensure the notification entity add formis available.
+    $this->drupalGet('node/add/location');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalLogout();
   }
