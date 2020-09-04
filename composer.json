@@ -52,6 +52,7 @@
     "cweagans/composer-patches": "^1.6",
     "drupal/acsf": "^2.67",
     "drupal/address": "^1.8",
+    "drupal/auto_entitylabel": "^3.0@beta",
     "drupal/core-recommended": "^9",
     "drupal/features": "^3.11",
     "drupal/moderation_dashboard": "^1.0",
