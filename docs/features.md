@@ -30,6 +30,9 @@ For example, if all content types share the same editorial workflow, that workfl
 into one or each feature. Instead, that configuration needs to be left out of the feature and a helper module will need to connect
 that configuration to each content type.
 
+- Features should not share fields. If two content types both contain a `body` field. That field _MUST_ be created for each content type. Typically, the field should prefix or relate
+to the content type to which it belongs. In this example, a Notification and a Press release content type, two fields would be created `field_notification_body` and `field_press_release_body`.
+
 [Online Documentation on Features] is available and gives a good overview of how to use it effectively.
     
 ## Deployment
