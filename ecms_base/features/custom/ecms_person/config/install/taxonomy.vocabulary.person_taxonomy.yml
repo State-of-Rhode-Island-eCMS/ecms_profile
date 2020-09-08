@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Staff / Department'
+vid: person_taxonomy
+description: 'Categorize people by staff/department etc.'
+weight: 0

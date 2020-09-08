@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.press_release.field_press_release_body
+    - field.field.node.press_release.field_press_release_date
+    - field.field.node.press_release.field_press_release_links
+    - field.field.node.press_release.field_press_release_source
+    - node.type.press_release
+  module:
+    - user
+id: node.press_release.teaser
+targetEntityType: node
+bundle: press_release
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_press_release_body: true
+  field_press_release_date: true
+  field_press_release_links: true
+  field_press_release_source: true

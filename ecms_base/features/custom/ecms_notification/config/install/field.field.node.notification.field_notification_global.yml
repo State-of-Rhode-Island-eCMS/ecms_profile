@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_notification_global
+    - node.type.notification
+id: node.notification.field_notification_global
+field_name: field_notification_global
+entity_type: node
+bundle: notification
+label: 'Global Notification'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

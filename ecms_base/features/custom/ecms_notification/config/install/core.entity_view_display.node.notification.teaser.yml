@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.notification.field_notification_expire_date
+    - field.field.node.notification.field_notification_global
+    - field.field.node.notification.field_notification_text
+    - node.type.notification
+  module:
+    - user
+id: node.notification.teaser
+targetEntityType: node
+bundle: notification
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_notification_expire_date: true
+  field_notification_global: true
+  field_notification_text: true

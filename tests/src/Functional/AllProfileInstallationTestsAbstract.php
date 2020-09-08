@@ -6,6 +6,7 @@ namespace Drupal\Tests\ecms_profile\Functional;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\SchemaCheckTestTrait;
@@ -58,9 +59,51 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   }
 
   /**
+   * Override the default drupalLogout method.
+   *
+   * @see \Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract::drupalLogin()
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   */
+  protected function drupalLogout(): void {
+    // Make a request to the logout page, and redirect to the user page, the
+    // idea being if you were properly logged out you should be seeing a login
+    // screen.
+    $assert_session = $this->assertSession();
+    $destination = Url::fromRoute('user.page')->toString();
+    $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]]));
+
+    // Assert the openid button on logout.
+    $assert_session->buttonExists('edit-openid-connect-client-generic-login');
+
+    // @see BrowserTestBase::drupalUserIsLoggedIn()
+    unset($this->loggedInUser->sessionId);
+    $this->loggedInUser = FALSE;
+    \Drupal::currentUser()->setAccount(new AnonymousUserSession());
+  }
+
+  /**
+   * Combine all the private tests into one method.
+   *
+   * This will combine all tests into one to keep the tests in one Drupal
+   * installation. Otherwise, each test function re-installs Drupal.
+   *
+   * Tests in extending classes should call the $this->globalTests() to
+   * include these tests in their profile tests.
+   */
+  public function globalTests(): void {
+    $this->ensureOpenIdConnect();
+    $this->ensureNotificationFeatureInstalled();
+    $this->ensurePressReleaseFeatureInstalled();
+    $this->ensurePersonFeatureInstalled();
+    $this->ensureLocationFeatureInstalled();
+    $this->ensureConfigInstall();
+  }
+
+  /**
    * Test the openid_connect module is installed properly.
    */
-  public function testOpenIdConnect(): void {
+  private function ensureOpenIdConnect(): void {
     $this->drupalGet('user/login');
     $this->assertSession()->buttonExists('edit-openid-connect-client-generic-login');
     $this->assertSession()->fieldNotExists('name');
@@ -91,12 +134,90 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-always-save-userinfo');
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
+
+    $this->drupalLogout($account);
+  }
+
+  /**
+   * Test whether the ecms_notification feature installed properly.
+   */
+  private function ensureNotificationFeatureInstalled(): void {
+    $account = $this->drupalCreateUser(['create notification content']);
+    $this->drupalLogin($account);
+
+    // Ensure the notification entity add form is available.
+    $this->drupalGet('node/add/notification');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_press_release feature installed properly.
+   */
+  private function ensurePressReleaseFeatureInstalled(): void {
+    $account = $this->drupalCreateUser(['create press_release content']);
+    $this->drupalLogin($account);
+
+    // Ensure the press release entity add form is available.
+    $this->drupalGet('node/add/press_release');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_location feature installed properly.
+   */
+  private function ensureLocationFeatureInstalled(): void {
+    $account = $this->drupalCreateUser(['create location content']);
+    $this->drupalLogin($account);
+
+    // Ensure the location entity add form is available.
+    $this->drupalGet('node/add/location');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_person feature installed properly.
+   */
+  private function ensurePersonFeatureInstalled(): void {
+    $account = $this->drupalCreateUser([
+      'create person content',
+      'create terms in person_taxonomy',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the notification entity add formis available.
+    $this->drupalGet('node/add/person');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $fields = [
+      'field_person_first_name[0][value]' => 'Test',
+      'field_person_last_name[0][value]' => 'User',
+      'field_person_job_title[0][value]' => 'Developer',
+    ];
+
+    // Check that the required fields exist in the form.
+    foreach ($fields as $key => $value) {
+      $this->assertFieldByName($key);
+    }
+
+    $this->drupalPostForm('node/add/person', $fields, 'Save');
+
+    // Ensure the auto entity label tokens were applied.
+    $this->assertText('Person Test User has been created.');
+
+    // Ensure the taxonomy is accessible.
+    $this->drupalGet('admin/structure/taxonomy/manage/person_taxonomy/add');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->drupalLogout();
   }
 
   /**
    * Ensure the configuration installed properly.
    */
-  public function testConfigInstall(): void {
+  private function ensureConfigInstall(): void {
     // Ensure all configuration imported.
     $names = $this->container->get('config.storage')->listAll();
     /** @var \Drupal\Core\Config\TypedConfigManagerInterface $typed_config */

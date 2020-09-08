@@ -1,0 +1,15 @@
+name: 'Press release'
+description: 'Provides Press release content type and related configuration.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - datetime
+  - field
+  - link
+  - menu_ui
+  - node
+  - path
+  - text
+  - user
+package: eCMS
+version: 9.x-1.0

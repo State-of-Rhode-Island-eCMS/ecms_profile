@@ -140,7 +140,7 @@ $LANDO composer remove drupal/coffee
 $LANDO composer require "behat/mink-goutte-driver" --dev
 
 # Update composer packages from the scaffold.
-$LANDO composer update
+# $LANDO composer update
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "

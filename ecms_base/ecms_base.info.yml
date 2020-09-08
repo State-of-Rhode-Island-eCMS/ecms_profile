@@ -20,6 +20,7 @@ dependencies:
   - editor
   - field_ui
   - file
+  - features
   - help
   - history
   - image
@@ -44,6 +45,13 @@ dependencies:
   - views_ui
   - webform
   - webform_ui
+
+# Install the required features.
+install:
+  - ecms_notification
+  - ecms_press_release
+  - ecms_location
+  - ecms_person
 
 # Theme dependencies for the distribution.
 themes:

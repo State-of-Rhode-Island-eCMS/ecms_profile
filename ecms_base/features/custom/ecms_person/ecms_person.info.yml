@@ -1,0 +1,19 @@
+name: Person
+description: 'Provides Person content type and related configuration. Manage people such as staff, departments, etc.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - auto_entitylabel
+  - field
+  - file
+  - image
+  - media
+  - media_library
+  - menu_ui
+  - node
+  - path
+  - taxonomy
+  - telephone
+  - token
+  - user
+package: eCMS
