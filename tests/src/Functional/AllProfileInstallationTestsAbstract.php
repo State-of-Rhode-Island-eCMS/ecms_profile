@@ -71,7 +71,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]]));
 
     // Assert the openid button on logout.
-    $assert_session->buttonExists('edit-openid-connect-client-generic-login');
+    $assert_session->buttonExists('edit-openid-connect-client-windows-aad-login');
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
     unset($this->loggedInUser->sessionId);
