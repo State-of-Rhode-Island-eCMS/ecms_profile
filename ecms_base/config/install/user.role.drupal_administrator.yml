@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies: {  }
+id: drupal_administrator
+label: 'Drupal Administrator'
+weight: 3
+is_admin: null
+permissions:
+  - 'access contextual links'
+  - 'access site reports'
+  - 'administer blocks'
+  - 'administer contact forms'
+  - 'administer contact_message display'
+  - 'administer contact_message fields'
+  - 'administer crop'
+  - 'administer crop types'
+  - 'administer media'
+  - 'administer menu'
+  - 'administer meta tags'
+  - 'administer nodes'
+  - 'administer url aliases'
+  - 'bypass node access'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'revert all revisions'
+  - 'update any media'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition review'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view own unpublished content'

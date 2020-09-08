@@ -6,6 +6,14 @@ label: 'Authenticated user'
 weight: 1
 is_admin: false
 permissions:
+  - 'access administration pages'
   - 'access content'
+  - 'access files overview'
+  - 'access media overview'
   - 'access shortcuts'
+  - 'access toolbar'
+  - 'create media'
   - 'use text format basic_html'
+  - 'view media'
+  - 'view own unpublished media'
+  - 'view the administration theme'
