@@ -29,7 +29,6 @@ dependencies:
   - menu_link_content
   - menu_ui
   - node
-  - openid_connect
   - options
   - path
   - page_cache
@@ -46,6 +45,7 @@ dependencies:
   - views_ui
   - webform
   - webform_ui
+  - openid_connect_windows_aad
 
 # Install the required features.
 install:
