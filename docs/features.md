@@ -20,7 +20,7 @@ The current list of features is:
 This contains the notification content type and the related field configuration.
 
 ### ecms_press_release
-This containe the press_release content type and the related field configuration.
+This contains the press_release content type and the related field configuration.
 
 ## Development Notes
 Developing with features can be tricky. A few items to remember:
