@@ -142,7 +142,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser(['create notification content']);
     $this->drupalLogin($account);
 
-    // Ensure the notification entity add formis available.
+    // Ensure the notification entity add form is available.
     $this->drupalGet('node/add/notification');
     $this->assertSession()->statusCodeEquals(200);
     $this->drupalLogout($account);

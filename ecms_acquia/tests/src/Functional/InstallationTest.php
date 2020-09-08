@@ -35,7 +35,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    * Run all available tests.
    *
    * This combines all of the functional tests into one allowing for only one
-   * Drupal installation. This shuold significantly increase the speed of
+   * Drupal installation. This should significantly increase the speed of
    * all of the tests.
    */
   public function testAllTheThings(): void {
