@@ -42,6 +42,8 @@ dependencies:
   - tour
   - views
   - views_ui
+  - webform
+  - webform_ui
 
 # Theme dependencies for the distribution.
 themes:
