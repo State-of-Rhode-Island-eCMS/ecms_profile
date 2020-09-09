@@ -9,7 +9,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\SchemaCheckTestTrait;
 
 /**
  * Class AllProfileInstallationTestsAbstract.
@@ -25,8 +24,6 @@ use Drupal\Tests\SchemaCheckTestTrait;
  * @package Drupal\Tests\ecms_profile\Functional
  */
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
-
-  use SchemaCheckTestTrait;
 
   /**
    * Override the default drupalLogin method.
