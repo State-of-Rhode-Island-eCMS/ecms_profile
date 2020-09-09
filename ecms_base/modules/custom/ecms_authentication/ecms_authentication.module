@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types = 1);
+
+/**
+ * Implements hook_openid_connect_pre_authorize().
+ */
+function ecms_authentication_openid_connect_pre_authorize($account, array $context): bool {
+  $userGroups = [];
+
+  // Get the user groups from the OIDC user information.
+  if ($context['plugin_id'] === 'windows_aad' && !empty($context['userinfo']['groups']['value'])) {
+    $userGroups = array_column($context['userinfo']['groups']['value'], 'displayName');
+  }
+
+  return \Drupal::service('ecms_user_authentication')->checkGroupAccess($userGroups);
+}

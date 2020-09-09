@@ -1,0 +1,4 @@
+services:
+  ecms_user_authentication:
+    class: Drupal\ecms_authentication\EcmsUserAuthentication
+    arguments: ['@request_stack']
