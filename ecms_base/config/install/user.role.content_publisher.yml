@@ -6,7 +6,6 @@ label: 'Content Publisher'
 weight: 5
 is_admin: null
 permissions:
-  - 'administer menu'
   - 'create url aliases'
   - 'delete all revisions'
   - 'delete any media'

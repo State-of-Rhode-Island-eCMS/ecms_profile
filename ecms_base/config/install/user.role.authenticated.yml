@@ -2,11 +2,10 @@ langcode: en
 status: true
 dependencies: {  }
 id: authenticated
-label: 'Authenticated user'
+label: 'Authenticated User'
 weight: 1
 is_admin: false
 permissions:
-  - 'access administration pages'
   - 'access content'
   - 'access content overview'
   - 'access files overview'

@@ -1,25 +1,13 @@
 langcode: en
 status: true
 dependencies: {  }
-id: drupal_administrator
-label: 'Drupal Administrator'
-weight: 3
+id: site_admin
+label: 'Site Admin'
+weight: 5
 is_admin: null
 permissions:
-  - 'access contextual links'
-  - 'access site reports'
-  - 'administer blocks'
-  - 'administer contact forms'
-  - 'administer contact_message display'
-  - 'administer contact_message fields'
-  - 'administer crop'
-  - 'administer crop types'
-  - 'administer media'
   - 'administer menu'
-  - 'administer meta tags'
-  - 'administer nodes'
-  - 'administer url aliases'
-  - 'bypass node access'
+  - 'administer site configuration'
   - 'create url aliases'
   - 'delete all revisions'
   - 'delete any media'

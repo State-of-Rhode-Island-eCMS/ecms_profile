@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: form_author
+label: 'Form Author'
+weight: 4
+is_admin: null
+permissions:
+  - 'create webform'
+  - 'edit own webform'

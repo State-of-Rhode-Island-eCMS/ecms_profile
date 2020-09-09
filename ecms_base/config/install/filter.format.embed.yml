@@ -1,0 +1,28 @@
+uuid: 005b9240-5b91-4b85-8295-810f33055516
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+name: Embed
+format: embed
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<script src type> <iframe id title width height src type frameborder name>'
+      filter_html_help: false
+      filter_html_nofollow: false
+  media_embed:
+    id: media_embed
+    provider: media
+    status: false
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_media_types: {  }
+      allowed_view_modes: {  }
