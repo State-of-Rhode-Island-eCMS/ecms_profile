@@ -62,6 +62,7 @@
     "drupal/acsf": "^2.67",
     "drupal/address": "^1.8",
     "drupal/auto_entitylabel": "^3.0@beta",
+    "drupal/content_moderation_notifications": "^3.2",
     "drupal/core-recommended": "^9",
     "drupal/features": "^3.11",
     "drupal/moderation_dashboard": "^1.0",
