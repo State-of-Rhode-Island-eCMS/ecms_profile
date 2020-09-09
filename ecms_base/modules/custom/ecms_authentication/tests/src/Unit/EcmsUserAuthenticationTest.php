@@ -27,7 +27,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
   /**
    * The admin group constant.
    */
-  const ADMIN_GROUP = 'Drupal Administrator';
+  const ADMIN_GROUP = 'Drupal Admin';
 
   /**
    * Mock of the request_stack service.
@@ -91,13 +91,13 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
         [
           'test group one',
           'test.subdomain.com',
-          'Drupal Administrator',
+          'Drupal Admin',
         ],
         TRUE,
       ],
       'test2' => [
         [
-          'Drupal Administrator',
+          'Drupal Admin',
           'test.invaliddomain.com',
           'test.invaliddomainnumbertwo.com',
           'oomphinc.com',

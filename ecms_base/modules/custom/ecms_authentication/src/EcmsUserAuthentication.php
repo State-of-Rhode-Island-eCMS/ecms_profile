@@ -19,7 +19,7 @@ class EcmsUserAuthentication {
   /**
    * Constant of the administrator group/role.
    */
-  const DRUPAL_ADMINISTRATOR = 'Drupal Administrator';
+  const DRUPAL_ADMINISTRATOR = 'Drupal Admin';
 
   /**
    * The request_stack service.
