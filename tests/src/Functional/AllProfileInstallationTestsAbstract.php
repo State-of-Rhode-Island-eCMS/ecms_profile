@@ -97,7 +97,6 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensurePressReleaseFeatureInstalled();
     $this->ensurePersonFeatureInstalled();
     $this->ensureLocationFeatureInstalled();
-    $this->ensureConfigInstall();
     $this->ensureWebformInstall();
     $this->ensurePublishContentInstalled();
   }
@@ -214,21 +213,6 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
 
     $this->drupalLogout();
-  }
-
-  /**
-   * Ensure the configuration installed properly.
-   */
-  private function ensureConfigInstall(): void {
-    // Ensure all configuration imported.
-    $names = $this->container->get('config.storage')->listAll();
-    /** @var \Drupal\Core\Config\TypedConfigManagerInterface $typed_config */
-    $typed_config = $this->container->get('config.typed');
-    foreach ($names as $name) {
-      $config = $this->config($name);
-      $this->assertConfigSchema($typed_config, $name, $config->get());
-    }
-
   }
 
   /**
