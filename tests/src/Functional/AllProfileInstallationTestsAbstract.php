@@ -98,6 +98,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensurePersonFeatureInstalled();
     $this->ensureLocationFeatureInstalled();
     $this->ensureConfigInstall();
+    $this->ensurePublishContentInstalled();
   }
 
   /**
@@ -242,18 +243,18 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
   }
 
-    /**
-     * Ensure Publish Content module installed properly.
-     */
-    private function ensurePublishContentInstalled(): void {
-        $account = $this->drupalCreateUser(['administer permissions']);
-        $this->drupalLogin($account);
+  /**
+   * Ensure Publish Content module installed properly.
+   */
+  private function ensurePublishContentInstalled(): void {
+    $account = $this->drupalCreateUser(['administer permissions']);
+    $this->drupalLogin($account);
 
-        // Ensure the permissions exist and roles are assigned.
-        $this->drupalGet('admin/people/permissions');
-        $this->assertSession()->statusCodeEquals(200);
-        $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
-        $this->drupalLogout();
-    }
+    // Ensure the permissions exist and roles are assigned.
+    $this->drupalGet('admin/people/permissions');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
+    $this->drupalLogout();
+  }
 
 }
