@@ -15,3 +15,4 @@ settings:
   userinfo_graph_api_use_other_mails: 0
   userinfo_update_email: 1
   hide_email_address_warning: 1
+  redirect_url: ''
