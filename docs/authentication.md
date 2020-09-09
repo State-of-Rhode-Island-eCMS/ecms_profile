@@ -29,7 +29,6 @@ $config['openid_connect.settings.windows_aad']['settings']['client_id'] = 'CLIEN
 $config['openid_connect.settings.windows_aad']['settings']['client_secret'] = 'CLIENT_SECRET_NEEDED';
 $config['openid_connect.settings.windows_aad']['settings']['authorization_endpoint_wa'] = 'https://AUTHORIZATION_URL_ENDPOINT_NEEDED/oauth2/v2.0/authorize';
 $config['openid_connect.settings.windows_aad']['settings']['token_endpoint_wa'] = 'https://TOKEN_ENDPOINT_NEEDED/oauth2/v2.0/token';
-$config['openid_connect.settings.windows_aad']['settings']['userinfo_endpoint'] = 'https://graph.microsoft.com/oidc/userinfo';
 ```
 
 ## Managing multiple sites
@@ -44,16 +43,15 @@ Groups created in AAD will be strictly mapped to roles in Drupal via the group
 name, and the role name. 
 
 ### Role Assumptions
-It is to be assumed that the AAD group `Drupal Admin` will be mapped to the Drupal role
-titled `Drupal Admin`. If a user authenticates and has this group, the user will
+It is to be assumed that the AAD group `Drupal Administrator` will be mapped to the Drupal role
+titled `Drupal Administrator`. If a user authenticates and has this group, the user will
 be allowed to administer _ALL SITES_ in the system.
 
 ### Site access
-Site access will be determined by a Drupal role identified by the site's URI.
-When installing a new site, a Drupal role will be programmatically created with
-the site's URL as the name. Any user who authenticates through AAD and is NOT a `Drupal Admin`
-will be required to have a group name that matches this programmatically created role.
-If the user's AAD group does not match this role, they will be denied access.
+Site access will be determined by AAD role identified by the site's URI.
+Any user who authenticates through AAD and is NOT in the AAD group `Drupal Administrator`
+will be required to have a group name that matches domain name of the site.
+If the user does not have a group with the domain name of the site, they will be denied access. 
 
 ## Azure Active Directory Application Configuration
 In order to create the necessary AAD application one must:
@@ -69,8 +67,8 @@ In order to create the necessary AAD application one must:
    https://new.website.com/openid-connect/windows_aad
 9. Copy the `Application (client) ID`   
 9. Browse to `Endpoints` and copy the following values:
-     - `OAuth 2.0 authorization endpoint (v2)`
-     - `OAuth 2.0 token endpoint (v2)`
+     - `OAuth 2.0 authorization endpoint (v1)`
+     - `OAuth 2.0 token endpoint (v1)`
 10. Browse to `Certificates & Secrets`
      - Create a `New Client Secret` that never expires and copy that value.
 11. Browse to `API Permissions`
