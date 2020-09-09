@@ -53,6 +53,7 @@ install:
   - ecms_press_release
   - ecms_location
   - ecms_person
+  - ecms_authentication
 
 # Theme dependencies for the distribution.
 themes:
