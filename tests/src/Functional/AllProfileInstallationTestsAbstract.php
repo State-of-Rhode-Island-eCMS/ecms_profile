@@ -242,4 +242,18 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
   }
 
+    /**
+     * Ensure Publish Content module installed properly.
+     */
+    private function ensurePublishContentInstalled(): void {
+        $account = $this->drupalCreateUser(['administer permissions']);
+        $this->drupalLogin($account);
+
+        // Ensure the permissions exist and roles are assigned.
+        $this->drupalGet('admin/people/permissions');
+        $this->assertSession()->statusCodeEquals(200);
+        $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
+        $this->drupalLogout();
+    }
+
 }

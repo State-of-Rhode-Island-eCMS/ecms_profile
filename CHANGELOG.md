@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-35: Added the Location content type as a feature.
 - RIG-34: Added the Person content type as a feature.
 - RIG-15: Added 5 custom roles to standard install profile.
+- RIG-15: Added the Publish Content module and installed by default.
 
 ### Changed
 
