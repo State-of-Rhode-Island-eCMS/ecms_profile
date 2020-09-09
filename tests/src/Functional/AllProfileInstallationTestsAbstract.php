@@ -98,6 +98,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensurePersonFeatureInstalled();
     $this->ensureLocationFeatureInstalled();
     $this->ensureConfigInstall();
+    $this->ensureWebformInstall();
     $this->ensurePublishContentInstalled();
   }
 
@@ -233,7 +234,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Ensure the webform requirement installed properly.
    */
-  public function testWebformInstall(): void {
+  public function ensureWebformInstall(): void {
     $account = $this->drupalCreateUser(['administer webform']);
     $this->drupalLogin($account);
 
