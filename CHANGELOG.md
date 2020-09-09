@@ -24,6 +24,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-41: Added the Promotions content type as a feature.
 - RIG-39: Added the Basic page content type as a feature.
 - RIG-38: Added the Landing page content type as a feature.
+- RIG-15: Added Content Moderation Notification module and config.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
