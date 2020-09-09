@@ -134,7 +134,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
 
-    $this->drupalLogout($account);
+    $this->drupalLogout();
   }
 
   /**
