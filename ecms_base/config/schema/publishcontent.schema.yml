@@ -1,0 +1,8 @@
+publishcontent.settings:
+  type: mapping
+  label: 'Settings'
+  mapping:
+    ui_localtask:
+      type: boolean
+    ui_checkbox:
+      type: boolean
