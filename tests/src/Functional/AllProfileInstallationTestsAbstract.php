@@ -25,7 +25,11 @@ use Drupal\Tests\BrowserTestBase;
  */
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
-  // Disable strict schema checking.
+  /**
+   * Whether to strictly check schema on installed configuration.
+   *
+   * @var bool
+   */
   protected $strictConfigSchema = FALSE;
 
   /**
