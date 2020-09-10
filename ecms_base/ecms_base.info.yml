@@ -29,6 +29,7 @@ dependencies:
   - menu_link_content
   - menu_ui
   - node
+  - openid_connect_windows_aad
   - options
   - path
   - page_cache
@@ -45,14 +46,14 @@ dependencies:
   - views_ui
   - webform
   - webform_ui
-  - openid_connect_windows_aad
 
 # Install the required features.
 install:
-  - ecms_notification
-  - ecms_press_release
+  - ecms_event
   - ecms_location
+  - ecms_notification
   - ecms_person
+  - ecms_press_release
   - ecms_authentication
 
 # Theme dependencies for the distribution.

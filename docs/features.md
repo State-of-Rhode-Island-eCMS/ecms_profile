@@ -22,6 +22,9 @@ This contains the notification content type and the related field configuration.
 ### ecms_press_release
 This contains the press_release content type and the related field configuration.
 
+### ecms_event
+This contains the event content type and the related field and taxonomy configuration.
+
 ## Development Notes
 Developing with features can be tricky. A few items to remember:
 

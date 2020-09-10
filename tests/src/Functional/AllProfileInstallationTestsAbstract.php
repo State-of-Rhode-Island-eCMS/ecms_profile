@@ -96,6 +96,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureLocationFeatureInstalled();
     $this->ensureWebformInstall();
     $this->ensurePublishContentInstalled();
+    $this->ensureEventFeatureInstalled();
   }
 
   /**
@@ -216,7 +217,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Ensure the webform requirement installed properly.
    */
-  public function ensureWebformInstall(): void {
+  private function ensureWebformInstall(): void {
     $account = $this->drupalCreateUser(['administer webform']);
     $this->drupalLogin($account);
 
@@ -237,6 +238,45 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalGet('admin/people/permissions');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_event feature installed properly.
+   */
+  private function ensureEventFeatureInstalled(): void {
+    $account = $this->drupalCreateUser([
+      'create event content',
+      'create terms in event_taxonomy',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the event entity add form is available.
+    $this->drupalGet('node/add/event');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $fields = [
+      'title[0][value]' => 'Test event',
+      'field_event_date[0][value][date]' => '1980-11-09',
+      'field_event_date[0][end_value][date]' => '1980-11-09',
+      'field_event_date[0][value][time]' => '14:44:44',
+      'field_event_date[0][end_value][time]' => '15:44:44',
+    ];
+
+    // Check that the required fields exist in the form.
+    foreach ($fields as $key => $value) {
+      $this->assertFieldByName($key);
+    }
+
+    $this->drupalPostForm('node/add/event', $fields, 'Save');
+
+    // Ensure the auto entity label tokens were applied.
+    $this->assertText('Event Test event has been created.');
+
+    // Ensure the taxonomy is accessible.
+    $this->drupalGet('admin/structure/taxonomy/manage/event_taxonomy/add');
+    $this->assertSession()->statusCodeEquals(200);
+
     $this->drupalLogout();
   }
 
