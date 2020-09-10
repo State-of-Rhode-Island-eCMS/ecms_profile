@@ -55,6 +55,7 @@ install:
   - ecms_notification
   - ecms_person
   - ecms_press_release
+  - ecms_promotions
 
 # Theme dependencies for the distribution.
 themes:
