@@ -25,6 +25,9 @@ use Drupal\Tests\BrowserTestBase;
  */
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
+  // Disable strict schema checking.
+  protected $strictConfigSchema = FALSE;
+
   /**
    * Override the default drupalLogin method.
    *
