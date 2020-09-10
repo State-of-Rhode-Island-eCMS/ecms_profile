@@ -251,7 +251,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     ]);
     $this->drupalLogin($account);
 
-    // Ensure the notification entity add formis available.
+    // Ensure the event entity add form is available.
     $this->drupalGet('node/add/event');
     $this->assertSession()->statusCodeEquals(200);
 
