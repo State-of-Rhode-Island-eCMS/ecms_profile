@@ -49,12 +49,12 @@ dependencies:
 
 # Install the required features.
 install:
+  - ecms_authentication
   - ecms_event
   - ecms_location
   - ecms_notification
   - ecms_person
   - ecms_press_release
-  - ecms_authentication
 
 # Theme dependencies for the distribution.
 themes:

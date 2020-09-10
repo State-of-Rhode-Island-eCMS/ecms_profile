@@ -97,6 +97,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureWebformInstall();
     $this->ensurePublishContentInstalled();
     $this->ensureEventFeatureInstalled();
+    $this->ensurePromotionsFeatureInstalled();
   }
 
   /**
@@ -275,6 +276,22 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Ensure the taxonomy is accessible.
     $this->drupalGet('admin/structure/taxonomy/manage/event_taxonomy/add');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_promotions feature installed properly.
+   */
+  private function ensurePromotionsFeatureInstalled(): void {
+    $account = $this->drupalCreateUser([
+      'create promotions content',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the promotions entity add form is available.
+    $this->drupalGet('node/add/promotions');
     $this->assertSession()->statusCodeEquals(200);
 
     $this->drupalLogout();
