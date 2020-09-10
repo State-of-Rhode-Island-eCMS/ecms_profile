@@ -1,7 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Event Categories'
-vid: event_categories
-description: 'Categories for events.'
-weight: 0

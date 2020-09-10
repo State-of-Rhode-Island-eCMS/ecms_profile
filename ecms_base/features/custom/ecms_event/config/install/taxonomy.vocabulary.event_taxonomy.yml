@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event categories'
+vid: event_taxonomy
+description: 'Group events by categories.'
+weight: 0
