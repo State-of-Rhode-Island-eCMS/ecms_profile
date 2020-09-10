@@ -1,0 +1,16 @@
+name: Promotions
+description: 'Provides Promotions content type and related configuration. Add a new promotional item to the site.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - field
+  - link
+  - media
+  - media_library
+  - menu_ui
+  - node
+  - path
+  - text
+  - user
+package: eCMS
+version: 9.x-1.0

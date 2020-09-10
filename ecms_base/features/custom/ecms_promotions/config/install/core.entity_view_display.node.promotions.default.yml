@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.promotions.field_promotion_body
+    - field.field.node.promotions.field_promotion_image
+    - field.field.node.promotions.field_promotion_url
+    - node.type.promotions
+  module:
+    - link
+    - text
+    - user
+id: node.promotions.default
+targetEntityType: node
+bundle: promotions
+mode: default
+content:
+  field_promotion_body:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_promotion_image:
+    type: entity_reference_entity_view
+    weight: 102
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_promotion_url:
+    weight: 103
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
