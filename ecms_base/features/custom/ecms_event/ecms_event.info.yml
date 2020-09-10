@@ -1,0 +1,19 @@
+name: Event
+description: 'Provides Event content type and related configuration.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - field
+  - file
+  - image
+  - media
+  - media_library
+  - menu_ui
+  - node
+  - path
+  - smart_date
+  - taxonomy
+  - text
+  - user
+package: eCMS
+version: 9.x-1.0
