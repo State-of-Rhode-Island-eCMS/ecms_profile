@@ -22,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-15: Added the Publish Content module and installed by default.
 
 ### Changed
+- RIG-23: Changed from OIDC generic to Windows AAD for authentication.
 
 ### Deprecated
 

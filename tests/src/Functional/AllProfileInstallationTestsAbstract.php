@@ -71,7 +71,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalGet(Url::fromRoute('user.logout', [], ['query' => ['destination' => $destination]]));
 
     // Assert the openid button on logout.
-    $assert_session->buttonExists('edit-openid-connect-client-generic-login');
+    $assert_session->buttonExists('edit-openid-connect-client-windows-aad-login');
 
     // @see BrowserTestBase::drupalUserIsLoggedIn()
     unset($this->loggedInUser->sessionId);
@@ -103,7 +103,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    */
   private function ensureOpenIdConnect(): void {
     $this->drupalGet('user/login');
-    $this->assertSession()->buttonExists('edit-openid-connect-client-generic-login');
+    $this->assertSession()->buttonExists('edit-openid-connect-client-windows-aad-login');
     $this->assertSession()->fieldNotExists('name');
     $this->assertSession()->fieldNotExists('pass');
 
@@ -114,18 +114,19 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalGet('admin/config/services/openid-connect');
     $this->assertSession()->statusCodeEquals(200);
 
-    // Ensure the Generic service is enabled.
-    $this->assertSession()->checkboxChecked('edit-clients-enabled-generic');
+    // Ensure the Windows AAD service is enabled.
+    $this->assertSession()->checkboxChecked('edit-clients-enabled-windows-aad');
 
     // Ensure no other service is available.
     $this->assertSession()->checkboxNotChecked('edit-clients-enabled-facebook');
     $this->assertSession()->checkboxNotChecked('edit-clients-enabled-github');
+    $this->assertSession()->checkboxNotChecked('edit-clients-enabled-generic');
     $this->assertSession()->checkboxNotChecked('edit-clients-enabled-google');
     $this->assertSession()->checkboxNotChecked('edit-clients-enabled-linkedin');
 
     // Ensure the configuration imported properly.
-    $this->assertSession()->fieldValueEquals('edit-clients-generic-settings-client-id', 'REDACTED');
-    $this->assertSession()->fieldValueEquals('edit-clients-generic-settings-client-secret', 'REDACTED');
+    $this->assertSession()->fieldValueEquals('edit-clients-windows-aad-settings-client-id', 'REDACTED');
+    $this->assertSession()->fieldValueEquals('edit-clients-windows-aad-settings-client-secret', 'REDACTED');
 
     // Ensure the additional settings are selected.
     $this->assertSession()->checkboxChecked('edit-override-registration-settings');
@@ -133,7 +134,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
 
-    $this->drupalLogout($account);
+    $this->drupalLogout();
   }
 
   /**
