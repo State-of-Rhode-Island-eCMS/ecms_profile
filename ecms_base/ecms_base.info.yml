@@ -33,6 +33,7 @@ dependencies:
   - options
   - path
   - page_cache
+  - publishcontent
   - quickedit
   - responsive_image
   - rdf

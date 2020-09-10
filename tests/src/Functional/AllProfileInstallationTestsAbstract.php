@@ -9,7 +9,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\SchemaCheckTestTrait;
 
 /**
  * Class AllProfileInstallationTestsAbstract.
@@ -25,8 +24,6 @@ use Drupal\Tests\SchemaCheckTestTrait;
  * @package Drupal\Tests\ecms_profile\Functional
  */
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
-
-  use SchemaCheckTestTrait;
 
   /**
    * Override the default drupalLogin method.
@@ -97,7 +94,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensurePressReleaseFeatureInstalled();
     $this->ensurePersonFeatureInstalled();
     $this->ensureLocationFeatureInstalled();
-    $this->ensureConfigInstall();
+    $this->ensureWebformInstall();
+    $this->ensurePublishContentInstalled();
   }
 
   /**
@@ -215,24 +213,9 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   }
 
   /**
-   * Ensure the configuration installed properly.
-   */
-  private function ensureConfigInstall(): void {
-    // Ensure all configuration imported.
-    $names = $this->container->get('config.storage')->listAll();
-    /** @var \Drupal\Core\Config\TypedConfigManagerInterface $typed_config */
-    $typed_config = $this->container->get('config.typed');
-    foreach ($names as $name) {
-      $config = $this->config($name);
-      $this->assertConfigSchema($typed_config, $name, $config->get());
-    }
-
-  }
-
-  /**
    * Ensure the webform requirement installed properly.
    */
-  public function testWebformInstall(): void {
+  public function ensureWebformInstall(): void {
     $account = $this->drupalCreateUser(['administer webform']);
     $this->drupalLogin($account);
 
@@ -240,6 +223,20 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalGet('admin/structure/webform');
     $this->assertSession()->statusCodeEquals(200);
 
+  }
+
+  /**
+   * Ensure Publish Content module installed properly.
+   */
+  private function ensurePublishContentInstalled(): void {
+    $account = $this->drupalCreateUser(['administer permissions']);
+    $this->drupalLogin($account);
+
+    // Ensure the permissions exist and roles are assigned.
+    $this->drupalGet('admin/people/permissions');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
+    $this->drupalLogout();
   }
 
 }

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+id: content_author
+label: 'Content Author'
+weight: 4
+is_admin: null
+permissions:
+  - 'delete media'
+  - 'update media'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition review'
+  - 'view own unpublished content'

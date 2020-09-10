@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies: {  }
+id: content_publisher
+label: 'Content Publisher'
+weight: 5
+is_admin: null
+permissions:
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any media'
+  - 'publish any content'
+  - 'revert all revisions'
+  - 'unpublish any content'
+  - 'update any media'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use editorial transition review'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view own unpublished content'
