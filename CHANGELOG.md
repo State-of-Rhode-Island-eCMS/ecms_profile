@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-34: Added the Person content type as a feature.
 - RIG-15: Added 5 custom roles to standard install profile.
 - RIG-15: Added the Publish Content module and installed by default.
+- RIG-40: Added the Event content type as a feature.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
