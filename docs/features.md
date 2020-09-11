@@ -25,6 +25,9 @@ This contains the press_release content type and the related field configuration
 ### ecms_event
 This contains the event content type and the related field and taxonomy configuration.
 
+### ecms_promotions
+This contains the promotions content type and the related field configurations.
+
 ## Development Notes
 Developing with features can be tricky. A few items to remember:
 

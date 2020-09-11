@@ -17,3 +17,4 @@ dependencies:
   - token
   - user
 package: eCMS
+version: 9.x-1.0

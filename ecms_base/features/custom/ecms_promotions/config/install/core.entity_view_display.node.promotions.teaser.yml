@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.promotions.field_promotion_body
+    - field.field.node.promotions.field_promotion_image
+    - field.field.node.promotions.field_promotion_url
+    - node.type.promotions
+  module:
+    - user
+id: node.promotions.teaser
+targetEntityType: node
+bundle: promotions
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_promotion_body: true
+  field_promotion_image: true
+  field_promotion_url: true
