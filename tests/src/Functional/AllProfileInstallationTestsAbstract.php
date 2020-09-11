@@ -106,6 +106,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureEventFeatureInstalled();
     $this->ensurePromotionsFeatureInstalled();
     $this->ensureBasicPageFeatureInstalled();
+    $this->ensureLandingPageFeatureInstalled();
   }
 
   /**
@@ -316,6 +317,22 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Ensure the basic_page entity add form is available.
     $this->drupalGet('node/add/basic_page');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_landing_page feature installed properly.
+   */
+  private function ensureLandingPageFeatureInstalled(): void {
+    $account = $this->drupalCreateUser([
+      'create landing_page content',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the landing page entity add form is available.
+    $this->drupalGet('node/add/landing_page');
     $this->assertSession()->statusCodeEquals(200);
 
     $this->drupalLogout();

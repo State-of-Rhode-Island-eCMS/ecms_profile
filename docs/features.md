@@ -31,6 +31,9 @@ This contains the promotions content type and the related field configurations.
 ### ecms_basic_page
 This contains the basic_page content type and the related field configurations.
 
+### ecms_landing_page
+This contains the landing page content type and the related field configurations.
+
 ## Development Notes
 Developing with features can be tricky. A few items to remember:
 
