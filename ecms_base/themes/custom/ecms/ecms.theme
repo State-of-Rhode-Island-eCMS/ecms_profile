@@ -1,0 +1,9 @@
+<?php
+/**
+ * @param $variables
+ */
+function ecms_preprocess_page(&$variables) {
+  if ($variables['is_front']) {
+    // front page special stuff
+  }
+}

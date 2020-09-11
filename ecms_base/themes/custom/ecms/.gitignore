@@ -1,0 +1,8 @@
+#ignore .git, .idea
+.git
+.idea
+
+
+#Thumbs / system files
+**/Thumbs.db
+**/.DS_STORE
