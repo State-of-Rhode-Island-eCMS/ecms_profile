@@ -314,7 +314,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     ]);
     $this->drupalLogin($account);
 
-    // Ensure the promotions entity add form is available.
+    // Ensure the basic_page entity add form is available.
     $this->drupalGet('node/add/basic_page');
     $this->assertSession()->statusCodeEquals(200);
 
