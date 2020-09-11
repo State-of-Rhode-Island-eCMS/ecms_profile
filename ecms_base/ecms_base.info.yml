@@ -50,6 +50,7 @@ dependencies:
 # Install the required features.
 install:
   - ecms_authentication
+  - ecms_basic_page
   - ecms_event
   - ecms_location
   - ecms_notification
