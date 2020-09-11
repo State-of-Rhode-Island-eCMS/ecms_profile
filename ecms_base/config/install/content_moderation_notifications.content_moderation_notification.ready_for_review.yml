@@ -13,6 +13,6 @@ site_mail: false
 emails: ''
 subject: '[site:name] - Content Ready to Review'
 body:
-  value: "<p>Review moderated content here: <a href=\"javascript:void(0);\">[site:url]</a>/admin/content/moderated</p>\r\n"
+  value: "<p>Review moderated content here: [site:url]/admin/content/moderated</p>\r\n"
   format: basic_html
 label: 'Ready for Review'
