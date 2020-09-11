@@ -28,6 +28,9 @@ This contains the event content type and the related field and taxonomy configur
 ### ecms_promotions
 This contains the promotions content type and the related field configurations.
 
+### ecms_basic_page
+This contains the basic_page content type and the related field configurations.
+
 ## Development Notes
 Developing with features can be tricky. A few items to remember:
 
