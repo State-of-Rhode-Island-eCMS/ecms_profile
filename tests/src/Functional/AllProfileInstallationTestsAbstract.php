@@ -322,7 +322,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalLogout();
   }
 
-   /**
+  /**
    * Test whether the ecms_landing_page feature installed properly.
    */
   private function ensureLandingPageFeatureInstalled(): void {
