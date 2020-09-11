@@ -3,7 +3,9 @@
   <description>Drupal coding standards</description>
 
   <!-- Directories to scan -->
-  <file>/app/web/profiles/contrib/ecms_profile/</file>
+  <file>ecms_base/</file>
+  <file>ecms_acquia/</file>
+  <file>tests/src/Functional</file>
 
   <!-- Excluded patterns -->
   <exclude-pattern>*.css</exclude-pattern>
