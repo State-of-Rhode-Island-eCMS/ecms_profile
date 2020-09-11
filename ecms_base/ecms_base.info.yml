@@ -52,6 +52,7 @@ install:
   - ecms_authentication
   - ecms_basic_page
   - ecms_event
+  - ecms_landing_page
   - ecms_location
   - ecms_notification
   - ecms_person
