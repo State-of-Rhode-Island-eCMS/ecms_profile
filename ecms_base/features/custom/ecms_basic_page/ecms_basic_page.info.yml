@@ -1,0 +1,13 @@
+name: 'Basic page'
+description: 'Provides Basic page content type and related configuration. Add a basic page to the site.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - field
+  - menu_ui
+  - node
+  - path
+  - text
+  - user
+package: eCMS
+version: 9.x-1.0

@@ -105,6 +105,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensurePublishContentInstalled();
     $this->ensureEventFeatureInstalled();
     $this->ensurePromotionsFeatureInstalled();
+    $this->ensureBasicPageFeatureInstalled();
   }
 
   /**
@@ -299,6 +300,22 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Ensure the promotions entity add form is available.
     $this->drupalGet('node/add/promotions');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->drupalLogout();
+  }
+
+  /**
+   * Test whether the ecms_basic_page feature installed properly.
+   */
+  private function ensureBasicPageFeatureInstalled(): void {
+    $account = $this->drupalCreateUser([
+      'create basic_page content',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the basic_page entity add form is available.
+    $this->drupalGet('node/add/basic_page');
     $this->assertSession()->statusCodeEquals(200);
 
     $this->drupalLogout();

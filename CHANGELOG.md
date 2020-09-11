@@ -22,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-15: Added the Publish Content module and installed by default.
 - RIG-40: Added the Event content type as a feature.
 - RIG-41: Added the Promotions content type as a feature.
+- RIG-39: Added the Basic page content type as a feature.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
