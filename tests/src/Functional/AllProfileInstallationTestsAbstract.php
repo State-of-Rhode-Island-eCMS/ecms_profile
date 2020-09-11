@@ -250,7 +250,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
     $this->drupalLogout();
   }
-  
+
   /**
    * Ensure the content moderation notification requirement installed properly.
    */
