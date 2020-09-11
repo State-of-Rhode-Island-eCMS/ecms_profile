@@ -24,5 +24,11 @@
 /web
 composer.lock
 
+# Drupal core assets
+/core
+/modules
+/themes
+/profiles
+
 # Mac
 .DS_Store

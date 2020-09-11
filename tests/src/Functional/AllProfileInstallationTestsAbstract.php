@@ -107,6 +107,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensurePromotionsFeatureInstalled();
     $this->ensureBasicPageFeatureInstalled();
     $this->ensureLandingPageFeatureInstalled();
+    $this->ensureModerationNotificationInstall();
   }
 
   /**
@@ -234,7 +235,6 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     // Ensure the form configuration page is available.
     $this->drupalGet('admin/structure/webform');
     $this->assertSession()->statusCodeEquals(200);
-
   }
 
   /**
@@ -249,6 +249,18 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
     $this->drupalLogout();
+  }
+
+  /**
+   * Ensure the content moderation notification requirement installed properly.
+   */
+  public function ensureModerationNotificationInstall(): void {
+    $account = $this->drupalCreateUser(['administer content moderation notifications']);
+    $this->drupalLogin($account);
+
+    // Ensure the form configuration page is available.
+    $this->drupalGet('admin/config/workflow/notifications');
+    $this->assertSession()->statusCodeEquals(200);
   }
 
   /**

@@ -14,6 +14,7 @@ dependencies:
   - color
   - config
   - content_moderation
+  - content_moderation_notifications
   - contextual
   - datetime
   - dynamic_page_cache

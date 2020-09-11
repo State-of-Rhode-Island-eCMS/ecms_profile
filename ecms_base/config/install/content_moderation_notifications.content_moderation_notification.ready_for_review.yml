@@ -1,0 +1,18 @@
+uuid: 4cfc402f-39a9-492a-aae4-765f6f23081a
+langcode: en
+status: true
+dependencies: {  }
+id: ready_for_review
+workflow: editorial
+transitions:
+  review: review
+roles:
+  content_publisher: content_publisher
+author: false
+site_mail: false
+emails: ''
+subject: '[site:name] - Content Ready to Review'
+body:
+  value: "<p>Review moderated content here: [site:url]/admin/content/moderated</p>\r\n"
+  format: basic_html
+label: 'Ready for Review'
