@@ -126,8 +126,18 @@ tooling:
   phpcs:
     service: appserver
     cmd: vendor/bin/phpcs --standard=/$INSTALL_PROFILE_DIRECTORY/phpcs.xml
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for apache.
+    cmd: 'docker-php-ext-enable xdebug && /etc/init.d/apache2 reload'
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for apache.
+    cmd: 'rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload'
+    user: root
 config:
-  xdebug: true" >> ${DEST_DIR}/.lando.local.yml
+  xdebug: false" >> ${DEST_DIR}/.lando.local.yml
 fi
 
 # Start the app with lando.
