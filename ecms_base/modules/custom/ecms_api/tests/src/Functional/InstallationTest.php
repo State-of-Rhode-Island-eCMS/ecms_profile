@@ -36,20 +36,27 @@ class InstallationTest extends BrowserTestBase {
   protected static $modules = ['ecms_api'];
 
   /**
-   * Test the API configuration settings.
+   * Test the eCMS API configuration settings.
    */
   public function testEcmsApiInstallation(): void {
     $account = $this->drupalCreateUser(['administer modules']);
     $this->drupalLogin($account);
 
+    // Ensure the Json API allows CRUD operations.
     $this->drupalGet('admin/config/services/jsonapi');
     $this->assertSession()->statusCodeEquals(200);
 
     $this->assertSession()->checkboxChecked('edit-read-only-rw');
     $this->assertSession()->checkboxNotChecked('edit-read-only-r');
 
+    // Ensure the API Path is correct.
     $this->drupalGet('admin/config/services/jsonapi/extras');
     $this->assertSession()->fieldValueEquals('edit-path-prefix', 'EcmsApi');
+
+    // Ensure the simple oauth public/private key values.
+    $this->drupalGet('admin/config/people/simple_oauth');
+    $this->assertSession()->fieldValueEquals('public_key', '../ecms_api_public.key');
+    $this->assertSession()->fieldValueEquals('private_key', '../ecms_api_private.key');
   }
 
 }
