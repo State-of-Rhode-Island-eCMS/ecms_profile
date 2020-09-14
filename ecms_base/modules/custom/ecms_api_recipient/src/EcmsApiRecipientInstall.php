@@ -122,7 +122,7 @@ class EcmsApiRecipientInstall {
 
     $consumer = $storage->create($values);
 
-    try{
+    try {
       $consumer->save();
     }
     catch(EntityStorageException $e) {

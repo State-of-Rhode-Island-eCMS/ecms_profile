@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\Tests\ecms_api_recipient\Functional;
 
 // Require the all profiles abstract class since autoloading doesn't work.
-require_once dirname(__FILE__) . '/../../../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
 
 use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 

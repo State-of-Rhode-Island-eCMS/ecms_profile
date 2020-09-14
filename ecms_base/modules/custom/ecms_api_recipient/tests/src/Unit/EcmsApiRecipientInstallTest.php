@@ -8,13 +8,14 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_api_recipient\EcmsApiRecipientInstall;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class EcmsApiRecipientInstallTest
+ * Class EcmsApiRecipientInstallTest.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
  * @group ecms
@@ -51,8 +52,6 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
 
   private $apiConfig;
 
-  private $userEntity;
-  private $consumerEntity;
 
   protected function setUp(): void {
     // Mock the immutable config for the recipient module.
@@ -61,49 +60,143 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     // Mock the config.factory service.
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
     $this->configFactory->expects($this->once())
-      ->with('get')
+      ->method('get')
       ->willReturn($this->apiConfig);
 
     // Mock the entity_type.manager service.
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
-
-    $this->userEntity = $this->createMock(EntityInterface::class);
-    $this->userEntity->expects($this->once())
-      ->method('id')
-      ->willReturn(self::USER_ID);
 
     $container = new ContainerBuilder();
     $container->set('string_translation', $this->getStringTranslationStub());
     \Drupal::setContainer($container);
   }
 
+  /**
+   * Test a successful installation.
+   */
   public function testInstallEcmsApiRecipient(): void {
+    $userEntity = $this->createMock(EntityInterface::class);
+    $userEntity->expects($this->once())
+      ->method('id')
+      ->willReturn(self::USER_ID);
+    $userEntity->expects($this->once())
+      ->method('save')
+      ->willReturnSelf();
+
     $userStorage = $this->createMock(EntityStorageInterface::class);
     $userStorage->expects($this->once())
       ->method('create')
       ->with(self::ACCOUNT)
-      ->willReturn($this->userEntity);
+      ->willReturn($userEntity);
 
-    $this->userEntity->expects($this->once())
+    $consumerEntity = $this->createMock(EntityInterface::class);
+    $consumerEntity->expects($this->once())
       ->method('save')
       ->willReturnSelf();
 
-    $consumerEntity = $this->createMock(EntityInterface::class);
     $consumerStorage = $this->createMock(EntityStorageInterface::class);
     $consumerStorage->expects($this->once())
       ->method('create')
       ->with(self::CONSUMER)
       ->willReturn($consumerEntity);
 
-    $consumerEntity->expects($this->once())
+    $this->apiConfig->expects($this->exactly(2))
+      ->method('get')
+      ->willReturnOnConsecutiveCalls(
+        self::CLIENT_ID,
+        self::CLIENT_SECRET
+      );
+
+    $this->entityTypeManager->expects($this->exactly(2))
+      ->method('getStorage')
+      ->withConsecutive(
+        ['user'],
+        ['consumer']
+      )
+      ->willReturnOnConsecutiveCalls(
+        $userStorage,
+        $consumerStorage
+      );
+
+    $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
+
+    $ecmsApiRecipientInstall->installEcmsApiRecipient();
+
+  }
+
+  public function testUnsuccessfulAccountCreation(): void {
+    $exception = $this->createMock(EntityStorageException::class);
+
+    $userEntity = $this->createMock(EntityInterface::class);
+    $userEntity->expects($this->never())
+      ->method('id');
+    $userEntity->expects($this->once())
+      ->method('save')
+      ->willThrowException($exception);
+
+    $userStorage = $this->createMock(EntityStorageInterface::class);
+    $userStorage->expects($this->once())
+      ->method('create')
+      ->with(self::ACCOUNT)
+      ->willReturn($userEntity);
+
+    $this->entityTypeManager->expects($this->once())
+      ->method('getStorage')
+      ->with('user')
+      ->willReturn($userStorage);
+
+    $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
+
+    $ecmsApiRecipientInstall->installEcmsApiRecipient();
+  }
+
+  /**
+   * Test a successful installation.
+   */
+  public function testUnsuccessfulConsumerCreation(): void {
+    $exception = $this->createMock(EntityStorageException::class);
+
+    $userEntity = $this->createMock(EntityInterface::class);
+    $userEntity->expects($this->once())
+      ->method('id')
+      ->willReturn(self::USER_ID);
+    $userEntity->expects($this->once())
       ->method('save')
       ->willReturnSelf();
+
+    $userStorage = $this->createMock(EntityStorageInterface::class);
+    $userStorage->expects($this->once())
+      ->method('create')
+      ->with(self::ACCOUNT)
+      ->willReturn($userEntity);
+
+    $consumerEntity = $this->createMock(EntityInterface::class);
+    $consumerEntity->expects($this->once())
+      ->method('save')
+      ->willThrowException($exception);
+
+    $consumerStorage = $this->createMock(EntityStorageInterface::class);
+    $consumerStorage->expects($this->once())
+      ->method('create')
+      ->with(self::CONSUMER)
+      ->willReturn($consumerEntity);
 
     $this->apiConfig->expects($this->exactly(2))
       ->method('get')
       ->willReturnOnConsecutiveCalls(
-        [self::CLIENT_ID],
-        [self::CLIENT_SECRET]
+        self::CLIENT_ID,
+        self::CLIENT_SECRET
+      );
+
+    $this->entityTypeManager->expects($this->exactly(2))
+      ->method('getStorage')
+      ->withConsecutive(
+        ['user'],
+        ['consumer']
+      )
+      ->willReturnOnConsecutiveCalls(
+        $userStorage,
+        $consumerStorage
       );
 
     $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
