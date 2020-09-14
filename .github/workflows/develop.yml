@@ -35,12 +35,17 @@ jobs:
           cd ../develop-ecms-profile
           lando phpcs
 
-      - name: Run unit tests.
-        run: |
-          cd ../develop-ecms-profile
-          lando phpunit
-
       - name: Run gulp validate.
         run: |
           cd ../develop-ecms-profile
           lando gulp-distro validate
+
+      - name: Run unit tests.
+        run: |
+          cd ../develop-ecms-profile
+          lando phpunit --testsuite=unit
+
+      - name: Run functional tests.
+        run: |
+          cd ../develop-ecms-profile
+          lando phpunit --testsuite=functional

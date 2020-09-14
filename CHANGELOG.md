@@ -28,6 +28,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
+- Disabled xdebug by default in the develop.sh script.
 
 ### Deprecated
 
