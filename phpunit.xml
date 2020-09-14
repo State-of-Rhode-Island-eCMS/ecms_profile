@@ -52,7 +52,6 @@
         </whitelist>
     </filter>
     <logging>
-<!--        <log type="coverage-html" target="tests/phpunit/results/html"/>-->
         <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
     </logging>
 </phpunit>
