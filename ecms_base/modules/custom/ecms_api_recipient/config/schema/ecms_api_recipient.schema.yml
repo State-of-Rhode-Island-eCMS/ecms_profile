@@ -1,0 +1,15 @@
+ecms_recipient.settings:
+  type: config_object
+  mapping:
+    oauth_client_id:
+      type: string
+      label: 'OAuth Client ID'
+    oauth_client_secret:
+      type: string
+      label: 'OAuth Client secret'
+    allowed_content_types:
+      type: sequence
+      label: 'Allowed content types'
+      sequence:
+        type: string
+        label: 'Content type'

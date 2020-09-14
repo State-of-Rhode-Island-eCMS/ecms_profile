@@ -1,0 +1,3 @@
+oauth_client_id: 'test-client-id'
+oauth_client_secret: 'test-client-secret'
+allowed_content_types: []
