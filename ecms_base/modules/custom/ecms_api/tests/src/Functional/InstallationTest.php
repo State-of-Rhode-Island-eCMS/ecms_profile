@@ -4,7 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_api\Functional;
 
-use Drupal\Tests\BrowserTestBase;
+// Require the all profiles abstract class since autoloading doesn't work.
+require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+
+use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 
 /**
  * Tests that installation finished correctly and known resources are available.
@@ -12,7 +15,7 @@ use Drupal\Tests\BrowserTestBase;
  * @group ecms
  * @group ecms_api
  */
-class InstallationTest extends BrowserTestBase {
+class InstallationTest extends AllProfileInstallationTestsAbstract {
 
   /**
    * The profile to install.
@@ -39,7 +42,11 @@ class InstallationTest extends BrowserTestBase {
    * Test the eCMS API configuration settings.
    */
   public function testEcmsApiInstallation(): void {
-    $account = $this->drupalCreateUser(['administer modules']);
+    $account = $this->drupalCreateUser([
+      'administer modules',
+      'administer site configuration',
+      'administer simple_oauth entities',
+      ]);
     $this->drupalLogin($account);
 
     // Ensure the Json API allows CRUD operations.
