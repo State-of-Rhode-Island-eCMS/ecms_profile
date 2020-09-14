@@ -1,0 +1,6 @@
+services:
+  # This service will handle altering configuration to setup the API endpoints
+  # on installation of this module.
+  ecms_api_install:
+    class: Drupal\ecms_api\EcmsApiInstall
+    arguments: ['@config.factory']

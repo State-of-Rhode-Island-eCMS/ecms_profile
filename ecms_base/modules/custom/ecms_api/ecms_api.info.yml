@@ -1,0 +1,10 @@
+name: eCMS API
+description: 'Provides the base configuration for the eCMS API'
+type: module
+core_version_requirement: ^9
+package: eCMS API
+
+dependencies:
+  - jsonapi
+  - jsonapi_extras
+  - simple_oauth

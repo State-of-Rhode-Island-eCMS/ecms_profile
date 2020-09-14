@@ -25,6 +25,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-39: Added the Basic page content type as a feature.
 - RIG-38: Added the Landing page content type as a feature.
 - RIG-15: Added Content Moderation Notification module and config.
+- RIG-43: Added the ecms_api custom module.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.

@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types = 1);
+
+/**
+ * Implements hook_install().
+ */
+function ecms_api_install(): void {
+  // Call the install service to update configuration.
+  \Drupal::service('ecms_api_install')->installEcmsApi();
+}
