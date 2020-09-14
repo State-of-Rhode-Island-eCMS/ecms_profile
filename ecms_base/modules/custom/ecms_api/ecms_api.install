@@ -6,5 +6,6 @@ declare(strict_types = 1);
  * Implements hook_install().
  */
 function ecms_api_install(): void {
-  // @todo: call a custom service to configure the module configuration.
+  // Call the install service to update configuration.
+  \Drupal::service('ecms_api_install')->installEcmsApi();
 }
