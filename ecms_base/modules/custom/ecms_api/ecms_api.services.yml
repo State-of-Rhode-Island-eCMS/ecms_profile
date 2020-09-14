@@ -1,0 +1,4 @@
+services:
+  ecms_api_install:
+    class: Drupal\ecms_api\EcmsApiInstall
+    arguments: ['@config.factory']
