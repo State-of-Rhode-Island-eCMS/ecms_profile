@@ -157,6 +157,7 @@ echo " Require ${REPOSITORY_NAME} using lando composer "
 echo "--------------------------------------------------"
 
 $LANDO composer config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "/'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
+$LANDO composer config repositories.ecms_patternlab '{"type": "package", "package": {"name": "state-of-rhode-island-ecms/ecms_patternlab", "version": "1.0.0", "type": "pattern-lab", "source": {"url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab", "type": "git", "reference": "master"}}}'
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
 # Update the lock file to ensure core patches applied.
