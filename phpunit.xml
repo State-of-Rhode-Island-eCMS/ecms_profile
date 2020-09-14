@@ -29,6 +29,7 @@
         </testsuite>
         <testsuite name="functional">
             <directory>/app/web/profiles/contrib/ecms_profile/*/tests/src/Functional</directory>
+            <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Functional</directory>
             <directory>/app/web/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/Functional</directory>
         </testsuite>
     </testsuites>
@@ -51,7 +52,7 @@
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="tests/phpunit/results/html"/>
+<!--        <log type="coverage-html" target="tests/phpunit/results/html"/>-->
         <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
     </logging>
 </phpunit>
