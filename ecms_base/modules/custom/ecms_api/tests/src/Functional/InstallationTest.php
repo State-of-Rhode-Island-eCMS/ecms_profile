@@ -46,7 +46,8 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
       'administer modules',
       'administer site configuration',
       'administer simple_oauth entities',
-      ]);
+    ]);
+
     $this->drupalLogin($account);
 
     // Ensure the Json API allows CRUD operations.
