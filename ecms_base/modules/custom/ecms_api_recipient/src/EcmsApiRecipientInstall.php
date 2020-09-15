@@ -83,6 +83,7 @@ class EcmsApiRecipientInstall {
       'name' => 'ecms_api_recipient',
       'mail' => 'ecms_api_recipient@ecms.com',
       'roles' => [self::RECIPIENT_ROLE],
+      'status' => 1,
     ]);
 
     try {

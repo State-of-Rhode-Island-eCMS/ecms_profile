@@ -46,6 +46,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     'name' => 'ecms_api_recipient',
     'mail' => 'ecms_api_recipient@ecms.com',
     'roles' => ['ecms_api_recipient'],
+    'status' => 1,
   ];
 
   /**
