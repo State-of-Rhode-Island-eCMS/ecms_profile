@@ -30,5 +30,8 @@ UUID length and formats.
 
 ### oauth_client_secret
 The OAuth client secret is essentially the password that is used to allow
-access to the consumer. Care should be taken to ensure that this secret is 
-treated as a password with plenty of length and randomness.
+access to the consumer entity. Care should be taken to ensure that this secret 
+is treated as a password with plenty of length and randomness.
+
+The Client ID and the Client Secret above will be passed to `oauth/token` route
+by the publishing site to gain an access token with which to create content.
