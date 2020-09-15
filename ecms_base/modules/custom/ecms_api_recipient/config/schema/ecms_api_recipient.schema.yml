@@ -7,6 +7,9 @@ ecms_recipient.settings:
     oauth_client_secret:
       type: string
       label: 'OAuth Client secret'
+    api_recipient_mail:
+      type: string
+      label: 'Recipient user email address'
     allowed_content_types:
       type: sequence
       label: 'Allowed content types'
