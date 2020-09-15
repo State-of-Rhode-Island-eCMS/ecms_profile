@@ -81,7 +81,7 @@ class EcmsApiRecipientInstall {
 
     $account = $storage->create([
       'name' => 'ecms_api_recipient',
-      'mail' => 'ecms_api_recipient@ecms.com',
+      'mail' => $this->getMailAddress(),
       'roles' => [self::RECIPIENT_ROLE],
       'status' => 1,
     ]);
@@ -151,6 +151,16 @@ class EcmsApiRecipientInstall {
    */
   private function getClientSecret(): string {
     return $this->ecmsRecipientApiConfig->get('oauth_client_secret');
+  }
+
+  /**
+   * Get the email address from configuration.
+   *
+   * @return string
+   *   The email address stored in configuration.
+   */
+  private function getMailAddress(): string {
+    return $this->ecmsRecipientApiConfig->get('api_recipient_mail');
   }
 
 }

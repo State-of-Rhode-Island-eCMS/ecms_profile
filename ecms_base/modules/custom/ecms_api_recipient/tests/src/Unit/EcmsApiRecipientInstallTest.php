@@ -40,11 +40,16 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
   const CLIENT_SECRET = 'client-secret-test';
 
   /**
+   * The email address configuration value.
+   */
+  const API_MAIL = 'test@test123.com';
+
+  /**
    * The account entity creation array.
    */
   const ACCOUNT = [
     'name' => 'ecms_api_recipient',
-    'mail' => 'ecms_api_recipient@ecms.com',
+    'mail' => self::API_MAIL,
     'roles' => ['ecms_api_recipient'],
     'status' => 1,
   ];
@@ -133,9 +138,10 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
       ->with(self::CONSUMER)
       ->willReturn($consumerEntity);
 
-    $this->apiConfig->expects($this->exactly(2))
+    $this->apiConfig->expects($this->exactly(3))
       ->method('get')
       ->willReturnOnConsecutiveCalls(
+        self::API_MAIL,
         self::CLIENT_ID,
         self::CLIENT_SECRET
       );
@@ -181,6 +187,10 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
       ->with('user')
       ->willReturn($userStorage);
 
+    $this->apiConfig->expects($this->once())
+      ->method('get')
+      ->willReturn(self::API_MAIL);
+
     $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
 
     $ecmsApiRecipientInstall->installEcmsApiRecipient();
@@ -217,9 +227,10 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
       ->with(self::CONSUMER)
       ->willReturn($consumerEntity);
 
-    $this->apiConfig->expects($this->exactly(2))
+    $this->apiConfig->expects($this->exactly(3))
       ->method('get')
       ->willReturnOnConsecutiveCalls(
+        self::API_MAIL,
         self::CLIENT_ID,
         self::CLIENT_SECRET
       );
