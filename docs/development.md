@@ -109,4 +109,4 @@ Certain configuration should be managed with the Features module.
 [Additional features documentation is available here](./features.md).
 
 ## Custom theme and Pattern Lab Integration
-[Additional documentation is available here](.theming.md).
+[Additional documentation is available here](./theming.md).
