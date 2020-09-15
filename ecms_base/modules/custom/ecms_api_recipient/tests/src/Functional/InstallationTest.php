@@ -45,6 +45,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
       'administer consumer entities',
       'administer users',
       'administer site configuration',
+      'access administration pages',
     ]);
     $this->drupalLogin($account);
 
@@ -102,7 +103,8 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-create-basic-page-content');
     $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-edit-own-basic-page-content');
 
-    $this->drupalGet('admin/config/services/');
+    // Ensure the menu link is available.
+    $this->drupalGet('admin/config/services');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->linkExists('eCMS API Allowed Recipients');
 
