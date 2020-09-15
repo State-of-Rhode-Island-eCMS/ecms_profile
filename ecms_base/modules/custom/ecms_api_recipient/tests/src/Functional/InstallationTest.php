@@ -102,6 +102,10 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-create-basic-page-content');
     $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-edit-own-basic-page-content');
 
+    $this->drupalGet('admin/config/services/');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->linkExists('eCMS API Allowed Recipients');
+
   }
 
 }

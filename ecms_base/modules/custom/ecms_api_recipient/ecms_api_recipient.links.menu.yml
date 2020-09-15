@@ -1,0 +1,6 @@
+ecms_api_recipient.settings_form:
+  title: 'eCMS API Allowed Recipients'
+  description: 'Configure the allowed content types to receive syndicated content.'
+  route_name: ecms_api_recipient.settings_form
+  parent: system.admin_config_services
+  weight: 10
