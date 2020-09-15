@@ -44,6 +44,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
       'administer permissions',
       'administer consumer entities',
       'administer users',
+      'administer site configuration',
     ]);
     $this->drupalLogin($account);
 
@@ -85,6 +86,22 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->fieldValueEquals('edit-user-id-0-target-id', "ecms_api_recipient ({$accountId})");
     // Ensure the correct role is set.
     $this->assertSession()->checkboxChecked('edit-roles-ecms-api-recipient');
+
+    $this->drupalGet('admin/config/ecms_api/ecms_api_recipient/settings');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->fieldExists('edit-allowed-content-types-notification');
+    $configFormSubmission = [
+      'edit-allowed-content-types-notification' => 1,
+    ];
+    $this->drupalPostForm('admin/config/ecms_api/ecms_api_recipient/settings', $configFormSubmission, 'Save configuration');
+    $this->drupalGet('admin/people/permissions/ecms_api_recipient');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-notification-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-notification-content');
+
+    $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-create-basic-page-content');
+    $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-edit-own-basic-page-content');
+
   }
 
 }
