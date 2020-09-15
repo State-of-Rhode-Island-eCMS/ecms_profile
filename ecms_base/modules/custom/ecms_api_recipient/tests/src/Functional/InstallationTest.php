@@ -61,7 +61,8 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
 
     // Parse the url to get the user account id.
     $accountDetails = explode('/', $accountUrl);
-    $accountId = $accountDetails[1];
+    $accountId = end($accountDetails);
+    $this->assertIsNumeric($accountId);
 
     // Browse to the user edit page.
     $this->drupalGet("{$accountUrl}/edit");
