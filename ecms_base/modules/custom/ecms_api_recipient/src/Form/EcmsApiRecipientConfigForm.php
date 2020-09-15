@@ -70,7 +70,7 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
   /**
    * {@inheritDoc}
    */
-  protected function getEditableConfigNames(): array {
+  public function getEditableConfigNames(): array {
     return [
       'ecms_api_recipient.settings',
     ];
