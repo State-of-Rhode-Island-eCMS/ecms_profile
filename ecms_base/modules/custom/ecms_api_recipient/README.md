@@ -35,3 +35,10 @@ is treated as a password with plenty of length and randomness.
 
 The Client ID and the Client Secret above will be passed to `oauth/token` route
 by the publishing site to gain an access token with which to create content.
+
+## Allowing JSON API Content Creation
+Content types can be toggled with the configuration form at: 
+`admin/config/ecms_api/ecms_api_recipient/settings`. This will allow an admin
+to select the content types to allow JSON API publishing. Once submitted, the
+`ecms_api_recipient` role permissions are update to allow the creation of the
+selected nodes.
