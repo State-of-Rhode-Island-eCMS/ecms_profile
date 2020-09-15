@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Component\Utility\Crypt;
 
 /**
  * Class EcmsApiRecipientInstall.
@@ -83,6 +84,7 @@ class EcmsApiRecipientInstall {
       'name' => 'ecms_api_recipient',
       'mail' => $this->getMailAddress(),
       'roles' => [self::RECIPIENT_ROLE],
+      'pass' => $this->generatePassword(),
       'status' => 1,
     ]);
 
@@ -115,7 +117,7 @@ class EcmsApiRecipientInstall {
       'user_id' => $user->id(),
       'roles' => [self::RECIPIENT_ROLE],
       'label' => $this->t('eCMS Recipient'),
-      'description' => $this->t('An oAuth client to receive conten from an eCMS publishing site.'),
+      'description' => $this->t('An oAuth client to receive content from an eCMS publishing site.'),
       'third_party' => FALSE,
       'uuid' => $this->getClientId(),
       'secret' => $this->getClientSecret(),
@@ -161,6 +163,16 @@ class EcmsApiRecipientInstall {
    */
   private function getMailAddress(): string {
     return $this->ecmsRecipientApiConfig->get('api_recipient_mail');
+  }
+
+  /**
+   * Generate a random password for the user.
+   *
+   * @return string
+   *   A random string generated with the Crypt utility method.
+   */
+  protected function generatePassword(): string {
+    return Crypt::randomBytesBase64();
   }
 
 }

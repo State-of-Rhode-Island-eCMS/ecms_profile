@@ -45,12 +45,18 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
   const API_MAIL = 'test@test123.com';
 
   /**
+   * Mock the password.
+   */
+  const PASSWORD = 'MockPassword123';
+
+  /**
    * The account entity creation array.
    */
   const ACCOUNT = [
     'name' => 'ecms_api_recipient',
     'mail' => self::API_MAIL,
     'roles' => ['ecms_api_recipient'],
+    'pass' => self::PASSWORD,
     'status' => 1,
   ];
 
@@ -61,7 +67,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     'user_id' => 123,
     'roles' => ['ecms_api_recipient'],
     'label' => 'eCMS Recipient',
-    'description' => 'An oAuth client to receive conten from an eCMS publishing site.',
+    'description' => 'An oAuth client to receive content from an eCMS publishing site.',
     'third_party' => FALSE,
     'uuid' => self::CLIENT_ID,
     'secret' => self::CLIENT_SECRET,
@@ -113,6 +119,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
    * Test a successful installation.
    */
   public function testInstallEcmsApiRecipient(): void {
+
     $userEntity = $this->createMock(EntityInterface::class);
     $userEntity->expects($this->once())
       ->method('id')
@@ -157,7 +164,13 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
         $consumerStorage
       );
 
-    $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
+    $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
+      ->onlyMethods(['generatePassword'])
+      ->setConstructorArgs([$this->entityTypeManager, $this->configFactory])
+      ->getMock();
+    $ecmsApiRecipientInstall->expects($this->once())
+      ->method('generatePassword')
+      ->willReturn(self::PASSWORD);
 
     $ecmsApiRecipientInstall->installEcmsApiRecipient();
 
@@ -191,8 +204,13 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
       ->method('get')
       ->willReturn(self::API_MAIL);
 
-    $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
-
+    $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
+      ->onlyMethods(['generatePassword'])
+      ->setConstructorArgs([$this->entityTypeManager, $this->configFactory])
+      ->getMock();
+    $ecmsApiRecipientInstall->expects($this->once())
+      ->method('generatePassword')
+      ->willReturn(self::PASSWORD);
     $ecmsApiRecipientInstall->installEcmsApiRecipient();
   }
 
@@ -246,7 +264,13 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
         $consumerStorage
       );
 
-    $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
+    $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
+      ->onlyMethods(['generatePassword'])
+      ->setConstructorArgs([$this->entityTypeManager, $this->configFactory])
+      ->getMock();
+    $ecmsApiRecipientInstall->expects($this->once())
+      ->method('generatePassword')
+      ->willReturn(self::PASSWORD);
 
     $ecmsApiRecipientInstall->installEcmsApiRecipient();
   }
