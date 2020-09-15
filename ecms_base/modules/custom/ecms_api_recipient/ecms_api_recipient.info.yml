@@ -1,5 +1,5 @@
 name: eCMS API Recipient
-description: 'Provides configuration for a site to receive notifications from a hub site within the network.'
+description: 'Provides configuration for a site to receive notifications from a hub site within the eCMS network.'
 type: module
 core_version_requirement: ^9
 package: eCMS API
