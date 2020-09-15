@@ -24,18 +24,33 @@ use Drupal\Tests\UnitTestCase;
  */
 class EcmsApiRecipientInstallTest extends UnitTestCase {
 
+  /**
+   * The user id to test with.
+   */
   const USER_ID = 123;
 
+  /**
+   * The client id configuration value.
+   */
   const CLIENT_ID = 'client-uuid-test';
 
+  /**
+   * The client secret configuration value.
+   */
   const CLIENT_SECRET = 'client-secret-test';
 
+  /**
+   * The account entity creation array.
+   */
   const ACCOUNT = [
     'name' => 'ecms_api_recipient',
     'mail' => 'ecms_api_recipient@ecms.com',
     'roles' => ['ecms_api_recipient'],
   ];
 
+  /**
+   * The consumer entity creation array.
+   */
   const CONSUMER = [
     'user_id' => 123,
     'roles' => ['ecms_api_recipient'],
@@ -46,13 +61,30 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     'secret' => self::CLIENT_SECRET,
   ];
 
+  /**
+   * Mock of the entity_type.manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $entityTypeManager;
 
+  /**
+   * Mock of the config.factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $configFactory;
 
+  /**
+   * Mock of the ecms_api_recipient.settings.yml configuration.
+   *
+   * @var \Drupal\Core\Config\ImmutableConfig|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $apiConfig;
 
-
+  /**
+   * {@inheritDoc}
+   */
   protected function setUp(): void {
     // Mock the immutable config for the recipient module.
     $this->apiConfig = $this->createMock(ImmutableConfig::class);
@@ -124,6 +156,9 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
 
   }
 
+  /**
+   * Test whether a user account exception is thrown.
+   */
   public function testUnsuccessfulAccountCreation(): void {
     $exception = $this->createMock(EntityStorageException::class);
 
@@ -151,7 +186,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
   }
 
   /**
-   * Test a successful installation.
+   * Test whether a consumer entity exception is thrown.
    */
   public function testUnsuccessfulConsumerCreation(): void {
     $exception = $this->createMock(EntityStorageException::class);
@@ -202,7 +237,6 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     $ecmsApiRecipientInstall = new EcmsApiRecipientInstall($this->entityTypeManager, $this->configFactory);
 
     $ecmsApiRecipientInstall->installEcmsApiRecipient();
-
   }
 
 }

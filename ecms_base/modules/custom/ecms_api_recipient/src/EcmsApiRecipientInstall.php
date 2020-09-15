@@ -88,7 +88,7 @@ class EcmsApiRecipientInstall {
     try {
       $account->save();
     }
-    catch(EntityStorageException $e) {
+    catch (EntityStorageException $e) {
       return NULL;
     }
 
@@ -125,7 +125,7 @@ class EcmsApiRecipientInstall {
     try {
       $consumer->save();
     }
-    catch(EntityStorageException $e) {
+    catch (EntityStorageException $e) {
       return NULL;
     }
 
