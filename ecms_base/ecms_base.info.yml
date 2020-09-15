@@ -6,6 +6,7 @@ core_version_requirement: ^9
 # Module dependencies for the distribution.
 # Modules that sub-profiles need must be listed here and_not in install.
 dependencies:
+  - admin_toolbar
   - big_pipe
   - block
   - block_content
@@ -38,7 +39,6 @@ dependencies:
   - quickedit
   - responsive_image
   - rdf
-  - search
   - shortcut
   - taxonomy
   - toolbar
@@ -64,3 +64,4 @@ install:
 themes:
   - bartik
   - claro
+  - ecms
