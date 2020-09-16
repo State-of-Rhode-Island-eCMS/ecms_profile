@@ -26,14 +26,18 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-38: Added the Landing page content type as a feature.
 - RIG-15: Added Content Moderation Notification module and config.
 - RIG-43: Added the ecms_api custom module.
+- RIG-16: Added custom theme with Pattern Lab repo dependency.
+- RIG-37: Added the Admin Toolbar module.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
 - Disabled xdebug by default in the develop.sh script.
+- RIG-37: Made ECMS custom theme the default.
 
 ### Deprecated
 
 ### Removed
+- RIG-37: Removed core search from default install.
 
 ### Fixed
 

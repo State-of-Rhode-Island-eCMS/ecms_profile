@@ -89,7 +89,24 @@ point to your feature branch.
 This will be the case if you update any requirements, such as a new module. Composer
 won't be aware of the changes unless it's looking at the updated dependencies.
 
+#### Steps to update local environment
+ * Pull down ecms_profile master branch, ensure your feature branch is rebased.
+ * Browse to ../develop-ecms-profile and run `lando start`
+ * As noted above, update composer.json to point to your ecms_profile feature branch.
+ * To ensure dependencies are up to date, run `lando composer update rhodeislandecms/ecms_profile`
+ * Note that you will need to perform the previous command any time you make changes to `ecms_profile/composer.json`.
+
+#### Testing updates to the profile installation
+Often you want to test the updated installation process to ensure plugins are enabled,
+configuration is installing correctly, etc. 
+To test the updated profile install process locally, browse to ../develop-ecms-profile and run:
+```bash
+lando drush site-install ecms_base --verbose --yes --site-mail=admin@localhost --account-mail=admin@localhost --site-name="State of Rhode Island Distribution" --account-name=admin --account-pass=admin;
+```
+
 ## Features
 Certain configuration should be managed with the Features module. 
 [Additional features documentation is available here](./features.md).
 
+## Custom theme and Pattern Lab Integration
+[Additional documentation is available here](./theming.md).

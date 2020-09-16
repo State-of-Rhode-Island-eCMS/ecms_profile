@@ -32,3 +32,6 @@ composer.lock
 
 # Mac
 .DS_Store
+
+# Pattern Lab package will be pulled in by Composer.
+/ecms_base/themes/custom/ecms/ecms_patternlab

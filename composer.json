@@ -20,6 +20,19 @@
     {
       "type": "composer",
       "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "state-of-rhode-island-ecms/ecms_patternlab",
+        "version": "1.0.0",
+        "type": "pattern-lab",
+        "source": {
+          "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab",
+          "type": "git",
+          "reference": "master"
+        }
+      }
     }
   ],
   "extra": {
@@ -34,12 +47,13 @@
       "drupal/publishcontent": {
         "3170248 - Configuration Schema Errors": "https://www.drupal.org/files/issues/2020-09-10/publishcontent-schema-3170248-2.patch"
       },
-      "drupal/smart_date": {
-        "3170288 - Configuration schema errors": "https://www.drupal.org/files/issues/2020-09-10/smart_date-schema-3170288-2.patch"
-      },
       "drupal/content_moderation_notifications": {
         "3170503 - Core requirement error during Functional test": "https://www.drupal.org/files/issues/2020-09-11/3170503-2.patch"
       }
+    },
+    "installer-types": ["pattern-lab"],
+    "installer-paths": {
+      "ecms_base/themes/custom/ecms/{$name}": ["state-of-rhode-island-ecms/ecms_patternlab"]
     },
     "preserve-paths": [],
     "drupal-scaffold": {}
@@ -64,6 +78,7 @@
     "cweagans/composer-patches": "^1.6",
     "drupal/acsf": "^2.67",
     "drupal/address": "^1.8",
+    "drupal/admin_toolbar": "^2.3",
     "drupal/auto_entitylabel": "^3.0@beta",
     "drupal/content_moderation_notifications": "^3.2",
     "drupal/core-recommended": "^9",
@@ -80,6 +95,8 @@
     "drupal/token": "^1.7",
     "drupal/webform": "^6.0",
     "drush/drush": "^10.0",
+    "oomphinc/composer-installers-extender": "^1.1",
+    "state-of-rhode-island-ecms/ecms_patternlab": "^1.0",
     "zaporylie/composer-drupal-optimizations": "^1.0"
   },
   "require-dev": {
