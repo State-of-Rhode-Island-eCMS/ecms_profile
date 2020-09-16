@@ -22,10 +22,6 @@ class EcmsApiSiteAccessControlHandler extends EntityAccessControlHandler {
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
     switch ($operation) {
       case 'view':
-        if (!$entity->isPublished()) {
-          return AccessResult::allowedIfHasPermission($account, 'view unpublished ecms api site entities');
-        }
-
         // Check if the entity belongs to the user.
         if ($account->id() === $entity->getOwnerId()) {
           return AccessResult::allowedIfHasPermission($account, 'view own published ecms api site entities');
