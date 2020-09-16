@@ -146,8 +146,10 @@ $LANDO start
 # Remove the coffee module as it currently breaks unit testing.
 $LANDO composer remove drupal/coffee
 
-# Add the mink driver for functional testing.
+# Add the development requirements for testing.
 $LANDO composer require "behat/mink-goutte-driver" --dev
+$LANDO composer require "php-mock/php-mock" --dev
+$LANDO composer require "php-mock/php-mock-phpunit" --dev
 
 # Update composer packages from the scaffold.
 # $LANDO composer update
