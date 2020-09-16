@@ -12,6 +12,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityPublishedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\link\LinkItemInterface;
+use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\user\UserInterface;
 
@@ -118,17 +119,21 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
   /**
    * {@inheritDoc}
    */
-  public function getApiEndpoint(): string {
-    /** @var \Drupal\Core\Link $host */
-    $host = $this->get('api_host');
-    return $host->getUrl()->toString();
+  public function getApiEndpoint(): LinkItem {
+    return $this->get('api_host')->first();
   }
 
   /**
    * {@inheritDoc}
    */
   public function getContentTypes(): array {
-    return $this->get('content_type')->getValue();
+    $contentTypes = $this->get('content_type')->getValue();
+    if (empty($contentTypes)) {
+      return [];
+    }
+    return array_map(function ($type) {
+      return $type['target_id'];
+    }, $contentTypes);
   }
 
   /**
@@ -138,9 +143,6 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
     // Get the base fields from the parent class.
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    // Add the published field.
-    $fields += static::publishedBaseFieldDefinitions($entity_type);
-
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('Give a descriptive name for this endpoint.'))
@@ -149,7 +151,6 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
         'text_processing' => 0,
       ])
       ->setRequired(TRUE)
-      ->setDefaultValue('')
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -4,
@@ -209,8 +210,8 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
 
     // The endpoint link field.
     $fields['api_host'] = BaseFieldDefinition::create('link')
-      ->setLabel('API endpoint')
-      ->setDescription('The API endpoint url for the recipient site.')
+      ->setLabel(t('API endpoint'))
+      ->setDescription(t('The API endpoint url for the recipient site.'))
       ->setCardinality(1)
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [
@@ -219,7 +220,7 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
       ])
       ->setSettings([
         'link_type' => LinkItemInterface::LINK_EXTERNAL,
-        'title' => DRUPAL_DISABLED,
+        'title' => 0,
       ])
       ->setDisplayOptions('view', [
         'label' => 'above',
