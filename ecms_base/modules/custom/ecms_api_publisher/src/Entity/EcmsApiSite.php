@@ -55,7 +55,6 @@ use Drupal\user\UserInterface;
  *   }
  * )
  */
-
 class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
 
   use EntityChangedTrait;
@@ -117,7 +116,7 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
   }
 
   /**
-   * @{inheritDoc}
+   * {@inheritDoc}
    */
   public function getApiEndpoint(): string {
     /** @var \Drupal\Core\Link $host */
@@ -126,7 +125,7 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
   }
 
   /**
-   * @{inheritDoc}
+   * {@inheritDoc}
    */
   public function getContentTypes(): array {
     return $this->get('content_type')->getValue();
@@ -230,7 +229,5 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
 
     return $fields;
   }
-
-
 
 }
