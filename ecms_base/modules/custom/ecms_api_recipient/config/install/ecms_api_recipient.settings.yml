@@ -1,0 +1,4 @@
+oauth_client_id: 'REDACTED'
+oauth_client_secret: 'REDACTED'
+api_recipient_mail: 'ecms_api_recipient@ecms.com'
+allowed_content_types: []

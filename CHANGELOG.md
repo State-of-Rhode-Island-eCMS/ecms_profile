@@ -28,6 +28,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-43: Added the ecms_api custom module.
 - RIG-16: Added custom theme with Pattern Lab repo dependency.
 - RIG-37: Added the Admin Toolbar module.
+- RIG-55: Added the ecms_api_recipient custom module.
+- RIG-56: Added a configuration form to toggle content types for the eCMS API. 
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.

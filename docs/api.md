@@ -5,3 +5,12 @@ within the network to share content.
 
 See the custom [ecms_api readme](../ecms_base/modules/custom/ecms_api/README.md)
 for configuration instructions.
+
+## ECMS API Recipient
+
+The eCMS API Recipient module manages setting up the API to accept incoming 
+content from hub sites and provides an interface for enabling/disabling content
+types from accessing the API.
+
+See the custom [ecms_api_recipient readme](../ecms_base/modules/custom/ecms_api_recipient/README.md)
+for configuration instructions.
