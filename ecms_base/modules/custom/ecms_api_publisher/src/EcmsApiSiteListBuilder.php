@@ -18,7 +18,7 @@ class EcmsApiSiteListBuilder extends EntityListBuilder {
   /**
    * {@inheritdoc}
    */
-  public function buildHeader() {
+  public function buildHeader(): array {
     $header['id'] = $this->t('ID');
     $header['name'] = $this->t('Name');
     return $header + parent::buildHeader();
@@ -27,7 +27,7 @@ class EcmsApiSiteListBuilder extends EntityListBuilder {
   /**
    * {@inheritdoc}
    */
-  public function buildRow(EntityInterface $entity) {
+  public function buildRow(EntityInterface $entity): array {
     /* @var \Drupal\ecms_api_publisher\Entity\EcmsApiSite $entity */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
