@@ -44,8 +44,7 @@ use Drupal\user\UserInterface;
  *     "label" = "name",
  *     "uuid" = "uuid",
  *     "uid" = "uid",
- *     "langcode" = "langcode",
- *     "published" = "status"
+ *     "langcode" = "langcode"
  *   },
  *   links = {
  *     "canonical" = "/admin/config/ecms_api/ecms_api_publisher/site/{ecms_api_site}",
@@ -59,7 +58,6 @@ use Drupal\user\UserInterface;
 class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
 
   use EntityChangedTrait;
-  use EntityPublishedTrait;
 
   /**
    * {@inheritdoc}
