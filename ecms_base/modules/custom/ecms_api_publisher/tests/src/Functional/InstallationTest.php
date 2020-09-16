@@ -44,6 +44,10 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   public function testEcmsApiPublisherEntityForms(): void {
     $account = $this->drupalCreateUser([
       'administer ecms api site entities',
+      'add ecms api site entities',
+      'edit ecms api site entities',
+      'delete ecms api site entities',
+      'view any published ecms api site entities',
     ]);
     $this->drupalLogin($account);
 
