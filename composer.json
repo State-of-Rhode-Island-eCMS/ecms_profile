@@ -47,9 +47,6 @@
       "drupal/publishcontent": {
         "3170248 - Configuration Schema Errors": "https://www.drupal.org/files/issues/2020-09-10/publishcontent-schema-3170248-2.patch"
       },
-      "drupal/smart_date": {
-        "3170288 - Configuration schema errors": "https://www.drupal.org/files/issues/2020-09-10/smart_date-schema-3170288-2.patch"
-      },
       "drupal/content_moderation_notifications": {
         "3170503 - Core requirement error during Functional test": "https://www.drupal.org/files/issues/2020-09-11/3170503-2.patch"
       }
