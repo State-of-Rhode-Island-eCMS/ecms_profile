@@ -1,5 +1,5 @@
 name: Rhode Island eCMS Theme
-description: "Drupal installation profile for the State of Rhode Island's eCMS system"
+description: "Drupal custom theme for the State of Rhode Island's eCMS system"
 type: theme
 core_version_requirement: ^8 || ^9
 base theme: bartik
