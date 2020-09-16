@@ -40,5 +40,5 @@ by the publishing site to gain an access token with which to create content.
 Content types can be toggled with the configuration form at: 
 `admin/config/ecms_api/ecms_api_recipient/settings`. This will allow an admin
 to select the content types to allow JSON API publishing. Once submitted, the
-`ecms_api_recipient` role permissions are update to allow the creation of the
+`ecms_api_recipient` role permissions are updated to allow the creation of the
 selected nodes.
