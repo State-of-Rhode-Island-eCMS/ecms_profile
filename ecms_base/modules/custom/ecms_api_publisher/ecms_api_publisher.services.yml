@@ -1,0 +1,4 @@
+services:
+  ecms_api_publisher.install:
+    class: Drupal\ecms_api_publisher\EcmsApiPublisherInstall
+    arguments: ['@entity_type.manager', '@config.factory']

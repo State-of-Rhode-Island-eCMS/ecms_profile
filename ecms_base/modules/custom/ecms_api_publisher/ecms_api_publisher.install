@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types = 1);
+
+/**
+ * Implements hook_install().
+ */
+function ecms_api_publisher_install() {
+  // @todo: Call the installer service.
+  \Drupal::service('ecms_api_publisher.install')->installEcmsApiPublisher();
+}
