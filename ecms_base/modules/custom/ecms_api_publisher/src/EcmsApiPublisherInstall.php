@@ -67,7 +67,8 @@ class EcmsApiPublisherInstall {
     // Create a new OAuth Consumer.
     $this->createSimpleOauthConsumer($account);
 
-    // @todo: Set permissions for the ecms_api_publisher role.
+    // Set permissions for the ecms_api_publisher role.
+    $this->setRolePermissions();
   }
 
   /**
@@ -175,6 +176,27 @@ class EcmsApiPublisherInstall {
    */
   protected function generatePassword(): string {
     return Crypt::randomBytesBase64();
+  }
+
+  private function setRolePermissions(): void {
+    $storage = $this->entityTypeManager->getStorage('user_role');
+
+    $role = $storage->load(self::PUBLISHER_ROLE);
+
+    // Guard against an empty role.
+    if (empty($role)) {
+      return;
+    }
+
+    // Allow the publisher role the ability to create api site entities.
+    $role->grantPermission("add ecms api site entities");
+
+    try {
+      $role->save();
+    }
+    catch (EntityStorageException $e) {
+      return;
+    }
   }
 
 }
