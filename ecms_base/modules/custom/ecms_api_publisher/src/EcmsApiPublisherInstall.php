@@ -178,6 +178,12 @@ class EcmsApiPublisherInstall {
     return Crypt::randomBytesBase64();
   }
 
+  /**
+   * Grant permission to the publisher role to create endpoints entities.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   private function setRolePermissions(): void {
     $storage = $this->entityTypeManager->getStorage('user_role');
 
