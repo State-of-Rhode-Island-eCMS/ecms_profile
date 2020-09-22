@@ -71,6 +71,7 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
   /**
    * Mock of the config.factory service.
+   *
    * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   private $configFactory;
