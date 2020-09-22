@@ -196,6 +196,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser([
       'create person content',
       'create terms in person_taxonomy',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
