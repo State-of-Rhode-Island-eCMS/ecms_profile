@@ -20,24 +20,31 @@ class EcmsApiSiteAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
+
+    // Default the permissions to no opinion.
+    $accessResult = AccessResult::neutral();
+
     switch ($operation) {
       case 'view':
         // Check if the entity belongs to the user.
         if ($account->id() === $entity->getOwnerId()) {
-          return AccessResult::allowedIfHasPermission($account, 'view own published ecms api site entities');
+          $accessResult = AccessResult::allowedIfHasPermission($account, 'view own published ecms api site entities');
         }
-
-        return AccessResult::allowedIfHasPermission($account, 'view published ecms api site entities');
+        else {
+          $accessResult = AccessResult::allowedIfHasPermission($account, 'view published ecms api site entities');
+        }
+        break;
 
       case 'update':
-        return AccessResult::allowedIfHasPermission($account, 'edit ecms api site entities');
+        $accessResult = AccessResult::allowedIfHasPermission($account, 'edit ecms api site entities');
+        break;
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete ecms api site entities');
+        $accessResult = AccessResult::allowedIfHasPermission($account, 'delete ecms api site entities');
+        break;
     }
 
-    // Unknown operation, no opinion.
-    return AccessResult::neutral();
+    return $accessResult;
   }
 
   /**
