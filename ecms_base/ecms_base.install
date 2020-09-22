@@ -47,9 +47,18 @@ function ecms_base_install() {
 
   // Assign the base content types to our workflow.
   /** @var \Drupal\workflows\WorkflowInterface $workflow */
-  $workflow = \Drupal::entityTypeManager()->getStorage("workflow")->loadByProperties(["id" => "editorial"])["editorial"];
+  $workflow = \Drupal::entityTypeManager()
+    ->getStorage("workflow")
+    ->loadByProperties(["id" => "editorial"])["editorial"];
   $config = $workflow->getTypePlugin()->getConfiguration();
-  $config["entity_types"]["node"][] = "basic_page";
+  $config["entity_types"]["node"] = [
+    "basic_page",
+    "event",
+    "location",
+    "person",
+    "press_release",
+    "promotions",
+  ];
   $workflow->getTypePlugin()->setConfiguration($config);
   $workflow->save();
 }
