@@ -1,0 +1,17 @@
+name: 'eCMS Publications'
+description: 'Provides Publication content type and related configuration.'
+type: module
+core: 8.x
+dependencies:
+  - field
+  - file
+  - image
+  - link
+  - media
+  - media_library
+  - menu_ui
+  - node
+  - path
+  - user
+version: 9.x-1.0
+package: eCMS
