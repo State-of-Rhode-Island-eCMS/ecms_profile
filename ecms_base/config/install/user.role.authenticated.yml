@@ -13,6 +13,7 @@ permissions:
   - 'access shortcuts'
   - 'access toolbar'
   - 'create media'
+  - 'use moderation dashboard'
   - 'use text format basic_html'
   - 'view media'
   - 'view own unpublished media'

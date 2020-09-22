@@ -30,6 +30,7 @@ dependencies:
   - media_library
   - menu_link_content
   - menu_ui
+  - moderation_dashboard
   - node
   - openid_connect_windows_aad
   - options

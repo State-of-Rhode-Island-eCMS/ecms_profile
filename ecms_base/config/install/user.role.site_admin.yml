@@ -22,6 +22,7 @@ permissions:
   - 'use editorial transition review'
   - 'view all media revisions'
   - 'view all revisions'
+  - 'view any moderation dashboard'
   - 'view any unpublished content'
   - 'view latest version'
   - 'view own unpublished content'
