@@ -466,12 +466,12 @@ class EcmsApiSiteTest extends UnitTestCase {
   }
 
   /**
-   * Build class with a number fake field methods.
+   * Build class with a number of fake field methods.
    *
-   * @param mixed $value
+   * @param object $value
    *   Value to return.
    */
-  protected function buildFakeField($value) {
+  protected function buildFakeField($value): object {
 
     // Return a new class that mimics the FieldItemsList.
     return new class($value) {
