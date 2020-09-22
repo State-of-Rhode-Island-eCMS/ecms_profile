@@ -255,7 +255,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Ensure the content moderation notification requirement installed properly.
    */
-  public function ensureModerationNotificationInstall(): void {
+  private function ensureModerationNotificationInstall(): void {
     $account = $this->drupalCreateUser(['administer content moderation notifications']);
     $this->drupalLogin($account);
 
@@ -267,7 +267,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Ensure the moderation dashboard requirement installed properly.
    */
-  public function ensureModerationDashboardInstall(): void {
+  private function ensureModerationDashboardInstall(): void {
     $account = $this->drupalCreateUser(['view any moderation dashboard']);
     $this->drupalLogin($account);
 
