@@ -141,7 +141,9 @@ config:
 fi
 
 # Start the app with lando.
+set +e
 $LANDO start
+set -e
 
 # Remove the coffee module as it currently breaks unit testing.
 $LANDO composer remove drupal/coffee
