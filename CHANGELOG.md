@@ -31,6 +31,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-55: Added the ecms_api_recipient custom module.
 - RIG-56: Added a configuration form to toggle content types for the eCMS API. 
 - RIG-57: Added the ecms_api_publisher module and custom entity.
+- RIG-60: Added the ecms_api_publisher module installation steps.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
