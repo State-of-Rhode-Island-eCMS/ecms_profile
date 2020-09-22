@@ -167,7 +167,11 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_press_release feature installed properly.
    */
   private function ensurePressReleaseFeatureInstalled(): void {
-    $account = $this->drupalCreateUser(['create press_release content']);
+    $account = $this->drupalCreateUser([
+      'create press_release content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
+    ]);
     $this->drupalLogin($account);
 
     // Ensure the press release entity add form is available.
@@ -180,7 +184,11 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_location feature installed properly.
    */
   private function ensureLocationFeatureInstalled(): void {
-    $account = $this->drupalCreateUser(['create location content']);
+    $account = $this->drupalCreateUser([
+      'create location content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
+    ]);
     $this->drupalLogin($account);
 
     // Ensure the location entity add form is available.
@@ -285,6 +293,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser([
       'create event content',
       'create terms in event_taxonomy',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
@@ -323,6 +333,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   private function ensurePromotionsFeatureInstalled(): void {
     $account = $this->drupalCreateUser([
       'create promotions content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
@@ -339,6 +351,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   private function ensureBasicPageFeatureInstalled(): void {
     $account = $this->drupalCreateUser([
       'create basic_page content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
