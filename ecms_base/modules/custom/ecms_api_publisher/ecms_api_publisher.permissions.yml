@@ -1,0 +1,22 @@
+add ecms api site entities:
+  title: 'Create new ecms api site entities'
+
+administer ecms api site entities:
+  title: 'Administer ecms api site entities'
+  description: 'Allow to access the administration form to configure ecms api site entities.'
+  restrict access: true
+
+delete ecms api site entities:
+  title: 'Delete ecms api site entities'
+
+edit ecms api site entities:
+  title: 'Edit ecms api site entities'
+
+view any published ecms api site entities:
+  title: 'View any published ecms api site entities'
+
+view own published ecms api site entities:
+  title: 'View own published ecms api site entities'
+
+view unpublished ecms api site entities:
+  title: 'View unpublished ecms api site entities'
