@@ -49,7 +49,7 @@ class EcmsApiPublisherInstall {
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory) {
     $this->entityTypeManager = $entityTypeManager;
-    $this->ecmsApiPublisherConfig = $configFactory->get('ecms_api_publisher.settings');;
+    $this->ecmsApiPublisherConfig = $configFactory->get('ecms_api_publisher.settings');
   }
 
   /**
