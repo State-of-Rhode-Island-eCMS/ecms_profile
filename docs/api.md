@@ -14,3 +14,8 @@ types from accessing the API.
 
 See the custom [ecms_api_recipient readme](../ecms_base/modules/custom/ecms_api_recipient/README.md)
 for configuration instructions.
+
+## ECMS API Publisher
+
+See the custom [ecms_api_publisher readme](../ecms_base/modules/custom/ecms_api_publisher/README.md)
+for configuration instructions of the publishing hub site.
