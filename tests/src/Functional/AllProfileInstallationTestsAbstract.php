@@ -108,6 +108,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureBasicPageFeatureInstalled();
     $this->ensureLandingPageFeatureInstalled();
     $this->ensureModerationNotificationInstall();
+    $this->ensureModerationDashboardInstall();
   }
 
   /**
@@ -260,6 +261,18 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Ensure the form configuration page is available.
     $this->drupalGet('admin/config/workflow/notifications');
+    $this->assertSession()->statusCodeEquals(200);
+  }
+
+  /**
+   * Ensure the moderation dashboard requirement installed properly.
+   */
+  public function ensureModerationDashboardInstall(): void {
+    $account = $this->drupalCreateUser(['view any moderation dashboard']);
+    $this->drupalLogin($account);
+
+    // Ensure the dashboard loads.
+    $this->drupalGet("user/{$account->id()}/moderation/dashboard");
     $this->assertSession()->statusCodeEquals(200);
   }
 
