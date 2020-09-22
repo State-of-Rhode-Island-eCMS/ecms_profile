@@ -36,7 +36,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   protected static $modules = ['ecms_api_publisher'];
 
   /**
-   * Test the ecms_api_recipient installation.
+   * Test the ecms_api_publisher installation.
    *
    * @throws \Behat\Mink\Exception\ExpectationException
    * @throws \Drupal\Core\Entity\EntityStorageException
