@@ -17,7 +17,7 @@ use Drupal\shortcut\Entity\Shortcut;
  *
  * @see system_install()
  */
-function standard_install() {
+function ecms_base_install() {
   // Assign user 1 the "drupal_admin" role.
   $user = User::load(1);
   $user->roles[] = 'drupal_admin';
@@ -44,4 +44,12 @@ function standard_install() {
   ]);
 
   $shortcut->save();
+
+  // Assign the base content types to our workflow.
+  /** @var \Drupal\workflows\WorkflowInterface $workflow */
+  $workflow = \Drupal::entityTypeManager()->getStorage("workflow")->loadByProperties(["id" => "editorial"])["editorial"];
+  $config = $workflow->getTypePlugin()->getConfiguration();
+  $config["entity_types"]["node"][] = "basic_page";
+  $workflow->getTypePlugin()->setConfiguration($config);
+  $workflow->save();
 }
