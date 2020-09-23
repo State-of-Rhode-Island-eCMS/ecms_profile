@@ -57,8 +57,7 @@ class EcmsWorkflowBundleCreate {
    * @param string $contentType
    *   The machine name of the new content type.
    *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   private function setRolePermissions(string $contentType): void {
     $storage = $this->entityTypeManager->getStorage('user_role');
@@ -83,6 +82,11 @@ class EcmsWorkflowBundleCreate {
     }
 
     $content_author_role = $storage->load(self::CONTENT_AUTHOR_ROLE);
+
+    // Guard against an empty role.
+    if (empty($content_author_role)) {
+      return;
+    }
 
     // Content Author role has limited editing permissions.
     $content_author_role->grantPermission("create {$contentType} content");
