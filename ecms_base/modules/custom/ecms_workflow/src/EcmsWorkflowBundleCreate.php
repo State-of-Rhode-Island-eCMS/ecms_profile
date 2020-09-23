@@ -110,7 +110,7 @@ class EcmsWorkflowBundleCreate {
 
     // Assign the new content type to the editorial workflow.
     /** @var \Drupal\workflows\WorkflowInterface $workflow */
-    $workflow = \Drupal::entityTypeManager()
+    $workflow = $this->entityTypeManager
       ->getStorage("workflow")
       ->loadByProperties(["id" => self::WORKFLOW_ID])[self::WORKFLOW_ID];
     $config = $workflow->getTypePlugin()->getConfiguration();
