@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types = 1);
+
+/**
+ * Implements hook_entity_bundle_create().
+ */
+function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
+  if ($entity_type_id !== 'node') {
+    return;
+  }
+
+  // Call the workflow service to update configuration.
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->addContentTypeToWorkflow($bundle);
+}
