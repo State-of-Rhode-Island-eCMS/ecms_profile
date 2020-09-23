@@ -4,3 +4,7 @@ services:
   ecms_api_install:
     class: Drupal\ecms_api\EcmsApiInstall
     arguments: ['@config.factory']
+
+  ecms_api:
+    class: Drupal\ecms_api\EcmsApi
+    arguments: ['@entity_type.manager', '@entity_field.manager', '@http_client', '@config.factory']
