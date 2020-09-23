@@ -4,6 +4,7 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - datetime
+  - ecms_workflow
   - field
   - link
   - menu_ui

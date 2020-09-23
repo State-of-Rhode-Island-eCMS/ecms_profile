@@ -3,6 +3,7 @@ description: 'Provides Basic page content type and related configuration. Add a 
 type: module
 core_version_requirement: ^9
 dependencies:
+  - ecms_workflow
   - field
   - menu_ui
   - node

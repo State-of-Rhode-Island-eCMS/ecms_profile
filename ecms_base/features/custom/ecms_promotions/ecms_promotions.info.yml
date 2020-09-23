@@ -3,6 +3,7 @@ description: 'Provides Promotions content type and related configuration. Add a 
 type: module
 core_version_requirement: ^9
 dependencies:
+  - ecms_workflow
   - field
   - link
   - media
