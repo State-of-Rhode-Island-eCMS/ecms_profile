@@ -3,3 +3,15 @@ description: 'Provides helper functions for managing the editorial workflow.'
 type: module
 core_version_requirement: ^9
 package: eCMS
+dependencies:
+  - content_moderation
+  - ecms_workflow
+  - field
+  - link
+  - media
+  - media_library
+  - menu_ui
+  - node
+  - path
+  - text
+  - user
