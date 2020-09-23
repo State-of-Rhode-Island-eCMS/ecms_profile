@@ -10,6 +10,11 @@ function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
     return;
   }
 
+  // Notifications are managed using the ecms_api module.
+  if ($bundle === 'notification') {
+    return;
+  }
+
   // Call the workflow service to update configuration.
   \Drupal::service('ecms_workflow.bundle_create')
     ->addContentTypeToWorkflow($bundle);
