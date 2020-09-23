@@ -30,7 +30,7 @@ class EcmsWorkflowBundleCreate {
   const CONTENT_AUTHOR_ROLE = 'content_author';
 
   /**
-   * The role id for content publishers.
+   * The machine id for the default workflow.
    */
   const WORKFLOW_ID = 'editorial';
 
