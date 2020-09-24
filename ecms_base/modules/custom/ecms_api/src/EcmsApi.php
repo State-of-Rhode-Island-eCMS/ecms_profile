@@ -4,27 +4,46 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api;
 
-use Drupal\Core\Config\ConfigFactory;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Url;
+use Drupal\jsonapi_extras\EntityToJsonApi;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * Class EcmsApi.
+ *
+ * @package Drupal\ecms_api
+ */
 class EcmsApi {
 
+  /**
+   * The API endpoint prefix.
+   */
   const API_ENDPOINT = 'EcmsApi';
 
-  const NO_API_FIELD_NAMES = [
-    'nid',
-    'uid',
-    'vid',
+  /**
+   * Allowed HTTP methods to accept for submission to the API endpoints.
+   */
+  const ALLOWED_HTTP_METHODS = [
+    'POST',
+    'PATCH',
   ];
 
-  const NO_API_FIELD_TYPES = [
-    'entity_reference',
+  /**
+   * Fields that should not be submitted.
+   */
+  const NO_API_FIELD_NAMES = [
+    'drupal_internal__nid',
+    'drupal_internal__vid',
+    'revision_timestamp',
+    'status',
+    'created',
+    'changed',
+    'promote',
+    'sticky',
+    'path',
   ];
 
   /**
@@ -35,36 +54,26 @@ class EcmsApi {
   private $httpClient;
 
   /**
-   * The entity_type.manager service.
+   * The jsonapi_extras.entity.to_jsonapi service.
    *
-   * @var\Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\jsonapi_extras\EntityToJsonApi
    */
-  private $entityTypeManager;
-
-  private $entityFieldManager;
-
-  /**
-   * The config.factory service.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  private $configFactory;
+  private $entityToJsonApi;
 
   /**
    * EcmsApi constructor.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity_type.manager service
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The http_client service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config.factory interface.
+   * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
+   *   The jsonapi_extras.entity.to_jsonapi service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, EntityFieldManagerInterface $entityFieldManager, ClientInterface $httpClient, ConfigFactoryInterface $configFactory) {
-    $this->entityTypeManager = $entityTypeManager;
-    $this->entityFieldManager = $entityFieldManager;
+  public function __construct(
+    ClientInterface $httpClient,
+    EntityToJsonApi $entityToJsonApi
+  ) {
     $this->httpClient = $httpClient;
-    $this->configFactory = $configFactory;
+    $this->entityToJsonApi = $entityToJsonApi;
   }
 
   /**
@@ -120,23 +129,40 @@ class EcmsApi {
   }
 
   /**
+   * Submit a new entity to the API endpoint.
+   *
+   * @param string $method
+   *   The HTTP method to use to submit to the api. Currently allowed methods
+   *   are POST for creating entities and PATCH for updating entities.
    * @param string $accessToken
-   *   The access token authorizing access. @see getAccessToken().
+   *   The access token to the API. @see getAccessToken().
    * @param \Drupal\Core\Url $url
-   *   The base url of the API to access.
+   *   The url of the endpoint.
    * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity to post.
+   *   The entity submitted.
    *
    * @return bool
+   *   True if the entity was successfully submitted.
    */
-  protected function postEntity(string $accessToken, Url $url, EntityInterface $entity): bool {
+  protected function submitEntity(string $method, string $accessToken, Url $url, EntityInterface $entity): bool {
+    // Only allow certain methods to be submitted.
+    if (!in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
+      return FALSE;
+    }
+
     // Get the endpoint for the entity.
-    $endpoint = $this->getEndpointUrl($url, $entity);
+    $endpoint = $this->getEndpointUrl($url, $entity, $method);
+
+    // Convert the entity to a json resource array.
+    $normalizedEntity = $this->entityToJsonApi->normalize($entity);
 
     $payload = [
       'json' => [
-        'type' => $entity->bundle(),
-        'attributes' => [],
+        'data' => [
+          'type' => $entity->bundle(),
+          'id' => $entity->uuid(),
+          'attributes' => $normalizedEntity['data']['attributes'],
+        ],
       ],
       'headers' => [
         'Content-Type' => 'application/vnd.api+json',
@@ -144,72 +170,73 @@ class EcmsApi {
       ],
     ];
 
-    // Alter the payload with the field values.
-    $this->buildEntityAttributes($payload, $entity);
+    // Alter the entity attributes before submission.
+    $this->alterEntityAttributes($payload['json']['data']['attributes'], $entity);
 
     try {
-      $request = $this->httpClient->request('POST', $endpoint, $payload);
+      $request = $this->httpClient->request($method, $endpoint, $payload);
     }
     catch (GuzzleException $exception) {
       return FALSE;
     }
 
+    // 201 means successfully created the entity.
+    if ($method === 'POST' && $request->getStatusCode() === 201) {
+      return TRUE;
+    }
 
+    // 200 means successfully updated the entity.
+    if ($method === 'PATCH' && $request->getStatusCode() === 200) {
+      return TRUE;
+    }
 
     return FALSE;
-
-
-    // @todo: Setup the curl request to post the entity payload.
   }
 
-  private function getEndpointUrl(Url $url, EntityInterface $entity): string {
+  /**
+   * Get the endpoint URL.
+   *
+   * @param \Drupal\Core\Url $url
+   *   The url of the API.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity being submitted to the API.
+   *
+   * @return string
+   *   The full url to the endpoint API.
+   */
+  protected function getEndpointUrl(Url $url, EntityInterface $entity, string $method): string {
     // Get the endpoint for the entity.
     $entityPath = "{$entity->getEntityTypeId()}/{$entity->bundle()}";
+
+    if ($method === 'PATCH') {
+      $entityPath = "{$entityPath}/{$entity->uuid()}";
+    }
     $endPoint = self::API_ENDPOINT;
 
     return "{$url->toString()}/{$endPoint}/{$entityPath}";
   }
 
-  private function buildEntityAttributes(&$payload, $entity): void {
-    // Get the fields available for the entity.
-    $fields = $this->entityFieldManager->getFieldDefinitions($entity->getEntityTypeId(), $entity->bundle());
+  /**
+   * Alter the attributes of the JSON Api entity.
+   *
+   * @param array $attributes
+   *   Associative array of entity attributes to send with JSON API./
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity being submitted.
+   */
+  protected function alterEntityAttributes(array &$attributes, EntityInterface $entity): void {
+    $keys = array_keys($attributes);
 
-    /**
-     * @var \Drupal\Core\Field\FieldDefinitionInterface $field
-     */
-    foreach ($fields as $field) {
-      if (in_array($field->getName(), self::NO_API_FIELD_NAMES)) {
-        continue;
+    foreach ($keys as $key) {
+      // If the attribute is disallowed, remove it.
+      if (in_array($key, self::NO_API_FIELD_NAMES)) {
+        unset($attributes[$key]);
       }
-
-      if (in_array($field->getType(), self::NO_API_FIELD_TYPES)) {
-        continue;
-      }
-
-      $payload['json']['attributes']["{$field->getName()}"] = $entity->get($field->getName())->value;
     }
+
+    // Add the uuid to the attributes.
+    $attributes['uuid'] = $entity->uuid();
 
   }
-
-//  /**
-//   * Post a new entity
-//   * @param \Drupal\Core\Entity\EntityInterface $entity
-//   *
-//   * @return bool
-//   */
-public function insertEntity(EntityInterface $entity): bool {
-    $url = Url::fromUri('https://appserver');
-
-    $accessToken = $this->getAccessToken($url, 'REDACTED', 'REDACTED', 'ecms_api_publisher');
-
-
-    if (!empty($accessToken)) {
-      return $this->postEntity($accessToken, $url, $entity);
-    }
-
-    return FALSE;
-}
-//
-//  public function updateEntity(EntityInterface $entity): bool {}
 
 }

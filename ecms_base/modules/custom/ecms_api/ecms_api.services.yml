@@ -5,6 +5,7 @@ services:
     class: Drupal\ecms_api\EcmsApiInstall
     arguments: ['@config.factory']
 
+  # The base api to submit data to endpoints.
   ecms_api:
     class: Drupal\ecms_api\EcmsApi
-    arguments: ['@entity_type.manager', '@entity_field.manager', '@http_client', '@config.factory']
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi']
