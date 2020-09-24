@@ -167,7 +167,7 @@ abstract class EcmsApi {
       ],
       'headers' => [
         'Content-Type' => 'application/vnd.api+json',
-        'Authorization' => "Bearer {$accessToken}"
+        'Authorization' => "Bearer {$accessToken}",
       ],
     ];
 
@@ -201,6 +201,8 @@ abstract class EcmsApi {
    *   The url of the API.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity being submitted to the API.
+   * @param string $method
+   *   The method being used to call the json API endpoint.
    *
    * @return string
    *   The full url to the endpoint API.
