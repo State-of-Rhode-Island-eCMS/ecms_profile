@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Url;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use GuzzleHttp\ClientInterface;
