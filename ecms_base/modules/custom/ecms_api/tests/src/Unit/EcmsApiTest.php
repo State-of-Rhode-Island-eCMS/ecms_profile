@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class EcmsApiTest
+ * Class EcmsApiTest.
  *
  * @package Drupal\Tests\ecms_api\Unit
  * @covers \Drupal\ecms_api\EcmsApi
@@ -25,23 +25,69 @@ use Psr\Http\Message\StreamInterface;
  * @group ecms_api
  */
 class EcmsApiTest extends UnitTestCase {
+
+  /**
+   * The endpoint url.
+   */
   const ENDPOINT_URL = 'https://oomphinc.com';
+
+  /**
+   * The oauth path.
+   */
   const OAUTH_ENDPOINT = 'https://oomphinc.com/oauth/token';
+
+  /**
+   * The client id to test with.
+   */
   const CLIENT_ID = 'TEST-CLIENT-ID';
+
+  /**
+   * The client secret to test with.
+   */
   const CLIENT_SECRET = 'TEST-CLIENT-SECRET';
+
+  /**
+   * The client scope to test with.
+   */
   const CLIENT_SCOPE = 'TEST-CLIENT-SCOPE';
+
+  /**
+   * The access token to test with.
+   */
   const ACCESS_TOKEN = 'test-access-token-123';
+
+  /**
+   * The oauth success return values.
+   */
   const OAUTH_SUCCESS = [
     'token_type' => 'Bearer',
     'expires_in' => 100,
     'access_token' => self::ACCESS_TOKEN,
   ];
 
-  const ENTITY_ENDPOINT = 'https://oomphinc.com/EcmsApi/entity_type_test/entity_bundle';
+  /**
+   * The entity endpoint to test with.
+   */
+  const ENTITY_ENDPOINT = 'https://oomphinc.com/EcmsApi/entity_type_test/entity_bundle'
+
+  /**
+   * The entity type to test with.
+   */
   const ENTITY_TYPE = 'entity_type_test';
+
+  /**
+   * The entity bundle to test with.
+   */
   const ENTITY_BUNDLE = 'entity_bundle';
+
+  /**
+   * The entity uuid to test with.
+   */
   const ENTITY_UUID = '1234-5678-abcd';
 
+  /**
+   * The expected payload to be sent to the API.
+   */
   const PAYLOAD = [
     'json' => [
       'data' => [
@@ -60,6 +106,9 @@ class EcmsApiTest extends UnitTestCase {
     ],
   ];
 
+  /**
+   * The expected return value of the entity after normalization.
+   */
   const NORMALIZED_ENTITY = [
     'data' => [
       'type' => self::ENTITY_BUNDLE,
@@ -71,13 +120,42 @@ class EcmsApiTest extends UnitTestCase {
         'field_text_field' => 'Text Field',
         'field_date_field' => '1980-11-09T23:43:43+00:00:00',
       ],
-    ]
+    ],
   ];
 
+  /**
+   * Mock of the http_client service.
+   *
+   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $httpclient;
+
+  /**
+   * Mock of the jsonapi_extras.entity.to_jsonapi service.
+   *
+   * @var \Drupal\jsonapi_extras\EntityToJsonApi|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $entityToJsonApi;
+
+  /**
+   * Mock entity to test with.
+   *
+   * @var \Drupal\Core\Entity\EntityInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $entity;
+
+  /**
+   * Mock URL to test with.
+   *
+   * @var \Drupal\Core\Url|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $url;
+
+  /**
+   * Mock response to return from Guzzle.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject|\Psr\Http\Message\ResponseInterface
+   */
   private $response;
 
   /**
@@ -100,7 +178,6 @@ class EcmsApiTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->onlyMethods(['toString'])
       ->getMock();
-
 
     $container = new ContainerBuilder();
     $container->set('unrouted_url_assembler', $this->createMock(UnroutedUrlAssemblerInterface::class));
@@ -178,7 +255,8 @@ class EcmsApiTest extends UnitTestCase {
         self::CLIENT_ID,
         self::CLIENT_SECRET,
         self::CLIENT_SCOPE,
-    ]);
+      ]
+    );
 
     $this->assertEquals($expectation, $result);
   }
@@ -232,6 +310,8 @@ class EcmsApiTest extends UnitTestCase {
    *
    * @param string $method
    *   The HTTP method to submit.
+   * @param int $code
+   *   The http status code to mock.
    * @param bool $expected
    *   The expected response.
    *
@@ -241,6 +321,7 @@ class EcmsApiTest extends UnitTestCase {
     $endpoint = self::ENTITY_ENDPOINT;
     $uuidCount = 2;
 
+    // Test for all allowed requests.
     if ($code !== 0) {
       $this->url->expects($this->once())
         ->method('toString')
@@ -268,12 +349,10 @@ class EcmsApiTest extends UnitTestCase {
         ->method('normalize')
         ->with($this->entity)
         ->willReturn(self::NORMALIZED_ENTITY);
-
-
     }
 
+    // Test a guzzle exception.
     if ($code === -1) {
-
       $this->response->expects($this->never())
         ->method('getStatusCode')
         ->willReturn($code);
@@ -309,11 +388,18 @@ class EcmsApiTest extends UnitTestCase {
         self::ACCESS_TOKEN,
         $this->url,
         $this->entity,
-    ]);
+      ]
+    );
 
     $this->assertEquals($expected, $result);
   }
 
+  /**
+   * Data provider for the testSubmitEntity method.
+   *
+   * @return array[]
+   *   Array of parameters for the testSubmitEntity method.
+   */
   public function dataProviderForTestSubmitEntity(): array {
     return [
       'test1' => [
