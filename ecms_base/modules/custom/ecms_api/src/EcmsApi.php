@@ -219,7 +219,7 @@ class EcmsApi {
    * Alter the attributes of the JSON Api entity.
    *
    * @param array $attributes
-   *   Associative array of entity attributes to send with JSON API./
+   *   Associative array of entity attributes to send with JSON API.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity being submitted.
    */
