@@ -103,6 +103,8 @@ class EcmsApi {
 
     if ($response->getStatusCode() === 200) {
       $contents = $response->getBody()->getContents();
+
+      // Decode the json string.
       $json = json_decode($contents);
 
       // Guard against a json error.
