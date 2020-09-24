@@ -15,7 +15,7 @@ use GuzzleHttp\Exception\GuzzleException;
  *
  * @package Drupal\ecms_api
  */
-class EcmsApi {
+abstract class EcmsApi {
 
   /**
    * The API endpoint prefix.
