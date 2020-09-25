@@ -15,7 +15,8 @@ use GuzzleHttp\Exception\GuzzleException;
  *
  * The EcmsApiBase class is an abstract that can be extended by other
  * services. By default, this class provides the functionality to authenticate
- * to another site Simple OAuth and the client_credentials connection method.
+ * to another site with Simple OAuth using the
+ * `client_credentials` connection method.
  * This class also provides the method to submit an entity to another site
  * using the Json API.
  *
