@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Publication Audience'
+vid: publication_audience
+description: 'The target audience groups of the publication.'
+weight: 0

@@ -34,8 +34,15 @@ This contains the basic_page content type and the related field configurations.
 ### ecms_landing_page
 This contains the landing page content type and the related field configurations.
 
+### ecms_publications
+This contains the publication content type and the related field configurations.
+
 ## Development Notes
 Developing with features can be tricky. A few items to remember:
+
+- Enable the Features UI module during local development.
+
+- To work with existing project features, browse to /admin/config/development/features and select the "eCMS" bundle.
 
 - Features should only contain configuration that belong together and _should not_ share configuration with other features.
 For example, if all content types share the same editorial workflow, that workflow will _NOT_ be able to be packaged

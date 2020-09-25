@@ -2,10 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.publication.field_publication_audiences
+    - field.field.node.publication.field_publication_date_modified
     - field.field.node.publication.field_publication_file_download
+    - field.field.node.publication.field_publication_topics
+    - field.field.node.publication.field_publication_types
     - field.field.node.publication.field_publication_url
     - node.type.publication
   module:
+    - datetime
     - link
     - media_library
     - path
@@ -20,12 +25,48 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_publication_audiences:
+    weight: 125
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_publication_date_modified:
+    weight: 123
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_publication_file_download:
     type: media_library_widget
     weight: 121
     settings:
       media_types: {  }
     third_party_settings: {  }
+    region: content
+  field_publication_topics:
+    weight: 124
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_publication_types:
+    weight: 126
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_publication_url:
     weight: 122
