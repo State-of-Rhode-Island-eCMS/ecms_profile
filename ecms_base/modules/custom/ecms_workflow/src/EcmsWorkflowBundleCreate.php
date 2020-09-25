@@ -101,7 +101,7 @@ class EcmsWorkflowBundleCreate {
   }
 
   /**
-   * Create a new user for use with the API.
+   * Apply workflow and permissions to the new content type.
    *
    * @param string $contentType
    *   The machine name of the new content type.
@@ -117,6 +117,12 @@ class EcmsWorkflowBundleCreate {
     $workflow = $this->entityTypeManager
       ->getStorage("workflow")
       ->loadByProperties(["id" => self::WORKFLOW_ID])[self::WORKFLOW_ID];
+
+    // Guard against an empty workflow.
+    if (empty($workflow)) {
+      return;
+    }
+
     $config = $workflow->getTypePlugin()->getConfiguration();
     $config["entity_types"]["node"][] = $contentType;
     $workflow->getTypePlugin()->setConfiguration($config);
