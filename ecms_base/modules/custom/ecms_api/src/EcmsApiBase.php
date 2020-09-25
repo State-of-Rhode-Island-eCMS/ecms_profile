@@ -11,11 +11,17 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
- * Class EcmsApi.
+ * Class EcmsApiBase.
+ *
+ * The EcmsApiBase class is an abstract that can be extended by other
+ * services. By default, this class provides the functionality to authenticate
+ * to another site Simple OAuth and the client_credentials connection method.
+ * This class also provides the method to submit an entity to another site
+ * using the Json API.
  *
  * @package Drupal\ecms_api
  */
-abstract class EcmsApi {
+abstract class EcmsApiBase {
 
   /**
    * The API endpoint prefix.
@@ -60,7 +66,7 @@ abstract class EcmsApi {
   private $entityToJsonApi;
 
   /**
-   * EcmsApi constructor.
+   * EcmsApiBase constructor.
    *
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The http_client service.

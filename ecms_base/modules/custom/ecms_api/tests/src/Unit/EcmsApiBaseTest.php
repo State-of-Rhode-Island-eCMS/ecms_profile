@@ -8,7 +8,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
-use Drupal\ecms_api\EcmsApi;
+use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
@@ -17,14 +17,14 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class EcmsApiTest.
+ * Class EcmsApiBaseTest.
  *
  * @package Drupal\Tests\ecms_api\Unit
- * @covers \Drupal\ecms_api\EcmsApi
+ * @covers \Drupal\ecms_api\EcmsApiBase
  * @group ecms
  * @group ecms_api
  */
-class EcmsApiTest extends UnitTestCase {
+class EcmsApiBaseTest extends UnitTestCase {
 
   /**
    * The endpoint url.
@@ -68,7 +68,7 @@ class EcmsApiTest extends UnitTestCase {
   /**
    * The entity endpoint to test with.
    */
-  const ENTITY_ENDPOINT = 'https://oomphinc.com/EcmsApi/entity_type_test/entity_bundle'
+  const ENTITY_ENDPOINT = 'https://oomphinc.com/EcmsApi/entity_type_test/entity_bundle';
 
   /**
    * The entity type to test with.
@@ -242,11 +242,11 @@ class EcmsApiTest extends UnitTestCase {
         ->willThrowException($guzzleException);
     }
 
-    $ecmsApi = $this->getMockBuilder(EcmsApi::class)
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
       ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
       ->getMock();
 
-    $getAccessToken = new \ReflectionMethod(EcmsApi::class, 'getAccessToken');
+    $getAccessToken = new \ReflectionMethod(EcmsApiBase::class, 'getAccessToken');
     $getAccessToken->setAccessible(TRUE);
 
     $result = $getAccessToken->invokeArgs(
@@ -375,11 +375,11 @@ class EcmsApiTest extends UnitTestCase {
         ->willReturn($this->response);
     }
 
-    $ecmsApi = $this->getMockBuilder(EcmsApi::class)
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
       ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
       ->getMock();
 
-    $submitEntity = new \ReflectionMethod(EcmsApi::class, 'submitEntity');
+    $submitEntity = new \ReflectionMethod(EcmsApiBase::class, 'submitEntity');
     $submitEntity->setAccessible(TRUE);
 
     $result = $submitEntity->invokeArgs(
