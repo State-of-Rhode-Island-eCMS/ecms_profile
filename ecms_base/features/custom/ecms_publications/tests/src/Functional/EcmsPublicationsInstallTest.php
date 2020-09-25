@@ -1,0 +1,48 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace Drupal\Tests\ecms_publications\Functional;
+
+// Require the all profiles abstract class since autoloading doesn't work.
+require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+
+use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
+
+/**
+ * Class InstallationTest.
+ *
+ * @package Drupal\Tests\ecms_publications\Functional
+ * @group ecms
+ * @group ecms_publications
+ */
+class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
+
+  /**
+   * Define the additional modules to install.
+   *
+   * @var string[]
+   */
+  protected static $modules = ['ecms_publications'];
+
+  /**
+   * Test the ecms_api_recipient installation.
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
+   */
+  public function testEcmsPublicationInstallation(): void {
+    $account = $this->drupalCreateUser([
+      'administer modules',
+      'administer site configuration',
+      'access administration pages',
+    ]);
+    $this->drupalLogin($account);
+
+    // Ensure the create content type permission is checked for admin.
+    $this->drupalGet('admin/people/permissions');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-drupal-admin-create-publication-content');
+
+  }
+
+}
