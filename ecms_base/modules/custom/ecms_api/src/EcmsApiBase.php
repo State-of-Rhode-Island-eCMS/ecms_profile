@@ -57,14 +57,14 @@ abstract class EcmsApiBase {
    *
    * @var \GuzzleHttp\ClientInterface
    */
-  private $httpClient;
+  protected $httpClient;
 
   /**
    * The jsonapi_extras.entity.to_jsonapi service.
    *
    * @var \Drupal\jsonapi_extras\EntityToJsonApi
    */
-  private $entityToJsonApi;
+  protected $entityToJsonApi;
 
   /**
    * EcmsApiBase constructor.
