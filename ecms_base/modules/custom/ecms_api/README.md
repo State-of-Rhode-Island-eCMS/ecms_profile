@@ -29,3 +29,8 @@ The json api is configured to allow for CRUD operations by default.
 
 ### Json API Extras
 This configures the endpoint for the API as `/EcmsAPI/`.
+
+### EcmsApiBase
+The EcmsApiBase class is the base class that manages getting access tokens from
+the sites and syndicating entities to other sites. This class is abstract by
+default as other services will extend this class to build upon this functionality.
