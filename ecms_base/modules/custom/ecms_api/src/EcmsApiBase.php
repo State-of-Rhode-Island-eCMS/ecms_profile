@@ -74,10 +74,7 @@ abstract class EcmsApiBase {
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
    */
-  public function __construct(
-    ClientInterface $httpClient,
-    EntityToJsonApi $entityToJsonApi
-  ) {
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi) {
     $this->httpClient = $httpClient;
     $this->entityToJsonApi = $entityToJsonApi;
   }
