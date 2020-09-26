@@ -19,13 +19,6 @@ use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
 
   /**
-   * The theme to test with.
-   *
-   * @var string
-   */
-  protected $defaultTheme = 'stark';
-
-  /**
    * Define the additional modules to install.
    *
    * @var string[]

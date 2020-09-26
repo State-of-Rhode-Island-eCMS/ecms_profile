@@ -26,6 +26,13 @@ use Drupal\Tests\BrowserTestBase;
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
   /**
+   * The theme to test with.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Whether to strictly check schema on installed configuration.
    *
    * @var bool
