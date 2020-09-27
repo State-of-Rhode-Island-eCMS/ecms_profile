@@ -19,13 +19,6 @@ use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
 
   /**
-   * Define the additional modules to install.
-   *
-   * @var string[]
-   */
-  protected static $modules = ['ecms_publications'];
-
-  /**
    * Test the ecms_api_recipient installation.
    *
    * @throws \Behat\Mink\Exception\ExpectationException
@@ -38,10 +31,11 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     ]);
     $this->drupalLogin($account);
 
-    // Ensure the create content type permission is checked for admin.
-    $this->drupalGet('admin/people/permissions');
-    $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->checkboxChecked('edit-drupal-admin-create-publication-content');
+    // Enable the ecms_publications feature.
+    $edit = [];
+    $edit["modules[ecms_publications][enable]"] = TRUE;
+    $this->drupalPostForm('admin/modules', $edit, t('Install'));
+    $this->assertText('Module eCMS Publications page has been enabled.');
 
   }
 
