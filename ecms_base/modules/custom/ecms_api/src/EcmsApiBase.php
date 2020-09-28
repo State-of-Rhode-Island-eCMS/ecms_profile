@@ -87,7 +87,7 @@ abstract class EcmsApiBase {
    * @param string $client_id
    *   The client id for the oauth connection.
    * @param string $client_secret
-   *   The client secret for the oauth connection
+   *   The client secret for the oauth connection.
    * @param string $scope
    *   The scope for the oauth connection.
    *
