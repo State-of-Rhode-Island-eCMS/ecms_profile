@@ -33,6 +33,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-57: Added the ecms_api_publisher module and custom entity.
 - RIG-60: Added the ecms_api_publisher module installation steps.
 - RIG-22: Added the ecms_workflow module to automatically assign content types to default workflow and set permissions.
+- RIG-61: Added the base class to authenticate and syndicate entities with Json API.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
