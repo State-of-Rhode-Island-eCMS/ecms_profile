@@ -168,7 +168,13 @@ $LANDO composer config extra.installer-types.2 "pattern-lab"
 # Add the installer path.
 $LANDO composer config extra.installer-paths./${INSTALL_PROFILE_DIRECTORY}/ecms_base/themes/custom/ecms/{\$name} PATTERN_LAB_REPLACE
 # Replace the "PATTERN_LAB_REPLACE" text with the actual value.
-sed -i '' 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+# sed is different for Macs, detect that here.
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+else
+  sed -i 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+fi
+
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
 # Update the lock file to ensure core patches applied.
