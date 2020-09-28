@@ -31,10 +31,15 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     ]);
     $this->drupalLogin($account);
 
+    $this->drupalGet('admin/modules');
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->assertSession()->checkboxNotChecked('edit-modules-ecms-publications-enable');
+
     // Enable the ecms_publications feature.
     $edit = [];
     $edit["modules[ecms_publications][enable]"] = TRUE;
-    $this->drupalPostForm('admin/modules', $edit, t('Install'));
+    $this->drupalPostForm(NULL, $edit, t('Install'));
     $this->assertText('Module eCMS Publications page has been enabled.');
 
   }
