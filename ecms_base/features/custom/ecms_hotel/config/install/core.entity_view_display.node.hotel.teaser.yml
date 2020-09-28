@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.hotel.field_hotel_address
+    - field.field.node.hotel.field_hotel_body
+    - field.field.node.hotel.field_hotel_booking_notes
+    - field.field.node.hotel.field_hotel_booking_url
+    - field.field.node.hotel.field_hotel_cover_image
+    - field.field.node.hotel.field_hotel_main_image
+    - field.field.node.hotel.field_hotel_more_info_url
+    - field.field.node.hotel.field_hotel_phone
+    - field.field.node.hotel.field_hotel_rate
+    - field.field.node.hotel.field_hotel_rate_amount
+    - node.type.hotel
+  module:
+    - user
+id: node.hotel.teaser
+targetEntityType: node
+bundle: hotel
+mode: teaser
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_hotel_address: true
+  field_hotel_body: true
+  field_hotel_booking_notes: true
+  field_hotel_booking_url: true
+  field_hotel_cover_image: true
+  field_hotel_main_image: true
+  field_hotel_more_info_url: true
+  field_hotel_phone: true
+  field_hotel_rate: true
+  field_hotel_rate_amount: true

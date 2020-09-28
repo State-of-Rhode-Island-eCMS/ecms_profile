@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hotel_more_info_url
+    - node.type.hotel
+  module:
+    - link
+id: node.hotel.field_hotel_more_info_url
+field_name: field_hotel_more_info_url
+entity_type: node
+bundle: hotel
+label: 'Hotel More Info URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link
