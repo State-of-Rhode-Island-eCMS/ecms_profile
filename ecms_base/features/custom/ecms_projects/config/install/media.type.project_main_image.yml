@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: project_main_image
+label: 'Project Main Image'
+description: 'Images for projects'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_2
+field_map: {  }
