@@ -108,6 +108,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureBasicPageFeatureInstalled();
     $this->ensureLandingPageFeatureInstalled();
     $this->ensureModerationNotificationInstall();
+    $this->ensureModerationDashboardInstall();
   }
 
   /**
@@ -166,7 +167,11 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_press_release feature installed properly.
    */
   private function ensurePressReleaseFeatureInstalled(): void {
-    $account = $this->drupalCreateUser(['create press_release content']);
+    $account = $this->drupalCreateUser([
+      'create press_release content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
+    ]);
     $this->drupalLogin($account);
 
     // Ensure the press release entity add form is available.
@@ -179,7 +184,11 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_location feature installed properly.
    */
   private function ensureLocationFeatureInstalled(): void {
-    $account = $this->drupalCreateUser(['create location content']);
+    $account = $this->drupalCreateUser([
+      'create location content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
+    ]);
     $this->drupalLogin($account);
 
     // Ensure the location entity add form is available.
@@ -195,6 +204,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser([
       'create person content',
       'create terms in person_taxonomy',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
@@ -254,12 +265,24 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Ensure the content moderation notification requirement installed properly.
    */
-  public function ensureModerationNotificationInstall(): void {
+  private function ensureModerationNotificationInstall(): void {
     $account = $this->drupalCreateUser(['administer content moderation notifications']);
     $this->drupalLogin($account);
 
     // Ensure the form configuration page is available.
     $this->drupalGet('admin/config/workflow/notifications');
+    $this->assertSession()->statusCodeEquals(200);
+  }
+
+  /**
+   * Ensure the moderation dashboard requirement installed properly.
+   */
+  private function ensureModerationDashboardInstall(): void {
+    $account = $this->drupalCreateUser(['view any moderation dashboard']);
+    $this->drupalLogin($account);
+
+    // Ensure the dashboard loads.
+    $this->drupalGet("user/{$account->id()}/moderation/dashboard");
     $this->assertSession()->statusCodeEquals(200);
   }
 
@@ -270,6 +293,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $account = $this->drupalCreateUser([
       'create event content',
       'create terms in event_taxonomy',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
@@ -308,6 +333,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   private function ensurePromotionsFeatureInstalled(): void {
     $account = $this->drupalCreateUser([
       'create promotions content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 
@@ -324,6 +351,8 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   private function ensureBasicPageFeatureInstalled(): void {
     $account = $this->drupalCreateUser([
       'create basic_page content',
+      'use editorial transition create_new_draft',
+      'view own unpublished content',
     ]);
     $this->drupalLogin($account);
 

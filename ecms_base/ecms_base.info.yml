@@ -30,6 +30,7 @@ dependencies:
   - media_library
   - menu_link_content
   - menu_ui
+  - moderation_dashboard
   - node
   - openid_connect_windows_aad
   - options
@@ -59,6 +60,7 @@ install:
   - ecms_person
   - ecms_press_release
   - ecms_promotions
+  - ecms_workflow
 
 # Theme dependencies for the distribution.
 themes:

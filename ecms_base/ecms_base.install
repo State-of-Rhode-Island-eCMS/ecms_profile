@@ -17,7 +17,7 @@ use Drupal\shortcut\Entity\Shortcut;
  *
  * @see system_install()
  */
-function standard_install() {
+function ecms_base_install() {
   // Assign user 1 the "drupal_admin" role.
   $user = User::load(1);
   $user->roles[] = 'drupal_admin';
@@ -44,4 +44,21 @@ function standard_install() {
   ]);
 
   $shortcut->save();
+
+  // Set the workflow and permissions for all content types.
+  $types = \Drupal::entityTypeManager()
+    ->getStorage('node_type')
+    ->loadMultiple();
+
+  foreach ($types as $type) {
+    // Notifications are managed using the ecms_api module.
+    if ($type === 'notification') {
+      continue;
+    }
+
+    // Call the workflow service to update configuration.
+    \Drupal::service('ecms_workflow.bundle_create')
+      ->addContentTypeToWorkflow($type->id());
+  }
+
 }
