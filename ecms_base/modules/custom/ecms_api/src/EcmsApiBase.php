@@ -82,6 +82,15 @@ abstract class EcmsApiBase {
   /**
    * Get an access token to authorize the request.
    *
+   * @param \Drupal\Core\Url $url
+   *   The base URL for the oauth endpoint.
+   * @param string $client_id
+   *   The client id for the oauth connection.
+   * @param string $client_secret
+   *   The client secret for the oauth connection
+   * @param string $scope
+   *   The scope for the oauth connection.
+   *
    * @return string|null
    *   The access token or NULL.
    */
