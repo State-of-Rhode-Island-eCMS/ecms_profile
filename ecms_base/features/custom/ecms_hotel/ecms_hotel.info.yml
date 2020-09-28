@@ -1,4 +1,4 @@
-name: Hotel
+name: 'eCMS Hotels'
 description: 'Provides Hotel content type and related configuration. Manage accommodations and associated packages and deals.'
 type: module
 core_version_requirement: ^9
