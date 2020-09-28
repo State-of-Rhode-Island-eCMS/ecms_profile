@@ -19,6 +19,20 @@ use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
 
   /**
+   * The profile to install.
+   *
+   * @var string
+   */
+  protected $profile = 'ecms_base';
+
+  /**
+   * The theme to test with.
+   *
+   * @var string
+   */
+  protected $defaultTheme = 'classy';
+
+  /**
    * Test the ecms_api_recipient installation.
    *
    * @throws \Behat\Mink\Exception\ExpectationException
