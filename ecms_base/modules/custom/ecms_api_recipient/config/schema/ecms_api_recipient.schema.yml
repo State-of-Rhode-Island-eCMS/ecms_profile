@@ -16,3 +16,6 @@ ecms_api_recipient.settings:
       sequence:
         type: string
         label: 'Content type'
+    api_main_hub:
+      type: string
+      label: 'API hub site url'
