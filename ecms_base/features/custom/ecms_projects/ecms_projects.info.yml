@@ -1,7 +1,7 @@
 name: 'eCMS Projects'
 description: 'Provides the Project content type and related configuration.'
 type: module
-core: 8.x
+core_version_requirement: ^9
 dependencies:
   - field
   - file
