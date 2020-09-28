@@ -51,7 +51,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
 
     // Enable the ecms_projects feature.
     $edit = [];
-    $edit["modules[ecms_projects][enable]"] = TRUE;
+    $edit["modules[ecms_hotels][enable]"] = TRUE;
     $this->drupalPostForm(NULL, $edit, t('Install'));
     $this->assertText('Module eCMS Hotels has been enabled.');
 
