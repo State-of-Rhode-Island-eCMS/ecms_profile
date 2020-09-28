@@ -54,7 +54,7 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     $edit = [];
     $edit["modules[ecms_publications][enable]"] = TRUE;
     $this->drupalPostForm(NULL, $edit, t('Install'));
-    $this->assertText('Module eCMS Publications page has been enabled.');
+    $this->assertText('Module eCMS Publications has been enabled.');
 
   }
 
