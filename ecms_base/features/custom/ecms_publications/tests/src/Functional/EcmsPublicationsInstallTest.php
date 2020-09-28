@@ -33,7 +33,7 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
   protected $defaultTheme = 'classy';
 
   /**
-   * Test the ecms_api_recipient installation.
+   * Test the ecms_publications installation.
    *
    * @throws \Behat\Mink\Exception\ExpectationException
    */
