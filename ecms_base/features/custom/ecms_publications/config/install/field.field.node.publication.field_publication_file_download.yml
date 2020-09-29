@@ -23,5 +23,5 @@ settings:
     sort:
       field: _none
     auto_create: false
-    auto_create_bundle: event_image
+    auto_create_bundle: publication_file
 field_type: entity_reference
