@@ -64,6 +64,7 @@
     "drupal/address": "^1.8",
     "drupal/admin_toolbar": "^2.3",
     "drupal/auto_entitylabel": "^3.0@beta",
+    "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
     "drupal/core-recommended": "^9",
     "drupal/features": "^3.11",
