@@ -6,6 +6,10 @@ base theme: bartik
 
 version: 1.x
 
+# Libraries
+libraries:
+  - ecms/global-styling
+
 regions:
   header: Header
   primary_menu: 'Primary menu'
