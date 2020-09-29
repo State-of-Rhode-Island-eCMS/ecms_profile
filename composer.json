@@ -20,19 +20,6 @@
     {
       "type": "composer",
       "url": "https://asset-packagist.org"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "state-of-rhode-island-ecms/ecms_patternlab",
-        "version": "1.0.0",
-        "type": "pattern-lab",
-        "source": {
-          "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab",
-          "type": "git",
-          "reference": "master"
-        }
-      }
     }
   ],
   "extra": {
@@ -54,10 +41,6 @@
       "drupal/webform": {
         "3173864 - Website Error after update to latest 6 alpha release / tippyjs/6.x": ",https://www.drupal.org/files/issues/2020-09-29/3173864-10.patch"
       }
-    },
-    "installer-types": ["pattern-lab"],
-    "installer-paths": {
-      "ecms_base/themes/custom/ecms/{$name}": ["state-of-rhode-island-ecms/ecms_patternlab"]
     },
     "preserve-paths": [],
     "drupal-scaffold": {}
@@ -100,7 +83,6 @@
     "drupal/webform": "^6.0",
     "drush/drush": "^10.0",
     "oomphinc/composer-installers-extender": "^1.1",
-    "state-of-rhode-island-ecms/ecms_patternlab": "^1.0",
     "zaporylie/composer-drupal-optimizations": "^1.0"
   },
   "require-dev": {
