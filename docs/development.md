@@ -104,13 +104,23 @@ as the distro is symlinked.
 When making changes to the "ecms_profile" repository in a feature branch, you may
 have to update the composer.json package version in the "develop-ecms-profile" to
 point to your feature branch.
+
 ```json
 "require": {
-        "rhodeislandecms/ecms_profile": "dev-feature-branch-name",
+        "rhodeislandecms/ecms_profile": "dev-[feature-branch-name]",
     },
 ```
+
 This will be the case if you update any requirements, such as a new module. Composer
 won't be aware of the changes unless it's looking at the updated dependencies.
+
+Example: A feature branch named `RIG-37/pattern-lab-integration`
+
+```json
+"require": {
+        "rhodeislandecms/ecms_profile": "dev-RIG-37/pattern-lab-integration",
+    },
+```
 
 #### Steps to update local environment
  * Pull down ecms_profile master branch, ensure your feature branch is rebased.
