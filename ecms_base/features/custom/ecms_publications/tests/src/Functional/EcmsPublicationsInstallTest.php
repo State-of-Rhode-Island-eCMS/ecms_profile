@@ -10,7 +10,7 @@ require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/All
 use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 
 /**
- * Class InstallationTest.
+ * Class EcmsPublicationsInstallTest.
  *
  * @package Drupal\Tests\ecms_publications\Functional
  * @group ecms
