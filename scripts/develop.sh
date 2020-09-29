@@ -162,6 +162,19 @@ echo "--------------------------------------------------"
 
 $LANDO composer config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "/'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
 $LANDO composer config repositories.ecms_patternlab '{"type": "package", "package": {"name": "state-of-rhode-island-ecms/ecms_patternlab", "version": "1.0.0", "type": "pattern-lab", "source": {"url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab", "type": "git", "reference": "master"}}}'
+# Add the pattern lab installer type.
+$LANDO composer config extra.installer-types.2 "pattern-lab"
+
+# Add the installer path.
+$LANDO composer config extra.installer-paths./${INSTALL_PROFILE_DIRECTORY}/ecms_base/themes/custom/ecms/{\$name} PATTERN_LAB_REPLACE
+# Replace the "PATTERN_LAB_REPLACE" text with the actual value.
+# sed is different for Macs, detect that here.
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+else
+  sed -i 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+fi
+
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
 # Update the lock file to ensure core patches applied.

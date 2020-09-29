@@ -47,5 +47,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Removed core search from default install.
 
 ### Fixed
+- RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 
 ### Security
