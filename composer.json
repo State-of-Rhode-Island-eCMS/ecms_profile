@@ -37,9 +37,6 @@
       },
       "drupal/content_moderation_notifications": {
         "3170503 - Core requirement error during Functional test": "https://www.drupal.org/files/issues/2020-09-11/3170503-2.patch"
-      },
-      "drupal/webform": {
-        "3173864 - Website Error after update to latest 6 alpha release / tippyjs/6.x": "https://www.drupal.org/files/issues/2020-09-29/3173864-10.patch"
       }
     },
     "preserve-paths": [],
@@ -80,7 +77,7 @@
     "drupal/simple_oauth": "^4.5",
     "drupal/smart_date": "^3.0",
     "drupal/token": "^1.7",
-    "drupal/webform": "^6.0",
+    "drupal/webform": "6.17",
     "drush/drush": "^10.0",
     "oomphinc/composer-installers-extender": "^1.1",
     "zaporylie/composer-drupal-optimizations": "^1.0"
