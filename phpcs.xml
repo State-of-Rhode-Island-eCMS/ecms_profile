@@ -10,6 +10,7 @@
   <!-- Excluded patterns -->
   <exclude-pattern>*.css</exclude-pattern>
   <exclude-pattern>*.js</exclude-pattern>
+  <exclude-pattern>ecms_base/themes/custom/ecms/ecms_patternlab/*</exclude-pattern>
 
   <!-- PHPCS argument overrides -->
   <arg name="colors" />
