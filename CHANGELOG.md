@@ -40,6 +40,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - Disabled xdebug by default in the develop.sh script.
 - RIG-37: Made ECMS custom theme the default.
 - RIG-22: Enable Moderation Dashboard module by default.
+- RIG-37: Updated the development script to allow for pattern lab development.
 
 ### Deprecated
 
