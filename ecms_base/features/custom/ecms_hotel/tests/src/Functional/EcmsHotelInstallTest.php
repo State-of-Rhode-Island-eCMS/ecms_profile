@@ -7,7 +7,7 @@ namespace Drupal\Tests\ecms_hotels\Functional;
 // Require the all profiles abstract class since autoloading doesn't work.
 require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
 
-use Drupal\Tests\ecms_hotels\Functional\AllProfileInstallationTestsAbstract;
+use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 
 /**
  * Class EcmsHotelInstallTest.
