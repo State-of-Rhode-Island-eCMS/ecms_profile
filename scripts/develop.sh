@@ -8,7 +8,10 @@ BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"
 APP_NAME="develop-ecms-profile"
 INSTALL_PROFILE_NAME="ecms_base"
 INSTALL_PROFILE_DIRECTORY="ecms_profile"
+PATTERN_LAB_DIRECTORY="ecms_patternlab"
 REPOSITORY_NAME="rhodeislandecms/ecms_profile"
+PATTERN_LAB_FULL_PATH="${BASE_DIR%/*}/${PATTERN_LAB_DIRECTORY}"
+PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
@@ -107,7 +110,23 @@ else
   echo "Create a .lando.local.yml file."
 
   # Include a .lando.local.yml to include the distribution in the app.
-  echo "services:
+  if [ -d "$PATTERN_LAB_FULL_PATH/.git" ]; then
+    echo -e  "${FG_C}${BG_C}Pattern lab git repository found at${NO_C}: $PATTERN_LAB_FULL_PATH, symlinking for development."
+    LANDO_SERVICES="services:
+  appserver:
+    overrides:
+      volumes:
+        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
+        - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY
+  nodejs:
+    overrides:
+      volumes:
+        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
+        - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY"
+  else
+
+    echo -e  "${FG_C}${BG_C}Pattern lab git repository NOT found at${NO_C}: $PATTERN_LAB_FULL_PATH, ignoring symlink."
+    LANDO_SERVICES="services:
   appserver:
     overrides:
       volumes:
@@ -115,7 +134,10 @@ else
   nodejs:
     overrides:
       volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
+        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY"
+  fi
+
+  echo "$LANDO_SERVICES
 tooling:
   phpunit:
     service: appserver
@@ -161,7 +183,7 @@ echo " Require ${REPOSITORY_NAME} using lando composer "
 echo "--------------------------------------------------"
 
 $LANDO composer config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "/'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
-$LANDO composer config repositories.ecms_patternlab '{"type": "package", "package": {"name": "state-of-rhode-island-ecms/ecms_patternlab", "version": "1.0.0", "type": "pattern-lab", "source": {"url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab", "type": "git", "reference": "master"}}}'
+
 # Add the pattern lab installer type.
 $LANDO composer config extra.installer-types.2 "pattern-lab"
 
@@ -170,13 +192,24 @@ $LANDO composer config extra.installer-paths./${INSTALL_PROFILE_DIRECTORY}/ecms_
 # Replace the "PATTERN_LAB_REPLACE" text with the actual value.
 # sed is different for Macs, detect that here.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+  sed -i '' 's/"PATTERN_LAB_REPLACE"/\["type:pattern-lab"]/g' composer.json
 else
-  sed -i 's/"PATTERN_LAB_REPLACE"/\["state-of-rhode-island-ecms\/ecms_patternlab"]/g' composer.json
+  sed -i 's/"PATTERN_LAB_REPLACE"/\["type:pattern-lab"]/g' composer.json
 fi
 
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
+
+if [ -d "$PATTERN_LAB_FULL_PATH/.git" ]; then
+  # Symlink pattern lab for development.
+  $LANDO composer config repositories.${PATTERN_LAB_DIRECTORY} '{"type": "path", "url": "/'${PATTERN_LAB_DIRECTORY}'", "options": {"symlink": true}}'
+  $LANDO composer require "${PATTERN_LAB_REPOSITORY_NAME}:*" --no-progress
+else
+  # Require pattern lab master branch from Github.
+  $LANDO composer config repositories.${PATTERN_LAB_DIRECTORY} '{"type": "git", "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab.git"}'
+  $LANDO composer require "${PATTERN_LAB_REPOSITORY_NAME}:dev-master" --no-progress
+fi
+
 # Update the lock file to ensure core patches applied.
 $LANDO composer update --lock
 
