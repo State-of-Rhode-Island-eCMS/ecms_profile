@@ -26,3 +26,21 @@ regions:
   footer_third: 'Footer third'
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
+
+component-libraries:
+  atoms:
+    paths:
+      - ecms_patternlab/source/_patterns/00-atoms
+  molecules:
+    paths:
+      - ecms_patternlab/source/_patterns/01-molecules
+  organisms:
+    paths:
+      - ecms_patternlab/source/_patterns/02-organisms
+  templates:
+    paths:
+      - ecms_patternlab/source/_patterns/03-templates
+  pages:
+    paths:
+      - ecms_patternlab/source/_patterns/04-pages
+
