@@ -37,7 +37,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
    *
    * @throws \Behat\Mink\Exception\ExpectationException
    */
-  public function testEcmsProjectsInstallation(): void {
+  public function testEcmsHotelInstallation(): void {
     $account = $this->drupalCreateUser([
       'administer modules',
       'administer site configuration',
