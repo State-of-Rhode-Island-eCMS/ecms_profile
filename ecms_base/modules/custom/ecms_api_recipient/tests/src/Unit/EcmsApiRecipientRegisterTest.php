@@ -194,7 +194,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
           ->method('getContentTypes')
           ->willReturn(self::CONTENT_TYPES);
 
-        // Increase the config count
+        // Increase the config count.
         $recipientConfigCount = 4;
 
         if (!$accessToken) {
