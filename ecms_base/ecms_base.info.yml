@@ -39,6 +39,7 @@ dependencies:
   - page_cache
   - publishcontent
   - quickedit
+  - rabbit_hole
   - responsive_image
   - rdf
   - shortcut

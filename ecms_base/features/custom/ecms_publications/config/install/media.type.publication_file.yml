@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: publication_file
+label: 'Publication File'
+description: 'Used by the publication content type to provide file downloads'
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_file
+field_map: {  }
