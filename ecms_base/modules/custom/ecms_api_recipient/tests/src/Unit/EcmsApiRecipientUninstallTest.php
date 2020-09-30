@@ -14,7 +14,7 @@ use Drupal\Tests\UnitTestCase;
 /**
  * Class EcmsApiRecipientUninstallTest.
  *
- * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientInstall
+ * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientUninstall
  * @group ecms
  * @group ecms_api
  * @group ecms_api_recipient
