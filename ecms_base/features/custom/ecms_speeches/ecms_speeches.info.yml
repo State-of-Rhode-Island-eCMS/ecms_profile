@@ -1,0 +1,14 @@
+name: 'eCMS Speeches'
+description: 'Provides Speech content type and related configuration.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - ecms_workflow
+  - datetime
+  - field
+  - menu_ui
+  - node
+  - path
+  - user
+version: 9.x-1.0
+package: eCMS

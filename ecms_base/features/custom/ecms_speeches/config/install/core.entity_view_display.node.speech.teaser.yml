@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.speech.field_speech_date
+    - field.field.node.speech.field_speech_long_title
+    - field.field.node.speech.field_speech_text
+    - node.type.speech
+  module:
+    - user
+id: node.speech.teaser
+targetEntityType: node
+bundle: speech
+mode: teaser
+content:
+  content_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_speech_date: true
+  field_speech_long_title: true
+  field_speech_text: true
