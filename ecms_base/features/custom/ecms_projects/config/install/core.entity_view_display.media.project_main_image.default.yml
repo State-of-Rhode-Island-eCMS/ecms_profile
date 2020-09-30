@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.project_main_image.field_media_image_2
+    - image.style.large
+    - media.type.project_main_image
+  module:
+    - image
+id: media.project_main_image.default
+targetEntityType: media
+bundle: project_main_image
+mode: default
+content:
+  field_media_image_2:
+    label: visually_hidden
+    weight: 0
+    settings:
+      image_style: large
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

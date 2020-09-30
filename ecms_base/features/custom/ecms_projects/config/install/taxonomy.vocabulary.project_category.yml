@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Project Category'
+vid: project_category
+description: 'Types of projects managed by RI DOT'
+weight: 0
