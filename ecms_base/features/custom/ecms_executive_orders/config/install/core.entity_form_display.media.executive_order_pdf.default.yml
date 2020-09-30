@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.media.executive_order_pdf.field_executive_order_pdf
-    - field.field.media.executive_order_pdf.field_media_file
     - media.type.executive_order_pdf
   module:
     - file
@@ -21,13 +20,6 @@ content:
     third_party_settings: {  }
   field_executive_order_pdf:
     weight: 101
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: file_generic
-    region: content
-  field_media_file:
-    weight: 0
     settings:
       progress_indicator: throbber
     third_party_settings: {  }

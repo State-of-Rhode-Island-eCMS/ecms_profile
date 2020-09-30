@@ -1,7 +1,7 @@
 name: 'eCMS Executive Orders'
 description: 'Provides Executive Order content type and related configuration.'
 type: module
-core: 8.x
+core_version_requirement: ^9
 dependencies:
   - datetime
   - field

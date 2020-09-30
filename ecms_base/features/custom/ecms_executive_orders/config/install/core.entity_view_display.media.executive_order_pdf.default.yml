@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.media.executive_order_pdf.field_executive_order_pdf
-    - field.field.media.executive_order_pdf.field_media_file
     - media.type.executive_order_pdf
   module:
     - file
@@ -15,14 +14,6 @@ content:
   field_executive_order_pdf:
     weight: 1
     label: above
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    type: file_default
-    region: content
-  field_media_file:
-    label: visually_hidden
-    weight: 0
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
