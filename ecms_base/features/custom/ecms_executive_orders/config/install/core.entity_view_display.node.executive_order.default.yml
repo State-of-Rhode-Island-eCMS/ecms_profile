@@ -14,11 +14,6 @@ targetEntityType: node
 bundle: executive_order
 mode: default
 content:
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   field_executive_order_date:
     weight: 102
     label: above
