@@ -3,7 +3,7 @@ status: true
 dependencies: {  }
 id: executive_order_pdf
 label: 'Executive Order PDF'
-description: ''
+description: 'PDF version of the executive order text.'
 source: file
 queue_thumbnail_downloads: false
 new_revision: false

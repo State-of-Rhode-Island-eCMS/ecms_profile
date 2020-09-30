@@ -5,8 +5,10 @@ dependencies:
     - field.field.node.executive_order.field_executive_order_date
     - field.field.node.executive_order.field_executive_order_long_title
     - field.field.node.executive_order.field_executive_order_pdf
+    - field.field.node.executive_order.field_executive_order_text
     - node.type.executive_order
   module:
+    - content_moderation
     - datetime
     - media_library
     - path
@@ -42,6 +44,20 @@ content:
       media_types: {  }
     third_party_settings: {  }
     region: content
+  field_executive_order_text:
+    weight: 124
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   path:
     type: path
     weight: 30

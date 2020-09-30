@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.executive_order.field_executive_order_date
     - field.field.node.executive_order.field_executive_order_long_title
     - field.field.node.executive_order.field_executive_order_pdf
+    - field.field.node.executive_order.field_executive_order_text
     - node.type.executive_order
   module:
     - datetime
@@ -14,6 +15,11 @@ targetEntityType: node
 bundle: executive_order
 mode: default
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_executive_order_date:
     weight: 102
     label: above
@@ -39,6 +45,13 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
+    region: content
+  field_executive_order_text:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
   links:
     weight: 100
