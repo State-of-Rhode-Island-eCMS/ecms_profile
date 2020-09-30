@@ -325,9 +325,14 @@ class EcmsApiBaseTest extends UnitTestCase {
   public function testSubmitEntity(string $method, int $code, bool $expected): void {
     $endpoint = self::ENTITY_ENDPOINT;
     $uuidCount = 2;
-
+    $bundleCount = 2;
     // Test for all allowed requests.
     if ($code !== 0) {
+      // If test 6, change the bundle count.
+      if ($code === 6) {
+        $bundleCount = 1;
+        $uuidCount = 0;
+      }
       $this->url->expects($this->once())
         ->method('toString')
         ->willReturn(self::ENDPOINT_URL);
@@ -336,7 +341,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         ->method('getEntityTypeId')
         ->willReturn(self::ENTITY_TYPE);
 
-      $this->entity->expects($this->exactly(2))
+      $this->entity->expects($this->exactly($bundleCount))
         ->method('bundle')
         ->willReturn(self::ENTITY_BUNDLE);
 
@@ -350,10 +355,20 @@ class EcmsApiBaseTest extends UnitTestCase {
         ->method('uuid')
         ->willReturn(self::ENTITY_UUID);
 
-      $this->entityToJsonApi->expects($this->once())
-        ->method('normalize')
-        ->with($this->entity)
-        ->willReturn(self::NORMALIZED_ENTITY);
+      // If test 6, alter the normlaize method return.
+      if ($code === 6) {
+        $this->entityToJsonApi->expects($this->once())
+          ->method('normalize')
+          ->with($this->entity)
+          ->willReturn([]);
+      }
+      else {
+        $this->entityToJsonApi->expects($this->once())
+          ->method('normalize')
+          ->with($this->entity)
+          ->willReturn(self::NORMALIZED_ENTITY);
+      }
+
     }
 
     // Test a guzzle exception.
@@ -430,6 +445,11 @@ class EcmsApiBaseTest extends UnitTestCase {
       'test5' => [
         'POST',
         -1,
+        FALSE,
+      ],
+      'test6' => [
+        'POST',
+        6,
         FALSE,
       ],
     ];
