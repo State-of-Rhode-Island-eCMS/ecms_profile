@@ -13,6 +13,7 @@ dependencies:
   - breakpoint
   - ckeditor
   - color
+  - components
   - config
   - content_moderation
   - content_moderation_notifications
