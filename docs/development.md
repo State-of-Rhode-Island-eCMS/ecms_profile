@@ -1,4 +1,8 @@
 # Development for the custom ecms_profile
+
+Before starting development, ensure that you have composer installed globally
+on your system. [Instructions can be found here](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos).
+ 
 Development of the ecms_profile can be started by cloning this repository and
 running the following script:
 ```bash
@@ -15,6 +19,25 @@ repository directory like this:
 - ecms_profile/
 - develop-ecms-profile/
 ```
+
+## Pattern Lab & Profile Development
+If you are developing with Pattern Lab and the Ecms Profile, you can develop
+both simultaneously by cloning the `ecms_patternlab` repository to a directory
+on the same level as the `ecms_profile` repository. Then, run your `develop.sh`
+script. The develop.sh script will detect the `ecms_patternlab` directory as a
+git repository and will symlink the directory in the lando environment.
+
+The directory structure should look like this:
+```
+- ecms_patternlab/
+- ecms_profile/
+- develop-ecms-profile/
+```
+
+If you do not have the `ecms_patternlab` repository cloned locally, the 
+develop.sh script will download the repository as a dependency 
+and place it in the `ecms_profile/ecms_base/themes/custom/ecms/ecms_patternlab`
+directory. 
 
 ## Adding dependencies
 This is the installation profile and does not contain Lando, therefore, you 
