@@ -13,10 +13,8 @@ dependencies:
     - field.field.node.hotel.field_hotel_rate
     - field.field.node.hotel.field_hotel_rate_amount
     - node.type.hotel
-    - workflows.workflow.editorial
   module:
     - address
-    - content_moderation
     - link
     - media_library
     - path
