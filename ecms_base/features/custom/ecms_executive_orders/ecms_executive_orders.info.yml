@@ -13,7 +13,6 @@ dependencies:
   - menu_ui
   - node
   - path
-  - rabbit_hole
   - rh_node
   - user
 version: 9.x-1.0
