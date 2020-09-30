@@ -19,3 +19,12 @@ ecms_api_recipient.settings:
     api_main_hub:
       type: string
       label: 'API hub site url'
+    api_main_hub_client_id:
+      type: string
+      label: 'API hub Oauth Client ID'
+    api_main_hub_client_secret:
+      type: string
+      label: 'API hub Oauth Client Secret'
+    api_main_hub_scope:
+      type: string
+      label: 'API hub Oauth scope'
