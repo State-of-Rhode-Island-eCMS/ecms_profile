@@ -169,14 +169,32 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     return $url;
   }
 
+  /**
+   * The the api client id from configuration.
+   *
+   * @return string
+   *   The configuration value for api_main_hub_client_id.
+   */
   private function getApiClientId(): string {
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_id');
   }
 
+  /**
+   * Get the api client secret from configuration.
+   *
+   * @return string
+   *   The configuration value for the api_main_hub_client_secret.
+   */
   private function getApiClientSecret(): string {
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_secret');
   }
 
+  /**
+   * Get the api scope from configuration.
+   *
+   * @return string
+   *   The configuration value for the api_main_hub_scope.
+   */
   private function getApiScope(): string {
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_scope');
   }
