@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
-    - field.field.media.hotel_image.field_media_image_2
+    - field.field.media.hotel_image.field_hotel_image
     - image.style.thumbnail
     - media.type.hotel_image
   module:
@@ -13,14 +13,6 @@ targetEntityType: media
 bundle: hotel_image
 mode: media_library
 content:
-  field_media_image_2:
-    weight: 5
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
   name:
     type: string_textfield
     settings:
@@ -31,6 +23,7 @@ content:
     region: content
 hidden:
   created: true
+  field_hotel_image: true
   path: true
   status: true
   uid: true

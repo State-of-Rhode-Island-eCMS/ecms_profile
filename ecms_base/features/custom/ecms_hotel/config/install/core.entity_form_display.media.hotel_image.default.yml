@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.hotel_image.field_media_image_2
+    - field.field.media.hotel_image.field_hotel_image
     - image.style.thumbnail
     - media.type.hotel_image
   module:
@@ -19,8 +19,8 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_media_image_2:
-    weight: 0
+  field_hotel_image:
+    weight: 101
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail

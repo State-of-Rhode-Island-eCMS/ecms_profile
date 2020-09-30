@@ -5,13 +5,14 @@ dependencies:
     - file
     - image
     - media
-id: media.field_media_image_2
-field_name: field_media_image_2
+id: media.field_hotel_image
+field_name: field_hotel_image
 entity_type: media
 type: image
 settings:
+  uri_scheme: public
   default_image:
-    uuid: null
+    uuid: ''
     alt: ''
     title: ''
     width: null
@@ -19,7 +20,6 @@ settings:
   target_type: file
   display_field: false
   display_default: false
-  uri_scheme: public
 module: image
 locked: false
 cardinality: 1

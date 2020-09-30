@@ -4,7 +4,6 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - address
-  - content_moderation
   - field
   - file
   - image
