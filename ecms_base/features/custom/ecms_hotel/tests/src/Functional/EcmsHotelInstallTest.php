@@ -49,7 +49,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxNotChecked('edit-modules-ecms-hotel-enable');
 
-    // Enable the ecms_projects feature.
+    // Enable the ecms_hotel feature.
     $edit = [];
     $edit["modules[ecms_hotel][enable]"] = TRUE;
     $this->drupalPostForm(NULL, $edit, t('Install'));
