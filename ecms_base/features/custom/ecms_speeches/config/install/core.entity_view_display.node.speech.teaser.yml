@@ -14,11 +14,6 @@ targetEntityType: node
 bundle: speech
 mode: teaser
 content:
-  content_moderation_control:
-    weight: -20
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   links:
     weight: 100
     region: content

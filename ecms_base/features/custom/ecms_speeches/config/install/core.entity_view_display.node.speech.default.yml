@@ -14,11 +14,6 @@ targetEntityType: node
 bundle: speech
 mode: default
 content:
-  content_moderation_control:
-    weight: -20
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_speech_date:
     weight: 103
     label: above

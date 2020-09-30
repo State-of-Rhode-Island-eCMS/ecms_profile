@@ -6,9 +6,7 @@ dependencies:
     - field.field.node.speech.field_speech_long_title
     - field.field.node.speech.field_speech_text
     - node.type.speech
-    - workflows.workflow.editorial
   module:
-    - content_moderation
     - datetime
     - path
 id: node.speech.default
@@ -44,12 +42,6 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
-  moderation_state:
-    type: moderation_state_default
-    weight: 100
-    settings: {  }
-    region: content
-    third_party_settings: {  }
   path:
     type: path
     weight: 30
