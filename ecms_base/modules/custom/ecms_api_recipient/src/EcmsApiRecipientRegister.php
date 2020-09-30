@@ -86,13 +86,13 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
 
     // Build the EcmsApiSite entity to pass to json api.
     $apiSiteEntity = $this->getSiteEntity($siteUrl, $allowedContentTypes);
-    // Get the access token.
 
     // Get the id/secret/scope from configuration.
     $clientId = $this->getApiClientId();
     $clientSecret = $this->getApiClientSecret();
     $clientScope = $this->getApiScope();
 
+    // Get the access token.
     $accessToken = $this->getAccessToken($hubUrl, $clientId, $clientSecret, $clientScope);
 
     // Guard against an empty access token.
