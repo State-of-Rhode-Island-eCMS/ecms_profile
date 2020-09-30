@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api_recipient;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
@@ -21,6 +20,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class EcmsApiRecipientRegister extends EcmsApiBase {
 
+  /**
+   * The content types to register with the hub by default.
+   */
   const INSTALLED_CONTENT_TYPES = ['notification'];
 
   /**
@@ -30,13 +32,24 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    */
   private $configFactory;
 
+  /**
+   * The request_stack service.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
   private $requestStack;
 
   /**
    * EcmsApiRecipientRegister constructor.
    *
    * @param \GuzzleHttp\ClientInterface $httpClient
+   *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
+   *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config.factory service.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   The request_stack service.
    */
   public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, ConfigFactoryInterface $configFactory, RequestStack $requestStack) {
     parent::__construct($httpClient, $entityToJsonApi);
@@ -65,37 +78,45 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
       return;
     }
 
-
     // Get the content types from the hub.
     $allowedContentTypes = $this->getContentTypes($hubUrl, self::INSTALLED_CONTENT_TYPES);
     if (empty($allowedContentTypes)) {
       return;
     }
 
-    // @todo: build the EcmsApiSite entity to pass to json api.
+    // Build the EcmsApiSite entity to pass to json api.
     $apiSiteEntity = $this->getSiteEntity($siteUrl, $allowedContentTypes);
     // Get the access token.
-    // @todo: Get the id/secret/scope from configuration.
-    $accessToken = $this->getAccessToken($hubUrl, 'REDACTED', 'REDACTED', 'ecms_api_publisher');
+
+    // Get the id/secret/scope from configuration.
+    $clientId = $this->getApiClientId();
+    $clientSecret = $this->getApiClientSecret();
+    $clientScope = $this->getApiScope();
+
+    $accessToken = $this->getAccessToken($hubUrl, $clientId, $clientSecret, $clientScope);
 
     // Guard against an empty access token.
     if (empty($accessToken)) {
       return;
     }
 
-    // @todo: POST the entity to the API.
+    // POST the entity to the API.
     $this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
     // @todo: Save the uuid of the entity for updating/deleting on uninstall.
   }
 
   /**
-   * Save the ecms_api_site entity.
+   * Save the ecms_api_site entity to the hub.
    *
    * @param string $accessToken
+   *   The access token. @see EcmsApiBase::getAccessToken().
    * @param \Drupal\Core\Url $url
+   *   The URL of the hub site.
    * @param array $entityArray
+   *   The entity to save. @see self::getSiteEntity().
    *
    * @return bool
+   *   Returns true on successful creation.
    */
   protected function postEntity(string $accessToken, Url $url, array $entityArray): bool {
     // Get the endpoint for the entity.
@@ -129,17 +150,6 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     return FALSE;
   }
 
-//  private function normalizeEcmsApiSiteEntity(EntityInterface $entity): array {
-////  $test = new JsonApiDocumentTopLevel($entity, )
-////    $this->serializer->serialize(
-////      new JsonApiDocumentTopLevelNormalizer($entity),
-////      'api_json',
-////      $this->calculateContext($entity)
-////    );
-//    // @todo: Build the attributes for the entity.
-//    return [];
-//  }
-
   /**
    * Get the hub host from configuration as a URL object.
    *
@@ -157,6 +167,18 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     }
 
     return $url;
+  }
+
+  private function getApiClientId(): string {
+    return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_id');
+  }
+
+  private function getApiClientSecret(): string {
+    return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_secret');
+  }
+
+  private function getApiScope(): string {
+    return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_scope');
   }
 
   /**
@@ -184,12 +206,13 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *
    * @param \Drupal\Core\Url $siteUrl
    *   The URL of the site.
+   * @param array $allowedContentTypes
+   *   The content types to retrieve. @see EcmsApiBase::getContentTypes().
    *
    * @return array
    *   The ecms_api_site entity to submit to json api.
    */
   private function getSiteEntity(Url $siteUrl, array $allowedContentTypes): array {
-    // @todo: Add the content types to post.
     $data = [
       'type' => 'ecms_api_site--ecms_api_site',
       'attributes' => [

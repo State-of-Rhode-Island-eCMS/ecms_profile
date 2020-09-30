@@ -260,12 +260,15 @@ abstract class EcmsApiBase {
   }
 
   /**
+   * Get the content types from the hub by machine name.
+   *
    * @param \Drupal\Core\Url $url
-   *   The url of the hub to get the content type uuid,
+   *   The url of the hub to get the content type uuid.
    * @param array $types
    *   The machine name of the content types to retrieve.
    *
    * @return array|null
+   *   Return the data array from the json api or null if an error occurs.
    */
   protected function getContentTypes(Url $url, array $types): ?array {
     $filter = [];
