@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: hotel_image
+label: 'Hotel Image'
+description: 'Images for accommodations.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_hotel_image
+field_map: {  }

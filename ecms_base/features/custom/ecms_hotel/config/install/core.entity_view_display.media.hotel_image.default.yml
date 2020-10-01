@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.hotel_image.field_hotel_image
+    - image.style.large
+    - media.type.hotel_image
+  module:
+    - image
+id: media.hotel_image.default
+targetEntityType: media
+bundle: hotel_image
+mode: default
+content:
+  field_hotel_image:
+    weight: 1
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

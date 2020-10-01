@@ -1,0 +1,5 @@
+bundle: ecms
+excluded:
+  - field.field.media.hotel_image.field_media_image_2
+  - field.storage.media.field_media_image_2
+required: true

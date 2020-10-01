@@ -41,6 +41,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-53: Added Rabbit Hole module.
 - RIG-47: Added Speech content type as optional feature.
 - RIG-58: Added the automated site registration to the hub.
+- RIG-49: Added the hotel content type as a feature.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
