@@ -32,7 +32,7 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
   private $ecmsApiPublisher;
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -47,11 +47,11 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
    * EcmsApiSyndicateQueueWorker constructor.
    *
    * @param array $configuration
-   *   The configuration of the plugin.
-   * @param $plugin_id
-   *   The plugin id.
-   * @param $plugin_definition
-   *   The plugin definition.
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
    * @param \Drupal\ecms_api_publisher\EcmsApiPublisher $ecmsApiPublisher
    *   The ecms_api_publisher.publisher service.
    */
@@ -62,7 +62,7 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function processItem($data) {
     /** @var \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $ecmsApiSiteEntity */

@@ -24,6 +24,9 @@ class EcmsApiSyndicate {
    */
   const SYNDICATE_QUEUE = 'ecms_api_publisher_queue';
 
+  /**
+   * Translate node method to json method.
+   */
   const ALLOWED_METHODS = [
     'INSERT' => 'POST',
     'UPDATE' => 'PATCH',
@@ -71,6 +74,8 @@ class EcmsApiSyndicate {
    *
    * @param \Drupal\node\NodeInterface $entity
    *   The node that should be syndicated to other sites.
+   * @param string $method
+   *   The method that was provided. Insert or update.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
@@ -115,7 +120,6 @@ class EcmsApiSyndicate {
     $this->messenger->addWarning($this->t('If you need this content posted immediately please <a href="@href">follow this link to manually clear the queue</a>.', [
       '@href' => '/',
     ]));
-    // @todo: Write the cron queue processor.
     // @todo: Write the form to batch the queued items if any exist.
   }
 
