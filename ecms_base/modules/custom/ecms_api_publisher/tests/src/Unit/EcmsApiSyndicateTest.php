@@ -26,6 +26,10 @@ use Drupal\Tests\UnitTestCase;
  */
 class EcmsApiSyndicateTest extends UnitTestCase {
 
+  const ALLOWED_METHODS = [
+    'INSERT',
+    'UPDATE',
+  ];
   /**
    * The queue name to test with.
    */
@@ -99,62 +103,110 @@ class EcmsApiSyndicateTest extends UnitTestCase {
 
   /**
    * Test the syndicateNode method.
+   *
+   * @dataProvider dataProviderForTestSyndicateNode
    */
-  public function testSyndicateNodeSuccess(): void {
+  public function testSyndicateNodeSuccess(string $method): void {
     $entity = $this->createMock(NodeInterface::class);
 
-    $entity->expects($this->once())
-      ->method('bundle')
-      ->willReturn(self::NODE_TYPE);
+    if (in_array($method, self::ALLOWED_METHODS)) {
+      $entity->expects($this->once())
+        ->method('bundle')
+        ->willReturn(self::NODE_TYPE);
 
-    $storage = $this->createMock(EntityStorageInterface::class);
-    $storage->expects($this->once())
-      ->method('loadByProperties')
-      ->with(['content_type' => self::NODE_TYPE])
-      ->willReturn($this->ecmsApiSites);
+      $storage = $this->createMock(EntityStorageInterface::class);
+      $storage->expects($this->once())
+        ->method('loadByProperties')
+        ->with(['content_type' => self::NODE_TYPE])
+        ->willReturn($this->ecmsApiSites);
 
-    $this->queue->expects($this->exactly(count($this->ecmsApiSites)))
-      ->method('createItem');
+      $this->queue->expects($this->exactly(count($this->ecmsApiSites)))
+        ->method('createItem');
 
-    $this->entityTypeManager->expects($this->once())
-      ->method('getStorage')
-      ->with('ecms_api_site')
-      ->willReturn($storage);
+      $this->entityTypeManager->expects($this->once())
+        ->method('getStorage')
+        ->with('ecms_api_site')
+        ->willReturn($storage);
 
-    $this->messenger->expects($this->once())
-      ->method('addMessage');
+      $this->messenger->expects($this->once())
+        ->method('addMessage');
 
-    $this->messenger->expects($this->once())
-      ->method('addWarning');
+      $this->messenger->expects($this->once())
+        ->method('addWarning');
+    }
+    else {
+      $entity->expects($this->never())
+        ->method('bundle')
+        ->willReturn(self::NODE_TYPE);
+
+      $storage = $this->createMock(EntityStorageInterface::class);
+      $storage->expects($this->never())
+        ->method('loadByProperties')
+        ->with(['content_type' => self::NODE_TYPE])
+        ->willReturn($this->ecmsApiSites);
+
+      $this->queue->expects($this->never())
+        ->method('createItem');
+
+      $this->entityTypeManager->expects($this->never())
+        ->method('getStorage')
+        ->with('ecms_api_site')
+        ->willReturn($storage);
+
+      $this->messenger->expects($this->never())
+        ->method('addMessage');
+
+      $this->messenger->expects($this->never())
+        ->method('addWarning');
+    }
 
     $ecmsApiSyndicate = new EcmsApiSyndicate($this->entityTypeManager, $this->queueFactory, $this->messenger);
-    $ecmsApiSyndicate->syndicateNode($entity);
-
+    $ecmsApiSyndicate->syndicateNode($entity, $method);
   }
 
   /**
    * Test the syndicateNode method with no api sites available.
+   *
+   * @dataProvider dataProviderForTestSyndicateNode
    */
-  public function testSyndicateNodeNone(): void {
+  public function testSyndicateNodeNone(string $method): void {
     $entity = $this->createMock(NodeInterface::class);
-
-    $entity->expects($this->once())
-      ->method('bundle')
-      ->willReturn(self::NODE_TYPE);
-
-    $storage = $this->createMock(EntityStorageInterface::class);
-    $storage->expects($this->once())
-      ->method('loadByProperties')
-      ->with(['content_type' => self::NODE_TYPE])
-      ->willReturn([]);
 
     $this->queue->expects($this->never())
       ->method('createItem');
 
-    $this->entityTypeManager->expects($this->once())
-      ->method('getStorage')
-      ->with('ecms_api_site')
-      ->willReturn($storage);
+    if (in_array($method, self::ALLOWED_METHODS)) {
+      $entity->expects($this->once())
+        ->method('bundle')
+        ->willReturn(self::NODE_TYPE);
+
+      $storage = $this->createMock(EntityStorageInterface::class);
+      $storage->expects($this->once())
+        ->method('loadByProperties')
+        ->with(['content_type' => self::NODE_TYPE])
+        ->willReturn([]);
+
+      $this->entityTypeManager->expects($this->once())
+        ->method('getStorage')
+        ->with('ecms_api_site')
+        ->willReturn($storage);
+    }
+    else {
+      $entity->expects($this->never())
+        ->method('bundle')
+        ->willReturn(self::NODE_TYPE);
+
+      $storage = $this->createMock(EntityStorageInterface::class);
+      $storage->expects($this->never())
+        ->method('loadByProperties')
+        ->with(['content_type' => self::NODE_TYPE])
+        ->willReturn([]);
+
+      $this->entityTypeManager->expects($this->never())
+        ->method('getStorage')
+        ->with('ecms_api_site')
+        ->willReturn($storage);
+    }
 
     $this->messenger->expects($this->never())
       ->method('addMessage');
@@ -163,8 +215,22 @@ class EcmsApiSyndicateTest extends UnitTestCase {
       ->method('addWarning');
 
     $ecmsApiSyndicate = new EcmsApiSyndicate($this->entityTypeManager, $this->queueFactory, $this->messenger);
-    $ecmsApiSyndicate->syndicateNode($entity);
+    $ecmsApiSyndicate->syndicateNode($entity, $method);
 
+  }
+
+  /**
+   * Data provider for the syndicateNode() methods.
+   *
+   * @return array
+   *   Return the methods to test with.
+   */
+  public function dataProviderForTestSyndicateNode(): array {
+    return [
+      'test1' => ['INSERT'],
+      'test2' => ['UPDATE'],
+      'test3' => ['DELETE'],
+    ];
   }
 
 }
