@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.executive_order_pdf.field_executive_order_pdf
+    - media.type.executive_order_pdf
+  module:
+    - file
+id: media.executive_order_pdf.default
+targetEntityType: media
+bundle: executive_order_pdf
+mode: default
+content:
+  field_executive_order_pdf:
+    weight: 1
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

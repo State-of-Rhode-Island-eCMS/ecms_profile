@@ -1,20 +1,19 @@
-name: 'eCMS Publications'
-description: 'Provides Publication content type and related configuration.'
+name: 'eCMS Executive Orders'
+description: 'Provides Executive Order content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
   - datetime
   - field
   - file
   - image
-  - link
   - media
   - media_library
   - menu_ui
   - node
   - path
   - rh_node
-  - taxonomy
   - user
 version: 9.x-1.0
 package: eCMS

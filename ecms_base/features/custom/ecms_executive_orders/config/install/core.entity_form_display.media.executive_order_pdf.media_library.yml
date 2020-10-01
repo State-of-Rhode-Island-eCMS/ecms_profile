@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.executive_order_pdf.field_executive_order_pdf
+    - media.type.executive_order_pdf
+id: media.executive_order_pdf.media_library
+targetEntityType: media
+bundle: executive_order_pdf
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    settings:
+      size: 60
+      placeholder: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_executive_order_pdf: true
+  path: true
+  status: true
+  uid: true

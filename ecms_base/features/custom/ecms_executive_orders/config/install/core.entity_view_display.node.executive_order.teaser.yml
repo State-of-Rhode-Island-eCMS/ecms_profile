@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.executive_order.field_executive_order_date
+    - field.field.node.executive_order.field_executive_order_long_title
+    - field.field.node.executive_order.field_executive_order_pdf
+    - field.field.node.executive_order.field_executive_order_text
+    - node.type.executive_order
+  module:
+    - user
+id: node.executive_order.teaser
+targetEntityType: node
+bundle: executive_order
+mode: teaser
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_executive_order_date: true
+  field_executive_order_long_title: true
+  field_executive_order_pdf: true
+  field_executive_order_text: true

@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: executive_order_pdf
+label: 'Executive Order PDF'
+description: 'PDF version of the executive order text.'
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_executive_order_pdf
+field_map: {  }
