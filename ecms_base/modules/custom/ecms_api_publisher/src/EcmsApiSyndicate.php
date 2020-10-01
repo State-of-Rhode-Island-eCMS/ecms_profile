@@ -24,6 +24,11 @@ class EcmsApiSyndicate {
    */
   const SYNDICATE_QUEUE = 'ecms_api_publisher_queue';
 
+  const ALLOWED_METHODS = [
+    'INSERT' => 'POST',
+    'UPDATE' => 'PATCH',
+  ];
+
   /**
    * The entity_type.manager service.
    *
@@ -70,7 +75,10 @@ class EcmsApiSyndicate {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function syndicateNode(NodeInterface $entity): void {
+  public function syndicateNode(NodeInterface $entity, string $method): void {
+    if (!array_key_exists($method, self::ALLOWED_METHODS)) {
+      return;
+    }
     // @todo: Ensure the node is published.
     // @see: https://www.sitepoint.com/drupal-8-queue-api-powerful-manual-and-cron-queueing/
     $type = $entity->bundle();
@@ -88,6 +96,7 @@ class EcmsApiSyndicate {
       $queueData = [
         'site_entity' => $site,
         'syndicated_content_entity' => $entity,
+        'method' => self::ALLOWED_METHODS[$method],
       ];
 
       // Push a new item onto the queue.
