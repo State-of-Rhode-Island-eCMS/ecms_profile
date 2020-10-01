@@ -170,6 +170,10 @@ abstract class EcmsApiBase {
     // Convert the entity to a json resource array.
     $normalizedEntity = $this->entityToJsonApi->normalize($entity);
 
+    if (empty($normalizedEntity['data']['attributes'])) {
+      return FALSE;
+    }
+
     $payload = [
       'json' => [
         'data' => [
@@ -252,6 +256,67 @@ abstract class EcmsApiBase {
 
     // Add the uuid to the attributes.
     $attributes['uuid'] = $entity->uuid();
+
+  }
+
+  /**
+   * Get the content types from the hub by machine name.
+   *
+   * @param \Drupal\Core\Url $url
+   *   The url of the hub to get the content type uuid.
+   * @param array $types
+   *   The machine name of the content types to retrieve.
+   *
+   * @return array|null
+   *   Return the data array from the json api or null if an error occurs.
+   */
+  protected function getContentTypes(Url $url, array $types): ?array {
+    $filter = [];
+
+    // Loop through the content types and build filters.
+    foreach ($types as $key => $value) {
+      $filter["filter[type-{$key}][condition][path]"] = "drupal_internal__type";
+      $filter["filter[type-{$key}][condition][operator]"] = "=";
+      $filter["filter[type-{$key}][condition][value]"] = "{$value}";
+    }
+
+    $queryParams = http_build_query($filter);
+    $apiEndpoint = self::API_ENDPOINT;
+    $endpoint = "{$url->toString()}/{$apiEndpoint}/node_type/node_type?{$queryParams}";
+
+    try {
+      $request = $this->httpClient->request("GET", $endpoint);
+    }
+    catch (GuzzleException $exception) {
+      return NULL;
+    }
+
+    if ($request->getStatusCode() === 200) {
+      $contents = $request->getBody()->getContents();
+
+      // Decode the json string.
+      $json = json_decode($contents);
+
+      // Guard against a json error.
+      if (empty($json)) {
+        return NULL;
+      }
+
+      // Ensure we have an object.
+      if (!is_object($json)) {
+        return NULL;
+      }
+
+      // Ensure we have the data property.
+      if (!property_exists($json, 'data')) {
+        return NULL;
+      }
+
+      // Return the content type id's that were requested.
+      return $json->data;
+    }
+
+    return NULL;
 
   }
 

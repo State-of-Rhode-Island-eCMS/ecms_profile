@@ -124,6 +124,11 @@ class EcmsApiBaseTest extends UnitTestCase {
   ];
 
   /**
+   * The endpoint for the node_type api.
+   */
+  const NODE_TYPE_ENDPOINT = '/EcmsApi/node_type/node_type';
+
+  /**
    * Mock of the http_client service.
    *
    * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
@@ -320,9 +325,14 @@ class EcmsApiBaseTest extends UnitTestCase {
   public function testSubmitEntity(string $method, int $code, bool $expected): void {
     $endpoint = self::ENTITY_ENDPOINT;
     $uuidCount = 2;
-
+    $bundleCount = 2;
     // Test for all allowed requests.
     if ($code !== 0) {
+      // If test 6, change the bundle count.
+      if ($code === 6) {
+        $bundleCount = 1;
+        $uuidCount = 0;
+      }
       $this->url->expects($this->once())
         ->method('toString')
         ->willReturn(self::ENDPOINT_URL);
@@ -331,7 +341,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         ->method('getEntityTypeId')
         ->willReturn(self::ENTITY_TYPE);
 
-      $this->entity->expects($this->exactly(2))
+      $this->entity->expects($this->exactly($bundleCount))
         ->method('bundle')
         ->willReturn(self::ENTITY_BUNDLE);
 
@@ -345,10 +355,20 @@ class EcmsApiBaseTest extends UnitTestCase {
         ->method('uuid')
         ->willReturn(self::ENTITY_UUID);
 
-      $this->entityToJsonApi->expects($this->once())
-        ->method('normalize')
-        ->with($this->entity)
-        ->willReturn(self::NORMALIZED_ENTITY);
+      // If test 6, alter the normlaize method return.
+      if ($code === 6) {
+        $this->entityToJsonApi->expects($this->once())
+          ->method('normalize')
+          ->with($this->entity)
+          ->willReturn([]);
+      }
+      else {
+        $this->entityToJsonApi->expects($this->once())
+          ->method('normalize')
+          ->with($this->entity)
+          ->willReturn(self::NORMALIZED_ENTITY);
+      }
+
     }
 
     // Test a guzzle exception.
@@ -427,7 +447,195 @@ class EcmsApiBaseTest extends UnitTestCase {
         -1,
         FALSE,
       ],
+      'test6' => [
+        'POST',
+        6,
+        FALSE,
+      ],
     ];
+  }
+
+  /**
+   * Test the getContentTypes() method.
+   *
+   * @param array $types
+   *   An array of node machine names to query.
+   * @param int $code
+   *   The http status code to expect.
+   * @param bool $expectation
+   *   The expected result of the method.
+   *
+   * @dataProvider dataProviderForTestGetContentTypes
+   */
+  public function testGetContentTypes(array $types, int $code, bool $expectation): void {
+    $queryParams = $this->getQueryParams($types);
+    $returnTypes = $this->buildNodeTypeReturn($types);
+    $url = self::ENDPOINT_URL;
+    $typePath = self::NODE_TYPE_ENDPOINT;
+
+    $fullEndpointPath = "{$url}{$typePath}?{$queryParams}";
+
+    $this->url->expects($this->once())
+      ->method('toString')
+      ->willReturn(self::ENDPOINT_URL);
+
+    if ($code === -1) {
+      $exception = $this->createMock(GuzzleException::class);
+      $this->httpclient->expects($this->once())
+        ->method('request')
+        ->with('GET', $fullEndpointPath)
+        ->willThrowException($exception);
+    }
+    else {
+      if ($code === 200) {
+        $streamInterface = $this->createMock(StreamInterface::class);
+        $streamInterface->expects($this->once())
+          ->method('getContents')
+          ->willReturn($returnTypes);
+
+        $this->response->expects($this->once())
+          ->method('getBody')
+          ->willReturn($streamInterface);
+      }
+
+      $this->response->expects($this->once())
+        ->method('getStatusCode')
+        ->willReturn($code);
+
+      $this->httpclient->expects($this->once())
+        ->method('request')
+        ->with('GET', $fullEndpointPath)
+        ->willReturn($this->response);
+    }
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->getMock();
+
+    $getContentTypes = new \ReflectionMethod(EcmsApiBase::class, 'getContentTypes');
+    $getContentTypes->setAccessible(TRUE);
+
+    $result = $getContentTypes->invokeArgs(
+      $ecmsApi, [
+        $this->url,
+        $types,
+      ]
+    );
+
+    if ($expectation) {
+      $this->assertIsArray($result);
+
+      $this->assertEquals(count($types), count($result));
+    }
+    else {
+      $this->assertNull($result);
+    }
+  }
+
+  /**
+   * Data provider for testGetContentTypes().
+   *
+   * @return array[]
+   *   Array of method parameters for testGetContentTypes().
+   */
+  public function dataProviderForTestGetContentTypes(): array {
+    return [
+      'test1' => [
+        ['notification'],
+        200,
+        TRUE,
+      ],
+      'test2' => [
+        ['notification', 'basic_page', 'testing'],
+        200,
+        TRUE,
+      ],
+      'test3' => [
+        ['notification'],
+        -1,
+        FALSE,
+      ],
+      'test4' => [
+        [],
+        200,
+        FALSE,
+      ],
+      'test5' => [
+        ['notification'],
+        500,
+        FALSE,
+      ],
+      'test6' => [
+        ['null_object'],
+        200,
+        FALSE,
+      ],
+      'test7' => [
+        ['null_data'],
+        200,
+        FALSE,
+      ],
+    ];
+  }
+
+  /**
+   * Build the query params for the endpoint url.
+   *
+   * @param array $types
+   *   An array of node type machine names.
+   *
+   * @return string
+   *   A url encoded query string.
+   */
+  private function getQueryParams(array $types): string {
+    $filter = [];
+
+    // Loop through the content types and build filters.
+    foreach ($types as $key => $value) {
+      $filter["filter[type-{$key}][condition][path]"] = "drupal_internal__type";
+      $filter["filter[type-{$key}][condition][operator]"] = "=";
+      $filter["filter[type-{$key}][condition][value]"] = "{$value}";
+    }
+
+    return http_build_query($filter);
+  }
+
+  /**
+   * Mock the return of the json api node type endpoint.
+   *
+   * @param array $types
+   *   An array of node type machine names.
+   *
+   * @return string
+   *   A json encoded string of the return type.
+   */
+  private function buildNodeTypeReturn(array $types): string {
+
+    if (empty($types)) {
+      return json_encode('');
+    }
+
+    if (array_search("null_object", $types, TRUE) !== FALSE) {
+      return json_encode('this is not an object');
+    }
+
+    if (array_search('null_data', $types, TRUE) !== FALSE) {
+      return json_encode((object) ['data_does_not_exist' => []]);
+    }
+
+    $return = ['data' => []];
+
+    foreach ($types as $key => $value) {
+      $return['data'][$key] = (object) [
+        'type' => 'node_type--node_type',
+        'id' => $this->randomMachineName(),
+        'attributes' => [
+          'drupal_internal__type' => $value,
+        ],
+      ];
+    }
+
+    return json_encode((object) $return);
   }
 
 }

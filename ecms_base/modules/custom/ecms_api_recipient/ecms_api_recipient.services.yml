@@ -2,3 +2,12 @@ services:
   ecms_api_recipient.install:
     class: Drupal\ecms_api_recipient\EcmsApiRecipientInstall
     arguments: ['@entity_type.manager', '@config.factory']
+
+  ecms_api_recipient.uninstall:
+    class: Drupal\ecms_api_recipient\EcmsApiRecipientUninstall
+    arguments: ['@entity_type.manager']
+
+  # The recipient api registration service.
+  ecms_api_recipient.register:
+    class: Drupal\ecms_api_recipient\EcmsApiRecipientRegister
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory', '@request_stack']

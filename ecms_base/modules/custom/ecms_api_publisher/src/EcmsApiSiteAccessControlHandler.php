@@ -31,7 +31,7 @@ class EcmsApiSiteAccessControlHandler extends EntityAccessControlHandler {
           $accessResult = AccessResult::allowedIfHasPermission($account, 'view own published ecms api site entities');
         }
         else {
-          $accessResult = AccessResult::allowedIfHasPermission($account, 'view published ecms api site entities');
+          $accessResult = AccessResult::allowedIfHasPermission($account, 'view any published ecms api site entities');
         }
         break;
 

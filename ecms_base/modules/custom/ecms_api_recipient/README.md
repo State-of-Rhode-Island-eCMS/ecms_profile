@@ -24,6 +24,17 @@ $config['ecms_api_recipient.settings']['oauth_client_secret'] = 'SECURE-CLIENT-S
 $config['ecms_api_recipient.settings']['api_recipient_mail'] = 'automateduser@email.com';
 ```
 
+Additional configuration has been provided to allow for automated
+registration with the main site hub. These settings should be managed within
+the `secrets.settings.php` file and should be the same values as the
+[ecms_api_publisher settings](../ecms_api_publisher/README.md).
+
+```php
+$config['ecms_api_recipient.settings']['api_main_hub'] = 'https://your-hub-site.com';
+$config['ecms_api_recipient.settings']['api_main_hub_client_id'] = 'SECURE-PUBLISHER-ID';
+$config['ecms_api_recipient.settings']['api_main_hub_client_secret'] = 'SECURE-PUBLISHER-SECRET';
+``` 
+
 ### oauth_client_id
 The OAuth client id is the UUID for the consumer entity and should follow normal
 UUID length and formats.
@@ -35,6 +46,21 @@ is treated as a password with plenty of length and randomness.
 
 The Client ID and the Client Secret above will be passed to `oauth/token` route
 by the publishing site to gain an access token with which to create content.
+
+### api_main_hub
+This is the URL to the main hub site.
+
+### api_main_hub_client_id
+This is the client id to access to hub site. This value should be the same as
+the `oauth_client_id` value provided in the *ecms_api_publisher* module.
+
+### api_main_hub_client_secret
+This is the client secret to access the hub site. This value should be the same
+as the `oauth_client_secret` value provided in the *ecms_api_publisher* module.
+
+### api_main_hub_scope
+This is the machine name of the user role that is provided 
+by the ecms_api_publisher module.
 
 ## Allowing JSON API Content Creation
 Content types can be toggled with the configuration form at: 

@@ -8,4 +8,14 @@ declare(strict_types = 1);
 function ecms_api_recipient_install(): void {
   // Call the installation service.
   \Drupal::service('ecms_api_recipient.install')->installEcmsApiRecipient();
+
+  // Call the site registration service.
+  \Drupal::service('ecms_api_recipient.register')->registerSite();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function ecms_api_recipient_uninstall(): void {
+  \Drupal::service('ecms_api_recipient.uninstall')->uninstall();
 }
