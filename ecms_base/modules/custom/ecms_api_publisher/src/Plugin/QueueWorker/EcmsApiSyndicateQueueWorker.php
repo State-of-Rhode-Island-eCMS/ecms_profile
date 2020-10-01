@@ -12,7 +12,7 @@ use Drupal\ecms_api_publisher\EcmsApiPublisher;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Post syndicated content on cron..
+ * Post syndicated content on cron.
  *
  * @QueueWorker(
  *   id = "ecms_api_publisher_queue",
