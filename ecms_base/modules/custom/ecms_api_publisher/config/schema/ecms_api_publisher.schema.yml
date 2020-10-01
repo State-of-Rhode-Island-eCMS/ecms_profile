@@ -10,3 +10,12 @@ ecms_api_publisher.settings:
     api_publisher_mail:
       type: string
       label: 'Publisher user email address'
+    recipient_client_id:
+      type: string
+      label: 'OAuth Client ID for the recipient site'
+    recipient_client_secret:
+      type: string
+      label: 'OAuth Client secret for the recipient site'
+    recipient_client_scope:
+      type: string
+      label: 'OAuth scope for the recipient site'
