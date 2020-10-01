@@ -81,8 +81,7 @@ class EcmsApiPublisher extends EcmsApiBase {
    *   The client id for the recipient site.
    */
   private function getClientId(): string {
-    // @todo: Load this from configuration.
-    return 'REDACTED';
+    return $this->configFactory->get('ecms_api_publisher.settings')->get('recipient_client_id');
   }
 
   /**
@@ -92,8 +91,7 @@ class EcmsApiPublisher extends EcmsApiBase {
    *   The client secret for the recipient site.
    */
   private function getClientSecret(): string {
-    // @todo: Load this from configuration.
-    return 'REDACTED';
+    return $this->configFactory->get('ecms_api_publisher.settings')->get('recipient_client_secret');
   }
 
   /**
@@ -103,8 +101,7 @@ class EcmsApiPublisher extends EcmsApiBase {
    *   The client scope for the recipient site.
    */
   private function getClientScope(): string {
-    // @todo: Load this from configuration.
-    return 'REDACTED';
+    return $this->configFactory->get('ecms_api_publisher.settings')->get('recipient_client_scope');
   }
 
 }
