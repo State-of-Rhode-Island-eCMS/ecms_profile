@@ -27,6 +27,8 @@ dependencies:
   - help
   - history
   - image
+  - layout_builder
+  - layout_discovery
   - media
   - media_library
   - menu_link_content

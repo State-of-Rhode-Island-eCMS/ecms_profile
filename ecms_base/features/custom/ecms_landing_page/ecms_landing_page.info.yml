@@ -3,8 +3,11 @@ description: 'Provides Landing page content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
   - ecms_workflow
   - field
+  - layout_builder
+  - layout_discovery
   - menu_ui
   - node
   - path
