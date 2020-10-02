@@ -11,6 +11,7 @@ use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
+use Drupal\ecms_api_publisher\EcmsApiPublisher;
 use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
 use Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm;
 use Drupal\link\Plugin\Field\FieldType\LinkItem;
@@ -25,6 +26,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
   private $queue;
   private $batchForm;
   private $messenger;
+  private $ecmsApiPublisher;
 
   private $globalBatch;
   private $mockGlobalTFunction;
@@ -53,6 +55,11 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
           return new TranslatableMarkup($string, $args, $options);
         }
       );
+
+    $this->ecmsApiPublisher = $this->getMockBuilder(EcmsApiPublisher::class)
+      ->disableOriginalConstructor()
+      ->onlyMethods(['syndicateNode'])
+      ->getMock();
 
     $this->mockGlobalTFunction = $mockGlobalTFunction->build();
     $this->mockGlobalTFunction->enable();
@@ -243,6 +250,9 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Set the container for the static methods.
+   */
   protected function setStaticMethodContainer(): void {
     $queueFactory = $this->createMock(QueueFactory::class);
     $queueFactory->expects($this->any())
@@ -255,6 +265,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
     $container->set('queue', $queueFactory);
     $container->set('string_translation', $this->getStringTranslationStub());
     $container->set('messenger', $this->messenger);
+    $container->set('ecms_api_publisher.publisher', $this->ecmsApiPublisher);
 
     \Drupal::setContainer($container);
   }
@@ -385,4 +396,79 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Test the postSyndicateContent method.
+   *
+   * @param bool $result
+   *   Mock the result of the EcmsApiPublisher::syndicateNode method.
+   *
+   * @dataProvider dataProviderForTestPostSyndicateContent
+   */
+  public function testPostSyndicateContent(bool $result): void {
+    $this->setStaticMethodContainer();
+
+    $urlMock = $this->createMock(Url::class);
+
+    $linkMock = $this->createMock(LinkItem::class);
+    $linkMock->expects($this->once())
+      ->method('getUrl')
+      ->willReturn($urlMock);
+
+    $ecmsApiSite = $this->createMock(EcmsApiSiteInterface::class);
+    $ecmsApiSite->expects($this->once())
+      ->method('getApiEndpoint')
+      ->willReturn($linkMock);
+
+    $node = $this->createMock(NodeInterface::class);
+    $method = $this->randomMachineName();
+
+    $methodCount = 1;
+
+    // If an error occurred.
+    if (!$result) {
+      $methodCount = 2;
+
+      $data = [
+        'site_entity' => $ecmsApiSite,
+        'syndicated_content_entity' => $node,
+        'method' => $method,
+      ];
+
+      $this->queue->expects($this->once())
+        ->method('createItem')
+        ->with($data);
+    }
+
+    $urlMock->expects($this->exactly($methodCount))
+      ->method('toString');
+
+    $node->expects($this->exactly($methodCount))
+      ->method('bundle');
+
+    $node->expects($this->exactly($methodCount))
+      ->method('getTitle');
+
+    $this->ecmsApiPublisher->expects($this->once())
+      ->method('syndicateNode')
+      ->willReturn($result);
+
+
+
+    $context = [];
+
+    EcmsApiBatchSendUpdatesForm::postSyndicateContent($ecmsApiSite, $node, $method, $context);
+  }
+
+  /**
+   * Parameters for the testPostSyndicateContent method.
+   *
+   * @return array
+   *   Parameters for the testPostSyndicateContent method.
+   */
+  public function dataProviderForTestPostSyndicateContent(): array {
+    return [
+      'test1' => [TRUE],
+      'test2' => [FALSE],
+    ];
+  }
 }

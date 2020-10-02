@@ -204,10 +204,10 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
       foreach ($operations as $error) {
         if (!empty($error[1])) {
           /** @var \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $site */
-          $ecmsApiSite = $error[1][0];
+          $ecmsApiSite = array_shift($error[1]);
           /** @var \Drupal\node\NodeInterface $node */
-          $node = $error[1][1];
-          $method = $error[1][2];
+          $node = array_shift($error[1]);
+          $method = array_shift($error[1]);
 
           // Rebuild the queue item for requeue.
           $data = [
