@@ -16,7 +16,6 @@ dependencies:
   - color
   - components
   - config
-  - config_entity_revisions
   - content_moderation
   - content_moderation_notifications
   - contextual
@@ -56,6 +55,7 @@ dependencies:
   - views
   - views_ui
   - webform
+  - webform_node
   - webform_ui
 
 # Install the required features.
