@@ -20,3 +20,6 @@ view own published ecms api site entities:
 
 view unpublished ecms api site entities:
   title: 'View unpublished ecms api site entities'
+
+manually clear ecms api publishing queue:
+  title: 'Manually clear the Ecms API queue'
