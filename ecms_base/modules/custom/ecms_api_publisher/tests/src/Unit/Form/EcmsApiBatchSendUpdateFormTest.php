@@ -19,16 +19,63 @@ use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 use phpmock\MockBuilder;
 
+/**
+ * Class EcmsApiBatchSendUpdateFormTest.
+ *
+ * @package Drupal\Tests\ecms_api_publisher\Unit\Form
+ *
+ * @covers \Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm
+ * @group ecms
+ * @group ecms_api
+ * @group ecms_api_publisher
+ */
 class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
+  /**
+   * Name of the queue.
+   */
   const SYNDICATE_QUEUE = 'ecms_api_publisher_queue';
 
+  /**
+   * Mock the ecms_api_publisher_queue queue.
+   *
+   * @var \Drupal\Core\Queue\QueueInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $queue;
+
+  /**
+   * The form to test.
+   *
+   * @var \Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm
+   */
   private $batchForm;
+
+  /**
+   * Mock of the messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $messenger;
+
+  /**
+   * Mock of the ecms_api_publisher.publisher service.
+   *
+   * @var \Drupal\ecms_api_publisher\EcmsApiPublisher|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $ecmsApiPublisher;
 
+  /**
+   * Mock the global batch_set() function.
+   *
+   * @var \phpmock\Mock
+   */
   private $globalBatch;
+
+  /**
+   * Mock the global t() function.
+   *
+   * @var \phpmock\Mock
+   */
   private $mockGlobalTFunction;
 
   /**
@@ -291,7 +338,9 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @param bool $success
    *   Status of the batch to test.
    * @param array $results
+   *   The expected results array.
    * @param array $operations
+   *   The expected operations array.
    *
    * @dataProvider dataProviderForFinishedMethod
    */
@@ -381,7 +430,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
               'apiSite',
               'node',
               $this->randomMachineName(),
-            ]
+            ],
           ],
           2 => [
             '\class\name\space',
@@ -389,8 +438,8 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
               'apiSite',
               'node',
               $this->randomMachineName(),
-            ]
-          ]
+            ],
+          ],
         ],
       ],
     ];
@@ -452,8 +501,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       ->method('syndicateNode')
       ->willReturn($result);
 
-
-
     $context = [];
 
     EcmsApiBatchSendUpdatesForm::postSyndicateContent($ecmsApiSite, $node, $method, $context);
@@ -471,4 +518,5 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       'test2' => [FALSE],
     ];
   }
+
 }
