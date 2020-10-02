@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 
 /**
@@ -116,9 +117,8 @@ class EcmsApiSyndicate {
     ]));
 
     // Add a message on how to manually push the content to all sites.
-    // @todo: Get the correct form link for @href.
-    $this->messenger->addWarning($this->t('If you need this content posted immediately please <a href="@href">follow this link to manually clear the queue</a>.', [
-      '@href' => '/',
+    $this->messenger->addWarning($this->t('If you need this content posted immediately please <a href=":form">follow this link to manually clear the queue</a>.', [
+      ':form' => Url::fromRoute('ecms_api_publisher.batch_send_form')->toString(),
     ]));
     // @todo: Write the form to batch the queued items if any exist.
   }
