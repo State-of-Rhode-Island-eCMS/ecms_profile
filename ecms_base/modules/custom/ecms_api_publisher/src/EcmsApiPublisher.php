@@ -69,9 +69,7 @@ class EcmsApiPublisher extends EcmsApiBase {
     }
 
     // Submit the entity to the API.
-    $result = $this->submitEntity($method, $accessToken, $recipientUrl, $node);
-
-    return $result;
+    return $this->submitEntity($method, $accessToken, $recipientUrl, $node);
   }
 
   /**
