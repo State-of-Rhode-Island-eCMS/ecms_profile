@@ -32,6 +32,14 @@ $config['ecms_api_publisher.settings']['oauth_client_secret'] = 'SECURE-CLIENT-S
 $config['ecms_api_publisher.settings']['api_recipient_mail'] = 'automateduser@email.com';
 ```
 
+Additionally, the publisher module requires the following configuration values
+to connect to all sites that requested content to be syndicated
+
+```php
+$config['ecms_api_publisher.settings']['recipient_client_id'] = 'SECURE-CLIENT-ID';
+$config['ecms_api_publisher.settings']['recipient_client_secret'] = 'SECURE-CLIENT-SECRET';
+```
+
 #### oauth_client_id
 
 The OAuth client id is the UUID for the consumer entity and should follow normal
@@ -46,3 +54,14 @@ is treated as a password with plenty of length and randomness.
 The Client ID and the Client Secret above will be passed to oauth/token route
 by the registering site to gain an access token with which to 
 create an `ecms_api_site` entity.
+
+#### recipient_client_id
+This is the oauth client id that is used to connect to sites in order to post
+nodes to them.
+
+#### recipient_client_secret
+This is the oauth client secret to connect to the recipient sites to post 
+content with the json api.
+
+#### recipient_client_scope
+This is the scope to provide to the recipient site during json api requests.
