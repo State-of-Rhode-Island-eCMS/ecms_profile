@@ -120,7 +120,6 @@ class EcmsApiSyndicate {
     $this->messenger->addWarning($this->t('If you need this content posted immediately please <a href=":form">follow this link to manually clear the queue</a>.', [
       ':form' => Url::fromRoute('ecms_api_publisher.batch_send_form')->toString(),
     ]));
-    // @todo: Write the form to batch the queued items if any exist.
   }
 
   /**
