@@ -5,12 +5,18 @@ declare(strict_types = 1);
 namespace Drupal\Tests\ecms_api_publisher\Unit\Form;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
-use Drupal\Core\StringTranslation\PluralTranslatableMarkup;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
+use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
 use Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm;
+use Drupal\link\Plugin\Field\FieldType\LinkItem;
+use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use phpmock\MockBuilder;
 
 class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
@@ -18,12 +24,60 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
   private $queue;
   private $batchForm;
+  private $messenger;
 
+  private $globalBatch;
+  private $mockGlobalTFunction;
+
+  /**
+   * {@inheritDoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
-    $this->queue = $this->createMock(QueueInterface::class);
+    $mockGlobalBatchFunction = new MockBuilder();
+    $mockGlobalBatchFunction->setNamespace('Drupal\ecms_api_publisher\Form')
+      ->setName('batch_set')
+      ->setFunction(
+        function (array $batch) {
+          return;
+        }
+      );
 
+    $mockGlobalTFunction = new MockBuilder();
+    $mockGlobalTFunction->setNamespace('Drupal\ecms_api_publisher\Form')
+      ->setName('t')
+      ->setFunction(
+        function ($string, array $args = [], array $options = []) {
+          // @codingStandardsIgnoreLine
+          return new TranslatableMarkup($string, $args, $options);
+        }
+      );
+
+    $this->mockGlobalTFunction = $mockGlobalTFunction->build();
+    $this->mockGlobalTFunction->enable();
+
+    $this->globalBatch = $mockGlobalBatchFunction->build();
+    $this->globalBatch->enable();
+
+    $this->queue = $this->createMock(QueueInterface::class);
+    $this->messenger = $this->createMock(MessengerInterface::class);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected function tearDown() {
+    parent::tearDown();
+
+    $this->globalBatch->disable();
+    $this->mockGlobalTFunction->disable();
+  }
+
+  /**
+   * Set the Drupal container for the form class.
+   */
+  protected function setFormContainer(): void {
     $queueFactory = $this->createMock(QueueFactory::class);
     $queueFactory->expects($this->once())
       ->method('get')
@@ -34,6 +88,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
     $container->set('queue', $queueFactory);
     $container->set('string_translation', $this->getStringTranslationStub());
+    $container->set('messenger', $this->messenger);
 
     \Drupal::setContainer($container);
 
@@ -49,6 +104,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @dataProvider dataProviderForTestGetDescription
    */
   public function testGetDescription(int $count): void {
+    $this->setFormContainer();
     $this->queue->expects($this->once())
       ->method('numberOfItems')
       ->willReturn($count);
@@ -79,7 +135,11 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Test the getQuestion method.
+   */
   public function testGetQuestion(): void {
+    $this->setFormContainer();
     $expected = "Do you want to manually push all syndicated content?";
 
     $actual = $this->batchForm->getQuestion();
@@ -87,7 +147,11 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
     $this->assertEquals($expected, $actual->render());
   }
 
+  /**
+   * Test the getFormId method.
+   */
   public function testGetFormId(): void {
+    $this->setFormContainer();
     $expected = "ecms_api_publisher_batch_send_updates";
 
     $actual = $this->batchForm->getFormId();
@@ -95,12 +159,230 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
     $this->assertEquals($expected, $actual);
   }
 
+  /**
+   * Test the getCancelUrl method.
+   */
   public function testGetCancelUrl(): void {
+    $this->setFormContainer();
     $expected = Url::fromRoute('<front>');
 
     $actual = $this->batchForm->getCancelUrl();
 
     $this->assertEquals($expected, $actual);
+  }
+
+  /**
+   * Test the submitForm method.
+   *
+   * @dataProvider dataProviderForTestSubmitForm
+   */
+  public function testSubmitForm(int $queueCount = 3, bool $batchExpected = TRUE): void {
+    $this->setFormContainer();
+    $form = [];
+    $form_state = $this->createMock(FormStateInterface::class);
+    $apiSite = $this->createMock(EcmsApiSiteInterface::class);
+    $node = $this->createMock(NodeInterface::class);
+    // Claims to pass to the queue.
+    $claims = [];
+
+    // Build up the claims array.
+    if ($queueCount > 0) {
+      for ($i = 0; $i < $queueCount; $i++) {
+        $item = new \stdClass();
+        $item->data = [
+          'site_entity' => $apiSite,
+          'syndicated_content_entity' => $node,
+          'method' => $this->randomMachineName(),
+        ];
+
+        $claims[] = $item;
+      }
+
+      $claims[] = FALSE;
+
+      $this->queue->expects($this->exactly($queueCount + 1))
+        ->method('claimItem')
+        ->willReturnOnConsecutiveCalls(...$claims);
+
+      $this->queue->expects($this->exactly($queueCount))
+        ->method('deleteItem');
+    }
+    else {
+      $this->queue->expects($this->exactly(1))
+        ->method('claimItem')
+        ->willReturn(FALSE);
+
+      $this->queue->expects($this->never())
+        ->method('deleteItem');
+    }
+
+    if (!$batchExpected) {
+      $this->messenger->expects($this->once())
+        ->method('addStatus')
+        ->with('No queue items were found or they have been claimed by another process. Please wait a few minutes and try again.');
+
+      $form_state->expects($this->once())
+        ->method('setRedirect')
+        ->with('<front>');
+    }
+
+    $this->batchForm->submitForm($form, $form_state);
+  }
+
+  /**
+   * Parameters to pass to the testSubmitForm method.
+   *
+   * @return array[]
+   *   Parameters to pass to the testSubmitForm method.
+   */
+  public function dataProviderForTestSubmitForm(): array {
+    return [
+      'test1' => [3, TRUE],
+      'test2' => [1, TRUE],
+      'test3' => [0, FALSE],
+    ];
+  }
+
+  protected function setStaticMethodContainer(): void {
+    $queueFactory = $this->createMock(QueueFactory::class);
+    $queueFactory->expects($this->any())
+      ->method('get')
+      ->with(self::SYNDICATE_QUEUE)
+      ->willReturn($this->queue);
+
+    $container = new ContainerBuilder();
+
+    $container->set('queue', $queueFactory);
+    $container->set('string_translation', $this->getStringTranslationStub());
+    $container->set('messenger', $this->messenger);
+
+    \Drupal::setContainer($container);
+  }
+
+  /**
+   * Test the requeueItem static method.
+   */
+  public function testRequeueItems(): void {
+    $this->setStaticMethodContainer();
+
+    $data = ['test' => 'array'];
+
+    $this->queue->expects($this->once())
+      ->method('createItem')
+      ->with($data);
+
+    EcmsApiBatchSendUpdatesForm::requeueItems($data);
+  }
+
+  /**
+   * Test the postSyndicatedContentFinished method.
+   *
+   * @param bool $success
+   *   Status of the batch to test.
+   * @param array $results
+   * @param array $operations
+   *
+   * @dataProvider dataProviderForFinishedMethod
+   */
+  public function testPostSyndicateContentFinished(bool $success, array $results, array $operations): void {
+    $this->setStaticMethodContainer();
+
+    if ($success) {
+      if (!empty($results['error'])) {
+        $this->messenger->expects($this->exactly(count($results['error'])))
+          ->method('addError');
+      }
+      else {
+        $this->messenger->expects($this->never())
+          ->method('addError');
+      }
+    }
+
+    if (!$success) {
+      foreach ($operations as &$error) {
+        $urlMock = $this->createMock(Url::class);
+        $urlMock->expects($this->once())
+          ->method('toString');
+
+        $linkMock = $this->createMock(LinkItem::class);
+        $linkMock->expects($this->once())
+          ->method('getUrl')
+          ->willReturn($urlMock);
+        $apiSite = $this->createMock(EcmsApiSiteInterface::class);
+        $apiSite->expects($this->once())
+          ->method('getApiEndpoint')
+          ->willReturn($linkMock);
+
+        // Mock the API Site entity.
+        $error[1][0] = $apiSite;
+
+        $node = $this->createMock(NodeInterface::class);
+        $node->expects($this->once())
+          ->method('bundle');
+        $node->expects($this->once())
+          ->method('getTitle');
+
+        $error[1][1] = $node;
+      }
+
+      $this->messenger->expects($this->exactly(count($operations)))
+        ->method('addError');
+
+      $this->queue->expects($this->exactly(count($operations)))
+        ->method('createItem');
+    }
+
+    EcmsApiBatchSendUpdatesForm::postSyndicateContentFinished($success, $results, $operations);
+
+  }
+
+  /**
+   * Parameters for the testPostSyndicateContentFinished method.
+   *
+   * @return array[]
+   *   Parameters for the testPostSyndicateContentFinished method.
+   */
+  public function dataProviderForFinishedMethod(): array {
+    return [
+      'test1' => [
+        TRUE,
+        ['error' => []],
+        [],
+      ],
+      'test2' => [
+        TRUE,
+        [
+          'error' => [
+            1 => 'Message 1',
+            2 => 'Message 2',
+            3 => 'Message 3',
+          ],
+        ],
+        [],
+      ],
+      'test3' => [
+        FALSE,
+        ['error' => []],
+        [
+          0 => [
+            '\class\name\space',
+            [
+              'apiSite',
+              'node',
+              $this->randomMachineName(),
+            ]
+          ],
+          2 => [
+            '\class\name\space',
+            [
+              'apiSite',
+              'node',
+              $this->randomMachineName(),
+            ]
+          ]
+        ],
+      ],
+    ];
   }
 
 }
