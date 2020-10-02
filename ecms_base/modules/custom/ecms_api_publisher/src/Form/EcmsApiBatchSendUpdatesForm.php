@@ -1,0 +1,237 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace Drupal\ecms_api_publisher\Form;
+
+use Drupal\Core\Form\ConfirmFormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Queue\QueueFactory;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
+use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
+
+  /**
+   * The publisher queue name.
+   */
+  const SYNDICATE_QUEUE = 'ecms_api_publisher_queue';
+
+  /**
+   * The queue interface for the syndicate queue.
+   *
+   * @var \Drupal\Core\Queue\QueueInterface
+   */
+  protected $queue;
+
+  /**
+   * EcmsApiBatchSendUpdatesForm constructor.
+   *
+   * @param \Drupal\Core\Queue\QueueFactory $queueFactory
+   */
+  public function __construct(QueueFactory $queueFactory) {
+    $this->queue = $queueFactory->get(self::SYNDICATE_QUEUE);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static (
+      $container->get('queue')
+    );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getDescription(): TranslatableMarkup {
+    // Get the actual count of items in the queue.
+    $count = $this->queue->numberOfItems();
+    return $this->formatPlural(
+      $count,
+      'Are you sure you would like to manually push syndicated content to 1 site?  This action cannot be undone!',
+      'Are you sure you would like to manually push syndicated content to @count sites?  This action cannot be undone!'
+    );
+  }
+  /**
+   * @inheritDoc
+   */
+  public function getQuestion(): TranslatableMarkup {
+    return $this->t('Do you want to manually push all syndicated content?');
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getCancelUrl(): Url {
+    return Url::fromRoute('<front>');
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getFormId(): string {
+    return 'ecms_api_publisher_batch_send_updates';
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
+    $operations = [];
+
+    // Loop through the queue and add them to a batch.
+    while ($item = $this->queue->claimItem()) {
+      // Add to the batch operations.
+      $operation = [
+        '\Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm::postSyndicateContent',
+        [
+          $item->data['site_entity'],
+          $item->data['syndicated_content_entity'],
+          $item->data['method']
+        ]
+      ];
+
+      $operations[] = $operation;
+      // Remove the item from the queue.
+      $this->queue->deleteItem($item);
+    }
+
+    // Only run a batch if there are operations available.
+    if (empty($operations)) {
+      //$form_state->setRedirect('<front>');
+    }
+    else {
+      $batch = [
+        'title' => $this->t('Manually syndicating content.'),
+        'operations' => $operations,
+        'finished' => '\Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm::postSyndicateContentFinished',
+      ];
+
+      batch_set($batch);
+    }
+  }
+
+  /**
+   * Post syndicated content from the queue.
+   *
+   * @param \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $ecmsApiSite
+   *   The site to post the content to.
+   * @param \Drupal\node\NodeInterface $node
+   *   The node to post to the site.
+   * @param string $method
+   *   The method to send the node with.
+   * @param array $context
+   *   Additional context from the batch process.
+   */
+  public static function postSyndicateContent(EcmsApiSiteInterface $ecmsApiSite, NodeInterface $node, string $method, array &$context): void {
+    // Get the ecms_api_publisher.publisher service.
+    /** @var \Drupal\ecms_api_publisher\EcmsApiPublisher $ecmsApiPublisher */
+    $ecmsApiPublisher = \Drupal::service('ecms_api_publisher.publisher');
+
+    $url = $ecmsApiSite->getApiEndpoint()->getUrl();
+
+    // Tell the user what we're doing.
+    $context['message'] = t('Posting the @type "@title" to @endpoint',
+      [
+        '@type' => $node->bundle(),
+        '@title' => $node->getTitle(),
+        '@endpoint' => $url->toString(),
+      ]
+    );
+
+    // Post the entity.
+    $result = $ecmsApiPublisher->syndicateNode($method, $url, $node);
+
+    // If an error occurs, re-queue the item.
+    if (!$result) {
+      $data = [
+        'site_entity' => $ecmsApiSite,
+        'syndicated_content_entity' => $node,
+        'method' => $method,
+      ];
+
+      // Requeue the item for later processing.
+      EcmsApiBatchSendUpdatesForm::requeueItems($data);
+
+      // Let the user know about the error.
+      $context['results']['error'][] = t('An error occurred posting the @type "@title" to @endpoint. This item has been re-queued.',
+        [
+          '@type' => $node->bundle(),
+          '@title' => $node->getTitle(),
+          '@endpoint' => $url->toString(),
+        ]
+      );
+    }
+  }
+
+  public static function postSyndicateContentFinished(bool $success, array $results, array $operations): void {
+    $messenger = \Drupal::messenger();
+    if ($success) {
+      // Look for any results unfinished.
+      if (!empty($results['error'])) {
+        // Let the user know what didn't complete.
+        foreach ($results['error'] as $message) {
+          $messenger->addError($message);
+        }
+      }
+    }
+    else {
+      // An error occurred and the user continued to the error page.
+      // Loop through the remaining operations and re-queue them.
+      foreach ($operations as $error) {
+        if (!empty($error[1])) {
+          /** @var \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $site */
+          $ecmsApiSite = $error[1][0];
+          /** @var \Drupal\node\NodeInterface $node */
+          $node = $error[1][1];
+          $method = $error[1][2];
+
+          // Rebuild the queue item for requeue.
+          $data = [
+            'site_entity' => $ecmsApiSite,
+            'syndicated_content_entity' => $node,
+            'method' => $method,
+          ];
+
+          // Requeue the item for later processing.
+          EcmsApiBatchSendUpdatesForm::requeueItems($data);
+
+          $url = $ecmsApiSite->getApiEndpoint()->getUrl();
+
+          $message = t('An error occurred before posting the @type "@title" to @endpoint. This item has been re-queued.',
+            [
+              '@type' => $node->bundle(),
+              '@title' => $node->getTitle(),
+              '@endpoint' => $url->toString(),
+            ]
+          );
+
+          $messenger->addError($message);
+        }
+      }
+    }
+  }
+
+  /**
+   * Requeue an item to the ecms_api_publisher_queue.
+   *
+   * @param array $data
+   *   The data to requeue.
+   */
+  public static function requeueItems(array $data): void {
+    /** @var \Drupal\Core\Queue\QueueFactory $queueFactory */
+    $queueFactory = \Drupal::service('queue');
+
+    // Get the queue.
+    $queue = $queueFactory->get(self::SYNDICATE_QUEUE);
+
+    // Re-queue the item.
+    $queue->createItem($data);
+  }
+
+}
