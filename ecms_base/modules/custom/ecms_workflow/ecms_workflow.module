@@ -1,13 +1,17 @@
 <?php
 
+/**
+ * @file
+ * ecms_workflow.module
+ */
+
 declare(strict_types = 1);
 
 /**
  * Implements hook_entity_bundle_create().
  *
  * When optional features (content types) are enabled on the site,
- * this will ensure they are assinged to the proper workflow.
- *
+ * this will ensure they are assigned to the proper workflow.
  */
 function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
   if ($entity_type_id !== 'node') {

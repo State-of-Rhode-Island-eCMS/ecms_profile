@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * ecms_api_publisher.module
+ */
+
 declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityInterface;
