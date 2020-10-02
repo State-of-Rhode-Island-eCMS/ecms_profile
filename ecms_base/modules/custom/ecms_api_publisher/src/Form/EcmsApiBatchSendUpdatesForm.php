@@ -13,6 +13,11 @@ use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * Class EcmsApiBatchSendUpdatesForm.
+ *
+ * @package Drupal\ecms_api_publisher\Form
+ */
 class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
 
   /**
@@ -31,6 +36,7 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
    * EcmsApiBatchSendUpdatesForm constructor.
    *
    * @param \Drupal\Core\Queue\QueueFactory $queueFactory
+   *   The queue service.
    */
   public function __construct(QueueFactory $queueFactory) {
     $this->queue = $queueFactory->get(self::SYNDICATE_QUEUE);
@@ -40,7 +46,7 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
    * {@inheritDoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static (
+    return new static(
       $container->get('queue')
     );
   }
@@ -57,29 +63,30 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
       'Are you sure you would like to manually push syndicated content to @count sites?  This action cannot be undone!'
     );
   }
+
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getQuestion(): TranslatableMarkup {
     return $this->t('Do you want to manually push all syndicated content?');
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getCancelUrl(): Url {
     return Url::fromRoute('<front>');
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getFormId(): string {
     return 'ecms_api_publisher_batch_send_updates';
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $operations = [];
@@ -92,8 +99,8 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
         [
           $item->data['site_entity'],
           $item->data['syndicated_content_entity'],
-          $item->data['method']
-        ]
+          $item->data['method'],
+        ],
       ];
 
       $operations[] = $operation;
@@ -103,7 +110,8 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
 
     // Only run a batch if there are operations available.
     if (empty($operations)) {
-      //$form_state->setRedirect('<front>');
+      $this->messenger()->addStatus('No queue items were found or they have been claimed by another process. Please wait a few minutes and try again.');
+      $form_state->setRedirect('<front>');
     }
     else {
       $batch = [
@@ -169,6 +177,16 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
     }
   }
 
+  /**
+   * Handle the finishing operations of the batch.
+   *
+   * @param bool $success
+   *   True if the batch finished successfully.
+   * @param array $results
+   *   The results of the batch.
+   * @param array $operations
+   *   The operations that did not complete.
+   */
   public static function postSyndicateContentFinished(bool $success, array $results, array $operations): void {
     $messenger = \Drupal::messenger();
     if ($success) {
