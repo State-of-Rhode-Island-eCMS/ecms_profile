@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Queue\QueueInterface;
+use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
 use Drupal\node\NodeInterface;
@@ -97,6 +98,7 @@ class EcmsApiSyndicateTest extends UnitTestCase {
 
     $container = new ContainerBuilder();
     $container->set('string_translation', $this->getStringTranslationStub());
+    $container->set('url_generator', $this->createMock(UrlGeneratorInterface::class));
 
     \Drupal::setContainer($container);
   }
