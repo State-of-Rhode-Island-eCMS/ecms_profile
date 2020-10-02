@@ -16,6 +16,7 @@ dependencies:
   - color
   - components
   - config
+  - config_entity_revisions
   - content_moderation
   - content_moderation_notifications
   - contextual
