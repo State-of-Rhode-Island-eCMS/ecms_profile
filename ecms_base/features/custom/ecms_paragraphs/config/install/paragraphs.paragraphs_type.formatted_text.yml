@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: formatted_text
+label: 'Formatted Text'
+icon_uuid: null
+icon_default: null
+description: 'A WYSIWYG driven text editor used for basic markup creation.'
+behavior_plugins: {  }
