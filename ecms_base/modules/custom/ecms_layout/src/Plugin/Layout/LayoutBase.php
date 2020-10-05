@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_layout\Plugin\Layout;
 
-use Drupal\ecms_layout\ECMSLayout;
+use Drupal\ecms_layout\EcmsLayout;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefault;
 
@@ -50,7 +50,7 @@ abstract class LayoutBase extends LayoutDefault {
    */
   public function defaultConfiguration(): array {
     return [
-      'background_color' => ECMSLayout::ROW_BACKGROUND_COLOR_NONE,
+      'background_color' => EcmsLayout::ROW_BACKGROUND_COLOR_NONE,
       'class' => NULL,
       'column_width' => $this->getDefaultColumnWidth(),
       'full_width' => FALSE,
@@ -155,8 +155,8 @@ abstract class LayoutBase extends LayoutDefault {
    */
   protected function getBackgroundColorOptions(): array {
     return [
-      ECMSLayout::ROW_BACKGROUND_COLOR_NONE => $this->t('None'),
-      ECMSLayout::ROW_BACKGROUND_COLOR_RED => $this->t('Red'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_NONE => $this->t('None'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_RED => $this->t('Red'),
     ];
   }
 

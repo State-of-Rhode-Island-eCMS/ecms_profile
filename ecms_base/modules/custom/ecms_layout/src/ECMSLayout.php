@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\ECMS_layout;
+namespace Drupal\ecms_layout;
 
 /**
  * Provides constants for the eCMS Layout module.
  */
-final class ECMSLayout {
+final class EcmsLayout {
 
   public const ROW_BACKGROUND_COLOR_NONE = 'none';
 
