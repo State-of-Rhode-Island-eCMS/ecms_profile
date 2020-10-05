@@ -62,9 +62,15 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
   }
 
   /**
-   * {@inheritDoc}
+   * Process an item in the queue.
+   *
+   * @param mixed $data
+   *   Data should be an array with the following keys:
+   *   - site_entity: \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface
+   *   - syndicated_content_entity: \Drupal\node\NodeInterface
+   *   - method: string.
    */
-  public function processItem($data) {
+  public function processItem($data): void {
     /** @var \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $ecmsApiSiteEntity */
     $ecmsApiSiteEntity = $data['site_entity'];
     $apiUrl = $ecmsApiSiteEntity->getApiEndpoint()->getUrl();
