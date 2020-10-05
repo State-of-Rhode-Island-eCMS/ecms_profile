@@ -53,6 +53,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-22: Enable Moderation Dashboard module by default.
 - RIG-37: Updated the development script to allow for pattern lab development.
 - RIG-76: Updated the api recipient installation values.
+- RIG-67: Added paragraph reference field to basic page.
 
 ### Deprecated
 
