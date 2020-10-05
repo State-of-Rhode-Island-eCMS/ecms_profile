@@ -3,8 +3,10 @@ status: true
 dependencies:
   config:
     - field.field.node.basic_page.field_basic_page_body
+    - field.field.node.basic_page.field_basic_page_paragraphs
     - node.type.basic_page
   module:
+    - entity_reference_revisions
     - text
     - user
 id: node.basic_page.default
@@ -12,6 +14,11 @@ targetEntityType: node
 bundle: basic_page
 mode: default
 content:
+  content_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_basic_page_body:
     weight: 101
     label: above
@@ -19,9 +26,18 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  links:
-    weight: 100
-    settings: {  }
+  field_basic_page_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 102
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }
