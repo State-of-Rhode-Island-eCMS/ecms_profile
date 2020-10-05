@@ -17,6 +17,7 @@ dependencies:
   - components
   - config
   - content_moderation
+  - content_translation
   - content_moderation_notifications
   - contextual
   - datetime
@@ -29,6 +30,7 @@ dependencies:
   - help
   - history
   - image
+  - language
   - layout_builder
   - layout_discovery
   - media
