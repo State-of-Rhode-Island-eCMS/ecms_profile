@@ -12,7 +12,7 @@ use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 
 /**
- * Class EcmsApiPublisher.
+ * Class EcmsApiSyndicate.
  *
  * @package Drupal\ecms_api_publisher
  */
