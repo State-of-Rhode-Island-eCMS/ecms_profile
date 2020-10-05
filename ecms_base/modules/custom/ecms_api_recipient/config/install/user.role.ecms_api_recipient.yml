@@ -5,4 +5,7 @@ id: ecms_api_recipient
 label: 'eCMS API Recipient'
 weight: 6
 is_admin: null
-permissions: {  }
+permissions:
+  - 'create notification content'
+  - 'edit own notification content'
+  - 'use editorial transition publish'
