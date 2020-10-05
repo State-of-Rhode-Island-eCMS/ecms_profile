@@ -216,7 +216,8 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->method('revokePermission')
       ->willReturnSelf();
 
-    $roleEntity->expects($this->exactly(count(self::SELECTED_NODE_TYPES) * 2))
+    $grantCount = (count(self::SELECTED_NODE_TYPES) * 2) + 1;
+    $roleEntity->expects($this->exactly($grantCount))
       ->method('grantPermission')
       ->willReturnSelf();
 
@@ -320,7 +321,8 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->method('revokePermission')
       ->willReturnSelf();
 
-    $roleEntity->expects($this->exactly(count(self::SELECTED_NODE_TYPES) * 2))
+    $grantCount = (count(self::SELECTED_NODE_TYPES) * 2) + 1;
+    $roleEntity->expects($this->exactly($grantCount))
       ->method('grantPermission')
       ->willReturnSelf();
 

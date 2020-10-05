@@ -50,6 +50,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Made ECMS custom theme the default.
 - RIG-22: Enable Moderation Dashboard module by default.
 - RIG-37: Updated the development script to allow for pattern lab development.
+- RIG-76: Updatd the api recipient installation values.
 
 ### Deprecated
 

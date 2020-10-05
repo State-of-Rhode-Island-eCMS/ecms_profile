@@ -53,6 +53,13 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->drupalGet('admin/people/roles/manage/ecms_api_recipient');
     $this->assertSession()->statusCodeEquals(200);
 
+    // Ensure the correct permissions are selected on install.
+    $this->drupalGet('admin/people/permissions/ecms_api_recipient');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-notification-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-notification-content');
+
     // Ensure the user account was created.
     $this->drupalGet('admin/people');
     $this->assertSession()->statusCodeEquals(200);
@@ -90,18 +97,24 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
 
     $this->drupalGet('admin/config/ecms_api/ecms_api_recipient/settings');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->fieldExists('edit-allowed-content-types-notification');
+    $this->assertSession()->checkboxChecked('edit-allowed-content-types-notification');
+
+    $this->assertSession()->fieldExists('edit-allowed-content-types-basic-page');
     $configFormSubmission = [
+      'edit-allowed-content-types-basic-page' => 1,
       'edit-allowed-content-types-notification' => 1,
     ];
     $this->drupalPostForm('admin/config/ecms_api/ecms_api_recipient/settings', $configFormSubmission, 'Save configuration');
     $this->drupalGet('admin/people/permissions/ecms_api_recipient');
     $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-notification-content');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-notification-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-basic-page-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-basic-page-content');
 
-    $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-create-basic-page-content');
-    $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-edit-own-basic-page-content');
+    $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-create-event-content');
+    $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-edit-own-event-content');
 
     // Ensure the menu link is available.
     $this->drupalGet('admin/config/services');
