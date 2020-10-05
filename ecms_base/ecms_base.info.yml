@@ -21,6 +21,7 @@ dependencies:
   - datetime
   - dynamic_page_cache
   - editor
+  - entity_reference_revisions
   - field_ui
   - file
   - features
