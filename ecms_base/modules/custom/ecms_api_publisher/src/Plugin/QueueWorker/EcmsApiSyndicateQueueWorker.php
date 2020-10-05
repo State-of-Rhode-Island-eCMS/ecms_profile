@@ -55,7 +55,7 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
    * @param \Drupal\ecms_api_publisher\EcmsApiPublisher $ecmsApiPublisher
    *   The ecms_api_publisher.publisher service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EcmsApiPublisher $ecmsApiPublisher) {
+  public function __construct(array $configuration, string $plugin_id, $plugin_definition, EcmsApiPublisher $ecmsApiPublisher) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->ecmsApiPublisher = $ecmsApiPublisher;
