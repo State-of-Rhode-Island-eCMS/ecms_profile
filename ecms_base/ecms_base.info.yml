@@ -64,6 +64,7 @@ install:
   - ecms_basic_page
   - ecms_event
   - ecms_landing_page
+  - ecms_languages
   - ecms_layout
   - ecms_location
   - ecms_notification
