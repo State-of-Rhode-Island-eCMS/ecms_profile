@@ -31,7 +31,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    *
    * @var string[]
    */
-  protected static $modules = ['ecms_workflow', 'ecms_api_recipient'];
+  protected static $modules = ['ecms_api_recipient'];
 
   /**
    * Test the ecms_api_recipient installation.
