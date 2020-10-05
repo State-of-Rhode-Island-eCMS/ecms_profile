@@ -3,15 +3,20 @@ description: 'Provides Event content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
+  - content_translation
+  - ecms_languages
   - ecms_workflow
   - field
   - file
   - image
+  - language
   - media
   - media_library
   - menu_ui
   - node
   - path
+  - rabbit_hole
   - smart_date
   - taxonomy
   - text
