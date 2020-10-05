@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * ecms_api_recipient.install
+ */
+
 declare(strict_types = 1);
 
 /**

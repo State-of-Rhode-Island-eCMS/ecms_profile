@@ -1,3 +1,6 @@
 oauth_client_id: 'REDACTED'
 oauth_client_secret: 'REDACTED'
 api_publisher_mail: 'ecms_api_publisher@ecms.com'
+recipient_client_id: 'REDACTED'
+recipient_client_secret: 'REDACTED'
+recipient_client_scope: 'ecms_api_recipient'

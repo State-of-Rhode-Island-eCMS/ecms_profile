@@ -14,6 +14,7 @@
 
   <!-- PHPCS argument overrides -->
   <arg name="colors" />
+  <arg name="extensions" value="inc,info,install,module,php,profile,test,theme" />
 
   <!-- PHP configuration overrides -->
   <ini name="memory_limit" value="-1" />

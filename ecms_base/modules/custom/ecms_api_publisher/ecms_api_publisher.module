@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * ecms_api_publisher.module
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for the node entity.
+ */
+function ecms_api_publisher_node_insert(EntityInterface $entity) {
+  // Call the syndication service on node insert.
+  \Drupal::service('ecms_api_publisher.syndicate')->syndicateNode($entity, 'INSERT');
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for the node entity.
+ */
+function hook_node_update(EntityInterface $entity): void {
+  // Call the syndication service on node update.
+  \Drupal::service('ecms_api_publisher.syndicate')->syndicateNode($entity, 'UPDATE');
+}

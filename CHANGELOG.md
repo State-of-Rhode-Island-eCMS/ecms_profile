@@ -43,6 +43,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-58: Added the automated site registration to the hub.
 - RIG-49: Added the hotel content type as a feature.
 - RIG-45: Added Executive Order content type as optional feature.
+- RIG-72: Added the queue and publish service to syndicate content to other sites.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.

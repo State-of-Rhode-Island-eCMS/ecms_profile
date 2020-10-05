@@ -2,3 +2,11 @@ services:
   ecms_api_publisher.install:
     class: Drupal\ecms_api_publisher\EcmsApiPublisherInstall
     arguments: ['@entity_type.manager', '@config.factory']
+
+  ecms_api_publisher.publisher:
+    class: Drupal\ecms_api_publisher\EcmsApiPublisher
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory']
+
+  ecms_api_publisher.syndicate:
+    class: Drupal\ecms_api_publisher\EcmsApiSyndicate
+    arguments: ['@entity_type.manager', '@queue', '@messenger']

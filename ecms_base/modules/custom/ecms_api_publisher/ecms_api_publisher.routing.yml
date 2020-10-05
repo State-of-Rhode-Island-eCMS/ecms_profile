@@ -1,0 +1,7 @@
+ecms_api_publisher.batch_send_form:
+  path: '/ecms_api/syndicate/manual-process'
+  defaults:
+    _form: '\Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm'
+    _title: 'Manually push content'
+  requirements:
+    _permission: 'manually clear ecms api publishing queue'
