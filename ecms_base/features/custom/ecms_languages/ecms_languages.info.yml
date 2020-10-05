@@ -1,0 +1,9 @@
+name: 'eCMS Languages'
+description: 'Define languages for the eCMS project.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - language
+  - content_translation
+version: 9.x-1.0
+package: eCMS

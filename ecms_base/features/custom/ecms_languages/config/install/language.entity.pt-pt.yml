@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: pt-pt
+label: 'Portuguese, Portugal'
+direction: ltr
+weight: -9
+locked: false
