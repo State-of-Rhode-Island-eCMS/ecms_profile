@@ -42,5 +42,5 @@ function ecms_workflow_webform_insert(WebformInterface $webform) : void {
   ]);
   $node->save();
 
-  \Drupal::messenger()->addMessage(t('Node %label created.', ['%label' => $node->label()]));
+  \Drupal::messenger()->addMessage(t('Webform node %label created.', ['%label' => $node->label()]));
 }
