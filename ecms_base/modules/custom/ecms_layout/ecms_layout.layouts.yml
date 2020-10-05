@@ -1,0 +1,63 @@
+ecms_layout__one_column:
+  label: 'One Column'
+  path: layouts
+  template: layout--one-column
+  class: Drupal\ecms_layout\Plugin\Layout\OneColumnLayout
+  category: 'Columns: 1'
+  default_region: first
+  icon_map:
+    - [first]
+  regions:
+    first:
+      label: First
+
+ecms_layout__two_column:
+  label: 'Two Column'
+  path: layouts
+  template: layout--two-column
+  class: Drupal\ecms_layout\Plugin\Layout\TwoColumnLayout
+  category: 'Columns: 2'
+  default_region: first
+  icon_map:
+    - [first, second]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+
+ecms_layout__three_column:
+  label: 'Three Column'
+  path: layouts
+  template: layout--three-column
+  class: Drupal\ecms_layout\Plugin\Layout\ThreeColumnLayout
+  category: 'Columns: 3'
+  default_region: first
+  icon_map:
+    - [first, second, third]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+    third:
+      label: Three
+
+ecms_layout__four_column:
+  label: 'Four Column'
+  path: layouts
+  template: layout--four-column
+  class: Drupal\ecms_layout\Plugin\Layout\FourColumnLayout
+  category: 'Columns: 4'
+  default_region: first
+  icon_map:
+    - [first, second, third, fourth]
+  regions:
+    first:
+      label: First
+    second:
+      label: Second
+    third:
+      label: Three
+    fourth:
+      label: Fourth

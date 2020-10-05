@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Lifespan Layout.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ *
+ * Curate the layouts available in the Layout Builder "Add Section" UI.
+ */
+function ecms_layout_plugin_filter_layout__layout_builder_alter(array &$definitions): void {
+  // Remove all non-ecms layouts from the Layout Builder.
+  foreach ($definitions as $id => $definition) {
+    if (!preg_match('/^ecms_layout__/', $id)) {
+      unset($definitions[$id]);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function ecms_layout_preprocess_block__ecms_layout(array &$variables): void {
+  // Wrap the output of the block in a container.
+  $variables['content']['#type'] = 'container';
+}
+
+/**
+ * Implements hook_entity_operation().
+ */
+function lifespan_layout_entity_operation(EntityInterface $entity) {
+  $account = \Drupal::currentUser();
+  $entity_type_id = $entity->getEntityTypeId();
+
+  $route_name = "layout_builder.overrides.$entity_type_id.view";
+  $route_parameters = [
+    $entity_type_id => $entity->id(),
+  ];
+
+  // If current user has access to route, then add the operation link. The
+  // access check will only return TRUE if the bundle is Layout Builder-
+  // enabled, overrides are allowed, and user has necessary permissions.
+  $access_manager = \Drupal::service('access_manager');
+  if (!$access_manager->checkNamedRoute($route_name, $route_parameters, $account)) {
+    return;
+  }
+
+  return [
+    'Layout' => [
+      'title' => t('Layout'),
+      'weight' => 50,
+      'url' => Url::fromRoute($route_name, $route_parameters),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
+ *
+ * Curate the blocks available in the Layout Builder "Add Block" UI.
+ */
+function ecms_layout_plugin_filter_block__layout_builder_alter(array &$definitions, array $extra) {
+  $exclude_list = _ecms_layout_block_exclude_list();
+
+  // Remove blocks from users who do not have advanced permission.
+  if (\Drupal::currentUser()->hasPermission('administer ecms layout') == FALSE) {
+    foreach ($definitions as $id => $definition) {
+      // If block is in exclude list remove it.
+      if (in_array($id, $exclude_list)) {
+        unset($definitions[$id]);
+      }
+    }
+  }
+}
+
+/**
+ * Helper function that lists each plugin ID to remove from "Add Block" UI.
+ */
+function _ecms_layout_block_exclude_list(): array {
+  return [
+    'system_menu_block:tools',
+  ];
+}

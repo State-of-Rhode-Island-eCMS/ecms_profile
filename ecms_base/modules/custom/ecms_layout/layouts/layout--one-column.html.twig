@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a one-column layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'qh-layout-section--col-count-1',
+  ]
+%}
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+
+    {% if content.first %}
+      <div {{ region_attributes.first.addClass('qh-layout-section__col', 'qh-layout-section__col--first') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+
+  </div>
+{% endif %}
