@@ -52,7 +52,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     // Ensure the ecms_api_recipient role was installed.
     $this->drupalGet('admin/people/roles/manage/ecms_api_recipient');
     $this->assertSession()->statusCodeEquals(200);
-    // Ensure the editorial permission is selected on install
+    // Ensure the editorial permission is selected on install.
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');
 
     // Ensure the user account was created.
