@@ -35,6 +35,7 @@ dependencies:
   - node
   - openid_connect_windows_aad
   - options
+  - paragraphs
   - path
   - page_cache
   - publishcontent
