@@ -26,3 +26,4 @@ content:
 hidden:
   field_basic_page_body: true
   field_basic_page_paragraphs: true
+  langcode: true
