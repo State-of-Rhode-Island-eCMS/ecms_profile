@@ -26,6 +26,11 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
   const RECIPIENT_ROLE = 'ecms_api_recipient';
 
   /**
+   * The publish action for the editorial workflow.
+   */
+  const EDITORIAL_PUBLISH = 'use editorial transition publish';
+
+  /**
    * The entity_type.manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -158,6 +163,9 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
       $role->grantPermission("create {$key} content");
       $role->grantPermission("edit own {$key} content");
     }
+
+    // Grant the publishing permission.
+    $role->grantPermission(self::EDITORIAL_PUBLISH);
 
     try {
       $role->save();
