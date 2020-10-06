@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.promotions
+id: node_type_promotions
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
