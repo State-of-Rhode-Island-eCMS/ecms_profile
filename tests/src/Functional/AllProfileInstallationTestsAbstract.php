@@ -26,6 +26,29 @@ use Drupal\Tests\BrowserTestBase;
 abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
   /**
+   * The default installed languages.
+   */
+  const DEFAULT_INSTALLED_LANGUAGES = [
+    'en',
+    'pt-pt',
+    'es',
+  ];
+
+  /**
+   * The default installated content types.
+   */
+  const DEFAULT_INSTALLED_CONTENT_TYPES = [
+    'basic_page',
+    'event',
+    'landing_page',
+    'location',
+    'notification',
+    'person',
+    'press_release',
+    'promotions',
+  ];
+
+  /**
    * The theme to test with.
    *
    * @var string
@@ -116,6 +139,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->ensureLandingPageFeatureInstalled();
     $this->ensureModerationNotificationInstall();
     $this->ensureModerationDashboardInstall();
+    $this->ensureLanguagesInstalled();
   }
 
   /**
@@ -153,6 +177,41 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->checkboxChecked('edit-always-save-userinfo');
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
     $this->assertSession()->checkboxChecked('edit-user-login-display-replace');
+
+    $this->drupalLogout();
+  }
+
+  /**
+   * Ensure the languages are installed correctly.
+   */
+  private function ensureLanguagesInstalled(): void {
+    $account = $this->drupalCreateUser(['administer languages', 'administer content']);
+    $this->drupalLogin($account);
+
+    // Ensure the default languages are available.
+    $this->drupalGet('admin/config/regional/language');
+    $this->assertSession()->statusCodeEquals(200);
+    foreach (self::DEFAULT_INSTALLED_LANGUAGES as $key => $langcode) {
+      $field = "edit-site-default-language-{$langcode}";
+      $this->assertSession()->fieldExists($field);
+
+      if ($key === 0) {
+        $this->assertSession()->checkboxChecked($field);
+      }
+    }
+
+    // Ensure the content types have the language options available.
+    foreach (self::DEFAULT_INSTALLED_CONTENT_TYPES as $type) {
+      $this->drupalGet("node/add/{$type}");
+      $this->assertSession()->statusCodeEquals(200);
+
+      // Ensure the language selection exists on the node form.
+      $this->assertSession()->fieldExists('edit-langcode-0-value');
+      // Ensure the default languages exist on the node form.
+      foreach (self::DEFAULT_INSTALLED_LANGUAGES as $langcode) {
+        $this->assertSession()->optionExists('edit-langcode-0-value', $langcode);
+      }
+    }
 
     $this->drupalLogout();
   }
