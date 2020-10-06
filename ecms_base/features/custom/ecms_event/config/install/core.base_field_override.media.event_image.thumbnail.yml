@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_media_image_1
     - media.type.event_image
   module:
     - content_translation
@@ -12,14 +11,14 @@ third_party_settings:
     translation_sync:
       alt: alt
       title: title
-      file: '0'
-id: media.event_image.field_media_image_1
-field_name: field_media_image_1
+      file: 0
+id: media.event_image.thumbnail
+field_name: thumbnail
 entity_type: media
 bundle: event_image
-label: Image
-description: ''
-required: true
+label: Thumbnail
+description: 'The thumbnail of the media item.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
@@ -39,6 +38,6 @@ settings:
     height: null
   file_directory: '[date:custom:Y]-[date:custom:m]'
   max_filesize: ''
-  handler: 'default:file'
+  handler: default
   handler_settings: {  }
 field_type: image
