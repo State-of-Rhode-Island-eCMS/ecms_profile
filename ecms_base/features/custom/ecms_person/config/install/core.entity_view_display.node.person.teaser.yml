@@ -22,6 +22,11 @@ targetEntityType: node
 bundle: person
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -39,3 +44,4 @@ hidden:
   field_person_photo: true
   field_person_prefix: true
   field_person_suffix: true
+  langcode: true
