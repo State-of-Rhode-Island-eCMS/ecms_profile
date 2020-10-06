@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a three-column layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'qh-layout-section--col-count-3',
+  ]
+%}
+{% if content %}
+  <div{{ attributes.addClass(classes) }}>
+
+    {% if content.first %}
+      <div {{ region_attributes.first.addClass('qh-layout-section__col', 'qh-layout-section__col--first') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+
+    {% if content.second %}
+      <div {{ region_attributes.second.addClass('qh-layout-section__col', 'qh-layout-section__col--second') }}>
+        {{ content.second }}
+      </div>
+    {% endif %}
+
+    {% if content.third %}
+      <div {{ region_attributes.third.addClass('qh-layout-section__col', 'qh-layout-section__col--third') }}>
+        {{ content.third }}
+      </div>
+    {% endif %}
+
+  </div>
+{% endif %}
