@@ -7,6 +7,7 @@ dependencies:
   - content_translation
   - ecms_workflow
   - field
+  - image
   - language
   - link
   - media
