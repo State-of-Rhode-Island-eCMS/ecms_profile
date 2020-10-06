@@ -40,6 +40,7 @@ abstract class LayoutBase extends LayoutDefault {
    */
   public function defaultConfiguration(): array {
     return [
+      'label' => '',
       'background_color' => EcmsLayout::ROW_BACKGROUND_COLOR_NONE,
       'class' => NULL,
       'column_width' => $this->getDefaultColumnWidth(),
