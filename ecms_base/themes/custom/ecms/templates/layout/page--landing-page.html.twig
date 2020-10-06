@@ -1,0 +1,77 @@
+{#
+  Temp template - Needs reworked
+#}
+<div id="page-wrapper">
+  <div id="page">
+    <header id="header" class="header" role="banner">
+      <div class="section layout-container clearfix">
+        {{ page.secondary_menu }}
+        {{ page.header }}
+        {{ page.primary_menu }}
+      </div>
+    </header>
+    {% if page.highlighted %}
+      <div class="highlighted">
+        <aside class="layout-container section clearfix" role="complementary">
+          {{ page.highlighted }}
+        </aside>
+      </div>
+    {% endif %}
+    {% if page.featured_top %}
+      <div class="featured-top">
+        <aside class="featured-top__inner section layout-container clearfix" role="complementary">
+          {{ page.featured_top }}
+        </aside>
+      </div>
+    {% endif %}
+    <div id="main-wrapper" class="layout-main-wrapper layout-container layout-builder-page clearfix">
+      <div id="main" class="layout-main clearfix">
+        {{ page.breadcrumb }}
+        <main id="content" class="column main-content" role="main">
+          <a id="main-content" tabindex="-1"></a>
+          {{ page.content }}
+        </main>
+        {% if page.sidebar_first %}
+          <div id="sidebar-first" class="column sidebar">
+            <aside class="section" role="complementary">
+              {{ page.sidebar_first }}
+            </aside>
+          </div>
+        {% endif %}
+        {% if page.sidebar_second %}
+          <div id="sidebar-second" class="column sidebar">
+            <aside class="section" role="complementary">
+              {{ page.sidebar_second }}
+            </aside>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% if page.featured_bottom_first or page.featured_bottom_second or page.featured_bottom_third %}
+      <div class="featured-bottom">
+        <aside class="layout-container clearfix" role="complementary">
+          {{ page.featured_bottom_first }}
+          {{ page.featured_bottom_second }}
+          {{ page.featured_bottom_third }}
+        </aside>
+      </div>
+    {% endif %}
+    <footer class="site-footer">
+      <div class="layout-container">
+        {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+          <div class="site-footer__top clearfix">
+            {{ page.footer_first }}
+            {{ page.footer_second }}
+            {{ page.footer_third }}
+            {{ page.footer_fourth }}
+          </div>
+        {% endif %}
+        {% if page.footer_fifth %}
+          <div class="site-footer__bottom">
+            {{ page.footer_fifth }}
+          </div>
+        {% endif %}
+      </div>
+    </footer>
+  </div>
+</div>
