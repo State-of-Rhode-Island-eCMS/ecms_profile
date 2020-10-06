@@ -88,15 +88,13 @@ abstract class LayoutBase extends LayoutDefault {
       ],
     ];
 
-    if (!empty($columnWidths)) {
-      $form['layout']['column_width'] = [
-        '#type' => 'radios',
-        '#title' => $this->t('Column Width'),
-        '#options' => $columnWidths,
-        '#default_value' => $this->configuration['column_width'],
-        '#required' => TRUE,
-      ];
-    }
+    $form['layout']['column_width'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Column Width'),
+      '#options' => $columnWidths,
+      '#default_value' => $this->configuration['column_width'],
+      '#required' => TRUE,
+    ];
 
     $form['extra'] = [
       '#type' => 'details',

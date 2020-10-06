@@ -13,14 +13,16 @@ final class ThreeColumnLayout extends LayoutBase {
    * {@inheritdoc}
    */
   protected function getColumnWidths(): array {
-    return [];
+    return [
+      '33-repeat' => $this->t('33% Columns'),
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getDefaultColumnWidth(): string {
-    return '';
+    return '33-repeat';
   }
 
 }
