@@ -24,16 +24,6 @@ abstract class LayoutBase extends LayoutDefault {
       $build['#attributes']['class'][] = 'qh-layout-section--col-size-' . $columnWidth;
     }
 
-    $backgroundColor = $this->configuration['background_color'];
-    if ($backgroundColor) {
-      $build['#attributes']['class'][] = 'qh-layout-section--background-color-' . $backgroundColor;
-    }
-
-    $full_width = $this->configuration['full_width'];
-    if ($full_width) {
-      $build['#attributes']['class'][] = 'qh-layout-section--max-width-full';
-    }
-
     $class = $this->configuration['class'];
     if ($class) {
       $build['#attributes']['class'] = array_merge(
