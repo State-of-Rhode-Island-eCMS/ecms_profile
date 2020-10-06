@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.person
+    - media.type.person_headshot
   module:
     - content_translation
 third_party_settings:
@@ -10,8 +10,8 @@ third_party_settings:
     enabled: true
     bundle_settings:
       untranslatable_fields_hide: '1'
-id: node.person
-target_entity_type_id: node
-target_bundle: person
+id: media.person_headshot
+target_entity_type_id: media
+target_bundle: person_headshot
 default_langcode: site_default
 language_alterable: true

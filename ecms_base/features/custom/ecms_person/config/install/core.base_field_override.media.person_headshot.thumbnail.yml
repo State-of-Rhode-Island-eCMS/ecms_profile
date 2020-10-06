@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_media_image
     - media.type.person_headshot
   module:
     - content_translation
@@ -12,14 +11,14 @@ third_party_settings:
     translation_sync:
       alt: alt
       title: title
-      file: '0'
-id: media.person_headshot.field_media_image
-field_name: field_media_image
+      file: 0
+id: media.person_headshot.thumbnail
+field_name: thumbnail
 entity_type: media
 bundle: person_headshot
-label: Image
-description: ''
-required: true
+label: Thumbnail
+description: 'The thumbnail of the media item.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
@@ -39,6 +38,6 @@ settings:
     height: null
   file_directory: '[date:custom:Y]-[date:custom:m]'
   max_filesize: ''
-  handler: 'default:file'
+  handler: default
   handler_settings: {  }
 field_type: image
