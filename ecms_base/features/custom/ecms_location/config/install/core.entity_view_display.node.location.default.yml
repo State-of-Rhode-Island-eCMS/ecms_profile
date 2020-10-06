@@ -18,6 +18,11 @@ targetEntityType: node
 bundle: location
 mode: default
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_location_address:
     weight: 101
     label: above
@@ -72,4 +77,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true

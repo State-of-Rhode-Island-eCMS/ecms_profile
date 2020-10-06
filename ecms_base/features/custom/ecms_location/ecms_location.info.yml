@@ -4,12 +4,16 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - address
+  - content_moderation
+  - content_translation
   - ecms_workflow
   - field
+  - language
   - menu_ui
   - node
   - office_hours
   - path
+  - rabbit_hole
   - telephone
   - text
   - user
