@@ -12,7 +12,7 @@ use Drupal\node\NodeInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
- * Class EcmsApiPublisher.
+ * Handles sending nodes to syndicated sites.
  *
  * @package Drupal\ecms_api_publisher
  */

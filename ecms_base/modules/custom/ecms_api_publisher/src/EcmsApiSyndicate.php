@@ -12,7 +12,7 @@ use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
 
 /**
- * Class EcmsApiSyndicate.
+ * Handles queueing nodes for syndication.
  *
  * @package Drupal\ecms_api_publisher
  */

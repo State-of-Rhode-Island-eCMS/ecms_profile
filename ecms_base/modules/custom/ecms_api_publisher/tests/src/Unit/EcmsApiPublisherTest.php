@@ -14,7 +14,7 @@ use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 
 /**
- * Class EcmsApiPublisherTest.
+ * Unit testing for the EcmsApiPublisher class.
  *
  * @covers \Drupal\ecms_api_publisher\EcmsApiPublisher
  * @group ecms
@@ -80,7 +80,11 @@ class EcmsApiPublisherTest extends UnitTestCase {
 
     $this->ecmsApiPublisher = $this->getMockBuilder(EcmsApiPublisher::class)
       ->onlyMethods(['getAccessToken', 'submitEntity'])
-      ->setConstructorArgs([$httpClient, $entityToJsonApi, $this->configFactory])
+      ->setConstructorArgs([
+        $httpClient,
+        $entityToJsonApi,
+        $this->configFactory,
+      ])
       ->getMock();
   }
 

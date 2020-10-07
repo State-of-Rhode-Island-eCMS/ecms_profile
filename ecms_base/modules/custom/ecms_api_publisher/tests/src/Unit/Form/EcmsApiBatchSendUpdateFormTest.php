@@ -20,7 +20,7 @@ use Drupal\Tests\UnitTestCase;
 use phpmock\MockBuilder;
 
 /**
- * Class EcmsApiBatchSendUpdateFormTest.
+ * Unit testing for the EcmsApiBatchSendUpdateForm class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit\Form
  *
