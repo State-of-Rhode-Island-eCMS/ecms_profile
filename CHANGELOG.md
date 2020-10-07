@@ -44,6 +44,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-49: Added the hotel content type as a feature.
 - RIG-45: Added Executive Order content type as optional feature.
 - RIG-72: Added the queue and publish service to syndicate content to other sites.
+- RIG-67: Added paragraphs feature to base install.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
@@ -51,7 +52,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Made ECMS custom theme the default.
 - RIG-22: Enable Moderation Dashboard module by default.
 - RIG-37: Updated the development script to allow for pattern lab development.
-- RIG-76: Updatd the api recipient installation values.
+- RIG-76: Updated the api recipient installation values.
+- RIG-67: Added paragraphs reference field to basic page.
 
 ### Deprecated
 

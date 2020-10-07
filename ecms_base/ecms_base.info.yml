@@ -6,6 +6,7 @@ core_version_requirement: ^9
 # Module dependencies for the distribution.
 # Modules that sub-profiles need must be listed here and_not in install.
 dependencies:
+  - allowed_formats
   - admin_toolbar
   - big_pipe
   - block
@@ -21,6 +22,7 @@ dependencies:
   - datetime
   - dynamic_page_cache
   - editor
+  - entity_reference_revisions
   - field_ui
   - file
   - features
@@ -37,6 +39,7 @@ dependencies:
   - node
   - openid_connect_windows_aad
   - options
+  - paragraphs
   - path
   - page_cache
   - publishcontent
@@ -63,6 +66,7 @@ install:
   - ecms_layout
   - ecms_location
   - ecms_notification
+  - ecms_paragraphs
   - ecms_person
   - ecms_press_release
   - ecms_promotions

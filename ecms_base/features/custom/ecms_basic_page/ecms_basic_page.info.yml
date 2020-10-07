@@ -3,10 +3,14 @@ description: 'Provides Basic page content type and related configuration. Add a 
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
+  - ecms_paragraphs
   - ecms_workflow
+  - entity_reference_revisions
   - field
   - menu_ui
   - node
+  - paragraphs
   - path
   - text
   - user

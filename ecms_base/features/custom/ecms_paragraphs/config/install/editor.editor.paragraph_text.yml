@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.paragraph_text
+  module:
+    - ckeditor
+format: paragraph_text
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Strike
+            - Superscript
+            - Subscript
+        -
+          name: Alignment
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - Outdent
+            - Indent
+        -
+          name: Links
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+        -
+          name: Headings
+          items:
+            - Format
+        -
+          name: Tools
+          items:
+            - HorizontalRule
+            - Blockquote
+            - SpecialChar
+            - RemoveFormat
+  plugins:
+    stylescombo:
+      styles: ''
+    language:
+      language_list: un
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

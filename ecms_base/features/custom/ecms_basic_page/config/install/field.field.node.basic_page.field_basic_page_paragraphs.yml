@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_basic_page_paragraphs
+    - node.type.basic_page
+    - paragraphs.paragraphs_type.formatted_text
+  module:
+    - entity_reference_revisions
+id: node.basic_page.field_basic_page_paragraphs
+field_name: field_basic_page_paragraphs
+entity_type: node
+bundle: basic_page
+label: 'Basic Page Paragraphs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      formatted_text: formatted_text
+    target_bundles_drag_drop:
+      formatted_text:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

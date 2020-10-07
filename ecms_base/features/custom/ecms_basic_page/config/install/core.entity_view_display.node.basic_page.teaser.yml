@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.basic_page.field_basic_page_body
+    - field.field.node.basic_page.field_basic_page_paragraphs
     - node.type.basic_page
   module:
     - user
@@ -12,6 +13,11 @@ targetEntityType: node
 bundle: basic_page
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -19,3 +25,4 @@ content:
     region: content
 hidden:
   field_basic_page_body: true
+  field_basic_page_paragraphs: true
