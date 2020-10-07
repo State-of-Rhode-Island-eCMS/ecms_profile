@@ -13,14 +13,16 @@ final class FourColumnLayout extends LayoutBase {
    * {@inheritdoc}
    */
   protected function getColumnWidths(): array {
-    return [];
+    return [
+      '25-repeat' => $this->t('25% Columns'),
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
   protected function getDefaultColumnWidth(): string {
-    return '';
+    return '25-repeat';
   }
 
 }

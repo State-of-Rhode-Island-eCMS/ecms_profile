@@ -24,16 +24,6 @@ abstract class LayoutBase extends LayoutDefault {
       $build['#attributes']['class'][] = 'qh-layout-section--col-size-' . $columnWidth;
     }
 
-    $backgroundColor = $this->configuration['background_color'];
-    if ($backgroundColor) {
-      $build['#attributes']['class'][] = 'qh-layout-section--background-color-' . $backgroundColor;
-    }
-
-    $full_width = $this->configuration['full_width'];
-    if ($full_width) {
-      $build['#attributes']['class'][] = 'qh-layout-section--max-width-full';
-    }
-
     $class = $this->configuration['class'];
     if ($class) {
       $build['#attributes']['class'] = array_merge(
@@ -50,6 +40,7 @@ abstract class LayoutBase extends LayoutDefault {
    */
   public function defaultConfiguration(): array {
     return [
+      'label' => '',
       'background_color' => EcmsLayout::ROW_BACKGROUND_COLOR_NONE,
       'class' => NULL,
       'column_width' => $this->getDefaultColumnWidth(),
@@ -97,15 +88,13 @@ abstract class LayoutBase extends LayoutDefault {
       ],
     ];
 
-    if (!empty($columnWidths)) {
-      $form['layout']['column_width'] = [
-        '#type' => 'radios',
-        '#title' => $this->t('Column Width'),
-        '#options' => $columnWidths,
-        '#default_value' => $this->configuration['column_width'],
-        '#required' => TRUE,
-      ];
-    }
+    $form['layout']['column_width'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Column Width'),
+      '#options' => $columnWidths,
+      '#default_value' => $this->configuration['column_width'],
+      '#required' => TRUE,
+    ];
 
     $form['extra'] = [
       '#type' => 'details',
@@ -156,7 +145,9 @@ abstract class LayoutBase extends LayoutDefault {
   protected function getBackgroundColorOptions(): array {
     return [
       EcmsLayout::ROW_BACKGROUND_COLOR_NONE => $this->t('None'),
-      EcmsLayout::ROW_BACKGROUND_COLOR_RED => $this->t('Red'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_RHODYRED => $this->t('Rhody Red'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_CALAMARI => $this->t('Calamari'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_NAVY => $this->t('Navy'),
     ];
   }
 
