@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  module:
-    - media
+dependencies: {  }
 name: 'Paragraph Text'
 format: paragraph_text
 weight: 0
@@ -23,12 +21,3 @@ filters:
       allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <hr> <s> <sup> <sub> <p>'
       filter_html_help: true
       filter_html_nofollow: false
-  media_embed:
-    id: media_embed
-    provider: media
-    status: false
-    weight: 100
-    settings:
-      default_view_mode: default
-      allowed_media_types: {  }
-      allowed_view_modes: {  }
