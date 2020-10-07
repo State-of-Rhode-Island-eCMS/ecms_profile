@@ -128,7 +128,12 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository found at${NO_C}: $PATTERN_LAB_FULL_PATH, symlinking for development."
     LANDO_SERVICES="services:
   appserver:
+    run_as_root:
+      - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
     overrides:
+      environment:
+        SIMPLETEST_BASE_URL: 'https://appserver'
+        SIMPLETEST_DB: 'sqlite://appserver/:memory:'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
         - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY
@@ -142,7 +147,12 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository NOT found at${NO_C}: $PATTERN_LAB_FULL_PATH, ignoring symlink."
     LANDO_SERVICES="services:
   appserver:
+    run_as_root:
+      - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
     overrides:
+      environment:
+        SIMPLETEST_BASE_URL: 'https://appserver'
+        SIMPLETEST_DB: 'sqlite://appserver/:memory:'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
   nodejs:
