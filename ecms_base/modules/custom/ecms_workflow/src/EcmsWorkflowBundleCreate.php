@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class EcmsWorkflowBundleCreate.
+ * Add node bundles to the editorial workflow.
  *
  * Handles configuration updates when a new content type is added.
  *

@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class EcmsApiBaseTest.
+ * Unit tests for the EcmsApiBase class.
  *
  * @package Drupal\Tests\ecms_api\Unit
  * @covers \Drupal\ecms_api\EcmsApiBase

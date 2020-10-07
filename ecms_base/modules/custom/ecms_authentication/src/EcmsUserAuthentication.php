@@ -7,7 +7,7 @@ namespace Drupal\ecms_authentication;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class EcmsUserAuthentication.
+ * Class to determine if the AAD user has access to the site.
  *
  * This is a custom service that will check the groups of a user and will
  * determine if the user is allowed to access the site.

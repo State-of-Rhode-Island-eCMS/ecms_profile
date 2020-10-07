@@ -12,7 +12,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Component\Utility\Crypt;
 
 /**
- * Class EcmsApiRecipientInstall.
+ * Installation tasks for the ecms_api_recipient module.
  *
  * @package Drupal\ecms_api_recipient
  */

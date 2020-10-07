@@ -10,7 +10,7 @@ use Drupal\ecms_api\EcmsApiInstall;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class EcmsApiInstallTest.
+ * Unit tests for the EcmsApiInstall class.
  *
  * @package Drupal\Tests\ecms_api\Unit
  *

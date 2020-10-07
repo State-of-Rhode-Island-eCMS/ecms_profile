@@ -10,7 +10,7 @@ require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/All
 use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 
 /**
- * Class EcmsSpeechesInstallTest.
+ * Functional tests for the EcmsSpeechesInstall feature.
  *
  * @package Drupal\Tests\ecms_hotels\Functional
  * @group ecms

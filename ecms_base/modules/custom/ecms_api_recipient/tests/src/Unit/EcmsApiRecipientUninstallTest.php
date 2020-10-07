@@ -12,7 +12,7 @@ use Drupal\ecms_api_recipient\EcmsApiRecipientUninstall;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class EcmsApiRecipientUninstallTest.
+ * Unit testing for the EcmsApiRecipientUninstall class.
  *
  * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientUninstall
  * @group ecms

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class EcmsUserAuthenticationTest.
+ * Unit tests for the EcmsUserAuthentication class.
  *
  * @package Drupal\Tests\ecms_authentication\Unit
  *
