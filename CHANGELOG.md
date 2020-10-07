@@ -29,7 +29,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-16: Added custom theme with Pattern Lab repo dependency.
 - RIG-37: Added the Admin Toolbar module.
 - RIG-55: Added the ecms_api_recipient custom module.
-- RIG-56: Added a configuration form to toggle content types for the eCMS API. 
+- RIG-56: Added a configuration form to toggle content types for the eCMS API.
 - RIG-57: Added the ecms_api_publisher module and custom entity.
 - RIG-60: Added the ecms_api_publisher module installation steps.
 - RIG-22: Added the ecms_workflow module to automatically assign content types to default workflow and set permissions.
@@ -46,6 +46,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-72: Added the queue and publish service to syndicate content to other sites.
 - RIG-67: Added paragraphs feature to base install.
 - RIG-62: Added webform node module install by default.
+- RIG-78: Added default languages and translations for the default content types.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
