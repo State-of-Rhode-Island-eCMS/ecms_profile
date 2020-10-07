@@ -6,7 +6,6 @@ dependencies:
   - content_moderation
   - content_translation
   - ecms_paragraphs
-  - ecms_languages
   - ecms_workflow
   - entity_reference_revisions
   - field
