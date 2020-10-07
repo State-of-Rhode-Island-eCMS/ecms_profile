@@ -194,7 +194,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   private function ensureLanguagesInstalled(): void {
     $account = $this->drupalCreateUser([
       'administer languages',
-      'administer content',
+      'administer nodes',
     ]);
 
     $this->drupalLogin($account);
