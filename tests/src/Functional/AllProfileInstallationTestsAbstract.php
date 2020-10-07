@@ -49,6 +49,13 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   ];
 
   /**
+   * The paragraph reference fields to check are NOT translatable.
+   */
+  const PARAGRAPH_REFERENCE_FIELDS = [
+    'edit-settings-node-basic-page-fields-field-basic-page-paragraphs',
+  ];
+
+  /**
    * The theme to test with.
    *
    * @var string
@@ -215,6 +222,15 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
       foreach (self::DEFAULT_INSTALLED_LANGUAGES as $langcode) {
         $this->assertSession()->optionExists('edit-langcode-0-value', $langcode);
       }
+    }
+
+    $this->drupalGet('admin/config/regional/content-language');
+    $this->assertSession()->statusCodeEquals(200);
+
+    // Loop through the paragraph reference fields and ensure
+    // they are NOT translatable.
+    foreach (self::PARAGRAPH_FIELDS as $id) {
+      $this->assertSession()->checkboxNotChecked($id);
     }
 
     $this->drupalLogout();
