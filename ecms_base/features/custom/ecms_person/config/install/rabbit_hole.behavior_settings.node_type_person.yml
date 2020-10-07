@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.person
+dependencies: {  }
 id: node_type_person
 action: display_page
 allow_override: 1
