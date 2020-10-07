@@ -29,7 +29,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    *
    * @var string
    */
-  protected $defaultTheme = 'stark';
+  protected $defaultTheme = 'ecms';
 
   /**
    * Run all available tests.
