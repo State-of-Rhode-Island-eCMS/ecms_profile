@@ -14,7 +14,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class EcmsApiBatchSendUpdatesForm.
+ * Provides the batch form for manually processing queued syndicated nodes.
  *
  * @package Drupal\ecms_api_publisher\Form
  */

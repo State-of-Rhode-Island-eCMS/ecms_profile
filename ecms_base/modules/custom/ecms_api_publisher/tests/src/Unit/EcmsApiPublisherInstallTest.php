@@ -17,7 +17,7 @@ use Drupal\user\RoleInterface;
 use Drupal\user\UserInterface;
 
 /**
- * Class EcmsApiPublisherInstallTest.
+ * Unit tests for the EcmsApiPublisherInstall class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit
  * @group ecms

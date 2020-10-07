@@ -22,7 +22,7 @@ use Drupal\user\UserInterface;
 use phpmock\MockBuilder;
 
 /**
- * Class EcmsApiSiteTest.
+ * Unit tests for the EcmsApiSite class.
  *
  * @covers \Drupal\ecms_api_publisher\Entity\EcmsApiSite
  * @group ecms

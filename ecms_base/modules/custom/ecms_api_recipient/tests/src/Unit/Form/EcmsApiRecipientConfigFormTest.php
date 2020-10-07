@@ -18,7 +18,7 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 
 /**
- * Class EcmsApiRecipientConfigFormTest.
+ * Unit testing for the EcmsApiRecipientConfigForm class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
  * @covers \Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm

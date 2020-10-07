@@ -87,6 +87,20 @@ if [ ! -d "$DEST_DIR" ]; then
   echo "-----------------------------------------------"
   echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER create-project --no-interaction oomphinc/drupal-scaffold:^1.1 ${DEST_DIR} --stability dev --no-interaction --no-install\n\n"
   $COMPOSER create-project --no-interaction "oomphinc/drupal-scaffold:^1.1" ${DEST_DIR} --stability dev --no-interaction --no-install
+
+  # Delete the composer.lock file to get the latest packages instead of the scaffolds outdated packages.
+  if [ -a "${DEST_DIR}/composer.lock" ]; then
+    echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} rm $DEST_DIR/composer.lock\n\n"
+    rm $DEST_DIR/composer.lock
+  fi
+
+  # Update the drupal optimization package.
+  # This is a temporary fix. @see https://github.com/zaporylie/composer-drupal-optimizations/issues/18#issuecomment-704187300
+  echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER require 'zaporylie/composer-drupal-optimizations:^1.1.2' --no-update\n\n"
+  cd $DEST_DIR
+  $COMPOSER require "zaporylie/composer-drupal-optimizations:^1.1.2" --no-update
+  cd $BASE_DIR
+
   if [ $? -ne 0 ]; then
     echo -e "${FG_C}${EBG_C} ERROR ${NO_C} There was a problem setting up $INSTALL_PROFILE_NAME using composer."
     echo "Please check your composer configuration and try again."

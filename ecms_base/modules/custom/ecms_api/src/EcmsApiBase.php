@@ -11,7 +11,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
- * Class EcmsApiBase.
+ * Ecms API base class.
  *
  * The EcmsApiBase class is an abstract that can be extended by other
  * services. By default, this class provides the functionality to authenticate

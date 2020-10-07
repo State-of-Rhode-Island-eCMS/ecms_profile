@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class EcmsApiRecipientRegisterTest.
+ * Unit testing for the EcmsApiRecipientRegister class.
  *
  * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientRegister
  * @group ecms

@@ -14,7 +14,7 @@ use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class EcmsApiRecipientConfigForm.
+ * Setup the configuration form for the ecms_api_recipient module.
  *
  * @package Drupal\ecms_api_recipient\Form
  */

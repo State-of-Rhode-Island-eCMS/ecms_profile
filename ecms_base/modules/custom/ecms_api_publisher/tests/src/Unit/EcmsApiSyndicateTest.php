@@ -17,7 +17,7 @@ use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class EcmsApiSyndicateTest.
+ * Unit testing for the EcmsApiSyndicate class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit
  * @covers \Drupal\ecms_api_publisher\EcmsApiSyndicate

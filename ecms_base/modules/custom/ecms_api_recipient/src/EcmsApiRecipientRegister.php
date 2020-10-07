@@ -10,11 +10,10 @@ use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class EcmsApiRecipientRegister.
+ * Handle registering with the hub site.
  *
  * @package Drupal\ecms_api_recipient
  */
@@ -162,7 +161,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     try {
       $url = Url::fromUri($hubHost);
     }
-    catch (InvalidArgumentException $e) {
+    catch (\InvalidArgumentException $e) {
       return NULL;
     }
 
@@ -212,7 +211,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     try {
       $url = Url::fromUri($httpHost);
     }
-    catch (InvalidArgumentException $e) {
+    catch (\InvalidArgumentException $e) {
       return NULL;
     }
 

@@ -12,7 +12,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class EcmsApiPublisherInstall.
+ * Install tasks for the ecms_api_publisher module..
  *
  * @package Drupal\ecms_api_publisher
  */

@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
- * Class EcmsApiRecipientUninstall.
+ * Uninstall tasks for the ecms_api_recipient module.
  *
  * @package Drupal\ecms_api_recipient
  */

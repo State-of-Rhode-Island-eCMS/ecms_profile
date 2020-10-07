@@ -7,7 +7,7 @@ namespace Drupal\ecms_api;
 use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
- * Class EcmsApiInstall.
+ * Handles installation tasks for the ecms_api module.
  *
  * @package Drupal\ecms_api
  */

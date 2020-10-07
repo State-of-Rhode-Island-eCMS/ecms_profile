@@ -28,7 +28,6 @@ class EcmsApiSiteListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity): array {
-    /* @var \Drupal\ecms_api_publisher\Entity\EcmsApiSite $entity */
     $row['id'] = $entity->id();
     $row['name'] = Link::createFromRoute(
       $entity->label(),

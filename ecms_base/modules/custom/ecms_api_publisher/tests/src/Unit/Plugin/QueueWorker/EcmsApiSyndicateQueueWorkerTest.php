@@ -15,7 +15,7 @@ use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class EcmsApiSyndicateQueueWorkerTest.
+ * Unit testing for the EcmsApiSyndicateQueueWorker class.
  *
  * @covers \Drupal\ecms_api_publisher\Plugin\QueueWorker\EcmsApiSyndicateQueueWorker
  * @group ecms
