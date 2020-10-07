@@ -133,7 +133,7 @@ else
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'sqlite://appserver/:memory:'
+        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
         - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY
@@ -152,7 +152,7 @@ else
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'sqlite://appserver/:memory:'
+        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
   nodejs:
