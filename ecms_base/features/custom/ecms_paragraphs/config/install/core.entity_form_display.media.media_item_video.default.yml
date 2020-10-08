@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.media.media_item_video.field_media_item_video_url
-    - field.field.media.media_item_video.field_media_oembed_video
     - media.type.media_item_video
   module:
     - media
@@ -27,14 +26,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: oembed_textfield
-    region: content
-  field_media_oembed_video:
-    type: oembed_textfield
-    weight: 0
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
     region: content
   path:
     type: path

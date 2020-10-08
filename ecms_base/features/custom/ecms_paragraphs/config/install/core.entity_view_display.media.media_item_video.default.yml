@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.media.media_item_video.field_media_item_video_url
-    - field.field.media.media_item_video.field_media_oembed_video
     - media.type.media_item_video
   module:
     - media
@@ -21,15 +20,6 @@ content:
       max_height: 0
     third_party_settings: {  }
     type: oembed
-    region: content
-  field_media_oembed_video:
-    type: oembed
-    label: visually_hidden
-    weight: 0
-    settings:
-      max_width: 0
-      max_height: 0
-    third_party_settings: {  }
     region: content
 hidden:
   created: true

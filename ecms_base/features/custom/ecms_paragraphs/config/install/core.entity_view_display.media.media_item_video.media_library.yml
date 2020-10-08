@@ -27,6 +27,5 @@ content:
 hidden:
   created: true
   field_media_item_video_url: true
-  field_media_oembed_video: true
   name: true
   uid: true

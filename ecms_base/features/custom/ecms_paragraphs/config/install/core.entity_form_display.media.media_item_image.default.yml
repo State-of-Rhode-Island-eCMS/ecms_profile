@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.media_item_image.field_media_image_2
     - field.field.media.media_item_image.field_media_item_image
     - image.style.thumbnail
     - media.type.media_item_image
@@ -21,14 +20,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_media_image_2:
-    weight: 0
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
-    region: content
   field_media_item_image:
     weight: 101
     settings:

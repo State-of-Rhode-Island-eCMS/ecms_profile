@@ -6,7 +6,6 @@ dependencies:
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_title
     - field.field.media.file.field_file_type
-    - field.field.media.file.field_media_file
     - media.type.file
   module:
     - file
@@ -46,14 +45,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_media_file:
-    label: visually_hidden
-    weight: 0
-    settings:
-      use_description_as_link_text: true
-    third_party_settings: {  }
-    type: file_default
     region: content
 hidden:
   created: true
