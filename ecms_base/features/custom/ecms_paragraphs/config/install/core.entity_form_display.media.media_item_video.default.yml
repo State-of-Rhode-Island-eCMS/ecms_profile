@@ -1,4 +1,3 @@
-uuid: b22b4e6d-5eec-43e8-b178-f83f9d31713c
 langcode: en
 status: true
 dependencies:
@@ -27,6 +26,13 @@ content:
     third_party_settings: {  }
     type: oembed_textfield
     region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
   path:
     type: path
     weight: 30
