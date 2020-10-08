@@ -8,6 +8,7 @@ core_version_requirement: ^9
 dependencies:
   - allowed_formats
   - admin_toolbar
+  - admin_toolbar_tools
   - big_pipe
   - block
   - block_content
@@ -24,6 +25,7 @@ dependencies:
   - dynamic_page_cache
   - editor
   - entity_reference_revisions
+  - features_ui
   - field_ui
   - file
   - features
