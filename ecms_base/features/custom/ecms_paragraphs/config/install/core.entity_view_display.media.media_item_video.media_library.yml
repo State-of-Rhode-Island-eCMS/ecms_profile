@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.media.media_library
     - field.field.media.media_item_video.field_media_item_video_url
-    - field.field.media.media_item_video.field_media_oembed_video
     - image.style.medium
     - media.type.media_item_video
   module:
