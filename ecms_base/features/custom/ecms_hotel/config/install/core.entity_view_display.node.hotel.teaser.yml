@@ -21,6 +21,11 @@ targetEntityType: node
 bundle: hotel
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -37,3 +42,4 @@ hidden:
   field_hotel_phone: true
   field_hotel_rate: true
   field_hotel_rate_amount: true
+  langcode: true

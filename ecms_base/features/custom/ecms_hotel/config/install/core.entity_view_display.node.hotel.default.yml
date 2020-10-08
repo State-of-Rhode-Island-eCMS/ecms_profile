@@ -23,6 +23,11 @@ targetEntityType: node
 bundle: hotel
 mode: default
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_hotel_address:
     weight: 102
     label: above
@@ -114,4 +119,5 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  langcode: true

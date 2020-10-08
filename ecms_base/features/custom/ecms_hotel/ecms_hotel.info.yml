@@ -4,15 +4,19 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - address
+  - content_moderation
+  - content_translation
   - field
   - file
   - image
+  - language
   - link
   - media
   - media_library
   - menu_ui
   - node
   - path
+  - rabbit_hole
   - telephone
   - text
   - user

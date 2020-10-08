@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.hotel
-id: node.hotel.promote
-field_name: promote
-entity_type: node
-bundle: hotel
-label: 'Promoted to front page'
+    - media.type.hotel_image
+id: media.hotel_image.status
+field_name: status
+entity_type: media
+bundle: hotel_image
+label: Published
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

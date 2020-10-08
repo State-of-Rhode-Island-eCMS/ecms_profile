@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.hotel_image
+id: media.hotel_image.name
+field_name: name
+entity_type: media
+bundle: hotel_image
+label: Name
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.media.hotel_image.field_hotel_image
-    - image.style.large
     - media.type.hotel_image
   module:
     - image
@@ -23,6 +22,7 @@ content:
     region: content
 hidden:
   created: true
+  langcode: true
   name: true
   thumbnail: true
   uid: true
