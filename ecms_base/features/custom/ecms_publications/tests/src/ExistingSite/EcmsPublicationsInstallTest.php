@@ -2,17 +2,17 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\ecms_publications\Functional;
+namespace Drupal\Tests\ecms_publications\ExistingSite;
 
 // Require the all profiles abstract class since autoloading doesn't work.
-require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
 
-use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
+use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 
 /**
  * Functional testing for the EcmsPublicationsInstall feature.
  *
- * @package Drupal\Tests\ecms_publications\Functional
+ * @package Drupal\Tests\ecms_publications\ExistingSite
  * @group ecms
  * @group ecms_publications
  */
@@ -38,7 +38,7 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
    * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function testEcmsPublicationInstallation(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'administer modules',
       'administer site configuration',
       'access administration pages',
@@ -54,7 +54,7 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     $edit = [];
     $edit["modules[ecms_publications][enable]"] = TRUE;
     $this->drupalPostForm(NULL, $edit, t('Install'));
-    $this->assertText('Module eCMS Publications has been enabled.');
+    $this->assertSession()->pageTextContainsOnce('Module eCMS Publications has been enabled.');
 
   }
 
