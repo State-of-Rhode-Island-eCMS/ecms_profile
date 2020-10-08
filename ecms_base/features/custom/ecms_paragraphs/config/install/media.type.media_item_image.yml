@@ -3,7 +3,7 @@ status: true
 dependencies: {  }
 id: media_item_image
 label: 'Media Item: Image'
-description: 'A image referenced from a Media Item paragraph.'
+description: 'An image referenced from a Media Item paragraph.'
 source: image
 queue_thumbnail_downloads: false
 new_revision: false
