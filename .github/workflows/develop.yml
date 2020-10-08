@@ -49,3 +49,8 @@ jobs:
         run: |
           cd ../develop-ecms-profile
           lando phpunit --testsuite=functional
+
+      - name: Run existing tests.
+          run: |
+            cd ../develop-ecms-profile
+            lando phpunit --testsuite=existing --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php
