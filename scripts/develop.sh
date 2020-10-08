@@ -134,6 +134,8 @@ else
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
         SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
+        DTT_BASE_URL: 'https://appserver'
+        TEMP: '/app/web/sites/default/files/temp'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
         - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY
@@ -153,6 +155,8 @@ else
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
         SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
+        DTT_BASE_URL: 'https://appserver'
+        TEMP: '/app/web/sites/default/files/temp'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
   nodejs:
@@ -277,6 +281,15 @@ cd ${DOCROOT}
 # Ensure the sites/default directory is writeable.
 if [ -d "${DEST_DIR}/${DOCROOT}/sites/default/files" ]; then
   chmod ug+w ${DEST_DIR}/${DOCROOT}/sites/default/files
+fi
+
+# Remove the CONFIG_SYNC_DIRECTORY constant.
+if [ -a "${DEST_DIR}/${DOCROOT}/sites/default/settings.php" ]; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/CONFIG_SYNC_DIRECTORY/"CONFIG_SYNC_DIRECTORY_OFF"/g' ${DEST_DIR}/${DOCROOT}/sites/default/settings.php
+  else
+    sed -i 's/CONFIG_SYNC_DIRECTORY/"CONFIG_SYNC_DIRECTORY_OFF"/g' ${DEST_DIR}/${DOCROOT}/sites/default/settings.php
+  fi
 fi
 
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO drush site-install ${INSTALL_PROFILE_NAME}"
