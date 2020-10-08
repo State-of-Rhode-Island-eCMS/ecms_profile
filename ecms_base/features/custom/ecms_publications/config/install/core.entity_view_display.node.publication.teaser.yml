@@ -17,6 +17,11 @@ targetEntityType: node
 bundle: publication
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -29,3 +34,4 @@ hidden:
   field_publication_topics: true
   field_publication_types: true
   field_publication_url: true
+  langcode: true

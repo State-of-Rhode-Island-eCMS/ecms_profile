@@ -3,15 +3,18 @@ description: 'Provides Publication content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
   - datetime
   - field
   - file
   - image
+  - language
   - link
   - media
   - media_library
   - menu_ui
   - node
+  - paragraphs
   - path
   - rh_node
   - taxonomy
