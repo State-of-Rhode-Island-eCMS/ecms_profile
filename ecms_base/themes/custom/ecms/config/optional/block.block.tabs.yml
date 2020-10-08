@@ -1,10 +1,9 @@
-uuid: 9dd05561-fd5b-44d0-ba95-8d8c26b730c8
 langcode: en
 status: true
 dependencies:
   theme:
     - ecms
-id: ecms_tabs
+id: tabs
 theme: ecms
 region: header
 weight: 0
