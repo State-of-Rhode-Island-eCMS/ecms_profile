@@ -19,20 +19,6 @@ use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
 
   /**
-   * The profile to install.
-   *
-   * @var string
-   */
-  protected $profile = 'ecms_base';
-
-  /**
-   * The theme to test with.
-   *
-   * @var string
-   */
-  protected $defaultTheme = 'ecms';
-
-  /**
    * Test the ecms_hotels installation.
    *
    * @throws \Behat\Mink\Exception\ExpectationException

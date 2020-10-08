@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\ecms_executive_orders\Functional;
+namespace Drupal\Tests\ecms_executive_orders\ExistingSite;
 
 // Require the all profiles abstract class since autoloading doesn't work.
 require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
@@ -17,20 +17,6 @@ use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
  * @group ecms_executive_orders
  */
 class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract {
-
-  /**
-   * The profile to install.
-   *
-   * @var string
-   */
-  protected $profile = 'ecms_base';
-
-  /**
-   * The theme to test with.
-   *
-   * @var string
-   */
-  protected $defaultTheme = 'ecms';
 
   /**
    * Test the ecms_executive_orders installation.
