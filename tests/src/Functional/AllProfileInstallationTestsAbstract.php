@@ -92,4 +92,5 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->loggedInUser = FALSE;
     \Drupal::currentUser()->setAccount(new AnonymousUserSession());
   }
+
 }
