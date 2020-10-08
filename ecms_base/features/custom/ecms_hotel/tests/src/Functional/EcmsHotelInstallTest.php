@@ -30,7 +30,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
    *
    * @var string
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'ecms';
 
   /**
    * Test the ecms_hotels installation.

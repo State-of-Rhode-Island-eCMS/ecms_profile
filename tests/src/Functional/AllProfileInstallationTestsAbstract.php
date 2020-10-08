@@ -30,7 +30,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    *
    * @var string
    */
-  protected $defaultTheme = 'stark';
+  protected $defaultTheme = 'ecms';
 
   /**
    * Whether to strictly check schema on installed configuration.

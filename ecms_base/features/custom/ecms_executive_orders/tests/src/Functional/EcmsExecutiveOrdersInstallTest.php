@@ -30,7 +30,7 @@ class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract
    *
    * @var string
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'ecms';
 
   /**
    * Test the ecms_executive_orders installation.

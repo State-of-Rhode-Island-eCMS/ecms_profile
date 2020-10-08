@@ -7,6 +7,9 @@
 
 declare(strict_types = 1);
 
+use Drupal\node\Entity\Node;
+use Drupal\webform\WebformInterface;
+
 /**
  * Implements hook_entity_bundle_create().
  *
@@ -26,4 +29,18 @@ function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
   // Call the workflow service to update configuration.
   \Drupal::service('ecms_workflow.bundle_create')
     ->addContentTypeToWorkflow($bundle);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ecms_workflow_webform_insert(WebformInterface $webform) : void {
+  $node = Node::create([
+    'type' => 'webform',
+    'title' => $webform->label(),
+    'webform' => ['target_id' => $webform->id()],
+  ]);
+  $node->save();
+
+  \Drupal::messenger()->addMessage(t('Webform node %label created.', ['%label' => $node->label()]));
 }

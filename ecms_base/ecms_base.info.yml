@@ -55,6 +55,7 @@ dependencies:
   - views
   - views_ui
   - webform
+  - webform_node
   - webform_ui
 
 # Install the required features.
