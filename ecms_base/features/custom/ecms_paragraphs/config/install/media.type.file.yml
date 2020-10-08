@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: file
+label: File
+description: 'A file that gets displayed in a File list paragraph.'
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_file
+field_map:
+  mimetype: field_file_type
+  filesize: field_file_size

@@ -1,0 +1,10 @@
+uuid: 77e1996e-6b38-475c-8298-da3227000ffc
+langcode: en
+status: true
+dependencies: {  }
+id: media_item
+label: 'Media Item'
+icon_uuid: null
+icon_default: null
+description: 'A media item allows for an image or video to be placed with various options.'
+behavior_plugins: {  }

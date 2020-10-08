@@ -1,0 +1,30 @@
+uuid: ffb74dad-e1bb-4373-9437-91678abdab25
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.media_item_video.field_media_item_video_url
+    - image.style.medium
+    - media.type.media_item_video
+  module:
+    - image
+id: media.media_item_video.media_library
+targetEntityType: media
+bundle: media_item_video
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_media_item_video_url: true
+  name: true
+  uid: true

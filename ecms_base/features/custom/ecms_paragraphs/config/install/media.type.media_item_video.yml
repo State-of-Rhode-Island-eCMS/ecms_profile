@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies: {  }
+id: media_item_video
+label: 'Media Item: Video'
+description: 'A video referenced from a Media Item paragraph.'
+source: 'oembed:video'
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  thumbnails_directory: 'public://oembed_thumbnails'
+  providers:
+    - YouTube
+    - Vimeo
+  source_field: field_media_item_video_url
+field_map: {  }
