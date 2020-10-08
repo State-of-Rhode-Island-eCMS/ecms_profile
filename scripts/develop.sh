@@ -198,9 +198,7 @@ $LANDO composer remove drupal/coffee
 $LANDO composer require "behat/mink-goutte-driver" --dev
 $LANDO composer require "php-mock/php-mock" --dev
 $LANDO composer require "php-mock/php-mock-phpunit" --dev
-
-# Update composer packages from the scaffold.
-# $LANDO composer update
+$LANDO composer require "weitzman/drupal-test-traits" --dev
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
