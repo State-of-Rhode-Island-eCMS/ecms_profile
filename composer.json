@@ -91,6 +91,7 @@
     "php-mock/php-mock": "^2.2",
     "php-mock/php-mock-phpunit": "^2.6",
     "phpunit/phpunit": "^8",
-    "symfony/phpunit-bridge": "^5.1"
+    "symfony/phpunit-bridge": "^5.1",
+    "weitzman/drupal-test-traits": "^1.5"
   }
 }
