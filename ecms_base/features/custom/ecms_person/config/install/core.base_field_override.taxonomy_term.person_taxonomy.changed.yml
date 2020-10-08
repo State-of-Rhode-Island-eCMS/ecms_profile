@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.person_headshot
-id: media.person_headshot.changed
+    - taxonomy.vocabulary.person_taxonomy
+id: taxonomy_term.person_taxonomy.changed
 field_name: changed
-entity_type: media
-bundle: person_headshot
+entity_type: taxonomy_term
+bundle: person_taxonomy
 label: Changed
-description: 'The time the media item was last edited.'
+description: 'The time that the term was last edited.'
 required: false
 translatable: false
 default_value: {  }

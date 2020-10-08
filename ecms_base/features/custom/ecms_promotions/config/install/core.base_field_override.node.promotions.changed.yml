@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.person_headshot
-id: media.person_headshot.changed
+    - node.type.promotions
+id: node.promotions.changed
 field_name: changed
-entity_type: media
-bundle: person_headshot
+entity_type: node
+bundle: promotions
 label: Changed
-description: 'The time the media item was last edited.'
+description: 'The time that the node was last edited.'
 required: false
 translatable: false
 default_value: {  }

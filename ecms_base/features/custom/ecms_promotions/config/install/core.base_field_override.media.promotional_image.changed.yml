@@ -10,7 +10,7 @@ bundle: promotional_image
 label: Changed
 description: 'The time the media item was last edited.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

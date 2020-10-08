@@ -2,17 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.person_headshot
-id: media.person_headshot.uid
+    - node.type.person
+id: node.person.uid
 field_name: uid
-entity_type: media
-bundle: person_headshot
+entity_type: node
+bundle: person
 label: 'Authored by'
-description: 'The user ID of the author.'
+description: 'The username of the content author.'
 required: false
 translatable: false
 default_value: {  }
-default_value_callback: 'Drupal\media\Entity\Media::getDefaultEntityOwner'
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
 settings:
   handler: default
   handler_settings: {  }

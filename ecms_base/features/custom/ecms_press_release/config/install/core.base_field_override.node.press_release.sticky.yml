@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.location
-id: node.location.promote
-field_name: promote
+    - node.type.press_release
+id: node.press_release.sticky
+field_name: sticky
 entity_type: node
-bundle: location
-label: 'Promoted to front page'
+bundle: press_release
+label: 'Sticky at top of lists'
 description: ''
 required: false
 translatable: false
