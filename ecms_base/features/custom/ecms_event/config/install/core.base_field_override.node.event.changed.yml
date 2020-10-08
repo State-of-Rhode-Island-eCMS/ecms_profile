@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.event_image
-id: media.event_image.changed
+    - node.type.event
+id: node.event.changed
 field_name: changed
-entity_type: media
-bundle: event_image
+entity_type: node
+bundle: event
 label: Changed
-description: 'The time the media item was last edited.'
+description: 'The time that the node was last edited.'
 required: false
 translatable: false
 default_value: {  }

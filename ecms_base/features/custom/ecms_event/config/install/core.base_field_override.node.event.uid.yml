@@ -2,17 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.event_image
-id: media.event_image.uid
+    - node.type.event
+id: node.event.uid
 field_name: uid
-entity_type: media
-bundle: event_image
+entity_type: node
+bundle: event
 label: 'Authored by'
-description: 'The user ID of the author.'
+description: 'The username of the content author.'
 required: false
 translatable: false
 default_value: {  }
-default_value_callback: 'Drupal\media\Entity\Media::getDefaultEntityOwner'
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
 settings:
   handler: default
   handler_settings: {  }

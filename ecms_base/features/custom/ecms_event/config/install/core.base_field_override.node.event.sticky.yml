@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.event_image
-id: media.event_image.status
-field_name: status
-entity_type: media
-bundle: event_image
-label: Published
+    - node.type.event
+id: node.event.sticky
+field_name: sticky
+entity_type: node
+bundle: event
+label: 'Sticky at top of lists'
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 1
+    value: 0
 default_value_callback: ''
 settings:
   on_label: 'On'

@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.event_image
-id: media.event_image.status
+    - node.type.event
+id: node.event.status
 field_name: status
-entity_type: media
-bundle: event_image
+entity_type: node
+bundle: event
 label: Published
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 1
