@@ -2,12 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\ecms_base\Functional;
+namespace Drupal\Tests\ecms_base\ExistingSite;
 
 // Require the all profiles abstract class since autoloading doesn't work.
-require_once dirname(__FILE__) . '/../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+require_once dirname(__FILE__) . '/../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
 
-use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
+use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 
 /**
  * Tests that installation finished correctly and known resources are available.
@@ -50,7 +50,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    * Test that the ACSF modules are not installed.
    */
   private function ensureAcsfModulesDisabled(): void {
-    $account = $this->drupalCreateUser(['administer modules']);
+    $account = $this->createUser(['administer modules']);
     $this->drupalLogin($account);
 
     $this->drupalGet('admin/modules');
