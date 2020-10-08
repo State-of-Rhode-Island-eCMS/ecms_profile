@@ -19,6 +19,8 @@
         <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
         <!-- To disable deprecation testing uncomment the next line. -->
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
+
+        <env name="DTT_BASE_URL" value="http://appserver/"/>
         <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
         <!-- Example for changing the driver args to phantomjs tests MINK_DRIVER_ARGS_PHANTOMJS value: '["http://127.0.0.1:8510"]' -->
     </php>
@@ -32,6 +34,14 @@
             <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Functional</directory>
             <directory>/app/web/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/Functional</directory>
         </testsuite>
+        <testsuite name="existing">
+          <!-- Assumes tests are namespaced as \Drupal\Tests\custom_foo\ExistingSite. -->
+          <directory>/app/web/profiles/contrib/ecms_profile/*/tests/src/ExistingSite</directory>
+          <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/ExistingSite</directory>
+          <directory>/app/web/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>
+          <!--<directory>./web/profiles/custom/*/tests/src/ExistingSite</directory>-->
+        </testsuite>
+
     </testsuites>
     <listeners>
         <listener class="\Drupal\Tests\Listeners\DrupalListener">
