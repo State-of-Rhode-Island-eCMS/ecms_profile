@@ -128,7 +128,14 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository found at${NO_C}: $PATTERN_LAB_FULL_PATH, symlinking for development."
     LANDO_SERVICES="services:
   appserver:
+    run_as_root:
+      - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
     overrides:
+      environment:
+        SIMPLETEST_BASE_URL: 'https://appserver'
+        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
+        DTT_BASE_URL: 'https://appserver'
+        TEMP: '/app/web/sites/default/files/temp'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
         - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY
@@ -142,7 +149,14 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository NOT found at${NO_C}: $PATTERN_LAB_FULL_PATH, ignoring symlink."
     LANDO_SERVICES="services:
   appserver:
+    run_as_root:
+      - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
     overrides:
+      environment:
+        SIMPLETEST_BASE_URL: 'https://appserver'
+        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
+        DTT_BASE_URL: 'https://appserver'
+        TEMP: '/app/web/sites/default/files/temp'
       volumes:
         - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
   nodejs:
@@ -188,9 +202,7 @@ $LANDO composer remove drupal/coffee
 $LANDO composer require "behat/mink-goutte-driver" --dev
 $LANDO composer require "php-mock/php-mock" --dev
 $LANDO composer require "php-mock/php-mock-phpunit" --dev
-
-# Update composer packages from the scaffold.
-# $LANDO composer update
+$LANDO composer require "weitzman/drupal-test-traits" --dev
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
@@ -269,6 +281,15 @@ cd ${DOCROOT}
 # Ensure the sites/default directory is writeable.
 if [ -d "${DEST_DIR}/${DOCROOT}/sites/default/files" ]; then
   chmod ug+w ${DEST_DIR}/${DOCROOT}/sites/default/files
+fi
+
+# Remove the CONFIG_SYNC_DIRECTORY constant.
+if [ -a "${DEST_DIR}/${DOCROOT}/sites/default/settings.php" ]; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/CONFIG_SYNC_DIRECTORY/"CONFIG_SYNC_DIRECTORY_OFF"/g' ${DEST_DIR}/${DOCROOT}/sites/default/settings.php
+  else
+    sed -i 's/CONFIG_SYNC_DIRECTORY/"CONFIG_SYNC_DIRECTORY_OFF"/g' ${DEST_DIR}/${DOCROOT}/sites/default/settings.php
+  fi
 fi
 
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO drush site-install ${INSTALL_PROFILE_NAME}"

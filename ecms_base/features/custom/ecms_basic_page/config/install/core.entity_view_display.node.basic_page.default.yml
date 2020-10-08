@@ -16,9 +16,9 @@ mode: default
 content:
   content_moderation_control:
     weight: -20
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_basic_page_body:
     weight: 101
     label: above
@@ -40,4 +40,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  langcode: true

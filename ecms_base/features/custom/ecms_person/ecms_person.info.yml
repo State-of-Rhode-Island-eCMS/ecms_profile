@@ -4,15 +4,19 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - auto_entitylabel
+  - content_moderation
+  - content_translation
   - ecms_workflow
   - field
   - file
   - image
+  - language
   - media
   - media_library
   - menu_ui
   - node
   - path
+  - rabbit_hole
   - taxonomy
   - telephone
   - token

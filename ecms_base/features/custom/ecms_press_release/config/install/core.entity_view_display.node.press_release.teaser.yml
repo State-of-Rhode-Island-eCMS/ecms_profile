@@ -15,6 +15,11 @@ targetEntityType: node
 bundle: press_release
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -25,3 +30,4 @@ hidden:
   field_press_release_date: true
   field_press_release_links: true
   field_press_release_source: true
+  langcode: true

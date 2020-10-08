@@ -13,7 +13,7 @@ bundle: press_release
 label: Source
 description: 'Optional agency and press contact information.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

@@ -4,14 +4,17 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - content_moderation
+  - content_translation
   - ecms_paragraphs
   - ecms_workflow
   - entity_reference_revisions
   - field
+  - language
   - menu_ui
   - node
   - paragraphs
   - path
+  - rabbit_hole
   - text
   - user
 package: eCMS

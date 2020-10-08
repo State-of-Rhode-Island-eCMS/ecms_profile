@@ -15,6 +15,11 @@ targetEntityType: node
 bundle: location
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -25,3 +30,4 @@ hidden:
   field_location_body: true
   field_location_office_hours: true
   field_location_phone: true
+  langcode: true

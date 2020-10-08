@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.event_image
+id: media.event_image.name
+field_name: name
+entity_type: media
+bundle: event_image
+label: Name
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -3,13 +3,17 @@ description: 'Provides Press release content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
+  - content_translation
   - datetime
   - ecms_workflow
   - field
+  - language
   - link
   - menu_ui
   - node
   - path
+  - rabbit_hole
   - text
   - user
 package: eCMS
