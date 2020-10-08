@@ -8,10 +8,14 @@ dependencies:
   - content_translation
   - editor
   - field
+  - file
   - filter
   - language
+  - image
   - media
+  - options
   - paragraphs
+  - path
   - text
 version: 9.x-1.0
 package: eCMS

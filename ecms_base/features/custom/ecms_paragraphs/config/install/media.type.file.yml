@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies: {  }
+id: file
+label: File
+description: 'A file that gets displayed in a File list paragraph.'
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_file
+field_map:
+  mimetype: field_file_type
+  filesize: field_file_size
+
+
+
+
+field.field.paragraph.media_item.field_size
+field.field.paragraph.media_item.field_media_item
+field.field.paragraph.media_item.field_caption
+field.field.paragraph.media_item.field_alignment
+core.entity_view_display.paragraph.media_item.default
+core.entity_form_display.paragraph.media_item.default
+core.entity_form_display.media.media_item_video.default
+core.entity_form_display.media.media_item_image.default
+core.entity_form_display.media.file.default
