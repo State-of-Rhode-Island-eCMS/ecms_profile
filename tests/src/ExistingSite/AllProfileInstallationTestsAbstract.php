@@ -2,28 +2,28 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\ecms_profile\Functional;
+namespace Drupal\Tests\ecms_profile\ExistingSite;
 
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
-use Drupal\Tests\BrowserTestBase;
+use weitzman\DrupalTestTraits\ExistingSiteBase;
 
 /**
- * Class AllProfileInstallationTestsAbstract.
+ * Abstract class handling global testing for the profile.
  *
  * This class defines common tests between all profiles and should be extended
  * for installation testing. Autoloading doesn't work, so it will need to be
  * required with:
  * ```
  * require_once dirname(__FILE__)
- *   . '/../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+ *   . '/../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
  * ```
  *
- * @package Drupal\Tests\ecms_profile\Functional
+ * @package Drupal\Tests\ecms_profile\ExistingSite
  */
-abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
+abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
 
   /**
    * The default installed languages.
@@ -35,7 +35,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   ];
 
   /**
-   * The default installated content types.
+   * The default installed content types.
    */
   const DEFAULT_INSTALLED_CONTENT_TYPES = [
     'basic_page',
@@ -46,13 +46,6 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     'person',
     'press_release',
     'promotions',
-  ];
-
-  /**
-   * The paragraph reference fields to check are NOT translatable.
-   */
-  const PARAGRAPH_REFERENCE_FIELDS = [
-    'edit-settings-node-basic-page-fields-field-basic-page-paragraphs',
   ];
 
   /**
@@ -102,7 +95,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
   /**
    * Override the default drupalLogout method.
    *
-   * @see \Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract::drupalLogin()
+   * @see \Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract::drupalLogin()
    *
    * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
@@ -158,7 +151,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->assertSession()->fieldNotExists('name');
     $this->assertSession()->fieldNotExists('pass');
 
-    $account = $this->drupalCreateUser(['administer openid connect clients']);
+    $account = $this->createUser(['administer openid connect clients']);
     $this->drupalLogin($account);
 
     // Ensure the settings page is available.
@@ -192,10 +185,16 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Ensure the languages are installed correctly.
    */
   private function ensureLanguagesInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $permissions = [
       'administer languages',
       'administer nodes',
-    ]);
+    ];
+
+    foreach (self::DEFAULT_INSTALLED_CONTENT_TYPES as $contentType) {
+      $permissions[] = "create {$contentType} content";
+    }
+
+    $account = $this->createUser($permissions);
 
     $this->drupalLogin($account);
 
@@ -227,12 +226,6 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->drupalGet('admin/config/regional/content-language');
     $this->assertSession()->statusCodeEquals(200);
 
-    // Loop through the paragraph reference fields and ensure
-    // they are NOT translatable.
-    foreach (self::PARAGRAPH_FIELDS as $id) {
-      $this->assertSession()->checkboxNotChecked($id);
-    }
-
     $this->drupalLogout();
   }
 
@@ -240,7 +233,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_notification feature installed properly.
    */
   private function ensureNotificationFeatureInstalled(): void {
-    $account = $this->drupalCreateUser(['create notification content']);
+    $account = $this->createUser(['create notification content']);
     $this->drupalLogin($account);
 
     // Ensure the notification entity add form is available.
@@ -253,7 +246,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_press_release feature installed properly.
    */
   private function ensurePressReleaseFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create press_release content',
       'use editorial transition create_new_draft',
       'view own unpublished content',
@@ -270,7 +263,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_location feature installed properly.
    */
   private function ensureLocationFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create location content',
       'use editorial transition create_new_draft',
       'view own unpublished content',
@@ -287,7 +280,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_person feature installed properly.
    */
   private function ensurePersonFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create person content',
       'create terms in person_taxonomy',
       'use editorial transition create_new_draft',
@@ -307,13 +300,13 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Check that the required fields exist in the form.
     foreach ($fields as $key => $value) {
-      $this->assertFieldByName($key);
+      $this->assertSession()->fieldExists($key);
     }
 
     $this->drupalPostForm('node/add/person', $fields, 'Save');
 
     // Ensure the auto entity label tokens were applied.
-    $this->assertText('Person Test User has been created.');
+    $this->assertSession()->pageTextContainsOnce('Person Test User has been created.');
 
     // Ensure the taxonomy is accessible.
     $this->drupalGet('admin/structure/taxonomy/manage/person_taxonomy/add');
@@ -326,7 +319,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Ensure the webform requirement installed properly.
    */
   private function ensureWebformInstall(): void {
-    $account = $this->drupalCreateUser(['administer webform']);
+    $account = $this->createUser(['administer webform']);
     $this->drupalLogin($account);
 
     // Ensure the form configuration page is available.
@@ -338,7 +331,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Ensure Publish Content module installed properly.
    */
   private function ensurePublishContentInstalled(): void {
-    $account = $this->drupalCreateUser(['administer permissions']);
+    $account = $this->createUser(['administer permissions']);
     $this->drupalLogin($account);
 
     // Ensure the permissions exist and roles are assigned.
@@ -352,7 +345,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Ensure the content moderation notification requirement installed properly.
    */
   private function ensureModerationNotificationInstall(): void {
-    $account = $this->drupalCreateUser(['administer content moderation notifications']);
+    $account = $this->createUser(['administer content moderation notifications']);
     $this->drupalLogin($account);
 
     // Ensure the form configuration page is available.
@@ -364,7 +357,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Ensure the moderation dashboard requirement installed properly.
    */
   private function ensureModerationDashboardInstall(): void {
-    $account = $this->drupalCreateUser(['view any moderation dashboard']);
+    $account = $this->createUser(['view any moderation dashboard']);
     $this->drupalLogin($account);
 
     // Ensure the dashboard loads.
@@ -376,7 +369,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_event feature installed properly.
    */
   private function ensureEventFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create event content',
       'create terms in event_taxonomy',
       'use editorial transition create_new_draft',
@@ -398,13 +391,13 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
 
     // Check that the required fields exist in the form.
     foreach ($fields as $key => $value) {
-      $this->assertFieldByName($key);
+      $this->assertSession()->fieldExists($key);
     }
 
     $this->drupalPostForm('node/add/event', $fields, 'Save');
 
     // Ensure the auto entity label tokens were applied.
-    $this->assertText('Event Test event has been created.');
+    $this->assertSession()->pageTextContainsOnce('Event Test event has been created.');
 
     // Ensure the taxonomy is accessible.
     $this->drupalGet('admin/structure/taxonomy/manage/event_taxonomy/add');
@@ -417,7 +410,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_promotions feature installed properly.
    */
   private function ensurePromotionsFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create promotions content',
       'use editorial transition create_new_draft',
       'view own unpublished content',
@@ -435,7 +428,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_basic_page feature installed properly.
    */
   private function ensureBasicPageFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create basic_page content',
       'use editorial transition create_new_draft',
       'view own unpublished content',
@@ -453,7 +446,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
    * Test whether the ecms_landing_page feature installed properly.
    */
   private function ensureLandingPageFeatureInstalled(): void {
-    $account = $this->drupalCreateUser([
+    $account = $this->createUser([
       'create landing_page content',
     ]);
     $this->drupalLogin($account);
