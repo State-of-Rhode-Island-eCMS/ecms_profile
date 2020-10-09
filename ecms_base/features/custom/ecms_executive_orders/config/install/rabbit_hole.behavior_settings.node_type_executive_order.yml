@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.executive_order
+dependencies: {  }
 id: node_type_executive_order
 action: page_redirect
 allow_override: 1
