@@ -1,0 +1,21 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.executive_order
+id: node.executive_order.sticky
+field_name: sticky
+entity_type: node
+bundle: executive_order
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
