@@ -25,5 +25,6 @@ content:
 hidden:
   created: true
   field_hotel_image: true
+  langcode: true
   name: true
   uid: true
