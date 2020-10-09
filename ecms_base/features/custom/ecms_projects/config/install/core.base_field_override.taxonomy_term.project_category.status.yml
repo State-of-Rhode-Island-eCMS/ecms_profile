@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.project
-id: node.project.promote
-field_name: promote
-entity_type: node
-bundle: project
-label: 'Promoted to front page'
+    - taxonomy.vocabulary.project_category
+id: taxonomy_term.project_category.status
+field_name: status
+entity_type: taxonomy_term
+bundle: project_category
+label: Published
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

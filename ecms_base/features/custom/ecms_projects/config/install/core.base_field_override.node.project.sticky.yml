@@ -2,16 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_project_detours_needed
     - node.type.project
-id: node.project.field_project_detours_needed
-field_name: field_project_detours_needed
+id: node.project.sticky
+field_name: sticky
 entity_type: node
 bundle: project
-label: 'Project Detours Needed'
+label: 'Sticky at top of lists'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     value: 0

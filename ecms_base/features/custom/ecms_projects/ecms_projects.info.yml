@@ -3,14 +3,18 @@ description: 'Provides the Project content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - content_moderation
+  - content_translation
   - field
   - file
   - image
+  - language
   - media
   - media_library
   - menu_ui
   - node
   - path
+  - rabbit_hole
   - taxonomy
   - text
   - user
