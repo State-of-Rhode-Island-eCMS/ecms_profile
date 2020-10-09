@@ -47,6 +47,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-67: Added paragraphs feature to base install.
 - RIG-62: Added webform node module install by default.
 - RIG-78: Added default languages and translations for the default content types.
+- RIG-85: Added translation support for the hotel content type.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
