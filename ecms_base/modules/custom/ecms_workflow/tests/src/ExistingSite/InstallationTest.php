@@ -8,6 +8,7 @@ namespace Drupal\Tests\ecms_workflow\ExistingSite;
 require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
 
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
+use Drupal\user\Entity\Role;
 
 /**
  * ExistingSite tests for the ecms_workflow module.
