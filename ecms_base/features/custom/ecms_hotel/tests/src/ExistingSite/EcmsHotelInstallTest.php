@@ -14,7 +14,7 @@ use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
 
 /**
- * Functional tests for the EcmsHotelInstall feature.
+ * ExistingSite tests for the EcmsHotelInstall feature.
  *
  * @package Drupal\Tests\ecms_hotels\ExistingSite
  * @group ecms
