@@ -14,7 +14,7 @@ use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
 
 /**
- * Functional tests for the EcmsExecutiveOrdersInstall feature.
+ * ExistingSite tests for the EcmsExecutiveOrdersInstall feature.
  *
  * @package Drupal\Tests\ecms_executive_orders\ExistingSite
  * @group ecms
@@ -29,7 +29,7 @@ class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract
   const EXECUTIVE_ORDER_TRANSLATABLE_FIELDS = [
     'title[0][value]' => 'This is an executive order title',
     'field_executive_order_long_title[0][value]' => 'This is an executive order body',
-    'field_executive_order_text[0][address][address_line1]' => 'This is an executive order long text field',
+    'field_executive_order_text[0][value]' => 'This is an executive order long text field',
   ];
 
   /**
@@ -74,6 +74,7 @@ class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract
       'use editorial transition create_new_draft',
       'view any unpublished content',
       'create content translations',
+      'rabbit hole bypass node',
     ]);
 
     $this->account = $this->createUser();
@@ -150,17 +151,17 @@ class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract
     }
 
     $this->drupalGet('admin/modules/uninstall');
-    $this->assertSession()->checkboxNotChecked('uninstall[ecms_executive_order]');
+    $this->assertSession()->checkboxNotChecked('uninstall[ecms_executive_orders]');
 
     $edit = [];
-    $edit["uninstall[ecms_executive_order]"] = TRUE;
+    $edit["uninstall[ecms_executive_orders]"] = TRUE;
     // Submit the uninstall form.
     $this->drupalPostForm(NULL, $edit, t('Uninstall'));
 
     // Submit the confirmation form.
     $this->drupalPostForm(NULL, [], t('Uninstall'));
 
-    $this->assertSession()->fieldNotExists('uninstall[ecms_executive_order]');
+    $this->assertSession()->fieldNotExists('uninstall[ecms_executive_orders]');
 
     $this->drupalLogout();
   }
