@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.project
+dependencies: {  }
 id: node_type_project
 action: display_page
 allow_override: 1
