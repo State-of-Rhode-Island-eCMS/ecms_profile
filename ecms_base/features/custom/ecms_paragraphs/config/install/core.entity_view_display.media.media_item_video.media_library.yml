@@ -1,4 +1,3 @@
-uuid: ffb74dad-e1bb-4373-9437-91678abdab25
 langcode: en
 status: true
 dependencies:
@@ -26,5 +25,6 @@ content:
 hidden:
   created: true
   field_media_item_video_url: true
+  langcode: true
   name: true
   uid: true

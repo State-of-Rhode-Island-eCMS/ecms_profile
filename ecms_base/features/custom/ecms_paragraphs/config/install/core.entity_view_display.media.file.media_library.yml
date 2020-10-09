@@ -31,5 +31,6 @@ hidden:
   field_file_size: true
   field_file_title: true
   field_file_type: true
+  langcode: true
   name: true
   uid: true

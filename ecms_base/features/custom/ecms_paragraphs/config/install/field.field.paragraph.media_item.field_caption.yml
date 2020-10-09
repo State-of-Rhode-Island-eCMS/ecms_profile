@@ -4,8 +4,6 @@ dependencies:
   config:
     - field.storage.paragraph.field_caption
     - paragraphs.paragraphs_type.media_item
-  module:
-    - options
 id: paragraph.media_item.field_caption
 field_name: field_caption
 entity_type: paragraph
@@ -17,4 +15,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: list_string
+field_type: string

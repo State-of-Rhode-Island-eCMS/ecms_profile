@@ -1,4 +1,3 @@
-uuid: cb9185a5-bb5f-44e6-8364-5b49536091c4
 langcode: en
 status: true
 dependencies:
@@ -26,5 +25,6 @@ content:
 hidden:
   created: true
   field_media_item_image: true
+  langcode: true
   name: true
   uid: true

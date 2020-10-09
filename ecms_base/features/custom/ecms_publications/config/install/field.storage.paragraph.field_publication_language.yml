@@ -2,15 +2,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - language
     - paragraphs
-id: paragraph.field_caption
-field_name: field_caption
+id: paragraph.field_publication_language
+field_name: field_publication_language
 entity_type: paragraph
-type: string
+type: entity_reference
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  target_type: configurable_language
 module: core
 locked: false
 cardinality: 1

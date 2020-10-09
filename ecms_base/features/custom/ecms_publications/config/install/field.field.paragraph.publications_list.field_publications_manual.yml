@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_publications_manual
+    - node.type.publication
+    - paragraphs.paragraphs_type.publications_list
+id: paragraph.publications_list.field_publications_manual
+field_name: field_publications_manual
+entity_type: paragraph
+bundle: publications_list
+label: 'Publications (manual tagging)'
+description: 'If you do not wish to display publications by topic or language, you can manually tag specific publications to display. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      publication: publication
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

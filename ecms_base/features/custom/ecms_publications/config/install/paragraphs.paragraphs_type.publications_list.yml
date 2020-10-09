@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: publications_list
+label: 'Publications list'
+icon_uuid: null
+icon_default: null
+description: 'A list of publications that can be displayed through a variety of controls. '
+behavior_plugins: {  }

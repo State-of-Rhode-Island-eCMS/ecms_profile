@@ -1,4 +1,3 @@
-uuid: 75f5428c-594d-4988-a542-dde8e76e026f
 langcode: en
 status: true
 dependencies:
@@ -23,9 +22,11 @@ content:
     region: content
   field_caption:
     weight: 3
-    settings: {  }
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
   field_media_item:
     type: media_library_widget

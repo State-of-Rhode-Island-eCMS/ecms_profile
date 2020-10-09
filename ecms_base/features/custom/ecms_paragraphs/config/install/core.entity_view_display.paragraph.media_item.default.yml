@@ -1,4 +1,3 @@
-uuid: fd004502-f6f2-44db-81e6-fa7b22249f17
 langcode: en
 status: true
 dependencies:
@@ -25,9 +24,10 @@ content:
   field_caption:
     weight: 3
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: list_default
+    type: string
     region: content
   field_media_item:
     type: entity_reference_entity_view

@@ -3,8 +3,8 @@ status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_caption
-field_name: field_caption
+id: paragraph.field_publication_list_title
+field_name: field_publication_list_title
 entity_type: paragraph
 type: string
 settings:
