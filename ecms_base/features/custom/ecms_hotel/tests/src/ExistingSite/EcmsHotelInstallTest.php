@@ -149,7 +149,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
       $this->assertSession()->pageTextContainsOnce("Hotel {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
-      $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}");
+      $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}/latest");
     }
 
     $this->drupalGet('admin/modules/uninstall');
