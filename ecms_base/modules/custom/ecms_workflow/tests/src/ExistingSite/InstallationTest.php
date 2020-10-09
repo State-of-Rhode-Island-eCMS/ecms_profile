@@ -13,7 +13,7 @@ use Drupal\user\Entity\Role;
 /**
  * ExistingSite tests for the ecms_workflow module.
  *
- * @package Drupal\Tests\ecms_workflow\Existing
+ * @package Drupal\Tests\ecms_workflow\ExistingSite
  * @group ecms
  * @group ecms_workflow
  */
