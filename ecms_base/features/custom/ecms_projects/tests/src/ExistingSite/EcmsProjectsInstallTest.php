@@ -10,27 +10,13 @@ require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/A
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 
 /**
- * Functional tests for the EcmsProjectsInstall feature.
+ * ExistingSite tests for the EcmsProjectsInstall feature.
  *
  * @package Drupal\Tests\ecms_projects\ExistingSite
  * @group ecms
  * @group ecms_projects
  */
 class EcmsProjectsInstallTest extends AllProfileInstallationTestsAbstract {
-
-  /**
-   * The profile to install.
-   *
-   * @var string
-   */
-  protected $profile = 'ecms_base';
-
-  /**
-   * The theme to test with.
-   *
-   * @var string
-   */
-  protected $defaultTheme = 'ecms';
 
   /**
    * Test the ecms_projects installation.
