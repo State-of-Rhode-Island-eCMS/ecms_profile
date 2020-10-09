@@ -9,6 +9,8 @@ require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/A
 
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
+use Drupal\node\Entity\NodeType;
+
 
 /**
  * ExistingSite tests for the ecms_workflow module.
@@ -65,6 +67,31 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxChecked('edit-content-publisher-create-basic-page-content');
     $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-basic-page-content');
     $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-basic-page-content');
+
+  }
+
+  /**
+   * Test the ecms_workflow new content type creation.
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
+   */
+  public function testEcmsWorkflowNewContentType(): void {
+    $this->drupalLogin($this->account);
+
+    $type = NodeType::create([
+      'type' => 'test_content_type',
+      'name' => 'Test Content Type',
+    ]);
+
+    $type->save();
+
+    // Ensure the new test content type has proper permissions.
+    $this->drupalGet('admin/people/permissions');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-content-author-create-test-content-type-content');
+    $this->assertSession()->checkboxChecked('edit-content-publisher-create-test-content-type-content');
+    $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-test-content-type-content');
+    $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-test-content-type-content');
 
   }
 
