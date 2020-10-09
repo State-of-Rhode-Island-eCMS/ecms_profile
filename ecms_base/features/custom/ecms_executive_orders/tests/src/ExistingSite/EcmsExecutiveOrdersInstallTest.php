@@ -23,7 +23,6 @@ use Drupal\user\Entity\Role;
 class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract {
 
   /**
-   * Test the ecms_executive_orders installation.
    * Required fields for the executive_order content type.
    */
   const EXECUTIVE_ORDER_TRANSLATABLE_FIELDS = [
