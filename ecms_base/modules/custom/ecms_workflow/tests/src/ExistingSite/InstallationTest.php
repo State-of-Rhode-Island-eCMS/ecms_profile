@@ -11,7 +11,6 @@ use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
 use Drupal\node\Entity\NodeType;
 
-
 /**
  * ExistingSite tests for the ecms_workflow module.
  *
