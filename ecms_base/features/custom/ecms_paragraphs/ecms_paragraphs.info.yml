@@ -10,9 +10,10 @@ dependencies:
   - field
   - file
   - filter
-  - language
   - image
+  - language
   - media
+  - media_library
   - options
   - paragraphs
   - path
