@@ -60,8 +60,25 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
    */
   private $media;
 
+  /**
+   * The topic taxonomy term to test with.
+   *
+   * @var \Drupal\taxonomy\Entity\Term
+   */
   private $topicTerm;
+
+  /**
+   * The audience taxonomy term to test with.
+   *
+   * @var \Drupal\taxonomy\Entity\Term
+   */
   private $audienceTerm;
+
+  /**
+   * The publication taxonomy term to test with.
+   *
+   * @var \Drupal\taxonomy\Entity\Term
+   */
   private $publicationTerm;
 
   /**
