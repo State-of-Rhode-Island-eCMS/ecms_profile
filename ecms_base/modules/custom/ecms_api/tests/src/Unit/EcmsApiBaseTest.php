@@ -6,6 +6,7 @@ namespace Drupal\Tests\ecms_api\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\ecms_api\EcmsApiBase;
@@ -127,6 +128,16 @@ class EcmsApiBaseTest extends UnitTestCase {
    * The endpoint for the node_type api.
    */
   const NODE_TYPE_ENDPOINT = '/EcmsApi/node_type/node_type';
+
+  /**
+   * The language ID to test with.
+   */
+  const LANGUAGE_ID = 'de';
+
+  /**
+   * The endpoint url if the entity is not in the default language.
+   */
+  const ENTITY_ENDPOINT_LANGUAGE = 'https://oomphinc.com/de/EcmsApi/entity_type_test/entity_bundle';
 
   /**
    * Mock of the http_client service.
@@ -322,12 +333,32 @@ class EcmsApiBaseTest extends UnitTestCase {
    *
    * @dataProvider dataProviderForTestSubmitEntity
    */
-  public function testSubmitEntity(string $method, int $code, bool $expected): void {
-    $endpoint = self::ENTITY_ENDPOINT;
+  public function testSubmitEntity(string $method, int $code, bool $defaultLanguage, bool $expected): void {
+    if ($defaultLanguage) {
+      $endpoint = self::ENTITY_ENDPOINT;
+    }
+    else {
+      $endpoint = self::ENTITY_ENDPOINT_LANGUAGE;
+    }
+
     $uuidCount = 2;
     $bundleCount = 2;
     // Test for all allowed requests.
     if ($code !== 0) {
+
+      $language = $this->createMock(LanguageInterface::class);
+      $language->expects($this->once())
+        ->method('getId')
+        ->willReturn(self::LANGUAGE_ID);
+
+      $language->expects($this->once())
+        ->method('isDefault')
+        ->willReturn($defaultLanguage);
+
+      $this->entity->expects($this->once())
+        ->method('language')
+        ->willReturn($language);
+
       // If test 6, change the bundle count.
       if ($code === 6) {
         $bundleCount = 1;
@@ -425,32 +456,44 @@ class EcmsApiBaseTest extends UnitTestCase {
       'test1' => [
         'DELETE',
         0,
+        TRUE,
         FALSE,
       ],
       'test2' => [
         'POST',
         201,
         TRUE,
+        TRUE,
       ],
       'test3' => [
         'PATCH',
         200,
         TRUE,
+        TRUE,
       ],
       'test4' => [
         'POST',
         401,
+        TRUE,
         FALSE,
       ],
       'test5' => [
         'POST',
         -1,
+        TRUE,
         FALSE,
       ],
       'test6' => [
         'POST',
         6,
+        TRUE,
         FALSE,
+      ],
+      'test7' => [
+        'PATCH',
+        200,
+        FALSE,
+        TRUE,
       ],
     ];
   }
