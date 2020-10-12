@@ -361,24 +361,24 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
 
     foreach (self::SELECTED_NODE_TYPES as $key => $value) {
       $grantMap[] = [
-        "create {$key} content"
+        "create {$key} content",
       ];
 
       $grantMap[] = [
-        "edit own {$key} content"
+        "edit own {$key} content",
       ];
 
       $grantMap[] = [
-        "translate {$key} node"
+        "translate {$key} node",
       ];
     }
 
     $grantMap[] = [
-      'use editorial transition publish'
+      'use editorial transition publish',
     ];
 
     $grantMap[] = [
-      'create content translations'
+      'create content translations',
     ];
 
     return $grantMap;

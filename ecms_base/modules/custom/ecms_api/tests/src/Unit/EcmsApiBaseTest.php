@@ -328,6 +328,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    *   The HTTP method to submit.
    * @param int $code
    *   The http status code to mock.
+   * @param bool $defaultLanguage
+   *   Whether the entity has the default language.
    * @param bool $expected
    *   The expected response.
    *
