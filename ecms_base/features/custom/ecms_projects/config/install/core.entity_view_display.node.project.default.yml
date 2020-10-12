@@ -19,6 +19,11 @@ targetEntityType: node
 bundle: project
 mode: default
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   field_project_body:
     weight: 103
     label: above
@@ -90,4 +95,5 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  langcode: true

@@ -5,7 +5,14 @@ dependencies:
     - field.storage.media.field_media_image_2
     - media.type.project_main_image
   module:
+    - content_translation
     - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      file: file
+      alt: '0'
+      title: '0'
 id: media.project_main_image.field_media_image_2
 field_name: field_media_image_2
 entity_type: media

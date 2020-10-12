@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.project_main_image
+id: media.project_main_image.created
+field_name: created
+entity_type: media
+bundle: project_main_image
+label: 'Authored on'
+description: 'The time the media item was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\media\Entity\Media::getRequestTime'
+settings: {  }
+field_type: created

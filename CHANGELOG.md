@@ -49,6 +49,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-78: Added default languages and translations for the default content types.
 - RIG-85: Added translation support for the hotel content type.
 - RIG-84: Added translation support for the executive order content type.
+- RIG-86: Added translation support for the projects content type.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
