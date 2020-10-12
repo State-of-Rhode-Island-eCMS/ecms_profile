@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.publication
-id: node.publication.promote
-field_name: promote
-entity_type: node
-bundle: publication
-label: 'Promoted to front page'
+    - media.type.publication_file
+id: media.publication_file.status
+field_name: status
+entity_type: media
+bundle: publication_file
+label: Published
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

@@ -4,6 +4,7 @@ type: module
 core_version_requirement: ^9
 dependencies:
   - content_moderation
+  - content_translation
   - datetime
   - field
   - file
