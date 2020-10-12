@@ -216,10 +216,12 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->method('revokePermission')
       ->willReturnSelf();
 
-    $grantCount = (count(self::SELECTED_NODE_TYPES) * 2) + 1;
+    $grantCount = (count(self::SELECTED_NODE_TYPES) * 3) + 2;
+    $grantMap = $this->getGrantMap();
+
     $roleEntity->expects($this->exactly($grantCount))
       ->method('grantPermission')
-      ->willReturnSelf();
+      ->willReturnMap($grantMap);
 
     $roleEntity->expects($this->once())
       ->method('save')
@@ -321,10 +323,12 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->method('revokePermission')
       ->willReturnSelf();
 
-    $grantCount = (count(self::SELECTED_NODE_TYPES) * 2) + 1;
+    $grantCount = (count(self::SELECTED_NODE_TYPES) * 3) + 2;
+    $grantMap = $this->getGrantMap();
+
     $roleEntity->expects($this->exactly($grantCount))
       ->method('grantPermission')
-      ->willReturnSelf();
+      ->willReturnMap($grantMap);
 
     $exception = $this->createMock(EntityStorageException::class);
     $roleEntity->expects($this->once())
@@ -344,6 +348,40 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
 
     $form = [];
     $this->configForm->submitForm($form, $this->formState);
+  }
+
+  /**
+   * Get the permissions expected to be granted to a role.
+   *
+   * @return array
+   *   The array of permissions expected to be granted by a role.
+   */
+  private function getGrantMap(): array {
+    $grantMap = [];
+
+    foreach (self::SELECTED_NODE_TYPES as $key => $value) {
+      $grantMap[] = [
+        "create {$key} content"
+      ];
+
+      $grantMap[] = [
+        "edit own {$key} content"
+      ];
+
+      $grantMap[] = [
+        "translate {$key} node"
+      ];
+    }
+
+    $grantMap[] = [
+      'use editorial transition publish'
+    ];
+
+    $grantMap[] = [
+      'create content translations'
+    ];
+
+    return $grantMap;
   }
 
 }
