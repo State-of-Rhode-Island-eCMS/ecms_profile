@@ -10,4 +10,133 @@
  * @ingroup themeable
  */
 #}
-{% include "@molecules/01-layout/four-column.twig" %}
+
+{% if content|render %}
+  {% include "@molecules/01-layout/four-column.twig" %}
+{% endif %}
+
+
+<div class="panel">
+		<a name="content"></a>
+		<h1>Food Sites for  Children</h1>
+
+		<p>Due to the closure of schools, free "Grab and Go" meals are available for children throughout Rhode Island. New sites are still being added so please check back or contact your school district or charter school for more options.
+		</p>
+		<p>At the vast majority of these sites, anyone aged 18 or under who shows up gets a free meal. Some food sites are only providing meals to students who are enrolled in that school/district.  These sites have a note under the Time section indicating any restrictions. Some sites now allow parents to pick up meals on behalf of their  child, but only if their child attends one of the sites on this list that is  indicated with an asterisk (*) after the Location name. Parents should be  prepared to validate their connection to the student and in some cases ID may  be required. Please check with the individual site for its pickup  requirements.&nbsp;
+		</p>
+		<p>Youth under the age of 18 are still able to receive meals from  any of the open sites on this list as long as they are present for the pick up,  even if they do not attend that school.</p>
+		<div class="noprint">
+			<form name="form" method="post" action="" onsubmit="return validate(this)">
+				<fieldset>
+					<legend>Find Food Sites</legend>
+					<div class="large-9 columns">
+						<select name="city" onchange='reload(this.form)' value=''>School City</option>
+						<option value=' Select'>
+							Select a City/Town</option>
+						<option value='All'>All</option>
+						<option value='Barrington'>Barrington</option>
+						<option value='Bristol'>Bristol</option>
+						<option value='Burrillville'>Burrillville</option>
+						<option value='Central Falls'>Central Falls</option>
+						<option value='Charlestown'>Charlestown</option>
+						<option value='Coventry'>Coventry</option>
+						<option value='Cranston'>Cranston</option>
+						<option value='Cumberland'>Cumberland</option>
+						<option value='East Greenwich'>East Greenwich</option>
+						<option value='East Providence'>East Providence</option>
+						<option value='Exeter'>Exeter</option>
+						<option value='Foster'>Foster</option>
+						<option value='Glocester'>Glocester</option>
+						<option value='Hopkinton'>Hopkinton</option>
+						<option value='Jamestown'>Jamestown</option>
+						<option value='Johnston'>Johnston</option>
+						<option value='Lincoln'>Lincoln</option>
+						<option value='Little Compton'>Little Compton</option>
+						<option value='Middletown'>Middletown</option>
+						<option value='Narragansett'>Narragansett</option>
+						<option value='New Shoreham'>New Shoreham</option>
+						<option value='Newport'>Newport</option>
+						<option value='North Kingstown'>North Kingstown</option>
+						<option value='North Providence'>North Providence</option>
+						<option value='North Smithfield'>North Smithfield</option>
+						<option value='Pawtucket'>Pawtucket</option>
+						<option value='Portsmouth'>Portsmouth</option>
+						<option value='Providence'>Providence</option>
+						<option value='Richmond'>Richmond</option>
+						<option value='Scituate'>Scituate</option>
+						<option value='Smithfield'>Smithfield</option>
+						<option value='South Kingstown'>South Kingstown</option>
+						<option value='Tiverton'>Tiverton</option>
+						<option value='Warren'>Warren</option>
+						<option value='Warwick'>Warwick</option>
+						<option value='West Greenwich'>West Greenwich</option>
+						<option value='West Warwick'>West Warwick</option>
+						<option value='Westerly'>Westerly</option>
+						<option value='Woonsocket'>Woonsocket</option>
+					</select>
+					Note: Sites may take a few seconds to load.
+				</div>
+				<div class="large-3 columns">
+					<input class="small button" type="submit" name="submit" id="submit" value="See Sites">
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div
+		style="clear:both"><!--	<p>Note: The American Academy of Pediatrics (AAP) recommends intramuscular inactivated influenza vaccine (IIV) for children in the 2018-2019 season as it has been more consistently effective against most strains of flu in recent seasons, but says the nasal vaccine (LAIV) may be an option for kids who otherwise will not be vaccinated.</p>-->
+	</div>
+	<div style="clear:both">
+		<h3>
+			All Food Sites for  Children</h3>
+	</p>
+	<div id="table_Up"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	 google.load("visualization", "1", {packages:["corechart", "table"]});
+//google.charts.load('current', {packages: ['table']});
+var php_var = "All";
+if (php_var != ' Select')
+	{	google.setOnLoadCallback(drawTableUp);
+		//google.charts.setOnLoadCallback(drawTableUp);
+	}
+
+
+function drawTableUp() {
+var opts = {sendMethod: 'auto'};
+var query2 = new google.visualization.Query('https://docs.google.com/spreadsheet/tq?key=1ZRxojvEm2Pz0RG_Cn8eAjfyhXjrp105kiFv5kpybhLc&transpose=0&headers=1&gid=911713538', opts);
+var php_var2 = "All";
+if (php_var2 != 'All')
+	{query2.setQuery("select A,B, C, D, E where E = 'All' order by E, A"); }
+	else{query2.setQuery("select A,B,C,  D, E order by E, A"); }
+query2.send(handleQueryResponseTableUp);
+
+}
+function handleQueryResponseTableUp(response) {
+
+
+  if (response.isError()) {
+    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+
+var data2 = response.getDataTable();
+rows = data2.getNumberOfRows();
+if (rows > 0 )
+	{
+var table2 = new google.visualization.Table(document.getElementById('table_Up'));
+table2.draw(data2, {allowHtml: true,  showRowNumber: false, width: '100%', height: '100%'});
+    }
+	else
+	{		 alert('No sites available in that city/town.' ); }
+
+}
+	  ;
+
+</script>
+<style>
+.google-visualization-table-tr-head{
+background-color: #23689f ;
+</style>
+
