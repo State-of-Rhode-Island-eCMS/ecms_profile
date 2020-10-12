@@ -8,13 +8,12 @@ namespace Drupal\Tests\ecms_speeches\ExistingSite;
 require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
 
 use Drupal\Core\Entity\EntityStorageException;
-use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
 
 /**
- * Functional tests for the EcmsSpeechesInstall feature.
+ * ExistingSite tests for the EcmsSpeechesInstall feature.
  *
  * @package Drupal\Tests\ecms_hotels\ExistingSite
  * @group ecms
