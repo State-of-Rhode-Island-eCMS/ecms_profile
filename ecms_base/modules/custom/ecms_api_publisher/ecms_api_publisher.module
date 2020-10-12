@@ -24,3 +24,13 @@ function hook_node_update(EntityInterface $entity): void {
   // Call the syndication service on node update.
   \Drupal::service('ecms_api_publisher.syndicate')->syndicateNode($entity, 'UPDATE');
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_translation_insert() for the node entity.
+ */
+function ecms_api_publisher_node_translation_insert(EntityInterface $translation) {
+  // Call the syndication service on translation insert.
+  // Translation support currently requires the patch from here:
+  // @see: https://www.drupal.org/project/drupal/issues/2794431#comment-13841477
+  \Drupal::service('ecms_api_publisher.syndicate')->syndicateNode($translation, 'UPDATE');
+}
