@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: embed_author
-label: 'Embed Author'
-weight: 4
-is_admin: null
-permissions:
-  - 'use text format embed'
