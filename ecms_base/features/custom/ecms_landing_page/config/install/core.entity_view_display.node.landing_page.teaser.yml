@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
   module:
     - user
@@ -25,3 +26,4 @@ content:
 hidden:
   field_landing_page_body: true
   langcode: true
+  layout_builder__layout: true
