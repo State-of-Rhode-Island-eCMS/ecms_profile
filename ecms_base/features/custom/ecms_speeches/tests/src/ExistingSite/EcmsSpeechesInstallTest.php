@@ -138,7 +138,7 @@ class EcmsSpeechesInstallTest extends AllProfileInstallationTestsAbstract {
       $this->assertSession()->pageTextContainsOnce("Speech {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
-      $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}/latest");
+      $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}");
     }
 
     $this->drupalGet('admin/modules/uninstall');
