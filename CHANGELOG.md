@@ -51,6 +51,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-84: Added translation support for the executive order content type.
 - RIG-86: Added translation support for the projects content type.
 - RIG-87: Added translation support for the publication content type.
+- RIG-88: Added translation support for the speech content type.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
