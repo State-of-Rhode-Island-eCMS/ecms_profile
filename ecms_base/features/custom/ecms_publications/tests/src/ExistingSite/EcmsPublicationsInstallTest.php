@@ -15,7 +15,7 @@ use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
 
 /**
- * Functional testing for the EcmsPublicationsInstall feature.
+ * ExistingSite testing for the EcmsPublicationsInstall feature.
  *
  * @package Drupal\Tests\ecms_publications\ExistingSite
  * @group ecms
@@ -92,12 +92,8 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
    * @throws \Behat\Mink\Exception\ExpectationException
    */
   public function testEcmsPublicationInstallation(): void {
-    $account = $this->createUser([
-      'administer modules',
-      'administer site configuration',
-      'access administration pages',
-    ]);
-    $this->drupalLogin($account);
+
+    $this->drupalLogin($this->account);
 
     $this->drupalGet('admin/modules');
     $this->assertSession()->statusCodeEquals(200);
@@ -137,10 +133,6 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
 
     $this->drupalGet("node/{$nodeId}");
     $this->assertSession()->statusCodeEquals(200);
-
-    foreach (self::PUBLICATION_TRANSLATABLE_FIELDS as $key => $value) {
-      $this->assertSession()->pageTextContainsOnce($value);
-    }
 
     foreach (self::DEFAULT_INSTALLED_LANGUAGES as $lang) {
       if ($lang === 'en') {
@@ -220,17 +212,17 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     }
 
     $this->publicationTerm = Term::create([
-      'bundle' => 'publication_type',
+      'vid' => 'publication_type',
       'name' => $this->randomMachineName(),
     ]);
 
     $this->audienceTerm = Term::create([
-      'bundle' => 'publication_audience',
+      'vid' => 'publication_audience',
       'name' => $this->randomMachineName(),
     ]);
 
     $this->topicTerm = Term::create([
-      'bundle' => 'publication_topic',
+      'vid' => 'publication_topic',
       'name' => $this->randomMachineName(),
     ]);
 
