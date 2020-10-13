@@ -7,13 +7,16 @@ dependencies:
   - content_translation
   - datetime
   - ecms_workflow
+  - entity_reference_revisions
   - field
   - language
   - link
   - menu_ui
   - node
+  - paragraphs
   - path
   - rabbit_hole
+  - taxonomy
   - text
   - user
 package: eCMS

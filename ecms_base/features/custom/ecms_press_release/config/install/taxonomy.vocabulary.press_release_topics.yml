@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Press Release Topics'
+vid: press_release_topics
+description: 'Group press releases by topics.'
+weight: 0

@@ -5,10 +5,13 @@ dependencies:
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
+    - field.field.node.press_release.field_press_release_paragraphs
     - field.field.node.press_release.field_press_release_source
+    - field.field.node.press_release.field_press_release_topics
     - node.type.press_release
   module:
     - datetime
+    - entity_reference_revisions
     - link
     - text
     - user
@@ -50,12 +53,29 @@ content:
     third_party_settings: {  }
     type: link
     region: content
+  field_press_release_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 105
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_press_release_source:
     weight: 104
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_press_release_topics:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
     weight: 100

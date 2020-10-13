@@ -51,6 +51,7 @@ dependencies:
   - quickedit
   - rabbit_hole
   - rh_node
+  - rh_taxonomy
   - responsive_image
   - rdf
   - shortcut

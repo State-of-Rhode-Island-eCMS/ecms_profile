@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.press_release_topics
+id: taxonomy_vocabulary_press_release_topics
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301

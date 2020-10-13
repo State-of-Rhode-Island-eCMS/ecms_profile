@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_press_release_paragraphs
+    - node.type.press_release
+  module:
+    - entity_reference_revisions
+id: node.press_release.field_press_release_paragraphs
+field_name: field_press_release_paragraphs
+entity_type: node
+bundle: press_release
+label: 'Press Release Content Components'
+description: 'Add one or more flexible content components.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 1
+    target_bundles: null
+    target_bundles_drag_drop:
+      file_list:
+        weight: 4
+        enabled: false
+      formatted_text:
+        weight: 5
+        enabled: false
+      media_item:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions
