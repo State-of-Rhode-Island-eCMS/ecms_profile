@@ -20,7 +20,7 @@ function ecms_api_publisher_node_insert(EntityInterface $entity) {
 /**
  * Implements hook_ENTITY_TYPE_update() for the node entity.
  */
-function hook_node_update(EntityInterface $entity): void {
+function ecms_api_publisher_node_update(EntityInterface $entity): void {
   // Call the syndication service on node update.
   \Drupal::service('ecms_api_publisher.syndicate')->syndicateNode($entity, 'UPDATE');
 }
