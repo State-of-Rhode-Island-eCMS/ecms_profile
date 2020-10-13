@@ -2,17 +2,18 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\ecms_api_recipient\Functional;
+namespace Drupal\Tests\ecms_api_recipient\ExistingSite;
 
 // Require the all profiles abstract class since autoloading doesn't work.
-require_once dirname(__FILE__) . '/../../../../../../../tests/src/Functional/AllProfileInstallationTestsAbstract.php';
+require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
 
-use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
+use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
+use Drupal\user\Entity\Role;
 
 /**
- * Functional testing for the ecms_api_recipient module.
+ * ExistingSite testing for the ecms_api_recipient module.
  *
- * @package Drupal\Tests\ecms_api_recipient\Functional
+ * @package Drupal\Tests\ecms_api_recipient\ExistingSite
  * @group ecms
  * @group ecms_api
  * @group ecms_api_recipient
@@ -20,18 +21,37 @@ use Drupal\Tests\ecms_profile\Functional\AllProfileInstallationTestsAbstract;
 class InstallationTest extends AllProfileInstallationTestsAbstract {
 
   /**
-   * Define the profile to test.
+   * The user account to test with.
+   *
+   * @var \Drupal\user\Entity\User
+   */
+  private $account;
+
+  /**
+   * The user role id to test with.
    *
    * @var string
    */
-  protected $profile = 'ecms_base';
+  private $role;
 
   /**
-   * Define the additional modules to install.
-   *
-   * @var string[]
+   * {@inheritDoc}
    */
-  protected static $modules = ['ecms_api_recipient'];
+  protected function setUp(): void {
+    parent::setUp();
+
+    $this->role = $this->coreCreateRole([
+      'administer modules',
+      'administer permissions',
+      'administer users',
+      'administer site configuration',
+      'access administration pages',
+    ]);
+
+    $this->account = $this->coreCreateUser();
+    $this->account->addRole($this->role);
+    $this->account->save();
+  }
 
   /**
    * Test the ecms_api_recipient installation.
@@ -40,14 +60,25 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function testEcmsApiRecipientInstallation(): void {
-    $account = $this->drupalCreateUser([
-      'administer permissions',
-      'administer consumer entities',
-      'administer users',
-      'administer site configuration',
-      'access administration pages',
-    ]);
-    $this->drupalLogin($account);
+
+    $this->drupalLogin($this->account);
+
+    $this->drupalGet('admin/modules');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxNotChecked('modules[ecms_api_recipient][enable]');
+
+    // Enable the ecms_api_recipient module.
+    $edit = [];
+    $edit["modules[ecms_api_recipient][enable]"] = TRUE;
+    $this->drupalPostForm(NULL, $edit, t('Install'));
+
+    // Submit the confirmation form.
+    $this->drupalPostForm(NULL, [], t('Continue'));
+
+    // Give the user the correct permissions.
+    $role = Role::load($this->role);
+    $role->grantPermission('administer consumer entities');
+    $role->save();
 
     // Ensure the ecms_api_recipient role was installed.
     $this->drupalGet('admin/people/roles/manage/ecms_api_recipient');
@@ -59,6 +90,8 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-notification-content');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-notification-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-translate-notification-node');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-content-translations');
 
     // Ensure the user account was created.
     $this->drupalGet('admin/people');
@@ -110,8 +143,11 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-notification-content');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-notification-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-translate-notification-node');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-basic-page-content');
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-basic-page-content');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-content-translations');
+    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-translate-basic-page-node');
 
     $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-create-event-content');
     $this->assertSession()->checkboxNotChecked('edit-ecms-api-recipient-edit-own-event-content');
@@ -121,6 +157,22 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->linkExists('eCMS API Allowed Recipients');
 
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function tearDown(): void {
+    parent::tearDown();
+
+    if (!empty($this->account)) {
+      $this->account->delete();
+    }
+
+    $role = Role::load($this->role);
+    if (!empty($role)) {
+      $role->delete();
+    }
   }
 
 }

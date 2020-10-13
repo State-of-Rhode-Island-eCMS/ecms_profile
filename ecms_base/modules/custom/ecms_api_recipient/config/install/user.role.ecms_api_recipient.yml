@@ -9,3 +9,5 @@ permissions:
   - 'create notification content'
   - 'edit own notification content'
   - 'use editorial transition publish'
+  - 'create content translations'
+  - 'translate notification node'

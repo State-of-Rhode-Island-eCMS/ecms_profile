@@ -225,6 +225,9 @@ abstract class EcmsApiBase {
    *   The full url to the endpoint API.
    */
   protected function getEndpointUrl(Url $url, EntityInterface $entity, string $method): string {
+    $language = $entity->language();
+    $languageEndpoint = $language->getId();
+
     // Get the endpoint for the entity.
     $entityPath = "{$entity->getEntityTypeId()}/{$entity->bundle()}";
 
@@ -232,6 +235,11 @@ abstract class EcmsApiBase {
       $entityPath = "{$entityPath}/{$entity->uuid()}";
     }
     $endPoint = self::API_ENDPOINT;
+
+    // Append the language id if it is not the default language.
+    if (!$language->isDefault()) {
+      return "{$url->toString()}/{$languageEndpoint}/{$endPoint}/{$entityPath}";
+    }
 
     return "{$url->toString()}/{$endPoint}/{$entityPath}";
   }

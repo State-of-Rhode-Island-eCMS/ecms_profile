@@ -70,5 +70,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
+- RIG-89: Fixed the Ecms API to work with syndicating translations.
 
 ### Security
