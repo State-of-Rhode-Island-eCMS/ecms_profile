@@ -39,6 +39,7 @@ dependencies:
   - media_library
   - menu_link_content
   - menu_ui
+  - moderated_content_bulk_publish
   - moderation_dashboard
   - node
   - openid_connect_windows_aad
