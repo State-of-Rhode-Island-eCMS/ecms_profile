@@ -36,8 +36,8 @@ content:
     type: entity_reference_paragraphs
     weight: 122
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
+      title: 'Content Component'
+      title_plural: 'Content Components'
       edit_mode: preview
       add_mode: dropdown
       form_display_mode: default
@@ -94,9 +94,9 @@ content:
     third_party_settings: {  }
   translation:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 5
