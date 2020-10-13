@@ -53,6 +53,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-87: Added translation support for the publication content type.
 - RIG-88: Added translation support for the speech content type.
 - RIG-22: Added moderated_content_bulk_publish module, installed by default.
+- RIG-94: Added Press Release paragraphs field.
+- RIG-95: Added Press Release Topics taxonomy.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
