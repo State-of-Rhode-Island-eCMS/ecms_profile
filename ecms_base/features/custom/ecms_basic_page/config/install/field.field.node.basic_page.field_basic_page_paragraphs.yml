@@ -10,8 +10,8 @@ id: node.basic_page.field_basic_page_paragraphs
 field_name: field_basic_page_paragraphs
 entity_type: node
 bundle: basic_page
-label: 'Basic Page Paragraphs'
-description: ''
+label: 'Page Content Components'
+description: 'Add one or more flexible content components.'
 required: false
 translatable: false
 default_value: {  }
@@ -30,8 +30,5 @@ settings:
         enabled: false
       media_item:
         weight: 7
-        enabled: false
-      publications_list:
-        weight: 8
         enabled: false
 field_type: entity_reference_revisions
