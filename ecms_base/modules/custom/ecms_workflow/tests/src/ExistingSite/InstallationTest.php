@@ -110,7 +110,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     }
 
     // Remove the test content type.
-    $content_type = \Drupal::entityManager()->getStorage('node_type')->load('test_content_type');
+    $content_type = \Drupal::entityTypeManager()->getStorage('node_type')->load('test_content_type');
     $content_type->delete();
 
   }
