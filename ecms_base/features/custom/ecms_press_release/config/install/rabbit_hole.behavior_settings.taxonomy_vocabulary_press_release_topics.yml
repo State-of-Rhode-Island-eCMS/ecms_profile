@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - taxonomy.vocabulary.press_release_topics
+dependencies: {  }
 id: taxonomy_vocabulary_press_release_topics
 action: page_not_found
 allow_override: 0
