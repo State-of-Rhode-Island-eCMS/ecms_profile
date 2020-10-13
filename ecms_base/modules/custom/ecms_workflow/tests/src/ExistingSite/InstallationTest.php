@@ -106,8 +106,6 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     catch (EntityStorageException $e) {
       return;
     }
-
-
   }
 
   /**
