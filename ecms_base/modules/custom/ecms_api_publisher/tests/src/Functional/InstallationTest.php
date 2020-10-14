@@ -51,6 +51,15 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     ]);
     $this->drupalLogin($account);
 
+    // Ensure the ecms_api_publisher role was installed.
+    $this->drupalGet('admin/people/roles/manage/ecms_api_publisher');
+    $this->assertSession()->statusCodeEquals(200);
+
+    // Ensure the correct permissions are selected on install.
+    $this->drupalGet('admin/people/permissions/ecms_api_publisher');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('ecms_api_publisher[view any unpublished content]');
+
     $this->drupalGet('admin/config/ecms_api/ecms_api_publisher/site/add');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->fieldExists('edit-name-0-value');
