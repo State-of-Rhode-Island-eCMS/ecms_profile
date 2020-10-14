@@ -87,11 +87,16 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     // Ensure the correct permissions are selected on install.
     $this->drupalGet('admin/people/permissions/ecms_api_recipient');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');
-    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-notification-content');
-    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-edit-own-notification-content');
-    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-translate-notification-node');
-    $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-create-content-translations');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[create notification content]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[edit own notification content]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[use editorial transition archive]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[use editorial transition create_new_draft]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[use editorial transition archived_published]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[use editorial transition publish]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[use editorial transition review]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[create content translations]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[translate notification node]');
+    $this->assertSession()->checkboxChecked('ecms_api_recipient[view own unpublished content]');
 
     // Ensure the user account was created.
     $this->drupalGet('admin/people');
