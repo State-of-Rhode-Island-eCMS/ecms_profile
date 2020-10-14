@@ -44,8 +44,6 @@ class EcmsApiPublisher extends EcmsApiBase {
   /**
    * Queue a node for syndication.
    *
-   * @param string $method
-   *   The HTTP method to use for the syndication. POST or PATCH.
    * @param \Drupal\Core\Url $recipientUrl
    *   The URL of the API receiving the node.
    * @param \Drupal\node\NodeInterface $node
@@ -54,7 +52,7 @@ class EcmsApiPublisher extends EcmsApiBase {
    * @return bool
    *   True if successfully saved.
    */
-  public function syndicateNode(string $method, Url $recipientUrl, NodeInterface $node): bool {
+  public function syndicateNode(Url $recipientUrl, NodeInterface $node): bool {
 
     $clientId = $this->getClientId();
     $clientSecret = $this->getClientSecret();
@@ -69,7 +67,7 @@ class EcmsApiPublisher extends EcmsApiBase {
     }
 
     // Submit the entity to the API.
-    return $this->submitEntity($method, $accessToken, $recipientUrl, $node);
+    return $this->submitEntity($accessToken, $recipientUrl, $node);
   }
 
   /**

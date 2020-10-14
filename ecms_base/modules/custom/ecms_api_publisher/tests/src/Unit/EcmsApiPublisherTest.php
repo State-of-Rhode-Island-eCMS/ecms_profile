@@ -99,7 +99,6 @@ class EcmsApiPublisherTest extends UnitTestCase {
    * @dataProvider dataProviderForTestSyndicateNode
    */
   public function testSyndicateNode(?string $accessToken, bool $expected): void {
-    $method = 'INSERT';
     $url = $this->createMock(Url::class);
     $node = $this->createMock(NodeInterface::class);
 
@@ -111,11 +110,11 @@ class EcmsApiPublisherTest extends UnitTestCase {
     if (!empty($accessToken)) {
       $this->ecmsApiPublisher->expects($this->once())
         ->method('submitEntity')
-        ->with($method, $accessToken, $url, $node)
+        ->with($accessToken, $url, $node)
         ->willReturn($expected);
     }
 
-    $result = $this->ecmsApiPublisher->syndicateNode($method, $url, $node);
+    $result = $this->ecmsApiPublisher->syndicateNode($url, $node);
 
     $this->assertEquals($expected, $result);
   }
