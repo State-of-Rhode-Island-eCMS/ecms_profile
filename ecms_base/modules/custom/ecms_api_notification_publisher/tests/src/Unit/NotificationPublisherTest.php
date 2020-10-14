@@ -150,7 +150,7 @@ class NotificationPublisherTest extends UnitTestCase {
           )) {
           $this->ecmsApiSyndicate->expects($this->once())
             ->method('syndicateNode')
-            ->with($this->node, 'INSERT');
+            ->with($this->node);
         }
       }
     }

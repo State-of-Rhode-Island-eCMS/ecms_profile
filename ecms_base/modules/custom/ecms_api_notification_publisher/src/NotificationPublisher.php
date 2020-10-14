@@ -58,14 +58,8 @@ class NotificationPublisher extends EcmsApiBase {
     // If the node has just transitioned to published or not-published.
     if ($this->hasTransitionedToPublished($node) || $this->hasTransitionedToNotPublished($node)) {
       // @todo: Need to determine insert, update or refactor away?
-      $this->ecmsApiSyndicate->syndicateNode($node, 'INSERT');
+      $this->ecmsApiSyndicate->syndicateNode($node);
     }
-
-    // @todo: Remove this code block once refactored syndicateNode method.
-    //    if ($this->hasTransitionedToNotPublished($node)) {
-    //      // If the node has just transitioned to not published, update the node.
-    //      $this->ecmsApiSyndicate->syndicateNode($node, 'UPDATE');
-    //    }
   }
 
   /**
