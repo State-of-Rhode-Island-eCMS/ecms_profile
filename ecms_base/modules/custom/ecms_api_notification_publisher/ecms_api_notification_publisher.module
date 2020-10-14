@@ -27,21 +27,8 @@ function ecms_api_notification_publisher_node_update(EntityInterface $entity): v
  * Implements hook_ENTITY_TYPE_translation_insert() for the node entity.
  */
 function ecms_api_notification_publisher_node_translation_insert(EntityInterface $translation): void {
-  \Drupal::service('ecms_api_notification_publisher')->broadcastNotification($translation);
   // Call the syndication service on translation insert.
   // Translation support currently requires the patch from here:
   // @see: https://www.drupal.org/project/drupal/issues/2794431#comment-13841477
-  //\Drupal::service('ecms_api_publisher.syndicate')->syndicateNode($translation, 'UPDATE');
+  \Drupal::service('ecms_api_notification_publisher')->broadcastNotification($translation);
 }
-
-
-/**
- * @todo: Check if a notification is published on insert
- *   - if yes, syndicate the node
- * @todo: Check if a node has transitioned to published on update.
- *   - if published, syndicate the node.
- * @todo: On syndication, check if the node already exists on the site.
- *   - if exists, PATCH the node.
- *   - if not exists, post the node.
- *  @todo:
- */
