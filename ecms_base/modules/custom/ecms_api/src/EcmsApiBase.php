@@ -240,6 +240,9 @@ abstract class EcmsApiBase {
       $request = $this->httpClient->request('GET', $endpoint, $payload);
     }
     catch (GuzzleException $exception) {
+      if ($exception->getCode() === 404) {
+        return 'POST';
+      }
       return NULL;
     }
 
