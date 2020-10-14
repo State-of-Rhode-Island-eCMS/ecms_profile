@@ -117,9 +117,8 @@ class NotificationPublisher extends EcmsApiBase {
     $original = $node->original;
 
     if (empty($original)) {
-      // If the original is empty, the node transitioned
-      // immediately to not published.
-      return TRUE;
+      // If the original is empty, return false.
+      return FALSE;
     }
 
     // If the original node was published,
