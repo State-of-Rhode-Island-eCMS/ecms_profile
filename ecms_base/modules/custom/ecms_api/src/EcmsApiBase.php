@@ -145,9 +145,6 @@ abstract class EcmsApiBase {
   /**
    * Submit a new entity to the API endpoint.
    *
-   * @param string $method
-   *   The HTTP method to use to submit to the api. Currently allowed methods
-   *   are POST for creating entities and PATCH for updating entities.
    * @param string $accessToken
    *   The access token to the API. @see getAccessToken().
    * @param \Drupal\Core\Url $url
@@ -158,9 +155,12 @@ abstract class EcmsApiBase {
    * @return bool
    *   True if the entity was successfully submitted.
    */
-  protected function submitEntity(string $method, string $accessToken, Url $url, EntityInterface $entity): bool {
+  protected function submitEntity(string $accessToken, Url $url, EntityInterface $entity): bool {
+    // Query the endpoint to get the correct HTTP method.
+    $method = $this->checkEntityExists($accessToken, $url, $entity);
+
     // Only allow certain methods to be submitted.
-    if (!in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
+    if (empty($method) || !in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
       return FALSE;
     }
 
@@ -209,6 +209,54 @@ abstract class EcmsApiBase {
     }
 
     return FALSE;
+  }
+
+  /**
+   * Check if an entity exists on the endpoint.
+   *
+   * @param string $accessToken
+   *   The access token from getAccessToken.
+   * @param \Drupal\Core\Url $url
+   *   The URL of the api site.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity being submitted.
+   *
+   * @return string|null
+   *   The http method to use for submission or null on error.
+   */
+  protected function checkEntityExists(string $accessToken, Url $url, EntityInterface $entity): ?string {
+    // Get the endpoint and assume a patch to append the UUID to the url.
+    $endpoint = $this->getEndpointUrl($url, $entity, 'PATCH');
+
+    // Pass the access token so we can get unpublished entities.
+    $payload = [
+      'headers' => [
+        'Content-Type' => 'application/vnd.api+json',
+        'Authorization' => "Bearer {$accessToken}",
+      ],
+    ];
+
+    try {
+      $request = $this->httpClient->request('GET', $endpoint, $payload);
+    }
+    catch (GuzzleException $exception) {
+      return NULL;
+    }
+
+    // If we receive a 200, the entity already exists.
+    if ($request->getStatusCode() === 200) {
+      return 'PATCH';
+    }
+
+    // If we receive a 404, the entity does not exist.
+    if ($request->getStatusCode() === 404) {
+      return 'POST';
+    }
+
+    // Default to NULL.
+    return NULL;
+
+    // @todo: Give the ecms_api_recipient role 'view own unpublished content'
   }
 
   /**
