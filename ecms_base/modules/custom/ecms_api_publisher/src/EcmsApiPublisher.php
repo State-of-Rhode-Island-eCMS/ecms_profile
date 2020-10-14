@@ -5,10 +5,13 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api_publisher;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -26,6 +29,13 @@ class EcmsApiPublisher extends EcmsApiBase {
   private $configFactory;
 
   /**
+   * The entity storage for the user entity.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  private $userStorage;
+
+  /**
    * EcmsApiPublisher constructor.
    *
    * @param \GuzzleHttp\ClientInterface $httpClient
@@ -34,11 +44,14 @@ class EcmsApiPublisher extends EcmsApiBase {
    *   The jsonapi_extras.entity.to_jsonapi service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity_type.manager service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, ConfigFactoryInterface $configFactory) {
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, ConfigFactoryInterface $configFactory, EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($httpClient, $entityToJsonApi);
 
     $this->configFactory = $configFactory;
+    $this->userStorage = $entityTypeManager->getStorage('user');
   }
 
   /**
@@ -68,6 +81,26 @@ class EcmsApiPublisher extends EcmsApiBase {
 
     // Submit the entity to the API.
     return $this->submitEntity($accessToken, $recipientUrl, $node);
+  }
+
+  /**
+   * Get the ecms_api_publisher user account.
+   *
+   * @return \Drupal\user\UserInterface|null
+   */
+  public function getEcmsApiPublisherUser(): ?UserInterface {
+
+    $publishers = $this->userStorage->loadByProperties(['name' => 'ecms_api_publisher']);
+
+    // Guard against an empty array.
+    if (empty($publishers)) {
+      return NULL;
+    }
+
+    /** @var \Drupal\user\UserInterface $publisher */
+    $publisher = array_shift($publishers);
+
+    return $publisher;
   }
 
   /**
