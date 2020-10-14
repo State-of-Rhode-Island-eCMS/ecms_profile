@@ -13,7 +13,7 @@ filters:
     status: false
     weight: -10
     settings:
-      allowed_html: '<script src type> <iframe id title width height src type frameborder name>'
+      allowed_html: ''
       filter_html_help: false
       filter_html_nofollow: false
   media_embed:
