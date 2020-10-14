@@ -7,6 +7,7 @@ namespace Drupal\ecms_api_publisher\Plugin\QueueWorker;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\Core\Queue\RequeueException;
+use Drupal\Core\Session\AccountSwitcher;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\ecms_api_publisher\EcmsApiPublisher;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -32,6 +33,13 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
   private $ecmsApiPublisher;
 
   /**
+   * The account_switcher service.
+   *
+   * @var \Drupal\Core\Session\AccountSwitcher
+   */
+  private $accountSwitcher;
+
+  /**
    * {@inheritDoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -39,7 +47,8 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('ecms_api_publisher.publisher')
+      $container->get('ecms_api_publisher.publisher'),
+      $container->get('account_switcher')
     );
   }
 
@@ -54,11 +63,14 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
    *   The plugin implementation definition.
    * @param \Drupal\ecms_api_publisher\EcmsApiPublisher $ecmsApiPublisher
    *   The ecms_api_publisher.publisher service.
+   * @param \Drupal\Core\Session\AccountSwitcher $accountSwitcher
+   *   The account_switcher service.
    */
-  public function __construct(array $configuration, string $plugin_id, $plugin_definition, EcmsApiPublisher $ecmsApiPublisher) {
+  public function __construct(array $configuration, string $plugin_id, $plugin_definition, EcmsApiPublisher $ecmsApiPublisher, AccountSwitcher $accountSwitcher) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->ecmsApiPublisher = $ecmsApiPublisher;
+    $this->accountSwitcher = $accountSwitcher;
   }
 
   /**
@@ -77,7 +89,34 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
     /** @var \Drupal\node\NodeInterface $node */
     $node = $data['syndicated_content_entity'];
 
-    $result = $this->ecmsApiPublisher->syndicateNode($apiUrl, $node);
+    // Get the ecms_api_publisher user.
+    $publisherAccount = $this->ecmsApiPublisher->getEcmsApiPublisherUser();
+
+    // Guard against a missing publisher account.
+    if (empty($publisherAccount)) {
+      $message = $this->t('The ecms_api_publisher account is missing from the system.');
+
+      throw new RequeueException($message->render());
+    }
+
+    $this->accountSwitcher->switchTo($publisherAccount);
+
+    try {
+      $result = $this->ecmsApiPublisher->syndicateNode($apiUrl, $node);
+    }
+    catch (\Exception $exception) {
+      // Trap any exceptions so the account switcher will revert the user.
+      $this->accountSwitcher->switchBack();
+
+      // Requeue the item.
+      $message = $this->t('An error occurred accessing the API endpoint here: @endpoint', [
+        '@endpoint' => $apiUrl->toUriString(),
+      ]);
+
+      throw new RequeueException($message->render());
+    }
+
+    $this->accountSwitcher->switchBack();
 
     // If the submission was not successful, requeue the task.
     if (!$result) {
