@@ -59,6 +59,8 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->drupalGet('admin/people/permissions/ecms_api_publisher');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('ecms_api_publisher[view any unpublished content]');
+    $this->assertSession()->checkboxChecked('ecms_api_publisher[view latest version]');
+    $this->assertSession()->checkboxChecked('ecms_api_publisher[view notification revisions]');
 
     $this->drupalGet('admin/config/ecms_api/ecms_api_publisher/site/add');
     $this->assertSession()->statusCodeEquals(200);

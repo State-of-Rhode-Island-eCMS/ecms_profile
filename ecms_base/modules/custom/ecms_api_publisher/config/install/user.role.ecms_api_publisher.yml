@@ -7,3 +7,5 @@ weight: 7
 is_admin: null
 permissions:
   - 'view any unpublished content'
+  - 'view latest version'
+  - 'view notification revisions'
