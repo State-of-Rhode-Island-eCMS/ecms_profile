@@ -6,3 +6,4 @@ package: eCMS API
 
 dependencies:
   - ecms_api
+  - ecms_notification

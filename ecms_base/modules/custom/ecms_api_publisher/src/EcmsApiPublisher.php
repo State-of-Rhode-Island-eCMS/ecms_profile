@@ -5,10 +5,13 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api_publisher;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -26,6 +29,20 @@ class EcmsApiPublisher extends EcmsApiBase {
   private $configFactory;
 
   /**
+   * The entity storage for the user entity.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  private $userStorage;
+
+  /**
+   * The account_switcher service.
+   *
+   * @var \Drupal\Core\Session\AccountSwitcherInterface
+   */
+  private $accountSwitcher;
+
+  /**
    * EcmsApiPublisher constructor.
    *
    * @param \GuzzleHttp\ClientInterface $httpClient
@@ -34,18 +51,28 @@ class EcmsApiPublisher extends EcmsApiBase {
    *   The jsonapi_extras.entity.to_jsonapi service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity_type.manager service.
+   * @param \Drupal\Core\Session\AccountSwitcherInterface $accountSwitcher
+   *   The account_switcher service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, ConfigFactoryInterface $configFactory) {
+  public function __construct(
+    ClientInterface $httpClient,
+    EntityToJsonApi $entityToJsonApi,
+    ConfigFactoryInterface $configFactory,
+    EntityTypeManagerInterface $entityTypeManager,
+    AccountSwitcherInterface $accountSwitcher
+  ) {
     parent::__construct($httpClient, $entityToJsonApi);
 
     $this->configFactory = $configFactory;
+    $this->userStorage = $entityTypeManager->getStorage('user');
+    $this->accountSwitcher = $accountSwitcher;
   }
 
   /**
    * Queue a node for syndication.
    *
-   * @param string $method
-   *   The HTTP method to use for the syndication. POST or PATCH.
    * @param \Drupal\Core\Url $recipientUrl
    *   The URL of the API receiving the node.
    * @param \Drupal\node\NodeInterface $node
@@ -54,7 +81,7 @@ class EcmsApiPublisher extends EcmsApiBase {
    * @return bool
    *   True if successfully saved.
    */
-  public function syndicateNode(string $method, Url $recipientUrl, NodeInterface $node): bool {
+  public function syndicateNode(Url $recipientUrl, NodeInterface $node): bool {
 
     $clientId = $this->getClientId();
     $clientSecret = $this->getClientSecret();
@@ -68,8 +95,43 @@ class EcmsApiPublisher extends EcmsApiBase {
       return FALSE;
     }
 
+    // Get the ecms_api_publisher user.
+    $publisherAccount = $this->getEcmsApiPublisherUser();
+
+    // Guard against a missing publisher account.
+    if (empty($publisherAccount)) {
+      return FALSE;
+    }
+
+    $this->accountSwitcher->switchTo($publisherAccount);
+
     // Submit the entity to the API.
-    return $this->submitEntity($method, $accessToken, $recipientUrl, $node);
+    $result = $this->submitEntity($accessToken, $recipientUrl, $node);
+
+    $this->accountSwitcher->switchBack();
+
+    return $result;
+  }
+
+  /**
+   * Get the ecms_api_publisher user account.
+   *
+   * @return \Drupal\user\UserInterface|null
+   *   The ecms_api_publisher user or null if it does not exist.
+   */
+  private function getEcmsApiPublisherUser(): ?UserInterface {
+
+    $publishers = $this->userStorage->loadByProperties(['name' => 'ecms_api_publisher']);
+
+    // Guard against an empty array.
+    if (empty($publishers)) {
+      return NULL;
+    }
+
+    /** @var \Drupal\user\UserInterface $publisher */
+    $publisher = array_shift($publishers);
+
+    return $publisher;
   }
 
   /**

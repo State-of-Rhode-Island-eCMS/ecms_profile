@@ -64,6 +64,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Updated the development script to allow for pattern lab development.
 - RIG-76: Updated the api recipient installation values.
 - RIG-67: Added paragraphs reference field to basic page.
+- RIG-80: Fixed the publishing of notifications to only published nodes and translations.
 
 ### Deprecated
 
