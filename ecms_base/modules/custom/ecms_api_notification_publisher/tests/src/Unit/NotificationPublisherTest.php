@@ -74,18 +74,18 @@ class NotificationPublisherTest extends UnitTestCase {
   /**
    * Test the broadCastNotification method.
    *
-   * @param bool $isNotification
-   *   Whether the node is a notification type.
-   * @param bool $isGlobal
-   *   Whether the notification is a global notification.
-   * @param bool $isNew
-   *   Whether the node is new or not.
-   * @param bool $originalPublished
-   *   Is the original node published.
-   * @param bool $nodePublished
-   *   Is the actual node published.
-   * @param bool $globalEmpty
-   *   Is the global notification field unselected.
+   * @param string $nodeType
+   *   The node type to test with.
+   * @param int $global
+   *   Whether the notification is global.
+   *   -1: The field is missing.
+   *   0 : The field is not selected.
+   *   1 : The field is selected.
+   *   2 : The field is empty.
+   * @param string $moderation
+   *   The moderation state of the node.
+   *   none: assume the field doe not exist.
+   *   empty: assume the field is empty.
    *
    * @dataProvider dataProviderForBroadcastNotification
    */

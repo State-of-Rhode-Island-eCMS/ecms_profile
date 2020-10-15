@@ -117,6 +117,7 @@ class EcmsApiPublisher extends EcmsApiBase {
    * Get the ecms_api_publisher user account.
    *
    * @return \Drupal\user\UserInterface|null
+   *   The ecms_api_publisher user or null if it does not exist.
    */
   private function getEcmsApiPublisherUser(): ?UserInterface {
 

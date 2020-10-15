@@ -57,7 +57,18 @@ class EcmsApiPublisherTest extends UnitTestCase {
    */
   private $ecmsApiPublisher;
 
+  /**
+   * Mock of the account_switcher service.
+   *
+   * @var \Drupal\Core\Session\AccountSwitcherInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $accountSwitcher;
+
+  /**
+   * Mock of the EntityStorageInterface for user entities.
+   *
+   * @var \Drupal\Core\Entity\EntityStorageInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $userStorage;
 
   /**
@@ -100,7 +111,7 @@ class EcmsApiPublisherTest extends UnitTestCase {
         $entityToJsonApi,
         $this->configFactory,
         $entityTypeManager,
-        $this->accountSwitcher
+        $this->accountSwitcher,
       ])
       ->getMock();
   }
@@ -110,6 +121,8 @@ class EcmsApiPublisherTest extends UnitTestCase {
    *
    * @param string|null $accessToken
    *   The accessToken to return.
+   * @param bool $publisherAccount
+   *   Whether a publisher account exists.
    * @param bool $expected
    *   The expected result.
    *

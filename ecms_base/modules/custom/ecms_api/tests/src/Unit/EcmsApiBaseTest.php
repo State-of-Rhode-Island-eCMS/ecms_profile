@@ -734,7 +734,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param bool $defaultLanguage
    *   Whether the entity is in the default language.
    * @param string|null $expected
-   *  The expected result from the method call.
+   *   The expected result from the method call.
    *
    * @dataProvider dataProviderForTestCheckEntityExists
    */

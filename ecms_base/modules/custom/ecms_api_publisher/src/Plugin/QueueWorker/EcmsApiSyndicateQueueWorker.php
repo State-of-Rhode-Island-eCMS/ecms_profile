@@ -7,7 +7,6 @@ namespace Drupal\ecms_api_publisher\Plugin\QueueWorker;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\Core\Queue\RequeueException;
-use Drupal\Core\Session\AccountSwitcher;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\ecms_api_publisher\EcmsApiPublisher;
 use Symfony\Component\DependencyInjection\ContainerInterface;
