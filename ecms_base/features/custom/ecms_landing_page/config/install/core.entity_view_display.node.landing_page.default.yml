@@ -3,10 +3,16 @@ status: true
 dependencies:
   config:
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
   module:
+    - layout_builder
     - text
     - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
 id: node.landing_page.default
 targetEntityType: node
 bundle: landing_page
@@ -14,9 +20,9 @@ mode: default
 content:
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_landing_page_body:
     weight: 101
     label: above
@@ -26,8 +32,9 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true
+  layout_builder__layout: true

@@ -10,4 +10,7 @@
  * @ingroup themeable
  */
 #}
-{% include "@molecules/01-layout/four-column.twig" %}
+
+{% if content|render %}
+  {% include "@molecules/01-layout/four-column.twig" %}
+{% endif %}

@@ -10,4 +10,6 @@
  * @ingroup themeable
  */
 #}
-{% include "@molecules/01-layout/three-column.twig" %}
+{% if content|render %}
+  {% include "@molecules/01-layout/three-column.twig" %}
+{% endif %}

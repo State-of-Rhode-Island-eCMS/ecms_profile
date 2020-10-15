@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_embed_content
+    - paragraphs.paragraphs_type.embed
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    embed: embed
+    basic_html: '0'
+    paragraph_text: '0'
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
+id: paragraph.embed.field_embed_content
+field_name: field_embed_content
+entity_type: paragraph
+bundle: embed
+label: 'Embed Content'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
