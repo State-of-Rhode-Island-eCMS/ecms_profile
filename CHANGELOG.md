@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.0] - 2020-10-15
+### Added
 - Added the [ACSF module](https://www.drupal.org/project/acsf) as a required dependency.
 - Added the [openid_connect](https://www.drupal.org/project/openid_connect) module as a dependency.
 - Added required modules/configuration based on the standard installation profile.
@@ -66,8 +79,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-67: Added paragraphs reference field to basic page.
 - RIG-80: Fixed the publishing of notifications to only published nodes and translations.
 
-### Deprecated
-
 ### Removed
 - RIG-37: Removed core search from default install.
 
@@ -75,4 +86,5 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-### Security
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/releases/tag/0.1.0
