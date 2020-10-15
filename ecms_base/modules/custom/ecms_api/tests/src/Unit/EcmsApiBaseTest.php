@@ -13,7 +13,9 @@ use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -776,21 +778,22 @@ class EcmsApiBaseTest extends UnitTestCase {
       ->method('uuid')
       ->willReturn(self::ENTITY_UUID);
 
-    if ($code === -1) {
-      $exception = $this->createMock(GuzzleException::class);
+    if ($code < 200 || $code > 399) {
+      $request = $this->createMock(RequestInterface::class);
+      $response = $this->createMock(ResponseInterface::class);
+      $response->expects($this->once())
+        ->method('getStatusCode')
+        ->willReturn($code);
+      $exception = new ClientException('', $request, $response);
+
       $this->httpclient->expects($this->once())
         ->method('request')
         ->with('GET', $endpoint, self::CHECK_ENTITY_EXISTS_PAYLOAD)
         ->willThrowException($exception);
     }
     else {
-      $codeCount = 1;
 
-      if ($code !== 200) {
-        $codeCount = 2;
-      }
-
-      $this->response->expects($this->exactly($codeCount))
+      $this->response->expects($this->once())
         ->method('getStatusCode')
         ->willReturn($code);
 
@@ -863,6 +866,11 @@ class EcmsApiBaseTest extends UnitTestCase {
       ],
       'test8' => [
         500,
+        FALSE,
+        NULL,
+      ],
+      'test9' => [
+        301,
         FALSE,
         NULL,
       ],

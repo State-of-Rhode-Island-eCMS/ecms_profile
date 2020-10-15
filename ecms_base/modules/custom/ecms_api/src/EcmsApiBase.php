@@ -251,15 +251,8 @@ abstract class EcmsApiBase {
       return 'PATCH';
     }
 
-    // If we receive a 404, the entity does not exist.
-    if ($request->getStatusCode() === 404) {
-      return 'POST';
-    }
-
     // Default to NULL.
     return NULL;
-
-    // @todo: Give the ecms_api_recipient role 'view own unpublished content'
   }
 
   /**
