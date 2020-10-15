@@ -6,11 +6,15 @@ namespace Drupal\Tests\ecms_api_publisher\Unit;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api_publisher\EcmsApiPublisher;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -53,6 +57,9 @@ class EcmsApiPublisherTest extends UnitTestCase {
    */
   private $ecmsApiPublisher;
 
+  private $accountSwitcher;
+  private $userStorage;
+
   /**
    * {@inheritDoc}
    */
@@ -78,12 +85,22 @@ class EcmsApiPublisherTest extends UnitTestCase {
     $httpClient = $this->createMock(ClientInterface::class);
     $entityToJsonApi = $this->createMock(EntityToJsonApi::class);
 
+    $this->accountSwitcher = $this->createMock(AccountSwitcherInterface::class);
+    $this->userStorage = $this->createMock(EntityStorageInterface::class);
+
+    $entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
+    $entityTypeManager->expects($this->once())
+      ->method('getStorage')
+      ->wilLReturn($this->userStorage);
+
     $this->ecmsApiPublisher = $this->getMockBuilder(EcmsApiPublisher::class)
       ->onlyMethods(['getAccessToken', 'submitEntity'])
       ->setConstructorArgs([
         $httpClient,
         $entityToJsonApi,
         $this->configFactory,
+        $entityTypeManager,
+        $this->accountSwitcher
       ])
       ->getMock();
   }
@@ -98,7 +115,7 @@ class EcmsApiPublisherTest extends UnitTestCase {
    *
    * @dataProvider dataProviderForTestSyndicateNode
    */
-  public function testSyndicateNode(?string $accessToken, bool $expected): void {
+  public function testSyndicateNode(?string $accessToken, bool $publisherAccount, bool $expected): void {
     $url = $this->createMock(Url::class);
     $node = $this->createMock(NodeInterface::class);
 
@@ -108,10 +125,29 @@ class EcmsApiPublisherTest extends UnitTestCase {
       ->willReturn($accessToken);
 
     if (!empty($accessToken)) {
-      $this->ecmsApiPublisher->expects($this->once())
-        ->method('submitEntity')
-        ->with($accessToken, $url, $node)
-        ->willReturn($expected);
+      $userAccountArray = [];
+
+      if ($publisherAccount) {
+        $account = $this->createMock(UserInterface::class);
+        $userAccountArray[] = $account;
+
+        $this->accountSwitcher->expects($this->once())
+          ->method('switchTo')
+          ->with($account);
+
+        $this->accountSwitcher->expects($this->once())
+          ->method('switchBack');
+
+        $this->ecmsApiPublisher->expects($this->once())
+          ->method('submitEntity')
+          ->with($accessToken, $url, $node)
+          ->willReturn($expected);
+      }
+
+      $this->userStorage->expects($this->once())
+        ->method('loadByProperties')
+        ->with()
+        ->willReturn($userAccountArray);
     }
 
     $result = $this->ecmsApiPublisher->syndicateNode($url, $node);
@@ -127,9 +163,9 @@ class EcmsApiPublisherTest extends UnitTestCase {
    */
   public function dataProviderForTestSyndicateNode(): array {
     return [
-      'test1' => [NULL, FALSE],
-      'test2' => ['123456', FALSE],
-      'test3' => ['987654', TRUE],
+      'test1' => [NULL, FALSE, FALSE],
+      'test2' => ['123456', FALSE, FALSE],
+      'test3' => ['987654', TRUE, TRUE],
     ];
   }
 

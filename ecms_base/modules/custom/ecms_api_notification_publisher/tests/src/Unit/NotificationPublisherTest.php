@@ -90,78 +90,78 @@ class NotificationPublisherTest extends UnitTestCase {
    * @dataProvider dataProviderForBroadcastNotification
    */
   public function testBroadcastNotification(
-    bool $isNotification,
-    bool $isGlobal,
-    bool $isNew,
-    bool $originalPublished,
-    bool $nodePublished,
-    bool $globalEmpty
+    string $nodeType,
+    int $global,
+    string $moderation
   ): void {
-    $isPublishedCount = 2;
-    if ($nodePublished && !$originalPublished) {
-      $isPublishedCount = 1;
-    }
-    if (!$isNotification) {
-      $this->node->expects($this->once())
-        ->method('getType')
-        ->willReturn($this->randomMachineName());
-    }
-    else {
-      $this->node->expects($this->once())
-        ->method('getType')
-        ->willReturn('notification');
 
-      $this->node->expects($this->once())
+    $hasFieldCount = 1;
+    $hasModerationField = TRUE;
+
+    if ($moderation === 'none') {
+      $hasModerationField = FALSE;
+    }
+
+    $this->node->expects($this->once())
+      ->method('getType')
+      ->willReturn($nodeType);
+
+    if ($nodeType === 'notification') {
+      $hasGlobalField = TRUE;
+
+      if ($global === -1) {
+        $hasGlobalField = FALSE;
+      }
+
+      if ($global === 1) {
+        $hasFieldCount = 2;
+      }
+
+      $this->node->expects($this->exactly($hasFieldCount))
         ->method('hasField')
-        ->with('field_notification_global')
-        ->willReturn($isGlobal);
+        ->withConsecutive(['field_notification_global'], ['moderation_state'])
+        ->willReturnOnConsecutiveCalls($hasGlobalField, $hasModerationField);
 
-      if ($isGlobal) {
-        if ($globalEmpty) {
-          $globalNotificationArray = [];
-        }
-        else {
-          $globalNotificationArray = [0 => ['value' => (int) $isGlobal]];
+      if ($hasGlobalField) {
+        $getFieldCount = 1;
 
-          $this->node->expects($this->exactly($isPublishedCount))
-            ->method('isPublished')
-            ->willReturn($nodePublished);
+        $moderationItemList = $this->createMock(FieldItemListInterface::class);
 
-          if (!$isNew) {
-            $this->originalNode->expects($this->once())
-              ->method('isPublished')
-              ->willReturn($originalPublished);
+        if ($hasModerationField) {
+          $getFieldCount = 2;
+
+          $moderationArray = [0 => ['value' => $moderation]];
+
+          if ($moderation === 'empty') {
+            // Mimic an empty field.
+            $moderationArray = [];
           }
+
+          $moderationItemList->expects($this->once())
+            ->method('getValue')
+            ->willReturn($moderationArray);
+        }
+
+        $globalNotification = [0 => ['value' => $global]];
+
+        if ($global === 2) {
+          // Mimic an empty field.
+          $globalNotification = [];
         }
 
         $fieldItemList = $this->createMock(FieldItemListInterface::class);
         $fieldItemList->expects($this->once())
           ->method('getValue')
-          ->willReturn($globalNotificationArray);
+          ->willReturn($globalNotification);
 
-        $this->node->expects($this->once())
+        $this->node->expects($this->exactly($getFieldCount))
           ->method('get')
-          ->with('field_notification_global')
-          ->willReturn($fieldItemList);
-
-        if (!$globalEmpty && (
-          ($nodePublished && $nodePublished !== $originalPublished) ||
-          ($originalPublished && $originalPublished !== $nodePublished)
-          )) {
-          $this->ecmsApiSyndicate->expects($this->once())
-            ->method('syndicateNode')
-            ->with($this->node);
-        }
+          ->withConsecutive(['field_notification_global'], ['moderation_state'])
+          ->willReturnOnConsecutiveCalls($fieldItemList, $moderationItemList);
       }
     }
 
     $notificationPublisher = new NotificationPublisher($this->httpclient, $this->entityToJsonApi, $this->ecmsApiSyndicate);
-
-    $this->node->original = NULL;
-    if (!$isNew) {
-      $this->node->original = $this->originalNode;
-    }
-
     $notificationPublisher->broadcastNotification($this->node);
 
   }
@@ -174,77 +174,50 @@ class NotificationPublisherTest extends UnitTestCase {
    */
   public function dataProviderForBroadcastNotification(): array {
     return [
-      'Not a notification node.' => [
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
+      'test1' => [
+        $this->randomMachineName(),
+        -1,
+        $this->randomMachineName(),
       ],
-      'Notification node that is not global' => [
-        TRUE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
+      'test2' => [
+        'notification',
+        -1,
+        $this->randomMachineName(),
       ],
-      'Notification that is global but not published and not new' => [
-        TRUE,
-        TRUE,
-        FALSE,
-        FALSE,
-        FALSE,
-        FALSE,
+      'test3' => [
+        'notification',
+        0,
+        'none',
       ],
-      'Global notification that transitioned to not published' => [
-        TRUE,
-        TRUE,
-        FALSE,
-        TRUE,
-        FALSE,
-        FALSE,
+      'test4' => [
+        'notification',
+        1,
+        'none',
       ],
-      'Global notification that transitioned to published' => [
-        TRUE,
-        TRUE,
-        FALSE,
-        FALSE,
-        TRUE,
-        FALSE,
+      'test5' => [
+        'notification',
+        2,
+        'none',
       ],
-      'New global notification node that is published' => [
-        TRUE,
-        TRUE,
-        TRUE,
-        FALSE,
-        TRUE,
-        FALSE,
+      'test6' => [
+        'notification',
+        1,
+        'review',
       ],
-      'New global notification node that is not published' => [
-        TRUE,
-        TRUE,
-        TRUE,
-        FALSE,
-        FALSE,
-        FALSE,
+      'test7' => [
+        'notification',
+        1,
+        $this->randomMachineName(),
       ],
-      'Existing global notification node that is not published' => [
-        TRUE,
-        TRUE,
-        FALSE,
-        TRUE,
-        TRUE,
-        FALSE,
+      'test8' => [
+        'notification',
+        1,
+        'published',
       ],
-      'Existing global notification node that has transitioned to not published and has the global notification de-selected' => [
-        TRUE,
-        TRUE,
-        FALSE,
-        FALSE,
-        TRUE,
-        TRUE,
+      'test9' => [
+        'notification',
+        1,
+        'empty',
       ],
     ];
   }

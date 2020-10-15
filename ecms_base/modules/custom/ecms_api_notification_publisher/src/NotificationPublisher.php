@@ -15,6 +15,8 @@ use GuzzleHttp\ClientInterface;
  */
 class NotificationPublisher extends EcmsApiBase {
 
+  const MODERATION_PUBLISHED = 'published';
+
   /**
    * The ecms_api_publisher.syndicate service.
    *
@@ -50,84 +52,28 @@ class NotificationPublisher extends EcmsApiBase {
       return;
     }
 
-    // If the notification was not marked as global, ignore.
+    // If the original notification was not marked as global, ignore.
     if (!$this->isGlobalNotification($node)) {
       return;
     }
 
-    // If the node has just transitioned to published or not-published.
-    if ($this->hasTransitionedToPublished($node) || $this->hasTransitionedToNotPublished($node)) {
+    // Guard against a node that is not using content_moderation.
+    if (!$node->hasField('moderation_state')) {
+      // We can only act upon nodes in moderation.
+      return;
+    }
+
+    // Get the moderated state of this revision.
+    $moderatedState = array_column($node->get('moderation_state')->getValue(), 'value');
+
+    // Guard against an empty array.
+    if (empty($moderatedState)) {
+      return;
+    }
+
+    if (in_array(self::MODERATION_PUBLISHED, $moderatedState, TRUE)) {
       $this->ecmsApiSyndicate->syndicateNode($node);
     }
-  }
-
-  /**
-   * Check if the notification has transitioned to published.
-   *
-   * @param \Drupal\node\NodeInterface $node
-   *   The node to check.
-   *
-   * @return bool
-   *   True if the node just transitioned to published.
-   */
-  private function hasTransitionedToPublished(NodeInterface $node): bool {
-    // If the node is not currently published, return early.
-    if (!$node->isPublished()) {
-      return FALSE;
-    }
-
-    // Get the original node.
-    /** @var \Drupal\node\NodeInterface|null $original */
-    $original = $node->original;
-
-    if (empty($original)) {
-      // If the original is empty, the node transitioned
-      // immediately to published.
-      return TRUE;
-    }
-
-    // If the original node was not published,
-    // a transition to published happened.
-    if (!$original->isPublished()) {
-      return TRUE;
-    }
-
-    // Default to false.
-    return FALSE;
-  }
-
-  /**
-   * Check if the notification has transitioned to not published.
-   *
-   * @param \Drupal\node\NodeInterface $node
-   *   The node to check.
-   *
-   * @return bool
-   *   True if the node just transitioned to not-published.
-   */
-  private function hasTransitionedToNotPublished(NodeInterface $node): bool {
-    // If the node is currently published, return early.
-    if ($node->isPublished()) {
-      return FALSE;
-    }
-
-    // Get the original node.
-    /** @var \Drupal\node\NodeInterface|null $original */
-    $original = $node->original;
-
-    if (empty($original)) {
-      // If the original is empty, return false.
-      return FALSE;
-    }
-
-    // If the original node was published,
-    // a transition to not published happened.
-    if ($original->isPublished()) {
-      return TRUE;
-    }
-
-    // Default to false.
-    return FALSE;
   }
 
   /**
@@ -148,8 +94,15 @@ class NotificationPublisher extends EcmsApiBase {
     // Get the field value.
     $globalCheck = $node->get('field_notification_global')->getValue();
 
-    // If it equals 1, the global checkbox was selected.
-    if (!empty($globalCheck) && $globalCheck[0]['value'] === 1) {
+    if (empty($globalCheck)) {
+      return FALSE;
+    }
+
+    // Cast the value as a boolean as this is changing between the default node
+    // and the translated version of the node.
+    $value = (bool) $globalCheck[0]['value'];
+    // If it equals TRUE, the global checkbox was selected.
+    if ($value) {
       return TRUE;
     }
 
