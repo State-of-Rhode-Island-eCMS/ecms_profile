@@ -6,13 +6,16 @@ namespace Drupal\Tests\ecms_api\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -107,6 +110,16 @@ class EcmsApiBaseTest extends UnitTestCase {
   ];
 
   /**
+   * The expected payload to be sent to the API.
+   */
+  const CHECK_ENTITY_EXISTS_PAYLOAD = [
+    'headers' => [
+      'Content-Type' => 'application/vnd.api+json',
+      'Authorization' => "Bearer " . self::ACCESS_TOKEN,
+    ],
+  ];
+
+  /**
    * The expected return value of the entity after normalization.
    */
   const NORMALIZED_ENTITY = [
@@ -127,6 +140,16 @@ class EcmsApiBaseTest extends UnitTestCase {
    * The endpoint for the node_type api.
    */
   const NODE_TYPE_ENDPOINT = '/EcmsApi/node_type/node_type';
+
+  /**
+   * The language ID to test with.
+   */
+  const LANGUAGE_ID = 'de';
+
+  /**
+   * The endpoint url if the entity is not in the default language.
+   */
+  const ENTITY_ENDPOINT_LANGUAGE = 'https://oomphinc.com/de/EcmsApi/entity_type_test/entity_bundle';
 
   /**
    * Mock of the http_client service.
@@ -317,94 +340,140 @@ class EcmsApiBaseTest extends UnitTestCase {
    *   The HTTP method to submit.
    * @param int $code
    *   The http status code to mock.
+   * @param bool $defaultLanguage
+   *   Whether the entity has the default language.
+   * @param int $entityExistsCode
+   *   The expected code that checkEntityExists will return.
    * @param bool $expected
    *   The expected response.
    *
    * @dataProvider dataProviderForTestSubmitEntity
    */
-  public function testSubmitEntity(string $method, int $code, bool $expected): void {
-    $endpoint = self::ENTITY_ENDPOINT;
-    $uuidCount = 2;
-    $bundleCount = 2;
-    // Test for all allowed requests.
-    if ($code !== 0) {
-      // If test 6, change the bundle count.
-      if ($code === 6) {
-        $bundleCount = 1;
-        $uuidCount = 0;
-      }
-      $this->url->expects($this->once())
-        ->method('toString')
-        ->willReturn(self::ENDPOINT_URL);
+  public function testSubmitEntity(string $method, int $code, bool $defaultLanguage, int $entityExistsCode, bool $expected): void {
 
-      $this->entity->expects($this->once())
-        ->method('getEntityTypeId')
-        ->willReturn(self::ENTITY_TYPE);
+    switch ($entityExistsCode) {
+      case 200:
+        $existsMethod = 'PATCH';
+        break;
 
-      $this->entity->expects($this->exactly($bundleCount))
-        ->method('bundle')
-        ->willReturn(self::ENTITY_BUNDLE);
+      case 404:
+        $existsMethod = 'POST';
+        break;
 
-      if ($method === 'PATCH') {
-        $uuidCount = 3;
-        $uuid = self::ENTITY_UUID;
-        $endpoint = "{$endpoint}/{$uuid}";
-      }
+      default:
+        $existsMethod = NULL;
+        break;
+    }
 
-      $this->entity->expects($this->exactly($uuidCount))
-        ->method('uuid')
-        ->willReturn(self::ENTITY_UUID);
-
-      // If test 6, alter the normlaize method return.
-      if ($code === 6) {
-        $this->entityToJsonApi->expects($this->once())
-          ->method('normalize')
-          ->with($this->entity)
-          ->willReturn([]);
+    if (!empty($existsMethod)) {
+      if ($defaultLanguage) {
+        $endpoint = self::ENTITY_ENDPOINT;
       }
       else {
-        $this->entityToJsonApi->expects($this->once())
-          ->method('normalize')
-          ->with($this->entity)
-          ->willReturn(self::NORMALIZED_ENTITY);
+        $endpoint = self::ENTITY_ENDPOINT_LANGUAGE;
       }
 
-    }
+      $uuidCount = 2;
+      $bundleCount = 2;
+      // Test for all allowed requests.
+      if ($code !== 0) {
 
-    // Test a guzzle exception.
-    if ($code === -1) {
-      $this->response->expects($this->never())
-        ->method('getStatusCode')
-        ->willReturn($code);
+        $language = $this->createMock(LanguageInterface::class);
+        $language->expects($this->once())
+          ->method('getId')
+          ->willReturn(self::LANGUAGE_ID);
 
-      $guzzleException = $this->createMock(GuzzleException::class);
-      $this->httpclient->expects($this->once())
-        ->method('request')
-        ->with($method, $endpoint, self::PAYLOAD)
-        ->willThrowException($guzzleException);
-    }
+        $language->expects($this->once())
+          ->method('isDefault')
+          ->willReturn($defaultLanguage);
 
-    if ($code > 100) {
-      $this->response->expects($this->once())
-        ->method('getStatusCode')
-        ->willReturn($code);
+        $this->entity->expects($this->once())
+          ->method('language')
+          ->willReturn($language);
 
-      $this->httpclient->expects($this->once())
-        ->method('request')
-        ->with($method, $endpoint, self::PAYLOAD)
-        ->willReturn($this->response);
+        // If test 6, change the bundle count.
+        if ($code === 6) {
+          $bundleCount = 1;
+          $uuidCount = 0;
+        }
+
+        $this->url->expects($this->once())
+          ->method('toString')
+          ->willReturn(self::ENDPOINT_URL);
+
+        $this->entity->expects($this->once())
+          ->method('getEntityTypeId')
+          ->willReturn(self::ENTITY_TYPE);
+
+        $this->entity->expects($this->exactly($bundleCount))
+          ->method('bundle')
+          ->willReturn(self::ENTITY_BUNDLE);
+
+        if ($method === 'PATCH') {
+          $uuidCount = 3;
+          $uuid = self::ENTITY_UUID;
+          $endpoint = "{$endpoint}/{$uuid}";
+        }
+
+        $this->entity->expects($this->exactly($uuidCount))
+          ->method('uuid')
+          ->willReturn(self::ENTITY_UUID);
+
+        // If test 6, alter the normlaize method return.
+        if ($code === 6) {
+          $this->entityToJsonApi->expects($this->once())
+            ->method('normalize')
+            ->with($this->entity)
+            ->willReturn([]);
+        }
+        else {
+          $this->entityToJsonApi->expects($this->once())
+            ->method('normalize')
+            ->with($this->entity)
+            ->willReturn(self::NORMALIZED_ENTITY);
+        }
+      }
+
+      // Test a guzzle exception.
+      if ($code === -1) {
+        $this->response->expects($this->never())
+          ->method('getStatusCode')
+          ->willReturn($code);
+
+        $guzzleException = $this->createMock(GuzzleException::class);
+        $this->httpclient->expects($this->once())
+          ->method('request')
+          ->with($method, $endpoint, self::PAYLOAD)
+          ->willThrowException($guzzleException);
+      }
+
+      if ($code > 100) {
+        $this->response->expects($this->once())
+          ->method('getStatusCode')
+          ->willReturn($code);
+
+        $this->httpclient->expects($this->once())
+          ->method('request')
+          ->with($method, $endpoint, self::PAYLOAD)
+          ->willReturn($this->response);
+      }
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
       ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->onlyMethods(['checkEntityExists'])
       ->getMock();
+
+    $ecmsApi->expects($this->once())
+      ->method('checkEntityExists')
+      ->with(self::ACCESS_TOKEN, $this->url, $this->entity)
+      ->willReturn($existsMethod);
 
     $submitEntity = new \ReflectionMethod(EcmsApiBase::class, 'submitEntity');
     $submitEntity->setAccessible(TRUE);
 
     $result = $submitEntity->invokeArgs(
       $ecmsApi, [
-        $method,
         self::ACCESS_TOKEN,
         $this->url,
         $this->entity,
@@ -425,32 +494,51 @@ class EcmsApiBaseTest extends UnitTestCase {
       'test1' => [
         'DELETE',
         0,
+        TRUE,
+        0,
         FALSE,
       ],
       'test2' => [
         'POST',
         201,
         TRUE,
+        404,
+        TRUE,
       ],
       'test3' => [
         'PATCH',
+        200,
+        TRUE,
         200,
         TRUE,
       ],
       'test4' => [
         'POST',
         401,
+        TRUE,
+        404,
         FALSE,
       ],
       'test5' => [
         'POST',
         -1,
+        TRUE,
+        404,
         FALSE,
       ],
       'test6' => [
         'POST',
         6,
+        TRUE,
+        404,
         FALSE,
+      ],
+      'test7' => [
+        'PATCH',
+        200,
+        FALSE,
+        200,
+        TRUE,
       ],
     ];
   }
@@ -636,6 +724,157 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     return json_encode((object) $return);
+  }
+
+  /**
+   * Test the checkEntityExists method.
+   *
+   * @param int $code
+   *   The http code returned from the http request.
+   * @param bool $defaultLanguage
+   *   Whether the entity is in the default language.
+   * @param string|null $expected
+   *   The expected result from the method call.
+   *
+   * @dataProvider dataProviderForTestCheckEntityExists
+   */
+  public function testCheckEntityExists(int $code, bool $defaultLanguage, ?string $expected): void {
+    if ($defaultLanguage) {
+      $endpoint = self::ENTITY_ENDPOINT;
+    }
+    else {
+      $endpoint = self::ENTITY_ENDPOINT_LANGUAGE;
+    }
+
+    $language = $this->createMock(LanguageInterface::class);
+    $language->expects($this->once())
+      ->method('getId')
+      ->willReturn(self::LANGUAGE_ID);
+
+    $language->expects($this->once())
+      ->method('isDefault')
+      ->willReturn($defaultLanguage);
+
+    $this->entity->expects($this->once())
+      ->method('language')
+      ->willReturn($language);
+
+    $this->url->expects($this->once())
+      ->method('toString')
+      ->willReturn(self::ENDPOINT_URL);
+
+    $this->entity->expects($this->once())
+      ->method('getEntityTypeId')
+      ->willReturn(self::ENTITY_TYPE);
+
+    $this->entity->expects($this->once())
+      ->method('bundle')
+      ->willReturn(self::ENTITY_BUNDLE);
+
+    $uuid = self::ENTITY_UUID;
+    $endpoint = "{$endpoint}/{$uuid}";
+
+    $this->entity->expects($this->once())
+      ->method('uuid')
+      ->willReturn(self::ENTITY_UUID);
+
+    if ($code < 200 || $code > 399) {
+      $request = $this->createMock(RequestInterface::class);
+      $response = $this->createMock(ResponseInterface::class);
+      $response->expects($this->once())
+        ->method('getStatusCode')
+        ->willReturn($code);
+      $exception = new ClientException('', $request, $response);
+
+      $this->httpclient->expects($this->once())
+        ->method('request')
+        ->with('GET', $endpoint, self::CHECK_ENTITY_EXISTS_PAYLOAD)
+        ->willThrowException($exception);
+    }
+    else {
+
+      $this->response->expects($this->once())
+        ->method('getStatusCode')
+        ->willReturn($code);
+
+      $this->httpclient->expects($this->once())
+        ->method('request')
+        ->with('GET', $endpoint, self::CHECK_ENTITY_EXISTS_PAYLOAD)
+        ->willReturn($this->response);
+    }
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->getMock();
+
+    $checkEntityExists = new \ReflectionMethod(EcmsApiBase::class, 'checkEntityExists');
+    $checkEntityExists->setAccessible(TRUE);
+
+    $result = $checkEntityExists->invokeArgs(
+      $ecmsApi, [
+        self::ACCESS_TOKEN,
+        $this->url,
+        $this->entity,
+      ]
+    );
+
+    $this->assertEquals($expected, $result);
+  }
+
+  /**
+   * Data provider for the testCheckEntityExists method.
+   *
+   * @return array[]
+   *   Array of parameters to pass to the testCheckEntityExists method.
+   */
+  public function dataProviderForTestCheckEntityExists(): array {
+    return [
+      'test1' => [
+        -1,
+        TRUE,
+        NULL,
+      ],
+      'test2' => [
+        200,
+        TRUE,
+        'PATCH',
+      ],
+      'test3' => [
+        404,
+        TRUE,
+        'POST',
+      ],
+      'test4' => [
+        500,
+        TRUE,
+        NULL,
+      ],
+      'test5' => [
+        -1,
+        FALSE,
+        NULL,
+      ],
+      'test6' => [
+        200,
+        FALSE,
+        'PATCH',
+      ],
+      'test7' => [
+        404,
+        FALSE,
+        'POST',
+      ],
+      'test8' => [
+        500,
+        FALSE,
+        NULL,
+      ],
+      'test9' => [
+        301,
+        FALSE,
+        NULL,
+      ],
+    ];
   }
 
 }

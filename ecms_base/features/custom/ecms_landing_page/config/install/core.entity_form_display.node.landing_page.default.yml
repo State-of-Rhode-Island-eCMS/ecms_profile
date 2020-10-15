@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
     - workflows.workflow.editorial
   module:
@@ -93,4 +94,5 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  layout_builder__layout: true

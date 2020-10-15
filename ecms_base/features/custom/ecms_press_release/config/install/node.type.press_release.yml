@@ -9,7 +9,7 @@ third_party_settings:
     parent: ''
 name: 'Press release'
 type: press_release
-description: ''
+description: 'Manage press releases.'
 help: ''
 new_revision: true
 preview_mode: 1

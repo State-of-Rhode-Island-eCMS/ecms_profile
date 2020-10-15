@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.0] - 2020-10-15
+### Added
 - Added the [ACSF module](https://www.drupal.org/project/acsf) as a required dependency.
 - Added the [openid_connect](https://www.drupal.org/project/openid_connect) module as a dependency.
 - Added required modules/configuration based on the standard installation profile.
@@ -49,6 +62,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-78: Added default languages and translations for the default content types.
 - RIG-85: Added translation support for the hotel content type.
 - RIG-84: Added translation support for the executive order content type.
+- RIG-86: Added translation support for the projects content type.
+- RIG-87: Added translation support for the publication content type.
+- RIG-88: Added translation support for the speech content type.
+- RIG-22: Added moderated_content_bulk_publish module, installed by default.
+- RIG-94: Added Press Release paragraphs field.
+- RIG-95: Added Press Release Topics taxonomy.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
@@ -58,13 +77,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Updated the development script to allow for pattern lab development.
 - RIG-76: Updated the api recipient installation values.
 - RIG-67: Added paragraphs reference field to basic page.
-
-### Deprecated
+- RIG-80: Fixed the publishing of notifications to only published nodes and translations.
 
 ### Removed
 - RIG-37: Removed core search from default install.
 
 ### Fixed
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
+- RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-### Security
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/releases/tag/0.1.0

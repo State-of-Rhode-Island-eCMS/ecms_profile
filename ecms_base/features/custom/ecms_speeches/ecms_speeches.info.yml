@@ -3,9 +3,12 @@ description: 'Provides Speech content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
-  - ecms_workflow
+  - content_moderation
+  - content_translation
   - datetime
+  - ecms_workflow
   - field
+  - language
   - menu_ui
   - node
   - path

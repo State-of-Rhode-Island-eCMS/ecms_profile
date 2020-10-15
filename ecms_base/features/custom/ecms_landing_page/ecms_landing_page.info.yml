@@ -8,6 +8,7 @@ dependencies:
   - ecms_workflow
   - field
   - language
+  - layout_builder
   - menu_ui
   - node
   - path

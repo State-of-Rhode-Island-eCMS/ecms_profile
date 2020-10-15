@@ -99,7 +99,6 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
         [
           $item->data['site_entity'],
           $item->data['syndicated_content_entity'],
-          $item->data['method'],
         ],
       ];
 
@@ -131,12 +130,10 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
    *   The site to post the content to.
    * @param \Drupal\node\NodeInterface $node
    *   The node to post to the site.
-   * @param string $method
-   *   The method to send the node with.
    * @param array $context
    *   Additional context from the batch process.
    */
-  public static function postSyndicateContent(EcmsApiSiteInterface $ecmsApiSite, NodeInterface $node, string $method, array &$context): void {
+  public static function postSyndicateContent(EcmsApiSiteInterface $ecmsApiSite, NodeInterface $node, array &$context): void {
     // Get the ecms_api_publisher.publisher service.
     /** @var \Drupal\ecms_api_publisher\EcmsApiPublisher $ecmsApiPublisher */
     $ecmsApiPublisher = \Drupal::service('ecms_api_publisher.publisher');
@@ -153,14 +150,13 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
     );
 
     // Post the entity.
-    $result = $ecmsApiPublisher->syndicateNode($method, $url, $node);
+    $result = $ecmsApiPublisher->syndicateNode($url, $node);
 
     // If an error occurs, re-queue the item.
     if (!$result) {
       $data = [
         'site_entity' => $ecmsApiSite,
         'syndicated_content_entity' => $node,
-        'method' => $method,
       ];
 
       // Requeue the item for later processing.
@@ -207,13 +203,11 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
           $ecmsApiSite = array_shift($error[1]);
           /** @var \Drupal\node\NodeInterface $node */
           $node = array_shift($error[1]);
-          $method = array_shift($error[1]);
 
           // Rebuild the queue item for requeue.
           $data = [
             'site_entity' => $ecmsApiSite,
             'syndicated_content_entity' => $node,
-            'method' => $method,
           ];
 
           // Requeue the item for later processing.

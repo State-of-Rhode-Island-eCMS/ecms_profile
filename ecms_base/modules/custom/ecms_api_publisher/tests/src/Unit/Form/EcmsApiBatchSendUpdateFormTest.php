@@ -246,7 +246,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
         $item->data = [
           'site_entity' => $apiSite,
           'syndicated_content_entity' => $node,
-          'method' => $this->randomMachineName(),
         ];
 
         $claims[] = $item;
@@ -429,7 +428,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
             [
               'apiSite',
               'node',
-              $this->randomMachineName(),
             ],
           ],
           2 => [
@@ -437,7 +435,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
             [
               'apiSite',
               'node',
-              $this->randomMachineName(),
             ],
           ],
         ],
@@ -469,7 +466,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       ->willReturn($linkMock);
 
     $node = $this->createMock(NodeInterface::class);
-    $method = $this->randomMachineName();
 
     $methodCount = 1;
 
@@ -480,7 +476,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       $data = [
         'site_entity' => $ecmsApiSite,
         'syndicated_content_entity' => $node,
-        'method' => $method,
       ];
 
       $this->queue->expects($this->once())
@@ -503,7 +498,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
     $context = [];
 
-    EcmsApiBatchSendUpdatesForm::postSyndicateContent($ecmsApiSite, $node, $method, $context);
+    EcmsApiBatchSendUpdatesForm::postSyndicateContent($ecmsApiSite, $node, $context);
   }
 
   /**

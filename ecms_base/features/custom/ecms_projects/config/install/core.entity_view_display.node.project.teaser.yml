@@ -19,6 +19,11 @@ targetEntityType: node
 bundle: project
 mode: teaser
 content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -33,3 +38,4 @@ hidden:
   field_project_main_image: true
   field_project_start_year: true
   field_project_total_cost: true
+  langcode: true

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: embed
+label: Embed
+icon_uuid: null
+icon_default: null
+description: 'An unrestricted text format which allows for iFrames, scripts, and other HTML to be embedded. Requires "Embed Author" role.'
+behavior_plugins: {  }

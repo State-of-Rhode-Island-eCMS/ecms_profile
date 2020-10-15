@@ -162,10 +162,14 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
     foreach ($contentTypes as $key => $type) {
       $role->grantPermission("create {$key} content");
       $role->grantPermission("edit own {$key} content");
+      $role->grantPermission("translate {$key} node");
     }
 
     // Grant the publishing permission.
     $role->grantPermission(self::EDITORIAL_PUBLISH);
+
+    // Allow the api user translation permissions.
+    $role->grantPermission('create content translations');
 
     try {
       $role->save();

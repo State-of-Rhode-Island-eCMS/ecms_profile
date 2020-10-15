@@ -39,6 +39,7 @@ dependencies:
   - media_library
   - menu_link_content
   - menu_ui
+  - moderated_content_bulk_publish
   - moderation_dashboard
   - node
   - openid_connect_windows_aad
@@ -50,6 +51,7 @@ dependencies:
   - quickedit
   - rabbit_hole
   - rh_node
+  - rh_taxonomy
   - responsive_image
   - rdf
   - shortcut

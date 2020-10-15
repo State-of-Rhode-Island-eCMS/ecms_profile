@@ -70,7 +70,6 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
    * @dataProvider dataProviderForProcessItem
    */
   public function testProcessItem(bool $expected): void {
-    $method = 'POST';
     $url = $this->createMock(Url::class);
     $node = $this->createMock(NodeInterface::class);
 
@@ -85,7 +84,7 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
 
     $this->ecmsApiPublisher->expects($this->once())
       ->method('syndicateNode')
-      ->with($method, $url, $node)
+      ->with($url, $node)
       ->willReturn($expected);
 
     if (!$expected) {
@@ -95,7 +94,6 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
     $data = [
       'site_entity' => $siteEntity,
       'syndicated_content_entity' => $node,
-      'method' => $method,
     ];
 
     $this->queueWorker->processItem($data);

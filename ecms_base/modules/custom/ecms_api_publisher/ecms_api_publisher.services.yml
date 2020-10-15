@@ -5,7 +5,7 @@ services:
 
   ecms_api_publisher.publisher:
     class: Drupal\ecms_api_publisher\EcmsApiPublisher
-    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory']
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory', '@entity_type.manager', '@account_switcher']
 
   ecms_api_publisher.syndicate:
     class: Drupal\ecms_api_publisher\EcmsApiSyndicate

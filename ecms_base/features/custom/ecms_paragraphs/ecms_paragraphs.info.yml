@@ -10,12 +10,14 @@ dependencies:
   - field
   - file
   - filter
-  - language
   - image
+  - language
   - media
+  - media_library
   - options
   - paragraphs
   - path
   - text
+  - user
 version: 9.x-1.0
 package: eCMS
