@@ -53,10 +53,13 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     $this->drupalGet('admin/people/roles/manage/ecms_api_publisher');
     $this->assertSession()->statusCodeEquals(200);
 
-    // Ensure the role has the create permission selected.
+    // Ensure the role has the correct permission selected.
     $this->drupalGet('admin/people/permissions/ecms_api_publisher');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkBoxChecked('ecms_api_publisher[add ecms api site entities]');
+    $this->assertSession()->checkboxChecked('ecms_api_publisher[view any unpublished content]');
+    $this->assertSession()->checkboxChecked('ecms_api_publisher[view latest version]');
+    $this->assertSession()->checkboxChecked('ecms_api_publisher[view notification revisions]');
 
     // Ensure the user account was created.
     $this->drupalGet('admin/people');
