@@ -74,7 +74,6 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
    * Test the ecms_workflow new content type creation.
    *
    * @throws \Behat\Mink\Exception\ExpectationException
-   * @throws
    */
   public function testEcmsWorkflowNewContentType(): void {
     $this->drupalLogin($this->account);
