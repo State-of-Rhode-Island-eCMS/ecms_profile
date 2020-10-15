@@ -6,7 +6,9 @@ dependencies:
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
+    - field.field.node.press_release.field_press_release_paragraphs
     - field.field.node.press_release.field_press_release_source
+    - field.field.node.press_release.field_press_release_topics
     - node.type.press_release
   module:
     - user
@@ -29,5 +31,7 @@ hidden:
   field_press_release_body: true
   field_press_release_date: true
   field_press_release_links: true
+  field_press_release_paragraphs: true
   field_press_release_source: true
+  field_press_release_topics: true
   langcode: true

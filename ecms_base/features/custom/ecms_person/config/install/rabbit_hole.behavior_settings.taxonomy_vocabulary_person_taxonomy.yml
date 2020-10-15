@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.person_taxonomy
+id: taxonomy_vocabulary_person_taxonomy
+action: page_not_found
+allow_override: 0
+redirect: ''
+redirect_code: 301

@@ -5,13 +5,16 @@ dependencies:
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
+    - field.field.node.press_release.field_press_release_paragraphs
     - field.field.node.press_release.field_press_release_source
+    - field.field.node.press_release.field_press_release_topics
     - node.type.press_release
     - workflows.workflow.editorial
   module:
     - content_moderation
     - datetime
     - link
+    - paragraphs
     - path
     - text
 id: node.press_release.default
@@ -49,6 +52,18 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  field_press_release_paragraphs:
+    type: entity_reference_paragraphs
+    weight: 125
+    settings:
+      title: 'Content Component'
+      title_plural: 'Content Components'
+      edit_mode: preview
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
   field_press_release_source:
     weight: 124
     settings:
@@ -56,6 +71,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_press_release_topics:
+    weight: 126
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select
