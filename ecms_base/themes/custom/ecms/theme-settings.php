@@ -20,7 +20,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   // Footer settings.
   $form['ecms_theme_options'] = [
     '#type' => 'details',
-    '#title' => "Theme Options",
+    '#title' => t("Theme Options"),
   ];
 
   $color_config_json_string = file_get_contents("/ecms_patternlab/source/_data/color-config.json");
