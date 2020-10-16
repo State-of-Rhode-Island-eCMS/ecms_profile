@@ -26,3 +26,13 @@ function ecms_preprocess_page(&$variables) {
   $variables['sidebar_right'] = theme_get_setting('footer_right')['value'];
   $variables['state_info'] = theme_get_setting('footer_state_info')['value'];
 }
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function ecms_preprocess_html(&$variables) {
+
+  // Add paletteClass from theme settings form.
+  $paletteClass = 'qh-t--' . theme_get_setting('color_palette');
+  $variables['attributes']['class'][] = $paletteClass;
+}
