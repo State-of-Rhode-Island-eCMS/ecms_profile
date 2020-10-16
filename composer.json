@@ -75,6 +75,7 @@
     "drupal/core-recommended": "^9",
     "drupal/features": "^3.11",
     "drupal/jsonapi_extras": "^3.16",
+    "drupal/layout_builder_modal": "^1.1",
     "drupal/moderated_content_bulk_publish": "^2.0",
     "drupal/moderation_dashboard": "^1.0",
     "drupal/office_hours": "^1.3",
