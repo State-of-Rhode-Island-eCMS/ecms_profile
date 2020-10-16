@@ -14,3 +14,25 @@ function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables
     $suggestions[] = 'page__' . $content_type;
   }
 }
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function ecms_preprocess_page(&$variables) {
+
+  // Attach footer variables.
+  $variables['sidebar_left'] = theme_get_setting('footer_left')['value'];
+  $variables['sidebar_center'] = theme_get_setting('footer_center')['value'];
+  $variables['sidebar_right'] = theme_get_setting('footer_right')['value'];
+  $variables['state_info'] = theme_get_setting('footer_state_info')['value'];
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function ecms_preprocess_html(&$variables) {
+
+  // Add paletteClass from theme settings form.
+  $paletteClass = 'qh-t--' . theme_get_setting('color_palette');
+  $variables['attributes']['class'][] = $paletteClass;
+}

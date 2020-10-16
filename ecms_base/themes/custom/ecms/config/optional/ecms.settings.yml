@@ -1,0 +1,22 @@
+features:
+  node_user_picture: true
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: 1
+logo:
+  use_default: 1
+favicon:
+  use_default: 1
+footer_left:
+  value: "<p><strong>Department of Health</strong></p>\r\n\r\n<p>3 Capitol Hill Providence, RI 02908</p>\r\n\r\n<p><a href=\"mailto:http://google.com\">Email us</a></p>\r\n\r\n<p><a href=\"http://google.com\">Directions</a></p>\r\n\r\n<p><a href=\"http://google.com\">Phonebook</a></p>\r\n\r\n<p>Phone: <a href=\"tel:401-222-5960\">401-222-5960</a></p>\r\n\r\n<p>After Hours Phone: <a href=\"tel:401-276-8046\">401-276-8046</a></p>\r\n"
+  format: basic_html
+footer_center:
+  value: "<p><strong>Office Hours</strong></p>\r\n\r\n<p>Monday - Friday</p>\r\n\r\n<p>8:30 AM - 4:30 PM</p>\r\n\r\n<p><a href=\"http://google.com\">Vital Records 7:30 AM - 3:30 PM</a></p>\r\n\r\n<p><a href=\"http://google.com\">Food Protection 8:30 AM - 4 PM</a></p>\r\n\r\n<p><a href=\"http://google.com\">Parking restrictions until 3 PM</a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Publications Center</strong></p>\r\n\r\n<p><a href=\"http://google.com\">Order Materials</a></p>\r\n"
+  format: basic_html
+footer_right:
+  value: "<p><strong>COVID-19 Info Line</strong></p>\r\n\r\n<p>Monday – Friday</p>\r\n\r\n<p>7:30 AM - 7:00 PM</p>\r\n\r\n<p>Saturday – Sunday</p>\r\n\r\n<p>8:30 AM - 4:30 PM</p>\r\n\r\n<p>Phone: <a href=\"tel:401-222-8022\">401-222-8022 </a></p>\r\n\r\n<p>After hours: <a href=\"tel:211\">Call 211</a></p>\r\n\r\n<p>RIDOH.COVID19Questions@health.ri.gov</p>\r\n"
+  format: basic_html
+footer_state_info:
+  value: "<p><strong>State of Rhode Island</strong></p>\r\n\r\n<p><a href=\"http://www.governor.ri.gov/\">Office of the Governor</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/\">RI.gov</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/guide/\">Elected Officials</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/guide/\">State Agencies (A-Z)</a></p>\r\n"
+  format: basic_html
+color_palette: scar
