@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * The main footer of the site broken out of the page template.
+ *
+#}
+
+{% include "@organisms/00-global/footer.twig" with {
+  column_left: sidebar_left,
+  column_center: sidebar_center,
+  column_right: sidebar_right,
+  state_info: state_info,
+} %}
+
+
+<footer>
+  <div class="l-container">
+  </div>
+</footer>
