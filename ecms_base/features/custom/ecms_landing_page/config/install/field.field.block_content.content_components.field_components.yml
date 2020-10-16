@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.content_components
+    - field.storage.block_content.field_components
+  module:
+    - entity_reference_revisions
+id: block_content.content_components.field_components
+field_name: field_components
+entity_type: block_content
+bundle: content_components
+label: Components
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles: null
+    target_bundles_drag_drop:
+      embed:
+        weight: 5
+        enabled: false
+      file_list:
+        weight: 6
+        enabled: false
+      formatted_text:
+        weight: 7
+        enabled: false
+      media_item:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

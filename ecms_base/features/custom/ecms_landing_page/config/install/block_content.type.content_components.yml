@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: content_components
+label: 'Content Components'
+revision: 0
+description: 'A block type which allows for multiple paragraphs to be embedded.'
