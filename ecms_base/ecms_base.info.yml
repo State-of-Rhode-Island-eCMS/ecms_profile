@@ -81,6 +81,6 @@ install:
 
 # Theme dependencies for the distribution.
 themes:
-  - bartik
+  - classy
   - claro
   - ecms
