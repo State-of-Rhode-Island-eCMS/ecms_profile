@@ -57,6 +57,7 @@ dependencies:
   - rh_taxonomy
   - responsive_image
   - rdf
+  - scheduler
   - shortcut
   - taxonomy
   - toolbar
