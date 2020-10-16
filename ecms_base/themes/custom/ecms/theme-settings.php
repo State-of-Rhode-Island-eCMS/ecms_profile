@@ -1,6 +1,16 @@
 <?php
 
-function ecms_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id = NULL) {
+/**
+ * @file
+ * Creates a theme settings form for the eCMS theme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * {@inheritdoc}
+ */
+function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
   // Work-around for a core bug affecting admin themes. See issue #943212.
   if (isset($form_id)) {
     return;
@@ -10,14 +20,14 @@ function ecms_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSta
   // Footer settings.
   $form['ecms_theme_options'] = [
     '#type' => 'details',
-    '#title' => "Theme Options"
+    '#title' => "Theme Options",
   ];
 
   $color_config_json_string = file_get_contents("/ecms_patternlab/source/_data/color-config.json");
   if ($color_config_json_string) {
 
-    $json_decoded = json_decode($color_config_json_string, true);
-    if ($json_decoded === null) {
+    $json_decoded = json_decode($color_config_json_string, TRUE);
+    if ($json_decoded === NULL) {
       return;
     }
 
@@ -38,7 +48,7 @@ function ecms_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormSta
   // Footer settings.
   $form['ecms_footer'] = [
     '#type' => 'details',
-    '#title' => "Footer"
+    '#title' => "Footer",
   ];
 
   $form['ecms_footer']['footer_left'] = [
