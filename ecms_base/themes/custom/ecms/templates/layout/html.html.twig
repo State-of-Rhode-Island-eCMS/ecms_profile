@@ -31,5 +31,22 @@
     db_offline ? 'db-offline'
   ]
 %}
+{% set head_title = head_title|safe_join(' | ') %}
 
-{% include "@templates/00-layouts/html.html.twig" %}
+{% set skip_link = 'Skip to main content'|t %}
+
+{% include "@templates/00-layouts/html.html.pl.twig" with {
+  logged_in: logged_in,
+  root_path: root_path,
+  node_type: node_type,
+  placeholder_token: placeholder_token,
+  db_offline: db_offline,
+  html_attributes: html_attributes,
+  body_classes: body_classes,
+  head_title: head_title,
+  skip_link: skip_link,
+  page_top: page_top,
+  page: page,
+  page_bottom: page_bottom
+}
+%}
