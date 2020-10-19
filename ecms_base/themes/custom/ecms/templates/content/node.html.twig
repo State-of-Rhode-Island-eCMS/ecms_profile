@@ -80,30 +80,33 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
-{{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
+{% set byline = 'Submitted by ' ~ author_name ~ ' on ' ~ date %}
+{% set byline_translatable = byline|t %}
 
-  {% if node.label  %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark"> {{ node.label }} </a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
-  {% if display_submitted %}
-    <footer class="node__meta">
-      {{ author_picture }}
-      <div{{ author_attributes.addClass('node__submitted') }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
-
-  <div{{ content_attributes.addClass('node__content') }}>
-    {{ content }}
-  </div>
-
-</article>
+{% include "@templates/01-content/node.html.pl.twig" with {
+  node: node,
+  label: label,
+  byline_translatable: byline_translatable,
+  content: content,
+  author_picture: author_picture,
+  metadata: metadata,
+  date: date,
+  author_name: author_name,
+  url: url,
+  display_submitted: display_submitted,
+  attributes: attributes,
+  title_attributes: title_attributes,
+  content_attributes: content_attributes,
+  author_attributes: author_attributes,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+  view_mode: view_mode,
+  teaser: teaser,
+  page: page,
+  readmore: readmore,
+  logged_in: logged_in,
+  is_admin: is_admin,
+  classes: classes
+}
+%}
