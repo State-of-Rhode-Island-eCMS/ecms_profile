@@ -48,7 +48,7 @@ settings:
     language:
       language_list: un
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''
