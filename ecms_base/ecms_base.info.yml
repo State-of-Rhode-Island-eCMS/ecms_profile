@@ -52,6 +52,7 @@ dependencies:
   - publishcontent
   - quickedit
   - rabbit_hole
+  - real_aes
   - rh_node
   - rh_taxonomy
   - responsive_image
