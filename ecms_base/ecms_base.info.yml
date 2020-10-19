@@ -69,7 +69,6 @@ dependencies:
 install:
   - ecms_authentication
   - ecms_basic_page
-  - ecms_editors
   - ecms_event
   - ecms_landing_page
   - ecms_layout

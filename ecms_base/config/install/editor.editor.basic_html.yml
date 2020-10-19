@@ -5,6 +5,8 @@ dependencies:
     - filter.format.basic_html
   module:
     - ckeditor
+_core:
+  default_config_hash: AqlPmO16LvJI4D0Ih6u4GFQIzqr5OnLgAUSjcUGWk2g
 format: basic_html
 editor: ckeditor
 settings:
@@ -16,6 +18,11 @@ settings:
           items:
             - Bold
             - Italic
+            - HorizontalRule
+            - Strike
+            - Blockquote
+            - Superscript
+            - Subscript
         -
           name: Linking
           items:
@@ -27,11 +34,6 @@ settings:
             - BulletedList
             - NumberedList
         -
-          name: Media
-          items:
-            - Blockquote
-            - DrupalImage
-        -
           name: 'Block Formatting'
           items:
             - Format
@@ -39,14 +41,17 @@ settings:
           name: Tools
           items:
             - Source
+            - RemoveFormat
   plugins:
     stylescombo:
       styles: ''
+    language:
+      language_list: un
 image_upload:
   status: true
   scheme: public
   directory: inline-images
   max_size: ''
   max_dimensions:
-    width: 0
-    height: 0
+    width: null
+    height: null
