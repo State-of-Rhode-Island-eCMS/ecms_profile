@@ -38,6 +38,10 @@
       },
       "drupal/content_moderation_notifications": {
         "3170503 - Core requirement error during Functional test": "https://www.drupal.org/files/issues/2020-09-11/3170503-2.patch"
+      },
+      "drupal/paragraphs": {
+        "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
+        "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch"
       }
     },
     "preserve-paths": [],
@@ -71,6 +75,7 @@
     "drupal/core-recommended": "^9",
     "drupal/features": "^3.11",
     "drupal/jsonapi_extras": "^3.16",
+    "drupal/layout_builder_modal": "^1.1",
     "drupal/moderated_content_bulk_publish": "^2.0",
     "drupal/moderation_dashboard": "^1.0",
     "drupal/office_hours": "^1.3",
