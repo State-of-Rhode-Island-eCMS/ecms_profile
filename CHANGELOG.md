@@ -21,6 +21,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [0.1.1] - 2020-10-19
+### Added
+- RIG-37: Add Content Components block type
+- RIG-37: Add layout_builder_modal contrib module.
+
 ## [0.1.0] - 2020-10-15
 ### Added
 - Added the [ACSF module](https://www.drupal.org/project/acsf) as a required dependency.
@@ -68,8 +73,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-22: Added moderated_content_bulk_publish module, installed by default.
 - RIG-94: Added Press Release paragraphs field.
 - RIG-95: Added Press Release Topics taxonomy.
-- RIG-37: Add Content Components block type
-- RIG-37: Add layout_builder_modal contrib module.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.
@@ -88,5 +91,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.1...HEAD
+[0.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/releases/tag/0.1.0
