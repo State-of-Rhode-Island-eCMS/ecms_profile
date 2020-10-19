@@ -66,4 +66,9 @@ function ecms_base_install() {
       ->addContentTypeToWorkflow($type->id());
   }
 
+  // Delete the default 'contact' webform.
+  \Drupal::entityTypeManager()
+    ->getStorage('webform')
+    ->load('contact')->delete();
+
 }
