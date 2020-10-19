@@ -1,0 +1,11 @@
+name: 'eCMS Editors'
+description: 'Manage configuration for all WYWIWYG editors in use for the sites.'
+type: module
+core_version_requirement: ^9
+dependencies:
+  - ckeditor
+  - editor
+  - filter
+  - media
+version: 9.x-1.0
+package: eCMS
