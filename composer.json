@@ -45,7 +45,6 @@
           "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch"
       },
       "drupal/webform_encrypt": {
-        "3156160 - Compatibility with Webform 6.x" : "https://www.drupal.org/files/issues/2020-09-28/incompitable-with-webform-6-3156160-4.patch",
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch"
       }
     },
