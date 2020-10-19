@@ -63,6 +63,7 @@ dependencies:
   - views
   - views_ui
   - webform
+  - webform_encrypt
   - webform_node
   - webform_ui
 
