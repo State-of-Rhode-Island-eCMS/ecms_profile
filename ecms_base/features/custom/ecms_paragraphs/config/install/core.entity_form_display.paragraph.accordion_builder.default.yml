@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.accordion_builder.field_item_flexible_text
+    - field.field.paragraph.accordion_builder.field_item_text
+    - paragraphs.paragraphs_type.accordion_builder
+  module:
+    - paragraphs
+id: paragraph.accordion_builder.default
+targetEntityType: paragraph
+bundle: accordion_builder
+mode: default
+content:
+  field_item_flexible_text:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: 'Flexible Component'
+      title_plural: 'Flexible Components'
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: formatted_text
+    third_party_settings: {  }
+    region: content
+  field_item_text:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

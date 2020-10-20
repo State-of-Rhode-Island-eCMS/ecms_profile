@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_item_flexible_text
+    - paragraphs.paragraphs_type.accordion_builder
+  module:
+    - entity_reference_revisions
+id: paragraph.accordion_builder.field_item_flexible_text
+field_name: field_item_flexible_text
+entity_type: paragraph
+bundle: accordion_builder
+label: 'Item Flexible Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 1
+    target_bundles:
+      accordion_builder: accordion_builder
+    target_bundles_drag_drop:
+      accordion_builder:
+        enabled: true
+        weight: 6
+      embed:
+        weight: 7
+        enabled: false
+      file_list:
+        weight: 8
+        enabled: false
+      formatted_text:
+        weight: 9
+        enabled: false
+      media_item:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions
