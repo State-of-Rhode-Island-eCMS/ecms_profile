@@ -33,7 +33,7 @@ function ecms_preprocess_page(&$variables) {
 function ecms_preprocess_html(&$variables) {
 
   // Add paletteClass from theme settings form.
-  $paletteClass = 'qh-t--' . theme_get_setting('color_palette');
+  $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
   $variables['attributes']['class'][] = $paletteClass;
 
 }
