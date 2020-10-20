@@ -29,8 +29,8 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
     'title[0][value]' => 'This is the hotel title',
     'field_hotel_body[0][value]' => 'This is the hotel body',
     'field_hotel_address[0][address][address_line1]' => '150 Chestnut Street',
-    'field_hotel_address[0][address][locality]' => 'Providence',
-    'field_hotel_address[0][address][postal_code]' => '02903',
+    'field_hotel_address[0][address][locality]' => 'Lexington',
+    'field_hotel_address[0][address][postal_code]' => '40511',
     'field_hotel_rate[0][value]' => '100 dollars',
     'field_hotel_rate_amount[0][value]' => '1999',
   ];
@@ -214,9 +214,9 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
       'field_hotel_address' => [
         'country_code' => 'US',
         'address_line1' => '150 Chestnut Street',
-        'locality' => 'Providence',
+        'locality' => 'Lexington',
         'administrative_area' => 'US-RI',
-        'postal_code' => '02903',
+        'postal_code' => '40511',
       ],
       'field_hotel_phone' => '401.228.7660',
       'field_hotel_rate' => '100 dollars',
