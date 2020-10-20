@@ -10,8 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-37: Add Layout Builder Restrictions module.
 
 ### Changed
+- RIG-37: Update Landing Page full content display with restricted block types.
 
 ### Deprecated
 

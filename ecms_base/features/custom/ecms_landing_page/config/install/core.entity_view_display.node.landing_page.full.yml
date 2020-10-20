@@ -8,6 +8,7 @@ dependencies:
     - node.type.landing_page
   module:
     - layout_builder
+    - layout_builder_restrictions
     - layout_discovery
     - text
     - user
@@ -57,6 +58,25 @@ third_party_settings:
             additional: {  }
             weight: 2
         third_party_settings: {  }
+  layout_builder_restrictions:
+    allowed_block_categories: {  }
+    entity_view_mode_restriction:
+      whitelisted_blocks:
+        'Chaos Tools': {  }
+        'Content fields':
+          - 'field_block:user:user:changed'
+        Forms: {  }
+        Help: {  }
+        'Lists (Views)': {  }
+        Menus: {  }
+        'Moderation Dashboard': {  }
+        'OpenID Connect': {  }
+        System: {  }
+        User: {  }
+        Webform: {  }
+        core: {  }
+      blacklisted_blocks: {  }
+      allowed_layouts: {  }
 id: node.landing_page.full
 targetEntityType: node
 bundle: landing_page
