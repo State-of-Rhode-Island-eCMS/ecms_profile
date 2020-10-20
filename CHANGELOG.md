@@ -14,6 +14,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIG-37: Update Landing Page full content display with restricted block types.
+- RIG-37: Added Accordion Builder paragraph bundle.
+
+### Changed
+- RIG-37: Moved ecms.settings.yml to config install folder.
 
 ### Deprecated
 
