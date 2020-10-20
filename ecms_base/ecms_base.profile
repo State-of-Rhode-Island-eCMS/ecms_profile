@@ -7,12 +7,20 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Config\FileStorage;
+
 /**
- * Update Basic HTML configuration is updated.
+ * Update Basic HTML configuration to match the install config.
  */
 function ecms_base_update_9001(array &$sandbox): void {
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('filter.format.basic_html');
-  $config->set('filters["filter_html"]["settings"]["allowed_html"]', '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <br> <span> <s> <sup> <sub> <hr>');
-  $config->save(TRUE);
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  $active_storage->write('editor.editor.basic_html', $install_source->read('editor.editor.basic_html'));
+  $active_storage->write('filter.format.basic_html', $install_source->read('filter.format.basic_html'));
+
 }
