@@ -31,7 +31,7 @@
     db_offline ? 'db-offline'
   ]
 %}
-{% set head_title = head_title|safe_join(' | ') %}
+{% set head_title_string = head_title|safe_join(' | ') %}
 
 {% set skip_link = 'Skip to main content'|t %}
 
@@ -43,7 +43,7 @@
   db_offline: db_offline,
   html_attributes: html_attributes,
   body_classes: body_classes,
-  head_title: head_title,
+  head_title: head_title_string,
   skip_link: skip_link,
   page_top: page_top,
   page: page,
