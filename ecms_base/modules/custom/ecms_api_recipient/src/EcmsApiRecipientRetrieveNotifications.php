@@ -10,6 +10,15 @@ use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * Retrieve currently published notifications from the hub site.
+ *
+ * This service will be called on installation and will manage pulling
+ * notifications from the hub site and adding them to a queue for generation
+ * on the current site.
+ *
+ * @package Drupal\ecms_api_recipient
+ */
 class EcmsApiRecipientRetrieveNotifications {
 
   /**
@@ -34,7 +43,7 @@ class EcmsApiRecipientRetrieveNotifications {
    *
    * @var \Drupal\Core\Queue\QueueInterface
    */
-  private $queue;
+  private $notificationQueue;
 
   /**
    * The queue interface for the paging queue.
@@ -56,11 +65,13 @@ class EcmsApiRecipientRetrieveNotifications {
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
    * @param \Drupal\Core\Queue\QueueFactory $queueFactory
+   *   The queue service.
    * @param \GuzzleHttp\ClientInterface $httpClient
+   *   The http_client service.
    */
   public function __construct(ConfigFactoryInterface $configFactory, QueueFactory $queueFactory, ClientInterface $httpClient) {
     $this->config = $configFactory->get('ecms_api_recipient.settings');
-    $this->queue = $queueFactory->get(self::NOTIFICATION_CREATION_QUEUE);
+    $this->notificationQueue = $queueFactory->get(self::NOTIFICATION_CREATION_QUEUE);
     $this->pagerQueue = $queueFactory->get(self::NOTIFICATION_PAGER_QUEUE);
     $this->httpClient = $httpClient;
   }
@@ -101,8 +112,6 @@ class EcmsApiRecipientRetrieveNotifications {
    *   The contents of the request or null if an error occurs.
    */
   private function callApiEndpoint(Url $endpoint): ?string {
-    // Callback to the hub and get all notification UUIDS.
-    // Callback as the anonymous user.
     try {
       $request = $this->httpClient->request('GET', $endpoint->toString());
     }
@@ -168,12 +177,12 @@ class EcmsApiRecipientRetrieveNotifications {
   /**
    * Queue the notification for creation.
    *
-   * @param array $uuids
-   *   The UUIDS to queue from the hub.
+   * @param string $uuid
+   *   The UUID of the notification node from the hub.
    */
   private function queueNotification(string $uuid): void {
     // Push a new item onto the queue.
-    $this->queue->createItem($uuid);
+    $this->notificationQueue->createItem($uuid);
   }
 
   /**
@@ -186,7 +195,7 @@ class EcmsApiRecipientRetrieveNotifications {
     try {
       $url = Url::fromUri($nextPage);
     }
-    catch(\InvalidArgumentException $e) {
+    catch (\InvalidArgumentException $e) {
       return;
     }
 
@@ -212,7 +221,7 @@ class EcmsApiRecipientRetrieveNotifications {
     try {
       $hub = Url::fromUri($hubUri);
     }
-    catch(\InvalidArgumentException $e) {
+    catch (\InvalidArgumentException $e) {
       return NULL;
     }
 
@@ -226,7 +235,7 @@ class EcmsApiRecipientRetrieveNotifications {
     try {
       $url = Url::fromUri("{$hub->toString()}/EcmsApi/node/notification?{$queryParams}");
     }
-    catch(\InvalidArgumentException $e) {
+    catch (\InvalidArgumentException $e) {
       return NULL;
     }
 

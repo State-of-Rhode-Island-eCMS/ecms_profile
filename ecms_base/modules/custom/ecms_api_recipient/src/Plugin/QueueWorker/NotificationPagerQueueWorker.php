@@ -50,6 +50,7 @@ class NotificationPagerQueueWorker extends QueueWorkerBase implements ContainerF
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    * @param \Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications $ecmsApiRetriever
+   *   The ecms_api_recipient.retrieve_notifications service.
    */
   public function __construct(array $configuration, string $plugin_id, $plugin_definition, EcmsApiRecipientRetrieveNotifications $ecmsApiRetriever) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -58,10 +59,17 @@ class NotificationPagerQueueWorker extends QueueWorkerBase implements ContainerF
   }
 
   /**
-   * @param \Drupal\Core\Url $url
+   * Process the queue item.
+   *
+   * @param mixed $url
+   *   The URL of the next page to retrieve.
+   *   Currently unable to typehint the parameter in the method
+   *   due to the QueueWorkerInterface. However, the parameter should be of
+   *   type: \Drupal\Core\Url.
    */
   public function processItem($url): void {
-    if (!$url instanceOf Url) {
+    // Ensure we have a \Drupal\Core\Url.
+    if (!$url instanceof Url) {
       return;
     }
 
