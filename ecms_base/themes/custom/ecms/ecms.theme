@@ -40,5 +40,19 @@ function ecms_preprocess_html(&$variables) {
   // Add paletteClass from theme settings form.
   $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
   $variables['attributes']['class'][] = $paletteClass;
+}
 
+/**
+ * Implements hook_theme().
+ */
+function ecms_theme($existing, $type, $theme, $path): array {
+  $templates = [];
+  if ($theme === 'ecms') {
+    // Workaround for the core bug found here:
+    // https://www.drupal.org/project/drupal/issues/3071201
+    // html.twig files were being discovered outside of the templates directory.
+    $templates = drupal_find_theme_functions($existing, [$theme]);
+    $templates += drupal_find_theme_templates($existing, '.html.twig', "{$path}/templates");
+  }
+  return $templates;
 }
