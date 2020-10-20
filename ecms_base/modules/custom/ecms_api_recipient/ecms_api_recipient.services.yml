@@ -11,3 +11,7 @@ services:
   ecms_api_recipient.register:
     class: Drupal\ecms_api_recipient\EcmsApiRecipientRegister
     arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory', '@request_stack']
+
+  ecms_api_recipient.retrieve_notifications:
+    class: Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications
+    arguments: ['@config.factory', '@queue', '@http_client']
