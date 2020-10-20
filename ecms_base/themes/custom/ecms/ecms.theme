@@ -20,11 +20,16 @@ function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables
  */
 function ecms_preprocess_page(&$variables) {
 
+  // Attach header variables.
+  $variables['header_preprocess_values']['top_line'] = theme_get_setting('header_top_line');
+  $variables['header_preprocess_values']['main_line'] = theme_get_setting('header_main_line');
+  $variables['header_preprocess_values']['bottom_line'] = theme_get_setting('header_bottom_line');
+
   // Attach footer variables.
-  $variables['sidebar_left'] = theme_get_setting('footer_left')['value'];
-  $variables['sidebar_center'] = theme_get_setting('footer_center')['value'];
-  $variables['sidebar_right'] = theme_get_setting('footer_right')['value'];
-  $variables['state_info'] = theme_get_setting('footer_state_info')['value'];
+  $variables['footer_preprocess_values']['sidebar_left'] = theme_get_setting('footer_left')['value'];
+  $variables['footer_preprocess_values']['sidebar_center'] = theme_get_setting('footer_center')['value'];
+  $variables['footer_preprocess_values']['sidebar_right'] = theme_get_setting('footer_right')['value'];
+  $variables['footer_preprocess_values']['state_info'] = theme_get_setting('footer_state_info')['value'];
 }
 
 /**
