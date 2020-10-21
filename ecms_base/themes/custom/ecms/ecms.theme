@@ -26,9 +26,9 @@ function ecms_preprocess_page(&$variables) {
   $variables['header_preprocess_values']['bottom_line'] = theme_get_setting('header_bottom_line');
 
   // Attach footer variables.
-  $variables['footer_preprocess_values']['sidebar_left'] = theme_get_setting('footer_left')['value'];
-  $variables['footer_preprocess_values']['sidebar_center'] = theme_get_setting('footer_center')['value'];
-  $variables['footer_preprocess_values']['sidebar_right'] = theme_get_setting('footer_right')['value'];
+  $variables['footer_preprocess_values']['footer_left'] = theme_get_setting('footer_left')['value'];
+  $variables['footer_preprocess_values']['footer_center'] = theme_get_setting('footer_center')['value'];
+  $variables['footer_preprocess_values']['footer_right'] = theme_get_setting('footer_right')['value'];
   $variables['footer_preprocess_values']['state_info'] = theme_get_setting('footer_state_info')['value'];
 }
 
