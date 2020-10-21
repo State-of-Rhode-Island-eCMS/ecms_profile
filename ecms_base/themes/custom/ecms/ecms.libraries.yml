@@ -3,6 +3,8 @@ global-styling:
   css:
     theme:
       ecms_patternlab/dist/css/pattern-lab-compiled.css: {}
+  js:
+    ecms_patternlab/dist/js/pattern-lab-compiled.js: {}
   dependencies:
     - core/drupal
     - core/jquery
@@ -12,3 +14,4 @@ header-scripts:
   header: true
   js:
     ecms_patternlab/dist/vendor/fontfaceobserver.js: {preprocess: false,weight: -100 }
+
