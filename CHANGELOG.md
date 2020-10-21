@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-37: Added Layout Builder Restrictions module.
 - RIG-37: Added Accordion Builder paragraph bundle.
+- RIG-37: Add base twig templates for HTML, Page, and Region.
 
 ### Changed
 - RIG-37: Update Landing Page full content display with restricted block types.
