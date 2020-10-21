@@ -35,7 +35,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
       // Do not add dark mode themes to list.
       $darkModeFound = strpos($key, '--dark');
 
-      if ($darkModeFound !== false) {
+      if ($darkModeFound !== FALSE) {
         continue;
       }
 
@@ -62,7 +62,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#title' => t('Top Line'),
     '#default_value' => theme_get_setting('header_top_line'),
     '#description' => t("(Optional) The top line of the header."),
-    '#maxlength' => 255
+    '#maxlength' => 255,
   ];
 
   $form['ecms_header']['header_main_line'] = [
@@ -71,7 +71,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#default_value' => theme_get_setting('header_main_line'),
     '#description' => t("The main line of the header."),
     '#required' => TRUE,
-    '#maxlength' => 255
+    '#maxlength' => 255,
   ];
 
   $form['ecms_header']['header_bottom_line'] = [
@@ -79,7 +79,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#title' => t('Bottom Line'),
     '#default_value' => theme_get_setting('header_bottom_line'),
     '#description' => t("(Optional) The bottom line of the header."),
-    '#maxlength' => 255
+    '#maxlength' => 255,
   ];
 
   // Footer settings.
