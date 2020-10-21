@@ -88,6 +88,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-76: Updated the api recipient installation values.
 - RIG-67: Added paragraphs reference field to basic page.
 - RIG-80: Fixed the publishing of notifications to only published nodes and translations.
+- RIG-22: Updated basic HTML WYSIWYG.
 
 ### Removed
 - RIG-37: Removed core search from default install.
