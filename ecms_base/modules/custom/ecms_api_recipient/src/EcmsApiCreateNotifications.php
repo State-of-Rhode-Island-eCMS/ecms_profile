@@ -6,10 +6,13 @@ namespace Drupal\ecms_api_recipient;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
+use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -59,127 +62,87 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     $this->jsonApiHelper = $jsonApiHelper;
   }
 
+  /**
+   * Create the notification node.
+   *
+   * @param object $jsonNodeObject
+   *   The json object returned from json api.
+   *
+   * @return bool
+   *   True if successful or false if an error occurred.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   public function createNotificationFromJson(object $jsonNodeObject): bool {
-    // The UUID exists already, ignore this node.
-    // @todo: How do we handle translations?
-    if ($this->checkEntityUuidExists($jsonNodeObject->id)) {
-      // @todo: Replace this return.
-      //return TRUE;
+    // Get the correct author id (ecms_api_recipient).
+    $recipientUser = $this->getEcmsApiRecipientUser();
+
+    // If the recipient user doesn't exist, stop processing.
+    if (empty($recipientUser)) {
+      return FALSE;
     }
 
+    // Convert the json to an array.
     $convertedJson = $this->jsonApiHelper->convertJsonDataToArray($jsonNodeObject);
+
+    // If not the default language and the node does not yet exist, requeue the
+    // creation at the bottom of the list.
+    if ($convertedJson['attributes']['default_langcode'] !== TRUE && !$this->checkEntityUuidExists($jsonNodeObject->id)) {
+      // @todo: Requeue this node at the end of the queue.
+      // @todo: Maybe move this to a translation queue?
+      return FALSE;
+    }
+
+    // If it is the default and the uuid already exists, we already have this
+    // entity. Move on without it.
+    if ($this->checkEntityUuidExists($jsonNodeObject->id)) {
+      // Return true to signify success.
+      return TRUE;
+    }
 
     $this->alterEntityAttributes($convertedJson['attributes'], NULL);
 
     // Add the uuid back into the attributes.
     $convertedJson['attributes']['uuid'] = $jsonNodeObject->id;
+    $convertedJson['attributes']['status'] = TRUE;
 
-    /** @var \Drupal\Core\Entity\EntityInterface $node */
+    /** @var \Drupal\node\NodeInterface $node */
     $node = $this->jsonApiHelper->extractEntity($convertedJson);
 
-//    foreach (self::NO_API_FIELD_NAMES)
-    $node->save();
-
-    // @todo: Change this to TRUE if the node saved.
-    return FALSE;
-
-//    // Get the domain of the current site.
-//    $siteUrl = $this->getSiteUrl();
-//
-//    // Guard against an empty site url.
-//    if (empty($siteUrl)) {
-//      return FALSE;
-//    }
-//
-//    // Get the id/secret/scope from configuration.
-//    $clientId = $this->getApiClientId();
-//    $clientSecret = $this->getApiClientSecret();
-//
-//    // Get the access token.
-//    $accessToken = $this->getAccessToken($siteUrl, $clientId, $clientSecret, self::API_SCOPE);
-//
-//    // Guard against an empty access token.
-//    if (empty($accessToken)) {
-//      return FALSE;
-//    }
-//
-//    // POST the entity to the API.
-//    //$status = $this->submitEntityAsJson($accessToken, $siteUrl, $jsonNodeObject);
-//    //$this->submitEntity()
-//    //$this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
-//    return $status;
-  }
-
-//  private function submitEntityAsJson(string $accessToken, Url $url, object $data): bool {
-//    // Query the endpoint to get the correct HTTP method.
-//    // @todo: Use the entity type manager to query for the uuid of the object.
-//    $method = 'POST';
-//    $method = $this->checkEntityUuidExists($data->id);
-////
-//    // Only allow certain methods to be submitted.
-//    if (empty($method) || !in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
-//      return FALSE;
-//    }
-//
-//    // Get the endpoint for the entity.
-//    $endpoint = $this->getEndpointUrlFromJson($url, $data, $method);
-//
-//    // Convert the entity to a json resource array.
-////    $normalizedEntity = $this->entityToJsonApi->normalize($entity);
-////
-////    if (empty($normalizedEntity['data']['attributes'])) {
-////      return FALSE;
-////    }
-//
-//    $payload = [
-//      'json' => [
-//        'data' => $data,
-//      ],
-//      'headers' => [
-//        'Content-Type' => 'application/vnd.api+json',
-//        'Authorization' => "Bearer {$accessToken}",
-//      ],
-//    ];
-//
-////    // Alter the entity attributes before submission.
-////    $this->alterEntityAttributes($payload['json']['data']['attributes'], $entity);
-//
-//    try {
-//      $request = $this->httpClient->request($method, $endpoint, $payload);
-//    }
-//    catch (GuzzleException $exception) {
-//      return FALSE;
-//    }
-//
-//    // 201 means successfully created the entity.
-//    if ($method === 'POST' && $request->getStatusCode() === 201) {
-//      return TRUE;
-//    }
-//
-//    // 200 means successfully updated the entity.
-//    if ($method === 'PATCH' && $request->getStatusCode() === 200) {
-//      return TRUE;
-//    }
-//
-//    return FALSE;
-//  }
-
-  private function getEndpointUrlFromJson(Url $url, object $data, string $method): string {
-    // Break the node type on the '--'.
-    $parts = explode('--', $data->type);
-
-    if ($method === 'PATCH') {
-      $parts[] = $data->id;
+    // Guard against an empty node object.
+    if (!$node instanceof NodeInterface) {
+      return FALSE;
     }
 
-    array_unshift($parts, self::API_ENDPOINT);
+    // Set the author of the node.
+    $node->set('uid', $recipientUser->id());
 
-    $path = implode('/', $parts);
+    try {
+      $node->save();
+    }
+    catch (EntityStorageException $e) {
+      // @todo: Log this error message.
+      return FALSE;
+    }
 
-    return "{$url->toString()}/{$path}";
+    // Change this to TRUE if the node saved.
+    return TRUE;
 
   }
 
+  /**
+   * Check if a node's uuid already exists.
+   *
+   * @param string $uuid
+   *   The uuid to query nodes with.
+   *
+   * @return bool
+   *   True if the uuid already exists.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   private function checkEntityUuidExists(string $uuid): bool {
     $storage = $this->entityTypeManager->getStorage('node');
 
@@ -190,9 +153,24 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
       return TRUE;
     }
 
-    // Default to false..
+    // Default to false.
     return FALSE;
+  }
 
+  private function getEcmsApiRecipientUser(): ?UserInterface {
+    $storage = $this->entityTypeManager->getStorage('user');
+
+    $users = $storage->loadByProperties(['name' => self::API_SCOPE]);
+
+    // Guard against no entity.
+    if (empty($users)) {
+      return NULL;
+    }
+
+    /** @var \Drupal\user\UserInterface $user */
+    $user = array_shift($users);
+
+    return $user;
   }
 
   /**
