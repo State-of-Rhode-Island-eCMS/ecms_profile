@@ -9,6 +9,7 @@ version: 1.x
 # Libraries
 libraries:
   - ecms/global-styling
+  - ecms/header-scripts
 
 component-libraries:
   atoms:

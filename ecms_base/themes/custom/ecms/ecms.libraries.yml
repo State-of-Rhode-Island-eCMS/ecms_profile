@@ -6,3 +6,9 @@ global-styling:
   dependencies:
     - core/drupal
     - core/jquery
+
+header-scripts:
+  version: 1
+  header: true
+  js:
+    ecms_patternlab/dist/vendor/fontfaceobserver.js: {preprocess: false,weight: -100 }

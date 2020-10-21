@@ -17,7 +17,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   }
 
   // Build out the form.
-  // Footer settings.
+  // Theme settings.
   $form['ecms_theme_options'] = [
     '#type' => 'details',
     '#title' => t("Theme Options"),
@@ -32,6 +32,13 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     }
 
     foreach ($json_decoded['palettes'] as $key => $palette) {
+      // Do not add dark mode themes to list.
+      $darkModeFound = strpos($key, '--dark');
+
+      if ($darkModeFound !== FALSE) {
+        continue;
+      }
+
       $paletteOptions[$key] = $palette['humanName'];
     }
 
@@ -44,7 +51,37 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     ];
   }
 
-  // Build out the form.
+  // Header settings.
+  $form['ecms_header'] = [
+    '#type' => 'details',
+    '#title' => "Header",
+  ];
+
+  $form['ecms_header']['header_top_line'] = [
+    '#type' => 'textfield',
+    '#title' => t('Top Line'),
+    '#default_value' => theme_get_setting('header_top_line'),
+    '#description' => t("(Optional) The top line of the header."),
+    '#maxlength' => 255,
+  ];
+
+  $form['ecms_header']['header_main_line'] = [
+    '#type' => 'textfield',
+    '#title' => t('Main Line'),
+    '#default_value' => theme_get_setting('header_main_line'),
+    '#description' => t("The main line of the header."),
+    '#required' => TRUE,
+    '#maxlength' => 255,
+  ];
+
+  $form['ecms_header']['header_bottom_line'] = [
+    '#type' => 'textfield',
+    '#title' => t('Bottom Line'),
+    '#default_value' => theme_get_setting('header_bottom_line'),
+    '#description' => t("(Optional) The bottom line of the header."),
+    '#maxlength' => 255,
+  ];
+
   // Footer settings.
   $form['ecms_footer'] = [
     '#type' => 'details',

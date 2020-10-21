@@ -20,11 +20,16 @@ function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables
  */
 function ecms_preprocess_page(&$variables) {
 
+  // Attach header variables.
+  $variables['header_preprocess_values']['top_line'] = theme_get_setting('header_top_line');
+  $variables['header_preprocess_values']['main_line'] = theme_get_setting('header_main_line');
+  $variables['header_preprocess_values']['bottom_line'] = theme_get_setting('header_bottom_line');
+
   // Attach footer variables.
-  $variables['sidebar_left'] = theme_get_setting('footer_left')['value'];
-  $variables['sidebar_center'] = theme_get_setting('footer_center')['value'];
-  $variables['sidebar_right'] = theme_get_setting('footer_right')['value'];
-  $variables['state_info'] = theme_get_setting('footer_state_info')['value'];
+  $variables['footer_preprocess_values']['footer_left'] = theme_get_setting('footer_left')['value'];
+  $variables['footer_preprocess_values']['footer_center'] = theme_get_setting('footer_center')['value'];
+  $variables['footer_preprocess_values']['footer_right'] = theme_get_setting('footer_right')['value'];
+  $variables['footer_preprocess_values']['state_info'] = theme_get_setting('footer_state_info')['value'];
 }
 
 /**
@@ -33,6 +38,21 @@ function ecms_preprocess_page(&$variables) {
 function ecms_preprocess_html(&$variables) {
 
   // Add paletteClass from theme settings form.
-  $paletteClass = 'qh-t--' . theme_get_setting('color_palette');
+  $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
   $variables['attributes']['class'][] = $paletteClass;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ecms_theme($existing, $type, $theme, $path): array {
+  $templates = [];
+  if ($theme === 'ecms') {
+    // Workaround for the core bug found here:
+    // https://www.drupal.org/project/drupal/issues/3071201
+    // html.twig files were being discovered outside of the templates directory.
+    $templates = drupal_find_theme_functions($existing, [$theme]);
+    $templates += drupal_find_theme_templates($existing, '.html.twig', "{$path}/templates");
+  }
+  return $templates;
 }
