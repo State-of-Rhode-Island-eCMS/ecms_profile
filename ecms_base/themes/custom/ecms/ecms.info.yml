@@ -27,4 +27,6 @@ component-libraries:
   pages:
     paths:
       - ecms_patternlab/source/_patterns/04-pages
-
+  icons:
+    paths:
+      - ecms_patternlab/source/images/icons
