@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_recipient;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Url;
@@ -28,6 +29,8 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    */
   private $entityTypeManager;
 
+  private $jsonApiHelper;
+
   /**
    * EcmsApiCreateNotifications constructor.
    *
@@ -45,96 +48,121 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     EntityToJsonApi $entityToJsonApi,
     ConfigFactoryInterface $configFactory,
     RequestStack $requestStack,
-    EntityTypeManagerInterface $entityTypeManager
+    EntityTypeManagerInterface $entityTypeManager,
+    JsonapiHelper $jsonApiHelper
   ) {
     parent::__construct($httpClient, $entityToJsonApi);
 
     $this->configFactory = $configFactory;
     $this->requestStack = $requestStack;
     $this->entityTypeManager = $entityTypeManager;
+    $this->jsonApiHelper = $jsonApiHelper;
   }
 
   public function createNotificationFromJson(object $jsonNodeObject): bool {
-    // Get the domain of the current site.
-    $siteUrl = $this->getSiteUrl();
-
-    // Guard against an empty site url.
-    if (empty($siteUrl)) {
-      return FALSE;
+    // The UUID exists already, ignore this node.
+    // @todo: How do we handle translations?
+    if ($this->checkEntityUuidExists($jsonNodeObject->id)) {
+      // @todo: Replace this return.
+      //return TRUE;
     }
 
-    // Get the id/secret/scope from configuration.
-    $clientId = $this->getApiClientId();
-    $clientSecret = $this->getApiClientSecret();
+    $convertedJson = $this->jsonApiHelper->convertJsonDataToArray($jsonNodeObject);
 
-    // Get the access token.
-    $accessToken = $this->getAccessToken($siteUrl, $clientId, $clientSecret, self::API_SCOPE);
+    $this->alterEntityAttributes($convertedJson['attributes'], NULL);
 
-    // Guard against an empty access token.
-    if (empty($accessToken)) {
-      return FALSE;
-    }
+    // Add the uuid back into the attributes.
+    $convertedJson['attributes']['uuid'] = $jsonNodeObject->id;
 
-    // POST the entity to the API.
-    $status = $this->submitEntityAsJson($accessToken, $siteUrl, $jsonNodeObject);
-    //$this->submitEntity()
-    //$this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
-    return $status;
-  }
+    /** @var \Drupal\Core\Entity\EntityInterface $node */
+    $node = $this->jsonApiHelper->extractEntity($convertedJson);
 
-  private function submitEntityAsJson(string $accessToken, Url $url, object $data): bool {
-    // Query the endpoint to get the correct HTTP method.
-    // @todo: Use the entity type manager to query for the uuid of the object.
-    $method = 'POST';
-    $method = $this->checkEntityUuidExists($data->id);
+//    foreach (self::NO_API_FIELD_NAMES)
+    $node->save();
+
+    // @todo: Change this to TRUE if the node saved.
+    return FALSE;
+
+//    // Get the domain of the current site.
+//    $siteUrl = $this->getSiteUrl();
 //
-    // Only allow certain methods to be submitted.
-    if (empty($method) || !in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
-      return FALSE;
-    }
-
-    // Get the endpoint for the entity.
-    $endpoint = $this->getEndpointUrlFromJson($url, $data, $method);
-
-    // Convert the entity to a json resource array.
-//    $normalizedEntity = $this->entityToJsonApi->normalize($entity);
-//
-//    if (empty($normalizedEntity['data']['attributes'])) {
+//    // Guard against an empty site url.
+//    if (empty($siteUrl)) {
 //      return FALSE;
 //    }
-
-    $payload = [
-      'json' => [
-        'data' => $data,
-      ],
-      'headers' => [
-        'Content-Type' => 'application/vnd.api+json',
-        'Authorization' => "Bearer {$accessToken}",
-      ],
-    ];
-
-//    // Alter the entity attributes before submission.
-//    $this->alterEntityAttributes($payload['json']['data']['attributes'], $entity);
-
-    try {
-      $request = $this->httpClient->request($method, $endpoint, $payload);
-    }
-    catch (GuzzleException $exception) {
-      return FALSE;
-    }
-
-    // 201 means successfully created the entity.
-    if ($method === 'POST' && $request->getStatusCode() === 201) {
-      return TRUE;
-    }
-
-    // 200 means successfully updated the entity.
-    if ($method === 'PATCH' && $request->getStatusCode() === 200) {
-      return TRUE;
-    }
-
-    return FALSE;
+//
+//    // Get the id/secret/scope from configuration.
+//    $clientId = $this->getApiClientId();
+//    $clientSecret = $this->getApiClientSecret();
+//
+//    // Get the access token.
+//    $accessToken = $this->getAccessToken($siteUrl, $clientId, $clientSecret, self::API_SCOPE);
+//
+//    // Guard against an empty access token.
+//    if (empty($accessToken)) {
+//      return FALSE;
+//    }
+//
+//    // POST the entity to the API.
+//    //$status = $this->submitEntityAsJson($accessToken, $siteUrl, $jsonNodeObject);
+//    //$this->submitEntity()
+//    //$this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
+//    return $status;
   }
+
+//  private function submitEntityAsJson(string $accessToken, Url $url, object $data): bool {
+//    // Query the endpoint to get the correct HTTP method.
+//    // @todo: Use the entity type manager to query for the uuid of the object.
+//    $method = 'POST';
+//    $method = $this->checkEntityUuidExists($data->id);
+////
+//    // Only allow certain methods to be submitted.
+//    if (empty($method) || !in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
+//      return FALSE;
+//    }
+//
+//    // Get the endpoint for the entity.
+//    $endpoint = $this->getEndpointUrlFromJson($url, $data, $method);
+//
+//    // Convert the entity to a json resource array.
+////    $normalizedEntity = $this->entityToJsonApi->normalize($entity);
+////
+////    if (empty($normalizedEntity['data']['attributes'])) {
+////      return FALSE;
+////    }
+//
+//    $payload = [
+//      'json' => [
+//        'data' => $data,
+//      ],
+//      'headers' => [
+//        'Content-Type' => 'application/vnd.api+json',
+//        'Authorization' => "Bearer {$accessToken}",
+//      ],
+//    ];
+//
+////    // Alter the entity attributes before submission.
+////    $this->alterEntityAttributes($payload['json']['data']['attributes'], $entity);
+//
+//    try {
+//      $request = $this->httpClient->request($method, $endpoint, $payload);
+//    }
+//    catch (GuzzleException $exception) {
+//      return FALSE;
+//    }
+//
+//    // 201 means successfully created the entity.
+//    if ($method === 'POST' && $request->getStatusCode() === 201) {
+//      return TRUE;
+//    }
+//
+//    // 200 means successfully updated the entity.
+//    if ($method === 'PATCH' && $request->getStatusCode() === 200) {
+//      return TRUE;
+//    }
+//
+//    return FALSE;
+//  }
 
   private function getEndpointUrlFromJson(Url $url, object $data, string $method): string {
     // Break the node type on the '--'.
@@ -152,18 +180,18 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
 
   }
 
-  private function checkEntityUuidExists(string $uuid): string {
+  private function checkEntityUuidExists(string $uuid): bool {
     $storage = $this->entityTypeManager->getStorage('node');
 
     $entities = $storage->loadByProperties(['uuid' => $uuid]);
 
-    // If no entities were found, return POST.
-    if (empty($entities)) {
-      return 'POST';
+    // If entities are found, return TRUE.
+    if (!empty($entities)) {
+      return TRUE;
     }
 
-    // The entity exists at this point, so we want to PATCH it.
-    return 'PATCH';
+    // Default to false..
+    return FALSE;
 
   }
 

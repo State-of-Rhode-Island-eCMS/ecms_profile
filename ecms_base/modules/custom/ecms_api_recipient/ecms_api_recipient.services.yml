@@ -18,4 +18,11 @@ services:
 
   ecms_api_recipient.create_notifications:
     class: Drupal\ecms_api_recipient\EcmsApiCreateNotifications
-    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory', '@request_stack', '@entity_type.manager']
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory', '@request_stack', '@entity_type.manager', '@ecms_api_recipient.jsonapi_helper']
+
+  ecms_api_recipient.jsonapi_helper:
+    class: Drupal\ecms_api_recipient\JsonapiHelper
+    arguments:
+      - '@jsonapi.serializer'
+      - '@serializer.normalizer.jsonapi_document_toplevel.jsonapi'
+      - '@jsonapi.resource_type.repository'

@@ -296,7 +296,7 @@ abstract class EcmsApiBase {
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity being submitted.
    */
-  protected function alterEntityAttributes(array &$attributes, EntityInterface $entity): void {
+  protected function alterEntityAttributes(array &$attributes, ?EntityInterface $entity = NULL): void {
     $keys = array_keys($attributes);
 
     foreach ($keys as $key) {
@@ -307,7 +307,10 @@ abstract class EcmsApiBase {
     }
 
     // Add the uuid to the attributes.
-    $attributes['uuid'] = $entity->uuid();
+    if ($entity) {
+      $attributes['uuid'] = $entity->uuid();
+    }
+
 
   }
 
