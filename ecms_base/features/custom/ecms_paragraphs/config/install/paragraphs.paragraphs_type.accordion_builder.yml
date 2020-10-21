@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: accordion_builder
+label: 'Accordion Builder'
+icon_uuid: null
+icon_default: null
+description: 'An accordion builder allows content authors to build out dynamic accordion content.'
+behavior_plugins: {  }
