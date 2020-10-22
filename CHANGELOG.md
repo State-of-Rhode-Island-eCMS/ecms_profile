@@ -34,6 +34,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Update Landing Page full content display with restricted block types.
 - RIG-37: Moved ecms.settings.yml to config install folder.
 - RIG-37: Changed landing page page.tpl to use classy.
+- RIG-37: Add tabledrag patch from 3083051 for core Claro theme.
 
 ### Fixed
 - RIG-121: Fixed the AAD administrator group name.
