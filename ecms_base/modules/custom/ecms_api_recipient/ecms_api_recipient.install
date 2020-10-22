@@ -18,7 +18,7 @@ function ecms_api_recipient_install(): void {
   \Drupal::service('ecms_api_recipient.register')->registerSite();
 
   // Retrieve all current notifications from the hub.
-  \Drupal::service('ecms_api_recipient.retrieve_notifications')->retrieveNotifications(NULL);
+  \Drupal::service('ecms_api_recipient.retrieve_notifications')->retrieveNotificationsFromHub();
 }
 
 /**

@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api_recipient;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
@@ -60,6 +62,13 @@ class EcmsApiRecipientRetrieveNotifications {
   private $httpClient;
 
   /**
+   * The language_manager service.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  private $languageManager;
+
+  /**
    * EcmsApiRecipientRetrieveNotifications constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
@@ -69,29 +78,34 @@ class EcmsApiRecipientRetrieveNotifications {
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The http_client service.
    */
-  public function __construct(ConfigFactoryInterface $configFactory, QueueFactory $queueFactory, ClientInterface $httpClient) {
+  public function __construct(ConfigFactoryInterface $configFactory, QueueFactory $queueFactory, ClientInterface $httpClient, LanguageManagerInterface $languageManager) {
     $this->config = $configFactory->get('ecms_api_recipient.settings');
     $this->notificationQueue = $queueFactory->get(self::NOTIFICATION_CREATION_QUEUE);
     $this->pagerQueue = $queueFactory->get(self::NOTIFICATION_PAGER_QUEUE);
     $this->httpClient = $httpClient;
+    $this->languageManager = $languageManager;
   }
 
   /**
-   * Query the api for published notifications.
-   *
-   * @param \Drupal\Core\Url|null $url
-   *   The url to query or null to query the main hub.
+   * Retrieve notifications from the hub querying for all languages.
    */
-  public function retrieveNotifications(?Url $url): void {
-    // If the url is empty, get the hub.
-    if (empty($url)) {
-      $url = $this->getHubUrl();
+  public function retrieveNotificationsFromHub(): void {
+    // Get all installed languages.
+    $languages = $this->languageManager->getLanguages();
 
-      if (empty($url)) {
-        return;
-      }
+    foreach ($languages as $code => $language) {
+      $url = $this->getHubUrl($language);
+      $this->retrieveNotifications($url);
     }
+  }
 
+  /**
+   * Query the url for published notifications.
+   *
+   * @param \Drupal\Core\Url $url
+   *   The url to query.
+   */
+  public function retrieveNotifications(Url $url): void {
     $contents = $this->callApiEndpoint($url);
 
     if (empty($contents)) {
@@ -209,8 +223,20 @@ class EcmsApiRecipientRetrieveNotifications {
    * @return \Drupal\Core\Url|null
    *   A url object or null if an error occurred.
    */
-  private function getHubUrl(): ?Url {
+  private function getHubUrl(LanguageInterface $language): ?Url {
     $hubUri = $this->config->get('api_main_hub');
+    $languageId = $language->getId();
+
+    $endpointPath = [
+      'EcmsApi',
+      'node',
+      'notification',
+    ];
+
+    // If the language is not the default, append it to the endpoint array.
+    if (!$language->isDefault()) {
+      array_unshift($endpointPath, $languageId);
+    }
 
     // Guard against an empty string.
     if (empty($hubUri)) {
@@ -225,15 +251,27 @@ class EcmsApiRecipientRetrieveNotifications {
       return NULL;
     }
 
+    // Append the hub url string to the endpoint array.
+    array_unshift($endpointPath, $hub->toString());
+
     // Add query parameters to the url.
+    // The filter on langcode is required to get the correct values. Not ideal,
+    // but is currently a workaround to get Json API returning all translated
+    // entities.
     $filter = [
       "page[limit]" => 10,
+      "filter[langcode][condition][path]" => "langcode",
+      "filter[langcode][condition][operator]" => "=",
+      "filter[langcode][condition][value]" => "{$languageId}",
     ];
 
     $queryParams = http_build_query($filter);
 
+    // Create an endpoint path.
+    $path = implode('/', $endpointPath);
+
     try {
-      $url = Url::fromUri("{$hub->toString()}/EcmsApi/node/notification?{$queryParams}");
+      $url = Url::fromUri("{$path}?{$queryParams}");
     }
     catch (\InvalidArgumentException $e) {
       return NULL;
