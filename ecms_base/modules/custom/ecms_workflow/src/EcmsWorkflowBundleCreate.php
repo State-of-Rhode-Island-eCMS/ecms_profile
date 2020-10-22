@@ -35,6 +35,11 @@ class EcmsWorkflowBundleCreate {
   const WORKFLOW_ID = 'editorial';
 
   /**
+   * Array of content types to exclude.
+   */
+  const EXCLUDED_TYPES = ['notification'];
+
+  /**
    * The entity_type.manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -167,6 +172,28 @@ class EcmsWorkflowBundleCreate {
     }
     catch (EntityStorageException $e) {
       return;
+    }
+
+  }
+
+  /**
+   * Apply workflow, schedule, and permissions to active content types.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function assignWorkflowToActiveTypes(): void {
+
+    $types = \Drupal::entityTypeManager()
+      ->getStorage('node_type')
+      ->loadMultiple();
+    foreach ($types as $type) {
+      // Skip if this is an excluded type.
+      if (in_array($type->id(), self::EXCLUDED_TYPES)) {
+        continue;
+      }
+
+      // Call the workflow service to update configuration.
+      $this->addContentTypeToWorkflow($type->id());
     }
 
   }

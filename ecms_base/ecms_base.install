@@ -50,4 +50,8 @@ function ecms_base_install() {
 
   $shortcut->save();
 
+  // Call the workflow service to update configuration.
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->assignWorkflowToActiveTypes();
+
 }

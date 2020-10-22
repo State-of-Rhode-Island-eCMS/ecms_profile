@@ -46,19 +46,8 @@ function ecms_base_update_9013(array &$sandbox): void {
   // Make sure the scheduler module is installed.
   \Drupal::service('module_installer')->install(['scheduler']);
 
-  // Assign the scheduler settings to existing content types.
-  $types = \Drupal::entityTypeManager()
-    ->getStorage('node_type')
-    ->loadMultiple();
+  // Call the workflow service to update configuration.
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->assignWorkflowToActiveTypes();
 
-  foreach ($types as $type) {
-    // Notifications are managed using the ecms_api module.
-    if ($type->id() === 'notification') {
-      continue;
-    }
-
-    // Call the workflow service to update configuration.
-    \Drupal::service('ecms_workflow.bundle_create')
-      ->addContentTypeToWorkflow($type->id());
-  }
 }
