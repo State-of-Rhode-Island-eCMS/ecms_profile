@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: drupal_admin
-label: Drupal Admin
+label: Drupal_Admin
 weight: 2
 is_admin: true
 permissions: {  }
