@@ -153,7 +153,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
     }
 
     // Create the notification. Requeue the node if it does not save correctly.
-    if (!$this->createNotification($content)) {
+    if (!$this->createNotification($json)) {
       throw new RequeueException();
     }
   }
@@ -229,7 +229,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
    * @return bool
    *   True if the node was successfully created.
    */
-  private function createNotification(string $content): bool {
+  private function createNotification(object $json): bool {
     // Post this entity to the current site.
     $status = $this->ecmsApiCreateNotification->createNotificationFromJson($json->data);
 
