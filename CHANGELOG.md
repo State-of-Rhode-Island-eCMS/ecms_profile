@@ -13,10 +13,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Added Layout Builder Restrictions module.
 - RIG-37: Added Accordion Builder paragraph bundle.
 - RIG-37: Add base twig templates for HTML, Page, and Region.
+- RIG-37: Add accordion and menu twig templates.
+- RIG-37: Added compiled pattern lab js import.
+- RIG-37: Added main navigation block to primary menu region.
 
 ### Changed
 - RIG-37: Update Landing Page full content display with restricted block types.
 - RIG-37: Moved ecms.settings.yml to config install folder.
+- RIG-37: Changed landing page page.tpl to use classy.
 
 ### Deprecated
 
