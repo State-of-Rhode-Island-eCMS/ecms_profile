@@ -18,6 +18,7 @@ dependencies:
   - paragraphs
   - path
   - rh_node
+  - scheduler
   - taxonomy
   - user
 version: 9.x-1.0

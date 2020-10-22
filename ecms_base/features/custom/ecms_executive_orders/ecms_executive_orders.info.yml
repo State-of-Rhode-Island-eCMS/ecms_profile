@@ -17,6 +17,7 @@ dependencies:
   - path
   - rabbit_hole
   - rh_node
+  - scheduler
   - user
 version: 9.x-1.0
 package: eCMS

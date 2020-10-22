@@ -14,6 +14,7 @@ dependencies:
   - office_hours
   - path
   - rabbit_hole
+  - scheduler
   - telephone
   - text
   - user
