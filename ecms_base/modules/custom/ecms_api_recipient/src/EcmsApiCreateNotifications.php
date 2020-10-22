@@ -86,21 +86,6 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     // Convert the json to an array.
     $convertedJson = $this->jsonApiHelper->convertJsonDataToArray($jsonNodeObject);
 
-    // If not the default language and the node does not yet exist, requeue the
-    // creation at the bottom of the list.
-    if ($convertedJson['attributes']['default_langcode'] !== TRUE && !$this->checkEntityUuidExists($jsonNodeObject->id)) {
-      // @todo: Requeue this node at the end of the queue.
-      // @todo: Maybe move this to a translation queue?
-      return FALSE;
-    }
-
-    // If it is the default and the uuid already exists, we already have this
-    // entity. Move on without it.
-    if ($this->checkEntityUuidExists($jsonNodeObject->id)) {
-      // Return true to signify success.
-      return TRUE;
-    }
-
     $this->alterEntityAttributes($convertedJson['attributes'], NULL);
 
     // Add the uuid back into the attributes.
@@ -126,7 +111,7 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
       return FALSE;
     }
 
-    // Change this to TRUE if the node saved.
+    // Return TRUE if the node saved without error.
     return TRUE;
 
   }
@@ -143,7 +128,7 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  private function checkEntityUuidExists(string $uuid): bool {
+  public function checkEntityUuidExists(string $uuid): bool {
     $storage = $this->entityTypeManager->getStorage('node');
 
     $entities = $storage->loadByProperties(['uuid' => $uuid]);

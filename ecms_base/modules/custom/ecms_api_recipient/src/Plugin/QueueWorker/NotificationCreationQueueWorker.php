@@ -6,6 +6,7 @@ namespace Drupal\ecms_api_recipient\Plugin\QueueWorker;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Queue\PostponeItemException;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\Core\Queue\RequeueException;
 use Drupal\Core\Url;
@@ -128,6 +129,29 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       return;
     }
 
+    $json = $this->decodeJson($content);
+
+    if (empty($json)) {
+      return;
+    }
+
+    $uuidExists = $this->ecmsApiCreateNotification->checkEntityUuidExists($json->data->id);
+
+    // Check if this object is in the default language.
+    if (!$json->data->attributes->default_langcode) {
+      // This entity is not the default language. Check if the existing entity
+      // already exists before proceeding.
+
+      if (!$uuidExists) {
+        // Postpone processing until the the uuid exists.
+        throw new PostponeItemException('The base translation does not exist yet.');
+      }
+    }
+    else if ($uuidExists) {
+      // This is in the default language and the uuid already exists, continue.
+      return;
+    }
+
     // Create the notification. Requeue the node if it does not save correctly.
     if (!$this->createNotification($content)) {
       throw new RequeueException();
@@ -206,28 +230,32 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
    *   True if the node was successfully created.
    */
   private function createNotification(string $content): bool {
+    // Post this entity to the current site.
+    $status = $this->ecmsApiCreateNotification->createNotificationFromJson($json->data);
+
+    return $status;
+  }
+
+  private function decodeJson(string $content): ?object {
     // Decode the json string.
     $json = json_decode($content);
 
     // Guard against a json error.
     if (empty($json)) {
-      return FALSE;
+      return NULL;
     }
 
     // Ensure we have an object.
     if (!is_object($json)) {
-      return FALSE;
+      return NULL;
     }
 
     // Ensure we have the data property.
     if (!property_exists($json, 'data')) {
-      return FALSE;
+      return NULL;
     }
 
-    // Post this entity to the current site.
-    $status = $this->ecmsApiCreateNotification->createNotificationFromJson($json->data);
-
-    return $status;
+    return $json;
   }
 
 }
