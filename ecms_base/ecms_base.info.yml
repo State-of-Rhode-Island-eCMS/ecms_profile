@@ -22,6 +22,7 @@ dependencies:
   - content_moderation_notifications
   - contextual
   - datetime
+  - dblog
   - dynamic_page_cache
   - editor
   - entity_reference_revisions
