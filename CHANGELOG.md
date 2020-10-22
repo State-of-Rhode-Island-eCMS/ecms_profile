@@ -23,6 +23,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-121: Fixed the AAD administrator group name.
 
 ### Security
 
