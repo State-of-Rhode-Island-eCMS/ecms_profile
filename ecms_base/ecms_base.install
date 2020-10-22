@@ -50,20 +50,4 @@ function ecms_base_install() {
 
   $shortcut->save();
 
-  // Set the workflow and permissions for all content types.
-  $types = \Drupal::entityTypeManager()
-    ->getStorage('node_type')
-    ->loadMultiple();
-
-  foreach ($types as $type) {
-    // Notifications are managed using the ecms_api module.
-    if ($type === 'notification') {
-      continue;
-    }
-
-    // Call the workflow service to update configuration.
-    \Drupal::service('ecms_workflow.bundle_create')
-      ->addContentTypeToWorkflow($type->id());
-  }
-
 }
