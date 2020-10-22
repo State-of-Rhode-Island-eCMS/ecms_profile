@@ -43,6 +43,9 @@ function ecms_base_update_9013(array &$sandbox): void {
   // Change the extlink settings to use what is in ecms_base profile.
   $active_storage->write('extlink.settings', $install_source->read('extlink.settings'));
 
+  // Make sure the scheduler module is installed.
+  \Drupal::service('module_installer')->install(['scheduler']);
+
   // Assign the scheduler settings to existing content types.
   $types = \Drupal::entityTypeManager()
     ->getStorage('node_type')
