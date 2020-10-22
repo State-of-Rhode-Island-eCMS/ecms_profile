@@ -27,7 +27,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
   /**
    * The admin group constant.
    */
-  const ADMIN_GROUP = 'Drupal Admin';
+  const ADMIN_GROUP = 'Drupal_Admin';
 
   /**
    * Mock of the request_stack service.
@@ -56,7 +56,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
    */
   public function testCheckGroupAccess(array $groups, bool $expected): void {
 
-    if (in_array(self::ADMIN_GROUP, $groups)) {
+    if (in_array(self::ADMIN_GROUP, $groups, TRUE)) {
       $this->requestStack->expects($this->never())
         ->method('getCurrentRequest');
     }
@@ -90,7 +90,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
       'test1' => [
         [
           'test group one',
-          'test.subdomain.com',
+          self::HOST,
           'Drupal Admin',
         ],
         TRUE,
@@ -102,7 +102,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
           'test.invaliddomainnumbertwo.com',
           'oomphinc.com',
         ],
-        TRUE,
+        FALSE,
       ],
       'test3' => [
         [
@@ -114,7 +114,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
       ],
       'test4' => [
         [
-          'test.subdomain.com',
+          self::HOST,
           'test.invaliddomainnumbertwo.com',
           'oomphinc.com',
         ],
@@ -122,6 +122,48 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
       ],
       'test5' => [
         [],
+        FALSE,
+      ],
+      'test6' => [
+        [
+          'test group one',
+          self::HOST,
+          'Drupal_Admin',
+        ],
+        TRUE,
+      ],
+      'test7' => [
+        [
+          'Drupal_Admin',
+          'test.invaliddomain.com',
+          'test.invaliddomainnumbertwo.com',
+          'oomphinc.com',
+        ],
+        TRUE,
+      ],
+      'test8' => [
+        [
+          'test group one',
+          self::HOST,
+          'drupal_admin',
+        ],
+        TRUE,
+      ],
+      'test9' => [
+        [
+          'DrUpAl_AdMiN',
+          'test.invaliddomain.com',
+          'test.invaliddomainnumbertwo.com',
+          'oomphinc.com',
+        ],
+        FALSE,
+      ],
+      'test10' => [
+        [
+          'test group one',
+          $this->randomMachineName(),
+          'drupal_admin',
+        ],
         FALSE,
       ],
     ];

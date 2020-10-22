@@ -11,8 +11,8 @@ tags:
 
 Authentication is assumed to be managed with a web application created within
 an Azure Active Directory instance. This is done utilizing the [OpenID Connect Microsoft Azure Active Directory client module](https://www.drupal.org/project/openid_connect_windows_aad)
-and a web application that is configured in the Active Directory instance. 
-The ecms_base installation profile will install the OIDC AAD module by default and setup the 
+and a web application that is configured in the Active Directory instance.
+The ecms_base installation profile will install the OIDC AAD module by default and setup the
 connection using REDACTED values.
 
 ## Settings
@@ -40,10 +40,10 @@ URL should be:
 
 ## Drupal Roles
 Groups created in AAD will be strictly mapped to roles in Drupal via the group
-name, and the role name. 
+name, and the role name.
 
 ### Role Assumptions
-It is to be assumed that the AAD group `Drupal Admin` will be mapped to the Drupal role
+It is to be assumed that the AAD group `Drupal_Admin` will be mapped to the Drupal role
 titled `Drupal Admin`. If a user authenticates and has this group, the user will
 be allowed to administer _ALL SITES_ in the system.
 
@@ -51,7 +51,7 @@ be allowed to administer _ALL SITES_ in the system.
 Site access will be determined by AAD role identified by the site's URI.
 Any user who authenticates through AAD and is NOT in the AAD group `Drupal Admin`
 will be required to have a group name that matches domain name of the site.
-If the user does not have a group with the domain name of the site, they will be denied access. 
+If the user does not have a group with the domain name of the site, they will be denied access.
 
 ## Azure Active Directory Application Configuration
 In order to create the necessary AAD application one must:
@@ -65,7 +65,7 @@ In order to create the necessary AAD application one must:
    (likely Single tenant).
 8. Add an initial `Web` redirect URI pointing to a production URI:
    https://new.website.com/openid-connect/windows_aad
-9. Copy the `Application (client) ID`   
+9. Copy the `Application (client) ID`
 9. Browse to `Endpoints` and copy the following values:
      - `OAuth 2.0 authorization endpoint (v1)`
      - `OAuth 2.0 token endpoint (v1)`
@@ -80,8 +80,8 @@ In order to create the necessary AAD application one must:
          - Directory.Read.All
      - Save these new API permissions
      - Grant Admin Approval for the new API permissions.
-12. Save the copied values to the `secrets.settings.php` file on the ACSF environments. 
+12. Save the copied values to the `secrets.settings.php` file on the ACSF environments.
 
-     
+
 
 
