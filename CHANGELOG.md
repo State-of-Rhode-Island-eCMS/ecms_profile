@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.2] - 2020-10-22
+### Added
 - RIG-37: Added Layout Builder Restrictions module.
 - RIG-37: Added Accordion Builder paragraph bundle.
 - RIG-37: Add base twig templates for HTML, Page, and Region.
@@ -22,14 +35,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Moved ecms.settings.yml to config install folder.
 - RIG-37: Changed landing page page.tpl to use classy.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIG-121: Fixed the AAD administrator group name.
-
-### Security
 
 ## [0.1.1] - 2020-10-19
 ### Added
@@ -102,6 +109,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.2...HEAD
+[0.1.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/releases/tag/0.1.0
