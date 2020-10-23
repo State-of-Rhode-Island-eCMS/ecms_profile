@@ -265,14 +265,8 @@ class EcmsApiRecipientRetrieveNotifications {
     array_unshift($endpointPath, $hub->toString());
 
     // Add query parameters to the url.
-    // The filter on langcode is required to get the correct values. Not ideal,
-    // but is currently a workaround to get Json API returning all translated
-    // entities.
     $filter = [
       "page[limit]" => 10,
-      "filter[langcode][condition][path]" => "langcode",
-      "filter[langcode][condition][operator]" => "=",
-      "filter[langcode][condition][value]" => "{$languageId}",
     ];
 
     $queryParams = http_build_query($filter);
