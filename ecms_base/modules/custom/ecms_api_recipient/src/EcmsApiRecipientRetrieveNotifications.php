@@ -266,6 +266,9 @@ class EcmsApiRecipientRetrieveNotifications {
     // Add query parameters to the url.
     $filter = [
       "page[limit]" => 10,
+      "filter[global][condition][path]" => "field_notification_global",
+      "filter[global][condition][operator]" => "=",
+      "filter[global][condition][value]" => TRUE,
     ];
 
     $queryParams = http_build_query($filter);
