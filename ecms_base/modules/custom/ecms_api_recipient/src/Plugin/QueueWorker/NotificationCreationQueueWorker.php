@@ -116,7 +116,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       return;
     }
 
-    // @todo: Get the full node from the API.
+    // Get the endpoint.
     $endpoint = $this->getNotificationEndpoint($uuid);
 
     if (empty($endpoint)) {
