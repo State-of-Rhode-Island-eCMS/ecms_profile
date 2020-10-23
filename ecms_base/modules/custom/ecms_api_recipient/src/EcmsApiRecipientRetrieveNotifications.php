@@ -173,8 +173,18 @@ class EcmsApiRecipientRetrieveNotifications {
         continue;
       }
 
+      if (!property_exists($notification, 'langcode')) {
+        continue;
+      }
+
       // Append the uuid onto the queue for creation.
-      $this->queueNotification($notification->id);
+      // @todo: Pass the language too.
+      $queueNotification = [
+        'uuid' => $notification->id,
+        'langcode' => $notification->langcode,
+      ];
+
+      $this->queueNotification($queueNotification);
     }
 
     // Check if we have the next page link.
@@ -191,12 +201,12 @@ class EcmsApiRecipientRetrieveNotifications {
   /**
    * Queue the notification for creation.
    *
-   * @param string $uuid
-   *   The UUID of the notification node from the hub.
+   * @param array $notification
+   *   An array with uuid and langcode.
    */
-  private function queueNotification(string $uuid): void {
+  private function queueNotification(array $notification): void {
     // Push a new item onto the queue.
-    $this->notificationQueue->createItem($uuid);
+    $this->notificationQueue->createItem($notification);
   }
 
   /**

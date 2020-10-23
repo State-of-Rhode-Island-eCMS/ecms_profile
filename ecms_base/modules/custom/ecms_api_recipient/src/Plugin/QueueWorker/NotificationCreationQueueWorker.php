@@ -31,6 +31,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class NotificationCreationQueueWorker extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
+  const HUB_DEFAULT_LANGCODE = 'en';
+
   /**
    * The ecms_api_recipient.retrieve_notifications service.
    *
@@ -106,18 +108,23 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
   /**
    * Process the queue item.
    *
-   * @param mixed $uuid
-   *   The uuid of the notification node on the hub site.
+   * @param array $notification
+   *   An array with uuid and langcode.
    *   This will be the notification uuid from the hub site. Cannot typehint
    *   the parameter due to the QueueWorkerInterface.
    */
-  public function processItem($uuid) {
-    if (!is_string($uuid)) {
+  public function processItem($notification) {
+    if (!is_array($notification)) {
+      return;
+    }
+
+    // Ensure we have uuid and langcode values.
+    if (empty($notification['uuid']) || empty($notification['langcode'])) {
       return;
     }
 
     // Get the endpoint.
-    $endpoint = $this->getNotificationEndpoint($uuid);
+    $endpoint = $this->getNotificationEndpoint($notification['uuid'], $notification['langcode']);
 
     if (empty($endpoint)) {
       throw new RequeueException();
@@ -193,7 +200,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
    * @return \Drupal\Core\Url|null
    *   A url object or null if an error occurred.
    */
-  private function getNotificationEndpoint(string $uuid): ?Url {
+  private function getNotificationEndpoint(string $uuid, string $langcode): ?Url {
     $hubUri = $this->config->get('api_main_hub');
 
     // Guard against an empty string.
@@ -209,8 +216,24 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       return NULL;
     }
 
+    $apiParts = [
+      'EcmsApi',
+      'node',
+      'notification',
+      "{$uuid}",
+    ];
+
+    if ($langcode !== self::HUB_DEFAULT_LANGCODE) {
+      array_unshift($apiParts, $langcode);
+    }
+
+    // Append the hub string to the parts array;
+    array_unshift($apiParts, $hub->toString());
+
+    $apiPath = implode('/', $apiParts);
+
     try {
-      $url = Url::fromUri("{$hub->toString()}/EcmsApi/node/notification/{$uuid}");
+      $url = Url::fromUri($apiPath);
     }
     catch (\InvalidArgumentException $e) {
       return NULL;
