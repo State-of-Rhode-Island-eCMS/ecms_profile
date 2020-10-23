@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-91: Installation & configuration of scheduler module for all content types.
 - RIG-69: Added SVG Image module installed by default.
 - RIG-69: Added new paragraph type Icon Card.
+- RIG-123: Install and configure Pathauto and Redirect modules.
 
 ### Changed
 
@@ -34,7 +35,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Add accordion and menu twig templates.
 - RIG-37: Added compiled pattern lab js import.
 - RIG-37: Added main navigation block to primary menu region.
-- RIG-123: Install and configure Pathauto and Redirect modules.
 
 ### Changed
 - RIG-37: Update Landing Page full content display with restricted block types.
