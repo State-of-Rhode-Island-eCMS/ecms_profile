@@ -512,4 +512,62 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Test the CheckEntityUuidExists method.
+   *
+   * @param string $uuid
+   *   The uuid to test.
+   * @param bool $expected
+   *   The expected result of the method.
+   *
+   * @dataProvider dataProviderForTestCheckEntityUuidExists
+   */
+  public function testCheckEntityUuidExists(string $uuid, bool $expected): void {
+    $return = [$this->node];
+
+    if ($uuid === 'none') {
+      $return = [];
+    }
+
+    $this->nodeStorage->expects($this->once())
+      ->method('loadByProperties')
+      ->with(['uuid' => $uuid])
+      ->willReturn($return);
+
+    $this->entityTypeManager->expects($this->once())
+      ->method('getStorage')
+      ->with('node')
+      ->willReturn($this->nodeStorage);
+
+    $ecmsApiCreateNotification = new EcmsApiCreateNotifications(
+      $this->httpClient,
+      $this->entityToJsonApi,
+      $this->entityTypeManager,
+      $this->jsonApiHelper
+    );
+
+    $result = $ecmsApiCreateNotification->checkEntityUuidExists($uuid);
+
+    $this->assertEquals($expected, $result);
+  }
+
+  /**
+   * Data provider for testCheckEntityUuidExists method.
+   *
+   * @return array[]
+   *   Array of parameters to pass to the testCheckEntityUuidExists method.
+   */
+  public function dataProviderForTestCheckEntityUuidExists(): array {
+    return [
+      'test1' => [
+        self::ENTITY_UUID,
+        TRUE,
+      ],
+      'test2' => [
+        'none',
+        FALSE,
+      ],
+    ];
+  }
+
 }
