@@ -293,8 +293,8 @@ abstract class EcmsApiBase {
    *
    * @param array $attributes
    *   Associative array of entity attributes to send with JSON API.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity being submitted.
+   * @param \Drupal\Core\Entity\EntityInterface|null $entity
+   *   The entity being submitted or null.
    */
   protected function alterEntityAttributes(array &$attributes, ?EntityInterface $entity = NULL): void {
     $keys = array_keys($attributes);
@@ -310,8 +310,6 @@ abstract class EcmsApiBase {
     if ($entity) {
       $attributes['uuid'] = $entity->uuid();
     }
-
-
   }
 
   /**

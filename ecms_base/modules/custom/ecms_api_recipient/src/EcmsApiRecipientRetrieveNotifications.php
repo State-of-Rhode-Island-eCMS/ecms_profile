@@ -77,6 +77,8 @@ class EcmsApiRecipientRetrieveNotifications {
    *   The queue service.
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The http_client service.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language_manager service.
    */
   public function __construct(ConfigFactoryInterface $configFactory, QueueFactory $queueFactory, ClientInterface $httpClient, LanguageManagerInterface $languageManager) {
     $this->config = $configFactory->get('ecms_api_recipient.settings');

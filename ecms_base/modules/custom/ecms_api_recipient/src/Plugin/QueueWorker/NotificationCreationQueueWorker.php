@@ -12,16 +12,12 @@ use Drupal\Core\Queue\RequeueException;
 use Drupal\Core\Url;
 use Drupal\ecms_api_recipient\EcmsApiCreateNotifications;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
-use Drupal\ecms_api_recipient\JsonapiHelper;
-use Drupal\jsonapi\Normalizer\JsonApiDocumentTopLevelNormalizer;
-use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * Create notifications queued from the hub..
+ * Create notifications queued from the hub.
  *
  * @QueueWorker(
  *   id = "ecms_api_recipient_notification_creation_queue",
@@ -31,6 +27,9 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class NotificationCreationQueueWorker extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
+  /**
+   * The default language code of the hub.
+   */
   const HUB_DEFAULT_LANGCODE = 'en';
 
   /**
@@ -85,8 +84,14 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
    *   The plugin ID for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\ecms_api_recipient\EcmsApiCreateNotifications $ecmsApiCreateNotification
+   * @param \Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications $ecmsApiRetriever
    *   The ecms_api_recipient.retrieve_notifications service.
+   * @param \GuzzleHttp\ClientInterface $httpClient
+   *   The http_client service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config.factory service.
+   * @param \Drupal\ecms_api_recipient\EcmsApiCreateNotifications $ecmsApiCreateNotification
+   *   The ecms_api_recipient.create_notifications service.
    */
   public function __construct(
     array $configuration,
@@ -108,12 +113,12 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
   /**
    * Process the queue item.
    *
-   * @param array $notification
+   * @param mixed $notification
    *   An array with uuid and langcode.
    *   This will be the notification uuid from the hub site. Cannot typehint
    *   the parameter due to the QueueWorkerInterface.
    */
-  public function processItem($notification) {
+  public function processItem($notification): void {
     if (!is_array($notification)) {
       return;
     }
@@ -148,14 +153,13 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
     if (!$json->data->attributes->default_langcode) {
       // This entity is not the default language. Check if the existing entity
       // already exists before proceeding.
-
       if (!$uuidExists) {
         // Postpone processing until the the uuid exists.
         throw new PostponeItemException('The base translation does not exist yet.');
       }
 
       // Create the translation for the existing node.
-      if (!$this->createTranslation($json)) {
+      if (!$this->ecmsApiCreateNotification->createNotificationTranslationFromJson($json->data)) {
         throw new RequeueException();
       }
 
@@ -163,13 +167,13 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       return;
 
     }
-    else if ($uuidExists) {
+    elseif ($uuidExists) {
       // This is in the default language and the uuid already exists, continue.
       return;
     }
 
     // Create the notification. Requeue the node if it does not save correctly.
-    if (!$this->createNotification($json)) {
+    if (!$this->ecmsApiCreateNotification->createNotificationFromJson($json->data)) {
       throw new RequeueException();
     }
   }
@@ -236,7 +240,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       array_unshift($apiParts, $langcode);
     }
 
-    // Append the hub string to the parts array;
+    // Append the hub string to the parts array.
     array_unshift($apiParts, $hub->toString());
 
     $apiPath = implode('/', $apiParts);
@@ -253,27 +257,14 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
   }
 
   /**
-   * Create the entity.
+   * Decode content returned from the hub into json.
    *
    * @param string $content
-   *   The json string returned from the hub.
+   *   The content returned from the json api call.
    *
-   * @return bool
-   *   True if the node was successfully created.
+   * @return object|null
+   *   The json object or null if an error occurred.
    */
-  private function createNotification(object $json): bool {
-    // Post this entity to the current site.
-    $status = $this->ecmsApiCreateNotification->createNotificationFromJson($json->data);
-
-    return $status;
-  }
-
-  private function createTranslation(object $json): bool {
-    $status = $this->ecmsApiCreateNotification->createNotificationTranslationFromJson($json->data);
-
-    return $status;
-  }
-
   private function decodeJson(string $content): ?object {
     // Decode the json string.
     $json = json_decode($content);

@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_recipient;
 
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -14,11 +13,18 @@ use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * Service to create notification nodes from json api objects.
+ *
+ * @package Drupal\ecms_api_recipient
+ */
 class EcmsApiCreateNotifications extends EcmsApiBase {
 
+  /**
+   * The scope used to connect to the api.
+   */
   const API_SCOPE = 'ecms_api_recipient';
 
   /**
@@ -60,6 +66,10 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    *   The config.factory service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request_stack service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity_type.manager service.
+   * @param \Drupal\ecms_api_recipient\JsonapiHelper $jsonApiHelper
+   *   The ecms_api_recipient.jsonapi_helper service.
    */
   public function __construct(
     ClientInterface $httpClient,
@@ -122,7 +132,6 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
       $node->save();
     }
     catch (EntityStorageException $e) {
-      // @todo: Log this error message.
       return FALSE;
     }
 
@@ -131,6 +140,18 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
 
   }
 
+  /**
+   * Create a translation for an existing node.
+   *
+   * @param object $jsonNodeObject
+   *   The json data object.
+   *
+   * @return bool
+   *   True if the translation saved successfully.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   public function createNotificationTranslationFromJson(object $jsonNodeObject): bool {
     // Get the correct author id (ecms_api_recipient).
     $recipientUser = $this->getEcmsApiRecipientUser();
@@ -144,20 +165,33 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     $convertedJson = $this->jsonApiHelper->convertJsonDataToArray($jsonNodeObject);
 
     $this->alterEntityAttributes($convertedJson['attributes'], NULL);
+
     // Add the uuid back into the attributes.
     $convertedJson['attributes']['uuid'] = $jsonNodeObject->id;
     $convertedJson['attributes']['status'] = TRUE;
 
-    $originalNodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['uuid' => $jsonNodeObject->id]);
-    /** @var NodeInterface $originalNode */
-    $originalNode = array_shift($originalNodes);
+    /** @var \Drupal\node\NodeInterface $originalNode */
+    $originalNode = $this->loadExistingNode($jsonNodeObject->id);
 
+    // Guard against an empty node.
+    if (empty($originalNode)) {
+      return FALSE;
+    }
+
+    // Guard against this translation already existing.
+    if ($originalNode->hasTranslation($convertedJson['attributes']['langcode'])) {
+      // We already have a translation, continue.
+      return TRUE;
+    }
+
+    // Add the translation to the node.
     $originalNode->addTranslation($convertedJson['attributes']['langcode'], $convertedJson['attributes']);
+
     try {
       $originalNode->save();
     }
     catch (EntityStorageException $e) {
-      // @todo: Log this error message.
+      // Trap any errors and requeue.
       return FALSE;
     }
 
@@ -191,6 +225,43 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     return FALSE;
   }
 
+  /**
+   * Load an existing node by uuid.
+   *
+   * @param string $uuid
+   *   The uuid of the node to query.
+   *
+   * @return \Drupal\node\NodeInterface|null
+   *   The node if found or null.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function loadExistingNode(string $uuid): ?NodeInterface {
+    $storage = $this->entityTypeManager->getStorage('node');
+
+    $entities = $storage->loadByProperties(['uuid' => $uuid]);
+
+    // If entities are found, return TRUE.
+    if (!empty($entities)) {
+      return NULL;
+    }
+
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = array_shift($entities);
+
+    return $node;
+  }
+
+  /**
+   * Load the ecms_api_recipient user.
+   *
+   * @return \Drupal\user\UserInterface|null
+   *   The ecms_api_recipient user account or null if not found.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
   private function getEcmsApiRecipientUser(): ?UserInterface {
     $storage = $this->entityTypeManager->getStorage('user');
 
@@ -246,6 +317,5 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
 
     return $url;
   }
-
 
 }
