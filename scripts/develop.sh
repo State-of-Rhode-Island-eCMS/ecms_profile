@@ -187,7 +187,18 @@ tooling:
     cmd: 'rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload'
     user: root
 config:
-  xdebug: false" >> ${DEST_DIR}/.lando.local.yml
+  xdebug: false
+env_file:
+  - .env  " >> ${DEST_DIR}/.lando.local.yml
+fi
+
+# Check for an existing .env file.
+if [ -a "${DEST_DIR}/.env" ]; then
+  echo "Found a .env file."
+else
+  echo "Create a .env file."
+  # Create the environment file with a temp key for webform encrypt.
+  echo -e  "ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
 fi
 
 # Start the app with lando.
