@@ -21,8 +21,18 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
 
   const API_SCOPE = 'ecms_api_recipient';
 
+  /**
+   * The config.factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
   private $configFactory;
 
+  /**
+   * The request_stack service.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
   private $requestStack;
 
   /**
@@ -32,6 +42,11 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    */
   private $entityTypeManager;
 
+  /**
+   * The ecms_api_recipient.jsonapi_helper service.
+   *
+   * @var \Drupal\ecms_api_recipient\JsonapiHelper
+   */
   private $jsonApiHelper;
 
   /**
