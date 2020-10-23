@@ -131,6 +131,40 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
 
   }
 
+  public function createNotificationTranslationFromJson(object $jsonNodeObject): bool {
+    // Get the correct author id (ecms_api_recipient).
+    $recipientUser = $this->getEcmsApiRecipientUser();
+
+    // If the recipient user doesn't exist, stop processing.
+    if (empty($recipientUser)) {
+      return FALSE;
+    }
+
+    // Convert the json to an array.
+    $convertedJson = $this->jsonApiHelper->convertJsonDataToArray($jsonNodeObject);
+
+    $this->alterEntityAttributes($convertedJson['attributes'], NULL);
+    // Add the uuid back into the attributes.
+    $convertedJson['attributes']['uuid'] = $jsonNodeObject->id;
+    $convertedJson['attributes']['status'] = TRUE;
+
+    $originalNodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['uuid' => $jsonNodeObject->id]);
+    /** @var NodeInterface $originalNode */
+    $originalNode = array_shift($originalNodes);
+
+    $originalNode->addTranslation($convertedJson['attributes']['langcode'], $convertedJson['attributes']);
+    try {
+      $originalNode->save();
+    }
+    catch (EntityStorageException $e) {
+      // @todo: Log this error message.
+      return FALSE;
+    }
+
+    return TRUE;
+
+  }
+
   /**
    * Check if a node's uuid already exists.
    *

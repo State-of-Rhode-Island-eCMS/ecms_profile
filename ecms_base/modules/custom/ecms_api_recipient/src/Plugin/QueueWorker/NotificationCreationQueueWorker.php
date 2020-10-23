@@ -153,6 +153,15 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
         // Postpone processing until the the uuid exists.
         throw new PostponeItemException('The base translation does not exist yet.');
       }
+
+      // Create the translation for the existing node.
+      if (!$this->createTranslation($json)) {
+        throw new RequeueException();
+      }
+
+      // Continue since the translation was saved correctly.
+      return;
+
     }
     else if ($uuidExists) {
       // This is in the default language and the uuid already exists, continue.
@@ -255,6 +264,12 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
   private function createNotification(object $json): bool {
     // Post this entity to the current site.
     $status = $this->ecmsApiCreateNotification->createNotificationFromJson($json->data);
+
+    return $status;
+  }
+
+  private function createTranslation(object $json): bool {
+    $status = $this->ecmsApiCreateNotification->createNotificationTranslationFromJson($json->data);
 
     return $status;
   }

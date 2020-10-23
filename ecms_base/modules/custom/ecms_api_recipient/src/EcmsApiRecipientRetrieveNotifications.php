@@ -173,15 +173,14 @@ class EcmsApiRecipientRetrieveNotifications {
         continue;
       }
 
-      if (!property_exists($notification, 'langcode')) {
+      if (!property_exists($notification, 'attributes') && !property_exists($notification->attributes, 'langcode')) {
         continue;
       }
 
-      // Append the uuid onto the queue for creation.
-      // @todo: Pass the language too.
+      // Pass the uuid and language to the queue for creation.
       $queueNotification = [
         'uuid' => $notification->id,
-        'langcode' => $notification->langcode,
+        'langcode' => $notification->attributes->langcode,
       ];
 
       $this->queueNotification($queueNotification);
