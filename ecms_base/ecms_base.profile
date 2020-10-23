@@ -23,6 +23,10 @@ function ecms_base_update_9001(array &$sandbox): void {
   $active_storage->write('editor.editor.basic_html', $install_source->read('editor.editor.basic_html'));
   $active_storage->write('filter.format.basic_html', $install_source->read('filter.format.basic_html'));
 
+  // Make sure the pathauto and redirect modules are installed.
+  \Drupal::service('module_installer')->install(['pathauto']);
+  \Drupal::service('module_installer')->install(['redirect']);
+
 }
 
 /**
