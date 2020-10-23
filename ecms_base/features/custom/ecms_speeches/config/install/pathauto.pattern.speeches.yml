@@ -1,0 +1,22 @@
+uuid: dd874446-fb17-4669-be8c-160fafb2aff2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: speeches
+label: Speeches
+type: 'canonical_entities:node'
+pattern: 'newsroom/speeches/[node:field_speech_date:date:custom:Y]/[node:title]'
+selection_criteria:
+  e6869106-9b31-4518-9b8f-096acbc2dae3:
+    id: node_type
+    bundles:
+      speech: speech
+    negate: false
+    context_mapping:
+      node: node
+    uuid: e6869106-9b31-4518-9b8f-096acbc2dae3
+selection_logic: and
+weight: -5
+relationships: {  }
