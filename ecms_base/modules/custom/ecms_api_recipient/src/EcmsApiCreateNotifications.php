@@ -4,16 +4,13 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_recipient;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Service to create notification nodes from json api objects.
@@ -28,20 +25,6 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
   const API_SCOPE = 'ecms_api_recipient';
 
   /**
-   * The config.factory service.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  private $configFactory;
-
-  /**
-   * The request_stack service.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
-   */
-  private $requestStack;
-
-  /**
    * The entity_type.manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -51,7 +34,7 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
   /**
    * The ecms_api_recipient.jsonapi_helper service.
    *
-   * @var \Drupal\ecms_api_recipient\JsonapiHelper
+   * @var \Drupal\ecms_api_recipient\JsonApiHelper
    */
   private $jsonApiHelper;
 
@@ -62,27 +45,19 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
-   *   The config.factory service.
-   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-   *   The request_stack service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
-   * @param \Drupal\ecms_api_recipient\JsonapiHelper $jsonApiHelper
+   * @param \Drupal\ecms_api_recipient\JsonApiHelper $jsonApiHelper
    *   The ecms_api_recipient.jsonapi_helper service.
    */
   public function __construct(
     ClientInterface $httpClient,
     EntityToJsonApi $entityToJsonApi,
-    ConfigFactoryInterface $configFactory,
-    RequestStack $requestStack,
     EntityTypeManagerInterface $entityTypeManager,
-    JsonapiHelper $jsonApiHelper
+    JsonApiHelper $jsonApiHelper
   ) {
     parent::__construct($httpClient, $entityToJsonApi);
 
-    $this->configFactory = $configFactory;
-    $this->requestStack = $requestStack;
     $this->entityTypeManager = $entityTypeManager;
     $this->jsonApiHelper = $jsonApiHelper;
   }
@@ -170,7 +145,7 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     $convertedJson['attributes']['uuid'] = $jsonNodeObject->id;
     $convertedJson['attributes']['status'] = TRUE;
 
-    /** @var \Drupal\node\NodeInterface $originalNode */
+    /** @var \Drupal\node\NodeInterface|null $originalNode */
     $originalNode = $this->loadExistingNode($jsonNodeObject->id);
 
     // Guard against an empty node.
@@ -242,8 +217,8 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
 
     $entities = $storage->loadByProperties(['uuid' => $uuid]);
 
-    // If entities are found, return TRUE.
-    if (!empty($entities)) {
+    // If entities are not found, return NULL.
+    if (empty($entities)) {
       return NULL;
     }
 
@@ -276,46 +251,6 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     $user = array_shift($users);
 
     return $user;
-  }
-
-  /**
-   * The the oauth client id from configuration.
-   *
-   * @return string
-   *   The configuration value for oauth_client_id.
-   */
-  private function getApiClientId(): string {
-    return $this->configFactory->get('ecms_api_recipient.settings')->get('oauth_client_id');
-  }
-
-  /**
-   * Get the api client secret from configuration.
-   *
-   * @return string
-   *   The configuration value for the api_main_hub_client_secret.
-   */
-  private function getApiClientSecret(): string {
-    return $this->configFactory->get('ecms_api_recipient.settings')->get('oauth_client_secret');
-  }
-
-  /**
-   * Get the current site host as a URL object.
-   *
-   * @return \Drupal\Core\Url|null
-   *   The URL of the current site or null if any errors were thrown.
-   */
-  private function getSiteUrl(): ?Url {
-    $httpHost = $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost();
-
-    // Trap any arguments in case the provided URI is invalid.
-    try {
-      $url = Url::fromUri($httpHost);
-    }
-    catch (\InvalidArgumentException $e) {
-      return NULL;
-    }
-
-    return $url;
   }
 
 }

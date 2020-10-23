@@ -10,11 +10,11 @@ use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * Class JsonapiHelper.
+ * Class JsonApiHelper.
  *
- * @package Drupal\ecms_api_recipient\Service
+ * @package Drupal\ecms_api_recipient
  */
-class JsonapiHelper {
+class JsonApiHelper {
 
   use StringTranslationTrait;
 
@@ -33,7 +33,7 @@ class JsonapiHelper {
   protected $resourceTypeRepository;
 
   /**
-   * JsonapiHelper constructor.
+   * JsonApiHelper constructor.
    *
    * @param \Symfony\Component\Serializer\SerializerInterface $serializer
    *   A serializer.
@@ -81,7 +81,7 @@ class JsonapiHelper {
     }
     else {
       $new = $data;
-    };
+    }
 
     return $new;
   }
