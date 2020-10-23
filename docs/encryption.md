@@ -13,7 +13,7 @@ for modules, most notably the Webform Encrypt module.
 
 ## Key
 Settings for each encryption profile require the use of the Drupal 'Key' module,
-with an associated secret encryption key stored an environment variable
+with an associated secret encryption key stored in an environment variable
 `ENCRYPTION_PRIVATE_KEY`. This value must exist in the `secrets.settings.php` file.
 This file should never be maintained in version control.
 
