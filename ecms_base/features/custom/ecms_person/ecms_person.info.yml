@@ -16,6 +16,7 @@ dependencies:
   - menu_ui
   - node
   - path
+  - pathauto
   - rabbit_hole
   - scheduler
   - taxonomy
