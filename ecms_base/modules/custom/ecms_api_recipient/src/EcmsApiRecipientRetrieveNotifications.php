@@ -97,6 +97,12 @@ class EcmsApiRecipientRetrieveNotifications {
 
     foreach ($languages as $code => $language) {
       $url = $this->getHubUrl($language);
+
+      // Guard against a null url.
+      if (empty($url)) {
+        continue;
+      }
+
       $this->retrieveNotifications($url);
     }
   }
@@ -236,6 +242,7 @@ class EcmsApiRecipientRetrieveNotifications {
    */
   private function getHubUrl(LanguageInterface $language): ?Url {
     $hubUri = $this->config->get('api_main_hub');
+
     $languageId = $language->getId();
 
     $endpointPath = [
