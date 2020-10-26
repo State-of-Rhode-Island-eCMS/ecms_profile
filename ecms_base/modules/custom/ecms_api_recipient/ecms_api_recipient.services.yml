@@ -11,3 +11,18 @@ services:
   ecms_api_recipient.register:
     class: Drupal\ecms_api_recipient\EcmsApiRecipientRegister
     arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@config.factory', '@request_stack']
+
+  ecms_api_recipient.retrieve_notifications:
+    class: Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications
+    arguments: ['@config.factory', '@queue', '@http_client', '@language_manager']
+
+  ecms_api_recipient.create_notifications:
+    class: Drupal\ecms_api_recipient\EcmsApiCreateNotifications
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@entity_type.manager', '@ecms_api_recipient.jsonapi_helper']
+
+  ecms_api_recipient.jsonapi_helper:
+    class: Drupal\ecms_api_recipient\JsonapiHelper
+    arguments:
+      - '@jsonapi.serializer'
+      - '@serializer.normalizer.jsonapi_document_toplevel.jsonapi'
+      - '@jsonapi.resource_type.repository'
