@@ -11,7 +11,7 @@ use Drupal\ecms_api_recipient\Plugin\QueueWorker\NotificationPagerQueueWorker;
 use Drupal\Tests\UnitTestCase;
 
 /**
- * Class NotificationPagerQueueWorkerTest
+ * Unit tests for the NotificationPagerQueueWorker class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit\Plugin\QueueWorker
  * @group ecms_api
@@ -19,10 +19,23 @@ use Drupal\Tests\UnitTestCase;
  */
 class NotificationPagerQueueWorkerTest extends UnitTestCase {
 
+  /**
+   * Mock of the ecms_api_recipient.retrieve_notifications service.
+   *
+   * @var \Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $ecmsNotificationRetriever;
 
+  /**
+   * The NotificationPagerQueueWorker plugin to test.
+   *
+   * @var \Drupal\Core\Plugin\ContainerFactoryPluginInterface|\Drupal\ecms_api_recipient\Plugin\QueueWorker\NotificationPagerQueueWorker
+   */
   private $plugin;
 
+  /**
+   * {@inheritDoc}
+   */
   protected function setUp(): void {
     parent::setUp();
 
@@ -55,7 +68,6 @@ class NotificationPagerQueueWorkerTest extends UnitTestCase {
       ->method('retrieveNotifications')
       ->with($url);
 
-
     $this->plugin->processItem($url);
   }
 
@@ -70,7 +82,7 @@ class NotificationPagerQueueWorkerTest extends UnitTestCase {
     $url = Url::fromUri($path);
     return [
       'test1' => [NULL],
-      'test2' => [$url]
+      'test2' => [$url],
     ];
   }
 

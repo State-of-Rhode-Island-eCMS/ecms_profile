@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class NotificationCreationQueueWorkerTest
+ * Unit tests for the NotificationCreationQueueWorker class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit\Plugin\QueueWorker
  * @group ecms_api
@@ -26,14 +26,46 @@ use Psr\Http\Message\StreamInterface;
  */
 class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
+  /**
+   * The UUID to test with.
+   */
   const ENTITY_UUID = '2e434fe8-0fcd-48ae-941e-ea78c4f348f7';
-  const LANGCODE = 'de';
+
+  /**
+   * Alternate language code.
+   */
+  const ALTERNATE_LANGCODE = 'de';
+
+  /**
+   * The default langcode.
+   */
   const DEFAULT_LANGCODE = 'en';
+
+  /**
+   * The hub uri to test with.
+   */
   const HUB_URI = 'https://oomphinc.com';
-  const ENDPOINT_STRING = 'https://oomphinc.com/de/EcmpApi/node/notification/abcd-efgh-ijkl-mnop';
-  const DEFAULT_ENDPOINT_STRING = 'https://oomphinc.com/EcmpApi/node/notification/abcd-efgh-ijkl-mnop';
+
+  /**
+   * The alternate endpoint url.
+   */
+  const ALTERNATE_ENDPOINT_STRING = 'https://oomphinc.com/de/EcmpApi/node/notification/2e434fe8-0fcd-48ae-941e-ea78c4f348f7';
+
+  /**
+   * The default endpoint url.
+   */
+  const DEFAULT_ENDPOINT_STRING = 'https://oomphinc.com/EcmpApi/node/notification/2e434fe8-0fcd-48ae-941e-ea78c4f348f7';
+
+  /**
+   * The alternate json object.
+   */
   const JSON_DATA_OBJECT_STRING = '{"jsonapi":{"version":"1.0","meta":{"links":{"self":{"href":"http:\/\/jsonapi.org\/format\/1.0\/"}}}},"data":{"type":"node--notification","id":"2e434fe8-0fcd-48ae-941e-ea78c4f348f7","links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7?resourceVersion=id%3A593"}},"attributes":{"drupal_internal__nid":218,"drupal_internal__vid":593,"langcode":"de","revision_timestamp":"2020-10-23T15:23:06+00:00","revision_log":"Bulk operation publish revision ","status":true,"title":"Notification - Cui Inhibeo (en)","created":"2020-10-20T03:49:23+00:00","changed":"2020-10-23T15:23:06+00:00","promote":false,"sticky":false,"default_langcode":false,"revision_translation_affected":true,"moderation_state":"published","path":{"alias":null,"pid":null,"langcode":"de"},"rh_action":null,"rh_redirect":null,"rh_redirect_response":null,"content_translation_source":"en","content_translation_outdated":false,"field_notification_expire_date":"2020-10-10T04:21:00+00:00","field_notification_global":true,"field_notification_text":"Global Notification Text"},"relationships":{"node_type":{"data":{"type":"node_type--node_type","id":"8dafd8ea-debc-4f84-91e8-78a781304d11"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/node_type?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/node_type?resourceVersion=id%3A593"}}},"revision_uid":{"data":{"type":"user--user","id":"8f102cd0-8202-4916-8641-f2da52ef7639"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/revision_uid?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/revision_uid?resourceVersion=id%3A593"}}},"uid":{"data":{"type":"user--user","id":"8f102cd0-8202-4916-8641-f2da52ef7639"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/uid?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/uid?resourceVersion=id%3A593"}}}}},"links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7"}}}';
+
+  /**
+   * The default json object.
+   */
   const JSON_DATA_OBJECT_STRING_DEFAULT = '{"jsonapi":{"version":"1.0","meta":{"links":{"self":{"href":"http:\/\/jsonapi.org\/format\/1.0\/"}}}},"data":{"type":"node--notification","id":"2e434fe8-0fcd-48ae-941e-ea78c4f348f7","links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7?resourceVersion=id%3A593"}},"attributes":{"drupal_internal__nid":218,"drupal_internal__vid":593,"langcode":"en","revision_timestamp":"2020-10-23T15:23:06+00:00","revision_log":"Bulk operation publish revision ","status":true,"title":"Notification - Cui Inhibeo (en)","created":"2020-10-20T03:49:23+00:00","changed":"2020-10-23T15:23:06+00:00","promote":false,"sticky":false,"default_langcode":true,"revision_translation_affected":true,"moderation_state":"published","path":{"alias":null,"pid":null,"langcode":"en"},"rh_action":null,"rh_redirect":null,"rh_redirect_response":null,"content_translation_source":"und","content_translation_outdated":false,"field_notification_expire_date":"2020-10-10T04:21:00+00:00","field_notification_global":true,"field_notification_text":"Global Notification Text"},"relationships":{"node_type":{"data":{"type":"node_type--node_type","id":"8dafd8ea-debc-4f84-91e8-78a781304d11"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/node_type?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/node_type?resourceVersion=id%3A593"}}},"revision_uid":{"data":{"type":"user--user","id":"8f102cd0-8202-4916-8641-f2da52ef7639"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/revision_uid?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/revision_uid?resourceVersion=id%3A593"}}},"uid":{"data":{"type":"user--user","id":"8f102cd0-8202-4916-8641-f2da52ef7639"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/uid?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/uid?resourceVersion=id%3A593"}}}}},"links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7"}}}';
+
   /**
    * The default language code of the hub.
    */
@@ -60,6 +92,11 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
    */
   private $config;
 
+  /**
+   * Mock of the config.factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $configFactory;
 
   /**
@@ -69,9 +106,20 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
    */
   private $ecmsApiCreateNotification;
 
+  /**
+   * The plugin to test with.
+   *
+   * @var \Drupal\Core\Plugin\ContainerFactoryPluginInterface|\Drupal\ecms_api_recipient\Plugin\QueueWorker\NotificationCreationQueueWorker
+   */
   private $plugin;
 
+  /**
+   * Mock of the unrouted_url_assembler service.
+   *
+   * @var \Drupal\Core\Utility\UnroutedUrlAssemblerInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $urlAssembler;
+
   /**
    * {@inheritDoc}
    */
@@ -98,10 +146,12 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
     $container->set('unrouted_url_assembler', $this->urlAssembler);
     \Drupal::setContainer($container);
 
-    $this->plugin = NotificationCreationQueueWorker::create($container, [],'id', []);
+    $this->plugin = NotificationCreationQueueWorker::create($container, [], 'id', []);
   }
 
   /**
+   * Test the processItem method.
+   *
    * @param int $testNumber
    *   The test number currently running.
    *
@@ -114,8 +164,12 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
       case 2:
         $notification = ['uuid' => self::ENTITY_UUID];
         break;
+
       case 3:
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::ALTERNATE_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -127,8 +181,12 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->expectException('\Drupal\Core\Queue\RequeueException');
         break;
+
       case 4:
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::ALTERNATE_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -137,7 +195,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->urlAssembler->expects($this->exactly(2))
           ->method('assemble')
-          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ENDPOINT_STRING);
+          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ALTERNATE_ENDPOINT_STRING);
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects($this->never())
@@ -155,14 +213,17 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->httpClient->expects($this->once())
           ->method('request')
-          ->with('GET', self::ENDPOINT_STRING)
+          ->with('GET', self::ALTERNATE_ENDPOINT_STRING)
           ->willReturn($response);
         break;
 
       case 5:
         // Test a non-default language entity that does not have a base entity
         // created yet. Expect the PostponeQueueException.
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::ALTERNATE_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -171,7 +232,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->urlAssembler->expects($this->exactly(2))
           ->method('assemble')
-          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ENDPOINT_STRING);
+          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ALTERNATE_ENDPOINT_STRING);
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects($this->once())
@@ -189,7 +250,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->httpClient->expects($this->once())
           ->method('request')
-          ->with('GET', self::ENDPOINT_STRING)
+          ->with('GET', self::ALTERNATE_ENDPOINT_STRING)
           ->willReturn($response);
 
         $this->ecmsApiCreateNotification->expects($this->once())
@@ -199,11 +260,15 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->expectException('\Drupal\Core\Queue\PostponeItemException');
         break;
+
       case 6:
         // Test a non-default language entity that does have a base entity
         // created but a translation save error occurs.
         // Expect the RequeueException.
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::ALTERNATE_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -212,7 +277,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->urlAssembler->expects($this->exactly(2))
           ->method('assemble')
-          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ENDPOINT_STRING);
+          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ALTERNATE_ENDPOINT_STRING);
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects($this->once())
@@ -230,7 +295,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->httpClient->expects($this->once())
           ->method('request')
-          ->with('GET', self::ENDPOINT_STRING)
+          ->with('GET', self::ALTERNATE_ENDPOINT_STRING)
           ->willReturn($response);
 
         $this->ecmsApiCreateNotification->expects($this->once())
@@ -242,7 +307,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
         $this->ecmsApiCreateNotification->expects($this->once())
           ->method('createNotificationTranslationFromJson')
           ->with($jsonData->data)
-        ->willReturn(FALSE);
+          ->willReturn(FALSE);
 
         $this->expectException('\Drupal\Core\Queue\RequeueException');
         break;
@@ -250,7 +315,10 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
       case 7:
         // Test a non-default language entity that does have a base entity
         // created and a translation saves correctly.
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::ALTERNATE_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -259,7 +327,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->urlAssembler->expects($this->exactly(2))
           ->method('assemble')
-          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ENDPOINT_STRING);
+          ->willReturnOnConsecutiveCalls(self::HUB_URI, self::ALTERNATE_ENDPOINT_STRING);
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects($this->once())
@@ -277,7 +345,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
         $this->httpClient->expects($this->once())
           ->method('request')
-          ->with('GET', self::ENDPOINT_STRING)
+          ->with('GET', self::ALTERNATE_ENDPOINT_STRING)
           ->willReturn($response);
 
         $this->ecmsApiCreateNotification->expects($this->once())
@@ -296,7 +364,10 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
         // Test a default language entity that does not an entity
         // created yet. Expect an error on node save.
         // Expect the RequeueException.
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::DEFAULT_LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::DEFAULT_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -343,7 +414,10 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
       case 9:
         // Test a default language entity that does have an entity
         // created. Expect no node save to occur.
-        $notification = ['uuid' => self::ENTITY_UUID, 'langcode' => self::DEFAULT_LANGCODE];
+        $notification = [
+          'uuid' => self::ENTITY_UUID,
+          'langcode' => self::DEFAULT_LANGCODE,
+        ];
 
         $this->config->expects($this->once())
           ->method('get')
@@ -392,7 +466,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
    * Data provider for the testProcessItem method.
    *
    * @return array
-   *  Arguments to pass to the testProcessItem method.
+   *   Arguments to pass to the testProcessItem method.
    */
   public function dataProviderForTestProcessItem(): array {
     return [
