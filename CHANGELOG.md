@@ -13,6 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-82: Added notification retrieval from the hub on installation.
 - RIG-124: Added the external links module and configuration.
 - RIG-91: Installation & configuration of scheduler module for all content types.
+- RIG-69: Added SVG Image module installed by default.
+- RIG-69: Added new paragraph type Icon Card.
 
 ### Changed
 
