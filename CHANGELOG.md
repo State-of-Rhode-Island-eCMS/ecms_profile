@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-82: Added notification retrieval from the hub on installation.
+- RIG-124: Added the external links module and configuration.
 
 ### Changed
 
