@@ -65,7 +65,7 @@ class EcmsWorkflowBundleCreate {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   private function addSchedulerSettings(string $contentType): void {
-    $type = \Drupal::entityTypeManager()
+    $type = $this->entityTypeManager
       ->getStorage('node_type')
       ->load($contentType);
 
@@ -183,7 +183,7 @@ class EcmsWorkflowBundleCreate {
    */
   public function assignWorkflowToActiveTypes(): void {
 
-    $types = \Drupal::entityTypeManager()
+    $types = $this->entityTypeManager
       ->getStorage('node_type')
       ->loadMultiple();
     foreach ($types as $type) {

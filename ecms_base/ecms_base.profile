@@ -10,7 +10,7 @@ declare(strict_types = 1);
 use Drupal\Core\Config\FileStorage;
 
 /**
- * Update Basic HTML configuration and add scheudler settings.
+ * Update Basic HTML configuration.
  */
 function ecms_base_update_9001(array &$sandbox): void {
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
