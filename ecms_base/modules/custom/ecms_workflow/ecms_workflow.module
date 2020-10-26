@@ -17,18 +17,18 @@ use Drupal\webform\WebformInterface;
  * this will ensure they are assigned to the proper workflow.
  */
 function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
-  if ($entity_type_id !== 'node') {
-    return;
+  // If we are dealing with nodes, add the correct permissions.
+  if ($entity_type_id === 'node') {
+    // Call the workflow service to update configuration.
+    \Drupal::service('ecms_workflow.bundle_create')
+      ->addContentTypeToWorkflow($bundle);
   }
 
-  // Notifications are managed using the ecms_api module.
-  if ($bundle === 'notification') {
-    return;
+  // Set taxonomy permissions when a new bundle is created.
+  if ($entity_type_id === 'taxonomy_term') {
+    \Drupal::service('ecms_workflow.bundle_create')
+      ->addTaxonomyTypePermissions($bundle);
   }
-
-  // Call the workflow service to update configuration.
-  \Drupal::service('ecms_workflow.bundle_create')
-    ->addContentTypeToWorkflow($bundle);
 }
 
 /**
