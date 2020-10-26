@@ -81,8 +81,8 @@ class JsonApiHelper {
    * @param mixed $data
    *   The data to convert to a nested array.
    *
-   * @return array
-   *   The converted array.
+   * @return mixed
+   *   The converted array|string|number.
    */
   public function convertJsonDataToArray($data) {
     if (is_object($data)) {

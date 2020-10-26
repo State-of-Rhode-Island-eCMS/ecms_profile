@@ -42,7 +42,7 @@ class JsonApiHelperTest extends UnitTestCase {
     10 => [
       'eleven' => [
         12,
-        13,
+        '13',
         14,
       ]
     ],
