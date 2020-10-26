@@ -23,4 +23,7 @@ function ecms_base_update_9001(array &$sandbox): void {
   $active_storage->write('editor.editor.basic_html', $install_source->read('editor.editor.basic_html'));
   $active_storage->write('filter.format.basic_html', $install_source->read('filter.format.basic_html'));
 
+  // Install the extlink settings to existing sites.
+  $active_storage->write('extlink.settings', $install_source->read('extlink.settings'));
+
 }
