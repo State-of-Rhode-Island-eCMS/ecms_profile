@@ -50,4 +50,7 @@ function ecms_base_update_9013(array &$sandbox): void {
   \Drupal::service('ecms_workflow.bundle_create')
     ->assignWorkflowToActiveTypes();
 
+  // Install the SVG Image module.
+  \Drupal::service('module_installer')->install(['svg_image']);
+
 }
