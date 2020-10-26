@@ -25,6 +25,7 @@ dependencies:
   - dynamic_page_cache
   - editor
   - entity_reference_revisions
+  - extlink
   - features_ui
   - field_ui
   - file
