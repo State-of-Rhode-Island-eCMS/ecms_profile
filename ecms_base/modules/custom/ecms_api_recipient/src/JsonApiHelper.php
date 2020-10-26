@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_recipient;
 
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\jsonapi\Normalizer\JsonApiDocumentTopLevelNormalizer;
 use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -15,8 +14,6 @@ use Symfony\Component\Serializer\SerializerInterface;
  * @package Drupal\ecms_api_recipient
  */
 class JsonApiHelper {
-
-  use StringTranslationTrait;
 
   /**
    * The JsonApiDocumentTopLevelNormalizer normalizer.
@@ -52,7 +49,17 @@ class JsonApiHelper {
     $this->resourceTypeRepository = $resource_type_repository;
   }
 
-
+  /**
+   * Extract an entity from the submitted json.
+   *
+   * @param array $data
+   *   An array converted from the json->data object.
+   *
+   * @return array|object
+   *   EntityInterface of the provided data.
+   *
+   * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+   */
   public function extractEntity(array $data) {
     // Format JSON as in
     // JsonApiDocumentTopLevelNormalizerTest::testDenormalize().
@@ -68,6 +75,15 @@ class JsonApiHelper {
     ]);
   }
 
+  /**
+   * Converts a nested object to a nested array.
+   *
+   * @param mixed $data
+   *   The data to convert to a nested array.
+   *
+   * @return array
+   *   The converted array.
+   */
   public function convertJsonDataToArray($data) {
     if (is_object($data)) {
       $data = (array) $data;
@@ -85,6 +101,5 @@ class JsonApiHelper {
 
     return $new;
   }
-
 
 }
