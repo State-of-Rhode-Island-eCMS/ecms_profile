@@ -18,6 +18,7 @@ dependencies:
   - options
   - paragraphs
   - path
+  - svg_image
   - text
   - user
 version: 9.x-1.0
