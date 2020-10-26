@@ -75,6 +75,7 @@
     "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
     "drupal/core-recommended": "^9",
+    "drupal/extlink": "^1.5",
     "drupal/features": "^3.11",
     "drupal/jsonapi_extras": "^3.16",
     "drupal/layout_builder_modal": "^1.1",
