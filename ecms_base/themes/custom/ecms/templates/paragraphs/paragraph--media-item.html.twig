@@ -45,13 +45,47 @@
   ]
 %}
 
-{% set pid = paragraph.id() %}
+{# Determine if this is a video or image #}
+{% set media_type = paragraph.field_media_item.entity.bundle() %}
 
-{% include "@molecules/media-item/media-item.twig" with {
-    classes: classes,
-    content: content,
-    paragraph: paragraph,
-    pid: pid
-  }
-%}
-{{ content }}
+{% set type = '' %}
+{% if media_type == 'media_item_image' %}
+  {% set type = 'img' %}
+{% endif %}
+{% if media_type == 'media_item_video' %}
+  {% set type = 'video' %}
+{% endif %}
+
+{% if type == 'img' %}
+  {# Get image url #}
+  {% set image = paragraph.field_media_item.entity.field_media_item_image %}
+  {% set image_url = file_url(image.entity.fileuri) %}
+
+  {% include "@molecules/media-item/media-item.twig" with {
+      classes: classes,
+      content: content,
+      type: type,
+      caption: paragraph.field_caption.value,
+      size: paragraph.field_size.value,
+      url: image_url,
+      alt: image.alt
+    }
+  %}
+{% endif %}
+
+
+{% if type == 'video' %}
+  {# still needs work #}
+  {% set video = paragraph.field_media_item.entity.field_media_item_video_url %}
+  {% set video_url = video.entity.fileuri %}
+
+  {% include "@molecules/media-item/media-item.twig" with {
+      classes: classes,
+      content: content,
+      type: type,
+      caption: paragraph.field_caption.value,
+      size: paragraph.field_size.value,
+      source: video_url
+    }
+  %}
+{% endif %}
