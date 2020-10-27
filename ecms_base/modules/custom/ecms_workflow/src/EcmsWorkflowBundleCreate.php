@@ -172,6 +172,11 @@ class EcmsWorkflowBundleCreate {
    */
   public function addContentTypeToWorkflow(string $contentType): void {
 
+    // Guard against any excluded content types.
+    if (in_array($contentType, self::EXCLUDED_TYPES)) {
+      return;
+    }
+
     $this->setRolePermissions($contentType);
     $this->addSchedulerSettings($contentType);
 
@@ -247,39 +252,36 @@ class EcmsWorkflowBundleCreate {
 
     $site_admin_role = $storage->load(self::SITE_ADMIN_ROLE);
 
-    if (empty($site_admin_role)) {
-      return;
-    }
+    // Ensure we have the admin role.
+    if (!empty($site_admin_role)) {
+      // Site admin role has all editing permissions.
+      $site_admin_role->grantPermission("create terms in {$taxonomyType}");
+      $site_admin_role->grantPermission("edit terms in {$taxonomyType}");
+      $site_admin_role->grantPermission("delete terms in {$taxonomyType}");
 
-    // Site admin role has all editing permissions.
-    $site_admin_role->grantPermission("create terms in {$taxonomyType}");
-    $site_admin_role->grantPermission("edit terms in {$taxonomyType}");
-    $site_admin_role->grantPermission("delete terms in {$taxonomyType}");
-
-    try {
-      $site_admin_role->save();
-    }
-    catch (EntityStorageException $e) {
-      return;
+      try {
+        $site_admin_role->save();
+      }
+      catch (EntityStorageException $e) {
+        // Trap any errors, but continue processing.
+      }
     }
 
     $content_publisher_role = $storage->load(self::CONTENT_PUBLISHER_ROLE);
 
-    // Guard against an empty role.
-    if (empty($content_publisher_role)) {
-      return;
-    }
+    // Ensure we have the publisher role.
+    if (!empty($content_publisher_role)) {
+      // Content Publisher role has all editing permissions.
+      $content_publisher_role->grantPermission("create terms in {$taxonomyType}");
+      $content_publisher_role->grantPermission("edit terms in {$taxonomyType}");
+      $content_publisher_role->grantPermission("delete terms in {$taxonomyType}");
 
-    // Content Publisher role has all editing permissions.
-    $content_publisher_role->grantPermission("create terms in {$taxonomyType}");
-    $content_publisher_role->grantPermission("edit terms in {$taxonomyType}");
-    $content_publisher_role->grantPermission("delete terms in {$taxonomyType}");
-
-    try {
-      $content_publisher_role->save();
-    }
-    catch (EntityStorageException $e) {
-      return;
+      try {
+        $content_publisher_role->save();
+      }
+      catch (EntityStorageException $e) {
+        // Trap any errors.
+      }
     }
   }
 
