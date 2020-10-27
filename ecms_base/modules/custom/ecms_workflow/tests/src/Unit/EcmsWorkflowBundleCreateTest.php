@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_workflow\Unit;
 
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
@@ -203,15 +204,86 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with(["id" => self::WORKFLOW_ID])
       ->willReturn([$workflow]);
 
-    $this->entityTypeManager->expects($this->exactly(2))
+    $nodeTypeEntity = $this->createMock(ConfigEntityInterface::class);
+    $nodeTypeEntity->expects($this->exactly(12))
+      ->method('setThirdPartySetting')
+      ->withConsecutive(
+        ['scheduler', 'expand_fieldset', 'when_required'],
+        ['scheduler', 'fields_display_mode', 'fieldset'],
+        ['scheduler', 'publish_enable', 1],
+        ['scheduler', 'publish_past_date', 0],
+        ['scheduler', 'publish_past_date_created', 'error'],
+        ['scheduler', 'publish_required', 0],
+        ['scheduler', 'publish_revision', 0],
+        ['scheduler', 'publish_touch', 0],
+        ['scheduler', 'show_message_after_update', 1],
+        ['scheduler', 'unpublish_enable', 1],
+        ['scheduler', 'unpublish_required', 0],
+        ['scheduler', 'unpublish_revision', 0]
+      )
+      ->willReturnSelf();
+
+    $nodeTypeEntity->expects($this->once())
+      ->method('save')
+      ->willReturnSelf();
+
+    $nodeTypeStorage = $this->createMock(EntityStorageInterface::class);
+    $nodeTypeStorage->expects($this->once())
+      ->method('load')
+      ->with($contentType)
+      ->willReturn($nodeTypeEntity);
+
+    $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->withConsecutive(['user_role'], ['workflow'])
-      ->willReturnOnConsecutiveCalls($this->entityStorage, $workflowStorage);
+      ->withConsecutive(['user_role'], ['node_type'], ['workflow'])
+      ->willReturnOnConsecutiveCalls($this->entityStorage, $nodeTypeStorage, $workflowStorage);
 
     $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager);
 
     $testClass->addContentTypeToWorkflow($contentType);
+  }
 
+  /**
+   * Test the assignWorkflowToActiveTypes method.
+   */
+  public function testAssignWorkflowToActiveTypes(): void {
+    $machineName = $this->randomMachineName();
+    $entityOne = $this->createMock(ConfigEntityInterface::class);
+    $entityOne->expects($this->exactly(2))
+      ->method('id')
+      ->willReturn($machineName);
+
+    $entityTwo = $this->createMock(ConfigEntityInterface::class);
+    $entityTwo->expects($this->once())
+      ->method('id')
+      ->willReturn('notification');
+
+    $types = [
+      "{$machineName}" => $entityOne,
+      "notification" => $entityTwo,
+    ];
+
+    $storage = $this->createMock(EntityStorageInterface::class);
+    $storage->expects($this->once())
+      ->method('loadMultiple')
+      ->willReturn($types);
+
+    $this->entityTypeManager->expects($this->once())
+      ->method('getStorage')
+      ->with('node_type')
+      ->willReturn($storage);
+
+    // Get a mock of the class to test.
+    $testClass = $this->getMockBuilder(EcmsWorkflowBundleCreate::class)
+      ->onlyMethods(['addContentTypeToWorkflow'])
+      ->setConstructorArgs([$this->entityTypeManager])
+      ->getMock();
+
+    $testClass->expects($this->once())
+      ->method('addContentTypeToWorkflow')
+      ->with($machineName);
+
+    $testClass->assignWorkflowToActiveTypes();
   }
 
 }
