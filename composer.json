@@ -44,6 +44,10 @@
       "drupal/paragraphs": {
         "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
         "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch"
+      },
+      "drupal/webform_encrypt": {
+        "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch",
+        "2943344 - Add option to encrypt all elements on a webform" : "https://www.drupal.org/files/issues/2020-05-19/webform_encrypt-encrypt_all-2943344-9.patch"
       }
     },
     "preserve-paths": [],
@@ -88,12 +92,14 @@
     "drupal/paragraphs": "^1.12",
     "drupal/publishcontent": "^1.2",
     "drupal/rabbit_hole": "^1.0",
+    "drupal/real_aes": "^2.3",
     "drupal/scheduler": "^1.3",
     "drupal/simple_oauth": "^4.5",
     "drupal/smart_date": "^3.0",
     "drupal/svg_image": "^1.14",
     "drupal/token": "^1.7",
     "drupal/webform": "^6.0",
+    "drupal/webform_encrypt": "1.x-dev@dev",
     "drush/drush": "^10.0",
     "oomphinc/composer-installers-extender": "^1.1",
     "zaporylie/composer-drupal-optimizations": "^1.0"

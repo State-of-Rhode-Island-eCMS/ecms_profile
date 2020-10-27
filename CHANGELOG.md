@@ -96,6 +96,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-22: Added moderated_content_bulk_publish module, installed by default.
 - RIG-94: Added Press Release paragraphs field.
 - RIG-95: Added Press Release Topics taxonomy.
+- RIG-74: Added Key, Encrypt, Webform Encrypt, and Real AES modules.
 
 ### Changed
 - RIG-23: Changed from OIDC generic to Windows AAD for authentication.

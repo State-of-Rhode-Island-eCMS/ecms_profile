@@ -54,6 +54,7 @@ dependencies:
   - publishcontent
   - quickedit
   - rabbit_hole
+  - real_aes
   - rh_node
   - rh_taxonomy
   - responsive_image
@@ -67,6 +68,7 @@ dependencies:
   - views
   - views_ui
   - webform
+  - webform_encrypt
   - webform_node
   - webform_ui
 

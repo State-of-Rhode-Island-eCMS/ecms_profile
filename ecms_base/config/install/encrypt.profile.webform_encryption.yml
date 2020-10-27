@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - key.key.encryption_key
+  module:
+    - real_aes
+id: webform_encryption
+label: 'Webform Encryption'
+encryption_method: real_aes
+encryption_key: encryption_key
+encryption_method_configuration: {  }
