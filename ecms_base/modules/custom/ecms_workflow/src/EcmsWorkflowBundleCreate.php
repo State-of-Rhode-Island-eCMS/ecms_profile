@@ -35,6 +35,11 @@ class EcmsWorkflowBundleCreate {
   const WORKFLOW_ID = 'editorial';
 
   /**
+   * Array of content types to exclude.
+   */
+  const EXCLUDED_TYPES = ['notification'];
+
+  /**
    * The entity_type.manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -49,6 +54,40 @@ class EcmsWorkflowBundleCreate {
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
+   * Add scheduler default settings to new content type.
+   *
+   * @param string $contentType
+   *   The machine name of the new content type.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  private function addSchedulerSettings(string $contentType): void {
+    $type = $this->entityTypeManager
+      ->getStorage('node_type')
+      ->load($contentType);
+
+    $type->setThirdPartySetting('scheduler', 'expand_fieldset', 'when_required');
+    $type->setThirdPartySetting('scheduler', 'fields_display_mode', 'fieldset');
+    $type->setThirdPartySetting('scheduler', 'publish_enable', 1);
+    $type->setThirdPartySetting('scheduler', 'publish_past_date', 0);
+    $type->setThirdPartySetting('scheduler', 'publish_past_date_created', 'error');
+    $type->setThirdPartySetting('scheduler', 'publish_required', 0);
+    $type->setThirdPartySetting('scheduler', 'publish_revision', 0);
+    $type->setThirdPartySetting('scheduler', 'publish_touch', 0);
+    $type->setThirdPartySetting('scheduler', 'show_message_after_update', 1);
+    $type->setThirdPartySetting('scheduler', 'unpublish_enable', 1);
+    $type->setThirdPartySetting('scheduler', 'unpublish_required', 0);
+    $type->setThirdPartySetting('scheduler', 'unpublish_revision', 0);
+
+    try {
+      $type->save();
+    }
+    catch (EntityStorageException $e) {
+      return;
+    }
   }
 
   /**
@@ -111,6 +150,7 @@ class EcmsWorkflowBundleCreate {
   public function addContentTypeToWorkflow(string $contentType): void {
 
     $this->setRolePermissions($contentType);
+    $this->addSchedulerSettings($contentType);
 
     // Assign the new content type to the editorial workflow.
     /** @var \Drupal\workflows\WorkflowInterface $workflow */
@@ -132,6 +172,28 @@ class EcmsWorkflowBundleCreate {
     }
     catch (EntityStorageException $e) {
       return;
+    }
+
+  }
+
+  /**
+   * Apply workflow, schedule, and permissions to active content types.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function assignWorkflowToActiveTypes(): void {
+
+    $types = $this->entityTypeManager
+      ->getStorage('node_type')
+      ->loadMultiple();
+    foreach ($types as $type) {
+      // Skip if this is an excluded type.
+      if (in_array($type->id(), self::EXCLUDED_TYPES)) {
+        continue;
+      }
+
+      // Call the workflow service to update configuration.
+      $this->addContentTypeToWorkflow($type->id());
     }
 
   }

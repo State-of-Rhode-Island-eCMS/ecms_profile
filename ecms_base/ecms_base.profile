@@ -10,7 +10,7 @@ declare(strict_types = 1);
 use Drupal\Core\Config\FileStorage;
 
 /**
- * Update Basic HTML configuration to match the install config.
+ * Update Basic HTML configuration.
  */
 function ecms_base_update_9001(array &$sandbox): void {
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
@@ -42,4 +42,12 @@ function ecms_base_update_9013(array &$sandbox): void {
 
   // Change the extlink settings to use what is in ecms_base profile.
   $active_storage->write('extlink.settings', $install_source->read('extlink.settings'));
+
+  // Make sure the scheduler module is installed.
+  \Drupal::service('module_installer')->install(['scheduler']);
+
+  // Call the workflow service to update configuration.
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->assignWorkflowToActiveTypes();
+
 }

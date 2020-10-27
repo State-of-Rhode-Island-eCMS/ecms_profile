@@ -15,6 +15,7 @@ dependencies:
   - node
   - path
   - rabbit_hole
+  - scheduler
   - taxonomy
   - text
   - user

@@ -17,6 +17,7 @@ dependencies:
   - node
   - path
   - rabbit_hole
+  - scheduler
   - taxonomy
   - telephone
   - token

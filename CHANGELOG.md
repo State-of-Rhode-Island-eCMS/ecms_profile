@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-82: Added notification retrieval from the hub on installation.
 - RIG-124: Added the external links module and configuration.
+- RIG-91: Installation & configuration of scheduler module for all content types.
 
 ### Changed
 
