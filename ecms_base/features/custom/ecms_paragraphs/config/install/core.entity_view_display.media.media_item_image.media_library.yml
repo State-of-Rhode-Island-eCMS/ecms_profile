@@ -7,7 +7,7 @@ dependencies:
     - image.style.medium
     - media.type.media_item_image
   module:
-    - image
+    - svg_image
 id: media.media_item_image.media_library
 targetEntityType: media
 bundle: media_item_image

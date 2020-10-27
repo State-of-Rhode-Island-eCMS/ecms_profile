@@ -5,7 +5,7 @@ dependencies:
     - field.field.media.media_item_image.field_media_item_image
     - media.type.media_item_image
   module:
-    - image
+    - svg_image
 id: media.media_item_image.default
 targetEntityType: media
 bundle: media_item_image

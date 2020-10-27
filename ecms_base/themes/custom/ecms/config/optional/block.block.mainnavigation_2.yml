@@ -7,9 +7,9 @@ dependencies:
     - menu_block
   theme:
     - ecms
-id: mainnavigation
+id: mainnavigation_2
 theme: ecms
-region: primary_menu
+region: sidebar_top
 weight: 0
 provider: null
 plugin: 'menu_block:main'
@@ -20,9 +20,9 @@ settings:
   label_display: '0'
   follow: false
   follow_parent: child
-  level: 1
-  depth: 2
-  expand: true
+  level: 2
+  depth: 0
+  expand: false
   parent: 'main:'
-  suggestion: main
+  suggestion: minor
 visibility: {  }

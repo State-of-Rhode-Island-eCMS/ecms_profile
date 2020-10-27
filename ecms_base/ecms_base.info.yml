@@ -41,6 +41,7 @@ dependencies:
   - layout_discovery
   - media
   - media_library
+  - menu_block
   - menu_link_content
   - menu_ui
   - moderated_content_bulk_publish

@@ -16,6 +16,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-69: Added SVG Image module installed by default.
 - RIG-69: Added new paragraph type Icon Card.
 - RIG-123: Install and configure Pathauto and Redirect modules.
+- RIG-69: Added pattern lab connection for Icon Card.
+- RIG-69: Added pattern lab connection for Media Item.
+- RIG-69: Added menu_block module.
+- RIG-69: Added pattern lab connection for Sidebar nav.
+- RIG-69: Defined new regions for ecms_theme. 
 
 ### Changed
 
