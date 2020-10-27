@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.3] - 2020-10-27
+### Added
 - RIG-82: Added notification retrieval from the hub on installation.
 - RIG-124: Added the external links module and configuration.
 - RIG-91: Installation & configuration of scheduler module for all content types.
@@ -20,18 +33,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-69: Added pattern lab connection for Media Item.
 - RIG-69: Added menu_block module.
 - RIG-69: Added pattern lab connection for Sidebar nav.
-- RIG-69: Defined new regions for ecms_theme. 
-
-### Changed
-
-### Deprecated
-
-### Removed
+- RIG-69: Defined new regions for ecms_theme.
 
 ### Fixed
 - RIG-129: Updated the permissions for the site_admin role.
-
-### Security
 
 ## [0.1.2] - 2020-10-22
 ### Added
@@ -123,7 +128,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.3...HEAD
+[0.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/releases/tag/0.1.0
