@@ -17,6 +17,7 @@ dependencies:
   - node
   - paragraphs
   - path
+  - pathauto
   - rabbit_hole
   - scheduler
   - text

@@ -1,0 +1,22 @@
+uuid: a225152c-06f2-4136-aa94-01b8cd2dc900
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: accommodations
+label: Accommodations
+type: 'canonical_entities:node'
+pattern: 'accommodations/[node:title]'
+selection_criteria:
+  2cde8a1a-0fa6-4f43-a6ad-53935edb3233:
+    id: node_type
+    bundles:
+      hotel: hotel
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 2cde8a1a-0fa6-4f43-a6ad-53935edb3233
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -50,11 +50,13 @@ dependencies:
   - options
   - paragraphs
   - path
+  - pathauto
   - page_cache
   - publishcontent
   - quickedit
   - rabbit_hole
   - real_aes
+  - redirect
   - rh_node
   - rh_taxonomy
   - responsive_image
