@@ -30,3 +30,15 @@ component-libraries:
   icons:
     paths:
       - ecms_patternlab/source/images/icons
+
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_top: 'Sidebar Top'
+  sidebar_middle: 'Sidebar Middle'
+  sidebar_bottom: 'Sidebar Bottom'
