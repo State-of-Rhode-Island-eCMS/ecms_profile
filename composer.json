@@ -48,9 +48,6 @@
       "drupal/webform_encrypt": {
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch",
         "2943344 - Add option to encrypt all elements on a webform" : "https://www.drupal.org/files/issues/2020-05-19/webform_encrypt-encrypt_all-2943344-9.patch"
-      },
-      "drupal/menu_block": {
-        "3146665 - Module test core_version_requirement": "https://www.drupal.org/files/issues/2020-06-05/3146665_1.patch"
       }
     },
     "preserve-paths": [],
@@ -87,7 +84,7 @@
     "drupal/jsonapi_extras": "^3.16",
     "drupal/layout_builder_modal": "^1.1",
     "drupal/layout_builder_restrictions": "^2.7",
-    "drupal/menu_block": "^1.6",
+    "drupal/menu_block": "1.x-dev",
     "drupal/moderated_content_bulk_publish": "^2.0",
     "drupal/moderation_dashboard": "^1.0",
     "drupal/office_hours": "^1.3",
