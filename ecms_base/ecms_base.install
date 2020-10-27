@@ -14,6 +14,7 @@ declare(strict_types = 1);
 
 use Drupal\user\Entity\User;
 use Drupal\shortcut\Entity\Shortcut;
+use Drupal\Core\Entity\EntityStorageException;
 
 /**
  * Implements hook_install().
@@ -66,9 +67,34 @@ function ecms_base_install() {
       ->addContentTypeToWorkflow($type->id());
   }
 
-  // Delete the default 'contact' webform.
-  \Drupal::entityTypeManager()
-    ->getStorage('webform')
-    ->load('contact')->delete();
+  // Delete the default 'Contact' webform.
+  try {
+    \Drupal::entityTypeManager()
+      ->getStorage('webform')
+      ->load('contact')->delete();
+  }
+  catch (EntityStorageException $e) {
+    // Trap storage errors.
+  }
+
+  // Delete the default 'Contact' node that was created, should be nid 1.
+  $values = [
+    'type' => 'webform',
+    'nid' => 1,
+  ];
+
+  // Get the node.
+  $nodes = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties($values);
+
+  try {
+    \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->delete($nodes);
+  }
+  catch (EntityStorageException $e) {
+    // Trap storage errors.
+  }
 
 }
