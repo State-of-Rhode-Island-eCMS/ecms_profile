@@ -13,7 +13,7 @@ mode: default
 content:
   field_media_item_video_url:
     weight: 1
-    label: visually_hidden
+    label: hidden
     settings:
       max_width: 0
       max_height: 0

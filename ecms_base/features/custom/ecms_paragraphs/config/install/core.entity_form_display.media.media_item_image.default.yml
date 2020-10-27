@@ -6,8 +6,8 @@ dependencies:
     - image.style.thumbnail
     - media.type.media_item_image
   module:
-    - image
     - path
+    - svg_image
 id: media.media_item_image.default
 targetEntityType: media
 bundle: media_item_image

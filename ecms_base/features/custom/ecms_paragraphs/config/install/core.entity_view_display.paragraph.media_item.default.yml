@@ -7,42 +7,21 @@ dependencies:
     - field.field.paragraph.media_item.field_media_item
     - field.field.paragraph.media_item.field_size
     - paragraphs.paragraphs_type.media_item
-  module:
-    - options
 id: paragraph.media_item.default
 targetEntityType: paragraph
 bundle: media_item
 mode: default
 content:
-  field_alignment:
-    weight: 1
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_caption:
-    weight: 3
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_media_item:
     type: entity_reference_entity_view
     weight: 0
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
     region: content
-  field_size:
-    weight: 2
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-hidden: {  }
+hidden:
+  field_alignment: true
+  field_caption: true
+  field_size: true
