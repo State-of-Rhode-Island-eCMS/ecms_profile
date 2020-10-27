@@ -23,6 +23,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-129: Updated the permissions for the site_admin role.
 
 ### Security
 

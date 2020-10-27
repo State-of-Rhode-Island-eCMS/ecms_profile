@@ -85,4 +85,32 @@ function ecms_base_install() {
     // Trap storage errors.
   }
 
+  // Add correct permissions for the nodes/taxonomies.
+  /** @var \Drupal\ecms_workflow\EcmsWorkflowBundleCreate $workflowBundleCreate */
+  $workflowBundleCreate = \Drupal::service('ecms_workflow.bundle_create');
+
+  /** @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundleInfo */
+  $bundleInfo = \Drupal::service('entity_type.bundle.info');
+
+  $nodes = $bundleInfo->getBundleInfo('node');
+
+  // Guard again an empty array of nodes.
+  if (!empty($nodes)) {
+    // Add the correct workflow to the node types.
+    foreach (array_keys($nodes) as $type) {
+      $workflowBundleCreate->addContentTypeToWorkflow($type);
+    }
+  }
+
+  // Set the permissions for all enabled taxonomy bundles.
+  $taxonomies = $bundleInfo->getBundleInfo('taxonomy_term');
+
+  // Guard against empty taxonomies.
+  if (!empty($taxonomies)) {
+    // Add the correct permissions for the taxonomy types.
+    foreach (array_keys($taxonomies) as $taxonomy) {
+      $workflowBundleCreate->addTaxonomyTypePermissions($taxonomy);
+    }
+  }
+
 }

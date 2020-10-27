@@ -20,6 +20,11 @@ class EcmsWorkflowBundleCreate {
   use StringTranslationTrait;
 
   /**
+   * The id for site admins.
+   */
+  const SITE_ADMIN_ROLE = 'site_admin';
+
+  /**
    * The role id for content publishers.
    */
   const CONTENT_PUBLISHER_ROLE = 'content_publisher';
@@ -101,6 +106,24 @@ class EcmsWorkflowBundleCreate {
   private function setRolePermissions(string $contentType): void {
     $storage = $this->entityTypeManager->getStorage('user_role');
 
+    $site_admin_role = $storage->load(self::SITE_ADMIN_ROLE);
+
+    if (empty($site_admin_role)) {
+      return;
+    }
+
+    // Site admin role has all editing permissions.
+    $site_admin_role->grantPermission("create {$contentType} content");
+    $site_admin_role->grantPermission("edit any {$contentType} content");
+    $site_admin_role->grantPermission("delete any {$contentType} content");
+
+    try {
+      $site_admin_role->save();
+    }
+    catch (EntityStorageException $e) {
+      return;
+    }
+
     $content_publisher_role = $storage->load(self::CONTENT_PUBLISHER_ROLE);
 
     // Guard against an empty role.
@@ -149,19 +172,26 @@ class EcmsWorkflowBundleCreate {
    */
   public function addContentTypeToWorkflow(string $contentType): void {
 
+    // Guard against any excluded content types.
+    if (in_array($contentType, self::EXCLUDED_TYPES)) {
+      return;
+    }
+
     $this->setRolePermissions($contentType);
     $this->addSchedulerSettings($contentType);
 
     // Assign the new content type to the editorial workflow.
-    /** @var \Drupal\workflows\WorkflowInterface $workflow */
-    $workflow = $this->entityTypeManager
+    $workflowEntities = $this->entityTypeManager
       ->getStorage("workflow")
-      ->loadByProperties(["id" => self::WORKFLOW_ID])[self::WORKFLOW_ID];
+      ->loadByProperties(["id" => self::WORKFLOW_ID]);
 
     // Guard against an empty workflow.
-    if (empty($workflow)) {
+    if (empty($workflowEntities)) {
       return;
     }
+
+    /** @var \Drupal\workflows\WorkflowInterface $workflow */
+    $workflow = array_shift($workflowEntities);
 
     $config = $workflow->getTypePlugin()->getConfiguration();
     $config["entity_types"]["node"][] = $contentType;
@@ -196,6 +226,63 @@ class EcmsWorkflowBundleCreate {
       $this->addContentTypeToWorkflow($type->id());
     }
 
+  }
+
+  /**
+   * Add taxonomy permissions to the correct roles.
+   *
+   * @param string $taxonomyType
+   *   The machine name of the new taxonomy bundle.
+   */
+  public function addTaxonomyTypePermissions(string $taxonomyType): void {
+    $this->setTaxonomyRolePermissions($taxonomyType);
+  }
+
+  /**
+   * Set the correct role permissions for the taxonomy bundle.
+   *
+   * @param string $taxonomyType
+   *   The machine name of the new taxonomy bundle.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  private function setTaxonomyRolePermissions(string $taxonomyType): void {
+    $storage = $this->entityTypeManager->getStorage('user_role');
+
+    $site_admin_role = $storage->load(self::SITE_ADMIN_ROLE);
+
+    // Ensure we have the admin role.
+    if (!empty($site_admin_role)) {
+      // Site admin role has all editing permissions.
+      $site_admin_role->grantPermission("create terms in {$taxonomyType}");
+      $site_admin_role->grantPermission("edit terms in {$taxonomyType}");
+      $site_admin_role->grantPermission("delete terms in {$taxonomyType}");
+
+      try {
+        $site_admin_role->save();
+      }
+      catch (EntityStorageException $e) {
+        // Trap any errors, but continue processing.
+      }
+    }
+
+    $content_publisher_role = $storage->load(self::CONTENT_PUBLISHER_ROLE);
+
+    // Ensure we have the publisher role.
+    if (!empty($content_publisher_role)) {
+      // Content Publisher role has all editing permissions.
+      $content_publisher_role->grantPermission("create terms in {$taxonomyType}");
+      $content_publisher_role->grantPermission("edit terms in {$taxonomyType}");
+      $content_publisher_role->grantPermission("delete terms in {$taxonomyType}");
+
+      try {
+        $content_publisher_role->save();
+      }
+      catch (EntityStorageException $e) {
+        // Trap any errors.
+      }
+    }
   }
 
 }
