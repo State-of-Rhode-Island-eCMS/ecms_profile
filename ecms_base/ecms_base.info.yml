@@ -60,6 +60,7 @@ dependencies:
   - rdf
   - scheduler
   - shortcut
+  - svg_image
   - taxonomy
   - toolbar
   - tour

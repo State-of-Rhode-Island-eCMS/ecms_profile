@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_list_title
+    - paragraphs.paragraphs_type.icon_card
+id: paragraph.icon_card.field_list_title
+field_name: field_list_title
+entity_type: paragraph
+bundle: icon_card
+label: 'Card Title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

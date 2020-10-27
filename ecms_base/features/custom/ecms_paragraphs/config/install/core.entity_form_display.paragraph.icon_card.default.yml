@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.icon_card.field_icon
+    - field.field.paragraph.icon_card.field_list_title
+    - field.field.paragraph.icon_card.field_text
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.icon_card
+  module:
+    - svg_image
+    - text
+id: paragraph.icon_card.default
+targetEntityType: paragraph
+bundle: icon_card
+mode: default
+content:
+  field_icon:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_list_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_text:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  status: true
