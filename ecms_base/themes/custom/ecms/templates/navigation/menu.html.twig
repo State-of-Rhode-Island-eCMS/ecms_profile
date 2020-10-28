@@ -19,9 +19,12 @@
  */
 #}
 
+{% set front_page = path('<front>') %}
+
 {% include "@organisms/navigation-main/navigation-main.twig" with {
     items: items,
     menu_name: menu_name,
-    attributes: attributes
+    attributes: attributes,
+    front_page: front_page
   }
 %}
