@@ -58,3 +58,28 @@ function ecms_base_update_9013(array &$sandbox): void {
   \Drupal::service('module_installer')->install(['svg_image']);
 
 }
+
+
+/**
+ * Updates to run for the 0.1.4 tag.
+ */
+function ecms_base_update_9014(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Install the needed encryption modules.
+  \Drupal::service('module_installer')->install(['key']);
+  \Drupal::service('module_installer')->install(['encrypt']);
+  \Drupal::service('module_installer')->install(['real_aes']);
+  \Drupal::service('module_installer')->install(['webform_encrypt']);
+
+  // Ensure encryption config is updated.
+  $active_storage->write('encrypt.settings', $install_source->read('encrypt.settings'));
+  $active_storage->write('key.key.encryption_key', $install_source->read('key.key.encryption_key'));
+  $active_storage->write('encrypt.profile.webform_encryption', $install_source->read('encrypt.profile.webform_encryption'));
+}

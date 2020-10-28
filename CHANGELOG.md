@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIG-74: Remove webform encrypt patch from issue 2943344.
 
 ### Fixed
 - RIG-136: Fixed the AAD login removing manually applied roles.
