@@ -71,18 +71,20 @@ function ecms_base_update_9014(array &$sandbox): void {
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
 
-  // Make sure the pathauto and redirect modules are installed.
-  \Drupal::service('module_installer')->install(['pathauto']);
-  \Drupal::service('module_installer')->install(['redirect']);
+  $modules_to_install = [
+    'pathauto',
+    'redirect',
+    'key',
+    'encrypt',
+    'real_aes',
+    'webform_encrypt',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
 
   $active_storage->write('pathauto.settings', $install_source->read('pathauto.settings'));
   $active_storage->write('redirect.settings', $install_source->read('redirect.settings'));
-
-  // Install the needed encryption modules.
-  \Drupal::service('module_installer')->install(['key']);
-  \Drupal::service('module_installer')->install(['encrypt']);
-  \Drupal::service('module_installer')->install(['real_aes']);
-  \Drupal::service('module_installer')->install(['webform_encrypt']);
 
   // Ensure encryption config is updated.
   $active_storage->write('encrypt.settings', $install_source->read('encrypt.settings'));
