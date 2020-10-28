@@ -7,6 +7,8 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Entity\EntityStorageException;
+
 /**
  * Change the admin role title to "Drupal_Admin".
  */
