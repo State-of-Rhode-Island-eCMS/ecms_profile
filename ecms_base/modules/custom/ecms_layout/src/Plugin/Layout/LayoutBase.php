@@ -148,6 +148,7 @@ abstract class LayoutBase extends LayoutDefault {
       EcmsLayout::ROW_BACKGROUND_COLOR_RHODYRED => $this->t('Rhody Red'),
       EcmsLayout::ROW_BACKGROUND_COLOR_CALAMARI => $this->t('Calamari'),
       EcmsLayout::ROW_BACKGROUND_COLOR_NAVY => $this->t('Navy'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_COFFEEMILK => $this->t('Coffee Milk'),
     ];
   }
 

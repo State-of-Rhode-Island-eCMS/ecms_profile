@@ -17,4 +17,6 @@ final class EcmsLayout {
 
   public const ROW_BACKGROUND_COLOR_NAVY = 'navy';
 
+  public const ROW_BACKGROUND_COLOR_COFFEEMILK = 'coffee-milk--trans25';
+
 }
