@@ -178,8 +178,10 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
    *   Whether the AAD has the admin group.
    * @param bool $hasDrupalAdminRole
    *   Whether the Drupal user has the admin group.
+   * @param bool $exception
+   *   Whether a storage exception should be expected.
    *
-   * @dataProvider  dataProviderForTestRemoveAdminGroup
+   * @dataProvider dataProviderForTestRemoveAdminGroup
    */
   public function testRemoveAdminGroup(bool $hasAadAdminGroup, bool $hasDrupalAdminRole, bool $exception): void {
     $aadGroups = [
