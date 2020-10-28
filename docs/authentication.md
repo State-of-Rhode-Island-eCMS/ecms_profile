@@ -39,17 +39,23 @@ URL should be:
 `https://new.website.com/openid-connect/windows_aad`
 
 ## Drupal Roles
-Groups created in AAD will be strictly mapped to roles in Drupal via the group
-name, and the role name.
+Groups created in AAD will be mapped to roles in Drupal via the group
+name, and the role name _only if_ those roles exist in Drupal. Any Drupal role
+that is manually applied to a user will remain the next time a user
+authenticates with AAD. The only role that will _not remain_ is the
+`Drupal_Admin` role. If a user is manually given the `Drupal_Admin` role
+in Drupal and the user does not have that group in AAD. On their next login,
+they will be removed from the `Drupal_Admin` role. All other Drupal roles
+will remain with the account.
 
 ### Role Assumptions
 It is to be assumed that the AAD group `Drupal_Admin` will be mapped to the Drupal role
-titled `Drupal Admin`. If a user authenticates and has this group, the user will
+titled `Drupal_Admin`. If a user authenticates and has this group, the user will
 be allowed to administer _ALL SITES_ in the system.
 
 ### Site access
 Site access will be determined by AAD role identified by the site's URI.
-Any user who authenticates through AAD and is NOT in the AAD group `Drupal Admin`
+Any user who authenticates through AAD and is NOT in the AAD group `Drupal_Admin`
 will be required to have a group name that matches domain name of the site.
 If the user does not have a group with the domain name of the site, they will be denied access.
 
