@@ -59,7 +59,6 @@ function ecms_base_update_9013(array &$sandbox): void {
 
 }
 
-
 /**
  * Updates to run for the 0.1.4 tag.
  */
@@ -71,6 +70,13 @@ function ecms_base_update_9014(array &$sandbox): void {
 
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
+
+  // Make sure the pathauto and redirect modules are installed.
+  \Drupal::service('module_installer')->install(['pathauto']);
+  \Drupal::service('module_installer')->install(['redirect']);
+
+  $active_storage->write('pathauto.settings', $install_source->read('pathauto.settings'));
+  $active_storage->write('redirect.settings', $install_source->read('redirect.settings'));
 
   // Install the needed encryption modules.
   \Drupal::service('module_installer')->install(['key']);
