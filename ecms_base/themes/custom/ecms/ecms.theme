@@ -58,9 +58,7 @@ function ecms_theme($existing, $type, $theme, $path): array {
 }
 
 /**
- * Implements hook_preprocess_paragaph.
- *
- * This is used to add image_uri to paragraph template.
+ * Implements hook_preprocess_paragaph().
  */
 function ecms_preprocess_paragraph__media_item(&$variables) {
   $paragraph = $variables['paragraph'];
@@ -72,7 +70,7 @@ function ecms_preprocess_paragraph__media_item(&$variables) {
 
     $image = $paragraph->get('field_media_item')->entity->get('field_media_item_image');
 
-    if(isset($image->entity->uri)) {
+    if (isset($image->entity->uri)) {
       $variables['image_url'] = file_create_url($image->entity->uri->value);
     }
   }
