@@ -122,3 +122,15 @@ function ecms_base_post_update_013_add_new_permissions_to_site_admin(&$sandbox):
     }
   }
 }
+
+/**
+ * Change the OIDC group mapping setting.
+ */
+function ecms_base_post_update_014_update_oidc_settings(&$sandbox): void {
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+
+  $oidcConfig = $configFactory->getEditable('openid_connect.settings.windows_aad');
+  $oidcConfig->set('settings.group_mapping.strict', FALSE);
+  $oidcConfig->save();
+}

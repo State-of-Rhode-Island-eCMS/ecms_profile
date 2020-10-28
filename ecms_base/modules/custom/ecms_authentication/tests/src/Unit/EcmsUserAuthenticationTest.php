@@ -4,8 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_authentication\Unit;
 
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\ecms_authentication\EcmsUserAuthentication;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -166,6 +168,105 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
         ],
         FALSE,
       ],
+    ];
+  }
+
+  /**
+   * Test the removeAdminGroup method.
+   *
+   * @param bool $hasAadAdminGroup
+   *   Whether the AAD has the admin group.
+   * @param bool $hasDrupalAdminRole
+   *   Whether the Drupal user has the admin group.
+   * @param bool $exception
+   *   Whether a storage exception should be expected.
+   *
+   * @dataProvider dataProviderForTestRemoveAdminGroup
+   */
+  public function testRemoveAdminGroup(bool $hasAadAdminGroup, bool $hasDrupalAdminRole, bool $exception): void {
+    $aadGroups = [
+      $this->randomMachineName(),
+      $this->randomMachineName(),
+    ];
+
+    if ($hasAadAdminGroup) {
+      $aadGroups[] = self::ADMIN_GROUP;
+    }
+
+    $userRoles = [
+      $this->randomMachineName(),
+      $this->randomMachineName(),
+    ];
+
+    if ($hasDrupalAdminRole) {
+      $userRoles[] = strtolower(self::ADMIN_GROUP);
+    }
+
+    $account = $this->createMock(UserInterface::class);
+
+    // If the admin group is not available in AAD.
+    if (!$hasAadAdminGroup) {
+      $account->expects($this->once())
+        ->method('getRoles')
+        ->with(TRUE)
+        ->willReturn($userRoles);
+
+      if ($hasDrupalAdminRole) {
+        $account->expects($this->once())
+          ->method('removeRole')
+          ->with(strtolower(self::ADMIN_GROUP))
+          ->willReturnSelf();
+
+        if ($exception) {
+          $exception = $this->createMock(EntityStorageException::class);
+          $account->expects($this->once())
+            ->method('save')
+            ->willThrowException($exception);
+        }
+        else {
+          $account->expects($this->once())
+            ->method('save')
+            ->willReturnSelf();
+        }
+
+      }
+      else {
+        $account->expects($this->never())
+          ->method('removeRole')
+          ->with(strtolower(self::ADMIN_GROUP))
+          ->willReturnSelf();
+
+        $account->expects($this->never())
+          ->method('save')
+          ->willReturnSelf();
+      }
+    }
+    else {
+      $account->expects($this->never())
+        ->method('getRoles')
+        ->with(TRUE)
+        ->willReturn($userRoles);
+    }
+
+    // Setup our new class to test.
+    $ecmsUserAuthentication = new EcmsUserAuthentication($this->requestStack);
+
+    $ecmsUserAuthentication->removeAdminGroup($aadGroups, $account);
+  }
+
+  /**
+   * Data provider for the testRemoveAdminGroup method.
+   *
+   * @return array
+   *   Array or parameters to pass to testRemoveAdminGroup.
+   */
+  public function dataProviderForTestRemoveAdminGroup(): array {
+    return [
+      'test1' => [FALSE, FALSE, FALSE],
+      'test2' => [FALSE, TRUE, FALSE],
+      'test3' => [TRUE, TRUE, FALSE],
+      'test4' => [TRUE, FALSE, FALSE],
+      'test5' => [FALSE, TRUE, TRUE],
     ];
   }
 

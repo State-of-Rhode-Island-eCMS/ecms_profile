@@ -7,6 +7,8 @@
 
 declare(strict_types = 1);
 
+use Drupal\user\UserInterface;
+
 /**
  * Implements hook_openid_connect_pre_authorize().
  */
@@ -19,4 +21,20 @@ function ecms_authentication_openid_connect_pre_authorize($account, array $conte
   }
 
   return \Drupal::service('ecms_user_authentication')->checkGroupAccess($userGroups);
+}
+
+/**
+ * Implements hook_openid_connect_userinfo_save().
+ */
+function ecms_authentication_openid_connect_userinfo_save(UserInterface $account, array $context): void {
+  if ($context['plugin_id'] !== 'windows_aad' || (!isset($context['user_data']['groups']) && !isset($context['userinfo']['groups']['value']))) {
+    return;
+  }
+
+  // Get the active directory groups from the claim.
+  $userAadGroups = array_column($context['userinfo']['groups']['value'], 'displayName');
+
+  // Remove the drupal_admin group if the user doesn't belong to that group
+  // in active directory.
+  \Drupal::service('ecms_user_authentication')->removeAdminGroup($userAadGroups, $account);
 }

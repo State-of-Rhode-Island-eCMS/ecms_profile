@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_authentication;
 
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\user\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -62,11 +64,19 @@ class EcmsUserAuthentication {
    *
    * @param array $groups
    *   Array of group names to check.
+   * @param bool $isDrupalRoleArray
+   *   Whether we are checking Drupal's role array or Active Directory's.
+   *   The difference is the case of the role id. Drupal roles are
+   *   all lowercase while Active Directory is mixed Case.
    *
    * @return bool
    *   True if the groups contain the admin group.
    */
-  private function isAdministrator(array $groups): bool {
+  private function isAdministrator(array $groups, bool $isDrupalRoleArray = FALSE): bool {
+    if ($isDrupalRoleArray) {
+      return in_array(strtolower(self::DRUPAL_ADMINISTRATOR), $groups, TRUE);
+    }
+
     return in_array(self::DRUPAL_ADMINISTRATOR, $groups, TRUE);
   }
 
@@ -84,6 +94,31 @@ class EcmsUserAuthentication {
     $host = $this->requestStack->getCurrentRequest()->getHttpHost();
 
     return in_array($host, $groups, TRUE);
+  }
+
+  /**
+   * Remove the Drupal Admin role from the Drupal account.
+   *
+   * @param array $aadGroups
+   *   The Active Directory groups array.
+   * @param \Drupal\user\UserInterface $account
+   *   The user account being loaded.
+   */
+  public function removeAdminGroup(array $aadGroups, UserInterface $account): void {
+    // Check if Active Directory does not list this user as an administrator.
+    if (!$this->isAdministrator($aadGroups)) {
+      // Is the user currently listed as an administrator in Drupal?
+      if ($this->isAdministrator($account->getRoles(TRUE), TRUE)) {
+        // Remove the Drupal role.
+        $account->removeRole(strtolower(self::DRUPAL_ADMINISTRATOR));
+        try {
+          $account->save();
+        }
+        catch (EntityStorageException $e) {
+          return;
+        }
+      }
+    }
   }
 
 }

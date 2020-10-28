@@ -9,7 +9,7 @@ settings:
   group_mapping:
     method: '0'
     mappings: ''
-    strict: 1
+    strict: 0
   userinfo_graph_api_wa: '1'
   userinfo_endpoint_wa: 'https://graph.microsoft.com/v1.0/me/memberOf'
   userinfo_graph_api_use_other_mails: 0
