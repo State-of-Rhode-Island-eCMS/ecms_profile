@@ -10,21 +10,28 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-69: Removed several field wrapper divs.
-- RIG-69: Passed front_page links to PL.
-- RIG-69: Added a preprocess function paragraph media items.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.4] - 2020-10-28
+### Added
+- RIG-69: Removed several field wrapper divs.
+- RIG-69: Passed front_page links to PL.
+- RIG-69: Added a preprocess function paragraph media items.
+
+### Removed
 - RIG-74: Remove webform encrypt patch from issue 2943344.
 
 ### Fixed
 - RIG-136: Fixed the AAD login removing manually applied roles.
-
-### Security
 
 ## [0.1.3] - 2020-10-27
 ### Added
@@ -133,7 +140,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.4...HEAD
+[0.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.0...0.1.1
