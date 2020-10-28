@@ -28,9 +28,9 @@ class EcmsProjectsInstallTest extends AllProfileInstallationTestsAbstract {
   const PROJECT_TRANSLATABLE_FIELDS = [
     'title[0][value]' => 'This is the project title',
     'field_project_body[0][value]' => 'This is the project body',
-    'field_project_end_year[0][value]' => '2021',
+    'field_project_end_year[0][value]' => '2000',
     'field_project_location[0][value]' => 'Lexington',
-    'field_project_start_year[0][value]' => '2020',
+    'field_project_start_year[0][value]' => '1999',
     'field_project_total_cost[0][value]' => '1 million',
   ];
 
@@ -211,9 +211,9 @@ class EcmsProjectsInstallTest extends AllProfileInstallationTestsAbstract {
       'title' => 'This is the project title',
       'field_project_body' => 'This is the project body',
       'field_project_detours_needed' => TRUE,
-      'field_project_end_year' => '2021',
+      'field_project_end_year' => '2000',
       'field_project_location' => 'Lexington',
-      'field_project_start_year' => '2020',
+      'field_project_start_year' => '1999',
       'field_project_total_cost' => '1 million',
       'field_project_main_image' => $this->media->id(),
       'uid' => $this->account->id(),
