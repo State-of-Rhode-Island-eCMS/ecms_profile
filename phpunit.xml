@@ -57,6 +57,7 @@
                 <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
                 <directory>/app/web/profiles/contrib/ecms_profile/*/tests</directory>
                 <directory>/app/web/profiles/contrib/ecms_profile/tests</directory>
+                <directory>/app/web/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
             </exclude>
         </whitelist>
     </filter>
