@@ -145,9 +145,9 @@ abstract class LayoutBase extends LayoutDefault {
   protected function getBackgroundColorOptions(): array {
     return [
       EcmsLayout::ROW_BACKGROUND_COLOR_NONE => $this->t('None'),
-      EcmsLayout::ROW_BACKGROUND_COLOR_RHODYRED => $this->t('Rhody Red'),
-      EcmsLayout::ROW_BACKGROUND_COLOR_CALAMARI => $this->t('Calamari'),
-      EcmsLayout::ROW_BACKGROUND_COLOR_NAVY => $this->t('Navy'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_PRIMARY => $this->t('Primary'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_PRIMARY_LIGHT => $this->t('Primary Light'),
+      EcmsLayout::ROW_BACKGROUND_COLOR_COFFEEMILK => $this->t('Coffee Milk'),
     ];
   }
 

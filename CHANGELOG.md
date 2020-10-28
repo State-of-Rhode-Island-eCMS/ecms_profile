@@ -10,6 +10,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-69: Removed several field wrapper divs.
+- RIG-69: Passed front_page links to PL.
+- RIG-69: Added a preprocess function paragraph media items.
 
 ### Changed
 
