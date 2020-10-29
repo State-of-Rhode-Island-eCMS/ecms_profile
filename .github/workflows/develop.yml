@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Test
+        run: |
+          pwd 
       - name: Prepare environment for Lando use
         run: |
           mkdir -p ~/.ssh
