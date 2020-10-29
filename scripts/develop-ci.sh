@@ -3,9 +3,10 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
-export SIMPLETEST_DB='sqlite://tmp/.ht.sqlite'
+export SIMPLETEST_DB='sqlite://web/.ht.sqlite'
 export SIMPLETEST_BASE_URL='http://localhost'
 export DTT_BASE_URL='http://localhost'
+export ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)
 
 # Move up a level starting from the scripts directory.
 BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"

@@ -43,7 +43,7 @@ jobs:
       - name: Install the site.
         run: |
           cd ../develop-ecms-profile
-          ./vendor/bin/drush si --db-url=sqlite://web/.ht.sqlite
+          ./vendor/bin/drush si --db-url=sqlite://web/.ht.sqlite --yes
 
       - name: Run functional tests.
         run: |
