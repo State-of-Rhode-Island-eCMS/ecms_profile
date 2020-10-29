@@ -9,32 +9,32 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  test:
-    runs-on: ubuntu-20.04
-    container:
-      image: php:7.3-apache
-      ports:
-        - 80:80
-      options: --network-alias=appserver
-    env:
-      SIMPLETEST_DB: sqlite://web/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://appserver
-      DTT_BASE_URL: http://appserver
-    steps:
-      - name: Test
-        run: |
-          cd /var/www/
-          rm -Rf html
+#  test:
+#    runs-on: ubuntu-20.04
+#    container:
+#      image: php:7.3-apache
+#      ports:
+#        - 80:80
+#      options: --network-alias=appserver
+#    env:
+#      SIMPLETEST_DB: sqlite://web/.ht.sqlite
+#      SIMPLETEST_BASE_URL: http://appserver
+#      DTT_BASE_URL: http://appserver
+#    steps:
+#      - name: Test
+#        run: |
+#          cd /var/www/
+#          rm -Rf html
 #      - name: Run the develop CI script.
 #        run: ./scripts/develop-ci.sh
 
-#  build:
-#    name: develop.sh
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#
+  build:
+    name: develop.sh
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
 #      - name: Cache the vendor directory
 #        id: drupal-cache
 #        run: |
@@ -44,26 +44,37 @@ jobs:
 #        with:
 #          path: ${{ steps.drupal-cache.outputs.dir }}
 #          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
-#
-#      - name: Run the develop CI script.
-#        run: ./scripts/develop-ci.sh
-#        if: steps.drupal-cache.outputs.cache-hit != 'true'
-#
-#      - name: Check coding standards.
-#        run: |
-#          cd ../develop-ecms-profile
-#          ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
-#
-#      - name: Run unit tests.
-#        run: |
-#          cd ../develop-ecms-profile
-#          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
-#
-#      - uses: actions/upload-artifact@v2
-#        with:
-#          name: my-artifact
-#          path: path/to/artifact/world.txt
-#
+
+      - name: Run the develop CI script.
+        run: ./scripts/develop-ci.sh
+        if: steps.drupal-cache.outputs.cache-hit != 'true'
+
+      - name: Register the build directory.
+        id: drupalarchivepath
+        run: |
+          cd ../develop-ecms-profile
+          echo "::set-output name=dir::$(pwd)"
+
+      - name: Echo the archive path.
+        run: |
+          echo "${{ steps.drupalarchivepath }}
+
+
+      - name: Check coding standards.
+        run: |
+          cd ../develop-ecms-profile
+          ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
+
+      - name: Run unit tests.
+        run: |
+          cd ../develop-ecms-profile
+          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
+
 #      - name: Install the site.
 #        run: |
 #          cd ../develop-ecms-profile

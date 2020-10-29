@@ -3,11 +3,6 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
-export SIMPLETEST_DB='sqlite://web/.ht.sqlite'
-export SIMPLETEST_BASE_URL='http://localhost:4000'
-export DTT_BASE_URL='http://localhost:4000'
-export ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)
-
 # Move up a level starting from the scripts directory.
 BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"
 APP_NAME="develop-ecms-profile"
@@ -45,7 +40,7 @@ $COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
 $COMPOSER require "drupal/coder:^8.3" --dev --no-update
 $COMPOSER require "drush/drush:^10.0" --dev --no-update
 
-$COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
+$COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'"}'
 
 # Add the pattern lab installer type.
 $COMPOSER config extra.installer-types.2 "pattern-lab"
