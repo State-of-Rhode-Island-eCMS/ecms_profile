@@ -19,6 +19,11 @@ jobs:
       - name: Run the develop CI script.
         run: ./scripts/develop-ci.sh
 
+      - name: Run unit tests.
+        run: |
+          cd ../develop-ecms-profile
+          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit --testsuite=unit
+
 #      - name: Prepare environment for Lando use
 #        run: |
 #          mkdir -p ~/.ssh
