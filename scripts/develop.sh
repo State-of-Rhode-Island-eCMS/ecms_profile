@@ -214,7 +214,11 @@ set -e
 $LANDO composer remove drupal/coffee
 
 # Add the development requirements for testing.
-$LANDO composer require "behat/mink-goutte-driver" "php-mock/php-mock" "php-mock/php-mock-phpunit" "weitzman/drupal-test-traits" "brianium/paratest:^4" --dev
+$LANDO composer require "behat/mink-goutte-driver" --dev
+$LANDO composer require "php-mock/php-mock" --dev
+$LANDO composer require "php-mock/php-mock-phpunit" --dev
+$LANDO composer require "weitzman/drupal-test-traits" --dev
+$LANDO composer require "brianium/paratest:^4" --dev
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
