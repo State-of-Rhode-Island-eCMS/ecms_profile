@@ -16,9 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Test
-        run: |
-          pwd 
       - name: Prepare environment for Lando use
         run: |
           mkdir -p ~/.ssh
@@ -30,19 +27,26 @@ jobs:
           sudo dpkg -i --ignore-depends=docker-ce lando-stable.deb
           popd
 
-      - name: Get Composer Cache Directory
-        id: composer-cache
+      - name: Cache the lando environment
+        id: lando-cache
         run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
+            echo "::set-output name=dir::/home/runner/work/ecms_profile/develop-ecms-profile"
+
       - uses: actions/cache@v2
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          path: ${{ steps.lando-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('/home/runner/work/ecms_profile/ecms_profile/composer.json') }}
 
       - name: Run the development script
         run: ./scripts/develop.sh
+        if: steps.lando-cache.outputs.cache-hit != 'true'
+
+      - name: Restart the lando environment
+        run: |
+          cd ../develop-ecms-profile
+          lando start
+          lando drush si ecms_base --yes
+        if: steps.lando-cache.outputs.cache-hit == 'true'
 
       - name: Check coding standards.
         run: |
