@@ -27,6 +27,10 @@ jobs:
           sudo dpkg -i --ignore-depends=docker-ce lando-stable.deb
           popd
 
+      - name: Print directory.
+        run: |
+          pwd
+
       - name: Cache the lando environment
         id: lando-cache
         run: |
@@ -61,6 +65,7 @@ jobs:
       - name: Run unit tests.
         run: |
           cd ../develop-ecms-profile
+          pwd
           lando phpunit --testsuite=unit
 
 #      - name: Run functional tests in parallel.
