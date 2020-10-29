@@ -22,7 +22,10 @@ jobs:
       DTT_BASE_URL: http://appserver
     steps:
       - name: Test
-        run: pwd
+        run: |
+          cd /var/www/html
+          pwd
+          ls -la
 #      - name: Run the develop CI script.
 #        run: ./scripts/develop-ci.sh
 
