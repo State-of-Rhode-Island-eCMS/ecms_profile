@@ -48,7 +48,7 @@ jobs:
       - name: Start php built in web server.
         run: |
           cd ../develop-ecms-profile
-          php -S localhost web/index.php
+          php -S localhost:4000 web/index.php
 
       - name: Run functional tests.
         run: |

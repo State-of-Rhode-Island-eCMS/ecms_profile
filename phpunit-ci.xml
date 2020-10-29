@@ -36,9 +36,9 @@
         </testsuite>
         <testsuite name="existing">
           <!-- Assumes tests are namespaced as \Drupal\Tests\custom_foo\ExistingSite. -->
-          <directory>/app/web/profiles/contrib/ecms_profile/*/tests/src/ExistingSite</directory>
-          <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/ExistingSite</directory>
-          <directory>/app/web/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>
+          <directory>./*/tests/src/ExistingSite</directory>
+          <directory>./*/modules/custom/*/tests/src/ExistingSite</directory>
+          <directory>./*/features/custom/*/tests/src/ExistingSite</directory>
         </testsuite>
 
     </testsuites>
@@ -52,17 +52,16 @@
     <!-- Filter for coverage reports. -->
     <filter>
         <whitelist>
-            <directory>/app/web/profiles/contrib/ecms_profile/*</directory>
+            <directory>./*</directory>
             <exclude>
-                <directory>/app/web/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
-                <directory>/app/web/profiles/contrib/ecms_profile/*/tests</directory>
-                <directory>/app/web/profiles/contrib/ecms_profile/tests</directory>
-                <directory>/app/web/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
+                <directory>./*/modules/custom/*/tests</directory>
+                <directory>./*/tests</directory>
+                <directory>./tests</directory>
+                <directory>./*/features/custom/*/tests</directory>
             </exclude>
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-html" target="tests/phpunit/results/html"/>
         <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
     </logging>
 </phpunit>

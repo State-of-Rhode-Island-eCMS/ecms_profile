@@ -4,8 +4,8 @@
 set -eo pipefail
 
 export SIMPLETEST_DB='sqlite://web/.ht.sqlite'
-export SIMPLETEST_BASE_URL='http://localhost'
-export DTT_BASE_URL='http://localhost'
+export SIMPLETEST_BASE_URL='http://localhost:4000'
+export DTT_BASE_URL='http://localhost:4000'
 export ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)
 
 # Move up a level starting from the scripts directory.
