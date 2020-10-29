@@ -88,8 +88,11 @@ function ecms_preprocess_paragraph__media_item(&$variables) {
 function ecms_preprocess_media__file(&$variables): void {
   $media = $variables['media'];
 
+  // Grab file title.
+  $variables['file_title'] = $media->get('field_file')->entity->getFilename();
+
   // Determine file type.
-  $file_type = pathinfo($variables['name'], PATHINFO_EXTENSION);
+  $file_type = pathinfo($variables['file_title'], PATHINFO_EXTENSION);
 
   // Grab file size and put it into a readable string.
   $file_size_raw = $media->get('field_file_size')->value;
@@ -98,36 +101,34 @@ function ecms_preprocess_media__file(&$variables): void {
   // Grab file url.
   $variables['file_url'] = file_create_url($media->get('field_file')->entity->uri->value);
 
-  // Grab file title.
-  $variables['file_title'] = $media->get('field_file_title')->value;
-
   // Determine file icon and what to label file.
   switch (TRUE) {
     case ($file_type === 'pdf'):
       $variables['file_type_icon'] = 'pdf';
-      $variables['file_type_readable'] = 'PDF file';
+      $variables['file_type_readable'] = t('PDF file');
       break;
 
     case ($file_type === 'doc' || $file_type === 'docx'):
       $variables['file_type_icon'] = 'word';
-      $variables['file_type_readable'] = 'Word file';
+      $variables['file_type_readable'] = t('Word file');
       break;
 
     case ($file_type === 'csv' || $file_type === 'xlx' || $file_type === 'xlsx'):
       $variables['file_type_icon'] = 'excel';
-      $variables['file_type_readable'] = 'Excel file';
+      $variables['file_type_readable'] = t('Excel file');
       break;
 
     case ($file_type === 'ppt' || $file_type === 'pptx'):
       $variables['file_type_icon'] = 'powerpoint';
-      $variables['file_type_readable'] = 'Powerpoint file';
+      $variables['file_type_readable'] = t('Powerpoint file');
       break;
 
     default:
       $variables['file_type_icon'] = 'generic';
-      $variables['file_type_readable'] = $file_type;
+      $variables['file_type_readable'] = $file_type . t(' file');
   }
 }
+
 
 /**
  * Helper function that converts bytes into an array with file size information.
