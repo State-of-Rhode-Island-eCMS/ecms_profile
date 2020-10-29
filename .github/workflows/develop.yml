@@ -45,9 +45,15 @@ jobs:
           cd ../develop-ecms-profile
           ./vendor/bin/drush si --db-url=sqlite://web/.ht.sqlite --yes
 
+      - name: Start php built in web server.
+        run: |
+          cd ../develop-ecms-profile
+          php -S localhost web/index.php
+
       - name: Run functional tests.
         run: |
           cd ../develop-ecms-profile
+          export ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)
           ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=functional
 
 #      - name: Prepare environment for Lando use
