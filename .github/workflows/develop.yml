@@ -16,8 +16,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Cache the vendor directory
+        id: lando-cache
+        run: |
+            echo "::set-output name=dir::../develop-ecms-profile/vendor"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.drupal-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+
       - name: Run the develop CI script.
         run: ./scripts/develop-ci.sh
+        if: steps.drupal-cache.outputs.cache-hit != 'true'
 
       - name: Run unit tests.
         run: |
