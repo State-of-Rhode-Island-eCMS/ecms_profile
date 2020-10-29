@@ -10,6 +10,7 @@ on:
 
 jobs:
   php7.3:
+    runs-on: ubuntu-20.04
     container: drupalci/php-7.3.x-apache
     steps:
       - name: Test
