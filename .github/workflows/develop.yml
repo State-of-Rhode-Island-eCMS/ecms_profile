@@ -9,7 +9,7 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-20.04
     container:
       image: php:7.3-apache
@@ -23,10 +23,8 @@ jobs:
     steps:
       - name: Test
         run: |
-          cd /var/www/html
-          pwd
-          ls -la
-          which composer
+          cd /var/www/
+          rm -Rf html
 #      - name: Run the develop CI script.
 #        run: ./scripts/develop-ci.sh
 
@@ -60,6 +58,11 @@ jobs:
 #        run: |
 #          cd ../develop-ecms-profile
 #          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
+#
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: my-artifact
+#          path: path/to/artifact/world.txt
 #
 #      - name: Install the site.
 #        run: |
