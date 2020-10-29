@@ -9,7 +9,7 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  php7.3:
+  build:
     runs-on: ubuntu-20.04
     container: drupalci/php-7.3.x-apache
     steps:
