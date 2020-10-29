@@ -16,11 +16,11 @@
         <!-- Example SIMPLETEST_DB value: mysql://username:password@localhost/databasename#table_prefix -->
         <env name="SIMPLETEST_DB" value="sqlite://tmp/.ht.sqlite"/>
         <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
-        <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="web/sites/default/files"/>
+        <env name="BROWSERTEST_OUTPUT_DIRECTORY" value=""/>
         <!-- To disable deprecation testing uncomment the next line. -->
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
         <!-- The base url to use for existing site tests. -->
-        <env name="DTT_BASE_URL" value="http://appserver/"/>
+        <env name="DTT_BASE_URL" value="http://localhost/"/>
         <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
         <!-- Example for changing the driver args to phantomjs tests MINK_DRIVER_ARGS_PHANTOMJS value: '["http://127.0.0.1:8510"]' -->
     </php>
