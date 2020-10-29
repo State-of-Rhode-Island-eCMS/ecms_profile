@@ -37,7 +37,7 @@ jobs:
           path: ${{ steps.lando-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('/home/runner/work/ecms_profile/ecms_profile/composer.json') }}
 
-      - name: Run the development script
+      - name: Run the development script (if not cached)
         run: ./scripts/develop.sh
         if: steps.lando-cache.outputs.cache-hit != 'true'
 
