@@ -45,12 +45,12 @@ jobs:
           cd ../develop-ecms-profile
           lando phpunit --testsuite=unit
 
-      - name: Run functional tests.
+      - name: Run functional tests in parallel.
         run: |
           cd ../develop-ecms-profile
-          lando phpunit --testsuite=functional
+          lando paratest -f --testsuite=functional  --max-batch-size=20 --stop-on-failure  /ecms_profile
 
       - name: Run existing tests.
         run: |
           cd ../develop-ecms-profile
-          lando phpunit --testsuite=existing --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php
+          lando paratest -f --testsuite=functional  --max-batch-size=20 --stop-on-failure --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php /ecms_profile

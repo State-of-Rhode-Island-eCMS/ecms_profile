@@ -170,6 +170,9 @@ tooling:
   phpunit:
     service: appserver
     cmd: vendor/bin/phpunit --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
+  paratests:
+    service: appserver
+    cmd: vendor/bin/paratest --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
   gulp-distro:
     service: nodejs
     cmd: cd /$INSTALL_PROFILE_DIRECTORY && npm install
@@ -211,10 +214,7 @@ set -e
 $LANDO composer remove drupal/coffee
 
 # Add the development requirements for testing.
-$LANDO composer require "behat/mink-goutte-driver" --dev
-$LANDO composer require "php-mock/php-mock" --dev
-$LANDO composer require "php-mock/php-mock-phpunit" --dev
-$LANDO composer require "weitzman/drupal-test-traits" --dev
+$LANDO composer require "behat/mink-goutte-driver" "php-mock/php-mock" "php-mock/php-mock-phpunit" "weitzman/drupal-test-traits" "brianium/paratest:^4" --dev
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
