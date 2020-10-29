@@ -41,6 +41,8 @@ $COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
 $COMPOSER require "brianium/paratest:^4" --dev --no-update
 $COMPOSER require "phpunit/phpunit:^8" --dev --no-update
 $COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
+$COMPOSER require "drupal/coder:^8.3" --dev --no-update
+$COMPOSER require "drush/drush:^10.0" --dev --no-update
 
 $COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
 
