@@ -63,12 +63,12 @@ jobs:
           cd ../develop-ecms-profile
           lando phpunit --testsuite=unit
 
-      - name: Run functional tests in parallel.
-        run: |
-          cd ../develop-ecms-profile
-          lando paratest -p8 --testsuite=functional /ecms_profile
-
-      - name: Run existing tests.
-        run: |
-          cd ../develop-ecms-profile
-          lando paratest -p8 --testsuite=existing --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php /ecms_profile
+#      - name: Run functional tests in parallel.
+#        run: |
+#          cd ../develop-ecms-profile
+#          lando paratest -p4 --testsuite=functional /ecms_profile
+#
+#      - name: Run existing tests.
+#        run: |
+#          cd ../develop-ecms-profile
+#          lando paratest -p4 --testsuite=existing --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php /ecms_profile
