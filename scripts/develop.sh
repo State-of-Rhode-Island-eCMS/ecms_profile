@@ -170,7 +170,7 @@ tooling:
   phpunit:
     service: appserver
     cmd: vendor/bin/phpunit --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
-  paratests:
+  paratest:
     service: appserver
     cmd: vendor/bin/paratest --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
   gulp-distro:
