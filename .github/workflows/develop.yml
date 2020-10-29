@@ -48,9 +48,9 @@ jobs:
       - name: Run functional tests in parallel.
         run: |
           cd ../develop-ecms-profile
-          lando paratest -f --testsuite=functional  --max-batch-size=20 --stop-on-failure  /ecms_profile
+          lando paratest --runner=WrapperRunner --testsuite=functional  --max-batch-size=20 --stop-on-failure  /ecms_profile
 
       - name: Run existing tests.
         run: |
           cd ../develop-ecms-profile
-          lando paratest -f --testsuite=functional  --max-batch-size=20 --stop-on-failure --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php /ecms_profile
+          lando paratest --runner=WrapperRunner --testsuite=existing  --max-batch-size=20 --stop-on-failure --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php /ecms_profile
