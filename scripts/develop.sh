@@ -154,7 +154,7 @@ else
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
+        SIMPLETEST_DB: 'mysql://drupal9:drupal9@database/drupal9'
         DTT_BASE_URL: 'https://appserver'
         TEMP: '/app/web/sites/default/files/temp'
       volumes:
