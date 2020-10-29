@@ -6,7 +6,6 @@
  * Available variables:
  * - name: Name of the media.
  * - content: Media content.
- * - file_title: title of file
  * - file_type_icon: name of icon
  * - file_type_readable: readable file type name
  * - file_url: absolute link of file location
@@ -22,7 +21,7 @@
 #}
 
 {% include "@molecules/file/file.twig" with {
-    file_title: file_title,
+    name: name,
     file_type_icon: file_type_icon,
     file_type_readable: file_type_readable,
     file_url: file_url,
