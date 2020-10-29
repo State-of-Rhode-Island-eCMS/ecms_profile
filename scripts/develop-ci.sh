@@ -3,6 +3,10 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
+export SIMPLETEST_DB='sqlite://tmp/.ht.sqlite'
+export SIMPLETEST_BASE_URL='http://localhost'
+export DTT_BASE_URL='http://localhost'
+
 # Move up a level starting from the scripts directory.
 BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"
 APP_NAME="develop-ecms-profile"
