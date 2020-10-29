@@ -14,8 +14,7 @@
         <!-- Example SIMPLETEST_BASE_URL value: http://localhost -->
         <env name="SIMPLETEST_BASE_URL" value="http://appserver/"/>
         <!-- Example SIMPLETEST_DB value: mysql://username:password@localhost/databasename#table_prefix -->
-<!--        <env name="SIMPLETEST_DB" value="sqlite://appserver/:memory:"/>-->
-        <env name="SIMPLETEST_DB" value="mysql://drupal9:drupal9@database/drupal9"/>
+        <env name="SIMPLETEST_DB" value="sqlite://web/sites/default/files/.ht.sqlite"/>
         <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
         <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="web/sites/default/files"/>
         <!-- To disable deprecation testing uncomment the next line. -->
