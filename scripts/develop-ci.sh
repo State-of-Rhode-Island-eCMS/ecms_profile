@@ -43,7 +43,7 @@ $COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "ur
 # Add the pattern lab installer type.
 $COMPOSER config extra.installer-types.2 "pattern-lab"
 
-$COMPOSER config extra.installer-paths./${INSTALL_PROFILE_DIRECTORY}/ecms_base/themes/custom/ecms/{\$name} PATTERN_LAB_REPLACE
+$COMPOSER config extra.installer-paths./web/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/{\$name} PATTERN_LAB_REPLACE
 
 # Replace the "PATTERN_LAB_REPLACE" text with the actual value.
 # sed is different for Macs, detect that here.
