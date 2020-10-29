@@ -22,7 +22,7 @@ jobs:
       - name: Run unit tests.
         run: |
           cd ../develop-ecms-profile
-          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit.xml --testsuite=unit
+          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit.xml --bootstrap=../develop-ecms-profile/web/core/tests/bootstrap.php --testsuite=unit
 
 #      - name: Prepare environment for Lando use
 #        run: |
