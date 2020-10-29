@@ -26,6 +26,7 @@ jobs:
           cd /var/www/html
           pwd
           ls -la
+          which composer
 #      - name: Run the develop CI script.
 #        run: ./scripts/develop-ci.sh
 
