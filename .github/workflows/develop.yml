@@ -1,6 +1,6 @@
 # Runs and tests the develop.sh script
 ---
-name: Test deploy.sh
+name: Test the Ecms Profile
 on:
   push:
     branches:
@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cache the vendor directory
-        id: lando-cache
+        id: drupal-cache
         run: |
             echo "::set-output name=dir::../develop-ecms-profile/vendor"
 
