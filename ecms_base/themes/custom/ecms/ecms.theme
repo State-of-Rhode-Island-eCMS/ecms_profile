@@ -158,3 +158,23 @@ function _filesize_formatted($bytes): array {
     'long_format' => $units_expanded[$pow],
   ];
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK for container templates.
+ *
+ * Add suggestions, as by default none are provided.
+ */
+function ecms_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#type']) && $element['#type'] == 'view') {
+    $suggestions[] = 'container__view__' . $element['#name'];
+    $suggestions[] = 'container__view__' . $element['#name'] . '__' . $element['#display_id'];
+  }
+  return $suggestions;
+}
+
+function ecms_preprocess_views_view (&$variables) {
+  $view = $variables['view'];
+  $variables['title'] = $view->getTitle();
+}
