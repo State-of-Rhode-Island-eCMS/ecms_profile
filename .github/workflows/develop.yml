@@ -30,6 +30,11 @@ jobs:
         run: ./scripts/develop-ci.sh
         if: steps.drupal-cache.outputs.cache-hit != 'true'
 
+      - name: Check coding standards.
+        run: |
+          cd ../develop-ecms-profile
+          ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
+
       - name: Run unit tests.
         run: |
           cd ../develop-ecms-profile
