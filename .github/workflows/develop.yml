@@ -11,10 +11,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    container: drupalci/php-7.3.x-apache
+    container:
+      image: php:7.3-apache
+      ports:
+        - 80:80
+      options: --network-alias=appserver
+    env:
+      SIMPLETEST_DB: sqlite://web/.ht.sqlite
+      SIMPLETEST_BASE_URL: http://appserver
+      DTT_BASE_URL: http://appserver
     steps:
       - name: Test
         run: pwd
+#      - name: Run the develop CI script.
+#        run: ./scripts/develop-ci.sh
+
 #  build:
 #    name: develop.sh
 #    runs-on: ubuntu-20.04
