@@ -12,6 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-130: Changed how JSON path is pulled in.
+- RIG-69: Update how translate functions are called with file media.
 
 ### Deprecated
 
