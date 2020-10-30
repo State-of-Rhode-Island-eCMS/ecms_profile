@@ -10,20 +10,27 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-138: Added twig_vardumper
 
 ### Changed
-- RIG-130: Changed how JSON path is pulled in.
-- RIG-69: Update how translate functions are called with file media.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIG-91: Add scheduler settings to applicable features.
 
 ### Security
+
+## [0.1.6] - 2020-10-30
+### Added
+- RIG-138: Added twig_vardumper
+
+### Changed
+- RIG-130: Changed how JSON path is pulled in.
+- RIG-69: Update how translate functions are called with file media.
+
+### Fixed
+- RIG-91: Add scheduler settings to applicable features.
 
 ## [0.1.5] - 2020-10-30
 ### Added
@@ -157,7 +164,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.6...HEAD
+[0.1.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.2...0.1.3
