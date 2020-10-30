@@ -111,7 +111,7 @@ function ecms_preprocess_media__file(&$variables): void {
       $variables['file_type_readable'] = 'Word file';
       break;
 
-    case ($file_type === 'csv' || $file_type === 'xlx' || $file_type === 'xlsx'):
+    case ($file_type === 'csv' || $file_type === 'xls' || $file_type === 'xlsx'):
       $variables['file_type_icon'] = 'excel';
       $variables['file_type_readable'] = 'Excel file';
       break;

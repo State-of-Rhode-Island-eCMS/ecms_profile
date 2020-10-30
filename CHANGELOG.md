@@ -10,12 +10,18 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-69: Added theming for file list paragraph.
+- RIG-130: Added theming for article teaser and article latest.
+- RIG-130: Added view media permission for anon users.
+- RIG-130: Added media_library_theme_reset module.
 
 ### Changed
+- RIG-69: Changed display settings for media file.
 
 ### Deprecated
 
 ### Removed
+- RIG-69: Removed field_file_title from eCMS_paragraphs.
 
 ### Fixed
 
