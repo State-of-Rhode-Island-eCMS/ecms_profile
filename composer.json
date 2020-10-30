@@ -101,6 +101,7 @@
     "drupal/smart_date": "^3.0",
     "drupal/svg_image": "^1.14",
     "drupal/token": "^1.7",
+    "drupal/twig_vardumper": "^3.0",
     "drupal/webform": "^6.0",
     "drupal/webform_encrypt": "1.x-dev@dev",
     "drush/drush": "^10.0",

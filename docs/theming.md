@@ -17,7 +17,7 @@ and uses composer-installer-extenders to place the package in the root of the cu
 
 ## Local Development
 All Pattern Lab work should be developed in its own repository. To test the changes locally,
-first update the "reference" attribute for the package in `composer.json` 
+first update the "reference" attribute for the package in `composer.json`
 to point to the branch you want to test.
 ```bash
 "package": {
@@ -37,5 +37,36 @@ When you run composer install, all project dependencies are going to be installe
 This includes Drupal core, and any contributed modules. You will want to remove
 those folders before attempting to reinstall the profile.
 
+### Theme debugging
+The [Twig VarDumper] is available for local theme debugging.
+The module is not enabled by default. To enable, run `lando drush en twig_vardumper`
+from the /develop-ecms-profile site root.
+Create or edit your local sites/default/settings.local.php file to include the following:
+```php
+$settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
+```
+Update the contents of the sites/development.services.yml to be:
+```yml
+parameters:
+  http.response.debug_cacheability_headers: true
+  twig.config:
+    debug: true
+    cache: false
+    autoload: true
+services:
+  cache.backend.null:
+    class: Drupal\Core\Cache\NullBackendFactory
+
+```
+Clear the Drupal cache. You should now be able to add debug calls in twig, e.g.
+```twig
+{{ dump() }}
+{{ dump(variable_name) }}
+{{ vardumper() }}
+{{ vardumper(variable_name) }}
+```
+
+
 [Pattern Lab]: https://patternlab.io/
+[Twig VarDumper]: https://www.drupal.org/project/twig_vardumper
 
