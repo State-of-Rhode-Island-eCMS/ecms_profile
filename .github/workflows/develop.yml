@@ -78,8 +78,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     container:
-#      image: drupalci/php-7.3.x-apache:production
-      image: php:7.3-apache
+      image: drupalci/php-7.3.x-apache:production
       ports:
         - 80:80
       options: --network-alias=appserver
@@ -129,13 +128,13 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
 
-      - name: Run functional tests.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/paratest -p4 --bootstrap=/var/www/html/core/tests/bootstrap.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional ${{ env.ECMS_PROFILE_DIRECTORY }}
-
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/paratest -p4 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+        run: ../vendor/bin/paratest -p2 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+
+      - name: Run functional tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/paratest -p2 --bootstrap=/var/www/html/core/tests/bootstrap.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional ${{ env.ECMS_PROFILE_DIRECTORY }}
 
 #      - name: Prepare environment for Lando use
 #        run: |
