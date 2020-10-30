@@ -118,7 +118,7 @@ jobs:
 
       - name: Check coding standards.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs.xml
+        run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs-ci.xml
 
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
