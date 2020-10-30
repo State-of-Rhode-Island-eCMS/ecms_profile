@@ -117,7 +117,7 @@ jobs:
           chmod 777 /var/www/html/sites/default/files
 
       - name: Set permissions on the web and vendor direvtories
-        run: chown -R www-data:www-data /var/www/web /var/www/vendor
+        run: chown -R www-data:www-data /var/www/html /var/www/vendor
 
       - name: Set the encryption private key variable.
         run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
