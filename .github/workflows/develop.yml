@@ -43,7 +43,7 @@ jobs:
 
       - name: Echo the archive path.
         run: |
-          echo "${{ env.drupal-directory }}"
+          echo "$( realpath ${{ env.drupal-directory }} )"
 
       - name: Check coding standards.
         working-directory: ${{ env.drupal-directory }}
@@ -53,10 +53,14 @@ jobs:
         working-directory: ${{ env.drupal-directory }}
         run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: drupal-build
-          path: ${{ env.drupal-directory }}
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: drupal-build
+#          path: ${{ env.drupal-directory }}
+
+  test-php-73:
+    name: Test the site with PHP 7.3
+
 
 #      - name: Install the site.
 #        run: |
