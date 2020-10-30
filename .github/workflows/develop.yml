@@ -94,7 +94,7 @@ jobs:
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
       - name: Where are we?
-        run: pwd
+        run: pwd && ls -l
 
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
@@ -102,7 +102,7 @@ jobs:
           name: drupal-build.tar.gz
 
       - name: Expand the build artifact
-        run: tar -xzf /tmp/drupal-build.tar.gz
+        run: tar -xzf ${{ env.GITHUB_WORKSPACE }}/drupal-build.tar.gz
 
       - name: Check the tmp directory.
         run: |
