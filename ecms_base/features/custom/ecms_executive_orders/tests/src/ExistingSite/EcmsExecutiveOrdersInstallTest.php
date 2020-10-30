@@ -128,7 +128,7 @@ class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract
     $this->assertSession()->statusCodeEquals(200);
 
     foreach (self::EXECUTIVE_ORDER_TRANSLATABLE_FIELDS as $key => $value) {
-      $this->assertSession()->pageTextContainsOnce($value);
+      $this->assertSession()->pageTextContains($value);
     }
 
     foreach (self::DEFAULT_INSTALLED_LANGUAGES as $lang) {
