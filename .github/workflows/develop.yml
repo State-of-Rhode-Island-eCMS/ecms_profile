@@ -47,9 +47,13 @@ jobs:
       - name: Set full path to the drupal build directory.
         run: echo "drupal-directory=$( realpath ${{ env.drupal-directory }} )" >> $GITHUB_ENV
 
-      - name: Check coding standards.
+      - name: Copy the profile into Drupal.
         working-directory: ${{ env.drupal-directory }}
-        run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
+        run: cp -Rf ../ecms_profile web/profiles/contrib
+
+#      - name: Check coding standards.
+#        working-directory: ${{ env.drupal-directory }}
+#        run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
 
       - name: Archive the Drupal files.
         working-directory: ${{ env.drupal-directory }}
