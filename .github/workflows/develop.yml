@@ -58,8 +58,8 @@ jobs:
 #          name: drupal-build
 #          path: ${{ env.drupal-directory }}
 
-  test-php-73:
-    name: Test the site with PHP 7.3
+#  test-php-73:
+#    name: Test the site with PHP 7.3
 
 
 #      - name: Install the site.
