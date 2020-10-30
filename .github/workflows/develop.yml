@@ -29,7 +29,7 @@ jobs:
 #        run: ./scripts/develop-ci.sh
 
   build:
-    name: develop.sh
+    name: Build Drupal.
     runs-on: ubuntu-latest
     env:
       drupal-directory: ../develop-ecms-profile
@@ -39,7 +39,6 @@ jobs:
 
       - name: Run the develop CI script.
         run: ./scripts/develop-ci.sh
-        if: steps.drupal-cache.outputs.cache-hit != 'true'
 
       - name: Set the full working directory environment variable.
         run: |
@@ -52,6 +51,10 @@ jobs:
         working-directory: ${{ env.drupal-directory }}
         run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
 
+      - name: Archive the Drupal files.
+        working-directory: ${{ env.drupal-directory }}
+        run: tar -czf /tmp/drupal-build.tar.gz .
+
 #      - name: Run unit tests.
 #        working-directory: ${{ env.drupal-directory }}
 #        run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
@@ -59,10 +62,30 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: drupal-build
-          path: ${{ env.drupal-directory }}
+          path: /tmp/drupal-build.tar.gz
 
 #  test-php-73:
 #    name: Test the site with PHP 7.3
+#    needs: build
+#    runs-on: ubuntu-latest
+#    container:
+#      image: drupalci/php-7.3.x-apache:production
+#      ports:
+#        - 80:80
+#      options: --network-alias=appserver
+#    env:
+#      SIMPLETEST_DB: sqlite://web/.ht.sqlite
+#      SIMPLETEST_BASE_URL: http://localhost
+#      DTT_BASE_URL: http://localhost
+#    steps:
+#      - name: Retrieve the build artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: drupal-build.tar.gz
+#          path: /var/www/html
+#
+#      - name: Expand the build artifact in the webroot
+#        run: tar -xzf /var/www/html/drupal-build.tar.gz
 
 
 #      - name: Install the site.
