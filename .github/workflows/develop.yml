@@ -79,8 +79,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: drupalci/php-7.3.x-apache:production
-      ports:
-        - 80:80
+#      ports:
+#        - 80:80
 #      options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
