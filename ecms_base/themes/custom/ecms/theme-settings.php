@@ -23,7 +23,8 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#title' => t("Theme Options"),
   ];
 
-  $color_config_json_string = file_get_contents("/ecms_patternlab/source/_data/color-config.json");
+  $theme = \Drupal::theme()->getActiveTheme();
+  $color_config_json_string = file_get_contents("{$theme->getPath()}/ecms_patternlab/source/_data/color-config.json");
   if ($color_config_json_string) {
 
     $json_decoded = json_decode($color_config_json_string, TRUE);
