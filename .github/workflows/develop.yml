@@ -86,40 +86,38 @@ jobs:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
       SIMPLETEST_BASE_URL: http://localhost
       DTT_BASE_URL: http://localhost
-      DRUPAL_DIRECTORY: /tmp/drupal-build/web
+      DRUPAL_DIRECTORY: /var/www/html
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
-      - name: Where are we?
-        run: |
-          pwd
-          ls -l /var/www
-
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
         with:
           name: drupal-build.tar.gz
           path: /var/www/
 
-      - name: Where are we?
-        run: |
-          pwd
-          ls -l /var/www
+      - name: Check the /var/www directory
+        run: ls -l /var/www
 
       - name: Expand the build artifact
         run: tar -xzf /var/www/drupal-build.tar.gz
 
-      - name: Check the tmp directory.
-        run: |
-          pwd
-          ls -la
-          ls -la /tmp
+      - name: Check the /var/www directory
+        run: ls -l /var/www
+
+      - name: Remove the original html directory
+        run: rm -Rf /var/www/html
+
+      - name: Rename Drupal's web directory
+        run: mv /var/www/web /var/www/html
 
       - name: Ensure a files directory exists.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: |
-          mkdir sites/default/files
-          chmod 777 sites/default/files
+          mkdir /var/www/html/sites/default/files
+          chmod 777 /var/www/html/sites/default/files
+
+      - name: Set permissions on the web and vendor direvtories
+        run: chown -R www-data:www-data /var/www/web /var/www/vendor
 
       - name: Set the encryption private key variable.
         run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
