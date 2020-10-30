@@ -86,6 +86,7 @@ jobs:
       SIMPLETEST_BASE_URL: http://localhost
       DTT_BASE_URL: http://localhost
       DRUPAL_DIRECTORY: /var/www/html
+      ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
     steps:
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
@@ -94,15 +95,17 @@ jobs:
           path: /tmp
 
       - name: Expand the build artifact in the webroot
-        run: tar -xzf /tmp/drupal-build.tar.gz
+        run: tar -xzf /tmp/drupal-build.tar.gz -C /var/www
       - name: Check the tmp directory.
-        run: ls -la /tmp
+        run: ls -la /var/html
 
-      - name: Copy the web directory.
-        run: cp -r /tmp/drupal-build/web/. /var/www/html
+      - name: Remove the original html directory
+        working-directory: /var/www
+        run: rm -Rf html
 
-      - name: Copy the vendor directory.
-        run: cp -r /tmp/drupal-build/vendor /var/www
+      - name: Rename the web directory.
+        working-directory: /var/www
+        run: mv web html
 
       - name: Ensure a files directory exists.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
@@ -110,15 +113,25 @@ jobs:
           mkdir sites/default/files
           chmod 777 sites/default/files
 
-      - name: Install the site.
+#      - name: Check coding standards.
+#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+#        run: ../vendor/bin/phpcs
+
+      - name: Run unit tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
+
+      - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
 
-#      - name: Run functional tests.
-#        run: |
-#          cd ../develop-ecms-profile
-#          export ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)
-#          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=functional
+      - name: Run functional tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
+
+      - name: Run existing site tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing
 
 #      - name: Prepare environment for Lando use
 #        run: |
