@@ -1,12 +1,29 @@
+uuid: da66d11b-6446-4468-8aa3-8c09953ca48f
 langcode: en
 status: true
 dependencies:
   module:
     - menu_ui
+    - scheduler
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: fieldset
+    publish_enable: true
+    publish_past_date: '0'
+    publish_past_date_created: true
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
+_core:
+  default_config_hash: BuiJZCsWYoJaoOkiClVrBeVquuVS-nigw6W1bogrnuA
 name: Publication
 type: publication
 description: 'Add a new publication or resource to the site.'

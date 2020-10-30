@@ -1,12 +1,29 @@
+uuid: 892f0e47-47f2-43e6-b6f5-447a263456a1
 langcode: en
 status: true
 dependencies:
   module:
     - menu_ui
+    - scheduler
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: fieldset
+    publish_enable: true
+    publish_past_date: '0'
+    publish_past_date_created: true
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
+_core:
+  default_config_hash: kGcC9sZhYS4bh3OumJC3TYWas6FxkwgPLey6KMbRxG0
 name: Hotel
 type: hotel
 description: 'Manage accommodations and associated packages and deals.'

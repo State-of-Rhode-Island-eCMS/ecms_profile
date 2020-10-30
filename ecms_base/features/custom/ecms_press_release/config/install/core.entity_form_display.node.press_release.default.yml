@@ -1,3 +1,4 @@
+uuid: ada68bc9-df41-496a-bb92-d44c7ee0a09a
 langcode: en
 status: true
 dependencies:
@@ -18,6 +19,8 @@ dependencies:
     - path
     - scheduler
     - text
+_core:
+  default_config_hash: WKgVocvsfdJoC-1Ws0bqnV5nStX6-sPtI6Vu5bltJtU
 id: node.press_release.default
 targetEntityType: node
 bundle: press_release

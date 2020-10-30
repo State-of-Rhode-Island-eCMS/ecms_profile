@@ -1,3 +1,4 @@
+uuid: c81f0869-e6e3-4520-ae07-efc93fc046a0
 langcode: en
 status: true
 dependencies:
@@ -10,7 +11,10 @@ dependencies:
     - content_moderation
     - paragraphs
     - path
+    - scheduler
     - text
+_core:
+  default_config_hash: kF6i8bHWgnmx-mcFPOk4c2M3bk9omMxbw8UNqHoCwxA
 id: node.basic_page.default
 targetEntityType: node
 bundle: basic_page
@@ -70,6 +74,17 @@ content:
     weight: 15
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:
@@ -106,5 +121,11 @@ content:
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

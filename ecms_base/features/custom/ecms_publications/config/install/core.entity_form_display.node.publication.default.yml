@@ -1,3 +1,4 @@
+uuid: 966fe962-901b-4d91-9704-e846ba92e345
 langcode: en
 status: true
 dependencies:
@@ -16,6 +17,9 @@ dependencies:
     - link
     - media_library
     - path
+    - scheduler
+_core:
+  default_config_hash: 1SHebiV5lMJGpOSl_8KcrYgELhdP-UDdERc0hzamVzI
 id: node.publication.default
 targetEntityType: node
 bundle: publication
@@ -104,6 +108,17 @@ content:
     weight: 15
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:
@@ -141,4 +156,15 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden: {  }

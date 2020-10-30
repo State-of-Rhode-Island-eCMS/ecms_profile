@@ -1,3 +1,4 @@
+uuid: a799b3e2-4959-4e10-b98e-46885bd49d11
 langcode: en
 status: true
 dependencies:
@@ -12,7 +13,10 @@ dependencies:
     - link
     - media_library
     - path
+    - scheduler
     - text
+_core:
+  default_config_hash: 2_jEz6L6Z0pAmJ80V0FIWyipZrO8u0g6lHlOhF76nIE
 id: node.promotions.default
 targetEntityType: node
 bundle: promotions
@@ -75,6 +79,17 @@ content:
     weight: 6
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:
@@ -111,5 +126,11 @@ content:
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

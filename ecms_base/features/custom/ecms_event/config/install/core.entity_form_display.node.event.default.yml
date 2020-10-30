@@ -1,3 +1,4 @@
+uuid: 1a8f962a-0573-46d8-a5a6-e442d2b735f7
 langcode: en
 status: true
 dependencies:
@@ -14,8 +15,11 @@ dependencies:
     - content_moderation
     - media_library
     - path
+    - scheduler
     - smart_date
     - text
+_core:
+  default_config_hash: wNtiSdE861O2UEW7JNK8-bnQELKbcB5RMt4RUHJvpck
 id: node.event.default
 targetEntityType: node
 bundle: event
@@ -106,6 +110,17 @@ content:
     weight: 9
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:
@@ -142,5 +157,11 @@ content:
       placeholder: ''
       match_limit: 10
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

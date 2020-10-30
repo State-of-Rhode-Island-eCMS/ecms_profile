@@ -1,3 +1,4 @@
+uuid: 5c129f7a-8136-45ed-aa61-a93589f26764
 langcode: en
 status: true
 dependencies:
@@ -20,8 +21,11 @@ dependencies:
     - link
     - media_library
     - path
+    - scheduler
     - telephone
     - text
+_core:
+  default_config_hash: uZEjOgD15tuExiGFePm_KnStAwvihonAZU-R1P8NCuE
 id: node.hotel.default
 targetEntityType: node
 bundle: hotel
@@ -134,6 +138,17 @@ content:
     weight: 15
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:
@@ -171,4 +186,15 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden: {  }

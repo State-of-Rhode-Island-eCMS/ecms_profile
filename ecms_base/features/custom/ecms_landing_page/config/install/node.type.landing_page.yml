@@ -1,13 +1,30 @@
+uuid: e56c6ded-e614-491a-aa29-467065582396
 langcode: en
 status: true
 dependencies:
   module:
     - menu_ui
+    - scheduler
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: fieldset
+    publish_enable: true
+    publish_past_date: '0'
+    publish_past_date_created: true
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
+_core:
+  default_config_hash: 5H9yq1DprGPzlG1kwsmMGEpwGNOz_lxbmlOyLRjqrjQ
 name: 'Landing page'
 type: landing_page
 description: 'Add a new landing page to the site.'

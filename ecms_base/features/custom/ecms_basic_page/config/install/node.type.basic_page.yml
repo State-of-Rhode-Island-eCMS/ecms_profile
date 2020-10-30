@@ -1,13 +1,30 @@
+uuid: 4473b86a-315c-4cbb-9493-4309f85b90e2
 langcode: en
 status: true
 dependencies:
   module:
     - menu_ui
+    - scheduler
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: fieldset
+    publish_enable: true
+    publish_past_date: '0'
+    publish_past_date_created: true
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
+_core:
+  default_config_hash: MWCImA2Qc7CXPfgNJyRBW3nrVwYiRUJjmXVXpzd40zA
 name: 'Basic page'
 type: basic_page
 description: 'Add a basic page to the site.'
