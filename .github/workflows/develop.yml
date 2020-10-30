@@ -41,17 +41,24 @@ jobs:
         run: ./scripts/develop-ci.sh
         if: steps.drupal-cache.outputs.cache-hit != 'true'
 
-      - name: Echo the archive path.
+      - name: Set the full working directory environment variable.
         run: |
           echo "$( realpath ${{ env.drupal-directory }} )"
+
+      - name: before
+        run: echo ${{ env.drupal-directory }}
+      - name: Set env
+        run: echo "drupal-directory=$( realpath ${{ env.drupal-directory }} )" >> $GITHUB_ENV
+      - name: After
+        run: echo ${{ env.drupal-directory }}
 
       - name: Check coding standards.
         working-directory: ${{ env.drupal-directory }}
         run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
 
-      - name: Run unit tests.
-        working-directory: ${{ env.drupal-directory }}
-        run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
+#      - name: Run unit tests.
+#        working-directory: ${{ env.drupal-directory }}
+#        run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
 
 #      - uses: actions/upload-artifact@v2
 #        with:
