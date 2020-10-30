@@ -7,6 +7,19 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+  scheduler:
+    expand_fieldset: when_required
+    fields_display_mode: fieldset
+    publish_enable: true
+    publish_past_date: '0'
+    publish_past_date_created: true
+    publish_required: false
+    publish_revision: false
+    publish_touch: false
+    show_message_after_update: true
+    unpublish_enable: true
+    unpublish_required: false
+    unpublish_revision: false
 name: Speech
 type: speech
 description: 'Manages speeches delivered by government officials.'
