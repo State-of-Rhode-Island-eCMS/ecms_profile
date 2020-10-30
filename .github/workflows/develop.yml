@@ -130,7 +130,7 @@ jobs:
 
       - name: Run functional tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/paratest -p4 --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
+        run: ../vendor/bin/paratest -p4 --bootstrap=/var/www/html/core/tests/bootstrap.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
 
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
