@@ -72,34 +72,45 @@ jobs:
           name: drupal-build
           path: /tmp/drupal-build.tar.gz
 
-#  test-php-73:
-#    name: Test the site with PHP 7.3
-#    needs: build
-#    runs-on: ubuntu-latest
-#    container:
-#      image: drupalci/php-7.3.x-apache:production
-#      ports:
-#        - 80:80
-#      options: --network-alias=appserver
-#    env:
-#      SIMPLETEST_DB: sqlite://web/.ht.sqlite
-#      SIMPLETEST_BASE_URL: http://localhost
-#      DTT_BASE_URL: http://localhost
-#    steps:
-#      - name: Retrieve the build artifact
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: drupal-build.tar.gz
-#          path: /var/www/html
-#
-#      - name: Expand the build artifact in the webroot
-#        run: tar -xzf /var/www/html/drupal-build.tar.gz
+  test-php-73:
+    name: Test the site with PHP 7.3
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: drupalci/php-7.3.x-apache:production
+      ports:
+        - 80:80
+      options: --network-alias=appserver
+    env:
+      SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
+      SIMPLETEST_BASE_URL: http://localhost
+      DTT_BASE_URL: http://localhost
+      DRUPAL_DIRECTORY: /var/www/html
+    steps:
+      - name: Retrieve the build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: drupal-build.tar.gz
+          path: /tmp
 
+      - name: Expand the build artifact in the webroot
+        run: tar -xzf /tmp/drupal-build.tar.gz
 
-#      - name: Install the site.
-#        run: |
-#          cd ../develop-ecms-profile
-#          ./vendor/bin/drush si --db-url=sqlite://web/.ht.sqlite --yes
+      - name: Copy the web directory.
+        run: cp -r /tmp/drupal-build/web/. /var/www/html
+
+      - name: Copy the vendor directory.
+        run: cp -r /tmp/drupal-build/vendor /var/www
+
+      - name: Ensure a files directory exists.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: |
+          mkdir sites/default/files
+          chmod 777 sites/default/files
+
+      - name: Install the site.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
 #
 #      - name: Start php built in web server.
 #        run: |
