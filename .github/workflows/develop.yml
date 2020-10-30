@@ -108,8 +108,11 @@ jobs:
       - name: Remove the original html directory
         run: rm -Rf /var/www/html
 
-      - name: Rename Drupal's web directory
-        run: mv /var/www/web /var/www/html
+      - name: Symlink the original html path
+        run: ln -s /var/www/web /var/www/html
+
+#      - name: Rename Drupal's web directory
+#        run: mv /var/www/web /var/www/html
 
       - name: Ensure a files directory exists.
         run: |
