@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.5] - 2020-10-30
+### Added
 - RIG-69: Added theming for file list paragraph.
 - RIG-130: Added theming for article teaser and article latest.
 - RIG-130: Added view media permission for anon users.
@@ -18,14 +31,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-69: Changed display settings for media file.
 
-### Deprecated
-
 ### Removed
 - RIG-69: Removed field_file_title from eCMS_paragraphs.
-
-### Fixed
-
-### Security
 
 ## [0.1.4] - 2020-10-28
 ### Added
@@ -146,7 +153,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.5...HEAD
+[0.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.1...0.1.2
