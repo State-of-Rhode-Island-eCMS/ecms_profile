@@ -84,8 +84,8 @@ jobs:
       options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://localhost
-      DTT_BASE_URL: http://localhost
+      SIMPLETEST_BASE_URL: http://127.0.0.1
+      DTT_BASE_URL: http://127.0.0.1
       DRUPAL_DIRECTORY: /var/www/html
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
@@ -117,6 +117,7 @@ jobs:
         run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
 
       - name: Check coding standards.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs.xml
 
       - name: Run unit tests.
