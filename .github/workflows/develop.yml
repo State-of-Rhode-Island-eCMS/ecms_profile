@@ -93,6 +93,9 @@ jobs:
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
         with:
