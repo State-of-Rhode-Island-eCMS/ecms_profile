@@ -10,20 +10,27 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-138: Added twig_vardumper
 
 ### Changed
-- RIG-130: Changed how JSON path is pulled in.
-- RIG-69: Update how translate functions are called with file media.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIG-91: Add scheduler settings to applicable features.
 
 ### Security
+
+## [0.1.6] - 2020-10-30
+### Added
+- RIG-138: Added twig_vardumper
+
+### Changed
+- RIG-130: Changed how JSON path is pulled in.
+- RIG-69: Update how translate functions are called with file media.
+
+### Fixed
+- RIG-91: Add scheduler settings to applicable features.
 
 ## [0.1.5] - 2020-10-30
 ### Added
