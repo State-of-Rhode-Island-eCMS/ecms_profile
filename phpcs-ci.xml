@@ -3,14 +3,14 @@
   <description>Drupal coding standards</description>
 
   <!-- Directories to scan -->
-  <file>/var/www/html/profiles/contrib/ecms_profile/ecms_base/</file>
-  <file>/var/www/html/profiles/contrib/ecms_profile/ecms_acquia/</file>
-  <file>/var/www/html/profiles/contrib/ecms_profile/tests/src/Functional</file>
+  <file>ecms_base/</file>
+  <file>ecms_acquia/</file>
+  <file>tests/src/Functional</file>
 
   <!-- Excluded patterns -->
   <exclude-pattern>*.css</exclude-pattern>
   <exclude-pattern>*.js</exclude-pattern>
-  <exclude-pattern>/var/www/html/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/ecms_patternlab/*</exclude-pattern>
+  <exclude-pattern>ecms_base/themes/custom/ecms/ecms_patternlab/*</exclude-pattern>
 
   <!-- PHPCS argument overrides -->
   <arg name="colors" />
