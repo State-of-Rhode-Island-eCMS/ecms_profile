@@ -27,6 +27,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-130: Added theming for article teaser and article latest.
 - RIG-130: Added view media permission for anon users.
 - RIG-130: Added media_library_theme_reset module.
+- RIG-138: Added twig_vardumper
 
 ### Changed
 - RIG-69: Changed display settings for media file.
