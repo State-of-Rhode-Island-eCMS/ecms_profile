@@ -95,6 +95,8 @@ jobs:
 
       - name: Expand the build artifact in the webroot
         run: tar -xzf /tmp/drupal-build.tar.gz
+      - name: Check the tmp directory.
+        run: ls -la /tmp
 
       - name: Copy the web directory.
         run: cp -r /tmp/drupal-build/web/. /var/www/html
@@ -111,12 +113,7 @@ jobs:
       - name: Install the site.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
-#
-#      - name: Start php built in web server.
-#        run: |
-#          cd ../develop-ecms-profile
-#          php -S localhost:4000 web/index.php
-#
+
 #      - name: Run functional tests.
 #        run: |
 #          cd ../develop-ecms-profile
