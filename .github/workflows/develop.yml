@@ -77,14 +77,11 @@ jobs:
     name: Test the site with PHP 7.3
     needs: build
     runs-on: ubuntu-latest
-    services:
-      apache:
-        image: drupalci/php-7.3.x-apache:production
-        ports:
-          - 80:80
-#        volumes:
-#          - /tmp/drupal-build/web:/var/www/html
-#          - /tmp/drupal-build/vendor:/var/www/vendor
+    container:
+      image: drupalci/php-7.3.x-apache:production
+      ports:
+        - 80:80
+      options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
       SIMPLETEST_BASE_URL: http://localhost
@@ -94,15 +91,23 @@ jobs:
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
       - name: Where are we?
-        run: pwd && ls -l
+        run: |
+          pwd
+          ls -l /var/www
 
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
         with:
           name: drupal-build.tar.gz
+          path: /var/www/
+
+      - name: Where are we?
+        run: |
+          pwd
+          ls -l /var/www
 
       - name: Expand the build artifact
-        run: tar -xzf ${{ env.GITHUB_WORKSPACE }}/drupal-build.tar.gz
+        run: tar -xzf /var/www/drupal-build.tar.gz
 
       - name: Check the tmp directory.
         run: |
