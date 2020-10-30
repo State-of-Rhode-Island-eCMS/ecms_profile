@@ -103,27 +103,27 @@ function ecms_preprocess_media__file(&$variables): void {
   switch (TRUE) {
     case ($file_type === 'pdf'):
       $variables['file_type_icon'] = 'pdf';
-      $variables['file_type_readable'] = 'PDF file';
+      $variables['file_type_readable'] = t('PDF file');
       break;
 
     case ($file_type === 'doc' || $file_type === 'docx'):
       $variables['file_type_icon'] = 'word';
-      $variables['file_type_readable'] = 'Word file';
+      $variables['file_type_readable'] = t('Word file');
       break;
 
     case ($file_type === 'csv' || $file_type === 'xls' || $file_type === 'xlsx'):
       $variables['file_type_icon'] = 'excel';
-      $variables['file_type_readable'] = 'Excel file';
+      $variables['file_type_readable'] = t('Excel file');
       break;
 
     case ($file_type === 'ppt' || $file_type === 'pptx'):
       $variables['file_type_icon'] = 'powerpoint';
-      $variables['file_type_readable'] = 'Powerpoint file';
+      $variables['file_type_readable'] = t('Powerpoint file');
       break;
 
     default:
       $variables['file_type_icon'] = 'generic';
-      $variables['file_type_readable'] = $file_type . 'file';
+      $variables['file_type_readable'] = t('@file_type file', ['@file_type' => $file_type]);
   }
 }
 
@@ -141,11 +141,11 @@ function _filesize_formatted($bytes): array {
 
   $units = ['b', 'kb', 'mb', 'gb', 'tb'];
   $units_expanded = [
-    'bytes',
-    'kilobytes',
-    'megabytes',
-    'gigabytes',
-    'terabytes',
+    t('bytes'),
+    t('kilobytes'),
+    t('megabytes'),
+    t('gigabytes'),
+    t('terabytes'),
   ];
 
   $bytes = max($bytes, 0);
@@ -157,7 +157,7 @@ function _filesize_formatted($bytes): array {
   $converted_bytes = round($bytes, 0);
 
   return [
-    'amount' => 'about ' . $converted_bytes,
+    'amount' => t('about @converted_bytes', ['@converted_bytes' => $converted_bytes]),
     'short_format' => $units[$pow],
     'long_format' => $units_expanded[$pow],
   ];
