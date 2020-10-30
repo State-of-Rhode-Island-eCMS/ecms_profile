@@ -38,8 +38,9 @@ This includes Drupal core, and any contributed modules. You will want to remove
 those folders before attempting to reinstall the profile.
 
 ### Theme debugging
-The [Twig VarDumper] module was added in 0.1.5. The module is not enabled by default.
-To enable, run `lando drush en twig_vardumper` from the /develop-ecms-profile site root.
+The [Twig VarDumper] is available for local theme debugging.
+The module is not enabled by default. To enable, run `lando drush en twig_vardumper`
+from the /develop-ecms-profile site root.
 Create or edit your local sites/default/settings.local.php file to include the following:
 ```php
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
