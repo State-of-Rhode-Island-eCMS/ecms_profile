@@ -40,7 +40,7 @@ $COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
 $COMPOSER require "drupal/coder:^8.3" --dev --no-update
 $COMPOSER require "drush/drush:^10.0" --dev --no-update
 
-# $COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'"}'
+$COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'"}'
 
 # Add the pattern lab installer type.
 $COMPOSER config extra.installer-types.2 "pattern-lab"

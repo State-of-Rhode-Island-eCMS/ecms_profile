@@ -44,10 +44,14 @@ jobs:
         run: |
           echo "$( realpath ${{ env.drupal-directory }} )"
 
-      - name: Set full path to the drupal build directory.
+      - name: Set full path to the Drupal build directory.
         run: echo "drupal-directory=$( realpath ${{ env.drupal-directory }} )" >> $GITHUB_ENV
 
-      - name: Copy the profile into Drupal.
+      - name: Remove the ecms_profile symlink.
+        working-directory: ${{ env.drupal-directory }}
+        run: rm -Rf web/profiles/contrib/ecms_profile
+
+      - name: Copy the ecms_profile into Drupal.
         working-directory: ${{ env.drupal-directory }}
         run: cp -Rf ../ecms_profile web/profiles/contrib
 
