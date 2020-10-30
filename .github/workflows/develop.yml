@@ -100,7 +100,7 @@ jobs:
         run: ls -l /var/www
 
       - name: Expand the build artifact
-        run: tar -xzvf /var/www/drupal-build.tar.gz
+        run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
 
       - name: Check the /var/www directory
         run: ls -l /var/www
