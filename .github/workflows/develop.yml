@@ -77,18 +77,18 @@ jobs:
     name: Test the site with PHP 7.3
     needs: build
     runs-on: ubuntu-latest
-    container:
-      options: --network-alias=drupal
-      image: drupalci/php-7.3.x-apache:production
-      ports:
-        - 80:80
-      volumes:
-        - /tmp/drupal-build/web:/var/www/html
-        - /tmp/drupal-build/vendor:/var/www/vendor
+    services:
+      apache:
+        image: drupalci/php-7.3.x-apache:production
+        ports:
+          - 80:80
+#        volumes:
+#          - /tmp/drupal-build/web:/var/www/html
+#          - /tmp/drupal-build/vendor:/var/www/vendor
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://drupal
-      DTT_BASE_URL: http://drupal
+      SIMPLETEST_BASE_URL: http://localhost
+      DTT_BASE_URL: http://localhost
       DRUPAL_DIRECTORY: /tmp/drupal-build/web
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
@@ -102,11 +102,13 @@ jobs:
           name: drupal-build.tar.gz
           path: /tmp
 
-      - name: Expand the build artifact in the webroot
+      - name: Expand the build artifact
         run: tar -xzf /tmp/drupal-build.tar.gz
 
       - name: Check the tmp directory.
-        run: ls -la /tmp
+        run: |
+          pwd
+          ls -la /tmp
 
       - name: Ensure a files directory exists.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
