@@ -171,7 +171,7 @@ function _filesize_formatted($bytes): array {
 function ecms_theme_suggestions_container_alter(array &$suggestions, array $variables) {
   $element = $variables['element'];
 
-  if (isset($element['#type']) && $element['#type'] == 'view') {
+  if (isset($element['#type']) && $element['#type'] === 'view') {
     $suggestions[] = 'container__view__' . $element['#name'];
     $suggestions[] = 'container__view__' . $element['#name'] . '__' . $element['#display_id'];
   }
