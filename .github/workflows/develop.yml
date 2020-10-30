@@ -81,11 +81,11 @@ jobs:
       image: drupalci/php-7.3.x-apache:production
       ports:
         - 80:80
-      options: --network-alias=appserver
+#      options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://172.18.0.2
-      DTT_BASE_URL: http://172.18.0.2
+      SIMPLETEST_BASE_URL: http://127.0.0.1
+      DTT_BASE_URL: http://127.0.0.1
       DRUPAL_DIRECTORY: /var/www/html
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
@@ -98,12 +98,6 @@ jobs:
 
       - name: Expand the build artifact.
         run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
-
-      - name: Register the local IP.
-        run: cat /etc/hosts
-
-      - name: IP ADDR
-        run: ip addr
 
       - name: Remove the original html directory.
         run: rm -Rf /var/www/html
