@@ -93,14 +93,13 @@ jobs:
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Where are we?
+        run: pwd
 
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
         with:
           name: drupal-build.tar.gz
-          path: /tmp
 
       - name: Expand the build artifact
         run: tar -xzf /tmp/drupal-build.tar.gz
@@ -108,6 +107,7 @@ jobs:
       - name: Check the tmp directory.
         run: |
           pwd
+          ls -la
           ls -la /tmp
 
       - name: Ensure a files directory exists.
