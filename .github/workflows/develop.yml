@@ -32,7 +32,7 @@ jobs:
     name: Build Drupal.
     runs-on: ubuntu-latest
     env:
-      drupal-directory: ../develop-ecms-profile
+      DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,17 +42,17 @@ jobs:
 
       - name: Set the full working directory environment variable.
         run: |
-          echo "$( realpath ${{ env.drupal-directory }} )"
+          echo "$( realpath ${{ env.DRUPAL_DIRECTORY }} )"
 
       - name: Set full path to the Drupal build directory.
-        run: echo "drupal-directory=$( realpath ${{ env.drupal-directory }} )" >> $GITHUB_ENV
+        run: echo "drupal-directory=$( realpath ${{ env.DRUPAL_DIRECTORY }} )" >> $GITHUB_ENV
 
       - name: Remove the ecms_profile symlink.
-        working-directory: ${{ env.drupal-directory }}
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: rm -Rf web/profiles/contrib/ecms_profile
 
       - name: Copy the ecms_profile into Drupal.
-        working-directory: ${{ env.drupal-directory }}
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: cp -Rf ../ecms_profile web/profiles/contrib
 
 #      - name: Check coding standards.
@@ -60,14 +60,15 @@ jobs:
 #        run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
 
       - name: Archive the Drupal files.
-        working-directory: ${{ env.drupal-directory }}
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: tar -czf /tmp/drupal-build.tar.gz .
 
 #      - name: Run unit tests.
 #        working-directory: ${{ env.drupal-directory }}
 #        run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload the artifact.
+        uses: actions/upload-artifact@v2
         with:
           name: drupal-build
           path: /tmp/drupal-build.tar.gz
@@ -80,7 +81,6 @@ jobs:
       image: drupalci/php-7.3.x-apache:production
       ports:
         - 80:80
-      options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
       SIMPLETEST_BASE_URL: http://localhost
@@ -90,7 +90,7 @@ jobs:
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
         with:
-          name: drupal-build.tar.gz
+          name: drupal-build
           path: /tmp
 
       - name: Expand the build artifact in the webroot
