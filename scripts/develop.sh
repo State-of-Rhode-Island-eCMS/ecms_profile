@@ -188,6 +188,7 @@ tooling:
     user: root
 config:
   xdebug: false
+  composer_version: '1.10.1'
 env_file:
   - .env  " >> ${DEST_DIR}/.lando.local.yml
 fi

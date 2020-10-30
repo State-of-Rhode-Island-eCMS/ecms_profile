@@ -79,3 +79,109 @@ function ecms_preprocess_paragraph__media_item(&$variables) {
     $variables['media_type'] = 'video';
   }
 }
+
+/**
+ * Implements hook_preprocess_paragaph().
+ */
+function ecms_preprocess_media__file(&$variables): void {
+  $media = $variables['media'];
+
+  // Grab file title.
+  $variables['file_title'] = $media->get('field_file')->entity->getFilename();
+
+  // Determine file type.
+  $file_type = pathinfo($variables['file_title'], PATHINFO_EXTENSION);
+
+  // Grab file size and put it into a readable string.
+  $file_size_raw = $media->get('field_file_size')->value;
+  $variables['file_size'] = _filesize_formatted(intval($file_size_raw));
+
+  // Grab file url.
+  $variables['file_url'] = file_create_url($media->get('field_file')->entity->uri->value);
+
+  // Determine file icon and what to label file.
+  switch (TRUE) {
+    case ($file_type === 'pdf'):
+      $variables['file_type_icon'] = 'pdf';
+      $variables['file_type_readable'] = 'PDF file';
+      break;
+
+    case ($file_type === 'doc' || $file_type === 'docx'):
+      $variables['file_type_icon'] = 'word';
+      $variables['file_type_readable'] = 'Word file';
+      break;
+
+    case ($file_type === 'csv' || $file_type === 'xls' || $file_type === 'xlsx'):
+      $variables['file_type_icon'] = 'excel';
+      $variables['file_type_readable'] = 'Excel file';
+      break;
+
+    case ($file_type === 'ppt' || $file_type === 'pptx'):
+      $variables['file_type_icon'] = 'powerpoint';
+      $variables['file_type_readable'] = 'Powerpoint file';
+      break;
+
+    default:
+      $variables['file_type_icon'] = 'generic';
+      $variables['file_type_readable'] = $file_type . 'file';
+  }
+}
+
+/**
+ * Helper function that converts bytes into an array with file size information.
+ */
+function _filesize_formatted($bytes): array {
+  if ($bytes < 1000000) {
+    return [
+      'amount' => t('less than 1'),
+      'short_format' => 'mb',
+      'long_format' => 'megabytes',
+    ];
+  }
+
+  $units = ['b', 'kb', 'mb', 'gb', 'tb'];
+  $units_expanded = [
+    'bytes',
+    'kilobytes',
+    'megabytes',
+    'gigabytes',
+    'terabytes',
+  ];
+
+  $bytes = max($bytes, 0);
+  $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+  $pow = min($pow, count($units) - 1);
+
+  $bytes /= pow(1024, $pow);
+
+  $converted_bytes = round($bytes, 0);
+
+  return [
+    'amount' => 'about ' . $converted_bytes,
+    'short_format' => $units[$pow],
+    'long_format' => $units_expanded[$pow],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_hook() for container templates.
+ *
+ * Add suggestions, as by default none are provided.
+ */
+function ecms_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#type']) && $element['#type'] === 'view') {
+    $suggestions[] = 'container__view__' . $element['#name'];
+    $suggestions[] = 'container__view__' . $element['#name'] . '__' . $element['#display_id'];
+  }
+  return $suggestions;
+}
+
+/**
+ * Implements hook_preprocess_view().
+ */
+function ecms_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+  $variables['title'] = $view->getTitle();
+}

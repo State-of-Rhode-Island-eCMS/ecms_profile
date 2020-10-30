@@ -11,27 +11,36 @@ dependencies:
     - field.field.node.press_release.field_press_release_topics
     - node.type.press_release
   module:
+    - datetime
+    - text
     - user
 id: node.press_release.teaser
 targetEntityType: node
 bundle: press_release
 mode: teaser
 content:
-  content_moderation_control:
-    weight: -20
-    settings: {  }
-    third_party_settings: {  }
+  field_press_release_body:
+    type: text_summary_or_trimmed
+    weight: 0
     region: content
-  links:
-    weight: 100
-    settings: {  }
+    label: hidden
+    settings:
+      trim_length: 200
     third_party_settings: {  }
+  field_press_release_date:
+    type: datetime_default
+    weight: 1
     region: content
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
 hidden:
-  field_press_release_body: true
-  field_press_release_date: true
+  content_moderation_control: true
   field_press_release_links: true
   field_press_release_paragraphs: true
   field_press_release_source: true
   field_press_release_topics: true
   langcode: true
+  links: true
