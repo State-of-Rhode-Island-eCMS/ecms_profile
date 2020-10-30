@@ -30,50 +30,33 @@ jobs:
 
   build:
     name: develop.sh
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    env:
+      drupal-directory: ../develop-ecms-profile
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-#      - name: Cache the vendor directory
-#        id: drupal-cache
-#        run: |
-#            echo "::set-output name=dir::../develop-ecms-profile/vendor"
-#
-#      - uses: actions/cache@v2
-#        with:
-#          path: ${{ steps.drupal-cache.outputs.dir }}
-#          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
 
       - name: Run the develop CI script.
         run: ./scripts/develop-ci.sh
         if: steps.drupal-cache.outputs.cache-hit != 'true'
 
-      - name: Register the build directory.
-        id: drupalarchivepath
-        run: |
-          cd ../develop-ecms-profile
-          echo "::set-output name=dir::$(pwd)"
-
       - name: Echo the archive path.
         run: |
-          echo "${{ steps.drupalarchivepath }}
-
+          echo "${{ env.drupal-directory }}"
 
       - name: Check coding standards.
-        run: |
-          cd ../develop-ecms-profile
-          ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
+        working-directory: ${{ env.drupal-directory }}
+        run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
 
       - name: Run unit tests.
-        run: |
-          cd ../develop-ecms-profile
-          ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
+        working-directory: ${{ env.drupal-directory }}
+        run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
 
       - uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
-          path: path/to/artifact/world.txt
+          name: drupal-build
+          path: ${{ env.drupal-directory }}
 
 #      - name: Install the site.
 #        run: |
