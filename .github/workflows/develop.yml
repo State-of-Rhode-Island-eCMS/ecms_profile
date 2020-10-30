@@ -83,8 +83,8 @@ jobs:
       ports:
         - 80:80
       volumes:
-        /tmp/drupal-build/web:/var/www/html
-        /tmp/drupal-build/vendor:/var/www/vendor
+        - /tmp/drupal-build/web:/var/www/html
+        - /tmp/drupal-build/vendor:/var/www/vendor
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
       SIMPLETEST_BASE_URL: http://drupal
