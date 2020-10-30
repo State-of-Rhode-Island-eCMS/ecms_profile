@@ -98,6 +98,8 @@ jobs:
 
       - name: Expand the build artifact.
         run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
+      - name: Register the local IP.
+        run: cat /etc/hosts
 
       - name: Remove the original html directory.
         run: rm -Rf /var/www/html
