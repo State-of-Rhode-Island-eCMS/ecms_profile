@@ -1,4 +1,3 @@
-uuid: 70aeea02-90f5-4384-8e59-8889820e0452
 langcode: en
 status: true
 dependencies:
@@ -19,8 +18,6 @@ dependencies:
     - path
     - scheduler
     - text
-_core:
-  default_config_hash: 9BZNfIuBygKNMzWCkYbzaKuAsAUq1Rluau47fprSo_o
 id: node.project.default
 targetEntityType: node
 bundle: project

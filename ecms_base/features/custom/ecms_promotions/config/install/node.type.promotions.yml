@@ -1,4 +1,3 @@
-uuid: 409fd599-a908-4098-b274-9bf30da38b77
 langcode: en
 status: true
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: t5UICNwXWwOZMCIXHtc5ESytxmlIcNJQUA_tjAhANWE
 name: Promotions
 type: promotions
 description: 'Add a new promotional item to the site.'

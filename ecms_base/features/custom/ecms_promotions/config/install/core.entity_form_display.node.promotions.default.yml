@@ -1,4 +1,3 @@
-uuid: a799b3e2-4959-4e10-b98e-46885bd49d11
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ dependencies:
     - path
     - scheduler
     - text
-_core:
-  default_config_hash: 2_jEz6L6Z0pAmJ80V0FIWyipZrO8u0g6lHlOhF76nIE
 id: node.promotions.default
 targetEntityType: node
 bundle: promotions

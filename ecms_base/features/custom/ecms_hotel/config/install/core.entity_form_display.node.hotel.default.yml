@@ -1,4 +1,3 @@
-uuid: 5c129f7a-8136-45ed-aa61-a93589f26764
 langcode: en
 status: true
 dependencies:
@@ -24,8 +23,6 @@ dependencies:
     - scheduler
     - telephone
     - text
-_core:
-  default_config_hash: uZEjOgD15tuExiGFePm_KnStAwvihonAZU-R1P8NCuE
 id: node.hotel.default
 targetEntityType: node
 bundle: hotel

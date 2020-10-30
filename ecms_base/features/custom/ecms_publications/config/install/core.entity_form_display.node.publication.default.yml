@@ -1,4 +1,3 @@
-uuid: 966fe962-901b-4d91-9704-e846ba92e345
 langcode: en
 status: true
 dependencies:
@@ -18,8 +17,6 @@ dependencies:
     - media_library
     - path
     - scheduler
-_core:
-  default_config_hash: 1SHebiV5lMJGpOSl_8KcrYgELhdP-UDdERc0hzamVzI
 id: node.publication.default
 targetEntityType: node
 bundle: publication

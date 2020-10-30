@@ -1,4 +1,3 @@
-uuid: 61f6942e-bef3-43d3-a9ec-7bf103e60da7
 langcode: en
 status: true
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: nT9x0AYSjTykKveF9IcxxFLI7dLwqPgajUuvMWAk82Y
 name: Person
 type: person
 description: 'Manage people such as staff, departments, etc.'

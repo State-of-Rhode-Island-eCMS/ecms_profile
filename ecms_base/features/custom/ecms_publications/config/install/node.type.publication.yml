@@ -1,4 +1,3 @@
-uuid: da66d11b-6446-4468-8aa3-8c09953ca48f
 langcode: en
 status: true
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: BuiJZCsWYoJaoOkiClVrBeVquuVS-nigw6W1bogrnuA
 name: Publication
 type: publication
 description: 'Add a new publication or resource to the site.'

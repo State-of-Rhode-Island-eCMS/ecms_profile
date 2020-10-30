@@ -1,4 +1,3 @@
-uuid: 6f2f05d7-b99b-47dd-81e6-f5014fada98c
 langcode: en
 status: true
 dependencies:
@@ -15,8 +14,6 @@ dependencies:
     - media_library
     - path
     - scheduler
-_core:
-  default_config_hash: eDjtJRDcUWtf5jGyXWXfvarxbJZ2e7tUhxLClHiB5TY
 id: node.executive_order.default
 targetEntityType: node
 bundle: executive_order

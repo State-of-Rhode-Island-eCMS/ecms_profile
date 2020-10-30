@@ -1,4 +1,3 @@
-uuid: 892f0e47-47f2-43e6-b6f5-447a263456a1
 langcode: en
 status: true
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: kGcC9sZhYS4bh3OumJC3TYWas6FxkwgPLey6KMbRxG0
 name: Hotel
 type: hotel
 description: 'Manage accommodations and associated packages and deals.'

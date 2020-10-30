@@ -1,4 +1,3 @@
-uuid: e56c6ded-e614-491a-aa29-467065582396
 langcode: en
 status: true
 dependencies:
@@ -23,8 +22,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: 5H9yq1DprGPzlG1kwsmMGEpwGNOz_lxbmlOyLRjqrjQ
 name: 'Landing page'
 type: landing_page
 description: 'Add a new landing page to the site.'

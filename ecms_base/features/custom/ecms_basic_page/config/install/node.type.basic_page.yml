@@ -1,4 +1,3 @@
-uuid: 4473b86a-315c-4cbb-9493-4309f85b90e2
 langcode: en
 status: true
 dependencies:
@@ -23,8 +22,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: MWCImA2Qc7CXPfgNJyRBW3nrVwYiRUJjmXVXpzd40zA
 name: 'Basic page'
 type: basic_page
 description: 'Add a basic page to the site.'

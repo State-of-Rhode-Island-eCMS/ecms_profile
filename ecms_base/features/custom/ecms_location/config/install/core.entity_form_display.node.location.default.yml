@@ -1,4 +1,3 @@
-uuid: 37ecaca9-ffb5-4a5b-a33c-2a58adc9cc04
 langcode: en
 status: true
 dependencies:
@@ -17,8 +16,6 @@ dependencies:
     - scheduler
     - telephone
     - text
-_core:
-  default_config_hash: 7DqZ4ycyTinaREqNkizPsXUfnfn1ZQufWJ_zqRdfxjI
 id: node.location.default
 targetEntityType: node
 bundle: location

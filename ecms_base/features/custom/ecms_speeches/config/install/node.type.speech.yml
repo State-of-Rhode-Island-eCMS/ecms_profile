@@ -1,4 +1,3 @@
-uuid: 60a7faf0-c9a4-4d2f-bd6f-a1bc596adb79
 langcode: en
 status: true
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: smcprfQCo3XLi3iJLHPogfyyGIzL1FrdLF9V6gXHjKg
 name: Speech
 type: speech
 description: 'Manages speeches delivered by government officials.'

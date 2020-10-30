@@ -1,4 +1,3 @@
-uuid: 55cfe3b9-d4fc-4ede-b0e7-5c79d46572db
 langcode: en
 status: true
 dependencies:
@@ -22,8 +21,6 @@ third_party_settings:
     unpublish_enable: true
     unpublish_required: false
     unpublish_revision: false
-_core:
-  default_config_hash: XfR9vSSWLD3yMwx8tXS2qgGq1wi9bCo5lqFaYlg_FAo
 name: 'Executive Order'
 type: executive_order
 description: 'Manage executive orders from the governor''s office.'
