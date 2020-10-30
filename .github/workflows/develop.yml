@@ -100,6 +100,8 @@ jobs:
         run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
       - name: Register the local IP.
         run: cat /etc/hosts
+      - name: IP ADDR
+        run: ip addr
 
       - name: Remove the original html directory.
         run: rm -Rf /var/www/html
