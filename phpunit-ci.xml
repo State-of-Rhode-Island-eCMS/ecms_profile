@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <phpunit bootstrap="../develop-ecms-profile/web/core/tests/bootstrap.php" colors="true"
+    <phpunit bootstrap="/var/www/html/core/tests/bootstrap.php" colors="true"
              beStrictAboutTestsThatDoNotTestAnything="true"
              beStrictAboutOutputDuringTests="true"
              beStrictAboutChangesToGlobalState="true"
@@ -26,19 +26,19 @@
     </php>
     <testsuites>
         <testsuite name="unit">
-            <directory>./*/modules/custom/*/tests/src/Unit</directory>
-            <directory>./*/features/custom/*/tests/src/Unit</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Unit</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/Unit</directory>
         </testsuite>
         <testsuite name="functional">
-            <directory>./*/tests/src/Functional</directory>
-            <directory>./*/modules/custom/*/tests/src/Functional</directory>
-            <directory>./*/features/custom/*/tests/src/Functional</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests/src/Functional</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/Functional</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/Functional</directory>
         </testsuite>
         <testsuite name="existing">
           <!-- Assumes tests are namespaced as \Drupal\Tests\custom_foo\ExistingSite. -->
-          <directory>./*/tests/src/ExistingSite</directory>
-          <directory>./*/modules/custom/*/tests/src/ExistingSite</directory>
-          <directory>./*/features/custom/*/tests/src/ExistingSite</directory>
+          <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests/src/ExistingSite</directory>
+          <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/ExistingSite</directory>
+          <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>
         </testsuite>
 
     </testsuites>
@@ -52,12 +52,12 @@
     <!-- Filter for coverage reports. -->
     <filter>
         <whitelist>
-            <directory>./*</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*</directory>
             <exclude>
-                <directory>./*/modules/custom/*/tests</directory>
-                <directory>./*/tests</directory>
-                <directory>./tests</directory>
-                <directory>./*/features/custom/*/tests</directory>
+                <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
+                <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests</directory>
+                <directory>/var/www/html/profiles/contrib/ecms_profile/tests</directory>
+                <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
             </exclude>
         </whitelist>
     </filter>
