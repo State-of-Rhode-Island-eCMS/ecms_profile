@@ -78,15 +78,20 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     container:
+      options: --network-alias=drupal
       image: drupalci/php-7.3.x-apache:production
       ports:
         - 80:80
+      volumes:
+        /tmp/drupal-build/web:/var/www/html
+        /tmp/drupal-build/vendor:/var/www/vendor
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://localhost
-      DTT_BASE_URL: http://localhost
-      DRUPAL_DIRECTORY: /var/www/html
+      SIMPLETEST_BASE_URL: http://drupal
+      DTT_BASE_URL: http://drupal
+      DRUPAL_DIRECTORY: /tmp/drupal-build/web
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
+      ENCRYPTION_PRIVATE_KEY: ''
     steps:
       - name: Retrieve the build artifact
         uses: actions/download-artifact@v2
@@ -95,23 +100,19 @@ jobs:
           path: /tmp
 
       - name: Expand the build artifact in the webroot
-        run: tar -xzf /tmp/drupal-build.tar.gz -C /var/www
+        run: tar -xzf /tmp/drupal-build.tar.gz
+
       - name: Check the tmp directory.
-        run: ls -la /var/html
-
-      - name: Remove the original html directory
-        working-directory: /var/www
-        run: rm -Rf html
-
-      - name: Rename the web directory.
-        working-directory: /var/www
-        run: mv web html
+        run: ls -la /tmp
 
       - name: Ensure a files directory exists.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: |
           mkdir sites/default/files
           chmod 777 sites/default/files
+
+      - name: Set the encryption private key variable.
+        run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
 
 #      - name: Check coding standards.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
