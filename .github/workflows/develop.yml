@@ -84,8 +84,8 @@ jobs:
 #      options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://127.0.0.1
-      DTT_BASE_URL: http://127.0.0.1
+      SIMPLETEST_BASE_URL: http://localhost
+      DTT_BASE_URL: http://c
       DRUPAL_DIRECTORY: /var/www/html
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
@@ -112,6 +112,9 @@ jobs:
 
       - name: Set permissions on the web and vendor direvtories.
         run: chown -R www-data:www-data /var/www/html /var/www/vendor
+
+      - name: Test curl.
+        run: curl http://localhost/core/CHANGELOG.txt
 
       - name: Set the encryption private key variable.
         run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
