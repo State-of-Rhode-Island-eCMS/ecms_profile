@@ -110,12 +110,12 @@ jobs:
           mkdir /var/www/html/sites/default/files
           chmod 777 /var/www/html/sites/default/files
 
-      - name: Set permissions on the web and vendor direvtories.
+      - name: Set permissions on the web and vendor directories.
         run: chown -R www-data:www-data /var/www/html /var/www/vendor
 
       - name: Test curl.
         run: |
-          curl -v http://localhost/core/CHANGELOG.txt
+          curl -v http://host.docker.internal/core/CHANGELOG.txt
           curl -v http://127.0.0.1/core/CHANGELOG.txt
 
       - name: Set the encryption private key variable.
