@@ -79,13 +79,13 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: drupalci/php-7.3.x-apache:production
-#      ports:
-#        - 80:80
-#      options: --network-alias=appserver
+      ports:
+        - 80:80
+      options: --network-alias=appserver
     env:
       SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-      SIMPLETEST_BASE_URL: http://localhost
-      DTT_BASE_URL: http://localhost
+      SIMPLETEST_BASE_URL: http://appserver
+      DTT_BASE_URL: http://appserver
       DRUPAL_DIRECTORY: /var/www/html
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
@@ -115,7 +115,7 @@ jobs:
 
       - name: Test curl.
         run: |
-          curl -v http://host.docker.internal/core/CHANGELOG.txt
+          curl -v http://appserver/core/CHANGELOG.txt
           curl -v http://127.0.0.1/core/CHANGELOG.txt
 
       - name: Set the encryption private key variable.
