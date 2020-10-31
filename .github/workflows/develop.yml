@@ -115,6 +115,8 @@ jobs:
 
       - name: Test curl.
         run: |
+          ls -lha /var/www/html
+          cat /etc/apache2/ports.conf
           curl -v http://appserver/core/CHANGELOG.txt
           curl -v http://127.0.0.1/core/CHANGELOG.txt
 
