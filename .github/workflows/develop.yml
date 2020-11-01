@@ -48,7 +48,7 @@ jobs:
         run: echo "This is a test" >> /var/www/html/index.html
       - name: Test curl.
         run: |
-          sudo service apache2 start
+          service apache2 start
           sleep 5
           ls -lha /var/www/html
           curl -v http://localhost/
