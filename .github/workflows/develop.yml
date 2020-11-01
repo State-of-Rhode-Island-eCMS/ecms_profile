@@ -146,7 +146,6 @@ jobs:
       - name: Ensure a files directory exists.
         run: |
           mkdir /var/www/html/sites/default/files
-          touch /var/www/html/sites/default/files/.ht.sqlite
           chmod -R 777 /var/www/html/sites/default/files
 
       - name: Set permissions on the web and vendor directories.
@@ -169,6 +168,9 @@ jobs:
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
+
+      - name: Change file permissions.
+        run: chmod -R 777 /var/www/html/sites/default/files
 
       - name: Run functional tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
