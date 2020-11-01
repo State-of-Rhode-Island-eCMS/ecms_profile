@@ -109,8 +109,20 @@ jobs:
 #      ports:
 #        - 80:80
 #      options: --network-alias=appserver
+    services:
+      mysql:
+        image: mysql:5.6
+        ports:
+          - 33306:3306
+        env:
+          - MYSQL_ROOT_PASSWORD: RRootPassword
+          - MYSQL_DATABASE: drupal
+          - MYSQL_USER: drupal
+          - MYSQL_PASSWORD: drupal
+        options: --network-alias=database
+
     env:
-      SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
+      SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
       DTT_BASE_URL: http://localhosts
       DRUPAL_DIRECTORY: /var/www/html
