@@ -143,7 +143,7 @@ class EcmsExecutiveOrdersInstallTest extends AllProfileInstallationTestsAbstract
       $postTranslation = self::EXECUTIVE_ORDER_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
       $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
-      $this->assertSession()->pageTextContainsOnce("Executive Order {$translationTitle} has been updated.");
+      $this->assertSession()->pageTextContains("Executive Order {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
       $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}");
