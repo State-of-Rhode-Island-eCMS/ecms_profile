@@ -105,7 +105,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     container:
-      image: drupalci/php-7.2-apache:production
+      image: drupalci/php-7.3-apache:production
 #      ports:
 #        - 80:80
 #      options: --network-alias=appserver
