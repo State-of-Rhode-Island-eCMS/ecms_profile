@@ -170,16 +170,15 @@ jobs:
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
 
       - name: Change file permissions.
-        run: chmod u+w -R /var/www/html/sites/default
-
-
-      - name: Run functional tests.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
+        run: chmod -R u+w /var/www/html/sites/default
 
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/paratest -p2 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+
+      - name: Run functional tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
 
 #      - name: Prepare environment for Lando use
 #        run: |
