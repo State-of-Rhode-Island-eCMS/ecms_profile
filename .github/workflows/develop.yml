@@ -115,12 +115,11 @@ jobs:
         ports:
           - 33306:3306
         env:
-          - MYSQL_ROOT_PASSWORD: RRootPassword
-          - MYSQL_DATABASE: drupal
-          - MYSQL_USER: drupal
-          - MYSQL_PASSWORD: drupal
+          MYSQL_RANDOM_ROOT_PASSWORD: yes
+          MYSQL_DATABASE: drupal
+          MYSQL_USER: drupal
+          MYSQL_PASSWORD: drupal
         options: --network-alias=database
-
     env:
       SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
