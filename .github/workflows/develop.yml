@@ -28,9 +28,34 @@ jobs:
 #      - name: Run the develop CI script.
 #        run: ./scripts/develop-ci.sh
 
+  setup:
+    name: Container setup test
+    runs-on: ubuntu-latest
+    container:
+      image: drupalci/php-7.3-apache:production
+    #      ports:
+    #        - 80:80
+    #      options: --network-alias=appserver
+    env:
+      SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
+      SIMPLETEST_BASE_URL: http://localhost
+      DTT_BASE_URL: http://localhosts
+      DRUPAL_DIRECTORY: /var/www/html
+      ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
+      ENCRYPTION_PRIVATE_KEY: ''
+    steps:
+      - name: Add index file.
+        run: echo "This is a test" >> /var/www/html/index.html
+      - name: Test curl.
+        run: |
+          ls -lha /var/www/html
+          curl -v http://localhost/
+          curl -v http://127.0.0.1/
+
   build:
     name: Build Drupal.
     runs-on: ubuntu-latest
+    needs: setup
     env:
       DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
