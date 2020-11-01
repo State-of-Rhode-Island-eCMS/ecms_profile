@@ -123,7 +123,7 @@ jobs:
     env:
       SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
-      DTT_BASE_URL: http://localhosts
+      DTT_BASE_URL: http://localhost
       DRUPAL_DIRECTORY: /var/www/html
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
