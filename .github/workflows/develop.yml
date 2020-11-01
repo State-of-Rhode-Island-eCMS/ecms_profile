@@ -111,7 +111,7 @@ jobs:
 #      options: --network-alias=appserver
     services:
       mysql:
-        image: mysql:5.6
+        image: mysql:5.7
         ports:
           - 33306:3306
         env:
