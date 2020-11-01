@@ -174,8 +174,9 @@ jobs:
 
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing
-#        run: ../vendor/bin/paratest -p2 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+        run: |
+          ../vendor/bin/drush cr
+          ../vendor/bin/paratest -p2 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
 
       - name: Run functional tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
