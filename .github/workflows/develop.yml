@@ -32,7 +32,7 @@ jobs:
     name: Container setup test
     runs-on: ubuntu-latest
     container:
-      image: drupalci/php-7.3-apache:production
+      image: php:7.3-apache
     #      ports:
     #        - 80:80
     #      options: --network-alias=appserver
