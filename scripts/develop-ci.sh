@@ -34,7 +34,7 @@ $COMPOSER require "behat/mink-goutte-driver" --dev --no-update
 $COMPOSER require "php-mock/php-mock" --dev --no-update
 $COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
 $COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
-$COMPOSER require "brianium/paratest:^4.2" --dev --no-update
+$COMPOSER require "brianium/paratest:^4" --dev --no-update
 $COMPOSER require "phpunit/phpunit:^8" --dev --no-update
 $COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
 $COMPOSER require "drupal/coder:^8.3" --dev --no-update

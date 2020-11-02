@@ -139,13 +139,11 @@ jobs:
 
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --testsuite=existing --runner=WrapperRunner --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php
-        #run: ../vendor/bin/phpunit --verbose --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing
+        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing --runner=WrapperRunner --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
 
       - name: Run functional tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --verbose --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
-        # run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --testsuite=functional --runner=WrapperRunner --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional --runner=WrapperRunner --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
 
 #      - name: Prepare environment for Lando use
 #        run: |
