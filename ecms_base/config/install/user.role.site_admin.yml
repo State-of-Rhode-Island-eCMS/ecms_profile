@@ -31,6 +31,7 @@ permissions:
   - 'moderated content bulk unpublish'
   - 'publish any content'
   - 'revert all revisions'
+  - 'schedule publishing of nodes'
   - 'translate any entity'
   - 'unpublish any content'
   - 'update any media'
@@ -51,4 +52,5 @@ permissions:
   - 'view latest version'
   - 'view own unpublished content'
   - 'view own webform submission'
+  - 'view scheduled content'
   - 'view unpublished paragraphs'
