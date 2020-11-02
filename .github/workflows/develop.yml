@@ -135,7 +135,11 @@ jobs:
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
 
       - name: Update settings.php
-        run: echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
+        run: |
+          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
+
 
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
