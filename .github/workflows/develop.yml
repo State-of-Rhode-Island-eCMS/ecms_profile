@@ -147,6 +147,6 @@ jobs:
 
       - name: Run functional tests with fastest.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "Functional" | ../vendor/liuggio/fastest/fastest  "vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+        run: sudo -u www-data -E find . -type f -iname "*Test.php" | grep "Functional" | ../vendor/liuggio/fastest/fastest  "vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
 
 #        sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
