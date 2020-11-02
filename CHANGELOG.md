@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-91: Added scheduler permissions for publishers and site admins.
 
 ### Deprecated
 
