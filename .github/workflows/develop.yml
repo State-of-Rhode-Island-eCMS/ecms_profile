@@ -141,10 +141,10 @@ jobs:
           echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
 
 
-      - name: Run existing site tests.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing --functional --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+#      - name: Run existing site tests.
+#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+#        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing --functional --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
 
       - name: Run functional tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional --functional --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional --functional --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php
