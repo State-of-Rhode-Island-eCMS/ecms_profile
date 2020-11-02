@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run the develop CI script.
-        run: ./scripts/develop-ci.sh
+        run: ./scripts/ci-develop.sh
 
       - name: Set the full working directory environment variable.
         run: |
@@ -69,9 +69,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: drupalci/php-7.3-apache:production
-#      ports:
-#        - 80:80
-#      options: --network-alias=appserver
     services:
       mysql:
         image: mysql:5.7
