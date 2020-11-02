@@ -9,55 +9,9 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-#  test:
-#    runs-on: ubuntu-20.04
-#    container:
-#      image: php:7.3-apache
-#      ports:
-#        - 80:80
-#      options: --network-alias=appserver
-#    env:
-#      SIMPLETEST_DB: sqlite://web/.ht.sqlite
-#      SIMPLETEST_BASE_URL: http://appserver
-#      DTT_BASE_URL: http://appserver
-#    steps:
-#      - name: Test
-#        run: |
-#          cd /var/www/
-#          rm -Rf html
-#      - name: Run the develop CI script.
-#        run: ./scripts/develop-ci.sh
-
-#  setup:
-#    name: Container setup test
-#    runs-on: ubuntu-latest
-#    container:
-#      image: php:7.3-apache
-#    #      ports:
-#    #        - 80:80
-#    #      options: --network-alias=appserver
-#    env:
-#      SIMPLETEST_DB: sqlite://sites/default/files/.ht.sqlite
-#      SIMPLETEST_BASE_URL: http://localhost
-#      DTT_BASE_URL: http://localhosts
-#      DRUPAL_DIRECTORY: /var/www/html
-#      ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
-#      ENCRYPTION_PRIVATE_KEY: ''
-#    steps:
-#      - name: Add index file.
-#        run: echo "This is a test" >> /var/www/html/index.html
-#      - name: Test curl.
-#        run: |
-#          service apache2 start
-#          sleep 5
-#          ls -lha /var/www/html
-#          curl -v http://localhost/
-#          curl -v http://127.0.0.1/
-
   build:
     name: Build Drupal.
     runs-on: ubuntu-latest
-#    needs: setup
     env:
       DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
@@ -82,17 +36,26 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: cp -Rf ../ecms_profile web/profiles/contrib
 
-#      - name: Check coding standards.
-#        working-directory: ${{ env.drupal-directory }}
-#        run: ./vendor/bin/phpcs --standard=../ecms_profile/phpcs.xml
+      - name: Get the node dependencies.
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Install the profile node requirements.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
+        run: npm install
+
+      - name: Run gulp validate.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
+        run: gulp validate
+
+      - name: Run gulp build.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
+        run: gulp build
 
       - name: Archive the Drupal files.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: tar -czf /tmp/drupal-build.tar.gz .
-
-#      - name: Run unit tests.
-#        working-directory: ${{ env.drupal-directory }}
-#        run: ./vendor/bin/phpunit --configuration=../ecms_profile/phpunit-ci.xml --testsuite=unit
 
       - name: Upload the artifact.
         uses: actions/upload-artifact@v2
