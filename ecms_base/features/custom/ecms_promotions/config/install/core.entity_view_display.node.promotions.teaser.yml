@@ -3,8 +3,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.promotions.field_promotion_body
+    - field.field.node.promotions.field_promotion_display_title
+    - field.field.node.promotions.field_promotion_global_display
     - field.field.node.promotions.field_promotion_image
+    - field.field.node.promotions.field_promotion_text
     - field.field.node.promotions.field_promotion_url
     - node.type.promotions
   module:
@@ -15,17 +17,34 @@ bundle: promotions
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
+    weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
+  field_promotion_display_title:
+    type: boolean
+    weight: 4
     region: content
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  field_promotion_text:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
-  field_promotion_body: true
+  field_promotion_global_display: true
   field_promotion_image: true
   field_promotion_url: true
   langcode: true

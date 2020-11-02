@@ -2,13 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.promotions.field_promotion_body
+    - field.field.node.promotions.field_promotion_display_title
+    - field.field.node.promotions.field_promotion_global_display
     - field.field.node.promotions.field_promotion_image
+    - field.field.node.promotions.field_promotion_text
     - field.field.node.promotions.field_promotion_url
     - node.type.promotions
   module:
     - link
-    - text
     - user
 id: node.promotions.default
 targetEntityType: node
@@ -20,21 +21,41 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  field_promotion_body:
-    weight: 101
+  field_promotion_display_title:
+    weight: 106
     label: above
-    settings: {  }
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    type: text_default
+    type: boolean
+    region: content
+  field_promotion_global_display:
+    weight: 104
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_promotion_image:
     type: entity_reference_entity_view
-    weight: 102
+    weight: 107
     label: above
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    region: content
+  field_promotion_text:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
     region: content
   field_promotion_url:
     weight: 103

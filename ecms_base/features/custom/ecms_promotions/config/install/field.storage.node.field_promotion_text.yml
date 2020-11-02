@@ -3,13 +3,13 @@ status: true
 dependencies:
   module:
     - node
-    - text
-id: node.field_promotion_body
-field_name: field_promotion_body
+id: node.field_promotion_text
+field_name: field_promotion_text
 entity_type: node
-type: text_with_summary
-settings: {  }
-module: text
+type: string_long
+settings:
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

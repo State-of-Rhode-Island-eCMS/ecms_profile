@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_promotion_global_display
+    - node.type.promotions
+id: node.promotions.field_promotion_global_display
+field_name: field_promotion_global_display
+entity_type: node
+bundle: promotions
+label: 'Global Display'
+description: 'Determine if this promotion will display on every piece of content.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
