@@ -114,7 +114,7 @@ jobs:
           chmod -R 777 /var/www/html/sites/simpletest
 
       - name: Set permissions on the web and vendor directories.
-        run: chown -R www-data:www-data /var/www/html /var/www/vendor
+        run: chown -R www-data:www-data /var/www/web /var/www/vendor
 
       - name: Start Apache
         run: service apache2 start
@@ -145,6 +145,8 @@ jobs:
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
 #        run: ../vendor/bin/paratest --verbose=1 --stop-on-failure  --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=existing --functional --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
 
-      - name: Run functional tests.
+      - name: Run functional tests with fastest.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
+        run: find . -type f -iname "*Test.php" | grep "Functional" | ../vendor/liuggio/fastest/fastest  "vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+
+#        sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
