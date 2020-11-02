@@ -176,7 +176,7 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: |
           ../vendor/bin/drush cr
-          ../vendor/bin/paratest -p4 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php ${{ env.ECMS_PROFILE_DIRECTORY }}
+          ../vendor/bin/paratest -p4 --testsuite=existing --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap.php ${{ env.ECMS_PROFILE_DIRECTORY }}
 
       - name: Run functional tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
