@@ -111,7 +111,7 @@
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2",
-    "brianium/paratest": "^4",
+    "liuggio/fastest": "^1.6",
     "drupal/coder": "^8.3",
     "drush/drush": "^10.0",
     "php-mock/php-mock": "^2.2",
