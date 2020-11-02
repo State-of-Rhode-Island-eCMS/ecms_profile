@@ -91,3 +91,22 @@ function ecms_base_update_9014(array &$sandbox): void {
   $active_storage->write('key.key.encryption_key', $install_source->read('key.key.encryption_key'));
   $active_storage->write('encrypt.profile.webform_encryption', $install_source->read('encrypt.profile.webform_encryption'));
 }
+
+
+/**
+ * Updates to run for the 0.1.7 tag.
+ */
+function ecms_base_update_9017(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Ensure scheduler permissions are updated.
+  $active_storage->write('user.role.content_publisher', $install_source->read('user.role.content_publisher'));
+  $active_storage->write('user.role.site_admin', $install_source->read('user.role.site_admin'));
+
+}
