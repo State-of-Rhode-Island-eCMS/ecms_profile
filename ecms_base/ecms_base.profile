@@ -92,7 +92,6 @@ function ecms_base_update_9014(array &$sandbox): void {
   $active_storage->write('encrypt.profile.webform_encryption', $install_source->read('encrypt.profile.webform_encryption'));
 }
 
-
 /**
  * Updates to run for the 0.1.7 tag.
  */
