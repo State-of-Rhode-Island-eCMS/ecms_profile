@@ -10,11 +10,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-91: Added scheduler permissions for publishers and site admins.
 - RIG-67: Added Global Display and Display Title field to promotions.
 - RIG-67: Added Promotion Entity Reference Filter view.
 
 ### Changed
-- RIG-91: Added scheduler permissions for publishers and site admins.
 - RIG-67: Changed promotion body field to use plain text.
 
 ### Deprecated
