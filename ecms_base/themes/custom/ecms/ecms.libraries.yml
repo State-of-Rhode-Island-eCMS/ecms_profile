@@ -7,7 +7,6 @@ global-styling:
     ecms_patternlab/dist/js/pattern-lab-compiled.js: {}
   dependencies:
     - core/drupal
-    - core/jquery
 
 header-scripts:
   version: 1
