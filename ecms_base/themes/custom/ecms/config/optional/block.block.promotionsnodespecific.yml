@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ecms_blocks
+  theme:
+    - ecms
+id: promotionsnodespecific
+theme: ecms
+region: sidebar_bottom
+weight: 0
+provider: null
+plugin: ecms_promotions_node_specific
+settings:
+  id: ecms_promotions_node_specific
+  label: 'Promotions - Node Specific'
+  provider: ecms_blocks
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }
