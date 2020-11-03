@@ -16,20 +16,14 @@ targetEntityType: node
 bundle: promotions
 mode: teaser
 content:
-  content_moderation_control:
-    weight: 2
+  field_promotion_image:
+    type: entity_reference_entity_view
+    weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_promotion_display_title:
-    type: boolean
-    weight: 4
-    region: content
-    label: above
+    label: hidden
     settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
+      link: true
+      view_mode: default
     third_party_settings: {  }
   field_promotion_text:
     type: basic_string
@@ -38,13 +32,10 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-  links:
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
+  content_moderation_control: true
+  field_promotion_display_title: true
   field_promotion_global_display: true
-  field_promotion_image: true
   field_promotion_url: true
   langcode: true
+  links: true

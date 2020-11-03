@@ -4,8 +4,9 @@ dependencies:
   config:
     - field.field.media.promotional_image.field_promotion_image
     - media.type.promotional_image
+    - responsive_image.styles.narrow
   module:
-    - svg_image
+    - responsive_image
 id: media.promotional_image.default
 targetEntityType: media
 bundle: promotional_image
@@ -13,16 +14,12 @@ mode: default
 content:
   field_promotion_image:
     weight: 1
-    label: above
+    label: hidden
     settings:
-      svg_attributes:
-        width: null
-        height: null
-      svg_render_as_image: true
-      image_style: ''
+      responsive_image_style: narrow
       image_link: ''
     third_party_settings: {  }
-    type: image
+    type: responsive_image
     region: content
 hidden:
   created: true

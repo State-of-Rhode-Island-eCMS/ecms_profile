@@ -3,6 +3,7 @@ description: 'Provides Promotions content type and related configuration. Add a 
 type: module
 core_version_requirement: ^9
 dependencies:
+  - block
   - content_moderation
   - content_translation
   - ecms_workflow
@@ -17,6 +18,7 @@ dependencies:
   - node
   - path
   - rabbit_hole
+  - responsive_image
   - scheduler
   - text
   - user
