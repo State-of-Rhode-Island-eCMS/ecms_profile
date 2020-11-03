@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.promotional_image.field_promotion_image
+    - image.style.thumbnail
+    - media.type.promotional_image
+  module:
+    - svg_image
+id: media.promotional_image.media_library
+targetEntityType: media
+bundle: promotional_image
+mode: media_library
+content:
+  field_promotion_image:
+    weight: -50
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  translation:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  path: true
+  status: true
+  uid: true

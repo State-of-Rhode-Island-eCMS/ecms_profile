@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_promotion_display_title
+    - node.type.promotions
+id: node.promotions.field_promotion_display_title
+field_name: field_promotion_display_title
+entity_type: node
+bundle: promotions
+label: 'Display Title'
+description: '(Optional) Enable this promotion to output the title text.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_promotion_text
+    - node.type.promotions
+id: node.promotions.field_promotion_text
+field_name: field_promotion_text
+entity_type: node
+bundle: promotions
+label: Text
+description: '(Optional) Add additional text to display for this promotion.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
