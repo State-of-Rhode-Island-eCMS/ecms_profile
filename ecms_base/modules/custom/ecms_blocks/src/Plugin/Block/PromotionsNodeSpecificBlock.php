@@ -115,7 +115,7 @@ class PromotionsNodeSpecificBlock extends BlockBase implements ContainerFactoryP
 
     // Return a list of rendered teaser nodes.
     $builder = $this->entityTypeManager->getViewBuilder('node');
-    return $builder->viewMultiple($promos, 'teaser');
+    return $builder->viewMultiple($promos, 'teaser', $language);
   }
 
   /**

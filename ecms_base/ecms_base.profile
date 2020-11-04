@@ -110,7 +110,7 @@ function ecms_base_update_9017(array &$sandbox): void {
 
   $modules_to_install = [
     'twig_tweak',
-    'ecms_distribution'
+    'ecms_distribution',
   ];
 
   // Enable eCMS distribution module.
