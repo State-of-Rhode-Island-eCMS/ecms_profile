@@ -101,7 +101,6 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
 
     // POST the entity to the API.
     $this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
-    // @todo: Save the uuid of the entity for updating/deleting on uninstall.
   }
 
   /**
