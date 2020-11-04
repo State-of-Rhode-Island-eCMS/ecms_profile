@@ -67,8 +67,6 @@ class PromotionsNodeSpecificBlock extends BlockBase implements ContainerFactoryP
    *   The language_manager service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   The entity_type.manager service.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
