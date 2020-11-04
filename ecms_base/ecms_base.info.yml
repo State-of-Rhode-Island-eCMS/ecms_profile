@@ -24,6 +24,7 @@ dependencies:
   - datetime
   - dblog
   - dynamic_page_cache
+  - ecms_distribution
   - editor
   - entity_reference_revisions
   - extlink
