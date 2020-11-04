@@ -1,0 +1,8 @@
+name: eCMS Distribution
+description: 'Provides config for eCMS profile that is required by feature packages.'
+type: module
+core_version_requirement: ^9
+package: eCMS
+dependencies:
+  - image
+  - responsive_image

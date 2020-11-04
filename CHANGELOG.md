@@ -13,6 +13,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-91: Added scheduler permissions for publishers and site admins.
 - RIG-67: Added Global Display and Display Title field to promotions.
 - RIG-67: Added Promotion Entity Reference Filter view.
+- RIG-67: Added ecms_blocks module and PromotionsNodeSpecific block.
+- RIG-67: Added regular and responsive image style config from standard Drupal profile.
+- RIG-67: Added Promotions - Global view.
+- RIG-67: Added theming for promotions teaser display.
+- RIG-67: Added twig_tweak contrib module.
 
 ### Changed
 - RIG-67: Changed promotion body field to use plain text.

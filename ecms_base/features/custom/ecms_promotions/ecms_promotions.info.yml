@@ -6,6 +6,7 @@ dependencies:
   - content_moderation
   - content_translation
   - ecms_workflow
+  - ecms_distribution
   - field
   - file
   - image
@@ -17,6 +18,7 @@ dependencies:
   - node
   - path
   - rabbit_hole
+  - responsive_image
   - scheduler
   - text
   - user

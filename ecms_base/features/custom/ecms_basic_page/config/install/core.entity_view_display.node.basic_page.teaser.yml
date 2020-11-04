@@ -5,6 +5,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.basic_page.field_basic_page_body
     - field.field.node.basic_page.field_basic_page_paragraphs
+    - field.field.node.basic_page.field_basic_page_promotions
     - node.type.basic_page
   module:
     - user
@@ -26,4 +27,5 @@ content:
 hidden:
   field_basic_page_body: true
   field_basic_page_paragraphs: true
+  field_basic_page_promotions: true
   langcode: true

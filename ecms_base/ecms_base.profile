@@ -108,4 +108,11 @@ function ecms_base_update_9017(array &$sandbox): void {
   $active_storage->write('user.role.content_publisher', $install_source->read('user.role.content_publisher'));
   $active_storage->write('user.role.site_admin', $install_source->read('user.role.site_admin'));
 
+  $modules_to_install = [
+    'twig_tweak',
+    'ecms_distribution',
+  ];
+
+  // Enable eCMS distribution module.
+  \Drupal::service('module_installer')->install($modules_to_install);
 }

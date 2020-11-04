@@ -24,6 +24,7 @@ dependencies:
   - datetime
   - dblog
   - dynamic_page_cache
+  - ecms_distribution
   - editor
   - entity_reference_revisions
   - extlink
@@ -69,6 +70,7 @@ dependencies:
   - taxonomy
   - toolbar
   - tour
+  - twig_tweak
   - views
   - views_ui
   - webform
@@ -80,6 +82,7 @@ dependencies:
 install:
   - ecms_authentication
   - ecms_basic_page
+  - ecms_blocks
   - ecms_event
   - ecms_landing_page
   - ecms_layout
