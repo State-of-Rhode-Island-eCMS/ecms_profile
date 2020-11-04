@@ -38,17 +38,10 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'qh-paragraph',
-    'qh--paragraph--' ~ paragraph.bundle|clean_class,
-  ]
-%}
 
 {% set pid = paragraph.id() %}
 
 {% include "@organisms/paragraphs/accordion/accordion.pl.twig" with {
-    classes: classes,
     content: content,
     paragraph: paragraph,
     pid: pid

@@ -38,15 +38,8 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'qh-paragraph',
-    'qh--paragraph--' ~ paragraph.bundle|clean_class,
-  ]
-%}
 
 {% include "@organisms/paragraphs/attention-card-w-icon/attention-card-w-icon.twig" with {
-    classes: classes,
     content: content,
     paragraph: paragraph,
   }

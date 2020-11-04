@@ -38,17 +38,10 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'qh-paragraph',
-    'qh--paragraph--' ~ paragraph.bundle|clean_class,
-  ]
-%}
 
 {# See preprocess_paragraph__menu_item #}
 {% if media_type == 'img' %}
   {% include "@molecules/media-item/media-item.twig" with {
-      classes: classes,
       content: content,
       type: media_type,
       caption: paragraph.field_caption.value,
@@ -63,7 +56,6 @@
   {% set video_source = content.field_media_item|render|striptags("<iframe>") %}
 
   {% include "@molecules/media-item/media-item.twig" with {
-      classes: classes,
       content: content,
       type: media_type,
       caption: paragraph.field_caption.value,

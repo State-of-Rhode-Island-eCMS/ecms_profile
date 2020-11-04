@@ -38,17 +38,10 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'qh-paragraph',
-    'qh--paragraph--' ~ paragraph.bundle|clean_class,
-  ]
-%}
 
 {% set files = content.field_files|render %}
 
 {% include "@organisms/paragraphs/file-list/file-list.pl.twig" with {
-    classes: classes,
     files: files,
     list_title: paragraph.field_list_title.value,
   }
