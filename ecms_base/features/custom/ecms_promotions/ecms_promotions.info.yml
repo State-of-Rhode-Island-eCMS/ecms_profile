@@ -6,6 +6,7 @@ dependencies:
   - content_moderation
   - content_translation
   - ecms_workflow
+  - ecms_distribution
   - field
   - file
   - image
