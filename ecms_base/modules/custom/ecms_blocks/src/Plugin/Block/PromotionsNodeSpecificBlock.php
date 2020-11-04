@@ -27,13 +27,6 @@ use Drupal\node\NodeInterface;
 class PromotionsNodeSpecificBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The account service.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $account;
-
-  /**
    * The language_manager service.
    *
    * @var \Drupal\Core\Language\LanguageManagerInterface
@@ -77,12 +70,11 @@ class PromotionsNodeSpecificBlock extends BlockBase implements ContainerFactoryP
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The entity_type.manager service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager, AccountInterface $account) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->languageManager = $languageManager;
     $this->entityTypeManager = $entityTypeManager;
-    $this->account = $account;
   }
 
   /**
@@ -121,8 +113,8 @@ class PromotionsNodeSpecificBlock extends BlockBase implements ContainerFactoryP
   /**
    * {@inheritdoc}
    */
-  protected function blockAccess(): AccessResult {
-    return AccessResult::allowedIfHasPermission($this->account, 'access content');
+  protected function blockAccess(AccountInterface $account): object {
+    return AccessResult::allowedIfHasPermission($account, 'access content');
   }
 
 }
