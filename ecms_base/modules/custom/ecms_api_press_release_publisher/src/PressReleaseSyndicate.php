@@ -7,7 +7,9 @@ namespace Drupal\ecms_api_press_release_publisher;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Queue\QueueFactory;
+use Drupal\file\FileInterface;
 use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 
 class PressReleaseSyndicate {
 
@@ -109,10 +111,16 @@ class PressReleaseSyndicate {
         continue;
       }
 
-      // Throw out user entities.
-      if ($entity->bundle() === 'user') {
+      // Ignore all file entities entities.
+      if ($entity instanceof FileInterface) {
         continue;
       }
+
+      // Ignore all user entities.
+      if ($entity instanceof UserInterface) {
+        continue;
+      }
+
       $this->processEntity($entity);
     }
   }

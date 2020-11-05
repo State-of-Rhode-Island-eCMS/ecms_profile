@@ -5,8 +5,15 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api;
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\File\FileSystem;
 use Drupal\Core\Url;
 use Drupal\jsonapi_extras\EntityToJsonApi;
+use Drupal\media\MediaInterface;
+use Drupal\media\Plugin\media\Source\File;
+use Drupal\node\NodeInterface;
+use Drupal\paragraphs\ParagraphInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -45,6 +52,10 @@ abstract class EcmsApiBase {
     'drupal_internal__vid',
     'drupal_internal__mid',
     'drupal_internal__fid',
+    'drupal_internal__id',
+    'drupal_internal__tid',
+    'drupal_internal__revision_id',
+    'langcode',
     'revision_timestamp',
     'status',
     'created',
@@ -52,6 +63,21 @@ abstract class EcmsApiBase {
     'promote',
     'sticky',
     'path',
+    'content_translation_changed',
+    'parent_id',
+  ];
+
+  const NO_RELATIONSHIPS_API = [
+    'uid',
+    'revision_uid',
+    'revision_user',
+    'node_type',
+    'thumbnail',
+    'paragraph_type',
+    'bundle',
+    'vid',
+    'parent',
+    'content_translation_uid',
   ];
 
   /**
@@ -69,16 +95,24 @@ abstract class EcmsApiBase {
   protected $entityToJsonApi;
 
   /**
+   * @var \Drupal\ecms_api\EcmsApiMediaHelper
+   */
+  protected $ecmsApiHelper;
+
+  /**
    * EcmsApiBase constructor.
    *
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiMediaHelper
+   *   The ecms_api_media_helper service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi) {
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiMediaHelper $ecmsApiHelper) {
     $this->httpClient = $httpClient;
     $this->entityToJsonApi = $entityToJsonApi;
+    $this->ecmsApiHelper = $ecmsApiHelper;
   }
 
   /**
@@ -158,6 +192,40 @@ abstract class EcmsApiBase {
    *   True if the entity was successfully submitted.
    */
   protected function submitEntity(string $accessToken, Url $url, EntityInterface $entity): bool {
+    $sourceFieldName = '';
+    if ($entity instanceof MediaInterface && $this->checkMediaSourceIsFile($entity)) {
+      // Get the source.
+      $source = $entity->getSource();
+      // Get the source field name.
+      $sourceFieldName = $source->getConfiguration()['source_field'];
+      // Get the source file id.
+      $sourceFileId = (int) $source->getSourceFieldValue($entity);
+      // Submit the source file field before processing the media entity.
+      $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, $sourceFileId, $sourceFieldName);
+
+      if (empty($fileUuid)) {
+        // Return false if the file entity for the media element was not saved.
+        return FALSE;
+      }
+    }
+    elseif ($entity instanceof FieldableEntityInterface) {
+      $fields = $entity->getFields();
+      /** @var \Drupal\Core\Field\FieldItemListInterface $field */
+      foreach ($fields as $field) {
+        if ($field->getFieldDefinition()->getType() === 'image' && !$field->isEmpty()) {
+          $fileEntity = $field->first()->entity;
+          $sourceFieldName = $field->getName();
+
+          $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, (int) $fileEntity->id(), $sourceFieldName);
+
+          if (empty($fileUuid)) {
+            // Return false if the file entity for the media element was not saved.
+            return FALSE;
+          }
+        }
+      }
+    }
+
     // Query the endpoint to get the correct HTTP method.
     $method = $this->checkEntityExists($accessToken, $url, $entity);
 
@@ -182,6 +250,7 @@ abstract class EcmsApiBase {
           'type' => $entity->bundle(),
           'id' => $entity->uuid(),
           'attributes' => $normalizedEntity['data']['attributes'],
+          'relationships' => $normalizedEntity['data']['relationships'],
         ],
       ],
       'headers' => [
@@ -192,6 +261,18 @@ abstract class EcmsApiBase {
 
     // Alter the entity attributes before submission.
     $this->alterEntityAttributes($payload['json']['data']['attributes'], $entity);
+
+    if (!empty($fileUuid)) {
+      // Alter the media entity file uuid.
+      $normalizedEntity['data']['relationships']["{$sourceFieldName}"]['data']['id'] = $fileUuid;
+      $payload['json']['data']['relationships']["{$sourceFieldName}"] = $normalizedEntity['data']['relationships']["{$sourceFieldName}"];
+      unset($payload['json']['data']['attributes']['langcode']);
+    }
+
+    // Alter the entity relationships before submission.
+    $this->alterEntityRelationships($payload['json']['data']['relationships']);
+
+    $this->setParagraphEntityRevisionIds($payload['json']['data']['relationships'], $entity, $accessToken, $url);
 
     try {
       $request = $this->httpClient->request($method, $endpoint, $payload);
@@ -211,6 +292,124 @@ abstract class EcmsApiBase {
     }
 
     return FALSE;
+  }
+
+  private function setParagraphEntityRevisionIds(&$relationships, EntityInterface $entity, string $accessToken, Url $url): void {
+    // Get referenced entities.
+    $references = $entity->referencedEntities();
+
+    if (empty($references)) {
+      return;
+    }
+
+    // Loop through the referenced entities and fetch paragraphs from the api.
+    /** @var EntityInterface $referencedEntity */
+    foreach ($references as $referencedEntity) {
+      // We only care about paragraph entities.
+      if (!$referencedEntity instanceof ParagraphInterface) {
+        continue;
+      }
+
+      $uuid = $referencedEntity->get('uuid')->value;
+
+      $remoteEntity = $this->fetchEntityFromApi($accessToken, $url, $referencedEntity);
+
+      if (!property_exists($remoteEntity, 'attributes') || !property_exists($remoteEntity->attributes, 'drupal_internal__revision_id')) {
+        return;
+      }
+
+      $remoteRevisionId = (int) $remoteEntity->attributes->drupal_internal__revision_id;
+
+      $this->setParagraphRevisionId($relationships, $uuid, $remoteRevisionId);
+
+    }
+  }
+
+  private function checkMediaSourceIsFile(MediaInterface $media): bool {
+    $source = $media->getSource();
+
+    if ($source instanceof File) {
+      return TRUE;
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Submit the source file for a media entity or legacy file field.
+   *
+   * @param \Drupal\media\MediaInterface $media
+   *   The media entity to post with json api.
+   * @param string $accessToken
+   *   The access token to connect to the hub site.
+   * @param \Drupal\Core\Url $url
+   *   The url of the hub site.
+   *
+   * @return string|null
+   *   The uuid of the new file or null.
+   */
+  private function submitSourceFileEntity(EntityInterface $entity, string $accessToken, Url $url, int $fileId, string $fieldName): ?string {
+    $filePath = $this->ecmsApiHelper->getFilePath($fileId);
+
+    // Guard against an empty filepath.
+    if (empty($filePath)) {
+      return NULL;
+    }
+
+    $pathParts = explode('/', $filePath);
+    $filename = array_pop($pathParts);
+
+    $payload = [
+      'headers' => [
+        'Content-Type' => "application/octet-stream",
+        'Authorization' => "Bearer {$accessToken}",
+        'Accept' => "application/vnd.api+json",
+        'Content-Disposition' => 'file; filename="' . $filename . '"',
+      ],
+      'body' => fopen($filePath, 'r'),
+    ];
+
+    $endpoint = $this->getFileEnpointUrl($entity, $fieldName, $url);
+
+    try {
+      $request = $this->httpClient->request('POST', $endpoint, $payload);
+    }
+    catch (GuzzleException $exception) {
+      return NULL;
+    }
+
+    if ($request->getStatusCode() === 201) {
+      $body = $request->getBody();
+      $contents = $body->getContents();
+      // Decode the json string.
+      $json = json_decode($contents);
+
+      // Guard against a json error.
+      if (empty($json)) {
+        return NULL;
+      }
+
+      // Ensure we have an object.
+      if (!is_object($json)) {
+        return NULL;
+      }
+
+      // Ensure we have the access token property.
+      if (!property_exists($json, 'data') || !property_exists($json->data, 'id')) {
+        return NULL;
+      }
+
+      // Return the uuid of the newly created file.
+      return $json->data->id;
+    }
+
+    // Default to NULL.
+    return NULL;
+  }
+
+  private function getFileEnpointUrl(EntityInterface $entity, string $fieldName, Url $url): string {
+    $apiEndpoint = self::API_ENDPOINT;
+    return "{$url->toString()}/{$apiEndpoint}/{$entity->getEntityTypeId()}/{$entity->bundle()}/{$fieldName}";
   }
 
   /**
@@ -251,6 +450,56 @@ abstract class EcmsApiBase {
     // If we receive a 200, the entity already exists.
     if ($request->getStatusCode() === 200) {
       return 'PATCH';
+    }
+
+    // Default to NULL.
+    return NULL;
+  }
+
+  protected function fetchEntityFromApi(string $accessToken, Url $url, EntityInterface $entity): ?object {
+    // Get the endpoint and assume a patch to append the UUID to the url.
+    $endpoint = $this->getEndpointUrl($url, $entity, 'PATCH');
+
+    // Pass the access token so we can get unpublished entities.
+    $payload = [
+      'headers' => [
+        'Content-Type' => 'application/vnd.api+json',
+        'Authorization' => "Bearer {$accessToken}",
+      ],
+    ];
+
+    try {
+      $request = $this->httpClient->request('GET', $endpoint, $payload);
+    }
+    catch (GuzzleException $exception) {
+      return NULL;
+    }
+
+    // If we receive a 200, the entity already exists.
+    if ($request->getStatusCode() === 200) {
+      $contents = $request->getBody()->getContents();
+
+      // Decode the json string.
+      $json = json_decode($contents);
+
+      // Guard against a json error.
+      if (empty($json)) {
+        return NULL;
+      }
+
+      // Ensure we have an object.
+      if (!is_object($json)) {
+        return NULL;
+      }
+
+      // Ensure we have the data property.
+      if (!property_exists($json, 'data')) {
+        return NULL;
+      }
+
+      // Return the content type id's that were requested.
+      return $json->data;
+
     }
 
     // Default to NULL.
@@ -312,6 +561,29 @@ abstract class EcmsApiBase {
     if ($entity) {
       $attributes['uuid'] = $entity->uuid();
     }
+
+    foreach ($attributes as $key => $value) {
+      // Remove `processed` keys from text fields.
+      // @see: https://www.drupal.org/project/drupal/issues/2972988
+      // @see: https://www.drupal.org/project/drupal/issues/2984466
+      if (is_array($value) && array_key_exists('processed', $value)) {
+        unset($attributes[$key]['processed']);
+      }
+    }
+  }
+
+  private function alterEntityRelationships(array &$relationships): void {
+    $keys = array_keys($relationships);
+
+    foreach ($keys as $key) {
+      // If the attribute is disallowed, remove it.
+      if (in_array($key, self::NO_RELATIONSHIPS_API)) {
+        unset($relationships[$key]);
+      }
+    }
+
+    //$this->ecmsApiHelper->removeParagraphReferences($relationships, ['target_revision_id']);
+
   }
 
   /**
@@ -373,6 +645,19 @@ abstract class EcmsApiBase {
 
     return NULL;
 
+  }
+
+  private function setParagraphRevisionId(array &$data, string $uuid, int $revisionId): void {
+    foreach ($data as $key => &$value) {
+      if ($key === 'id' && $data[$key] === $uuid) {
+        // Set the revision ID from the remote entity.
+        $data['meta']['target_revision_id'] = $revisionId;
+      }
+
+      if (is_array($value)) {
+        $this->setParagraphRevisionId($value, $uuid, $revisionId);
+      }
+    }
   }
 
 }
