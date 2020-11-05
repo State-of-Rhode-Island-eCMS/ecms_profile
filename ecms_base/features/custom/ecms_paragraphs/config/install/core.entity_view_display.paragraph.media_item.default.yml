@@ -4,14 +4,29 @@ dependencies:
   config:
     - field.field.paragraph.media_item.field_alignment
     - field.field.paragraph.media_item.field_caption
+    - field.field.paragraph.media_item.field_link
     - field.field.paragraph.media_item.field_media_item
     - field.field.paragraph.media_item.field_size
     - paragraphs.paragraphs_type.media_item
+  module:
+    - link
 id: paragraph.media_item.default
 targetEntityType: paragraph
 bundle: media_item
 mode: default
 content:
+  field_link:
+    weight: 1
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
   field_media_item:
     type: entity_reference_entity_view
     weight: 0
