@@ -6,8 +6,10 @@ namespace Drupal\ecms_api_press_release_publisher;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Queue\PostponeItemException;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
+use Drupal\file\FileInterface;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use GuzzleHttp\ClientInterface;
 
@@ -45,6 +47,8 @@ class PressReleasePublisher extends EcmsApiBase {
    */
   public function postEntity(EntityInterface $entity): bool {
 
+    // @todo: Figure out how to handle file uploads:
+    // @see: https://www.drupal.org/node/3024331
     $url = $this->getHubUri();
 
     // Guard against a non-url.
@@ -66,6 +70,11 @@ class PressReleasePublisher extends EcmsApiBase {
     if ($this->submitEntity($accessToken, $url, $entity)) {
       // If the entity was created, return true.
       return TRUE;
+    }
+
+    // Let's postpone a file for now.
+    if ($entity instanceof FileInterface) {
+      throw new PostponeItemException();
     }
 
     // Default to false.

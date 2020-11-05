@@ -43,6 +43,8 @@ abstract class EcmsApiBase {
   const NO_API_FIELD_NAMES = [
     'drupal_internal__nid',
     'drupal_internal__vid',
+    'drupal_internal__mid',
+    'drupal_internal__fid',
     'revision_timestamp',
     'status',
     'created',
