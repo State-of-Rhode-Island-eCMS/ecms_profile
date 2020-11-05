@@ -76,6 +76,9 @@
 {% set img_alt = node.field_promotion_image.entity.field_promotion_image.alt %}
 {% set img = drupal_image(img_uri, 'narrow', {alt: img_alt}, true) %}
 
+{# Render img until PL can be hooked up #}
+{{ img }}
+
 {# {% include '@molecules/teaser-promotion/teaser-promotion.twig' with {
   title: node.label,
   display_title: node.field_promotion_display_title.value,
