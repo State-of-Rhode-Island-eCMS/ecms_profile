@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api_notification_publisher;
 
 use Drupal\ecms_api\EcmsApiBase;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
@@ -34,8 +35,8 @@ class NotificationPublisher extends EcmsApiBase {
    * @param \Drupal\ecms_api_publisher\EcmsApiSyndicate $ecmsApiSyndicate
    *   The ecms_api_publisher.syndicate service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiSyndicate $ecmsApiSyndicate) {
-    parent::__construct($httpClient, $entityToJsonApi);
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper, EcmsApiSyndicate $ecmsApiSyndicate) {
+    parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 
     $this->ecmsApiSyndicate = $ecmsApiSyndicate;
   }

@@ -10,7 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Queue\PostponeItemException;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
-use Drupal\ecms_api\EcmsApiMediaHelper;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\file\FileInterface;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\media\MediaInterface;
@@ -33,7 +33,7 @@ class PressReleasePublisher extends EcmsApiBase {
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *    The jsonapi_extras.entity.to_jsonapi service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiMediaHelper $ecmsApiHelper, ConfigFactoryInterface $configFactory) {
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper, ConfigFactoryInterface $configFactory) {
     parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 
     $this->config = $configFactory->get('ecms_api_recipient.settings');

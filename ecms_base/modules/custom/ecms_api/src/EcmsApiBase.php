@@ -67,6 +67,9 @@ abstract class EcmsApiBase {
     'parent_id',
   ];
 
+  /**
+   * Related fields that should not be submitted through JsonAPI.
+   */
   const NO_RELATIONSHIPS_API = [
     'uid',
     'revision_uid',
@@ -95,7 +98,7 @@ abstract class EcmsApiBase {
   protected $entityToJsonApi;
 
   /**
-   * @var \Drupal\ecms_api\EcmsApiMediaHelper
+   * @var \Drupal\ecms_api\EcmsApiHelper
    */
   protected $ecmsApiHelper;
 
@@ -106,10 +109,10 @@ abstract class EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
-   * @param \Drupal\ecms_api\EcmsApiMediaHelper
+   * @param \Drupal\ecms_api\EcmsApiHelper
    *   The ecms_api_media_helper service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiMediaHelper $ecmsApiHelper) {
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper) {
     $this->httpClient = $httpClient;
     $this->entityToJsonApi = $entityToJsonApi;
     $this->ecmsApiHelper = $ecmsApiHelper;

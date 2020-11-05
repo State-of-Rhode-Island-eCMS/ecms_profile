@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\Tests\ecms_api_notification_publisher\Unit;
 
 use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_notification_publisher\NotificationPublisher;
 use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\jsonapi_extras\EntityToJsonApi;
@@ -38,6 +39,8 @@ class NotificationPublisherTest extends UnitTestCase {
    */
   private $entityToJsonApi;
 
+  private $ecmsApiHelper;
+
   /**
    * The ecms_api_publisher.syndicate service mock.
    *
@@ -66,6 +69,7 @@ class NotificationPublisherTest extends UnitTestCase {
     $this->httpclient = $this->createMock(ClientInterface::class);
     $this->entityToJsonApi = $this->createMock(EntityToJsonApi::class);
     $this->ecmsApiSyndicate = $this->createMock(EcmsApiSyndicate::class);
+    $this->ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
 
     $this->originalNode = $this->createMock(NodeInterface::class);
     $this->node = $this->createMock(NodeInterface::class);
@@ -161,7 +165,7 @@ class NotificationPublisherTest extends UnitTestCase {
       }
     }
 
-    $notificationPublisher = new NotificationPublisher($this->httpclient, $this->entityToJsonApi, $this->ecmsApiSyndicate);
+    $notificationPublisher = new NotificationPublisher($this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper, $this->ecmsApiSyndicate);
     $notificationPublisher->broadcastNotification($this->node);
 
   }

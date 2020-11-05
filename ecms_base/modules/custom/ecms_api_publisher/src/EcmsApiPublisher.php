@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
@@ -59,11 +60,12 @@ class EcmsApiPublisher extends EcmsApiBase {
   public function __construct(
     ClientInterface $httpClient,
     EntityToJsonApi $entityToJsonApi,
+    EcmsApiHelper $ecmsApiHelper,
     ConfigFactoryInterface $configFactory,
     EntityTypeManagerInterface $entityTypeManager,
     AccountSwitcherInterface $accountSwitcher
   ) {
-    parent::__construct($httpClient, $entityToJsonApi);
+    parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 
     $this->configFactory = $configFactory;
     $this->userStorage = $entityTypeManager->getStorage('user');

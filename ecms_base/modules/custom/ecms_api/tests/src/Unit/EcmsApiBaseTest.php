@@ -10,6 +10,7 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\ecms_api\EcmsApiBase;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
@@ -101,6 +102,7 @@ class EcmsApiBaseTest extends UnitTestCase {
           'field_date_field' => '1980-11-09T23:43:43+00:00:00',
           'uuid' => self::ENTITY_UUID,
         ],
+        'relationships' => [],
       ],
     ],
     'headers' => [
@@ -132,6 +134,18 @@ class EcmsApiBaseTest extends UnitTestCase {
         'created' => 232654568,
         'field_text_field' => 'Text Field',
         'field_date_field' => '1980-11-09T23:43:43+00:00:00',
+      ],
+      'relationships' => [
+        'uid' => '',
+        'revision_uid' => '',
+        'revision_user' => '',
+        'node_type' => '',
+        'thumbnail' => '',
+        'paragraph_type' => '',
+        'bundle' => '',
+        'vid' => '',
+        'parent' => '',
+        'content_translation_uid' => '',
       ],
     ],
   ];
@@ -179,6 +193,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    */
   private $url;
 
+  private $ecmsApiHelper;
+
   /**
    * Mock response to return from Guzzle.
    *
@@ -192,6 +208,7 @@ class EcmsApiBaseTest extends UnitTestCase {
   protected function setUp(): void {
     parent::setUp();
 
+    $this->ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
     $this->httpclient = $this->createMock(ClientInterface::class);
     $this->response = $this->createMock(ResponseInterface::class);
     $this->entityToJsonApi = $this->getMockBuilder(EntityToJsonApi::class)
@@ -271,7 +288,7 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
       ->getMock();
 
     $getAccessToken = new \ReflectionMethod(EcmsApiBase::class, 'getAccessToken');
@@ -460,7 +477,7 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
       ->onlyMethods(['checkEntityExists'])
       ->getMock();
 
@@ -597,7 +614,7 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
       ->getMock();
 
     $getContentTypes = new \ReflectionMethod(EcmsApiBase::class, 'getContentTypes');
@@ -804,7 +821,7 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi])
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
       ->getMock();
 
     $checkEntityExists = new \ReflectionMethod(EcmsApiBase::class, 'checkEntityExists');

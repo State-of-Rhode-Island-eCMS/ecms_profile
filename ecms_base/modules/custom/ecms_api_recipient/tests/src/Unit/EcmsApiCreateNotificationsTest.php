@@ -7,6 +7,7 @@ namespace Drupal\Tests\ecms_api_recipient\Unit;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_recipient\EcmsApiCreateNotifications;
 use Drupal\ecms_api_recipient\JsonApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
@@ -86,6 +87,8 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    */
   private $jsonApiHelper;
 
+  private $ecmsApiHelper;
+
   /**
    * Mock of the recipient user.
    *
@@ -136,6 +139,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->jsonApiHelper = $this->createMock(JsonApiHelper::class);
+    $this->ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
     $this->recipientUser = $this->createMock(UserInterface::class);
     $this->userStorage = $this->createMock(EntityStorageInterface::class);
     $this->nodeStorage = $this->createMock(EntityStorageInterface::class);
@@ -273,6 +277,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
     $ecmsApiCreateNotification = new EcmsApiCreateNotifications(
       $this->httpClient,
       $this->entityToJsonApi,
+      $this->ecmsApiHelper,
       $this->entityTypeManager,
       $this->jsonApiHelper
     );
@@ -471,6 +476,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
     $ecmsApiCreateNotification = new EcmsApiCreateNotifications(
       $this->httpClient,
       $this->entityToJsonApi,
+      $this->ecmsApiHelper,
       $this->entityTypeManager,
       $this->jsonApiHelper
     );
@@ -542,6 +548,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
     $ecmsApiCreateNotification = new EcmsApiCreateNotifications(
       $this->httpClient,
       $this->entityToJsonApi,
+      $this->ecmsApiHelper,
       $this->entityTypeManager,
       $this->jsonApiHelper
     );

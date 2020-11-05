@@ -7,7 +7,7 @@ namespace Drupal\ecms_api;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StreamWrapper\PublicStream;
 
-class EcmsApiMediaHelper {
+class EcmsApiHelper {
 
   protected $entityTypeManager;
 
