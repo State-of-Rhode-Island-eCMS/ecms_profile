@@ -4,10 +4,12 @@ dependencies:
   config:
     - field.field.paragraph.media_item.field_alignment
     - field.field.paragraph.media_item.field_caption
+    - field.field.paragraph.media_item.field_link
     - field.field.paragraph.media_item.field_media_item
     - field.field.paragraph.media_item.field_size
     - paragraphs.paragraphs_type.media_item
   module:
+    - link
     - media_library
 id: paragraph.media_item.default
 targetEntityType: paragraph
@@ -27,6 +29,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_link:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
     region: content
   field_media_item:
     type: media_library_widget

@@ -18,6 +18,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-67: Added Promotions - Global view.
 - RIG-67: Added theming for promotions teaser display.
 - RIG-67: Added twig_tweak contrib module.
+- RIG-67: Added column container paragraph bundle.
+- RIG-67: Added link field to media items.
 
 ### Changed
 - RIG-67: Changed promotion body field to use plain text.

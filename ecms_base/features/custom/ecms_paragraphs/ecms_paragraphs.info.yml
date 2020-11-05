@@ -13,6 +13,7 @@ dependencies:
   - filter
   - image
   - language
+  - link
   - media
   - media_library
   - options

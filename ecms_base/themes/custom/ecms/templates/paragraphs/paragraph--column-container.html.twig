@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a paragraph.
+ * Default theme implementation to display a column container paragraph.
  *
  * Available variables:
  * - paragraph: Full paragraph entity.
@@ -39,11 +39,7 @@
  */
 #}
 
-{% set pid = paragraph.id() %}
-
-{% include "@organisms/paragraphs/accordion/accordion.pl.twig" with {
+{% include "@organisms/paragraphs/column-container/column-container.twig" with {
     content: content,
-    paragraph: paragraph,
-    pid: pid
   }
 %}

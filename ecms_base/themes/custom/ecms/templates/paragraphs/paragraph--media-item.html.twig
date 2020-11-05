@@ -38,22 +38,25 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'qh-paragraph',
-    'qh--paragraph--' ~ paragraph.bundle|clean_class,
-  ]
-%}
+
+{# Get link url #}
+{% if paragraph.field_link.0.url.external %}
+  {% set link_url = content.field_link.0['#url'].getUri() %}
+{% else %}
+  {% set link_url = content.field_link.0['#url'].getInternalPath() %}
+  {% set link_url = file_url(link_url) %}
+{% endif %}
 
 {# See preprocess_paragraph__menu_item #}
 {% if media_type == 'img' %}
   {% include "@molecules/media-item/media-item.twig" with {
-      classes: classes,
       content: content,
       type: media_type,
       caption: paragraph.field_caption.value,
       size: paragraph.field_size.value,
       align: paragraph.field_alignment.value,
+      link_url: link_url,
+      link_title: paragraph.field_link.title,
       url: image_url,
     }
   %}
@@ -63,7 +66,6 @@
   {% set video_source = content.field_media_item|render|striptags("<iframe>") %}
 
   {% include "@molecules/media-item/media-item.twig" with {
-      classes: classes,
       content: content,
       type: media_type,
       caption: paragraph.field_caption.value,
