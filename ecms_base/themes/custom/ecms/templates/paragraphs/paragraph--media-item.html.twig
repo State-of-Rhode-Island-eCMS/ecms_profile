@@ -39,12 +39,16 @@
  */
 #}
 
-{# Get link url #}
-{% if paragraph.field_link.0.url.external %}
-  {% set link_url = content.field_link.0['#url'].getUri() %}
-{% else %}
-  {% set link_url = content.field_link.0['#url'].getInternalPath() %}
-  {% set link_url = file_url(link_url) %}
+{# Link field is not required. #}
+{% set link_url = FALSE %}
+{% if not paragraph.field_link is empty %}
+
+  {# Get link url #}
+  {% if paragraph.field_link.0.url.external %}
+    {% set link_url = content.field_link.0['#url'].getUri() %}
+  {% else %}
+    {% set link_url = content.field_link.0['#url'] %}
+  {% endif %}
 {% endif %}
 
 {# See preprocess_paragraph__menu_item #}
