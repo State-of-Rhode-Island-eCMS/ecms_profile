@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.7] - 2020-11-05
+### Added
 - RIG-91: Added scheduler permissions for publishers and site admins.
 - RIG-67: Added Global Display and Display Title field to promotions.
 - RIG-67: Added Promotion Entity Reference Filter view.
@@ -25,15 +38,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-67: Changed promotion body field to use plain text.
 - RIG-67: Changed location of layout templates in PL.
 
-### Deprecated
-
 ### Removed
 - RIG-67: Removed jQuery from eCMS theme.
 
 ### Fixed
 - RIG-67: Fixed issue of promotional images using a duplicate source field.
-
-### Security
 
 ## [0.1.6] - 2020-10-30
 ### Added
@@ -178,7 +187,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.7...HEAD
+[0.1.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.6...0.1.7
 [0.1.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.3...0.1.4
