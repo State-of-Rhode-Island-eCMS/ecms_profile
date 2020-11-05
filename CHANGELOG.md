@@ -21,10 +21,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIG-67: Changed promotion body field to use plain text.
+- RIG-67: Changed location of layout templates in PL.
 
 ### Deprecated
 
 ### Removed
+- RIG-67: Removed jQuery from eCMS theme.
 
 ### Fixed
 - RIG-67: Fixed issue of promotional images using a duplicate source field.
