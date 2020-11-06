@@ -18,6 +18,7 @@ dependencies:
   - paragraphs
   - path
   - rh_node
+  - scheduled_transitions
   - scheduler
   - taxonomy
   - user
