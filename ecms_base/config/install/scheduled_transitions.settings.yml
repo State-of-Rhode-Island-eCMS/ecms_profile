@@ -11,3 +11,25 @@ bundles:
   -
     entity_type: node
     bundle: basic_page
+  -
+    entity_type: node
+    bundle: event
+  -
+    entity_type: node
+    bundle: landing_page
+  -
+    entity_type: node
+    bundle: location
+  -
+    entity_type: node
+    bundle: person
+  -
+    entity_type: node
+    bundle: press_release
+  -
+    entity_type: node
+    bundle: promotions
+  -
+    entity_type: node
+    bundle: webform
+
