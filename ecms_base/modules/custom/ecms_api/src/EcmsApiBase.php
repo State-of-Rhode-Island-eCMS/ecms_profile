@@ -372,7 +372,7 @@ abstract class EcmsApiBase {
       'body' => fopen($filePath, 'r'),
     ];
 
-    $endpoint = $this->getFileEnpointUrl($entity, $fieldName, $url);
+    $endpoint = $this->getFileEndpointUrl($entity, $fieldName, $url);
 
     try {
       $request = $this->httpClient->request('POST', $endpoint, $payload);
@@ -410,7 +410,20 @@ abstract class EcmsApiBase {
     return NULL;
   }
 
-  private function getFileEnpointUrl(EntityInterface $entity, string $fieldName, Url $url): string {
+  /**
+   * Get the endpoint of a file upload through json api.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity with a file upload required.
+   * @param string $fieldName
+   *   The field name of the file upload.
+   * @param \Drupal\Core\Url $url
+   *   The URL of the endpoint.
+   *
+   * @return string
+   *   The string to the file entpoint.
+   */
+  private function getFileEndpointUrl(EntityInterface $entity, string $fieldName, Url $url): string {
     $apiEndpoint = self::API_ENDPOINT;
     return "{$url->toString()}/{$apiEndpoint}/{$entity->getEntityTypeId()}/{$entity->bundle()}/{$fieldName}";
   }
@@ -459,6 +472,19 @@ abstract class EcmsApiBase {
     return NULL;
   }
 
+  /**
+   * Fetch an entity from the endpoint if it exists.
+   *
+   * @param string $accessToken
+   *   The access token to request the entity.
+   * @param \Drupal\Core\Url $url
+   *   The URL of the endpoint.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to try and fetch.
+   *
+   * @return object|null
+   *   Return the object decoded from json or null if not exists or error.
+   */
   protected function fetchEntityFromApi(string $accessToken, Url $url, EntityInterface $entity): ?object {
     // Get the endpoint and assume a patch to append the UUID to the url.
     $endpoint = $this->getEndpointUrl($url, $entity, 'PATCH');

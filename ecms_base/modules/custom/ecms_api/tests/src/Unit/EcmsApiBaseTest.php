@@ -11,11 +11,16 @@ use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\ecms_api\EcmsApiHelper;
+use Drupal\file\FileInterface;
 use Drupal\jsonapi_extras\EntityToJsonApi;
+use Drupal\media\MediaInterface;
+use Drupal\media\Plugin\media\Source\File;
+use Drupal\media\Plugin\media\Source\OEmbed;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use phpmock\MockBuilder;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -165,6 +170,12 @@ class EcmsApiBaseTest extends UnitTestCase {
    */
   const ENTITY_ENDPOINT_LANGUAGE = 'https://oomphinc.com/de/EcmsApi/entity_type_test/entity_bundle';
 
+  const JSON_DATA_OBJECT_STRING = '{"jsonapi":{"version":"1.0","meta":{"links":{"self":{"href":"http:\/\/jsonapi.org\/format\/1.0\/"}}}},"data":{"type":"node--notification","id":"2e434fe8-0fcd-48ae-941e-ea78c4f348f7","links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7?resourceVersion=id%3A593"}},"attributes":{"drupal_internal__nid":218,"drupal_internal__vid":593,"langcode":"en","revision_timestamp":"2020-10-23T15:23:06+00:00","revision_log":"Bulk operation publish revision ","status":true,"title":"Notification - Cui Inhibeo (en)","created":"2020-10-20T03:49:23+00:00","changed":"2020-10-23T15:23:06+00:00","promote":false,"sticky":false,"default_langcode":false,"revision_translation_affected":true,"moderation_state":"published","path":{"alias":null,"pid":null,"langcode":"en"},"rh_action":null,"rh_redirect":null,"rh_redirect_response":null,"content_translation_source":"und","content_translation_outdated":false,"field_notification_expire_date":"2020-10-10T04:21:00+00:00","field_notification_global":true,"field_notification_text":"Global Notification Text"},"relationships":{"node_type":{"data":{"type":"node_type--node_type","id":"8dafd8ea-debc-4f84-91e8-78a781304d11"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/node_type?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/node_type?resourceVersion=id%3A593"}}},"revision_uid":{"data":{"type":"user--user","id":"8f102cd0-8202-4916-8641-f2da52ef7639"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/revision_uid?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/revision_uid?resourceVersion=id%3A593"}}},"uid":{"data":{"type":"user--user","id":"8f102cd0-8202-4916-8641-f2da52ef7639"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/uid?resourceVersion=id%3A593"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7\/relationships\/uid?resourceVersion=id%3A593"}}}}},"links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/node\/notification\/2e434fe8-0fcd-48ae-941e-ea78c4f348f7"}}}';
+
+  const JSON_UUID = '2e434fe8-0fcd-48ae-941e-ea78c4f348f7';
+
+  const FILE_BYTES = 'beepboopbeepbeep';
+
   /**
    * Mock of the http_client service.
    *
@@ -203,10 +214,30 @@ class EcmsApiBaseTest extends UnitTestCase {
   private $response;
 
   /**
+   * Mock the php fopen function.
+   *
+   * @var \phpmock\Mock
+   */
+  private $mockPhpFopenFunction;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
     parent::setUp();
+
+    $mockPhpFopenFunction = new MockBuilder();
+    $mockPhpFopenFunction->setNamespace('\Drupal\ecms_api')
+      ->setName('fopen')
+      ->setFunction(
+        function (string $path, string $mode) {
+          // @codingStandardsIgnoreLine
+          return self::FILE_BYTES;
+        }
+      );
+
+    $this->mockPhpFopenFunction = $mockPhpFopenFunction->build();
+    $this->mockPhpFopenFunction->enable();
 
     $this->ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
     $this->httpclient = $this->createMock(ClientInterface::class);
@@ -227,6 +258,16 @@ class EcmsApiBaseTest extends UnitTestCase {
     $container = new ContainerBuilder();
     $container->set('unrouted_url_assembler', $this->createMock(UnroutedUrlAssemblerInterface::class));
     \Drupal::setContainer($container);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  protected function tearDown(): void {
+    parent::tearDown();
+
+    // Disable the global t().
+    $this->mockPhpFopenFunction->disable();
   }
 
   /**
@@ -892,6 +933,163 @@ class EcmsApiBaseTest extends UnitTestCase {
         NULL,
       ],
     ];
+  }
+
+  /**
+   * Test the getFileEndpointUrl method.
+   */
+  public function testGetFileEndpointUrl(): void {
+    $this->entity->expects($this->once())
+      ->method('getEntityTypeId')
+      ->willReturn('test_entity_type');
+
+    $this->entity->expects($this->once())
+      ->method('bundle')
+      ->willReturn('entity_bundle');
+
+    $this->url->expects($this->once())
+      ->method('toString')
+      ->willReturn(self::ENDPOINT_URL);
+    $fieldname = 'file_upload_test_field_name';
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->getMock();
+
+    $getFileEndpointUrl = new \ReflectionMethod(EcmsApiBase::class, 'getFileEndpointUrl');
+    $getFileEndpointUrl->setAccessible(TRUE);
+
+    $result = $getFileEndpointUrl->invokeArgs(
+      $ecmsApi, [
+        $this->entity,
+        $fieldname,
+        $this->url
+      ]
+    );
+
+    $expected = 'https://oomphinc.com/EcmsApi/test_entity_type/entity_bundle/file_upload_test_field_name';
+
+    $this->assertEquals($expected, $result);
+  }
+
+  /**
+   * Test the checkMediaSourceIsFile method.
+   *
+   * @param bool $isFile
+   *   Is the source a file or not.
+   *
+   * @dataProvider dataProviderForTestCheckMediaSourceIsFile
+   */
+  public function testCheckMediaSourceIsFile(bool $isFile): void {
+    if ($isFile) {
+      $source = $this->createMock(File::class);
+    }
+    else {
+      $source = $this->createMock(OEmbed::class);
+    }
+
+    $media = $this->createMock(MediaInterface::class);
+
+    $media->expects($this->once())
+      ->method('getSource')
+      ->willReturn($source);
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->getMock();
+
+    $checkMediaSourceIsFile = new \ReflectionMethod(EcmsApiBase::class, 'checkMediaSourceIsFile');
+    $checkMediaSourceIsFile->setAccessible(TRUE);
+
+    $actual = $checkMediaSourceIsFile->invokeArgs(
+      $ecmsApi, [
+        $media
+      ]
+    );
+
+    $this->assertEquals($isFile, $actual);
+  }
+
+  /**
+   * Data provider for the testCheckMediaSourceIsFile method.
+   *
+   * @return array
+   *   Array of parameters for testCheckMediaSourceIsFile.
+   */
+  public function dataProviderForTestCheckMediaSourceIsFile(): array {
+    return [
+      'test1' => [TRUE],
+      'test2' => [FALSE],
+    ];
+  }
+
+  public function testSubmitSourceFileEntity(): void {
+    $fileId = 45865;
+    $filepath = '/path/to/public/files/directory/test-image.png';
+    $fieldname = 'file_upload_test_field_name';
+    $endpoint = 'https://oomphinc.com/EcmsApi/test_entity_type/entity_bundle/file_upload_test_field_name';
+
+    $payload = [
+      'headers' => [
+        'Content-Type' => "application/octet-stream",
+        'Authorization' => "Bearer " . self::ACCESS_TOKEN,
+        'Accept' => "application/vnd.api+json",
+        'Content-Disposition' => 'file; filename="test-image.png"',
+      ],
+      'body' => self::FILE_BYTES,
+    ];
+
+    $this->entity->expects($this->once())
+      ->method('getEntityTypeId')
+      ->willReturn('test_entity_type');
+
+    $this->entity->expects($this->once())
+      ->method('bundle')
+      ->willReturn('entity_bundle');
+
+    $this->url->expects($this->once())
+      ->method('toString')
+      ->willReturn(self::ENDPOINT_URL);
+
+    $this->ecmsApiHelper->expects($this->once())
+      ->method('getFilePath')
+      ->with($fileId)
+      ->willReturn($filepath);
+
+    $request = $this->createMock(ResponseInterface::class);
+    $request->expects($this->once())
+      ->method('getStatusCode')
+      ->willReturn(201);
+
+    $stream = $this->createMock(StreamInterface::class);
+    $stream->expects($this->once())
+      ->method('getContents')
+      ->willReturn(self::JSON_DATA_OBJECT_STRING);
+
+    $request->expects($this->once())
+      ->method('getBody')
+      ->willReturn($stream);
+
+    $this->httpclient->expects($this->once())
+      ->method('request')
+      ->with('POST', $endpoint, $payload)
+      ->willReturn($request);
+
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->getMock();
+
+    $submitSourceFileEntity = new \ReflectionMethod(EcmsApiBase::class, 'submitSourceFileEntity');
+    $submitSourceFileEntity->setAccessible(TRUE);
+
+    $actual = $submitSourceFileEntity->invokeArgs(
+      $ecmsApi, [
+        $this->entity, self::ACCESS_TOKEN, $this->url, $fileId, $fieldname
+      ]
+    );
+
+    $this->assertEquals(self::JSON_UUID, $actual);
   }
 
 }
