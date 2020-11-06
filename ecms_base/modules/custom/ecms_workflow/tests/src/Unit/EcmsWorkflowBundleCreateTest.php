@@ -122,12 +122,14 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $contentType = $this->randomMachineName();
 
     $adminRole = $this->createMock(RoleInterface::class);
-    $adminRole->expects($this->exactly(3))
+    $adminRole->expects($this->exactly(5))
       ->method('grantPermission')
       ->withConsecutive(
         ["create {$contentType} content"],
         ["edit any {$contentType} content"],
-        ["delete any {$contentType} content"]
+        ["delete any {$contentType} content"],
+        ["add scheduled transitions node {$contentType}"],
+        ["reschedule scheduled transitions node {$contentType}"]
       )
       ->willReturnSelf();
 
@@ -136,12 +138,14 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->willReturnSelf();
 
     $publisherRole = $this->createMock(RoleInterface::class);
-    $publisherRole->expects($this->exactly(3))
+    $publisherRole->expects($this->exactly(5))
       ->method('grantPermission')
       ->withConsecutive(
         ["create {$contentType} content"],
         ["edit any {$contentType} content"],
-        ["delete any {$contentType} content"]
+        ["delete any {$contentType} content"],
+        ["add scheduled transitions node {$contentType}"],
+        ["reschedule scheduled transitions node {$contentType}"]
       )
       ->willReturnSelf();
 
