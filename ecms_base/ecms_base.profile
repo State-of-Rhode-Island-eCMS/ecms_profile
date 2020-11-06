@@ -116,3 +116,19 @@ function ecms_base_update_9017(array &$sandbox): void {
   // Enable eCMS distribution module.
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Updates to run for the 0.1.9 tag.
+ */
+function ecms_base_update_9019(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Add the social navigation menu.
+  $active_storage->write('system.menu.social-navigation', $install_source->read('system.menu.social-navigation'));
+}

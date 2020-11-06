@@ -1,0 +1,253 @@
+<?php
+
+/**
+ * @file
+ * ecms_distribution.module
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Get the social configuration from pattern lab if available.
+ *
+ * @return array|null
+ *   The available social navigation options, or null if an error.
+ */
+function get_patternlab_social_source(): ?array {
+  $return = [];
+  /** @var \Drupal\Core\Extension\ThemeHandler $themeHandler */
+  $themeHandler = \Drupal::service('theme_handler');
+
+  $defaultTheme = $themeHandler->getDefault();
+
+  $path = drupal_get_path('theme', $defaultTheme);
+
+  // If the source file doesn't exist, ignore the form alteration.
+  if (!file_exists("{$path}/ecms_patternlab/source/_data/social-config.json")) {
+    return NULL;
+  }
+
+  $json = json_decode(file_get_contents("{$path}/ecms_patternlab/source/_data/social-config.json"));
+
+  if (!property_exists($json, 'social-platforms')) {
+    return NULL;
+  }
+
+  foreach ($json->{'social-platforms'} as $key => $object) {
+    $return[$key] = $object->{'link-title'};
+  }
+
+  $return['other'] = t('Other');
+
+  return $return;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for menu_link_content_menu_link_content_form.
+ */
+function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&$form, FormStateInterface $form_state): void {
+  $options = get_patternlab_social_source();
+
+  if (empty($options)) {
+    return;
+  }
+
+  $menuParentValue = $form_state->getValue('menu_parent');
+
+  if (empty($menuParentValue)) {
+    $menuParentValue = $form['menu_parent']['#default_value'];
+  }
+
+  // Add the other title container and textfield.
+  $form['ecms_social_other_container'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'id' => 'ecms-social-wrapper-other-title',
+    ],
+    '#states' => [
+      'visible' => [
+        ':input[name="title[0][value]"]' => ['value' => 'other'],
+      ],
+    ],
+    '#weight' => -5,
+  ];
+
+  $form['ecms_social_other_container']['ecms_social_other_title'] = [
+    '#type' => 'textfield',
+    '#title' => t('Other Link title'),
+    '#access' => FALSE,
+    '#states' => [
+      'required' => [
+        ':input[name="title[0][value]"]' => ['value' => 'other'],
+      ],
+      'visible' => [
+        ':input[name="title[0][value]"]' => ['value' => 'other'],
+      ],
+    ],
+    '#weight' => -4,
+    '#element_validate' => [
+      '_ecms_distribution_menu_form_validate',
+    ],
+  ];
+
+  $form['title']['#weight'] = -50;
+  $form['title']['#prefix'] = '<div id="ecms-social-wrapper-title">';
+  $form['title']['#suffix'] = '</div>';
+
+  if (str_starts_with($menuParentValue, 'social-navigation:')) {
+    $form['title']['widget'][0]['value']['#type'] = 'select';
+    $form['title']['widget'][0]['value']['#options'] = $options;
+    $form['title']['widget'][0]['value']['#limit'] = 1;
+    $form['title']['widget'][0]['value']['#size'] = 1;
+
+    // If the default isn't in the list of options, try the keys.
+    $defaultTitle = $form['title']['widget'][0]['value']['#default_value'];
+    if (!array_key_exists($defaultTitle, $options)) {
+      $flipped = array_flip($options);
+
+      if (array_key_exists($defaultTitle, $flipped)) {
+        $form['title']['widget'][0]['value']['#default_value'] = $flipped[$defaultTitle];
+      }
+      else {
+        /** @var \Drupal\menu_link_content\MenuLinkContentInterface $menu_link */
+        $menu_link = $form_state->getFormObject()->getEntity();
+        // Ensure this is an existing entity.
+        if ($menu_link->id()) {
+          $options = $menu_link->link->first()->options;
+          if ($options['attributes']['class'][0] === 'other') {
+            $form['title']['widget'][0]['value']['#default_value'] = 'other';
+            $form['ecms_social_other_container']['ecms_social_other_title']['#default_value'] = $options['attributes']['title'];
+          }
+        }
+      }
+    }
+
+    // Enable access to the other title field.
+    $form['ecms_social_other_container']['ecms_social_other_title']['#access'] = TRUE;
+  }
+
+  $form['menu_parent']['#ajax'] = [
+    'callback' => 'ecms_distribution_menu_link_callback',
+  ];
+
+  $form['actions']['submit']['#submit'][] = '_ecms_distribution_menu_form_submit';
+}
+
+/**
+ * Custom validation function for the ecms_social_other_title form element.
+ *
+ * @param array $element
+ *   The ecms_social_other_title form element.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ * @param array $form
+ *   The form.
+ */
+function _ecms_distribution_menu_form_validate(array $element, FormStateInterface $form_state, array $form): void {
+  $menuParentValue = $form_state->getValue('menu_parent');
+
+  if (str_starts_with($menuParentValue, 'social-navigation:')) {
+    // The title will be the class name.
+    $class = $form_state->getValue('title');
+    if ($class[0]['value'] === 'other') {
+      $otherTitle = $form_state->getValue('ecms_social_other_title');
+
+      if (empty($otherTitle)) {
+        $form_state->setError($element, t('The title field is required when choosing "other".'));
+      }
+    }
+  }
+}
+
+/**
+ * Custom form submit for the menu link entity form.
+ *
+ * @param array $form
+ *   The form array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function _ecms_distribution_menu_form_submit(array $form, FormStateInterface $form_state): void {
+  $menuParentValue = $form_state->getValue('menu_parent');
+
+  if (str_starts_with($menuParentValue, 'social-navigation:')) {
+    $options = get_patternlab_social_source();
+
+    // The title will be the class name.
+    $class = $form_state->getValue('title');
+
+    // Get the title from the json array.
+    $title = $options[$class[0]['value']];
+
+    if ($class[0]['value'] === 'other') {
+      // Get the other title in case we need it.
+      $otherTitle = $form_state->getValue('ecms_social_other_title');
+    }
+
+    /** @var \Drupal\menu_link_content\MenuLinkContentInterface $menu_link */
+    $menu_link = $form_state->getFormObject()->getEntity();
+
+    if (!empty($otherTitle)) {
+      $title = $otherTitle;
+    }
+
+    // Set the title of the menu link to the json object.
+    $menu_link->set('title', $title);
+
+    $linkOptions['attributes']['class'] = [$class[0]['value']];
+    $linkOptions['attributes']['title'] = $title;
+    $linkOptions['item_attributes']['class'] = [$class[0]['value']];
+    $linkOptions['item_attributes']['title'] = $title;
+
+    $menu_link->link->first()->options = $linkOptions;
+    $menu_link->link->first()->title = $title;
+    $menu_link->save();
+  }
+}
+
+/**
+ * Ajax callback for the menu link form.
+ *
+ * @param array $form
+ *   The form array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state interface.
+ *
+ * @return \Drupal\Core\Ajax\AjaxResponse
+ *   The ajax response replacing the two required fields.
+ */
+function ecms_distribution_menu_link_callback(array $form, FormStateInterface $form_state): AjaxResponse {
+  $response = new AjaxResponse();
+
+  $response
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', render($form['title'])));
+
+  $response
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', render($form['ecms_social_other_container'])));
+
+  return $response;
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function ecms_distribution_preprocess_menu(&$variables): void {
+  if (isset($variables['menu_name']) && $variables['menu_name'] === 'social-navigation') {
+    foreach ($variables['items'] as $linkKey => $item) {
+      $options = $item['url']->getOptions();
+
+      // Set the link item_attributes on the <li> elements.
+      if (array_key_exists('item_attributes', $options)) {
+        foreach ($options['item_attributes'] as $key => $value) {
+          $variables['items'][$linkKey]['attributes']->setAttribute($key, $value);
+        }
+      }
+    }
+  }
+}

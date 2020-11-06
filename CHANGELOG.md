@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-142: Added social navigation automatic class functionality.
 
 ### Changed
 - RIG-139: CI Improvements.
