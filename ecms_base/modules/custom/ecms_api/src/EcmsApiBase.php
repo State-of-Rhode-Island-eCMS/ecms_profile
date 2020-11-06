@@ -55,7 +55,7 @@ abstract class EcmsApiBase {
     'drupal_internal__id',
     'drupal_internal__tid',
     'drupal_internal__revision_id',
-    'langcode',
+//    'langcode',
     'revision_timestamp',
     'status',
     'created',
