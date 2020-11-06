@@ -10,11 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-67: Added promotion teaser theming.
-- RIG-67: Sidebar nav menu preprocess to pass level one link.
 
 ### Changed
-- RIG-69: Updated media item translation config and template.
 
 ### Deprecated
 
@@ -23,6 +20,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.1.8] - 2020-11-06
+### Added
+- RIG-67: Added promotion teaser theming.
+- RIG-67: Sidebar nav menu preprocess to pass level one link.
+
+### Changed
+- RIG-69: Updated media item translation config and template.
 
 ## [0.1.7] - 2020-11-05
 ### Added
@@ -190,7 +195,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.8...HEAD
+[0.1.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.7...0.1.8
 [0.1.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.6...0.1.7
 [0.1.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.4...0.1.5
