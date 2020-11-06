@@ -23,6 +23,7 @@ dependencies:
   - contextual
   - datetime
   - dblog
+  - dynamic_entity_reference
   - dynamic_page_cache
   - ecms_distribution
   - editor
@@ -64,6 +65,7 @@ dependencies:
   - rh_taxonomy
   - responsive_image
   - rdf
+  - scheduled_transitions
   - scheduler
   - shortcut
   - svg_image
