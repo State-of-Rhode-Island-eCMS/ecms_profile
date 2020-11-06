@@ -19,6 +19,7 @@ dependencies:
   - rabbit_hole
   - scheduler
   - smart_date
+  - svg_image
   - taxonomy
   - text
   - user
