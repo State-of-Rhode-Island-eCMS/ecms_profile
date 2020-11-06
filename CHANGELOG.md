@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-67: Added promotion teaser theming.
+- RIG-67: Sidebar nav menu preprocess to pass level one link.
 
 ### Changed
 - RIG-69: Updated media item translation config and template.
