@@ -49,7 +49,7 @@ function get_patternlab_social_source(): ?array {
 /**
  * Implements hook_form_FORM_ID_alter() for menu_link_content_menu_link_content_form.
  */
-function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&$form, FormStateInterface $form_state) {
+function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&$form, FormStateInterface $form_state): void {
   $options = get_patternlab_social_source();
 
   if (empty($options)) {
