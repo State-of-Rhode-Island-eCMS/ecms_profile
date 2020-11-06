@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @file
+ * ecms_distribution.module
+ */
+
+declare(strict_types=1);
+
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormStateInterface;
@@ -9,7 +16,6 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @return array|null
  *   The available social navigation options, or null if an error.
- *
  */
 function get_patternlab_social_source(): ?array {
   $return = [];
@@ -62,6 +68,11 @@ function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&
     '#attributes' => [
       'id' => 'ecms-social-wrapper-other-title',
     ],
+    '#states' => [
+      'visible' => [
+        ':input[name="title[0][value]"]' => ['value' => 'other'],
+      ],
+    ],
     '#weight' => -5,
   ];
 
@@ -70,17 +81,17 @@ function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&
     '#title' => t('Other Link title'),
     '#access' => FALSE,
     '#states' => [
+      'required' => [
+        ':input[name="title[0][value]"]' => ['value' => 'other'],
+      ],
       'visible' => [
         ':input[name="title[0][value]"]' => ['value' => 'other'],
       ],
-      'required' => [
-        ':input[name="title[0][value]"]' => ['value' => 'other'],
-      ]
     ],
     '#weight' => -4,
     '#element_validate' => [
       '_ecms_distribution_menu_form_validate',
-    ]
+    ],
   ];
 
   $form['title']['#weight'] = -50;
@@ -136,7 +147,7 @@ function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&
  * @param array $form
  *   The form.
  */
-function _ecms_distribution_menu_form_validate(array $element, FormStateInterface $form_state, array $form) {
+function _ecms_distribution_menu_form_validate(array $element, FormStateInterface $form_state, array $form): void {
   $menuParentValue = $form_state->getValue('menu_parent');
 
   if (str_starts_with($menuParentValue, 'social-navigation:')) {
@@ -155,14 +166,14 @@ function _ecms_distribution_menu_form_validate(array $element, FormStateInterfac
 /**
  * Custom form submit for the menu link entity form.
  *
- * @param $form
+ * @param array $form
  *   The form array.
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  *   The form state.
  *
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
-function _ecms_distribution_menu_form_submit($form, FormStateInterface $form_state) {
+function _ecms_distribution_menu_form_submit(array $form, FormStateInterface $form_state): void {
   $menuParentValue = $form_state->getValue('menu_parent');
 
   if (str_starts_with($menuParentValue, 'social-navigation:')) {
@@ -211,13 +222,14 @@ function _ecms_distribution_menu_form_submit($form, FormStateInterface $form_sta
  * @return \Drupal\Core\Ajax\AjaxResponse
  *   The ajax response replacing the two required fields.
  */
-function ecms_distribution_menu_link_callback(array $form, FormStateInterface $form_state) {
+function ecms_distribution_menu_link_callback(array $form, FormStateInterface $form_state): AjaxResponse {
   $response = new AjaxResponse();
-  $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', render($form['ecms_social_other_container'])));
 
   $response
     ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', render($form['title'])));
+
+  $response
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', render($form['ecms_social_other_container'])));
 
   return $response;
 }
@@ -225,12 +237,12 @@ function ecms_distribution_menu_link_callback(array $form, FormStateInterface $f
 /**
  * Implements hook_preprocess_menu().
  */
-function ecms_distribution_preprocess_menu(&$variables) {
+function ecms_distribution_preprocess_menu(&$variables): void {
   if (isset($variables['menu_name']) && $variables['menu_name'] === 'social-navigation') {
     foreach ($variables['items'] as $linkKey => $item) {
       $options = $item['url']->getOptions();
 
-      // Set the link item attributes to the <li> elements.
+      // Set the link item_attributes on the <li> elements.
       if (array_key_exists('item_attributes', $options)) {
         foreach ($options['item_attributes'] as $key => $value) {
           $variables['items'][$linkKey]['attributes']->setAttribute($key, $value);
