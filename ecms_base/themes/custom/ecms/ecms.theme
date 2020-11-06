@@ -196,8 +196,8 @@ function ecms_preprocess_menu__minor(&$variables) {
   $parameters->setMinDepth(1);
 
   $minor_nav = $menu_tree->load('main', $parameters);
-  foreach($minor_nav as $level) {
-    if ( $level->inActiveTrail ) {
+  foreach ($minor_nav as $level) {
+    if ($level->inActiveTrail) {
       $variables['level_one_link']['title'] = $level->link->getTitle();
       $variables['level_one_link']['url'] = $level->link->getUrlObject()->toString();
 
