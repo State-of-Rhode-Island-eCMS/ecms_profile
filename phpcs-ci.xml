@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ruleset name="Drupal">
+  <description>Drupal coding standards</description>
+
+  <!-- Directories to scan -->
+  <file>ecms_base/</file>
+  <file>ecms_acquia/</file>
+  <file>tests/src/Functional</file>
+
+  <!-- Excluded patterns -->
+  <exclude-pattern>*.css</exclude-pattern>
+  <exclude-pattern>*.js</exclude-pattern>
+  <exclude-pattern>ecms_base/themes/custom/ecms/ecms_patternlab/*</exclude-pattern>
+
+  <!-- PHPCS argument overrides -->
+  <arg name="colors" />
+  <arg name="extensions" value="inc,info,install,module,php,profile,test,theme" />
+
+  <!-- PHP configuration overrides -->
+  <ini name="memory_limit" value="-1" />
+
+  <!-- Project autoloader -->
+  <autoload>/var/www/vendor/autoload.php</autoload>
+
+  <!-- Project rulesets -->
+  <rule ref="/var/www/vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
+</ruleset>

@@ -135,7 +135,7 @@ class EcmsSpeechesInstallTest extends AllProfileInstallationTestsAbstract {
       $postTranslation = self::SPEECH_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
       $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
-      $this->assertSession()->pageTextContainsOnce("Speech {$translationTitle} has been updated.");
+      $this->assertSession()->pageTextContains("Speech {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
       $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}");

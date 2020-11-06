@@ -1,6 +1,6 @@
 # Runs and tests the develop.sh script
 ---
-name: Test deploy.sh
+name: Test the Ecms Profile
 on:
   push:
     branches:
@@ -10,47 +10,137 @@ on:
 
 jobs:
   build:
-    name: develop.sh
-    runs-on: ubuntu-18.04
+    name: Build Drupal.
+    runs-on: ubuntu-latest
+    env:
+      DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Prepare environment for Lando use
-        run: |
-          mkdir -p ~/.ssh
+      - name: Run the develop CI script.
+        run: ./scripts/ci-develop.sh
 
-      - name: Install Lando
+      - name: Set the full working directory environment variable.
         run: |
-          pushd /tmp
-          wget https://files.devwithlando.io/lando-stable.deb
-          sudo dpkg -i --ignore-depends=docker-ce lando-stable.deb
-          popd
+          echo "$( realpath ${{ env.DRUPAL_DIRECTORY }} )"
 
-      - name: Run the development script
-        run: ./scripts/develop.sh
+      - name: Set full path to the Drupal build directory.
+        run: echo "drupal-directory=$( realpath ${{ env.DRUPAL_DIRECTORY }} )" >> $GITHUB_ENV
 
-      - name: Check coding standards.
-        run: |
-          cd ../develop-ecms-profile
-          lando phpcs
+      - name: Remove the ecms_profile symlink.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: rm -Rf web/profiles/contrib/ecms_profile
+
+      - name: Copy the ecms_profile into Drupal.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: cp -Rf ../ecms_profile web/profiles/contrib
+
+      - name: Get the node dependencies.
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
+      - name: Install the profile node requirements.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
+        run: npm install
 
       - name: Run gulp validate.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
+        run: gulp validate
+
+      - name: Run gulp build.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
+        run: gulp build
+
+      - name: Archive the Drupal files.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: tar -czf /tmp/drupal-build.tar.gz .
+
+      - name: Upload the artifact.
+        uses: actions/upload-artifact@v2
+        with:
+          name: drupal-build.tar.gz
+          path: /tmp/drupal-build.tar.gz
+
+  test-php-73:
+    name: Test the site with PHP 7.3
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: drupalci/php-7.3-apache:production
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 33306:3306
+        env:
+          MYSQL_RANDOM_ROOT_PASSWORD: yes
+          MYSQL_DATABASE: drupal
+          MYSQL_USER: drupal
+          MYSQL_PASSWORD: drupal
+        options: --network-alias=database
+    env:
+      SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
+      SIMPLETEST_BASE_URL: http://localhost
+      DTT_BASE_URL: http://localhost
+      DRUPAL_DIRECTORY: /var/www/html
+      ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
+      ENCRYPTION_PRIVATE_KEY: ''
+    steps:
+      - name: Retrieve the build artifact.
+        uses: actions/download-artifact@v2
+        with:
+          name: drupal-build.tar.gz
+          path: /var/www/
+
+      - name: Expand the build artifact.
+        run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
+
+      - name: Remove the original html directory.
+        run: rm -Rf /var/www/html
+
+      - name: Symlink the original html path to web.
+        run: ln -s /var/www/web /var/www/html
+
+      - name: Ensure a files directory exists.
         run: |
-          cd ../develop-ecms-profile
-          lando gulp-distro validate
+          mkdir /var/www/html/sites/default/files
+          chmod -R 777 /var/www/html/sites/default/files
+          mkdir /var/www/html/sites/simpletest
+          chmod -R 777 /var/www/html/sites/simpletest
+
+      - name: Set permissions on the web and vendor directories.
+        run: chown -R www-data:www-data /var/www/web /var/www/vendor
+
+      - name: Start Apache
+        run: service apache2 start
+
+      - name: Set the encryption private key variable.
+        run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
+
+      - name: Check coding standards.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs-ci.xml
 
       - name: Run unit tests.
-        run: |
-          cd ../develop-ecms-profile
-          lando phpunit --testsuite=unit
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
 
-      - name: Run functional tests.
-        run: |
-          cd ../develop-ecms-profile
-          lando phpunit --testsuite=functional
+      - name: Install the ecms base profile.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
 
-      - name: Run existing tests.
+      - name: Update settings.php
         run: |
-          cd ../develop-ecms-profile
-          lando phpunit --testsuite=existing --bootstrap=/app/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php
+          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
+
+      - name: Run functional tests with fastest.
+        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
+        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest  "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+
+#      - name: Run existing site tests.
+#        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
+#        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest  "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"

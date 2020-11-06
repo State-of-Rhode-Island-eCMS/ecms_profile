@@ -99,6 +99,7 @@ if [ ! -d "$DEST_DIR" ]; then
   echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER require 'zaporylie/composer-drupal-optimizations:^1.1.2' --no-update\n\n"
   cd $DEST_DIR
   $COMPOSER require "zaporylie/composer-drupal-optimizations:^1.1.2" --no-update
+  $COMPOSER require "oomphinc/composer-installers-extender: ^2.0" --no-update
   cd $BASE_DIR
 
   if [ $? -ne 0 ]; then
@@ -128,8 +129,6 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository found at${NO_C}: $PATTERN_LAB_FULL_PATH, symlinking for development."
     LANDO_SERVICES="services:
   appserver:
-    run_as_root:
-      - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
@@ -154,7 +153,7 @@ else
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
+        SIMPLETEST_DB: 'mysql://drupal9:drupal9@database/drupal9'
         DTT_BASE_URL: 'https://appserver'
         TEMP: '/app/web/sites/default/files/temp'
       volumes:
@@ -170,6 +169,9 @@ tooling:
   phpunit:
     service: appserver
     cmd: vendor/bin/phpunit --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
+  paratest:
+    service: appserver
+    cmd: vendor/bin/paratest --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
   gulp-distro:
     service: nodejs
     cmd: cd /$INSTALL_PROFILE_DIRECTORY && npm install
@@ -188,7 +190,6 @@ tooling:
     user: root
 config:
   xdebug: false
-  composer_version: '1.10.1'
 env_file:
   - .env  " >> ${DEST_DIR}/.lando.local.yml
 fi
@@ -211,10 +212,15 @@ set -e
 $LANDO composer remove drupal/coffee
 
 # Add the development requirements for testing.
-$LANDO composer require "behat/mink-goutte-driver" --dev
-$LANDO composer require "php-mock/php-mock" --dev
-$LANDO composer require "php-mock/php-mock-phpunit" --dev
-$LANDO composer require "weitzman/drupal-test-traits" --dev
+$LANDO composer require "behat/mink-goutte-driver" --dev --no-update
+$LANDO composer require "php-mock/php-mock" --dev --no-update
+$LANDO composer require "php-mock/php-mock-phpunit" --dev --no-update
+$LANDO composer require "weitzman/drupal-test-traits" --dev --no-update
+$LANDO composer require 'liuggio/fastest:^1.6' --dev --no-update
+$LANDO composer require "phpunit/phpunit:^8" --dev --no-update
+$LANDO composer require "symfony/phpunit-bridge:^5.1" --dev --no-update
+$LANDO composer require "drupal/coder:^8.3" --dev --no-update
+$LANDO composer require "drush/drush:^10.0" --dev --no-update
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "

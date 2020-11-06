@@ -146,7 +146,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
       $postTranslation = self::HOTEL_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
       $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
-      $this->assertSession()->pageTextContainsOnce("Hotel {$translationTitle} has been updated.");
+      $this->assertSession()->pageTextContains("Hotel {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
       $this->assertEqual($translatedUrl, "/{$lang}/node/{$nodeId}");
