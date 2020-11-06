@@ -121,7 +121,6 @@ class EcmsWorkflowBundleCreate {
     $site_admin_role->grantPermission("add scheduled transitions node {$contentType}");
     $site_admin_role->grantPermission("reschedule scheduled transitions node {$contentType}");
 
-
     try {
       $site_admin_role->save();
     }
