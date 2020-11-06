@@ -5,8 +5,8 @@ core_version_requirement: ^9
 dependencies:
   - content_moderation
   - content_translation
-  - ecms_workflow
   - ecms_distribution
+  - ecms_workflow
   - field
   - file
   - image
@@ -20,6 +20,7 @@ dependencies:
   - rabbit_hole
   - responsive_image
   - scheduler
+  - svg_image
   - text
   - user
   - views
