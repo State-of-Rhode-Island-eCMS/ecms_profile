@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.promotions.field_promotion_url
     - node.type.promotions
   module:
+    - link
     - user
 id: node.promotions.teaser
 targetEntityType: node
@@ -32,10 +33,21 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
+  field_promotion_url:
+    type: link
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
 hidden:
   content_moderation_control: true
   field_promotion_display_title: true
   field_promotion_global_display: true
-  field_promotion_url: true
   langcode: true
   links: true
