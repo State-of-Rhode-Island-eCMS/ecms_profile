@@ -12,9 +12,11 @@ dependencies:
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_photo
     - field.field.node.person.field_person_prefix
+    - field.field.node.person.field_person_promotions
     - field.field.node.person.field_person_suffix
     - node.type.person
   module:
+    - telephone
     - user
 id: node.person.default
 targetEntityType: node
@@ -23,9 +25,9 @@ mode: default
 content:
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_person_category:
     weight: 111
     label: above
@@ -44,9 +46,10 @@ content:
   field_person_fax:
     weight: 103
     label: above
-    settings: {  }
+    settings:
+      title: ''
     third_party_settings: {  }
-    type: basic_string
+    type: telephone_link
     region: content
   field_person_first_name:
     weight: 104
@@ -83,9 +86,10 @@ content:
   field_person_phone:
     weight: 102
     label: above
-    settings: {  }
+    settings:
+      title: ''
     third_party_settings: {  }
-    type: basic_string
+    type: telephone_link
     region: content
   field_person_photo:
     type: entity_reference_entity_view
@@ -104,6 +108,15 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_person_promotions:
+    weight: 112
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_person_suffix:
     weight: 108
     label: above
@@ -114,8 +127,8 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true

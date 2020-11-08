@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
     - field.field.node.press_release.field_press_release_paragraphs
+    - field.field.node.press_release.field_press_release_promotions
     - field.field.node.press_release.field_press_release_source
     - field.field.node.press_release.field_press_release_topics
     - node.type.press_release
@@ -22,9 +23,9 @@ mode: default
 content:
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_press_release_body:
     weight: 101
     label: above
@@ -62,6 +63,15 @@ content:
       link: ''
     third_party_settings: {  }
     region: content
+  field_press_release_promotions:
+    weight: 107
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_press_release_source:
     weight: 104
     label: above
@@ -79,8 +89,8 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true

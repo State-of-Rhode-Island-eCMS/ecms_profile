@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.location.field_location_body
     - field.field.node.location.field_location_office_hours
     - field.field.node.location.field_location_phone
+    - field.field.node.location.field_location_promotions
     - node.type.location
     - workflows.workflow.editorial
   module:
@@ -53,6 +54,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
+    region: content
+  field_location_promotions:
+    weight: 125
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   langcode:
     type: language_select
@@ -134,4 +145,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden: {  }

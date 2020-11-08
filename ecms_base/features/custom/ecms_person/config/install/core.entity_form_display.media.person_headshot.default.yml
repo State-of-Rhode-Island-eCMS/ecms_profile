@@ -6,8 +6,8 @@ dependencies:
     - image.style.thumbnail
     - media.type.person_headshot
   module:
-    - image
     - path
+    - svg_image
 id: media.person_headshot.default
 targetEntityType: media
 bundle: person_headshot

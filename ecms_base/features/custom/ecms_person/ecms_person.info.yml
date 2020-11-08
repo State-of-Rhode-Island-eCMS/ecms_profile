@@ -19,6 +19,7 @@ dependencies:
   - pathauto
   - rabbit_hole
   - scheduler
+  - svg_image
   - taxonomy
   - telephone
   - token

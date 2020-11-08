@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_photo
     - field.field.node.person.field_person_prefix
+    - field.field.node.person.field_person_promotions
     - field.field.node.person.field_person_suffix
     - node.type.person
   module:
@@ -43,5 +44,6 @@ hidden:
   field_person_phone: true
   field_person_photo: true
   field_person_prefix: true
+  field_person_promotions: true
   field_person_suffix: true
   langcode: true
