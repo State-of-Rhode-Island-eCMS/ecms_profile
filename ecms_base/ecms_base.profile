@@ -131,4 +131,7 @@ function ecms_base_update_9019(array &$sandbox): void {
 
   // Add the social navigation menu.
   $active_storage->write('system.menu.social-navigation', $install_source->read('system.menu.social-navigation'));
+
+  // Add scheduler settings.
+  $active_storage->write('scheduled_transitions.settings', $install_source->read('scheduled_transitions.settings'));
 }

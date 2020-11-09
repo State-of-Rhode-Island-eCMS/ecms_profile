@@ -19,6 +19,7 @@ dependencies:
   - path
   - rabbit_hole
   - responsive_image
+  - scheduled_transitions
   - scheduler
   - text
   - user

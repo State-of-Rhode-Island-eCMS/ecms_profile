@@ -15,6 +15,7 @@ dependencies:
   - path
   - pathauto
   - rabbit_hole
+  - scheduled_transitions
   - scheduler
   - telephone
   - text

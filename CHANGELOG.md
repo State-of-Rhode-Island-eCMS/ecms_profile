@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIG-139: CI Improvements.
+- RIG-91: Added Scheduled Transitions module to most content types.
 
 ### Deprecated
 

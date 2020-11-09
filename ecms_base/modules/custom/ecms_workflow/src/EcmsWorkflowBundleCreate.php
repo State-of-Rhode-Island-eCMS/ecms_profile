@@ -117,6 +117,10 @@ class EcmsWorkflowBundleCreate {
     $site_admin_role->grantPermission("edit any {$contentType} content");
     $site_admin_role->grantPermission("delete any {$contentType} content");
 
+    // Site admin role can manage scheduled transitions.
+    $site_admin_role->grantPermission("add scheduled transitions node {$contentType}");
+    $site_admin_role->grantPermission("reschedule scheduled transitions node {$contentType}");
+
     try {
       $site_admin_role->save();
     }
@@ -135,6 +139,10 @@ class EcmsWorkflowBundleCreate {
     $content_publisher_role->grantPermission("create {$contentType} content");
     $content_publisher_role->grantPermission("edit any {$contentType} content");
     $content_publisher_role->grantPermission("delete any {$contentType} content");
+
+    // Content Publisher role can manage scheduled transitions.
+    $content_publisher_role->grantPermission("add scheduled transitions node {$contentType}");
+    $content_publisher_role->grantPermission("reschedule scheduled transitions node {$contentType}");
 
     try {
       $content_publisher_role->save();

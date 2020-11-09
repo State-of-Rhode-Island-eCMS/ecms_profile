@@ -17,6 +17,7 @@ dependencies:
   - path
   - rabbit_hole
   - rh_node
+  - scheduled_transitions
   - scheduler
   - user
 version: 9.x-1.0
