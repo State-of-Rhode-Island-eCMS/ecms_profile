@@ -6,6 +6,7 @@ dependencies:
   - auto_entitylabel
   - content_moderation
   - content_translation
+  - ecms_promotions
   - ecms_workflow
   - field
   - file
