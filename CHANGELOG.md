@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-142: Added social navigation automatic class functionality.
+- RIG-69: Added promotion reference fields for locations, people, events, and press releases.
 
 ### Changed
 - RIG-139: CI Improvements.

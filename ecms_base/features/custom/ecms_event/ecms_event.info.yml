@@ -5,6 +5,7 @@ core_version_requirement: ^9
 dependencies:
   - content_moderation
   - content_translation
+  - ecms_promotions
   - ecms_workflow
   - field
   - file
@@ -20,6 +21,7 @@ dependencies:
   - scheduled_transitions
   - scheduler
   - smart_date
+  - svg_image
   - taxonomy
   - text
   - user

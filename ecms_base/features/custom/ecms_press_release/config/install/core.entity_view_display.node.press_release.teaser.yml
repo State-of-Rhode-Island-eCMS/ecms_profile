@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
     - field.field.node.press_release.field_press_release_paragraphs
+    - field.field.node.press_release.field_press_release_promotions
     - field.field.node.press_release.field_press_release_source
     - field.field.node.press_release.field_press_release_topics
     - node.type.press_release
@@ -40,6 +41,7 @@ hidden:
   content_moderation_control: true
   field_press_release_links: true
   field_press_release_paragraphs: true
+  field_press_release_promotions: true
   field_press_release_source: true
   field_press_release_topics: true
   langcode: true

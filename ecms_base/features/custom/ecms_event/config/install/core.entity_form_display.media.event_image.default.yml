@@ -6,8 +6,8 @@ dependencies:
     - image.style.thumbnail
     - media.type.event_image
   module:
-    - image
     - path
+    - svg_image
 id: media.event_image.default
 targetEntityType: media
 bundle: event_image

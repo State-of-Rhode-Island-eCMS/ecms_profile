@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_location
+    - field.field.node.event.field_event_promotions
     - field.field.node.event.field_event_type
     - node.type.event
   module:
@@ -20,9 +21,9 @@ mode: default
 content:
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_event_body:
     weight: 101
     label: above
@@ -46,6 +47,7 @@ content:
       force_chronological: false
       format_type: medium
       timezone_override: ''
+      add_classes: 0
     third_party_settings: {  }
     type: smartdate_default
     region: content
@@ -66,6 +68,15 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_event_promotions:
+    weight: 108
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_event_type:
     weight: 105
     label: above
@@ -76,8 +87,8 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true

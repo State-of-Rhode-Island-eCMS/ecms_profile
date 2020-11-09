@@ -6,6 +6,7 @@ dependencies:
   - auto_entitylabel
   - content_moderation
   - content_translation
+  - ecms_promotions
   - ecms_workflow
   - field
   - file
@@ -20,6 +21,7 @@ dependencies:
   - rabbit_hole
   - scheduled_transitions
   - scheduler
+  - svg_image
   - taxonomy
   - telephone
   - token

@@ -6,6 +6,7 @@ dependencies:
   - address
   - content_moderation
   - content_translation
+  - ecms_promotions
   - ecms_workflow
   - field
   - language
