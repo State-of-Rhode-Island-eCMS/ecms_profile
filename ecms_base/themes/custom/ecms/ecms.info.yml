@@ -32,7 +32,8 @@ component-libraries:
       - ecms_patternlab/source/images/icons
 
 regions:
-  header: Header
+  header_inner: 'Header: Inner'
+  admin_links: 'Admin Links'
   primary_menu: 'Primary menu'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
