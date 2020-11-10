@@ -22,11 +22,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class PressReleaseQueueWorker extends QueueWorkerBase implements ContainerFactoryPluginInterface {
 
-  /** @var \Drupal\ecms_api_press_release_publisher\PressReleasePublisher  */
+  /**
+   * The ecms_api_press_release_publisher service.
+   *
+   * @var \Drupal\ecms_api_press_release_publisher\PressReleasePublisher
+   */
   private $pressReleasePublisher;
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -41,12 +45,12 @@ class PressReleaseQueueWorker extends QueueWorkerBase implements ContainerFactor
    * PressReleaseQueueWorker constructor.
    *
    * @param array $configuration
-   *   The configuration of the plugin.
-   * @param $plugin_id
-   *   The plugin id.
-   * @param $plugin_definition
-   *   The plugin definition.
-   * @param \Drupal\ecms_api_press_release_publisher\PressReleasePublisher $PressReleasePublisher
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\ecms_api_press_release_publisher\PressReleasePublisher $pressReleasePublisher
    *   The ecms_api_press_release_publisher service.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, PressReleasePublisher $pressReleasePublisher) {
@@ -56,9 +60,9 @@ class PressReleaseQueueWorker extends QueueWorkerBase implements ContainerFactor
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
-  public function processItem($data) {
+  public function processItem($data): void {
 
     // Guard against a non-entity and move on.
     if (!$data instanceof EntityInterface) {

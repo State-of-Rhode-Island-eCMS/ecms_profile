@@ -51,8 +51,10 @@ class EcmsApiHelperTest extends UnitTestCase {
   /**
    * Test the getFilePath method.
    *
+   * @param string|null $fileUri
+   *   The URI of the file to test with.
    * @param string|null $expected
-   *   The string to test with or null.
+   *   The expected full path to the file or null.
    *
    * @dataProvider dataProviderForTestGetFilePath
    */

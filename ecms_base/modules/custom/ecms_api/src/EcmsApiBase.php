@@ -5,14 +5,11 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api;
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
-use Drupal\Core\File\FileSystem;
 use Drupal\Core\Url;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\media\MediaInterface;
 use Drupal\media\Plugin\media\Source\File;
-use Drupal\node\NodeInterface;
 use Drupal\paragraphs\ParagraphInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
@@ -55,7 +52,7 @@ abstract class EcmsApiBase {
     'drupal_internal__id',
     'drupal_internal__tid',
     'drupal_internal__revision_id',
-//    'langcode',
+    // 'langcode',
     'revision_timestamp',
     'status',
     'created',
@@ -98,6 +95,8 @@ abstract class EcmsApiBase {
   protected $entityToJsonApi;
 
   /**
+   * The ecms_api_helper service.
+   *
    * @var \Drupal\ecms_api\EcmsApiHelper
    */
   protected $ecmsApiHelper;
@@ -109,7 +108,7 @@ abstract class EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
-   * @param \Drupal\ecms_api\EcmsApiHelper
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
    *   The ecms_api_helper service.
    */
   public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper) {
@@ -222,7 +221,8 @@ abstract class EcmsApiBase {
           $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, (int) $fileEntity->id(), $sourceFieldName);
 
           if (empty($fileUuid)) {
-            // Return false if the file entity for the media element was not saved.
+            // Return false if the file entity for the
+            // media element was not saved.
             return FALSE;
           }
         }
@@ -297,7 +297,19 @@ abstract class EcmsApiBase {
     return FALSE;
   }
 
-  protected function setParagraphEntityRevisionIds(&$relationships, EntityInterface $entity, string $accessToken, Url $url): void {
+  /**
+   * Set the paragraph entity revision ids on the remote entity.
+   *
+   * @param array $relationships
+   *   The relationships array returned from the normalized entity.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity being syndicated.
+   * @param string $accessToken
+   *   The access token to connect to json api.
+   * @param \Drupal\Core\Url $url
+   *   The url of the endpoint.
+   */
+  protected function setParagraphEntityRevisionIds(array &$relationships, EntityInterface $entity, string $accessToken, Url $url): void {
     // Get referenced entities.
     $references = $entity->referencedEntities();
     if (empty($references)) {
@@ -305,7 +317,7 @@ abstract class EcmsApiBase {
     }
 
     // Loop through the referenced entities and fetch paragraphs from the api.
-    /** @var EntityInterface $referencedEntity */
+    /** @var \Drupal\Core\Entity\EntityInterface $referencedEntity */
     foreach ($references as $referencedEntity) {
       // We only care about paragraph entities.
       if (!$referencedEntity instanceof ParagraphInterface) {
@@ -322,7 +334,7 @@ abstract class EcmsApiBase {
 
       $remoteRevisionId = (int) $remoteEntity->attributes->drupal_internal__revision_id;
 
-      $this->setParagraphRevisionId($relationships, $uuid, $remoteRevisionId);
+      $this->setRemoteParagraphRevisionId($relationships, $uuid, $remoteRevisionId);
 
     }
   }
@@ -349,12 +361,16 @@ abstract class EcmsApiBase {
   /**
    * Submit the source file for a media entity or legacy file field.
    *
-   * @param \Drupal\media\MediaInterface $media
-   *   The media entity to post with json api.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to post with json api.
    * @param string $accessToken
    *   The access token to connect to the hub site.
    * @param \Drupal\Core\Url $url
    *   The url of the hub site.
+   * @param int $fileId
+   *   The file id of the file to submit to json api.
+   * @param string $fieldName
+   *   The name of the field to upload the file to.
    *
    * @return string|null
    *   The uuid of the new file or null.
@@ -687,8 +703,17 @@ abstract class EcmsApiBase {
 
   }
 
-
-  private function setParagraphRevisionId(array &$data, string $uuid, int $revisionId): void {
+  /**
+   * Set the remote paragraph revision id.
+   *
+   * @param array $data
+   *   The data to search for the revision id.
+   * @param string $uuid
+   *   The UUID of the entity to search.
+   * @param int $revisionId
+   *   The new revision id of the remote entitiy.
+   */
+  private function setRemoteParagraphRevisionId(array &$data, string $uuid, int $revisionId): void {
     foreach ($data as $key => &$value) {
       if ($key === 'id' && $data[$key] === $uuid) {
         // Set the revision ID from the remote entity.
@@ -696,7 +721,7 @@ abstract class EcmsApiBase {
       }
 
       if (is_array($value)) {
-        $this->setParagraphRevisionId($value, $uuid, $revisionId);
+        $this->setRemoteParagraphRevisionId($value, $uuid, $revisionId);
       }
     }
   }

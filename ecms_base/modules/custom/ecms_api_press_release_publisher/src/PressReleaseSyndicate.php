@@ -11,6 +11,11 @@ use Drupal\file\FileInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 
+/**
+ * Queue publications for syndication back to the hub site.
+ *
+ * @package Drupal\ecms_api_press_release_publisher
+ */
 class PressReleaseSyndicate {
 
   /**
@@ -68,12 +73,6 @@ class PressReleaseSyndicate {
 
     if (in_array(self::MODERATION_PUBLISHED, $moderatedState, TRUE)) {
       $this->processEntity($node);
-      // @todo: Push the media to the hub first.
-      // @todo: How to handle the paragraphs?
-      // @todo: How to handle media items within paragraphs?
-      // @todo: How to handle the taxonomy terms?
-      // @todo: How to handle terms with the same name on different sites?
-      // @todo: Push the node to the hub.
     }
   }
 

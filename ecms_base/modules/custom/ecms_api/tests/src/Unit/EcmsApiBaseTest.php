@@ -9,10 +9,8 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemInterface;
-use Drupal\Core\Field\FieldItemList;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\ecms_api\EcmsApiBase;
@@ -20,7 +18,6 @@ use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\file\FileInterface;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\media\MediaInterface;
-use Drupal\media\MediaSourceInterface;
 use Drupal\media\Plugin\media\Source\File;
 use Drupal\media\Plugin\media\Source\OEmbed;
 use Drupal\paragraphs\ParagraphInterface;
@@ -294,6 +291,11 @@ class EcmsApiBaseTest extends UnitTestCase {
    */
   private $url;
 
+  /**
+   * Mock of the ecms_api_helper service.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $ecmsApiHelper;
 
   /**
@@ -419,7 +421,11 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $getAccessToken = new \ReflectionMethod(EcmsApiBase::class, 'getAccessToken');
@@ -608,7 +614,11 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->onlyMethods(['checkEntityExists'])
       ->getMock();
 
@@ -745,7 +755,11 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $getContentTypes = new \ReflectionMethod(EcmsApiBase::class, 'getContentTypes');
@@ -952,7 +966,11 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $checkEntityExists = new \ReflectionMethod(EcmsApiBase::class, 'checkEntityExists');
@@ -1043,7 +1061,11 @@ class EcmsApiBaseTest extends UnitTestCase {
     $fieldname = 'file_upload_test_field_name';
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $getFileEndpointUrl = new \ReflectionMethod(EcmsApiBase::class, 'getFileEndpointUrl');
@@ -1053,7 +1075,7 @@ class EcmsApiBaseTest extends UnitTestCase {
       $ecmsApi, [
         $this->entity,
         $fieldname,
-        $this->url
+        $this->url,
       ]
     );
 
@@ -1085,7 +1107,11 @@ class EcmsApiBaseTest extends UnitTestCase {
       ->willReturn($source);
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $checkMediaSourceIsFile = new \ReflectionMethod(EcmsApiBase::class, 'checkMediaSourceIsFile');
@@ -1093,7 +1119,7 @@ class EcmsApiBaseTest extends UnitTestCase {
 
     $actual = $checkMediaSourceIsFile->invokeArgs(
       $ecmsApi, [
-        $media
+        $media,
       ]
     );
 
@@ -1113,6 +1139,9 @@ class EcmsApiBaseTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Test the submitSourceFileEntity method.
+   */
   public function testSubmitSourceFileEntity(): void {
     $fileId = 45865;
     $filepath = '/path/to/public/files/directory/test-image.png';
@@ -1165,9 +1194,12 @@ class EcmsApiBaseTest extends UnitTestCase {
       ->with('POST', $endpoint, $payload)
       ->willReturn($request);
 
-
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $submitSourceFileEntity = new \ReflectionMethod(EcmsApiBase::class, 'submitSourceFileEntity');
@@ -1175,7 +1207,11 @@ class EcmsApiBaseTest extends UnitTestCase {
 
     $actual = $submitSourceFileEntity->invokeArgs(
       $ecmsApi, [
-        $this->entity, self::ACCESS_TOKEN, $this->url, $fileId, $fieldname
+        $this->entity,
+        self::ACCESS_TOKEN,
+        $this->url,
+        $fileId,
+        $fieldname,
       ]
     );
 
@@ -1271,7 +1307,11 @@ class EcmsApiBaseTest extends UnitTestCase {
     }
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->getMock();
 
     $fetchEntityFromApi = new \ReflectionMethod(EcmsApiBase::class, 'fetchEntityFromApi');
@@ -1416,7 +1456,11 @@ class EcmsApiBaseTest extends UnitTestCase {
       ->willReturn(self::ENTITY_UUID);
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->onlyMethods(['checkEntityExists', 'submitSourceFileEntity'])
       ->getMock();
 
@@ -1456,7 +1500,6 @@ class EcmsApiBaseTest extends UnitTestCase {
     );
 
     $this->assertEquals($expected, $result);
-
   }
 
   /**
@@ -1472,6 +1515,9 @@ class EcmsApiBaseTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Test the setParagraphEntityRevisionIds method.
+   */
   public function testSetParagraphEntityRevisionIds(): void {
     $references = [];
 
@@ -1497,7 +1543,11 @@ class EcmsApiBaseTest extends UnitTestCase {
       ->willReturn($references);
 
     $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
-      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
       ->onlyMethods(['fetchEntityFromApi'])
       ->getMock();
 
@@ -1524,11 +1574,12 @@ class EcmsApiBaseTest extends UnitTestCase {
         &$relationships,
         $this->entity,
         self::ACCESS_TOKEN,
-        $this->url
+        $this->url,
       ]
     );
 
     $this->assertEquals(58, $relationships['field_test']['meta']['target_revision_id']);
 
   }
+
 }

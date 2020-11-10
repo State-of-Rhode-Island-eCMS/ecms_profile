@@ -46,6 +46,8 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
+   *   The ecms_api_helper service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
    * @param \Drupal\ecms_api_recipient\JsonApiHelper $jsonApiHelper

@@ -6,16 +6,17 @@ namespace Drupal\ecms_api_press_release_publisher;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Queue\PostponeItemException;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\ecms_api\EcmsApiHelper;
-use Drupal\file\FileInterface;
 use Drupal\jsonapi_extras\EntityToJsonApi;
-use Drupal\media\MediaInterface;
 use GuzzleHttp\ClientInterface;
 
+/**
+ * Handle publishing press releases back to the hub site.
+ *
+ * @package Drupal\ecms_api_press_release_publisher
+ */
 class PressReleasePublisher extends EcmsApiBase {
 
   /**
@@ -31,7 +32,11 @@ class PressReleasePublisher extends EcmsApiBase {
    * @param \GuzzleHttp\ClientInterface $httpClient
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
-   *    The jsonapi_extras.entity.to_jsonapi service.
+   *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
+   *   The ecms_api_helper service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config.factory service.
    */
   public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper, ConfigFactoryInterface $configFactory) {
     parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
@@ -77,40 +82,10 @@ class PressReleasePublisher extends EcmsApiBase {
     return FALSE;
   }
 
-//  /**
-//   * Alter the attributes of the JSON Api entity.
-//   *
-//   * @param array $attributes
-//   *   Associative array of entity attributes to send with JSON API.
-//   * @param \Drupal\Core\Entity\EntityInterface|null $entity
-//   *   The entity being submitted or null.
-//   */
-//  protected function alterEntityAttributes(array &$attributes, ?EntityInterface $entity = NULL): void {
-//    $keys = array_keys($attributes);
-//
-//    foreach ($keys as $key) {
-//      // If the attribute is disallowed, remove it.
-//      if (in_array($key, self::NO_API_FIELD_NAMES)) {
-//        unset($attributes[$key]);
-//      }
-//    }
-//
-//    if ($entity instanceof MediaInterface) {
-//      if (in_array('langcode', $keys)) {
-//        unset($attributes['langcode']);
-//      }
-//    }
-//
-//    // Add the uuid to the attributes.
-//    if ($entity) {
-//      $attributes['uuid'] = $entity->uuid();
-//    }
-//  }
-
   /**
    * Get the hub uri from configuration.
    *
-   * @return Url|null
+   * @return \Drupal\Core\Url|null
    *   The client id for the recipient site.
    */
   private function getHubUri(): ?Url {

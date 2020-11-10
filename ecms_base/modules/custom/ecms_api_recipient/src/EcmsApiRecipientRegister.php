@@ -46,6 +46,8 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
+   *   The ecms_api_helper service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack

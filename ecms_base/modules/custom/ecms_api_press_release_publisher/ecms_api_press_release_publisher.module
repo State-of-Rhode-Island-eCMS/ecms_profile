@@ -2,7 +2,7 @@
 
 /**
  * @file
- * ecms_api_notification_publisher.module
+ * Ecms_api_notification_publisher.module.
  */
 
 declare(strict_types = 1);
@@ -21,14 +21,4 @@ function ecms_api_press_release_publisher_node_insert(EntityInterface $entity): 
  */
 function ecms_api_press_release_publisher_node_update(EntityInterface $entity): void {
   \Drupal::service('ecms_api_press_release_syndicate')->syndicatePressRelease($entity);
-}
-
-/**
- * Implements hook_ENTITY_TYPE_translation_insert() for the node entity.
- */
-function ecms_api_press_release_publisher_translation_insert(EntityInterface $translation): void {
-  // Call the syndication service on translation insert.
-  // Translation support currently requires the patch from here:
-  // @see: https://www.drupal.org/project/drupal/issues/2794431#comment-13841477
-  //\Drupal::service('ecms_api_press_release_syndicate')->broadcastPressRelease($translation);
 }

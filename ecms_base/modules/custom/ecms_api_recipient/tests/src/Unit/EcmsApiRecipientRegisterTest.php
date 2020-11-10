@@ -92,6 +92,11 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
    */
   private $httpClient;
 
+  /**
+   * Mock of the ecms_api_helper service.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $ecmsApiHelper;
 
   /**

@@ -16,6 +16,9 @@ use GuzzleHttp\ClientInterface;
  */
 class NotificationPublisher extends EcmsApiBase {
 
+  /**
+   * The published moderation state.
+   */
   const MODERATION_PUBLISHED = 'published';
 
   /**
@@ -32,6 +35,8 @@ class NotificationPublisher extends EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
+   *   The ecms_api_helper service.
    * @param \Drupal\ecms_api_publisher\EcmsApiSyndicate $ecmsApiSyndicate
    *   The ecms_api_publisher.syndicate service.
    */

@@ -39,6 +39,11 @@ class NotificationPublisherTest extends UnitTestCase {
    */
   private $entityToJsonApi;
 
+  /**
+   * Mock of the ecms_api_helper service.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $ecmsApiHelper;
 
   /**
