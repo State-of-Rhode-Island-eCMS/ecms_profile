@@ -5,6 +5,6 @@ services:
     class: Drupal\ecms_api\EcmsApiInstall
     arguments: ['@config.factory']
 
-  ecms_api_media_helper:
+  ecms_api_helper:
     class: Drupal\ecms_api\EcmsApiHelper
     arguments: ['@entity_type.manager', '@stream_wrapper.public']

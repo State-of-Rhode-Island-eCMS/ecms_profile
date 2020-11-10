@@ -10,7 +10,7 @@ services:
   # The recipient api registration service.
   ecms_api_recipient.register:
     class: Drupal\ecms_api_recipient\EcmsApiRecipientRegister
-    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_media_helper', '@config.factory', '@request_stack']
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_helper', '@config.factory', '@request_stack']
 
   ecms_api_recipient.retrieve_notifications:
     class: Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications
@@ -18,7 +18,7 @@ services:
 
   ecms_api_recipient.create_notifications:
     class: Drupal\ecms_api_recipient\EcmsApiCreateNotifications
-    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_media_helper', '@entity_type.manager', '@ecms_api_recipient.jsonapi_helper']
+    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_helper', '@entity_type.manager', '@ecms_api_recipient.jsonapi_helper']
 
   ecms_api_recipient.jsonapi_helper:
     class: Drupal\ecms_api_recipient\JsonapiHelper
