@@ -297,10 +297,9 @@ abstract class EcmsApiBase {
     return FALSE;
   }
 
-  private function setParagraphEntityRevisionIds(&$relationships, EntityInterface $entity, string $accessToken, Url $url): void {
+  protected function setParagraphEntityRevisionIds(&$relationships, EntityInterface $entity, string $accessToken, Url $url): void {
     // Get referenced entities.
     $references = $entity->referencedEntities();
-
     if (empty($references)) {
       return;
     }
@@ -328,7 +327,16 @@ abstract class EcmsApiBase {
     }
   }
 
-  private function checkMediaSourceIsFile(MediaInterface $media): bool {
+  /**
+   * Ensure that the media entity source field is a file.
+   *
+   * @param \Drupal\media\MediaInterface $media
+   *   The media entity to check.
+   *
+   * @return bool
+   *   Return true if the source entity is a File.
+   */
+  protected function checkMediaSourceIsFile(MediaInterface $media): bool {
     $source = $media->getSource();
 
     if ($source instanceof File) {
@@ -351,7 +359,7 @@ abstract class EcmsApiBase {
    * @return string|null
    *   The uuid of the new file or null.
    */
-  private function submitSourceFileEntity(EntityInterface $entity, string $accessToken, Url $url, int $fileId, string $fieldName): ?string {
+  protected function submitSourceFileEntity(EntityInterface $entity, string $accessToken, Url $url, int $fileId, string $fieldName): ?string {
     $filePath = $this->ecmsApiHelper->getFilePath($fileId);
 
     // Guard against an empty filepath.
@@ -601,6 +609,12 @@ abstract class EcmsApiBase {
     }
   }
 
+  /**
+   * Alter the relationships of the JSON Api entity.
+   *
+   * @param array $relationships
+   *   Associative array of entity relationships to send with JSON API.
+   */
   private function alterEntityRelationships(array &$relationships): void {
     $keys = array_keys($relationships);
 
@@ -610,9 +624,6 @@ abstract class EcmsApiBase {
         unset($relationships[$key]);
       }
     }
-
-    //$this->ecmsApiHelper->removeParagraphReferences($relationships, ['target_revision_id']);
-
   }
 
   /**
@@ -675,6 +686,7 @@ abstract class EcmsApiBase {
     return NULL;
 
   }
+
 
   private function setParagraphRevisionId(array &$data, string $uuid, int $revisionId): void {
     foreach ($data as $key => &$value) {

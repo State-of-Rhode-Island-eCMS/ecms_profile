@@ -6,7 +6,13 @@ namespace Drupal\Tests\ecms_api\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemInterface;
+use Drupal\Core\Field\FieldItemList;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\TypedData\TypedDataInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
 use Drupal\ecms_api\EcmsApiBase;
@@ -14,8 +20,10 @@ use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\file\FileInterface;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\media\MediaInterface;
+use Drupal\media\MediaSourceInterface;
 use Drupal\media\Plugin\media\Source\File;
 use Drupal\media\Plugin\media\Source\OEmbed;
+use Drupal\paragraphs\ParagraphInterface;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
@@ -105,6 +113,9 @@ class EcmsApiBaseTest extends UnitTestCase {
         'attributes' => [
           'field_text_field' => 'Text Field',
           'field_date_field' => '1980-11-09T23:43:43+00:00:00',
+          'field_text_field_processed' => [
+            'value' => 'Text Field Processed',
+          ],
           'uuid' => self::ENTITY_UUID,
         ],
         'relationships' => [],
@@ -139,6 +150,10 @@ class EcmsApiBaseTest extends UnitTestCase {
         'created' => 232654568,
         'field_text_field' => 'Text Field',
         'field_date_field' => '1980-11-09T23:43:43+00:00:00',
+        'field_text_field_processed' => [
+          'value' => 'Text Field Processed',
+          'processed' => TRUE,
+        ],
       ],
       'relationships' => [
         'uid' => '',
@@ -155,6 +170,77 @@ class EcmsApiBaseTest extends UnitTestCase {
     ],
   ];
 
+  /**
+   * The expected return value of the entity after normalization.
+   */
+  const NORMALIZED_MEDIA_ENTITY = [
+    'data' => [
+      'type' => self::ENTITY_BUNDLE,
+      'id' => self::ENTITY_UUID,
+      'attributes' => [
+        'drupal_internal__nid' => 12345,
+        'drupal_internal__vid' => 54321,
+        'created' => 232654568,
+        'field_text_field' => 'Text Field',
+        'field_date_field' => '1980-11-09T23:43:43+00:00:00',
+        'field_text_field_processed' => [
+          'value' => 'Text Field Processed',
+          'processed' => TRUE,
+        ],
+      ],
+      'relationships' => [
+        self::MEDIA_SOURCE_FIELD_NAME => [
+          'data' => [
+            'id' => 'uuid-1234-test-5678',
+          ],
+        ],
+        'uid' => '',
+        'revision_uid' => '',
+        'revision_user' => '',
+        'node_type' => '',
+        'thumbnail' => '',
+        'paragraph_type' => '',
+        'bundle' => '',
+        'vid' => '',
+        'parent' => '',
+        'content_translation_uid' => '',
+      ],
+    ],
+  ];
+
+  /**
+   * The expected payload to be sent to the API.
+   */
+  const MEDIA_PAYLOAD = [
+    'json' => [
+      'data' => [
+        'type' => self::ENTITY_BUNDLE,
+        'id' => self::ENTITY_UUID,
+        'attributes' => [
+          'field_text_field' => 'Text Field',
+          'field_date_field' => '1980-11-09T23:43:43+00:00:00',
+          'field_text_field_processed' => [
+            'value' => 'Text Field Processed',
+          ],
+          'uuid' => self::ENTITY_UUID,
+        ],
+        'relationships' => [
+          self::MEDIA_SOURCE_FIELD_NAME => [
+            'data' => [
+              'id' => self::MEDIA_SOURCE_FILE_UUID,
+            ],
+          ],
+        ],
+      ],
+    ],
+    'headers' => [
+      'Content-Type' => 'application/vnd.api+json',
+      'Authorization' => "Bearer " . self::ACCESS_TOKEN,
+    ],
+  ];
+
+  const PARAGRAPH_ENTITY_UUID = 'bcf3f58d-8c27-4cab-bcac-18d3702c5dbb';
+  const PARAGRAPH_ENTITY_JSON = '{"jsonapi":{"version":"1.0","meta":{"links":{"self":{"href":"http:\/\/jsonapi.org\/format\/1.0\/"}}}},"data":{"type":"paragraph--icon_card","id":"bcf3f58d-8c27-4cab-bcac-18d3702c5dbb","links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/paragraph\/icon_card\/bcf3f58d-8c27-4cab-bcac-18d3702c5dbb"}},"attributes":{"drupal_internal__id":37,"drupal_internal__revision_id":58,"langcode":"en","status":true,"created":"2020-11-05T12:48:54+00:00","parent_id":null,"parent_type":"node","parent_field_name":"field_press_release_paragraphs","behavior_settings":null,"default_langcode":true,"revision_translation_affected":true,"content_translation_source":"und","content_translation_outdated":false,"content_translation_changed":"2020-11-05T12:48:54+00:00","field_list_title":"Icon Card #1","field_text":{"value":"\u003Cp\u003EThis is a test\u003C\/p\u003E\r\n","format":"basic_html","processed":"\u003Cp\u003EThis is a test\u003C\/p\u003E"}},"relationships":{"paragraph_type":{"data":{"type":"paragraphs_type--paragraphs_type","id":"4d71e2ef-b3a6-4926-96c7-0541db99e5cb"},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/paragraph\/icon_card\/bcf3f58d-8c27-4cab-bcac-18d3702c5dbb\/paragraph_type"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/paragraph\/icon_card\/bcf3f58d-8c27-4cab-bcac-18d3702c5dbb\/relationships\/paragraph_type"}}},"field_icon":{"data":{"type":"file--file","id":"e32e7a2a-ef10-4e95-a960-b739258866de","meta":{"alt":"Icon","title":"","width":64,"height":64}},"links":{"related":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/paragraph\/icon_card\/bcf3f58d-8c27-4cab-bcac-18d3702c5dbb\/field_icon"},"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/paragraph\/icon_card\/bcf3f58d-8c27-4cab-bcac-18d3702c5dbb\/relationships\/field_icon"}}}}},"links":{"self":{"href":"https:\/\/develop-ecms-profile.lndo.site\/EcmsApi\/paragraph\/icon_card\/bcf3f58d-8c27-4cab-bcac-18d3702c5dbb"}}}';
   /**
    * The endpoint for the node_type api.
    */
@@ -175,6 +261,10 @@ class EcmsApiBaseTest extends UnitTestCase {
   const JSON_UUID = '2e434fe8-0fcd-48ae-941e-ea78c4f348f7';
 
   const FILE_BYTES = 'beepboopbeepbeep';
+
+  const MEDIA_SOURCE_FIELD_NAME = 'test_field_name';
+  const MEDIA_SOURCE_FILE_UUID = 'file-test-uuid-1234-5566';
+  const MEDIA_SOURCE_FILE_ID = 747;
 
   /**
    * Mock of the http_client service.
@@ -1092,4 +1182,353 @@ class EcmsApiBaseTest extends UnitTestCase {
     $this->assertEquals(self::JSON_UUID, $actual);
   }
 
+  /**
+   * Test the fetchEntityFromApi method.
+   *
+   * @param int $code
+   *   The status code to return.
+   * @param bool $defaultLanguage
+   *   The language to use for the entity.
+   * @param string|null $expected
+   *   The expected return result.
+   *
+   * @dataProvider dataProviderForTestFetchEntityFromApi
+   */
+  public function testFetchEntityFromApi(int $code, bool $defaultLanguage, ?string $expected): void {
+    if ($defaultLanguage) {
+      $endpoint = self::ENTITY_ENDPOINT;
+    }
+    else {
+      $endpoint = self::ENTITY_ENDPOINT_LANGUAGE;
+    }
+
+    $language = $this->createMock(LanguageInterface::class);
+    $language->expects($this->once())
+      ->method('getId')
+      ->willReturn(self::LANGUAGE_ID);
+
+    $language->expects($this->once())
+      ->method('isDefault')
+      ->willReturn($defaultLanguage);
+
+    $this->entity->expects($this->once())
+      ->method('language')
+      ->willReturn($language);
+
+    $this->url->expects($this->once())
+      ->method('toString')
+      ->willReturn(self::ENDPOINT_URL);
+
+    $this->entity->expects($this->once())
+      ->method('getEntityTypeId')
+      ->willReturn(self::ENTITY_TYPE);
+
+    $this->entity->expects($this->once())
+      ->method('bundle')
+      ->willReturn(self::ENTITY_BUNDLE);
+
+    $uuid = self::ENTITY_UUID;
+    $endpoint = "{$endpoint}/{$uuid}";
+
+    $this->entity->expects($this->once())
+      ->method('uuid')
+      ->willReturn(self::ENTITY_UUID);
+
+    if ($code < 200 || $code > 399) {
+      $request = $this->createMock(RequestInterface::class);
+      $response = $this->createMock(ResponseInterface::class);
+      $response->expects($this->once())
+        ->method('getStatusCode')
+        ->willReturn($code);
+      $exception = new ClientException('', $request, $response);
+
+      $this->httpclient->expects($this->once())
+        ->method('request')
+        ->with('GET', $endpoint, self::CHECK_ENTITY_EXISTS_PAYLOAD)
+        ->willThrowException($exception);
+    }
+    else {
+      $this->response->expects($this->once())
+        ->method('getStatusCode')
+        ->willReturn($code);
+
+      $stream = $this->createMock(StreamInterface::class);
+      $stream->expects($this->once())
+        ->method('getContents')
+        ->willReturn(self::JSON_DATA_OBJECT_STRING);
+
+      $this->response->expects($this->once())
+        ->method('getBody')
+        ->willReturn($stream);
+
+      $this->httpclient->expects($this->once())
+        ->method('request')
+        ->with('GET', $endpoint, self::CHECK_ENTITY_EXISTS_PAYLOAD)
+        ->willReturn($this->response);
+
+      $expectedJson = json_decode(self::JSON_DATA_OBJECT_STRING);
+      $expected = $expectedJson->data;
+    }
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->getMock();
+
+    $fetchEntityFromApi = new \ReflectionMethod(EcmsApiBase::class, 'fetchEntityFromApi');
+    $fetchEntityFromApi->setAccessible(TRUE);
+
+    $result = $fetchEntityFromApi->invokeArgs(
+      $ecmsApi, [
+        self::ACCESS_TOKEN,
+        $this->url,
+        $this->entity,
+      ]
+    );
+
+    $this->assertEquals($expected, $result);
+  }
+
+  /**
+   * Data provider for the testFetchEntityFromApi method.
+   *
+   * @return array[]
+   *   Parameters to pass to the testFetchEntityFromApi method.
+   */
+  public function dataProviderForTestFetchEntityFromApi(): array {
+    return [
+      'test1' => [
+        -1,
+        TRUE,
+        NULL,
+      ],
+      'test2' => [
+        200,
+        TRUE,
+        self::JSON_DATA_OBJECT_STRING,
+      ],
+      'test3' => [
+        404,
+        TRUE,
+        NULL,
+      ],
+    ];
+  }
+
+  /**
+   * Test the submit entity method with media & file fields.
+   *
+   * @param string $type
+   *   The type of entity to expect.
+   * @param bool $expected
+   *   The expected result.
+   *
+   * @dataProvider dataProviderForTestSubmitEntityWithFileFields
+   */
+  public function testSubmitEntityWithFileFields(string $type, bool $expected): void {
+    switch ($type) {
+      case 'media':
+        $localEntity = $this->createMock(MediaInterface::class);
+
+        $source = $this->createMock(File::class);
+
+        $source->expects($this->once())
+          ->method('getConfiguration')
+          ->willReturn(['source_field' => self::MEDIA_SOURCE_FIELD_NAME]);
+
+        $source->expects($this->once())
+          ->method('getSourceFieldValue')
+          ->with($localEntity)
+          ->willReturn(self::MEDIA_SOURCE_FILE_ID);
+
+        $localEntity->expects($this->exactly(2))
+          ->method('getSource')
+          ->willReturn($source);
+
+        break;
+
+      case 'fieldable':
+        $fileEntity = $this->createMock(FileInterface::class);
+        $fileEntity->expects($this->once())
+          ->method('id')
+          ->willReturn(self::MEDIA_SOURCE_FILE_ID);
+
+        $fieldItem = $this->createMock(FieldItemInterface::class);
+        $fieldItem->expects($this->once())
+          ->method('__get')
+          ->with('entity')
+          ->willReturn($fileEntity);
+
+        $fieldDefinition = $this->createMock(FieldDefinitionInterface::class);
+        $fieldDefinition->expects($this->once())
+          ->method('getType')
+          ->willReturn('image');
+
+        $fieldItemList = $this->createMock(FieldItemListInterface::class);
+        $fieldItemList->expects($this->once())
+          ->method('getFieldDefinition')
+          ->willReturn($fieldDefinition);
+
+        $fieldItemList->expects($this->once())
+          ->method('isEmpty')
+          ->willReturn(FALSE);
+        $fieldItemList->expects($this->once())
+          ->method('first')
+          ->willReturn($fieldItem);
+        $fieldItemList->expects($this->once())
+          ->method('getName')
+          ->willReturn(self::MEDIA_SOURCE_FIELD_NAME);
+
+        $localEntity = $this->createMock(FieldableEntityInterface::class);
+        $localEntity->expects($this->once())
+          ->method('getFields')
+          ->willReturn([$fieldItemList]);
+
+        break;
+    }
+
+    $language = $this->createMock(LanguageInterface::class);
+    $language->expects($this->once())
+      ->method('getId')
+      ->willReturn(self::LANGUAGE_ID);
+
+    $language->expects($this->once())
+      ->method('isDefault')
+      ->willReturn(TRUE);
+
+    $localEntity->expects($this->once())
+      ->method('language')
+      ->willReturn($language);
+
+    $this->url->expects($this->once())
+      ->method('toString')
+      ->willReturn(self::ENDPOINT_URL);
+
+    $localEntity->expects($this->once())
+      ->method('getEntityTypeId')
+      ->willReturn(self::ENTITY_TYPE);
+
+    $localEntity->expects($this->exactly(2))
+      ->method('bundle')
+      ->willReturn(self::ENTITY_BUNDLE);
+
+    $localEntity->expects($this->exactly(2))
+      ->method('uuid')
+      ->willReturn(self::ENTITY_UUID);
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->onlyMethods(['checkEntityExists', 'submitSourceFileEntity'])
+      ->getMock();
+
+    $ecmsApi->expects($this->once())
+      ->method('checkEntityExists')
+      ->with(self::ACCESS_TOKEN, $this->url, $localEntity)
+      ->willReturn('POST');
+
+    $ecmsApi->expects($this->once())
+      ->method('submitSourceFileEntity')
+      ->with($localEntity, self::ACCESS_TOKEN, $this->url, self::MEDIA_SOURCE_FILE_ID, self::MEDIA_SOURCE_FIELD_NAME)
+      ->willReturn(self::MEDIA_SOURCE_FILE_UUID);
+
+    $this->entityToJsonApi->expects($this->once())
+      ->method('normalize')
+      ->with($localEntity)
+      ->willReturn(self::NORMALIZED_MEDIA_ENTITY);
+
+    $request = $this->createMock(ResponseInterface::class);
+    $request->expects($this->once())
+      ->method('getStatusCode')
+      ->willReturn(201);
+    $this->httpclient->expects($this->once())
+      ->method('request')
+      ->with('POST', self::ENTITY_ENDPOINT, self::MEDIA_PAYLOAD)
+      ->willReturn($request);
+
+    $submitEntity = new \ReflectionMethod(EcmsApiBase::class, 'submitEntity');
+    $submitEntity->setAccessible(TRUE);
+
+    $result = $submitEntity->invokeArgs(
+      $ecmsApi, [
+        self::ACCESS_TOKEN,
+        $this->url,
+        $localEntity,
+      ]
+    );
+
+    $this->assertEquals($expected, $result);
+
+  }
+
+  /**
+   * Data provider for the testSubmitEntityWithFileFields method.
+   *
+   * @return array[]
+   *   Array of parameters to pass to testSubmitEntityWithFileFields.
+   */
+  public function dataProviderForTestSubmitEntityWithFileFields(): array {
+    return [
+      'test1' => ['media', TRUE],
+      'test2' => ['fieldable', TRUE],
+    ];
+  }
+
+  public function testSetParagraphEntityRevisionIds(): void {
+    $references = [];
+
+    $nonParagraphEntity = $this->createMock(EntityInterface::class);
+
+    $references[] = $nonParagraphEntity;
+
+    $uuidField = $this->createMock(FieldItemListInterface::class);
+    $uuidField->expects($this->once())
+      ->method('__get')
+      ->with('value')
+      ->willReturn(self::PARAGRAPH_ENTITY_UUID);
+
+    $paragraph = $this->createMock(ParagraphInterface::class);
+    $paragraph->expects($this->once())
+      ->method('get')
+      ->with('uuid')
+      ->willReturn($uuidField);
+
+    $references[] = $paragraph;
+    $this->entity->expects($this->once())
+      ->method('referencedEntities')
+      ->willReturn($references);
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([$this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper])
+      ->onlyMethods(['fetchEntityFromApi'])
+      ->getMock();
+
+    $jsonData = json_decode(self::PARAGRAPH_ENTITY_JSON);
+    $ecmsApi->expects($this->once())
+      ->method('fetchEntityFromApi')
+      ->with(self::ACCESS_TOKEN, $this->url, $paragraph)
+      ->willReturn($jsonData->data);
+
+    $setParagraphEntityRevisionIds = new \ReflectionMethod(EcmsApiBase::class, 'setParagraphEntityRevisionIds');
+    $setParagraphEntityRevisionIds->setAccessible(TRUE);
+
+    $relationships = [
+      'field_test' => [
+        'id' => self::PARAGRAPH_ENTITY_UUID,
+        'meta' => [
+          'target_revision_id' => 99999,
+        ],
+      ],
+    ];
+
+    $setParagraphEntityRevisionIds->invokeArgs(
+      $ecmsApi, [
+        &$relationships,
+        $this->entity,
+        self::ACCESS_TOKEN,
+        $this->url
+      ]
+    );
+
+    $this->assertEquals(58, $relationships['field_test']['meta']['target_revision_id']);
+
+  }
 }
