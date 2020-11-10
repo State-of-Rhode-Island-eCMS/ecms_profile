@@ -41,6 +41,10 @@ abstract class EcmsApiBase {
     'PATCH',
   ];
 
+  const NO_API_PARAGRAPH_ONLY = [
+    'langcode',
+  ];
+
   /**
    * Fields that should not be submitted.
    */
@@ -52,7 +56,6 @@ abstract class EcmsApiBase {
     'drupal_internal__id',
     'drupal_internal__tid',
     'drupal_internal__revision_id',
-    // 'langcode',
     'revision_timestamp',
     'status',
     'created',
@@ -613,6 +616,15 @@ abstract class EcmsApiBase {
     // Add the uuid to the attributes.
     if ($entity) {
       $attributes['uuid'] = $entity->uuid();
+
+      if ($entity instanceof ParagraphInterface) {
+        foreach ($keys as $key) {
+          // If the attribute is disallowed, remove it.
+          if (in_array($key, self::NO_API_PARAGRAPH_ONLY)) {
+            unset($attributes[$key]);
+          }
+        }
+      }
     }
 
     foreach ($attributes as $key => $value) {
