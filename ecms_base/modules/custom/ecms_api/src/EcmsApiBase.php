@@ -110,7 +110,7 @@ abstract class EcmsApiBase {
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
    * @param \Drupal\ecms_api\EcmsApiHelper
-   *   The ecms_api_media_helper service.
+   *   The ecms_api_helper service.
    */
   public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper) {
     $this->httpClient = $httpClient;
