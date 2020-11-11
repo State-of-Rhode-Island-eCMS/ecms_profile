@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Ecms_api_notification_publisher.module.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for the node entity.
+ */
+function ecms_api_press_release_publisher_node_insert(EntityInterface $entity): void {
+  \Drupal::service('ecms_api_press_release_syndicate')->syndicatePressRelease($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for the node entity.
+ */
+function ecms_api_press_release_publisher_node_update(EntityInterface $entity): void {
+  \Drupal::service('ecms_api_press_release_syndicate')->syndicatePressRelease($entity);
+}

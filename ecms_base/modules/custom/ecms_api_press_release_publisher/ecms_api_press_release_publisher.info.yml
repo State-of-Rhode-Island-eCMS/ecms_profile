@@ -1,0 +1,9 @@
+name: eCMS API Press Release Publisher
+description: 'Provides logic to post press releases to the main hub site.'
+type: module
+core_version_requirement: ^9
+package: eCMS API
+
+dependencies:
+  - ecms_api_recipient
+  - ecms_press_release

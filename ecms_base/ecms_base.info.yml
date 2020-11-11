@@ -53,6 +53,7 @@ dependencies:
   - openid_connect_windows_aad
   - options
   - paragraphs
+  - paragraphs:paragraphs_type_permissions
   - path
   - pathauto
   - page_cache

@@ -13,6 +13,7 @@ permissions:
   - 'administer site configuration'
   - 'administer themes'
   - 'administer users'
+  - 'bypass paragraphs type content access'
   - 'configure any layout'
   - 'create content translations'
   - 'create url aliases'

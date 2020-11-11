@@ -9,6 +9,7 @@ use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\UnroutedUrlAssemblerInterface;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRegister;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\Tests\UnitTestCase;
@@ -92,6 +93,13 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
   private $httpClient;
 
   /**
+   * Mock of the ecms_api_helper service.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $ecmsApiHelper;
+
+  /**
    * Mock of the jsonapi_extras.entity.to_jsonapi service.
    *
    * @var \Drupal\jsonapi_extras\EntityToJsonApi|\PHPUnit\Framework\MockObject\MockObject
@@ -108,6 +116,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
     $this->requestStack = $this->createMock(RequestStack::class);
     $this->entityToJsonApi = $this->createMock(EntityToJsonApi::class);
     $this->httpClient = $this->createMock(ClientInterface::class);
+    $this->ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
 
     $container = new ContainerBuilder();
     $container->set('unrouted_url_assembler', $this->createMock(UnroutedUrlAssemblerInterface::class));
@@ -178,6 +187,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
       ->setConstructorArgs([
         $this->httpClient,
         $this->entityToJsonApi,
+        $this->ecmsApiHelper,
         $this->configFactory,
         $this->requestStack,
       ])

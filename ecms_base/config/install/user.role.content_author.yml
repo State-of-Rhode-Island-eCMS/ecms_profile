@@ -6,6 +6,7 @@ label: 'Content Author'
 weight: 4
 is_admin: null
 permissions:
+  - 'bypass paragraphs type content access'
   - 'delete media'
   - 'update media'
   - 'use editorial transition create_new_draft'

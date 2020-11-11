@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Url;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_publisher\EcmsApiPublisher;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
@@ -95,6 +96,7 @@ class EcmsApiPublisherTest extends UnitTestCase {
 
     $httpClient = $this->createMock(ClientInterface::class);
     $entityToJsonApi = $this->createMock(EntityToJsonApi::class);
+    $ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
 
     $this->accountSwitcher = $this->createMock(AccountSwitcherInterface::class);
     $this->userStorage = $this->createMock(EntityStorageInterface::class);
@@ -109,6 +111,7 @@ class EcmsApiPublisherTest extends UnitTestCase {
       ->setConstructorArgs([
         $httpClient,
         $entityToJsonApi,
+        $ecmsApiHelper,
         $this->configFactory,
         $entityTypeManager,
         $this->accountSwitcher,

@@ -7,3 +7,4 @@ package: eCMS API
 dependencies:
   - ecms_api
   - ecms_notification
+  - paragraphs:paragraphs_type_permissions

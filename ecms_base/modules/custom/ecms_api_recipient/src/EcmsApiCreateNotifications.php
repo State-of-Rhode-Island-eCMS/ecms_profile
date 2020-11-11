@@ -7,6 +7,7 @@ namespace Drupal\ecms_api_recipient;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_api\EcmsApiBase;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
@@ -45,6 +46,8 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
+   *   The ecms_api_helper service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
    * @param \Drupal\ecms_api_recipient\JsonApiHelper $jsonApiHelper
@@ -53,10 +56,11 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
   public function __construct(
     ClientInterface $httpClient,
     EntityToJsonApi $entityToJsonApi,
+    EcmsApiHelper $ecmsApiHelper,
     EntityTypeManagerInterface $entityTypeManager,
     JsonApiHelper $jsonApiHelper
   ) {
-    parent::__construct($httpClient, $entityToJsonApi);
+    parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 
     $this->entityTypeManager = $entityTypeManager;
     $this->jsonApiHelper = $jsonApiHelper;

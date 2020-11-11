@@ -7,6 +7,7 @@ namespace Drupal\ecms_api_recipient;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
+use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
@@ -45,13 +46,15 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The http_client service.
    * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
    *   The jsonapi_extras.entity.to_jsonapi service.
+   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
+   *   The ecms_api_helper service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request_stack service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, ConfigFactoryInterface $configFactory, RequestStack $requestStack) {
-    parent::__construct($httpClient, $entityToJsonApi);
+  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper, ConfigFactoryInterface $configFactory, RequestStack $requestStack) {
+    parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 
     $this->configFactory = $configFactory;
     $this->requestStack = $requestStack;
