@@ -77,6 +77,7 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
 
     $node_storage = $this->entityTypeManager->getStorage('node');
 
+    // Query all notifications.
     $query = $node_storage->getQuery();
     $query->condition('type', 'notification')
           ->condition('status', 1)
