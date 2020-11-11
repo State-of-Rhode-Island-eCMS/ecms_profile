@@ -75,19 +75,19 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
    */
   public function build(): array {
 
-    // Query all notifications.
-    $query = \Drupal::entityQuery('node')
-      ->condition('type', 'notification')
-      ->condition('status', 1)
-      ->sort('field_notification_global', "DESC");
+    $node_storage = $this->entityTypeManager->getStorage('node');
+
+    $query = $node_storage->getQuery();
+    $query->condition('type', 'notification')
+          ->condition('status', 1)
+          ->sort('field_notification_global', "DESC");
+
     $nids = $query->execute();
 
     // Guard against no nodes.
     if (empty($nids)) {
       return [];
     }
-
-    $node_storage = $this->entityTypeManager->getStorage('node');
 
     // Load multiple nodes.
     $nodes = $node_storage->loadMultiple($nids);
