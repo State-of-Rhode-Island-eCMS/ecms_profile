@@ -6,6 +6,7 @@ label: 'Content Publisher'
 weight: 5
 is_admin: null
 permissions:
+  - 'bypass paragraphs type content access'
   - 'create url aliases'
   - 'delete all revisions'
   - 'delete any media'

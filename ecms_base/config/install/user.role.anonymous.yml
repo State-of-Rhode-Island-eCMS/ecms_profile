@@ -8,3 +8,10 @@ is_admin: false
 permissions:
   - 'access content'
   - 'view media'
+  - 'view paragraph content accordion_builder'
+  - 'view paragraph content column_container'
+  - 'view paragraph content embed'
+  - 'view paragraph content file_list'
+  - 'view paragraph content formatted_text'
+  - 'view paragraph content icon_card'
+  - 'view paragraph content media_item'
