@@ -13,14 +13,21 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-142: Added social navigation automatic class functionality.
 - RIG-69: Added promotion reference fields for locations, people, events, and press releases.
 - RIG-81: Added press release syndication.
+- RIG-130: Added custom site notifications block and theming.
+- RIG-130: Added theming for social navigation menu.
+- RIG-130: Added language switcher block.
+- RIG-130: Added Header: Inner, Admin Links, User Settings regions.
 
 ### Changed
 - RIG-139: CI Improvements.
 - RIG-91: Added Scheduled Transitions module to most content types.
+- RIG-130: Changed promotions and notifications to use rich text rather than plain text.
+- RIG-130: Changed paragraphs text format to include source button.
 
 ### Deprecated
 
 ### Removed
+- RIG-130: Removed Header region.
 
 ### Fixed
 
