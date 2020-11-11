@@ -14,13 +14,16 @@ targetEntityType: node
 bundle: notification
 mode: teaser
 content:
-  links:
-    weight: 100
+  field_notification_text:
+    type: text_default
+    weight: 0
+    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
+  content_moderation_control: true
   field_notification_expire_date: true
   field_notification_global: true
-  field_notification_text: true
   langcode: true
+  links: true

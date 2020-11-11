@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ecms_blocks
+  theme:
+    - ecms
+id: sitenotifications
+theme: ecms
+region: highlighted
+weight: -3
+provider: null
+plugin: ecms_site_notifications
+settings:
+  id: ecms_site_notifications
+  label: 'Site Notifications'
+  provider: ecms_blocks
+  label_display: '0'
+visibility: {  }

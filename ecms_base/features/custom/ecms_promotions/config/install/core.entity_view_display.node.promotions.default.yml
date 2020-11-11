@@ -10,6 +10,7 @@ dependencies:
     - node.type.promotions
   module:
     - link
+    - text
     - user
 id: node.promotions.default
 targetEntityType: node
@@ -51,11 +52,11 @@ content:
     third_party_settings: {  }
     region: content
   field_promotion_text:
-    weight: 105
+    weight: 108
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: text_default
     region: content
   field_promotion_url:
     weight: 103

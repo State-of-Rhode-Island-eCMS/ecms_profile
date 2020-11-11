@@ -3,6 +3,7 @@ description: 'Provides Promotions content type and related configuration. Add a 
 type: module
 core_version_requirement: ^9
 dependencies:
+  - allowed_formats
   - content_moderation
   - content_translation
   - ecms_distribution

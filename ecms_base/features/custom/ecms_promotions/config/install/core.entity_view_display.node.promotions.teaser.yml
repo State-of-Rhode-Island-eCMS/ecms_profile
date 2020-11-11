@@ -26,13 +26,6 @@ content:
       link: true
       view_mode: default
     third_party_settings: {  }
-  field_promotion_text:
-    type: basic_string
-    weight: 1
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
   field_promotion_url:
     type: link
     weight: 2
@@ -49,5 +42,6 @@ hidden:
   content_moderation_control: true
   field_promotion_display_title: true
   field_promotion_global_display: true
+  field_promotion_text: true
   langcode: true
   links: true

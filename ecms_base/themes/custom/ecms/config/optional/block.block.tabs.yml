@@ -5,7 +5,7 @@ dependencies:
     - ecms
 id: tabs
 theme: ecms
-region: header
+region: admin_links
 weight: -2
 provider: null
 plugin: local_tasks_block

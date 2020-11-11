@@ -38,7 +38,7 @@ function get_patternlab_social_source(): ?array {
   }
 
   foreach ($json->{'social-platforms'} as $key => $object) {
-    $return[$key] = $object->{'link-title'};
+    $return[$object->{'icon'}] = $object->{'link-title'};
   }
 
   $return['other'] = t('Other');
@@ -244,9 +244,9 @@ function ecms_distribution_preprocess_menu(&$variables): void {
 
       // Set the link item_attributes on the <li> elements.
       if (array_key_exists('item_attributes', $options)) {
-        foreach ($options['item_attributes'] as $key => $value) {
-          $variables['items'][$linkKey]['attributes']->setAttribute($key, $value);
-        }
+        // Set icon as an item property.
+        // Drupal Attributes are not easily accessible in Pattern Lab.
+        $variables['items'][$linkKey]['icon'] = $options['item_attributes']['class'][0];
       }
     }
   }

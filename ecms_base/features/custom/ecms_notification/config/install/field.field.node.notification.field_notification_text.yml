@@ -4,6 +4,17 @@ dependencies:
   config:
     - field.storage.node.field_notification_text
     - node.type.notification
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    paragraph_text: paragraph_text
+    basic_html: '0'
+    embed: '0'
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
 id: node.notification.field_notification_text
 field_name: field_notification_text
 entity_type: node
@@ -15,4 +26,4 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string_long
+field_type: text_long
