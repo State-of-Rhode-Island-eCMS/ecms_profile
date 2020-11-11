@@ -53,7 +53,7 @@ class PressReleaseQueueWorker extends QueueWorkerBase implements ContainerFactor
    * @param \Drupal\ecms_api_press_release_publisher\PressReleasePublisher $pressReleasePublisher
    *   The ecms_api_press_release_publisher service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, PressReleasePublisher $pressReleasePublisher) {
+  public function __construct(array $configuration, string $plugin_id, $plugin_definition, PressReleasePublisher $pressReleasePublisher) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->pressReleasePublisher = $pressReleasePublisher;
