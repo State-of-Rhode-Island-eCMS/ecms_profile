@@ -80,8 +80,8 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
     // Query all notifications.
     $query = $node_storage->getQuery();
     $query->condition('type', 'notification')
-          ->condition('status', 1)
-          ->sort('field_notification_global', "DESC");
+      ->condition('status', 1)
+      ->sort('field_notification_global', "DESC");
 
     $nids = $query->execute();
 
