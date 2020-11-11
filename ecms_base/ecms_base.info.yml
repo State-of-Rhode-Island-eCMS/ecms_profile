@@ -23,6 +23,7 @@ dependencies:
   - contextual
   - datetime
   - dblog
+  - disable_language
   - dynamic_entity_reference
   - dynamic_page_cache
   - ecms_distribution
