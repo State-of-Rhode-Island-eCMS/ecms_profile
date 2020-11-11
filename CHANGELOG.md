@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.9] - 2020-11-11
+### Added
 - RIG-142: Added social navigation automatic class functionality.
 - RIG-69: Added promotion reference fields for locations, people, events, and press releases.
 - RIG-81: Added press release syndication.
@@ -24,14 +37,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-130: Changed promotions and notifications to use rich text rather than plain text.
 - RIG-130: Changed paragraphs text format to include source button.
 
-### Deprecated
-
 ### Removed
 - RIG-130: Removed Header region.
-
-### Fixed
-
-### Security
 
 ## [0.1.8] - 2020-11-06
 ### Added
@@ -207,7 +214,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.9...HEAD
+[0.1.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.8...0.1.9
 [0.1.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.7...0.1.8
 [0.1.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.6...0.1.7
 [0.1.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.5...0.1.6
