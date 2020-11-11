@@ -48,6 +48,7 @@ settings:
             - Blockquote
             - SpecialChar
             - RemoveFormat
+            - Source
   plugins:
     stylescombo:
       styles: ''
