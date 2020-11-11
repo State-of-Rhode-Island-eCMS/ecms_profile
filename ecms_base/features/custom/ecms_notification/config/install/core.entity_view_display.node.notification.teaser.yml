@@ -15,7 +15,7 @@ bundle: notification
 mode: teaser
 content:
   field_notification_text:
-    type: basic_string
+    type: text_default
     weight: 0
     region: content
     label: hidden

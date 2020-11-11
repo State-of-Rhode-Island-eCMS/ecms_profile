@@ -3,6 +3,7 @@ description: 'Provides Notification content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - allowed_formats
   - content_moderation
   - content_translation
   - datetime
@@ -12,6 +13,7 @@ dependencies:
   - node
   - path
   - rabbit_hole
+  - text
   - user
   - workflows
 package: eCMS

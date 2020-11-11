@@ -34,11 +34,11 @@ content:
     type: boolean
     region: content
   field_notification_text:
-    weight: 101
+    weight: 104
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: text_default
     region: content
   links:
     weight: 100
