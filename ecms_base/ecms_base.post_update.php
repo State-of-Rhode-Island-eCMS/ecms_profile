@@ -134,3 +134,92 @@ function ecms_base_post_update_014_update_oidc_settings(&$sandbox): void {
   $oidcConfig->set('settings.group_mapping.strict', FALSE);
   $oidcConfig->save();
 }
+
+/**
+ * Update user permission for the paragraph bundles.
+ */
+function ecms_base_post_update_019_update_role_permissions(&$sandbox): void {
+  // List all current paragraph bundles.
+  $paragraph_types = [
+    'accordion_builder',
+    'column_container',
+    'embed',
+    'file_list',
+    'formatted_text',
+    'icon_card',
+    'media_item',
+  ];
+
+  // List all new permissions being introduced by role.
+  $permissions = [
+    'anonymous' => [],
+    'authenticated' => [],
+    'content_author' => [
+      'bypass paragraphs type content access',
+    ],
+    'embed_author' => [
+      'bypass paragraphs type content access',
+    ],
+    'content_publisher' => [
+      'bypass paragraphs type content access',
+    ],
+    'site_admin' => [
+      'bypass paragraphs type content access',
+    ],
+    'ecms_api_publisher' => [
+      'add ecms api site entities',
+      'bypass paragraphs type content access',
+      'create content translations',
+      'create press_release content',
+      'create terms in press_release_topics',
+      'delete media',
+      'edit own press_release content',
+      'edit terms in press_release_topics',
+      'translate any entity',
+      'translate paragraph',
+      'update any media',
+      'update content translations',
+      'update media',
+      'use editorial transition archive',
+      'use editorial transition archived_published',
+      'use editorial transition create_new_draft',
+      'use editorial transition publish',
+      'use editorial transition review',
+      'use text format embed',
+      'use text format full_html',
+      'use text format paragraph_text',
+      'view own unpublished content',
+      'view press_release revisions',
+      'view unpublished paragraphs',
+    ],
+  ];
+
+  foreach ($paragraph_types as $type) {
+    $permissions['anonymous'][] = "view paragraph content {$type}";
+    $permissions['authenticated'][] = "view paragraph content {$type}";
+  }
+
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entityManager */
+  $entityManager = \Drupal::service('entity_type.manager');
+
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $roleStorage */
+  $roleStorage = $entityManager->getStorage('user_role');
+
+  foreach ($permissions as $role_name => $role_permissions) {
+    /** @var \Drupal\user\RoleInterface $role */
+    $role = $roleStorage->load($role_name);
+
+    if (!empty($role)) {
+      foreach ($role_permissions as $permission) {
+        $role->grantPermission($permission);
+      }
+
+      try {
+        $role->save();
+      }
+      catch (EntityStorageException $e) {
+        // Trap any storage errors.
+      }
+    }
+  }
+}

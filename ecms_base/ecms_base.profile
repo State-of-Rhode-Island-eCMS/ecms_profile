@@ -134,4 +134,12 @@ function ecms_base_update_9019(array &$sandbox): void {
 
   // Add scheduler settings.
   $active_storage->write('scheduled_transitions.settings', $install_source->read('scheduled_transitions.settings'));
+
+  // Install new modules.
+  $modules_to_install = [
+    'paragraphs_type_permissions',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
 }
