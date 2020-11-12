@@ -143,3 +143,16 @@ function ecms_base_update_9019(array &$sandbox): void {
   // Make sure necessary modules are installed.
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Updates to run for the 0.2.0 tag.
+ */
+function ecms_base_update_9020(array &$sandbox): void {
+  // Install new modules.
+  $modules_to_install = [
+    'disable_language',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
