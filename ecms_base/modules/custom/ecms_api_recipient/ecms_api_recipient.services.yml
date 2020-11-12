@@ -21,7 +21,7 @@ services:
     arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_helper', '@entity_type.manager', '@ecms_api_recipient.jsonapi_helper']
 
   ecms_api_recipient.jsonapi_helper:
-    class: Drupal\ecms_api_recipient\JsonapiHelper
+    class: Drupal\ecms_api_recipient\JsonApiHelper
     arguments:
       - '@jsonapi.serializer'
       - '@serializer.normalizer.jsonapi_document_toplevel.jsonapi'
