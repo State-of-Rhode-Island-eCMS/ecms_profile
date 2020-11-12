@@ -23,7 +23,6 @@ dependencies:
   - contextual
   - datetime
   - dblog
-  - disable_language
   - dynamic_entity_reference
   - dynamic_page_cache
   - ecms_distribution
@@ -88,6 +87,7 @@ install:
   - ecms_basic_page
   - ecms_blocks
   - ecms_event
+  - ecms_languages
   - ecms_landing_page
   - ecms_layout
   - ecms_location

@@ -47,9 +47,6 @@
       },
       "drupal/webform_encrypt": {
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch"
-      },
-      "drupal/disable_language": {
-          "3181905 - Remove core key" : "https://www.drupal.org/files/issues/2020-11-11/disable_language_coreinfo.patch"
       }
     },
     "preserve-paths": [],
@@ -81,7 +78,6 @@
     "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
     "drupal/core-recommended": "^9",
-    "drupal/disable_language": "^1.0@beta",
     "drupal/extlink": "^1.5",
     "drupal/features": "^3.11",
     "drupal/jsonapi_extras": "^3.16",

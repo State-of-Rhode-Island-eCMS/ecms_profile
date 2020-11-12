@@ -1,0 +1,6 @@
+ecms_languages.ecms_languages_settings:
+  title: 'eCMS Language Settings'
+  route_name: ecms_languages.ecms_languages_settings
+  description: 'Configure the eCMS Language Settings module settings'
+  parent: entity.configurable_language.collection
+  weight: 99

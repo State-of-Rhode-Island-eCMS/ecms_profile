@@ -10,12 +10,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-130: Added eCMS Languages custom module.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+- RIG-130: Removed Disable language module.
 
 ### Fixed
 
