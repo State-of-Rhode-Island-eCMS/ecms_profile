@@ -39,6 +39,12 @@
  */
 #}
 
+
+{% set align = '' %}
+{% if not paragraph.field_alignment.value is empty %}
+  {% set align = paragraph.field_alignment.value %}
+{% endif %}
+
 {# Link field is not required. #}
 {% set link_url = FALSE %}
 {% if not paragraph.field_link is empty %}
@@ -58,7 +64,7 @@
       type: media_type,
       caption: paragraph.field_caption.value,
       size: paragraph.field_size.value,
-      align: paragraph.field_alignment.value,
+      align: align,
       link_url: link_url,
       link_title: paragraph.field_link.title,
       url: image_url,
@@ -74,7 +80,7 @@
       type: media_type,
       caption: paragraph.field_caption.value,
       size: paragraph.field_size.value,
-      align: paragraph.field_alignment.value,
+      align: align,
       source: video_source
     }
   %}
