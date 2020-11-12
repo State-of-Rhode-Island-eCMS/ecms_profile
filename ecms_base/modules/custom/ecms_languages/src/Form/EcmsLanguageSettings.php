@@ -49,7 +49,7 @@ class EcmsLanguageSettings extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames() : array {
     return [
       'ecms_languages.settings',
     ];
@@ -58,14 +58,14 @@ class EcmsLanguageSettings extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId() : string {
     return 'ecms_languages_settings';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) : array {
     $config = $this->config('ecms_languages.settings');
 
     $excluded_languages = $config->get('excluded_languages') ?? [];
@@ -92,7 +92,7 @@ class EcmsLanguageSettings extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) : void {
     parent::submitForm($form, $form_state);
 
     $values = $form_state->getValue('excluded_languages');

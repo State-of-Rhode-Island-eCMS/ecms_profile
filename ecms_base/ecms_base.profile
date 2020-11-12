@@ -157,7 +157,6 @@ function ecms_base_update_9020(array &$sandbox): void {
   \Drupal::service('module_installer')->install($modules_to_install);
 }
 
-
 /**
  * Updates to run for the 0.2.1 tag.
  */
