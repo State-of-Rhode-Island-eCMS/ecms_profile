@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-130: Added disable language module.
 
 ### Changed
 
@@ -19,9 +18,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-143: Fixed a class path php error.
 
 ### Security
+
+## [0.2.0] - 2020-11-12
+### Added
+- RIG-130: Added disable language module.
+
+### Fixed
+- RIG-143: Fixed a class path php error.
 
 ## [0.1.9] - 2020-11-11
 ### Added
@@ -216,7 +221,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.9...0.2.0
 [0.1.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.8...0.1.9
 [0.1.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.7...0.1.8
 [0.1.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.6...0.1.7
