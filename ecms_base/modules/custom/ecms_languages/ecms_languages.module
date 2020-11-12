@@ -12,8 +12,7 @@ use Drupal\Core\Url;
 /**
  * Implements hook_language_switch_links_alter().
  *
- * We need to filter out the languages
- * from the configuration list.
+ * We need to filter out the languages from the configuration list.
  */
 function ecms_languages_language_switch_links_alter(array &$links, string $type, Url $path) : void {
 
@@ -26,15 +25,6 @@ function ecms_languages_language_switch_links_alter(array &$links, string $type,
 
   // Remove languages that were flagged in the configuration.
   foreach ($links as $langcode => $link) {
-    // When te language isn't available in the link object we need to load it
-    // using the entity storage.
-    if (empty($link['language']) || !($link['language'] instanceof LanguageInterface)) {
-      $language = \Drupal::entityTypeManager()->getStorage('configurable_language')->load($langcode);
-    }
-    else {
-      $language = $link['language'];
-    }
-
     // If the language was checked, remove it.
     if ($excluded_languages[$langcode] === $langcode) {
       unset($links[$langcode]);
