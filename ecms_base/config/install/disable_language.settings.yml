@@ -1,0 +1,5 @@
+redirect_override_routes:
+  - user.reset.login
+  - entity.user.edit_form
+exclude_request_path:
+  pages: ''
