@@ -9,7 +9,7 @@ use Drupal\Core\Language\LanguageManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * CProvides a configuration form to exclude languages from the switcher.
+ * Provides a configuration form to exclude languages from the switcher.
  */
 class EcmsLanguageSettings extends ConfigFormBase {
 
@@ -67,11 +67,8 @@ class EcmsLanguageSettings extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) : array {
     $config = $this->config('ecms_languages.settings');
-
     $excluded_languages = $config->get('excluded_languages') ?? [];
-
     $active_languages = $this->languageManager->getLanguages();
-
     $language_options = [];
 
     foreach ($active_languages as $key => $language) {
