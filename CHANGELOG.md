@@ -10,12 +10,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-130: Added eCMS Languages custom module.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+- RIG-130: Uninstalls the Disable Language module.
+- RIG-91: Uninstall the Scheduler module.
 
 ### Fixed
 

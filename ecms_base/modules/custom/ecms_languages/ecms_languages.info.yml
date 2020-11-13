@@ -1,0 +1,7 @@
+name: eCMS Languages
+description: 'Provides a custom language switcher.'
+type: module
+core_version_requirement: ^9
+package: eCMS
+dependencies:
+  - drupal:language

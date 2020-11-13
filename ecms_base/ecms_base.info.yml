@@ -23,7 +23,6 @@ dependencies:
   - contextual
   - datetime
   - dblog
-  - disable_language
   - dynamic_entity_reference
   - dynamic_page_cache
   - ecms_distribution
@@ -68,7 +67,6 @@ dependencies:
   - responsive_image
   - rdf
   - scheduled_transitions
-  - scheduler
   - shortcut
   - svg_image
   - taxonomy
@@ -89,6 +87,7 @@ install:
   - ecms_blocks
   - ecms_event
   - ecms_landing_page
+  - ecms_languages
   - ecms_layout
   - ecms_location
   - ecms_notification

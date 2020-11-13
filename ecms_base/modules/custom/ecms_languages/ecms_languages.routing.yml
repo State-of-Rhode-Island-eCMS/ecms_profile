@@ -1,0 +1,9 @@
+ecms_languages.ecms_languages_settings:
+  path: '/admin/config/regional/language/ecms_languages'
+  defaults:
+    _form: '\Drupal\ecms_languages\Form\EcmsLanguageSettings'
+    _title: 'eCMS Language Settings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
