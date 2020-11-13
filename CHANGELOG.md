@@ -11,6 +11,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-130: Added eCMS Languages custom module.
+- RIG-130: Added promotion refernce paragraph bundle.
+- RIG-130: Added patch to allow svg to be uploaded for theme logos.
 
 ### Changed
 - RIG-148: Changed the language detection method to session/cookie.
