@@ -17,7 +17,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
-- RIG-130: Removed Disable language module.
+- RIG-130: Uninstalls the Disable Language module.
+- RIG-91: Uninstall the Scheduler module.
 
 ### Fixed
 

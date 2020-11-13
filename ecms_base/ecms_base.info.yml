@@ -67,7 +67,6 @@ dependencies:
   - responsive_image
   - rdf
   - scheduled_transitions
-  - scheduler
   - shortcut
   - svg_image
   - taxonomy
