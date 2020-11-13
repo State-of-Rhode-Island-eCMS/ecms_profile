@@ -10,6 +10,21 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.1] - 2020-11-13
+### Added
 - RIG-130: Added eCMS Languages custom module.
 - RIG-130: Added promotion refernce paragraph bundle.
 - RIG-130: Added patch to allow svg to be uploaded for theme logos.
@@ -24,15 +39,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-130: Changed External Link module config.
 - RIG-130: Changed Press Release view to support transaltions.
 
-### Deprecated
-
 ### Removed
 - RIG-130: Uninstalls the Disable Language module.
 - RIG-91: Uninstall the Scheduler module.
-
-### Fixed
-
-### Security
 
 ## [0.2.0] - 2020-11-12
 ### Added
@@ -234,7 +243,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.9...0.2.0
 [0.1.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.8...0.1.9
 [0.1.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.7...0.1.8
