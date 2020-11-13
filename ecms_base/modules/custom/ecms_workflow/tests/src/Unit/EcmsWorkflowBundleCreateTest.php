@@ -208,17 +208,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with(["id" => self::WORKFLOW_ID])
       ->willReturn([$workflow]);
 
-    $nodeTypeEntity = $this->createMock(ConfigEntityInterface::class);
-    $nodeTypeEntity->expects($this->once())
-      ->method('save')
-      ->willReturnSelf();
-
-    $nodeTypeStorage = $this->createMock(EntityStorageInterface::class);
-    $nodeTypeStorage->expects($this->once())
-      ->method('load')
-      ->with($contentType)
-      ->willReturn($nodeTypeEntity);
-
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
       ->withConsecutive(['user_role'], ['workflow'])
