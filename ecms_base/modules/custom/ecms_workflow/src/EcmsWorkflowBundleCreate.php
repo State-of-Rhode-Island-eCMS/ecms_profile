@@ -70,29 +70,7 @@ class EcmsWorkflowBundleCreate {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   private function addSchedulerSettings(string $contentType): void {
-    $type = $this->entityTypeManager
-      ->getStorage('node_type')
-      ->load($contentType);
-
-    $type->setThirdPartySetting('scheduler', 'expand_fieldset', 'when_required');
-    $type->setThirdPartySetting('scheduler', 'fields_display_mode', 'fieldset');
-    $type->setThirdPartySetting('scheduler', 'publish_enable', 1);
-    $type->setThirdPartySetting('scheduler', 'publish_past_date', 0);
-    $type->setThirdPartySetting('scheduler', 'publish_past_date_created', 'error');
-    $type->setThirdPartySetting('scheduler', 'publish_required', 0);
-    $type->setThirdPartySetting('scheduler', 'publish_revision', 0);
-    $type->setThirdPartySetting('scheduler', 'publish_touch', 0);
-    $type->setThirdPartySetting('scheduler', 'show_message_after_update', 1);
-    $type->setThirdPartySetting('scheduler', 'unpublish_enable', 1);
-    $type->setThirdPartySetting('scheduler', 'unpublish_required', 0);
-    $type->setThirdPartySetting('scheduler', 'unpublish_revision', 0);
-
-    try {
-      $type->save();
-    }
-    catch (EntityStorageException $e) {
-      return;
-    }
+    // @todo Add the content type to the scheduled transitions settings.
   }
 
   /**
