@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-130: Added eCMS Languages custom module.
 
 ### Changed
+- RIG-148: Changed the language detection method to session/cookie.
 
 ### Deprecated
 
