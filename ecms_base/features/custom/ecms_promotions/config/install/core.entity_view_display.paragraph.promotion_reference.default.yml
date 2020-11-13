@@ -1,0 +1,21 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.promotion_reference.field_promotion
+    - paragraphs.paragraphs_type.promotion_reference
+id: paragraph.promotion_reference.default
+targetEntityType: paragraph
+bundle: promotion_reference
+mode: default
+content:
+  field_promotion:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden: {  }
