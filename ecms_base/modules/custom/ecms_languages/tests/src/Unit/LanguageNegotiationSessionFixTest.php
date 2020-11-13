@@ -101,7 +101,7 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
 
     $this->bubbleCache->expects($this->exactly($methodCount))
       ->method('addCacheTags')
-      ->willReturnSelf();;
+      ->willReturnSelf();
 
     $this->bubbleCache->expects($this->exactly($methodCount))
       ->method('addCacheContexts')
