@@ -39,7 +39,7 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * {@inheritDoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, string $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
       $plugin_id,
@@ -63,7 +63,7 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
    */
-  public function __construct(array $configuration, string $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->languageManager = $languageManager;
