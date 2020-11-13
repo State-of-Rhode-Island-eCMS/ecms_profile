@@ -160,7 +160,7 @@ function ecms_base_update_9020(array &$sandbox): void {
 /**
  * Updates to run for the 0.2.1 tag.
  */
-function ecms_base_update_9022(array &$sandbox): void {
+function ecms_base_update_9021(array &$sandbox): void {
   // Install new modules.
   $modules_to_install = [
     'ecms_languages',

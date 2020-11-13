@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\ecms_languages\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -24,9 +26,9 @@ class EcmsLanguageSettings extends ConfigFormBase {
    * Class constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The plugin factory to create the condition plugin.
+   *   The config.factory service.
    * @param Drupal\Core\Language\LanguageManager $language_manager
-   *   The language manager service.
+   *   The language_manager service.
    */
   public function __construct(
     ConfigFactoryInterface $config_factory,

@@ -209,24 +209,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->willReturn([$workflow]);
 
     $nodeTypeEntity = $this->createMock(ConfigEntityInterface::class);
-    $nodeTypeEntity->expects($this->exactly(12))
-      ->method('setThirdPartySetting')
-      ->withConsecutive(
-        ['scheduler', 'expand_fieldset', 'when_required'],
-        ['scheduler', 'fields_display_mode', 'fieldset'],
-        ['scheduler', 'publish_enable', 1],
-        ['scheduler', 'publish_past_date', 0],
-        ['scheduler', 'publish_past_date_created', 'error'],
-        ['scheduler', 'publish_required', 0],
-        ['scheduler', 'publish_revision', 0],
-        ['scheduler', 'publish_touch', 0],
-        ['scheduler', 'show_message_after_update', 1],
-        ['scheduler', 'unpublish_enable', 1],
-        ['scheduler', 'unpublish_required', 0],
-        ['scheduler', 'unpublish_revision', 0]
-      )
-      ->willReturnSelf();
-
     $nodeTypeEntity->expects($this->once())
       ->method('save')
       ->willReturnSelf();
