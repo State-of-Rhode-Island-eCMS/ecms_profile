@@ -16,7 +16,7 @@ use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class LanguageNegotiationSessionFixTest
+ * Unit tests for the LanguageNegotiationSessionFix class.
  *
  * @package Drupal\Tests\ecms_languages\Unit
  * @group ecms_languages
@@ -67,7 +67,13 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
    * Test the processOutbound method.
    *
    * @param string $path
-   * @param string $langCode
+   *   The path to test with.
+   * @param bool $entity
+   *   Whether an entity is expected.
+   * @param bool $langCode
+   *   Whether a language is expected.
+   * @param bool $methodsCalled
+   *   Whether the custom process methods will be called.
    *
    * @dataProvider dataProviderForTestProcessOutbound
    */
