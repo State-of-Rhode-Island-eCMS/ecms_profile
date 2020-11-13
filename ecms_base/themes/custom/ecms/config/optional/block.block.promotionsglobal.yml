@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ecms_blocks
+  theme:
+    - ecms
+id: promotionsglobal
+theme: ecms
+region: sidebar_middle
+weight: 0
+provider: null
+plugin: ecms_promotions_global
+settings:
+  id: ecms_promotions_global
+  label: 'Promotions - Global'
+  provider: ecms_blocks
+  label_display: '0'
+visibility: {  }
