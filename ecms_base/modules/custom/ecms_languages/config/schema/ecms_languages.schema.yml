@@ -3,7 +3,7 @@ ecms_languages.settings:
   mapping:
     excluded_languages:
       type: sequence
-        label: 'Excluded Languages'
-        sequence:
-          type: string
-          label: 'Langcode'
+      label: 'Excluded Languages'
+      sequence:
+        type: string
+        label: 'Langcode'
