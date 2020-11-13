@@ -178,17 +178,4 @@ function ecms_base_update_9021(array &$sandbox): void {
 
   // Make sure necessary modules are uninstalled.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
-
-  // Install our new configuration.
-  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
-
-  /** @var \Drupal\Core\Config\FileStorage $install_source */
-  $install_source = new FileStorage($path . "/config/install/");
-
-  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
-  $active_storage = \Drupal::service('config.storage');
-
-  $active_storage->write('language.negotiation', $install_source->read('language.negotiation'));
-  $active_storage->write('language.types', $install_source->read('language.types'));
-  $active_storage->write('language_cookie.negotiation', $install_source->read('language_cookie.negotiation'));
 }
