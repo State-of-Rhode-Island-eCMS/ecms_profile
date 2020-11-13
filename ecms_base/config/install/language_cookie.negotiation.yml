@@ -6,5 +6,3 @@ secure: true
 set_on_every_pageload: true
 blacklisted_paths: {  }
 language_type: language_interface
-_core:
-  default_config_hash: n_3pCzprO9rcyGMNPR5YNLxIpJQyO1RvKi-e87Rb0JM
