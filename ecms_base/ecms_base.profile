@@ -172,7 +172,7 @@ function ecms_base_update_9021(array &$sandbox): void {
   // Disable existing modules.
   $modules_to_uninstall = [
     'disable_language',
-    'scheduler'
+    'scheduler',
   ];
 
   // Make sure necessary modules are uninstalled.
