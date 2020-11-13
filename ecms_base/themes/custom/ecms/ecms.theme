@@ -21,6 +21,7 @@ function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables
 function ecms_preprocess_page(&$variables) {
 
   // Attach header variables.
+  $variables['header_preprocess_values']['site_logo'] = theme_get_setting('logo.url');
   $variables['header_preprocess_values']['top_line'] = theme_get_setting('header_top_line');
   $variables['header_preprocess_values']['main_line'] = theme_get_setting('header_main_line');
   $variables['header_preprocess_values']['bottom_line'] = theme_get_setting('header_bottom_line');
