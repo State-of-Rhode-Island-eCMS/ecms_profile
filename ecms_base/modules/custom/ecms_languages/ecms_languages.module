@@ -38,6 +38,6 @@ function ecms_languages_language_switch_links_alter(array &$links, string $type,
  * We need to update the session negotiator to fix translation
  * links in the admin.
  */
-function ecms_languages_language_negotiation_info_alter(array &$negotiation_info) {
+function ecms_languages_language_negotiation_info_alter(array &$negotiation_info): void {
   $negotiation_info['language-session']['class'] = 'Drupal\ecms_languages\LanguageNegotiationSessionFix';
 }
