@@ -13,7 +13,7 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
- * Provides a listing of global promos.
+ * Provides a listing of promos referenced by the node.
  *
  * @Block(
  *   id = "ecms_promotions_global",
@@ -50,7 +50,7 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
   }
 
   /**
-   * PromotionsGlobalBlock constructor.
+   * PromotionsNodeSpecificBlock constructor.
    *
    * @param array $configuration
    *   Configuration array for the block.
