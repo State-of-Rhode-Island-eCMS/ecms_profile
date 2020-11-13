@@ -1,0 +1,8 @@
+param: language
+time: 31536000
+path: /
+domain: ''
+secure: true
+set_on_every_pageload: true
+blacklisted_paths: {  }
+language_type: language_interface

@@ -164,6 +164,7 @@ function ecms_base_update_9021(array &$sandbox): void {
   // Install new modules.
   $modules_to_install = [
     'ecms_languages',
+    'language_cookie',
   ];
 
   // Make sure necessary modules are installed.
