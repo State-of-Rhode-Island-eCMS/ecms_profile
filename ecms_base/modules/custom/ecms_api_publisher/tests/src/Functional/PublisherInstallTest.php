@@ -89,8 +89,9 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->linkExists('eCMS Publisher');
     $this->clickLink('eCMS Publisher');
     $url = $this->getUrl();
+    $urlParts = explode('?', $url);
     // Edit the consumer.
-    $this->drupalGet("{$url}/edit");
+    $this->drupalGet("{$urlParts[0]}/edit");
     $this->assertSession()->statusCodeEquals(200);
     // Ensure the api user is set.
     $this->assertSession()->fieldValueEquals('edit-user-id-0-target-id', "ecms_api_publisher ({$accountId})");
