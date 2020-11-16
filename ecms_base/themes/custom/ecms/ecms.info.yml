@@ -30,6 +30,9 @@ component-libraries:
   icons:
     paths:
       - ecms_patternlab/source/images/icons
+  generic:
+    paths:
+      - templates/generic
 
 regions:
   language_switcher: 'Language Switcher'
