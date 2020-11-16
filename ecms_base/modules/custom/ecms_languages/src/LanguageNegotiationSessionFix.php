@@ -16,35 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 class LanguageNegotiationSessionFix extends LanguageNegotiationSession {
 
   /**
-   * Node operations to add the language query parameter.
-   */
-  const NODE_OPERATIONS = [
-    'edit',
-    'delete',
-  ];
-
-  /**
    * {@inheritDoc}
    */
   public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL): string {
     $parent = parent::processOutbound($path, $options, $request, $bubbleable_metadata);
-
-    $parts = explode('/', ltrim($path, '/'));
-
-    // Make sure we have the correct path length.
-    if (count($parts) !== 3) {
-      return $parent;
-    }
-
-    // Make sure we are dealing with a node.
-    if ($parts[0] !== 'node') {
-      return $parent;
-    }
-
-    // We only care about a few operations.
-    if (!in_array($parts[2], self::NODE_OPERATIONS, TRUE)) {
-      return $parent;
-    }
 
     // Make sure we have an entity.
     if (empty($options['entity'])) {

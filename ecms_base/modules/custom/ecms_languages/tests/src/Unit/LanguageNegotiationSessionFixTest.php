@@ -188,16 +188,52 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
         FALSE,
       ],
       'test8' => [
-        'node/path/add',
+        'media/123/delete',
         TRUE,
         TRUE,
-        FALSE,
+        TRUE,
       ],
       'test9' => [
-        'path/to/delete',
+        'media/123/edit',
         TRUE,
+        TRUE,
+        TRUE,
+      ],
+      'test10' => [
+        'taxonomy/term/123/edit',
+        TRUE,
+        TRUE,
+        TRUE,
+      ],
+      'test11' => [
+        'taxonomy/term/123/delete',
+        TRUE,
+        TRUE,
+        TRUE,
+      ],
+      'test12' => [
+        'taxonomy/term/123/edit',
         TRUE,
         FALSE,
+        FALSE,
+      ],
+      'test13' => [
+        'taxonomy/term/123/delete',
+        TRUE,
+        FALSE,
+        FALSE,
+      ],
+      'test14' => [
+        'block/123/?language=de',
+        TRUE,
+        TRUE,
+        TRUE,
+      ],
+      'test15' => [
+        'block/123/delete?language=de',
+        TRUE,
+        TRUE,
+        TRUE,
       ],
     ];
   }
