@@ -15,7 +15,6 @@ use Drupal\workflows\WorkflowTypeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\Config;
 
-
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.
  *

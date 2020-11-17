@@ -73,6 +73,14 @@ class EcmsWorkflowBundleCreate {
   }
 
   /**
+   * EcmsWorkflowBundleCreate destructor. Ensures caches are cleared.
+   *
+   */
+  public function __destruct() {
+    drupal_flush_all_caches();
+  }
+
+  /**
    * Add scheduled transitions default settings to new content type.
    *
    * @param string $contentType
