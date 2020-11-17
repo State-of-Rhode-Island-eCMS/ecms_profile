@@ -72,9 +72,12 @@
 #}
 
 {# Prepare the image to be sent to PL #}
-{% set img_uri = node.field_promotion_image.entity.field_promotion_image.entity.getFileUri() %}
-{% set img_alt = node.field_promotion_image.entity.field_promotion_image.alt %}
-{% set img = drupal_image(img_uri, 'narrow', {alt: img_alt}, true) %}
+{% set img = '' %}
+{% if node.field_promotion_image is not empty %}
+  {% set img_uri = node.field_promotion_image.entity.field_promotion_image.entity.getFileUri() %}
+  {% set img_alt = node.field_promotion_image.entity.field_promotion_image.alt %}
+  {% set img = drupal_image(img_uri, 'narrow', {alt: img_alt}, true) %}
+{% endif %}
 
 {% include '@molecules/teaser-promotion/teaser-promotion.twig' with {
   title: node.label,
