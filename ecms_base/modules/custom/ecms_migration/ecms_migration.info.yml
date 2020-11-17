@@ -1,0 +1,8 @@
+name: 'Migrate eCMS'
+type: module
+description: 'Migrate a site into the eCMS platform.'
+core_version_requirement: ^8 || ^9
+package: 'Migration'
+dependencies:
+  - drupal:migrate_google_sheets
+  - drupal:migration_tools
