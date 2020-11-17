@@ -247,7 +247,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->config->expects($this->once())
       ->method('set')
-      ->with('bundles', $newBundle)
+      ->with('bundles', [$newBundle])
       ->willReturnSelf();
 
     $this->config->expects($this->once())
