@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-91: Adds the scheduled transitions config updates to the workflow bundle create class.
 
 ### Changed
 
