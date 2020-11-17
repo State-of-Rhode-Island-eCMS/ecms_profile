@@ -74,7 +74,6 @@ class EcmsWorkflowBundleCreate {
 
   /**
    * EcmsWorkflowBundleCreate destructor. Ensures caches are cleared.
-   *
    */
   public function __destruct() {
     drupal_flush_all_caches();
