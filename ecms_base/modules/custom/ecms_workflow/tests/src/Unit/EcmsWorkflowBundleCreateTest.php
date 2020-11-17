@@ -12,6 +12,9 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 use Drupal\workflows\WorkflowInterface;
 use Drupal\workflows\WorkflowTypeInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\Config;
+
 
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.
@@ -64,6 +67,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $configFactory;
 
   /**
+   * Mock of a mutable Config object.
+   *
+   * @var \Drupal\Core\Config\Config|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $config;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -72,6 +82,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->entityStorage = $this->createMock(EntityStorageInterface::class);
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
+    $this->config = $this->createMock(Config::class);
   }
 
   /**
@@ -224,7 +235,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $this->configFactory->expects($this->once())
       ->method('getEditable')
       ->with('scheduled_transitions.settings')
-      ->willReturn($this->configFactory);
+      ->willReturn($this->config);
 
     $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager, $this->configFactory);
 
