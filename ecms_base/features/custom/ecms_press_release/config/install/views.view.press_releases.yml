@@ -206,6 +206,11 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      use_more: false
+      use_more_always: false
+      use_more_text: ''
+      link_url: ''
+      link_display: page_1
     cache_metadata:
       max-age: -1
       contexts:
@@ -229,7 +234,13 @@ display:
           offset: 0
       defaults:
         pager: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
       rendering_language: '***LANGUAGE_language_interface***'
+      use_more: true
+      use_more_always: true
+      use_more_text: 'All press releases'
     cache_metadata:
       max-age: -1
       contexts:
