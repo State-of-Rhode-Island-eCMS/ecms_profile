@@ -251,6 +251,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->willReturn($this->config);
 
     $this->configFactory->expects($this->once())
+      ->method('set')
+      ->with('bundles')
+      ->willReturnSelf();
+
+    $this->configFactory->expects($this->once())
       ->method('save')
       ->willReturnSelf();
 
