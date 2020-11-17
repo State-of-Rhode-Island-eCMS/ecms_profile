@@ -20,6 +20,32 @@
     {
       "type": "composer",
       "url": "https://asset-packagist.org"
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "drupal_git/migration_tools",
+            "type": "drupal-module",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migration_tools.git",
+                "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"
+            }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "drupal_git/migrate_google_sheets",
+            "type": "drupal-module",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_google_sheets.git",
+                "reference": "22944d55be891cfe48d6a6d7c222ff9e89f67b8d"
+            }
+        }
     }
   ],
   "extra": {
@@ -48,6 +74,12 @@
       },
       "drupal/webform_encrypt": {
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch"
+      },
+      "drupal_git/migration_tools": {
+        "3148135 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/automated-d9-compatibility-fixes-3148135-5.patch"
+      },
+      "drupal_git/migrate_google_sheets": {
+        "3138999 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/Drupal-9-readiness-3138999-6.patch"
       }
     },
     "preserve-paths": [],
@@ -110,6 +142,8 @@
     "drupal/twig_vardumper": "^3.0",
     "drupal/webform": "^6.0",
     "drupal/webform_encrypt": "1.x-dev@dev",
+    "drupal_git/migrate_google_sheets": "1.0.0",
+    "drupal_git/migration_tools": "1.0.0",
     "drush/drush": "^10.0",
     "oomphinc/composer-installers-extender": "^2.0",
     "zaporylie/composer-drupal-optimizations": "^1.0"
