@@ -15,7 +15,6 @@ dependencies:
     - content_moderation
     - media_library
     - path
-    - scheduler
     - smart_date
     - text
 id: node.event.default
@@ -124,11 +123,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  scheduler_settings:
-    weight: 20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:

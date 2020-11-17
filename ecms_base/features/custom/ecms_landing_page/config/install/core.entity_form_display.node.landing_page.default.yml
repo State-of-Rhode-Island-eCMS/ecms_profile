@@ -9,7 +9,6 @@ dependencies:
   module:
     - content_moderation
     - path
-    - scheduler
     - text
 id: node.landing_page.default
 targetEntityType: node
@@ -64,11 +63,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  scheduler_settings:
-    weight: 20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:

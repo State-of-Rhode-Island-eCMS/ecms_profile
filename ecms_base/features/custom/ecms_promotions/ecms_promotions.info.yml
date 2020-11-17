@@ -21,7 +21,6 @@ dependencies:
   - rabbit_hole
   - responsive_image
   - scheduled_transitions
-  - scheduler
   - svg_image
   - text
   - user

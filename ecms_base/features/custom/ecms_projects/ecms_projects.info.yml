@@ -17,7 +17,6 @@ dependencies:
   - pathauto
   - rabbit_hole
   - scheduled_transitions
-  - scheduler
   - taxonomy
   - text
   - user

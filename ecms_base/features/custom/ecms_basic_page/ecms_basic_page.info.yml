@@ -18,7 +18,6 @@ dependencies:
   - pathauto
   - rabbit_hole
   - scheduled_transitions
-  - scheduler
   - text
   - user
 package: eCMS

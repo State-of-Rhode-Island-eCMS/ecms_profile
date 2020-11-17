@@ -7,6 +7,7 @@ namespace Drupal\ecms_workflow;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Add node bundles to the editorial workflow.
@@ -52,17 +53,27 @@ class EcmsWorkflowBundleCreate {
   private $entityTypeManager;
 
   /**
+   * The config.factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  private $configFactory;
+
+  /**
    * EcmsWorkflowBundleCreate constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config.factory service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory) {
     $this->entityTypeManager = $entityTypeManager;
+    $this->configFactory = $configFactory;
   }
 
   /**
-   * Add scheduler default settings to new content type.
+   * Add scheduled transitions default settings to new content type.
    *
    * @param string $contentType
    *   The machine name of the new content type.
@@ -70,7 +81,16 @@ class EcmsWorkflowBundleCreate {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   private function addSchedulerSettings(string $contentType): void {
-    // @todo Add the content type to the scheduled transitions settings.
+    /** @var \Drupal\Core\Config\Config $scheduledTransitionsConfig */
+    $scheduledTransitionsConfig = $this->configFactory->getEditable('scheduled_transitions.settings');
+    $currentBundles = $scheduledTransitionsConfig->get('bundles');
+    $newBundle = [
+      'entity_type' => 'node',
+      'bundle' => $contentType,
+    ];
+    $scheduledTransitionsConfig
+      ->set('bundles', array_merge($currentBundles, $newBundle))
+      ->save();
   }
 
   /**

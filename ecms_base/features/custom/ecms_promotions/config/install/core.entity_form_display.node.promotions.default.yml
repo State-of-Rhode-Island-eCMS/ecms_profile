@@ -14,7 +14,6 @@ dependencies:
     - link
     - media_library
     - path
-    - scheduler
     - text
 id: node.promotions.default
 targetEntityType: node
@@ -93,11 +92,6 @@ content:
   publish_on:
     type: datetime_timestamp_no_default
     weight: 16
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  scheduler_settings:
-    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }

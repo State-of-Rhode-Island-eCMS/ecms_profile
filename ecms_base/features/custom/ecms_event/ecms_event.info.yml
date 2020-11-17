@@ -19,7 +19,6 @@ dependencies:
   - pathauto
   - rabbit_hole
   - scheduled_transitions
-  - scheduler
   - smart_date
   - svg_image
   - taxonomy
