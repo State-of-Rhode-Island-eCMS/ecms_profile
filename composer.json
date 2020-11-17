@@ -147,6 +147,7 @@
     "drupal_git/migrate_google_sheets": "1.0.0",
     "drupal_git/migration_tools": "1.0.0",
     "drush/drush": "^10.0",
+    "querypath/querypath": "^3.0",
     "oomphinc/composer-installers-extender": "^2.0",
     "zaporylie/composer-drupal-optimizations": "^1.0"
   },
