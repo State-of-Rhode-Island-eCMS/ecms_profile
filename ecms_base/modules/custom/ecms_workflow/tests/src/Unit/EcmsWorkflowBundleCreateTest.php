@@ -274,7 +274,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     // Get a mock of the class to test.
     $testClass = $this->getMockBuilder(EcmsWorkflowBundleCreate::class)
       ->onlyMethods(['addContentTypeToWorkflow'])
-      ->setConstructorArgs([$this->entityTypeManager])
+      ->setConstructorArgs([$this->entityTypeManager, $this->configFactory])
       ->getMock();
 
     $testClass->expects($this->once())
