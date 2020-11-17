@@ -84,12 +84,15 @@ class EcmsWorkflowBundleCreate {
     /** @var \Drupal\Core\Config\Config $scheduledTransitionsConfig */
     $scheduledTransitionsConfig = $this->configFactory->getEditable('scheduled_transitions.settings');
     $currentBundles = $scheduledTransitionsConfig->get('bundles');
+
+    // Add the new content type to the entity types for scheduled transitions.
     $newBundle = [
       'entity_type' => 'node',
       'bundle' => $contentType,
     ];
+    $currentBundles[] = $newBundle;
     $scheduledTransitionsConfig
-      ->set('bundles', array_merge($currentBundles, $newBundle))
+      ->set('bundles', ($currentBundles))
       ->save();
   }
 
