@@ -14,6 +14,7 @@ use Drupal\workflows\WorkflowInterface;
 use Drupal\workflows\WorkflowTypeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\Config;
+use Drupal\Core\Cache\CacheBackendInterface;
 
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.
@@ -73,6 +74,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $config;
 
   /**
+   * Mock of cache.render service.
+   *
+   * @var \Drupal\Core\Cache\CacheBackendInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $cache;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -82,6 +90,8 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $this->entityStorage = $this->createMock(EntityStorageInterface::class);
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
     $this->config = $this->createMock(Config::class);
+    $this->cache = $this->createMock(CacheBackendInterface::class);
+
   }
 
   /**
@@ -128,7 +138,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with('user_role')
       ->willReturn($this->entityStorage);
 
-    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager, $this->configFactory);
+    $testClass = new EcmsWorkflowBundleCreate(
+      $this->entityTypeManager,
+      $this->configFactory,
+      $this->cache
+    );
 
     $testClass->addTaxonomyTypePermissions($bundle);
   }
@@ -236,7 +250,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with('scheduled_transitions.settings')
       ->willReturn($this->config);
 
-    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager, $this->configFactory);
+    $testClass = new EcmsWorkflowBundleCreate(
+      $this->entityTypeManager,
+      $this->configFactory,
+      $this->cache
+    );
 
     $testClass->addContentTypeToWorkflow($contentType);
   }
@@ -274,7 +292,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     // Get a mock of the class to test.
     $testClass = $this->getMockBuilder(EcmsWorkflowBundleCreate::class)
       ->onlyMethods(['addContentTypeToWorkflow'])
-      ->setConstructorArgs([$this->entityTypeManager, $this->configFactory])
+      ->setConstructorArgs(
+        [
+          $this->entityTypeManager,
+          $this->configFactory,
+          $this->cache,
+        ]
+      )
       ->getMock();
 
     $testClass->expects($this->once())

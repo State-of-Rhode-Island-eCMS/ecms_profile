@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
 
 /**
  * Add node bundles to the editorial workflow.
@@ -60,23 +61,33 @@ class EcmsWorkflowBundleCreate {
   private $configFactory;
 
   /**
+   * The cache.entity service.
+   *
+   * @var \Drupal\Core\Cache\CacheBackendInterface
+   */
+  private $cache;
+
+  /**
    * EcmsWorkflowBundleCreate constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
+   *   The cache.entity service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory, CacheBackendInterface $cache) {
     $this->entityTypeManager = $entityTypeManager;
     $this->configFactory = $configFactory;
+    $this->cache = $cache;
   }
 
   /**
-   * EcmsWorkflowBundleCreate destructor. Ensures caches are cleared.
+   * EcmsWorkflowBundleCreate destructor. Ensures entity caches are cleared.
    */
   public function __destruct() {
-    drupal_flush_all_caches();
+    $this->cache->invalidateAll();
   }
 
   /**
