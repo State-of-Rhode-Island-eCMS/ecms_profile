@@ -250,6 +250,10 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with('scheduled_transitions.settings')
       ->willReturn($this->config);
 
+    $this->configFactory->expects($this->once())
+      ->method('save')
+      ->willReturnSelf();
+
     $testClass = new EcmsWorkflowBundleCreate(
       $this->entityTypeManager,
       $this->configFactory,
