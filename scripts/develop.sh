@@ -245,7 +245,7 @@ fi
 $LANDO composer config repositories.migrate_google_sheets '{"type": "package", "package": {"name": "drupal_git/migrate_google_sheets", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migrate_google_sheets.git", "reference": "22944d55be891cfe48d6a6d7c222ff9e89f67b8d"}}}'
 
 # Add the migration_tools repository.
-$LANDO composer config repositories.migrate_google_sheets '{"type": "package", "package": {"name": "drupal_git/migration_tools", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migration_tools.git", "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"}}}'
+$LANDO composer config repositories.migratation_tools '{"type": "package", "package": {"name": "drupal_git/migration_tools", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migration_tools.git", "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"}}}'
 
 $LANDO composer config extra.enable-patching true
 $LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
