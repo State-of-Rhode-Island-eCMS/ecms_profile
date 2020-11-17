@@ -101,7 +101,7 @@ class EcmsWorkflowBundleCreate {
     ];
     $currentBundles[] = $newBundle;
     $scheduledTransitionsConfig
-      ->set('bundles', ($currentBundles))
+      ->set('bundles', $currentBundles)
       ->save();
   }
 

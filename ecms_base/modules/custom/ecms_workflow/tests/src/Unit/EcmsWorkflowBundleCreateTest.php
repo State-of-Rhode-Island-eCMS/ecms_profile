@@ -235,6 +235,25 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->withConsecutive(['user_role'], ['workflow'])
       ->willReturnOnConsecutiveCalls($this->entityStorage, $workflowStorage);
 
+    $this->config->expects($this->once())
+      ->method('get')
+      ->with('bundles')
+      ->willReturn([]);
+
+    $newBundle = [
+      'entity_type' => 'node',
+      'bundle' => $contentType,
+    ];
+
+    $this->config->expects($this->once())
+      ->method('set')
+      ->with('bundles', $newBundle)
+      ->willReturnSelf();
+
+    $this->config->expects($this->once())
+      ->method('save')
+      ->willReturnSelf();
+
     $this->configFactory->expects($this->once())
       ->method('getEditable')
       ->with('scheduled_transitions.settings')
@@ -285,7 +304,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
         [
           $this->entityTypeManager,
           $this->configFactory,
-          $this->cache,
         ]
       )
       ->getMock();
