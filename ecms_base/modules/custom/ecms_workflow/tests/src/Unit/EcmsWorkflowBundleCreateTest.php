@@ -14,7 +14,6 @@ use Drupal\workflows\WorkflowInterface;
 use Drupal\workflows\WorkflowTypeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\Config;
-use Drupal\Core\Cache\CacheBackendInterface;
 
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.
@@ -74,13 +73,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $config;
 
   /**
-   * Mock of cache.entity service.
-   *
-   * @var \Drupal\Core\Cache\CacheBackendInterface|\PHPUnit\Framework\MockObject\MockObject
-   */
-  private $cache;
-
-  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -90,7 +82,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $this->entityStorage = $this->createMock(EntityStorageInterface::class);
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
     $this->config = $this->createMock(Config::class);
-    $this->cache = $this->createMock(CacheBackendInterface::class);
 
   }
 
@@ -141,7 +132,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $testClass = new EcmsWorkflowBundleCreate(
       $this->entityTypeManager,
       $this->configFactory,
-      $this->cache
     );
 
     $testClass->addTaxonomyTypePermissions($bundle);
@@ -250,19 +240,9 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with('scheduled_transitions.settings')
       ->willReturn($this->config);
 
-    $this->configFactory->expects($this->once())
-      ->method('set')
-      ->with('bundles')
-      ->willReturnSelf();
-
-    $this->configFactory->expects($this->once())
-      ->method('save')
-      ->willReturnSelf();
-
     $testClass = new EcmsWorkflowBundleCreate(
       $this->entityTypeManager,
       $this->configFactory,
-      $this->cache
     );
 
     $testClass->addContentTypeToWorkflow($contentType);
