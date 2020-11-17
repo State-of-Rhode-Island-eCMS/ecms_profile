@@ -57,6 +57,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $entityStorage;
 
   /**
+   * Mock of the ConfigFactoryInterface.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $configFactory;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -64,6 +71,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->entityStorage = $this->createMock(EntityStorageInterface::class);
+    $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
   }
 
   /**
@@ -110,7 +118,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with('user_role')
       ->willReturn($this->entityStorage);
 
-    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager);
+    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager, $this->configFactory);
 
     $testClass->addTaxonomyTypePermissions($bundle);
   }
@@ -213,7 +221,12 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->withConsecutive(['user_role'], ['workflow'])
       ->willReturnOnConsecutiveCalls($this->entityStorage, $workflowStorage);
 
-    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager);
+    $this->configFactory->expects($this->once())
+      ->method('getEditable')
+      ->with('scheduled_transitions.settings')
+      ->willReturn($this->configFactory);
+
+    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager, $this->configFactory);
 
     $testClass->addContentTypeToWorkflow($contentType);
   }
