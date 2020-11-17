@@ -74,7 +74,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $config;
 
   /**
-   * Mock of cache.render service.
+   * Mock of cache.entity service.
    *
    * @var \Drupal\Core\Cache\CacheBackendInterface|\PHPUnit\Framework\MockObject\MockObject
    */
