@@ -11,6 +11,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-91: Adds the scheduled transitions config updates to the workflow bundle create class.
+- RIG-130: Added generic block and field templates to remove drupal wrappers.
+- RIG-130: Add easy_breadcrumbs module and configure.
 
 ### Changed
 

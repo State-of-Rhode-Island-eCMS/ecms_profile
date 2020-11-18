@@ -25,6 +25,7 @@ dependencies:
   - dblog
   - dynamic_entity_reference
   - dynamic_page_cache
+  - easy_breadcrumb
   - ecms_distribution
   - editor
   - entity_reference_revisions

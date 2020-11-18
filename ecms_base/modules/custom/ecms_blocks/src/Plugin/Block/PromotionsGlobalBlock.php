@@ -82,7 +82,7 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
     $query->condition('type', 'promotions')
       ->condition('status', 1)
       ->condition('field_promotion_global_display', 1)
-      ->sort('created', "DESC");
+      ->sort('changed', "DESC");
 
     $nids = $query->execute();
 

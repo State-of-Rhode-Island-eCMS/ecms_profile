@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * A blank template which returns content without a wrapper.
+ *
+ * Available variables:
+ * - content: The content of this block.
+ */
+#}
+
+{% block content %}
+  {# Cache buster #}
+  {% set cachebust = content|render %}
+
+  {{ content }}
+{% endblock %}

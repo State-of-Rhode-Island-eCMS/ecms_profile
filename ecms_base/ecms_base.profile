@@ -179,3 +179,27 @@ function ecms_base_update_9021(array &$sandbox): void {
   // Make sure necessary modules are uninstalled.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 }
+
+/**
+ * Updates to run for the 0.2.2 tag.
+ */
+function ecms_base_update_9022(array &$sandbox): void {
+  // Install new modules.
+  $modules_to_install = [
+    'easy_breadcrumb',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Add the breadcrumbs block.
+  $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.breadcrumbs'));
+}

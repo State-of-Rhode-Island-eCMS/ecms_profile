@@ -49,7 +49,9 @@
 
     {% include '@organisms/articles-latest/articles-latest.twig' with {
       title: title,
-      rows: rows
+      rows: rows,
+      more_title: more['#title'],
+      more_url: more['#url'].toString()
     } %}
 
   {% elseif empty %}
@@ -59,9 +61,7 @@
   {% if pager %}
     {{ pager }}
   {% endif %}
-  {% if more %}
-    {{ more }}
-  {% endif %}
+
   {% if feed_icons %}
     <div class="feed-icons">
       {{ feed_icons }}
