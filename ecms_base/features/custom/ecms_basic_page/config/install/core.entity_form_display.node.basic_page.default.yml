@@ -11,7 +11,6 @@ dependencies:
     - content_moderation
     - paragraphs
     - path
-    - scheduler
     - text
 id: node.basic_page.default
 targetEntityType: node
@@ -85,11 +84,6 @@ content:
   publish_on:
     type: datetime_timestamp_no_default
     weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  scheduler_settings:
-    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }

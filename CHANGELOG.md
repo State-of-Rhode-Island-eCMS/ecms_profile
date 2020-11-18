@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-91: Adds the scheduled transitions config updates to the workflow bundle create class.
 
 ### Changed
 
@@ -18,6 +19,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIG-130: Removes the Disable Language module dependency.
+- RIG-91: Removes the Scheduler module dependency.
 
 ### Fixed
 - RIG-149: Fixed the language detection to work with all entities.

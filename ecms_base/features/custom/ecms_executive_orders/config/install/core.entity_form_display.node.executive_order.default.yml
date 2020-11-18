@@ -13,7 +13,6 @@ dependencies:
     - datetime
     - media_library
     - path
-    - scheduler
 id: node.executive_order.default
 targetEntityType: node
 bundle: executive_order
@@ -86,11 +85,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  scheduler_settings:
-    weight: 20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:

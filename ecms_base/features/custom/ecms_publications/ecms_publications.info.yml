@@ -19,7 +19,6 @@ dependencies:
   - path
   - rh_node
   - scheduled_transitions
-  - scheduler
   - taxonomy
   - user
 version: 9.x-1.0

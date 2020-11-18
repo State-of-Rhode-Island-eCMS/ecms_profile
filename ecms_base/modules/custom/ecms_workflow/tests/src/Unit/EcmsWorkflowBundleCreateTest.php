@@ -12,6 +12,8 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 use Drupal\workflows\WorkflowInterface;
 use Drupal\workflows\WorkflowTypeInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\Config;
 
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.
@@ -57,6 +59,20 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $entityStorage;
 
   /**
+   * Mock of the ConfigFactoryInterface.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $configFactory;
+
+  /**
+   * Mock of a mutable Config object.
+   *
+   * @var \Drupal\Core\Config\Config|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $config;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -64,6 +80,9 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->entityStorage = $this->createMock(EntityStorageInterface::class);
+    $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
+    $this->config = $this->createMock(Config::class);
+
   }
 
   /**
@@ -110,7 +129,10 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->with('user_role')
       ->willReturn($this->entityStorage);
 
-    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager);
+    $testClass = new EcmsWorkflowBundleCreate(
+      $this->entityTypeManager,
+      $this->configFactory,
+    );
 
     $testClass->addTaxonomyTypePermissions($bundle);
   }
@@ -213,7 +235,34 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
       ->withConsecutive(['user_role'], ['workflow'])
       ->willReturnOnConsecutiveCalls($this->entityStorage, $workflowStorage);
 
-    $testClass = new EcmsWorkflowBundleCreate($this->entityTypeManager);
+    $this->config->expects($this->once())
+      ->method('get')
+      ->with('bundles')
+      ->willReturn([]);
+
+    $newBundle = [
+      'entity_type' => 'node',
+      'bundle' => $contentType,
+    ];
+
+    $this->config->expects($this->once())
+      ->method('set')
+      ->with('bundles', [$newBundle])
+      ->willReturnSelf();
+
+    $this->config->expects($this->once())
+      ->method('save')
+      ->willReturnSelf();
+
+    $this->configFactory->expects($this->once())
+      ->method('getEditable')
+      ->with('scheduled_transitions.settings')
+      ->willReturn($this->config);
+
+    $testClass = new EcmsWorkflowBundleCreate(
+      $this->entityTypeManager,
+      $this->configFactory,
+    );
 
     $testClass->addContentTypeToWorkflow($contentType);
   }
@@ -251,7 +300,12 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     // Get a mock of the class to test.
     $testClass = $this->getMockBuilder(EcmsWorkflowBundleCreate::class)
       ->onlyMethods(['addContentTypeToWorkflow'])
-      ->setConstructorArgs([$this->entityTypeManager])
+      ->setConstructorArgs(
+        [
+          $this->entityTypeManager,
+          $this->configFactory,
+        ]
+      )
       ->getMock();
 
     $testClass->expects($this->once())

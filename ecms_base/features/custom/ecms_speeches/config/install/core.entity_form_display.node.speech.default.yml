@@ -11,7 +11,6 @@ dependencies:
     - content_moderation
     - datetime
     - path
-    - scheduler
 id: node.speech.default
 targetEntityType: node
 bundle: speech
@@ -77,11 +76,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  scheduler_settings:
-    weight: 20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:

@@ -16,7 +16,6 @@ dependencies:
     - link
     - media_library
     - path
-    - scheduler
 id: node.publication.default
 targetEntityType: node
 bundle: publication
@@ -111,11 +110,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  scheduler_settings:
-    weight: 20
-    settings: {  }
-    third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
     settings:
