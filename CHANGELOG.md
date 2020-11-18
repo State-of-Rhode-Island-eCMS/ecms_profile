@@ -10,9 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-91: Adds the scheduled transitions config updates to the workflow bundle create class.
-- RIG-130: Added generic block and field templates to remove drupal wrappers.
-- RIG-130: Add easy_breadcrumbs module and configure.
 
 ### Changed
 
@@ -21,13 +18,23 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.2] - 2020-11-18
+### Added
+- RIG-91: Adds the scheduled transitions config updates to the workflow bundle create class.
+- RIG-130: Added generic block and field templates to remove drupal wrappers.
+- RIG-130: Add easy_breadcrumbs module and configure.
+
+### Removed
 - RIG-130: Removes the Disable Language module dependency.
 - RIG-91: Removes the Scheduler module dependency.
 
 ### Fixed
 - RIG-149: Fixed the language detection to work with all entities.
-
-### Security
 
 ## [0.2.1] - 2020-11-13
 ### Added
@@ -249,7 +256,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.1...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.2...HEAD
+[0.2.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.9...0.2.0
 [0.1.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.8...0.1.9
