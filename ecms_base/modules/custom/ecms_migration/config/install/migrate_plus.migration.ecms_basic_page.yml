@@ -1,8 +1,10 @@
 # Migrate a Google spreadsheet of URLs as basic pages into the eCMS system.
-id: ecms_import_basic_page
+id: ecms_basic_page
 label: Migrate basic pages into eCMS.
 migration_group: ecms
 source:
+  constants:
+    domain: http://www.eohhs.ri.gov
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: google_sheets
@@ -29,6 +31,7 @@ source:
     - name: url
       label: 'Url'
       selector: 'url'
+
     - name: status
       label: 'Status'
       selector: 'status'
@@ -49,46 +52,81 @@ source:
         title:
           obtainer: ObtainTitle
           jobs:
+            # Find the first h1 and use that as the page title.
             - job: 'addSearch'
               method: 'pluckSelector'
               arguments:
                 - h1
+            # Find the first h2 and use that as the page title
+            # if the h1 is empty.
             - job: 'addSearch'
               method: 'pluckSelector'
               arguments:
                 - h2
-        field_basic_page_body:
+        # Get the body content.
+        body_container_1:
           obtainer: ObtainBody
           jobs:
+            # Get the body using the css selector provided in body_selector.
             - job: 'addSearch'
               method: 'pluckSelector'
               arguments:
                 - '#dnn_contentpane .livehtmlwrapper'
                 - '1'
                 - innerHTML
+        body_container_2:
+          obtainer: ObtainBody
+          jobs:
+            # Get the body using the css selector provided in body_selector.
+            - job: 'addSearch'
+              method: 'pluckSelector'
+              arguments:
+                - '#dnn_subleft .livehtmlwrapper'
+                - '1'
+                - innerHTML
+        body_container_3:
+          obtainer: ObtainBody
+          jobs:
+            # Get the body using the css selector provided in body_selector.
+            - job: 'addSearch'
+              method: 'pluckSelector'
+              arguments:
+                - '#dnn_subright .livehtmlwrapper'
+                - '1'
+                - innerHTML
       dom_operations:
         - operation: get_field
           field: title
         - operation: get_field
-          field: field_basic_page_body
+          field: body_container_1
+        - operation: get_field
+          field: body_container_2
+        - operation: get_field
+          field: body_container_3
+
 process:
-  id: url
-  title: title
-  status: status
-  field_basic_page_body/value: field_basic_page_body
-  field_basic_page_body/format:
-    plugin: default_value
-    default_value: full_html
   type:
     plugin: default_value
     default_value: basic_page
 
+  id: url
+  title: title
+  status: status
+  'field_basic_page_body/value':
+    plugin: concat
+    source:
+      - body_container_1
+      - body_container_2
+      - body_container_3
+  'field_basic_page_body/format':
+    plugin: default_value
+    default_value: full_html
   moderation_state:
     plugin: static_map
     source: status
     map:
-      publishd: 1
-      archived: 0
+      1: published
+      0: archived
 
   # Disable path auto.
   'path/pathauto':

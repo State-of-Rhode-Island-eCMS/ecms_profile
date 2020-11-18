@@ -1,0 +1,87 @@
+# Migrate url aliases for basic pages.
+id: ecms_basic_page_url
+label: Migrate basic page url into eCMS.
+migration_group: ecms
+source:
+  constants:
+    domain: 'http://www.eohhs.ri.gov'
+    slash: '/'
+    entity_path: 'node'
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: google_sheets
+  # The feed file for the spreadsheet. The Google Spreadsheet should be either “Public” or set to “Anyone with link can
+  # view” in order for the feed to work. Note that the <SHEET> param is the order of the tabs and WILL change if the
+  # tabs are re-ordered.
+  # Template: 'https://spreadsheets.google.com/feeds/list/<KEY>/<SHEET>/public/values?alt=json'
+  urls: 'https://spreadsheets.google.com/feeds/list/14gljNKk6k78xPpF96lV_oL9URuMqc1V7vlw58hEFFz4/1/public/values?alt=json'
+  # Under 'fields', we list the data items to be imported. The first level keys
+  # are the source field names we want to populate (the names to be used as
+  # sources in the process configuration below). For each field we're importing,
+  # we provide a label (optional - this is for display in migration tools) and
+  # an selector (xpath) for retrieving that value. It's important to note that this xpath
+  # is relative to the elements retrieved by item_selector.
+  # For Google Spreadsheet XML feeds the actual columns are named with gsx: followed by the cleaned column name (lower,
+  # limited punctuation, etc).
+
+  # Use the URL as the key unique migration identifier.
+  keys:
+    - url
+
+  # What fields are in the google sheet.
+  fields:
+    - name: url
+      label: 'Url'
+      selector: 'url'
+
+    - name: status
+      label: 'Status'
+      selector: 'status'
+
+    - name: body_selector
+      label: "Body css selector"
+      selector: 'bodyselector'
+
+  ids:
+    url:
+      type: string
+
+process:
+  nid:
+    - plugin: migration_lookup
+      migration: ecms_basic_page
+      source: url
+      no_stub: true
+
+  # Parse the URL and extract the path element from the values.
+  computed_path:
+    - plugin: callback
+      callable: parse_url
+      source: url
+    - plugin: extract
+      index:
+        - path
+
+  path:
+    plugin: concat
+    source:
+      - constants/slash
+      - constants/entity_path
+      - constants/slash
+      - '@nid'
+
+  # Set the alias to the original path.
+  alias: '@computed_path'
+
+
+destination:
+  plugin: 'entity:path_alias'
+
+migration_dependencies:
+  required:
+    - ecms_basic_page
+
+dependencies:
+  enforced:
+    module:
+      - ecms_migration
