@@ -31,6 +31,15 @@ class LanguageNegotiationSessionFix extends LanguageNegotiationSession {
       return $parent;
     }
 
+    /** @var \Symfony\Component\Routing\Route $proposedRoute */
+    $proposedRoute = $options['route'];
+    $form = $proposedRoute->getDefault('_entity_form');
+
+    // If the proposed route is not a form, do not specify a translation.
+    if (empty($form)) {
+      return $parent;
+    }
+
     /** @var \Drupal\Core\Language\LanguageInterface $language */
     $language = $options['language'];
 

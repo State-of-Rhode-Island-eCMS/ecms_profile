@@ -14,6 +14,7 @@ use Drupal\ecms_languages\LanguageNegotiationSessionFix;
 use Drupal\language\ConfigurableLanguageManager;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Route;
 
 /**
  * Unit tests for the LanguageNegotiationSessionFix class.
@@ -52,6 +53,13 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
   private $language;
 
   /**
+   * Mock of a route object.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Routing\Route
+   */
+  private $route;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -61,6 +69,7 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
     $this->bubbleCache = $this->createMock(BubbleableMetadata::class);
     $this->entity = $this->createMock(EntityInterface::class);
     $this->language = $this->createMock(LanguageInterface::class);
+    $this->route = $this->createMock(Route::class);
   }
 
   /**
@@ -70,6 +79,8 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
    *   The path to test with.
    * @param bool $entity
    *   Whether an entity is expected.
+   * @param string|null $entityFormRoute
+   *   The expected return for the _entity_form route default.
    * @param bool $langCode
    *   Whether a language is expected.
    * @param bool $methodsCalled
@@ -77,10 +88,11 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
    *
    * @dataProvider dataProviderForTestProcessOutbound
    */
-  public function testProcessOutbound(string $path, bool $entity, bool $langCode, bool $methodsCalled): void {
+  public function testProcessOutbound(string $path, bool $entity, ?string $entityFormRoute, bool $langCode, bool $methodsCalled): void {
 
     $options = [];
     $options['entity'] = $this->entity;
+    $options['route'] = $this->route;
     $methodCount = 0;
 
     if ($langCode) {
@@ -93,6 +105,13 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
 
     if ($methodsCalled) {
       $methodCount = 1;
+    }
+
+    if ($entity && $langCode) {
+      $this->route->expects($this->once())
+        ->method('getDefault')
+        ->with('_entity_form')
+        ->willReturn($entityFormRoute);
     }
 
     $this->language->expects($this->exactly($methodCount))
@@ -145,93 +164,122 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
    */
   public function dataProviderForTestProcessOutbound(): array {
     return [
+      'test0' => [
+        'node/123',
+        TRUE,
+        NULL,
+        TRUE,
+        FALSE,
+      ],
       'test1' => [
         'node/123/edit',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
       'test2' => [
         'node/123/delete',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
       'test3' => [
         'node/123/edit',
         FALSE,
+        $this->randomMachineName(),
         TRUE,
         FALSE,
       ],
       'test4' => [
         'node/123/delete',
         FALSE,
+        $this->randomMachineName(),
         TRUE,
         FALSE,
       ],
       'test5' => [
         'node/123/edit',
         TRUE,
+        $this->randomMachineName(),
         FALSE,
         FALSE,
       ],
       'test6' => [
         'node/123/delete',
         TRUE,
+        $this->randomMachineName(),
         FALSE,
         FALSE,
       ],
       'test7' => [
         'not/a/node/path',
         FALSE,
+        $this->randomMachineName(),
         FALSE,
         FALSE,
       ],
       'test8' => [
         'media/123/delete',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
       'test9' => [
         'media/123/edit',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
+      ],
+      'test10.1' => [
+        'taxonomy/term/123',
+        TRUE,
+        NULL,
+        TRUE,
+        FALSE,
       ],
       'test10' => [
         'taxonomy/term/123/edit',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
       'test11' => [
         'taxonomy/term/123/delete',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
       'test12' => [
         'taxonomy/term/123/edit',
         TRUE,
+        $this->randomMachineName(),
         FALSE,
         FALSE,
       ],
       'test13' => [
         'taxonomy/term/123/delete',
         TRUE,
+        $this->randomMachineName(),
         FALSE,
         FALSE,
       ],
       'test14' => [
         'block/123/?language=de',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
       'test15' => [
         'block/123/delete?language=de',
         TRUE,
+        $this->randomMachineName(),
         TRUE,
         TRUE,
       ],
