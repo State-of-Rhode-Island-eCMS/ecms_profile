@@ -105,10 +105,6 @@ source:
           field: body_container_3
 
 process:
-  type:
-    plugin: default_value
-    default_value: basic_page
-
   id: url
   title: title
   status: status
@@ -135,6 +131,7 @@ process:
 
 destination:
   plugin: 'entity:node'
+  default_bundle: 'basic_page'
 
 dependencies:
   enforced:
