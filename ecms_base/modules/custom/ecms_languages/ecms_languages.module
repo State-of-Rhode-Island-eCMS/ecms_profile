@@ -7,7 +7,19 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Language\Language;
 use Drupal\Core\Url;
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function ecms_languages_module_implements_alter(&$implementations, $hook) {
+  if (isset($implementations['hook'])) {
+    $group = $implementations['hook'];
+    unset($implementations['hook']);
+    $implementations['hook'] = $group;
+  }
+}
 
 /**
  * Implements hook_language_switch_links_alter().
@@ -40,4 +52,12 @@ function ecms_languages_language_switch_links_alter(array &$links, string $type,
  */
 function ecms_languages_language_negotiation_info_alter(array &$negotiation_info): void {
   $negotiation_info['language-session']['class'] = 'Drupal\ecms_languages\LanguageNegotiationSessionFix';
+}
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ */
+function ecms_languages_pathauto_alias_alter(&$alias, array &$context): void {
+  // Force all aliases to be saved as language neutral.
+  $context['language'] = Language::LANGCODE_NOT_SPECIFIED;
 }

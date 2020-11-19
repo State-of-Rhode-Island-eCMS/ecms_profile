@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-153: Updated the language session fix to only apply to entity forms.
+- RIG-154: Change path aliases to always be language neutral.
 
 ### Security
 

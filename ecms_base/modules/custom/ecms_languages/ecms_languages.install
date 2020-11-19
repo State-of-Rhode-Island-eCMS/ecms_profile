@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Ecms_languages.install.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Language\Language;
+
+/**
+ * Update all language aliases to be language neutral.
+ */
+function ecms_languages_update_9000(): void {
+  $modules_to_install = [
+    'language_neutral_aliases',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  /** @var Drupal\Core\Database\Connection $database */
+  $database = \Drupal::service('database');
+
+  // Update the path_alias table and change all alias languages to
+  // not specified.
+  $database->update('path_alias')
+    ->fields([
+      'langcode' => Language::LANGCODE_NOT_SPECIFIED,
+    ])
+    ->condition('langcode', Language::LANGCODE_NOT_SPECIFIED, '<>')
+    ->execute();
+
+  // Update the path_alias_revision table and change all alias languages to
+  // not specified.
+  $database->update('path_alias_revision')
+    ->fields([
+      'langcode' => Language::LANGCODE_NOT_SPECIFIED,
+    ])
+    ->condition('langcode', Language::LANGCODE_NOT_SPECIFIED, '<>')
+    ->execute();
+}

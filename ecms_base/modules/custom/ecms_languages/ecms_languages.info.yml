@@ -5,3 +5,4 @@ core_version_requirement: ^9
 package: eCMS
 dependencies:
   - drupal:language
+  - drupal:language_neutral_aliases
