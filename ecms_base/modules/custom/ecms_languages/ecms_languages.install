@@ -2,7 +2,7 @@
 
 /**
  * @file
- * ecms_languages.install.
+ * Ecms_languages.install.
  */
 
 declare(strict_types = 1);
@@ -30,7 +30,7 @@ function ecms_languages_update_9000(): void {
       'langcode' => Language::LANGCODE_NOT_SPECIFIED,
     ])
     ->condition('langcode', Language::LANGCODE_NOT_SPECIFIED, '<>')
-  ->execute();
+    ->execute();
 
   // Update the path_alias_revision table and change all alias languages to
   // not specified.
