@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-### Added
-- RIG-130: Adds label to teaser notifications.
 
 ### Changed
 
@@ -26,6 +24,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-154: Change path aliases to always be language neutral.
 
 ### Security
+
+## [0.2.3] - 2020-11-19
+### Added
+- RIG-130: Adds label to teaser notifications.
 
 ## [0.2.2] - 2020-11-18
 ### Added
@@ -260,7 +262,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.3...HEAD
+[0.2.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.1.9...0.2.0
