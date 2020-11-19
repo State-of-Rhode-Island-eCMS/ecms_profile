@@ -7,3 +7,4 @@ dependencies:
   - drupal:migrate_google_sheets
   - drupal:migration_tools
   - drupal:migrate_tools
+  - drupal:migrate_process_trim

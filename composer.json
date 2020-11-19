@@ -46,6 +46,19 @@
                 "reference": "22944d55be891cfe48d6a6d7c222ff9e89f67b8d"
             }
         }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "drupal_git/migrate_process_trim",
+            "type": "drupal-module",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/migrate_process_trim.git",
+                "reference": "79c7ceb9113c1e21818bd124135e5d261ccbebbc"
+            }
+        }
     }
   ],
   "extra": {
@@ -68,6 +81,9 @@
       "drupal/content_moderation_notifications": {
         "3170503 - Core requirement error during Functional test": "https://www.drupal.org/files/issues/2020-09-11/3170503-2.patch"
       },
+      "drupal/redirect": {
+        "3082364 - Fix the migration of the status_code redirect property: status code of NULL or 0 causes exception": "https://www.drupal.org/files/issues/2020-07-28/redirect-fix_status_code_property_migration-3082364-13.patch"
+      },
       "drupal/paragraphs": {
         "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
         "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch"
@@ -80,6 +96,9 @@
       },
       "drupal_git/migrate_google_sheets": {
         "3138999 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/Drupal-9-readiness-3138999-6.patch"
+      },
+      "drupal_git/migrate_process_trim": {
+        "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
       }
     },
     "preserve-paths": [],
@@ -145,10 +164,11 @@
     "drupal/webform": "^6.0",
     "drupal/webform_encrypt": "1.x-dev@dev",
     "drupal_git/migrate_google_sheets": "1.0.0",
+    "drupal_git/migrate_process_trim": "1.0.0",
     "drupal_git/migration_tools": "1.0.0",
     "drush/drush": "^10.0",
-    "querypath/querypath": "^3.0",
     "oomphinc/composer-installers-extender": "^2.0",
+    "querypath/querypath": "^3.0",
     "zaporylie/composer-drupal-optimizations": "^1.0"
   },
   "require-dev": {
