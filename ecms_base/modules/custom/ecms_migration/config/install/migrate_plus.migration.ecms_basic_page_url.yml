@@ -38,10 +38,6 @@ source:
       label: 'Status'
       selector: 'status'
 
-    - name: body_selector
-      label: "Body css selector"
-      selector: 'bodyselector'
-
   ids:
     url:
       type: string
