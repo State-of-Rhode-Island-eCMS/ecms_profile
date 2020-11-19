@@ -72,6 +72,7 @@
 #}
 
 {% include '@molecules/teaser-notification/teaser-notification.twig' with {
-  text: node.field_notification_text.0.value
+  text: node.field_notification_text.0.value,
+  label: label,
 } %}
 
