@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+### Added
+- RIG-130: Adds label to teaser notifications.
 
 ### Changed
 
