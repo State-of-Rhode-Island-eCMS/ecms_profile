@@ -101,6 +101,7 @@
     "drupal/real_aes": "^2.3",
     "drupal/redirect": "^1.6",
     "drupal/scheduled_transitions": "^2.0",
+    "drupal/search_api": "^1.18",
     "drupal/simple_oauth": "^4.5",
     "drupal/smart_date": "^3.0",
     "drupal/svg_image": "^1.14",

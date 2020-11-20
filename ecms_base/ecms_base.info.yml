@@ -69,6 +69,8 @@ dependencies:
   - responsive_image
   - rdf
   - scheduled_transitions
+  - search_api
+  - search_api_db
   - shortcut
   - svg_image
   - taxonomy
