@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-131: Add Search API and database index.
 - RIG-106: Added custom migrations from static websites.
+- RIG-155: Add the Audio media item.
 
 ### Changed
 
