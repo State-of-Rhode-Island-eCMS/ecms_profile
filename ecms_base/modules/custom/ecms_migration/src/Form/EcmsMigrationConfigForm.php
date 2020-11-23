@@ -127,11 +127,13 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
       unset($values['_core']);
     }
 
-    $flattendArray = array_values($values);
-    return array_merge(...$flattendArray);
+    $flattenedArray = array_values($values);
+    return array_merge(...$flattenedArray);
   }
 
   /**
+   * Update the migration configuration with the user supplied values.
+   *
    * @param string $name
    *   The name of the migration fieldset.
    * @param array $settings
@@ -161,7 +163,7 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
    * @param array $migrations
    *   The migrations associated with this form setting.
    */
-  private function setCssSelector(string $key, string $selector, array $migrations): void {
+  protected function setCssSelector(string $key, string $selector, array $migrations): void {
     // Set a null selector if the selector key is empty.
     if (empty($selector)) {
       $selector = "#ECMS-MIGRATION-NULL-SELECTOR";
@@ -195,7 +197,7 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
    * @param array $migrations
    *   The migrations to apply this sheet ID.
    */
-  private function setGoogleSheet(string $googleSheetId, array $migrations): void {
+  protected function setGoogleSheet(string $googleSheetId, array $migrations): void {
     $googleSheetPath = str_replace(self::GOOGLE_SHEET_UUID, $googleSheetId, self::GOOGLE_SHEET_URL_MASK);
 
     // All migrations have a URL in the source.
