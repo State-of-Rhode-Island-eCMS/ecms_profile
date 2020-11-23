@@ -25,7 +25,7 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
   const GOOGLE_SHEET_UUID = 'GOOGLE_SHEET_UUID';
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   protected function getEditableConfigNames(): array {
     $return = [
@@ -35,11 +35,10 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
     $migrations = $this->getRawMigrationConfiguration();
 
     return array_merge($return, $migrations);
-
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getFormId(): string {
     return 'ecms_migration_settings_form';
@@ -207,4 +206,5 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
       $migrationConfig->set('source.urls', [$googleSheetPath])->save();
     }
   }
+
 }

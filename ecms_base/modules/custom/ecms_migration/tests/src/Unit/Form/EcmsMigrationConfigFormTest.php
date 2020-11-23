@@ -23,8 +23,14 @@ use phpmock\MockBuilder;
  */
 class EcmsMigrationConfigFormTest extends UnitTestCase {
 
+  /**
+   * The expected form id.
+   */
   const FORM_ID = 'ecms_migration_settings_form';
 
+  /**
+   * The expected settings configuration.
+   */
   const MIGRATION_SETTINGS_CONFIG = [
     'ecms_file' => [
       'google_sheet_id' => 'GOOGLE_ID_123',
@@ -38,6 +44,9 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
     '_core' => 'TEST',
   ];
 
+  /**
+   * Then expected migration configuration.
+   */
   const MIGRATION_MIGRATIONS_CONFIG = [
     'ecms_file' => [
       'migrate_plus.migration.ecms_file',
@@ -51,16 +60,44 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
     '_core' => 'TEST',
   ];
 
+  /**
+   * The expected google sheet url.
+   */
   const GOOGLE_SHEET_URL_MASK = 'https://spreadsheets.google.com/feeds/list/GOOGLE_ID/1/public/values?alt=json';
 
+  /**
+   * Mock of the config.factory service.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $configFactory;
 
+  /**
+   * Mock of the FormStateInterface.
+   *
+   * @var \Drupal\Core\Form\FormStateInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $formState;
 
+  /**
+   * Mock of the editable settings configuration.
+   *
+   * @var \Drupal\Core\Config\Config|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $settingsConfig;
 
+  /**
+   * Mock of the immutable migration configuration.
+   *
+   * @var \Drupal\Core\Config\ImmutableConfig|\PHPUnit\Framework\MockObject\MockObject
+   */
   private $migrationConfig;
 
+  /**
+   * Mock of the drupal_flush_all_caches() method.
+   *
+   * @var \phpmock\Mock
+   */
   private $mockFlushCache;
 
   /**
@@ -71,7 +108,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
     $this->formState = $this->createMock(FormStateInterface::class);
-    $this->settingsConfig =$this->createMock(Config::class);
+    $this->settingsConfig = $this->createMock(Config::class);
     $this->migrationConfig = $this->createMock(ImmutableConfig::class);
 
     $container = new ContainerBuilder();
@@ -85,7 +122,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
       ->setName('drupal_flush_all_caches')
       ->setFunction(
         function () {
-         return;
+          return;
         }
       );
 
@@ -93,6 +130,9 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
     $this->mockFlushCache->enable();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   protected function tearDown() {
     parent::tearDown();
 
@@ -206,7 +246,6 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
         self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']
       );
 
-    //$testForm = new EcmsMigrationConfigForm($this->configFactory);
     $testForm = $this->getMockBuilder(EcmsMigrationConfigForm::class)
       ->onlyMethods(['setGoogleSheet', 'setCssSelector'])
       ->setConstructorArgs([$this->configFactory])
@@ -246,15 +285,6 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
       );
 
     $testForm->submitForm($form, $this->formState);
-  }
-
-  public function testSetGoogleSheet(): void {
-    $id = self::MIGRATION_MIGRATIONS_CONFIG['ecms_file']['google_sheet_id'];
-
-    $this->configFactory->expects($this->exactly(count(self::MIGRATION_MIGRATIONS_CONFIG['ecms_file'])))
-      ->method('getEditable')
-      ->withConsecutive(...self::MIGRATION_MIGRATIONS_CONFIG['ecms_file'])
-      ->willReturnOnConsecutiveCalls();
   }
 
 }
