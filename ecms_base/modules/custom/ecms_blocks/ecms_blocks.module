@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * ecms_blocks.module
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function ecms_blocks_theme() {
+  return [
+    'ecms_search_block_form' => [
+      'render element' => 'form',
+    ],
+  ];
+}

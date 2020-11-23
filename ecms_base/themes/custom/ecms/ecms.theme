@@ -5,6 +5,9 @@
  * Functions to support theming in the eCMS theme.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
@@ -176,6 +179,15 @@ function ecms_theme_suggestions_container_alter(array &$suggestions, array $vari
     $suggestions[] = 'container__view__' . $element['#name'];
     $suggestions[] = 'container__view__' . $element['#name'] . '__' . $element['#display_id'];
   }
+
+  if (isset($element['#type']) && $element['#type'] != 'container') {
+    $suggestions[] = 'container__' . $element['#type'];
+  }
+
+  if (isset($element['#type']) && $element['#type'] == 'container' && isset($element['children']['#type'])) {
+    $suggestions[] = 'container__' . $element['children']['#type'];
+  }
+
   return $suggestions;
 }
 
@@ -207,5 +219,26 @@ function ecms_preprocess_menu__minor(&$variables) {
         $variables['level_one_link']['active'] = TRUE;
       }
     }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_input_alter().
+ */
+function ecms_theme_suggestions_input_alter(&$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#attributes']['data-twig-suggestion'])) {
+    $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ecms_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'ecms_search_block_form') {
+    $form['search_input']['#attributes']['data-twig-suggestion'] = 'search';
+    $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search';
   }
 }
