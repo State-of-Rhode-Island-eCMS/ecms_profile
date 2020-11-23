@@ -238,7 +238,7 @@ function ecms_theme_suggestions_input_alter(&$suggestions, array $variables) {
  */
 function ecms_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id == 'ecms_search_block_form') {
-    $form['search_input']['#attributes']['data-twig-suggestion'] = 'search';
+    $form['search_input']['#attributes']['class'][] = 'qh__site-search__query';
     $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search';
   }
 }
