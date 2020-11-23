@@ -15,7 +15,7 @@ source:
   # view” in order for the feed to work. Note that the <SHEET> param is the order of the tabs and WILL change if the
   # tabs are re-ordered.
   # Template: 'https://spreadsheets.google.com/feeds/list/<KEY>/<SHEET>/public/values?alt=json'
-  urls: 'https://spreadsheets.google.com/feeds/list/10bdfSHzTOkmCGuUJKETiAg9OB9UmD_zAz4tn4bnrDiA/1/public/values?alt=json'
+  urls: 'https://spreadsheets.google.com/feeds/list/REDACTED/1/public/values?alt=json'
   # Under 'fields', we list the data items to be imported. The first level keys
   # are the source field names we want to populate (the names to be used as
   # sources in the process configuration below). For each field we're importing,

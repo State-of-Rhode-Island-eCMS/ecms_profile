@@ -3,8 +3,6 @@ id: ecms_basic_page
 label: Migrate basic pages into eCMS.
 migration_group: ecms
 source:
-  constants:
-    domain: http://www.eohhs.ri.gov
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: google_sheets
@@ -12,7 +10,7 @@ source:
   # view” in order for the feed to work. Note that the <SHEET> param is the order of the tabs and WILL change if the
   # tabs are re-ordered.
   # Template: 'https://spreadsheets.google.com/feeds/list/<KEY>/<SHEET>/public/values?alt=json'
-  urls: 'https://spreadsheets.google.com/feeds/list/14gljNKk6k78xPpF96lV_oL9URuMqc1V7vlw58hEFFz4/1/public/values?alt=json'
+  urls: 'https://spreadsheets.google.com/feeds/list/REDACTED/1/public/values?alt=json'
   # Under 'fields', we list the data items to be imported. The first level keys
   # are the source field names we want to populate (the names to be used as
   # sources in the process configuration below). For each field we're importing,
@@ -64,45 +62,45 @@ source:
               arguments:
                 - h2
         # Get the body content.
-        body_container_1:
+        css_selector_1:
           obtainer: ObtainBody
           jobs:
             # Get the body using the css selector provided in body_selector.
             - job: 'addSearch'
               method: 'pluckSelector'
               arguments:
-                - '#dnn_contentpane .livehtmlwrapper'
+                - 'REDACTED'
                 - '1'
                 - innerHTML
-        body_container_2:
+        css_selector_2:
           obtainer: ObtainBody
           jobs:
             # Get the body using the css selector provided in body_selector.
             - job: 'addSearch'
               method: 'pluckSelector'
               arguments:
-                - '#dnn_subleft .livehtmlwrapper'
+                - 'REDACTED'
                 - '1'
                 - innerHTML
-        body_container_3:
+        css_selector_3:
           obtainer: ObtainBody
           jobs:
             # Get the body using the css selector provided in body_selector.
             - job: 'addSearch'
               method: 'pluckSelector'
               arguments:
-                - '#dnn_subright .livehtmlwrapper'
+                - 'REDACTED'
                 - '1'
                 - innerHTML
       dom_operations:
         - operation: get_field
           field: title
         - operation: get_field
-          field: body_container_1
+          field: css_selector_1
         - operation: get_field
-          field: body_container_2
+          field: css_selector_2
         - operation: get_field
-          field: body_container_3
+          field: css_selector_3
 
 process:
   id: url
@@ -111,9 +109,9 @@ process:
   'field_basic_page_body/value':
     plugin: concat
     source:
-      - body_container_1
-      - body_container_2
-      - body_container_3
+      - css_selector_1
+      - css_selector_2
+      - css_selector_3
   'field_basic_page_body/format':
     plugin: default_value
     default_value: full_html
