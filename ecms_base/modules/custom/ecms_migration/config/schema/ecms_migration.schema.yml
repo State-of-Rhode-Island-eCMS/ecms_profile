@@ -24,3 +24,13 @@ ecms_migration.settings:
         css_selector_3:
           type: string
           label: "Third CSS Selector"
+
+ecms_migration.migrations:
+  type: config_object
+  mapping:
+    ecms_file:
+      type: sequence
+      label: 'Migration configuration objects for the ecms_file migration'
+    ecms_basic_page:
+      type: sequence
+      label: 'Migration configuration objects for the ecms_basic_page migration'
