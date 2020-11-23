@@ -203,3 +203,24 @@ function ecms_base_update_9022(array &$sandbox): void {
   // Add the breadcrumbs block.
   $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.breadcrumbs'));
 }
+
+/**
+ * Updates to run for the 0.2.4 tag.
+ */
+function ecms_base_update_9024(array &$sandbox): void {
+  // Reinstall the features that were no longer installed on the Covid site.
+  $modules_to_install = [
+    'ecms_basic_page',
+    'ecms_event',
+    'ecms_landing_page',
+    'ecms_location',
+    'ecms_notification',
+    'ecms_paragraphs',
+    'ecms_person',
+    'ecms_press_release',
+    'ecms_promotions',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
