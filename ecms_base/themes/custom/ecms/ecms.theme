@@ -238,8 +238,18 @@ function ecms_theme_suggestions_input_alter(array &$suggestions, array $variable
  * Implements hook_form_alter().
  */
 function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id): void {
-  if ($form_id === 'ecms_search_block_form') {
-    $form['search_input']['#attributes']['class'][] = 'qh__site-search__query';
+  if ($form_id === 'ecms_search_block_form' || $form['#id'] === "views-exposed-form-site-search-page-1") {
+
+    // Input provided by search view exposed form.
+    if (isset($form['search_api_fulltext'])) {
+      $form['search_api_fulltext']['#theme_wrappers'] = [];
+    }
+
+    // Input provided by ecms_search_block_form.
+    if (isset($form['search_input'])) {
+      $form['search_input']['#attributes']['class'][] = 'qh__site-search__query';
+    }
+
     $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search';
   }
 }
