@@ -7,51 +7,60 @@ namespace Drupal\ecms_blocks\Form;
  * Contains \Drupal\ecms_blocks\Form\SearchBlockForm.
  */
 
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
+/**
+ * Provides a custom site search form.
+ *
+ * @package Drupal\ecms_blocks\Form
+ */
 class SearchBlockForm extends FormBase {
+
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'ecms_search_block_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state):array {
 
     $form['#theme'] = 'ecms_search_block_form';
 
-    $form['search_input'] = array(
+    $form['search_input'] = [
       '#type' => 'textfield',
       "#placeholder" => t('Search the site'),
       '#required' => TRUE,
       "#attributes" => [
-        'type' => "search"
+        'type' => "search",
       ],
-      '#theme_wrappers' => array()
-    );
+      '#theme_wrappers' => [],
+    ];
 
     $form['actions']['#type'] = 'actions';
-    $form['actions']['submit'] = array(
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Register'),
       '#button_type' => 'primary',
-    );
+    ];
 
     return $form;
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $input = $form_state->getValue('search_input');
     $params['query'] = [
       'search_api_fulltext' => $input,
     ];
     $form_state->setRedirectUrl(Url::fromUri('internal:' . '/search', $params));
   }
+
 }

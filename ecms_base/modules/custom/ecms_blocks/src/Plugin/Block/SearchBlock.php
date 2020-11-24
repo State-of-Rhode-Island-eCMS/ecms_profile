@@ -9,7 +9,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 
-
 /**
  * Provides a listing of promos referenced by the node.
  *
@@ -25,8 +24,7 @@ class SearchBlock extends BlockBase implements ContainerFactoryPluginInterface {
    *
    * @var \Drupal\Core\Form\FormBuilderInterface
    */
-  protected $form_builder;
-
+  protected $formBuilder;
 
   /**
    * {@inheritDoc}
@@ -54,21 +52,17 @@ class SearchBlock extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-
-    $this->form_builder = $form_builder;
+    $this->formBuilder = $form_builder;
   }
 
   /**
    * {@inheritdoc}
    */
   public function build(): array {
-    // $form = $this->formBuilder->getForm('Drupal\ecms_blocks\Form\SearchBlockForm');
 
-    $output['form'] = $this->form_builder->getForm('Drupal\ecms_blocks\Form\SearchBlockForm');
+    $output['form'] = $this->formBuilder->getForm('Drupal\ecms_blocks\Form\SearchBlockForm');
     return $output;
 
-    // return $form;
-    return [];
   }
 
 }
