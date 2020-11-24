@@ -1,0 +1,9 @@
+langcode: es
+status: true
+dependencies: {  }
+id: text_card
+label: 'Text Card'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

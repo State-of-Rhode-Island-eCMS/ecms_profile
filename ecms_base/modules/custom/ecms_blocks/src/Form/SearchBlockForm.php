@@ -43,7 +43,7 @@ class SearchBlockForm extends FormBase {
 
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Search')
+      '#value' => $this->t('Search'),
     ];
 
     return $form;

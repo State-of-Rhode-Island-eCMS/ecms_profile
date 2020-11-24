@@ -1,0 +1,43 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.text_card_collection
+    - field.field.block_content.text_card_collection.field_cards
+    - field.field.block_content.text_card_collection.field_collection_card_style
+    - field.field.block_content.text_card_collection.field_collection_description
+  module:
+    - entity_reference_revisions
+    - options
+    - text
+id: block_content.text_card_collection.default
+targetEntityType: block_content
+bundle: text_card_collection
+mode: default
+content:
+  field_cards:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_collection_card_style:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_collection_description:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
