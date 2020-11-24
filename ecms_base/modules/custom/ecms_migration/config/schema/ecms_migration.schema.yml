@@ -24,6 +24,13 @@ ecms_migration.settings:
         css_selector_3:
           type: string
           label: "Third CSS Selector"
+    ecms_publication:
+      type: mapping
+      label: 'Settings for the Publication migration'
+      mapping:
+        google_sheet_id:
+          type: string
+          label: "Google Sheet ID for the Publication Migration"
 
 ecms_migration.migrations:
   type: config_object
@@ -34,3 +41,6 @@ ecms_migration.migrations:
     ecms_basic_page:
       type: sequence
       label: 'Migration configuration objects for the ecms_basic_page migration'
+    ecms_publication:
+      type: sequence
+      label: 'Migration configuration objects for the ecms_publication migration'
