@@ -50,7 +50,7 @@ class SearchBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The Form builder service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $form_builder) {
+  public function __construct(array $configuration, string $plugin_id, $plugin_definition, FormBuilderInterface $form_builder) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->formBuilder = $form_builder;
   }

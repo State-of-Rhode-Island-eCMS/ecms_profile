@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\ecms_blocks\Form;
 
 /**
@@ -28,7 +30,7 @@ class SearchBlockForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state):array {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
 
     $form['#theme'] = 'ecms_search_block_form';
 
