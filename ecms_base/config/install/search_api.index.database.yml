@@ -6,7 +6,6 @@ dependencies:
     - search_api
   config:
     - search_api.server.database
-    - core.entity_view_mode.node.teaser
 id: database
 name: Database
 description: ''
@@ -28,13 +27,13 @@ field_settings:
         anonymous: anonymous
       view_mode:
         'entity:node':
-          basic_page: teaser
-          event: teaser
-          landing_page: teaser
-          location: teaser
-          person: teaser
-          press_release: teaser
-          webform: teaser
+          basic_page: default
+          event: default
+          landing_page: default
+          location: default
+          person: default
+          press_release: default
+          webform: default
   status:
     label: status
     datasource_id: 'entity:node'
@@ -86,21 +85,28 @@ processor_settings:
     weights:
       preprocess_query: -30
   entity_status: {  }
+  highlight:
+    highlight: always
+    highlight_partial: false
+    excerpt: true
+    excerpt_length: 256
+    exclude_fields: {  }
+    prefix: '<strong>'
+    suffix: '</strong>'
+    weights:
+      postprocess_query: 0
   html_filter:
-    all_fields: true
+    all_fields: false
     fields:
       - rendered_item
-      - title
-    title: true
+    title: false
     alt: true
     tags:
       b: 2
-      em: 1
       h1: 5
       h2: 3
       h3: 2
       strong: 2
-      u: 1
     weights:
       preprocess_index: -15
       preprocess_query: -15

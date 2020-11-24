@@ -223,4 +223,22 @@ function ecms_base_update_9024(array &$sandbox): void {
 
   // Make sure necessary modules are installed.
   \Drupal::service('module_installer')->install($modules_to_install);
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $theme_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_source */
+  $profile_source = new FileStorage($path . "/config/install/");
+
+  // Add the search view.
+  $active_storage->write('views.view.site_search', $profile_source->read('views.view.site_search'));
+
+  // Add the header inner search block.
+  $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.searchblock'));
+
+  // Add the exposed form block.
+  $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.exposedformsite_searchpage_1'));
 }

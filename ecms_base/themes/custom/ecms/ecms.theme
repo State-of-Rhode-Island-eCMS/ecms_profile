@@ -5,10 +5,14 @@
  * Functions to support theming in the eCMS theme.
  */
 
+declare(strict_types = 1);
+
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables): void {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     $content_type = $node->bundle();
     $suggestions[] = 'page__' . $content_type;
@@ -18,7 +22,7 @@ function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables
 /**
  * Implements hook_preprocess_page().
  */
-function ecms_preprocess_page(&$variables) {
+function ecms_preprocess_page(array &$variables): void {
 
   // Attach header variables.
   $variables['header_preprocess_values']['site_logo'] = theme_get_setting('logo.url');
@@ -36,7 +40,7 @@ function ecms_preprocess_page(&$variables) {
 /**
  * Implements hook_preprocess_html().
  */
-function ecms_preprocess_html(&$variables) {
+function ecms_preprocess_html(array &$variables): void {
 
   // Add paletteClass from theme settings form.
   $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
@@ -46,7 +50,7 @@ function ecms_preprocess_html(&$variables) {
 /**
  * Implements hook_theme().
  */
-function ecms_theme($existing, $type, $theme, $path): array {
+function ecms_theme(array $existing, string $type, string $theme, string $path): array {
   $templates = [];
   if ($theme === 'ecms') {
     // Workaround for the core bug found here:
@@ -61,7 +65,7 @@ function ecms_theme($existing, $type, $theme, $path): array {
 /**
  * Implements hook_preprocess_paragaph().
  */
-function ecms_preprocess_paragraph__media_item(&$variables) {
+function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
   $media_type = $paragraph->field_media_item->entity->bundle();
@@ -84,7 +88,7 @@ function ecms_preprocess_paragraph__media_item(&$variables) {
 /**
  * Implements hook_preprocess_paragaph().
  */
-function ecms_preprocess_media__file(&$variables): void {
+function ecms_preprocess_media__file(array &$variables): void {
   $media = $variables['media'];
 
   // Grab file title.
@@ -131,7 +135,7 @@ function ecms_preprocess_media__file(&$variables): void {
 /**
  * Helper function that converts bytes into an array with file size information.
  */
-function _filesize_formatted($bytes): array {
+function _filesize_formatted(int $bytes): array {
   if ($bytes < 1000000) {
     return [
       'amount' => t('less than 1'),
@@ -169,20 +173,29 @@ function _filesize_formatted($bytes): array {
  *
  * Add suggestions, as by default none are provided.
  */
-function ecms_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+function ecms_theme_suggestions_container_alter(array &$suggestions, array $variables): array {
   $element = $variables['element'];
 
   if (isset($element['#type']) && $element['#type'] === 'view') {
     $suggestions[] = 'container__view__' . $element['#name'];
     $suggestions[] = 'container__view__' . $element['#name'] . '__' . $element['#display_id'];
   }
+
+  if (isset($element['#type']) && $element['#type'] !== 'container') {
+    $suggestions[] = 'container__' . $element['#type'];
+  }
+
+  if (isset($element['#type']) && $element['#type'] === 'container' && isset($element['children']['#type'])) {
+    $suggestions[] = 'container__' . $element['children']['#type'];
+  }
+
   return $suggestions;
 }
 
 /**
  * Implements hook_preprocess_view().
  */
-function ecms_preprocess_views_view(&$variables) {
+function ecms_preprocess_views_view(array &$variables): void {
   $view = $variables['view'];
   $variables['title'] = $view->getTitle();
 }
@@ -190,7 +203,7 @@ function ecms_preprocess_views_view(&$variables) {
 /**
  * Implements hook_preprocess_menu().
  */
-function ecms_preprocess_menu__minor(&$variables) {
+function ecms_preprocess_menu__minor(array &$variables): void {
   // Load level one menu links.
   $menu_tree = \Drupal::menuTree();
   $parameters = $menu_tree->getCurrentRouteMenuTreeParameters('main');
@@ -207,5 +220,36 @@ function ecms_preprocess_menu__minor(&$variables) {
         $variables['level_one_link']['active'] = TRUE;
       }
     }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_input_alter().
+ */
+function ecms_theme_suggestions_input_alter(array &$suggestions, array $variables): void {
+  $element = $variables['element'];
+
+  if (isset($element['#attributes']['data-twig-suggestion'])) {
+    $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id): void {
+  if ($form_id === 'ecms_search_block_form' || $form['#id'] === "views-exposed-form-site-search-page-1") {
+
+    // Input provided by search view exposed form.
+    if (isset($form['search_api_fulltext'])) {
+      $form['search_api_fulltext']['#theme_wrappers'] = [];
+    }
+
+    // Input provided by ecms_search_block_form.
+    if (isset($form['search_input'])) {
+      $form['search_input']['#attributes']['class'][] = 'qh__site-search__query';
+    }
+
+    $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search';
   }
 }
