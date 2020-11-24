@@ -45,7 +45,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
   ];
 
   /**
-   * Then expected migration configuration.
+   * The expected migration configuration.
    */
   const MIGRATION_MIGRATIONS_CONFIG = [
     'ecms_file' => [

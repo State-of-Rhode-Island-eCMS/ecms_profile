@@ -1,6 +1,6 @@
 # Migrate a Google spreadsheet of URLs as file entities into the eCMS system.
 id: ecms_file_media
-label: Create media entities from the import files..
+label: Create media entities from the import files.
 migration_group: ecms
 
 destination:

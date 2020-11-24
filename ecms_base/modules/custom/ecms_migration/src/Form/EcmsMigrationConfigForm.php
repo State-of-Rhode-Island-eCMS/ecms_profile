@@ -47,7 +47,7 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
   /**
    * {@inheritDoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildForm($form, $form_state);
     $form['#tree'] = TRUE;
 

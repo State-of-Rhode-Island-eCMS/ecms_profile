@@ -50,9 +50,9 @@ When adding new migrations to this module you'll need to do a few things:
 
 1. Create the migration and export the configuration to the `config/install` directory.
 2. In the `ecms_migration.settings` configuration, add a new key with the values
-   that need replaced in the migration.
+   to be replaced in the migration.
 3. In the `ecms_migration.migrations` configuration, add the same key from the
-   settings file in #2 above and the machine names of the migrations that were
+   settings file in #2 above, and the machine names of the migrations that were
    added to the config/install directory.
 
 Doing the above will ensure the settings form will update the correct migration
