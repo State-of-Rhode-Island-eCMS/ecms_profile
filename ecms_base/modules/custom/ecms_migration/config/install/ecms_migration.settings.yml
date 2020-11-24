@@ -1,0 +1,8 @@
+ecms_file:
+  google_sheet_id: REDACTED
+ecms_basic_page:
+  google_sheet_id: REDACTED
+  css_selector_1: REDACTED
+  css_selector_2: REDACTED
+  css_selector_3: REDACTED
+

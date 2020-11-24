@@ -40,6 +40,15 @@ $COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
 $COMPOSER require "drupal/coder:^8.3" --dev --no-update
 $COMPOSER require "drush/drush:^10.0" --dev --no-update
 
+# Add the migrate_google_sheets repository.
+$COMPOSER config repositories.migrate_google_sheets '{"type": "package", "package": {"name": "drupal_git/migrate_google_sheets", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migrate_google_sheets.git", "reference": "22944d55be891cfe48d6a6d7c222ff9e89f67b8d"}}}'
+
+# Add the migration_tools repository.
+$COMPOSER config repositories.migratation_tools '{"type": "package", "package": {"name": "drupal_git/migration_tools", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migration_tools.git", "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"}}}'
+
+# Add the migrate_process_trim repository.
+$COMPOSER config repositories.migratation_process_trim '{"type": "package", "package": {"name": "drupal_git/migrate_process_trim", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migrate_process_trim.git", "reference": "79c7ceb9113c1e21818bd124135e5d261ccbebbc"}}}'
+
 $COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'"}'
 
 # Add the pattern lab installer type.
