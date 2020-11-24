@@ -90,18 +90,16 @@ processor_settings:
     highlight_partial: false
     excerpt: true
     excerpt_length: 256
-    exclude_fields:
-      - title
+    exclude_fields: {  }
     prefix: '<strong>'
     suffix: '</strong>'
     weights:
       postprocess_query: 0
   html_filter:
-    all_fields: true
+    all_fields: false
     fields:
       - rendered_item
-      - title
-    title: true
+    title: false
     alt: true
     tags:
       b: 2

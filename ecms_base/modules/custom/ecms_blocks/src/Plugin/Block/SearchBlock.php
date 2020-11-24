@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 
 /**
- * Provides a listing of promos referenced by the node.
+ * Provides a custom block for the site search form.
  *
  * @Block(
  *   id = "ecms_search_block",
@@ -39,7 +39,7 @@ class SearchBlock extends BlockBase implements ContainerFactoryPluginInterface {
   }
 
   /**
-   * PromotionsNodeSpecificBlock constructor.
+   * SearchBlock constructor.
    *
    * @param array $configuration
    *   Configuration array for the block.
