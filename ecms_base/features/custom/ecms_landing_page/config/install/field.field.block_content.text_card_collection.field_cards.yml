@@ -1,0 +1,54 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.text_card_collection
+    - field.storage.block_content.field_cards
+    - paragraphs.paragraphs_type.text_card
+  module:
+    - entity_reference_revisions
+id: block_content.text_card_collection.field_cards
+field_name: field_cards
+entity_type: block_content
+bundle: text_card_collection
+label: Cards
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      text_card: text_card
+    target_bundles_drag_drop:
+      accordion_builder:
+        weight: 10
+        enabled: false
+      column_container:
+        weight: 11
+        enabled: false
+      embed:
+        weight: 12
+        enabled: false
+      file_list:
+        weight: 13
+        enabled: false
+      formatted_text:
+        weight: 14
+        enabled: false
+      icon_card:
+        weight: 15
+        enabled: false
+      media_item:
+        weight: 16
+        enabled: false
+      promotion_reference:
+        weight: 17
+        enabled: false
+      text_card:
+        enabled: true
+        weight: 18
+field_type: entity_reference_revisions

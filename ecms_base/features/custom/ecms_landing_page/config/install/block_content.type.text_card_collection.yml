@@ -1,0 +1,7 @@
+langcode: es
+status: true
+dependencies: {  }
+id: text_card_collection
+label: 'Text Card Collection'
+revision: 0
+description: 'A block type that displays multiple text cards.'

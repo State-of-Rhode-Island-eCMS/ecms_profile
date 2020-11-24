@@ -1,0 +1,22 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.text_card_collection
+    - field.storage.block_content.field_collection_card_style
+  module:
+    - options
+id: block_content.text_card_collection.field_collection_card_style
+field_name: field_collection_card_style
+entity_type: block_content
+bundle: text_card_collection
+label: 'Card Style'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: no-style
+default_value_callback: ''
+settings: {  }
+field_type: list_string
