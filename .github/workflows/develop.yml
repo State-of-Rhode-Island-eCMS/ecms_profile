@@ -137,10 +137,13 @@ jobs:
           echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
           echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
 
+#      - name: Run functional tests.
+#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+#        run: sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
       - name: Run functional tests with fastest.
         working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest  "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
 
 #      - name: Run existing site tests.
 #        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-#        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest  "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+#        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"

@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_media_item
+    - media.type.media_item_audio
     - media.type.media_item_image
     - media.type.media_item_video
     - paragraphs.paragraphs_type.media_item
@@ -20,6 +21,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
+      media_item_audio: media_item_audio
       media_item_image: media_item_image
       media_item_video: media_item_video
     sort:

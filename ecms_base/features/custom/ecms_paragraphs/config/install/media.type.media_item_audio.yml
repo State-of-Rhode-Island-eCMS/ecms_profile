@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: media_item_audio
+label: 'Media Item: Audio'
+description: 'An audio file referenced from a Media Item paragraph.'
+source: audio_file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_item_audio_file
+field_map: {  }
