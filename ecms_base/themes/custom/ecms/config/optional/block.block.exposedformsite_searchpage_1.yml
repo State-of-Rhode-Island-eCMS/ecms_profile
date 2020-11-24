@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.site_search
+  module:
+    - system
+    - views
+  theme:
+    - ecms
+id: exposedformsite_searchpage_1
+theme: ecms
+region: content
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:site_search-page_1'
+settings:
+  id: 'views_exposed_filter_block:site_search-page_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
