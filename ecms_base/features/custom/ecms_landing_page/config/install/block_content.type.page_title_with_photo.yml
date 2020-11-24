@@ -1,0 +1,7 @@
+langcode: es
+status: true
+dependencies: {  }
+id: page_title_with_photo
+label: 'Page title with photo'
+revision: 0
+description: 'A block type that can be used to add a stylized page title with photo.'

@@ -1,0 +1,28 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.page_title_with_photo
+    - field.storage.block_content.field_image
+    - media.type.media_item_image
+id: block_content.page_title_with_photo.field_image
+field_name: field_image
+entity_type: block_content
+bundle: page_title_with_photo
+label: Image
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      media_item_image: media_item_image
+    sort:
+      field: changed
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
