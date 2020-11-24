@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_media_audio_file
+    - field.storage.media.field_media_item_audio_file
     - media.type.media_item_audio
   module:
     - file
-id: media.media_item_audio.field_media_audio_file
-field_name: field_media_audio_file
+id: media.media_item_audio.field_media_item_audio_file
+field_name: field_media_item_audio_file
 entity_type: media
 bundle: media_item_audio
-label: 'Audio file'
+label: 'Audio File'
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

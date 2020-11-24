@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
-    - field.field.media.media_item_audio.field_media_audio_file
+    - field.field.media.media_item_audio.field_media_item_audio_file
     - image.style.medium
     - media.type.media_item_audio
   module:
@@ -13,6 +13,14 @@ targetEntityType: media
 bundle: media_item_audio
 mode: media_library
 content:
+  name:
+    type: string
+    weight: 0
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
   thumbnail:
     type: image
     label: hidden
@@ -23,13 +31,12 @@ content:
         width: null
         height: null
       svg_render_as_image: true
-    weight: 0
+    weight: 1
     third_party_settings: {  }
     region: content
 hidden:
   created: true
-  field_media_audio_file: true
+  field_media_item_audio_file: true
   langcode: true
-  name: true
   search_api_excerpt: true
   uid: true

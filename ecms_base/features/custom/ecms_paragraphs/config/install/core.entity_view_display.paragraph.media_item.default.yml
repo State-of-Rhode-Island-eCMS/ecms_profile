@@ -16,7 +16,9 @@ bundle: media_item
 mode: default
 content:
   field_link:
+    type: link
     weight: 1
+    region: content
     label: above
     settings:
       trim_length: 80
@@ -25,8 +27,6 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
-    region: content
   field_media_item:
     type: entity_reference_entity_view
     weight: 0

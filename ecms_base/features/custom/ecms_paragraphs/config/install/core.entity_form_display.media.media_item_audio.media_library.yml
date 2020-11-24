@@ -3,13 +3,22 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.media.media_library
-    - field.field.media.media_item_audio.field_media_audio_file
+    - field.field.media.media_item_audio.field_media_item_audio_file
     - media.type.media_item_audio
+  module:
+    - file
 id: media.media_item_audio.media_library
 targetEntityType: media
 bundle: media_item_audio
 mode: media_library
 content:
+  field_media_item_audio_file:
+    type: file_generic
+    weight: 1
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
   name:
     type: string_textfield
     settings:
@@ -20,7 +29,6 @@ content:
     region: content
 hidden:
   created: true
-  field_media_audio_file: true
   langcode: true
   path: true
   status: true
