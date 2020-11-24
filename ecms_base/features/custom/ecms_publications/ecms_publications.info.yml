@@ -21,5 +21,6 @@ dependencies:
   - scheduled_transitions
   - taxonomy
   - user
+  - views
 version: 9.x-1.0
 package: eCMS
