@@ -4,11 +4,6 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_blocks\Form;
 
-/**
- * @file
- * Contains \Drupal\ecms_blocks\Form\SearchBlockForm.
- */
-
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
@@ -36,7 +31,7 @@ class SearchBlockForm extends FormBase {
 
     $form['search_input'] = [
       '#type' => 'textfield',
-      "#placeholder" => t('Search the site'),
+      "#placeholder" => $this->t('Search the site'),
       '#required' => TRUE,
       "#attributes" => [
         'type' => "search",
@@ -45,10 +40,10 @@ class SearchBlockForm extends FormBase {
     ];
 
     $form['actions']['#type'] = 'actions';
+
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Register'),
-      '#button_type' => 'primary',
+      '#value' => $this->t('Search')
     ];
 
     return $form;
