@@ -2,13 +2,15 @@
 
 /**
  * @file
- * ecms_blocks.module
+ * Provide a custom theme hook for the site search form.
  */
+
+declare(strict_types = 1);
 
 /**
  * Implements hook_theme().
  */
-function ecms_blocks_theme() {
+function ecms_blocks_theme(): array {
   return [
     'ecms_search_block_form' => [
       'render element' => 'form',
