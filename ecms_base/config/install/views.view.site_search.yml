@@ -44,7 +44,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 5
+          items_per_page: 15
           offset: 0
           id: 0
           total_pages: null
@@ -214,7 +214,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: 'Fulltext search'
+            label: 'Keyword'
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
