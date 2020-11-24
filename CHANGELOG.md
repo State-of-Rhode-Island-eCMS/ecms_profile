@@ -10,14 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-131: Add Search API and database index.
-- RIG-106: Added custom migrations from static websites.
-- RIG-155: Add the Audio media item.
-- RIG-131: Add custom eCMS search form.
-- RIG-131: Theme search page.
-- RIG-130: Add text card paragraph.
-- RIG-130: Add text card collection block type.
-- RIG-130: Add photo title with image block type.
 
 ### Changed
 
@@ -28,10 +20,23 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-153: Updated the language session fix to only apply to entity forms.
-- RIG-154: Change path aliases to always be language neutral.
 
 ### Security
+
+## [0.2.4] - 2020-11-24
+### Added
+- RIG-131: Add Search API and database index.
+- RIG-106: Added custom migrations from static websites.
+- RIG-155: Add the Audio media item.
+- RIG-131: Add custom eCMS search form.
+- RIG-131: Theme search page.
+- RIG-130: Add text card paragraph.
+- RIG-130: Add text card collection block type.
+- RIG-130: Add photo title with image block type.
+
+### Fixed
+- RIG-153: Updated the language session fix to only apply to entity forms.
+- RIG-154: Change path aliases to always be language neutral.
 
 ## [0.2.3] - 2020-11-19
 ### Added
@@ -270,7 +275,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.4...HEAD
+[0.2.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.0...0.2.1
