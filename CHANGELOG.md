@@ -15,6 +15,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-155: Add the Audio media item.
 - RIG-131: Add custom eCMS search form.
 - RIG-131: Theme search page.
+- RIG-130: Add text card paragraph.
+- RIG-130: Add text card collection block type.
+- RIG-130: Add photo title with image block type.
 
 ### Changed
 
