@@ -1,0 +1,31 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.text_card.field_card_title
+    - field.field.paragraph.text_card.field_text
+    - paragraphs.paragraphs_type.text_card
+  module:
+    - text
+id: paragraph.text_card.default
+targetEntityType: paragraph
+bundle: text_card
+mode: default
+content:
+  field_card_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  search_api_excerpt: true
