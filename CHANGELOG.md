@@ -10,10 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-156: Added paragraph permissions to anonymous and authenticated roles.
 
 ### Changed
-- RIG-131: Added current language filter to search view.
 
 ### Deprecated
 
@@ -22,6 +20,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.2.5] - 2020-11-25
+### Added
+- RIG-156: Added paragraph permissions to anonymous and authenticated roles.
+
+### Changed
+- RIG-131: Added current language filter to search view.
 
 ## [0.2.4] - 2020-11-24
 ### Added
@@ -275,7 +280,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...HEAD
+[0.2.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.1...0.2.2
