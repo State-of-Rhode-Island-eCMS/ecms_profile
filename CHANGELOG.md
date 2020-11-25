@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-156: Added paragraph permissions to anonymous and authenticated roles.
 
 ### Changed
 
