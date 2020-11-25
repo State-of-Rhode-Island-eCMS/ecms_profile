@@ -13,8 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-156: Added paragraph permissions to anonymous and authenticated roles.
 
 ### Changed
-
-### Changed
+- RIG-131: Added current language filter to search view.
 
 ### Deprecated
 
