@@ -92,7 +92,8 @@
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch"
       },
       "drupal_git/migration_tools": {
-        "3148135 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/automated-d9-compatibility-fixes-3148135-5.patch"
+        "3148135 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/automated-d9-compatibility-fixes-3148135-5.patch",
+        "3163830 - Fatal Error: Call to undefined function drush_print()": "https://www.drupal.org/files/issues/2020-08-06/migration_tools-drush-10-compatibility-13778991-3.patch"
       },
       "drupal_git/migrate_google_sheets": {
         "3138999 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/Drupal-9-readiness-3138999-6.patch"

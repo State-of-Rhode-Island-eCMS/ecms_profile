@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-106: Added patch to allow drush to run migration tools migrations.
 
 ### Security
 
