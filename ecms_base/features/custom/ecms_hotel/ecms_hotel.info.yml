@@ -20,6 +20,7 @@ dependencies:
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - simple_sitemap
   - svg_image
   - telephone
   - text

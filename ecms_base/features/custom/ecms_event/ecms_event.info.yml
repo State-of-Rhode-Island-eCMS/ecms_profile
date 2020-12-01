@@ -19,6 +19,7 @@ dependencies:
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - simple_sitemap
   - smart_date
   - svg_image
   - taxonomy
