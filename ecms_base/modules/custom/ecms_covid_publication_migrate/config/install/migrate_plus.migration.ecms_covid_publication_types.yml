@@ -1,0 +1,62 @@
+id: ecms_covid_publication_types
+label: 'Import publication types from the RSS feed.'
+migration_group: ecms_covid_publications
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - https://health.ri.gov/rss/pubs/rss-covid-pub-list.php
+  data_parser_plugin: simple_xml
+
+  item_selector: /rss/channel/item
+  fields:
+    - name: guid
+      label: GUID
+      selector: guid
+    - name: title
+      label: Title
+      selector: title
+    - name: link
+      label: 'Origin link'
+      selector: link
+    - name: type
+      label: 'Publication type (rss description)'
+      selector: description
+    - name: subtype
+      label: 'Sub-type (rss category)'
+      selector: category
+    - name: language
+      label: 'Language'
+      selector: language
+
+  ids:
+    guid:
+      type: string
+
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: 'publication_type'
+
+process:
+  id: guid
+
+  pseudo_check_exists:
+    - plugin: entity_lookup
+      entity_type: taxonomy_term
+      value_key: name
+      bundle_key: vid
+      bundle: 'publication_type'
+      source: type
+    - plugin: callback
+      callable: is_null
+    - plugin: skip_on_empty
+      method: row
+
+  name: type
+
+# Add an enforced dependency so the config uninstalls with the module.
+dependencies:
+  enforced:
+    module:
+      - ecms_covid_publication_migrate

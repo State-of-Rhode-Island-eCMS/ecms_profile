@@ -1,0 +1,108 @@
+id: ecms_covid_publications_rss
+label: 'Import publications from the Rhode Island RSS feed.'
+migration_group: ecms_covid_publications
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - https://health.ri.gov/rss/pubs/rss-covid-pub-list.php
+  data_parser_plugin: simple_xml
+
+  item_selector: /rss/channel/item
+  fields:
+    - name: guid
+      label: GUID
+      selector: guid
+    - name: title
+      label: Title
+      selector: title
+    - name: link
+      label: 'Origin link'
+      selector: link
+    - name: type
+      label: 'Publication type (rss description)'
+      selector: description
+    - name: subtype
+      label: 'Sub-type (rss category)'
+      selector: category
+    - name: language
+      label: 'Language'
+      selector: language
+
+  ids:
+    guid:
+      type: string
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: 'publication'
+
+process:
+  id: guid
+  title: title
+  'field_publication_url/uri': link
+  'field_publication_url/title': title
+  pseudo_publication_type:
+    - plugin: entity_lookup
+      entity_type: taxonomy_term
+      value_key: name
+      bundle_key: vid
+      bundle: 'publication_type'
+      source: type
+
+  pseudo_publication_subtype:
+    - plugin: entity_lookup
+      entity_type: taxonomy_term
+      value_key: parent
+      bundle_key: vid
+      bundle: 'publication_type'
+      source: '@pseudo_publication_type'
+      ignore_case: true
+    - plugin: skip_on_empty
+      method: process
+    - plugin: entity_exists
+      entity_type: taxonomy_term
+
+  field_publication_types:
+    - plugin: null_coalesce
+      source:
+        - '@pseudo_publication_subtype'
+        - '@pseudo_publication_type'
+
+  langcode:
+    - plugin: static_map
+      source: language
+      map:
+        en-us: en
+        es: es
+        pt: pt-pt
+        zh-cn: zh-hans
+        sg: ht
+        ar: ar
+        fr: fr
+        sw: sw
+        lo: lo
+        km: km
+      default_value: en
+
+
+  moderation_state:
+    plugin: default_value
+    default_value: published
+
+  # Disable path auto.
+  'path/pathauto':
+    plugin: default_value
+    default_value: 0
+
+migration_dependencies:
+  required:
+    - ecms_covid_publication_types
+    - ecms_covid_publication_subtypes
+
+# Add an enforced dependency so the config uninstalls with the module.
+dependencies:
+  enforced:
+    module:
+      - ecms_covid_publication_migrate
