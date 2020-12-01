@@ -10,8 +10,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-130: Added ecms_hotel_listing custom block plugin.
+- RIG-130: Added teaser and full node templates for hotel content type.
 
 ### Changed
+- RIG-130: Changed hotel rate fields to support percentages.
 
 ### Deprecated
 
@@ -19,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-106: Added patch to allow drush to run migration tools migrations.
+- RIG-130: Fixed typo in ecms_base.profile update script.
 
 ### Security
 

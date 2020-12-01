@@ -6,8 +6,8 @@ dependencies:
     - image.style.thumbnail
     - media.type.hotel_image
   module:
-    - image
     - path
+    - svg_image
 id: media.hotel_image.default
 targetEntityType: media
 bundle: hotel_image

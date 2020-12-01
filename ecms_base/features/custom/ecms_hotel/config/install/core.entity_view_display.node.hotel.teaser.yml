@@ -11,8 +11,9 @@ dependencies:
     - field.field.node.hotel.field_hotel_main_image
     - field.field.node.hotel.field_hotel_more_info_url
     - field.field.node.hotel.field_hotel_phone
-    - field.field.node.hotel.field_hotel_rate
-    - field.field.node.hotel.field_hotel_rate_amount
+    - field.field.node.hotel.field_hotel_promo_rate
+    - field.field.node.hotel.field_hotel_promo_rate_unit
+    - field.field.node.hotel.field_hotel_rate_description
     - node.type.hotel
   module:
     - user
@@ -40,6 +41,8 @@ hidden:
   field_hotel_main_image: true
   field_hotel_more_info_url: true
   field_hotel_phone: true
-  field_hotel_rate: true
-  field_hotel_rate_amount: true
+  field_hotel_promo_rate: true
+  field_hotel_promo_rate_unit: true
+  field_hotel_rate_description: true
   langcode: true
+  search_api_excerpt: true

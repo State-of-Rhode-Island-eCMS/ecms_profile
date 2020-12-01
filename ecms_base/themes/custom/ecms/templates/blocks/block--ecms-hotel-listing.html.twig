@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Theme override for the ecms hotel listing block.
+#}
+
+{% include '@organisms/hotels-grid/hotels-grid.twig' with {
+  label: label,
+  cards: content.field_cards,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+} %}
+

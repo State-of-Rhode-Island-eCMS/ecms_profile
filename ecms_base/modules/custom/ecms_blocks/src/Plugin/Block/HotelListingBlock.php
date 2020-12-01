@@ -11,16 +11,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfo;
 
 /**
- * Provides a listing of global promos.
+ * Provides a listing of hotels.
  *
  * @Block(
- *   id = "ecms_promotions_global",
- *   admin_label = @Translation("Promotions - Global"),
+ *   id = "ecms_hotel_listing",
+ *   admin_label = @Translation("Hotels list"),
  * )
  */
-class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginInterface {
+class HotelListingBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * The language_manager service.
@@ -37,6 +38,13 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
   protected $entityTypeManager;
 
   /**
+   * The entity_type.bundle.info service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeBundleInfo
+   */
+  protected $entityTypeBundle;
+
+  /**
    * {@inheritDoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -45,7 +53,8 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
       $plugin_id,
       $plugin_definition,
       $container->get('language_manager'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('entity_type.bundle.info')
     );
   }
 
@@ -62,12 +71,15 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
    *   The language_manager service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfo $entityTypeBundle
+   *   The entity_type.manager service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager, EntityTypeBundleInfo $entityTypeBundle) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 
     $this->languageManager = $languageManager;
     $this->entityTypeManager = $entityTypeManager;
+    $this->entityTypeBundle = $entityTypeBundle;
   }
 
   /**
@@ -75,14 +87,19 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
    */
   public function build(): array {
 
+    $bundles = $this->entityTypeBundle->getBundleInfo('node');
+    // Guard against a missing hotel bundle.
+    if (!array_key_exists('hotel', $bundles)) {
+      return [];
+    }
+
     $node_storage = $this->entityTypeManager->getStorage('node');
 
-    // Query all global promotions.
+    // Query all hotels.
     $query = $node_storage->getQuery();
-    $query->condition('type', 'promotions')
+    $query->condition('type', 'hotel')
       ->condition('status', 1)
-      ->condition('field_promotion_global_display', 1)
-      ->sort('changed', "DESC");
+      ->sort('title', "ASC");
 
     $nids = $query->execute();
 

@@ -3,14 +3,13 @@ status: true
 dependencies:
   module:
     - node
-id: node.field_hotel_rate_amount
-field_name: field_hotel_rate_amount
+id: node.field_hotel_promo_rate
+field_name: field_hotel_promo_rate
 entity_type: node
-type: string
+type: integer
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

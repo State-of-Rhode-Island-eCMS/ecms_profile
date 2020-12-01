@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hotel_promo_rate
+    - node.type.hotel
+id: node.hotel.field_hotel_promo_rate
+field_name: field_hotel_promo_rate
+entity_type: node
+bundle: hotel
+label: 'Promo Rate: Value'
+description: 'The promo rate is displayed in the teaser display for this hotel. This field is tied to the Promo Rate: Unit field.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
