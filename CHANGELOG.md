@@ -10,21 +10,28 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-130: Added ecms_hotel_listing custom block plugin.
-- RIG-130: Added teaser and full node templates for hotel content type.
 
 ### Changed
-- RIG-130: Changed hotel rate fields to support percentages.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIG-106: Added patch to allow drush to run migration tools migrations.
-- RIG-130: Fixed typo in ecms_base.profile update script.
 
 ### Security
+
+## [0.2.6] - 2020-12-01
+### Added
+- RIG-130: Added ecms_hotel_listing custom block plugin.
+- RIG-130: Added teaser and full node templates for hotel content type.
+
+### Changed
+- RIG-130: Changed hotel rate fields to support percentages.
+
+### Fixed
+- RIG-106: Added patch to allow drush to run migration tools migrations.
+- RIG-130: Fixed typo in ecms_base.profile update script.
 
 ## [0.2.5] - 2020-11-25
 ### Added
@@ -285,7 +292,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.6...HEAD
+[0.2.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...0.2.6
 [0.2.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.2...0.2.3
