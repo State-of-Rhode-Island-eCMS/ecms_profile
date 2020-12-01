@@ -15,10 +15,12 @@ dependencies:
   - media_library
   - menu_ui
   - node
+  - options
   - path
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - svg_image
   - telephone
   - text
   - user

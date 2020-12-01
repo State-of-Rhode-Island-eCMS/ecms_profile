@@ -10,12 +10,14 @@ dependencies:
     - field.field.node.hotel.field_hotel_main_image
     - field.field.node.hotel.field_hotel_more_info_url
     - field.field.node.hotel.field_hotel_phone
-    - field.field.node.hotel.field_hotel_rate
-    - field.field.node.hotel.field_hotel_rate_amount
+    - field.field.node.hotel.field_hotel_promo_rate
+    - field.field.node.hotel.field_hotel_promo_rate_unit
+    - field.field.node.hotel.field_hotel_rate_description
     - node.type.hotel
   module:
     - address
     - link
+    - options
     - text
     - user
 id: node.hotel.default
@@ -98,16 +100,24 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_hotel_rate:
-    weight: 104
+  field_hotel_promo_rate:
+    weight: 114
     label: above
     settings:
-      link_to_entity: false
+      thousand_separator: ''
+      prefix_suffix: true
     third_party_settings: {  }
-    type: string
+    type: number_integer
     region: content
-  field_hotel_rate_amount:
-    weight: 105
+  field_hotel_promo_rate_unit:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_hotel_rate_description:
+    weight: 113
     label: above
     settings:
       link_to_entity: false
@@ -121,3 +131,4 @@ content:
     region: content
 hidden:
   langcode: true
+  search_api_excerpt: true

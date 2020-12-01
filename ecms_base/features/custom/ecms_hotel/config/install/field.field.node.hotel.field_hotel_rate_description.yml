@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hotel_rate_description
+    - node.type.hotel
+id: node.hotel.field_hotel_rate_description
+field_name: field_hotel_rate_description
+entity_type: node
+bundle: hotel
+label: 'Complete rate description'
+description: 'The rate description to shows users on the hotel''s node display. Example: $49/night plus tax - $343/week plus tax'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

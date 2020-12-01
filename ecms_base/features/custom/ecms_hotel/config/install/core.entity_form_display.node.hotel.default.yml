@@ -10,8 +10,9 @@ dependencies:
     - field.field.node.hotel.field_hotel_main_image
     - field.field.node.hotel.field_hotel_more_info_url
     - field.field.node.hotel.field_hotel_phone
-    - field.field.node.hotel.field_hotel_rate
-    - field.field.node.hotel.field_hotel_rate_amount
+    - field.field.node.hotel.field_hotel_promo_rate
+    - field.field.node.hotel.field_hotel_promo_rate_unit
+    - field.field.node.hotel.field_hotel_rate_description
     - node.type.hotel
     - workflows.workflow.editorial
   module:
@@ -29,18 +30,18 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   field_hotel_address:
-    weight: 122
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_hotel_body:
-    weight: 121
+    weight: 16
     settings:
       rows: 5
       placeholder: ''
@@ -48,7 +49,7 @@ content:
     type: string_textarea
     region: content
   field_hotel_booking_notes:
-    weight: 127
+    weight: 19
     settings:
       rows: 5
       placeholder: ''
@@ -56,7 +57,7 @@ content:
     type: text_textarea
     region: content
   field_hotel_booking_url:
-    weight: 126
+    weight: 18
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -65,20 +66,20 @@ content:
     region: content
   field_hotel_cover_image:
     type: media_library_widget
-    weight: 129
+    weight: 20
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_hotel_main_image:
     type: media_library_widget
-    weight: 130
+    weight: 21
     settings:
       media_types: {  }
     third_party_settings: {  }
     region: content
   field_hotel_more_info_url:
-    weight: 128
+    weight: 17
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -86,22 +87,27 @@ content:
     type: link_default
     region: content
   field_hotel_phone:
-    weight: 123
+    weight: 11
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
     region: content
-  field_hotel_rate:
-    weight: 124
+  field_hotel_promo_rate:
+    weight: 14
     settings:
-      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: number
     region: content
-  field_hotel_rate_amount:
-    weight: 125
+  field_hotel_promo_rate_unit:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_hotel_rate_description:
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -110,20 +116,20 @@ content:
     region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 9
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -131,7 +137,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 5
     region: content
     third_party_settings: {  }
   publish_on:
@@ -144,32 +150,32 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 10
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 6
     region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60
@@ -184,8 +190,8 @@ content:
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 8
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }
