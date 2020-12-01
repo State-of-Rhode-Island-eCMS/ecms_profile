@@ -258,6 +258,17 @@ function ecms_base_update_9027(array &$sandbox): void {
   // Config updates for new modules.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $active_storage->write('google_tag.settings', $install_source->read('google_tag.settings'));
+  $active_storage->write('simple_sitemap.settings', $install_source->read('simple_sitemap.settings'));
+  $active_storage->write('simple_sitemap.custom_links.default', $install_source->read('simple_sitemap.custom_links.default'));
+  $active_storage->write('simple_sitemap.variants.default_hreflang', $install_source->read('simple_sitemap.variants.default_hreflang'));
+
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
 
