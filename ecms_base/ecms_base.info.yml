@@ -49,6 +49,7 @@ dependencies:
   - menu_block
   - menu_link_content
   - menu_ui
+  - metatag
   - moderated_content_bulk_publish
   - moderation_dashboard
   - node
@@ -100,6 +101,7 @@ install:
   - ecms_press_release
   - ecms_promotions
   - ecms_workflow
+  - google_tag
 
 # Theme dependencies for the distribution.
 themes:
