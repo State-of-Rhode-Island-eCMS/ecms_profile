@@ -76,6 +76,8 @@
 {% if node.field_promotion_image is not empty %}
   {% set img_uri = node.field_promotion_image.entity.field_promotion_image.entity.getFileUri() %}
   {% set img_alt = node.field_promotion_image.entity.field_promotion_image.alt %}
+
+  {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
   {% set img = drupal_image(img_uri, 'narrow', {alt: img_alt}, true) %}
 {% endif %}
 
