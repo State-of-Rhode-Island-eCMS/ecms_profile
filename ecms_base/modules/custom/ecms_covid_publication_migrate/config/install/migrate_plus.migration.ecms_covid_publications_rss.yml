@@ -8,7 +8,6 @@ source:
   urls:
     - https://health.ri.gov/rss/pubs/rss-covid-pub-list.php
   data_parser_plugin: simple_xml
-
   item_selector: /rss/channel/item
   fields:
     - name: guid
@@ -85,7 +84,6 @@ process:
         lo: lo
         km: km
       default_value: en
-
 
   moderation_state:
     plugin: default_value
