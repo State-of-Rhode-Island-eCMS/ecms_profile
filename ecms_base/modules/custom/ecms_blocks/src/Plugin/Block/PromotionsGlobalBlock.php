@@ -105,7 +105,7 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * {@inheritdoc}
    */
-  protected function blockAccess(AccountInterface $account): object {
+  protected function blockAccess(AccountInterface $account): AccessResult {
     return AccessResult::allowedIfHasPermission($account, 'access content');
   }
 
