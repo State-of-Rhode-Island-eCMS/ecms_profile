@@ -205,9 +205,9 @@ function ecms_base_update_9022(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.2.5 tag.
+ * Updates to run for the 0.2.6 tag.
  */
-function ecms_base_update_9025(array &$sandbox): void {
+function ecms_base_update_9026(array &$sandbox): void {
   // Reinstall the features that were no longer installed on the Covid site.
   $modules_to_install = [
     'ecms_basic_page',
