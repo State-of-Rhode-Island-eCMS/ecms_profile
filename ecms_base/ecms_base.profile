@@ -208,6 +208,8 @@ function ecms_base_update_9022(array &$sandbox): void {
  * Updates to run for the 0.2.6 tag.
  */
 function ecms_base_update_9026(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
   // Reinstall the features that were no longer installed on the Covid site.
   $modules_to_install = [
     'ecms_basic_page',
