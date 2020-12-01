@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags_hotel
+    - node.type.hotel
+  module:
+    - metatag
+id: node.hotel.field_meta_tags_hotel
+field_name: field_meta_tags_hotel
+entity_type: node
+bundle: hotel
+label: 'Meta Tags Hotel'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

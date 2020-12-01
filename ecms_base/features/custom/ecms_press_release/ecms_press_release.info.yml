@@ -14,6 +14,7 @@ dependencies:
   - language
   - link
   - menu_ui
+  - metatag
   - node
   - paragraphs
   - path

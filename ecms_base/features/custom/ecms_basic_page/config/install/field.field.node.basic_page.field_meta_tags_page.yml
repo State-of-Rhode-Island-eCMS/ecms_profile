@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags_page
+    - node.type.basic_page
+  module:
+    - metatag
+id: node.basic_page.field_meta_tags_page
+field_name: field_meta_tags_page
+entity_type: node
+bundle: basic_page
+label: 'Meta Tags Page'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

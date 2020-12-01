@@ -10,6 +10,7 @@ dependencies:
   - field
   - language
   - menu_ui
+  - metatag
   - node
   - path
   - pathauto

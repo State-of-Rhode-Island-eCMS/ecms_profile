@@ -9,11 +9,13 @@ dependencies:
     - field.field.node.event.field_event_location
     - field.field.node.event.field_event_promotions
     - field.field.node.event.field_event_type
+    - field.field.node.event.field_meta_tags_event
     - node.type.event
     - workflows.workflow.editorial
   module:
     - content_moderation
     - media_library
+    - metatag
     - path
     - smart_date
     - text
@@ -90,6 +92,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
+    region: content
+  field_meta_tags_event:
+    weight: 102
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   langcode:
     type: language_select

@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.project.field_meta_tags_project
     - field.field.node.project.field_project_body
     - field.field.node.project.field_project_categories
     - field.field.node.project.field_project_detours_needed
@@ -15,6 +16,7 @@ dependencies:
   module:
     - content_moderation
     - media_library
+    - metatag
     - path
     - text
 id: node.project.default
@@ -28,6 +30,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags_project:
+    weight: 131
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_project_body:
     weight: 123
     settings:

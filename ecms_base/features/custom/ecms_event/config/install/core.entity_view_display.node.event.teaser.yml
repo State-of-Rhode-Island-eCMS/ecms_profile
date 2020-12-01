@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.event.field_event_location
     - field.field.node.event.field_event_promotions
     - field.field.node.event.field_event_type
+    - field.field.node.event.field_meta_tags_event
     - node.type.event
   module:
     - user
@@ -36,4 +37,6 @@ hidden:
   field_event_location: true
   field_event_promotions: true
   field_event_type: true
+  field_meta_tags_event: true
   langcode: true
+  search_api_excerpt: true

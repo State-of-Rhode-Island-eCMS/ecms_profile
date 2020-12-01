@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.project.field_meta_tags_project
     - field.field.node.project.field_project_body
     - field.field.node.project.field_project_categories
     - field.field.node.project.field_project_detours_needed
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.project.field_project_total_cost
     - node.type.project
   module:
+    - metatag
     - text
     - user
 id: node.project.default
@@ -23,6 +25,13 @@ content:
     weight: -20
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_meta_tags_project:
+    weight: 111
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
     region: content
   field_project_body:
     weight: 103
@@ -97,3 +106,4 @@ content:
     region: content
 hidden:
   langcode: true
+  search_api_excerpt: true

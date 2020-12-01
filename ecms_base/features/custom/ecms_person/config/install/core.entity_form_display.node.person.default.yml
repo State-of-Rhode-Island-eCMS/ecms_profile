@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
     - field.field.node.person.field_person_fax
@@ -19,6 +20,7 @@ dependencies:
   module:
     - content_moderation
     - media_library
+    - metatag
     - path
     - telephone
 id: node.person.default
@@ -32,6 +34,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags_person:
+    weight: 102
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_person_category:
     weight: 11
     settings:

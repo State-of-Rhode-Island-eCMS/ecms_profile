@@ -3,6 +3,7 @@ description: 'Provides Landing page content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - allowed_formats
   - block_content
   - content_moderation
   - content_translation
@@ -14,8 +15,11 @@ dependencies:
   - layout_builder
   - layout_builder_restrictions
   - layout_discovery
+  - media
   - menu_ui
+  - metatag
   - node
+  - options
   - paragraphs
   - path
   - pathauto

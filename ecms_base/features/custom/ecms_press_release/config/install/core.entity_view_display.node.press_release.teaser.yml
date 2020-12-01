@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.press_release.field_meta_tags_press_release
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
@@ -39,6 +40,7 @@ content:
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
+  field_meta_tags_press_release: true
   field_press_release_links: true
   field_press_release_paragraphs: true
   field_press_release_promotions: true
@@ -46,3 +48,4 @@ hidden:
   field_press_release_topics: true
   langcode: true
   links: true
+  search_api_excerpt: true

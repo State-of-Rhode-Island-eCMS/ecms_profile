@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.press_release.field_meta_tags_press_release
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
@@ -14,6 +15,7 @@ dependencies:
     - datetime
     - entity_reference_revisions
     - link
+    - metatag
     - text
     - user
 id: node.press_release.default
@@ -26,6 +28,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags_press_release:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
   field_press_release_body:
     weight: 101
     label: above
@@ -94,3 +103,4 @@ content:
     third_party_settings: {  }
 hidden:
   langcode: true
+  search_api_excerpt: true

@@ -13,10 +13,12 @@ dependencies:
     - field.field.node.hotel.field_hotel_promo_rate
     - field.field.node.hotel.field_hotel_promo_rate_unit
     - field.field.node.hotel.field_hotel_rate_description
+    - field.field.node.hotel.field_meta_tags_hotel
     - node.type.hotel
   module:
     - address
     - link
+    - metatag
     - options
     - text
     - user
@@ -123,6 +125,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_meta_tags_hotel:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
     region: content
   links:
     weight: 100

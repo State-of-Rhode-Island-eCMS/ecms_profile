@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.speech.field_meta_tags_speech
     - field.field.node.speech.field_speech_date
     - field.field.node.speech.field_speech_long_title
     - field.field.node.speech.field_speech_text
@@ -25,7 +26,9 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_meta_tags_speech: true
   field_speech_date: true
   field_speech_long_title: true
   field_speech_text: true
   langcode: true
+  search_api_excerpt: true

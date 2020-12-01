@@ -15,6 +15,7 @@ dependencies:
   - media
   - media_library
   - menu_ui
+  - metatag
   - node
   - path
   - pathauto

@@ -9,8 +9,10 @@ dependencies:
     - field.field.node.event.field_event_location
     - field.field.node.event.field_event_promotions
     - field.field.node.event.field_event_type
+    - field.field.node.event.field_meta_tags_event
     - node.type.event
   module:
+    - metatag
     - smart_date
     - text
     - user
@@ -85,6 +87,13 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_meta_tags_event:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
   links:
     weight: 100
     region: content
@@ -92,3 +101,4 @@ content:
     third_party_settings: {  }
 hidden:
   langcode: true
+  search_api_excerpt: true
