@@ -222,15 +222,7 @@ function ecms_base_update_9026(array &$sandbox): void {
     'ecms_person',
     'ecms_press_release',
     'ecms_promotions',
-  ];
-
-  // Make sure necessary modules are installed.
-  \Drupal::service('module_installer')->install($modules_to_install);
-
-  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
-  $active_storage = \Drupal::service('config.storage');
-
-  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+    ];
 
   /** @var \Drupal\Core\Config\FileStorage $theme_source */
   $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
