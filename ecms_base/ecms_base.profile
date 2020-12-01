@@ -205,9 +205,9 @@ function ecms_base_update_9022(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.2.4 tag.
+ * Updates to run for the 0.2.5 tag.
  */
-function ecms_base_update_9024(array &$sandbox): void {
+function ecms_base_update_9025(array &$sandbox): void {
   // Reinstall the features that were no longer installed on the Covid site.
   $modules_to_install = [
     'ecms_basic_page',
@@ -237,8 +237,8 @@ function ecms_base_update_9024(array &$sandbox): void {
   $active_storage->write('views.view.site_search', $profile_source->read('views.view.site_search'));
 
   // Add the header inner search block.
-  $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.searchblock'));
+  $active_storage->write('block.block.searchblock', $theme_source->read('block.block.searchblock'));
 
   // Add the exposed form block.
-  $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.exposedformsite_searchpage_1'));
+  $active_storage->write('block.block.exposedformsite_searchpage_1', $theme_source->read('block.block.exposedformsite_searchpage_1'));
 }
