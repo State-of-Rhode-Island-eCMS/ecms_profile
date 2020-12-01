@@ -210,8 +210,8 @@ function ecms_base_update_9022(array &$sandbox): void {
  */
 function ecms_base_update_9026(array &$sandbox): void {
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
   // Reinstall the features that were no longer installed on the Covid site.
-  // Also install the newly introduced SEO modules.
   $modules_to_install = [
     'ecms_basic_page',
     'ecms_event',
@@ -222,7 +222,13 @@ function ecms_base_update_9026(array &$sandbox): void {
     'ecms_person',
     'ecms_press_release',
     'ecms_promotions',
-    ];
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
 
   /** @var \Drupal\Core\Config\FileStorage $theme_source */
   $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
@@ -238,7 +244,6 @@ function ecms_base_update_9026(array &$sandbox): void {
 
   // Add the exposed form block.
   $active_storage->write('block.block.exposedformsite_searchpage_1', $theme_source->read('block.block.exposedformsite_searchpage_1'));
-
 }
 
 /**
