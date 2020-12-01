@@ -285,6 +285,7 @@ function ecms_base_update_9027(array &$sandbox): void {
   $active_storage->write('simple_sitemap.custom_links.default', $install_source->read('simple_sitemap.custom_links.default'));
   $active_storage->write('simple_sitemap.variants.default_hreflang', $install_source->read('simple_sitemap.variants.default_hreflang'));
 
+  /* Features revert should add these, but if not this will do it. Saving.
   $pageSitemapConfig = new Config('simple_sitemap.bundle_settings.default.node.basic_page',
     $active_storage,
     \Drupal::service('event_dispatcher'),
@@ -297,5 +298,6 @@ function ecms_base_update_9027(array &$sandbox): void {
     ->set('changefreq', '')
     ->set('include_images', 'false')
     ->save();
+  */
 
 }
