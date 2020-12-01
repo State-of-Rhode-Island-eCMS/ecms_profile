@@ -1,0 +1,14 @@
+max_links: 2000
+cron_generate: true
+cron_generate_interval: 24
+generate_duration: 10000
+remove_duplicates: true
+skip_untranslated: true
+xsl: false
+base_url: ''
+default_variant: default
+custom_links_include_images: false
+excluded_languages: {  }
+enabled_entity_types:
+  - node
+disable_language_hreflang: false
