@@ -6,7 +6,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - https://appserver/rss-covid-pub-list.php
+    - https://appserver/rss-covid-pub-list.xml
   data_parser_plugin: simple_xml
   item_selector: /rss/channel/item
   fields:
@@ -41,18 +41,23 @@ process:
   id: guid
 
   pseudo_check_exists:
+    - plugin: callback
+      callable: urldecode
+      source: type
     - plugin: entity_lookup
       entity_type: taxonomy_term
       value_key: name
       bundle_key: vid
       bundle: 'publication_type'
-      source: type
     - plugin: callback
       callable: is_null
     - plugin: skip_on_empty
       method: row
 
-  name: type
+  name:
+    - plugin: callback
+      callable: urldecode
+      source: type
 
 # Add an enforced dependency so the config uninstalls with the module.
 dependencies:

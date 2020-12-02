@@ -6,7 +6,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - https://appserver/rss-covid-pub-list.php
+    - https://appserver/rss-covid-pub-list.xml
   data_parser_plugin: simple_xml
   item_selector: /rss/channel/item
   fields:
@@ -39,16 +39,27 @@ destination:
 
 process:
   id: guid
-  title: title
-  'field_publication_url/uri': link
-  'field_publication_url/title': title
+  title:
+   - plugin: callback
+     callable: urldecode
+     source: title
+  'field_publication_url/uri':
+    - plugin: callback
+      callable: urldecode
+      source: link
+  'field_publication_url/title':
+    - plugin: callback
+      callable: urldecode
+      source: title
   pseudo_publication_type:
+    - plugin: callback
+      callable: urldecode
+      source: type
     - plugin: entity_lookup
       entity_type: taxonomy_term
       value_key: name
       bundle_key: vid
       bundle: 'publication_type'
-      source: type
 
   pseudo_publication_subtype:
     - plugin: entity_lookup
