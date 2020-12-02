@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-132: Install and configure GTM module.
 
 ### Changed
+- RIG-161: Updated the default user role permissions.
 
 ### Deprecated
 
