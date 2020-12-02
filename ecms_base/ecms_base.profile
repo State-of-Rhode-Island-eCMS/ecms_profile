@@ -273,12 +273,4 @@ function ecms_base_update_9027(array &$sandbox): void {
   $active_storage->write('simple_sitemap.custom_links.default', $install_source->read('simple_sitemap.custom_links.default'));
   $active_storage->write('simple_sitemap.variants.default_hreflang', $install_source->read('simple_sitemap.variants.default_hreflang'));
 
-  /** @var \Drupal\Core\Config\FileStorage $install_source */
-  $install_source = new FileStorage($path . "/config/install/");
-
-  $active_storage->write('google_tag.settings', $install_source->read('google_tag.settings'));
-  $active_storage->write('simple_sitemap.settings', $install_source->read('simple_sitemap.settings'));
-  $active_storage->write('simple_sitemap.custom_links.default', $install_source->read('simple_sitemap.custom_links.default'));
-  $active_storage->write('simple_sitemap.variants.default_hreflang', $install_source->read('simple_sitemap.variants.default_hreflang'));
-
 }
