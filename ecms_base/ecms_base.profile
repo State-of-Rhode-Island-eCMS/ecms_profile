@@ -283,5 +283,4 @@ function ecms_base_update_9027(array &$sandbox): void {
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
-
 }
