@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.project.field_meta_tags_project
     - field.field.node.project.field_project_body
     - field.field.node.project.field_project_categories
     - field.field.node.project.field_project_detours_needed
@@ -30,6 +31,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_meta_tags_project: true
   field_project_body: true
   field_project_categories: true
   field_project_detours_needed: true
@@ -39,3 +41,4 @@ hidden:
   field_project_start_year: true
   field_project_total_cost: true
   langcode: true
+  search_api_excerpt: true

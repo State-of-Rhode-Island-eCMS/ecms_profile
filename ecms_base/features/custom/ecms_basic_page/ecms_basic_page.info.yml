@@ -12,12 +12,14 @@ dependencies:
   - field
   - language
   - menu_ui
+  - metatag
   - node
   - paragraphs
   - path
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - simple_sitemap
   - text
   - user
 package: eCMS

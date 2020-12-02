@@ -14,12 +14,14 @@ dependencies:
   - language
   - link
   - menu_ui
+  - metatag
   - node
   - paragraphs
   - path
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - simple_sitemap
   - taxonomy
   - text
   - user

@@ -10,6 +10,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-145: Install and Configure Metatag Module.
+- RIG-133: Install and configure simple XML sitemap module.
+- RIG-132: Install and configure GTM module.
 
 ### Changed
 

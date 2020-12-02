@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.full
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.field_meta_tags_landing_page
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
   module:
@@ -100,5 +101,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_meta_tags_landing_page: true
   langcode: true
   layout_builder__layout: true
+  search_api_excerpt: true

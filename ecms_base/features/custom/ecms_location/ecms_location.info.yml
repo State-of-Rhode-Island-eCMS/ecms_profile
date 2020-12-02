@@ -11,12 +11,14 @@ dependencies:
   - field
   - language
   - menu_ui
+  - metatag
   - node
   - office_hours
   - path
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - simple_sitemap
   - telephone
   - text
   - user

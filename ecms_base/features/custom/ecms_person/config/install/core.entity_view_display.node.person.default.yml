@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
     - field.field.node.person.field_person_fax
@@ -16,6 +17,7 @@ dependencies:
     - field.field.node.person.field_person_suffix
     - node.type.person
   module:
+    - metatag
     - telephone
     - user
 id: node.person.default
@@ -28,6 +30,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags_person:
+    weight: 113
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
   field_person_category:
     weight: 111
     label: above
@@ -132,3 +141,4 @@ content:
     third_party_settings: {  }
 hidden:
   langcode: true
+  search_api_excerpt: true

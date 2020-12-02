@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.press_release.field_meta_tags_press_release
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
     - field.field.node.press_release.field_press_release_links
@@ -15,6 +16,7 @@ dependencies:
     - content_moderation
     - datetime
     - link
+    - metatag
     - paragraphs
     - path
     - text
@@ -29,6 +31,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags_press_release:
+    weight: 128
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
   field_press_release_body:
     weight: 121
     settings:

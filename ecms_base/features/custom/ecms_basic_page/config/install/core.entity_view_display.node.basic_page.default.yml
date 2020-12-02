@@ -5,9 +5,11 @@ dependencies:
     - field.field.node.basic_page.field_basic_page_body
     - field.field.node.basic_page.field_basic_page_paragraphs
     - field.field.node.basic_page.field_basic_page_promotions
+    - field.field.node.basic_page.field_meta_tags_page
     - node.type.basic_page
   module:
     - entity_reference_revisions
+    - metatag
     - text
     - user
 id: node.basic_page.default
@@ -36,6 +38,13 @@ content:
       link: ''
     third_party_settings: {  }
     region: content
+  field_meta_tags_page:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
   links:
     weight: 1
     region: content
@@ -44,3 +53,4 @@ content:
 hidden:
   field_basic_page_promotions: true
   langcode: true
+  search_api_excerpt: true

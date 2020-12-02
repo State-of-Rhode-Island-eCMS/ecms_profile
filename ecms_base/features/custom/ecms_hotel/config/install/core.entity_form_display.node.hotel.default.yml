@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.hotel.field_hotel_promo_rate
     - field.field.node.hotel.field_hotel_promo_rate_unit
     - field.field.node.hotel.field_hotel_rate_description
+    - field.field.node.hotel.field_meta_tags_hotel
     - node.type.hotel
     - workflows.workflow.editorial
   module:
@@ -20,6 +21,7 @@ dependencies:
     - content_moderation
     - link
     - media_library
+    - metatag
     - path
     - telephone
     - text
@@ -113,6 +115,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_meta_tags_hotel:
+    weight: 31
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   langcode:
     type: language_select

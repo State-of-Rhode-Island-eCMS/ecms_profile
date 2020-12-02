@@ -10,10 +10,12 @@ dependencies:
   - field
   - language
   - menu_ui
+  - metatag
   - node
   - path
   - pathauto
   - scheduled_transitions
+  - simple_sitemap
   - user
 version: 9.x-1.0
 package: eCMS

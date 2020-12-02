@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags_landing_page
+    - node.type.landing_page
+  module:
+    - metatag
+id: node.landing_page.field_meta_tags_landing_page
+field_name: field_meta_tags_landing_page
+entity_type: node
+bundle: landing_page
+label: 'Meta Tags Landing Page'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

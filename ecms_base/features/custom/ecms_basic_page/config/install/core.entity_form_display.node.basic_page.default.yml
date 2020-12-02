@@ -5,10 +5,12 @@ dependencies:
     - field.field.node.basic_page.field_basic_page_body
     - field.field.node.basic_page.field_basic_page_paragraphs
     - field.field.node.basic_page.field_basic_page_promotions
+    - field.field.node.basic_page.field_meta_tags_page
     - node.type.basic_page
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - metatag
     - paragraphs
     - path
     - text
@@ -54,6 +56,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_meta_tags_page:
+    weight: 26
+    settings:
+      sidebar: true
+    third_party_settings: {  }
+    type: metatag_firehose
     region: content
   langcode:
     type: language_select

@@ -14,12 +14,14 @@ dependencies:
   - media
   - media_library
   - menu_ui
+  - metatag
   - node
   - options
   - path
   - pathauto
   - rabbit_hole
   - scheduled_transitions
+  - simple_sitemap
   - svg_image
   - telephone
   - text

@@ -244,3 +244,33 @@ function ecms_base_update_9026(array &$sandbox): void {
   // Add the exposed form block.
   $active_storage->write('block.block.exposedformsite_searchpage_1', $theme_source->read('block.block.exposedformsite_searchpage_1'));
 }
+
+/**
+ * Updates to run for the 0.2.7 tag.
+ */
+function ecms_base_update_9027(array &$sandbox): void {
+
+  // Install the newly introduced SEO modules.
+  $modules_to_install = [
+    'google_tag',
+    'metatag',
+    'simple_sitemap',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $active_storage->write('google_tag.settings', $install_source->read('google_tag.settings'));
+  $active_storage->write('simple_sitemap.settings', $install_source->read('simple_sitemap.settings'));
+  $active_storage->write('simple_sitemap.custom_links.default', $install_source->read('simple_sitemap.custom_links.default'));
+  $active_storage->write('simple_sitemap.variants.default_hreflang', $install_source->read('simple_sitemap.variants.default_hreflang'));
+
+}
