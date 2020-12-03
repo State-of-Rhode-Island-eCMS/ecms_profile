@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: promotion_reference
+label: 'Promotion reference'
+revision: 0
+description: 'A block that allows multiple promotion references.'

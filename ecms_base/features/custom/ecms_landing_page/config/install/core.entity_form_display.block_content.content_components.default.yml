@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.content_components
     - field.field.block_content.content_components.field_components
+    - field.field.block_content.content_components.field_components_bg_color
   module:
     - paragraphs
 id: block_content.content_components.default
@@ -13,7 +14,7 @@ mode: default
 content:
   field_components:
     type: entity_reference_paragraphs
-    weight: 0
+    weight: 1
     settings:
       title: 'Content Component'
       title_plural: 'Content Components'
@@ -22,6 +23,12 @@ content:
       form_display_mode: default
       default_paragraph_type: formatted_text
     third_party_settings: {  }
+    region: content
+  field_components_bg_color:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
 hidden:
   info: true

@@ -13,6 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-145: Install and Configure Metatag Module.
 - RIG-133: Install and configure simple XML sitemap module.
 - RIG-132: Install and configure GTM module.
+- RIG-130: Added promotion reference block type.
+- RIG-130: Added background color field to content components block type.
 
 ### Changed
 - RIG-161: Updated the default user role permissions.
@@ -22,6 +24,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-130: Fixed form settings missing for block types.
 
 ### Security
 
