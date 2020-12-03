@@ -4,8 +4,10 @@ dependencies:
   config:
     - block_content.type.content_components
     - field.field.block_content.content_components.field_components
+    - field.field.block_content.content_components.field_components_bg_color
   module:
     - entity_reference_revisions
+    - options
 id: block_content.content_components.default
 targetEntityType: block_content
 bundle: content_components
@@ -20,5 +22,13 @@ content:
       link: ''
     third_party_settings: {  }
     region: content
+  field_components_bg_color:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
 hidden:
   langcode: true
+  search_api_excerpt: true

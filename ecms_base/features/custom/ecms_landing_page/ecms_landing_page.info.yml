@@ -16,6 +16,7 @@ dependencies:
   - layout_builder_restrictions
   - layout_discovery
   - media
+  - media_library
   - menu_ui
   - metatag
   - node
