@@ -7,6 +7,11 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\media_library\MediaLibraryState;
+
 /**
  * Implements hook_theme().
  */
@@ -16,4 +21,50 @@ function ecms_blocks_theme(): array {
       'render element' => 'form',
     ],
   ];
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ *
+ * @see: https://www.drupal.org/project/drupal/issues/3106315#comment-13875496
+ */
+function ecms_blocks_field_widget_media_library_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+  /** @var \Drupal\Core\Routing\RouteMatchInterface $route_match */
+  $route_match = \Drupal::routeMatch();
+
+  if ($route_match->getRouteName() === 'layout_builder.add_block') {
+    /** @var \Drupal\media_library\MediaLibraryState $state */
+    $state = $element['open_button']['#media_library_state'];
+    $openerParameters = $state->getOpenerParameters();
+    $openerParameters['plugin_id'] = $route_match->getParameters()->get('plugin_id');
+    $new_state = MediaLibraryState::create($state->getOpenerId(), $state->getAllowedTypeIds(), $state->getSelectedTypeId(), $state->getAvailableSlots(), $openerParameters);
+    $element['open_button']['#media_library_state'] = $new_state;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ *
+ * @see: * @see: https://www.drupal.org/project/drupal/issues/3106315#comment-13875496
+ */
+function ecms_blocks_block_content_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if ($route_name === 'media_library.ui') {
+    /** @var \Drupal\media_library\MediaLibraryState $state */
+    $state = MediaLibraryState::fromRequest(\Drupal::request());
+    $openerParameters = $state->getOpenerParameters();
+
+    // If the plugin ID exists within the opener parameters, we know
+    // the media library is being used on the layout builder form.
+    if (isset($openerParameters['plugin_id']) && substr($openerParameters['plugin_id'], 0, 12) === 'inline_block') {
+
+      if ($account->hasPermission('create and edit custom blocks')) {
+        return AccessResult::allowed();
+      }
+    }
+  }
+
+  // No opinion.
+  return AccessResult::neutral();
 }

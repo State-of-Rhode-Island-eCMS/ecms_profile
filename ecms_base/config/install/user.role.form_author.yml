@@ -7,4 +7,6 @@ weight: 4
 is_admin: null
 permissions:
   - 'create webform'
+  - 'edit any webform'
   - 'edit own webform'
+  - 'translate webform node'

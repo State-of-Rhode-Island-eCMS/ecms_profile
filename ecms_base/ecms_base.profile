@@ -268,9 +268,18 @@ function ecms_base_update_9027(array &$sandbox): void {
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
 
-  $active_storage->write('google_tag.settings', $install_source->read('google_tag.settings'));
-  $active_storage->write('simple_sitemap.settings', $install_source->read('simple_sitemap.settings'));
-  $active_storage->write('simple_sitemap.custom_links.default', $install_source->read('simple_sitemap.custom_links.default'));
-  $active_storage->write('simple_sitemap.variants.default_hreflang', $install_source->read('simple_sitemap.variants.default_hreflang'));
+  $newConfig = [
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.form_author',
+    'user.role.site_admin',
+    'google_tag.settings',
+    'simple_sitemap.settings',
+    'simple_sitemap.custom_links.default',
+    'simple_sitemap.variants.default_hreflang',
+  ];
 
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
 }
