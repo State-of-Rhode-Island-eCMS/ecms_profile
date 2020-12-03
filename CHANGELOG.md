@@ -14,8 +14,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 
-### Changed
-
 ### Deprecated
 
 ### Removed
