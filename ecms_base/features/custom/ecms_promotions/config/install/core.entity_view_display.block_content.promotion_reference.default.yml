@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.promotion_reference
+    - field.field.block_content.promotion_reference.field_promotions
+id: block_content.promotion_reference.default
+targetEntityType: block_content
+bundle: promotion_reference
+mode: default
+content:
+  field_promotions:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

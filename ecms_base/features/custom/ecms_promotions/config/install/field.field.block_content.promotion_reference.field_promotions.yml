@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.promotion_reference
+    - field.storage.block_content.field_promotions
+    - node.type.promotions
+id: block_content.promotion_reference.field_promotions
+field_name: field_promotions
+entity_type: block_content
+bundle: promotion_reference
+label: Promotions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      promotions: promotions
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
