@@ -10,23 +10,28 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-145: Install and Configure Metatag Module.
-- RIG-133: Install and configure simple XML sitemap module.
-- RIG-132: Install and configure GTM module.
-- RIG-130: Added promotion reference block type.
-- RIG-130: Added background color field to content components block type.
 
 ### Changed
-- RIG-161: Updated the default user role permissions.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIG-130: Fixed form settings missing for block types.
 
 ### Security
+
+## [0.2.7] - 2020-12-03
+### Added
+- RIG-145: Install and Configure Metatag Module.
+- RIG-133: Install and configure simple XML sitemap module.
+- RIG-132: Install and configure GTM module.
+- RIG-130: Added promotion reference block type.
+- RIG-130: Added background color field to content components block type.
+### Changed
+- RIG-161: Updated the default user role permissions.
+### Fixed
+- RIG-130: Fixed form settings missing for block types.
 
 ## [0.2.6] - 2020-12-01
 ### Added
@@ -299,7 +304,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.7...HEAD
+[0.2.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.6...0.2.7
 [0.2.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...0.2.6
 [0.2.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.3...0.2.4
