@@ -6,7 +6,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - https://appserver/rss-covid-pub-list.xml
+    - https://health.ri.gov/rss/pubs/rss-covid-pub-list.php
   data_parser_plugin: simple_xml
   item_selector: /rss/channel/item
   fields:
