@@ -57,7 +57,7 @@ function ecms_blocks_block_content_create_access(AccountInterface $account, arra
 
     // If the plugin ID exists within the opener parameters, we know
     // the media library is being used on the layout builder form.
-    if (isset($openerParameters['plugin_id']) && substr($openerParameters['plugin_id'], 0, 12 ) === 'inline_block') {
+    if (isset($openerParameters['plugin_id']) && substr($openerParameters['plugin_id'], 0, 12) === 'inline_block') {
 
       if ($account->hasPermission('create and edit custom blocks')) {
         return AccessResult::allowed();
