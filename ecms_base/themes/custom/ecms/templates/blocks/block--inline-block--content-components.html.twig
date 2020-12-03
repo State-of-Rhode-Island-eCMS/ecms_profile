@@ -33,7 +33,7 @@
 {% set cachebust = content|render %}
 
 {% set bg_color_class = '' %}
-{% if content['#block_content'].get('field_components_bg_color').value != '' %}
+{% if content.field_components_bg_color|render is not empty %}
   {% set bg_color_class = 'qh__t__' ~ content['#block_content'].get('field_components_bg_color').value|clean_class %}
 {% endif %}
 
