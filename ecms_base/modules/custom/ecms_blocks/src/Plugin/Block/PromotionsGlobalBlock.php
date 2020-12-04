@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides a listing of global promos.
@@ -107,6 +108,15 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
    */
   protected function blockAccess(AccountInterface $account): AccessResult {
     return AccessResult::allowedIfHasPermission($account, 'access content');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(): array {
+    // We want to rebuild when promotions change.
+    return Cache::mergeTags(parent::getCacheTags(), ['node_list:promotions']);
+
   }
 
 }

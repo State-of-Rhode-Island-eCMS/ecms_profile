@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-163: Added the role delegation module and updated site admin permissions.
+- RIG-131: Added cache tags method to global promotions block.
 
 ### Changed
 
