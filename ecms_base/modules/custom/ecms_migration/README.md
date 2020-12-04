@@ -26,7 +26,7 @@ and will append that content to the `field_basic_page_body` field.
 
 ### eCMS Publications
 The eCMS Publication migration will generate `publication` nodes and will accept
-a Googe Sheet with the following columns:
+a Google Sheet with the following columns:
 - Title (The title of the link and node)
 - Language (The language of the publication)
 - Url (The link to the external publication)
