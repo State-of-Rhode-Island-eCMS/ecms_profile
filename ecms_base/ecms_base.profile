@@ -283,3 +283,26 @@ function ecms_base_update_9027(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
+/**
+ * Updates to run for the 0.2.8 tag.
+ */
+function ecms_base_update_9028(array &$sandbox): void {
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}

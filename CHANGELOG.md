@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-141: Added Covid site specific publication migration from an RSS feed.
+- RIG-161: Added delete content permissions for the content publisher role.
 
 ### Changed
 
