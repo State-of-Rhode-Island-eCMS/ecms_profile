@@ -24,6 +24,8 @@ permissions:
   - 'administer site configuration'
   - 'administer themes'
   - 'administer users'
+  - 'assign content_author role'
+  - 'assign content_publisher role'
   - 'bypass paragraphs type content access'
   - 'configure any layout'
   - 'configure editable landing_page node layout overrides'

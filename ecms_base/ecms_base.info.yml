@@ -69,6 +69,7 @@ dependencies:
   - rh_taxonomy
   - responsive_image
   - rdf
+  - role_delegation
   - scheduled_transitions
   - search_api
   - search_api_db
