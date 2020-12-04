@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-141: Added Covid site specific publication migration from an RSS feed.
-- RIG-161: Added delete content permissions for the content publisher role.
 
 ### Changed
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.2.8] - 2020-12-04
+### Added
+- RIG-141: Added Covid site specific publication migration from an RSS feed.
+- RIG-161: Added delete content permissions for the content publisher role.
 
 ## [0.2.7] - 2020-12-03
 ### Added
@@ -306,7 +309,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.8...HEAD
+[0.2.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.7...0.2.8
 [0.2.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.6...0.2.7
 [0.2.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...0.2.6
 [0.2.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.4...0.2.5
