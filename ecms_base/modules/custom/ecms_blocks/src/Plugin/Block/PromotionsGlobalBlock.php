@@ -116,7 +116,6 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
   public function getCacheTags(): array {
     // We want to rebuild when promotions change.
     return Cache::mergeTags(parent::getCacheTags(), ['node_list:promotions']);
-
   }
 
 }
