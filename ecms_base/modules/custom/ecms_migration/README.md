@@ -24,6 +24,14 @@ and will use the first _h1_ tag on the page as the title of the node. It will
 continue pulling the inner html from three user defined css selectors
 and will append that content to the `field_basic_page_body` field.
 
+### eCMS Publications
+The eCMS Publication migration will generate `publication` nodes and will accept
+a Google Sheet with the following columns:
+- Title (The title of the link and node)
+- Language (The language of the publication)
+- Url (The link to the external publication)
+- Type (The type taxonomy for the publication)
+
 ## Google Sheets
 The Google Sheet that is created _MUST_ be publicly accessible and published to
 the web. This is accomplished by going to the `File > Publish to the web` menu.

@@ -5,4 +5,5 @@ ecms_basic_page:
   css_selector_1: REDACTED
   css_selector_2: REDACTED
   css_selector_3: REDACTED
-
+ecms_publications:
+  google_sheet_id: REDACTED

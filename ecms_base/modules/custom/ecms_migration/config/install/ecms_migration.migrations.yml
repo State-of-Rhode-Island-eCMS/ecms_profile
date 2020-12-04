@@ -5,3 +5,5 @@ ecms_file:
 ecms_basic_page:
   - migrate_plus.migration.ecms_basic_page
   - migrate_plus.migration.ecms_basic_page_url
+ecms_publications:
+  - migrate_plus.migration.ecms_publications

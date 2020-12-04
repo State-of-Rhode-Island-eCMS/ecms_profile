@@ -1,0 +1,10 @@
+name: 'eCMS Covid Publication Migration'
+type: module
+description: 'Migrate Covid publications from the DOH rss feed.'
+core_version_requirement: ^8 || ^9
+package: 'eCMS'
+dependencies:
+  - drupal:migration_tools
+  - drupal:migrate_tools
+  - drupal:migrate_process_trim
+  - ecms_publications

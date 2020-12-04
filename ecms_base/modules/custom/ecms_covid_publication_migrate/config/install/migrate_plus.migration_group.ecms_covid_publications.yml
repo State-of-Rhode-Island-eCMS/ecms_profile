@@ -1,0 +1,18 @@
+# The machine name of the group, by which it is referenced in individual
+# migrations.
+id: ecms_covid_publications
+
+# A human-friendly label for the group.
+label: eCMS Covid Publications
+
+# More information about the group.
+description: Publication migrations for the Covid site.
+
+# Short description of the type of source.
+source_type: RSS Feed Import
+
+# Add an enforced dependency so the config uninstalls with the module.
+dependencies:
+  enforced:
+    module:
+      - ecms_covid_publication_migrate
