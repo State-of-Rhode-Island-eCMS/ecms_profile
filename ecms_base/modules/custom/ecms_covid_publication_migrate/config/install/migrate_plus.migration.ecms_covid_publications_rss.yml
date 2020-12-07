@@ -61,24 +61,15 @@ process:
       bundle_key: vid
       bundle: 'publication_type'
 
-  pseudo_publication_subtype:
+  field_publication_types:
+    - plugin: callback
+      callable: urldecode
+      source: type
     - plugin: entity_lookup
       entity_type: taxonomy_term
-      value_key: parent
+      value_key: name
       bundle_key: vid
       bundle: 'publication_type'
-      source: '@pseudo_publication_type'
-      ignore_case: true
-    - plugin: skip_on_empty
-      method: process
-    - plugin: entity_exists
-      entity_type: taxonomy_term
-
-  field_publication_types:
-    - plugin: null_coalesce
-      source:
-        - '@pseudo_publication_subtype'
-        - '@pseudo_publication_type'
 
   langcode:
     - plugin: static_map
@@ -108,7 +99,6 @@ process:
 migration_dependencies:
   required:
     - ecms_covid_publication_types
-    - ecms_covid_publication_subtypes
 
 # Add an enforced dependency so the config uninstalls with the module.
 dependencies:
