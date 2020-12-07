@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.media_item
-id: paragraph.media_item.status
+    - paragraphs.paragraphs_type.accordion_builder
+id: paragraph.accordion_builder.status
 field_name: status
 entity_type: paragraph
-bundle: media_item
+bundle: accordion_builder
 label: Published
 description: ''
 required: false

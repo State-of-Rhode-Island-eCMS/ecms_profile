@@ -2,17 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_file_size
     - media.type.file
-id: media.file.field_file_size
-field_name: field_file_size
+  module:
+    - path
+id: media.file.path
+field_name: path
 entity_type: media
 bundle: file
-label: 'File size'
+label: 'URL alias'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: string
+field_type: path

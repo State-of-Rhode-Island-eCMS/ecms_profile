@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.file
+    - media.type.media_item_image
   module:
     - content_translation
 third_party_settings:
@@ -10,8 +10,8 @@ third_party_settings:
     enabled: true
     bundle_settings:
       untranslatable_fields_hide: '1'
-id: media.file
+id: media.media_item_image
 target_entity_type_id: media
-target_bundle: file
+target_bundle: media_item_image
 default_langcode: site_default
 language_alterable: true

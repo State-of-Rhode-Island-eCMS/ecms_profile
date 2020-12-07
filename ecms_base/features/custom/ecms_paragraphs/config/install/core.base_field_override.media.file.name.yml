@@ -2,17 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_file_size
     - media.type.file
-id: media.file.field_file_size
-field_name: field_file_size
+id: media.file.name
+field_name: name
 entity_type: media
 bundle: file
-label: 'File size'
+label: Name
 description: ''
-required: false
+required: true
 translatable: true
-default_value: {  }
+default_value:
+  -
+    value: ''
 default_value_callback: ''
 settings: {  }
 field_type: string

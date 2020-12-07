@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.file
+    - media.type.media_item_video
   module:
     - content_translation
 third_party_settings:
   content_translation:
     enabled: true
     bundle_settings:
-      untranslatable_fields_hide: '1'
-id: media.file
+      untranslatable_fields_hide: '0'
+id: media.media_item_video
 target_entity_type_id: media
-target_bundle: file
+target_bundle: media_item_video
 default_langcode: site_default
 language_alterable: true
