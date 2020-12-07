@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_promotion_image
     - media.type.promotional_image
   module:
     - content_translation
@@ -10,35 +9,35 @@ dependencies:
 third_party_settings:
   content_translation:
     translation_sync:
-      alt: alt
-      title: title
-      file: '0'
-id: media.promotional_image.field_promotion_image
-field_name: field_promotion_image
+      file: file
+      alt: 0
+      title: 0
+id: media.promotional_image.thumbnail
+field_name: thumbnail
 entity_type: media
 bundle: promotional_image
-label: Image
-description: ''
-required: true
+label: Thumbnail
+description: 'The thumbnail of the media item.'
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
-  max_filesize: ''
-  max_resolution: ''
-  min_resolution: ''
   alt_field: true
   alt_field_required: true
   title_field: false
   title_field_required: false
+  max_resolution: ''
+  min_resolution: ''
   default_image:
-    uuid: ''
+    uuid: null
     alt: ''
     title: ''
     width: null
     height: null
-  handler: 'default:file'
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  max_filesize: ''
+  handler: default
   handler_settings: {  }
 field_type: image
