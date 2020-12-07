@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.type.person_headshot
-id: media.person_headshot.status
+    - node.type.person
+id: node.person.status
 field_name: status
-entity_type: media
-bundle: person_headshot
+entity_type: node
+bundle: person
 label: Published
 description: ''
 required: false
