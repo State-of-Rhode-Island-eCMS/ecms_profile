@@ -1,0 +1,17 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.text_card_collection
+id: block_content.text_card_collection.metatag
+field_name: metatag
+entity_type: block_content
+bundle: text_card_collection
+label: Metatags
+description: 'The meta tags for the entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map
