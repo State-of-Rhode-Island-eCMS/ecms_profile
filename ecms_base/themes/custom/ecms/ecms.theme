@@ -264,7 +264,7 @@ function ecms_preprocess_node__publication(array &$variables): void {
 
   // Grab file title.
   $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
-  $test = 'true';
+
   // Determine file type.
   $publication_type = pathinfo($variables['publication_url'], PATHINFO_EXTENSION);
 
