@@ -328,9 +328,31 @@ function ecms_base_update_9029(array &$sandbox): void {
   $active_storage = \Drupal::service('config.storage');
 
   $newConfig = [
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.3.0 tag.
+ */
+function ecms_base_update_9030(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
     'page_manager.page.moderation_dashboard',
     'page_manager.page_variant.moderation_dashboard-panels_variant-0',
-    'user.role.site_admin',
     'views.view.moderation_dashboard_recent_changes',
     'workflows.workflow.editorial.yml',
   ];
