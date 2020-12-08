@@ -297,7 +297,7 @@ function ecms_preprocess_node__publication(array &$variables): void {
     default:
       $variables['enable_download'] = FALSE;
       $variables['publication_icon'] = 'globe';
-      $variables['publication_readable'] = 'Web page';
+      $variables['publication_readable'] = t('Web page');
   }
 }
 
@@ -307,6 +307,7 @@ function ecms_preprocess_node__publication(array &$variables): void {
 function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
+  // Set target audience if there is one.
   $audience = $paragraph->get('field_publication_list_audience')->getString();
 
   $entity_type_manager = \Drupal::entityTypeManager();
