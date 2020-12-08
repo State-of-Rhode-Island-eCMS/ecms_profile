@@ -10,21 +10,28 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-163: Added the role delegation module and updated site admin permissions.
-- RIG-131: Added cache tags method to global promotions block.
-- RIG-130: Added theming to support publications list.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.9] - 2020-12-08
+### Added
+- RIG-163: Added the role delegation module and updated site admin permissions.
+- RIG-131: Added cache tags method to global promotions block.
+- RIG-130: Added theming to support publications list.
+
+### Removed
 - RIG-130: Removed publications_list paragraph in favor of publication_list.
 
 ### Fixed
 - RIG-141: Fix the rss import to ignore subcategories.
-
-### Security
 
 ## [0.2.8] - 2020-12-04
 ### Added
@@ -314,7 +321,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.9...HEAD
+[0.2.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.8...0.2.9
 [0.2.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.7...0.2.8
 [0.2.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.6...0.2.7
 [0.2.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...0.2.6
