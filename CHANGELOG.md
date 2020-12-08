@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-168: Updated moderation dashboard and workflow state labels.
 
 ### Deprecated
 
