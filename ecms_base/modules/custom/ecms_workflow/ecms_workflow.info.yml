@@ -12,6 +12,7 @@ dependencies:
   - media_library
   - menu_ui
   - node
+  - page_manager
   - path
   - text
   - user
