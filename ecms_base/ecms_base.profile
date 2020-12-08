@@ -328,7 +328,11 @@ function ecms_base_update_9029(array &$sandbox): void {
   $active_storage = \Drupal::service('config.storage');
 
   $newConfig = [
+    'page_manager.page.moderation_dashboard',
+    'page_manager.page_variant.moderation_dashboard-panels_variant-0',
     'user.role.site_admin',
+    'views.view.moderation_dashboard_recent_changes',
+    'workflows.workflow.editorial.yml'
   ];
 
   foreach ($newConfig as $config) {
