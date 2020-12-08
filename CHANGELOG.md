@@ -12,12 +12,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-163: Added the role delegation module and updated site admin permissions.
 - RIG-131: Added cache tags method to global promotions block.
+- RIG-130: Added theming to support publications list.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+- RIG-130: Removed publications_list paragraph in favor of publication_list.
 
 ### Fixed
 - RIG-141: Fix the rss import to ignore subcategories.
