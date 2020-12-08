@@ -8,6 +8,7 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -107,27 +108,27 @@ function ecms_preprocess_media__file(array &$variables): void {
   // Determine file icon and what to label file.
   switch (TRUE) {
     case ($file_type === 'pdf'):
-      $variables['file_type_icon'] = 'pdf';
+      $variables['file_type_icon'] = 'file-pdf';
       $variables['file_type_readable'] = t('PDF file');
       break;
 
     case ($file_type === 'doc' || $file_type === 'docx'):
-      $variables['file_type_icon'] = 'word';
+      $variables['file_type_icon'] = 'file-word';
       $variables['file_type_readable'] = t('Word file');
       break;
 
     case ($file_type === 'csv' || $file_type === 'xls' || $file_type === 'xlsx'):
-      $variables['file_type_icon'] = 'excel';
+      $variables['file_type_icon'] = 'file-excel';
       $variables['file_type_readable'] = t('Excel file');
       break;
 
     case ($file_type === 'ppt' || $file_type === 'pptx'):
-      $variables['file_type_icon'] = 'powerpoint';
+      $variables['file_type_icon'] = 'file-powerpoint';
       $variables['file_type_readable'] = t('Powerpoint file');
       break;
 
     default:
-      $variables['file_type_icon'] = 'generic';
+      $variables['file_type_icon'] = 'file-generic';
       $variables['file_type_readable'] = t('@file_type file', ['@file_type' => $file_type]);
   }
 }
@@ -252,4 +253,115 @@ function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id
 
     $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search';
   }
+}
+
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function ecms_preprocess_node__publication(array &$variables): void {
+  $node = $variables['node'];
+
+  // Grab file title.
+  $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
+  $test = 'true';
+  // Determine file type.
+  $publication_type = pathinfo($variables['publication_url'], PATHINFO_EXTENSION);
+
+  // Determine publication icon and what to label publication.
+  switch (TRUE) {
+    case ($publication_type === 'pdf'):
+      $variables['enable_download'] = TRUE;
+      $variables['publication_icon'] = 'file-pdf';
+      $variables['publication_readable'] = t('PDF file');
+      break;
+
+    case ($publication_type === 'doc' || $publication_type === 'docx'):
+      $variables['enable_download'] = TRUE;
+      $variables['publication_icon'] = 'file-word';
+      $variables['publication_readable'] = t('Word file');
+      break;
+
+    case ($publication_type === 'csv' || $publication_type === 'xls' || $publication_type === 'xlsx'):
+      $variables['enable_download'] = TRUE;
+      $variables['publication_icon'] = 'file-excel';
+      $variables['publication_readable'] = t('Excel file');
+      break;
+
+    case ($publication_type === 'ppt' || $publication_type === 'pptx'):
+      $variables['enable_download'] = TRUE;
+      $variables['publication_icon'] = 'file-powerpoint';
+      $variables['publication_readable'] = t('Powerpoint file');
+      break;
+
+    default:
+      $variables['enable_download'] = FALSE;
+      $variables['publication_icon'] = 'globe';
+      $variables['publication_readable'] = 'Web page';
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragaph().
+ */
+function ecms_preprocess_paragraph__publication_list(array &$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  $audience = $paragraph->get('field_publication_list_audience')->getString();
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $node_storage = $entity_type_manager->getStorage('node');
+
+  // Query all publications.
+  $query = $node_storage->getQuery();
+  $query->condition('type', 'publication')
+    ->condition('status', 1)
+    ->sort('title', "ASC");
+
+  if ($audience) {
+    $query->condition('field_publication_audiences', $audience);
+  }
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return;
+  }
+
+  // Load multiple nodes.
+  $nodes = $node_storage->loadMultiple($nids);
+  $publications_types = [];
+
+  foreach ($nodes as $node) {
+    // Get proper language name.
+    $language = $node->language()->getName();
+
+    // Get all referenced entities.
+    $types_field = $node->get('field_publication_types')->referencedEntities();
+
+    // Build out mutli-dimensional array.
+    foreach ($types_field  as $type) {
+      $publications_types[intval($type->getWeight())][$type->get('name')->value][$language][] = $node;
+    }
+  }
+
+  $builder = $entity_type_manager->getViewBuilder('node');
+
+  // Pop english to top and load our node views.
+  foreach ($publications_types as &$weight) {
+    foreach($weight as &$type) {
+      $type = array('English' => $type['English']) + $type;
+
+      foreach ($type as &$language) {
+        // Return a list of rendered teaser nodes.
+        $language =  $builder->viewMultiple($language, 'teaser');
+      }
+    }
+  }
+
+  // Sort publications by key
+  ksort($publications_types);
+
+  $variables['publications'] = $publications_types;
 }
