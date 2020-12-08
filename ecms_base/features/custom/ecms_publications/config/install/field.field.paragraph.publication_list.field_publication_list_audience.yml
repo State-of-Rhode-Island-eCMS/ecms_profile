@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_publication_list_audience
+    - paragraphs.paragraphs_type.publication_list
+    - taxonomy.vocabulary.publication_audience
+id: paragraph.publication_list.field_publication_list_audience
+field_name: field_publication_list_audience
+entity_type: paragraph
+bundle: publication_list
+label: 'Audience restriction'
+description: 'Select the audience for the publication list. Leave -None- for all publications.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      publication_audience: publication_audience
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

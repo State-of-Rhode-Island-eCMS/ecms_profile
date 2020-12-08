@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.publication.field_publication_url
     - node.type.publication
   module:
+    - link
     - user
 id: node.publication.teaser
 targetEntityType: node
@@ -18,20 +19,47 @@ bundle: publication
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
+  field_publication_types:
+    type: entity_reference_label
+    weight: 1
     region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_publication_url:
+    type: link
+    weight: 2
+    region: content
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  langcode:
+    type: language
+    weight: 3
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_publication_audiences: true
   field_publication_date_modified: true
   field_publication_file_download: true
   field_publication_topics: true
-  field_publication_types: true
-  field_publication_url: true
-  langcode: true
+  search_api_excerpt: true
