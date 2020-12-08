@@ -8,7 +8,6 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -254,7 +253,6 @@ function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id
     $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search';
   }
 }
-
 
 /**
  * Implements hook_preprocess_node().
