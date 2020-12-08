@@ -105,23 +105,27 @@ function ecms_preprocess_media__file(array &$variables): void {
   $variables['file_url'] = file_create_url($media->get('field_file')->entity->uri->value);
 
   // Determine file icon and what to label file.
-  switch (TRUE) {
-    case ($file_type === 'pdf'):
+  switch ($file_type) {
+    case 'pdf':
       $variables['file_type_icon'] = 'file-pdf';
       $variables['file_type_readable'] = t('PDF file');
       break;
 
-    case ($file_type === 'doc' || $file_type === 'docx'):
+    case 'doc':
+    case 'docx':
       $variables['file_type_icon'] = 'file-word';
       $variables['file_type_readable'] = t('Word file');
       break;
 
-    case ($file_type === 'csv' || $file_type === 'xls' || $file_type === 'xlsx'):
+    case 'csv':
+    case 'xls':
+    case 'xlsx':
       $variables['file_type_icon'] = 'file-excel';
       $variables['file_type_readable'] = t('Excel file');
       break;
 
-    case ($file_type === 'ppt' || $file_type === 'pptx'):
+    case 'ppt':
+    case 'pptx':
       $variables['file_type_icon'] = 'file-powerpoint';
       $variables['file_type_readable'] = t('Powerpoint file');
       break;
@@ -267,26 +271,30 @@ function ecms_preprocess_node__publication(array &$variables): void {
   $publication_type = pathinfo($variables['publication_url'], PATHINFO_EXTENSION);
 
   // Determine publication icon and what to label publication.
-  switch (TRUE) {
-    case ($publication_type === 'pdf'):
+  switch ($publication_type) {
+    case 'pdf':
       $variables['enable_download'] = TRUE;
       $variables['publication_icon'] = 'file-pdf';
       $variables['publication_readable'] = t('PDF file');
       break;
 
-    case ($publication_type === 'doc' || $publication_type === 'docx'):
+    case 'doc':
+    case 'docx':
       $variables['enable_download'] = TRUE;
       $variables['publication_icon'] = 'file-word';
       $variables['publication_readable'] = t('Word file');
       break;
 
-    case ($publication_type === 'csv' || $publication_type === 'xls' || $publication_type === 'xlsx'):
+    case 'csv':
+    case 'xls':
+    case 'xlsx':
       $variables['enable_download'] = TRUE;
       $variables['publication_icon'] = 'file-excel';
       $variables['publication_readable'] = t('Excel file');
       break;
 
-    case ($publication_type === 'ppt' || $publication_type === 'pptx'):
+    case 'ppt':
+    case 'pptx':
       $variables['enable_download'] = TRUE;
       $variables['publication_icon'] = 'file-powerpoint';
       $variables['publication_readable'] = t('Powerpoint file');
