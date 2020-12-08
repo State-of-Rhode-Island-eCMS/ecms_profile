@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.notification.field_notification_text
     - node.type.notification
   module:
+    - text
     - user
 id: node.notification.teaser
 targetEntityType: node
@@ -27,3 +28,4 @@ hidden:
   field_notification_global: true
   langcode: true
   links: true
+  search_api_excerpt: true

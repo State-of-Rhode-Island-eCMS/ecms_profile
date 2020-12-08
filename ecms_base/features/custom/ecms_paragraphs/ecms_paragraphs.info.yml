@@ -16,6 +16,7 @@ dependencies:
   - link
   - media
   - media_library
+  - metatag
   - options
   - paragraphs
   - path

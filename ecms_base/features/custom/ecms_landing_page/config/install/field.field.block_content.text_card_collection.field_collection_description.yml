@@ -22,7 +22,7 @@ bundle: text_card_collection
 label: 'Collection Description'
 description: '(Optional) A rich text field that displays under the collection title.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

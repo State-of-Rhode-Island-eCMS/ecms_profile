@@ -1,0 +1,17 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - media.type.person_headshot
+id: media.person_headshot.metatag
+field_name: metatag
+entity_type: media
+bundle: person_headshot
+label: Metatags
+description: 'The meta tags for the entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

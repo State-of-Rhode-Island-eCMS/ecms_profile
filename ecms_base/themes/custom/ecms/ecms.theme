@@ -63,7 +63,7 @@ function ecms_theme(array $existing, string $type, string $theme, string $path):
 }
 
 /**
- * Implements hook_preprocess_paragaph().
+ * Implements hook_preprocess_HOOK() for the paragraph__media_item.
  */
 function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $paragraph = $variables['paragraph'];
@@ -86,7 +86,7 @@ function ecms_preprocess_paragraph__media_item(array &$variables): void {
 }
 
 /**
- * Implements hook_preprocess_paragaph().
+ * Implements hook_preprocess_HOOK() for the media__file element.
  */
 function ecms_preprocess_media__file(array &$variables): void {
   $media = $variables['media'];
@@ -173,7 +173,7 @@ function _filesize_formatted(int $bytes): array {
 }
 
 /**
- * Implements hook_theme_suggestions_hook() for container templates.
+ * Implements hook_theme_suggestions_HOOK_alter() for container templates.
  *
  * Add suggestions, as by default none are provided.
  */
@@ -371,4 +371,18 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   ksort($publications_types);
 
   $variables['publications'] = $publications_types;
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function ecms_preprocess_block(array &$variables): void {
+  // Block labels are not translated properly.
+  // @see: https://www.drupal.org/project/drupal/issues/2810457#comment-12625567
+  if ($variables['elements']['#base_plugin_id'] === 'inline_block' || $variables['elements']['#base_plugin_id'] === 'block_content') {
+    if (!empty($variables['label'])) {
+      // Use the correct language for the block label.
+      $variables['label'] = $variables['content']['#block_content']->label();
+    }
+  }
 }

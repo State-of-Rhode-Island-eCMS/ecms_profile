@@ -5,7 +5,14 @@ dependencies:
     - field.storage.paragraph.field_icon
     - paragraphs.paragraphs_type.icon_card
   module:
+    - content_translation
     - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
 id: paragraph.icon_card.field_icon
 field_name: field_icon
 entity_type: paragraph
@@ -13,7 +20,7 @@ bundle: icon_card
 label: Icon
 description: ''
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

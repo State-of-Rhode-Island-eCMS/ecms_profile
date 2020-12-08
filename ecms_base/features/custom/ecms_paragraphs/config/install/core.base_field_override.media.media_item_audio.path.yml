@@ -1,0 +1,19 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - media.type.media_item_audio
+  module:
+    - path
+id: media.media_item_audio.path
+field_name: path
+entity_type: media
+bundle: media_item_audio
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

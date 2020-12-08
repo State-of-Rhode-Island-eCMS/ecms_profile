@@ -5,7 +5,14 @@ dependencies:
     - field.storage.media.field_promotion_image
     - media.type.promotional_image
   module:
+    - content_translation
     - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
 id: media.promotional_image.field_promotion_image
 field_name: field_promotion_image
 entity_type: media
