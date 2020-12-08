@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_list.field_publication_list_audience
+    - field.field.paragraph.publication_list.field_publication_list_title
+    - paragraphs.paragraphs_type.publication_list
+id: paragraph.publication_list.default
+targetEntityType: paragraph
+bundle: publication_list
+mode: default
+content:
+  field_publication_list_audience:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_publication_list_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

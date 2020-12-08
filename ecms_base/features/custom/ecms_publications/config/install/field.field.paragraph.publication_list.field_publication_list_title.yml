@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_publication_list_title
-    - paragraphs.paragraphs_type.publications_list
-id: paragraph.publications_list.field_publication_list_title
+    - paragraphs.paragraphs_type.publication_list
+id: paragraph.publication_list.field_publication_list_title
 field_name: field_publication_list_title
 entity_type: paragraph
-bundle: publications_list
+bundle: publication_list
 label: 'List Title'
 description: ''
 required: false
