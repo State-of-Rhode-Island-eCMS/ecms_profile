@@ -341,7 +341,7 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
     $types_field = $node->get('field_publication_types')->referencedEntities();
 
     // Build out mutli-dimensional array.
-    foreach ($types_field  as $type) {
+    foreach ($types_field as $type) {
       $publications_types[intval($type->getWeight())][$type->get('name')->value][$language][] = $node;
     }
   }
@@ -350,17 +350,17 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
 
   // Pop english to top and load our node views.
   foreach ($publications_types as &$weight) {
-    foreach($weight as &$type) {
-      $type = array('English' => $type['English']) + $type;
+    foreach ($weight as &$type) {
+      $type = ['English' => $type['English']] + $type;
 
       foreach ($type as &$language) {
         // Return a list of rendered teaser nodes.
-        $language =  $builder->viewMultiple($language, 'teaser');
+        $language = $builder->viewMultiple($language, 'teaser');
       }
     }
   }
 
-  // Sort publications by key
+  // Sort publications by key.
   ksort($publications_types);
 
   $variables['publications'] = $publications_types;
