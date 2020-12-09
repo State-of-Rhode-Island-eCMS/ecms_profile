@@ -2,25 +2,21 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.accordion_builder.field_item_flexible_text
     - field.field.paragraph.accordion_builder.field_item_text
     - paragraphs.paragraphs_type.accordion_builder
   module:
-    - entity_reference_revisions
-id: paragraph.accordion_builder.default
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.accordion_builder.preview
 targetEntityType: paragraph
 bundle: accordion_builder
-mode: default
+mode: preview
 content:
-  field_item_flexible_text:
-    type: entity_reference_revisions_entity_view
-    weight: 1
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    region: content
   field_item_text:
     weight: 0
     label: hidden
@@ -30,4 +26,5 @@ content:
     type: string
     region: content
 hidden:
+  field_item_flexible_text: true
   search_api_excerpt: true

@@ -13,6 +13,7 @@ dependencies:
   - filter
   - image
   - language
+  - layout_builder
   - link
   - media
   - media_library

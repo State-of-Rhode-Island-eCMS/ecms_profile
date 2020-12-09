@@ -2,30 +2,29 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.file_list.field_files
     - field.field.paragraph.file_list.field_list_title
     - paragraphs.paragraphs_type.file_list
-id: paragraph.file_list.default
+  module:
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.file_list.preview
 targetEntityType: paragraph
 bundle: file_list
-mode: default
+mode: preview
 content:
-  field_files:
-    type: entity_reference_entity_view
-    weight: 0
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    region: content
   field_list_title:
-    weight: 1
-    label: above
+    weight: 0
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
 hidden:
+  field_files: true
   search_api_excerpt: true

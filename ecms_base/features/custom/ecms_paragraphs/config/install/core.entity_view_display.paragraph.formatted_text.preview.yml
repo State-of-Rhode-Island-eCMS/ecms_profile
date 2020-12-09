@@ -2,21 +2,28 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.formatted_text.field_text
     - paragraphs.paragraphs_type.formatted_text
   module:
+    - layout_builder
     - text
-id: paragraph.formatted_text.default
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.formatted_text.preview
 targetEntityType: paragraph
 bundle: formatted_text
-mode: default
+mode: preview
 content:
   field_text:
     weight: 0
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 155
     third_party_settings: {  }
-    type: text_default
+    type: text_trimmed
     region: content
 hidden:
   search_api_excerpt: true
