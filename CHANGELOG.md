@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-166: Added ecms_claro admin theme and set it as the default for the profile.
 
 ### Changed
 - RIG-168: Updated moderation dashboard and workflow state labels.
