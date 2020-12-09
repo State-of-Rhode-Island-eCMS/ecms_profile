@@ -9,7 +9,7 @@ field_name: field_person_promotions
 entity_type: node
 bundle: person
 label: 'Person Promotions'
-description: ''
+description: 'Assigned promotions will output below the section navigation and any global promotions.'
 required: false
 translatable: false
 default_value: {  }

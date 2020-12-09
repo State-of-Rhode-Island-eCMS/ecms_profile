@@ -9,7 +9,7 @@ field_name: field_event_promotions
 entity_type: node
 bundle: event
 label: 'Event Promotions'
-description: ''
+description: 'Assigned promotions will output below the section navigation and any global promotions.'
 required: false
 translatable: false
 default_value: {  }
