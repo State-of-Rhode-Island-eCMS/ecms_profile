@@ -1,0 +1,38 @@
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.text_card.field_card_title
+    - field.field.paragraph.text_card.field_text
+    - paragraphs.paragraphs_type.text_card
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.text_card.preview
+targetEntityType: paragraph
+bundle: text_card
+mode: preview
+content:
+  field_card_title:
+    weight: 0
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_text:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 55
+    third_party_settings: {  }
+    type: text_trimmed
+    region: content
+hidden:
+  search_api_excerpt: true

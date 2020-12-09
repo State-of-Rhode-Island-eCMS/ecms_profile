@@ -2,23 +2,30 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.icon_card.field_icon
     - field.field.paragraph.icon_card.field_list_title
     - field.field.paragraph.icon_card.field_text
+    - image.style.thumbnail
     - paragraphs.paragraphs_type.icon_card
   module:
+    - layout_builder
     - svg_image
     - text
-id: paragraph.icon_card.default
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.icon_card.preview
 targetEntityType: paragraph
 bundle: icon_card
-mode: default
+mode: preview
 content:
   field_icon:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: thumbnail
       image_link: ''
       svg_attributes:
         width: null
@@ -29,7 +36,7 @@ content:
     region: content
   field_list_title:
     weight: 1
-    label: hidden
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -38,9 +45,10 @@ content:
   field_text:
     weight: 2
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 55
     third_party_settings: {  }
-    type: text_default
+    type: text_trimmed
     region: content
 hidden:
   search_api_excerpt: true

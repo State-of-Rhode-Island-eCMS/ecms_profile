@@ -40,3 +40,4 @@ hidden:
   field_alignment: true
   field_caption: true
   field_size: true
+  search_api_excerpt: true

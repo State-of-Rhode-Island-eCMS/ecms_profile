@@ -2,22 +2,26 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.column_container.field_components
     - paragraphs.paragraphs_type.column_container
   module:
-    - entity_reference_revisions
-id: paragraph.column_container.default
+    - layout_builder
+    - paragraphs
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.column_container.preview
 targetEntityType: paragraph
 bundle: column_container
-mode: default
+mode: preview
 content:
   field_components:
-    type: entity_reference_revisions_entity_view
+    type: paragraph_summary
     weight: 0
-    label: above
-    settings:
-      view_mode: default
-      link: ''
+    label: inline
+    settings: {  }
     third_party_settings: {  }
     region: content
 hidden:

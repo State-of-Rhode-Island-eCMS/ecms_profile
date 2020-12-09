@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.media_item.field_alignment
+    - field.field.paragraph.media_item.field_caption
+    - field.field.paragraph.media_item.field_link
+    - field.field.paragraph.media_item.field_media_item
+    - field.field.paragraph.media_item.field_size
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.media_item
+  module:
+    - layout_builder
+    - link
+    - media
+    - options
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.media_item.preview
+targetEntityType: paragraph
+bundle: media_item
+mode: preview
+content:
+  field_alignment:
+    type: list_default
+    weight: 3
+    region: content
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+  field_caption:
+    type: string
+    weight: 1
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_link:
+    type: link
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_media_item:
+    type: media_thumbnail
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+  field_size:
+    type: list_default
+    weight: 4
+    region: content
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true
