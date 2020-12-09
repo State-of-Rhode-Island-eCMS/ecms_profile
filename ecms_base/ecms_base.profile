@@ -360,4 +360,16 @@ function ecms_base_update_9030(array &$sandbox): void {
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
+
+  // Install the ecms_claro theme.
+  /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
+  $themeInstaller = \Drupal::service('theme_installer');
+  $themeInstaller->install(['ecms_claro']);
+
+  // Set the ecms_claro theme as the admin theme.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.theme');
+  $config->set('admin', 'ecms_claro');
+  $config->save();
 }

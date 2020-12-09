@@ -10,6 +10,9 @@
 !/gulpfile.js
 /**/*.map
 
+# Allow custom admin theme css to be committed.
+!/ecms_base/themes/custom/ecms_claro/**/*.css
+
 # Project dependencies
 /node_modules
 /vendor
