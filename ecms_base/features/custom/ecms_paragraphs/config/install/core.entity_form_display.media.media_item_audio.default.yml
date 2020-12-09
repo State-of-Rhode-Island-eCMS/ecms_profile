@@ -6,7 +6,6 @@ dependencies:
     - media.type.media_item_audio
   module:
     - file
-    - path
 id: media.media_item_audio.default
 targetEntityType: media
 bundle: media_item_audio
@@ -20,7 +19,7 @@ content:
     third_party_settings: {  }
   field_media_item_audio_file:
     type: file_generic
-    weight: 6
+    weight: 5
     region: content
     settings:
       progress_indicator: throbber
@@ -40,24 +39,18 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  path:
-    type: path
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 5
+    weight: 4
     region: content
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 6
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 2
@@ -68,4 +61,5 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  path: true
