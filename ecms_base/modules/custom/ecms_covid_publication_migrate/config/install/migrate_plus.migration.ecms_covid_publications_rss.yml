@@ -28,9 +28,6 @@ source:
     - name: language
       label: 'Language'
       selector: language
-    - name: language
-      label: 'Language'
-      selector: language
     - name: audiences
       label: 'Audiences'
       selector: audience
