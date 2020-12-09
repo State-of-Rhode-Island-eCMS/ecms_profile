@@ -361,3 +361,20 @@ function ecms_base_update_9030(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
+/**
+ * Updates to run for the 0.3.0 tag.
+ */
+function ecms_base_update_9030(array &$sandbox): void {
+  // Install the ecms_claro theme.
+  /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
+  $themeInstaller = \Drupal::service('theme_installer');
+  $themeInstaller->install(['ecms_claro']);
+
+  // Set the ecms_claro theme as the admin theme.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.theme');
+  $config->set('admin', 'ecms_claro');
+  $config->save();
+}
