@@ -360,12 +360,7 @@ function ecms_base_update_9030(array &$sandbox): void {
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
-}
 
-/**
- * Updates to run for the 0.3.0 tag.
- */
-function ecms_base_update_9030(array &$sandbox): void {
   // Install the ecms_claro theme.
   /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
   $themeInstaller = \Drupal::service('theme_installer');
