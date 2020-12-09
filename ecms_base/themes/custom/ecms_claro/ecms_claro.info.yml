@@ -1,0 +1,22 @@
+name: Rhode Island eCMS Admin Theme
+description: "A custom administration theme for the Rhode Island eCMS system based on Claro."
+type: theme
+core_version_requirement: ^8 || ^9
+base theme: claro
+
+libraries:
+  - ecms_claro/global-styling
+
+regions:
+  header: 'Header'
+  pre_content: 'Pre-content'
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  sidebar_first: 'First sidebar'
+
+regions_hidden:
+  - sidebar_first
