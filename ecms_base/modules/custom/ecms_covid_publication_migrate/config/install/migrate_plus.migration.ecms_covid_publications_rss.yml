@@ -6,7 +6,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - https://health.ri.gov/rss/pubs/rss-covid-pub-list.php
+    - https://health.ri.gov/rss/pubs/all-rss-covid-pub-list.php
   data_parser_plugin: simple_xml
   item_selector: /rss/channel/item
   fields:
@@ -28,9 +28,14 @@ source:
     - name: language
       label: 'Language'
       selector: language
+    - name: audiences
+      label: 'Audiences'
+      selector: audience
 
   ids:
     guid:
+      type: string
+    language:
       type: string
 
 destination:
@@ -38,11 +43,12 @@ destination:
   default_bundle: 'publication'
 
 process:
-  id: guid
   title:
    - plugin: callback
      callable: urldecode
      source: title
+   - plugin: callback
+     callable: trim
   'field_publication_url/uri':
     - plugin: callback
       callable: urldecode
@@ -51,6 +57,8 @@ process:
     - plugin: callback
       callable: urldecode
       source: title
+    - plugin: callback
+      callable: trim
   pseudo_publication_type:
     - plugin: callback
       callable: urldecode
@@ -70,6 +78,24 @@ process:
       value_key: name
       bundle_key: vid
       bundle: 'publication_type'
+
+  field_publication_audiences:
+    - plugin: callback
+      callable: urldecode
+    - plugin: skip_on_empty
+      source: audiences
+      method: process
+      message: 'No audience listed.'
+    - plugin: explode
+      delimiter: ','
+    - plugin: callback
+      callable: trim
+    - plugin: entity_generate
+      entity_type: taxonomy_term
+      value_key: name
+      bundle_key: vid
+      bundle: 'publication_audience'
+      ignore_case: true
 
   langcode:
     - plugin: static_map
