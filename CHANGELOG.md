@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-166: Added ecms_claro admin theme and set it as the default for the profile.
 - RIG-175: Added links to the ecms_api_publisher site entity collection.
+- RIG-130: Added card paragraph bundle.
 
 ### Changed
 - RIG-168: Updated moderation dashboard and workflow state labels.
