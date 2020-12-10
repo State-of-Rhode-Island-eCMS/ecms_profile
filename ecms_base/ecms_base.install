@@ -476,9 +476,6 @@ function ecms_base_update_9030(array &$sandbox): void {
   $newConfig = [
     'page_manager.page.moderation_dashboard',
     'page_manager.page_variant.moderation_dashboard-panels_variant-0',
-    'purge.logger_channels',
-    'purge.plugins',
-    'purge_queuer_coretags.settings',
     'views.view.moderation_dashboard_recent_changes',
     'user.role.anonymous',
     'user.role.authenticated',
@@ -497,6 +494,20 @@ function ecms_base_update_9030(array &$sandbox): void {
 
   foreach ($updatedModuleConfig as $config) {
     $active_storage->write("{$config}", $workflow_source->read("{$config}"));
+  }
+
+  // Config updates.
+  $acquia_path = \Drupal::service('extension.list.profile')->getPath('ecms_acquia');
+  $acquia_config_source = new FileStorage($acquia_path . "/config/install/");
+
+  $acquiaConfig = [
+    'purge.logger_channels',
+    'purge.plugins',
+    'purge_queuer_coretags.settings',
+  ];
+
+  foreach ($acquiaConfig as $config) {
+    $active_storage->write("{$config}", $acquia_config_source->read("{$config}"));
   }
 
   // Install the ecms_claro theme.

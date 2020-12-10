@@ -7,7 +7,6 @@ core_version_requirement: ^9
 # Modules that sub-profiles need must be listed here and_not in install.
 dependencies:
   - allowed_formats
-  - acquia_purge
   - admin_toolbar
   - admin_toolbar_tools
   - big_pipe
@@ -62,12 +61,6 @@ dependencies:
   - pathauto
   - page_cache
   - publishcontent
-  - purge
-  - purge_drush
-  - purge_processor_cron
-  - purge_processor_lateruntime
-  - purge_queuer_coretags
-  - purge_ui
   - quickedit
   - rabbit_hole
   - real_aes
