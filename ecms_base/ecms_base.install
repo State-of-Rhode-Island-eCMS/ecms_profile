@@ -493,4 +493,11 @@ function ecms_base_update_9030(array &$sandbox): void {
   $config = $configFactory->getEditable('system.theme');
   $config->set('admin', 'ecms_claro');
   $config->save();
+
+  // Install the ecms_publications feature by default.
+  $modules_to_install = [
+    'ecms_publications',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
 }
