@@ -16,4 +16,5 @@ permissions:
   - 'view paragraph content icon_card'
   - 'view paragraph content media_item'
   - 'view paragraph content promotion_reference'
+  - 'view paragraph content publication_list'
   - 'view paragraph content text_card'

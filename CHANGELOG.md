@@ -25,6 +25,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-160: Fixed the missing contextual links on layout builder blocks allowing for translation.
+- RIG-178: Updated user permissions and enabled the ecms_publications by default.
 
 ### Security
 

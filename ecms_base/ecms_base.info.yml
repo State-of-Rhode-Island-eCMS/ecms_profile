@@ -102,6 +102,7 @@ install:
   - ecms_person
   - ecms_press_release
   - ecms_promotions
+  - ecms_publications
   - ecms_workflow
   - google_tag
 
