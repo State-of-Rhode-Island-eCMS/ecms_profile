@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.3.0] - 2020-12-10
+### Added
 - RIG-166: Added ecms_claro admin theme and set it as the default for the profile.
 - RIG-175: Added links to the ecms_api_publisher site entity collection.
 - RIG-130: Added card paragraph bundle.
@@ -21,15 +34,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-169: Added the audience terms to the Covid migration.
 - RIG-6: Moved update hooks into .install file.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIG-160: Fixed the missing contextual links on layout builder blocks allowing for translation.
 - RIG-178: Updated user permissions and enabled the ecms_publications by default.
-
-### Security
 
 ## [0.2.9] - 2020-12-08
 ### Added
@@ -331,8 +338,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.9...HEAD
-[0.2.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.8...0.2.9
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.0...HEAD
+[0.2.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.9...0.3.0
 [0.2.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.7...0.2.8
 [0.2.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.6...0.2.7
 [0.2.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.5...0.2.6
