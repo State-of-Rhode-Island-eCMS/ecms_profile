@@ -476,15 +476,15 @@ function ecms_base_update_9030(array &$sandbox): void {
   $newConfig = [
     'page_manager.page.moderation_dashboard',
     'page_manager.page_variant.moderation_dashboard-panels_variant-0',
+    'purge.logger_channels',
+    'purge.plugins',
+    'purge_queuer_coretags.settings',
     'views.view.moderation_dashboard_recent_changes',
     'user.role.anonymous',
     'user.role.authenticated',
     'user.role.content_author',
     'user.role.content_publisher',
     'user.role.site_admin',
-    'purge.logger_channels',
-    'purge.plugins',
-    'purge_queuer_coretags.settings',
   ];
 
   foreach ($newConfig as $config) {
