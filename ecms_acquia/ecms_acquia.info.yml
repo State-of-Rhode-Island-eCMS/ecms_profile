@@ -15,7 +15,6 @@ dependencies:
   - purge_queuer_coretags
   - purge_ui
 
-
 # Theme dependencies for the distribution.
 themes:
   - claro
