@@ -1,0 +1,5 @@
+ecms_api_publisher.add_ecms_api_site_action:
+  route_name: entity.ecms_api_site.add_form
+  title: 'Register a new syndicated site'
+  appears_on:
+    - entity.ecms_api_site.collection

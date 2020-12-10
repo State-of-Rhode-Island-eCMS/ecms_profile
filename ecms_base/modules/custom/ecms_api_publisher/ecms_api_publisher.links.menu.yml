@@ -1,0 +1,6 @@
+ecms_api_publisher.registered_site_collection:
+  title: 'eCMS syndicates'
+  description: 'Sites that should receive syndicated content.'
+  route_name: entity.ecms_api_site.collection
+  parent: system.admin_config_services
+  weight: 11
