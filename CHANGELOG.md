@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-160: Fixed the missing contextual links on layout builder blocks allowing for translation.
 
 ### Security
 
