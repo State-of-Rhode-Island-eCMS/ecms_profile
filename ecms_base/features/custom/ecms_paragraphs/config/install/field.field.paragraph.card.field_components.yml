@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_components
+    - paragraphs.paragraphs_type.card
+    - paragraphs.paragraphs_type.text_card
+  module:
+    - entity_reference_revisions
+id: paragraph.card.field_components
+field_name: field_components
+entity_type: paragraph
+bundle: card
+label: Components
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 1
+    target_bundles:
+      card: card
+      text_card: text_card
+    target_bundles_drag_drop:
+      accordion_builder:
+        weight: 13
+        enabled: false
+      card:
+        enabled: true
+        weight: 14
+      column_container:
+        weight: 15
+        enabled: false
+      embed:
+        weight: 16
+        enabled: false
+      file_list:
+        weight: 17
+        enabled: false
+      formatted_text:
+        weight: 18
+        enabled: false
+      gallery:
+        weight: 19
+        enabled: false
+      icon_card:
+        weight: 20
+        enabled: false
+      media_item:
+        weight: 21
+        enabled: false
+      promotion_reference:
+        weight: 22
+        enabled: false
+      publication_list:
+        weight: 23
+        enabled: false
+      text_card:
+        enabled: true
+        weight: 24
+field_type: entity_reference_revisions
