@@ -454,6 +454,19 @@ function ecms_base_update_9030(array &$sandbox): void {
 
   \Drupal::service('module_installer')->install($modules_to_install);
 
+  // Install the newly introduced purge modules.
+  $modules_to_install = [
+    'acquia_purge',
+    'purge',
+    'purge_drush',
+    'purge_processor_cron',
+    'purge_processor_lateruntime',
+    'purge_queuer_coretags',
+    'purge_ui',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
   // Config updates.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
