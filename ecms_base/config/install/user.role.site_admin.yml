@@ -301,6 +301,7 @@ permissions:
   - 'update content translations'
   - 'update media'
   - 'update paragraph content accordion_builder'
+  - 'update paragraph content card'
   - 'update paragraph content column_container'
   - 'update paragraph content embed'
   - 'update paragraph content file_list'
