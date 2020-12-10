@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-168: Updated moderation dashboard and workflow state labels.
 - RIG-169: Added the audience terms to the Covid migration.
+- RIG-6: Moved update hooks into .install file.
 
 ### Deprecated
 
