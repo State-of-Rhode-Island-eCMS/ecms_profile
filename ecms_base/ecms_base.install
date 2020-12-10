@@ -448,15 +448,10 @@ function ecms_base_update_9029(array &$sandbox): void {
  */
 function ecms_base_update_9030(array &$sandbox): void {
   // Install the ecms_publications feature by default.
-  $modules_to_install = [
-    'ecms_publications',
-  ];
-
-  \Drupal::service('module_installer')->install($modules_to_install);
-
-  // Install the newly introduced purge modules.
+  // Install the newly introduced purge modules too.
   $modules_to_install = [
     'acquia_purge',
+    'ecms_publications',
     'purge',
     'purge_drush',
     'purge_processor_cron',
@@ -487,6 +482,9 @@ function ecms_base_update_9030(array &$sandbox): void {
     'user.role.content_author',
     'user.role.content_publisher',
     'user.role.site_admin',
+    'purge.logger_channels',
+    'purge.plugins',
+    'purge_queuer_coretags.settings',
   ];
 
   foreach ($newConfig as $config) {
