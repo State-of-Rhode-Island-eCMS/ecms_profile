@@ -5,5 +5,5 @@ id: text_card
 label: 'Text Card'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'A paragraph used exclusively in the text card collection custom block type.'
 behavior_plugins: {  }

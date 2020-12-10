@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: card
+label: Card
+icon_uuid: null
+icon_default: null
+description: 'A card is a collection of paragraphs with a single wrapper.'
+behavior_plugins: {  }

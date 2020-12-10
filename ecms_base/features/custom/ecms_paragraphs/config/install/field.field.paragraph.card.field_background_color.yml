@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color
+    - paragraphs.paragraphs_type.card
+  module:
+    - options
+id: paragraph.card.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+bundle: card
+label: 'Background color'
+description: '(Optional) Select a background color for the card.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

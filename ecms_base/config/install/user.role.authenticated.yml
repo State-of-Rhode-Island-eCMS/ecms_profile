@@ -20,6 +20,7 @@ permissions:
   - 'view media'
   - 'view own unpublished media'
   - 'view paragraph content accordion_builder'
+  - 'view paragraph content card'
   - 'view paragraph content column_container'
   - 'view paragraph content embed'
   - 'view paragraph content file_list'
