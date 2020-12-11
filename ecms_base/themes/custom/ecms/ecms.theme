@@ -26,15 +26,34 @@ function ecms_preprocess_page(array &$variables): void {
 
   // Attach header variables.
   $variables['header_preprocess_values']['site_logo'] = theme_get_setting('logo.url');
-  $variables['header_preprocess_values']['top_line'] = theme_get_setting('header_top_line');
-  $variables['header_preprocess_values']['main_line'] = theme_get_setting('header_main_line');
-  $variables['header_preprocess_values']['bottom_line'] = theme_get_setting('header_bottom_line');
+  $variables['header_preprocess_values']['top_line'] = ['#plain_text' => theme_get_setting('header_top_line')];
+  $variables['header_preprocess_values']['main_line'] = ['#plain_text' => theme_get_setting('header_main_line')];
+  $variables['header_preprocess_values']['bottom_line'] = ['#plain_text' => theme_get_setting('header_bottom_line')];
 
   // Attach footer variables.
-  $variables['footer_preprocess_values']['footer_left'] = theme_get_setting('footer_left')['value'];
-  $variables['footer_preprocess_values']['footer_center'] = theme_get_setting('footer_center')['value'];
-  $variables['footer_preprocess_values']['footer_right'] = theme_get_setting('footer_right')['value'];
-  $variables['footer_preprocess_values']['state_info'] = theme_get_setting('footer_state_info')['value'];
+  $variables['footer_preprocess_values']['footer_left'] = [
+    '#type' => 'processed_text',
+    '#text' => theme_get_setting('footer_left')['value'],
+    '#format' => theme_get_setting('footer_left')['format'],
+  ];
+
+  $variables['footer_preprocess_values']['footer_center'] = [
+    '#type' => 'processed_text',
+    '#text' => theme_get_setting('footer_center')['value'],
+    '#format' => theme_get_setting('footer_center')['format'],
+  ];
+
+  $variables['footer_preprocess_values']['footer_right'] = [
+    '#type' => 'processed_text',
+    '#text' => theme_get_setting('footer_right')['value'],
+    '#format' => theme_get_setting('footer_right')['format'],
+  ];
+
+  $variables['footer_preprocess_values']['state_info'] = [
+    '#type' => 'processed_text',
+    '#text' => theme_get_setting('footer_state_info')['value'],
+    '#format' => theme_get_setting('footer_state_info')['format'],
+  ];
 }
 
 /**
