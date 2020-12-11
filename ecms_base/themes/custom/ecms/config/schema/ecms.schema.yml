@@ -1,0 +1,91 @@
+ecms.settings:
+  type: config_object
+  mapping:
+    features:
+      label: Features
+      type: mapping
+      mapping:
+        node_user_picture:
+          type: boolean
+          label: "Show author picture"
+        comment_user_picture:
+          type: boolean
+          label: "Show comment author's picture"
+        comment_user_verification:
+          type: boolean
+          label: "Show user verified in comments"
+        favicon:
+          type: integer
+          label: "Display the favicon"
+    logo:
+      type: mapping
+      mapping:
+        use_default:
+          type: integer
+          label: "Use the default logo"
+        path:
+          type: string
+          label: 'Logo path'
+    favicon:
+      type: mapping
+      mapping:
+        use_default:
+          type: integer
+          label: "Use the default favicon"
+        path:
+          type: string
+          label: 'Favicon path'
+        mimetype:
+          type: string
+          label: 'Favicon mimetype'
+    footer_left:
+      type: mapping
+      mapping:
+        value:
+          type: text
+          label: "Left footer column text"
+        format:
+          type: string
+          label: "Left footer column text format"
+    footer_center:
+      type: mapping
+      mapping:
+        value:
+          type: text
+          label: "Center footer column text"
+        format:
+          type: string
+          label: "Center footer column text format"
+    footer_right:
+      type: mapping
+      mapping:
+        value:
+          type: text
+          label: "Right footer column text"
+        format:
+          type: string
+          label: "Right footer column text format"
+    footer_state_info:
+      type: mapping
+      mapping:
+        value:
+          type: text
+          label: "State information text"
+        format:
+          type: string
+          label: "State information text format"
+    color_palette:
+      type: string
+      label: 'Color palette'
+    header_top_line:
+      type: text
+      label: 'Top line of the header'
+    header_main_line:
+      type: text
+      label: 'Center line of the header'
+    header_bottom_line:
+      type: text
+      label: 'Bottom line of the header'
+    langcode:
+      type: string
+      label: 'Language code'
