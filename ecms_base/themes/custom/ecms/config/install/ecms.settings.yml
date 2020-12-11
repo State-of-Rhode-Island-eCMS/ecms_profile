@@ -20,6 +20,6 @@ footer_state_info:
   value: "<p><strong>State of Rhode Island</strong></p>\r\n\r\n<p><a href=\"http://www.governor.ri.gov/\">Office of the Governor</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/\">RI.gov</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/guide/\">Elected Officials</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/guide/\">State Agencies (A-Z)</a></p>\r\n"
   format: basic_html
 color_palette: scarborough
-header_top_line: 'State of Rhode Island'
-header_main_line: 'Agency Name'
-header_bottom_line: ''
+header_top_line: "State of Rhode Island"
+header_main_line: "Agency Name"
+header_bottom_line: "Agency Slogan"
