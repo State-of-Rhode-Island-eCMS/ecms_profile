@@ -18,8 +18,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-180: Fixed the theme settings to make them translatable.
 
 ### Security
+- RIG-180: Fixed an XSS issue with the output of the theme settings variables.
 
 ## [0.3.1] - 2020-12-11
 ### Fixed
