@@ -6,12 +6,7 @@ dependencies:
     - field.field.paragraph.embed.field_embed_content
     - paragraphs.paragraphs_type.embed
   module:
-    - layout_builder
     - text
-third_party_settings:
-  layout_builder:
-    allow_custom: false
-    enabled: false
 id: paragraph.embed.preview
 targetEntityType: paragraph
 bundle: embed
@@ -20,9 +15,11 @@ content:
   field_embed_content:
     weight: 0
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 155
     third_party_settings: {  }
-    type: text_default
+    type: text_trimmed
     region: content
 hidden:
   search_api_excerpt: true
+
