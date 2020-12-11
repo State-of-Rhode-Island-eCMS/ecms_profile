@@ -524,9 +524,9 @@ function ecms_base_update_9030(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.3.1 tag.
+ * Updates to run for the 0.3.2 tag.
  */
-function ecms_base_update_9031(array &$sandbox): void {
+function ecms_base_update_9032(array &$sandbox): void {
   // Install the locale module for interface translations.
   $modules_to_install = [
     'locale',
