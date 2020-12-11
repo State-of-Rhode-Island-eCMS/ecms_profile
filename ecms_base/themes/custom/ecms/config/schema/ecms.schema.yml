@@ -7,22 +7,22 @@ ecms.settings:
       mapping:
         node_user_picture:
           type: boolean
-          label: "Show author picture"
+          label: 'Show author picture'
         comment_user_picture:
           type: boolean
-          label: "Show comment author's picture"
+          label: 'Show comment author picture'
         comment_user_verification:
           type: boolean
-          label: "Show user verified in comments"
+          label: 'Show user verified in comments'
         favicon:
           type: integer
-          label: "Display the favicon"
+          label: 'Display the favicon'
     logo:
       type: mapping
       mapping:
         use_default:
           type: integer
-          label: "Use the default logo"
+          label: 'Use the default logo'
         path:
           type: string
           label: 'Logo path'
@@ -31,7 +31,7 @@ ecms.settings:
       mapping:
         use_default:
           type: integer
-          label: "Use the default favicon"
+          label: 'Use the default favicon'
         path:
           type: string
           label: 'Favicon path'
@@ -43,37 +43,37 @@ ecms.settings:
       mapping:
         value:
           type: text
-          label: "Left footer column text"
+          label: 'Left footer column text'
         format:
           type: string
-          label: "Left footer column text format"
+          label: 'Left footer column text format'
     footer_center:
       type: mapping
       mapping:
         value:
           type: text
-          label: "Center footer column text"
+          label: 'Center footer column text'
         format:
           type: string
-          label: "Center footer column text format"
+          label: 'Center footer column text format'
     footer_right:
       type: mapping
       mapping:
         value:
           type: text
-          label: "Right footer column text"
+          label: 'Right footer column text'
         format:
           type: string
-          label: "Right footer column text format"
+          label: 'Right footer column text format'
     footer_state_info:
       type: mapping
       mapping:
         value:
           type: text
-          label: "State information text"
+          label: 'State information text'
         format:
           type: string
-          label: "State information text format"
+          label: 'State information text format'
     color_palette:
       type: string
       label: 'Color palette'
