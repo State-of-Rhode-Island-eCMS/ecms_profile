@@ -358,11 +358,13 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   // Pop english to top and load our node views.
   foreach ($publications_types as &$weight) {
     foreach ($weight as &$type) {
-      $type = ['English' => $type['English']] + $type;
 
+      // $type = ['English' => $type['English']] + $type;
       foreach ($type as &$language) {
         // Return a list of rendered teaser nodes.
-        $language = $builder->viewMultiple($language, 'teaser');
+        if ($language !== NULL) {
+          $language = $builder->viewMultiple($language, 'teaser');
+        }
       }
     }
   }
