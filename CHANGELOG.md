@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-6: PHP null error in publications preprocess.
 
 ### Security
+
+## [0.3.2] - 2020-12-12
+### Fixed
+- RIG-6: PHP null error in publications preprocess.
 
 ## [0.3.1] - 2020-12-11
 ### Fixed
@@ -343,7 +346,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.1...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.2...HEAD
+[0.3.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.9...0.3.0
 [0.2.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.2.9...0.3.0
