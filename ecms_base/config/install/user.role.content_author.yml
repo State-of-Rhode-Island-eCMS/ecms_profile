@@ -122,4 +122,5 @@ permissions:
   - 'use editorial transition create_new_draft'
   - 'use editorial transition review'
   - 'use text format paragraph_text'
+  - 'view all revisions'
   - 'view own unpublished content'

@@ -524,13 +524,31 @@ function ecms_base_update_9030(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.3.2 tag.
+ * Updates to run for the 0.3.3 tag.
  */
-function ecms_base_update_9032(array &$sandbox): void {
+function ecms_base_update_9033(array &$sandbox): void {
   // Install the locale module for interface translations.
   $modules_to_install = [
     'locale',
   ];
 
   \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'user.role.content_author',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
 }

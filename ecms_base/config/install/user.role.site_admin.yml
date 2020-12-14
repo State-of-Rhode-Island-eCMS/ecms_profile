@@ -245,6 +245,7 @@ permissions:
   - 'translate event_image media'
   - 'translate event_taxonomy taxonomy_term'
   - 'translate file media'
+  - 'translate interface'
   - 'translate landing_page node'
   - 'translate location node'
   - 'translate media_item_audio media'

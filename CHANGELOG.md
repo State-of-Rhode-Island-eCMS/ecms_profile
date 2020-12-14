@@ -20,6 +20,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-180: Fixed the theme settings to make them translatable.
+- RIG-181: Gave the content author 'view all revisions' permission by default.
+- RIG-184: Gave the site admin 'translate interface' permission by default.
 
 ### Security
 - RIG-180: Fixed an XSS issue with the output of the theme settings variables.
