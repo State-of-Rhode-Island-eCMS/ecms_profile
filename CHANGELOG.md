@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-182: Updated publication language ordering.
 
 ### Deprecated
 
@@ -19,7 +20,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-180: Fixed the theme settings to make them translatable.
-- RIG-182: Updated publication language ordering.
 
 ### Security
 - RIG-180: Fixed an XSS issue with the output of the theme settings variables.
