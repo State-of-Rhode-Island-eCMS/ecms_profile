@@ -62,7 +62,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#type' => 'textfield',
     '#title' => t('Top Line'),
     '#default_value' => theme_get_setting('header_top_line'),
-    '#description' => t("(Optional) The top line of the header."),
+    '#description' => t("(Optional) The top line of the header. For translation, search for 'State of Rhode Island'"),
     '#maxlength' => 255,
   ];
 
@@ -70,7 +70,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#type' => 'textfield',
     '#title' => t('Main Line'),
     '#default_value' => theme_get_setting('header_main_line'),
-    '#description' => t("The main line of the header."),
+    '#description' => t("The main line of the header. For translation, search for 'Agency Name'"),
     '#required' => TRUE,
     '#maxlength' => 255,
   ];
@@ -79,7 +79,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#type' => 'textfield',
     '#title' => t('Bottom Line'),
     '#default_value' => theme_get_setting('header_bottom_line'),
-    '#description' => t("(Optional) The bottom line of the header."),
+    '#description' => t("(Optional) The bottom line of the header. For translation, search for 'Agency Slogan'"),
     '#maxlength' => 255,
   ];
 
