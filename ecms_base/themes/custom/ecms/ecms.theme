@@ -378,7 +378,13 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   foreach ($publications_types as &$weight) {
     foreach ($weight as &$type) {
 
-      // $type = ['English' => $type['English']] + $type;
+      if (!empty($type['English'])) {
+        $type = ['English' => $type['English']] + $type;
+      }
+      else {
+        ksort($type);
+      }
+
       foreach ($type as &$language) {
         // Return a list of rendered teaser nodes.
         if ($language !== NULL) {
