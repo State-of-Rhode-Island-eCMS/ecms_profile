@@ -47,6 +47,7 @@ dependencies:
   - media
   - media_library
   - media_library_theme_reset
+  - memcache
   - menu_block
   - menu_link_content
   - menu_ui
@@ -77,12 +78,12 @@ dependencies:
   - shortcut
   - simple_sitemap
   - svg_image
+  - syslog
   - taxonomy
   - toolbar
   - tour
   - twig_tweak
   - views
-  - views_ui
   - webform
   - webform_encrypt
   - webform_node

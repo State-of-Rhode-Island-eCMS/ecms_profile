@@ -169,7 +169,11 @@ else
   nodejs:
     overrides:
       volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY"
+        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
+  cache:
+    type: memcached:1.5.11
+    mem: 256
+    portforward: 11222"
   fi
 
   echo "$LANDO_SERVICES
