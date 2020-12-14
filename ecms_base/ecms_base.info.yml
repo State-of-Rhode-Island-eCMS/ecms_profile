@@ -84,7 +84,6 @@ dependencies:
   - tour
   - twig_tweak
   - views
-  - views_ui
   - webform
   - webform_encrypt
   - webform_node
