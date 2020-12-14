@@ -118,8 +118,8 @@ jobs:
 
       - name: Install memcache extension
         run: |
-        apt-get -y update
-        apt-get -y install php5-memcache memcache
+          apt-get -y update
+          apt-get -y install php5-memcache memcache
 
       - name: Start Apache
         run: service apache2 restart
