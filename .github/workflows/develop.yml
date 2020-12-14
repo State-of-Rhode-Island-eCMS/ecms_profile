@@ -134,12 +134,7 @@ jobs:
 
       - name: Add memcache settings to settings.php
         run: |
-          echo "use Drupal\Core\Installer\InstallerKernel;" >> /var/www/html/sites/default/settings.php
-          echo "\$settings['memcache']['servers'] = ['cache:11211' => 'default'];" >> /var/www/html/sites/default/settings.php
-          echo "\$settings['memcache']['bins'] = ['default' => 'default'];" >> /var/www/html/sites/default/settings.php
-          echo "\$settings['memcache']['key_prefix'] = 'ecms_';" >> /var/www/html/sites/default/settings.php
-          echo "if (!InstallerKernel::installationAttempted()) {" >> /var/www/html/sites/default/settings.php
-          echo "\$settings['cache']['default'] = 'cache.backend.memcache';}" >> /var/www/html/sites/default/settings.php
+          echo "use Drupal\Core\Installer\InstallerKernel;\$settings['memcache']['servers'] = ['cache:11211' => 'default'];\$settings['memcache']['bins'] = ['default' => 'default'];\$settings['memcache']['key_prefix'] = 'ecms_';if (!InstallerKernel::installationAttempted()) {\$settings['cache']['default'] = 'cache.backend.memcache';}" >> /var/www/html/sites/default/settings.php
 
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
