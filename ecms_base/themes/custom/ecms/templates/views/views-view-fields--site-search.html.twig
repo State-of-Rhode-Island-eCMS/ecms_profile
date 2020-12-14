@@ -31,8 +31,8 @@
 #}
 
 {% set path = '#' %}
-{% if view.field.nid.original_value|length > 0 %}
-  {% set path = path('entity.node.canonical', {'node': view.field.nid.original_value}) %}
+{% if fields.nid.content %}
+  {% set path = path('entity.node.canonical', {'node': fields.nid.content|striptags|trim|number_format}) %}
 {% endif %}
 
 {% if fields %}
