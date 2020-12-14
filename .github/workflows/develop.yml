@@ -80,6 +80,11 @@ jobs:
           MYSQL_USER: drupal
           MYSQL_PASSWORD: drupal
         options: --network-alias=database
+      memcache:
+        image: memcached:1.5
+        ports:
+          - 11211:11211
+        options: --network-alias=cache
     env:
       SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
@@ -115,14 +120,6 @@ jobs:
 
       - name: Start Apache
         run: service apache2 start
-
-      - name: Install memcache extension
-        run: |
-          apt-get -y update
-          apt-get -y install memcached
-
-      - name: Start Apache
-        run: service apache2 restart
 
       - name: Set the encryption private key variable.
         run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV
