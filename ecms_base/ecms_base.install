@@ -574,15 +574,15 @@ function ecms_base_update_9033(array &$sandbox): void {
  * Updates to run for the 0.3.4 tag.
  */
 function ecms_base_update_9034(array &$sandbox): void {
-    // Install new required modules.
-    $modules_to_install = [
-      'memcache',
-      'syslog',
-    ];
+  // Install new required modules.
+  $modules_to_install = [
+    'memcache',
+    'syslog',
+  ];
 
   \Drupal::service('module_installer')->install($modules_to_install);
 
-    // Disable existing modules.
+  // Disable existing modules.
   $modules_to_uninstall = [
     'views_ui',
   ];
