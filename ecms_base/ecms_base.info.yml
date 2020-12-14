@@ -43,6 +43,7 @@ dependencies:
   - layout_builder_restrictions
   - language_cookie
   - layout_discovery
+  - locale
   - media
   - media_library
   - media_library_theme_reset
