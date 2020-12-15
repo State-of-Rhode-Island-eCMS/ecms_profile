@@ -114,6 +114,13 @@ function ecms_base_install() {
     }
   }
 
+  // Install the memcache module.
+  $modules_to_install = [
+    'memcache',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
 }
 
 /**
