@@ -66,7 +66,7 @@ jobs:
   test-php-73:
     name: Test the site with PHP 7.3
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     container:
       image: drupalci/php-7.3-apache:production
     services:
