@@ -12,7 +12,6 @@ use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
-use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
 
