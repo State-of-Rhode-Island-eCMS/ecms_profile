@@ -74,7 +74,7 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
     $ecmsApiSiteEntity = $data['site_entity'];
     $apiUrl = $ecmsApiSiteEntity->getApiEndpoint()->getUrl();
 
-    /** @var \Drupal\node\NodeInterface $entity */
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $data['syndicated_content_entity'];
 
     $result = $this->ecmsApiPublisher->syndicateEntity($apiUrl, $entity);
