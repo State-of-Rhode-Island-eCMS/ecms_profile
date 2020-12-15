@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          php-version: '7.3'
 
       - name: Run the develop CI script.
         run: ./scripts/ci-develop.sh
@@ -93,6 +95,7 @@ jobs:
         with:
           name: drupal-build.tar.gz
           path: /var/www/
+          php-version: '7.3'
 
       - name: Expand the build artifact.
         run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
