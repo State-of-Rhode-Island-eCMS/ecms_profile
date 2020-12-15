@@ -130,7 +130,7 @@ class EcmsApiSyndicateTest extends UnitTestCase {
       ->method('addWarning');
 
     $ecmsApiSyndicate = new EcmsApiSyndicate($this->entityTypeManager, $this->queueFactory, $this->messenger);
-    $ecmsApiSyndicate->syndicateNode($entity);
+    $ecmsApiSyndicate->syndicateEntity($entity);
   }
 
   /**
@@ -164,7 +164,7 @@ class EcmsApiSyndicateTest extends UnitTestCase {
       ->method('addWarning');
 
     $ecmsApiSyndicate = new EcmsApiSyndicate($this->entityTypeManager, $this->queueFactory, $this->messenger);
-    $ecmsApiSyndicate->syndicateNode($entity);
+    $ecmsApiSyndicate->syndicateEntity($entity);
 
   }
 
