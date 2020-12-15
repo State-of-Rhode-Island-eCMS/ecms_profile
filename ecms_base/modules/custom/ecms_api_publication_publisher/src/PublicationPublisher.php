@@ -14,7 +14,7 @@ use GuzzleHttp\ClientInterface;
 /**
  * Determine if a publication node should be syndicated.
  */
-class PublicationPublisher extends EcmsApiBase {
+class PublicationPublisher {
 
   /**
    * The published moderation state.
@@ -31,18 +31,10 @@ class PublicationPublisher extends EcmsApiBase {
   /**
    * PublicationsPublisher constructor.
    *
-   * @param \GuzzleHttp\ClientInterface $httpClient
-   *   The http_client service.
-   * @param \Drupal\jsonapi_extras\EntityToJsonApi $entityToJsonApi
-   *   The jsonapi_extras.entity.to_jsonapi service.
-   * @param \Drupal\ecms_api\EcmsApiHelper $ecmsApiHelper
-   *   The ecms_api_helper service.
    * @param \Drupal\ecms_api_publisher\EcmsApiSyndicate $ecmsApiSyndicate
    *   The ecms_api_publisher.syndicate service.
    */
-  public function __construct(ClientInterface $httpClient, EntityToJsonApi $entityToJsonApi, EcmsApiHelper $ecmsApiHelper, EcmsApiSyndicate $ecmsApiSyndicate) {
-    parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
-
+  public function __construct(EcmsApiSyndicate $ecmsApiSyndicate) {
     $this->ecmsApiSyndicate = $ecmsApiSyndicate;
   }
 

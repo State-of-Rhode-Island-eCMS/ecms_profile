@@ -1,4 +1,4 @@
 services:
   ecms_api_publication_publisher:
     class: Drupal\ecms_api_publication_publisher\PublicationPublisher
-    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_helper', '@ecms_api_publisher.syndicate']
+    arguments: ['@ecms_api_publisher.syndicate']
