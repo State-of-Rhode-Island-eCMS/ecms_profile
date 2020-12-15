@@ -150,13 +150,13 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
     );
 
     // Post the entity.
-    $result = $ecmsApiPublisher->syndicateEntity($url, $node);
+    $result = $ecmsApiPublisher->syndicateEntity($url, $entity);
 
     // If an error occurs, re-queue the item.
     if (!$result) {
       $data = [
         'site_entity' => $ecmsApiSite,
-        'syndicated_content_entity' => $node,
+        'syndicated_content_entity' => $entity,
       ];
 
       // Requeue the item for later processing.
@@ -207,7 +207,7 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
           // Rebuild the queue item for requeue.
           $data = [
             'site_entity' => $ecmsApiSite,
-            'syndicated_content_entity' => $node,
+            'syndicated_content_entity' => $entity,
           ];
 
           // Requeue the item for later processing.
