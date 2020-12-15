@@ -348,7 +348,8 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   // Set target audience if there is one.
   if ($audience_url_restriction) {
     $audience = $audience_url_restriction;
-  } else {
+  }
+  else {
     $audience = $paragraph->get('field_publication_list_audience')->getString();
   }
 
