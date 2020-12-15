@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * ecms_api_publication_publisher.module
+ */
+
+declare(strict_types = 1);
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for the node entity.
+ */
+function ecms_api_publication_publisher_node_insert(EntityInterface $entity) {
+  \Drupal::service('ecms_api_publication_publisher')->broadcastPublication($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update() for the node entity.
+ */
+function ecms_api_publication_publisher_node_update(EntityInterface $entity): void {
+  \Drupal::service('ecms_api_publication_publisher')->broadcastPublication($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_translation_insert() for the node entity.
+ */
+function ecms_api_publication_publisher_node_translation_insert(EntityInterface $translation): void {
+  // Call the syndication service on translation insert.
+  // Translation support currently requires the patch from here:
+  // @see: https://www.drupal.org/project/drupal/issues/2794431#comment-13841477
+  \Drupal::service('ecms_api_publication_publisher')->broadcastPublication($translation);
+}

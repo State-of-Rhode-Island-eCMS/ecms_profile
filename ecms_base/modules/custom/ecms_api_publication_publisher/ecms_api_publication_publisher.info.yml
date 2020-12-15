@@ -1,0 +1,9 @@
+name: eCMS API Publications Publisher
+description: 'Provides logic to post publications to syndicated sites.'
+type: module
+core_version_requirement: ^9
+package: eCMS API
+
+dependencies:
+  - ecms_api_publisher
+  - ecms_publications
