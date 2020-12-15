@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-176: Allowed the syndication to handle multiple referenced entities.
 
 ### Security
 
