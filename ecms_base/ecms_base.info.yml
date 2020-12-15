@@ -47,7 +47,6 @@ dependencies:
   - media
   - media_library
   - media_library_theme_reset
-  - memcache
   - menu_block
   - menu_link_content
   - menu_ui
@@ -107,6 +106,7 @@ install:
   - ecms_publications
   - ecms_workflow
   - google_tag
+  - memcache
 
 # Theme dependencies for the distribution.
 themes:
