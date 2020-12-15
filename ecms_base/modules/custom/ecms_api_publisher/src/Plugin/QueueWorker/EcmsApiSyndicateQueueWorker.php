@@ -67,17 +67,17 @@ class EcmsApiSyndicateQueueWorker extends QueueWorkerBase implements ContainerFa
    * @param mixed $data
    *   Data should be an array with the following keys:
    *   - site_entity: \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface.
-   *   - syndicated_content_entity: \Drupal\node\NodeInterface.
+   *   - syndicated_content_entity: \Drupal\Core\Entity\EntityInterface.
    */
   public function processItem($data): void {
     /** @var \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $ecmsApiSiteEntity */
     $ecmsApiSiteEntity = $data['site_entity'];
     $apiUrl = $ecmsApiSiteEntity->getApiEndpoint()->getUrl();
 
-    /** @var \Drupal\node\NodeInterface $node */
-    $node = $data['syndicated_content_entity'];
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    $entity = $data['syndicated_content_entity'];
 
-    $result = $this->ecmsApiPublisher->syndicateNode($apiUrl, $node);
+    $result = $this->ecmsApiPublisher->syndicateEntity($apiUrl, $entity);
 
     // If the submission was not successful, requeue the task.
     if (!$result) {

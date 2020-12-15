@@ -166,7 +166,7 @@ class EcmsApiPublisherTest extends UnitTestCase {
         ->willReturn($userAccountArray);
     }
 
-    $result = $this->ecmsApiPublisher->syndicateNode($url, $node);
+    $result = $this->ecmsApiPublisher->syndicateEntity($url, $node);
 
     $this->assertEquals($expected, $result);
   }

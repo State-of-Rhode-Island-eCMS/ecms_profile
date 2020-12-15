@@ -5,13 +5,13 @@ declare(strict_types = 1);
 namespace Drupal\ecms_api_publisher;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Url;
 use Drupal\ecms_api\EcmsApiBase;
 use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\jsonapi_extras\EntityToJsonApi;
-use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
 
@@ -79,13 +79,13 @@ class EcmsApiPublisher extends EcmsApiBase {
    *
    * @param \Drupal\Core\Url $recipientUrl
    *   The URL of the API receiving the node.
-   * @param \Drupal\node\NodeInterface $node
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The node to submit.
    *
    * @return bool
    *   True if successfully saved.
    */
-  public function syndicateNode(Url $recipientUrl, NodeInterface $node): bool {
+  public function syndicateEntity(Url $recipientUrl, EntityInterface $entity): bool {
 
     $clientId = $this->getClientId();
     $clientSecret = $this->getClientSecret();
@@ -110,7 +110,7 @@ class EcmsApiPublisher extends EcmsApiBase {
     $this->accountSwitcher->switchTo($publisherAccount);
 
     // Submit the entity to the API.
-    $result = $this->submitEntity($accessToken, $recipientUrl, $node);
+    $result = $this->submitEntity($accessToken, $recipientUrl, $entity);
 
     $this->accountSwitcher->switchBack();
 

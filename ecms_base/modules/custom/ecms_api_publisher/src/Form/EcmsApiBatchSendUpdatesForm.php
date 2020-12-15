@@ -150,7 +150,7 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
     );
 
     // Post the entity.
-    $result = $ecmsApiPublisher->syndicateNode($url, $node);
+    $result = $ecmsApiPublisher->syndicateEntity($url, $node);
 
     // If an error occurs, re-queue the item.
     if (!$result) {

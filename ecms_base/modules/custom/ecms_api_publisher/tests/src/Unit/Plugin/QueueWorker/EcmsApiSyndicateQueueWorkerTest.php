@@ -47,7 +47,7 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
     parent::setUp();
 
     $this->ecmsApiPublisher = $this->getMockBuilder(EcmsApiPublisher::class)
-      ->onlyMethods(['syndicateNode'])
+      ->onlyMethods(['syndicateEntity'])
       ->disableOriginalConstructor()
       ->getMock();
 
@@ -83,7 +83,7 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
       ->willReturn($linkItem);
 
     $this->ecmsApiPublisher->expects($this->once())
-      ->method('syndicateNode')
+      ->method('syndicateEntity')
       ->with($url, $node)
       ->willReturn($expected);
 

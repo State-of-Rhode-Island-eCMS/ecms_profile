@@ -24,6 +24,8 @@
         <env name="DTT_BASE_URL" value="http://appserver/"/>
         <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
         <!-- Example for changing the driver args to phantomjs tests MINK_DRIVER_ARGS_PHANTOMJS value: '["http://127.0.0.1:8510"]' -->
+        <const name="XDEBUG_CC_DEAD_CODE" value="2" />
+        <const name="XDEBUG_CC_UNUSED" value="1" />
     </php>
     <testsuites>
         <testsuite name="unit">
