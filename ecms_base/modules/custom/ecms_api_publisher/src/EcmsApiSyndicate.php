@@ -4,12 +4,16 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_publisher;
 
+use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
-use Drupal\node\NodeInterface;
+use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
+use Drupal\file\FileInterface;
+use Drupal\user\UserInterface;
 
 /**
  * Handles queueing nodes for syndication.
@@ -65,13 +69,13 @@ class EcmsApiSyndicate {
   /**
    * Syndicate the entity to all registered sites.
    *
-   * @param \Drupal\node\NodeInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The node that should be syndicated to other sites.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function syndicateNode(NodeInterface $entity): void {
+  public function syndicateEntity(EntityInterface $entity): void {
     $type = $entity->bundle();
 
     // Get a list of all ecms_api_site entities that are of the bundle.
@@ -84,13 +88,7 @@ class EcmsApiSyndicate {
 
     // Loop through the site entities and add them to a queue.
     foreach ($sites as $site) {
-      $queueData = [
-        'site_entity' => $site,
-        'syndicated_content_entity' => $entity,
-      ];
-
-      // Push a new item onto the queue.
-      $this->queue->createItem($queueData);
+      $this->processEntity($entity, $site);
     }
 
     // Notify the user that the node will be posted on the next cron run.
@@ -125,6 +123,63 @@ class EcmsApiSyndicate {
 
     // Return the ecms_api_sites.
     return $sites;
+  }
+
+  /**
+   * Queue entities for creation on the hub site.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to process.
+   * @param \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $site
+   *   The ecms_api_site entity to submit the entity.
+   */
+  private function processEntity(EntityInterface $entity, EcmsApiSiteInterface $site): void {
+    $references = $entity->referencedEntities();
+
+    // Keep drilling into the references.
+    if (!empty($references)) {
+      $this->processReferencedEntities($references, $site);
+    }
+
+    $queueData = [
+      'site_entity' => $site,
+      'syndicated_content_entity' => $entity,
+    ];
+
+    // Queue this entity for syndication.
+    $this->queue->createItem($queueData);
+  }
+
+  /**
+   * Process referenced entities.
+   *
+   * @param array $references
+   *   Array of entities referencing the original entity.
+   * @param \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $site
+   *   The ecms_api_site entity to submit the entity.
+   */
+  private function processReferencedEntities(array $references, EcmsApiSiteInterface $site): void {
+    // Loop through the entities.
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    foreach ($references as $entity) {
+
+      // Ignore all configuration entities.
+      if ($entity instanceof ConfigEntityBase) {
+        continue;
+      }
+
+      // Ignore all file entities entities.
+      if ($entity instanceof FileInterface) {
+        continue;
+      }
+
+      // Ignore all user entities.
+      if ($entity instanceof UserInterface) {
+        continue;
+      }
+
+      $this->processEntity($entity, $site);
+    }
   }
 
 }

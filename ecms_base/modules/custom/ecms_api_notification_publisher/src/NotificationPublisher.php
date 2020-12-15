@@ -78,7 +78,7 @@ class NotificationPublisher extends EcmsApiBase {
     }
 
     if (in_array(self::MODERATION_PUBLISHED, $moderatedState, TRUE)) {
-      $this->ecmsApiSyndicate->syndicateNode($node);
+      $this->ecmsApiSyndicate->syndicateEntity($node);
     }
   }
 
