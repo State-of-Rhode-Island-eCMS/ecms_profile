@@ -17,8 +17,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '7.3'
+
+      - name: Check PHP Version
+        run: php -v
 
       - name: Run the develop CI script.
         run: ./scripts/ci-develop.sh
@@ -90,12 +96,19 @@ jobs:
       ECMS_PROFILE_DIRECTORY: /var/www/html/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.3'
+
+      - name: Check PHP Version
+        run: php -v
+
       - name: Retrieve the build artifact.
         uses: actions/download-artifact@v2
         with:
           name: drupal-build.tar.gz
           path: /var/www/
-          php-version: '7.3'
 
       - name: Expand the build artifact.
         run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
