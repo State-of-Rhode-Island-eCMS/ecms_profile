@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-171: Moved memcache to ecms_install hook.
 
 ### Deprecated
 
