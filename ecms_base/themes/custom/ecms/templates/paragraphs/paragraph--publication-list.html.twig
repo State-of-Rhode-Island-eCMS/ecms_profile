@@ -43,7 +43,8 @@
 
 {% include "@organisms/paragraphs/publication-list/publication-list.twig" with {
     publications: publications,
-    list_title: paragraph.field_publication_list_title.value
+    list_title: paragraph.field_publication_list_title.value,
+    lang_label: lang_label
   }
 %}
 
