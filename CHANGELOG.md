@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-130: Fixed syntax error in number_format.
 
 ### Security
+
+## [0.3.6] - 2020-12-15
+### Fixed
+- RIG-130: Fixed syntax error in number_format.
 
 ## [0.3.5] - 2020-12-15
 ### Added
@@ -376,7 +379,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...HEAD
+[0.3.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.5...0.3.6
 [0.3.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.4...0.3.5
 [0.3.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.3...0.3.4
 [0.3.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.2...0.3.3
