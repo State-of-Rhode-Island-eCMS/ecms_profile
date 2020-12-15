@@ -87,7 +87,11 @@ function ecms_theme(array $existing, string $type, string $theme, string $path):
 function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
-  $media_type = $paragraph->field_media_item->entity->bundle();
+  if(isset($paragraph->field_media_item->entity)) {
+    $media_type = $paragraph->field_media_item->entity->bundle();
+  } else {
+    return;
+  }
 
   if ($media_type === 'media_item_image') {
     $variables['media_type'] = 'img';
@@ -284,7 +288,11 @@ function ecms_preprocess_node__publication(array &$variables): void {
   $node = $variables['node'];
 
   // Grab file title.
-  $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
+  if($node->field_publication_url->first()) {
+    $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
+  } else {
+    return;
+  }
 
   // Determine file type.
   $publication_type = pathinfo($variables['publication_url'], PATHINFO_EXTENSION);
