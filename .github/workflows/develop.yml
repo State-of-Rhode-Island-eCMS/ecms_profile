@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Drupal.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
       DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
