@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-130: Fixed search url errors with NIDs of 4 digits.
 
 ### Security
 
