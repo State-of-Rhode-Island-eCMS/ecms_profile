@@ -1,4 +1,4 @@
-name: eCMS API Publications Publisher
+name: eCMS API Publication Publisher
 description: 'Provides logic to post publications to syndicated sites.'
 type: module
 core_version_requirement: ^9
