@@ -32,7 +32,7 @@
 
 {% set path = '#' %}
 {% if fields.nid.content %}
-  {% set path = path('entity.node.canonical', {'node': fields.nid.content|striptags|trim|number_format(0,'',''}) %}
+  {% set path = path('entity.node.canonical', {'node': fields.nid.content|striptags|trim|number_format(0,'','')}) %}
 {% endif %}
 
 {% if fields %}
