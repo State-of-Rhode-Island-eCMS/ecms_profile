@@ -335,6 +335,10 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   // Set target audience if there is one.
   $audience = $paragraph->get('field_publication_list_audience')->getString();
 
+  // Set language restriction if there is one.
+  $language = $paragraph->get('field_publication_list_language')->getString();
+  $variables['lang_label'] = TRUE;
+
   $entity_type_manager = \Drupal::entityTypeManager();
   $node_storage = $entity_type_manager->getStorage('node');
 
@@ -346,6 +350,11 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
 
   if ($audience) {
     $query->condition('field_publication_audiences', $audience);
+  }
+
+  if ($language) {
+    $variables['lang_label'] = FALSE;
+    $query->condition('langcode', $language);
   }
 
   $nids = $query->execute();
