@@ -105,7 +105,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
     $this->ecmsApiPublisher = $this->getMockBuilder(EcmsApiPublisher::class)
       ->disableOriginalConstructor()
-      ->onlyMethods(['syndicateNode'])
+      ->onlyMethods(['syndicateEntity'])
       ->getMock();
 
     $this->mockGlobalTFunction = $mockGlobalTFunction->build();
@@ -446,7 +446,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * Test the postSyndicateContent method.
    *
    * @param bool $result
-   *   Mock the result of the EcmsApiPublisher::syndicateNode method.
+   *   Mock the result of the EcmsApiPublisher::syndicateEntity method.
    *
    * @dataProvider dataProviderForTestPostSyndicateContent
    */
@@ -493,7 +493,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       ->method('getTitle');
 
     $this->ecmsApiPublisher->expects($this->once())
-      ->method('syndicateNode')
+      ->method('syndicateEntity')
       ->willReturn($result);
 
     $context = [];
