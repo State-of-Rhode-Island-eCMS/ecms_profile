@@ -10,7 +10,7 @@ field_name: field_publication_list_audience
 entity_type: paragraph
 bundle: publication_list
 label: 'Audience restriction'
-description: 'Select the audience for the publication list. Leave -None- for all publications.'
+description: "Select the audience for the publication list. Leave -None- for all publications.\r\n\r\nThis also serves as the default value if the the exposed form is enabled."
 required: false
 translatable: false
 default_value: {  }
