@@ -560,7 +560,6 @@ function ecms_base_update_9033(array &$sandbox): void {
 function ecms_base_update_9034(array &$sandbox): void {
   // Install new required modules.
   $modules_to_install = [
-    'memcache',
     'syslog',
   ];
 
