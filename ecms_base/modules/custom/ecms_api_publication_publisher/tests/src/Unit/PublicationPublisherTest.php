@@ -26,27 +26,6 @@ use GuzzleHttp\ClientInterface;
 class PublicationPublisherTest extends UnitTestCase {
 
   /**
-   * The http_client service mock.
-   *
-   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
-   */
-  private $httpclient;
-
-  /**
-   * The jsonapi_extras.entity.to_jsonapi service mock.
-   *
-   * @var \Drupal\jsonapi_extras\EntityToJsonApi|\PHPUnit\Framework\MockObject\MockObject
-   */
-  private $entityToJsonApi;
-
-  /**
-   * Mock of the ecms_api_helper service.
-   *
-   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
-   */
-  private $ecmsApiHelper;
-
-  /**
    * The ecms_api_publisher.syndicate service mock.
    *
    * @var \Drupal\ecms_api_publisher\EcmsApiSyndicate|\PHPUnit\Framework\MockObject\MockObject
@@ -143,7 +122,7 @@ class PublicationPublisherTest extends UnitTestCase {
 
     }
 
-    $publicationPublisher = new PublicationPublisher($this->httpclient, $this->entityToJsonApi, $this->ecmsApiHelper, $this->ecmsApiSyndicate);
+    $publicationPublisher = new PublicationPublisher($this->ecmsApiSyndicate);
     $publicationPublisher->broadcastPublication($this->node);
   }
 
