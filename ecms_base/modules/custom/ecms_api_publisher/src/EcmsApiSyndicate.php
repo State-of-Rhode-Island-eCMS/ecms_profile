@@ -91,10 +91,10 @@ class EcmsApiSyndicate {
       $this->processEntity($entity, $site);
     }
 
-    // Notify the user that the node will be posted on the next cron run.
+    // Notify the user that the entity will be posted on the next cron run.
     $this->messenger->addMessage($this->t('Successfully queued the @type "%title" to get posted to @number sites on the next cron run.', [
       '@type' => $type,
-      '%title' => $entity->getTitle(),
+      '%title' => $entity->label(),
       '@number' => count($sites),
     ]));
 

@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_api_publisher\Unit;
 
+use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -13,8 +15,11 @@ use Drupal\Core\Queue\QueueInterface;
 use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
+use Drupal\file\FileInterface;
+use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 
 /**
  * Unit testing for the EcmsApiSyndicate class.
@@ -100,9 +105,9 @@ class EcmsApiSyndicateTest extends UnitTestCase {
   }
 
   /**
-   * Test the syndicateNode method.
+   * Test the syndicateEntity method.
    */
-  public function testSyndicateNodeSuccess(): void {
+  public function testsyndicateEntitySuccess(): void {
     $entity = $this->createMock(NodeInterface::class);
 
     $entity->expects($this->once())
@@ -134,9 +139,9 @@ class EcmsApiSyndicateTest extends UnitTestCase {
   }
 
   /**
-   * Test the syndicateNode method with no api sites available.
+   * Test the syndicateEntity method with no api sites available.
    */
-  public function testSyndicateNodeNone(): void {
+  public function testsyndicateEntityNone(): void {
     $entity = $this->createMock(NodeInterface::class);
 
     $this->queue->expects($this->never())
@@ -166,6 +171,56 @@ class EcmsApiSyndicateTest extends UnitTestCase {
     $ecmsApiSyndicate = new EcmsApiSyndicate($this->entityTypeManager, $this->queueFactory, $this->messenger);
     $ecmsApiSyndicate->syndicateEntity($entity);
 
+  }
+
+  /**
+   * Test the syndicateEntity method with references.
+   */
+  public function testsyndicateEntityReferences(): void {
+    $entity = $this->createMock(EntityInterface::class);
+
+    $configEntity = $this->createMock(ConfigEntityBase::class);
+    $fileEntity = $this->createMock(FileInterface::class);
+    $userEntity = $this->createMock(UserInterface::class);
+    $mediaEntity = $this->createMock(MediaInterface::class);
+
+    $references = [
+      $configEntity,
+      $fileEntity,
+      $userEntity,
+      $mediaEntity,
+    ];
+
+    $entity->expects($this->atLeastOnce())
+      ->method('referencedEntities')
+      ->willReturn($references);
+
+    $entity->expects($this->once())
+      ->method('bundle')
+      ->willReturn(self::NODE_TYPE);
+
+    $storage = $this->createMock(EntityStorageInterface::class);
+    $storage->expects($this->once())
+      ->method('loadByProperties')
+      ->with(['content_type' => self::NODE_TYPE])
+      ->willReturn($this->ecmsApiSites);
+
+    $this->queue->expects($this->exactly(count($this->ecmsApiSites) * 2))
+      ->method('createItem');
+
+    $this->entityTypeManager->expects($this->once())
+      ->method('getStorage')
+      ->with('ecms_api_site')
+      ->willReturn($storage);
+
+    $this->messenger->expects($this->once())
+      ->method('addMessage');
+
+    $this->messenger->expects($this->once())
+      ->method('addWarning');
+
+    $ecmsApiSyndicate = new EcmsApiSyndicate($this->entityTypeManager, $this->queueFactory, $this->messenger);
+    $ecmsApiSyndicate->syndicateEntity($entity);
   }
 
 }
