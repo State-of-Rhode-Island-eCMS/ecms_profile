@@ -37,12 +37,13 @@ class PublicationAudienceForm extends FormBase {
       $audiences[$term->tid] = $term->name;
     }
 
-    // TODO: This default value is not connected to paragraph.
+    // @todo Fix default value is not connected to paragraph.
     // See if the audience restriction is in the url.
     $url_restriction = \Drupal::request()->get('audience_restriction');
     if ($url_restriction != NULL) {
       $default_value = $url_restriction;
-    } else {
+    }
+    else {
       // If no restriction then the default is Public.
       $default_value = array_search('Public', $audiences);
     }
