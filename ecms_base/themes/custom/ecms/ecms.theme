@@ -332,8 +332,15 @@ function ecms_preprocess_node__publication(array &$variables): void {
 function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
+  // Get ?audience_restriction value.
+  $audience_url_restriction = \Drupal::request()->get('audience_restriction');
+
   // Set target audience if there is one.
-  $audience = $paragraph->get('field_publication_list_audience')->getString();
+  if($audience_url_restriction) {
+    $audience = $audience_url_restriction;
+  } else {
+    $audience = $paragraph->get('field_publication_list_audience')->getString();
+  }
 
   // Set language restriction if there is one.
   $language = $paragraph->get('field_publication_list_language')->getString();
@@ -407,6 +414,13 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   ksort($publications_types);
 
   $variables['publications'] = $publications_types;
+
+  // Check if the audience form is enabled
+  if($paragraph->get('field_publication_list_form')->getString() == 1) {
+    $variables['audience_form'] =  \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\PublicationAudienceForm');
+  } else {
+    $variables['audience_form'] = FALSE;
+  }
 }
 
 /**
