@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-130: Added lang filter for publication list.
 
 ### Changed
+- RIG-171: Moved memcache to ecms_install hook.
 
 ### Deprecated
 

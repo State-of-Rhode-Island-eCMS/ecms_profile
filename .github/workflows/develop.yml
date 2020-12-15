@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Drupal.
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     env:
       DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
@@ -66,7 +66,7 @@ jobs:
   test-php-73:
     name: Test the site with PHP 7.3
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     container:
       image: drupalci/php-7.3-apache:production
     services:
@@ -80,11 +80,6 @@ jobs:
           MYSQL_USER: drupal
           MYSQL_PASSWORD: drupal
         options: --network-alias=database
-      memcache:
-        image: memcached:1.5
-        ports:
-          - 11211:11211
-        options: --network-alias=cache
     env:
       SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
@@ -132,9 +127,6 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
 
-      - name: Add memcache settings to settings.php
-        run: echo "use Drupal\Core\Installer\InstallerKernel;\$settings['memcache']['servers'] = ['cache:11211' => 'default'];\$settings['memcache']['bins'] = ['default' => 'default'];\$settings['memcache']['key_prefix'] = 'ecms_';if (\!InstallerKernel::installationAttempted()) {\$settings['cache']['default'] = 'cache.backend.memcache';}" >> /var/www/html/sites/default/settings.php
-
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
@@ -148,9 +140,10 @@ jobs:
 #      - name: Run functional tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
 #        run: sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
-      - name: Run functional tests with fastest.
-        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+
+#      - name: Run functional tests with fastest.
+#        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
+#        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
 
 #      - name: Run existing site tests.
 #        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}

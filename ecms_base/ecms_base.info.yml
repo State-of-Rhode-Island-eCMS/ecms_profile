@@ -47,7 +47,6 @@ dependencies:
   - media
   - media_library
   - media_library_theme_reset
-  - memcache
   - menu_block
   - menu_link_content
   - menu_ui
