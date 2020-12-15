@@ -80,11 +80,6 @@ jobs:
           MYSQL_USER: drupal
           MYSQL_PASSWORD: drupal
         options: --network-alias=database
-      memcache:
-        image: memcached:1.5
-        ports:
-          - 11211:11211
-        options: --network-alias=cache
     env:
       SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
