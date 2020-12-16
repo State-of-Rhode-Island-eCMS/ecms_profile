@@ -65,6 +65,10 @@ abstract class EcmsApiBase {
     'path',
     'content_translation_changed',
     'parent_id',
+    'rh_action',
+    'rh_redirect',
+    'rh_redirect_response',
+    'rh_redirect_fallback_action',
   ];
 
   /**

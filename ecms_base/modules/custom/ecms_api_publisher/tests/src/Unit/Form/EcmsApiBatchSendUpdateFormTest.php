@@ -379,7 +379,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
         $node->expects($this->once())
           ->method('bundle');
         $node->expects($this->once())
-          ->method('getTitle');
+          ->method('label');
 
         $error[1][1] = $node;
       }
@@ -490,7 +490,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       ->method('bundle');
 
     $node->expects($this->exactly($methodCount))
-      ->method('getTitle');
+      ->method('label');
 
     $this->ecmsApiPublisher->expects($this->once())
       ->method('syndicateEntity')

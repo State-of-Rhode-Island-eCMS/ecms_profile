@@ -1,0 +1,4 @@
+services:
+  ecms_api_publication_publisher:
+    class: Drupal\ecms_api_publication_publisher\PublicationPublisher
+    arguments: ['@ecms_api_publisher.syndicate']

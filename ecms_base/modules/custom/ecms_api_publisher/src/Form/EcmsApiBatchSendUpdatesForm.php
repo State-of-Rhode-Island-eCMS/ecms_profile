@@ -10,7 +10,7 @@ use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
-use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -128,12 +128,12 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
    *
    * @param \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $ecmsApiSite
    *   The site to post the content to.
-   * @param \Drupal\node\NodeInterface $node
-   *   The node to post to the site.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to post to the site.
    * @param array $context
    *   Additional context from the batch process.
    */
-  public static function postSyndicateContent(EcmsApiSiteInterface $ecmsApiSite, NodeInterface $node, array &$context): void {
+  public static function postSyndicateContent(EcmsApiSiteInterface $ecmsApiSite, EntityInterface $entity, array &$context): void {
     // Get the ecms_api_publisher.publisher service.
     /** @var \Drupal\ecms_api_publisher\EcmsApiPublisher $ecmsApiPublisher */
     $ecmsApiPublisher = \Drupal::service('ecms_api_publisher.publisher');
@@ -143,20 +143,20 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
     // Tell the user what we're doing.
     $context['message'] = t('Posting the @type "@title" to @endpoint',
       [
-        '@type' => $node->bundle(),
-        '@title' => $node->getTitle(),
+        '@type' => $entity->bundle(),
+        '@title' => $entity->label(),
         '@endpoint' => $url->toString(),
       ]
     );
 
     // Post the entity.
-    $result = $ecmsApiPublisher->syndicateEntity($url, $node);
+    $result = $ecmsApiPublisher->syndicateEntity($url, $entity);
 
     // If an error occurs, re-queue the item.
     if (!$result) {
       $data = [
         'site_entity' => $ecmsApiSite,
-        'syndicated_content_entity' => $node,
+        'syndicated_content_entity' => $entity,
       ];
 
       // Requeue the item for later processing.
@@ -165,8 +165,8 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
       // Let the user know about the error.
       $context['results']['error'][] = t('An error occurred posting the @type "@title" to @endpoint. This item has been re-queued.',
         [
-          '@type' => $node->bundle(),
-          '@title' => $node->getTitle(),
+          '@type' => $entity->bundle(),
+          '@title' => $entity->label(),
           '@endpoint' => $url->toString(),
         ]
       );
@@ -201,13 +201,13 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
         if (!empty($error[1])) {
           /** @var \Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface $site */
           $ecmsApiSite = array_shift($error[1]);
-          /** @var \Drupal\node\NodeInterface $node */
-          $node = array_shift($error[1]);
+          /** @var \Drupal\Core\Entity\EntityInterface $entity */
+          $entity = array_shift($error[1]);
 
           // Rebuild the queue item for requeue.
           $data = [
             'site_entity' => $ecmsApiSite,
-            'syndicated_content_entity' => $node,
+            'syndicated_content_entity' => $entity,
           ];
 
           // Requeue the item for later processing.
@@ -217,8 +217,8 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
 
           $message = t('An error occurred before posting the @type "@title" to @endpoint. This item has been re-queued.',
             [
-              '@type' => $node->bundle(),
-              '@title' => $node->getTitle(),
+              '@type' => $entity->bundle(),
+              '@title' => $entity->label(),
               '@endpoint' => $url->toString(),
             ]
           );
