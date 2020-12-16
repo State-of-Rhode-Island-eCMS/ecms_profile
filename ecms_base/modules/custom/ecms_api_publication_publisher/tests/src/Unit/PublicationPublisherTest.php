@@ -60,12 +60,12 @@ class PublicationPublisherTest extends UnitTestCase {
   }
 
   /**
-   * Test the broadCastNotification method.
+   * Test the broadcastPublication method.
    *
    * @param string $nodeType
    *   The node type to test with.
    * @param int $global
-   *   Whether the notification is global.
+   *   Whether the publication is global.
    *   -1: The field is missing.
    *   0 : The field is not selected.
    *   1 : The field is selected.
