@@ -10,20 +10,29 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.3.8] - 2020-12-16
+### Added
 - RIG-177: Added the publisher module for publication nodes to go from hub to syndicated sites.
 
 ### Changed
 - RIG-198: Update pathauto patterns to only apply to default language (EN).
-
-### Deprecated
 
 ### Removed
 - RIG-198: Removed base field override config from ecms_promotions (metatag and menu_link).
 
 ### Fixed
 - RIG-200: Fixed the cache contexts for the publication listing paragraph.
-
-### Security
 
 ## [0.3.7] - 2020-12-16
 ### Added
@@ -391,7 +400,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.8...HEAD
+[0.3.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...0.3.8
 [0.3.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...0.3.7
 [0.3.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.5...0.3.6
 [0.3.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.4...0.3.5
