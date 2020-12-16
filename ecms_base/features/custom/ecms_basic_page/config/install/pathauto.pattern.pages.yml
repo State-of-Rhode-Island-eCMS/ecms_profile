@@ -2,13 +2,14 @@ langcode: en
 status: true
 dependencies:
   module:
+    - language
     - node
 id: pages
 label: Pages
 type: 'canonical_entities:node'
 pattern: '[node:menu-link:parents:join-path]/[node:menu-link]'
 selection_criteria:
-  4532149e-106e-4e15-b944-14a7007a3011:
+  89ebfd63-3ed2-44a4-9432-6f0ec257b787:
     id: node_type
     bundles:
       basic_page: basic_page
@@ -16,7 +17,17 @@ selection_criteria:
     negate: false
     context_mapping:
       node: node
-    uuid: 4532149e-106e-4e15-b944-14a7007a3011
+    uuid: 89ebfd63-3ed2-44a4-9432-6f0ec257b787
+  fb55ee7b-d11e-4794-acfe-a30679609543:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: fb55ee7b-d11e-4794-acfe-a30679609543
 selection_logic: and
 weight: -5
-relationships: {  }
+relationships:
+  'node:langcode:language':
+    label: Language

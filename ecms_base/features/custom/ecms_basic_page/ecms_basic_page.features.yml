@@ -1,1 +1,5 @@
 bundle: ecms
+excluded:
+  - page_manager.page.moderation_dashboard
+  - page_manager.page_variant.moderation_dashboard-panels_variant-0
+  - views.view.moderation_dashboard_recent_changes

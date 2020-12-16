@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-198: Update pathauto patterns to only apply to default language (EN).
 
 ### Deprecated
 

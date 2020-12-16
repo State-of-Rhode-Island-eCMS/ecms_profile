@@ -2,20 +2,31 @@ langcode: en
 status: true
 dependencies:
   module:
+    - language
     - node
 id: speeches
 label: Speeches
 type: 'canonical_entities:node'
 pattern: 'newsroom/speeches/[node:field_speech_date:date:custom:Y]/[node:title]'
 selection_criteria:
-  e6869106-9b31-4518-9b8f-096acbc2dae3:
+  a99c2095-d425-4d8f-98f4-d4e360cf14ec:
     id: node_type
     bundles:
       speech: speech
     negate: false
     context_mapping:
       node: node
-    uuid: e6869106-9b31-4518-9b8f-096acbc2dae3
+    uuid: a99c2095-d425-4d8f-98f4-d4e360cf14ec
+  23f5d4fe-51a8-413c-a750-d943f62d4263:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 23f5d4fe-51a8-413c-a750-d943f62d4263
 selection_logic: and
 weight: -5
-relationships: {  }
+relationships:
+  'node:langcode:language':
+    label: Language
