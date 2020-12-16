@@ -17,6 +17,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIG-198: Removed base field override config from ecms_promotions (metatag and menu_link).
 
 ### Fixed
 
