@@ -14,7 +14,7 @@ use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 
 /**
- * Unit tests for the PublicationsPublisher class.
+ * Unit tests for the PublicationPublisher class.
  *
  * @package Drupal\Tests\ecms_api_publication_publisher\Unit
  * @covers \Drupal\ecms_api_publication_publisher\PublicationPublisher

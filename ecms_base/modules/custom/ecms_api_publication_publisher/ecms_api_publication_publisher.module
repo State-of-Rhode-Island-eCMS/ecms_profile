@@ -12,7 +12,7 @@ use Drupal\Core\Entity\EntityInterface;
 /**
  * Implements hook_ENTITY_TYPE_insert() for the node entity.
  */
-function ecms_api_publication_publisher_node_insert(EntityInterface $entity) {
+function ecms_api_publication_publisher_node_insert(EntityInterface $entity): void {
   \Drupal::service('ecms_api_publication_publisher')->broadcastPublication($entity);
 }
 

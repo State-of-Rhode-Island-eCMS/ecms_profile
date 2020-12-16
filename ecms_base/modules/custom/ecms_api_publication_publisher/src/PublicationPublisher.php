@@ -25,7 +25,7 @@ class PublicationPublisher {
   private $ecmsApiSyndicate;
 
   /**
-   * PublicationsPublisher constructor.
+   * PublicationPublisher constructor.
    *
    * @param \Drupal\ecms_api_publisher\EcmsApiSyndicate $ecmsApiSyndicate
    *   The ecms_api_publisher.syndicate service.

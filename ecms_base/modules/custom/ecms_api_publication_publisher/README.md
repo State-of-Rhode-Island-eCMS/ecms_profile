@@ -8,7 +8,7 @@ hook_ENTITY_TYPE_update
 hook_ENTITY_TYPE_translation_insert
 
 It then calls a custom service that determines if the node is a
-pulication and whether the moderation state is 'published'. If these
+publication and whether the moderation state is 'published'. If these
 conditions are met, it syndicates the node into the queue for all currently
 registered sites.
 
