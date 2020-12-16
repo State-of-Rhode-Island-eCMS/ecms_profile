@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-177: Added the publisher module for publication nodes to go from hub to syndicated sites.
 
 ### Changed
 
