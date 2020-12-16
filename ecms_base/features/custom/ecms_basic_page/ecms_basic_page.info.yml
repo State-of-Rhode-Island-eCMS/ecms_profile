@@ -5,17 +5,8 @@ core_version_requirement: ^9
 dependencies:
   - content_moderation
   - content_translation
-  - ecms_event
-  - ecms_hotel
-  - ecms_landing_page
-  - ecms_location
   - ecms_paragraphs
-  - ecms_person
-  - ecms_press_release
-  - ecms_projects
   - ecms_promotions
-  - ecms_publications
-  - ecms_speeches
   - ecms_workflow
   - entity_reference_revisions
   - field
