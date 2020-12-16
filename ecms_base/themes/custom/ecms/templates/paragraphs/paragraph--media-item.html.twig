@@ -59,6 +59,17 @@
 
 {# See preprocess_paragraph__menu_item #}
 {% if media_type == 'img' %}
+
+  {# Prepare the image to be sent to PL #}
+  {% set img = '' %}
+  {% if paragraph.field_media_item is not empty %}
+    {% set img_uri = paragraph.field_media_item.entity.field_media_item_image.entity.getFileUri() %}
+    {% set img_alt = paragraph.field_media_item.entity.field_media_item_image.alt %}
+
+    {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
+    {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
+  {% endif %}
+
   {% include "@molecules/media-item/media-item.twig" with {
       content: content,
       type: media_type,
@@ -67,7 +78,7 @@
       align: align,
       link_url: link_url,
       link_title: paragraph.field_link.title,
-      url: image_url,
+      img: img,
     }
   %}
 {% endif %}
