@@ -340,6 +340,9 @@ function ecms_preprocess_node__publication(array &$variables): void {
 function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
+  // Set the cache contexts to the audience_restriction query parameter.
+  $variables['#cache']['contexts'][] = 'url.query_args:audience_restriction';
+
   // Get ?audience_restriction value.
   $audience_url_restriction = \Drupal::request()->get('audience_restriction');
 
