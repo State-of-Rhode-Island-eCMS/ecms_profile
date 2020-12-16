@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-177: Added the publisher module for publication nodes to go from hub to syndicated sites.
+- RIG-6: Added shivammathur/setup-php PHP setup action to develop workflow to lock php at 7.3.
 
 ### Changed
 
