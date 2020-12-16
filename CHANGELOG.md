@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-130: Added exposed form to control publication list paragraph display.
 
 ### Changed
 
@@ -19,10 +18,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-176: Allowed the syndication to handle multiple referenced entities.
-- RIG-130: Fixed issues with calling functions on null values.
 
 ### Security
+
+## [0.3.7] - 2020-12-16
+### Added
+- RIG-130: Added exposed form to control publication list paragraph display.
+
+### Fixed
+- RIG-176: Allowed the syndication to handle multiple referenced entities.
+- RIG-130: Fixed issues with calling functions on null values.
 
 ## [0.3.6] - 2020-12-15
 ### Fixed
@@ -382,7 +387,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...HEAD
+[0.3.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...0.3.7
 [0.3.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.5...0.3.6
 [0.3.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.4...0.3.5
 [0.3.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.3...0.3.4
