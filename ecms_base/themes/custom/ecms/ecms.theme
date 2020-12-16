@@ -87,6 +87,10 @@ function ecms_theme(array $existing, string $type, string $theme, string $path):
 function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
+  if ($paragraph->field_media_item->isEmpty()) {
+    return;
+  }
+
   $media_type = $paragraph->field_media_item->entity->bundle();
 
   if ($media_type === 'media_item_image') {
@@ -283,6 +287,10 @@ function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id
 function ecms_preprocess_node__publication(array &$variables): void {
   $node = $variables['node'];
 
+  if ($node->field_publication_url->isEmpty()) {
+    return;
+  }
+
   // Grab file title.
   $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
 
@@ -332,8 +340,16 @@ function ecms_preprocess_node__publication(array &$variables): void {
 function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
+  // Get ?audience_restriction value.
+  $audience_url_restriction = \Drupal::request()->get('audience_restriction');
+
   // Set target audience if there is one.
-  $audience = $paragraph->get('field_publication_list_audience')->getString();
+  if (!empty($audience_url_restriction)) {
+    $audience = $audience_url_restriction;
+  }
+  else {
+    $audience = $paragraph->get('field_publication_list_audience')->getString();
+  }
 
   // Set language restriction if there is one.
   $language = $paragraph->get('field_publication_list_language')->getString();
@@ -407,6 +423,13 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   ksort($publications_types);
 
   $variables['publications'] = $publications_types;
+
+  // Check if the audience form is enabled.
+  $variables['audience_form'] = FALSE;
+
+  if ($paragraph->get('field_publication_list_form')->getString() === '1') {
+    $variables['audience_form'] = \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\PublicationAudienceForm');
+  }
 }
 
 /**

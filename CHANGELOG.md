@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-130: Added exposed form to control publication list paragraph display.
 
 ### Changed
 
@@ -19,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-176: Allowed the syndication to handle multiple referenced entities.
+- RIG-130: Fixed issues with calling functions on null values.
 
 ### Security
 
