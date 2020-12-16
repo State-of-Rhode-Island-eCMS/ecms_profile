@@ -4,12 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_publication_publisher;
 
-use Drupal\ecms_api\EcmsApiBase;
-use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_publisher\EcmsApiSyndicate;
-use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
-use GuzzleHttp\ClientInterface;
 
 /**
  * Determine if a publication node should be syndicated.
