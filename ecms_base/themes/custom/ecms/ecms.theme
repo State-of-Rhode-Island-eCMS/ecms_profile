@@ -87,12 +87,11 @@ function ecms_theme(array $existing, string $type, string $theme, string $path):
 function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
-  if (isset($paragraph->field_media_item->entity)) {
-    $media_type = $paragraph->field_media_item->entity->bundle();
-  }
-  else {
+  if ($paragraph->field_media_item->isEmpty()) {
     return;
   }
+
+  $media_type = $paragraph->field_media_item->entity->bundle();
 
   if ($media_type === 'media_item_image') {
     $variables['media_type'] = 'img';
@@ -288,13 +287,12 @@ function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id
 function ecms_preprocess_node__publication(array &$variables): void {
   $node = $variables['node'];
 
-  // Grab file title.
-  if ($node->field_publication_url->first()) {
-    $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
-  }
-  else {
+  if ($node->field_publication_url->isEmpty()) {
     return;
   }
+
+  // Grab file title.
+  $variables['publication_url'] = $node->field_publication_url->first()->getUrl()->getUri();
 
   // Determine file type.
   $publication_type = pathinfo($variables['publication_url'], PATHINFO_EXTENSION);
@@ -346,7 +344,7 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $audience_url_restriction = \Drupal::request()->get('audience_restriction');
 
   // Set target audience if there is one.
-  if ($audience_url_restriction) {
+  if (!empty($audience_url_restriction)) {
     $audience = $audience_url_restriction;
   }
   else {
@@ -427,11 +425,10 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $variables['publications'] = $publications_types;
 
   // Check if the audience form is enabled.
-  if ($paragraph->get('field_publication_list_form')->getString() == 1) {
+  $variables['audience_form'] = FALSE;
+
+  if ($paragraph->get('field_publication_list_form')->getString() === '1') {
     $variables['audience_form'] = \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\PublicationAudienceForm');
-  }
-  else {
-    $variables['audience_form'] = FALSE;
   }
 }
 

@@ -15,6 +15,8 @@ use Drupal\Core\Url;
  */
 class PublicationAudienceForm extends FormBase {
 
+  const VID = 'publication_audience';
+
   /**
    * {@inheritdoc}
    */
@@ -28,8 +30,7 @@ class PublicationAudienceForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
     // Load audience values.
-    $vid = 'publication_audience';
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree(self::VID);
 
     // Build out select options list.
     $audiences = [];
@@ -40,7 +41,7 @@ class PublicationAudienceForm extends FormBase {
     // @todo Fix default value is not connected to paragraph.
     // See if the audience restriction is in the url.
     $url_restriction = \Drupal::request()->get('audience_restriction');
-    if ($url_restriction != NULL) {
+    if ($url_restriction !== NULL) {
       $default_value = $url_restriction;
     }
     else {
