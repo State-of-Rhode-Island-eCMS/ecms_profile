@@ -32,6 +32,8 @@
  */
 #}
 
+{% set cachebust = content|render %}
+
 {% include '@organisms/notfications-block/notifications-block.twig' with {
   content: content
 } %}
