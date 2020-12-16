@@ -2,20 +2,31 @@ langcode: en
 status: true
 dependencies:
   module:
+    - language
     - node
 id: locations
 label: Locations
 type: 'canonical_entities:node'
 pattern: 'locations/[node:title]'
 selection_criteria:
-  f42bdaef-8821-43c8-9ae5-e3982ef3d4c7:
+  43042ff6-78dc-4a2a-b401-a1898abd68a0:
     id: node_type
     bundles:
       location: location
     negate: false
     context_mapping:
       node: node
-    uuid: f42bdaef-8821-43c8-9ae5-e3982ef3d4c7
+    uuid: 43042ff6-78dc-4a2a-b401-a1898abd68a0
+  d0b0c87a-1553-44ef-b971-6645f1835f40:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: d0b0c87a-1553-44ef-b971-6645f1835f40
 selection_logic: and
 weight: -5
-relationships: {  }
+relationships:
+  'node:langcode:language':
+    label: Language

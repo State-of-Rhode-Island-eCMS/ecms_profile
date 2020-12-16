@@ -13,7 +13,10 @@ dependencies:
   - language
   - menu_ui
   - metatag
+  - moderation_dashboard
   - node
+  - page_manager
+  - panels
   - paragraphs
   - path
   - pathauto
@@ -22,5 +25,7 @@ dependencies:
   - simple_sitemap
   - text
   - user
+  - views
+  - workflows
 package: eCMS
 version: 9.x-1.0

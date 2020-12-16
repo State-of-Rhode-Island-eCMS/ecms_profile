@@ -2,20 +2,31 @@ langcode: en
 status: true
 dependencies:
   module:
+    - language
     - node
 id: accommodations
 label: Accommodations
 type: 'canonical_entities:node'
 pattern: 'accommodations/[node:title]'
 selection_criteria:
-  2cde8a1a-0fa6-4f43-a6ad-53935edb3233:
+  de570a7b-a064-44f3-b908-9b5931e4a4eb:
     id: node_type
     bundles:
       hotel: hotel
     negate: false
     context_mapping:
       node: node
-    uuid: 2cde8a1a-0fa6-4f43-a6ad-53935edb3233
+    uuid: de570a7b-a064-44f3-b908-9b5931e4a4eb
+  213a90b2-4a90-4cc5-8c2e-7154c23ffd9b:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 213a90b2-4a90-4cc5-8c2e-7154c23ffd9b
 selection_logic: and
 weight: -5
-relationships: {  }
+relationships:
+  'node:langcode:language':
+    label: Language

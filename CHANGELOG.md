@@ -13,10 +13,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-177: Added the publisher module for publication nodes to go from hub to syndicated sites.
 
 ### Changed
+- RIG-198: Update pathauto patterns to only apply to default language (EN).
 
 ### Deprecated
 
 ### Removed
+- RIG-198: Removed base field override config from ecms_promotions (metatag and menu_link).
 
 ### Fixed
 

@@ -2,20 +2,31 @@ langcode: en
 status: true
 dependencies:
   module:
+    - language
     - node
 id: press_releases
 label: 'Press Releases'
 type: 'canonical_entities:node'
 pattern: 'press-releases/[node:title]'
 selection_criteria:
-  687ebb9c-f3ac-4935-ac79-cc3e7fc13e1f:
+  f235b91c-7e2d-4379-b392-980d6bd8a143:
     id: node_type
     bundles:
       press_release: press_release
     negate: false
     context_mapping:
       node: node
-    uuid: 687ebb9c-f3ac-4935-ac79-cc3e7fc13e1f
+    uuid: f235b91c-7e2d-4379-b392-980d6bd8a143
+  7f78cdb8-2d6e-40dd-aa70-ac18d60a541a:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 7f78cdb8-2d6e-40dd-aa70-ac18d60a541a
 selection_logic: and
 weight: -5
-relationships: {  }
+relationships:
+  'node:langcode:language':
+    label: Language
