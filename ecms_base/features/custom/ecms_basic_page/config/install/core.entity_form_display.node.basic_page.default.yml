@@ -11,7 +11,7 @@ dependencies:
   module:
     - content_moderation
     - metatag
-    - paragraphs
+    - paragraphs_asymmetric_translation_widgets
     - path
     - text
 id: node.basic_page.default
@@ -36,7 +36,7 @@ content:
     type: text_textarea_with_summary
     region: content
   field_basic_page_paragraphs:
-    type: entity_reference_paragraphs
+    type: paragraphs_classic_asymmetric
     weight: 3
     settings:
       title: 'Content Component'

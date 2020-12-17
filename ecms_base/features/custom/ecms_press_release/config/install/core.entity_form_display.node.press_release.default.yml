@@ -17,7 +17,7 @@ dependencies:
     - datetime
     - link
     - metatag
-    - paragraphs
+    - paragraphs_asymmetric_translation_widgets
     - path
     - text
 id: node.press_release.default
@@ -63,7 +63,7 @@ content:
     type: link_default
     region: content
   field_press_release_paragraphs:
-    type: entity_reference_paragraphs
+    type: paragraphs_classic_asymmetric
     weight: 125
     settings:
       title: 'Content Component'
@@ -179,7 +179,7 @@ content:
     third_party_settings: {  }
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }

@@ -17,6 +17,7 @@ dependencies:
   - metatag
   - node
   - paragraphs
+  - paragraphs_asymmetric_translation_widgets
   - path
   - pathauto
   - rabbit_hole
