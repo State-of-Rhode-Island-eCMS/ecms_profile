@@ -123,4 +123,6 @@ permissions:
   - 'use editorial transition review'
   - 'use text format paragraph_text'
   - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view latest version'
   - 'view own unpublished content'
