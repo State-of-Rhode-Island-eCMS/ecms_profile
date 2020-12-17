@@ -2,17 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_components
-    - paragraphs.paragraphs_type.card
+    - field.storage.paragraph.field_gallery_items
+    - paragraphs.paragraphs_type.gallery
     - paragraphs.paragraphs_type.gallery_item
-    - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
-id: paragraph.card.field_components
-field_name: field_components
+id: paragraph.gallery.field_gallery_items
+field_name: field_gallery_items
 entity_type: paragraph
-bundle: card
-label: Components
+bundle: gallery
+label: 'Gallery items'
 description: ''
 required: false
 translatable: false
@@ -21,49 +20,47 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
+    negate: 0
     target_bundles:
-      card: card
       gallery_item: gallery_item
-      text_card: text_card
     target_bundles_drag_drop:
       accordion_builder:
-        weight: 13
+        weight: 14
         enabled: false
       card:
-        enabled: true
-        weight: 14
-      column_container:
         weight: 15
         enabled: false
-      embed:
+      column_container:
         weight: 16
         enabled: false
-      file_list:
+      embed:
         weight: 17
         enabled: false
-      formatted_text:
+      file_list:
         weight: 18
         enabled: false
-      gallery:
+      formatted_text:
         weight: 19
+        enabled: false
+      gallery:
+        weight: 20
         enabled: false
       gallery_item:
         enabled: true
         weight: 21
       icon_card:
-        weight: 20
-        enabled: false
-      media_item:
-        weight: 21
-        enabled: false
-      promotion_reference:
         weight: 22
         enabled: false
-      publication_list:
+      media_item:
         weight: 23
         enabled: false
-      text_card:
-        enabled: true
+      promotion_reference:
         weight: 24
+        enabled: false
+      publication_list:
+        weight: 25
+        enabled: false
+      text_card:
+        weight: 26
+        enabled: false
 field_type: entity_reference_revisions
