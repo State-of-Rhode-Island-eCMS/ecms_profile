@@ -598,3 +598,19 @@ function ecms_base_update_9034(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Updates to run for the 0.3.9 tag.
+ */
+function ecms_base_update_9039(array &$sandbox): void {
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $theme_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $active_storage->write('block.block.sitenotifications', $theme_source->read('block.block.sitenotifications'));
+}

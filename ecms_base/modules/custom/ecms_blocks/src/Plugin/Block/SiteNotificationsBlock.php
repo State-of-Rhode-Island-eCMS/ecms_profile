@@ -18,6 +18,9 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  * @Block(
  *   id = "ecms_site_notifications",
  *   admin_label = @Translation("Site Notifications"),
+ *   context_definitions = {
+ *     "node" = @ContextDefinition("entity:node", label = @Translation("Node"))
+ *   }
  * )
  */
 class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -93,8 +96,16 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
     // Load multiple nodes.
     $nodes = $node_storage->loadMultiple($nids);
 
-    // Get language code.
-    $language = $this->languageManager->getCurrentLanguage()->getId();
+    // Get language code from the current node.
+    $active_node = $this->getContextValue('node');
+
+    if ($active_node) {
+      $language = $active_node->get('langcode')->value;
+    }
+    else {
+      // Get site active language.
+      $language = $this->languageManager->getCurrentLanguage()->getId();
+    }
 
     // Return a list of rendered teaser nodes.
     $builder = $this->entityTypeManager->getViewBuilder('node');
