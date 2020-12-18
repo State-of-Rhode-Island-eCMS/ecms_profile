@@ -350,3 +350,4 @@ permissions:
   - 'view scheduled transitions node webform'
   - 'view unpublished paragraphs'
   - 'view webform revisions'
+  - 'view webform submissions any node'

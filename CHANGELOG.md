@@ -20,6 +20,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-205: Fixed the content author permissions to prevent 404 redirects.
+- RIG-204: Fixed the php error preventing viewing node revisions.
 
 ### Security
 

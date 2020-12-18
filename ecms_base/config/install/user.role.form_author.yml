@@ -10,3 +10,6 @@ permissions:
   - 'edit any webform'
   - 'edit own webform'
   - 'translate webform node'
+  - 'view any webform submission'
+  - 'view encrypted values'
+  - 'view webform submissions any node'
