@@ -619,6 +619,8 @@ function ecms_base_update_9039(array &$sandbox): void {
 
   $newConfig = [
     'user.role.content_author',
+    'user.role.form_author',
+    'user.role.site_admin',
   ];
 
   foreach ($newConfig as $config) {
