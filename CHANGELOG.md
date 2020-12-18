@@ -10,20 +10,27 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-6: Added shivammathur/setup-php PHP setup action to develop workflow to lock php at 7.3.
 
 ### Changed
-- RIG-130: Changed notifications block to use node langcode rather than the current users.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIG-205: Fixed the content author permissions to prevent 404 redirects.
-- RIG-204: Fixed the php error preventing viewing node revisions.
 
 ### Security
+
+## [0.3.9] - 2020-12-18
+### Added
+- RIG-6: Added shivammathur/setup-php PHP setup action to develop workflow to lock php at 7.3.
+
+### Changed
+- RIG-130: Changed notifications block to use node langcode rather than the current users.
+
+### Fixed
+- RIG-205: Fixed the content author permissions to prevent 404 redirects.
+- RIG-204: Fixed the php error preventing viewing node revisions.
 
 ## [0.3.8] - 2020-12-16
 ### Added
@@ -404,7 +411,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...HEAD
+[0.3.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...0.3.8
 [0.3.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...0.3.7
 [0.3.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.5...0.3.6
