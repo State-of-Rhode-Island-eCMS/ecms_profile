@@ -19,7 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-192: Fixed some missing title errors during migration.
-- RIG-207: Fixed the cardcomponent translation settings.
+- RIG-207: Fixed the card component translation settings.
 
 ### Security
 
