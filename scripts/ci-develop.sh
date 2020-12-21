@@ -18,7 +18,7 @@ COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
 
 
-echo ${GITHUB_REF}
+#echo ${GITHUB_REF##*/}
 
 # Move up a directory.
 cd ..
@@ -67,7 +67,7 @@ else
 fi
 
 $COMPOSER config extra.enable-patching true
-$COMPOSER require "${REPOSITORY_NAME}:*" --no-progress
+$COMPOSER require "${REPOSITORY_NAME}:dev-RIG-164/drupal-9.1-upgrade" --no-progress
 
 # Require pattern lab master branch from Github.
 $COMPOSER config repositories.${PATTERN_LAB_DIRECTORY} '{"type": "git", "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab.git"}'
