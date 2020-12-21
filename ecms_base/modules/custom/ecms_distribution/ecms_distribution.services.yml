@@ -1,0 +1,4 @@
+services:
+  ecms_distribution.paragraph_translation_update:
+    class: Drupal\ecms_distribution\EcmsDistributionParagraphUpdate
+    arguments: ['@entity_type.manager']
