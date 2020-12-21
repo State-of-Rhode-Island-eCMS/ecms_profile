@@ -41,7 +41,7 @@ source:
   migration_tools:
     - source: url
       source_type: url
-      source_operation:
+      source_operations:
         - operation: modifier
           modifier: basicCleanup
       fields:
@@ -61,6 +61,12 @@ source:
               method: 'pluckSelector'
               arguments:
                 - h2
+            # Find the first h3 and use that as the page title
+            # if the h2 is empty.
+            - job: 'addSearch'
+              method: 'pluckSelector'
+              arguments:
+                - h3
         # Get the body content.
         css_selector_1:
           obtainer: ObtainBody
@@ -104,7 +110,10 @@ source:
 
 process:
   id: url
-  title: title
+  title:
+    plugin: default_value
+    source: title
+    default_value: "MISSING TITLE"
   status: status
   'field_basic_page_body/value':
     plugin: concat
