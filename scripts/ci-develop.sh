@@ -29,6 +29,9 @@ composer create-project drupal/recommended-project:^9.1 $APP_NAME --no-install -
 # Move into the directory.
 cd $APP_NAME;
 
+# Change the minimum stability flag.
+$COMPOSER config minimum-stability "dev"
+
 $COMPOSER require "zaporylie/composer-drupal-optimizations:^1.1.2" --no-update
 
 # Add the development requirements for testing.
@@ -67,7 +70,7 @@ else
 fi
 
 $COMPOSER config extra.enable-patching true
-$COMPOSER require "${REPOSITORY_NAME}:dev-RIG-164/drupal-9.1-upgrade" --no-progress
+$COMPOSER require "${REPOSITORY_NAME}:*" --no-progress
 
 # Require pattern lab master branch from Github.
 $COMPOSER config repositories.${PATTERN_LAB_DIRECTORY} '{"type": "git", "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab.git"}'
