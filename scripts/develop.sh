@@ -114,11 +114,11 @@ echo " Initialize lando for local usage "
 echo "----------------------------------"
 cd ${DEST_DIR}
 
-echo "Lock Drupal core to 9.0 branch."
-$COMPOSER require "drupal/core-composer-scaffold:~9.0.9" --no-update
-$COMPOSER require "drupal/core-project-message:~9.0.9" --no-update
-$COMPOSER require "drupal/core-recommended:~9.0.9" --no-update
-$COMPOSER require "drupal/core-vendor-hardening:~9.0.9" --no-update
+#echo "Lock Drupal core to 9.0 branch."
+#$COMPOSER require "drupal/core-composer-scaffold:~9.0.9" --no-update
+#$COMPOSER require "drupal/core-project-message:~9.0.9" --no-update
+#$COMPOSER require "drupal/core-recommended:~9.0.9" --no-update
+#$COMPOSER require "drupal/core-vendor-hardening:~9.0.9" --no-update
 
 
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --webroot $DOCROOT --source cwd\n\n"
