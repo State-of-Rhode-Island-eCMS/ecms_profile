@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-192: Fixed some missing title errors during migration.
 
 ### Security
 
