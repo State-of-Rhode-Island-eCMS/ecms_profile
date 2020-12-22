@@ -28,6 +28,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [0.4.0] - 2020-12-22
+### Fixed
+- RIG-192: Fixed some missing title errors during migration.
+- RIG-207: Fixed the card component translation settings.
+
 ## [0.3.9] - 2020-12-18
 ### Added
 - RIG-6: Added shivammathur/setup-php PHP setup action to develop workflow to lock php at 7.3.
@@ -418,7 +423,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...0.4.0
 [0.3.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...0.3.8
 [0.3.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...0.3.7
