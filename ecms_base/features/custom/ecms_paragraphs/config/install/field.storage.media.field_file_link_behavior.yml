@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - options
+id: media.field_file_link_behavior
+field_name: field_file_link_behavior
+entity_type: media
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: new_tab
+      label: 'Open in new tab'
+    -
+      value: download
+      label: 'Download file'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

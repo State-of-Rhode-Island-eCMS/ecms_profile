@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_file_link_behavior
+    - media.type.file
+  module:
+    - options
+id: media.file.field_file_link_behavior
+field_name: field_file_link_behavior
+entity_type: media
+bundle: file
+label: 'Link behavior'
+description: 'Select the link behavior for this file.'
+required: true
+translatable: false
+default_value:
+  -
+    value: new_tab
+default_value_callback: ''
+settings: {  }
+field_type: list_string

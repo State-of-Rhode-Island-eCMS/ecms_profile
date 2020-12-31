@@ -4,9 +4,13 @@ dependencies:
   config:
     - core.entity_view_mode.media.media_library
     - field.field.media.file.field_file
+    - field.field.media.file.field_file_link_behavior
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_type
+    - image.style.media_library
     - media.type.file
+  module:
+    - svg_image
 id: media.file.media_library
 targetEntityType: media
 bundle: file
@@ -20,11 +24,25 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  thumbnail:
+    type: image
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      image_style: media_library
+      image_link: ''
+      svg_render_as_image: true
+      svg_attributes:
+        width: null
+        height: null
+    third_party_settings: {  }
 hidden:
   created: true
   field_file: true
+  field_file_link_behavior: true
   field_file_size: true
   field_file_type: true
   langcode: true
-  thumbnail: true
+  search_api_excerpt: true
   uid: true
