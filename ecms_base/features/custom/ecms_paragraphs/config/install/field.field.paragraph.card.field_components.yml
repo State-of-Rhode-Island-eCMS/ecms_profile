@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.storage.paragraph.field_components
     - paragraphs.paragraphs_type.card
+    - paragraphs.paragraphs_type.gallery_item
     - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
@@ -23,6 +24,7 @@ settings:
     negate: 1
     target_bundles:
       card: card
+      gallery_item: gallery_item
       text_card: text_card
     target_bundles_drag_drop:
       accordion_builder:
@@ -46,6 +48,9 @@ settings:
       gallery:
         weight: 19
         enabled: false
+      gallery_item:
+        enabled: true
+        weight: 21
       icon_card:
         weight: 20
         enabled: false

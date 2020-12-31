@@ -2,16 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_basic_page_paragraphs
-    - node.type.basic_page
+    - field.storage.paragraph.field_gallery_items
+    - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.gallery_item
   module:
     - entity_reference_revisions
-id: node.basic_page.field_basic_page_paragraphs
-field_name: field_basic_page_paragraphs
-entity_type: node
-bundle: basic_page
-label: 'Page Content Components'
-description: 'Add one or more flexible content components.'
+id: paragraph.gallery.field_gallery_items
+field_name: field_gallery_items
+entity_type: paragraph
+bundle: gallery
+label: 'Gallery items'
+description: ''
 required: false
 translatable: false
 default_value: {  }
@@ -19,10 +20,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
+    negate: 0
     target_bundles:
       gallery_item: gallery_item
-      text_card: text_card
     target_bundles_drag_drop:
       accordion_builder:
         weight: 14
@@ -37,10 +37,10 @@ settings:
         weight: 17
         enabled: false
       file_list:
-        weight: 5
+        weight: 18
         enabled: false
       formatted_text:
-        weight: 2
+        weight: 19
         enabled: false
       gallery:
         weight: 20
@@ -52,7 +52,7 @@ settings:
         weight: 22
         enabled: false
       media_item:
-        weight: 7
+        weight: 23
         enabled: false
       promotion_reference:
         weight: 24
@@ -61,6 +61,6 @@ settings:
         weight: 25
         enabled: false
       text_card:
-        enabled: true
         weight: 26
+        enabled: false
 field_type: entity_reference_revisions
