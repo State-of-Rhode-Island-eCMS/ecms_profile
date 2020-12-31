@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-130: Added gallery and gallery item paragraph bundles.
+- RIG-130: Added tiny-slider library.
 
 ### Changed
 
