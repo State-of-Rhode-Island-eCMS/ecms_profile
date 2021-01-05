@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-130: Added tiny-slider library.
 
 ### Changed
+- RIG-196: Updated migration documentation.
 
 ### Deprecated
 

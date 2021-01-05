@@ -68,3 +68,18 @@ configurations.
 
 Also, note that the migration tools selector keys need to match the
 ecms_migration.settings keys for proper replacement.
+
+## Using Drush to complete problem migrations
+If migrations are not completing using the UI, it may be necessary to
+use drush to complete them. Here is an example set of steps and commands.
+1. SSH into server (e.g. `ssh riecms.01live@web-4876.enterprise-g1.hosting.acquia.com`)
+2. Browse to webroot (e.g. `cd /var/www/html/riecms.01live/docroot`)
+3. Execute migrate-import command
+   * (e.g. `drush10 migrate:import ecms_basic_page --uri=https://eohhs.riecms.acsitefactory.com`)
+
+As with all drush commands on Site Factory, the `--uri` argument must be passed in
+     order to target the intended site.
+Other useful migration commands
+* `drush10 migrate:stop`
+* `drush10 migrate:reset`
+* `drush10 migrate:stop`
