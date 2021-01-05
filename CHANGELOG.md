@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.4.0] - 2021-01-05
+### Added
 - RIG-130: Added gallery and gallery item paragraph bundles.
 - RIG-130: Added tiny-slider library.
 - RIG-125: Added link behavior field to media files.
@@ -17,21 +30,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-196: Updated migration documentation.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIG-192: Fixed some missing title errors during migration.
 - RIG-207: Fixed the card component translation settings.
 - RIG-125: Fixed file display in media library.
-
-### Security
-
-## [0.4.0] - 2020-12-22
-### Fixed
-- RIG-192: Fixed some missing title errors during migration.
-- RIG-207: Fixed the card component translation settings.
 
 ## [0.3.9] - 2020-12-18
 ### Added
