@@ -25,6 +25,8 @@ permissions:
   - 'view paragraph content embed'
   - 'view paragraph content file_list'
   - 'view paragraph content formatted_text'
+  - 'view paragraph content gallery'
+  - 'view paragraph content gallery_item'
   - 'view paragraph content icon_card'
   - 'view paragraph content media_item'
   - 'view paragraph content promotion_reference'
