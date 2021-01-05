@@ -3,11 +3,13 @@ status: true
 dependencies:
   config:
     - field.field.media.file.field_file
+    - field.field.media.file.field_file_link_behavior
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_type
     - media.type.file
   module:
     - file
+    - path
 id: media.file.default
 targetEntityType: media
 bundle: file
@@ -20,15 +22,21 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_file:
-    weight: 5
+    weight: 7
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
+  field_file_link_behavior:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   langcode:
     type: language_select
-    weight: 1
+    weight: 2
     region: content
     settings:
       include_locked: true
@@ -41,17 +49,18 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 4
+    weight: 5
     region: content
-    third_party_settings: {  }
-  translation:
-    weight: 6
-    region: content
-    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
@@ -66,4 +75,3 @@ content:
 hidden:
   field_file_size: true
   field_file_type: true
-  path: true
