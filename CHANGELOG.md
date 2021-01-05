@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-125: Added link behavior field to media files.
 
 ### Changed
+- RIG-196: Updated migration documentation.
 
 ### Deprecated
 
