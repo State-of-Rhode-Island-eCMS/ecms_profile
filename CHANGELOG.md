@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.4.0] - 2021-01-05
+### Added
 - RIG-130: Added gallery and gallery item paragraph bundles.
 - RIG-130: Added tiny-slider library.
 - RIG-125: Added link behavior field to media files.
@@ -17,16 +30,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-196: Updated migration documentation.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIG-192: Fixed some missing title errors during migration.
 - RIG-207: Fixed the card component translation settings.
 - RIG-125: Fixed file display in media library.
-
-### Security
 
 ## [0.3.9] - 2020-12-18
 ### Added
@@ -418,7 +425,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...0.4.0
 [0.3.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...0.3.8
 [0.3.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.6...0.3.7
