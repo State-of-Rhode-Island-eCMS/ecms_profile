@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-130: Added permissions for gallery and gallery item paragraph bundles.
 
 ### Changed
 
@@ -19,9 +18,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-217: Added patch to fix "Call to a member function getEntityTypeId() on null (Layout Builder)".
 
 ### Security
+
+## [0.4.1] - 2021-01-06
+### Added
+- RIG-130: Added permissions for gallery and gallery item paragraph bundles.
+
+### Fixed
+- RIG-217: Added patch to fix "Call to a member function getEntityTypeId() on null (Layout Builder)".
 
 ## [0.4.0] - 2021-01-05
 ### Added
@@ -427,7 +432,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.1...HEAD
+[0.4.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...0.4.0
 [0.3.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.8...0.3.9
 [0.3.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.7...0.3.8
