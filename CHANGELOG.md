@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-217: Added patch to fix "Call to a member function getEntityTypeId() on null (Layout Builder)";
 
 ### Security
 
