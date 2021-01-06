@@ -447,7 +447,7 @@ function ecms_preprocess_block(array &$variables): void {
   // Block labels are not translated properly.
   // @see: https://www.drupal.org/project/drupal/issues/2810457#comment-12625567
   if ($variables['elements']['#base_plugin_id'] === 'inline_block' || $variables['elements']['#base_plugin_id'] === 'block_content') {
-    if (!empty($variables['label'])) {
+    if (!empty($variables['label']) && !empty($variables['content']['#block_content'])) {
       // Use the correct language for the block label.
       $variables['label'] = $variables['content']['#block_content']->label();
     }
