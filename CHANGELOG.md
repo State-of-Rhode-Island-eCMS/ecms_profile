@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-130: Added permissions for gallery and gallery item paragraph bundles.
 
 ### Changed
 
