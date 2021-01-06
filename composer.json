@@ -72,7 +72,8 @@
         "1832818 - Allow a queue item to be postponed": "https://www.drupal.org/files/issues/2020-03-24/1832818.80-requeue.patch",
         "2259567 - Unnecessary restrictions on logo format: Can't upload replacement SVG logo": "https://www.drupal.org/files/issues/2019-06-24/2259567-113_0.patch",
         "3020876 - Contextual links of reusable content blocks are not displayed when rendering entities built via Layout Builder": "https://www.drupal.org/files/issues/2020-09-25/contextual_links_with_LB-3020876-38.patch",
-        "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch"
+        "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
+        "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch"
       },
       "drupal/openid_connect_windows_aad": {
         "3169996 - Incorrect configuration schema file": "https://www.drupal.org/files/issues/2020-09-09/openid_connect_windows_aad-schema-update-3169996-3.patch"
