@@ -16,6 +16,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIG-195: Removed core links field from all content types default display.
 
 ### Fixed
 
