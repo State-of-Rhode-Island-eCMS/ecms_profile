@@ -18,12 +18,12 @@ bundle: promotions
 mode: default
 content:
   content_moderation_control:
-    weight: -20
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   field_promotion_display_title:
-    weight: 106
+    weight: 3
     label: above
     settings:
       format: default
@@ -33,7 +33,7 @@ content:
     type: boolean
     region: content
   field_promotion_global_display:
-    weight: 104
+    weight: 2
     label: above
     settings:
       format: default
@@ -44,7 +44,7 @@ content:
     region: content
   field_promotion_image:
     type: entity_reference_entity_view
-    weight: 107
+    weight: 4
     label: above
     settings:
       view_mode: default
@@ -52,14 +52,14 @@ content:
     third_party_settings: {  }
     region: content
   field_promotion_text:
-    weight: 108
+    weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_promotion_url:
-    weight: 103
+    weight: 1
     label: above
     settings:
       trim_length: 80
@@ -70,10 +70,7 @@ content:
     third_party_settings: {  }
     type: link
     region: content
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   langcode: true
+  links: true
+  search_api_excerpt: true
