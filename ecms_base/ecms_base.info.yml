@@ -36,6 +36,7 @@ dependencies:
   - features
   - help
   - history
+  - honeypot
   - image
   - language
   - layout_builder
