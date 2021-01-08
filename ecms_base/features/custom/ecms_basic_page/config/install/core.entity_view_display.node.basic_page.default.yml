@@ -23,7 +23,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_basic_page_body:
-    weight: 2
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -31,7 +31,7 @@ content:
     region: content
   field_basic_page_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 3
+    weight: 2
     label: hidden
     settings:
       view_mode: default
@@ -39,18 +39,14 @@ content:
     third_party_settings: {  }
     region: content
   field_meta_tags_page:
-    weight: 4
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
-  links:
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   field_basic_page_promotions: true
   langcode: true
+  links: true
   search_api_excerpt: true

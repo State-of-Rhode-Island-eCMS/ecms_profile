@@ -21,7 +21,7 @@ content:
     third_party_settings: {  }
     region: content
   field_notification_expire_date:
-    weight: 102
+    weight: 0
     label: above
     settings:
       format_type: medium
@@ -30,7 +30,7 @@ content:
     type: datetime_default
     region: content
   field_notification_global:
-    weight: 103
+    weight: 1
     label: above
     settings:
       format: default
@@ -40,17 +40,13 @@ content:
     type: boolean
     region: content
   field_notification_text:
-    weight: 104
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
 hidden:
   langcode: true
+  links: true
   search_api_excerpt: true

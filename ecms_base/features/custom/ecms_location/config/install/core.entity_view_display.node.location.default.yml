@@ -22,26 +22,26 @@ bundle: location
 mode: default
 content:
   content_moderation_control:
-    weight: -20
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   field_location_address:
-    weight: 101
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_location_body:
-    weight: 104
+    weight: 4
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_location_office_hours:
-    weight: 103
+    weight: 3
     label: above
     settings:
       show_closed: all
@@ -68,7 +68,7 @@ content:
     type: office_hours
     region: content
   field_location_phone:
-    weight: 102
+    weight: 2
     label: above
     settings:
       title: ''
@@ -76,7 +76,7 @@ content:
     type: telephone_link
     region: content
   field_location_promotions:
-    weight: 105
+    weight: 5
     label: hidden
     settings:
       view_mode: teaser
@@ -85,17 +85,13 @@ content:
     type: entity_reference_entity_view
     region: content
   field_meta_tags_location:
-    weight: 106
+    weight: 6
     label: above
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   langcode: true
+  links: true
   search_api_excerpt: true
