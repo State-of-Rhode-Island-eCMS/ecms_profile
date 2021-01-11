@@ -21,7 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
-## [0.4.2] - 2021-01-07
+## [0.4.2] - 2021-01-11
 ### Added
 - RIG-212: Install and configure honeypot module.
 - RIG-216: Add migration plugin to strip style attributes.
