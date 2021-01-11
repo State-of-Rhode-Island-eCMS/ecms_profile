@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\ecms_migration\Unit\process;
 
 use Drupal\ecms_migration\Plugin\migrate\process\RemoveAttribute;

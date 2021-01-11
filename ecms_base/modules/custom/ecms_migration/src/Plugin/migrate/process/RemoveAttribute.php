@@ -29,7 +29,7 @@ class RemoveAttribute extends ProcessPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
+  public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property): string {
     if (!isset($this->configuration['attribute'])) {
       throw new MigrateException('"search" must be configured.');
     }
