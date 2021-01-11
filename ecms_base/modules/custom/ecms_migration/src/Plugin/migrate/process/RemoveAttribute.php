@@ -24,7 +24,6 @@ use Drupal\migrate\Row;
  *   attribute: 'style'
  * @endcode
  *
- * @codingStandardsIgnoreEnd
  */
 class RemoveAttribute extends ProcessPluginBase {
 
