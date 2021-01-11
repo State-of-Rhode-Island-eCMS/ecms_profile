@@ -13,17 +13,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\media_library\MediaLibraryState;
 
 /**
- * Implements hook_theme().
- */
-function ecms_blocks_theme(): array {
-  return [
-    'ecms_search_block_form' => [
-      'render element' => 'form',
-    ],
-  ];
-}
-
-/**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  *
  * @see: https://www.drupal.org/project/drupal/issues/3106315#comment-13875496

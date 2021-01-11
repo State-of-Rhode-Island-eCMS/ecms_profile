@@ -27,8 +27,6 @@ class SearchBlockForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
-    $form['#theme'] = 'ecms_search_block_form';
-
     $form['search_input'] = [
       '#type' => 'textfield',
       "#placeholder" => $this->t('Search the site'),

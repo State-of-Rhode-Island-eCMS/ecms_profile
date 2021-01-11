@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-195: Removed core links field from all content types default display.
 
 ### Fixed
+- RIG-221: Remove deprecated theme functions for search block.
 
 ### Security
 
