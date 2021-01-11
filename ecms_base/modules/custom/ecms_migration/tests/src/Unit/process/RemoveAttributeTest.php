@@ -23,7 +23,7 @@ class RemoveAttributeTest extends MigrateProcessTestCase {
     $configuration['attribute'] = 'style';
     $plugin = new RemoveAttribute($configuration, 'remove_attribute', []);
     $actual = $plugin->transform($value, $this->migrateExecutable, $this->row, 'destinationproperty');
-    $this->assertNotContains('style="width:500px;height:500px;border:1px solid red;"', $actual);
+    $this->assertStringNotContainsString('style="width:500px;height:500px;border:1px solid red;"', $actual);
 
   }
 
@@ -35,7 +35,7 @@ class RemoveAttributeTest extends MigrateProcessTestCase {
     $configuration['attribute'] = 'id';
     $plugin = new RemoveAttribute($configuration, 'remove_attribute', []);
     $actual = $plugin->transform($value, $this->migrateExecutable, $this->row, 'destinationproperty');
-    $this->assertContains('class="leaveAlone"', $actual);
+    $this->assertStringContainsString('class="leaveAlone"', $actual);
 
   }
 
