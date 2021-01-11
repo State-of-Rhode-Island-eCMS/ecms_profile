@@ -23,7 +23,6 @@ use Drupal\migrate\Row;
  *   source: text
  *   attribute: 'style'
  * @endcode
- *
  */
 class RemoveAttribute extends ProcessPluginBase {
 
