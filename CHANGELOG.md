@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-212: Install and configure honeypot module.
+- RIG-216: Add migration plugin to strip style attributes.
 
 ### Changed
 - RIG-225: Add notifications block cache tags.
