@@ -116,11 +116,16 @@ process:
     default_value: "MISSING TITLE"
   status: status
   'field_basic_page_body/value':
-    plugin: concat
-    source:
-      - css_selector_1
-      - css_selector_2
-      - css_selector_3
+    -
+      plugin: concat
+      source:
+        - css_selector_1
+        - css_selector_2
+        - css_selector_3
+    -
+      plugin: remove_attribute
+      method: process
+      attribute: 'style'
   'field_basic_page_body/format':
     plugin: default_value
     default_value: full_html
