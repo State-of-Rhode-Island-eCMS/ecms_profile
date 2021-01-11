@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-212: Install and configure honeypot module.
 
 ### Changed
+- RIG-225: Add notifications block cache tags.
 
 ### Deprecated
 
