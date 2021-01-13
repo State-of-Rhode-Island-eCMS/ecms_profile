@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-233: Update hook_prepare_row for file redirect migration.
 
 ### Deprecated
 
