@@ -16,11 +16,11 @@ use Drupal\Core\Site\Settings;
  * Implements hook_migrate_MIGRATION_ID_prepare_row() for the ecms_file_redirect migration.
  */
 function ecms_migration_migrate_ecms_file_redirect_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
-  // Load the $settings['file_public_path'] for the site.
-  // This is required as every site within ACSF will have a different path.
-  $public_file_path = file_create_url('public://');
+  // Need to
+  $public_file_path = rtrim(file_url_transform_relative(file_create_url('public://')), "/");
+  $host = \Drupal::request()->getSchemeAndHttpHost();
 
   // Replace the DRUPAL_FILE_DIRECTORY constant with the site specific value.
   $row
-    ->setSourceProperty('constants/DRUPAL_FILE_DIRECTORY', $public_file_path);
+    ->setSourceProperty('constants/DRUPAL_FILE_DIRECTORY', $host . $public_file_path);
 }
