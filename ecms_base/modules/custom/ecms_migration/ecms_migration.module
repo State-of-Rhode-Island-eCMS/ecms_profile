@@ -18,9 +18,9 @@ use Drupal\Core\Site\Settings;
 function ecms_migration_migrate_ecms_file_redirect_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
   // Load the $settings['file_public_path'] for the site.
   // This is required as every site within ACSF will have a different path.
-  $public_file_path = Settings::get('file_public_path');
+  $public_file_path = file_create_url('public://');
 
   // Replace the DRUPAL_FILE_DIRECTORY constant with the site specific value.
   $row
-    ->setSourceProperty('constants/DRUPAL_FILE_DIRECTORY', "internal:/{$public_file_path}");
+    ->setSourceProperty('constants/DRUPAL_FILE_DIRECTORY', $public_file_path);
 }
