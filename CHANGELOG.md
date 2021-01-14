@@ -10,8 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-233: Add URL encoding to pseudo_basename file redirect migration field.
 
 ### Changed
+- RIG-233: Update hook_prepare_row for file redirect migration.
 
 ### Deprecated
 

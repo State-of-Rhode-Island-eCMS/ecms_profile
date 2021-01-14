@@ -70,6 +70,9 @@ process:
     - plugin: extract
       index:
         - basename
+    # Url encode the filename or the redirect won't work.
+    - plugin: callback
+      callable: urlencode
 
   pseudo_new_file_path:
     - plugin: concat
