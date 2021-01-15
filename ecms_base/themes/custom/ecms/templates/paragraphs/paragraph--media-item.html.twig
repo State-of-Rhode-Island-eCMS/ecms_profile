@@ -39,6 +39,9 @@
  */
 #}
 
+{% if langcode is null %}
+  {% set langcode = 'en' %}
+{% endif %}
 
 {% set align = '' %}
 {% if not paragraph.field_alignment.value is empty %}
@@ -63,8 +66,8 @@
   {# Prepare the image to be sent to PL #}
   {% set img = '' %}
   {% if paragraph.field_media_item is not empty %}
-    {% set img_uri = paragraph.field_media_item.entity.field_media_item_image.entity.getFileUri() %}
-    {% set img_alt = paragraph.field_media_item.entity.field_media_item_image.alt %}
+    {% set img_uri = paragraph.field_media_item.entity.translation(langcode).field_media_item_image.entity.getFileUri() %}
+    {% set img_alt = paragraph.field_media_item.entity.translation(langcode).field_media_item_image.alt %}
 
     {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
     {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}

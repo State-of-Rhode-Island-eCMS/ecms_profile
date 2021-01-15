@@ -73,11 +73,15 @@
 
 {% set cachebust = content|render %}
 
+{% if langcode is null %}
+  {% set langcode = 'en' %}
+{% endif %}
+
 {# Generate responsive image style #}
 {% set img = '' %}
 {% if node.field_hotel_cover_image is not empty %}
-  {% set img_uri = node.field_hotel_main_image.entity.field_hotel_image.entity.getFileUri() %}
-  {% set img_alt = node.field_hotel_main_image.entity.field_hotel_image.alt %}
+  {% set img_uri = node.field_hotel_main_image.entity.translation(langcode).field_hotel_image.entity.getFileUri() %}
+  {% set img_alt = node.field_hotel_main_image.entity.translation(langcode).field_hotel_image.alt %}
 
   {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
   {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
