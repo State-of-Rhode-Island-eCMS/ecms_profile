@@ -133,7 +133,7 @@ abstract class LayoutBase extends LayoutDefault {
     $this->configuration['background_color'] = $values['background']['background_color'];
     $this->configuration['class'] = $values['extra']['class'];
     $this->configuration['column_width'] = $values['layout']['column_width'];
-    $this->configuration['full_width'] = $values['layout']['full_width'];
+    $this->configuration['full_width'] = $values['layout']['full_width']['checkbox'];
   }
 
   /**
