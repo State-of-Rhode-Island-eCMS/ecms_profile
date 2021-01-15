@@ -12,6 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-233: Add URL encoding to pseudo_basename file redirect migration field.
 - RIG-220: Allow admin accounts to specify language.
+- RIG-223: Added header, image, and action block type.
+- RIG-203: Added minmal text format.
 
 ### Changed
 - RIG-233: Update hook_prepare_row for file redirect migration.
@@ -23,6 +25,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-220: Pass language code to paragraph templates for image rendering.
+- RIG-202: Fixed content components missing block description.
+- RIG-234: Fixed LB CSS issues with Safari and Firefox.
+- RIG-223: Fixed Landing Page content type missing tabs on default layout.
 
 ### Security
 
