@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.media_item
-id: paragraph.media_item.created
+    - paragraphs.paragraphs_type.gallery_item
+id: paragraph.gallery_item.created
 field_name: created
 entity_type: paragraph
-bundle: media_item
+bundle: gallery_item
 label: 'Authored on'
 description: 'The time that the Paragraph was created.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
