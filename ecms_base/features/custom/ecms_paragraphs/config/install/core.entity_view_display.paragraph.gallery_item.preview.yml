@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.gallery_item.field_gallery_item
+    - field.field.paragraph.gallery_item.field_gallery_item_caption
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.gallery_item
+  module:
+    - layout_builder
+    - media
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: paragraph.gallery_item.preview
+targetEntityType: paragraph
+bundle: gallery_item
+mode: preview
+content:
+  field_gallery_item:
+    type: media_thumbnail
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+  field_gallery_item_caption:
+    weight: 1
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  search_api_excerpt: true

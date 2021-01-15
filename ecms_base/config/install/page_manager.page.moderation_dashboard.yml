@@ -21,8 +21,8 @@ access_conditions:
     id: moderation_dashboard_access
     negate: false
     context_mapping:
-      dashboard_user: user
-      current_user: current_user
+      dashboard_user: '@user.current_user_context:current_user'
+      current_user: '@user.current_user_context:current_user'
 parameters:
   user:
     machine_name: user
