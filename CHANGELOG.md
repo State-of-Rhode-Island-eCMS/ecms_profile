@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.4.3] - 2021-01-15
+### Added
 - RIG-233: Add URL encoding to pseudo_basename file redirect migration field.
 - RIG-220: Allow admin accounts to specify language.
 - RIG-223: Added header, image, and action block type.
@@ -19,17 +32,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-233: Update hook_prepare_row for file redirect migration.
 - RIG-220: Update translation settings for media item image and paragraph gallery items.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIG-220: Pass language code to paragraph templates for image rendering.
 - RIG-202: Fixed content components missing block description.
 - RIG-234: Fixed LB CSS issues with Safari and Firefox.
 - RIG-223: Fixed Landing Page content type missing tabs on default layout.
-
-### Security
 
 ## [0.4.2] - 2021-01-11
 ### Added
@@ -456,7 +463,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.3...HEAD
+[0.4.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.2...0.4.3
 [0.4.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.1...0.4.2
 [0.4.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.0...0.4.1
 [0.4.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.3.9...0.4.0
