@@ -15,12 +15,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIG-233: Update hook_prepare_row for file redirect migration.
+- RIG-220: Update translation settings for media item image and paragraph gallery items.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIG-220: Pass language code to paragraph templates for image rendering.
 
 ### Security
 
