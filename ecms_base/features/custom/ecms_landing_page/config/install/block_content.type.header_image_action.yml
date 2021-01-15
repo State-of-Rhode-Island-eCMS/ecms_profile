@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: header_image_action
+label: 'Header, Image, and Action'
+revision: 0
+description: 'A block type used to create a large image with a header and optional text overlays.'

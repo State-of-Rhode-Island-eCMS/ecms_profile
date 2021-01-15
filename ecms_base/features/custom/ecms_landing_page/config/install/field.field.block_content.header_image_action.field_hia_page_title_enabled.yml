@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.header_image_action
+    - field.storage.block_content.field_hia_page_title_enabled
+id: block_content.header_image_action.field_hia_page_title_enabled
+field_name: field_hia_page_title_enabled
+entity_type: block_content
+bundle: header_image_action
+label: 'Page title enabled'
+description: 'Enable this checkbox if this component contains the page title and should render the heading with an h1 tag.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

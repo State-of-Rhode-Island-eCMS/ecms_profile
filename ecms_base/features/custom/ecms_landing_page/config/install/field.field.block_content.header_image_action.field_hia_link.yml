@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.header_image_action
+    - field.storage.block_content.field_hia_link
+  module:
+    - link
+id: block_content.header_image_action.field_hia_link
+field_name: field_hia_link
+entity_type: block_content
+bundle: header_image_action
+label: Link
+description: '(Optional) Provide a link which will display as a button under the header and text.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link
