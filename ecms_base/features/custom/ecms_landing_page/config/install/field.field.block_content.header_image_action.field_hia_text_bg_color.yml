@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.header_image_action
+    - field.storage.block_content.field_hia_text_bg_color
+  module:
+    - options
+id: block_content.header_image_action.field_hia_text_bg_color
+field_name: field_hia_text_bg_color
+entity_type: block_content
+bundle: header_image_action
+label: 'Text background color'
+description: '(Optional) Background color of the text overlay. Will only be displayed if text or action is populated.'
+required: true
+translatable: false
+default_value:
+  -
+    value: primary
+default_value_callback: ''
+settings: {  }
+field_type: list_string

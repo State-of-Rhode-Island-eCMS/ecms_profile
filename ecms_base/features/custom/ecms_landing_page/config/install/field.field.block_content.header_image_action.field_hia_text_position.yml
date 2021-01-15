@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.header_image_action
+    - field.storage.block_content.field_hia_text_position
+  module:
+    - options
+id: block_content.header_image_action.field_hia_text_position
+field_name: field_hia_text_position
+entity_type: block_content
+bundle: header_image_action
+label: 'Text position'
+description: 'If text is present, which side of the image should it appear on.'
+required: true
+translatable: false
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string
