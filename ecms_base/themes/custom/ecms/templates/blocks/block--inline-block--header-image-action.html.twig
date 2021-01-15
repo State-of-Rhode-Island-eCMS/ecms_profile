@@ -1,0 +1,97 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a header, image, and action.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main content
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set cachebust = content|render %}
+
+{% set img = "" %}
+
+{# Image #}
+{% if content.field_image|render is not empty %}
+  {% set img_uri = content.field_image[0]['#media'].field_media_item_image.entity.uri.value %}
+  {% set img_alt = content.field_image[0]['#media'].field_media_item_image.alt %}
+  {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
+{% endif %}
+
+{# BG Color #}
+{% set bg_color_class = '' %}
+{% if content.field_hia_text_bg_color|render is not empty %}
+  {% set bg_color_class = 'qh__tc__' ~ content.field_hia_text_bg_color|render|striptags|trim|clean_class %}
+{% endif %}
+
+{# Enable overlay #}
+{% set enable_overlay = FALSE %}
+{% set hia_modifier_class = 'qh__header-image-action--title-only' %}
+
+{% if content.field_hia_text|render is not empty or content.field_hia_link|render is not empty %}
+  {% set enable_overlay = TRUE %}
+  {% set hia_modifier_class = 'qh__header-image-action--has-overlay' %}
+{% endif %}
+
+{# Link #}
+{% if content.field_hia_link|render is not empty %}
+  {% set link_title = content.field_hia_link.0['#title'] %}
+  {% set external = content.field_hia_link.0['#options'].external %}
+
+  {% if external == true %}
+    {% set link_url = content.field_hia_link.0['#url'].getUri() %}
+  {% else %}
+    {% set link_url = content.field_hia_link.0['#url'].getInternalPath() %}
+    {% set link_url = drupal_url(link_url) %}
+  {% endif %}
+{% endif %}
+
+{# Text position #}
+{% set text_position_class = '' %}
+{% if content.field_hia_text_position|render is not empty %}
+  {% set text_position_class = 'qh__header-image-action__overlay--text-' ~ content.field_hia_text_position|render|striptags|trim|clean_class %}
+{% endif %}
+
+{# Text position #}
+{% if content.field_hia_page_title_enabled|render|striptags|trim == "True" %}
+  {% set page_title_enabled = TRUE %}
+{% endif %}
+
+{% include '@molecules/header_image_action/header_image_action.twig' with {
+  title: label,
+  page_title_enabled: page_title_enabled,
+  img: img,
+  text: content.field_hia_text|render,
+  text_position_class: text_position_class,
+  link_title: link_title,
+  link_url: link_url,
+  enable_overlay: enable_overlay,
+  hia_modifier_class: hia_modifier_class,
+  bg_color_class: bg_color_class,
+  title_prefix: title_prefix,
+  title_suffix: title_suffix,
+
+} %}
