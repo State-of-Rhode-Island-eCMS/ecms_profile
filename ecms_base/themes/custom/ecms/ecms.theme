@@ -102,10 +102,10 @@ function ecms_preprocess_paragraph__media_item(array &$variables): void {
   if ($media_type === 'media_item_image') {
     $variables['media_type'] = 'img';
 
-    // @todo Is $variables['image_url'] being used? Not seeing it in twig.
     $image = $paragraph->get('field_media_item')->entity->get('field_media_item_image');
 
     if (isset($image->entity->uri)) {
+      // @todo Is $variables['image_url'] being used? Not seeing it in twig.
       $variables['image_url'] = file_create_url($image->entity->uri->value);
     }
   }
