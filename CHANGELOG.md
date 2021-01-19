@@ -24,7 +24,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [0.4.4] - 2021-01-19
 ### Fixed
 - RIG-220: Missing translation error in template files.
-- RIG-420: Fixed article listing to work with views-view and views-unformatted.
+- RIG-242: Fixed article listing to work with views-view and views-unformatted.
 
 ## [0.4.3] - 2021-01-15
 ### Added
