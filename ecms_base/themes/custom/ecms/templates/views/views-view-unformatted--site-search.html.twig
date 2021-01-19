@@ -50,6 +50,7 @@
     {% include '@organisms/articles-list/articles-list.twig' with {
       title: title,
       rows: rows,
+      rows_loop: TRUE
     } %}
 
   {% elseif empty %}
