@@ -78,8 +78,13 @@
 {# Prepare the image to be sent to PL #}
 {% set img = '' %}
 {% if node.field_promotion_image is not empty %}
-  {% set img_uri = node.field_promotion_image.entity.translation(langcode).field_promotion_image.entity.getFileUri() %}
-  {% set img_alt = node.field_promotion_image.entity.translation(langcode).field_promotion_image.alt %}
+  {% if node.field_promotion_image.entity.hasTranslation(langcode) %}
+    {% set img_uri = node.field_promotion_image.entity.translation(langcode).field_promotion_image.entity.getFileUri() %}
+    {% set img_alt = node.field_promotion_image.entity.translation(langcode).field_promotion_image.alt %}
+  {% else %}
+    {% set img_uri = node.field_promotion_image.entity.translation('en').field_promotion_image.entity.getFileUri() %}
+    {% set img_alt = node.field_promotion_image.entity.translation('en').field_promotion_image.alt %}
+  {% endif %}
 
   {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
   {% set img = drupal_image(img_uri, 'narrow', {alt: img_alt}, true) %}
