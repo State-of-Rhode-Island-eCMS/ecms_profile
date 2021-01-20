@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.notification.field_notification_expire_date
     - field.field.node.notification.field_notification_global
     - field.field.node.notification.field_notification_text
+    - field.field.node.notification.field_notification_weight
     - node.type.notification
     - workflows.workflow.editorial
   module:
@@ -43,6 +44,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_notification_weight:
+    weight: 125
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   langcode:
     type: language_select

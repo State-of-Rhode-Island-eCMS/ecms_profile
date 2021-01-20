@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.notification.field_notification_expire_date
     - field.field.node.notification.field_notification_global
     - field.field.node.notification.field_notification_text
+    - field.field.node.notification.field_notification_weight
     - node.type.notification
   module:
     - text
@@ -26,6 +27,7 @@ hidden:
   content_moderation_control: true
   field_notification_expire_date: true
   field_notification_global: true
+  field_notification_weight: true
   langcode: true
   links: true
   search_api_excerpt: true

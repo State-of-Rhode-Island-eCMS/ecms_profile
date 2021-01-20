@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_notification_weight
+    - node.type.notification
+  module:
+    - options
+id: node.notification.field_notification_weight
+field_name: field_notification_weight
+entity_type: node
+bundle: notification
+label: Weight
+description: 'Add a sorting weight to the notification. 9 being the highest priority and appearing first in the list. -9 being the lowest priority and appearing last.'
+required: true
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings: {  }
+field_type: list_string
