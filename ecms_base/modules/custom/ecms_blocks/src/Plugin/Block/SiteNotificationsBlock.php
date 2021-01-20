@@ -91,8 +91,9 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
     $query = $node_storage->getQuery();
     $query->condition('type', 'notification')
       ->condition('status', 1)
-      ->sort('field_notification_global', "DESC");
       ->condition('field_notification_expire_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '>')
+      ->sort('field_notification_global', "DESC")
+      ->sort('field_notification_weight', "DESC");
 
     $nids = $query->execute();
 
