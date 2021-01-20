@@ -16,6 +16,7 @@ permissions:
   - 'create media'
   - 'use moderation dashboard'
   - 'use text format basic_html'
+  - 'use text format minimal'
   - 'view disabled languages'
   - 'view media'
   - 'view own unpublished media'
