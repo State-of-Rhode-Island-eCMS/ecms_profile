@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Additional notification functionality for the site.
+ */
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+
+/**
+ * Implements hook_cron().
+ *
+ * Unplublishes any notification that has an expire date in the past.
+ */
+function ecms_notification_cron() {
+
+  // Query all notifications that have expired.
+  $now = new DrupalDateTime('now');
+  $now->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+  $query = \Drupal::entityQuery("node");
+  $query->condition('type', 'notification')
+    ->condition('status',  1)
+    ->condition('field_notification_expire_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<');
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return [];
+  }
+
+  // Load multiple nodes.
+  $node_storage = \Drupal::entityTypeManager()->getStorage("node");
+  $nodes = $node_storage->loadMultiple($nids);
+
+  \Drupal::logger('ecms_notification')->notice('Unpublished notification node(s): %nids.',
+  array(
+    '%nids' => implode(", ", array_keys($nids)),
+  ));
+
+  // Unpublish nodes.
+  foreach($nodes as $node) {
+    $node->setUnpublished();
+    $node->save();
+  }
+}
