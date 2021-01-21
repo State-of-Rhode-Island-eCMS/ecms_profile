@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\Core\Cache\Cache;
 
 /**
@@ -81,11 +83,17 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
 
     $node_storage = $this->entityTypeManager->getStorage('node');
 
+    // Get the current date object.
+    $now = new DrupalDateTime('now');
+    $now->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
     // Query all notifications.
     $query = $node_storage->getQuery();
     $query->condition('type', 'notification')
       ->condition('status', 1)
-      ->sort('field_notification_global', "DESC");
+      ->condition('field_notification_expire_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '>')
+      ->sort('field_notification_global', "DESC")
+      ->sort('field_notification_weight', "DESC");
 
     $nids = $query->execute();
 
@@ -110,7 +118,12 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
 
     // Return a list of rendered teaser nodes.
     $builder = $this->entityTypeManager->getViewBuilder('node');
-    return $builder->viewMultiple($nodes, 'teaser', $language);
+    $build = $builder->viewMultiple($nodes, 'teaser', $language);
+
+    // Set a cache of an hour on the render array.
+    $build['#cache']['max-age'] = 3600;
+
+    return $build;
   }
 
   /**

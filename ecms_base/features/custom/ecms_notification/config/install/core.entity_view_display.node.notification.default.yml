@@ -5,9 +5,11 @@ dependencies:
     - field.field.node.notification.field_notification_expire_date
     - field.field.node.notification.field_notification_global
     - field.field.node.notification.field_notification_text
+    - field.field.node.notification.field_notification_weight
     - node.type.notification
   module:
     - datetime
+    - options
     - text
     - user
 id: node.notification.default
@@ -45,6 +47,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_notification_weight:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
 hidden:
   langcode: true
