@@ -10,9 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIG-239: Added logo only theme setting.
-- RIG-229: Added weight field to notifications.
-- RIG-244: Added hook_cron to unpublish expired notifications.
 
 ### Changed
 
@@ -23,6 +20,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.4.5] - 2021-01-21
+### Added
+- RIG-239: Added logo only theme setting.
+- RIG-229: Added weight field to notifications.
+- RIG-244: Added hook_cron to unpublish expired notifications.
 
 ## [0.4.4] - 2021-01-19
 ### Fixed
@@ -471,7 +474,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.5...HEAD
+[0.4.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.4...0.4.5
 [0.4.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.3...0.4.4
 [0.4.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.2...0.4.3
 [0.4.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.1...0.4.2
