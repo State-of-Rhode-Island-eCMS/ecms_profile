@@ -21,7 +21,7 @@ function ecms_notification_cron() {
 
   $query = \Drupal::entityQuery("node");
   $query->condition('type', 'notification')
-    ->condition('status',  1)
+    ->condition('status', 1)
     ->condition('field_notification_expire_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<');
 
   $nids = $query->execute();
@@ -36,12 +36,12 @@ function ecms_notification_cron() {
   $nodes = $node_storage->loadMultiple($nids);
 
   \Drupal::logger('ecms_notification')->notice('Unpublished notification node(s): %nids.',
-  array(
-    '%nids' => implode(", ", array_keys($nids)),
-  ));
+  [
+    '%nids' => implode(", ", array_keys($nids))
+  ]);
 
   // Unpublish nodes.
-  foreach($nodes as $node) {
+  foreach ($nodes as $node) {
     $node->setUnpublished();
     $node->save();
   }
