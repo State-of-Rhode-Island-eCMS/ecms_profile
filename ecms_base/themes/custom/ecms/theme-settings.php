@@ -83,6 +83,12 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#maxlength' => 255,
   ];
 
+  $form['ecms_header']['logo_only'] = [
+    '#type' => 'checkbox',
+    '#default_value' => theme_get_setting('logo_only'),
+    '#title' => t('Display logo only. Do not show any text.'),
+  ];
+
   // Footer settings.
   $form['ecms_footer'] = [
     '#type' => 'details',
