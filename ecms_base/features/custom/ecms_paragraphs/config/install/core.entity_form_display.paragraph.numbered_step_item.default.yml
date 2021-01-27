@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.numbered_step_item.field_components
+    - field.field.paragraph.numbered_step_item.field_step_title
+    - paragraphs.paragraphs_type.numbered_step_item
+  module:
+    - paragraphs
+id: paragraph.numbered_step_item.default
+targetEntityType: paragraph
+bundle: numbered_step_item
+mode: default
+content:
+  field_components:
+    weight: 1
+    settings:
+      title: 'Step content component'
+      title_plural: 'Step content components'
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: formatted_text
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+  field_step_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  translation:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

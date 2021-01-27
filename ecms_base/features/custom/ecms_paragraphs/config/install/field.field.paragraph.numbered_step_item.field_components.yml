@@ -9,12 +9,12 @@ dependencies:
     - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
-id: paragraph.column_container.field_components
+id: paragraph.numbered_step_item.field_components
 field_name: field_components
 entity_type: paragraph
-bundle: column_container
-label: Components
-description: ''
+bundle: numbered_step_item
+label: 'Step content components'
+description: 'Create the content components for this numbered step.'
 required: true
 translatable: false
 default_value: {  }
@@ -30,22 +30,22 @@ settings:
       text_card: text_card
     target_bundles_drag_drop:
       accordion_builder:
-        weight: 8
+        weight: 15
         enabled: false
       card:
         weight: 16
         enabled: false
       column_container:
         enabled: true
-        weight: 9
+        weight: 17
       embed:
-        weight: 10
+        weight: 18
         enabled: false
       file_list:
-        weight: 11
+        weight: 19
         enabled: false
       formatted_text:
-        weight: 12
+        weight: 20
         enabled: false
       gallery:
         weight: 21
@@ -54,10 +54,10 @@ settings:
         enabled: true
         weight: 22
       icon_card:
-        weight: 13
+        weight: 23
         enabled: false
       media_item:
-        weight: 14
+        weight: 24
         enabled: false
       numbered_step_item:
         enabled: true

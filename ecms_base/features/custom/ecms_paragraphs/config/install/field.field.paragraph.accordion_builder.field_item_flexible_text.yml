@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.storage.paragraph.field_item_flexible_text
     - paragraphs.paragraphs_type.accordion_builder
+    - paragraphs.paragraphs_type.gallery_item
+    - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
 id: paragraph.accordion_builder.field_item_flexible_text
