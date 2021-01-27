@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-238: Added numbered step item paragraph bundle, permissions, and preprocess function.
 
 ### Changed
 
