@@ -492,10 +492,10 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
     // Get entity_reference_revisions field.
     $components = $parent->get('field_basic_page_paragraphs');
 
-    // We want to find each consective numbered list item and put it into a list.
-    // If the numbered step is followed by a different paragraph bundle the list ends.
-    // If the numbered step is the last item in the content array the list ends.
-    // Each time a list ends a new list is started unless there are no more items.
+    // Find each consective numbered list item and put it in a list.
+    // If the step is followed by a different paragraph bundle the list ends.
+    // If the step is the last item in the content array the list ends.
+    // If a list ends a new list is started unless there are no more paragraphs.
     $lists = [];
     $list_count = 0;
     $current_pid = $variables['paragraph']->id();
@@ -510,7 +510,7 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
         if (!isset($lists[$list_count]['start'])) {
           $lists[$list_count]['start'] = $paragraph->id();
 
-          // Add flag to current paragraph that it needs a prefix in paragraph template.
+          // Add flag to current paragraph that it is a start item.
           if ($paragraph->id() == $current_pid) {
             $variables['list_start'] = TRUE;
           }
@@ -521,7 +521,7 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
         if (!isset($paragraphs[$key + 1]) || $paragraphs[$key + 1]->bundle() != 'numbered_step_item') {
           $lists[$list_count]['end'] = $paragraph->id();
 
-          // Add flag to current paragraph that it needs a suffix in paragraph template.
+          // Add flag to current paragraph that it is an end item.
           if ($paragraph->id() == $current_pid) {
             $variables['list_end'] = TRUE;
           }
@@ -530,7 +530,7 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
           $list_count += 1;
         }
 
-        // If this is the current paragraph we can leave after it's flags are set.
+        // If this is the current pid we can leave after it's flags are set.
         if ($paragraph->id() == $current_pid) {
           return;
         }
