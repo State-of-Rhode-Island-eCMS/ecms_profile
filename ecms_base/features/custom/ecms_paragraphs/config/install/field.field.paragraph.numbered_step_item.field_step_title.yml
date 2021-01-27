@@ -9,7 +9,7 @@ field_name: field_step_title
 entity_type: paragraph
 bundle: numbered_step_item
 label: 'Step title'
-description: 'Provided the numbered step title. This will be displayed above the step''s content components.'
+description: 'Provide the numbered step title. This will be displayed above the step''s content components.'
 required: true
 translatable: true
 default_value: {  }
