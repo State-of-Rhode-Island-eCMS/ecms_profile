@@ -4,6 +4,9 @@ dependencies:
   config:
     - block_content.type.content_components
     - field.storage.block_content.field_components
+    - paragraphs.paragraphs_type.gallery_item
+    - paragraphs.paragraphs_type.numbered_step_item
+    - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
 id: block_content.content_components.field_components
@@ -19,9 +22,21 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
-    target_bundles: null
+    negate: 1
+    target_bundles:
+      gallery_item: gallery_item
+      numbered_step_item: numbered_step_item
+      text_card: text_card
     target_bundles_drag_drop:
+      accordion_builder:
+        weight: 15
+        enabled: false
+      card:
+        weight: 16
+        enabled: false
+      column_container:
+        weight: 17
+        enabled: false
       embed:
         weight: 5
         enabled: false
@@ -31,7 +46,28 @@ settings:
       formatted_text:
         weight: 7
         enabled: false
+      gallery:
+        weight: 21
+        enabled: false
+      gallery_item:
+        enabled: true
+        weight: 22
+      icon_card:
+        weight: 23
+        enabled: false
       media_item:
         weight: 8
         enabled: false
+      numbered_step_item:
+        enabled: true
+        weight: 25
+      promotion_reference:
+        weight: 26
+        enabled: false
+      publication_list:
+        weight: 27
+        enabled: false
+      text_card:
+        enabled: true
+        weight: 28
 field_type: entity_reference_revisions

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_step_title
+    - paragraphs.paragraphs_type.numbered_step_item
+id: paragraph.numbered_step_item.field_step_title
+field_name: field_step_title
+entity_type: paragraph
+bundle: numbered_step_item
+label: 'Step title'
+description: 'Provide the numbered step title. This will be displayed above the step''s content components.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

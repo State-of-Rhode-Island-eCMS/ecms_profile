@@ -5,6 +5,7 @@ dependencies:
     - field.storage.paragraph.field_components
     - paragraphs.paragraphs_type.card
     - paragraphs.paragraphs_type.gallery_item
+    - paragraphs.paragraphs_type.numbered_step_item
     - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
@@ -26,6 +27,7 @@ settings:
       card: card
       gallery_item: gallery_item
       text_card: text_card
+      numbered_step_item: numbered_step_item
     target_bundles_drag_drop:
       accordion_builder:
         weight: 13
@@ -57,6 +59,9 @@ settings:
       media_item:
         weight: 21
         enabled: false
+      numbered_step_item:
+        enabled: true
+        weight: 25
       promotion_reference:
         weight: 22
         enabled: false
