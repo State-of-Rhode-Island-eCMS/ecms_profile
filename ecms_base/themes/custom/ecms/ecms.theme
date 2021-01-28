@@ -487,7 +487,7 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
 
   $parent = $variables['paragraph']->getParentEntity();
 
-  if ($parent->bundle() == 'basic_page') {
+  if ($parent->bundle() === 'basic_page') {
 
     // Get entity_reference_revisions field.
     $components = $parent->get('field_basic_page_paragraphs');
@@ -500,29 +500,33 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
     $list_count = 0;
     $current_pid = $variables['paragraph']->id();
 
+    // Set default flags.
+    $variables['list_start'] = FALSE;
+    $variables['list_end'] = FALSE;
+
     // Fetch all reference paragraphs for the node.
     $paragraphs = $components->referencedEntities();
 
     foreach ($paragraphs as $key => $paragraph) {
-      if ($paragraph->bundle() == 'numbered_step_item') {
+      if ($paragraph->bundle() === 'numbered_step_item') {
 
         // Check if start key has been set for current list.
         if (!isset($lists[$list_count]['start'])) {
           $lists[$list_count]['start'] = $paragraph->id();
 
           // Add flag to current paragraph that it is a start item.
-          if ($paragraph->id() == $current_pid) {
+          if ($paragraph->id() === $current_pid) {
             $variables['list_start'] = TRUE;
           }
         }
 
         // Check if end key has been set for current list.
         // Or if we have run out of paragraphs.
-        if (!isset($paragraphs[$key + 1]) || $paragraphs[$key + 1]->bundle() != 'numbered_step_item') {
+        if (!isset($paragraphs[$key + 1]) || $paragraphs[$key + 1]->bundle() !== 'numbered_step_item') {
           $lists[$list_count]['end'] = $paragraph->id();
 
           // Add flag to current paragraph that it is an end item.
-          if ($paragraph->id() == $current_pid) {
+          if ($paragraph->id() === $current_pid) {
             $variables['list_end'] = TRUE;
           }
 
@@ -531,7 +535,7 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
         }
 
         // If this is the current pid we can leave after it's flags are set.
-        if ($paragraph->id() == $current_pid) {
+        if ($paragraph->id() === $current_pid) {
           return;
         }
       }
