@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.event.feeds_item
     - field.field.node.event.field_event_body
     - field.field.node.event.field_event_contact
     - field.field.node.event.field_event_date
@@ -95,6 +96,7 @@ content:
     type: metatag_empty_formatter
     region: content
 hidden:
+  feeds_item: true
   langcode: true
   links: true
   search_api_excerpt: true

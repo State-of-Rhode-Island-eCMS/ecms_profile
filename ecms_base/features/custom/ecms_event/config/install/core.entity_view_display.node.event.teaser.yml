@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.event.feeds_item
     - field.field.node.event.field_event_body
     - field.field.node.event.field_event_contact
     - field.field.node.event.field_event_date
@@ -30,6 +31,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  feeds_item: true
   field_event_body: true
   field_event_contact: true
   field_event_date: true

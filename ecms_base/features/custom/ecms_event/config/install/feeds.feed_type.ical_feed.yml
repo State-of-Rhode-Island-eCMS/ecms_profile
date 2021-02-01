@@ -1,0 +1,76 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.event.created
+    - field.field.node.event.field_event_body
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_location
+    - node.type.event
+  module:
+    - ecms_feeds
+    - node
+id: ical_feed
+label: 'iCal Feed'
+description: ''
+help: ''
+import_period: 3600
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: feeds_ecms_ical
+parser_configuration: {  }
+processor: 'entity:node'
+processor_configuration:
+  langcode: en
+  update_existing: 2
+  update_non_existent: _delete
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+  authorize: true
+  skip_hash_check: true
+  values:
+    type: event
+custom_sources: {  }
+mappings:
+  -
+    target: title
+    map:
+      value: summary
+    unique: {  }
+    settings:
+      language: null
+  -
+    target: field_event_body
+    map:
+      value: description
+      summary: ''
+    settings:
+      language: null
+      format: plain_text
+  -
+    target: field_event_date
+    map:
+      value: dtstart
+      end_value: dtend
+    settings:
+      language: null
+  -
+    target: created
+    map:
+      value: created
+    settings:
+      language: null
+      timezone: UTC
+  -
+    target: field_event_location
+    map:
+      value: location
+    unique: {  }
+    settings:
+      language: null
