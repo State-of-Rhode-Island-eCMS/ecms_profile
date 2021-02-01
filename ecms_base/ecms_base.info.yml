@@ -31,6 +31,7 @@ dependencies:
   - entity_reference_revisions
   - extlink
   - features_ui
+  - feeds
   - field_ui
   - file
   - features
