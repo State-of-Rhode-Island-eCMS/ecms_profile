@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-251: Add ecms_feeds module which includes iCal parser and item.
 
 ### Changed
 
