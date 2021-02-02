@@ -46,12 +46,12 @@ class EcmsIcalParser extends PluginBase implements ParserInterface {
 
       // Create ical parsing object.
       $ical = new ICal('ICal.ics', [
-          'defaultSpan'                 => 2,     // Default value
-          'defaultTimeZone'             => 'UTC',
-          'defaultWeekStart'            => 'MO',  // Default value
-          'disableCharacterReplacement' => false, // Default value
-          'skipRecurrence'              => false, // Default value
-          'useTimeZoneWithRRules'       => false, // Default value
+        'defaultSpan'                 => 2,
+        'defaultTimeZone'             => 'UTC',
+        'defaultWeekStart'            => 'MO',
+        'disableCharacterReplacement' => FALSE,
+        'skipRecurrence'              => FALSE,
+        'useTimeZoneWithRRules'       => FALSE,
       ]);
 
       $ical->initString($rawResponseString);
