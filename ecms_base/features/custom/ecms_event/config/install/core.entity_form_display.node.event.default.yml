@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.event.feeds_item
     - field.field.node.event.field_event_body
     - field.field.node.event.field_event_contact
     - field.field.node.event.field_event_date
