@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-257: Updated translation settings for misc paragraphs.
 
 ### Deprecated
 
