@@ -496,7 +496,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: site-search
+      path: search
       exposed_block: true
       menu:
         type: normal

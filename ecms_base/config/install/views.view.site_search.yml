@@ -402,7 +402,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: search
+      path: search-backup
       exposed_block: true
     cache_metadata:
       max-age: -1
