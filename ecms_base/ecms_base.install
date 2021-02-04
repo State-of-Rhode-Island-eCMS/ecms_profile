@@ -759,6 +759,7 @@ function ecms_base_update_9047(array &$sandbox): void {
 
   $newConfig = [
     'extlink.settings',
+    'system.performance',
   ];
 
   foreach ($newConfig as $config) {
