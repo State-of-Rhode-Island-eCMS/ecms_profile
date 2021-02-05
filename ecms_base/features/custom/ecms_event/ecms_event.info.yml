@@ -28,5 +28,6 @@ dependencies:
   - taxonomy
   - text
   - user
+  - views
 package: eCMS
 version: 9.x-1.0
