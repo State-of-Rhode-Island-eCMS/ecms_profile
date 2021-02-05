@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\ecms_feeds\Feeds\Item;
 
 use Drupal\feeds\Feeds\Item\BaseItem;
