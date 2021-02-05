@@ -139,6 +139,7 @@
     "drupal/easy_breadcrumb": "^1.13",
     "drupal/extlink": "^1.5",
     "drupal/features": "^3.11",
+    "drupal/feeds": "^3.0@alpha",
     "drupal/google_tag": "^1.4",
     "drupal/honeypot": "^2.0",
     "drupal/jsonapi_extras": "^3.16",
