@@ -23,3 +23,10 @@ tiny-slider:
     ecms_patternlab/dist/vendor/tiny-slider/tiny-slider.js:  { weight: -1}
   dependencies:
     - ecms/global-styling
+
+rrule-js:
+  version: 2.6.6
+  js:
+    ecms_patternlab/dist/vendor/rrule/rrule.min.js:  { weight: -1, attributes: { type: "module"} }
+  dependencies:
+    - ecms/global-styling
