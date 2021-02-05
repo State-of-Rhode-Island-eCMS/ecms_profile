@@ -127,6 +127,9 @@ class EcmsIcalParser extends PluginBase implements ParserInterface {
       'location' => [
         'label' => $this->t('LOCATION'),
       ],
+      'rrule' => [
+        'label' => $this->t('RRULE'),
+      ],
       'sequence' => [
         'label' => $this->t('SEQUENCE'),
       ],

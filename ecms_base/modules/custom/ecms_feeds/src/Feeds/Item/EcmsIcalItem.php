@@ -72,4 +72,9 @@ class EcmsIcalItem extends BaseItem {
    */
   protected $transp;
 
+  /**
+   * {@inheritdoc}
+   */
+  protected $rrule;
+
 }
