@@ -93,7 +93,6 @@ third_party_settings:
           - 'field_block:user:user:changed'
         Forms: {  }
         Help: {  }
-        'Lists (Views)': {  }
         Menus: {  }
         'Moderation Dashboard': {  }
         'OpenID Connect': {  }
@@ -102,7 +101,18 @@ third_party_settings:
         Webform: {  }
         core:
           - local_tasks_block
-      blacklisted_blocks: {  }
+      blacklisted_blocks:
+        'Lists (Views)':
+          - 'views_block:content_moderation_dashboard_in_review-block_2'
+          - 'views_block:content_moderation_dashboard_in_review-block_1'
+          - 'views_block:content_moderation_dashboard_in_review-block_3'
+          - 'views_block:moderation_dashboard_recent_changes-block_1'
+          - 'views_block:moderation_dashboard_recent_changes-block_2'
+          - 'views_block:moderation_dashboard_recently_created-block_2'
+          - 'views_block:moderation_dashboard_recently_created-block_1'
+          - 'views_block:publications_list_with_filter_-block_1'
+          - 'views_block:content_recent-block_1'
+          - 'views_block:who_s_online-who_s_online_block'
       allowed_layouts: {  }
 id: node.landing_page.full
 targetEntityType: node
