@@ -38,7 +38,7 @@ display:
         type: basic
         options:
           submit_button: Search
-          reset_button: true
+          reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -81,7 +81,7 @@ display:
       fields:
         title:
           id: title
-          table: search_api_datasource_acquia_search_solr_search_api_solr_index_entity_node
+          table: search_api_index_acquia_search_solr_search_api_solr_index
           field: title
           relationship: none
           group_type: group
@@ -130,7 +130,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -141,14 +141,13 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          field_rendering: true
+          field_rendering: false
           fallback_handler: search_api
           fallback_options:
-            link_to_item: false
-            use_highlighting: false
+            link_to_item: true
+            use_highlighting: true
             multi_type: separator
             multi_separator: ', '
-          entity_type: node
           plugin_id: search_api_field
         search_api_excerpt:
           id: search_api_excerpt
@@ -255,7 +254,7 @@ display:
           type: number_integer
           settings:
             thousand_separator: ''
-            prefix_suffix: false
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
