@@ -13,6 +13,7 @@ dependencies:
   - file
   - image
   - language
+  - link
   - media
   - media_library
   - menu_ui
