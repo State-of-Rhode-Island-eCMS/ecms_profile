@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-253: Add rrule library.
 - RIG-188: Add virtual meeting and registration url fields to event.
 - RIG-188: Add twig template for event full display.
+- RIG-222: Add Acquia Solr Search modules, templates, and config.
 
 ### Changed
 - RIG-257: Updated translation settings for misc paragraphs.
