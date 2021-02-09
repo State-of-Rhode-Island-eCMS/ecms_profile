@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_location
     - field.field.node.event.field_event_promotions
+    - field.field.node.event.field_event_rrule
     - field.field.node.event.field_event_type
     - field.field.node.event.field_meta_tags_event
     - node.type.event
@@ -25,20 +26,31 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
+  field_event_location:
+    type: string
+    weight: 1
     region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_event_rrule:
+    type: string
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
 hidden:
   feeds_item: true
   field_event_body: true
   field_event_contact: true
   field_event_date: true
   field_event_image: true
-  field_event_location: true
   field_event_promotions: true
   field_event_type: true
   field_meta_tags_event: true
   langcode: true
+  links: true
   search_api_excerpt: true

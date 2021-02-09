@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_rrule
+    - node.type.event
+id: node.event.field_event_rrule
+field_name: field_event_rrule
+entity_type: node
+bundle: event
+label: RRule
+description: 'A field for an rrule which will be translated into a readable string.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

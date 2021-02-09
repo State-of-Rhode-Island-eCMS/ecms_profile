@@ -11,9 +11,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-251: Add ecms_feeds module which includes iCal parser and item.
+- RIG-253: Add twig template for events related components.
+- RIG-253: Add rrule library.
 
 ### Changed
 - RIG-257: Updated translation settings for misc paragraphs.
+- RIG-253: Changed ecms_events to include smart_date, rrule, and events view.
 
 ### Deprecated
 

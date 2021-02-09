@@ -78,6 +78,7 @@ dependencies:
   - search_api_db
   - shortcut
   - simple_sitemap
+  - smart_date
   - svg_image
   - syslog
   - taxonomy

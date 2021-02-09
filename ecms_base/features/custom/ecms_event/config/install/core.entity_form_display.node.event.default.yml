@@ -9,10 +9,10 @@ dependencies:
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_location
     - field.field.node.event.field_event_promotions
+    - field.field.node.event.field_event_rrule
     - field.field.node.event.field_event_type
     - field.field.node.event.field_meta_tags_event
     - node.type.event
-    - workflows.workflow.editorial
   module:
     - content_moderation
     - media_library
@@ -50,7 +50,7 @@ content:
     type: string_textfield
     region: content
   field_event_date:
-    weight: 1
+    weight: 104
     settings:
       modal: false
       default_duration: 60
@@ -83,6 +83,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_event_rrule:
+    weight: 103
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_event_type:
     weight: 5
