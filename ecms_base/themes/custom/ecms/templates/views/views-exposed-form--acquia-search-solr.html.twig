@@ -17,6 +17,12 @@
 {{ q }}
 {% endif %}
 
+{#
+  Make sure input field ('form.search') is passed as "search_api_fulltext"
+  to pattern lab template.
+#}
+{% set form = form|merge({ 'search_api_fulltext': form.search }) %}
+
 {% include '@molecules/site-search/site-search--inner.twig' with {
     form: form
   }
