@@ -366,6 +366,16 @@ function ecms_preprocess_node__promotions(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_node().
+ */
+function ecms_preprocess_node__event(array &$variables): void {
+
+  // We need to know the current language for some requests.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $language;
+}
+
+/**
  * Implements hook_preprocess_paragraph().
  */
 function ecms_preprocess_paragraph__publication_list(array &$variables): void {
