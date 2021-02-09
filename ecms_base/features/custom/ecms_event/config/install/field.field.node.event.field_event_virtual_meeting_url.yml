@@ -13,7 +13,7 @@ bundle: event
 label: 'Virtual Meeting URL'
 description: '(Optional) Add a virtual link URL if one exists.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

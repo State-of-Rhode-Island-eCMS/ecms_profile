@@ -71,6 +71,10 @@
  */
 #}
 
+{% if langcode is null %}
+  {% set langcode = 'en' %}
+{% endif %}
+
 {# Start date variables #}
 {% set start_date = node.field_event_date.value|date('F j, Y') %}
 {% set datetime_startdate_format = node.field_event_date.start_value|date('Y-m-d') %}
@@ -96,11 +100,30 @@
   {% set allday = TRUE %}
 {% endif %}
 
+
+% set img = '' %}
+  {% if paragraph.field_gallery_item is not empty %}
+    {% if paragraph.field_gallery_item.entity.hasTranslation(langcode) %}
+      {% set img_uri = paragraph.field_gallery_item.entity.translation(langcode).field_media_item_image.entity.getFileUri() %}
+      {% set img_alt = paragraph.field_gallery_item.entity.translation(langcode).field_media_item_image.alt %}
+    {% else %}
+      {% set img_uri = paragraph.field_gallery_item.entity.translation('en').field_media_item_image.entity.getFileUri() %}
+      {% set img_alt = paragraph.field_gallery_item.entity.translation('en').field_media_item_image.alt %}
+    {% endif %}
+    {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
+    {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
+  {% endif %}
+
 {# Generate responsive image style #}
 {% set img = '' %}
 {% if node.field_event_image is not empty %}
-  {% set img_uri = node.field_event_image.entity.field_media_image_1.entity.getFileUri() %}
-  {% set img_alt = node.field_event_image.entity.field_media_image_1.alt %}
+  {% if node.field_event_image.entity.translation(langcode) %}
+    {% set img_uri = node.field_event_image.entity.translation(langcode).field_media_image_1.entity.getFileUri() %}
+    {% set img_alt = node.field_event_image.entity.translation(langcode).field_media_image_1.alt %}
+  {% else %}
+    {% set img_uri = node.field_event_image.entity.translation('en').field_media_image_1.entity.getFileUri() %}
+    {% set img_alt = node.field_event_image.entity.translation('en').field_media_image_1.alt %}
+  {% endif %}
 
   {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
   {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}

@@ -13,7 +13,7 @@ bundle: event
 label: 'Registration URL'
 description: '(Optional) If there is a registration form for the event provide it here.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
