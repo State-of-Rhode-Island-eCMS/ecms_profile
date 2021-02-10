@@ -2,15 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.database
+    - search_api.index.acquia_search_solr_search_api_solr_index
+    - system.menu.main
   module:
     - search_api
-id: site_search
-label: 'Site Search'
+    - user
+id: acquia_search_solr
+label: 'Acquia Search Solr'
 module: views
 description: ''
 tag: ''
-base_table: search_api_index_database
+base_table: search_api_index_acquia_search_solr_search_api_solr_index
 base_field: search_api_id
 display:
   default:
@@ -20,21 +22,22 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content'
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
         options:
           bypass_access: false
           skip_access: false
-          preserve_facet_query_args: false
+          parse_mode: terms
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Search
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -48,11 +51,6 @@ display:
           offset: 0
           id: 0
           total_pages: null
-          tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -61,13 +59,18 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
           quantity: 9
       style:
         type: default
         options:
+          grouping: {  }
           row_class: ''
           default_row_class: true
-          uses_fields: false
       row:
         type: fields
         options:
@@ -78,7 +81,7 @@ display:
       fields:
         title:
           id: title
-          table: search_api_datasource_database_entity_node
+          table: search_api_index_acquia_search_solr_search_api_solr_index
           field: title
           relationship: none
           group_type: group
@@ -127,7 +130,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -138,18 +141,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          field_rendering: true
+          field_rendering: false
           fallback_handler: search_api
           fallback_options:
-            link_to_item: false
-            use_highlighting: false
+            link_to_item: true
+            use_highlighting: true
             multi_type: separator
             multi_separator: ', '
-          entity_type: node
           plugin_id: search_api_field
         search_api_excerpt:
           id: search_api_excerpt
-          table: search_api_index_database
+          table: search_api_index_acquia_search_solr_search_api_solr_index
           field: search_api_excerpt
           relationship: none
           group_type: group
@@ -191,18 +193,18 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: ''
+          empty: '{{body}}'
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           link_to_item: false
-          use_highlighting: true
+          use_highlighting: false
           multi_type: separator
           multi_separator: ', '
           plugin_id: search_api
         nid:
           id: nid
-          table: search_api_datasource_database_entity_node
+          table: search_api_datasource_acquia_search_solr_search_api_solr_index_entity_node
           field: nid
           relationship: none
           group_type: group
@@ -252,7 +254,7 @@ display:
           type: number_integer
           settings:
             thousand_separator: ''
-            prefix_suffix: false
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -269,7 +271,7 @@ display:
             set_precision: false
             precision: 0
             decimal: .
-            separator: ''
+            separator: ','
             format_plural: false
             format_plural_string: !!binary MQNAY291bnQ=
             prefix: ''
@@ -286,7 +288,7 @@ display:
       filters:
         search_api_fulltext:
           id: search_api_fulltext
-          table: search_api_index_database
+          table: search_api_index_acquia_search_solr_search_api_solr_index
           field: search_api_fulltext
           relationship: none
           group_type: group
@@ -297,7 +299,7 @@ display:
           exposed: true
           expose:
             operator_id: search_api_fulltext_op
-            label: Keyword
+            label: ''
             description: ''
             use_operator: false
             operator: search_api_fulltext_op
@@ -317,6 +319,8 @@ display:
               content_publisher: '0'
               site_admin: '0'
             placeholder: ''
+            expose_fields: false
+            searched_fields_id: ''
           is_grouped: false
           group_info:
             label: ''
@@ -329,20 +333,20 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          parse_mode: terms
+          parse_mode: direct
           min_length: null
           fields: {  }
           plugin_id: search_api_fulltext
         search_api_language:
           id: search_api_language
-          table: search_api_index_database
+          table: search_api_index_acquia_search_solr_search_api_solr_index
           field: search_api_language
           relationship: none
           group_type: group
           admin_label: ''
           operator: in
           value:
-            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+            '***LANGUAGE_language_content***': '***LANGUAGE_language_content***'
           group: 1
           exposed: false
           expose:
@@ -373,11 +377,36 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: search_api_language
-      sorts: {  }
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_acquia_search_solr_search_api_solr_index
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       title: ''
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No results found.'
+            format: basic_html
+          plugin_id: text
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
@@ -393,17 +422,28 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:search_api.index.database'
-  page_1:
+        - 'config:search_api.index.acquia_search_solr_search_api_solr_index'
+  page:
     display_plugin: page
-    id: page_1
-    display_title: Page
+    id: page
+    display_title: 'Acquia Search Solr Page'
     position: 1
     display_options:
       display_extenders: {  }
-      path: search-backup
+      path: search
       exposed_block: true
+      menu:
+        type: normal
+        title: Search
+        description: ''
+        expanded: false
+        parent: ''
+        weight: 0
+        context: '0'
+        menu_name: main
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:
@@ -412,5 +452,6 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
+        - user.permissions
       tags:
-        - 'config:search_api.index.database'
+        - 'config:search_api.index.acquia_search_solr_search_api_solr_index'
