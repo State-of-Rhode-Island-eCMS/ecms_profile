@@ -11,6 +11,7 @@ echo -e "*   Cleanup Config   *"
 echo -e "**********************"
 echo -e "Cleaning up configuration in: ${BASE_DIR}/*/config/install/\n"
 echo -e "Cleaning up configuration in: ${BASE_DIR}/*/modules/custom/*/config/install/\n"
+echo -e "Cleaning up configuration in: ${BASE_DIR}/*/themes/custom/*/config/*\n"
 echo -e "Cleaning up configuration in: ${BASE_DIR}/*/features/custom/*/config/install/\n"
 
 # sed is different for Macs, detect that here.
@@ -22,6 +23,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   find ${BASE_DIR}/*/modules/custom -path "*/config/*.yml" -exec sed -i '' '/^uuid: /d' {} \;
   find ${BASE_DIR}/*/modules/custom -path "*/config/*.yml" -exec sed -i '' '/_core:/{N;d;}' {} \;
 
+  # Traverse the custom themes too.
+  find ${BASE_DIR}/*/themes/custom -path "*/config/*.yml" -exec sed -i '' '/^uuid: /d' {} \;
+  find ${BASE_DIR}/*/themes/custom -path "*/config/*.yml" -exec sed -i '' '/_core:/{N;d;}' {} \;
+
   # Traverse the features too.
   find ${BASE_DIR}/*/features/custom -path "*/config/*.yml" -exec sed -i '' '/^uuid: /d' {} \;
   find ${BASE_DIR}/*/features/custom -path "*/config/*.yml" -exec sed -i '' '/_core:/{N;d;}' {} \;
@@ -32,6 +37,10 @@ else
   # Traverse the custom modules too.
   find ${BASE_DIR}/*/modules/custom -path "*/config/*.yml" -exec sed -i '/^uuid: /d' {} \;
   find ${BASE_DIR}/*/modules/custom -path "*/config/*.yml" -exec sed -i '/_core:/,+1d' {} \;
+
+  # Traverse the custom themes too.
+  find ${BASE_DIR}/*/themes/custom -path "*/config/*.yml" -exec sed -i '/^uuid: /d' {} \;
+  find ${BASE_DIR}/*/themes/custom -path "*/config/*.yml" -exec sed -i '/_core:/,+1d' {} \;
 
   # Traverse the features too.
   find ${BASE_DIR}/*/features/custom -path "*/config/*.yml" -exec sed -i '/^uuid: /d' {} \;
