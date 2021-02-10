@@ -305,7 +305,7 @@ display:
             operator: search_api_fulltext_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: search
+            identifier: search_api_fulltext
             required: false
             remember: false
             multiple: false
@@ -318,8 +318,9 @@ display:
               form_author: '0'
               content_publisher: '0'
               site_admin: '0'
-              ecms_api_recipient: '0'
             placeholder: ''
+            expose_fields: false
+            searched_fields_id: ''
           is_grouped: false
           group_info:
             label: ''
