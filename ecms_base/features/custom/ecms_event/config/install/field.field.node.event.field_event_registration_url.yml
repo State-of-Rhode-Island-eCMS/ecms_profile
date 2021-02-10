@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_registration_url
+    - node.type.event
+  module:
+    - link
+id: node.event.field_event_registration_url
+field_name: field_event_registration_url
+entity_type: node
+bundle: event
+label: 'Registration URL'
+description: '(Optional) If there is a registration form for the event provide it here.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

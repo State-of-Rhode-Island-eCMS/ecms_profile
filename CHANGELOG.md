@@ -13,6 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-251: Add ecms_feeds module which includes iCal parser and item.
 - RIG-253: Add twig template for events related components.
 - RIG-253: Add rrule library.
+- RIG-188: Add virtual meeting and registration url fields to event.
+- RIG-188: Add twig template for event full display.
 
 ### Changed
 - RIG-257: Updated translation settings for misc paragraphs.

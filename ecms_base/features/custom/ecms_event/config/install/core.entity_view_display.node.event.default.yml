@@ -9,11 +9,14 @@ dependencies:
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_location
     - field.field.node.event.field_event_promotions
+    - field.field.node.event.field_event_registration_url
     - field.field.node.event.field_event_rrule
     - field.field.node.event.field_event_type
+    - field.field.node.event.field_event_virtual_meeting_url
     - field.field.node.event.field_meta_tags_event
     - node.type.event
   module:
+    - link
     - metatag
     - smart_date
     - text
@@ -81,6 +84,18 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
+  field_event_registration_url:
+    weight: 12
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
   field_event_rrule:
     weight: 9
     label: above
@@ -91,11 +106,23 @@ content:
     region: content
   field_event_type:
     weight: 4
-    label: above
+    label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_event_virtual_meeting_url:
+    weight: 13
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
     region: content
   field_meta_tags_event:
     weight: 8
