@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-257: Updated translation settings for misc paragraphs.
 - RIG-253: Changed ecms_events to include smart_date, rrule, and events view.
+- RIG-246: Updated extlink to exlcude top level domain.
 
 ### Deprecated
 
