@@ -21,7 +21,7 @@ redirect imports will encode the path automatically.
 A more reliable tool is the [Screaming Frog] app. This has been used on the
 last few migrations. In addition to the crawl of a site, it can also
 be used in "[List Mode]" mode to test the resulting migration. Simply switch to
-list mode, the paste in all the URLs you want to test. To generate the list,
+list mode, then paste in all the URLs you want to test. To generate the list,
 take the source list of URLs, and replace the domain (e.g. http://eohhs.ri.gov/)
 with the new test domain (e.g. https://eohhs.riecms.acsitefactory.com/). Then
 execute the crawl, and look for any 404 response codes to identify problem pages
