@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.4.7] - 2021-02-12
+### Added
 - RIG-251: Add ecms_feeds module which includes iCal parser and item.
 - RIG-253: Add twig template for events related components.
 - RIG-253: Add rrule library.
@@ -21,15 +34,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-257: Updated translation settings for misc paragraphs.
 - RIG-253: Changed ecms_events to include smart_date, rrule, and events view.
 - RIG-246: Updated extlink to exlcude top level domain.
-- RIG-247:
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
+- RIG-247: Ensure proper minimum cache lifetime.
 
 ## [0.4.6] - 2021-01-28
 ### Added
@@ -488,7 +493,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.7...HEAD
+[0.4.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.6...0.4.7
 [0.4.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.5...0.4.6
 [0.4.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.4...0.4.5
 [0.4.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.3...0.4.4
