@@ -12,6 +12,21 @@ extension will crawl the site and find all publicly accessible URLs.
 From this list, a master URL Google Sheet can be created. This list can then
 be filtered to pull out the file URLs from the page URLs.
 
+### Files list and URL encoding
+During early testing some issues with handling URL encoded file names were
+encountered. To address this, the files lists should be cleared of all "%20"
+encoded spaces, and simply replaced with a space. The resulting file and file
+redirect imports will encode the path automatically.
+
+A more reliable tool is the [Screaming Frog] app. This has been used on the
+last few migrations. In addition to the crawl of a site, it can also
+be used in "[List Mode]" mode to test the resulting migration. Simply switch to
+list mode, then paste in all the URLs you want to test. To generate the list,
+take the source list of URLs, and replace the domain (e.g. http://eohhs.ri.gov/)
+with the new test domain (e.g. https://eohhs.riecms.acsitefactory.com/). Then
+execute the crawl, and look for any 404 response codes to identify problem pages
+or redirects.
+
 ## Migrations currently included
 ### eCMS File
 The eCMS File migration will take a sheet with URLs of existing files and create
@@ -83,3 +98,6 @@ Other useful migration commands
 * `drush10 migrate:stop`
 * `drush10 migrate:reset`
 * `drush10 migrate:stop`
+
+[Screaming Frog]: https://www.screamingfrog.co.uk/seo-spider/
+[List Mode]: https://www.screamingfrog.co.uk/how-to-use-list-mode/
