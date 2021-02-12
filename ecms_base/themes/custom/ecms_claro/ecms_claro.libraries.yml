@@ -1,4 +1,7 @@
 global-styling:
+  version: 1
   css:
     component:
       css/style.css: {}
+  dependencies:
+    - core/drupal
