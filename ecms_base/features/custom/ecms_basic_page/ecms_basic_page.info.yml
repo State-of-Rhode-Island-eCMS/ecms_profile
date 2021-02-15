@@ -18,7 +18,6 @@ dependencies:
   - page_manager
   - panels
   - paragraphs
-  - paragraphs_asymmetric_translation_widgets
   - path
   - pathauto
   - rabbit_hole
