@@ -88,7 +88,7 @@
       "drupal/paragraphs": {
         "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
         "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-        "2461695 - Support asymmetric translations": "https://www.drupal.org/files/issues/2020-03-06/2461695-276.patch"
+        "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2020-08-05/translation-sync-submodule-2887353-44.patch"
       },
       "drupal/webform_encrypt": {
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch"
