@@ -28,8 +28,6 @@ function ecms_preprocess_page(array &$variables): void {
 
   $config = \Drupal::config('system.site');
 
-//  $testNode = \Drupal::service('entity_type.manager')->getStorage('node')->load(341);
-//  \Drupal::service('ecms_distribution.paragraph_translation_update')->updateNodeParagraphs($testNode);
 
   // Attach header variables.
   $variables['header_preprocess_values']['site_name'] = $config->get('name');
