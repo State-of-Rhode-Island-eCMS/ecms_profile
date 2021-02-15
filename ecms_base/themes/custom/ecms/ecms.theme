@@ -25,9 +25,7 @@ function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables
  * Implements hook_preprocess_page().
  */
 function ecms_preprocess_page(array &$variables): void {
-
   $config = \Drupal::config('system.site');
-
 
   // Attach header variables.
   $variables['header_preprocess_values']['site_name'] = $config->get('name');
