@@ -4,14 +4,11 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_icon_library\Plugin\Field\FieldWidget;
 
-use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsWidgetBase;
-use Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsSelectWidget;
-use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Form\OptGroup;
 
 /**
  * Plugin implementation of the 'field_example_text' widget.
@@ -21,54 +18,77 @@ use Drupal\Core\Form\OptGroup;
  *   module = "ecms_icon_library",
  *   label = @Translation("Icon library"),
  *   field_types = {
- *     "list_string"
- *   },
- *   multiple_values = FALSE
+ *     "ecms_icon_library"
+ *   }
  * )
  */
-class EcmsIconLibraryWidget extends OptionsWidgetBase {
+class EcmsIconLibraryWidget extends WidgetBase {
 
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
-    $element['icon_filename'] = [
+    $element['pl_icon'] =
+    [
       '#type' => 'select',
       '#title' => 'Icon',
       '#description' => t('Select an icon from the dropdown. A preview of the icon will be shown below after you select it.'),
-      '#options' => $this->getOptions($items->getEntity()),
+      '#options' => $this->getIconOptions(),
       // Do not display a 'multiple' select box if there is only one option.
-      '#default_value' => $this->getSelectedOptions($items),
+      '#default_value' => $items[$delta]->get('pl_icon')->getValue(),
       '#field_suffix' => '<div id="qh-icon-field" class="qh__icon-library-preview"></div>',
-      '#ajax' => array(
-        'callback' => [$this, 'ecms_icon_preview_callback'],
+      '#ajax' => [
+        'callback' => [$this, 'ecmsIconPreviewCallback'],
         'event' => 'change',
-      ),
+      ],
+    ];
+
+    $element['media_library_icon'] =
+    [
+      '#type' => 'media_library',
+      '#allowed_bundles' => ['icon'],
+      '#title' => t('Media Library icon'),
+      '#description' => t('Upload or select an existing icon. Note: This WILL override any icon in the above dropdown.'),
+      '#default_value' => $items[$delta]->get('media_library_icon')->getValue(),
+      /* TODO: FIX THIS.
+       * A relevant issue: https://www.drupal.org/project/drupal/issues/1091852.
+       * '#states' => [
+       *   'visible' => [
+       *     'select[name$="[pl_icon]"]' => ['value' => 'media_library_icon'],
+       *   ]
+       * ]
+       */
     ];
 
     return $element;
   }
 
   /**
-   * {@inheritdoc}
+   * Custom #ajax callback to load SVG icon and add as suffix to form element.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   An AJAX response that display validation error messages or represents a
+   *   successful submission.
    */
-  public function ecms_icon_preview_callback(array &$form, FormStateInterface $form_state) {
+  public function ecmsIconPreviewCallback(array &$form, FormStateInterface $form_state) {
 
     // Get icon filename from select element.
     $icon_filename = $form_state->getTriggeringElement()['#value'];
 
     if (!$icon_filename) {
-      return;
+      return new AjaxResponse();
     }
 
     // Get theme path.
     /** @var \Drupal\Core\Extension\ThemeHandler $themeHandler */
     $themeHandler = \Drupal::service('theme_handler');
-
     $defaultTheme = $themeHandler->getDefault();
-
     $path = drupal_get_path('theme', $defaultTheme);
 
     // If the source file doesn't exist, ignore the form alteration.
@@ -79,6 +99,7 @@ class EcmsIconLibraryWidget extends OptionsWidgetBase {
     // Generate SVG HTML.
     $svg_file = file_get_contents("{$path}/ecms_patternlab/source/images/icons/{$icon_filename}");
 
+    // Return ajax respons with SVG markup.
     $ajax_response = new AjaxResponse();
     $ajax_response->addCommand(new HtmlCommand('#qh-icon-field', $svg_file));
 
@@ -88,14 +109,13 @@ class EcmsIconLibraryWidget extends OptionsWidgetBase {
   /**
    * Returns the array of options for the widget.
    *
-   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
-   *   The entity for which to return options.
-   *
    * @return array
    *   The array of options for the widget.
    */
-  protected function getOptions(FieldableEntityInterface $entity) {
+  protected function getIconOptions(): array {
     $return = [];
+
+    // Get theme path.
     /** @var \Drupal\Core\Extension\ThemeHandler $themeHandler */
     $themeHandler = \Drupal::service('theme_handler');
 
@@ -118,9 +138,12 @@ class EcmsIconLibraryWidget extends OptionsWidgetBase {
       $return[$object->{'filename'}] = $key;
     }
 
-    $this->options = $return;
+    /* TODO: Resolve issue with #states api.
+     * In the future the this value should drive the visible state of the media library element.
+     * $return['media_library_icon'] = t("Icon from media library");
+     */
 
-    return $this->options;
+    return $return;
   }
 
 }
