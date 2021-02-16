@@ -12,12 +12,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIG-269: Updated publication migration and url output to ensure no whitespace.
+- RIG-269: Updated promotional image media item translation settings.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIG-269: Promotions Translation Issue, fixed teaser template to use current langcode.
 
 ### Security
 
