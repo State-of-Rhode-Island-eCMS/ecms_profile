@@ -53,6 +53,8 @@ process:
     - plugin: callback
       callable: urldecode
       source: link
+    - plugin: callback
+      callable: trim
   'field_publication_url/title':
     - plugin: callback
       callable: urldecode
