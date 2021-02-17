@@ -59,8 +59,8 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         $svgRaw = file_get_contents($file_url);
 
         if ($svgRaw) {
-          $svgRaw = preg_replace([
-            '/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
+          $svgRaw = preg_replace(
+            ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
             '',
             $svgRaw
           );
