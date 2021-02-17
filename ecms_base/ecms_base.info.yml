@@ -48,6 +48,7 @@ dependencies:
   - locale
   - media
   - media_library
+  - media_library_form_element
   - media_library_theme_reset
   - menu_block
   - menu_link_content
