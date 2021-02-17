@@ -22,6 +22,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [0.4.9] - 2021-02-17
+### Fixed
+- RIG-254: Fixed missing module dependency media_library_form_element.
+
 ## [0.4.8] - 2021-02-17
 ### Added
 - RIG-254: Added custom ecms_icon_library module.
@@ -507,7 +511,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.9...HEAD
+[0.4.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.8...0.4.9
 [0.4.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.7...0.4.8
 [0.4.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.6...0.4.7
 [0.4.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.5...0.4.6
