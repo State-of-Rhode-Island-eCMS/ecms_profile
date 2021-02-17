@@ -93,7 +93,7 @@ class EcmsIconLibraryWidget extends WidgetBase {
 
     // If the source file doesn't exist, ignore the form alteration.
     if (!file_exists("{$path}/ecms_patternlab/source/images/icons/{$icon_filename}")) {
-      return NULL;
+      return new AjaxResponse();
     }
 
     // Generate SVG HTML.
@@ -125,13 +125,13 @@ class EcmsIconLibraryWidget extends WidgetBase {
 
     // If the source file doesn't exist, ignore the form alteration.
     if (!file_exists("{$path}/ecms_patternlab/source/_data/icons.json")) {
-      return NULL;
+      return [];
     }
 
     $json = json_decode(file_get_contents("{$path}/ecms_patternlab/source/_data/icons.json"));
 
     if (!property_exists($json, 'icons')) {
-      return NULL;
+      return [];
     }
 
     foreach ($json->{'icons'} as $key => $object) {
@@ -139,7 +139,7 @@ class EcmsIconLibraryWidget extends WidgetBase {
     }
 
     /* TODO: Resolve issue with #states api.
-     * In the future the this value should drive the
+     * In the future this value should drive the
      * visible state of the media library element.
      * $return['media_library_icon'] = t("Icon from media library");
      */

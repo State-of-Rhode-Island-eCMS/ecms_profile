@@ -107,7 +107,6 @@ permissions:
   - 'delete own event content'
   - 'delete own event_image media'
   - 'delete own file media'
-  - 'delete own icon media'
   - 'delete own landing_page content'
   - 'delete own location content'
   - 'delete own media_item_audio media'
