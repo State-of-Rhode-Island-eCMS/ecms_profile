@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.4.8] - 2021-02-17
+### Added
 - RIG-254: Added custom ecms_icon_library module.
 - RIG-254: Added ecms_icon_library field formatter, widget, and type.
 - RIG-254: Added icon button paragraph bundle.
@@ -18,14 +31,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-269: Updated publication migration and url output to ensure no whitespace.
 - RIG-269: Updated promotional image media item translation settings.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIG-269: Promotions Translation Issue, fixed teaser template to use current langcode.
-
-### Security
 
 ## [0.4.7] - 2021-02-12
 ### Added
@@ -499,7 +506,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.8...HEAD
+[0.4.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.7...0.4.8
 [0.4.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.6...0.4.7
 [0.4.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.5...0.4.6
 [0.4.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.4...0.4.5
