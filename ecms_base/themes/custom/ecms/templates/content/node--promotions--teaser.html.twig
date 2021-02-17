@@ -75,6 +75,12 @@
   {% set langcode = 'en' %}
 {% endif %}
 
+{% if node.hasTranslation(langcode) %}
+  {% set translated_node = node.translation(langcode) %}
+{% else %}
+  {% set translated_node = node %}
+{% endif %}
+
 {# Prepare the image to be sent to PL #}
 {% set img = '' %}
 {% if node.field_promotion_image is not empty %}
@@ -91,10 +97,10 @@
 {% endif %}
 
 {% include '@molecules/teaser-promotion/teaser-promotion.twig' with {
-  title: node.label,
-  display_title: node.field_promotion_display_title.value,
+  title: translated_node.label,
+  display_title: translated_node.field_promotion_display_title.value,
   img: img,
-  text: node.field_promotion_text.0.value,
-  url: content.field_promotion_url.0['#url']
+  text: translated_node.field_promotion_text.0.value,
+  url: translated_node.field_promotion_url.0['#url']
 } %}
 
