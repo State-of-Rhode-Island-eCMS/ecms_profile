@@ -9,7 +9,6 @@ use Drupal\media\Entity\Media;
 use Drupal\file\Entity\File;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Field\FormatterBase;
-use enshrined\svgSanitize\Sanitizer;
 
 /**
  * Plugin implementation of the 'image' formatter.
@@ -34,8 +33,8 @@ class EcmsIconLibraryFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      // Render each element as markup.
 
+      // Render each element as markup.
       if ($item->get('pl_icon')->getValue()) {
         $elements[$delta]['pl_icon'] = $item->get('pl_icon')->getValue();
       }
@@ -60,7 +59,11 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         $svgRaw = file_get_contents($file_url);
 
         if ($svgRaw) {
-          $svgRaw = preg_replace(['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'], '', $svgRaw);
+          $svgRaw = preg_replace([
+            '/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
+            '',
+            $svgRaw
+          );
           $svgRaw = trim($svgRaw);
 
           $elements[$delta]['media_library_icon'] = [

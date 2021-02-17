@@ -40,7 +40,7 @@ class EcmsIconLibrary extends FieldItemBase implements FieldItemInterface {
           'type' => 'text',
           'size' => 'tiny',
           'not null' => FALSE,
-        ]
+        ],
       ],
     ];
   }
@@ -59,4 +59,5 @@ class EcmsIconLibrary extends FieldItemBase implements FieldItemInterface {
 
     return $properties;
   }
+
 }

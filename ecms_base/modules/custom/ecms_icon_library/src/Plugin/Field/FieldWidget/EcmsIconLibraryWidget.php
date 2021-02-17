@@ -139,7 +139,8 @@ class EcmsIconLibraryWidget extends WidgetBase {
     }
 
     /* TODO: Resolve issue with #states api.
-     * In the future the this value should drive the visible state of the media library element.
+     * In the future the this value should drive the
+     * visible state of the media library element.
      * $return['media_library_icon'] = t("Icon from media library");
      */
 
