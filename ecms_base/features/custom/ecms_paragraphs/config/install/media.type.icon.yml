@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: icon
+label: Icon
+description: 'SVG icons to be reused across site.'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_icon_image
+field_map: {  }

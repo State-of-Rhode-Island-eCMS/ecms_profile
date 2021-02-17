@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: icon_button
+label: 'Icon Button'
+icon_uuid: null
+icon_default: null
+description: 'A button with a link and icon.'
+behavior_plugins: {  }

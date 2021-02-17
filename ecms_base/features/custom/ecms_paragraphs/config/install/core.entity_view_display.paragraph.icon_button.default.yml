@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.icon_button.field_button_color
+    - field.field.paragraph.icon_button.field_icon_library_icon
+    - field.field.paragraph.icon_button.field_link
+    - paragraphs.paragraphs_type.icon_button
+  module:
+    - ecms_icon_library
+    - link
+    - options
+id: paragraph.icon_button.default
+targetEntityType: paragraph
+bundle: icon_button
+mode: default
+content:
+  field_button_color:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_icon_library_icon:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: ecms_icon_library_formatter
+    region: content
+  field_link:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  search_api_excerpt: true

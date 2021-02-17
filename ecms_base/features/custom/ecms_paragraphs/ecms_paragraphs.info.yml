@@ -6,6 +6,7 @@ dependencies:
   - allowed_formats
   - ckeditor
   - content_translation
+  - ecms_icon_library
   - editor
   - entity_reference_revisions
   - field
