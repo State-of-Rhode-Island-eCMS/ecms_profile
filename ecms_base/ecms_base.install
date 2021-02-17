@@ -770,7 +770,14 @@ function ecms_base_update_9047(array &$sandbox): void {
 /**
  * Updates to run for the 0.4.8 tag.
  */
-function ecms_base_update_9046(array &$sandbox): void {
+function ecms_base_update_9048(array &$sandbox): void {
+  // Install new required modules.
+  $modules_to_install = [
+    'ecms_icon_library',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
   // Config updates.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
