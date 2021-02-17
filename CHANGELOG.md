@@ -10,6 +10,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-254: Added custom ecms_icon_library module.
+- RIG-254: Added ecms_icon_library field formatter, widget, and type.
+- RIG-254: Added icon button paragraph bundle.
 
 ### Changed
 - RIG-269: Updated publication migration and url output to ensure no whitespace.

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_color
+    - paragraphs.paragraphs_type.icon_button
+  module:
+    - options
+id: paragraph.icon_button.field_button_color
+field_name: field_button_color
+entity_type: paragraph
+bundle: icon_button
+label: 'Button color'
+description: 'Select the background color for the button.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon_library_icon
+    - paragraphs.paragraphs_type.icon_button
+  module:
+    - ecms_icon_library
+id: paragraph.icon_button.field_icon_library_icon
+field_name: field_icon_library_icon
+entity_type: paragraph
+bundle: icon_button
+label: Icon
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    pl_icon: alarm-bell.svg
+    media_library_icon: null
+default_value_callback: ''
+settings: {  }
+field_type: ecms_icon_library

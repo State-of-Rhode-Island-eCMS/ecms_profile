@@ -1,3 +1,8 @@
 /**
  * Custom styles for the ecms_claro theme.
  */
+
+#qh-icon-field svg {
+  margin-top: 10px;
+  width: 75px;
+}
