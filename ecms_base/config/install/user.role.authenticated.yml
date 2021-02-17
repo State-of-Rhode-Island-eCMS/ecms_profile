@@ -28,6 +28,7 @@ permissions:
   - 'view paragraph content formatted_text'
   - 'view paragraph content gallery'
   - 'view paragraph content gallery_item'
+  - 'view paragraph content icon_button'
   - 'view paragraph content icon_card'
   - 'view paragraph content media_item'
   - 'view paragraph content numbered_step_item'
