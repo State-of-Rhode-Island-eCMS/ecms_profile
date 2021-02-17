@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-254: Fixed missing module dependency media_library_form_element.
 
 ### Security
 

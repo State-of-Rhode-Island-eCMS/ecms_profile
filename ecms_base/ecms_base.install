@@ -799,3 +799,15 @@ function ecms_base_update_9048(array &$sandbox): void {
     $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
   }
 }
+
+/**
+ * Updates to run for the 0.4.9 tag.
+ */
+function ecms_base_update_9049(array &$sandbox): void {
+  // Install new required modules.
+  $modules_to_install = [
+    'media_library_form_element',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
