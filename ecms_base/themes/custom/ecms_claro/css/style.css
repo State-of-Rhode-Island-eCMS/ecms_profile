@@ -2,7 +2,7 @@
  * Custom styles for the ecms_claro theme.
  */
 
-.qh__icon-library-preview svg {
+#qh-icon-field svg {
   margin-top: 10px;
-  width: 75px !important;
+  width: 75px;
 }

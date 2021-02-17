@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\ecms_icon_library\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\FieldItemBase;
@@ -25,7 +27,7 @@ class EcmsIconLibrary extends FieldItemBase implements FieldItemInterface {
   /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field_definition) {
+  public static function schema(FieldStorageDefinitionInterface $field_definition): array {
     return [
       // Columns contains the values that the field will store.
       'columns' => [
@@ -46,7 +48,7 @@ class EcmsIconLibrary extends FieldItemBase implements FieldItemInterface {
   /**
    * {@inheritdoc}
    */
-  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
+  public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition): array {
     $properties = [];
     $properties['pl_icon'] = DataDefinition::create('string')
       ->setLabel(t('eCMS Library Icon'))
