@@ -45,8 +45,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
           return;
         }
 
-        // TODO: update value.
-        $fid = $media->field_media_image_2->target_id;
+        $fid = $media->field_icon_image->target_id;
 
         if (!$fid) {
           return;
