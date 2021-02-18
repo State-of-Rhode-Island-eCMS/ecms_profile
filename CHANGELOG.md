@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIG-269: Broken promotion URLs.
 
 ### Security
+
+## [0.5.0] - 2021-02-18
+### Fixed
+- RIG-269: Broken promotion URLs.
 
 ## [0.4.9] - 2021-02-17
 ### Fixed
@@ -511,7 +514,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.0...HEAD
+[0.5.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.9...0.5.0
 [0.4.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.8...0.4.9
 [0.4.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.7...0.4.8
 [0.4.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.6...0.4.7
