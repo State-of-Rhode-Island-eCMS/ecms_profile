@@ -811,3 +811,13 @@ function ecms_base_update_9049(array &$sandbox): void {
 
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Updates to run for the 0.5.1 tag.
+ */
+function ecms_base_update_9051(array &$sandbox): void {
+  // Config updates.
+  $newConfig = [ 
+    'content_moderation_notifications.content_moderation_notification.ready_for_review', 
+  ];
+}
