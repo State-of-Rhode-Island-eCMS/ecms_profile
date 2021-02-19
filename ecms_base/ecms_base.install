@@ -826,8 +826,8 @@ function ecms_base_update_9051(array &$sandbox): void {
   /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
   $profile_install_source = new FileStorage($path . "/config/install/");
 
-  $newConfig = [ 
-    'content_moderation_notifications.content_moderation_notification.ready_for_review', 
+  $newConfig = [
+    'content_moderation_notifications.content_moderation_notification.ready_for_review',
   ];
 
   foreach ($newConfig as $config) {
