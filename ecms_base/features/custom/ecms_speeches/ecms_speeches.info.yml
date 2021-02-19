@@ -1,21 +1,24 @@
 name: 'eCMS Speeches'
 description: 'Provides Speech content type and related configuration.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - content_moderation
-  - content_translation
-  - datetime
-  - ecms_workflow
-  - field
-  - language
-  - menu_ui
-  - metatag
-  - node
-  - path
-  - pathauto
-  - scheduled_transitions
-  - simple_sitemap
-  - user
+  - 'allowed_formats:allowed_formats'
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:datetime'
+  - 'drupal:field'
+  - 'drupal:language'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'ecms_workflow:ecms_workflow'
+  - 'metatag:metatag'
+  - 'pathauto:pathauto'
+  - 'scheduled_transitions:scheduled_transitions'
+  - 'simple_sitemap:simple_sitemap'
 version: 9.x-1.0
 package: eCMS
