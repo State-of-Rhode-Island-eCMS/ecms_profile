@@ -8,7 +8,6 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityStorageException;
-use Drupal\paragraphs\ParagraphInterface;
 
 /**
  * Change the admin role title to "Drupal_Admin".
