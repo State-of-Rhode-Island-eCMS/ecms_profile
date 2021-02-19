@@ -51,6 +51,13 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  status:
+    weight: 11
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   translation:
     weight: 10
     settings: {  }
@@ -58,4 +65,3 @@ content:
     region: content
 hidden:
   created: true
-  status: true
