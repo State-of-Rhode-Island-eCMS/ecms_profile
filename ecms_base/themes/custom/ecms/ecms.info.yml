@@ -36,6 +36,7 @@ component-libraries:
 
 regions:
   language_switcher: 'Language Switcher'
+  header_global: 'Header: Global'
   header_inner: 'Header: Inner'
   admin_links: 'Admin Links'
   primary_menu: 'Primary menu'
