@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIG-266: Added optional google translator module.
 
 ### Changed
 - RIG-277: Updated content moderation notification.

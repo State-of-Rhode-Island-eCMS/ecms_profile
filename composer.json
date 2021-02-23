@@ -143,6 +143,7 @@
     "drupal/features": "^3.11",
     "drupal/feeds": "^3.0@alpha",
     "drupal/google_tag": "^1.4",
+    "drupal/google_translator": "^1.0@RC",
     "drupal/honeypot": "^2.0",
     "drupal/jsonapi_extras": "^3.16",
     "drupal/language_cookie": "1.x-dev",
