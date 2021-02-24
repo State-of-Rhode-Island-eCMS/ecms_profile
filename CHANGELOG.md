@@ -24,6 +24,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-277: Updated content moderation notification.
 - RIG-274: Changed person content type field config.
+- RIG-271: Upgraded Acquia Search Solr to 3.x.
 
 ### Deprecated
 
