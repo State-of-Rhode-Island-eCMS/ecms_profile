@@ -128,7 +128,7 @@ process:
       attribute: 'style'
   'field_basic_page_body/format':
     plugin: default_value
-    default_value: full_html
+    default_value: basic_html
   moderation_state:
     plugin: static_map
     source: status
