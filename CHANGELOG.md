@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIG-266: Added optional google translator module.
+- RIG-276: Updated basic page migration to use basic_html format.
 
 ### Changed
 - RIG-277: Updated content moderation notification.
@@ -20,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIG-276: Update hook 9051 includes script to update text format to basic_html for all basic pages.
 
 ### Security
 

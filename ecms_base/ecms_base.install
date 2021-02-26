@@ -833,4 +833,35 @@ function ecms_base_update_9051(array &$sandbox): void {
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
   }
+
+  // Update the basic page migration config.
+  $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
+
+  $updatedModuleConfig = [
+    'migrate_plus.migration.ecms_basic_page',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $module_source->read("{$config}"));
+  }
+
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+
+  // Query for all pages.
+  $query = $node_storage->getQuery();
+  $query->condition('type', 'basic_page');
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return;
+  }
+
+  // Load nodes and change their format.
+  $nodes = $node_storage->loadMultiple($nids);
+  foreach ($nodes as $node) {
+    $node->field_basic_page_body->format = 'basic_html';
+    $node->save();
+  }
 }
