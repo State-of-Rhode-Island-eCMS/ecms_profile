@@ -6,16 +6,12 @@ dependencies:
     - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
-    - field.field.node.person.field_person_fax
     - field.field.node.person.field_person_first_name
     - field.field.node.person.field_person_job_title
     - field.field.node.person.field_person_last_name
-    - field.field.node.person.field_person_middle_initial
     - field.field.node.person.field_person_phone
-    - field.field.node.person.field_person_photo
-    - field.field.node.person.field_person_prefix
+    - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_promotions
-    - field.field.node.person.field_person_suffix
     - node.type.person
   module:
     - user
@@ -25,28 +21,73 @@ bundle: person
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
+    weight: 7
+    region: content
     settings: {  }
     third_party_settings: {  }
+  field_person_category:
+    type: entity_reference_label
+    weight: 2
     region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_person_email:
+    type: basic_string
+    weight: 4
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_person_first_name:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_person_job_title:
+    type: string
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_person_last_name:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_person_phone:
+    type: string
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_person_phone_extension:
+    type: number_integer
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 8
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_meta_tags_person: true
-  field_person_category: true
-  field_person_email: true
-  field_person_fax: true
-  field_person_first_name: true
-  field_person_job_title: true
-  field_person_last_name: true
-  field_person_middle_initial: true
-  field_person_phone: true
-  field_person_photo: true
-  field_person_prefix: true
   field_person_promotions: true
-  field_person_suffix: true
   langcode: true
   search_api_excerpt: true

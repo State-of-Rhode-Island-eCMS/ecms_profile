@@ -10,7 +10,7 @@ field_name: field_person_category
 entity_type: node
 bundle: person
 label: Category
-description: ''
+description: 'Select the category/department(s) this person belongs to. If an item has a "-" prefix on its name it means it''s a subcategory of the first term listed above it which doesn''t contain a prefix. Please select only a subcategory OR the main category. Do not select both or it will appear in this category''s list twice.'
 required: false
 translatable: false
 default_value: {  }

@@ -5,20 +5,15 @@ dependencies:
     - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
-    - field.field.node.person.field_person_fax
     - field.field.node.person.field_person_first_name
     - field.field.node.person.field_person_job_title
     - field.field.node.person.field_person_last_name
-    - field.field.node.person.field_person_middle_initial
     - field.field.node.person.field_person_phone
-    - field.field.node.person.field_person_photo
-    - field.field.node.person.field_person_prefix
+    - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_promotions
-    - field.field.node.person.field_person_suffix
     - node.type.person
   module:
     - metatag
-    - telephone
     - user
 id: node.person.default
 targetEntityType: node
@@ -32,14 +27,14 @@ content:
     third_party_settings: {  }
   field_meta_tags_person:
     weight: 13
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
   field_person_category:
     weight: 11
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -47,22 +42,14 @@ content:
     region: content
   field_person_email:
     weight: 1
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_person_fax:
-    weight: 3
-    label: above
-    settings:
-      title: ''
-    third_party_settings: {  }
-    type: telephone_link
-    region: content
   field_person_first_name:
     weight: 4
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -70,7 +57,7 @@ content:
     region: content
   field_person_job_title:
     weight: 9
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -78,15 +65,7 @@ content:
     region: content
   field_person_last_name:
     weight: 5
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_person_middle_initial:
-    weight: 6
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -94,28 +73,20 @@ content:
     region: content
   field_person_phone:
     weight: 2
-    label: above
-    settings:
-      title: ''
-    third_party_settings: {  }
-    type: telephone_link
-    region: content
-  field_person_photo:
-    type: entity_reference_entity_view
-    weight: 10
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    region: content
-  field_person_prefix:
-    weight: 7
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_person_phone_extension:
+    weight: 14
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_person_promotions:
     weight: 12
@@ -125,14 +96,6 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
-    region: content
-  field_person_suffix:
-    weight: 8
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
 hidden:
   langcode: true

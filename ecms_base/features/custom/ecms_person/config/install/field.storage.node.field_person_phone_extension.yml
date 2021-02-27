@@ -3,15 +3,16 @@ status: true
 dependencies:
   module:
     - node
-    - telephone
-id: node.field_person_fax
-field_name: field_person_fax
+id: node.field_person_phone_extension
+field_name: field_person_phone_extension
 entity_type: node
-type: telephone
-settings: {  }
-module: telephone
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

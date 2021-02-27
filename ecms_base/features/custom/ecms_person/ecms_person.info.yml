@@ -17,6 +17,7 @@ dependencies:
   - menu_ui
   - metatag
   - node
+  - paragraphs
   - path
   - pathauto
   - rabbit_hole
@@ -27,5 +28,6 @@ dependencies:
   - telephone
   - token
   - user
+  - views
 package: eCMS
 version: 9.x-1.0

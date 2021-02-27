@@ -2,15 +2,14 @@ langcode: en
 status: true
 dependencies:
   module:
-    - node
-id: node.field_person_middle_initial
-field_name: field_person_middle_initial
-entity_type: node
-type: string
+    - paragraphs
+    - taxonomy
+id: paragraph.field_department_category
+field_name: field_department_category
+entity_type: paragraph
+type: entity_reference
 settings:
-  max_length: 1
-  is_ascii: false
-  case_sensitive: false
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: 1
