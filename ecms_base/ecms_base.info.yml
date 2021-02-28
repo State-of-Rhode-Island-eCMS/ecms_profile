@@ -7,7 +7,6 @@ core_version_requirement: ^9
 # Modules that sub-profiles need must be listed here and_not in install.
 dependencies:
   - allowed_formats
-  - acquia_search_solr
   - admin_toolbar
   - admin_toolbar_tools
   - big_pipe

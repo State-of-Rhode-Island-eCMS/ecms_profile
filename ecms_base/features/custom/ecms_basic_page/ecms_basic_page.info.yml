@@ -3,7 +3,6 @@ description: 'Provides Basic page content type and related configuration. Add a 
 type: module
 core_version_requirement: ^9
 dependencies:
-  - acquia_search_solr
   - content_moderation
   - content_translation
   - ecms_paragraphs
