@@ -97,7 +97,7 @@ field_settings:
       config:
         - field.storage.node.field_location_body
   field_press_release_body:
-    label: Body
+    label: 'Press Release Body'
     datasource_id: 'entity:node'
     property_path: field_press_release_body
     type: text
