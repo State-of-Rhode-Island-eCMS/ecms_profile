@@ -7,7 +7,9 @@ dependencies:
     - node
     - search_api
   config:
-    - field.storage.node.body
+    - field.storage.node.field_location_body
+    - field.storage.node.field_press_release_body
+    - field.storage.node.field_event_body
     - field.storage.node.field_basic_page_body
     - field.storage.node.field_landing_page_body
     - search_api.server.acquia_search_solr_search_api_solr_server
@@ -55,19 +57,13 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+_core:
+  default_config_hash: 1V2CjTr1bKsfCCUzDm7u5iMl9pbW0x-ewm-st6Po12o
 id: acquia_search_solr_search_api_solr_index
 name: 'Acquia Search Solr Search API Solr index'
 description: ''
 read_only: false
 field_settings:
-  body:
-    label: Body
-    datasource_id: 'entity:node'
-    property_path: body
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.body
   field_basic_page_body:
     label: 'Intro text'
     datasource_id: 'entity:node'
@@ -76,6 +72,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_basic_page_body
+  field_event_body:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_event_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_body
   field_landing_page_body:
     label: 'Intro text'
     datasource_id: 'entity:node'
@@ -84,6 +88,22 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_landing_page_body
+  field_location_body:
+    label: 'Additional information'
+    datasource_id: 'entity:node'
+    property_path: field_location_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_location_body
+  field_press_release_body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: field_press_release_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_press_release_body
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
