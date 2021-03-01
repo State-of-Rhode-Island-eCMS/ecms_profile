@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * A blank template which returns field data without a wrapper.
+ *
+ * Available variables:
+ * - label: The label for the field.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ */
+#}
+
+{% include '@molecules/audiences-served/audiences-served.twig' with {
+  label: label,
+  items: items
+} %}
