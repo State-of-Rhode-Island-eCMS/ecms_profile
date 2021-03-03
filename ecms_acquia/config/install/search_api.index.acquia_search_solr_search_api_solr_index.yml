@@ -57,8 +57,6 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
-_core:
-  default_config_hash: 1V2CjTr1bKsfCCUzDm7u5iMl9pbW0x-ewm-st6Po12o
 id: acquia_search_solr_search_api_solr_index
 name: 'Acquia Search Solr Search API Solr index'
 description: ''
