@@ -34,16 +34,16 @@
 {% if fields.nid.content %}
   {% set path = path('entity.node.canonical', {'node': fields.nid.content|striptags|trim|number_format(0,'','')}) %}
 {% endif %}
-{% set distance = fields.field_geofield_proximity.content|render|striptags|trim %}
+{% set distance = fields.field_vacsite_geofield_proximity.content|render|striptags|trim %}
 {% if fields %}
 
   {% include '@molecules/teaser-location-vacsite/teaser-location-vacsite.twig' with {
     title: fields.title.content,
     distance: distance,
-    address: fields.field_location_address.content,
-    phone: fields.field_phone.content,
-    type: fields.field_location_type.content,
-    vaccines: fields.field_vaccines_offered.content,
+    address: fields.field_vacsite_location_address.content,
+    phone: fields.field_vacsite_phone.content,
+    type: fields.field_vacsite_location_type.content,
+    vaccines: fields.field_vacsite_vaccines_offered.content,
     url: path,
     alt_read_text: 'Details & Scheduling'
   } %}

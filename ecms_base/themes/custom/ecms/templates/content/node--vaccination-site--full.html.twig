@@ -81,9 +81,9 @@
   ]
 %}
 
-{% set address = node.field_location_address.value %}
-{% set type_in_out = content.field_location_type|render|striptags ~ ' – ' ~ content.field_indoor_or_outoor|render|striptags %}
-{% set special_instructions = node.field_special_instructions.value %}
+{% set address = node.field_vacsite_location_address.value %}
+{% set type_in_out = content.field_vacsite_location_type|render|striptags ~ ' – ' ~ content.field_vacsite_indoor_or_outdoor|render|striptags %}
+{% set special_instructions = node.field_vacsite_spec_instructions.value %}
 
 {% include "@templates/01-content/node--vaccination-site--full.html.pl.twig" with {
   node: node,
