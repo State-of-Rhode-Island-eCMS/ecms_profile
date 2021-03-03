@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.vacsite_indoor_outdoor
+id: taxonomy_term.vacsite_indoor_outdoor
+target_entity_type_id: taxonomy_term
+target_bundle: vacsite_indoor_outdoor
+default_langcode: site_default
+language_alterable: false

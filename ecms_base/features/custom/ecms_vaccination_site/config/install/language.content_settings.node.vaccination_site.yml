@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.vaccination_site
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.vaccination_site
+target_entity_type_id: node
+target_bundle: vaccination_site
+default_langcode: site_default
+language_alterable: true

@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.vaccination_site.field_vacsite_audiences
+    - field.field.node.vaccination_site.field_vacsite_body
+    - field.field.node.vaccination_site.field_vacsite_geofield
+    - field.field.node.vaccination_site.field_vacsite_indoor_or_outdoor
+    - field.field.node.vaccination_site.field_vacsite_location_address
+    - field.field.node.vaccination_site.field_vacsite_location_type
+    - field.field.node.vaccination_site.field_vacsite_office_hours
+    - field.field.node.vaccination_site.field_vacsite_phone
+    - field.field.node.vaccination_site.field_vacsite_ripta_trip_planner
+    - field.field.node.vaccination_site.field_vacsite_schedule_link
+    - field.field.node.vaccination_site.field_vacsite_spec_instructions
+    - field.field.node.vaccination_site.field_vacsite_vaccines_offered
+    - field.field.node.vaccination_site.field_vacsite_website_link
+    - node.type.vaccination_site
+  module:
+    - address
+    - user
+id: node.vaccination_site.teaser
+targetEntityType: node
+bundle: vaccination_site
+mode: teaser
+content:
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_vacsite_location_address:
+    type: address_default
+    weight: 2
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vacsite_location_type:
+    type: entity_reference_label
+    weight: 4
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_vacsite_vaccines_offered:
+    type: entity_reference_label
+    weight: 6
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+hidden:
+  field_vacsite_audiences: true
+  field_vacsite_body: true
+  field_vacsite_geofield: true
+  field_vacsite_indoor_or_outdoor: true
+  field_vacsite_office_hours: true
+  field_vacsite_phone: true
+  field_vacsite_ripta_trip_planner: true
+  field_vacsite_schedule_link: true
+  field_vacsite_spec_instructions: true
+  field_vacsite_website_link: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

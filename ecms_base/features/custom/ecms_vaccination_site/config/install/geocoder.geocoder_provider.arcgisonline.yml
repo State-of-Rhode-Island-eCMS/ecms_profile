@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: arcgisonline
+label: ArcGisOnline
+plugin: arcgisonline
+configuration:
+  sourceCountry: 'United States'
+  throttle:
+    period: null
+    limit: null

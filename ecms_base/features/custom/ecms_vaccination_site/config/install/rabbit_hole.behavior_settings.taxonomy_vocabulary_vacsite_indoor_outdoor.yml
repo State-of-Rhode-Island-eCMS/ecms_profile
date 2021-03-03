@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.vacsite_indoor_outdoor
+id: taxonomy_vocabulary_vacsite_indoor_outdoor
+entity_type_id: taxonomy_vocabulary
+entity_id: vacsite_indoor_outdoor
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied
