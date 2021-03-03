@@ -3,13 +3,14 @@ status: true
 dependencies:
   module:
     - node
-    - telephone
-id: node.field_location_phone
-field_name: field_location_phone
+id: node.field_location_phone_extension
+field_name: field_location_phone_extension
 entity_type: node
-type: telephone
-settings: {  }
-module: telephone
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
 locked: false
 cardinality: 1
 translatable: true

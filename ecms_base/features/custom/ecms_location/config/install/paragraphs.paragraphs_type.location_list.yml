@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: location_list
+label: 'Location list'
+icon_uuid: null
+icon_default: null
+description: 'Provides a list of locations with varying display configuration options.'
+behavior_plugins: {  }

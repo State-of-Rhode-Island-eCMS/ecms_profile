@@ -12,7 +12,7 @@ entity_type: node
 bundle: location
 label: 'Office hours'
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

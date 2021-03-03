@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_location_list_form
+    - paragraphs.paragraphs_type.location_list
+id: paragraph.location_list.field_location_list_form
+field_name: field_location_list_form
+entity_type: paragraph
+bundle: location_list
+label: 'Display form'
+description: 'Display the exposed form to let site users filter the results.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

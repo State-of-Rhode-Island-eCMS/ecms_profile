@@ -10,15 +10,18 @@ dependencies:
   - ecms_workflow
   - field
   - language
+  - link
   - menu_ui
   - metatag
   - node
   - office_hours
+  - paragraphs
   - path
   - pathauto
   - rabbit_hole
   - scheduled_transitions
   - simple_sitemap
+  - taxonomy
   - telephone
   - text
   - user
