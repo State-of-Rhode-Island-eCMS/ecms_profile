@@ -5,21 +5,16 @@ dependencies:
     - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
-    - field.field.node.person.field_person_fax
     - field.field.node.person.field_person_first_name
     - field.field.node.person.field_person_job_title
     - field.field.node.person.field_person_last_name
-    - field.field.node.person.field_person_middle_initial
     - field.field.node.person.field_person_phone
-    - field.field.node.person.field_person_photo
-    - field.field.node.person.field_person_prefix
+    - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_promotions
-    - field.field.node.person.field_person_suffix
     - node.type.person
     - workflows.workflow.editorial
   module:
     - content_moderation
-    - media_library
     - metatag
     - path
     - telephone
@@ -30,41 +25,30 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 13
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   field_meta_tags_person:
-    weight: 102
+    weight: 19
     settings:
       sidebar: true
     third_party_settings: {  }
     type: metatag_firehose
     region: content
   field_person_category:
-    weight: 11
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    weight: 8
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete_tags
+    type: options_buttons
     region: content
   field_person_email:
-    weight: 7
+    weight: 6
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: email_default
-    region: content
-  field_person_fax:
-    weight: 9
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: telephone_default
     region: content
   field_person_first_name:
     weight: 1
@@ -75,14 +59,6 @@ content:
     type: string_textfield
     region: content
   field_person_job_title:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_person_last_name:
     weight: 3
     settings:
       size: 60
@@ -90,7 +66,7 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_person_middle_initial:
+  field_person_last_name:
     weight: 2
     settings:
       size: 60
@@ -99,29 +75,21 @@ content:
     type: string_textfield
     region: content
   field_person_phone:
-    weight: 8
+    weight: 4
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
     region: content
-  field_person_photo:
-    type: media_library_widget
-    weight: 10
+  field_person_phone_extension:
+    weight: 5
     settings:
-      media_types: {  }
-    third_party_settings: {  }
-    region: content
-  field_person_prefix:
-    weight: 4
-    settings:
-      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
+    type: number
     region: content
   field_person_promotions:
-    weight: 101
+    weight: 18
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -130,30 +98,22 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_person_suffix:
-    weight: 5
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
-    weight: 2
+    weight: 7
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 17
     settings: {  }
     region: content
     third_party_settings: {  }
   path:
     type: path
-    weight: 16
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -161,7 +121,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 14
+    weight: 12
     region: content
     third_party_settings: {  }
   publish_on:
@@ -174,14 +134,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 17
+    weight: 15
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 13
     region: content
     third_party_settings: {  }
   title:
@@ -193,13 +153,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 10
     settings:
       match_operator: CONTAINS
       size: 60
@@ -214,8 +174,8 @@ content:
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 16
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }

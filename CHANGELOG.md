@@ -19,10 +19,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-277: Updated content moderation notification.
 - RIG-260: Changed field_speech_text to formatted long.
+- RIG-274: Added person list paragraph bundle.
+
+### Changed
+- RIG-277: Updated content moderation notification.
+- RIG-274: Changed person content type field config.
 
 ### Deprecated
 
 ### Removed
+- RIG-274: Removed several person content type fields that were unused.
 
 ### Fixed
 - RIG-276: Update hook 9051 includes script to update text format to basic_html for all basic pages.

@@ -33,6 +33,7 @@ permissions:
   - 'view paragraph content location_list'
   - 'view paragraph content media_item'
   - 'view paragraph content numbered_step_item'
+  - 'view paragraph content person_list'
   - 'view paragraph content promotion_reference'
   - 'view paragraph content publication_list'
   - 'view paragraph content text_card'

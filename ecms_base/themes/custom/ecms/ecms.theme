@@ -617,3 +617,160 @@ function ecms_preprocess_paragraph__location_list(array &$variables): void {
 
   $variables['locations'] = $teasers;
 }
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function ecms_preprocess_paragraph__person_list(array &$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  // Get necessary services.
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $node_storage = $entity_type_manager->getStorage('node');
+  $term_storage = $entity_type_manager->getStorage('taxonomy_term');
+  $node_builder = $entity_type_manager->getViewBuilder('node');
+
+  // Get current language.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  // Check if we're listing all person nodes or a specific department.
+  if ($paragraph->get('field_department_category')->isEmpty()) {
+
+    // Query all person nodes.
+    $query = $node_storage->getQuery();
+    $query->condition('type', 'person')
+      ->condition('status', 1)
+      ->sort('field_person_last_name', "ASC");
+
+    $nids = $query->execute();
+
+    // Guard against no nodes.
+    if (empty($nids)) {
+      return;
+    }
+
+    // Return a list of rendered person teaser nodes.
+    $nodes = $node_storage->loadMultiple($nids);
+    $variables['person_listing'] = $node_builder->viewMultiple($nodes, 'teaser', $language);
+    $variables['list_mode'] = "full";
+  }
+  else {
+    // A term filter was selected.
+    // Find all person nodes that reference this term.
+    $parent_term = $paragraph->get('field_department_category')->referencedEntities()[0];
+    $parent_tid = $parent_term->get('tid')->value;
+
+    // Guard against empty term.
+    if (!$parent_tid) {
+      return;
+    }
+
+    // Build out an array of arrays with terms and their related person nodes.
+    $term_person_list = [
+      'term_name' => $parent_term->get('name')->value,
+      'child_terms' => [],
+      'persons' => _ecms_query_persons_by_category_tid($parent_tid, $node_storage, $node_builder, $language),
+    ];
+
+    // Load child terms.
+    $child_terms = $term_storage->loadChildren($parent_tid);
+
+    foreach ($child_terms as $child_term) {
+      // Check to see if this child term has person nodes associated.
+      $child_term_persons = _ecms_query_persons_by_category_tid($child_term->get('tid')->value, $node_storage, $node_builder, $language);
+
+      if (!empty($child_term_persons)) {
+        // Store the child term's person teasers on parent list.
+        $term_person_list['child_terms'][$child_term->get('name')->value] = $child_term_persons;
+      }
+    }
+
+    $variables['person_listing'] = $term_person_list;
+    $variables['list_mode'] = "term-list";
+  }
+}
+
+/**
+ * Helper function that returns a list of person teasers for a category term.
+ *
+ * @param string $tid
+ *   The term id to query related persons.
+ * @param object $node_storage
+ *   The node storage interface.
+ * @param object $node_builder
+ *   The node builder interface.
+ * @param string $language
+ *   The langcode to render.
+ *
+ * @return array
+ *   A render array of person teasers.
+ */
+function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, object $node_builder, string $language): array {
+  if (!$tid) {
+    return [];
+  }
+
+  // See if any person nodes are tied directly to term.
+  $query = $node_storage->getQuery();
+  $query->condition('type', 'person')
+    ->condition('field_person_category', $tid)
+    ->condition('status', 1)
+    ->sort('field_person_last_name', "ASC");
+
+  $nids = $query->execute();
+
+  $teasers = [];
+
+  // Load teaser displays for each person.
+  if (!empty($nids)) {
+    $nodes = $node_storage->loadMultiple($nids);
+    $teasers = $node_builder->viewMultiple($nodes, 'teaser', $language);
+  }
+
+  return $teasers;
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function ecms_preprocess_node__person(array &$variables) {
+  $node = $variables['node'];
+
+  // Get necessary services.
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $term_storage = $entity_type_manager->getStorage('taxonomy_term');
+
+  // Get current language.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $language;
+
+  // Get each term reference.
+  $categories = $node->get('field_person_category')->referencedEntities();
+  $variables['categories'] = [];
+
+  // Loop over each term reference.
+  foreach ($categories as $category) {
+    $category_tid = $category->id();
+
+    // Load parent terms.
+    $category_parent = $term_storage->loadParents($category_tid);
+
+    if (!empty($category_parent)) {
+      // Get first item of keyed array.
+      $category_parent = reset($category_parent);
+
+      // Get translated version of term.
+      $category_parent_trans = \Drupal::service('entity.repository')->getTranslationFromContext($category_parent, $language);
+
+      $variables['categories'][] = $category_parent_trans->getName();
+    }
+    else {
+      // No parent term. Just fetch translated term name of referenced term.
+      $category_trans = \Drupal::service('entity.repository')->getTranslationFromContext($category, $language);
+      $variables['categories'][] = $category_trans->getName();
+    }
+  }
+
+  // Comma separate all categories.
+  $variables['categories'] = implode(', ', $variables['categories']);
+}

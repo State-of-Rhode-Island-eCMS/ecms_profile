@@ -828,6 +828,11 @@ function ecms_base_update_9051(array &$sandbox): void {
 
   $newConfig = [
     'content_moderation_notifications.content_moderation_notification.ready_for_review',
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.site_admin',
   ];
 
   foreach ($newConfig as $config) {
