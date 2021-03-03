@@ -18,6 +18,7 @@ permissions:
   - 'view paragraph content gallery_item'
   - 'view paragraph content icon_button'
   - 'view paragraph content icon_card'
+  - 'view paragraph content location_list'
   - 'view paragraph content media_item'
   - 'view paragraph content numbered_step_item'
   - 'view paragraph content promotion_reference'

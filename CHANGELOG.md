@@ -13,6 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-266: Added optional google translator module.
 - RIG-276: Updated basic page migration to use basic_html format.
 - RIG-260: Added speech view and speech twig templates for teaser and full.
+- RIGA-14: Added location list paragraph and custom form.
+- RIGA-14: Added website url and phone extension to location content type.
 
 ### Changed
 - RIG-277: Updated content moderation notification.

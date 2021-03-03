@@ -2,14 +2,13 @@ langcode: en
 status: true
 dependencies:
   module:
-    - node
-    - telephone
-id: node.field_location_phone
-field_name: field_location_phone
-entity_type: node
-type: telephone
+    - paragraphs
+id: paragraph.field_location_list_link_node
+field_name: field_location_list_link_node
+entity_type: paragraph
+type: boolean
 settings: {  }
-module: telephone
+module: core
 locked: false
 cardinality: 1
 translatable: true

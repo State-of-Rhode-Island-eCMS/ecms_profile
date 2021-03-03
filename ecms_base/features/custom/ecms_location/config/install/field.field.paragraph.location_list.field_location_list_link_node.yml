@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_location_list_link_node
+    - paragraphs.paragraphs_type.location_list
+id: paragraph.location_list.field_location_list_link_node
+field_name: field_location_list_link_node
+entity_type: paragraph
+bundle: location_list
+label: 'Link title to node'
+description: 'Enabling this option will link the title of the location to its detailed node view.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

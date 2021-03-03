@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_location_list_category
+    - paragraphs.paragraphs_type.location_list
+    - taxonomy.vocabulary.location_categories
+id: paragraph.location_list.field_location_list_category
+field_name: field_location_list_category
+entity_type: paragraph
+bundle: location_list
+label: 'Category restriction'
+description: "Select the category for the location list. Leave -None- for all locations.\r\n\r\nIf a category is selected the form will not show regardless of the field setting for the exposed form."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      location_categories: location_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
