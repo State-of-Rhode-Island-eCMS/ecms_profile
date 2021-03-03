@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.5.1] - 2021-03-04
+### Added
 - RIG-266: Added optional google translator module.
 - RIG-276: Updated basic page migration to use basic_html format.
 - RIG-260: Added speech view and speech twig templates for teaser and full.
@@ -18,18 +31,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-38: Added Vaccination Site Portal Build Out - Content type, View, geolocation
 
 ### Changed
-- RIG-277: Updated content moderation notification.
 - RIG-260: Changed field_speech_text to formatted long.
 - RIG-274: Added person list paragraph bundle.
-
-### Changed
 - RIG-277: Updated content moderation notification.
 - RIG-274: Changed person content type field config.
 - RIG-277: Updated content moderation notification message.
 - RIG-271: Upgraded Acquia Search Solr to 3.x.
 - RIG-271: Added excluded config (search_api_solr) to ecms_basic_page feature.
-
-### Deprecated
 
 ### Removed
 - RIG-274: Removed several person content type fields that were unused.
@@ -37,8 +45,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIG-276: Update hook 9051 includes script to update text format to basic_html for all basic pages.
-
-### Security
 
 ## [0.5.0] - 2021-02-18
 ### Fixed
@@ -533,7 +539,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.1...HEAD
+[0.5.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.9...0.5.0
 [0.4.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.8...0.4.9
 [0.4.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.7...0.4.8
