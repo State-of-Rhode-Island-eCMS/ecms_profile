@@ -9,6 +9,8 @@ dependencies:
     - field.field.node.speech.field_speech_text
     - node.type.speech
   module:
+    - datetime
+    - text
     - user
 id: node.speech.teaser
 targetEntityType: node
@@ -16,19 +18,41 @@ bundle: speech
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
+  field_speech_date:
+    type: datetime_default
+    weight: 2
     region: content
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+  field_speech_long_title:
+    type: string
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_speech_text:
+    type: text_summary_or_trimmed
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      trim_length: 500
+    third_party_settings: {  }
   links:
-    weight: 100
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_meta_tags_speech: true
-  field_speech_date: true
-  field_speech_long_title: true
-  field_speech_text: true
   langcode: true
   search_api_excerpt: true

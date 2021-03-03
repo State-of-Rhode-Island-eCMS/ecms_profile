@@ -12,9 +12,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIG-266: Added optional google translator module.
 - RIG-276: Updated basic page migration to use basic_html format.
+- RIG-260: Added speech view and speech twig templates for teaser and full.
 
 ### Changed
 - RIG-277: Updated content moderation notification.
+- RIG-260: Changed field_speech_text to formatted long.
 
 ### Deprecated
 

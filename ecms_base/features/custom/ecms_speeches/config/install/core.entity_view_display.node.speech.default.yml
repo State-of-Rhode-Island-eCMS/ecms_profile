@@ -10,6 +10,7 @@ dependencies:
   module:
     - datetime
     - metatag
+    - text
     - user
 id: node.speech.default
 targetEntityType: node
@@ -18,19 +19,19 @@ mode: default
 content:
   content_moderation_control:
     weight: -20
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   field_meta_tags_speech:
     weight: 104
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
   field_speech_date:
     weight: 103
-    label: above
+    label: hidden
     settings:
       format_type: medium
       timezone_override: ''
@@ -39,18 +40,18 @@ content:
     region: content
   field_speech_long_title:
     weight: 102
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_speech_text:
-    weight: 101
-    label: above
+    weight: 105
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: text_default
     region: content
   links:
     weight: 100
