@@ -1,0 +1,38 @@
+name: 'Vaccination Site'
+description: 'Provides Vaccination Site content type and related configuration. '
+type: module
+core_version_requirement: '^8.9 || ^9'
+dependencies:
+  - address
+  - allowed_formats
+  - content_moderation
+  - content_translation
+  - field
+  - geocoder
+  - geocoder_address
+  - geocoder_field
+  - geocoder_geofield
+  - geofield
+  - geolocation
+  - geolocation_address
+  - geolocation_geofield
+  - geolocation_geometry
+  - geolocation_geometry_data
+  - geolocation_geometry_data
+  - geolocation_leaflet
+  - language
+  - layout_builder
+  - link
+  - menu_ui
+  - node
+  - office_hours
+  - path
+  - rabbit_hole
+  - simple_sitemap
+  - taxonomy
+  - telephone
+  - text
+  - user
+  - views
+version: 9.x-1.0
+package: eCMS

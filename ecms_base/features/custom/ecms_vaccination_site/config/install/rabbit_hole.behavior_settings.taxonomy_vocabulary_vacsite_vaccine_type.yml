@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.vacsite_vaccine_type
+id: taxonomy_vocabulary_vacsite_vaccine_type
+entity_type_id: taxonomy_vocabulary
+entity_id: vacsite_vaccine_type
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

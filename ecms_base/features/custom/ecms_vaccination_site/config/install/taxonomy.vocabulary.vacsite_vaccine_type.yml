@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'VacSite Vaccine Type'
+vid: vacsite_vaccine_type
+description: 'Vaccination Site vaccine types'
+weight: 0

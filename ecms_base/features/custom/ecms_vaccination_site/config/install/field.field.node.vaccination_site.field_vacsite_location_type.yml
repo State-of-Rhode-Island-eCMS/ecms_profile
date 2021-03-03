@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vacsite_location_type
+    - node.type.vaccination_site
+    - taxonomy.vocabulary.vacsite_location_type
+id: node.vaccination_site.field_vacsite_location_type
+field_name: field_vacsite_location_type
+entity_type: node
+bundle: vaccination_site
+label: 'Location type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      vacsite_location_type: vacsite_location_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

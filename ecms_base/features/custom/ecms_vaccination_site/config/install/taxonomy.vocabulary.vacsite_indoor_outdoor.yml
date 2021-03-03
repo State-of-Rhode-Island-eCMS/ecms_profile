@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'VacSite Indoor Outdoor'
+vid: vacsite_indoor_outdoor
+description: 'Vaccination site indoor or outdoor setting'
+weight: 0

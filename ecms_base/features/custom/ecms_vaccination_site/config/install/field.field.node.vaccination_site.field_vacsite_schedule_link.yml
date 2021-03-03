@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vacsite_schedule_link
+    - node.type.vaccination_site
+  module:
+    - link
+id: node.vaccination_site.field_vacsite_schedule_link
+field_name: field_vacsite_schedule_link
+entity_type: node
+bundle: vaccination_site
+label: 'Schedule Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

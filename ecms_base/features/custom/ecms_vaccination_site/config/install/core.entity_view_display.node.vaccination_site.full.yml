@@ -1,0 +1,104 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.vaccination_site.field_vacsite_audiences
+    - field.field.node.vaccination_site.field_vacsite_body
+    - field.field.node.vaccination_site.field_vacsite_geofield
+    - field.field.node.vaccination_site.field_vacsite_indoor_or_outdoor
+    - field.field.node.vaccination_site.field_vacsite_location_address
+    - field.field.node.vaccination_site.field_vacsite_location_type
+    - field.field.node.vaccination_site.field_vacsite_office_hours
+    - field.field.node.vaccination_site.field_vacsite_phone
+    - field.field.node.vaccination_site.field_vacsite_ripta_trip_planner
+    - field.field.node.vaccination_site.field_vacsite_schedule_link
+    - field.field.node.vaccination_site.field_vacsite_spec_instructions
+    - field.field.node.vaccination_site.field_vacsite_vaccines_offered
+    - field.field.node.vaccination_site.field_vacsite_website_link
+    - node.type.vaccination_site
+  module:
+    - layout_builder
+    - link
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: node.vaccination_site.full
+targetEntityType: node
+bundle: vaccination_site
+mode: full
+content:
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_vacsite_audiences:
+    type: entity_reference_label
+    weight: 7
+    region: content
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_vacsite_body:
+    type: text_default
+    weight: 11
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vacsite_indoor_or_outdoor:
+    type: entity_reference_label
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_vacsite_location_type:
+    type: entity_reference_label
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_vacsite_schedule_link:
+    type: link_separate
+    weight: 14
+    region: content
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_vacsite_vaccines_offered:
+    type: entity_reference_label
+    weight: 9
+    region: content
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_vacsite_geofield: true
+  field_vacsite_location_address: true
+  field_vacsite_office_hours: true
+  field_vacsite_phone: true
+  field_vacsite_ripta_trip_planner: true
+  field_vacsite_spec_instructions: true
+  field_vacsite_website_link: true
+  langcode: true
+  search_api_excerpt: true

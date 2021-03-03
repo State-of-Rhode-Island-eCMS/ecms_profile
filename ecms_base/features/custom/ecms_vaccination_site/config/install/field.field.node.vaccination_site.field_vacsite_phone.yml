@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vacsite_phone
+    - node.type.vaccination_site
+  module:
+    - telephone
+id: node.vaccination_site.field_vacsite_phone
+field_name: field_vacsite_phone
+entity_type: node
+bundle: vaccination_site
+label: Phone
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

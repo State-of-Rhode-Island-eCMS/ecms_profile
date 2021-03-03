@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vacsite_geofield
+    - node.type.vaccination_site
+  module:
+    - geocoder_field
+    - geofield
+third_party_settings:
+  geocoder_field:
+    method: geocode
+    weight: 0
+    reverse_geocode:
+      field: ''
+    skip_not_empty_value: false
+    disabled: true
+    hidden: false
+    providers:
+      - arcgisonline
+    dumper: wkt
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+    field: field_vacsite_location_address
+    delta_handling: s_to_m
+id: node.vaccination_site.field_vacsite_geofield
+field_name: field_vacsite_geofield
+entity_type: node
+bundle: vaccination_site
+label: Geofield
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  backend: geofield_backend_default
+field_type: geofield
