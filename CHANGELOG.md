@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-260: Added speech view and speech twig templates for teaser and full.
 - RIGA-14: Added location list paragraph and custom form.
 - RIGA-14: Added website url and phone extension to location content type.
+- RIGA-38: Added Vaccination Site Portal Build Out - Content type, View, geolocation
 
 ### Changed
 - RIG-277: Updated content moderation notification.
