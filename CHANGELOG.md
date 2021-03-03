@@ -29,6 +29,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-14: Added location list paragraph and custom form.
 - RIGA-14: Added website url and phone extension to location content type.
 - RIGA-38: Added Vaccination Site Portal Build Out - Content type, View, geolocation
+- RIG-274: Added person teaser theming.
+- RIG-274: Added person list paragraph.
 
 ### Changed
 - RIG-260: Changed field_speech_text to formatted long.
