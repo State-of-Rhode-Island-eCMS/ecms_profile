@@ -591,9 +591,6 @@ function ecms_preprocess_paragraph__location_list(array &$variables): void {
     $variables['category_form'] = FALSE;
   };
 
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $node_storage = $entity_type_manager->getStorage('node');
-
   // Query all locations.
   $query = $node_storage->getQuery();
   $query->condition('type', 'location')
