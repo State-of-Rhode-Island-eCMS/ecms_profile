@@ -82,9 +82,6 @@
       "drupal/publishcontent": {
         "3170248 - Configuration Schema Errors": "https://www.drupal.org/files/issues/2020-09-10/publishcontent-schema-3170248-2.patch"
       },
-      "drupal/content_moderation_notifications": {
-        "3170503 - Core requirement error during Functional test": "https://www.drupal.org/files/issues/2020-09-11/3170503-2.patch"
-      },
       "drupal/redirect": {
         "3082364 - Fix the migration of the status_code redirect property: status code of NULL or 0 causes exception": "https://www.drupal.org/files/issues/2020-07-28/redirect-fix_status_code_property_migration-3082364-13.patch"
       },
@@ -129,7 +126,7 @@
     "cweagans/composer-patches": "^1.6",
     "drupal/acquia_connector": "^2.0@RC",
     "drupal/acquia_purge": "^1.1",
-    "drupal/acquia_search_solr": "^1.0@beta",
+    "drupal/acquia_search_solr": "^3.0@RC",
     "drupal/acsf": "^2.67",
     "drupal/address": "^1.8",
     "drupal/admin_toolbar": "^2.3",

@@ -24,11 +24,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIG-277: Updated content moderation notification.
 - RIG-274: Changed person content type field config.
+- RIG-277: Updated content moderation notification message.
+- RIG-271: Upgraded Acquia Search Solr to 3.x.
+- RIG-271: Added excluded config (search_api_solr) to ecms_basic_page feature.
 
 ### Deprecated
 
 ### Removed
 - RIG-274: Removed several person content type fields that were unused.
+- RIG-277: Remove patch from content_moderation_notifications issue 3170503.
 
 ### Fixed
 - RIG-276: Update hook 9051 includes script to update text format to basic_html for all basic pages.
