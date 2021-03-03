@@ -573,7 +573,7 @@ function ecms_preprocess_paragraph__location_list(array &$variables): void {
   // Check if the paragraph is targeting a specific category.
   if ($paragraph->get('field_location_list_category')->isEmpty()) {
 
-    // Check if the exposed form is enabled on the paragraph
+    // Check if the exposed form is enabled on the paragraph.
     if ($paragraph->get('field_location_list_form')->getString() === '1') {
       $variables['category_form'] = \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\LocationCategoryForm');
     }

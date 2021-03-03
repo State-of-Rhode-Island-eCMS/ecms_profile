@@ -34,7 +34,7 @@ class LocationCategoryForm extends FormBase {
 
     // Build out select options list.
     $categories = [
-      '' => t('All locations')
+      '' => t('All locations'),
     ];
     foreach ($terms as $term) {
       $categories[$term->tid] = $term->name;
