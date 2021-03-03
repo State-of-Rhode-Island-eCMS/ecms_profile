@@ -555,3 +555,68 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function ecms_preprocess_paragraph__location_list(array &$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  // Get necessary services.
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $node_storage = $entity_type_manager->getStorage('node');
+  $node_builder = $entity_type_manager->getViewBuilder('node');
+
+  // Set the cache contexts to the location_restriction query parameter.
+  $variables['#cache']['contexts'][] = 'url.query_args:location_restriction';
+
+  // Check if the paragraph is targeting a specific category.
+  if ($paragraph->get('field_location_list_category')->isEmpty()) {
+
+    // Check if the exposed form is enabled on the paragraph
+    if ($paragraph->get('field_location_list_form')->getString() === '1') {
+      $variables['category_form'] = \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\LocationCategoryForm');
+    }
+
+    // Get ?location_restriction value.
+    $location_url_restriction = \Drupal::request()->get('location_restriction');
+
+    if (!empty($location_url_restriction)) {
+      $category = $location_url_restriction;
+    }
+  }
+  else {
+    // Get the category and disable the form.
+    $category = $paragraph->get('field_location_list_category')->getString();
+    $variables['category_form'] = FALSE;
+  };
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $node_storage = $entity_type_manager->getStorage('node');
+
+  // Query all locations.
+  $query = $node_storage->getQuery();
+  $query->condition('type', 'location')
+    ->condition('status', 1)
+    ->sort('title', "ASC");
+
+  if ($category) {
+    $query->condition('field_location_category', $category);
+  }
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return;
+  }
+
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $language;
+
+  // Load teaser displays for each location.
+  $nodes = $node_storage->loadMultiple($nids);
+  $teasers = $node_builder->viewMultiple($nodes, 'teaser', $language);
+
+  $variables['locations'] = $teasers;
+}
