@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'VacSite Location Type'
+vid: vacsite_location_type
+description: 'Vaccination Site location types'
+weight: 0
