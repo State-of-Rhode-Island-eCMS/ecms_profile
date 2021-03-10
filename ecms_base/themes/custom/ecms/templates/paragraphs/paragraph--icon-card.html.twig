@@ -39,8 +39,20 @@
  */
 #}
 
+{# Determine which icon to render #}
+{% set media_library_icon = FALSE %}
+
+{% if content.field_icon.0.media_library_icon %}
+  {% set media_library_icon = TRUE %}
+  {% set icon = content.field_icon.0.media_library_icon %}
+{% else %}
+  {% set icon = content.field_icon.0.pl_icon %}
+{% endif %}
+
 {% include "@organisms/paragraphs/attention-card-w-icon/attention-card-w-icon.twig" with {
     content: content,
     paragraph: paragraph,
+    media_library_icon: media_library_icon,
+    icon: icon
   }
 %}

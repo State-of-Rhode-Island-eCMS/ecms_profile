@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.field.media.icon.field_icon_image
-    - image.style.large
     - media.type.icon
   module:
     - svg_image
