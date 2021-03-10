@@ -11,6 +11,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-8: Updated icon field on icon card to use eCMS icon library.
+- RIGA-47: Added executive order view and speech twig templates for teaser and full.
+- RIGA-47: Added views_ajax_get contrib module.
 
 ### Changed
 

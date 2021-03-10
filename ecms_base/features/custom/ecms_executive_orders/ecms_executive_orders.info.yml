@@ -3,6 +3,7 @@ description: 'Provides Executive Order content type and related configuration.'
 type: module
 core_version_requirement: ^9
 dependencies:
+  - allowed_formats
   - content_moderation
   - content_translation
   - datetime
@@ -15,9 +16,13 @@ dependencies:
   - menu_ui
   - node
   - path
+  - pathauto
   - rabbit_hole
   - rh_node
   - scheduled_transitions
+  - svg_image
+  - text
   - user
+  - views
 version: 9.x-1.0
 package: eCMS

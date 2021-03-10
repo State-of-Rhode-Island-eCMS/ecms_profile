@@ -361,18 +361,7 @@ function ecms_preprocess_node__publication(array &$variables): void {
 /**
  * Implements hook_preprocess_node().
  */
-function ecms_preprocess_node__promotions(array &$variables): void {
-
-  // We need to know the current language for some requests.
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $variables['langcode'] = $language;
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function ecms_preprocess_node__event(array &$variables): void {
-
+function ecms_preprocess_node(array &$variables): void {
   // We need to know the current language for some requests.
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['langcode'] = $language;
@@ -739,10 +728,6 @@ function ecms_preprocess_node__person(array &$variables) {
   // Get necessary services.
   $entity_type_manager = \Drupal::entityTypeManager();
   $term_storage = $entity_type_manager->getStorage('taxonomy_term');
-
-  // Get current language.
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $variables['langcode'] = $language;
 
   // Get each term reference.
   $categories = $node->get('field_person_category')->referencedEntities();

@@ -16,9 +16,6 @@ dependencies:
   - geolocation
   - geolocation_address
   - geolocation_geofield
-  - geolocation_geometry
-  - geolocation_geometry_data
-  - geolocation_geometry_data
   - geolocation_leaflet
   - language
   - layout_builder
