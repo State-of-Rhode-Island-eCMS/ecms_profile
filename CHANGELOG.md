@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-8: Updated icon field on icon card to use eCMS icon library.
 
 ### Changed
 
