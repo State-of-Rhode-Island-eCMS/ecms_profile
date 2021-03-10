@@ -19,7 +19,6 @@ class LanguageNegotiationSessionFix extends LanguageNegotiationSession {
    * {@inheritDoc}
    */
   public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL): string {
-
     if (empty($path)) {
       return '';
     }
