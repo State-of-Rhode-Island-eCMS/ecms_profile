@@ -4,15 +4,29 @@ dependencies:
   config:
     - field.storage.node.field_executive_order_text
     - node.type.executive_order
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    embed: '0'
+    minimal: '0'
+    paragraph_text: '0'
+    restricted_html: '0'
+    full_html: '0'
+    plain_text: '0'
 id: node.executive_order.field_executive_order_text
 field_name: field_executive_order_text
 entity_type: node
 bundle: executive_order
 label: 'Executive Order Text'
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
-field_type: string_long
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -9,6 +9,7 @@ dependencies:
     - node.type.executive_order
   module:
     - datetime
+    - text
     - user
 id: node.executive_order.default
 targetEntityType: node
@@ -51,7 +52,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: text_default
     region: content
   links:
     weight: 100
@@ -60,3 +61,4 @@ content:
     region: content
 hidden:
   langcode: true
+  search_api_excerpt: true
