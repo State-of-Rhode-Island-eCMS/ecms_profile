@@ -5,10 +5,9 @@ dependencies:
     - field.field.paragraph.icon_card.field_icon
     - field.field.paragraph.icon_card.field_list_title
     - field.field.paragraph.icon_card.field_text
-    - image.style.thumbnail
     - paragraphs.paragraphs_type.icon_card
   module:
-    - svg_image
+    - ecms_icon_library
     - text
 id: paragraph.icon_card.default
 targetEntityType: paragraph
@@ -17,11 +16,9 @@ mode: default
 content:
   field_icon:
     weight: 1
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+    settings: {  }
     third_party_settings: {  }
-    type: image_image
+    type: ecms_icon_library_widget
     region: content
   field_list_title:
     weight: 0
@@ -40,10 +37,10 @@ content:
     type: text_textarea
     region: content
   translation:
-    weight: 10
+    weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   status: true

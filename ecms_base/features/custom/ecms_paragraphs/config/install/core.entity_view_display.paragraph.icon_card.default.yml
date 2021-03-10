@@ -7,7 +7,7 @@ dependencies:
     - field.field.paragraph.icon_card.field_text
     - paragraphs.paragraphs_type.icon_card
   module:
-    - svg_image
+    - ecms_icon_library
     - text
 id: paragraph.icon_card.default
 targetEntityType: paragraph
@@ -15,17 +15,11 @@ bundle: icon_card
 mode: default
 content:
   field_icon:
-    weight: 0
-    label: hidden
-    settings:
-      image_style: ''
-      image_link: ''
-      svg_attributes:
-        width: null
-        height: null
-      svg_render_as_image: false
+    weight: 3
+    label: above
+    settings: {  }
     third_party_settings: {  }
-    type: image
+    type: ecms_icon_library_formatter
     region: content
   field_list_title:
     weight: 1
