@@ -19,6 +19,10 @@ class LanguageNegotiationSessionFix extends LanguageNegotiationSession {
    * {@inheritDoc}
    */
   public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL): string {
+
+    if (empty($path)) {
+      return '';
+    }
     $parent = parent::processOutbound($path, $options, $request, $bubbleable_metadata);
 
     // Make sure we have an entity.
