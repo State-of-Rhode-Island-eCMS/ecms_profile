@@ -10,9 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-8: Updated icon field on icon card to use eCMS icon library.
-- RIGA-47: Added executive order view and speech twig templates for teaser and full.
-- RIGA-47: Added views_ajax_get contrib module.
 
 ### Changed
 
@@ -21,9 +18,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-45: Added check to custom language negotiation.
 
 ### Security
+
+## [0.5.3] - 2021-03-10
+### Added
+- RIGA-8: Updated icon field on icon card to use eCMS icon library.
+- RIGA-47: Added executive order view and speech twig templates for teaser and full.
+- RIGA-47: Added views_ajax_get contrib module.
+
+### Fixed
+- RIGA-45: Added check to custom language negotiation.
 
 ## [0.5.2] - 2021-03-04
 ### Fixed
@@ -549,7 +554,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.3...HEAD
+[0.5.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.2...0.5.3
 [0.5.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.4.9...0.5.0
