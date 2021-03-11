@@ -5,12 +5,28 @@ It does this by using Google Sheets with a list of URLs from the website that
 is intended to by migrated into the eCMS system.
 
 ## URL Gathering
-URL Gathering to generate the Google Sheet is a manual process. Testing has been
-done with the Google Chrome Site Spider Mark II extension with success. This
-extension will crawl the site and find all publicly accessible URLs.
+URL Gathering to generate the Google Sheets is a manual process, utilizing the
+[Screaming Frog] app. After installing the program and entering the license key,
+simply enter the primary domain name of the site you want to crawl, and click
+start. Once the crawl is complete, you can filter the URL list by type to
+separate the files list from the main pages. Be sure to exclude any assets
+such as JS and CSS. Using the status code field to identify all 200 response
+codes, you should be able to obtain your final lists. Simply copy and paste
+the lists into a new Google Sheet, one sheet for each of HTML pages and files.
+Each sheet should contain 2 columns with the headers "Url" and "Status" where
+Status will be mapped to the Published field during migration. It's expected
+that most pages will have a status value of 1.
 
-From this list, a master URL Google Sheet can be created. This list can then
-be filtered to pull out the file URLs from the page URLs.
+### Example Sheets
+[Example Pages]
+
+[Example Files]
+
+
+### Exclude List
+To configure a list of excluded urls in Screaming Frog, navigate
+to "Configuration > Exclude." A dialog will open where you can enter any
+single url, or a regular expression.
 
 ### Files list and URL encoding
 During early testing some issues with handling URL encoded file names were
@@ -18,14 +34,6 @@ encountered. To address this, the files lists should be cleared of all "%20"
 encoded spaces, and simply replaced with a space. The resulting file and file
 redirect imports will encode the path automatically.
 
-A more reliable tool is the [Screaming Frog] app. This has been used on the
-last few migrations. In addition to the crawl of a site, it can also
-be used in "[List Mode]" mode to test the resulting migration. Simply switch to
-list mode, then paste in all the URLs you want to test. To generate the list,
-take the source list of URLs, and replace the domain (e.g. http://eohhs.ri.gov/)
-with the new test domain (e.g. https://eohhs.riecms.acsitefactory.com/). Then
-execute the crawl, and look for any 404 response codes to identify problem pages
-or redirects.
 
 ## Migrations currently included
 ### eCMS File
@@ -99,5 +107,17 @@ Other useful migration commands
 * `drush10 migrate:reset`
 * `drush10 migrate:stop`
 
+## Validating File Redirects
+In addition to crawling a site, Screaming Frog can also be used in "[List Mode]"
+to test the resulting migration. Simply switch to list mode ("Mode > List"), then
+paste in all the URLs you want to test. To generate the list,
+take the original source list of URLs, and replace the domain (e.g. http://eohhs.ri.gov/)
+with the new test domain (e.g. https://eohhs.riecms.acsitefactory.com/). Then
+execute the crawl, and look for any 404 response codes to identify problem pages
+or redirects.
+
+
 [Screaming Frog]: https://www.screamingfrog.co.uk/seo-spider/
 [List Mode]: https://www.screamingfrog.co.uk/how-to-use-list-mode/
+[Example Pages]: https://docs.google.com/spreadsheets/d/1ajAEB86ZbTt9NT4NPctFTMdU5DVIWYOWmp8SJDz3PHQ/edit#gid=0
+[Example Files]: https://docs.google.com/spreadsheets/d/1jwD_m-HC3depOVZeALE9b6tunZCAtHJCfhwVv16UYiM/edit#gid=0
