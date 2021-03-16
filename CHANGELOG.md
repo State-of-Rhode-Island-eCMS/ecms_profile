@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-42: Added zip to list of allowed file types for media type file.
 
 ### Deprecated
 
