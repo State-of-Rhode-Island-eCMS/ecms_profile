@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-zipfix: Added 'zip' files as an allowed file type for Media Entities of type 'file'
 
 ### Changed
 
