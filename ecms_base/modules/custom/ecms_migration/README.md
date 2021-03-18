@@ -17,6 +17,10 @@ Each sheet should contain 2 columns with the headers "Url" and "Status" where
 Status will be mapped to the Published field during migration. It's expected
 that most pages will have a status value of 1.
 
+### Existing Broken Links
+This initial report will identify any existing broken links on the site.
+This 404 list should be provided to the department for their review.
+
 ### Example Sheets
 [Example Pages]
 
@@ -30,9 +34,9 @@ single url, or a regular expression.
 
 ### Files list and URL encoding
 During early testing some issues with handling URL encoded file names were
-encountered. To address this, the files lists should be cleared of all "%20"
-encoded spaces, and simply replaced with a space. The resulting file and file
-redirect imports will encode the path automatically.
+encountered. To address this, the migration scripts have been updated to
+first decode, and then transliterate the file paths. Finally all spaces
+are replaced with hypehns.
 
 
 ## Migrations currently included
@@ -107,7 +111,7 @@ Other useful migration commands
 * `drush10 migrate:reset`
 * `drush10 migrate:stop`
 
-## Validating File Redirects
+## Validating File Migrations
 In addition to crawling a site, Screaming Frog can also be used in "[List Mode]"
 to test the resulting migration. Simply switch to list mode ("Mode > List"), then
 paste in all the URLs you want to test. To generate the list,
@@ -115,6 +119,12 @@ take the original source list of URLs, and replace the domain (e.g. http://eohhs
 with the new test domain (e.g. https://eohhs.riecms.acsitefactory.com/). Then
 execute the crawl, and look for any 404 response codes to identify problem pages
 or redirects.
+
+### Validating the file redirects
+Using the list mode above, you should be able to confirm all file redirects are
+in place. One of the result columns of the crawl is "Redirect URL." Use that column
+to create a new list, which should then be crawled and produce 200 OK responses.
+Any missing files or incorrect redirects should be identified by a 404.
 
 
 [Screaming Frog]: https://www.screamingfrog.co.uk/seo-spider/
