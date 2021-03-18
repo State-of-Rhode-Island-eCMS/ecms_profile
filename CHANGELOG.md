@@ -10,9 +10,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-51: Added migrate_devel module for debugging.
 
 ### Changed
 - RIGA-42: Added zip to list of allowed file types for media type file.
+- RIGA-51: Updated file and file redirect migrations.
 
 ### Deprecated
 
