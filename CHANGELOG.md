@@ -10,12 +10,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-10: Added paragraph translation sync settings to person and location features.
+- RIGA-35: Add acquia_search to install list.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+- RIGA-35: Remove acquia_search_solr from install list.
 
 ### Fixed
 - RIGA-56: Embed paragraph preview mode was breaking in admin.
