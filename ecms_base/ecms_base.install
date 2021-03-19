@@ -870,3 +870,28 @@ function ecms_base_update_9051(array &$sandbox): void {
     $node->save();
   }
 }
+
+/**
+ * Updates to run for the 0.5.4 tag.
+ */
+function ecms_base_update_9054(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Update the basic page migration config.
+  $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
+
+  $updatedModuleConfig = [
+    'migrate_plus.migration.ecms_file',
+    'migrate_plus.migration.ecms_file_redirect',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $module_source->read("{$config}"));
+  }
+
+}

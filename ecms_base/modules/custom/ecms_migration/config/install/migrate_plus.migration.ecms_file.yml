@@ -9,6 +9,7 @@ destination:
 source:
   constants:
     DRUPAL_FILE_DIRECTORY: 'public://'
+    DIRECTORY_SEPERATOR: '/'
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: google_sheets
@@ -54,13 +55,19 @@ process:
       index:
         - path
 
-  pseudo_directory:
+  pseudo_directory_path:
     - plugin: callback
       callable: pathinfo
       source: '@pseudo_file_path'
     - plugin: extract
       index:
         - dirname
+
+  pseudo_directory:
+    - plugin: concat
+      source:
+        - '@pseudo_directory_path'
+        - constants/DIRECTORY_SEPERATOR
 
   pseudo_filename:
     - plugin: callback
@@ -72,6 +79,15 @@ process:
     - plugin: skip_on_empty
       method: row
       message: 'Cannot import empty image filename.'
+    - plugin: callback
+      callable: urldecode
+    - plugin: transliteration
+    - plugin: str_replace
+      search: ' '
+      replace: '-'
+    - plugin: callback
+      callable: trim
+
 
   pseudo_basename:
     - plugin: callback
@@ -86,8 +102,15 @@ process:
       source:
         - constants/DRUPAL_FILE_DIRECTORY
         - '@pseudo_directory'
-        - '/'
         - '@pseudo_basename'
+    - plugin: callback
+      callable: urldecode
+    - plugin: transliteration
+    - plugin: str_replace
+      search: ' '
+      replace: '-'
+    - plugin: callback
+      callable: trim
 
   filename: '@pseudo_filename'
   uri:

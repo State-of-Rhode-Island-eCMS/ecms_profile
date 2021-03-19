@@ -9,6 +9,7 @@ destination:
 source:
   constants:
     DRUPAL_FILE_DIRECTORY: 'sites/default/files'
+    DIRECTORY_SEPERATOR: '/'
     REDIRECT_CODE: 301
   plugin: url
   data_fetcher_plugin: http
@@ -55,7 +56,8 @@ process:
       index:
         - path
 
-  pseudo_directory:
+  # Build the new directory structure.
+  pseudo_directory_path:
     - plugin: callback
       callable: pathinfo
       source: '@pseudo_original_filepath'
@@ -63,6 +65,22 @@ process:
       index:
         - dirname
 
+  # Add the trailing slash and handle special characters and spaces.
+  pseudo_directory:
+    - plugin: concat
+      source:
+        - '@pseudo_directory_path'
+        - constants/DIRECTORY_SEPERATOR
+    - plugin: callback
+      callable: urldecode
+    - plugin: transliteration
+    - plugin: str_replace
+      search: ' '
+      replace: '-'
+    - plugin: callback
+      callable: trim
+
+  # Build the file name, handle special characters and spaces.
   pseudo_basename:
     - plugin: callback
       callable: pathinfo
@@ -70,16 +88,20 @@ process:
     - plugin: extract
       index:
         - basename
-    # Url encode the filename or the redirect won't work.
     - plugin: callback
-      callable: urlencode
+      callable: urldecode
+    - plugin: transliteration
+    - plugin: str_replace
+      search: ' '
+      replace: '-'
+    - plugin: callback
+      callable: trim
 
   pseudo_new_file_path:
     - plugin: concat
       source:
         - constants/DRUPAL_FILE_DIRECTORY
         - '@pseudo_directory'
-        - '/'
         - '@pseudo_basename'
 
   redirect_redirect: '@pseudo_new_file_path'

@@ -15,11 +15,13 @@ use Drupal\migrate\Row;
  * Implements hook_migrate_MIGRATION_ID_prepare_row() for the ecms_file_redirect migration.
  */
 function ecms_migration_migrate_ecms_file_redirect_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
-  // Ensure we have the right public URL for the current site.
+  // Ensure we have the right public files directory for the current site.
   $public_file_path = rtrim(file_url_transform_relative(file_create_url('public://')), "/");
-  $host = \Drupal::request()->getSchemeAndHttpHost();
+
+  // Make sure this is a valid internal Uri.
+  $public_file_path = "internal:{$public_file_path}";
 
   // Replace the DRUPAL_FILE_DIRECTORY constant with the site specific value.
   $row
-    ->setSourceProperty('constants/DRUPAL_FILE_DIRECTORY', $host . $public_file_path);
+    ->setSourceProperty('constants/DRUPAL_FILE_DIRECTORY', $public_file_path);
 }
