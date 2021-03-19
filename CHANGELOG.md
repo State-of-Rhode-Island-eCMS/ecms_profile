@@ -10,11 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-51: Added migrate_devel module for debugging.
 
 ### Changed
-- RIGA-42: Added zip to list of allowed file types for media type file.
-- RIGA-51: Updated file and file redirect migrations.
 
 ### Deprecated
 
@@ -23,6 +20,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.5.4] - 2021-03-19
+### Added
+- RIGA-51: Added migrate_devel module for debugging.
+
+### Changed
+- RIGA-42: Added zip to list of allowed file types for media type file.
+- RIGA-51: Updated file and file redirect migrations.
 
 ## [0.5.3] - 2021-03-10
 ### Added
@@ -557,7 +562,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.4...HEAD
+[0.5.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.3...0.5.4
 [0.5.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.2...0.5.3
 [0.5.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.0...0.5.1
