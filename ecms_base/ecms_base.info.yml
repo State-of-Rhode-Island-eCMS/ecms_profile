@@ -112,6 +112,8 @@ install:
   - ecms_publications
   - ecms_workflow
   - google_tag
+  - update
+
 
 # Theme dependencies for the distribution.
 themes:
