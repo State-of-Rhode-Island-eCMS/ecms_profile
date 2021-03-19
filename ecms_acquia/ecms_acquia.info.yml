@@ -9,7 +9,7 @@ dependencies:
   - acsf
   - acquia_connector
   - acquia_purge
-  - acquia_search_solr
+  - acquia_search
   - purge
   - purge_drush
   - purge_processor_cron
