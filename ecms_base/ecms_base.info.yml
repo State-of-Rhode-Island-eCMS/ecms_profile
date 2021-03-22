@@ -113,6 +113,7 @@ install:
   - ecms_workflow
   - google_tag
   - update
+  - views_ui
 
 
 # Theme dependencies for the distribution.
