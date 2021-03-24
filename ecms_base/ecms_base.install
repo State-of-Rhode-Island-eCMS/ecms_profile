@@ -896,7 +896,6 @@ function ecms_base_update_9054(array &$sandbox): void {
 
 }
 
-
 /**
  * Updates to run for the 0.5.5 tag.
  */
