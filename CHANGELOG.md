@@ -10,10 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-10: Patch for paragraphs that introduces the Paragraph Translation Sync module (2887353).
 
 ### Changed
-- RIGA-54: Updated file migration to use basename.
 
 ### Deprecated
 
@@ -22,6 +20,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.5.5] - 2021-04-05
+### Added
+- RIGA-10: Patch for paragraphs that introduces the Paragraph Translation Sync module (2887353).
+
+### Changed
+- RIGA-54: Updated file migration to use basename.
 
 ## [0.5.4] - 2021-03-19
 ### Added
@@ -564,7 +569,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.5...HEAD
+[0.5.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.4...0.5.5
 [0.5.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.3...0.5.4
 [0.5.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.2...0.5.3
 [0.5.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.1...0.5.2
