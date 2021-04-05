@@ -899,7 +899,7 @@ function ecms_base_update_9054(array &$sandbox): void {
 /**
  * Updates to run for the 0.5.5 tag.
  */
-function ecms_base_update_9056(array &$sandbox): void {
+function ecms_base_update_9055(array &$sandbox): void {
 
   // Install the new module.
   $modules_to_install = [
