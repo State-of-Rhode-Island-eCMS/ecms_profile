@@ -36,6 +36,13 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  status:
+    weight: 12
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   translation:
     weight: 3
     region: content
@@ -43,4 +50,3 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
-  status: true

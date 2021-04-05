@@ -23,6 +23,13 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     region: content
+  status:
+    weight: 12
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   translation:
     weight: 10
     settings: {  }
@@ -30,4 +37,3 @@ content:
     region: content
 hidden:
   created: true
-  status: true

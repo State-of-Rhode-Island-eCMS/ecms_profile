@@ -22,13 +22,43 @@ settings:
     negate: 1
     target_bundles: null
     target_bundles_drag_drop:
-      file_list:
-        weight: 4
+      accordion_builder:
+        weight: 14
         enabled: false
-      formatted_text:
+      card:
+        weight: 15
+        enabled: false
+      column_container:
+        weight: 16
+        enabled: false
+      embed:
+        weight: 17
+        enabled: false
+      file_list:
         weight: 5
         enabled: false
-      media_item:
-        weight: 6
+      formatted_text:
+        weight: 2
         enabled: false
+      gallery:
+        weight: 20
+        enabled: false
+      gallery_item:
+        enabled: true
+        weight: 21
+      icon_card:
+        weight: 22
+        enabled: false
+      media_item:
+        weight: 7
+        enabled: false
+      promotion_reference:
+        weight: 24
+        enabled: false
+      publication_list:
+        weight: 25
+        enabled: false
+      text_card:
+        enabled: true
+        weight: 26
 field_type: entity_reference_revisions

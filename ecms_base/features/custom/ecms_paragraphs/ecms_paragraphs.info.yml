@@ -1,29 +1,30 @@
 name: 'eCMS Paragraphs'
 description: 'Provides Paragraph types and related configuration.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - allowed_formats
-  - ckeditor
-  - content_translation
-  - ecms_icon_library
-  - editor
-  - entity_reference_revisions
-  - field
-  - file
-  - filter
-  - image
-  - language
-  - layout_builder
-  - link
-  - media
-  - media_library
-  - metatag
-  - options
-  - paragraphs
-  - path
-  - svg_image
-  - text
-  - user
+  - 'allowed_formats:allowed_formats'
+  - 'drupal:ckeditor'
+  - 'drupal:content_translation'
+  - 'drupal:editor'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:filter'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:layout_builder'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'ecms_icon_library:ecms_icon_library'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'metatag:metatag'
+  - 'paragraphs:paragraphs'
+  - 'paragraphs:paragraphs_translation_sync'
+  - 'svg_image:svg_image'
 version: 9.x-1.0
 package: eCMS
