@@ -75,10 +75,10 @@ process:
       source: '@pseudo_file_path'
     - plugin: extract
       index:
-        - filename
+        - basename
     - plugin: skip_on_empty
       method: row
-      message: 'Cannot import empty image filename.'
+      message: 'Cannot import empty filename.'
     - plugin: callback
       callable: urldecode
     - plugin: transliteration

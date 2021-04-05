@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-10: Patch for paragraphs that introduces the Paragraph Translation Sync module (2887353).
 
 ### Changed
+- RIGA-54: Updated file migration to use basename.
 
 ### Deprecated
 
