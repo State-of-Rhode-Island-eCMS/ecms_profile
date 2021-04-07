@@ -115,7 +115,6 @@ install:
   - update
   - views_ui
 
-
 # Theme dependencies for the distribution.
 themes:
   - classy
