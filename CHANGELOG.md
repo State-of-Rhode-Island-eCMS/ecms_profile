@@ -10,8 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-10: Added paragraph translation sync settings to person and location features.
 
 ### Changed
+- RIGA-10: Enabled translation for icon_card paragraph.
 
 ### Deprecated
 

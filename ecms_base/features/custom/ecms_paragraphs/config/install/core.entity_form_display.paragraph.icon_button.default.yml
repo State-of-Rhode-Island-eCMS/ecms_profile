@@ -35,7 +35,7 @@ content:
     type: link_default
     region: content
   status:
-    weight: 14
+    weight: 15
     settings:
       display_label: true
     third_party_settings: {  }
