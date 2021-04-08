@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-54: Update hook 9056 renames all files without extensions in filename.
 
 ### Security
 
