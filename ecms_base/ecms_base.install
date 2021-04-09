@@ -937,3 +937,32 @@ function ecms_base_update_9055(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Updates to run for the 0.5.6 tag.
+ */
+function ecms_base_update_9056(array &$sandbox): void {
+
+  // Find all the files that do have an extension.
+  $query = \Drupal::entityQuery("file");
+  $query->condition('filename', '.', 'CONTAINS');
+  $files_with_extensions = $query->execute();
+
+  // Get all file ids.
+  $all_query = \Drupal::entityQuery("file");
+  $all_files = $all_query->execute();
+
+  // Result of the diff will be files that don't have extensions.
+  $missing_extension_ids = array_diff($all_files, $files_with_extensions);
+
+  /** @var \Drupal\file\FileInterface|null $file*/
+  $files_to_rename = \Drupal::entityTypeManager()
+    ->getStorage('file')
+    ->loadMultiple($missing_extension_ids);
+
+  foreach ($files_to_rename as $file) {
+    $file->setFilename(basename($file->getFileUri()));
+    $file->save();
+  }
+
+}
