@@ -15,10 +15,9 @@ content:
   field_embed_content:
     weight: 0
     label: hidden
-    settings:
-      trim_length: 155
+    settings: {  }
     third_party_settings: {  }
-    type: text_trimmed
+    type: text_default
     region: content
 hidden:
   search_api_excerpt: true

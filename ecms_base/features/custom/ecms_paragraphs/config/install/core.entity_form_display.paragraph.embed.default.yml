@@ -2,22 +2,34 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.embed.field_embed_content
     - paragraphs.paragraphs_type.embed
   module:
     - text
-id: paragraph.embed.preview
+id: paragraph.embed.default
 targetEntityType: paragraph
 bundle: embed
-mode: preview
+mode: default
 content:
   field_embed_content:
     weight: 0
-    label: hidden
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  status:
+    weight: 12
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  translation:
+    weight: 10
     settings: {  }
     third_party_settings: {  }
-    type: text_default
     region: content
 hidden:
-  search_api_excerpt: true
+  created: true
