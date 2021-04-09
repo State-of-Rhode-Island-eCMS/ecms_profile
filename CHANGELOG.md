@@ -10,19 +10,26 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-10: Added paragraph translation sync settings to person and location features.
 
 ### Changed
-- RIGA-10: Enabled translation for icon_card paragraph.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIGA-54: Update hook 9056 renames all files without extensions in filename.
 
 ### Security
+
+## [0.5.6] - 2021-04-09
+### Added
+- RIGA-10: Added paragraph translation sync settings to person and location features.
+
+### Changed
+- RIGA-10: Enabled translation for icon_card paragraph.
+
+### Fixed
+- RIGA-54: Update hook 9056 renames all files without extensions in filename.
 
 ## [0.5.5] - 2021-04-05
 ### Added
@@ -572,7 +579,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.6...HEAD
+[0.5.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.5...0.5.6
 [0.5.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.4...0.5.5
 [0.5.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.3...0.5.4
 [0.5.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.2...0.5.3
