@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-56: Embed paragraph preview mode was breaking in admin.
 
 ### Security
 
