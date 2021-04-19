@@ -2,22 +2,18 @@ langcode: en
 status: true
 dependencies:
   module:
-    - acquia_search
     - search_api_solr
     - node
     - search_api
   config:
+    - field.storage.node.field_location_body
     - field.storage.node.body
+    - field.storage.node.field_press_release_body
     - field.storage.node.field_basic_page_body
     - field.storage.node.field_landing_page_body
-    - field.storage.node.field_event_body
-    - field.storage.node.field_location_body
-    - field.storage.node.field_press_release_body
     - search_api.server.acquia_search_server
     - core.entity_view_mode.node.full
 third_party_settings:
-  acquia_search_solr:
-    use_edismax: 1
   search_api_solr:
     finalize: false
     commit_before_finalize: false
@@ -96,21 +92,13 @@ field_settings:
       config:
         - field.storage.node.field_location_body
   field_press_release_body:
-    label: 'Press Release Body'
+    label: Body
     datasource_id: 'entity:node'
     property_path: field_press_release_body
     type: text
     dependencies:
       config:
         - field.storage.node.field_press_release_body
-  field_event_body:
-    label: 'Event Body'
-    datasource_id: 'entity:node'
-    property_path: field_event_body
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_event_body
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -198,7 +186,8 @@ processor_settings:
     highlight_partial: false
     excerpt: true
     excerpt_length: 256
-    exclude_fields: {  }
+    exclude_fields:
+      - title
     prefix: '<strong>'
     suffix: '</strong>'
     weights:
@@ -208,7 +197,6 @@ processor_settings:
     fields:
       - body
       - field_basic_page_body
-      - field_event_body
       - field_landing_page_body
       - field_location_body
       - field_press_release_body
@@ -243,4 +231,4 @@ tracker_settings:
 options:
   index_directly: false
   cron_limit: 50
-server: acquia_search_solr_search_api_solr_server
+server: acquia_search_server
