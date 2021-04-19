@@ -7,9 +7,9 @@ dependencies:
     - node
     - search_api
   config:
-    - field.storage.node.body
     - field.storage.node.field_basic_page_body
     - field.storage.node.field_landing_page_body
+    - field.storage.node.field_event_body
     - search_api.server.acquia_search_server
     - core.entity_view_mode.node.full
 third_party_settings:
@@ -60,14 +60,6 @@ name: 'Acquia Search Solr Search API Solr index'
 description: ''
 read_only: false
 field_settings:
-  body:
-    label: Body
-    datasource_id: 'entity:node'
-    property_path: body
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.body
   field_basic_page_body:
     label: 'Intro text'
     datasource_id: 'entity:node'
@@ -84,6 +76,30 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_landing_page_body
+  field_location_body:
+    label: 'Additional information'
+    datasource_id: 'entity:node'
+    property_path: field_location_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_location_body
+  field_press_release_body:
+    label: 'Press Release Body'
+    datasource_id: 'entity:node'
+    property_path: field_press_release_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_press_release_body
+  field_event_body:
+    label: 'Event Body'
+    datasource_id: 'entity:node'
+    property_path: field_basic_page_bodyfield_event_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_body
   node_grants:
     label: 'Node access information'
     property_path: search_api_node_grants
@@ -171,8 +187,7 @@ processor_settings:
     highlight_partial: false
     excerpt: true
     excerpt_length: 256
-    exclude_fields:
-      - title
+    exclude_fields: {  }
     prefix: '<strong>'
     suffix: '</strong>'
     weights:
