@@ -11,9 +11,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-10: Added paragraph translation sync settings to person and location features.
-- RIGA-35: Add acquia_search to install list.
+- RIGA-35: Add acquia_search module.
 
 ### Changed
+- RIGA-35: Moved Acquia Search and related config into new feature ecms_solr_search.
+- RIGA-35: Acquia Connector is now installed by default but not required.
 
 ### Deprecated
 
