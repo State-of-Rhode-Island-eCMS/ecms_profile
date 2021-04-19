@@ -18,7 +18,6 @@ dependencies:
 # Install the search modules.
 install:
   - acquia_connector
-  - acquia_search
 
 # Theme dependencies for the distribution.
 themes:
