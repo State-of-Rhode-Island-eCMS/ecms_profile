@@ -95,7 +95,7 @@ field_settings:
   field_event_body:
     label: 'Event Body'
     datasource_id: 'entity:node'
-    property_path: field_basic_page_bodyfield_event_body
+    property_path: field_event_body
     type: text
     dependencies:
       config:
