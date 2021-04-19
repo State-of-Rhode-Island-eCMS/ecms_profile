@@ -7,6 +7,7 @@ dependencies:
     - node
     - search_api
   config:
+    - field.storage.node.body
     - field.storage.node.field_basic_page_body
     - field.storage.node.field_landing_page_body
     - field.storage.node.field_event_body
@@ -62,6 +63,14 @@ name: 'Acquia Search Solr Search API Solr index'
 description: ''
 read_only: false
 field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
   field_basic_page_body:
     label: 'Intro text'
     datasource_id: 'entity:node'
@@ -197,6 +206,7 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
+      - body
       - field_basic_page_body
       - field_event_body
       - field_landing_page_body
