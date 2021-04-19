@@ -10,6 +10,8 @@ dependencies:
     - field.storage.node.field_basic_page_body
     - field.storage.node.field_landing_page_body
     - field.storage.node.field_event_body
+    - field.storage.node.field_location_body
+    - field.storage.node.field_press_release_body
     - search_api.server.acquia_search_server
     - core.entity_view_mode.node.full
 third_party_settings:
@@ -195,9 +197,11 @@ processor_settings:
   html_filter:
     all_fields: true
     fields:
-      - body
       - field_basic_page_body
+      - field_event_body
       - field_landing_page_body
+      - field_location_body
+      - field_press_release_body
       - rendered_item
       - title
       - type
