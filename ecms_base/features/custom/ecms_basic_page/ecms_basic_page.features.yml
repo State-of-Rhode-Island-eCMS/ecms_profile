@@ -2,6 +2,6 @@ bundle: ecms
 excluded:
   - page_manager.page.moderation_dashboard
   - page_manager.page_variant.moderation_dashboard-panels_variant-0
-  - search_api.index.acquia_search_solr_search_api_solr_index
+  - search_api.index.acquia_search_index
   - views.view.moderation_dashboard_recent_changes
-  - views.view.acquia_search_solr
+  - views.view.acquia_search

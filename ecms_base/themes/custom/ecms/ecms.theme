@@ -288,7 +288,7 @@ function ecms_theme_suggestions_input_alter(array &$suggestions, array $variable
 function ecms_form_alter(&$form, FormStateInterface $form_state, string $form_id): void {
   if ($form_id === 'ecms_search_block_form'
     || $form['#id'] === "views-exposed-form-site-search-page-1"
-    || $form['#id'] === "views-exposed-form-acquia-search-solr-page"
+    || $form['#id'] === "views-exposed-form-acquia-search-page"
   ) {
 
     // Input provided by search view exposed form.

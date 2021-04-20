@@ -5,7 +5,7 @@ dependencies:
     - search_api.index.acquia_search_index
   module:
     - search_api
-id: acquia_search_solr
+id: acquia_search
 label: 'Acquia Search Solr'
 module: views
 description: ''
@@ -372,7 +372,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
+          order: DESC
           exposed: false
           expose:
             label: ''
