@@ -68,7 +68,7 @@
         "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
         "3092181 - Nested Paragraphs create multiple drag handles": "https://www.drupal.org/files/issues/2020-12-08/3092181-142-9X_0.patch",
         "3116478 - Add a way to silently keep an item locked when processing a queue via cron": "https://www.drupal.org/files/issues/2020-08-19/3116478-63.patch",
-        "2259567 - Unnecessary restrictions on logo format: Can't upload replacement SVG logo": "https://www.drupal.org/files/issues/2019-06-24/2259567-113_0.patch",
+        "2259567 - Unnecessary restrictions on logo format: Can't upload replacement SVG logo": "https://www.drupal.org/files/issues/2021-01-26/2259567--119-allow-svg-image-upload-d9-1-x.patch",
         "3020876 - Contextual links of reusable content blocks are not displayed when rendering entities built via Layout Builder": "https://www.drupal.org/files/issues/2020-09-25/contextual_links_with_LB-3020876-38.patch",
         "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
         "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
