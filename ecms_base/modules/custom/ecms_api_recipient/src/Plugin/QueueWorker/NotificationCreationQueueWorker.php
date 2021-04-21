@@ -155,7 +155,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       // already exists before proceeding.
       if (!$uuidExists) {
         // Postpone processing until the the uuid exists.
-        throw new DelayedRequeueException('The base translation does not exist yet.');
+        throw new DelayedRequeueException(3600, 'The base translation does not exist yet.');
       }
 
       // Create the translation for the existing node.
