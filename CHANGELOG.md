@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-10: Added paragraph translation sync settings to person and location features.
 - RIGA-35: Add acquia_search module.
 
 ### Changed
