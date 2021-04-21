@@ -6,7 +6,7 @@ namespace Drupal\ecms_api_recipient\Plugin\QueueWorker;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Queue\PostponeItemException;
+use Drupal\Core\Queue\DelayedRequeueException;
 use Drupal\Core\Queue\QueueWorkerBase;
 use Drupal\Core\Queue\RequeueException;
 use Drupal\Core\Url;
@@ -155,7 +155,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
       // already exists before proceeding.
       if (!$uuidExists) {
         // Postpone processing until the the uuid exists.
-        throw new PostponeItemException('The base translation does not exist yet.');
+        throw new DelayedRequeueException('The base translation does not exist yet.');
       }
 
       // Create the translation for the existing node.
