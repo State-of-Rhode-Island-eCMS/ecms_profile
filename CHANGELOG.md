@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-35: Add acquia_search module.
+- RIGA-43: Added mobile and fax fields to person.
 
 ### Changed
 - RIGA-35: Moved Acquia Search and related config into new feature ecms_solr_search.

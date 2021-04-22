@@ -3,14 +3,13 @@ status: true
 dependencies:
   module:
     - node
-    - taxonomy
-id: node.field_person_category
-field_name: field_person_category
+    - telephone
+id: node.field_person_mobile
+field_name: field_person_mobile
 entity_type: node
-type: entity_reference
-settings:
-  target_type: taxonomy_term
-module: core
+type: telephone
+settings: {  }
+module: telephone
 locked: false
 cardinality: 1
 translatable: true
