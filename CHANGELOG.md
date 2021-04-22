@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.5.7] - 2021-04-22
+### Added
 - RIGA-35: Add acquia_search module.
 - RIGA-43: Added mobile and fax fields to person.
 
@@ -17,16 +30,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-35: Moved Acquia Search and related config into new feature ecms_solr_search.
 - RIGA-35: Acquia Connector is now installed by default but not required.
 
-### Deprecated
-
 ### Removed
 - RIGA-35: Remove acquia_search_solr from install list.
 
 ### Fixed
 - RIGA-52: Fixed IE11 not displaying color themes correctly.
 - RIGA-56: Embed paragraph preview mode was breaking in admin.
-
-### Security
 
 ## [0.5.6] - 2021-04-09
 ### Added
@@ -586,7 +595,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.7...HEAD
+[0.5.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.6...0.5.7
 [0.5.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.5...0.5.6
 [0.5.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.4...0.5.5
 [0.5.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.3...0.5.4
