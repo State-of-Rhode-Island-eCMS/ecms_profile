@@ -2,21 +2,18 @@ langcode: en
 status: true
 dependencies:
   module:
-    - acquia_search_solr
     - search_api_solr
     - node
     - search_api
   config:
     - field.storage.node.field_location_body
+    - field.storage.node.body
     - field.storage.node.field_press_release_body
-    - field.storage.node.field_event_body
     - field.storage.node.field_basic_page_body
     - field.storage.node.field_landing_page_body
-    - search_api.server.acquia_search_solr_search_api_solr_server
+    - search_api.server.acquia_search_server
     - core.entity_view_mode.node.full
 third_party_settings:
-  acquia_search_solr:
-    use_edismax: 1
   search_api_solr:
     finalize: false
     commit_before_finalize: false
@@ -57,11 +54,19 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
-id: acquia_search_solr_search_api_solr_index
+id: acquia_search_index
 name: 'Acquia Search Solr Search API Solr index'
 description: ''
 read_only: false
 field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
   field_basic_page_body:
     label: 'Intro text'
     datasource_id: 'entity:node'
@@ -70,14 +75,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_basic_page_body
-  field_event_body:
-    label: Description
-    datasource_id: 'entity:node'
-    property_path: field_event_body
-    type: text
-    dependencies:
-      config:
-        - field.storage.node.field_event_body
   field_landing_page_body:
     label: 'Intro text'
     datasource_id: 'entity:node'
@@ -95,7 +92,7 @@ field_settings:
       config:
         - field.storage.node.field_location_body
   field_press_release_body:
-    label: 'Press Release Body'
+    label: Body
     datasource_id: 'entity:node'
     property_path: field_press_release_body
     type: text
@@ -189,14 +186,43 @@ processor_settings:
     highlight_partial: false
     excerpt: true
     excerpt_length: 256
-    exclude_fields: {  }
+    exclude_fields:
+      - title
     prefix: '<strong>'
     suffix: '</strong>'
     weights:
       postprocess_query: 0
+  html_filter:
+    all_fields: true
+    fields:
+      - body
+      - field_basic_page_body
+      - field_landing_page_body
+      - field_location_body
+      - field_press_release_body
+      - rendered_item
+      - title
+      - type
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
   language_with_fallback: {  }
   rendered_item: {  }
   solr_date_range:
+    weights:
+      preprocess_index: 0
+  type_boost:
+    boosts:
+      'entity:node':
+        datasource_boost: !!float 1
     weights:
       preprocess_index: 0
 tracker_settings:
@@ -205,4 +231,4 @@ tracker_settings:
 options:
   index_directly: false
   cron_limit: 50
-server: acquia_search_solr_search_api_solr_server
+server: acquia_search_server

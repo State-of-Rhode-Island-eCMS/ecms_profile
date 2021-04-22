@@ -1,0 +1,10 @@
+name: 'eCMS Acquia Solr Search'
+description: 'Provides an optional Solr driven search'
+type: module
+core_version_requirement: '^8.9 || ^9'
+dependencies:
+  - node
+  - acquia_search
+  - views
+version: 9.x-1.0
+package: eCMS

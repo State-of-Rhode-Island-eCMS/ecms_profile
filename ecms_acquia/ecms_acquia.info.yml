@@ -7,15 +7,17 @@ core_version_requirement: ^9
 # Module dependencies for the distribution.
 dependencies:
   - acsf
-  - acquia_connector
   - acquia_purge
-  - acquia_search_solr
   - purge
   - purge_drush
   - purge_processor_cron
   - purge_processor_lateruntime
   - purge_queuer_coretags
   - purge_ui
+
+# Install the search modules.
+install:
+  - acquia_connector
 
 # Theme dependencies for the distribution.
 themes:

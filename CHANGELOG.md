@@ -10,12 +10,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-35: Add acquia_search module.
 
 ### Changed
+- RIGA-35: Moved Acquia Search and related config into new feature ecms_solr_search.
+- RIGA-35: Acquia Connector is now installed by default but not required.
 
 ### Deprecated
 
 ### Removed
+- RIGA-35: Remove acquia_search_solr from install list.
 
 ### Fixed
 - RIGA-56: Embed paragraph preview mode was breaking in admin.
