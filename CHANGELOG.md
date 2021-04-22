@@ -22,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-35: Remove acquia_search_solr from install list.
 
 ### Fixed
+- RIGA-52: Fixed IE11 not displaying color themes correctly.
 - RIGA-56: Embed paragraph preview mode was breaking in admin.
 
 ### Security
