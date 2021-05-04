@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-57: Allow table tags within basic_html format.
 
 ### Changed
 
@@ -25,7 +26,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-35: Add acquia_search module.
 - RIGA-43: Added mobile and fax fields to person.
-- RIGA-57: Allow table tags within basic_html format.
 
 ### Changed
 - RIGA-35: Moved Acquia Search and related config into new feature ecms_solr_search.

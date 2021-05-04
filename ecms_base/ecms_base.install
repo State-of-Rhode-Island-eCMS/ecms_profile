@@ -968,9 +968,9 @@ function ecms_base_update_9056(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.5.7 tag.
+ * Updates to run for the 0.5.8 tag.
  */
-function ecms_base_update_9057(array &$sandbox): void {
+function ecms_base_update_9058(array &$sandbox): void {
 
   // Config updates.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
