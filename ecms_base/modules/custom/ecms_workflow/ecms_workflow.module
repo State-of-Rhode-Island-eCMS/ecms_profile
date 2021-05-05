@@ -29,6 +29,10 @@ function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
     \Drupal::service('ecms_workflow.bundle_create')
       ->addTaxonomyTypePermissions($bundle);
   }
+
+  if (function_exists('drupal_flush_all_caches')) {
+    drupal_flush_all_caches();
+  }
 }
 
 /**
