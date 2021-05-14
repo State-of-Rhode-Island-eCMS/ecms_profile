@@ -18,7 +18,6 @@ COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
 
 
-
 # Move up a directory.
 cd ..
 
