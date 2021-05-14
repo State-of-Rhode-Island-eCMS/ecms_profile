@@ -11,17 +11,22 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-57: Allow table tags within basic_html format.
+- RIGA-62: Support events that span multiple months in teaser view.
+- RIGA-62: Added patch for smart_date to fix issue with all day dates.
 
 ### Changed
 - RIGA-24: Update Drupal core from 9.0.x to 9.1.x.
 - RIGA-24: Update Views Ajax Get module to 1.x-dev.
 - RIGA-24: Restored functional tests for Github actions.
+- RIGA-61: Changed events view to use end date rather than start date for filter.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-63: Fixed frontend output for all day events.
+- RIGA-77: Fixed events not showing restration url.
 
 ### Security
 
