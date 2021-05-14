@@ -123,10 +123,10 @@
 {% endif %}
 
 {# Get registration link url #}
-{% if node.field_event_virtual_meeting_url.0.url.external %}
-  {% set registration_link_url = content.field_event_virtual_meeting_url.0['#url'].getUri() %}
+{% if node.field_event_registration_url.0.url.external %}
+  {% set registration_link_url = content.field_event_registration_url.0['#url'].getUri() %}
 {% else %}
-  {% set registration_link_url = content.field_event_virtual_meeting_url.0['#url'] %}
+  {% set registration_link_url = content.field_event_registration_url.0['#url'] %}
 {% endif %}
 
 {% include '@templates/01-content/node--event--full.twig' with {
