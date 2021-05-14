@@ -18,7 +18,6 @@ COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
 
 
-#echo ${GITHUB_REF##*/}
 
 # Move up a directory.
 cd ..
