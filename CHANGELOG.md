@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-57: Allow table tags within basic_html format.
 
 ### Changed
+- RIGA-24: Update Drupal core from 9.0.x to 9.1.x.
 
 ### Deprecated
 
