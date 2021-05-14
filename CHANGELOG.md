@@ -26,7 +26,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-63: Fixed frontend output for all day events.
-- RIGA-77: Fixed events not showing restration url.
+- RIGA-77: Fixed events not showing registration url.
 
 ### Security
 
