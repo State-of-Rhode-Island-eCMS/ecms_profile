@@ -100,7 +100,7 @@
       "drupal_git/migrate_process_trim": {
         "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
       },
-      "drupal_git/views_ajax_get": {
+      "drupal/views_ajax_get": {
         "3214376 - Core version requirement": "https://www.drupal.org/files/issues/2021-05-17/3214376-2.patch"
       }
     },
