@@ -14,6 +14,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-24: Update Drupal core from 9.0.x to 9.1.x.
+- RIGA-24: Update Views Ajax Get module to 1.x-dev.
+- RIGA-24: Restored functional tests for Github actions.
 
 ### Deprecated
 
