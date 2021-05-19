@@ -64,17 +64,12 @@
   "extra": {
     "patches": {
       "drupal/core": {
-        "1356276 - Allow profiles to define a base/parent profile and load them in the correct order": "https://www.drupal.org/files/issues/2020-03-24/1356276-531-9.0.x-9.patch",
-        "2914389 - Allow profiles to exclude dependencies of their parent": "https://www.drupal.org/files/issues/2018-07-09/2914389-8-do-not-test.patch",
-        "3106659 - Error: Call to a member function getItemDefinition() on null in media_requirements()": "https://www.drupal.org/files/issues/2020-04-29/media-install-requirements-3106659.patch",
+        "1356276 - Allow profiles to define a base/parent profile and load them in the correct order": "https://www.drupal.org/files/issues/2020-12-13/1356276-633-by-mpotter-balsama-phenaproxima-9.1.0-9.2.x.patch",
         "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
-        "3083051 - Remove tabledrag.js replacement when core issues are resolved": "https://www.drupal.org/files/issues/2020-10-02/3083051-21.patch",
-        "1832818 - Allow a queue item to be postponed": "https://www.drupal.org/files/issues/2020-03-24/1832818.80-requeue.patch",
-        "2259567 - Unnecessary restrictions on logo format: Can't upload replacement SVG logo": "https://www.drupal.org/files/issues/2019-06-24/2259567-113_0.patch",
+        "3092181 - Nested Paragraphs create multiple drag handles": "https://www.drupal.org/files/issues/2020-12-08/3092181-142-9X_0.patch",
         "3020876 - Contextual links of reusable content blocks are not displayed when rendering entities built via Layout Builder": "https://www.drupal.org/files/issues/2020-09-25/contextual_links_with_LB-3020876-38.patch",
         "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
         "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
-        "2958588 - Off-canvas style resets are overriding styles (especially SVGs) in Safari and Firefox resulting in display issues": "https://www.drupal.org/files/issues/2021-01-06/off-canvas-style-resets-2958588-13.patch",
         "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2021-02-10/3025039_42.patch",
         "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch"
       },
@@ -137,7 +132,7 @@
     "drupal/auto_entitylabel": "^3.0@beta",
     "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
-    "drupal/core-recommended": "^9.0",
+    "drupal/core-recommended": "^9.1",
     "drupal/easy_breadcrumb": "^1.13",
     "drupal/extlink": "^1.5",
     "drupal/features": "^3.11",
@@ -182,7 +177,7 @@
     "drupal/token": "^1.7",
     "drupal/twig_tweak": "^2.8",
     "drupal/twig_vardumper": "^3.0",
-    "drupal/views_ajax_get": "^1.0@RC",
+    "drupal/views_ajax_get": "1.x-dev@dev",
     "drupal/webform": "^6.0",
     "drupal/webform_encrypt": "1.x-dev@dev",
     "drupal_git/migrate_google_sheets": "1.0.0",

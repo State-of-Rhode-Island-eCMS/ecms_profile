@@ -219,7 +219,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
       case 5:
         // Test a non-default language entity that does not have a base entity
-        // created yet. Expect the PostponeQueueException.
+        // created yet. Expect the DelayedRequeueException.
         $notification = [
           'uuid' => self::ENTITY_UUID,
           'langcode' => self::ALTERNATE_LANGCODE,
@@ -258,7 +258,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
           ->with(self::ENTITY_UUID)
           ->willReturn(FALSE);
 
-        $this->expectException('\Drupal\Core\Queue\PostponeItemException');
+        $this->expectException('\Drupal\Core\Queue\DelayedRequeueException');
         break;
 
       case 6:
