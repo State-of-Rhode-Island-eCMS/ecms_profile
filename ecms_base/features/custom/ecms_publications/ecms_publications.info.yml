@@ -1,26 +1,30 @@
 name: 'eCMS Publications'
 description: 'Provides Publication content type and related configuration.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - content_moderation
-  - content_translation
-  - datetime
-  - field
-  - file
-  - image
-  - language
-  - link
-  - media
-  - media_library
-  - menu_ui
-  - node
-  - paragraphs
-  - path
-  - rh_node
-  - scheduled_transitions
-  - taxonomy
-  - user
-  - views
+  - 'drupal:block'
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:datetime'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:system'
+  - 'drupal:taxonomy'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'paragraphs:paragraphs'
+  - 'paragraphs:paragraphs_translation_sync'
+  - 'rabbit_hole:rh_node'
+  - 'scheduled_transitions:scheduled_transitions'
+  - 'svg_image:svg_image'
 version: 9.x-1.0
 package: eCMS

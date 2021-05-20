@@ -11,7 +11,7 @@ bundle: publication_list
 label: 'Display form'
 description: 'Display the exposed form to let site users filter the results.'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 0
