@@ -82,9 +82,6 @@
       "drupal/redirect": {
         "3082364 - Fix the migration of the status_code redirect property: status code of NULL or 0 causes exception": "https://www.drupal.org/files/issues/2020-07-28/redirect-fix_status_code_property_migration-3082364-13.patch"
       },
-      "drupal/smart_date": {
-        "3212990 - Hide the end date unless different hides the end date on all day": "https://www.drupal.org/files/issues/2021-05-08/smart_date-dont_hide_all_day_end-3212990-2.patch"
-      },
       "drupal/paragraphs": {
         "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
         "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
@@ -175,7 +172,7 @@
     "drupal/search_api": "^1.18",
     "drupal/simple_oauth": "^4.5",
     "drupal/simple_sitemap": "^3.8",
-    "drupal/smart_date": "^3.1",
+    "drupal/smart_date": "^3.3",
     "drupal/svg_image": "^1.14",
     "drupal/token": "^1.7",
     "drupal/twig_tweak": "^2.8",
