@@ -16,6 +16,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-62: Removed patch for smart_date to fix issue with all day dates.
 
 ### Fixed
 
