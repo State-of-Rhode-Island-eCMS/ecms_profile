@@ -16,11 +16,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
-- RIGA-62: Removed patch for smart_date to fix issue with all day dates.
 
 ### Fixed
 
 ### Security
+
+## [0.5.9] - 2021-05-20
+### Removed
+- RIGA-62: Removed patch for smart_date to fix issue with all day dates.
 
 ## [0.5.8] - 2021-05-20
 ### Added
@@ -613,7 +616,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.9...HEAD
+[0.5.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.8...0.5.9
 [0.5.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.7...0.5.8
 [0.5.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.6...0.5.7
 [0.5.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.5...0.5.6
