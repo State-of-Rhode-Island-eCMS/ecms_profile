@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-57: Allow table tags within paragraph_text format.
 
 ### Deprecated
 
