@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.5.8] - 2021-05-20
+### Added
 - RIGA-57: Allow table tags within basic_html format.
 - RIGA-62: Support events that span multiple months in teaser view.
 - RIGA-62: Added patch for smart_date to fix issue with all day dates.
@@ -20,16 +33,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-24: Restored functional tests for Github actions.
 - RIGA-61: Changed events view to use end date rather than start date for filter.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIGA-63: Fixed frontend output for all day events.
 - RIGA-77: Fixed events not showing registration url.
 - RIGA-64: Fixed issues with publication list translation settings.
-
-### Security
 
 ## [0.5.7] - 2021-04-22
 ### Added
@@ -605,7 +612,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.8...HEAD
+[0.5.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.7...0.5.8
 [0.5.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.6...0.5.7
 [0.5.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.5...0.5.6
 [0.5.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.4...0.5.5
