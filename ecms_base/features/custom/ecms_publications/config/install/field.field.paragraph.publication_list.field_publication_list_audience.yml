@@ -12,7 +12,7 @@ bundle: publication_list
 label: 'Audience restriction'
 description: "Select the audience for the publication list. Leave -None- for all publications.\r\n\r\nThis also serves as the default value if the the exposed form is enabled."
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

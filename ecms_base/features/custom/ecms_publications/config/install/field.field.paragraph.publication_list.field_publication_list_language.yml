@@ -11,7 +11,7 @@ bundle: publication_list
 label: 'Language restriction'
 description: 'Select a language for the publication list. Leave -None- for all languages.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
