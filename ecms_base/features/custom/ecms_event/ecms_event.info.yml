@@ -1,34 +1,34 @@
 name: Event
 description: 'Provides Event content type and related configuration.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - content_moderation
-  - content_translation
-  - ecms_feeds
-  - ecms_promotions
-  - ecms_workflow
-  - feeds
-  - field
-  - file
-  - image
-  - language
-  - link
-  - media
-  - media_library
-  - menu_ui
-  - metatag
-  - node
-  - path
-  - pathauto
-  - rabbit_hole
-  - scheduled_transitions
-  - simple_sitemap
-  - smart_date
-  - svg_image
-  - taxonomy
-  - text
-  - user
-  - views
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'ecms_feeds:ecms_feeds'
+  - 'ecms_promotions:ecms_promotions'
+  - 'ecms_workflow:ecms_workflow'
+  - 'feeds:feeds'
+  - 'metatag:metatag'
+  - 'pathauto:pathauto'
+  - 'rabbit_hole:rabbit_hole'
+  - 'scheduled_transitions:scheduled_transitions'
+  - 'simple_sitemap:simple_sitemap'
+  - 'smart_date:smart_date'
+  - 'svg_image:svg_image'
 package: eCMS
 version: 9.x-1.0
