@@ -12,7 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-57: Allow table tags within paragraph_text format.
 
 ### Deprecated
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.6.0] - 2021-05-21
+### Changed
+- RIGA-57: Allow table tags within paragraph_text format.
 
 ## [0.5.9] - 2021-05-20
 ### Removed
@@ -617,7 +620,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.0...HEAD
+[0.6.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.9...0.6.0
 [0.5.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.8...0.5.9
 [0.5.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.7...0.5.8
 [0.5.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.6...0.5.7
