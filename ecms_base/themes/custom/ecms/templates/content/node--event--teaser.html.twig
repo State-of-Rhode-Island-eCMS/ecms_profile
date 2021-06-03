@@ -74,15 +74,15 @@
 {{ attach_library('ecms/rrule-js') }}
 
 {# Month variable #}
-{% if node.field_event_date.start_value|date('M') == node.field_event_date.end_value|date('M')  %}
-  {% set month = node.field_event_date.start_value|date('M') %}
+{% if node.field_event_date.value|date('M') == node.field_event_date.end_value|date('M')  %}
+  {% set month = node.field_event_date.value|date('M') %}
 {% else %}
-  {% set month = node.field_event_date.start_value|date('M') ~ ' - ' ~ node.field_event_date.end_value|date('M') %}
+  {% set month = node.field_event_date.value|date('M') ~ ' - ' ~ node.field_event_date.end_value|date('M') %}
 {% endif %}
 
 {# Start date variables #}
 {% set start_date = node.field_event_date.value|date('j') %}
-{% set datetime_startdate_format = node.field_event_date.start_value|date('Y-m-d') %}
+{% set datetime_startdate_format = node.field_event_date.value|date('Y-m-d') %}
 
 {# End date variables #}
 {% set end_date = node.field_event_date.end_value|date('j') %}
