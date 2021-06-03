@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-85: Fixed issue with events displaying incorrect month.
 
 ### Security
+
+## [0.6.1] - 2021-06-03
+### Fixed
+- RIGA-85: Fixed issue with events displaying incorrect month.
 
 ## [0.6.0] - 2021-05-21
 ### Changed
@@ -621,7 +624,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.1...HEAD
+[0.6.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.0...0.6.1
 [0.6.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.9...0.6.0
 [0.5.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.8...0.5.9
 [0.5.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.7...0.5.8
