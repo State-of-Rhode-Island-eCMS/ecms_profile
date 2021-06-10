@@ -989,3 +989,26 @@ function ecms_base_update_9058(array &$sandbox): void {
     $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
   }
 }
+
+/**
+ * Updates to run for the 0.6.2 tag.
+ */
+function ecms_base_update_9062(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'node.type.webform',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
