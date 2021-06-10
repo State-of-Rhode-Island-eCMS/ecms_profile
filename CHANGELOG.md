@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-90: Update (and lock) ACSF module to 2.69.
 
 ### Deprecated
 
