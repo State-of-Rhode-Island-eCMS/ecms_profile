@@ -22,7 +22,7 @@ DOCROOT="web"
 cd ..
 
 # Create a new Drupal project.
-composer create-project drupal/recommended-project:^9.1 $APP_NAME --no-install --no-interaction
+composer create-project drupal/recommended-project:9.1.9 $APP_NAME --no-install --no-interaction
 
 # Move into the directory.
 cd $APP_NAME;
