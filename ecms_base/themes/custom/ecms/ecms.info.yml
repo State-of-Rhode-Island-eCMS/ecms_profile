@@ -30,6 +30,9 @@ component-libraries:
   icons:
     paths:
       - ecms_patternlab/source/images/icons
+  illustrations:
+    paths:
+      - ecms_patternlab/source/images/illustrations
   generic:
     paths:
       - templates/generic
