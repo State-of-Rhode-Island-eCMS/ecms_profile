@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: webform_nodes
+label: 'Webform Nodes'
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parents:join-path]/[node:menu-link]'
+selection_criteria:
+  a042dc44-5a63-449e-b4bc-5e1b3b9f1a20:
+    id: node_type
+    bundles:
+      webform: webform
+    negate: false
+    context_mapping:
+      node: node
+  c47b3893-32db-4c46-a853-d9f04166461b:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

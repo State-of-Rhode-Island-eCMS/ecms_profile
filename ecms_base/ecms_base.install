@@ -1006,6 +1006,7 @@ function ecms_base_update_9062(array &$sandbox): void {
 
   $newConfig = [
     'node.type.webform',
+    'pathauto.pattern.webform_nodes',
   ];
 
   foreach ($newConfig as $config) {
