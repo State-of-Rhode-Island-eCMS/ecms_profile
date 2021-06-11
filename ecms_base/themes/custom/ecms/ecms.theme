@@ -34,6 +34,7 @@ function ecms_preprocess_page(array &$variables): void {
   $variables['header_preprocess_values']['top_line'] = ['#plain_text' => theme_get_setting('header_top_line')];
   $variables['header_preprocess_values']['main_line'] = ['#plain_text' => theme_get_setting('header_main_line')];
   $variables['header_preprocess_values']['bottom_line'] = ['#plain_text' => theme_get_setting('header_bottom_line')];
+  $variables['illustration'] = theme_get_setting('illustration_option');
 
   // Attach footer variables.
   $variables['footer_preprocess_values']['footer_left'] = [
