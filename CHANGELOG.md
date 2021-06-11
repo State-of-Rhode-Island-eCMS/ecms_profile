@@ -10,9 +10,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-78: Add pathauto pattern for Webform content type.
 
 ### Changed
 - RIGA-90: Update (and lock) ACSF module to 2.69.
+- RIGA-41: Update Webform content type to not display author info.
 
 ### Deprecated
 
