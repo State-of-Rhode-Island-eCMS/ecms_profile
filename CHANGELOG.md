@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-68: Add event list paragraph type.
 - RIGA-68: Add events archive view.
 - RIGA-68: Add page components to event content type.
+- RIGA-18: Added patch to webform encrypt to support global encryption for a given form.
 
 ### Changed
 - RIGA-90: Update (and lock) ACSF module to 2.69.
