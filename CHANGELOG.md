@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-64: Fixed additional issues with publication list translation settings.
 
 ### Security
 
