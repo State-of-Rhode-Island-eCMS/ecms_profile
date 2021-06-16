@@ -16,6 +16,8 @@ use Drupal\user\Entity\User;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\Exception\FileException;
 
 /**
  * Implements hook_install().
@@ -1011,5 +1013,29 @@ function ecms_base_update_9062(array &$sandbox): void {
 
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+
+  // Copy over generic icons from media module.
+  // Taken directly from hook_install in media module.
+  $source = drupal_get_path('module', 'media') . '/images/icons';
+  $destination = \Drupal::config('media.settings')->get('icon_base_uri');
+  $file_system = \Drupal::service('file_system');
+
+  $file_system->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+  $files = $file_system->scanDirectory($source, '/.*\\.(svg|png|jpg|jpeg|gif)$/');
+  foreach ($files as $file) {
+    // When reinstalling the media module we don't want to copy the icons when
+    // they already exist. The icons could be replaced (by a contrib module or
+    // manually), so we don't want to replace the existing files. Removing the
+    // files when we uninstall could also be a problem if the files are
+    // referenced somewhere else. Since showing an error that it was not
+    // possible to copy the files is also confusing, we silently do nothing.
+    if (!file_exists($destination . DIRECTORY_SEPARATOR . $file->filename)) {
+      try {
+        $file_system->copy($file->uri, $destination, FileSystemInterface::EXISTS_ERROR);
+      } catch (FileException $e) {
+        // Ignore and continue.
+      }
+    }
   }
 }
