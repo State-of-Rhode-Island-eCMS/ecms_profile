@@ -1033,7 +1033,8 @@ function ecms_base_update_9062(array &$sandbox): void {
     if (!file_exists($destination . DIRECTORY_SEPARATOR . $file->filename)) {
       try {
         $file_system->copy($file->uri, $destination, FileSystemInterface::EXISTS_ERROR);
-      } catch (FileException $e) {
+      }
+      catch (FileException $e) {
         // Ignore and continue.
       }
     }
