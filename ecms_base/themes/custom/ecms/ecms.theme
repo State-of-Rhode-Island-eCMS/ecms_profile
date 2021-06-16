@@ -583,11 +583,12 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
 
   // Upcoming or Recent.
   $date_condition = $paragraph->get('field_upcoming_recent')->getString();
-  if($date_condition == 'recent') {
-    $query->condition('field_event_date.end_value',  $now, '<');
+  if( $date_condition === 'recent') {
+    $query->condition('field_event_date.end_value', $now, '<');
     $query->sort('field_event_date.end_value', "DESC");
-  } else {
-    $query->condition('field_event_date.end_value',  $now, '>');
+  }
+  else {
+    $query->condition('field_event_date.end_value', $now, '>');
     $query->sort('field_event_date.end_value', "ASC");
   }
 
@@ -599,7 +600,6 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
   }
 
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $variables['langcode'] = $language;
 
   // Load teaser displays for each event.
   $nodes = $node_storage->loadMultiple($nids);
