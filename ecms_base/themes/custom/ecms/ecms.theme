@@ -549,6 +549,69 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
 /**
  * Implements hook_preprocess_paragraph().
  */
+function ecms_preprocess_paragraph__event_list(array &$variables): void {
+  $paragraph = $variables['paragraph'];
+
+  // Get necessary services.
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $node_storage = $entity_type_manager->getStorage('node');
+  $node_builder = $entity_type_manager->getViewBuilder('node');
+
+  // Check if the paragraph is targeting a specific event type.
+  if (!$paragraph->get('field_event_list_type')->isEmpty()) {
+    $event_type = $paragraph->get('field_event_list_type')->getString();
+  }
+
+  // Query all locations.
+  $query = $node_storage->getQuery();
+  $query->condition('type', 'event')
+    ->condition('status', 1);
+
+  // Add event type condition
+  if ($event_type) {
+    $query->condition('field_event_type', $event_type);
+  }
+
+  // Add limit to query
+  $limit = $paragraph->get('field_event_list_limit')->getString();
+  if ($limit) {
+    $query->range(0, intval($limit));
+  }
+
+  // Get the current timestamp.
+  $now = time();
+
+  // Upcoming or Recent
+  $date_condition = $paragraph->get('field_upcoming_recent')->getString();
+  if($date_condition == 'recent') {
+    $query->condition('field_event_date.end_value',  $now, '<');
+    $query->sort('field_event_date.end_value', "DESC");
+  } else {
+    $query->condition('field_event_date.end_value',  $now, '>');
+    $query->sort('field_event_date.end_value', "ASC");
+  }
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return;
+  }
+
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $language;
+
+  // Load teaser displays for each event.
+  $nodes = $node_storage->loadMultiple($nids);
+  $teasers = $node_builder->viewMultiple($nodes, 'teaser', $language);
+
+  $variables['events'] = $teasers;
+}
+
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
 function ecms_preprocess_paragraph__location_list(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
