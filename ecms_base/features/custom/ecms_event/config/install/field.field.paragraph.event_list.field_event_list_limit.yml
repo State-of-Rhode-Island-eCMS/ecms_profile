@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_event_list_limit
+    - paragraphs.paragraphs_type.event_list
+  module:
+    - options
+id: paragraph.event_list.field_event_list_limit
+field_name: field_event_list_limit
+entity_type: paragraph
+bundle: event_list
+label: '# of items to display'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 3
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

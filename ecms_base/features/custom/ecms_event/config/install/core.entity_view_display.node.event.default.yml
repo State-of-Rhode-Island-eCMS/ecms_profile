@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_event_date
     - field.field.node.event.field_event_image
     - field.field.node.event.field_event_location
+    - field.field.node.event.field_event_paragraphs
     - field.field.node.event.field_event_promotions
     - field.field.node.event.field_event_registration_url
     - field.field.node.event.field_event_rrule
@@ -16,6 +17,7 @@ dependencies:
     - field.field.node.event.field_meta_tags_event
     - node.type.event
   module:
+    - entity_reference_revisions
     - link
     - metatag
     - smart_date
@@ -33,14 +35,14 @@ content:
     third_party_settings: {  }
   field_event_body:
     weight: 1
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_event_contact:
     weight: 3
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -48,20 +50,21 @@ content:
     region: content
   field_event_date:
     weight: 10
-    label: above
+    label: hidden
     settings:
       format: default
       force_chronological: false
-      add_classes: 0
+      add_classes: false
       format_type: medium
       timezone_override: ''
+      time_wrapper: true
     third_party_settings: {  }
     type: smartdate_default
     region: content
   field_event_image:
     type: entity_reference_entity_view
     weight: 5
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: false
@@ -69,11 +72,20 @@ content:
     region: content
   field_event_location:
     weight: 2
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_event_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 14
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
   field_event_promotions:
     weight: 7
@@ -86,7 +98,7 @@ content:
     region: content
   field_event_registration_url:
     weight: 12
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -98,7 +110,7 @@ content:
     region: content
   field_event_rrule:
     weight: 9
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -114,7 +126,7 @@ content:
     region: content
   field_event_virtual_meeting_url:
     weight: 13
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -126,7 +138,7 @@ content:
     region: content
   field_meta_tags_event:
     weight: 8
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter

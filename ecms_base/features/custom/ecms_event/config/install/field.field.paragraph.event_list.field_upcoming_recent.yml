@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_upcoming_recent
+    - paragraphs.paragraphs_type.event_list
+  module:
+    - options
+id: paragraph.event_list.field_upcoming_recent
+field_name: field_upcoming_recent
+entity_type: paragraph
+bundle: event_list
+label: Upcoming/Recent
+description: 'Select whether to show upcoming or recent events in the list.'
+required: true
+translatable: false
+default_value:
+  -
+    value: upcoming
+default_value_callback: ''
+settings: {  }
+field_type: list_string
