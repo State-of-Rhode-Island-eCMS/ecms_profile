@@ -562,17 +562,17 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
     $event_type = $paragraph->get('field_event_list_type')->getString();
   }
 
-  // Query all locations.
+  // Query all events.
   $query = $node_storage->getQuery();
   $query->condition('type', 'event')
     ->condition('status', 1);
 
-  // Add event type condition
+  // Add event type condition.
   if ($event_type) {
     $query->condition('field_event_type', $event_type);
   }
 
-  // Add limit to query
+  // Add limit to query.
   $limit = $paragraph->get('field_event_list_limit')->getString();
   if ($limit) {
     $query->range(0, intval($limit));
@@ -581,7 +581,7 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
   // Get the current timestamp.
   $now = time();
 
-  // Upcoming or Recent
+  // Upcoming or Recent.
   $date_condition = $paragraph->get('field_upcoming_recent')->getString();
   if($date_condition == 'recent') {
     $query->condition('field_event_date.end_value',  $now, '<');
@@ -607,7 +607,6 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
 
   $variables['events'] = $teasers;
 }
-
 
 /**
  * Implements hook_preprocess_paragraph().
