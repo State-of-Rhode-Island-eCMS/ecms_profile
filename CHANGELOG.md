@@ -25,6 +25,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-64: Fixed additional issues with publication list translation settings.
+- RIGA-89: Fixed missing file icons by adding hook_install to copy files.
 
 ### Security
 
