@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-21: Remove Admin Tabs Showing for "Unpublish This Translation".
 
 ### Deprecated
 
