@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.person_additional_fields.field_person_field_label
+    - field.field.paragraph.person_additional_fields.field_person_field_value
+    - paragraphs.paragraphs_type.person_additional_fields
+id: paragraph.person_additional_fields.default
+targetEntityType: paragraph
+bundle: person_additional_fields
+mode: default
+content:
+  field_person_field_label:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_person_field_value:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  status:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+hidden:
+  created: true

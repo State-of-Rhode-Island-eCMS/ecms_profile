@@ -4,16 +4,22 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.person.field_meta_tags_person
+    - field.field.node.person.field_person_additional_fields
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
+    - field.field.node.person.field_person_fax
     - field.field.node.person.field_person_first_name
     - field.field.node.person.field_person_job_title
     - field.field.node.person.field_person_last_name
+    - field.field.node.person.field_person_list_weight
+    - field.field.node.person.field_person_mobile
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_phone_extension
+    - field.field.node.person.field_person_photo
     - field.field.node.person.field_person_promotions
     - node.type.person
   module:
+    - entity_reference_revisions
     - user
 id: node.person.teaser
 targetEntityType: node
@@ -21,9 +27,18 @@ bundle: person
 mode: teaser
 content:
   content_moderation_control:
-    weight: 7
+    weight: 9
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_person_additional_fields:
+    type: entity_reference_revisions_entity_view
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
   field_person_category:
     type: entity_reference_label
@@ -81,13 +96,25 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-  links:
+  field_person_photo:
+    type: entity_reference_entity_view
     weight: 8
+    region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+  links:
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_meta_tags_person: true
+  field_person_fax: true
+  field_person_list_weight: true
+  field_person_mobile: true
   field_person_promotions: true
   langcode: true
   search_api_excerpt: true

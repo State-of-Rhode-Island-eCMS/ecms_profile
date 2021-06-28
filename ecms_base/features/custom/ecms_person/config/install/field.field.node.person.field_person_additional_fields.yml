@@ -1,0 +1,84 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_additional_fields
+    - node.type.person
+    - paragraphs.paragraphs_type.person_additional_fields
+  module:
+    - entity_reference_revisions
+id: node.person.field_person_additional_fields
+field_name: field_person_additional_fields
+entity_type: node
+bundle: person
+label: 'Additional fields'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      person_additional_fields: person_additional_fields
+    target_bundles_drag_drop:
+      accordion_builder:
+        weight: 20
+        enabled: false
+      card:
+        weight: 21
+        enabled: false
+      column_container:
+        weight: 22
+        enabled: false
+      embed:
+        weight: 23
+        enabled: false
+      event_list:
+        weight: 24
+        enabled: false
+      file_list:
+        weight: 25
+        enabled: false
+      formatted_text:
+        weight: 26
+        enabled: false
+      gallery:
+        weight: 27
+        enabled: false
+      gallery_item:
+        weight: 28
+        enabled: false
+      icon_button:
+        weight: 29
+        enabled: false
+      icon_card:
+        weight: 30
+        enabled: false
+      location_list:
+        weight: 31
+        enabled: false
+      media_item:
+        weight: 32
+        enabled: false
+      numbered_step_item:
+        weight: 33
+        enabled: false
+      person_additional_fields:
+        enabled: true
+        weight: 34
+      person_list:
+        weight: 35
+        enabled: false
+      promotion_reference:
+        weight: 36
+        enabled: false
+      publication_list:
+        weight: 37
+        enabled: false
+      text_card:
+        weight: 38
+        enabled: false
+field_type: entity_reference_revisions

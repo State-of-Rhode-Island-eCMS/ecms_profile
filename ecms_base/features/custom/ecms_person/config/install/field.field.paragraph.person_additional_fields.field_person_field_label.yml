@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_person_field_label
+    - paragraphs.paragraphs_type.person_additional_fields
+    - taxonomy.vocabulary.person_additional_fields
+id: paragraph.person_additional_fields.field_person_field_label
+field_name: field_person_field_label
+entity_type: paragraph
+bundle: person_additional_fields
+label: 'Field label'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      person_additional_fields: person_additional_fields
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: person_additional_fields
+field_type: entity_reference

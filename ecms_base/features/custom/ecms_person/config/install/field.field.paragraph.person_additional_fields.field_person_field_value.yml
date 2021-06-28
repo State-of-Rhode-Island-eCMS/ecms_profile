@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_person_field_value
+    - paragraphs.paragraphs_type.person_additional_fields
+id: paragraph.person_additional_fields.field_person_field_value
+field_name: field_person_field_value
+entity_type: paragraph
+bundle: person_additional_fields
+label: 'Field value'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
