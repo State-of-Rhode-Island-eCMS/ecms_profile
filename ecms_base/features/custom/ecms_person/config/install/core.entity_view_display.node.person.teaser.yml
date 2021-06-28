@@ -16,7 +16,6 @@ dependencies:
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_photo
-    - field.field.node.person.field_person_promotions
     - node.type.person
   module:
     - entity_reference_revisions
@@ -115,6 +114,5 @@ hidden:
   field_person_fax: true
   field_person_list_weight: true
   field_person_mobile: true
-  field_person_promotions: true
   langcode: true
   search_api_excerpt: true

@@ -15,7 +15,6 @@ dependencies:
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_photo
-    - field.field.node.person.field_person_promotions
     - node.type.person
   module:
     - entity_reference_revisions
@@ -128,15 +127,6 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-  field_person_promotions:
-    weight: 6
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
 hidden:
   field_person_photo: true
   langcode: true
