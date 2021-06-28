@@ -82,6 +82,16 @@
   {% set translated_node = node %}
 {% endif %}
 
+{# Generate responsive image style #}
+{% set photo = '' %}
+{% if node.field_person_photo is not empty %}
+  {% set photo_uri = node.field_person_photo.entity.field_personal_photo_image.entity.getFileUri() %}
+  {% set photo_alt = node.field_person_photo.entity.field_personal_photo_image.alt %}
+
+  {# TODO: this fails if an uri exists in DB but not on local file system. Need to find a way to check if file exists locally #}
+  {% set photo = drupal_image(photo_uri, 'wide', {alt: photo_alt}, true) %}
+{% endif %}
+
 {% include '@molecules/teaser-person/teaser-person.twig' with {
   last_name: translated_node.field_person_last_name.value,
   first_name: translated_node.field_person_first_name.value,
@@ -91,5 +101,8 @@
   extension: translated_node.field_person_phone_extension.value,
   email: translated_node.field_person_email.value,
   job_title: translated_node.field_person_job_title.value,
-  categories: categories
+  categories: categories,
+  photo: photo,
+  additional_fields: additional_fields,
+  placeholder_path: "/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/ecms_patternlab/source/images/person-placeholder.png"
 } %}
