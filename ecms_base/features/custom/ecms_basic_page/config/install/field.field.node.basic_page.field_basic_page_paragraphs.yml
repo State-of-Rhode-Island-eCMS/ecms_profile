@@ -4,6 +4,9 @@ dependencies:
   config:
     - field.storage.node.field_basic_page_paragraphs
     - node.type.basic_page
+    - paragraphs.paragraphs_type.gallery_item
+    - paragraphs.paragraphs_type.person_additional_fields
+    - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
 id: node.basic_page.field_basic_page_paragraphs
@@ -23,6 +26,7 @@ settings:
     target_bundles:
       gallery_item: gallery_item
       text_card: text_card
+      person_additional_fields: person_additional_fields
     target_bundles_drag_drop:
       accordion_builder:
         weight: 14
@@ -36,6 +40,9 @@ settings:
       embed:
         weight: 17
         enabled: false
+      event_list:
+        weight: 24
+        enabled: false
       file_list:
         weight: 5
         enabled: false
@@ -48,11 +55,26 @@ settings:
       gallery_item:
         enabled: true
         weight: 21
+      icon_button:
+        weight: 29
+        enabled: false
       icon_card:
         weight: 22
         enabled: false
+      location_list:
+        weight: 31
+        enabled: false
       media_item:
         weight: 7
+        enabled: false
+      numbered_step_item:
+        weight: 33
+        enabled: false
+      person_additional_fields:
+        enabled: true
+        weight: 34
+      person_list:
+        weight: 35
         enabled: false
       promotion_reference:
         weight: 24
