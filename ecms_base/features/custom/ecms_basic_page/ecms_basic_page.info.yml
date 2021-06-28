@@ -1,31 +1,32 @@
 name: 'Basic page'
 description: 'Provides Basic page content type and related configuration. Add a basic page to the site.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - content_moderation
-  - content_translation
-  - ecms_paragraphs
-  - ecms_promotions
-  - ecms_workflow
-  - entity_reference_revisions
-  - field
-  - language
-  - menu_ui
-  - metatag
-  - moderation_dashboard
-  - node
-  - page_manager
-  - panels
-  - paragraphs
-  - path
-  - pathauto
-  - rabbit_hole
-  - scheduled_transitions
-  - simple_sitemap
-  - text
-  - user
-  - views
-  - workflows
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:language'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'drupal:workflows'
+  - 'ecms_paragraphs:ecms_paragraphs'
+  - 'ecms_person:ecms_person'
+  - 'ecms_promotions:ecms_promotions'
+  - 'ecms_workflow:ecms_workflow'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'metatag:metatag'
+  - 'moderation_dashboard:moderation_dashboard'
+  - 'page_manager:page_manager'
+  - 'panels:panels'
+  - 'paragraphs:paragraphs'
+  - 'pathauto:pathauto'
+  - 'rabbit_hole:rabbit_hole'
+  - 'scheduled_transitions:scheduled_transitions'
+  - 'simple_sitemap:simple_sitemap'
 package: eCMS
 version: 9.x-1.0

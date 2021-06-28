@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_event_paragraphs
     - node.type.event
     - paragraphs.paragraphs_type.gallery_item
+    - paragraphs.paragraphs_type.person_additional_fields
     - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
@@ -24,6 +25,7 @@ settings:
     negate: 1
     target_bundles:
       gallery_item: gallery_item
+      person_additional_fields: person_additional_fields
       text_card: text_card
     target_bundles_drag_drop:
       accordion_builder:
@@ -37,6 +39,9 @@ settings:
         enabled: false
       embed:
         weight: 21
+        enabled: false
+      event_list:
+        weight: 24
         enabled: false
       file_list:
         weight: 22
@@ -65,6 +70,9 @@ settings:
       numbered_step_item:
         weight: 30
         enabled: false
+      person_additional_fields:
+        enabled: true
+        weight: 34
       person_list:
         weight: 31
         enabled: false
