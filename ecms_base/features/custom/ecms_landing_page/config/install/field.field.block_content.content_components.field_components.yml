@@ -6,6 +6,7 @@ dependencies:
     - field.storage.block_content.field_components
     - paragraphs.paragraphs_type.gallery_item
     - paragraphs.paragraphs_type.numbered_step_item
+    - paragraphs.paragraphs_type.person_additional_fields
     - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
@@ -27,6 +28,7 @@ settings:
       gallery_item: gallery_item
       numbered_step_item: numbered_step_item
       text_card: text_card
+      person_additional_fields: person_additional_fields
     target_bundles_drag_drop:
       accordion_builder:
         weight: 15
@@ -40,6 +42,9 @@ settings:
       embed:
         weight: 5
         enabled: false
+      event_list:
+        weight: 24
+        enabled: false
       file_list:
         weight: 6
         enabled: false
@@ -52,8 +57,14 @@ settings:
       gallery_item:
         enabled: true
         weight: 22
+      icon_button:
+        weight: 29
+        enabled: false
       icon_card:
         weight: 23
+        enabled: false
+      location_list:
+        weight: 31
         enabled: false
       media_item:
         weight: 8
@@ -61,6 +72,12 @@ settings:
       numbered_step_item:
         enabled: true
         weight: 25
+      person_additional_fields:
+        enabled: true
+        weight: 34
+      person_list:
+        weight: 35
+        enabled: false
       promotion_reference:
         weight: 26
         enabled: false
