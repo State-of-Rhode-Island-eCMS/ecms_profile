@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-70: Added person additional fields taxonomy, field to person content type.
 - RIGA-70: Added photo support to person teaser and additional preprocessing to person and person_list.
+- RIGA-69: Add geolocation support for locations.
 
 ### Changed
 - RIGA-21: Remove Admin Tabs Showing for "Unpublish This Translation".
@@ -32,7 +33,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-68: Add events archive view.
 - RIGA-68: Add page components to event content type.
 - RIGA-18: Added patch to webform encrypt to support global encryption for a given form.
-- RIGA-69: Add geolocation support for locations.
 
 ### Changed
 - RIGA-90: Update (and lock) ACSF module to 2.69.
