@@ -854,13 +854,20 @@ function ecms_preprocess_node__person(array &$variables) {
   // Comma separate all categories.
   $variables['categories'] = implode(', ', $variables['categories']);
 
+  // Get current language.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
   // Build out additional fields array for twig.
   if (!$node->field_person_additional_fields->isEmpty()) {
     $paragraphs = $node->field_person_additional_fields->referencedEntities();
     $variables['additional_fields'] = [];
     foreach ($paragraphs as $paragraph) {
-      $field_label = $paragraph->get('field_person_field_label')->entity->getName();
-      $field_value = $paragraph->get('field_person_field_value')->getString();
+
+      $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
+      $paragraph_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph, $language);
+
+      $field_label = $term_trans->getName();
+      $field_value = $paragraph_trans->get('field_person_field_value')->getString();
 
       if ($field_value && $field_label) {
         $variables['additional_fields'][$field_label] = $field_value;
