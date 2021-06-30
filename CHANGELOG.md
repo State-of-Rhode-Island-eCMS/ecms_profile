@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-26: Add Media Entity Download module and update file list component url.
 
 ### Changed
 
@@ -28,7 +29,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-69: Add geolocation support for locations.
 - RIGA-78: Add pathauto pattern for Webform content type.
 - RIGA-74: Add theme setting for illustration and pass value to patternlab.
-- RIGA-26: Add Media Entity Download module and update file list component url.
 
 ### Changed
 - RIGA-21: Remove Admin Tabs Showing for "Unpublish This Translation".
