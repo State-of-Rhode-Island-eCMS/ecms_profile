@@ -80,7 +80,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     // Set up hardcoded options.
     $illustrationOptions = [
       'none' => t("No illustration"),
-      $randomKeyString => t("Random illustration")
+      $randomKeyString => t("Random illustration"),
     ];
 
     // Add compilied list to hardcoded options.
