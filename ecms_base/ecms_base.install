@@ -1040,3 +1040,16 @@ function ecms_base_update_9062(array &$sandbox): void {
     }
   }
 }
+
+/**
+ * Updates to run for the 0.6.3 tag.
+ */
+function ecms_base_update_9063(array &$sandbox): void {
+
+  $modules_to_install = [
+    'media_entity_download',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
