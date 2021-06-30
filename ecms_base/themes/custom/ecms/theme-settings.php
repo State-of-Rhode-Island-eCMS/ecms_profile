@@ -24,6 +24,8 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   ];
 
   $theme = \Drupal::theme()->getActiveTheme();
+
+  // Pallete options.
   $color_config_json_string = file_get_contents("{$theme->getPath()}/ecms_patternlab/source/_data/color-config.json");
   if ($color_config_json_string) {
 
@@ -49,6 +51,47 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
       "#default_value" => theme_get_setting('color_palette'),
       "#options" => $paletteOptions,
       "#description" => t("Select which color palette the site will use."),
+    ];
+  }
+
+  // Illustration options.
+  $illustration_json_string = file_get_contents("{$theme->getPath()}/ecms_patternlab/source/_data/illustrations.json");
+  if ($illustration_json_string) {
+
+    $json_decoded = json_decode($illustration_json_string, TRUE);
+    if ($json_decoded === NULL) {
+      return;
+    }
+
+    $illustrations = [];
+    $allFilenames = [];
+
+    // Loop over illustrations and build out arrays.
+    foreach ($json_decoded['illustrations'] as $key => $object) {
+      $illustrations[$object['filename']] = $key;
+      $allFilenames[] = $object['filename'];
+    }
+
+    // Comma separate all filenames to pass as the key for the random selection.
+    // Twig will parse this string and select a filename at random.
+    $allFilenames = implode(', ', $allFilenames);
+    $randomKeyString = 'random:' . $allFilenames;
+
+    // Set up hardcoded options.
+    $illustrationOptions = [
+      'none' => t("No illustration"),
+      $randomKeyString => t("Random illustration"),
+    ];
+
+    // Add compilied list to hardcoded options.
+    $illustrationOptions = $illustrationOptions + $illustrations;
+
+    $form['ecms_theme_options']['illustration_option'] = [
+      "#type" => "select",
+      "#title" => t("Illustration"),
+      "#default_value" => theme_get_setting('illustration_option'),
+      "#options" => $illustrationOptions,
+      "#description" => t("Select your configuration for page illustrations."),
     ];
   }
 
