@@ -9,9 +9,9 @@ third_party_settings:
   content_translation:
     enabled: true
     bundle_settings:
-      untranslatable_fields_hide: '0'
+      untranslatable_fields_hide: '1'
 id: paragraph.person_additional_fields
 target_entity_type_id: paragraph
 target_bundle: person_additional_fields
 default_langcode: site_default
-language_alterable: false
+language_alterable: true
