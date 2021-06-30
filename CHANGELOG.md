@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.6.3] - 2021-06-30
+### Added
 - RIGA-70: Added person additional fields taxonomy, field to person content type.
 - RIGA-70: Added photo support to person teaser and additional preprocessing to person and person_list.
 - RIGA-69: Add geolocation support for locations.
@@ -19,14 +32,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-21: Remove Admin Tabs Showing for "Unpublish This Translation".
 
-### Deprecated
-
 ### Removed
 - RIGA-70: Removed promotions from person content type.
-
-### Fixed
-
-### Security
 
 ## [0.6.2] - 2021-06-23
 ### Added
@@ -647,7 +654,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.3...HEAD
+[0.6.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.2...0.6.3
 [0.6.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.1...0.6.2
 [0.6.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.0...0.6.1
 [0.6.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.5.9...0.6.0
