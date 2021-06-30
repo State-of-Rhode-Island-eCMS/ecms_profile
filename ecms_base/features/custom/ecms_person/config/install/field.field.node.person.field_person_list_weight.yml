@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_list_weight
+    - node.type.person
+  module:
+    - options
+id: node.person.field_person_list_weight
+field_name: field_person_list_weight
+entity_type: node
+bundle: person
+label: 'List weight'
+description: 'Weight this person in person lists. -10 appears at the top of the list. 10 appears at the bottom. Leave at 0 for default alphabetical sorting.'
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: person_additional_fields
+label: 'Person additional fields'
+icon_uuid: null
+icon_default: null
+description: 'This paragraphs allows for site specific person fields to be used.'
+behavior_plugins: {  }

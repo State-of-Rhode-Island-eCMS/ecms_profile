@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.media.field_media_image
+    - field.storage.media.field_personal_photo_image
     - media.type.person_headshot
   module:
     - content_translation
@@ -13,8 +13,8 @@ third_party_settings:
       file: file
       alt: '0'
       title: '0'
-id: media.person_headshot.field_media_image
-field_name: field_media_image
+id: media.person_headshot.field_personal_photo_image
+field_name: field_personal_photo_image
 entity_type: media
 bundle: person_headshot
 label: Image
@@ -24,21 +24,21 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
+  file_directory: personal-photos
   file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
   alt_field: true
   alt_field_required: true
   title_field: false
   title_field_required: false
-  max_resolution: ''
-  min_resolution: ''
   default_image:
-    uuid: null
+    uuid: ''
     alt: ''
     title: ''
     width: null
     height: null
-  file_directory: '[date:custom:Y]-[date:custom:m]'
-  max_filesize: ''
   handler: 'default:file'
   handler_settings: {  }
 field_type: image

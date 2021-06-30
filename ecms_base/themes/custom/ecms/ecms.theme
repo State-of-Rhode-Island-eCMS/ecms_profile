@@ -692,6 +692,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
     $query = $node_storage->getQuery();
     $query->condition('type', 'person')
       ->condition('status', 1)
+      ->sort('field_person_list_weight', "ASC")
       ->sort('field_person_last_name', "ASC");
 
     $nids = $query->execute();
@@ -701,8 +702,12 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
       return;
     }
 
-    // Return a list of rendered person teaser nodes.
     $nodes = $node_storage->loadMultiple($nids);
+    if (_ecms_person_list_contains_photo($nodes)) {
+      $variables['photo_list'] = TRUE;
+    };
+
+    // Return a list of rendered person teaser nodes.
     $variables['person_listing'] = $node_builder->viewMultiple($nodes, 'teaser', $language);
     $variables['list_mode'] = "full";
   }
@@ -721,7 +726,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
     $term_person_list = [
       'term_name' => $parent_term->get('name')->value,
       'child_terms' => [],
-      'persons' => _ecms_query_persons_by_category_tid($parent_tid, $node_storage, $node_builder, $language),
+      'persons' => _ecms_query_persons_by_category_tid($parent_tid, $node_storage, $node_builder, $language, $variables),
     ];
 
     // Load child terms.
@@ -729,7 +734,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
 
     foreach ($child_terms as $child_term) {
       // Check to see if this child term has person nodes associated.
-      $child_term_persons = _ecms_query_persons_by_category_tid($child_term->get('tid')->value, $node_storage, $node_builder, $language);
+      $child_term_persons = _ecms_query_persons_by_category_tid($child_term->get('tid')->value, $node_storage, $node_builder, $language, $variables);
 
       if (!empty($child_term_persons)) {
         // Store the child term's person teasers on parent list.
@@ -753,11 +758,13 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
  *   The node builder interface.
  * @param string $language
  *   The langcode to render.
+ * @param array $variables
+ *   The variables array.
  *
  * @return array
  *   A render array of person teasers.
  */
-function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, object $node_builder, string $language): array {
+function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, object $node_builder, string $language, array &$variables): array {
   if (!$tid) {
     return [];
   }
@@ -767,6 +774,7 @@ function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, 
   $query->condition('type', 'person')
     ->condition('field_person_category', $tid)
     ->condition('status', 1)
+    ->sort('field_person_list_weight', "ASC")
     ->sort('field_person_last_name', "ASC");
 
   $nids = $query->execute();
@@ -776,10 +784,34 @@ function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, 
   // Load teaser displays for each person.
   if (!empty($nids)) {
     $nodes = $node_storage->loadMultiple($nids);
+
+    if (_ecms_person_list_contains_photo($nodes)) {
+      $variables['photo_list'] = TRUE;
+    };
+
     $teasers = $node_builder->viewMultiple($nodes, 'teaser', $language);
   }
 
   return $teasers;
+}
+
+/**
+ * Helper function that determines if a list of person teasers contain photos.
+ *
+ * @param array $nodes
+ *   The term id to query related persons.
+ *
+ * @return bool
+ *   A bool value indicating if list contains a photo.
+ */
+function _ecms_person_list_contains_photo(array $nodes): bool {
+  foreach ($nodes as $node) {
+    if (!$node->get('field_person_photo')->isEmpty()) {
+      return TRUE;
+    }
+  }
+
+  return FALSE;
 }
 
 /**
@@ -821,4 +853,25 @@ function ecms_preprocess_node__person(array &$variables) {
 
   // Comma separate all categories.
   $variables['categories'] = implode(', ', $variables['categories']);
+
+  // Get current language.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  // Build out additional fields array for twig.
+  if (!$node->field_person_additional_fields->isEmpty()) {
+    $paragraphs = $node->field_person_additional_fields->referencedEntities();
+    $variables['additional_fields'] = [];
+    foreach ($paragraphs as $paragraph) {
+
+      $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
+      $paragraph_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph, $language);
+
+      $field_label = $term_trans->getName();
+      $field_value = $paragraph_trans->get('field_person_field_value')->getString();
+
+      if ($field_value && $field_label) {
+        $variables['additional_fields'][$field_label] = $field_value;
+      }
+    }
+  }
 }

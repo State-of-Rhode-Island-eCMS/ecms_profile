@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.media.media_library
-    - field.field.media.person_headshot.field_media_image
+    - field.field.media.person_headshot.field_personal_photo_image
     - image.style.medium
     - media.type.person_headshot
   module:
@@ -24,7 +24,7 @@ content:
     region: content
 hidden:
   created: true
-  field_media_image: true
+  field_personal_photo_image: true
   langcode: true
   name: true
   search_api_excerpt: true

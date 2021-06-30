@@ -2,8 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.media.person_headshot.field_media_image
-    - image.style.large
+    - field.field.media.person_headshot.field_personal_photo_image
     - media.type.person_headshot
   module:
     - svg_image
@@ -12,12 +11,16 @@ targetEntityType: media
 bundle: person_headshot
 mode: default
 content:
-  field_media_image:
+  field_personal_photo_image:
     label: visually_hidden
     weight: 0
     settings:
-      image_style: large
+      image_style: ''
       image_link: ''
+      svg_render_as_image: true
+      svg_attributes:
+        width: null
+        height: null
     third_party_settings: {  }
     type: image
     region: content

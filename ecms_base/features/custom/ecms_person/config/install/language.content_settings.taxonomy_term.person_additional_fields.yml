@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.person_additional_fields
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '1'
+id: taxonomy_term.person_additional_fields
+target_entity_type_id: taxonomy_term
+target_bundle: person_additional_fields
+default_langcode: site_default
+language_alterable: true

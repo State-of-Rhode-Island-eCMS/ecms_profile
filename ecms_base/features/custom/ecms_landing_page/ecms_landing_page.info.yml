@@ -1,34 +1,36 @@
 name: 'Landing page'
 description: 'Provides Landing page content type and related configuration.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - allowed_formats
-  - block_content
-  - content_moderation
-  - content_translation
-  - ecms_layout
-  - ecms_paragraphs
-  - ecms_workflow
-  - entity_reference_revisions
-  - field
-  - language
-  - layout_builder
-  - layout_builder_restrictions
-  - layout_discovery
-  - media
-  - media_library
-  - menu_ui
-  - metatag
-  - node
-  - options
-  - paragraphs
-  - path
-  - pathauto
-  - rabbit_hole
-  - scheduled_transitions
-  - simple_sitemap
-  - text
-  - user
+  - 'allowed_formats:allowed_formats'
+  - 'drupal:block_content'
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:language'
+  - 'drupal:layout_builder'
+  - 'drupal:layout_discovery'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'ecms_layout:ecms_layout'
+  - 'ecms_paragraphs:ecms_paragraphs'
+  - 'ecms_person:ecms_person'
+  - 'ecms_workflow:ecms_workflow'
+  - 'entity_reference_revisions:entity_reference_revisions'
+  - 'layout_builder_restrictions:layout_builder_restrictions'
+  - 'metatag:metatag'
+  - 'paragraphs:paragraphs'
+  - 'pathauto:pathauto'
+  - 'rabbit_hole:rabbit_hole'
+  - 'scheduled_transitions:scheduled_transitions'
+  - 'simple_sitemap:simple_sitemap'
 package: eCMS
 version: 9.x-1.0

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.person_additional_fields
+id: taxonomy_vocabulary_person_additional_fields
+entity_type_id: taxonomy_vocabulary
+entity_id: person_additional_fields
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

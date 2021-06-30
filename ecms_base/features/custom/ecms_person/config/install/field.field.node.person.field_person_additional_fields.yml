@@ -2,19 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - block_content.type.content_components
-    - field.storage.block_content.field_components
-    - paragraphs.paragraphs_type.gallery_item
-    - paragraphs.paragraphs_type.numbered_step_item
+    - field.storage.node.field_person_additional_fields
+    - node.type.person
     - paragraphs.paragraphs_type.person_additional_fields
-    - paragraphs.paragraphs_type.text_card
   module:
     - entity_reference_revisions
-id: block_content.content_components.field_components
-field_name: field_components
-entity_type: block_content
-bundle: content_components
-label: Components
+id: node.person.field_person_additional_fields
+field_name: field_person_additional_fields
+entity_type: node
+bundle: person
+label: 'Additional fields'
 description: ''
 required: false
 translatable: false
@@ -23,55 +20,52 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
+    negate: 0
     target_bundles:
-      gallery_item: gallery_item
-      numbered_step_item: numbered_step_item
-      text_card: text_card
       person_additional_fields: person_additional_fields
     target_bundles_drag_drop:
       accordion_builder:
-        weight: 15
+        weight: 20
         enabled: false
       card:
-        weight: 16
+        weight: 21
         enabled: false
       column_container:
-        weight: 17
+        weight: 22
         enabled: false
       embed:
-        weight: 5
+        weight: 23
         enabled: false
       event_list:
         weight: 24
         enabled: false
       file_list:
-        weight: 6
+        weight: 25
         enabled: false
       formatted_text:
-        weight: 7
+        weight: 26
         enabled: false
       gallery:
-        weight: 21
+        weight: 27
         enabled: false
       gallery_item:
-        enabled: true
-        weight: 22
+        weight: 28
+        enabled: false
       icon_button:
         weight: 29
         enabled: false
       icon_card:
-        weight: 23
+        weight: 30
         enabled: false
       location_list:
         weight: 31
         enabled: false
       media_item:
-        weight: 8
+        weight: 32
         enabled: false
       numbered_step_item:
-        enabled: true
-        weight: 25
+        weight: 33
+        enabled: false
       person_additional_fields:
         enabled: true
         weight: 34
@@ -79,12 +73,12 @@ settings:
         weight: 35
         enabled: false
       promotion_reference:
-        weight: 26
+        weight: 36
         enabled: false
       publication_list:
-        weight: 27
+        weight: 37
         enabled: false
       text_card:
-        enabled: true
-        weight: 28
+        weight: 38
+        enabled: false
 field_type: entity_reference_revisions
