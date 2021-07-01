@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-26: Add Media Entity Download module and update file list component url.
 
 ### Changed
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.6.4] - 2021-07-01
+### Added
+- RIGA-26: Add Media Entity Download module and update file list component url.
 
 ## [0.6.3] - 2021-06-30
 ### Added
@@ -655,7 +658,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.4...HEAD
+[0.6.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.3...0.6.4
 [0.6.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.2...0.6.3
 [0.6.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.1...0.6.2
 [0.6.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.0...0.6.1
