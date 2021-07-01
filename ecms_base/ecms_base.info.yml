@@ -47,6 +47,7 @@ dependencies:
   - layout_discovery
   - locale
   - media
+  - media_entity_download
   - media_library
   - media_library_form_element
   - media_library_theme_reset

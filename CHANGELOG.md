@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-26: Add Media Entity Download module and update file list component url.
 
 ### Changed
 
