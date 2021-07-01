@@ -131,6 +131,10 @@ function ecms_preprocess_paragraph__gallery_item(array &$variables): void {
  * Implements hook_preprocess_media() for the media__file element.
  */
 function ecms_preprocess_media__file(array &$variables): void {
+  // We need to know the current language for download requests.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $language;
+
   $media = $variables['media'];
 
   // Grab file title.
