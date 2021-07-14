@@ -10,13 +10,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-26: Extend download media permission to anonymous and authenticated users.
 
 ### Changed
 - RIGA-26: Add language var to download link for file list component url.
+- RIGA-76: Views UI module disabled by default.
+- RIGA-76: History module disabled by default.
 
 ### Deprecated
 
 ### Removed
+- RIGA-76: Honeypot time limit form protection (allows for page caching).
 
 ### Fixed
 

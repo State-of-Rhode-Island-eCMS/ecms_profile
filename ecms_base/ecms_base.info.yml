@@ -36,7 +36,6 @@ dependencies:
   - file
   - features
   - help
-  - history
   - honeypot
   - image
   - language
@@ -114,7 +113,6 @@ install:
   - ecms_workflow
   - google_tag
   - update
-  - views_ui
 
 # Theme dependencies for the distribution.
 themes:
