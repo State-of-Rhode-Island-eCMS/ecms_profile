@@ -36,7 +36,6 @@ dependencies:
   - file
   - features
   - help
-  - history
   - honeypot
   - image
   - language
