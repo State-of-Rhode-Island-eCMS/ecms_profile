@@ -1069,6 +1069,7 @@ function ecms_base_update_9065(array &$sandbox): void {
   $active_storage = \Drupal::service('config.storage');
 
   $newConfig = [
+    'honeypot.settings',
     'user.role.anonymous',
     'user.role.authenticated',
   ];
