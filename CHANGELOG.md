@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.6.5] - 2021-07-15
+### Added
 - RIGA-26: Extend download media permission to anonymous and authenticated users.
 
 ### Changed
@@ -17,14 +30,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-76: Views UI module disabled by default.
 - RIGA-76: History module disabled by default.
 
-### Deprecated
-
 ### Removed
 - RIGA-76: Honeypot time limit form protection (allows for page caching).
-
-### Fixed
-
-### Security
 
 ## [0.6.4] - 2021-07-01
 ### Added
@@ -663,7 +670,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.5...HEAD
+[0.6.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.4...0.6.5
 [0.6.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.3...0.6.4
 [0.6.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.2...0.6.3
 [0.6.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.1...0.6.2
