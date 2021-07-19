@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-26: Add modified media view with file link examples to config.
 
 ### Changed
+- RIGA-76: Disable the history module on exiting sites.
 
 ### Deprecated
 

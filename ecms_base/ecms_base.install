@@ -1100,4 +1100,13 @@ function ecms_base_update_9066(array &$sandbox): void {
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
+
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'history',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
 }
