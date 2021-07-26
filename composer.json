@@ -130,7 +130,7 @@
     "drupal/auto_entitylabel": "^3.0@beta",
     "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
-    "drupal/core-recommended": "^9.1",
+    "drupal/core-recommended": "^9.2",
     "drupal/easy_breadcrumb": "^1.13",
     "drupal/extlink": "^1.5",
     "drupal/features": "^3.11",
@@ -187,8 +187,7 @@
     "geocoder-php/google-maps-provider": "^4.6",
     "geocoder-php/ipstack-provider": "^0.3.0",
     "oomphinc/composer-installers-extender": "^2.0",
-    "querypath/querypath": "^3.0",
-    "zaporylie/composer-drupal-optimizations": "^1.0"
+    "querypath/querypath": "^3.0"
   },
   "require-dev": {
     "behat/mink-goutte-driver": "^1.2",
