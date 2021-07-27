@@ -21,7 +21,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.3'
+          php-version: '7.4'
 
       - name: Check PHP Version
         run: php -v
@@ -72,11 +72,11 @@ jobs:
           path: /tmp/drupal-build.tar.gz
 
   test-php-73:
-    name: Test the site with PHP 7.3
+    name: Test the site with PHP 7.4
     needs: build
     runs-on: ubuntu-18.04
     container:
-      image: drupalci/php-7.3-apache:production
+      image: drupalci/php-7.4.x-apache:production
     services:
       mysql:
         image: mysql:5.7
