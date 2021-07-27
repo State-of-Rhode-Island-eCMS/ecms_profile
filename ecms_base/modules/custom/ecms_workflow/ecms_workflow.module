@@ -11,32 +11,6 @@ use Drupal\node\Entity\Node;
 use Drupal\webform\WebformInterface;
 
 /**
- * Implements hook_entity_bundle_create().
- *
- * When optional features (content types) are enabled on the site,
- * this will ensure they are assigned to the proper workflow.
- */
-function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
-  return;
-  // If we are dealing with nodes, add the correct permissions.
-  if ($entity_type_id === 'node') {
-    // Call the workflow service to update configuration.
-    \Drupal::service('ecms_workflow.bundle_create')
-      ->addContentTypeToWorkflow($bundle);
-  }
-
-  // Set taxonomy permissions when a new bundle is created.
-  if ($entity_type_id === 'taxonomy_term') {
-    \Drupal::service('ecms_workflow.bundle_create')
-      ->addTaxonomyTypePermissions($bundle);
-  }
-
-  if (function_exists('drupal_flush_all_caches')) {
-    drupal_flush_all_caches();
-  }
-}
-
-/**
  * Implements hook_ENTITY_TYPE_insert().
  */
 function ecms_workflow_webform_insert(WebformInterface $webform) : void {
