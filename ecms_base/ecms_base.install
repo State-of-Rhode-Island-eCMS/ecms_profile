@@ -1,0 +1,1112 @@
+<?php
+
+/**
+ * @file
+ * ecms_base.install
+ */
+
+declare(strict_types = 1);
+
+/**
+ * @file
+ * Install, update and uninstall functions for the ecms_base profile.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\shortcut\Entity\Shortcut;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\Exception\FileException;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function ecms_base_install() {
+  // Assign user 1 the "drupal_admin" role.
+  $user = User::load(1);
+  $user->roles[] = 'drupal_admin';
+  $user->save();
+
+  // We install some menu links, so we have to rebuild the router, to ensure the
+  // menu links are valid.
+  \Drupal::service('router.builder')->rebuildIfNeeded();
+
+  // Populate the default shortcut set.
+  $shortcut = Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('Add content'),
+    'weight' => -20,
+    'link' => ['uri' => 'internal:/node/add'],
+  ]);
+  $shortcut->save();
+
+  $shortcut = Shortcut::create([
+    'shortcut_set' => 'default',
+    'title' => t('All content'),
+    'weight' => -19,
+    'link' => ['uri' => 'internal:/admin/content'],
+  ]);
+
+  $shortcut->save();
+
+  // Call the workflow service to update configuration.
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->assignWorkflowToActiveTypes();
+
+  // Delete the default 'Contact' webform.
+  try {
+    \Drupal::entityTypeManager()
+      ->getStorage('webform')
+      ->load('contact')->delete();
+  }
+  catch (EntityStorageException $e) {
+    // Trap storage errors.
+  }
+
+  // Delete the default 'Contact' node that was created, should be nid 1.
+  $values = [
+    'type' => 'webform',
+    'nid' => 1,
+  ];
+
+  // Get the node.
+  $nodes = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties($values);
+
+  try {
+    \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->delete($nodes);
+  }
+  catch (EntityStorageException $e) {
+    // Trap storage errors.
+  }
+
+  // Add correct permissions for the nodes/taxonomies.
+  /** @var \Drupal\ecms_workflow\EcmsWorkflowBundleCreate $workflowBundleCreate */
+  $workflowBundleCreate = \Drupal::service('ecms_workflow.bundle_create');
+
+  /** @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface $bundleInfo */
+  $bundleInfo = \Drupal::service('entity_type.bundle.info');
+
+  $nodes = $bundleInfo->getBundleInfo('node');
+
+  // Guard again an empty array of nodes.
+  if (!empty($nodes)) {
+    // Add the correct workflow to the node types.
+    foreach (array_keys($nodes) as $type) {
+      $workflowBundleCreate->addContentTypeToWorkflow($type);
+    }
+  }
+
+  // Set the permissions for all enabled taxonomy bundles.
+  $taxonomies = $bundleInfo->getBundleInfo('taxonomy_term');
+
+  // Guard against empty taxonomies.
+  if (!empty($taxonomies)) {
+    // Add the correct permissions for the taxonomy types.
+    foreach (array_keys($taxonomies) as $taxonomy) {
+      $workflowBundleCreate->addTaxonomyTypePermissions($taxonomy);
+    }
+  }
+
+  // Install the memcache module.
+  $modules_to_install = [
+    'memcache',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+}
+
+/**
+ * Update Basic HTML configuration.
+ */
+function ecms_base_update_9001(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  $active_storage->write('editor.editor.basic_html', $install_source->read('editor.editor.basic_html'));
+  $active_storage->write('filter.format.basic_html', $install_source->read('filter.format.basic_html'));
+
+  // Make sure the pathauto and redirect modules are installed.
+  \Drupal::service('module_installer')->install(['pathauto']);
+  \Drupal::service('module_installer')->install(['redirect']);
+
+}
+
+/**
+ * Updates to run for the 0.1.3 tag.
+ */
+function ecms_base_update_9013(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Install the external links module.
+  \Drupal::service('module_installer')->install(['extlink']);
+
+  // Change the extlink settings to use what is in ecms_base profile.
+  $active_storage->write('extlink.settings', $install_source->read('extlink.settings'));
+
+  // Make sure the scheduler module is installed.
+  \Drupal::service('module_installer')->install(['scheduler']);
+
+  // Call the workflow service to update configuration.
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->assignWorkflowToActiveTypes();
+
+  // Install the SVG Image module.
+  \Drupal::service('module_installer')->install(['svg_image']);
+
+}
+
+/**
+ * Updates to run for the 0.1.4 tag.
+ */
+function ecms_base_update_9014(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $modules_to_install = [
+    'pathauto',
+    'redirect',
+    'key',
+    'encrypt',
+    'real_aes',
+    'webform_encrypt',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  $active_storage->write('pathauto.settings', $install_source->read('pathauto.settings'));
+  $active_storage->write('redirect.settings', $install_source->read('redirect.settings'));
+
+  // Ensure encryption config is updated.
+  $active_storage->write('encrypt.settings', $install_source->read('encrypt.settings'));
+  $active_storage->write('key.key.encryption_key', $install_source->read('key.key.encryption_key'));
+  $active_storage->write('encrypt.profile.webform_encryption', $install_source->read('encrypt.profile.webform_encryption'));
+}
+
+/**
+ * Updates to run for the 0.1.7 tag.
+ */
+function ecms_base_update_9017(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Ensure scheduler permissions are updated.
+  $active_storage->write('user.role.content_publisher', $install_source->read('user.role.content_publisher'));
+  $active_storage->write('user.role.site_admin', $install_source->read('user.role.site_admin'));
+
+  $modules_to_install = [
+    'twig_tweak',
+    'ecms_distribution',
+  ];
+
+  // Enable eCMS distribution module.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Updates to run for the 0.1.9 tag.
+ */
+function ecms_base_update_9019(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Add the social navigation menu.
+  $active_storage->write('system.menu.social-navigation', $install_source->read('system.menu.social-navigation'));
+
+  // Add scheduler settings.
+  $active_storage->write('scheduled_transitions.settings', $install_source->read('scheduled_transitions.settings'));
+
+  // Install new modules.
+  $modules_to_install = [
+    'paragraphs_type_permissions',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Updates to run for the 0.2.0 tag.
+ */
+function ecms_base_update_9020(array &$sandbox): void {
+  // Install new modules.
+  $modules_to_install = [
+    'disable_language',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Updates to run for the 0.2.1 tag.
+ */
+function ecms_base_update_9021(array &$sandbox): void {
+  // Install new modules.
+  $modules_to_install = [
+    'ecms_languages',
+    'language_cookie',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'disable_language',
+    'scheduler',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+}
+
+/**
+ * Updates to run for the 0.2.2 tag.
+ */
+function ecms_base_update_9022(array &$sandbox): void {
+  // Install new modules.
+  $modules_to_install = [
+    'easy_breadcrumb',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Add the breadcrumbs block.
+  $active_storage->write('block.block.breadcrumbs', $theme_source->read('block.block.breadcrumbs'));
+}
+
+/**
+ * Updates to run for the 0.2.6 tag.
+ */
+function ecms_base_update_9026(array &$sandbox): void {
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  // Reinstall the features that were no longer installed on the Covid site.
+  $modules_to_install = [
+    'ecms_basic_page',
+    'ecms_event',
+    'ecms_landing_page',
+    'ecms_location',
+    'ecms_notification',
+    'ecms_paragraphs',
+    'ecms_person',
+    'ecms_press_release',
+    'ecms_promotions',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $theme_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_source */
+  $profile_source = new FileStorage($path . "/config/install/");
+
+  // Add the search view.
+  $active_storage->write('views.view.site_search', $profile_source->read('views.view.site_search'));
+
+  // Add the header inner search block.
+  $active_storage->write('block.block.searchblock', $theme_source->read('block.block.searchblock'));
+
+  // Add the exposed form block.
+  $active_storage->write('block.block.exposedformsite_searchpage_1', $theme_source->read('block.block.exposedformsite_searchpage_1'));
+}
+
+/**
+ * Updates to run for the 0.2.7 tag.
+ */
+function ecms_base_update_9027(array &$sandbox): void {
+
+  // Install the newly introduced SEO modules.
+  $modules_to_install = [
+    'google_tag',
+    'metatag',
+    'simple_sitemap',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.form_author',
+    'user.role.site_admin',
+    'google_tag.settings',
+    'simple_sitemap.settings',
+    'simple_sitemap.custom_links.default',
+    'simple_sitemap.variants.default_hreflang',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.2.8 tag.
+ */
+function ecms_base_update_9028(array &$sandbox): void {
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.2.9 tag.
+ */
+function ecms_base_update_9029(array &$sandbox): void {
+  // Install the newly introduced role delegation module.
+  $modules_to_install = [
+    'role_delegation',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.3.0 tag.
+ */
+function ecms_base_update_9030(array &$sandbox): void {
+  // Install the ecms_publications feature by default.
+  // Install the newly introduced purge modules too.
+  $modules_to_install = [
+    'acquia_purge',
+    'ecms_publications',
+    'purge',
+    'purge_drush',
+    'purge_processor_cron',
+    'purge_processor_lateruntime',
+    'purge_queuer_coretags',
+    'purge_ui',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  $workflow_source = new FileStorage($path . "/modules/custom/ecms_workflow/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'page_manager.page.moderation_dashboard',
+    'page_manager.page_variant.moderation_dashboard-panels_variant-0',
+    'views.view.moderation_dashboard_recent_changes',
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+  $updatedModuleConfig = [
+    'workflows.workflow.editorial',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $workflow_source->read("{$config}"));
+  }
+
+  // Config updates.
+  $acquia_path = \Drupal::service('extension.list.profile')->getPath('ecms_acquia');
+  $acquia_config_source = new FileStorage($acquia_path . "/config/install/");
+
+  $acquiaConfig = [
+    'purge.logger_channels',
+    'purge.plugins',
+    'purge_queuer_coretags.settings',
+  ];
+
+  foreach ($acquiaConfig as $config) {
+    $active_storage->write("{$config}", $acquia_config_source->read("{$config}"));
+  }
+
+  // Install the ecms_claro theme.
+  /** @var \Drupal\Core\Extension\ThemeInstallerInterface $themeInstaller */
+  $themeInstaller = \Drupal::service('theme_installer');
+  $themeInstaller->install(['ecms_claro']);
+
+  // Set the ecms_claro theme as the admin theme.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.theme');
+  $config->set('admin', 'ecms_claro');
+  $config->save();
+}
+
+/**
+ * Updates to run for the 0.3.3 tag.
+ */
+function ecms_base_update_9033(array &$sandbox): void {
+  // Install the locale module for interface translations.
+  $modules_to_install = [
+    'locale',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates for new modules.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'user.role.content_author',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.3.4 tag.
+ */
+function ecms_base_update_9034(array &$sandbox): void {
+  // Install new required modules.
+  $modules_to_install = [
+    'syslog',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'views_ui',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'system.performance',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+}
+
+/**
+ * Updates to run for the 0.3.9 tag.
+ */
+function ecms_base_update_9039(array &$sandbox): void {
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $theme_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $active_storage->write('block.block.sitenotifications', $theme_source->read('block.block.sitenotifications'));
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'user.role.content_author',
+    'user.role.form_author',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.1 tag.
+ */
+function ecms_base_update_9041(array &$sandbox): void {
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+
+  // Update the basic page migration config.
+  $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
+
+  $updatedModuleConfig = [
+    'migrate_plus.migration.ecms_basic_page',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $module_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.2 tag.
+ */
+function ecms_base_update_9042(array &$sandbox): void {
+  // Install new required modules.
+  $modules_to_install = [
+    'honeypot',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'webform.settings',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.3 tag.
+ */
+function ecms_base_update_9043(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'language.types',
+    'filter.format.minimal',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.6 tag.
+ */
+function ecms_base_update_9046(array &$sandbox): void {
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.7 tag.
+ */
+function ecms_base_update_9047(array &$sandbox): void {
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'extlink.settings',
+    'system.performance',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.8 tag.
+ */
+function ecms_base_update_9048(array &$sandbox): void {
+  // Install new required modules.
+  $modules_to_install = [
+    'ecms_icon_library',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.4.9 tag.
+ */
+function ecms_base_update_9049(array &$sandbox): void {
+  // Install new required modules.
+  $modules_to_install = [
+    'media_library_form_element',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Updates to run for the 0.5.1 tag.
+ */
+function ecms_base_update_9051(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'content_moderation_notifications.content_moderation_notification.ready_for_review',
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.site_admin',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+
+  // Update the basic page migration config.
+  $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
+
+  $updatedModuleConfig = [
+    'migrate_plus.migration.ecms_basic_page',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $module_source->read("{$config}"));
+  }
+
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+
+  // Query for all pages.
+  $query = $node_storage->getQuery();
+  $query->condition('type', 'basic_page');
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return;
+  }
+
+  // Load nodes and change their format.
+  $nodes = $node_storage->loadMultiple($nids);
+  foreach ($nodes as $node) {
+    $node->field_basic_page_body->format = 'basic_html';
+    $node->save();
+  }
+}
+
+/**
+ * Updates to run for the 0.5.4 tag.
+ */
+function ecms_base_update_9054(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Update the basic page migration config.
+  $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
+
+  $updatedModuleConfig = [
+    'migrate_plus.migration.ecms_file',
+    'migrate_plus.migration.ecms_file_redirect',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $module_source->read("{$config}"));
+  }
+
+}
+
+/**
+ * Updates to run for the 0.5.5 tag.
+ */
+function ecms_base_update_9055(array &$sandbox): void {
+
+  // Install the new module.
+  $modules_to_install = [
+    'paragraphs_translation_sync',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  $updatedConfig = [
+    'user.role.anonymous',
+  ];
+
+  foreach ($updatedConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+  // Update the basic page migration config.
+  $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
+
+  $updatedModuleConfig = [
+    'migrate_plus.migration.ecms_file',
+  ];
+
+  foreach ($updatedModuleConfig as $config) {
+    $active_storage->write("{$config}", $module_source->read("{$config}"));
+  }
+
+}
+
+/**
+ * Updates to run for the 0.5.6 tag.
+ */
+function ecms_base_update_9056(array &$sandbox): void {
+
+  // Find all the files that do have an extension.
+  $query = \Drupal::entityQuery("file");
+  $query->condition('filename', '.', 'CONTAINS');
+  $files_with_extensions = $query->execute();
+
+  // Get all file ids.
+  $all_query = \Drupal::entityQuery("file");
+  $all_files = $all_query->execute();
+
+  // Result of the diff will be files that don't have extensions.
+  $missing_extension_ids = array_diff($all_files, $files_with_extensions);
+
+  /** @var \Drupal\file\FileInterface|null $file*/
+  $files_to_rename = \Drupal::entityTypeManager()
+    ->getStorage('file')
+    ->loadMultiple($missing_extension_ids);
+
+  foreach ($files_to_rename as $file) {
+    $file->setFilename(basename($file->getFileUri()));
+    $file->save();
+  }
+
+}
+
+/**
+ * Updates to run for the 0.5.8 tag.
+ */
+function ecms_base_update_9058(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'filter.format.basic_html',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.6.2 tag.
+ */
+function ecms_base_update_9062(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $profile_install_source = new FileStorage($path . "/config/install/");
+
+  $newConfig = [
+    'node.type.webform',
+    'pathauto.pattern.webform_nodes',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $profile_install_source->read("{$config}"));
+  }
+
+  // Copy over generic icons from media module.
+  // Taken directly from hook_install in media module.
+  $source = drupal_get_path('module', 'media') . '/images/icons';
+  $destination = \Drupal::config('media.settings')->get('icon_base_uri');
+  $file_system = \Drupal::service('file_system');
+
+  $file_system->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+  $files = $file_system->scanDirectory($source, '/.*\\.(svg|png|jpg|jpeg|gif)$/');
+  foreach ($files as $file) {
+    // When reinstalling the media module we don't want to copy the icons when
+    // they already exist. The icons could be replaced (by a contrib module or
+    // manually), so we don't want to replace the existing files. Removing the
+    // files when we uninstall could also be a problem if the files are
+    // referenced somewhere else. Since showing an error that it was not
+    // possible to copy the files is also confusing, we silently do nothing.
+    if (!file_exists($destination . DIRECTORY_SEPARATOR . $file->filename)) {
+      try {
+        $file_system->copy($file->uri, $destination, FileSystemInterface::EXISTS_ERROR);
+      }
+      catch (FileException $e) {
+        // Ignore and continue.
+      }
+    }
+  }
+}
+
+/**
+ * Updates to run for the 0.6.3 tag.
+ */
+function ecms_base_update_9063(array &$sandbox): void {
+
+  $modules_to_install = [
+    'media_entity_download',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Updates to run for the 0.6.5 tag.
+ */
+function ecms_base_update_9065(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'honeypot.settings',
+    'user.role.anonymous',
+    'user.role.authenticated',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Updates to run for the 0.6.6 tag.
+ */
+function ecms_base_update_9066(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'views.view.media',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'history',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+}
