@@ -17,7 +17,7 @@ dependencies:
   - color
   - components
   - config
-  - content_moderation
+  - 'drupal:content_moderation'
   - content_translation
   - content_moderation_notifications
   - contextual
