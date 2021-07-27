@@ -141,7 +141,7 @@ jobs:
 
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes
+        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
 
       - name: Update settings.php
         run: |
