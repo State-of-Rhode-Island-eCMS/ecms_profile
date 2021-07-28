@@ -43,7 +43,7 @@ class EcmsWorkflowBundleCreate {
   /**
    * Array of content types to exclude.
    */
-  const EXCLUDED_TYPES = ['notification', 'promotions'];
+  const EXCLUDED_TYPES = ['notification'];
 
   /**
    * The entity_type.manager service.
