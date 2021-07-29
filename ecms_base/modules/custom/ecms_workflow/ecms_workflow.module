@@ -17,7 +17,6 @@ use Drupal\webform\WebformInterface;
  * this will ensure they are assigned to the proper workflow.
  */
 function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
-
   // If we are dealing with nodes, add the correct permissions.
   if ($entity_type_id === 'node') {
     // Call the workflow service to update configuration.
