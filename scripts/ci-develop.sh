@@ -22,15 +22,13 @@ DOCROOT="web"
 cd ..
 
 # Create a new Drupal project.
-composer create-project drupal/recommended-project:9.1.9 $APP_NAME --no-install --no-interaction
+composer create-project drupal/recommended-project:9.2.2 $APP_NAME --no-install --no-interaction
 
 # Move into the directory.
 cd $APP_NAME;
 
 # Change the minimum stability flag.
 $COMPOSER config minimum-stability "dev"
-
-$COMPOSER require "zaporylie/composer-drupal-optimizations:^1.1.2" --no-update
 
 # Add the development requirements for testing.
 $COMPOSER require "behat/mink-goutte-driver" --dev --no-update

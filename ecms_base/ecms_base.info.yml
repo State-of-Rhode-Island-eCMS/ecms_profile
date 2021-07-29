@@ -17,7 +17,7 @@ dependencies:
   - color
   - components
   - config
-  - content_moderation
+  - 'drupal:content_moderation'
   - content_translation
   - content_moderation_notifications
   - contextual
@@ -26,7 +26,8 @@ dependencies:
   - dynamic_entity_reference
   - dynamic_page_cache
   - easy_breadcrumb
-  - ecms_distribution
+  - 'ecms_distribution:ecms_distribution'
+  - 'ecms_promotions:ecms_promotions'
   - editor
   - entity_reference_revisions
   - extlink
@@ -108,7 +109,6 @@ install:
   - ecms_paragraphs
   - ecms_person
   - ecms_press_release
-  - ecms_promotions
   - ecms_publications
   - ecms_workflow
   - google_tag

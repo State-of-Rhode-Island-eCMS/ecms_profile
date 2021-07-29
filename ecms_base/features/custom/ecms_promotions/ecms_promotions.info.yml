@@ -1,31 +1,32 @@
 name: Promotions
 description: 'Provides Promotions content type and related configuration. Add a new promotional item to the site.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: '^8.9 || ^9'
 dependencies:
-  - allowed_formats
-  - block_content
-  - content_moderation
-  - content_translation
-  - ecms_distribution
-  - ecms_workflow
-  - field
-  - file
-  - image
-  - language
-  - link
-  - media
-  - media_library
-  - menu_ui
-  - node
-  - paragraphs
-  - path
-  - rabbit_hole
-  - responsive_image
-  - scheduled_transitions
-  - svg_image
-  - text
-  - user
-  - views
+  - 'allowed_formats:allowed_formats'
+  - 'drupal:block_content'
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:field'
+  - 'drupal:file'
+  - 'drupal:image'
+  - 'drupal:language'
+  - 'drupal:link'
+  - 'drupal:media'
+  - 'drupal:media_library'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:path'
+  - 'drupal:responsive_image'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:views'
+  - 'ecms_distribution:ecms_distribution'
+  - 'ecms_workflow:ecms_workflow'
+  - 'paragraphs:paragraphs'
+  - 'paragraphs:paragraphs_translation_sync'
+  - 'rabbit_hole:rabbit_hole'
+  - 'scheduled_transitions:scheduled_transitions'
+  - 'svg_image:svg_image'
 package: eCMS
 version: 9.x-1.0

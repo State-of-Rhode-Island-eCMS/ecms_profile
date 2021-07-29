@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-76: Disable the history module on existing sites.
+- RIGA-96: Update Drupal core to 9.2.2.
 
 ### Deprecated
 
