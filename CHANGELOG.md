@@ -10,11 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-26: Add modified media view with file link examples to config.
 
 ### Changed
-- RIGA-76: Disable the history module on existing sites.
-- RIGA-96: Update Drupal core to 9.2.2.
 
 ### Deprecated
 
@@ -23,6 +20,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+
+## [0.6.6] - 2021-07-29
+### Added
+- RIGA-26: Add modified media view with file link examples to config.
+
+### Changed
+- RIGA-76: Disable the history module on existing sites.
+- RIGA-96: Update Drupal core to 9.2.2.
 
 ## [0.6.5] - 2021-07-15
 ### Added
@@ -673,7 +679,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.6...HEAD
+[0.6.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.5...0.6.6
 [0.6.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.4...0.6.5
 [0.6.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.3...0.6.4
 [0.6.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.2...0.6.3
