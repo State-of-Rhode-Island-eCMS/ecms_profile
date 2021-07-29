@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-98: Updated search_api_solr to 4.2.x.
 
 ### Deprecated
 
