@@ -10,13 +10,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-98: Added dependency for Acquia Search module.
 
 ### Changed
-- RIGA-98: Updated search_api_solr to 4.2.x.
+- RIGA-98: Updated Search API Solr to 4.2.x.
 
 ### Deprecated
 
 ### Removed
+- RIGA-98: Removed Acquia Search Solr module.
 
 ### Fixed
 
