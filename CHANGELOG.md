@@ -18,7 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
-- RIGA-98: Removed Acquia Search Solr module.
+- RIGA-98: Uninstall hook for the Acquia Search Solr module.
 
 ### Fixed
 
