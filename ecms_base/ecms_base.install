@@ -1110,3 +1110,16 @@ function ecms_base_update_9066(array &$sandbox): void {
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
 }
+
+/**
+ * Updates to run for the 0.6.7 tag.
+ */
+function ecms_base_update_9067(array &$sandbox): void {
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'acquia_search_solr',
+  ];
+
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+}
