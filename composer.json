@@ -121,7 +121,6 @@
     "cweagans/composer-patches": "^1.6",
     "drupal/acquia_connector": "^3.0",
     "drupal/acquia_purge": "^1.1",
-    "drupal/acquia_search_solr": "^3.0",
     "drupal/acsf": "2.69",
     "drupal/address": "^1.8",
     "drupal/admin_toolbar": "^2.3",
