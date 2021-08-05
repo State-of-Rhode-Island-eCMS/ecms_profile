@@ -10,20 +10,26 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-98: Added dependency for Acquia Search module.
 
 ### Changed
-- RIGA-98: Updated Search API Solr to 4.2.x.
 
 ### Deprecated
 
 ### Removed
-- RIGA-98: Uninstall hook for the Acquia Search Solr module.
 
 ### Fixed
 
 ### Security
 
+## [0.6.7] 2021-08-05
+### Added
+- RIGA-98: Added dependency for Acquia Search module.
+
+### Changed
+- RIGA-98: Updated Search API Solr to 4.2.x.
+
+### Removed
+- RIGA-98: Uninstall hook for the Acquia Search Solr module.
 
 ## [0.6.6] - 2021-07-29
 ### Added
@@ -682,7 +688,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.7...HEAD
+[0.6.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.6...0.6.7
 [0.6.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.5...0.6.6
 [0.6.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.4...0.6.5
 [0.6.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.3...0.6.4
