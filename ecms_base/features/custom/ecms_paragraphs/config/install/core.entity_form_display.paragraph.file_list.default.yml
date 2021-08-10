@@ -28,7 +28,7 @@ content:
     type: string_textfield
     region: content
   status:
-    weight: 13
+    weight: 14
     settings:
       display_label: true
     third_party_settings: {  }

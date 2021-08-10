@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.media.file.field_file
+    - field.field.media.file.field_file_description
     - field.field.media.file.field_file_link_behavior
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_type
@@ -27,6 +28,14 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
+    region: content
+  field_file_description:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_file_link_behavior:
     weight: 26
