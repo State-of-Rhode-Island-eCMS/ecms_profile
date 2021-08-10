@@ -153,6 +153,9 @@ function ecms_preprocess_media__file(array &$variables): void {
   // Grab file url.
   $variables['file_url'] = file_create_url($media->get('field_file')->entity->uri->value);
 
+  // Set the description.
+  $variables['file_description'] = file_create_url($media->get('field_file_description')->value);
+
   // Determine file icon and what to label file.
   switch ($file_type) {
     case 'pdf':
