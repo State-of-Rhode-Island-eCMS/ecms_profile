@@ -16,11 +16,18 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
-- RIGA-105: Removed deprecated Acquia Search Solr module.
 
 ### Fixed
 
 ### Security
+
+## [0.6.8] - 2021-08-12
+### Added
+- RIGA-104: Added file description field to file media type.
+- RIGA-104: Added translation handling for file media type in theme.
+
+### Removed
+- RIGA-105: Removed deprecated Acquia Search Solr module.
 
 ## [0.6.7] 2021-08-05
 ### Added
@@ -689,7 +696,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.8...HEAD
+[0.6.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.7...0.6.8
 [0.6.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.6...0.6.7
 [0.6.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.5...0.6.6
 [0.6.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.4...0.6.5
