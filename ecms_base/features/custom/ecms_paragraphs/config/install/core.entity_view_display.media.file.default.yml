@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.media.file.field_file
+    - field.field.media.file.field_file_description
     - field.field.media.file.field_file_link_behavior
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_type
@@ -14,6 +15,14 @@ targetEntityType: media
 bundle: file
 mode: default
 content:
+  field_file_description:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_file_link_behavior:
     weight: 1
     label: above

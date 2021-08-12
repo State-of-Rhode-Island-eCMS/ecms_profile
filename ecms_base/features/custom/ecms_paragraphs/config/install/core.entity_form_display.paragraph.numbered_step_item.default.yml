@@ -33,7 +33,7 @@ content:
     type: string_textfield
     region: content
   status:
-    weight: 5
+    weight: 6
     settings:
       display_label: true
     third_party_settings: {  }
