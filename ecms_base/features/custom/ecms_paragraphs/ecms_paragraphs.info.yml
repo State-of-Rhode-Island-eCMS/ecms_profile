@@ -18,6 +18,7 @@ dependencies:
   - 'drupal:media_library'
   - 'drupal:options'
   - 'drupal:path'
+  - 'drupal:taxonomy'
   - 'drupal:text'
   - 'drupal:user'
   - 'ecms_icon_library:ecms_icon_library'
@@ -25,6 +26,7 @@ dependencies:
   - 'metatag:metatag'
   - 'paragraphs:paragraphs'
   - 'paragraphs:paragraphs_translation_sync'
+  - 'rabbit_hole:rabbit_hole'
   - 'svg_image:svg_image'
 version: 9.x-1.0
 package: eCMS

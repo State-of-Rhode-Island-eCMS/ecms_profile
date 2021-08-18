@@ -7,6 +7,7 @@ dependencies:
     - field.field.media.file.field_file_description
     - field.field.media.file.field_file_link_behavior
     - field.field.media.file.field_file_size
+    - field.field.media.file.field_file_tags
     - field.field.media.file.field_file_type
     - image.style.media_library
     - media.type.file
@@ -44,6 +45,7 @@ hidden:
   field_file_description: true
   field_file_link_behavior: true
   field_file_size: true
+  field_file_tags: true
   field_file_type: true
   langcode: true
   search_api_excerpt: true
