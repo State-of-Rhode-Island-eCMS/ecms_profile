@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'File Tags'
+vid: file_tags
+description: 'Provides optional tags for file grouping'
+weight: 0

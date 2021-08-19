@@ -1,1 +1,8 @@
 bundle: ecms
+required:
+  - language.content_settings.taxonomy_term.file_tags
+  - core.entity_form_display.taxonomy_term.file_tags.default
+  - field.field.media.file.field_file_tags
+  - field.storage.media.field_file_tags
+  - rabbit_hole.behavior_settings.taxonomy_vocabulary_file_tags
+  - taxonomy.vocabulary.file_tags
