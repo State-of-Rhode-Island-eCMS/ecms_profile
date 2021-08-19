@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-104: Added File Tags taxonomy for media files.
 
 ### Changed
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.6.9] - 2021-08-19
+### Added
+- RIGA-104: Added File Tags taxonomy for media files.
 
 ## [0.6.8] - 2021-08-12
 ### Added
@@ -697,7 +700,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.9...HEAD
+[0.6.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.8...0.6.9
 [0.6.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.7...0.6.8
 [0.6.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.6...0.6.7
 [0.6.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.5...0.6.6
