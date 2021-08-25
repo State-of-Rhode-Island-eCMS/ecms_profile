@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -102,13 +103,29 @@ function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $variables['langcode'] = $language;
 
   $media_type = $paragraph->field_media_item->entity->bundle();
+  switch ($media_type) {
+    case 'media_item_image':
+      $variables['media_type'] = 'img';
+      break;
 
-  if ($media_type === 'media_item_image') {
-    $variables['media_type'] = 'img';
-  }
+    case 'media_item_video':
+      $variables['media_type'] = 'video';
+      break;
 
-  if ($media_type === 'media_item_video') {
-    $variables['media_type'] = 'video';
+    case 'media_item_audio':
+      $variables['media_type'] = 'audio';
+
+      // Load the media file and pass necessary variables.
+      if(isset($paragraph->field_media_item->entity->field_media_item_audio_file->target_id)) {
+        $file = File::load($paragraph->field_media_item->entity->field_media_item_audio_file->target_id);
+        $variables['audio_url'] = file_create_url($file->getFileUri());
+        $variables['audio_mimetype'] = $file->getMimeType();
+      }
+
+      break;
+
+    default:
+      $variables['media_type'] = '';
   }
 }
 
