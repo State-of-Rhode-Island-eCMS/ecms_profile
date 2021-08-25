@@ -21,6 +21,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+- RIGA-106: Updated webform to 6.0.5 (from 6.0.3).
+- RIGA-106: Updated Admin Toolbar to 3.x branch (from 2.x).
 
 ## [0.6.9] - 2021-08-19
 ### Added
