@@ -178,7 +178,7 @@
     "drupal/twig_tweak": "^2.8",
     "drupal/twig_vardumper": "^3.0",
     "drupal/views_ajax_get": "1.x-dev@dev",
-    "drupal/webform": "~6.0.3",
+    "drupal/webform": "~6.0.5",
     "drupal/webform_encrypt": "1.x-dev@dev",
     "drupal_git/migrate_google_sheets": "1.0.0",
     "drupal_git/migrate_process_trim": "1.0.0",
