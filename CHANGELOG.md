@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-109: Add core patch from issue 2492171 to support filename transliteration.
 
 ### Changed
 
