@@ -105,3 +105,17 @@
     }
   %}
 {% endif %}
+
+{% if media_type == 'audio' %}
+
+  {% include "@molecules/media-item/media-item.twig" with {
+      content: content,
+      type: media_type,
+      caption: paragraph.field_caption.value,
+      size: paragraph.field_size.value,
+      align: align,
+      audio_url: audio_url,
+      audio_mimetype: audio_mimetype
+    }
+  %}
+{% endif %}
