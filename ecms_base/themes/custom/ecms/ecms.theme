@@ -116,7 +116,7 @@ function ecms_preprocess_paragraph__media_item(array &$variables): void {
       $variables['media_type'] = 'audio';
 
       // Load the media file and pass necessary variables.
-      if(isset($paragraph->field_media_item->entity->field_media_item_audio_file->target_id)) {
+      if (isset($paragraph->field_media_item->entity->field_media_item_audio_file->target_id)) {
         $file = File::load($paragraph->field_media_item->entity->field_media_item_audio_file->target_id);
         $variables['audio_url'] = file_create_url($file->getFileUri());
         $variables['audio_mimetype'] = $file->getMimeType();
