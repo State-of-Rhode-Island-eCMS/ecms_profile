@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-109: Add core patch from issue 2492171 to support filename transliteration.
+- RIGA-112: Added theming for audio media items.
 
 ### Changed
 
