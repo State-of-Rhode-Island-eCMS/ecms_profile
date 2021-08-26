@@ -10,9 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-109: Add core patch from issue 2492171 to support filename transliteration.
-- RIGA-112: Added theming for audio media items.
-- RIGA-113: Include the HTTP Cache Control module.
 
 ### Changed
 
@@ -21,6 +18,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.7.0] - 2021-08-26
+### Added
+- RIGA-109: Add core patch from issue 2492171 to support filename transliteration.
+- RIGA-112: Added theming for audio media items.
+- RIGA-113: Include the HTTP Cache Control module.
 
 ### Security
 - RIGA-106: Updated webform to 6.0.5 (from 6.0.3).
@@ -705,7 +710,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.0...HEAD
+[0.7.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.9...0.7.0
 [0.6.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.8...0.6.9
 [0.6.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.7...0.6.8
 [0.6.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.6...0.6.7
