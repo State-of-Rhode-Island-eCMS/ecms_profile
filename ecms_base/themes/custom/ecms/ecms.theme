@@ -502,6 +502,81 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_paragraph().
+ */
+function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
+
+  $paragraph = $variables['paragraph'];
+
+  // Get the selected tag.
+  $term_id = $paragraph->get('field_file_tag')->getString();
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $media_storage = $entity_type_manager->getStorage('media');
+
+  // Get any child terms.
+  $child_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
+    ->loadTree('file_tags', $term_id);
+
+  \Drupal::messenger()->addMessage(print_r($child_terms, TRUE), 'info');
+
+  // Query all files with selected tag.
+  $query = $media_storage->getQuery();
+  $query->condition('bundle', 'file')
+    ->condition('field_file_tags', $term_id)
+    ->condition('status', 1)
+    ->sort('name', "ASC");
+
+  $media_ids = $query->execute();
+
+  // Guard against no media and no children.
+  if (empty($media_ids) && empty($child_terms)) {
+    return;
+  }
+
+  // Load multiple files.
+  $files = $media_storage->loadMultiple($media_ids);
+  $file_list = [];
+
+  foreach ($files as $file) {
+    $file_list[] = $file;
+  }
+
+  $builder = $entity_type_manager->getViewBuilder('media');
+  $variables['parent_files'] = $builder->viewMultiple($file_list);
+
+  $main_term = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->load($term_id);
+  $variables['parent_title'] = $main_term->name->value;
+
+  // Handle any child terms.
+  foreach ($child_terms as $term) {
+    $child_query = $media_storage->getQuery();
+    $child_query->condition('bundle', 'file')
+      ->condition('field_file_tags', $term->tid)
+      ->condition('status', 1)
+      ->sort('name', "ASC");
+
+    $child_media_ids = $child_query->execute();
+    $child_files = $media_storage->loadMultiple($child_media_ids);
+    $child_file_list = [];
+
+    foreach ($child_files as $child_file) {
+      $child_file_list[] = $child_file;
+    }
+
+    $variables['children'][] = [
+      'title' => $term->name,
+      'files' => $builder->viewMultiple($child_file_list)
+      ];
+  }
+
+
+
+}
+
+/**
  * Implements hook_preprocess_block().
  */
 function ecms_preprocess_block(array &$variables): void {
