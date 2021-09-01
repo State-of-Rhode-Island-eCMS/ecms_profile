@@ -2,7 +2,12 @@ bundle: ecms
 required:
   - language.content_settings.taxonomy_term.file_tags
   - core.entity_form_display.taxonomy_term.file_tags.default
+  - core.entity_form_display.paragraph.file_list_by_tag.default
   - field.field.media.file.field_file_tags
+  - field.field.paragraph.file_list_by_tag.field_file_tag
   - field.storage.media.field_file_tags
+  - field.storage.paragraph.field_file_tag
   - rabbit_hole.behavior_settings.taxonomy_vocabulary_file_tags
   - taxonomy.vocabulary.file_tags
+  - core.entity_view_display.paragraph.file_list_by_tag.default
+  - paragraphs.paragraphs_type.file_list_by_tag

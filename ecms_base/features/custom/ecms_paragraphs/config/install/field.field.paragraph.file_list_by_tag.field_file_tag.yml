@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_file_tag
+    - paragraphs.paragraphs_type.file_list_by_tag
+    - taxonomy.vocabulary.file_tags
+id: paragraph.file_list_by_tag.field_file_tag
+field_name: field_file_tag
+entity_type: paragraph
+bundle: file_list_by_tag
+label: 'File Tag'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      file_tags: file_tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

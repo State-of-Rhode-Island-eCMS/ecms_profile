@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.file_list_by_tag.field_file_tag
+    - paragraphs.paragraphs_type.file_list_by_tag
+id: paragraph.file_list_by_tag.default
+targetEntityType: paragraph
+bundle: file_list_by_tag
+mode: default
+content:
+  field_file_tag:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

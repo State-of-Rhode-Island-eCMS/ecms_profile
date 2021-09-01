@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: file_list_by_tag
+label: 'File list by tag'
+icon_uuid: null
+icon_default: null
+description: 'Outputs a list of files based on the selected tag.'
+behavior_plugins: {  }
