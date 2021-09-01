@@ -518,8 +518,6 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
   $child_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
     ->loadTree('file_tags', $term_id);
 
-  \Drupal::messenger()->addMessage(print_r($child_terms, TRUE), 'info');
-
   // Query all files with selected tag.
   $query = $media_storage->getQuery();
   $query->condition('bundle', 'file')
@@ -559,6 +557,12 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
       ->sort('name', "ASC");
 
     $child_media_ids = $child_query->execute();
+
+    // Guard against no media for this sub term.
+    if (empty($child_media_ids)) {
+      continue;
+    }
+
     $child_files = $media_storage->loadMultiple($child_media_ids);
     $child_file_list = [];
 
