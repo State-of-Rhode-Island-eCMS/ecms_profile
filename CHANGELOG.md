@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-104: Add File list by tag component.
 
 ### Changed
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.7.1] - 2021-09-01
+### Added
+- RIGA-104: Add File list by tag component.
 
 ## [0.7.0] - 2021-08-26
 ### Added
@@ -711,7 +714,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.1...HEAD
+[0.7.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.0...0.7.1
 [0.7.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.9...0.7.0
 [0.6.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.8...0.6.9
 [0.6.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.7...0.6.8
