@@ -1,13 +1,8 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - taxonomy.vocabulary.file_tags
+dependencies: {  }
 id: taxonomy_vocabulary_file_tags
-entity_type_id: taxonomy_vocabulary
-entity_id: file_tags
 action: page_redirect
 allow_override: 1
 redirect: /
 redirect_code: 301
-redirect_fallback_action: access_denied
