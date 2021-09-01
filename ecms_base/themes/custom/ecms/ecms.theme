@@ -573,7 +573,7 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
     $variables['children'][] = [
       'title' => $term->name,
       'files' => $builder->viewMultiple($child_file_list),
-      ];
+    ];
   }
 }
 
