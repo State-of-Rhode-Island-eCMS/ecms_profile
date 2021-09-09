@@ -1175,3 +1175,16 @@ function ecms_base_update_9071(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Updates to run for the 0.7.2 tag.
+ */
+function ecms_base_update_9072(array &$sandbox): void {
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'http_cache_control',
+  ];
+
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+}
