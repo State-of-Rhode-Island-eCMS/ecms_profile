@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-127: For eCMS Paragraphs feature, make media item reference field translatable.
 
 ### Deprecated
 
