@@ -6,6 +6,9 @@ label: 'Form Author'
 weight: 4
 is_admin: null
 permissions:
+  - 'access administration pages'
+  - 'access webform help'
+  - 'access webform overview'
   - 'create webform'
   - 'edit any webform'
   - 'edit own webform'

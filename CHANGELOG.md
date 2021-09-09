@@ -12,10 +12,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-127: For eCMS Paragraphs feature, make media item reference field translatable.
+- RIGA-129: Update permissions for form author and site admin to access webform overview.
 
 ### Deprecated
 
 ### Removed
+- RIGA-113: Add uninstall HTTP Cache Control module to update hook.
 
 ### Fixed
 

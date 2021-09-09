@@ -10,6 +10,8 @@ permissions:
   - 'access contextual links'
   - 'access taxonomy overview'
   - 'access user profiles'
+  - 'access webform help'
+  - 'access webform overview'
   - 'add scheduled transitions node basic_page'
   - 'add scheduled transitions node event'
   - 'add scheduled transitions node landing_page'
