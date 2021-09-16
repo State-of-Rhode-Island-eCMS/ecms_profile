@@ -523,6 +523,7 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
   $query->condition('bundle', 'file')
     ->condition('field_file_tags', $term_id)
     ->condition('status', 1)
+    ->sort('field_file_list_weight', "ASC")
     ->sort('name', "ASC");
 
   $media_ids = $query->execute();
@@ -554,6 +555,7 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
     $child_query->condition('bundle', 'file')
       ->condition('field_file_tags', $term->tid)
       ->condition('status', 1)
+      ->sort('field_file_list_weight', "ASC")
       ->sort('name', "ASC");
 
     $child_media_ids = $child_query->execute();
