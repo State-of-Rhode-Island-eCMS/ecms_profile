@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-132: Added sorting to file list by tag by adding a weight field to files.
+- RIGA-133: Added edit link for authenticated users to media: file.
 
 ### Changed
 
