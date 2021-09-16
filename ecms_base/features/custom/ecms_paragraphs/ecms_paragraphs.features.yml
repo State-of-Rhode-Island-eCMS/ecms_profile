@@ -5,8 +5,10 @@ required:
   - core.entity_form_display.paragraph.file_list_by_tag.default
   - field.field.media.file.field_file_tags
   - field.field.paragraph.file_list_by_tag.field_file_tag
+  - field.field.media.file.field_file_list_weight
   - field.storage.media.field_file_tags
   - field.storage.paragraph.field_file_tag
+  - field.storage.media.field_file_list_weight
   - rabbit_hole.behavior_settings.taxonomy_vocabulary_file_tags
   - taxonomy.vocabulary.file_tags
   - core.entity_view_display.paragraph.file_list_by_tag.default

@@ -6,6 +6,7 @@ dependencies:
     - field.field.media.file.field_file
     - field.field.media.file.field_file_description
     - field.field.media.file.field_file_link_behavior
+    - field.field.media.file.field_file_list_weight
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_tags
     - field.field.media.file.field_file_type
@@ -40,6 +41,7 @@ hidden:
   field_file: true
   field_file_description: true
   field_file_link_behavior: true
+  field_file_list_weight: true
   field_file_size: true
   field_file_tags: true
   field_file_type: true

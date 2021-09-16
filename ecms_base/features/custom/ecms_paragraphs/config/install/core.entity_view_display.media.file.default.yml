@@ -5,6 +5,7 @@ dependencies:
     - field.field.media.file.field_file
     - field.field.media.file.field_file_description
     - field.field.media.file.field_file_link_behavior
+    - field.field.media.file.field_file_list_weight
     - field.field.media.file.field_file_size
     - field.field.media.file.field_file_tags
     - field.field.media.file.field_file_type
@@ -26,6 +27,13 @@ content:
     region: content
   field_file_link_behavior:
     weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_file_list_weight:
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
