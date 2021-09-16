@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_file_list_weight
+    - media.type.file
+  module:
+    - options
+id: media.file.field_file_list_weight
+field_name: field_file_list_weight
+entity_type: media
+bundle: file
+label: 'List weight'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings: {  }
+field_type: list_integer
