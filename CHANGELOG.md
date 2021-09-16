@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-132: Added sorting to file list by tag by adding a weight field to files.
-- RIGA-133: Added edit link for authenticated users to media: file.
 
 ### Changed
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.7.3] - 2021-09-16
+### Added
+- RIGA-132: Added sorting to file list by tag by adding a weight field to files.
+- RIGA-133: Added edit link for authenticated users to media: file.
 
 ## [0.7.2] - 2021-09-09
 ### Changed
@@ -724,7 +727,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.3...HEAD
+[0.7.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.2...0.7.3
 [0.7.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.1...0.7.2
 [0.7.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.0...0.7.1
 [0.7.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.6.9...0.7.0
