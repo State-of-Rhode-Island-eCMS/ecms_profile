@@ -158,6 +158,10 @@ function ecms_preprocess_media__file(array &$variables): void {
     $media = $media->getTranslation($language);
   }
 
+  // Provide edit link for authenticated users.
+  $variables['edit_permission'] = \Drupal::currentUser()->isAuthenticated();
+  $variables['edit_url'] = $media->toUrl('edit-form');
+
   // Grab the file title.
   $variables['file_title'] = $media->label();
 
