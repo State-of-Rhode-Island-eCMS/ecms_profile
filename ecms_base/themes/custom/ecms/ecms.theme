@@ -94,7 +94,7 @@ function ecms_theme(array $existing, string $type, string $theme, string $path):
 function ecms_preprocess_paragraph__media_item(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
-  if ($paragraph->field_media_item->isEmpty() && !isset($paragraph->field_media_item->entity)) {
+  if ($paragraph->field_media_item->isEmpty() || empty($paragraph->field_media_item->entity)) {
     return;
   }
 
