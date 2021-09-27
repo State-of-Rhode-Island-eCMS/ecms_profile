@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-138: Added additional check in media item preprocessing to prevent error.
 
 ### Security
 
