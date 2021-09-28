@@ -21,7 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
-## [0.7.4]
+## [0.7.4] - 2021-09-28
 ### Fixed
 - RIGA-138: Added additional check in media item preprocessing to prevent error.
 
