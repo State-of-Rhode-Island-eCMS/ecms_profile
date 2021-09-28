@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-138: Added additional check in media item preprocessing to prevent error.
 
 ### Security
+
+## [0.7.4] - 2021-09-28
+### Fixed
+- RIGA-138: Added additional check in media item preprocessing to prevent error.
 
 ## [0.7.3] - 2021-09-16
 ### Added
@@ -728,7 +731,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.4...HEAD
+[0.7.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.3...0.7.4
 [0.7.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.2...0.7.3
 [0.7.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.1...0.7.2
 [0.7.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.0...0.7.1
