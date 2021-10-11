@@ -5,16 +5,16 @@ ecms_migration.settings:
       type: mapping
       label: 'Settings for the Basic Page migration'
       mapping:
-        google_sheet_id:
+        json_source_url:
           type: string
-          label: "Google Sheet ID for the File Migration"
+          label: "JSON file URL for the File Migration"
     ecms_basic_page:
       type: mapping
       label: 'Settings for the Basic Page migration'
       mapping:
-        google_sheet_id:
+        json_source_url:
           type: string
-          label: "Google Sheet ID for the Basic Page Migration"
+          label: "JSON file URL for the Basic Page Migration"
         css_selector_1:
           type: string
           label: "First CSS Selector"
@@ -28,9 +28,9 @@ ecms_migration.settings:
       type: mapping
       label: 'Settings for the Publication migration'
       mapping:
-        google_sheet_id:
+        json_source_url:
           type: string
-          label: "Google Sheet ID for the Publication Migration"
+          label: "JSON file URL for the Publication Migration"
 
 ecms_migration.migrations:
   type: config_object

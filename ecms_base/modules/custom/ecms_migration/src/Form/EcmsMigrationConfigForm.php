@@ -15,16 +15,6 @@ use Drupal\Core\Form\FormStateInterface;
 class EcmsMigrationConfigForm extends ConfigFormBase {
 
   /**
-   * The Google Sheets URL mask for migration imports.
-   */
-  const GOOGLE_SHEET_URL_MASK = 'https://spreadsheets.google.com/feeds/list/GOOGLE_SHEET_UUID/1/public/values?alt=json';
-
-  /**
-   * The default UUID for the migration url.
-   */
-  const GOOGLE_SHEET_UUID = 'GOOGLE_SHEET_UUID';
-
-  /**
    * {@inheritDoc}
    */
   protected function getEditableConfigNames(): array {
@@ -143,8 +133,8 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
     $migrations = $this->config('ecms_migration.migrations')->get($name);
 
     foreach ($settings as $key => $value) {
-      if ($key === 'google_sheet_id') {
-        $this->setGoogleSheet($settings['google_sheet_id'], $migrations);
+      if ($key === 'json_source_url') {
+        $this->setJsonUrl($settings['json_source_url'], $migrations);
       }
       else {
         $this->setCssSelector($key, $value, $migrations);
@@ -189,21 +179,20 @@ class EcmsMigrationConfigForm extends ConfigFormBase {
   }
 
   /**
-   * Set the Google Sheet url for the supplied migrations.
+   * Set the JSON url for the supplied migrations.
    *
-   * @param string $googleSheetId
-   *   The UUID of the Google Sheet.
+   * @param string $jsonUrl
+   *   The URL of the JSON file.
    * @param array $migrations
-   *   The migrations to apply this sheet ID.
+   *   The migrations to apply this URL.
    */
-  protected function setGoogleSheet(string $googleSheetId, array $migrations): void {
-    $googleSheetPath = str_replace(self::GOOGLE_SHEET_UUID, $googleSheetId, self::GOOGLE_SHEET_URL_MASK);
+  protected function setJsonUrl(string $jsonUrl, array $migrations): void {
 
     // All migrations have a URL in the source.
     /** @var \Drupal\Core\Config\Config $migration */
     foreach ($migrations as $migration) {
       $migrationConfig = $this->config($migration);
-      $migrationConfig->set('source.urls', [$googleSheetPath])->save();
+      $migrationConfig->set('source.urls', [$jsonUrl])->save();
     }
   }
 
