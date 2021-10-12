@@ -1266,6 +1266,18 @@ function ecms_base_update_9076(array &$sandbox): void {
   // Make sure necessary modules are uninstalled.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
+}
+
+/**
+ * Update eCMS Migration module configuration.
+ */
+function ecms_base_update_9077(array &$sandbox): void {
+
+  // Don't run if migration module is disabled.
+  if (!\Drupal::service('module_handler')->moduleExists('devel')) {
+    return;
+  }
+
   // Config updates.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
@@ -1276,7 +1288,13 @@ function ecms_base_update_9076(array &$sandbox): void {
   $module_source = new FileStorage($path . "/modules/custom/ecms_migration/config/install/");
 
   $updatedModuleConfig = [
+    'ecms_migration.settings',
     'migrate_plus.migration.ecms_basic_page',
+    'migrate_plus.migration.ecms_basic_page_url',
+    'migrate_plus.migration.ecms_file',
+    'migrate_plus.migration.ecms_file_media',
+    'migrate_plus.migration.ecms_file_redirect',
+    'migrate_plus.migration.ecms_publications',
   ];
 
   foreach ($updatedModuleConfig as $config) {
