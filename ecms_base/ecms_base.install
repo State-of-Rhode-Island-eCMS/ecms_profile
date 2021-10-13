@@ -1206,3 +1206,30 @@ function ecms_base_update_9072(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Updates to run for the 0.7.5 tag.
+ */
+function ecms_base_update_9075(array &$sandbox): void {
+
+  $media_storage = \Drupal::entityTypeManager()->getStorage('media');
+
+  // Query all files with null list weight.
+  $query = $media_storage->getQuery();
+  $query->condition('bundle', 'file')
+    ->notExists('field_file_list_weight');
+
+  $media_ids = $query->execute();
+
+  // Guard against no files.
+  if (empty($media_ids)) {
+    return;
+  }
+
+  // Loop over entities and set their value to 0.
+  $files = $media_storage->loadMultiple($media_ids);
+  foreach ($files as $file) {
+    $file->set('field_file_list_weight', 0);
+    $file->save();
+  }
+}
