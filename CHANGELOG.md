@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-148: Fixed null argument error.
+- RIGA-139: Fixed missing taxonomy permissions for site admin and content publisher.
 
 ### Security
 
