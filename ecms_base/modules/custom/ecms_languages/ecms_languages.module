@@ -65,7 +65,11 @@ function ecms_languages_pathauto_alias_alter(&$alias, array &$context): void {
 /**
  * Implements hook_menu_local_tasks_alter().
  */
-function ecms_languages_menu_local_tasks_alter(array &$data, string $route_name): void {
+function ecms_languages_menu_local_tasks_alter(array &$data, ?string $route_name): void {
+  if ($route_name === NULL) {
+    return;
+  }
+
   // Remove the toggle publish tabs for node view and edit routes.
   if ($route_name === 'entity.node.canonical'
     || $route_name === 'entity.node.edit_form') {
