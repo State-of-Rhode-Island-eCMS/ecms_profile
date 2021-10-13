@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-138: Added hook_install function to update null values of field_file_list_weight.
+- RIGA-146: Added Asset Injector module to codebase.
 
 ### Changed
 
