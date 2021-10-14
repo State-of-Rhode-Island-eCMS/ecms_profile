@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.7.5] - 2021-10-14
+### Added
 - RIGA-138: Added hook_install function to update null values of field_file_list_weight.
 - RIGA-146: Added Asset Injector module to codebase.
 - RIGA-111: Added new feature ecms_migration_file to support JSON file uploads.
@@ -17,16 +30,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-111: Updated migration configuration to use JSON source plugin to replace google sheets.
 
-### Deprecated
-
 ### Removed
 - RIGA-111: Disabled the Migration Google Sheets module.
 
 ### Fixed
 - RIGA-148: Fixed null argument error.
 - RIGA-139: Fixed missing taxonomy permissions for site admin and content publisher.
-
-### Security
 
 ## [0.7.4] - 2021-09-28
 ### Fixed
@@ -738,7 +747,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.5...HEAD
+[0.7.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.4...0.7.5
 [0.7.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.3...0.7.4
 [0.7.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.2...0.7.3
 [0.7.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.1...0.7.2
