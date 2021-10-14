@@ -1254,7 +1254,7 @@ function ecms_base_update_9075(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.7.3 tag.
+ * Disable the migrate_google_sheets module.
  */
 function ecms_base_update_9076(array &$sandbox): void {
 
@@ -1274,7 +1274,7 @@ function ecms_base_update_9076(array &$sandbox): void {
 function ecms_base_update_9077(array &$sandbox): void {
 
   // Don't run if migration module is disabled.
-  if (!\Drupal::service('module_handler')->moduleExists('devel')) {
+  if (!\Drupal::service('module_handler')->moduleExists('ecms_migration')) {
     return;
   }
 
