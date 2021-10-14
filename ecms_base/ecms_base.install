@@ -1254,24 +1254,9 @@ function ecms_base_update_9075(array &$sandbox): void {
 }
 
 /**
- * Disable the migrate_google_sheets module.
- */
-function ecms_base_update_9076(array &$sandbox): void {
-
-  // Disable existing modules.
-  $modules_to_uninstall = [
-    'migrate_google_sheets',
-  ];
-
-  // Make sure necessary modules are uninstalled.
-  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
-
-}
-
-/**
  * Update eCMS Migration module configuration.
  */
-function ecms_base_update_9077(array &$sandbox): void {
+function ecms_base_update_9076(array &$sandbox): void {
 
   // Don't run if migration module is disabled.
   if (!\Drupal::service('module_handler')->moduleExists('ecms_migration')) {
@@ -1300,5 +1285,20 @@ function ecms_base_update_9077(array &$sandbox): void {
   foreach ($updatedModuleConfig as $config) {
     $active_storage->write("{$config}", $module_source->read("{$config}"));
   }
+
+}
+
+/**
+ * Disable the migrate_google_sheets module.
+ */
+function ecms_base_update_9077(array &$sandbox): void {
+
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'migrate_google_sheets',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
 }
