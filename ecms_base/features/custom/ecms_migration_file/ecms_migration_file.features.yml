@@ -1,6 +1,6 @@
 bundle: ecms
 required:
   - core.entity_form_display.media.migration_file.default
-  - field.field.media.migration_file.field_media_file_1
-  - field.storage.media.field_media_file_1
+  - field.field.media.migration_file.field_media_migration_file
+  - field.storage.media.field_media_migration_file
   - media.type.migration_file
