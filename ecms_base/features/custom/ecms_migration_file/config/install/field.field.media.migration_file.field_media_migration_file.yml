@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_migration_file
+    - media.type.migration_file
+  module:
+    - file
+id: media.migration_file.field_media_migration_file
+field_name: field_media_migration_file
+entity_type: media
+bundle: migration_file
+label: 'JSON File'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: json
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

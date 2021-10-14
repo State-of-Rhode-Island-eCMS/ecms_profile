@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: migration_file
+label: 'Migration File'
+description: 'Allows JSON file uploads to support migrations'
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_migration_file
+field_map: {  }

@@ -33,10 +33,10 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
    */
   const MIGRATION_SETTINGS_CONFIG = [
     'ecms_file' => [
-      'google_sheet_id' => 'GOOGLE_ID_123',
+      'json_source_url' => 'https://filetest.ri.gov',
     ],
     'ecms_basic_page' => [
-      'google_sheet_id' => 'GOOGLE_ID_456',
+      'json_source_url' => 'https://pagetest.ri.gov',
       'css_selector_1' => '#css-selector-1',
       'css_selector_2' => '#css-selector-2',
       'css_selector_3' => '#css-selector-3',
@@ -59,11 +59,6 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
     ],
     '_core' => 'TEST',
   ];
-
-  /**
-   * The expected google sheet url.
-   */
-  const GOOGLE_SHEET_URL_MASK = 'https://spreadsheets.google.com/feeds/list/GOOGLE_ID/1/public/values?alt=json';
 
   /**
    * Mock of the config.factory service.
@@ -247,19 +242,19 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
       );
 
     $testForm = $this->getMockBuilder(EcmsMigrationConfigForm::class)
-      ->onlyMethods(['setGoogleSheet', 'setCssSelector'])
+      ->onlyMethods(['setJsonUrl', 'setCssSelector'])
       ->setConstructorArgs([$this->configFactory])
       ->getMock();
 
     $testForm->expects($this->exactly(2))
-      ->method('setGoogleSheet')
+      ->method('setJsonUrl')
       ->withConsecutive(
         [
-          self::MIGRATION_SETTINGS_CONFIG['ecms_file']['google_sheet_id'],
+          self::MIGRATION_SETTINGS_CONFIG['ecms_file']['json_source_url'],
           self::MIGRATION_MIGRATIONS_CONFIG['ecms_file'],
         ],
         [
-          self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']['google_sheet_id'],
+          self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']['json_source_url'],
           self::MIGRATION_MIGRATIONS_CONFIG['ecms_basic_page'],
         ]
       );

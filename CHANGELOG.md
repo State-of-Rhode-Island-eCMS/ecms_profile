@@ -12,12 +12,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-138: Added hook_install function to update null values of field_file_list_weight.
 - RIGA-146: Added Asset Injector module to codebase.
+- RIGA-111: Added new feature ecms_migration_file to support JSON file uploads.
 
 ### Changed
+- RIGA-111: Updated migration configuration to use JSON source plugin to replace google sheets.
 
 ### Deprecated
 
 ### Removed
+- RIGA-111: Disabled the Migration Google Sheets module.
 
 ### Fixed
 - RIGA-148: Fixed null argument error.
