@@ -7,3 +7,4 @@ dependencies:
   - drupal:migration_tools
   - drupal:migrate_tools
   - drupal:migrate_process_trim
+  - ecms_migration_file
