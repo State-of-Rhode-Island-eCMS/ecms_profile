@@ -10,7 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-143: Added Media Revisions UI module.
+- RIGA-143: Add and enable Media Revisions UI module.
 
 ### Changed
 
