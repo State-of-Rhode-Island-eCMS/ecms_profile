@@ -1302,3 +1302,18 @@ function ecms_base_update_9077(array &$sandbox): void {
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
 }
+
+/**
+ * Enable the media_revisions_ui module.
+ */
+function ecms_base_update_9078(array &$sandbox): void {
+
+  // Enable new modules.
+  $modules_to_install = [
+    'media_revisions_ui',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+}
