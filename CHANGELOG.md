@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-143: Add and enable Media Revisions UI module.
 
 ### Changed
 
@@ -21,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.7.6] - 2021-10-21
+### Added
+- RIGA-143: Add and enable Media Revisions UI module.
+- RIGA-154: Add CAPTCHA module to codebase.
 
 ## [0.7.5] - 2021-10-14
 ### Added
@@ -748,7 +752,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.6...HEAD
+[0.7.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.5...0.7.6
 [0.7.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.4...0.7.5
 [0.7.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.3...0.7.4
 [0.7.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.2...0.7.3
