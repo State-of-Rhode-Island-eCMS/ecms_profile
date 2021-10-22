@@ -24,6 +24,9 @@ function ecms_api_press_release_publisher_node_update(EntityInterface $entity): 
   _ecms_api_press_release_publisher_syndicate($entity);
 }
 
+/**
+ * Utility function for calling the syndication for press releases.
+ */
 function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void {
   // Guard against a non-press_release.
   if ($node->getType() !== 'press_release') {
