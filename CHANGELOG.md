@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-103: Use EcmsApiPublisher service to syndicate Press Releases.
 
 ### Deprecated
 
