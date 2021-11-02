@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-160: Add Views Database Connector module to codebase.
+- RIGA-151: Add Entity Print module to codebase.
 
 ### Changed
 
