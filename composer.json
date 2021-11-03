@@ -190,6 +190,7 @@
     "geocoder-php/arcgis-online-provider": "^4.3",
     "geocoder-php/google-maps-provider": "^4.6",
     "geocoder-php/ipstack-provider": "^0.3.0",
+    "johngrogg/ics-parser": "^2",
     "oomphinc/composer-installers-extender": "^2.0",
     "querypath/querypath": "^3.0"
   },
