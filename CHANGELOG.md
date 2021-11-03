@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-161: Require johngrogg/ics-parser library to fix missing ICal error.
 
 ### Security
 
