@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-160: Add Views Database Connector module to codebase.
-- RIGA-151: Add Entity Print module to codebase.
 
 ### Changed
 
@@ -20,9 +18,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-161: Require johngrogg/ics-parser library to fix missing ICal error.
 
 ### Security
+
+## [0.7.7] - 2021-11-04
+### Added
+- RIGA-160: Add Views Database Connector module to codebase.
+- RIGA-151: Add Entity Print module to codebase.
+
+### Fixed
+- RIGA-161: Require johngrogg/ics-parser library to fix missing ICal error.
 
 ## [0.7.6] - 2021-10-21
 ### Added
@@ -755,7 +760,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.7...HEAD
+[0.7.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.6...0.7.7
 [0.7.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.5...0.7.6
 [0.7.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.4...0.7.5
 [0.7.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.3...0.7.4
