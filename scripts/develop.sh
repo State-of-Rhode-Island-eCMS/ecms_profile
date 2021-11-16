@@ -85,8 +85,8 @@ if [ ! -d "$DEST_DIR" ]; then
   echo "-----------------------------------------------"
   echo " Setup $INSTALL_PROFILE_NAME using composer "
   echo "-----------------------------------------------"
-  echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER create-project --no-interaction oomphinc/drupal-scaffold:^1.1 ${DEST_DIR} --stability dev --no-interaction --no-install\n\n"
-  $COMPOSER create-project --no-interaction "oomphinc/drupal-scaffold:^1.1" ${DEST_DIR} --stability dev --no-interaction --no-install
+  echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER create-project --no-interaction oomphinc/drupal-scaffold:^1.2 ${DEST_DIR} --stability dev --no-interaction --no-install\n\n"
+  $COMPOSER create-project --no-interaction "oomphinc/drupal-scaffold:^1.2" ${DEST_DIR} --stability dev --no-interaction --no-install
 
   # Delete the composer.lock file to get the latest packages instead of the scaffolds outdated packages.
   if [ -a "${DEST_DIR}/composer.lock" ]; then

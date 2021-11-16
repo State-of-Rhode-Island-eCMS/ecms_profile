@@ -12,10 +12,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-6: Update oomphinc/drupal-scaffold to 1.2.x branch.
 
 ### Deprecated
 
 ### Removed
+- RIGA-6: Removed dependency for migrate_google_sheets module.
 
 ### Fixed
 
