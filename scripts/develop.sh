@@ -94,11 +94,7 @@ if [ ! -d "$DEST_DIR" ]; then
     rm $DEST_DIR/composer.lock
   fi
 
-  # Update the drupal optimization package.
-  # This is a temporary fix. @see https://github.com/zaporylie/composer-drupal-optimizations/issues/18#issuecomment-704187300
-  echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER require 'zaporylie/composer-drupal-optimizations:^1.1.2' --no-update\n\n"
   cd $DEST_DIR
-  $COMPOSER require "zaporylie/composer-drupal-optimizations:^1.1.2" --no-update
   $COMPOSER require "oomphinc/composer-installers-extender: ^2.0" --no-update
   cd $BASE_DIR
 
