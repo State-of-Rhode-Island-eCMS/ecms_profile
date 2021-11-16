@@ -17,6 +17,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-6: Removed dependency for migrate_google_sheets module.
 
 ### Fixed
 
