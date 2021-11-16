@@ -60,13 +60,6 @@ mappings:
       language: null
       format: plain_text
   -
-    target: created
-    map:
-      value: created
-    settings:
-      language: null
-      timezone: UTC
-  -
     target: field_event_location
     map:
       value: location
