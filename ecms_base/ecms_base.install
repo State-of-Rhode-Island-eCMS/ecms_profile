@@ -1328,8 +1328,7 @@ function ecms_base_update_9079(array &$sandbox): void {
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
 
-  $ecms_event_path = \Drupal::service('extension.list.profile')->getPath('ecms_event');
-  $ecms_event_config_source = new FileStorage($ecms_event_path . "/config/install/");
+  $ecms_event_config_source = new FileStorage($path . "/features/custom/ecms_event/config/install/");
 
   $ecmsEventConfig = [
     'feeds.feed_type.ical_feed',
