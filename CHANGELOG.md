@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-162: Added State Search CTA to acquia search results.
 
 ### Changed
 - RIGA-6: Update oomphinc/drupal-scaffold to 1.2.x branch.
