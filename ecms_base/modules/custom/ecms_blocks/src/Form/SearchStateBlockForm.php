@@ -30,7 +30,7 @@ class SearchStateBlockForm extends FormBase {
 
     $form['search_input'] = [
       '#type' => 'textfield',
-      "#placeholder" => $this->t('Search the site'),
+      "#placeholder" => $this->t('Search all RI.gov sites'),
       '#required' => TRUE,
       "#attributes" => [
         'type' => "search",
