@@ -61,6 +61,10 @@
     {{ pager }}
   {% endif %}
 
+  {% include '@molecules/search-state-cta/search-state-cta.twig' with {
+    search_link: search_link,
+  } %}
+
   {% if feed_icons %}
     <div class="feed-icons">
       {{ feed_icons }}

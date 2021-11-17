@@ -285,6 +285,17 @@ function ecms_preprocess_views_view(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_view().
+ */
+function ecms_preprocess_views_view_unformatted(array &$variables): void {
+  $view = $variables['view'];
+
+  if ($variables['view']->id() === "acquia_search") {
+    $variables['search_link'] = "https://rigov.ecms.ri.gov/search/index.php?q=" . \Drupal::request()->query->get('search_api_fulltext');
+  }
+}
+
+/**
  * Implements hook_preprocess_menu().
  */
 function ecms_preprocess_menu__minor(array &$variables): void {
