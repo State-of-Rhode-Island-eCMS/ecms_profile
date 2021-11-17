@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * Theme override for the ecms search block.
+#}
+
+{% include '@molecules/site-search/site-search.twig' with {
+    content: content,
+    js_id: TRUE
+  }
+%}
