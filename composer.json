@@ -161,7 +161,7 @@
     "drupal/search_api_solr": "^4.2",
     "drupal/simple_oauth": "^4.5",
     "drupal/simple_sitemap": "^3.8",
-    "drupal/smart_date": "^3.3",
+    "drupal/smart_date": "^3.4",
     "drupal/svg_image": "^1.14",
     "drupal/token": "^1.7",
     "drupal/twig_tweak": "^2.8",

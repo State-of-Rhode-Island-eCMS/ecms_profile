@@ -13,11 +13,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-6: Update oomphinc/drupal-scaffold to 1.2.x branch.
+- RIGA-166: Update Smart Date module to 3.4.x.
 
 ### Deprecated
 
 ### Removed
 - RIGA-6: Removed dependency for migrate_google_sheets module.
+- RIGA-166: Removed feeds import mapping for CREATED field.
 
 ### Fixed
 
