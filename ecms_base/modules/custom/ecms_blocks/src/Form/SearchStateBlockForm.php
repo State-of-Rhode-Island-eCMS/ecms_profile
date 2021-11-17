@@ -57,7 +57,7 @@ class SearchStateBlockForm extends FormBase {
       'q' => $input,
     ];
 
-    $response = new TrustedRedirectResponse(Url::fromUri("https://rigov.ecms.ri.gov/search/index.php", $params)->toString());
+    $response = new TrustedRedirectResponse(Url::fromUri("https://www.ri.gov/search/result.php", $params)->toString());
 
     $metadata = $response->getCacheableMetadata();
     $metadata->setCacheMaxAge(0);
