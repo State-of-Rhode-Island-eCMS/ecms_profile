@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.7.8] - 2021-11-18
+### Added
 - RIGA-162: Added State Search CTA to acquia search results.
 - RIGA-163: Added search state block.
 
@@ -17,15 +30,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-6: Update oomphinc/drupal-scaffold to 1.2.x branch.
 - RIGA-166: Update Smart Date module to 3.4.x.
 
-### Deprecated
-
 ### Removed
 - RIGA-6: Removed dependency for migrate_google_sheets module.
 - RIGA-166: Removed feeds import mapping for CREATED field.
-
-### Fixed
-
-### Security
 
 ## [0.7.7] - 2021-11-04
 ### Added
@@ -766,7 +773,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.8...HEAD
+[0.7.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.7...0.7.8
 [0.7.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.6...0.7.7
 [0.7.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.5...0.7.6
 [0.7.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.4...0.7.5
