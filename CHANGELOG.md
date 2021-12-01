@@ -17,6 +17,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-6: Removed dependency for migrate_google_sheets module.
+- RIGA-166: Removed feeds import mapping for CREATED field.
+- RIGA-167: Removed core patch for 3020876.
 
 ### Fixed
 
