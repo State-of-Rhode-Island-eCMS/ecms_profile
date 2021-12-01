@@ -62,6 +62,9 @@ class EcmsApiInstall {
 
     // Update the simple oauth configuration.
     $this->updateSimpleOauthConfiguration();
+
+    // Update the site email config.
+    // $this->updateSiteEmailConfig()();
   }
 
   /**

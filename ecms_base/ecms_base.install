@@ -1339,3 +1339,17 @@ function ecms_base_update_9079(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Update the site email address.
+ */
+function ecms_base_update_9080(array &$sandbox): void {
+
+  // Set the system site email address.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.site');
+  $config->set('mail', 'ecms@notification.ri.gov');
+  $config->save();
+
+}
