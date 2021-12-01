@@ -29,6 +29,11 @@ class EcmsApiInstall {
   const OAUTH_PRIVATE_KEY = '../ecms_api_private.key';
 
   /**
+   * The global email address.
+   */
+  const ECMS_GLOBAL_EMAIL_ADDRESS = 'ecms@notification.ri.gov';
+
+  /**
    * The config.factory service.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
@@ -87,6 +92,16 @@ class EcmsApiInstall {
 
     $config->set('public_key', self::OAUTH_PUBLIC_KEY);
     $config->set('private_key', self::OAUTH_PRIVATE_KEY);
+    $config->save();
+  }
+
+  /**
+   * Set the site email address.
+   */
+  private function updateSiteEmailConfig(): void {
+    $config = $this->configFactory->getEditable('system.site');
+
+    $config->set('mail', self::ECMS_GLOBAL_EMAIL_ADDRESS);
     $config->save();
   }
 
