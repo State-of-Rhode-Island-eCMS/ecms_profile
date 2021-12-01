@@ -123,6 +123,14 @@ function ecms_base_install() {
 
   \Drupal::service('module_installer')->install($modules_to_install);
 
+
+  // Set the system site email address.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.site');
+  $config->set('mail', 'ecms@notification.ri.gov');
+  $config->save();
+
 }
 
 /**
