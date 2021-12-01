@@ -134,7 +134,7 @@ Often you want to test the updated installation process to ensure plugins are en
 configuration is installing correctly, etc.
 To test the updated profile install process locally, browse to ../develop-ecms-profile and run:
 ```bash
-lando drush site-install ecms_base --verbose --yes --site-mail=admin@localhost --account-mail=admin@localhost --site-name="State of Rhode Island Distribution" --account-name=admin --account-pass=admin;
+lando drush site-install ecms_base --verbose --yes --site-name="State of Rhode Island Distribution" --account-name=admin --account-pass=admin;
 ```
 
 ## Features

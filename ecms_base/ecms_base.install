@@ -123,6 +123,13 @@ function ecms_base_install() {
 
   \Drupal::service('module_installer')->install($modules_to_install);
 
+  // Set the system site email address.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.site');
+  $config->set('mail', 'ecms@notification.ri.gov');
+  $config->save();
+
 }
 
 /**
@@ -1337,5 +1344,19 @@ function ecms_base_update_9079(array &$sandbox): void {
   foreach ($ecmsEventConfig as $config) {
     $active_storage->write("{$config}", $ecms_event_config_source->read("{$config}"));
   }
+
+}
+
+/**
+ * Update the site email address.
+ */
+function ecms_base_update_9080(array &$sandbox): void {
+
+  // Set the system site email address.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.site');
+  $config->set('mail', 'ecms@notification.ri.gov');
+  $config->save();
 
 }
