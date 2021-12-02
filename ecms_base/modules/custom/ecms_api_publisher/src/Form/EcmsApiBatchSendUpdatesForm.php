@@ -59,8 +59,8 @@ class EcmsApiBatchSendUpdatesForm extends ConfirmFormBase {
     $count = $this->queue->numberOfItems();
     return $this->formatPlural(
       $count,
-      'Are you sure you would like to manually push syndicated content to 1 site?  This action cannot be undone!',
-      'Are you sure you would like to manually push syndicated content to @count sites?  This action cannot be undone!'
+      'Are you sure you would like to manually push 1 syndicated content item to all recipient sites?  This action cannot be undone!',
+      'Are you sure you would like to manually push @count syndicated content items to all recipient sites?  This action cannot be undone!'
     );
   }
 
