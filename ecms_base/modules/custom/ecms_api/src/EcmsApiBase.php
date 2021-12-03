@@ -279,6 +279,10 @@ abstract class EcmsApiBase {
       unset($payload['json']['data']['attributes']['langcode']);
     }
 
+    // Unset the langcode regardless, getting permission errors.
+    // See @https://www.drupal.org/project/drupal/issues/2794431#comment-13841477
+    unset($payload['json']['data']['attributes']['langcode']);
+
     // Alter the entity relationships before submission.
     $this->alterEntityRelationships($payload['json']['data']['relationships']);
 

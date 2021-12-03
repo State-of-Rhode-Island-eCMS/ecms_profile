@@ -91,6 +91,8 @@ class EcmsApiPublisher extends EcmsApiBase {
     $clientSecret = $this->getClientSecret();
     $clientScope = $this->getClientScope();
 
+
+
     // Get the access token to create this node.
     $accessToken = $this->getAccessToken($recipientUrl, $clientId, $clientSecret, $clientScope);
 
