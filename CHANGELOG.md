@@ -25,6 +25,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [0.8.0] - 2021-12-08
 ### Changed
 - RIGA-172: Update search string placeholder.
+- RIGA-174: Added results summary to views; content, media, and files.
 
 ### Security
 - RIGA-175: Webform security update SA-CONTRIB-2021-045.
