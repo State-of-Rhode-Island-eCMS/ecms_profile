@@ -21,7 +21,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
-
 ## [0.8.0] - 2021-12-08
 ### Changed
 - RIGA-172: Update search string placeholder.
