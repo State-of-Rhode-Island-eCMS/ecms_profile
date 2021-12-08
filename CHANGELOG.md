@@ -12,13 +12,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-172: Update search string placeholder.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.8.0] - 2021-12-08
+### Changed
+- RIGA-172: Update search string placeholder.
+- RIGA-174: Added results summary to views; content, media, and files.
 
 ### Security
 - RIGA-175: Webform security update SA-CONTRIB-2021-045.
@@ -784,7 +790,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.0...HEAD
+[0.8.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.9...0.8.0
 [0.7.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.8...0.7.9
 [0.7.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.7...0.7.8
 [0.7.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.6...0.7.7
