@@ -278,7 +278,7 @@ class EcmsWorkflowBundleCreate {
     $config = $workflow->getTypePlugin()->getConfiguration();
     $currentNodes = $config["entity_types"]["node"];
 
-    // Make sure we remove any duplicates
+    // Make sure we remove any duplicates.
     $currentNodes = array_unique($currentNodes);
     $newNodesList = [];
     foreach ($currentNodes as $type) {
