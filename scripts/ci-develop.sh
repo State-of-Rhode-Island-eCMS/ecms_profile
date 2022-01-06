@@ -31,7 +31,7 @@ cd $APP_NAME;
 $COMPOSER config minimum-stability "dev"
 
 # Add the development requirements for testing.
-$COMPOSER require "behat/mink-goutte-driver" --dev --no-update
+$COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
 $COMPOSER require "php-mock/php-mock" --dev --no-update
 $COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
 $COMPOSER require "weitzman/drupal-test-traits" --dev --no-update

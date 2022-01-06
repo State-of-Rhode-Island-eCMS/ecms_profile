@@ -43,7 +43,7 @@ class EcmsWorkflowBundleCreate {
   /**
    * Array of content types to exclude.
    */
-  const EXCLUDED_TYPES = ['notification'];
+  const EXCLUDED_TYPES = ['notification', 'press_release'];
 
   /**
    * The entity_type.manager service.
@@ -245,6 +245,62 @@ class EcmsWorkflowBundleCreate {
    */
   public function addTaxonomyTypePermissions(string $taxonomyType): void {
     $this->setTaxonomyRolePermissions($taxonomyType);
+  }
+
+  /**
+   * Remove a content type from the workflow.
+   *
+   * @param string $contentType
+   *   The machine name of the content type.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeContentTypeFromWorkflow(string $contentType): void {
+
+    // Ensure content type is included in the exclude list.
+    if (!in_array($contentType, self::EXCLUDED_TYPES)) {
+      return;
+    }
+
+    // Remove the new content type from the editorial workflow.
+    $workflowEntities = $this->entityTypeManager
+      ->getStorage("workflow")
+      ->loadByProperties(["id" => self::WORKFLOW_ID]);
+
+    // Guard against an empty workflow.
+    if (empty($workflowEntities)) {
+      return;
+    }
+
+    /** @var \Drupal\workflows\WorkflowInterface $workflow */
+    $workflow = array_shift($workflowEntities);
+
+    $config = $workflow->getTypePlugin()->getConfiguration();
+    $currentNodes = $config["entity_types"]["node"];
+
+    // Make sure we remove any duplicates.
+    $currentNodes = array_unique($currentNodes);
+    $newNodesList = [];
+    foreach ($currentNodes as $type) {
+
+      // Maintain all other node types.
+      if ($type !== $contentType) {
+        $newNodesList[] = $type;
+      }
+    }
+
+    // Reset the node list to the maintained.
+    $config["entity_types"]["node"] = $newNodesList;
+
+    $workflow->getTypePlugin()->setConfiguration($config);
+
+    try {
+      $workflow->save();
+    }
+    catch (EntityStorageException $e) {
+      return;
+    }
+
   }
 
   /**
