@@ -276,8 +276,22 @@ class EcmsWorkflowBundleCreate {
     $workflow = array_shift($workflowEntities);
 
     $config = $workflow->getTypePlugin()->getConfiguration();
-    unset($config["entity_types"]["node"][$contentType]);
-    unset($config["dependencies"]["config"]["node.type." . $contentType]);
+    $currentNodes = $config["entity_types"]["node"];
+
+    // Make sure we remove any duplicates
+    $currentNodes = array_unique($currentNodes);
+    $newNodesList = [];
+    foreach ($currentNodes as $type) {
+
+      // Maintain all other node types.
+      if ($type !== $contentType) {
+        $newNodesList[] = $type;
+      }
+    }
+
+    // Reset the node list to the maintained.
+    $config["entity_types"]["node"] = $newNodesList;
+
     $workflow->getTypePlugin()->setConfiguration($config);
 
     try {
