@@ -248,6 +248,48 @@ class EcmsWorkflowBundleCreate {
   }
 
   /**
+   * Remove a content type from the workflow.
+   *
+   * @param string $contentType
+   *   The machine name of the content type.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function removeContentTypeFromWorkflow(string $contentType): void {
+
+    // Ensure content type is included in the exclude list.
+    if (!in_array($contentType, self::EXCLUDED_TYPES)) {
+      return;
+    }
+
+    // Remove the new content type from the editorial workflow.
+    $workflowEntities = $this->entityTypeManager
+      ->getStorage("workflow")
+      ->loadByProperties(["id" => self::WORKFLOW_ID]);
+
+    // Guard against an empty workflow.
+    if (empty($workflowEntities)) {
+      return;
+    }
+
+    /** @var \Drupal\workflows\WorkflowInterface $workflow */
+    $workflow = array_shift($workflowEntities);
+
+    $config = $workflow->getTypePlugin()->getConfiguration();
+    unset($config["entity_types"]["node"][$contentType]);
+    unset($config["dependencies"]["config"]["node.type." . $contentType]);
+    $workflow->getTypePlugin()->setConfiguration($config);
+
+    try {
+      $workflow->save();
+    }
+    catch (EntityStorageException $e) {
+      return;
+    }
+
+  }
+
+  /**
    * Set the correct role permissions for the taxonomy bundle.
    *
    * @param string $taxonomyType
