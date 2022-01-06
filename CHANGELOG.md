@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-185: Remove press releases from editorial workflow.
 
 ### Deprecated
 
