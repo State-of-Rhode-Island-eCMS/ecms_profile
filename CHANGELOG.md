@@ -12,7 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-185: Remove press releases from editorial workflow.
 
 ### Deprecated
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.8.1] - 2022-01-06
+### Changed
+- RIGA-185: Remove press releases from editorial workflow.
 
 ## [0.8.0] - 2021-12-08
 ### Changed
@@ -791,7 +794,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.1...HEAD
+[0.8.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.9...0.8.0
 [0.7.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.8...0.7.9
 [0.7.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.7...0.7.8
