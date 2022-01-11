@@ -393,7 +393,7 @@ class EcmsApiSiteTest extends UnitTestCase {
     // The endpoint link field.
     $fields['api_host'] = BaseFieldDefinition::create('link')
       ->setLabel('API endpoint')
-      ->setDescription('The API endpoint url for the recipient site.')
+      ->setDescription('The API endpoint url for the recipient site. Do not include trailing slash.')
       ->setCardinality(1)
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [
