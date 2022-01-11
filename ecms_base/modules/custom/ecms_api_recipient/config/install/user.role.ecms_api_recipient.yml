@@ -1,9 +1,6 @@
-uuid: 9c2099dc-f871-4c87-a7da-21452ad91708
 langcode: en
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: 6HPCFfUgOpF7iD3a-Babj3H011ddkGi5eCdrjU7OxvI
 id: ecms_api_recipient
 label: 'eCMS API Recipient'
 weight: 6
