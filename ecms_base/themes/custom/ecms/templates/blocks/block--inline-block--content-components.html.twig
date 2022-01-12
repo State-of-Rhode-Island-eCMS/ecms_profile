@@ -37,6 +37,13 @@
   {% set bg_color_class = 'qh__tc__' ~ content['#block_content'].get('field_components_bg_color').value|clean_class %}
 {% endif %}
 
+{# Add block translate link manually for now until core contextual links issue is resolved.
+   @see: https://www.drupal.org/node/3020876
+#}
+{% if logged_in %}
+  <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
+{% endif %}
+
 {% include '@organisms/content-components-block/content-components-block.twig' with {
   label: label,
   title_prefix: title_prefix,
