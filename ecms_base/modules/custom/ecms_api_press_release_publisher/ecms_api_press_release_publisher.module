@@ -8,17 +8,36 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_ENTITY_TYPE_insert() for the node entity.
  */
 function ecms_api_press_release_publisher_node_insert(EntityInterface $entity): void {
-  \Drupal::service('ecms_api_press_release_syndicate')->syndicatePressRelease($entity);
+  _ecms_api_press_release_publisher_syndicate($entity);
 }
 
 /**
  * Implements hook_ENTITY_TYPE_update() for the node entity.
  */
 function ecms_api_press_release_publisher_node_update(EntityInterface $entity): void {
-  \Drupal::service('ecms_api_press_release_syndicate')->syndicatePressRelease($entity);
+  _ecms_api_press_release_publisher_syndicate($entity);
+}
+
+/**
+ * Utility function for calling the syndication for press releases.
+ */
+function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void {
+  // Guard against a non-press_release.
+  if ($node->getType() !== 'press_release') {
+    return;
+  }
+
+  // Guard against a node that is not using content_moderation.
+  if (!$node->hasField('moderation_state')) {
+    // We can only act upon nodes in moderation.
+    return;
+  }
+
+  \Drupal::service('ecms_api_publisher.syndicate')->syndicateEntity($node);
 }

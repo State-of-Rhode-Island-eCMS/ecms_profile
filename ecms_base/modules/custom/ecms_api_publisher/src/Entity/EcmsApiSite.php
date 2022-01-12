@@ -208,7 +208,7 @@ class EcmsApiSite extends ContentEntityBase implements EcmsApiSiteInterface {
     // The endpoint link field.
     $fields['api_host'] = BaseFieldDefinition::create('link')
       ->setLabel(t('API endpoint'))
-      ->setDescription(t('The API endpoint url for the recipient site.'))
+      ->setDescription(t('The API endpoint url for the recipient site. Do not include trailing slash.'))
       ->setCardinality(1)
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [

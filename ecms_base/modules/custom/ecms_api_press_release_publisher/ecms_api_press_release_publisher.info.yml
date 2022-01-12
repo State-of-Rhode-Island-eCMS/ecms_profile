@@ -7,3 +7,4 @@ package: eCMS API
 dependencies:
   - ecms_api_recipient
   - ecms_press_release
+  - ecms_api_publisher

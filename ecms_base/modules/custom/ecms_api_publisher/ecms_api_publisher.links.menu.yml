@@ -4,3 +4,9 @@ ecms_api_publisher.registered_site_collection:
   route_name: entity.ecms_api_site.collection
   parent: system.admin_config_services
   weight: 11
+ecms_api_publisher.manually_process_queue:
+  title: 'Manually syndicate content'
+  description: 'Process the syndication queue.'
+  route_name: ecms_api_publisher.batch_send_form
+  parent: ecms_api_publisher.registered_site_collection
+  weight: 1

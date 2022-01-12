@@ -12,6 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-103: Use EcmsApiPublisher service to syndicate Press Releases.
+- RIGA-103: Updated permissions for eCMS Recipient role.
 
 ### Deprecated
 
