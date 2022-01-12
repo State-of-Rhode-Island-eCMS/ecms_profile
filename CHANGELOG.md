@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-182: Added inline block translation links for admins.
 
 ### Changed
 - RIGA-103: Use EcmsApiPublisher service to syndicate Press Releases.
