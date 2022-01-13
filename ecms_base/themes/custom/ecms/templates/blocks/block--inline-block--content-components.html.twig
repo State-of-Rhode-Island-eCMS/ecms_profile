@@ -23,6 +23,8 @@
  *   displayed in front of the main title tag that appears in the template.
  * - title_suffix: Additional output populated by modules, intended to be
  *   displayed after the main title tag that appears in the template.
+ * - current_node_has_translation: Boolean value indicating if the current
+ *   node (if applicable) has any translations. @see ecms_preprocess_block().
  *
  * @see template_preprocess_block()
  *
@@ -35,6 +37,13 @@
 {% set bg_color_class = '' %}
 {% if content.field_components_bg_color|render is not empty %}
   {% set bg_color_class = 'qh__tc__' ~ content['#block_content'].get('field_components_bg_color').value|clean_class %}
+{% endif %}
+
+{# Add block translate link manually for now until core contextual links issue is resolved.
+   @see: https://www.drupal.org/node/3020876
+#}
+{% if logged_in and current_node_has_translation %}
+  <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
 {% endif %}
 
 {% include '@organisms/content-components-block/content-components-block.twig' with {

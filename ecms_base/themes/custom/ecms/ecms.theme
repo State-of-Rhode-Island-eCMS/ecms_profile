@@ -607,6 +607,15 @@ function ecms_preprocess_block(array &$variables): void {
       $variables['label'] = $variables['content']['#block_content']->label();
     }
   }
+
+  // Send node translation status to blocks.
+  $variables['current_node_has_translation'] = FALSE;
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof EntityInterface) {
+    // Get translated languages excluding default.
+    $translations = $node->getTranslationLanguages(FALSE);
+    $variables['current_node_has_translation'] = (bool) count($translations);
+  }
 }
 
 /**
