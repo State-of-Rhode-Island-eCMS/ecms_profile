@@ -32,6 +32,13 @@
 
 {% set cachebust = content|render %}
 
+{# Add block translate link manually for now until core contextual links issue is resolved.
+   @see: https://www.drupal.org/node/3020876
+#}
+{% if logged_in and current_node_has_translation %}
+  <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
+{% endif %}
+
 {% set img = "" %}
 
 {# Image #}
