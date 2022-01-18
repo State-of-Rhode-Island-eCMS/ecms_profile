@@ -110,11 +110,11 @@ echo " Initialize lando for local usage "
 echo "----------------------------------"
 cd ${DEST_DIR}
 
-echo "Lock Drupal core to 9.2.2 branch."
-$COMPOSER require "drupal/core-composer-scaffold:9.2.2" --no-update
-$COMPOSER require "drupal/core-project-message:9.2.2" --no-update
-$COMPOSER require "drupal/core-recommended:9.2.2" --no-update
-$COMPOSER require "drupal/core-vendor-hardening:9.2.2" --no-update
+echo "Lock Drupal core to 9.2.9 branch."
+$COMPOSER require "drupal/core-composer-scaffold:9.2.9" --no-update
+$COMPOSER require "drupal/core-project-message:9.2.9" --no-update
+$COMPOSER require "drupal/core-recommended:9.2.9" --no-update
+$COMPOSER require "drupal/core-vendor-hardening:9.2.9" --no-update
 
 
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --webroot $DOCROOT --source cwd\n\n"
@@ -220,7 +220,7 @@ set -e
 $LANDO composer remove drupal/coffee
 
 # Add the development requirements for testing.
-$LANDO composer require "behat/mink-goutte-driver" --dev --no-update
+$LANDO composer require "behat/mink-goutte-driver:~1.2" --dev --no-update
 $LANDO composer require "php-mock/php-mock" --dev --no-update
 $LANDO composer require "php-mock/php-mock-phpunit" --dev --no-update
 $LANDO composer require "weitzman/drupal-test-traits" --dev --no-update
