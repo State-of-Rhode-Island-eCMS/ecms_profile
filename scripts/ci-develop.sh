@@ -12,17 +12,16 @@ PATTERN_LAB_DIRECTORY="ecms_patternlab"
 REPOSITORY_NAME="rhodeislandecms/ecms_profile"
 PATTERN_LAB_FULL_PATH="${BASE_DIR%/*}/${PATTERN_LAB_DIRECTORY}"
 PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
-
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-
+DRUPAL_CORE_VERSION="9.2.11"
 
 # Move up a directory.
 cd ..
 
 # Create a new Drupal project.
-composer create-project drupal/recommended-project:9.2.2 $APP_NAME --no-install --no-interaction
+composer create-project drupal/recommended-project:$DRUPAL_CORE_VERSION $APP_NAME --no-install --no-interaction
 
 # Move into the directory.
 cd $APP_NAME;
