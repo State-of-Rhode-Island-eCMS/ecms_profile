@@ -16,6 +16,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
+DRUPAL_CORE_VERSION="9.2.11"
 
 # Whether the source directory should be deleted before rebuilding lando
 DELETE_SRC=0
@@ -110,11 +111,11 @@ echo " Initialize lando for local usage "
 echo "----------------------------------"
 cd ${DEST_DIR}
 
-echo "Lock Drupal core to 9.2.9 branch."
-$COMPOSER require "drupal/core-composer-scaffold:9.2.9" --no-update
-$COMPOSER require "drupal/core-project-message:9.2.9" --no-update
-$COMPOSER require "drupal/core-recommended:9.2.9" --no-update
-$COMPOSER require "drupal/core-vendor-hardening:9.2.9" --no-update
+echo "Lock Drupal core to version ${DRUPAL_CORE_VERSION}."
+$COMPOSER require "drupal/core-composer-scaffold:${DRUPAL_CORE_VERSION}" --no-update
+$COMPOSER require "drupal/core-project-message:${DRUPAL_CORE_VERSION}" --no-update
+$COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
+$COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
 
 
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --webroot $DOCROOT --source cwd\n\n"
