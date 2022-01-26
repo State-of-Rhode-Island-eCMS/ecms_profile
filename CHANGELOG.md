@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-182: Added more inline block translation links for admins.
 
 ### Changed
 
@@ -19,6 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.8.3] - 2022-01-26
+### Added
+- RIGA-182: Added more inline block translation links for admins.
 
 ### Security
 - RIGA-202: Updated Drupal core to 9.2.11 (SA-CORE-2022-001).
@@ -804,7 +809,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.3...HEAD
+[0.8.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.2...0.8.3
 [0.8.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.1...0.8.2
 [0.8.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.7.9...0.8.0
