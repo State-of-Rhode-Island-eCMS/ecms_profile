@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * ecms_api_press_release_publisher.install
+ */
+
+declare(strict_types = 1);
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_install().
+ */
+function ecms_api_press_release_publisher_install(): void {
+  // Add a new press release term to identify source site.
+  $term_name = \Drupal::request()->getHost();
+  $vid = 'press_release_topics';
+
+  $term = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties(['name' => $term_name, 'vid' => $vid]);
+  $term = reset($term);
+  if ($term === FALSE) {
+    $term = Term::create(['name' => $term_name, 'vid' => $vid])->save();
+  }
+}
