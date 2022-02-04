@@ -2,8 +2,7 @@
 
 /**
  * @file
- * ecms_api_press_release_publisher.install - adds the site host as a press
- * topic.
+ * Adds the site host as a press release topic term.
  */
 
 declare(strict_types = 1);
