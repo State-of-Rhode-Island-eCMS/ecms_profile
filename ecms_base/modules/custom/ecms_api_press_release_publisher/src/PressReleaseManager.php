@@ -89,5 +89,7 @@ class PressReleaseManager {
       $currentTerms[] = ['target_id' => $term->id()];
       $entity->set('field_press_release_topics', $currentTerms);
     }
+
   }
+
 }
