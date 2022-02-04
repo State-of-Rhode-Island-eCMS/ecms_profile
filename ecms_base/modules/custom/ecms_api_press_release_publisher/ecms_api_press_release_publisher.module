@@ -30,7 +30,6 @@ function ecms_api_press_release_publisher_node_update(EntityInterface $entity): 
  */
 function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void {
 
-  \Drupal::messenger()->addMessage(print_r('Hi!', TRUE), 'info');
   // Guard against a non-press_release.
   if ($node->getType() !== 'press_release') {
     return;
@@ -42,11 +41,14 @@ function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void 
     return;
   }
 
-  \Drupal::messenger()->addMessage(print_r('make a term!', TRUE), 'info');
   // Add a new press release term to identify source site.
-  $term_name = \Drupal::request()->getHost();
-  $vid = 'press_release_topics';
-  Term::create(['name' => $term_name, 'vid' => $vid])->save();
+  $term = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties(['name' => $term_name, 'vid' => $vid]);
+  $term = reset($term);
+  if ($term === FALSE) {
+    $term = Term::create(['name' => $term_name, 'vid' => $vid])->save();
+  }
 
 
   \Drupal::service('ecms_api_publisher.syndicate')->syndicateEntity($node);
