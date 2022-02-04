@@ -29,6 +29,7 @@ function ecms_api_press_release_publisher_node_update(EntityInterface $entity): 
  */
 function ecms_api_press_release_publisher_entity_presave(EntityInterface $entity): void {
 
+  // Guard against non press releases or those missing the term ref field.
   if ($entity->getEntityTypeId() !== 'node'
   || $entity->bundle() !== 'press_release'
   || !$entity->hasField('field_press_release_topics')) {
