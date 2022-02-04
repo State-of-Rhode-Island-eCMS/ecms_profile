@@ -1,8 +1,4 @@
 services:
-  ecms_api_press_release_syndicate:
-    class: Drupal\ecms_api_press_release_publisher\PressReleaseSyndicate
-    arguments: ['@queue']
-
-  ecms_api_press_release_publisher:
-    class: Drupal\ecms_api_press_release_publisher\PressReleasePublisher
-    arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_helper', '@config.factory']
+  ecms_api_press_release_publisher.press_release_manager:
+    class: Drupal\ecms_api_press_release_publisher\PressReleaseManager
+    arguments: ['@config.factory', '@entity_type.manager']

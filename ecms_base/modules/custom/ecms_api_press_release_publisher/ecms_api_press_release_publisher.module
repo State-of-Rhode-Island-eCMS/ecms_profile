@@ -9,7 +9,6 @@ declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
-use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_ENTITY_TYPE_insert() for the node entity.
@@ -23,6 +22,22 @@ function ecms_api_press_release_publisher_node_insert(EntityInterface $entity): 
  */
 function ecms_api_press_release_publisher_node_update(EntityInterface $entity): void {
   _ecms_api_press_release_publisher_syndicate($entity);
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function ecms_api_press_release_publisher_entity_presave(EntityInterface $entity): void {
+
+  if ($entity->getEntityTypeId() !== 'node'
+  || $entity->bundle() !== 'press_release'
+  || !$entity->hasField('field_press_release_topics')) {
+    return;
+  }
+
+  \Drupal::service('ecms_api_press_release_publisher.press_release_manager')
+    ->addSiteSourceTermToPressRelease($entity);
+
 }
 
 /**
@@ -40,16 +55,6 @@ function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void 
     // We can only act upon nodes in moderation.
     return;
   }
-
-  // Add a new press release term to identify source site.
-  $term = \Drupal::entityTypeManager()
-    ->getStorage('taxonomy_term')
-    ->loadByProperties(['name' => $term_name, 'vid' => $vid]);
-  $term = reset($term);
-  if ($term === FALSE) {
-    $term = Term::create(['name' => $term_name, 'vid' => $vid])->save();
-  }
-
 
   \Drupal::service('ecms_api_publisher.syndicate')->syndicateEntity($node);
 }
