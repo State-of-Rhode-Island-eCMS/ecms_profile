@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -391,7 +392,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<a href=\"/media/{{ mid }}/edit?language=en\">{{ name }}</a>\r\n{{ field_file_link_behavior }}"
+            text: "<a href=\"/media/{{ mid }}/edit?language=en\">{{ name }}</a>\r\n<br /> Download link: /media/{{ mid }}/download"
             make_link: false
             path: ''
             absolute: false

@@ -10,9 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-210: Added media download link to all media types.
 
 ### Changed
-- RIGA-208: Updated redirecte module to 1.7.
+- RIGA-208: Updated redirect module to 1.7.
 - RIGA-208: Updated admin toolbar module to 3.1.x.
 - RIGA-208: Updated easy breadcrumb module to 2.0.x.
 
