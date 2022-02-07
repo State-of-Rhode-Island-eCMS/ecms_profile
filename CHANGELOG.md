@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-210: Added media download link to all media types.
+- RIGA-151: Add Better Exposed Filters module to codebase.
 
 ### Changed
 - RIGA-208: Updated redirect module to 1.7.
