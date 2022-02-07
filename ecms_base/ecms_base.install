@@ -1396,7 +1396,6 @@ function ecms_base_update_9082(array &$sandbox): void {
   $workflowBundleCreate->removeContentTypeFromWorkflow('press_release');
 }
 
-
 /**
  * Update the media admin view.
  */
