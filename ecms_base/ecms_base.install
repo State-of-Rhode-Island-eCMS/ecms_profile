@@ -1412,6 +1412,9 @@ function ecms_base_update_9083(array &$sandbox): void {
 
   $newConfig = [
     'views.view.media',
+    'user.role.content_author',
+    'user.role.form_author',
+    'user.role.site_admin',
   ];
 
   foreach ($newConfig as $config) {

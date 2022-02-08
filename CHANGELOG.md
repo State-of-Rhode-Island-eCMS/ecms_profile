@@ -23,6 +23,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-192: File revert button on file not showing for all users.
 
 ### Security
 
