@@ -255,6 +255,7 @@ permissions:
   - 'reschedule scheduled transitions node promotions'
   - 'reschedule scheduled transitions node publication'
   - 'reschedule scheduled transitions node webform'
+  - 'revert all media revisions'
   - 'revert all revisions'
   - 'revert basic_page revisions'
   - 'revert event revisions'
