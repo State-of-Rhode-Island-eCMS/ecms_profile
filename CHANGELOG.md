@@ -24,6 +24,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-192: File revert button on file not showing for all users.
+- RIGA-191: Fixed aria-label missing from search block input.
 
 ### Security
 

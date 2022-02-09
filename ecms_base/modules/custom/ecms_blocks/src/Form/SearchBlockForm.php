@@ -33,6 +33,7 @@ class SearchBlockForm extends FormBase {
       '#required' => TRUE,
       "#attributes" => [
         'type' => "search",
+        'aria-label' => $this->t("Search"),
       ],
       '#theme_wrappers' => [],
     ];
