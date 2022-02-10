@@ -18,6 +18,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-176: Fixed PHP error on term save.
+- RIGA-192: Add update hook to sync content_publisher role missed on last deploy.
 
 ### Security
 
@@ -25,6 +27,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-210: Added media download link to all media types.
 - RIGA-199: Add Better Exposed Filters module to codebase.
+- RIGA-176: Automatically tag press releases with the current site hostname
 
 ### Changed
 - RIGA-208: Updated redirect module to 1.7.

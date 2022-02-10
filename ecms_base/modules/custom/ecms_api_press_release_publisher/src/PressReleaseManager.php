@@ -62,7 +62,8 @@ class PressReleaseManager {
       ->loadByProperties(['name' => $term_name, 'vid' => self::VID]);
     $term = reset($term);
     if ($term === FALSE) {
-      $term = Term::create(['name' => $term_name, 'vid' => self::VID])->save();
+      $term = Term::create(['name' => $term_name, 'vid' => self::VID]);
+      $term->save();
     }
 
     return $term;
