@@ -1424,7 +1424,7 @@ function ecms_base_update_9083(array &$sandbox): void {
 }
 
 /**
- * Update site publisher permissions.
+ * Update content publisher permissions.
  */
 function ecms_base_update_9084(array &$sandbox): void {
 
