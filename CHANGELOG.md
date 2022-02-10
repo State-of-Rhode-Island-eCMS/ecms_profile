@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.8.4] - 2022-02-10
+### Added
 - RIGA-210: Added media download link to all media types.
 - RIGA-199: Add Better Exposed Filters module to codebase.
 
@@ -18,15 +31,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-208: Updated admin toolbar module to 3.1.x.
 - RIGA-208: Updated easy breadcrumb module to 2.0.x.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIGA-192: File revert button on file not showing for all users.
 - RIGA-191: Fixed aria-label missing from search block input.
-
-### Security
 
 ## [0.8.3] - 2022-01-26
 ### Added
@@ -816,7 +823,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.4...HEAD
+[0.8.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.3...0.8.4
 [0.8.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.2...0.8.3
 [0.8.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.1...0.8.2
 [0.8.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.0...0.8.1
