@@ -22,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-192: Add update hook to sync content_publisher role missed on last deploy.
 
 ### Security
+- RIGA-218: Updated Drupal core to 9.2.13 (SA-CORE-2022-003, -004).
 
 ## [0.8.4] - 2022-02-10
 ### Added
