@@ -18,6 +18,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.8.5] - 2022-02-17
+### Fixed
 - RIGA-176: Fixed PHP error on term save.
 - RIGA-192: Add update hook to sync content_publisher role missed on last deploy.
 
@@ -827,7 +832,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.5...HEAD
+[0.8.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.4...0.8.5
 [0.8.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.3...0.8.4
 [0.8.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.2...0.8.3
 [0.8.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.1...0.8.2
