@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-222: Add patch for Media Revisions UI (new error in core 9.3).
 
 ### Security
 
