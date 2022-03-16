@@ -77,6 +77,9 @@
       },
       "drupal_git/migrate_process_trim": {
         "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
+      },
+      "drupal/media_revisions_ui": {
+        "3257781 - Error: Call to undefined method MediaRevisionAccessCheck": "https://www.drupal.org/files/issues/2022-01-20/3257781-restore-method-5.patch"
       }
     },
     "preserve-paths": [],
