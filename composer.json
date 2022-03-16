@@ -51,7 +51,7 @@
   "extra": {
     "patches": {
       "drupal/core": {
-        "1356276 - Allow profiles to define a base/parent profile and load them in the correct order": "https://www.drupal.org/files/issues/2021-06-29/D91x_AND_D93x-1356276-656.patch",
+        "1356276 - Allow profiles to define a base/parent profile and load them in the correct order": "https://www.drupal.org/files/issues/2022-01-16/1356276-667-subprofile-support-9.3.x.patch",
         "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
         "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
         "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
@@ -77,6 +77,9 @@
       },
       "drupal_git/migrate_process_trim": {
         "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
+      },
+      "drupal/media_revisions_ui": {
+        "3257781 - Error: Call to undefined method MediaRevisionAccessCheck": "https://www.drupal.org/files/issues/2022-01-20/3257781-restore-method-5.patch"
       }
     },
     "preserve-paths": [],
@@ -113,7 +116,7 @@
     "drupal/captcha": "^1.2",
     "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
-    "drupal/core-recommended": "~9.2.13",
+    "drupal/core-recommended": "~9.3.8",
     "drupal/easy_breadcrumb": "^2.0",
     "drupal/entity_print": "^2.4",
     "drupal/extlink": "^1.5",
@@ -156,7 +159,7 @@
     "drupal/scheduled_transitions": "^2.0",
     "drupal/search_api": "^1.18",
     "drupal/search_api_solr": "^4.2",
-    "drupal/simple_oauth": "^4.5",
+    "drupal/simple_oauth": "^5.2",
     "drupal/simple_sitemap": "^3.8",
     "drupal/smart_date": "^3.4",
     "drupal/svg_image": "^1.14",

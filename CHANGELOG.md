@@ -12,12 +12,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-222: Update core to 9.3.8.
+- RIGA-222: Update core patch for issue 1356276 (profiles can define base/parent).
+- RIGA-222: Update Simple OAuth from 4.6 to 5.2.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-222: Add patch for Media Revisions UI (new error in core 9.3).
 
 ### Security
 
