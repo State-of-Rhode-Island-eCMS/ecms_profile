@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.media.media_library
     - field.field.media.file.field_file
     - field.field.media.file.field_file_description
     - field.field.media.file.field_file_link_behavior
@@ -10,53 +11,11 @@ dependencies:
     - field.field.media.file.field_file_tags
     - field.field.media.file.field_file_type
     - media.type.file
-  module:
-    - file
-    - path
-id: media.file.default
+id: media.file.media_library
 targetEntityType: media
 bundle: file
-mode: default
+mode: media_library
 content:
-  created:
-    type: datetime_timestamp
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_file:
-    type: file_generic
-    weight: 6
-    region: content
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-  field_file_description:
-    type: string_textfield
-    weight: 10
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_file_link_behavior:
-    type: options_select
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_file_list_weight:
-    type: options_select
-    weight: 12
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_file_tags:
-    type: options_buttons
-    weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 1
@@ -72,39 +31,20 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  path:
-    type: path
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  replace_file:
-    weight: 7
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    weight: 5
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
   translation:
-    weight: 8
-    region: content
+    weight: 10
     settings: {  }
     third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 2
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
 hidden:
+  created: true
+  field_file: true
+  field_file_description: true
+  field_file_link_behavior: true
+  field_file_list_weight: true
   field_file_size: true
+  field_file_tags: true
   field_file_type: true
+  path: true
+  status: true
+  uid: true
