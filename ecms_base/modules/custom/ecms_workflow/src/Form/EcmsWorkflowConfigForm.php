@@ -113,7 +113,7 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
    * {@inheritDoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    // Get the allowed content types from the user.
+    // Get the excluded content types from the user.
     $contentTypes = $form_state->getValue('excluded_content_types');
 
     // Filter the array.
