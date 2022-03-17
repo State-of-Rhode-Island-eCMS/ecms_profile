@@ -43,7 +43,7 @@ class EcmsWorkflowBundleCreate {
   /**
    * Array of content types to exclude.
    */
-  const EXCLUDED_TYPES = ['notification', 'press_release'];
+  const EXCLUDED_TYPES = ['notification'];
 
   /**
    * The entity_type.manager service.
@@ -176,13 +176,27 @@ class EcmsWorkflowBundleCreate {
    *
    * @param string $contentType
    *   The machine name of the new content type.
+   * @param bool $ignoreExclude
+   *   Flag to skip the exclude check and force adding.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function addContentTypeToWorkflow(string $contentType): void {
+  public function addContentTypeToWorkflow(string $contentType, bool $ignoreExclude = FALSE): void {
 
-    // Guard against any excluded content types.
+    // Guard against any globally excluded content types.
     if (in_array($contentType, self::EXCLUDED_TYPES)) {
+      return;
+    }
+
+    // Check per site exclusion in config.
+    $ecmsWorkflowConfigExcluded = [];
+    if ($this->configFactory->get('ecms_workflow.settings')) {
+      $ecmsWorkflowConfigExcluded = $this->configFactory
+        ->get('ecms_workflow.settings')
+        ->get('excluded_content_types');
+    }
+
+    if (!$ignoreExclude && in_array($contentType, $ecmsWorkflowConfigExcluded)) {
       return;
     }
 
@@ -256,11 +270,6 @@ class EcmsWorkflowBundleCreate {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function removeContentTypeFromWorkflow(string $contentType): void {
-
-    // Ensure content type is included in the exclude list.
-    if (!in_array($contentType, self::EXCLUDED_TYPES)) {
-      return;
-    }
 
     // Remove the new content type from the editorial workflow.
     $workflowEntities = $this->entityTypeManager

@@ -1446,3 +1446,30 @@ function ecms_base_update_9084(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Add press_release back to workflow.
+ */
+function ecms_base_update_9085(array &$sandbox): void {
+
+  /** @var \Drupal\ecms_workflow\EcmsWorkflowBundleCreate $workflowBundleCreate */
+  $workflowBundleCreate = \Drupal::service('ecms_workflow.bundle_create');
+  $workflowBundleCreate->addContentTypeToWorkflow('press_release');
+
+  // Import new ecms_workflow.settings config.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  $workflow_source = new FileStorage($path . "/modules/custom/ecms_workflow/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'ecms_workflow.settings',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $workflow_source->read("{$config}"));
+  }
+
+}

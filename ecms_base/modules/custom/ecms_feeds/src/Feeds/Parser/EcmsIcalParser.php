@@ -148,4 +148,11 @@ class EcmsIcalParser extends PluginBase implements ParserInterface {
     ];
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getSupportedCustomSourcePlugins(): array {
+    return [];
+  }
+
 }

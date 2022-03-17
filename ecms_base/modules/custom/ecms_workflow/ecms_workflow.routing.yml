@@ -1,0 +1,7 @@
+ecms_worksflow.settings_form:
+  path: 'admin/config/workflow/workflows/ecms_workflow/settings'
+  defaults:
+    _form: '\Drupal\ecms_workflow\Form\EcmsWorkflowConfigForm'
+    _title: 'eCMS Workflow Configuration'
+  requirements:
+    _permission: 'administer site configuration'
