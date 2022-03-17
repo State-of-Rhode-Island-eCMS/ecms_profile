@@ -1456,7 +1456,7 @@ function ecms_base_update_9085(array &$sandbox): void {
   $workflowBundleCreate = \Drupal::service('ecms_workflow.bundle_create');
   $workflowBundleCreate->addContentTypeToWorkflow('press_release');
 
-  // Import new ecms_workflow.settings config
+  // Import new ecms_workflow.settings config.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   $workflow_source = new FileStorage($path . "/modules/custom/ecms_workflow/config/install/");
