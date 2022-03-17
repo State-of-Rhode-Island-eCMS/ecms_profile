@@ -111,7 +111,10 @@ install:
   - ecms_press_release
   - ecms_publications
   - ecms_workflow
+  - file_delete
   - google_tag
+  - media_entity_file_replace
+  - media_file_delete
   - media_revisions_ui
   - update
 

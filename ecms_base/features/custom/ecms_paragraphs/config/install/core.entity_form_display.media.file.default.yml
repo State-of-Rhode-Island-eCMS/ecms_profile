@@ -25,41 +25,41 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_file:
-    weight: 7
+    type: file_generic
+    weight: 6
+    region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
-    type: file_generic
-    region: content
   field_file_description:
-    weight: 27
+    type: string_textfield
+    weight: 10
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_file_link_behavior:
-    weight: 26
+    type: options_select
+    weight: 9
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_file_list_weight:
-    weight: 29
-    settings: {  }
-    third_party_settings: {  }
     type: options_select
+    weight: 12
     region: content
-  field_file_tags:
-    weight: 28
     settings: {  }
     third_party_settings: {  }
+  field_file_tags:
     type: options_buttons
+    weight: 11
     region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
@@ -78,27 +78,32 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  replace_file:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 2
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
 hidden:
   field_file_size: true

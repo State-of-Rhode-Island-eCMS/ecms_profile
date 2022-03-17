@@ -1472,4 +1472,26 @@ function ecms_base_update_9085(array &$sandbox): void {
     $active_storage->write("{$config}", $workflow_source->read("{$config}"));
   }
 
+  // Update the form_author role.
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  $updatedConfig = [
+    'user.role.form_author',
+  ];
+
+  foreach ($updatedConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+  // Install new media modules.
+  $modules_to_install = [
+    'file_delete',
+    'media_entity_file_replace',
+    'media_file_delete',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
 }
