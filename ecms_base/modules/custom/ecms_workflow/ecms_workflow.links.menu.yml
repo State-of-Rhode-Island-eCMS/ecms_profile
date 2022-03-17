@@ -1,0 +1,6 @@
+ecms_workflow.settings_form:
+  title: 'eCMS Workflow Configuration'
+  description: 'Configure the excluded content types for the default workflow.'
+  route_name: ecms_worksflow.settings_form
+  parent: entity.workflow.collection
+  weight: 10
