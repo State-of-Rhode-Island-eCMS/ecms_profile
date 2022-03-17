@@ -7,6 +7,7 @@ namespace Drupal\ecms_workflow\Form;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
@@ -17,6 +18,13 @@ use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
  * @package Drupal\ecms_workflow\Form
  */
 class EcmsWorkflowConfigForm extends ConfigFormBase {
+
+  /**
+   * The entity_type.manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  private $entityTypeManager;
 
   /**
    * The entity_type.bundle.info service.
@@ -35,6 +43,8 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
   /**
    * EcmsWorkflowConfigForm constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity_type.manager service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config.factory service.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entityTypeBundleInfo
@@ -42,9 +52,10 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
    * @param \Drupal\ecms_workflow\EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService
    *   The ecms_workflow.bundle_create service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeBundleInfoInterface $entityTypeBundleInfo, EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $config_factory, EntityTypeBundleInfoInterface $entityTypeBundleInfo, EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService) {
     parent::__construct($config_factory);
 
+    $this->entityTypeManager = $entityTypeManager;
     $this->entityTypeBundleInfo = $entityTypeBundleInfo;
     $this->ecmsWorkflowBundleCreate = $ecmsWorkflowBundleCreateService;
   }
@@ -54,6 +65,7 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('entity_type.manager'),
       $container->get('config.factory'),
       $container->get('entity_type.bundle.info'),
       $container->get('ecms_workflow.bundle_create')
@@ -83,17 +95,14 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
     $form = parent::buildForm($form, $form_state);
 
     // Load the available nodes and build list of types.
-    $nodes = $this->entityTypeBundleInfo->getBundleInfo('node');
-    $nodes = array_map(function ($bundle_info) {
-      return $bundle_info['label'];
-    }, $nodes);
+    $nodeTypes = node_type_get_names();
 
     // List of all available content types as checkboxes.
     $form['excluded_content_types'] = [
       '#title' => $this->t('Excluded Content types'),
       '#description' => $this->t('Select the content types to exclude from the default workflow.'),
       '#type' => 'checkboxes',
-      '#options' => $nodes,
+      '#options' => $nodeTypes,
       '#default_value' => $this->config('ecms_workflow.settings')->get('excluded_content_types'),
     ];
 
@@ -133,6 +142,13 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
 
     foreach ($contentTypes as $key => $type) {
       $this->ecmsWorkflowBundleCreate->removeContentTypeFromWorkflow($key);
+    }
+
+    // Make sure all unchecked types are in the workflow.
+    foreach (node_type_get_names() as $key => $type) {
+      if (!array_key_exists($key, $contentTypes)) {
+        $this->ecmsWorkflowBundleCreate->addContentTypeToWorkflow($key, TRUE);
+      }
     }
 
   }
