@@ -21,6 +21,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [0.8.7] - 2022-03-17
+### Fixed
+- RIGA-222: Update to easy breadcrumb install config.
+
 ## [0.8.6] - 2022-03-17
 ### Added
 - RIGA-223: Added eCMS Workflow config to allow sites to exclude content types from default workflow.
@@ -850,7 +854,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.7...HEAD
+[0.8.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.6...0.8.7
 [0.8.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.5...0.8.6
 [0.8.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.4...0.8.5
 [0.8.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.3...0.8.4
