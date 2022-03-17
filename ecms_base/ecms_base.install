@@ -1472,4 +1472,14 @@ function ecms_base_update_9085(array &$sandbox): void {
     $active_storage->write("{$config}", $workflow_source->read("{$config}"));
   }
 
+  // Install new media modules.
+  $modules_to_install = [
+    'file_delete',
+    'media_entity_file_replace',
+    'media_file_delete',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
 }
