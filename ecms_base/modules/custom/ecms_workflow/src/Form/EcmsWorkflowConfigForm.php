@@ -117,7 +117,7 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
 
     parent::submitForm($form, $form_state);
 
-    // Save the permissions of the selected content types to the api role.
+    // Remove the selected content types from the workflow.
     $this->removeTypesFromWorkflow($contentTypes);
   }
 
@@ -131,7 +131,6 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
    */
   private function removeTypesFromWorkflow(array $contentTypes): void {
 
-    // Grant create and edit own permissions for the selected content types.
     foreach ($contentTypes as $key => $type) {
       $this->ecmsWorkflowBundleCreate->removeContentTypeFromWorkflow($key);
     }
