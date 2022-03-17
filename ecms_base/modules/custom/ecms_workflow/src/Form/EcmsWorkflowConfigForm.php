@@ -5,13 +5,11 @@ declare(strict_types =1);
 namespace Drupal\ecms_workflow\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\user\RoleInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
 
 /**
  * Setup the configuration form for the ecms_workflow module.
@@ -19,13 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @package Drupal\ecms_workflow\Form
  */
 class EcmsWorkflowConfigForm extends ConfigFormBase {
-
-  /**
-   * The entity_type.manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  private $entityTypeManager;
 
   /**
    * The entity_type.bundle.info service.
@@ -46,17 +37,14 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config.factory service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity_type.manager service.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entityTypeBundleInfo
    *   The entity_type.bundle.info service.
-   * @param \Drupal\Core\Entity\EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService
+   * @param \Drupal\ecms_workflow\EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService
    *   The ecms_workflow.bundle_create service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entityTypeManager, EntityTypeBundleInfoInterface $entityTypeBundleInfo, EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService) {
+  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeBundleInfoInterface $entityTypeBundleInfo, EcmsWorkflowBundleCreate $ecmsWorkflowBundleCreateService) {
     parent::__construct($config_factory);
 
-    $this->entityTypeManager = $entityTypeManager;
     $this->entityTypeBundleInfo = $entityTypeBundleInfo;
     $this->ecmsWorkflowBundleCreate = $ecmsWorkflowBundleCreateService;
   }
@@ -67,7 +55,6 @@ class EcmsWorkflowConfigForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('entity_type.manager'),
       $container->get('entity_type.bundle.info'),
       $container->get('ecms_workflow.bundle_create')
     );
