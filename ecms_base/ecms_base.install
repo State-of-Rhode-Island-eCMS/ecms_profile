@@ -1450,7 +1450,7 @@ function ecms_base_update_9084(array &$sandbox): void {
 /**
  * Add press_release back to workflow.
  */
-function ecms_base_update_9085(array &$sandbox): void {
+function ecms_base_update_9087(array &$sandbox): void {
 
   /** @var \Drupal\ecms_workflow\EcmsWorkflowBundleCreate $workflowBundleCreate */
   $workflowBundleCreate = \Drupal::service('ecms_workflow.bundle_create');
@@ -1470,6 +1470,18 @@ function ecms_base_update_9085(array &$sandbox): void {
 
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $workflow_source->read("{$config}"));
+  }
+
+  // Update the form_author role.
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  $updatedConfig = [
+    'user.role.form_author',
+  ];
+
+  foreach ($updatedConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 
   // Install new media modules.
