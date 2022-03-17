@@ -10,22 +10,34 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-223: Added eCMS Workflow config to allow sites to exclude content types from default workflow.
 
 ### Changed
-- RIGA-222: Update core to 9.3.8.
-- RIGA-222: Update core patch for issue 1356276 (profiles can define base/parent).
-- RIGA-222: Update Simple OAuth from 4.6 to 5.2.
-- RIGA-223: Restored press_release to the default workflow.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.8.6] - 2022-03-17
+### Added
+- RIGA-223: Added eCMS Workflow config to allow sites to exclude content types from default workflow.
+- RIGA-221: Added file_delete, media_file_delete, and media_entity_file_replace modules.
+
+### Changed
+- RIGA-222: Update core to 9.3.8.
+- RIGA-222: Update core patch for issue 1356276 (profiles can define base/parent).
+- RIGA-222: Update Simple OAuth from 4.6 to 5.2.
+- RIGA-223: Restored press_release to the default workflow.
+- RIGA-144: Updated form_author role to be submission viewer only.
+
+### Fixed
 - RIGA-222: Add patch for Media Revisions UI (new error in core 9.3).
 
 ### Security
+- RIGA-222: Updated Drupal core to 9.3.8 (SA-CORE-2022-001).
 
 ## [0.8.5] - 2022-02-17
 ### Fixed
@@ -838,7 +850,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.6...HEAD
+[0.8.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.5...0.8.6
 [0.8.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.4...0.8.5
 [0.8.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.3...0.8.4
 [0.8.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.2...0.8.3
