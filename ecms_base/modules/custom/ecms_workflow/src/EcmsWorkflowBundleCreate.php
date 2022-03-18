@@ -189,12 +189,14 @@ class EcmsWorkflowBundleCreate {
     }
 
     // Check per site exclusion in config.
-    $ecmsWorkflowConfigExcluded = [];
     if ($this->configFactory->get('ecms_workflow.settings')) {
       $ecmsWorkflowConfigExcluded = $this->configFactory
         ->get('ecms_workflow.settings')
         ->get('excluded_content_types');
     }
+
+    // Make sure we have a value.
+    $ecmsWorkflowConfigExcluded = $ecmsWorkflowConfigExcluded ?? [];
 
     if (!$ignoreExclude && in_array($contentType, $ecmsWorkflowConfigExcluded)) {
       return;
