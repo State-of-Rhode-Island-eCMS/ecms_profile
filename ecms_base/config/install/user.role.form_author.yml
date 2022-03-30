@@ -1,14 +1,23 @@
+uuid: null
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - entity_print
+    - system
+    - webform
+    - webform_encrypt
+    - webform_node
 id: form_author
-label: 'Form Author'
+label: 'Form Submissions Editor'
 weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
   - 'access webform help'
   - 'access webform overview'
+  - 'edit any webform submission'
+  - 'entity print access type webform_submission'
   - 'view any webform submission'
   - 'view encrypted values'
   - 'view webform submissions any node'
