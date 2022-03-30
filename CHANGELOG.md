@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+- RIGA-233: Updated Drupal core to 9.3.9 (SA-CORE-2022-006).
 
 ## [0.8.8] - 2022-03-18
 ### Fixed
