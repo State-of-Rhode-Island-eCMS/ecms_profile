@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-231: Update form submissions editor role.
+- RIGA-231: Install entity_print by default.
 
 ### Deprecated
 
