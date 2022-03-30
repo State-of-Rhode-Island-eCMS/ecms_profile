@@ -1501,6 +1501,14 @@ function ecms_base_update_9085(array &$sandbox): void {
  */
 function ecms_base_update_9086(array &$sandbox): void {
 
+  // Install entity_print.
+  $modules_to_install = [
+    'entity_print',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
   // Config updates.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 

@@ -29,6 +29,7 @@ dependencies:
   - 'ecms_distribution:ecms_distribution'
   - 'ecms_promotions:ecms_promotions'
   - editor
+  - entity_print
   - entity_reference_revisions
   - extlink
   - features_ui
