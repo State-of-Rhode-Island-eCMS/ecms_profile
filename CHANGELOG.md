@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-231: Update form submissions editor role.
+- RIGA-231: Install entity_print, webform_entity_print by default.
 
 ### Deprecated
 
@@ -21,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+- RIGA-233: Updated Drupal core to 9.3.9 (SA-CORE-2022-006).
 
 ## [0.8.8] - 2022-03-18
 ### Fixed

@@ -15,7 +15,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="9.3.8"
+DRUPAL_CORE_VERSION="9.3.9"
 
 # Move up a directory.
 cd ..
