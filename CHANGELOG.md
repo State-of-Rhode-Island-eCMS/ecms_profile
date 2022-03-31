@@ -12,14 +12,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-231: Update form submissions editor role.
-- RIGA-231: Install entity_print, webform_entity_print by default.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.8.9] - 2022-03-31
+### Changed
+- RIGA-231: Update form submissions editor role.
+- RIGA-231: Install entity_print, webform_entity_print by default.
 
 ### Security
 - RIGA-233: Updated Drupal core to 9.3.9 (SA-CORE-2022-006).
@@ -861,7 +866,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.9...HEAD
+[0.8.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.8...0.8.9
 [0.8.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.7...0.8.8
 [0.8.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.6...0.8.7
 [0.8.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.5...0.8.6
