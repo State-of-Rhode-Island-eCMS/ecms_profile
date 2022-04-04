@@ -1,31 +1,6 @@
 # ECMS Drupal Installation Profile
 Drupal base installation profile for the Rhode Island eCMS system.
 
-## Getting started
-
-To use this distribution, you need to include the custom repository in your
-composer.json file:
-
-```json
-"repositories": [
-    {
-        "type": "git",
-        "url": "git@github.com/State-of-Rhode-Island-eCMS/ecms_profile.git"
-    }
-],
-```
-
-Then, require the distribution like any other project:
-
-```bash
-composer require rhodeislandecms/ecms_profile
-```
-
-Also, be sure to allow dependencies to patch files with:
-```json
-composer config extra.enable-patching true
-```
-
 ## Development Quick Start
 To develop this installation profile, start by running
 
