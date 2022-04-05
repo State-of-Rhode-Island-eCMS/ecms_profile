@@ -158,6 +158,7 @@
     "drupal/rabbit_hole": "^1.0",
     "drupal/real_aes": "^2.3",
     "drupal/redirect": "^1.7",
+    "drupal/robotstxt": "^1.4",
     "drupal/role_delegation": "^1.1",
     "drupal/scheduled_transitions": "^2.0",
     "drupal/search_api": "^1.18",

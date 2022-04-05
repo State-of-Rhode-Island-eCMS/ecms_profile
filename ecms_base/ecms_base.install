@@ -1528,3 +1528,54 @@ function ecms_base_update_9086(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Install robotstxt module.
+ */
+function ecms_base_update_9087(array &$sandbox): void {
+
+  // Install robotstxt.
+  $modules_to_install = [
+    'robotstxt',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $newConfig = [
+    'robotstxt.settings',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+}
+
+/**
+ * Update tabs block visibilty.
+ */
+function ecms_base_update_9088(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Update the tabs block.
+  $active_storage->write('block.block.tabs', $theme_source->read('block.block.tabs'));
+
+}

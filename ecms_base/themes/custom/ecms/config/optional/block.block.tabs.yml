@@ -1,19 +1,32 @@
 langcode: en
 status: true
 dependencies:
+  module:
+    - node
   theme:
     - ecms
 id: tabs
 theme: ecms
 region: admin_links
-weight: -2
+weight: 0
 provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
   label: Tabs
-  provider: core
   label_display: '0'
+  provider: core
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      basic_page: basic_page
+      event: event
+      location: location
+      press_release: press_release
+      webform: webform
