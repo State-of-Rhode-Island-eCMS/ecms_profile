@@ -177,8 +177,6 @@ function ecms_preprocess_media__file(array &$variables): void {
   $file_size_raw = $media->get('field_file_size')->value;
   $variables['file_size'] = _filesize_formatted(intval($file_size_raw));
 
-  \Drupal::messenger()->addMessage(print_r(theme_get_setting('use_file_path'), TRUE), 'info');
-
   // Grab file url, accounting for global "use absolute file" setting.
   $variables['file_url'] = '/media/' . $media->id() . '/download?language=' . $language;
   if (theme_get_setting('use_file_path')) {
