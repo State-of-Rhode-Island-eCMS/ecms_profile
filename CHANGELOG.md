@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-244: Add robotstxt module to codebase.
+- RIGA-226: Add option to file list components to use absolute file link.
 
 ### Changed
 

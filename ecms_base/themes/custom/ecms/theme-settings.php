@@ -132,6 +132,18 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
     '#title' => t('Display logo only. Do not show any text.'),
   ];
 
+  // File settings.
+  $form['ecms_files'] = [
+    '#type' => 'details',
+    '#title' => "Files",
+  ];
+
+  $form['ecms_files']['use_file_path'] = [
+    '#type' => 'checkbox',
+    '#default_value' => theme_get_setting('use_file_path'),
+    '#title' => t('Use absolute file path for download links.'),
+  ];
+
   // Footer settings.
   $form['ecms_footer'] = [
     '#type' => 'details',
