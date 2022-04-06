@@ -23,3 +23,5 @@ color_palette: scarborough
 header_top_line: "State of Rhode Island"
 header_main_line: "Agency Name"
 header_bottom_line: "Agency Slogan"
+use_file_path: 0
+

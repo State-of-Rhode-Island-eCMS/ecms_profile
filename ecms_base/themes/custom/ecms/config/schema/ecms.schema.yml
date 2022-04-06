@@ -89,3 +89,6 @@ ecms.settings:
     langcode:
       type: string
       label: 'Language code'
+    use_file_path:
+      type: integer
+      label: 'Use absolute file path for download links'
