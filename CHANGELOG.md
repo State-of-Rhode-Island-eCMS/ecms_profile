@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-244: Add robotstxt module to codebase.
-- RIGA-226: Add option to file list components to use absolute file link.
 
 ### Changed
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.0] - 2022-04-07
+### Added
+- RIGA-244: Add robotstxt module to codebase.
+- RIGA-226: Add option to file list components to use absolute file link.
 
 ## [0.8.9] - 2022-03-31
 ### Changed
@@ -868,7 +871,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.0...HEAD
+[0.9.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.9...0.9.0
 [0.8.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.8...0.8.9
 [0.8.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.7...0.8.8
 [0.8.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.6...0.8.7
