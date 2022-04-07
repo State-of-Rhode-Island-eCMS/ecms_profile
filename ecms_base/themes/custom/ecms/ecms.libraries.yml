@@ -30,3 +30,11 @@ rrule-js:
     ecms_patternlab/dist/vendor/rrule/rrule.min.js:  { weight: -1, attributes: { type: "module"} }
   dependencies:
     - ecms/global-styling
+
+modal:
+  version: 1.0
+  js:
+    ecms_patternlab/dist/vendor/micromodal/micromodal.min.js:  { weight: -1, attributes: { type: "module"} }
+  dependencies:
+    - ecms/global-styling
+
