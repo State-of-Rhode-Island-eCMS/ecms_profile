@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 
@@ -74,22 +75,22 @@ function ecms_preprocess_html(array &$variables): void {
   $variables['palette'] = $paletteClass;
 
   $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     // Check if field_apple_icon for each content type.
     // Basic page.
-    if ( $node->hasField('field_apple_icon') && isset($node->field_apple_icon[0]) && $mid = $node->field_apple_icon[0]->getValue()['target_id']) {
+    if ($node->hasField('field_apple_icon') && isset($node->field_apple_icon[0]) && $mid = $node->field_apple_icon[0]->getValue()['target_id']) {
       $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
     }
 
-    if ( $node->hasField('field_landing_apple_touch_icon') && isset($node->field_landing_apple_touch_icon[0]) && $mid = $node->field_landing_apple_touch_icon[0]->getValue()['target_id']) {
+    if ($node->hasField('field_landing_apple_touch_icon') && isset($node->field_landing_apple_touch_icon[0]) && $mid = $node->field_landing_apple_touch_icon[0]->getValue()['target_id']) {
       $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
     }
 
-    if ( $node->hasField('field_webform_apple_touch_icon') && isset($node->field_webform_apple_touch_icon[0]) && $mid = $node->field_webform_apple_touch_icon[0]->getValue()['target_id']) {
+    if ($node->hasField('field_webform_apple_touch_icon') && isset($node->field_webform_apple_touch_icon[0]) && $mid = $node->field_webform_apple_touch_icon[0]->getValue()['target_id']) {
       $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
     }
 
-    if($fid) {
+    if ($fid) {
       $file = File::load($fid);
       $variables['apple_touch_icon'] = file_create_url($file->getFileUri());
     }
@@ -104,7 +105,6 @@ function ecms_preprocess_node(array &$variables): void {
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['langcode'] = $language;
 }
-
 
 /**
  * Implements hook_theme().
@@ -1048,6 +1048,6 @@ function ecms_preprocess_node__landing_page(&$variables) {
     $entity_type_manager = \Drupal::entityTypeManager();
     $node_builder = $entity_type_manager->getViewBuilder('node');
 
-    $variables['modal'] =  $node_builder->viewMultiple($modal, 'default');
+    $variables['modal'] = $node_builder->viewMultiple($modal, 'default');
   }
 }
