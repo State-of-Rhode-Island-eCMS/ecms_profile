@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.basic_page.field_apple_icon
     - field.field.node.basic_page.field_basic_page_body
     - field.field.node.basic_page.field_basic_page_paragraphs
     - field.field.node.basic_page.field_basic_page_promotions
     - field.field.node.basic_page.field_meta_tags_page
+    - field.field.node.basic_page.field_page_modal
     - node.type.basic_page
   module:
     - entity_reference_revisions
@@ -18,34 +20,47 @@ bundle: basic_page
 mode: default
 content:
   content_moderation_control:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_basic_page_body:
-    weight: 1
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
   field_basic_page_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 2
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 2
     region: content
   field_meta_tags_page:
-    weight: 3
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 3
+    region: content
+  field_page_modal:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 4
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_apple_icon: true
   field_basic_page_promotions: true
   langcode: true
   links: true

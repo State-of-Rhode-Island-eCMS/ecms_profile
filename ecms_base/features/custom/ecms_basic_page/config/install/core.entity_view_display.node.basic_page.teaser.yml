@@ -3,10 +3,12 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.basic_page.field_apple_icon
     - field.field.node.basic_page.field_basic_page_body
     - field.field.node.basic_page.field_basic_page_paragraphs
     - field.field.node.basic_page.field_basic_page_promotions
     - field.field.node.basic_page.field_meta_tags_page
+    - field.field.node.basic_page.field_page_modal
     - node.type.basic_page
   module:
     - user
@@ -16,19 +18,24 @@ bundle: basic_page
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_apple_icon: true
   field_basic_page_body: true
   field_basic_page_paragraphs: true
   field_basic_page_promotions: true
   field_meta_tags_page: true
+  field_page_modal: true
   langcode: true
   search_api_excerpt: true

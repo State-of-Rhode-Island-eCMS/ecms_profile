@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.modal.field_close_button_text
+    - field.field.node.modal.field_modal_body
+    - field.field.node.modal.field_modal_icon
+    - node.type.modal
+  module:
+    - user
+id: node.modal.teaser
+targetEntityType: node
+bundle: modal
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_close_button_text: true
+  field_modal_body: true
+  field_modal_icon: true
+  langcode: true
+  search_api_excerpt: true

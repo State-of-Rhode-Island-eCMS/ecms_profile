@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_modal_icon
+    - node.type.modal
+  module:
+    - ecms_icon_library
+id: node.modal.field_modal_icon
+field_name: field_modal_icon
+entity_type: node
+bundle: modal
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    pl_icon: anchor-small.svg
+    media_library_icon: null
+default_value_callback: ''
+settings: {  }
+field_type: ecms_icon_library
