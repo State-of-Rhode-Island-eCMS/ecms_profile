@@ -10,6 +10,7 @@ declare(strict_types = 1);
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -71,6 +72,24 @@ function ecms_preprocess_html(array &$variables): void {
   // Add paletteClass from theme settings form.
   $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
   $variables['palette'] = $paletteClass;
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    // Check if field_apple_icon has value and load media url.
+    if ( $node->hasField('field_apple_icon') && isset($node->field_apple_icon[0]) && $mid = $node->field_apple_icon[0]->getValue()['target_id']) {
+      $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
+
+      if($fid) {
+        $file = File::load($fid);
+        //dd($file);
+        $variables['apple_touch_icon'] = file_create_url($file->getFileUri());
+      }
+
+    }
+  }
+
+
+
 }
 
 /**
@@ -416,6 +435,8 @@ function ecms_preprocess_node(array &$variables): void {
   // We need to know the current language for some requests.
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['langcode'] = $language;
+
+
 }
 
 /**
