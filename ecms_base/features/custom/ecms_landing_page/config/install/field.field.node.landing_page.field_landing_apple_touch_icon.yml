@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_landing_apple_touch_icon
+    - media.type.media_item_image
+    - node.type.landing_page
+id: node.landing_page.field_landing_apple_touch_icon
+field_name: field_landing_apple_touch_icon
+entity_type: node
+bundle: landing_page
+label: 'Apple Touch Icon'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      media_item_image: media_item_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
