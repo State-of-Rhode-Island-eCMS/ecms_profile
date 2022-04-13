@@ -5,13 +5,7 @@ dependencies:
     - field.storage.node.field_modal_body
     - node.type.modal
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - basic_html
-      - full_html
 id: node.modal.field_modal_body
 field_name: field_modal_body
 entity_type: node
@@ -19,7 +13,7 @@ bundle: modal
 label: Body
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
