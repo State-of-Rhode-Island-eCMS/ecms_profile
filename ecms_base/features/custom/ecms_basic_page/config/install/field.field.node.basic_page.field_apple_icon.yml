@@ -9,7 +9,7 @@ id: node.basic_page.field_apple_icon
 field_name: field_apple_icon
 entity_type: node
 bundle: basic_page
-label: 'Apple Touch Icon'
+label: 'Add to Home Screen'
 description: ''
 required: false
 translatable: false
