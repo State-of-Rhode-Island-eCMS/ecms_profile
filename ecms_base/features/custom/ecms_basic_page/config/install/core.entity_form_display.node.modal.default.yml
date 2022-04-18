@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.modal.field_close_button_text
+    - field.field.node.modal.field_home_screen
     - field.field.node.modal.field_modal_body
     - field.field.node.modal.field_modal_icon
     - node.type.modal
@@ -30,6 +31,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_home_screen:
+    type: boolean_checkbox
+    weight: 26
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_modal_body:
     type: text_textarea

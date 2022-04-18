@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.modal.field_close_button_text
+    - field.field.node.modal.field_home_screen
     - field.field.node.modal.field_modal_body
     - field.field.node.modal.field_modal_icon
     - node.type.modal
@@ -29,6 +30,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_close_button_text: true
+  field_home_screen: true
   field_modal_body: true
   field_modal_icon: true
   langcode: true

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_home_screen
+    - node.type.modal
+id: node.modal.field_home_screen
+field_name: field_home_screen
+entity_type: node
+bundle: modal
+label: 'Home Screen help text?'
+description: 'Display the instructions describing how to add the page to the home screen above the modal.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

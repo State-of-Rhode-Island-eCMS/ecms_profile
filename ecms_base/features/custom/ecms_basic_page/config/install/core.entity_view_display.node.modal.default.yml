@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.modal.field_close_button_text
+    - field.field.node.modal.field_home_screen
     - field.field.node.modal.field_modal_body
     - field.field.node.modal.field_modal_icon
     - node.type.modal
@@ -27,6 +28,16 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 6
+    region: content
+  field_home_screen:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 7
     region: content
   field_modal_body:
     type: text_default

@@ -81,9 +81,15 @@
   {% set icon = content.field_modal_icon.0.pl_icon %}
 {% endif %}
 
+{# Home Screen help text #}
+{% if node.field_home_screen.value %}
+  {% set home_screen = TRUE %}
+{% endif %}
+
 {% include '@organisms/modal/modal.twig' with {
   node: node,
   content: content,
   icon: icon,
   media_library_icon: media_library_icon,
+  home_screen
 } %}
