@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-256: Add modal content type.
-- RIGA-256: Add fields to basic page and landing page to reference modal.
 
 ### Changed
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.1] - 2022-04-19
+### Added
+- RIGA-256: Add modal content type.
+- RIGA-256: Add fields to basic page and landing page to reference modal.
 
 ## [0.9.0] - 2022-04-07
 ### Added
@@ -873,7 +876,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.1...HEAD
+[0.9.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.0...0.9.1
 [0.9.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.9...0.9.0
 [0.8.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.8...0.8.9
 [0.8.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.7...0.8.8
