@@ -3,7 +3,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
+    - field.field.node.landing_page.field_landing_apple_touch_icon
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.field_landing_page_modal
     - field.field.node.landing_page.field_meta_tags_landing_page
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
@@ -16,8 +18,8 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: true
     enabled: true
+    allow_custom: true
     sections:
       -
         layout_id: ecms_layout__one_column
@@ -35,13 +37,13 @@ third_party_settings:
             configuration:
               id: local_tasks_block
               label: Tabs
-              provider: core
               label_display: '0'
+              provider: core
+              context_mapping: {  }
               primary: true
               secondary: true
-              context_mapping: {  }
-            additional: {  }
             weight: 0
+            additional: {  }
         third_party_settings: {  }
       -
         layout_id: layout_onecol
@@ -52,44 +54,57 @@ third_party_settings:
             uuid: e8d5c96e-e3e1-439d-8bc6-d9c0cedcb273
             region: content
             configuration:
+              id: 'extra_field_block:node:landing_page:content_moderation_control'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:landing_page:content_moderation_control'
-            additional: {  }
             weight: 0
+            additional: {  }
           86fa6568-eed2-4202-9994-9b7957a19592:
             uuid: 86fa6568-eed2-4202-9994-9b7957a19592
             region: content
             configuration:
+              id: 'extra_field_block:node:landing_page:links'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'extra_field_block:node:landing_page:links'
-            additional: {  }
             weight: 1
+            additional: {  }
           2d581444-721d-4e08-98f1-46abdf3a6f2f:
             uuid: 2d581444-721d-4e08-98f1-46abdf3a6f2f
             region: content
             configuration:
+              id: 'field_block:node:landing_page:field_landing_page_body'
               label_display: '0'
               context_mapping:
                 entity: layout_builder.entity
-              id: 'field_block:node:landing_page:field_landing_page_body'
               formatter:
+                type: text_default
                 label: above
                 settings: {  }
                 third_party_settings: {  }
-                type: text_default
-            additional: {  }
             weight: 2
+            additional: {  }
         third_party_settings: {  }
   layout_builder_restrictions:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
+      allowed_layouts: {  }
+      blacklisted_blocks:
+        'Lists (Views)':
+          - 'views_block:content_moderation_dashboard_in_review-block_2'
+          - 'views_block:content_moderation_dashboard_in_review-block_1'
+          - 'views_block:content_moderation_dashboard_in_review-block_3'
+          - 'views_block:moderation_dashboard_recent_changes-block_1'
+          - 'views_block:moderation_dashboard_recent_changes-block_2'
+          - 'views_block:moderation_dashboard_recently_created-block_2'
+          - 'views_block:moderation_dashboard_recently_created-block_1'
+          - 'views_block:content_recent-block_1'
+          - 'views_block:who_s_online-who_s_online_block'
       whitelisted_blocks:
         'Chaos Tools': {  }
         'Content fields':
+          - 'field_block:node:landing_page:field_add_modal'
           - 'field_block:user:user:changed'
         Forms: {  }
         Help: {  }
@@ -101,42 +116,35 @@ third_party_settings:
         Webform: {  }
         core:
           - local_tasks_block
-      blacklisted_blocks:
-        'Lists (Views)':
-          - 'views_block:content_moderation_dashboard_in_review-block_2'
-          - 'views_block:content_moderation_dashboard_in_review-block_1'
-          - 'views_block:content_moderation_dashboard_in_review-block_3'
-          - 'views_block:moderation_dashboard_recent_changes-block_1'
-          - 'views_block:moderation_dashboard_recent_changes-block_2'
-          - 'views_block:moderation_dashboard_recently_created-block_2'
-          - 'views_block:moderation_dashboard_recently_created-block_1'
-          - 'views_block:publications_list_with_filter_-block_1'
-          - 'views_block:content_recent-block_1'
-          - 'views_block:who_s_online-who_s_online_block'
-      allowed_layouts: {  }
+      restricted_categories: {  }
 id: node.landing_page.full
 targetEntityType: node
 bundle: landing_page
 mode: full
 content:
   content_moderation_control:
-    weight: -20
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: -20
+    region: content
   field_landing_page_body:
-    weight: 101
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 101
     region: content
   links:
-    weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_landing_apple_touch_icon: true
+  field_landing_page_modal: true
   field_meta_tags_landing_page: true
   langcode: true
   layout_builder__layout: true

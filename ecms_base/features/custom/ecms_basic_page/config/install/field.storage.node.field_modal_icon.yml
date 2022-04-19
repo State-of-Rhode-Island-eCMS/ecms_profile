@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ecms_icon_library
+    - node
+id: node.field_modal_icon
+field_name: field_modal_icon
+entity_type: node
+type: ecms_icon_library
+settings: {  }
+module: ecms_icon_library
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

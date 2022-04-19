@@ -118,8 +118,8 @@ $COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
 
 
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --webroot $DOCROOT --source cwd\n\n"
-$LANDO init --name ${APP_NAME} --recipe drupal9 --webroot ${DOCROOT} --source cwd
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --option php=7.4 --webroot $DOCROOT --source cwd\n\n"
+$LANDO init --name ${APP_NAME} --recipe drupal9 --option php=7.4 --webroot ${DOCROOT} --source cwd
 
 # Check for a lando local file.
 if [ -a "${DEST_DIR}/.lando.local.yml" ]; then

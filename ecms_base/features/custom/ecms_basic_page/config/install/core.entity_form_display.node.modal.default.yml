@@ -2,123 +2,108 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.landing_page.field_landing_apple_touch_icon
-    - field.field.node.landing_page.field_landing_page_body
-    - field.field.node.landing_page.field_landing_page_modal
-    - field.field.node.landing_page.field_meta_tags_landing_page
-    - field.field.node.landing_page.layout_builder__layout
-    - node.type.landing_page
+    - field.field.node.modal.field_close_button_text
+    - field.field.node.modal.field_home_screen
+    - field.field.node.modal.field_modal_body
+    - field.field.node.modal.field_modal_icon
+    - node.type.modal
     - workflows.workflow.editorial
   module:
     - content_moderation
-    - media_library
-    - metatag
+    - ecms_icon_library
     - path
     - text
-id: node.landing_page.default
+id: node.modal.default
 targetEntityType: node
-bundle: landing_page
+bundle: modal
 mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_landing_apple_touch_icon:
-    type: media_library_widget
-    weight: 124
+  field_close_button_text:
+    type: string_textfield
+    weight: 14
     region: content
     settings:
-      media_types: {  }
-    third_party_settings: {  }
-  field_landing_page_body:
-    type: text_textarea_with_summary
-    weight: 121
-    region: content
-    settings:
-      rows: 9
-      summary_rows: 3
+      size: 60
       placeholder: ''
-      show_summary: false
     third_party_settings: {  }
-  field_landing_page_modal:
-    type: options_select
-    weight: 123
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_meta_tags_landing_page:
-    type: metatag_firehose
-    weight: 122
+  field_home_screen:
+    type: boolean_checkbox
+    weight: 26
     region: content
     settings:
-      sidebar: true
-      use_details: true
+      display_label: true
+    third_party_settings: {  }
+  field_modal_body:
+    type: text_textarea
+    weight: 12
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_modal_icon:
+    type: ecms_icon_library_widget
+    weight: 11
+    region: content
+    settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 15
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
-  publish_on:
-    type: datetime_timestamp_no_default
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 120
+    weight: 9
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 16
+    weight: 5
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -126,16 +111,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  unpublish_on:
-    type: datetime_timestamp_no_default
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  layout_builder__layout: true
+hidden: {  }

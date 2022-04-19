@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_apple_icon
+    - media.type.media_item_image
+    - node.type.basic_page
+id: node.basic_page.field_apple_icon
+field_name: field_apple_icon
+entity_type: node
+bundle: basic_page
+label: 'Add to Home Screen'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      media_item_image: media_item_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

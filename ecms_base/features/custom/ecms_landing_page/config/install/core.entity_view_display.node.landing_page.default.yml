@@ -2,7 +2,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.landing_page.field_landing_apple_touch_icon
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.field_landing_page_modal
     - field.field.node.landing_page.field_meta_tags_landing_page
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
@@ -13,33 +15,46 @@ dependencies:
     - user
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: node.landing_page.default
 targetEntityType: node
 bundle: landing_page
 mode: default
 content:
   content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
   field_landing_page_body:
-    weight: 1
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
+    region: content
+  field_landing_page_modal:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 3
     region: content
   field_meta_tags_landing_page:
-    weight: 2
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 2
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_landing_apple_touch_icon: true
   langcode: true
   layout_builder__layout: true
   links: true

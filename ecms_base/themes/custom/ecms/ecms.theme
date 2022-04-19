@@ -9,7 +9,9 @@ declare(strict_types = 1);
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
 use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -71,6 +73,37 @@ function ecms_preprocess_html(array &$variables): void {
   // Add paletteClass from theme settings form.
   $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
   $variables['palette'] = $paletteClass;
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    // Check if field_apple_icon for each content type.
+    // Basic page.
+    if ($node->hasField('field_apple_icon') && isset($node->field_apple_icon[0]) && $mid = $node->field_apple_icon[0]->getValue()['target_id']) {
+      $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
+    }
+
+    if ($node->hasField('field_landing_apple_touch_icon') && isset($node->field_landing_apple_touch_icon[0]) && $mid = $node->field_landing_apple_touch_icon[0]->getValue()['target_id']) {
+      $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
+    }
+
+    if ($node->hasField('field_webform_apple_touch_icon') && isset($node->field_webform_apple_touch_icon[0]) && $mid = $node->field_webform_apple_touch_icon[0]->getValue()['target_id']) {
+      $fid = Media::load($mid)->field_media_item_image[0]->getValue()['target_id'];
+    }
+
+    if ($fid) {
+      $file = File::load($fid);
+      $variables['apple_touch_icon'] = file_create_url($file->getFileUri());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function ecms_preprocess_node(array &$variables): void {
+  // We need to know the current language for some requests.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $language;
 }
 
 /**
@@ -407,15 +440,6 @@ function ecms_preprocess_node__publication(array &$variables): void {
       $variables['publication_icon'] = 'globe';
       $variables['publication_readable'] = t('Web page');
   }
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function ecms_preprocess_node(array &$variables): void {
-  // We need to know the current language for some requests.
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $variables['langcode'] = $language;
 }
 
 /**
@@ -1010,5 +1034,20 @@ function ecms_preprocess_node__person(array &$variables) {
         $variables['additional_fields'][$field_label] = $field_value;
       }
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function ecms_preprocess_node__landing_page(&$variables) {
+  $node = $variables['node'];
+
+  // Since we're using layout builder we have to render the modals manually.
+  if ($node->hasField('field_landing_page_modal') && $modal = $node->get('field_landing_page_modal')->referencedEntities()) {
+    $entity_type_manager = \Drupal::entityTypeManager();
+    $node_builder = $entity_type_manager->getViewBuilder('node');
+
+    $variables['modal'] = $node_builder->viewMultiple($modal, 'default');
   }
 }

@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override to display a node.
+ * Theme override to display a modal node.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -70,44 +70,26 @@
  *   in different view modes.
  */
 #}
-{%
-  set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    node.isPromoted() ? 'node--promoted',
-    node.isSticky() ? 'node--sticky',
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-  ]
-%}
 
-{% set byline = 'Submitted by ' ~ author_name ~ ' on ' ~ date %}
-{% set byline_translatable = byline|t %}
+{# Determine which icon to render #}
+{% set media_library_icon = FALSE %}
 
-{% include "@templates/01-content/node--landing-page.pl.twig" with {
+{% if content.field_modal_icon.0.media_library_icon %}
+  {% set media_library_icon = TRUE %}
+  {% set icon = content.field_modal_icon.0.media_library_icon %}
+{% else %}
+  {% set icon = content.field_modal_icon.0.pl_icon %}
+{% endif %}
+
+{# Home Screen help text #}
+{% if node.field_home_screen.value %}
+  {% set home_screen = TRUE %}
+{% endif %}
+
+{% include '@organisms/modal/modal.twig' with {
   node: node,
-  label: node.label,
-  byline_translatable: byline_translatable,
   content: content,
-  author_picture: author_picture,
-  metadata: metadata,
-  date: date,
-  author_name: author_name,
-  url: url,
-  display_submitted: display_submitted,
-  attributes: attributes,
-  title_attributes: title_attributes,
-  content_attributes: content_attributes,
-  author_attributes: author_attributes,
-  title_prefix: title_prefix,
-  title_suffix: title_suffix,
-  view_mode: view_mode,
-  teaser: teaser,
-  page: page,
-  readmore: readmore,
-  logged_in: logged_in,
-  is_admin: is_admin,
-  classes: classes,
-  modal: modal
-}
-%}
+  icon: icon,
+  media_library_icon: media_library_icon,
+  home_screen
+} %}

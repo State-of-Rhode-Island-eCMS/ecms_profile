@@ -20,6 +20,7 @@ dependencies:
   - 'drupal:path'
   - 'drupal:text'
   - 'drupal:user'
+  - 'ecms_basic_page:ecms_basic_page'
   - 'ecms_layout:ecms_layout'
   - 'ecms_paragraphs:ecms_paragraphs'
   - 'ecms_person:ecms_person'

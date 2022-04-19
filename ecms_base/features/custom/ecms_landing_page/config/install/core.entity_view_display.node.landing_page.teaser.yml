@@ -3,7 +3,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.landing_page.field_landing_apple_touch_icon
     - field.field.node.landing_page.field_landing_page_body
+    - field.field.node.landing_page.field_landing_page_modal
     - field.field.node.landing_page.field_meta_tags_landing_page
     - field.field.node.landing_page.layout_builder__layout
     - node.type.landing_page
@@ -15,17 +17,22 @@ bundle: landing_page
 mode: teaser
 content:
   content_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_landing_apple_touch_icon: true
   field_landing_page_body: true
+  field_landing_page_modal: true
   field_meta_tags_landing_page: true
   langcode: true
   layout_builder__layout: true

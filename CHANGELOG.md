@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-256: Add modal content type.
+- RIGA-256: Add fields to basic page and landing page to reference modal.
 
 ### Changed
 
