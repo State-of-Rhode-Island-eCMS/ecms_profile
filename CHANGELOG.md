@@ -20,6 +20,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.2] - 2022-04-28
+### Security
 - RIGA-258: Update core to 9.3.12 (SA-CORE-2022-009).
 
 ## [0.9.1] - 2022-04-19
@@ -877,7 +880,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.1...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.2...HEAD
+[0.9.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.1...0.9.2
 [0.9.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.0...0.9.1
 [0.9.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.9...0.9.0
 [0.8.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.8...0.8.9
