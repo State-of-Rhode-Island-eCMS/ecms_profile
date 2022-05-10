@@ -3,6 +3,7 @@ time: 31536000
 path: /
 domain: ''
 secure: true
+http_only: true
 set_on_every_pageload: true
 blacklisted_paths: {  }
 language_type: language_interface
