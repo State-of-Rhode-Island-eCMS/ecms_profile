@@ -12,7 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-261: JS aggregate error. Updated smart_date module to 3.5.x.
 
 ### Deprecated
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.3] - 2022-05-12
+### Changed
+- RIGA-261: JS aggregate error. Updated smart_date module to 3.5.x.
 
 ## [0.9.2] - 2022-04-28
 ### Security
@@ -881,7 +884,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.3...HEAD
+[0.9.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.2...0.9.3
 [0.9.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.1...0.9.2
 [0.9.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.0...0.9.1
 [0.9.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.8.9...0.9.0
