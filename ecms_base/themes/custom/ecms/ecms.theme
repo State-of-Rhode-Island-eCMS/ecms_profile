@@ -76,6 +76,9 @@ function ecms_preprocess_html(array &$variables): void {
 
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof NodeInterface) {
+
+    // Default false value for $fid.
+    $fid = FALSE;
     // Check if field_apple_icon for each content type.
     // Basic page.
     if ($node->hasField('field_apple_icon') && isset($node->field_apple_icon[0]) && $mid = $node->field_apple_icon[0]->getValue()['target_id']) {

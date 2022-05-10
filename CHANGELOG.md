@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-261: JS aggregate error. Updated smart_date module to 3.5.x.
 
 ### Deprecated
 
