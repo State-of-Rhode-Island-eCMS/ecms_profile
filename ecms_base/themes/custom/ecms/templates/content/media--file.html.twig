@@ -20,15 +20,20 @@
  */
 #}
 
-{% include "@molecules/file/file.twig" with {
-    name: file_title,
-    file_type_icon: file_type_icon,
-    file_type_readable: file_type_readable,
-    file_url: file_url,
-    file_size: file_size,
-    link_behavior: link_behavior,
-    file_description: file_description,
-    edit_permission: edit_permission,
-    edit_url: edit_url,
-  }
-%}
+
+{% if file_filename %}
+
+  {% include "@molecules/file/file.twig" with {
+      name: file_title,
+      file_type_icon: file_type_icon,
+      file_type_readable: file_type_readable,
+      file_url: file_url,
+      file_size: file_size,
+      link_behavior: link_behavior,
+      file_description: file_description,
+      edit_permission: edit_permission,
+      edit_url: edit_url,
+    }
+  %}
+
+{% endif %}
