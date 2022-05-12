@@ -201,7 +201,9 @@ function ecms_preprocess_media__file(array &$variables): void {
   $variables['file_title'] = $media->label();
 
   // Grab file filename.
-  $variables['file_filename'] = $media->get('field_file')->entity->getFilename();
+  if (isset($media->get('field_file')->entity)) {
+    $variables['file_filename'] = $media->get('field_file')->entity->getFilename();
+  };
 
   // Grab link behavior.
   $variables['link_behavior'] = $media->get('field_file_link_behavior')->value;
