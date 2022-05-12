@@ -200,6 +200,11 @@ function ecms_preprocess_media__file(array &$variables): void {
   // Grab the file title.
   $variables['file_title'] = $media->label();
 
+  // Check if we have a file entity.
+  if (!isset($media->get('field_file')->entity)) {
+    return;
+  };
+
   // Grab file filename.
   $variables['file_filename'] = $media->get('field_file')->entity->getFilename();
 
