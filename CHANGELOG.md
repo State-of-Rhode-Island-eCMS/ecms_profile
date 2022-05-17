@@ -12,9 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-263: Update core to 9.3.13.
-- RIGA-263: Update scheduled transitions to 2.2.1.
-- RIGA-263: Update acsf to 2.72.
 
 ### Deprecated
 
@@ -23,6 +20,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.5] - 2022-05-19
+### Changed
+- RIGA-263: Update core to 9.3.13.
+- RIGA-263: Update scheduled transitions to 2.2.1.
+- RIGA-263: Update acsf to 2.72.
 
 ## [0.9.4] - 2022-05-12
 ### Fixed
@@ -891,7 +894,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.5...HEAD
+[0.9.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.4...0.9.5
 [0.9.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.3...0.9.4
 [0.9.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.2...0.9.3
 [0.9.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.1...0.9.2
