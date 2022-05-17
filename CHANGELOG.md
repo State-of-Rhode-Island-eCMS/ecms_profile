@@ -12,6 +12,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-263: Update core to 9.3.13.
+- RIGA-263: Update scheduled transitions to 2.2.1.
+- RIGA-263: Update acsf to 2.72.
 
 ### Deprecated
 
