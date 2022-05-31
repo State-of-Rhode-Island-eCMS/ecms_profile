@@ -162,6 +162,7 @@
     "drupal/role_delegation": "^1.1",
     "drupal/scheduled_transitions": "^2.2",
     "drupal/search_api": "^1.18",
+    "drupal/search_api_exclude": "^2.0",
     "drupal/search_api_solr": "^4.2",
     "drupal/simple_oauth": "^5.2",
     "drupal/simple_sitemap": "^3.8",
