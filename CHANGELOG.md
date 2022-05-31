@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+- RIGA-271: Update core to 9.3.14 (SA-CORE-2022-010).
 
 ## [0.9.5] - 2022-05-19
 ### Changed
