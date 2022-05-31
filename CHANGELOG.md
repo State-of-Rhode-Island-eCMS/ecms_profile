@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-273: Add Search API Exclude module to codebase.
 
 ### Changed
 
@@ -19,6 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [0.9.6] - 2022-06-02
+### Added
+- RIGA-273: Add Search API Exclude module to codebase.
 
 ### Security
 - RIGA-271: Update core to 9.3.14 (SA-CORE-2022-010).
@@ -896,7 +901,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.6...HEAD
+[0.9.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.5...0.9.6
 [0.9.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.4...0.9.5
 [0.9.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.3...0.9.4
 [0.9.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.2...0.9.3
