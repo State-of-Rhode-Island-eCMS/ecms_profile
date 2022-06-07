@@ -9,12 +9,7 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    embed: embed
-    basic_html: '0'
-    paragraph_text: '0'
-    restricted_html: '0'
-    full_html: '0'
-    plain_text: '0'
+    - embed
 id: paragraph.embed.field_embed_content
 field_name: field_embed_content
 entity_type: paragraph

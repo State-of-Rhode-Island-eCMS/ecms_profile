@@ -9,13 +9,7 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    basic_html: basic_html
-    embed: '0'
-    minimal: '0'
-    paragraph_text: '0'
-    restricted_html: '0'
-    full_html: '0'
-    plain_text: '0'
+    - basic_html
 id: node.vaccination_site.field_vacsite_body
 field_name: field_vacsite_body
 entity_type: node
