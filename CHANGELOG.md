@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-276: Add Big Menu module to codebase.
 
 ### Changed
+- RIGA-271: Update core to 9.3.15.
 
 ### Deprecated
 
