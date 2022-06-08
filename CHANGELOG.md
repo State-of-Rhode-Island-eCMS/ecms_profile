@@ -14,7 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-271: Update core to 9.3.15.
-- RIGA-268: Updated config for text editor "allowed_formats" and search api indexes to reflect updates in those modules.
+- RIGA-268: Updated config for text editor "allowed_formats" and search api indexes.
 
 ### Deprecated
 
