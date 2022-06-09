@@ -10,11 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-276: Add Big Menu module to codebase.
 
 ### Changed
-- RIGA-271: Update core to 9.3.15.
-- RIGA-268: Updated config for text editor "allowed_formats" and search api indexes.
 
 ### Deprecated
 
@@ -23,6 +20,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.7] - 2022-06-09
+### Added
+- RIGA-276: Add Big Menu module to codebase.
+
+### Changed
+- RIGA-271: Update core to 9.3.15.
+- RIGA-268: Updated config for text editor "allowed_formats" and search api indexes.
 
 ## [0.9.6] - 2022-06-02
 ### Added
@@ -904,7 +909,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.7...HEAD
+[0.9.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.6...0.9.7
 [0.9.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.5...0.9.6
 [0.9.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.4...0.9.5
 [0.9.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.3...0.9.4
