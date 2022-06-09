@@ -9,12 +9,7 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    paragraph_text: paragraph_text
-    basic_html: '0'
-    embed: '0'
-    restricted_html: '0'
-    full_html: '0'
-    plain_text: '0'
+    - paragraph_text
 id: block_content.text_card_collection.field_collection_description
 field_name: field_collection_description
 entity_type: block_content
