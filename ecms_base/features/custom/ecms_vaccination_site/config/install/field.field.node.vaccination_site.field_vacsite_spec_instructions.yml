@@ -9,7 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    - basic_html
+    allowed_formats:
+      - basic_html
 id: node.vaccination_site.field_vacsite_spec_instructions
 field_name: field_vacsite_spec_instructions
 entity_type: node

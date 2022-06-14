@@ -9,7 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    - minimal
+    allowed_formats:
+      - minimal
 id: block_content.header_image_action.field_hia_text
 field_name: field_hia_text
 entity_type: block_content
