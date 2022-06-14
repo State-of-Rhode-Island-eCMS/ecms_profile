@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-268: Updated Office Hours field storage config for vaccination site per office_hours_update_8004().
 
 ### Deprecated
 
