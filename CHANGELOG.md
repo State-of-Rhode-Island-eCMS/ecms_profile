@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-277: Fix default allowed formats config.
 
 ### Security
 - RIGA-278: Updated Drupal core to 9.3.16 (SA-CORE-2022-011).
