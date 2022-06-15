@@ -9,7 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    - paragraph_text
+    allowed_formats:
+      - paragraph_text
 id: paragraph.gallery_item.field_gallery_item_caption
 field_name: field_gallery_item_caption
 entity_type: paragraph

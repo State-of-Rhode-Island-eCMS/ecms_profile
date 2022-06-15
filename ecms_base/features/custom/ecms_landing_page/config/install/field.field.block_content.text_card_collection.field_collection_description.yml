@@ -9,7 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    - paragraph_text
+    allowed_formats:
+      - paragraph_text
 id: block_content.text_card_collection.field_collection_description
 field_name: field_collection_description
 entity_type: block_content

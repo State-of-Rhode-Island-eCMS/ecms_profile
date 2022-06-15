@@ -9,7 +9,8 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    - paragraph_text
+    allowed_formats:
+      - paragraph_text
 id: node.promotions.field_promotion_text
 field_name: field_promotion_text
 entity_type: node

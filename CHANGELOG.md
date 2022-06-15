@@ -12,14 +12,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-268: Updated Office Hours field storage config for vaccination site per office_hours_update_8004().
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-277: Fix default allowed formats config.
 
 ### Security
+- RIGA-278: Updated Drupal core to 9.3.16 (SA-CORE-2022-011).
 
 ## [0.9.7] - 2022-06-09
 ### Added
