@@ -10,7 +10,7 @@ type: 'canonical_entities:node'
 pattern: 'accommodations/[node:title]'
 selection_criteria:
   de570a7b-a064-44f3-b908-9b5931e4a4eb:
-    id: node_type
+   id: 'entity_bundle:node'
     bundles:
       hotel: hotel
     negate: false

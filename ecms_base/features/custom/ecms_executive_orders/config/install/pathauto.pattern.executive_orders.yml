@@ -10,7 +10,7 @@ type: 'canonical_entities:node'
 pattern: 'executive-orders/[node:title]'
 selection_criteria:
   a2b06055-d13b-4741-b3e4-a9fb48bb50c4:
-    id: node_type
+   id: 'entity_bundle:node'
     bundles:
       executive_order: executive_order
     negate: false
