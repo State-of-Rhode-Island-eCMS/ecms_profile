@@ -10,22 +10,22 @@ type: 'canonical_entities:node'
 pattern: '[node:menu-link:parents:join-path]/[node:menu-link]'
 selection_criteria:
   89ebfd63-3ed2-44a4-9432-6f0ec257b787:
-    id: node_type
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 89ebfd63-3ed2-44a4-9432-6f0ec257b787
+    context_mapping:
+      node: node
     bundles:
       basic_page: basic_page
       landing_page: landing_page
-    negate: false
-    context_mapping:
-      node: node
-    uuid: 89ebfd63-3ed2-44a4-9432-6f0ec257b787
   fb55ee7b-d11e-4794-acfe-a30679609543:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: fb55ee7b-d11e-4794-acfe-a30679609543
     context_mapping:
       language: 'node:langcode:language'
-    uuid: fb55ee7b-d11e-4794-acfe-a30679609543
+    langcodes:
+      en: en
 selection_logic: and
 weight: -5
 relationships:
