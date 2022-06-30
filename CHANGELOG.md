@@ -12,16 +12,21 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-268: Updated Entity Print to 2.5.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIGA-270: Restored functional tests during builds.
 
 ### Security
+
+## [0.9.9] - 2022-06-30
+### Changed
+- RIGA-268: Updated Entity Print to 2.5.
+
+### Fixed
+- RIGA-270: Restored functional tests during builds.
 
 ## [0.9.8] - 2022-06-16
 ### Changed
@@ -921,7 +926,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.9...HEAD
+[0.9.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.8...0.9.9
 [0.9.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.7...0.9.8
 [0.9.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.6...0.9.7
 [0.9.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.5...0.9.6
