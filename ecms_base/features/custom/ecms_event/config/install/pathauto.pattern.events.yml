@@ -10,21 +10,21 @@ type: 'canonical_entities:node'
 pattern: 'events/[node:title]'
 selection_criteria:
   2b91bbb8-ae1d-4944-98bf-d6b628a417f1:
-    id: node_type
-    bundles:
-      event: event
+    id: 'entity_bundle:node'
     negate: false
+    uuid: 2b91bbb8-ae1d-4944-98bf-d6b628a417f1
     context_mapping:
       node: node
-    uuid: 2b91bbb8-ae1d-4944-98bf-d6b628a417f1
+    bundles:
+      event: event
   62a66b5f-56c6-481c-b326-fe6894c9e68d:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: 62a66b5f-56c6-481c-b326-fe6894c9e68d
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 62a66b5f-56c6-481c-b326-fe6894c9e68d
+    langcodes:
+      en: en
 selection_logic: and
 weight: -5
 relationships:

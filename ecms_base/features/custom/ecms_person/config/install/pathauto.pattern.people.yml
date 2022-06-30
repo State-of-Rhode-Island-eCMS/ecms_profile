@@ -10,21 +10,21 @@ type: 'canonical_entities:node'
 pattern: 'people/[node:title]'
 selection_criteria:
   f290a563-dbc1-4793-b95c-34fcca3bc39e:
-    id: node_type
-    bundles:
-      person: person
+    id: 'entity_bundle:node'
     negate: false
+    uuid: f290a563-dbc1-4793-b95c-34fcca3bc39e
     context_mapping:
       node: node
-    uuid: f290a563-dbc1-4793-b95c-34fcca3bc39e
+    bundles:
+      person: person
   378ed13a-4aa9-44fa-87f5-570bc9d5b441:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: 378ed13a-4aa9-44fa-87f5-570bc9d5b441
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 378ed13a-4aa9-44fa-87f5-570bc9d5b441
+    langcodes:
+      en: en
 selection_logic: and
 weight: -5
 relationships:

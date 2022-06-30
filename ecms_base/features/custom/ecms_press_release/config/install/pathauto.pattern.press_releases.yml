@@ -10,21 +10,21 @@ type: 'canonical_entities:node'
 pattern: 'press-releases/[node:title]'
 selection_criteria:
   f235b91c-7e2d-4379-b392-980d6bd8a143:
-    id: node_type
-    bundles:
-      press_release: press_release
+    id: 'entity_bundle:node'
     negate: false
+    uuid: f235b91c-7e2d-4379-b392-980d6bd8a143
     context_mapping:
       node: node
-    uuid: f235b91c-7e2d-4379-b392-980d6bd8a143
+    bundles:
+      press_release: press_release
   7f78cdb8-2d6e-40dd-aa70-ac18d60a541a:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: 7f78cdb8-2d6e-40dd-aa70-ac18d60a541a
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 7f78cdb8-2d6e-40dd-aa70-ac18d60a541a
+    langcodes:
+      en: en
 selection_logic: and
 weight: -5
 relationships:

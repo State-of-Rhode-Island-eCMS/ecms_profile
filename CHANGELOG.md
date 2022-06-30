@@ -12,12 +12,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-268: Updated Entity Print to 2.5.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-270: Restored functional tests during builds.
 
 ### Security
 
