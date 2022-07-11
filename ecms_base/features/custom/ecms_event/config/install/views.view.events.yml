@@ -271,6 +271,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: field_event_date_value
           granularity: second
           plugin_id: date
       title: Events
@@ -536,6 +537,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: field_event_date_value
           granularity: second
           plugin_id: date
     cache_metadata:

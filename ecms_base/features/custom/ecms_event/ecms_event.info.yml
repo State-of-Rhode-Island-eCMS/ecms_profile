@@ -37,4 +37,4 @@ dependencies:
   - 'smart_date:smart_date'
   - 'svg_image:svg_image'
 package: eCMS
-version: 9.x-1.0
+version: 9.x-1.1
