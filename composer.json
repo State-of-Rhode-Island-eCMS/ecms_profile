@@ -86,8 +86,17 @@
     "drupal-scaffold": {}
   },
   "config": {
-    "process-timeout": 0,
-    "sort-packages": true
+        "process-timeout": 0,
+        "sort-packages": true,
+        "allow-plugins": {
+          "composer/installers": true,
+          "cweagans/composer-patches": true,
+          "oomphinc/composer-installers-extender": true,
+          "drupal-composer/preserve-paths": true,
+          "drupal/core-composer-scaffold": true,
+          "drupal/core-project-message": true,
+          "drupal/core-vendor-hardening": true
+        }
   },
   "scripts": {
     "develop": "scripts/develop.sh",
