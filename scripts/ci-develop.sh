@@ -55,6 +55,7 @@ $COMPOSER config allow-plugins.drupal-composer/preserve-paths  true
 $COMPOSER config allow-plugins.drupal/core-composer-scaffold true
 $COMPOSER config allow-plugins.drupal/core-project-message true
 $COMPOSER config allow-plugins.drupal/core-vendor-hardening true
+$COMPOSER config allow-plugins.dealerdirect/phpcodesniffer-composer-installer  true
 
 # Add the pattern lab installer type.
 $COMPOSER config extra.installer-types.2 "pattern-lab"
