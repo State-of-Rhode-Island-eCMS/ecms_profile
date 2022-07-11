@@ -48,14 +48,6 @@ $COMPOSER config repositories.migratation_process_trim '{"type": "package", "pac
 
 $COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'"}'
 
-"composer/installers": true,
-          "cweagans/composer-patches": true,
-          "oomphinc/composer-installers-extender": true,
-          "drupal-composer/preserve-paths": true,
-          "drupal/core-composer-scaffold": true,
-          "drupal/core-project-message": true,
-          "drupal/core-vendor-hardening": true
-
 $COMPOSER config allow-plugins.composer/installers true
 $COMPOSER config allow-plugins.cweagans/composer-patches true
 $COMPOSER config allow-plugins.oomphinc/composer-installers-extender true
