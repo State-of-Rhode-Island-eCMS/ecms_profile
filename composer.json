@@ -86,8 +86,17 @@
     "drupal-scaffold": {}
   },
   "config": {
-    "process-timeout": 0,
-    "sort-packages": true
+        "process-timeout": 0,
+        "sort-packages": true,
+        "allow-plugins": {
+          "composer/installers": true,
+          "cweagans/composer-patches": true,
+          "oomphinc/composer-installers-extender": true,
+          "drupal-composer/preserve-paths": true,
+          "drupal/core-composer-scaffold": true,
+          "drupal/core-project-message": true,
+          "drupal/core-vendor-hardening": true
+        }
   },
   "scripts": {
     "develop": "scripts/develop.sh",
@@ -176,6 +185,7 @@
     "drupal/views_database_connector": "^1.4",
     "drupal/webform": "^6.0",
     "drupal/webform_encrypt": "1.x-dev@dev",
+    "drupal/webform_views": "^5.0@beta",
     "drupal_git/migrate_process_trim": "1.0.0",
     "drupal_git/migration_tools": "1.0.0",
     "drush/drush": "^10.0",
