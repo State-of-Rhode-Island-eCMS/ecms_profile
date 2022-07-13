@@ -10,9 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-280: Add webform_views module to cosebase.
+- RIGA-280: Add webform_views module to codebase.
 
 ### Changed
+- RIGA-288: Update event category reference to unlimited.
 
 ### Deprecated
 
