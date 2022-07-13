@@ -10,10 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-280: Add webform_views module to codebase.
 
 ### Changed
-- RIGA-288: Update event category reference to unlimited.
 
 ### Deprecated
 
@@ -22,6 +20,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.10] - 2022-07-14
+### Added
+- RIGA-280: Add webform_views module to codebase.
+
+### Changed
+- RIGA-288: Update event category reference to unlimited.
 
 ## [0.9.9] - 2022-06-30
 ### Changed
@@ -928,7 +933,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.10...HEAD
+[0.9.10]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.9...0.9.10
 [0.9.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.8...0.9.9
 [0.9.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.7...0.9.8
 [0.9.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.6...0.9.7
