@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-294: Add access site reports permission to site admin role.
 
 ### Deprecated
 
