@@ -10,6 +10,7 @@ permissions:
   - 'access contextual links'
   - 'access taxonomy overview'
   - 'access user profiles'
+  - 'access site reports'
   - 'access webform help'
   - 'access webform overview'
   - 'add scheduled transitions node basic_page'
