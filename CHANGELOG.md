@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-294: Add access site reports permission to site admin role.
+- RIGA-285: Updated Paragraphs Translation Sync patch (issue #2887353) to latest version.
 
 ### Deprecated
 
