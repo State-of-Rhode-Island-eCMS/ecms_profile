@@ -11,12 +11,12 @@ pattern: 'executive-orders/[node:title]'
 selection_criteria:
   a2b06055-d13b-4741-b3e4-a9fb48bb50c4:
     id: 'entity_bundle:node'
-      negate: false
-      uuid: a2b06055-d13b-4741-b3e4-a9fb48bb50c4
-      context_mapping:
-        node: node
-      bundles:
-        executive_order: executive_order
+    negate: false
+    uuid: a2b06055-d13b-4741-b3e4-a9fb48bb50c4
+    context_mapping:
+      node: node
+    bundles:
+      executive_order: executive_order
   4341f257-6b98-4647-9092-445e32b56037:
     id: language
     langcodes:
