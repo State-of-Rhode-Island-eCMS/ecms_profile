@@ -26,6 +26,7 @@ permissions:
   - 'administer redirects'
   - 'administer scheduled transitions'
   - 'administer site configuration'
+  - 'administer sitemap settings'
   - 'administer themes'
   - 'administer users'
   - 'assign content_author role'
