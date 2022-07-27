@@ -65,7 +65,7 @@
       "drupal/paragraphs": {
         "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
         "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-        "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2020-08-05/translation-sync-submodule-2887353-44.patch"
+        "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2022-07-26/paragraphs-translation-sync-2887353-54.patch"
       },
       "drupal/webform_encrypt": {
         "3142997 - D9 readiness" : "https://www.drupal.org/files/issues/2020-06-05/3142997-20.patch",
@@ -126,7 +126,7 @@
     "drupal/captcha": "^1.2",
     "drupal/components": "^2.0",
     "drupal/content_moderation_notifications": "^3.2",
-    "drupal/core-recommended": "~9.3.16",
+    "drupal/core-recommended": "~9.3.19",
     "drupal/easy_breadcrumb": "^2.0",
     "drupal/entity_print": "^2.5",
     "drupal/extlink": "^1.5",

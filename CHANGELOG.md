@@ -12,6 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-294: Add access site reports permission to site admin role.
+- RIGA-285: Updated Paragraphs Translation Sync patch (issue #2887353) to latest version.
 
 ### Deprecated
 
@@ -20,6 +22,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+-RIGA-293: Update core to 9.3.19.
+-RIGA-293: Drupal core - Moderately critical - Information Disclosure - SA-CORE-2022-012.
+-RIGA-293: Drupal core - Moderately critical - Access Bypass - SA-CORE-2022-013.
+-RIGA-293: Drupal core - Critical - Arbitrary PHP code execution - SA-CORE-2022-014.
+-RIGA-293: Drupal core - Moderately critical - Multiple vulnerabilities - SA-CORE-2022-015.
 
 ## [0.9.10] - 2022-07-14
 ### Added
