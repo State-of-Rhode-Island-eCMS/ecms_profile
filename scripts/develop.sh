@@ -111,6 +111,7 @@ echo " Initialize lando for local usage "
 echo "----------------------------------"
 cd ${DEST_DIR}
 
+
 echo "Lock Drupal core to version ${DRUPAL_CORE_VERSION}."
 $COMPOSER require "drupal/core-composer-scaffold:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-project-message:${DRUPAL_CORE_VERSION}" --no-update
@@ -209,7 +210,7 @@ if [ -a "${DEST_DIR}/.env" ]; then
 else
   echo "Create a .env file."
   # Create the environment file with a temp key for webform encrypt.
-  echo -e  "ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
+  echo -e  "COMPOSER_MEMORY_LIMIT=-1\nCOMPOSER_PROCESS_TIMEOUT=900\nTEMP=/tmp\nCOMPOSE_HTTP_TIMEOUT=900\nENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
 fi
 
 # Start the app with lando.
