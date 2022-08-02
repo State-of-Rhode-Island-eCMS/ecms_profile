@@ -117,15 +117,6 @@ $COMPOSER require "drupal/core-project-message:${DRUPAL_CORE_VERSION}" --no-upda
 $COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
 
-$COMPOSER config --no-interaction allow-plugins.composer/installers true
-$COMPOSER config --no-interaction allow-plugins.cweagans/composer-patches true
-$COMPOSER config --no-interaction allow-plugins.oomphinc/composer-installers-extender true
-$COMPOSER config --no-interaction allow-plugins.drupal-composer/preserve-paths  true
-$COMPOSER config --no-interaction allow-plugins.drupal/core-composer-scaffold true
-$COMPOSER config --no-interaction allow-plugins.drupal/core-project-message true
-$COMPOSER config --no-interaction allow-plugins.drupal/core-vendor-hardening true
-$COMPOSER config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer  true
-
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --option php=7.4 --webroot $DOCROOT --source cwd\n\n"
 $LANDO init --name ${APP_NAME} --recipe drupal9 --option php=7.4 --webroot ${DOCROOT} --source cwd
 
@@ -238,6 +229,16 @@ $LANDO composer require "phpunit/phpunit:^8" --dev --no-update
 $LANDO composer require "symfony/phpunit-bridge:^5.1" --dev --no-update
 $LANDO composer require "drupal/coder:^8.3" --dev --no-update
 $LANDO composer require "drush/drush:^10.0" --dev --no-update
+
+
+$LANDO composer config --no-interaction allow-plugins.composer/installers true
+$LANDO composer config --no-interaction allow-plugins.cweagans/composer-patches true
+$LANDO composer config --no-interaction allow-plugins.oomphinc/composer-installers-extender true
+$LANDO composer config --no-interaction allow-plugins.drupal-composer/preserve-paths  true
+$LANDO composer config --no-interaction allow-plugins.drupal/core-composer-scaffold true
+$LANDO composer config --no-interaction allow-plugins.drupal/core-project-message true
+$LANDO composer config --no-interaction allow-plugins.drupal/core-vendor-hardening true
+$LANDO composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer  true
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
