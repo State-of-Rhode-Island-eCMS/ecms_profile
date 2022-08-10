@@ -10,8 +10,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-297: Add increased memory limits and timeouts to .env file.
 
 ### Changed
+- RIGA-297: Update drupal/core 9.3.19 => 9.4.5.
+- RIGA-297: Update core patch for issue 1356276.
+- RIGA-297: Save config for Acquia search view after db update.
+- RIGA-297: Comment out functional tests from develop script.
 
 ### Deprecated
 

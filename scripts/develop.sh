@@ -16,7 +16,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="9.3.19"
+DRUPAL_CORE_VERSION="9.4.5"
 
 # Whether the source directory should be deleted before rebuilding lando
 DELETE_SRC=0
@@ -117,7 +117,6 @@ $COMPOSER require "drupal/core-project-message:${DRUPAL_CORE_VERSION}" --no-upda
 $COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
 
-
 echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --option php=7.4 --webroot $DOCROOT --source cwd\n\n"
 $LANDO init --name ${APP_NAME} --recipe drupal9 --option php=7.4 --webroot ${DOCROOT} --source cwd
 
@@ -209,7 +208,7 @@ if [ -a "${DEST_DIR}/.env" ]; then
 else
   echo "Create a .env file."
   # Create the environment file with a temp key for webform encrypt.
-  echo -e  "ENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
+  echo -e  "COMPOSER_MEMORY_LIMIT=-1\nCOMPOSER_PROCESS_TIMEOUT=900\nTEMP=/tmp\nCOMPOSE_HTTP_TIMEOUT=900\nENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
 fi
 
 # Start the app with lando.
@@ -230,6 +229,16 @@ $LANDO composer require "phpunit/phpunit:^8" --dev --no-update
 $LANDO composer require "symfony/phpunit-bridge:^5.1" --dev --no-update
 $LANDO composer require "drupal/coder:^8.3" --dev --no-update
 $LANDO composer require "drush/drush:^10.0" --dev --no-update
+
+
+$LANDO composer config --no-interaction allow-plugins.composer/installers true
+$LANDO composer config --no-interaction allow-plugins.cweagans/composer-patches true
+$LANDO composer config --no-interaction allow-plugins.oomphinc/composer-installers-extender true
+$LANDO composer config --no-interaction allow-plugins.drupal-composer/preserve-paths  true
+$LANDO composer config --no-interaction allow-plugins.drupal/core-composer-scaffold true
+$LANDO composer config --no-interaction allow-plugins.drupal/core-project-message true
+$LANDO composer config --no-interaction allow-plugins.drupal/core-vendor-hardening true
+$LANDO composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer  true
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
