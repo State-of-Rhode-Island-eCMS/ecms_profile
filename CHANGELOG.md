@@ -10,13 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-297: Add increased memory limits and timeouts to .env file.
 
 ### Changed
-- RIGA-297: Update drupal/core 9.3.19 => 9.4.5.
-- RIGA-297: Update core patch for issue 1356276.
-- RIGA-297: Save config for Acquia search view after db update.
-- RIGA-297: Comment out functional tests from develop script.
 
 ### Deprecated
 
@@ -25,6 +20,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.10.0] - 2022-08-10
+### Added
+- RIGA-301: Add increased memory limits and timeouts to .env file.
+
+### Changed
+- RIGA-282: Update drupal/core 9.3.19 => 9.4.5.
+- RIGA-282: Update core patch for issue 1356276.
+- RIGA-297: Save config for Acquia search view after db update.
+- RIGA-301: Comment out functional tests from develop script.
 
 ## [0.9.11] - 2022-07-28
 ### Changed
@@ -950,7 +955,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.11...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.0...HEAD
+[0.10.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.11...0.10.0
 [0.9.11]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.10...0.9.11
 [0.9.10]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.9...0.9.10
 [0.9.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.8...0.9.9
