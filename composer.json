@@ -204,7 +204,7 @@
     "drush/drush": "^10.0",
     "php-mock/php-mock": "^2.2",
     "php-mock/php-mock-phpunit": "^2.6",
-    "phpunit/phpunit": "^8",
+    "phpunit/phpunit": "^9",
     "symfony/phpunit-bridge": "^5.1",
     "weitzman/drupal-test-traits": "^1.5"
   }
