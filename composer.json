@@ -116,7 +116,7 @@
     "drupal/acquia_connector": "^3.0",
     "drupal/acquia_purge": "^1.1",
     "drupal/acquia_search": "^3.0",
-    "drupal/acsf": "2.72",
+    "drupal/acsf": "2.73",
     "drupal/address": "^1.8",
     "drupal/admin_toolbar": "^3.1.0",
     "drupal/allowed_formats": "^1.3",
