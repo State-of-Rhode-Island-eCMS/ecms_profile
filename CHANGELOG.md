@@ -12,7 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-308: Update drupal/acsf 2.72 => 2.73.
 
 ### Deprecated
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.13] - 2022-09-15
+### Changed
+- RIGA-308: Update drupal/acsf 2.72 => 2.73.
 
 ## [0.9.12] - 2022-08-11
 ### Added
@@ -956,7 +959,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.12...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.13...HEAD
+[0.9.13]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.12...0.9.13
 [0.9.12]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.11...0.9.12
 [0.9.11]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.10...0.9.11
 [0.9.10]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.9...0.9.10
