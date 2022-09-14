@@ -17,7 +17,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @return array|null
  *   The available social navigation options, or null if an error.
  */
-function get_patternlab_social_source(): ?array {
+function ecms_distribution_get_patternlab_social_source(): ?array {
   $return = [];
   /** @var \Drupal\Core\Extension\ThemeHandler $themeHandler */
   $themeHandler = \Drupal::service('theme_handler');
@@ -50,7 +50,7 @@ function get_patternlab_social_source(): ?array {
  * Implements hook_form_FORM_ID_alter() for menu_link_content_menu_link_content_form.
  */
 function ecms_distribution_form_menu_link_content_menu_link_content_form_alter(&$form, FormStateInterface $form_state): void {
-  $options = get_patternlab_social_source();
+  $options = ecms_distribution_get_patternlab_social_source();
 
   if (empty($options)) {
     return;
@@ -177,7 +177,7 @@ function _ecms_distribution_menu_form_submit(array $form, FormStateInterface $fo
   $menuParentValue = $form_state->getValue('menu_parent');
 
   if (str_starts_with($menuParentValue, 'social-navigation:')) {
-    $options = get_patternlab_social_source();
+    $options = ecms_distribution_get_patternlab_social_source();
 
     // The title will be the class name.
     $class = $form_state->getValue('title');

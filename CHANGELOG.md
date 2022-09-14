@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-308: Update drupal/acsf 2.72 => 2.73.
 
 ### Deprecated
 
