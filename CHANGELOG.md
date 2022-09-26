@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-311: Update config formatting for new drupal/components API.
 
 ### Deprecated
 

@@ -11,30 +11,23 @@ libraries:
   - ecms/global-styling
   - ecms/header-scripts
 
-component-libraries:
-  atoms:
-    paths:
+components:
+  namespaces:
+    atoms:
       - ecms_patternlab/source/_patterns/00-atoms
-  molecules:
-    paths:
+    molecules:
       - ecms_patternlab/source/_patterns/01-molecules
-  organisms:
-    paths:
+    organisms:
       - ecms_patternlab/source/_patterns/02-organisms
-  templates:
-    paths:
+    templates:
       - ecms_patternlab/source/_patterns/03-templates
-  pages:
-    paths:
+    pages:
       - ecms_patternlab/source/_patterns/04-pages
-  icons:
-    paths:
+    icons:
       - ecms_patternlab/source/images/icons
-  illustrations:
-    paths:
+    illustrations:
       - ecms_patternlab/source/images/illustrations
-  generic:
-    paths:
+    generic:
       - templates/generic
 
 regions:
