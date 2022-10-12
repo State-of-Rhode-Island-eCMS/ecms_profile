@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA:312: Upgrading drupal/file_delete from 8.x-1.x to 2.x.
 
 ### Deprecated
 
