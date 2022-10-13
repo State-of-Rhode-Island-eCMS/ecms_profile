@@ -1654,7 +1654,7 @@ function ecms_base_update_9091(array &$sandbox): void {
 }
 
 /**
- * Update the files views.
+ * Update the files view.
  */
 function ecms_base_update_9092(array &$sandbox): void {
 
