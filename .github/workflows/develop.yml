@@ -21,7 +21,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.0'
 
       - name: Check PHP Version
         run: php -v
@@ -72,7 +72,7 @@ jobs:
           path: /tmp/drupal-build.tar.gz
 
   test-php:
-    name: Test the site with PHP 7.4
+    name: Test the site with PHP 8.0
     needs: build
     runs-on: ubuntu-20.04
     container:
