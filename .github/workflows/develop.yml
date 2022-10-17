@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Drupal.
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
@@ -21,7 +21,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.0'
 
       - name: Check PHP Version
         run: php -v
@@ -71,12 +71,12 @@ jobs:
           name: drupal-build.tar.gz
           path: /tmp/drupal-build.tar.gz
 
-  test-php-73:
-    name: Test the site with PHP 7.4
+  test-php:
+    name: Test the site with PHP 8.0
     needs: build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     container:
-      image: drupalci/php-7.4.x-apache:production
+      image: drupalci/php-8.0.x-apache:production
     services:
       mysql:
         image: mysql:5.7
