@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-317: Added layout_builder_tabs and supporting functionality.
 
 ### Changed
 - RIGA-312: Upgrading drupal/file_delete from 8.x-1.x to 2.x.
