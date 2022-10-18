@@ -18,7 +18,7 @@ use Drupal\Core\Entity\EntityInterface;
 function ecms_layout_plugin_filter_layout__layout_builder_alter(array &$definitions): void {
   // Remove all non-ecms layouts from the Layout Builder.
   foreach ($definitions as $id => $definition) {
-    if (!preg_match('/^ecms_layout__/', $id)) {
+    if (!preg_match('/^ecms_layout__/', $id) && $id !== 'tabs') {
       unset($definitions[$id]);
     }
   }
