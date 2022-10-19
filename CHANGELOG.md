@@ -10,11 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-317: Added layout_builder_tabs and supporting functionality.
 
 ### Changed
-- RIGA-312: Upgrading drupal/file_delete from 8.x-1.x to 2.x.
-- RIGA-315: Update drupal/core 9.4.7 => 9.4.8.
 
 ### Deprecated
 
@@ -23,6 +20,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.16] - 2022-10-20
+### Added
+- RIGA-317: Added layout_builder_tabs and supporting functionality.
+
+### Changed
+- RIGA-312: Upgrading drupal/file_delete from 8.x-1.x to 2.x.
+- RIGA-315: Update drupal/core 9.4.7 => 9.4.8.
 
 ## [0.9.15] - 2022-10-06
 ### Removed
@@ -970,7 +975,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.15...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.16...HEAD
+[0.9.16]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.15...0.9.16
 [0.9.15]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.14...0.9.15
 [0.9.14]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.13...0.9.14
 [0.9.13]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.12...0.9.13
