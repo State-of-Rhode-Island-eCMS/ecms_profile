@@ -1,0 +1,69 @@
+{%
+  set classes = [
+    'layout',
+    'layout--tabs',
+    'qh-layout-section--col-size-100',
+    'qh-layout-section--tabs',
+    'qh-layout-section',
+    'qh-layout-section--col-count-1'
+  ]
+%}
+
+{% if content %}
+
+{% set region = 'tabs' %}
+{% set blocks = content[region]|sortbyweight %}
+  <div{{ attributes.addClass(classes) }}>
+    <div {{ region_attributes.tabs.addClass('layout__region', 'layout__region--tabs', 'tabs-region', 'qh-layout-section__col', 'qh-layout-section__col--first') }}>
+{# Our custom structure breaks layout builder, so omit #}
+{% if content.tabs.layout_builder_add_block is not defined %}
+{{ attach_library('layout_builder_tabs/tabs') }}
+
+<!-- Nav tabs -->
+<ul class="tabs tab--primary layout-tabs">
+{% for block_id, block_data in blocks if content[region][block_id] %}
+{% set block_label = content[region][block_id]['content']['#title']['#markup'] %}
+{% if block_label is empty %}
+  {% set block_label = content[region][block_id]['#configuration']['label'] %}
+{% endif %}
+<li class="tabs__tab"><a class="nav-item nav-link {{ loop.first ? 'is-active' }}"
+  href="#panel-{{ block_id }}" id="tab-{{ block_id }}">
+  <div class="label"> {{ block_label }}</div>
+</a></li>
+{% endfor %}
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  {% for block_id, block_data in blocks if content[region][block_id] %}
+  <div class="tab-pane {{ loop.first ? 'active' }}" id="panel-{{ block_id }}">
+    {{ content[region][block_id] }}
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+{# Markup for layout builder #}
+<!-- Tab panes -->
+{% for block_id, block_data in blocks if content[region][block_id] %}
+  {% if block_id starts with '#' %}
+    {# Don't try to output attributes #}
+  {% else %}
+    {% set block_label = content[region][block_id]['content']['#title']['#markup'] %}
+    {% if block_label is empty %}
+      {% set block_label = content[region][block_id]['#configuration']['label'] %}
+    {% endif %}
+    {% if block_label is not empty %}
+      {# Simulate tab labels above each block in Layout Builder #}
+      <ul class="tabs"><li>
+      <h3 class="tabs__tab"><a class="is-active">{{ block_label }}</a></h3>
+      </li></ul>
+    {% endif %}
+    {{ content[region][block_id] }}
+  {% endif %}
+{% endfor %}
+{% endif %}
+{# Output anything remaining #}
+{{ content|without(region) }}
+</div>
+</div>
+{% endif %}

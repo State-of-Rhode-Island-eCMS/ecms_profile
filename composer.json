@@ -67,6 +67,9 @@
         "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
         "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2022-07-26/paragraphs-translation-sync-2887353-54.patch"
       },
+      "drupal/layout_builder_tabs": {
+        "3305095 - The callable passed to the filter must be a Closure in sandbox mode": "https://www.drupal.org/files/issues/2022-09-06/3305095-3-error-500-on-save.patch"
+      },
       "drupal_git/migration_tools": {
         "3148135 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/automated-d9-compatibility-fixes-3148135-5.patch",
         "3163830 - Fatal Error: Call to undefined function drush_print()": "https://www.drupal.org/files/issues/2020-08-06/migration_tools-drush-10-compatibility-13778991-3.patch"
@@ -142,6 +145,7 @@
     "drupal/language_neutral_aliases": "^3.0",
     "drupal/layout_builder_modal": "^1.1",
     "drupal/layout_builder_restrictions": "^2.7",
+    "drupal/layout_builder_tabs": "^1.0",
     "drupal/media_entity_download": "^2.0",
     "drupal/media_entity_file_replace": "^1.0",
     "drupal/media_file_delete": "^1.1",
