@@ -1677,7 +1677,6 @@ function ecms_base_update_9092(array &$sandbox): void {
 
 }
 
-
 /**
  * Update pathauto patterns.
  */
