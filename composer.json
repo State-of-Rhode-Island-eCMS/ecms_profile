@@ -1,211 +1,211 @@
 {
-  "name": "rhodeislandecms/ecms_profile",
-  "description": "Drupal installation profile for the State of Rhode Island's eCMS system",
-  "type": "drupal-profile",
-  "authors": [
-    {
-      "name": "Oomph, Inc.",
-      "email": "devops@oomphinc.com",
-      "homepage": "https://www.oomphinc.com/"
-    }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "license": "GPL-2.0-or-later",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    },
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    },
-    {
-        "type": "package",
-        "package": {
-            "name": "drupal_git/migration_tools",
-            "type": "drupal-module",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/migration_tools.git",
-                "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"
+    "name": "rhodeislandecms/ecms_profile",
+    "description": "Drupal installation profile for the State of Rhode Island's eCMS system",
+    "type": "drupal-profile",
+    "authors": [
+        {
+            "name": "Oomph, Inc.",
+            "email": "devops@oomphinc.com",
+            "homepage": "https://www.oomphinc.com/"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "GPL-2.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal_git/migration_tools",
+                "type": "drupal-module",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://git.drupalcode.org/project/migration_tools.git",
+                    "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal_git/migrate_process_trim",
+                "type": "drupal-module",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://git.drupalcode.org/project/migrate_process_trim.git",
+                    "reference": "79c7ceb9113c1e21818bd124135e5d261ccbebbc"
+                }
             }
         }
-    },
-    {
-        "type": "package",
-        "package": {
-            "name": "drupal_git/migrate_process_trim",
-            "type": "drupal-module",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/migrate_process_trim.git",
-                "reference": "79c7ceb9113c1e21818bd124135e5d261ccbebbc"
+    ],
+    "extra": {
+        "patches": {
+            "drupal/core": {
+                "1356276 - Allow profiles to define a base/parent profile and load them in the correct order": "https://www.drupal.org/files/issues/2022-06-17/1356276-688_0.patch",
+                "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
+                "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
+                "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
+                "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2021-02-10/3025039_42.patch",
+                "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch",
+                "2492171 - Provide options to sanitize filenames": "https://www.drupal.org/files/issues/2021-07-22/2492171-295_0.patch"
+            },
+            "drupal/openid_connect_windows_aad": {
+                "3169996 - Incorrect configuration schema file": "https://www.drupal.org/files/issues/2020-09-09/openid_connect_windows_aad-schema-update-3169996-3.patch"
+            },
+            "drupal/paragraphs": {
+                "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
+                "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
+                "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2022-07-26/paragraphs-translation-sync-2887353-54.patch"
+            },
+            "drupal/layout_builder_tabs": {
+                "3305095 - The callable passed to the filter must be a Closure in sandbox mode": "https://www.drupal.org/files/issues/2022-09-06/3305095-3-error-500-on-save.patch"
+            },
+            "drupal_git/migration_tools": {
+                "3148135 - D9 readiness": "https://www.drupal.org/files/issues/2020-11-17/automated-d9-compatibility-fixes-3148135-5.patch",
+                "3163830 - Fatal Error: Call to undefined function drush_print()": "https://www.drupal.org/files/issues/2020-08-06/migration_tools-drush-10-compatibility-13778991-3.patch"
+            },
+            "drupal_git/migrate_process_trim": {
+                "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
+            },
+            "drupal/media_revisions_ui": {
+                "3257781 - Error: Call to undefined method MediaRevisionAccessCheck": "https://www.drupal.org/files/issues/2022-01-20/3257781-restore-method-5.patch"
             }
-        }
-    }
-  ],
-  "extra": {
-    "patches": {
-      "drupal/core": {
-        "1356276 - Allow profiles to define a base/parent profile and load them in the correct order": "https://www.drupal.org/files/issues/2022-06-17/1356276-688_0.patch",
-        "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
-        "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
-        "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
-        "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2021-02-10/3025039_42.patch",
-        "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch",
-        "2492171 - Provide options to sanitize filenames": "https://www.drupal.org/files/issues/2021-07-22/2492171-295_0.patch"
-      },
-      "drupal/openid_connect_windows_aad": {
-        "3169996 - Incorrect configuration schema file": "https://www.drupal.org/files/issues/2020-09-09/openid_connect_windows_aad-schema-update-3169996-3.patch"
-      },
-      "drupal/paragraphs": {
-        "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
-        "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-        "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2022-07-26/paragraphs-translation-sync-2887353-54.patch"
-      },
-      "drupal/layout_builder_tabs": {
-        "3305095 - The callable passed to the filter must be a Closure in sandbox mode": "https://www.drupal.org/files/issues/2022-09-06/3305095-3-error-500-on-save.patch"
-      },
-      "drupal_git/migration_tools": {
-        "3148135 - D9 readiness" : "https://www.drupal.org/files/issues/2020-11-17/automated-d9-compatibility-fixes-3148135-5.patch",
-        "3163830 - Fatal Error: Call to undefined function drush_print()": "https://www.drupal.org/files/issues/2020-08-06/migration_tools-drush-10-compatibility-13778991-3.patch"
-      },
-      "drupal_git/migrate_process_trim": {
-        "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
-      },
-      "drupal/media_revisions_ui": {
-        "3257781 - Error: Call to undefined method MediaRevisionAccessCheck": "https://www.drupal.org/files/issues/2022-01-20/3257781-restore-method-5.patch"
-      }
+        },
+        "preserve-paths": [],
+        "drupal-scaffold": {}
     },
-    "preserve-paths": [],
-    "drupal-scaffold": {}
-  },
-  "config": {
+    "config": {
         "process-timeout": 0,
         "sort-packages": true,
         "allow-plugins": {
-      "composer/installers": true,
-      "cweagans/composer-patches": true,
-      "oomphinc/composer-installers-extender": true,
-      "drupal-composer/preserve-paths": true,
-      "drupal/core-composer-scaffold": true,
-      "drupal/core-project-message": true,
-      "drupal/core-vendor-hardening": true,
-      "dealerdirect/phpcodesniffer-composer-installer": true
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "oomphinc/composer-installers-extender": true,
+            "drupal-composer/preserve-paths": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/core-vendor-hardening": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "develop": "scripts/develop.sh",
+        "clean-config": "scripts/clean-config.sh",
+        "post-package-install": [
+            "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
+        ],
+        "post-package-update": [
+            "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
+        ]
+    },
+    "provide": {},
+    "require": {
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.6",
+        "drupal/acquia_connector": "^4.0",
+        "drupal/acquia_purge": "^1.1",
+        "drupal/acquia_search": "^3.0",
+        "drupal/acsf": "2.73",
+        "drupal/address": "^1.8",
+        "drupal/admin_toolbar": "^3.1.0",
+        "drupal/allowed_formats": "^1.3",
+        "drupal/asset_injector": "^2.7",
+        "drupal/auto_entitylabel": "^3.0@beta",
+        "drupal/better_exposed_filters": "^5.0",
+        "drupal/bigmenu": "^2.0@RC",
+        "drupal/captcha": "^1.2",
+        "drupal/components": "^2.0",
+        "drupal/content_moderation_notifications": "^3.2",
+        "drupal/core-recommended": "~9.4.8",
+        "drupal/easy_breadcrumb": "^2.0",
+        "drupal/entity_print": "^2.5",
+        "drupal/extlink": "^1.5",
+        "drupal/features": "^3.11",
+        "drupal/feeds": "^3.0@alpha",
+        "drupal/file_delete": "^2.0",
+        "drupal/geocoder": "^3.15",
+        "drupal/geofield": "^1.20",
+        "drupal/geolocation": "^3.2",
+        "drupal/google_tag": "^1.4",
+        "drupal/google_translator": "^1.0@RC",
+        "drupal/honeypot": "^2.0",
+        "drupal/http_cache_control": "^2.0",
+        "drupal/jsonapi_extras": "^3.16",
+        "drupal/language_cookie": "1.x-dev",
+        "drupal/language_neutral_aliases": "^3.0",
+        "drupal/layout_builder_modal": "^1.1",
+        "drupal/layout_builder_restrictions": "^2.7",
+        "drupal/layout_builder_tabs": "^1.0",
+        "drupal/media_entity_download": "^2.0",
+        "drupal/media_entity_file_replace": "^1.0",
+        "drupal/media_file_delete": "^1.1",
+        "drupal/media_library_form_element": "^2.0",
+        "drupal/media_library_theme_reset": "^1.0",
+        "drupal/media_revisions_ui": "^2.0",
+        "drupal/memcache": "^2.2",
+        "drupal/menu_block": "1.x-dev",
+        "drupal/metatag": "^1.14",
+        "drupal/migrate_devel": "^2.0",
+        "drupal/migrate_plus": "^5.1",
+        "drupal/migrate_tools": "^5.0",
+        "drupal/moderated_content_bulk_publish": "^2.0",
+        "drupal/moderation_dashboard": "^1.0",
+        "drupal/office_hours": "^1.3",
+        "drupal/openid_connect": "1.x-dev",
+        "drupal/openid_connect_windows_aad": "^1.3",
+        "drupal/paragraphs": "^1.12",
+        "drupal/pathauto": "^1.8",
+        "drupal/publishcontent": "^1.3",
+        "drupal/rabbit_hole": "^1.0",
+        "drupal/real_aes": "^2.3",
+        "drupal/redirect": "^1.7",
+        "drupal/robotstxt": "^1.4",
+        "drupal/role_delegation": "^1.1",
+        "drupal/scheduled_transitions": "^2.2",
+        "drupal/search_api": "^1.18",
+        "drupal/search_api_exclude": "^2.0",
+        "drupal/search_api_solr": "^4.2",
+        "drupal/simple_oauth": "^5.2",
+        "drupal/simple_sitemap": "^3.8",
+        "drupal/smart_date": "^3.5",
+        "drupal/svg_image": "^1.14",
+        "drupal/token": "^1.7",
+        "drupal/twig_tweak": "^2.8",
+        "drupal/twig_vardumper": "^3.0",
+        "drupal/views_ajax_get": "1.x-dev@dev",
+        "drupal/views_database_connector": "^1.4",
+        "drupal/webform": "^6.0",
+        "drupal/webform_encrypt": "1.x-dev@dev",
+        "drupal/webform_views": "^5.0@beta",
+        "drupal_git/migrate_process_trim": "1.0.0",
+        "drupal_git/migration_tools": "1.0.0",
+        "drush/drush": "^10.0",
+        "geocoder-php/arcgis-online-provider": "^4.3",
+        "geocoder-php/google-maps-provider": "^4.6",
+        "geocoder-php/ipstack-provider": "^0.3.0",
+        "johngrogg/ics-parser": "^2",
+        "oomphinc/composer-installers-extender": "^2.0",
+        "querypath/querypath": "^3.0"
+    },
+    "require-dev": {
+        "behat/mink-goutte-driver": "^1.2",
+        "liuggio/fastest": "^1.6",
+        "drupal/coder": "^8.3",
+        "drush/drush": "^10.0",
+        "php-mock/php-mock": "^2.2",
+        "php-mock/php-mock-phpunit": "^2.6",
+        "phpunit/phpunit": "^9",
+        "symfony/phpunit-bridge": "^5.1",
+        "weitzman/drupal-test-traits": "^1.5"
     }
-  },
-  "scripts": {
-    "develop": "scripts/develop.sh",
-    "clean-config": "scripts/clean-config.sh",
-    "post-package-install": [
-      "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
-    ],
-    "post-package-update": [
-      "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
-    ]
-  },
-  "provide": {},
-  "require": {
-    "composer/installers": "^1.9",
-    "cweagans/composer-patches": "^1.6",
-    "drupal/acquia_connector": "^3.0",
-    "drupal/acquia_purge": "^1.1",
-    "drupal/acquia_search": "^3.0",
-    "drupal/acsf": "2.73",
-    "drupal/address": "^1.8",
-    "drupal/admin_toolbar": "^3.1.0",
-    "drupal/allowed_formats": "^1.3",
-    "drupal/asset_injector": "^2.7",
-    "drupal/auto_entitylabel": "^3.0@beta",
-    "drupal/better_exposed_filters": "^5.0",
-    "drupal/bigmenu": "^2.0@RC",
-    "drupal/captcha": "^1.2",
-    "drupal/components": "^2.0",
-    "drupal/content_moderation_notifications": "^3.2",
-    "drupal/core-recommended": "~9.4.8",
-    "drupal/easy_breadcrumb": "^2.0",
-    "drupal/entity_print": "^2.5",
-    "drupal/extlink": "^1.5",
-    "drupal/features": "^3.11",
-    "drupal/feeds": "^3.0@alpha",
-    "drupal/file_delete": "^2.0",
-    "drupal/geocoder": "^3.15",
-    "drupal/geofield": "^1.20",
-    "drupal/geolocation": "^3.2",
-    "drupal/google_tag": "^1.4",
-    "drupal/google_translator": "^1.0@RC",
-    "drupal/honeypot": "^2.0",
-    "drupal/http_cache_control": "^2.0",
-    "drupal/jsonapi_extras": "^3.16",
-    "drupal/language_cookie": "1.x-dev",
-    "drupal/language_neutral_aliases": "^3.0",
-    "drupal/layout_builder_modal": "^1.1",
-    "drupal/layout_builder_restrictions": "^2.7",
-    "drupal/layout_builder_tabs": "^1.0",
-    "drupal/media_entity_download": "^2.0",
-    "drupal/media_entity_file_replace": "^1.0",
-    "drupal/media_file_delete": "^1.1",
-    "drupal/media_library_form_element": "^2.0",
-    "drupal/media_library_theme_reset": "^1.0",
-    "drupal/media_revisions_ui": "^2.0",
-    "drupal/memcache": "^2.2",
-    "drupal/menu_block": "1.x-dev",
-    "drupal/metatag": "^1.14",
-    "drupal/migrate_devel": "^2.0",
-    "drupal/migrate_plus": "^5.1",
-    "drupal/migrate_tools": "^5.0",
-    "drupal/moderated_content_bulk_publish": "^2.0",
-    "drupal/moderation_dashboard": "^1.0",
-    "drupal/office_hours": "^1.3",
-    "drupal/openid_connect": "1.x-dev",
-    "drupal/openid_connect_windows_aad": "^1.3",
-    "drupal/paragraphs": "^1.12",
-    "drupal/pathauto": "^1.8",
-    "drupal/publishcontent": "^1.3",
-    "drupal/rabbit_hole": "^1.0",
-    "drupal/real_aes": "^2.3",
-    "drupal/redirect": "^1.7",
-    "drupal/robotstxt": "^1.4",
-    "drupal/role_delegation": "^1.1",
-    "drupal/scheduled_transitions": "^2.2",
-    "drupal/search_api": "^1.18",
-    "drupal/search_api_exclude": "^2.0",
-    "drupal/search_api_solr": "^4.2",
-    "drupal/simple_oauth": "^5.2",
-    "drupal/simple_sitemap": "^3.8",
-    "drupal/smart_date": "^3.5",
-    "drupal/svg_image": "^1.14",
-    "drupal/token": "^1.7",
-    "drupal/twig_tweak": "^2.8",
-    "drupal/twig_vardumper": "^3.0",
-    "drupal/views_ajax_get": "1.x-dev@dev",
-    "drupal/views_database_connector": "^1.4",
-    "drupal/webform": "^6.0",
-    "drupal/webform_encrypt": "1.x-dev@dev",
-    "drupal/webform_views": "^5.0@beta",
-    "drupal_git/migrate_process_trim": "1.0.0",
-    "drupal_git/migration_tools": "1.0.0",
-    "drush/drush": "^10.0",
-    "geocoder-php/arcgis-online-provider": "^4.3",
-    "geocoder-php/google-maps-provider": "^4.6",
-    "geocoder-php/ipstack-provider": "^0.3.0",
-    "johngrogg/ics-parser": "^2",
-    "oomphinc/composer-installers-extender": "^2.0",
-    "querypath/querypath": "^3.0"
-  },
-  "require-dev": {
-    "behat/mink-goutte-driver": "^1.2",
-    "liuggio/fastest": "^1.6",
-    "drupal/coder": "^8.3",
-    "drush/drush": "^10.0",
-    "php-mock/php-mock": "^2.2",
-    "php-mock/php-mock-phpunit": "^2.6",
-    "phpunit/phpunit": "^9",
-    "symfony/phpunit-bridge": "^5.1",
-    "weitzman/drupal-test-traits": "^1.5"
-  }
 }
