@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-290: Added drupal/migrate_devel as dev dependency for migration debugging.
 
 ### Changed
 
