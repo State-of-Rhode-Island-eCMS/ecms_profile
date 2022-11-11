@@ -13,12 +13,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-290: Added drupal/migrate_devel as dev dependency for migration debugging.
 
 ### Changed
+- RIGA-227: Update components available when Creating a Press Release.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-6: Fixed pathauto pattern for webform node type.
 
 ### Security
 
