@@ -4,6 +4,8 @@ dependencies:
   config:
     - field.storage.node.field_press_release_paragraphs
     - node.type.press_release
+    - paragraphs.paragraphs_type.formatted_text
+    - paragraphs.paragraphs_type.media_item
   module:
     - entity_reference_revisions
 id: node.press_release.field_press_release_paragraphs
@@ -19,8 +21,10 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
-    target_bundles: null
+    target_bundles:
+      formatted_text: formatted_text
+      media_item: media_item
+    negate: 0
     target_bundles_drag_drop:
       accordion_builder:
         weight: 14
@@ -34,23 +38,44 @@ settings:
       embed:
         weight: 17
         enabled: false
+      event_list:
+        weight: 25
+        enabled: false
       file_list:
         weight: 5
         enabled: false
+      file_list_by_tag:
+        weight: 27
+        enabled: false
       formatted_text:
         weight: 2
-        enabled: false
+        enabled: true
       gallery:
         weight: 20
         enabled: false
       gallery_item:
-        enabled: true
         weight: 21
+        enabled: false
+      icon_button:
+        weight: 31
+        enabled: false
       icon_card:
         weight: 22
         enabled: false
+      location_list:
+        weight: 33
+        enabled: false
       media_item:
         weight: 7
+        enabled: true
+      numbered_step_item:
+        weight: 35
+        enabled: false
+      person_additional_fields:
+        weight: 36
+        enabled: false
+      person_list:
+        weight: 37
         enabled: false
       promotion_reference:
         weight: 24
@@ -59,6 +84,6 @@ settings:
         weight: 25
         enabled: false
       text_card:
-        enabled: true
         weight: 26
+        enabled: false
 field_type: entity_reference_revisions

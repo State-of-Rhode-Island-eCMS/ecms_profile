@@ -10,19 +10,19 @@ type: 'canonical_entities:node'
 pattern: '[node:menu-link:parents:join-path]/[node:menu-link]'
 selection_criteria:
   a042dc44-5a63-449e-b4bc-5e1b3b9f1a20:
-    id: node_type
-    bundles:
-      webform: webform
+    id: 'entity_bundle:node'
     negate: false
     context_mapping:
       node: node
+    bundles:
+      webform: webform
   c47b3893-32db-4c46-a853-d9f04166461b:
     id: language
-    langcodes:
-      en: en
     negate: false
     context_mapping:
       language: 'node:langcode:language'
+    langcodes:
+      en: en
 selection_logic: and
 weight: -10
 relationships:
