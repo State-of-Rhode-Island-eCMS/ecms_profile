@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-328: Update panels dependency.
 - RIGA-328: Update Solr search index config from search_api_solr_update_8414().
 - RIGA-329: Update Acquia Connector Module
+- RIGA-288: Update event form display for type.
 
 ### Deprecated
 
