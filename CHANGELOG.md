@@ -10,14 +10,21 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-290: Added drupal/migrate_devel as dev dependency for migration debugging.
 
 ### Changed
+- RIGA-227: Update components available when Creating a Press Release.
+- RIGA-328: Update moderation_dashboard to 2.x.
+- RIGA-328: Added page_manager dependency.
+- RIGA-328: Update panels dependency.
+- RIGA-328: Update Solr search index config from search_api_solr_update_8414().
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-6: Fixed pathauto pattern for webform node type.
 
 ### Security
 

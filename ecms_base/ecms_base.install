@@ -1676,3 +1676,37 @@ function ecms_base_update_9092(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Update pathauto patterns.
+ */
+function ecms_base_update_9093(array &$sandbox): void {
+
+  // Config updates.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $ecms_event_config_source = new FileStorage($path . "/features/custom/ecms_event/config/install/");
+
+  $newConfig = [
+    'pathauto.pattern.events',
+  ];
+
+  foreach ($newConfig as $config) {
+    $active_storage->write("{$config}", $ecms_event_config_source->read("{$config}"));
+  }
+
+  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
+  $ecms_press_config_source = new FileStorage($path . "/features/custom/ecms_press_release/config/install/");
+
+  $newPressConfig = [
+    'pathauto.pattern.press_releases',
+  ];
+
+  foreach ($newPressConfig as $config) {
+    $active_storage->write("{$config}", $ecms_press_config_source->read("{$config}"));
+  }
+}

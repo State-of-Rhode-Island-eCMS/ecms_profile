@@ -39,12 +39,14 @@ function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function ecms_workflow_webform_insert(WebformInterface $webform) : void {
-  $node = Node::create([
-    'type' => 'webform',
-    'title' => $webform->label(),
-    'webform' => ['target_id' => $webform->id()],
-  ]);
-  $node->save();
+  if (!defined('MAINTENANCE_MODE') || constant('MAINTENANCE_MODE') !== 'install') {
+    $node = Node::create([
+      'type' => 'webform',
+      'title' => $webform->label(),
+      'webform' => ['target_id' => $webform->id()],
+    ]);
+    $node->save();
 
-  \Drupal::messenger()->addMessage(t('Webform node %label created.', ['%label' => $node->label()]));
+    \Drupal::messenger()->addMessage(t('Webform node %label created.', ['%label' => $node->label()]));
+  }
 }

@@ -81,7 +81,7 @@ As you develop locally, there may be some configuration changes needed.
 When you add config files to the profile repository, be sure to run this
 shell script to remove the UUIDs.
 
-## Get a local spun up for the distribution
+## Get a local spun up to contribute to the project
 1. Download and install Lando if you haven’t already.
    The team is using the latest stable release `https://github.com/lando/lando`
 2. Clone the profile repository:
