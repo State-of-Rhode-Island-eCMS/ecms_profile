@@ -21,6 +21,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [0.9.18] - 2022-11-17
+### Hotfix
+- RIGA-328: Fixed dependency revert in composer.
+
 ## [0.9.17] - 2022-11-17
 ### Added
 - RIGA-290: Added drupal/migrate_devel as dev dependency for migration debugging.
@@ -991,7 +995,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.17...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.18...HEAD
+[0.9.18]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.17...0.9.18
 [0.9.17]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.16...0.9.17
 [0.9.16]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.15...0.9.16
 [0.9.15]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.14...0.9.15
