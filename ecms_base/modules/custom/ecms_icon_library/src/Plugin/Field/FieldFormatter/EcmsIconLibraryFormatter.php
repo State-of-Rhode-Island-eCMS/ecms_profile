@@ -56,7 +56,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         $file_url = file_create_url($file_uri);
 
         // Render as SVG tag.
-        $svgRaw = url_get_contents($file_url);
+        $svgRaw = urlGetContents($file_url);
 
         if ($svgRaw) {
           $svgRaw = preg_replace(
@@ -78,16 +78,17 @@ class EcmsIconLibraryFormatter extends FormatterBase {
   }
 
   /**
-   * Replacement for function file_get_contents()
-   *   see stackoverflow.com/questions/3979802/alternative-to-file-get-contents
+   * Replacement for function file_get_contents().
+   *
+   * See stackoverflow.com/questions/3979802/alternative-to-file-get-contents.
    */
-  private function url_get_contents($url) {
-    if (!function_exists('curl_init')){
+  private function urlGetContents($url) {
+    if (!function_exists('curl_init')) {
       die('CURL is not installed!');
     }
     $curl_handle = curl_init();
     curl_setopt($curl_handle, CURLOPT_URL, $url);
-    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, TRUE);
     $output = curl_exec($curl_handle);
     curl_close($curl_handle);
     return $output;
