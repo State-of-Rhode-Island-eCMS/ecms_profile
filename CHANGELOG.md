@@ -12,12 +12,20 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-333: Upgrading drupal/paragraphs 1.14.0 => 1.15.0.
+- RIGA-333: Upgrading drupal/media_revisions_ui 2.0.0 => 2.1.0.
+- RIGA-333: Upgrading drupal/media_library_form_element 2.0.3 => 2.0.4.
+- RIGA-333: Upgrading drupal/media_file_delete 1.1.1 => 1.3.0.
+- RIGA-333: Upgrading drupal/media_entity_file_replace 1.0.0 => 1.1.0.
+- RIGA-333: Upgrading drupal/layout_builder_restrictions 2.13.0 => 2.17.0.
+- RIGA-333: Upgrading drupal/acquia_connector 4.0.0 => 4.0.1.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-337: Upgrading acquia_connector also fixes fatal error (issue 3316912).
 
 ### Security
 
