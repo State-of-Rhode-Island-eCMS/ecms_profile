@@ -58,7 +58,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         // Render as SVG tag.
         $svgRaw = $this->urlGetContents($file_url);
 
-        // Debug
+        // Debug.
         $message = "FID: " . $fid . "\n";
         $message = $message . "file_uri: " . $file_uri . "\n";
         $message = $message . "file_url: " . $file_url . "\n";
@@ -72,7 +72,6 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         else {
           \Drupal::logger('my_module')->notice($message);
         }
-
 
         if ($svgRaw) {
           $svgRaw = preg_replace(
