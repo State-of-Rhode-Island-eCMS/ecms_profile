@@ -60,18 +60,16 @@ class EcmsIconLibraryFormatter extends FormatterBase {
 
         // Debug.
         $message = "FID: " . $fid . "\n";
-        $message = $message . "file_uri: " . $file_uri . "\n";substr($svgRaw, 0, 1)
+        $message = $message . "file_uri: " . $file_uri . "\n";
         $message = $message . "file_url: " . $file_url . "\n";
         $message = $message . "svgRaw is string?: " . is_string($svgRaw) . "\n";
         $message = $message . "strlen(svgRaw): " . strlen($svgRaw) . "\n";
-        $message = $message . "substr offset 0: " . substr($svgRaw, 0, 1) . "\n";
-        $message = $message . "substr is string?: " . is_string(substr($svgRaw, 0, 1)) . "\n";
-        // $message = $message . "substr: " . substr($svgRaw, 0, 14) . "\n";
-        // $message = $message . "substr === Page not found?: " . (substr($svgRaw, 0, 14) === "Page not found") . "\n";
-        // $message = $message . "svgRaw: " . $svgRaw . "\n";
-        // $message = $message . "svgRaw: " . $svgRaw . "\n";
+        $message = $message . "sub len1=: " . substr($svgRaw, 0, 1) . "\n";
+        $message = $message . "sub=str?: " . is_string(substr($svgRaw, 0, 1));
         if ($svgRaw === "") {
-          \Drupal::logger('my_module')->notice("FID: " . $fid . " can't be loaded as SVG.");
+          \Drupal::logger('my_module')->notice(
+            "FID: " . $fid . " can't be loaded as SVG."
+          );
           return;
         }
         else {
