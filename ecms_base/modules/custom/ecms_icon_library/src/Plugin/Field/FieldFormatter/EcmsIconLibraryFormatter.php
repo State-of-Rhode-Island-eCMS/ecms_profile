@@ -56,7 +56,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         $file_url = file_create_url($file_uri);
 
         // Render as SVG tag.
-        $svgRaw = urlGetContents($file_url);
+        $svgRaw = $this->urlGetContents($file_url);
 
         // Debug
         $message = "FID: " . $fid . "\n";
