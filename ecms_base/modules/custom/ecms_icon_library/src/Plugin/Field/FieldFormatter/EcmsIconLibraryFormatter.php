@@ -63,7 +63,9 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         $message = $message . "file_uri: " . $file_uri . "\n";
         $message = $message . "file_url: " . $file_url . "\n";
         $message = $message . "svgRaw: " . $svgRaw . "\n";
-        if (strpos($svgRaw, "Page not found") === 0) {
+        $message = $message . "svgRaw: " . $svgRaw . "\n";
+        $message = $message . "substr === Page not found?: " . (substr($svgRaw, 0, 14) === "Page not found");
+        if (substr($svgRaw, 0, 14) === "Page not found") {
           \Drupal::logger('my_module')->notice("FID: " . $fid . " can't be loaded as SVG.");
           return;
         }
