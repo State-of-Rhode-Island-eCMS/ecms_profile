@@ -58,6 +58,13 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         // Render as SVG tag.
         $svgRaw = urlGetContents($file_url);
 
+        // Debug
+        $message = "FID: " . $fid . "\n";
+        $message = $message . "file_uri: " . $file_uri . "\n";
+        $message = $message . "file_url: " . $file_url . "\n";
+        $message = $message . "svgRaw: " . $svgRaw . "\n";
+        \Drupal::logger('my_module')->notice($message);
+
         if ($svgRaw) {
           $svgRaw = preg_replace(
             ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
