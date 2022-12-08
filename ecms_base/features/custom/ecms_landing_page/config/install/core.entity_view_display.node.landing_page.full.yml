@@ -90,7 +90,7 @@ third_party_settings:
     allowed_block_categories: {  }
     entity_view_mode_restriction:
       allowed_layouts: {  }
-      blacklisted_blocks:
+      denylisted_blocks:
         'Lists (Views)':
           - 'views_block:content_moderation_dashboard_in_review-block_2'
           - 'views_block:content_moderation_dashboard_in_review-block_1'
@@ -101,7 +101,7 @@ third_party_settings:
           - 'views_block:moderation_dashboard_recently_created-block_1'
           - 'views_block:content_recent-block_1'
           - 'views_block:who_s_online-who_s_online_block'
-      whitelisted_blocks:
+      allowlisted_blocks:
         'Chaos Tools': {  }
         'Content fields':
           - 'field_block:node:landing_page:field_add_modal'
