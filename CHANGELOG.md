@@ -12,6 +12,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.19] - 2022-12-08
+### Changed
 - RIGA-333: Upgrading drupal/paragraphs 1.14.0 => 1.15.0.
 - RIGA-333: Upgrading drupal/media_revisions_ui 2.0.0 => 2.1.0.
 - RIGA-333: Upgrading drupal/media_library_form_element 2.0.3 => 2.0.4.
@@ -20,14 +31,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-333: Upgrading drupal/layout_builder_restrictions 2.13.0 => 2.17.0.
 - RIGA-333: Upgrading drupal/acquia_connector 4.0.0 => 4.0.1.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIGA-337: Upgrading acquia_connector also fixes fatal error (issue 3316912).
-
-### Security
 
 ## [0.9.18] - 2022-11-17
 ### Hotfix
@@ -1003,7 +1008,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.18...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.19...HEAD
+[0.9.19]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.18...0.9.19
 [0.9.18]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.17...0.9.18
 [0.9.17]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.16...0.9.17
 [0.9.16]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.15...0.9.16
