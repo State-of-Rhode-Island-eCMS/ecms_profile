@@ -86,7 +86,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
    * Replacement for function file_get_contents().
    *
    * See stackoverflow.com/questions/3979802/alternative-to-file-get-contents.
-   * 
+   *
    * From curl_exec() docs: "If the CURLOPT_RETURNTRANSFER option is set,
    * it will return the result on success, false on failure."
    */
