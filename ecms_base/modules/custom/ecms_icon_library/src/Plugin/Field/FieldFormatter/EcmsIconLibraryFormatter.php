@@ -60,7 +60,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
 
         if ($svgRaw === FALSE) {
           \Drupal::logger('ecms_icon_library')->notice(
-            "File ID " . $fid . " can't be loaded as SVG."
+            'File ID ' . $fid . ' cannot be loaded as SVG.'
           );
           return;
         }
@@ -92,7 +92,10 @@ class EcmsIconLibraryFormatter extends FormatterBase {
    */
   private function urlGetContents($url) {
     if (!function_exists('curl_init')) {
-      die('CURL is not installed!');
+      \Drupal::logger('ecms_icon_library')->notice(
+        '`urlGetContents()` cannot work because `CURL` is not available.'
+      );
+      return FALSE;
     }
     $curl_handle = curl_init();
     curl_setopt($curl_handle, CURLOPT_URL, $url);
