@@ -58,36 +58,23 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         // Render as SVG tag.
         $svgRaw = $this->urlGetContents($file_url);
 
-        // Debug.
-        $message = "FID: " . $fid . "\n";
-        $message = $message . "file_uri: " . $file_uri . "\n";
-        $message = $message . "file_url: " . $file_url . "\n";
-        $message = $message . "svgRaw is string?: " . is_string($svgRaw) . "\n";
-        $message = $message . "strlen(svgRaw): " . strlen($svgRaw) . "\n";
-        $message = $message . "sub len1=: " . substr($svgRaw, 0, 1) . "\n";
-        $message = $message . "sub=str?: " . is_string(substr($svgRaw, 0, 1));
-        if ($svgRaw === "") {
-          \Drupal::logger('my_module')->notice(
-            "FID: " . $fid . " can't be loaded as SVG."
+        if ($svgRaw === FALSE) {
+          \Drupal::logger('ecms_icon_library')->notice(
+            "File ID " . $fid . " can't be loaded as SVG."
           );
           return;
         }
-        else {
-          \Drupal::logger('my_module')->notice($message);
-        }
 
-        if ($svgRaw) {
-          $svgRaw = preg_replace(
-            ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
-            '',
-            $svgRaw
-          );
-          $svgRaw = trim($svgRaw);
+        $svgRaw = preg_replace(
+          ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
+          '',
+          $svgRaw
+        );
+        $svgRaw = trim($svgRaw);
 
-          $elements[$delta]['media_library_icon'] = [
-            '#markup' => Markup::create($svgRaw),
-          ];
-        }
+        $elements[$delta]['media_library_icon'] = [
+          '#markup' => Markup::create($svgRaw),
+        ];
       }
     }
 
@@ -99,6 +86,9 @@ class EcmsIconLibraryFormatter extends FormatterBase {
    * Replacement for function file_get_contents().
    *
    * See stackoverflow.com/questions/3979802/alternative-to-file-get-contents.
+   * 
+   * From curl_exec() docs: "If the CURLOPT_RETURNTRANSFER option is set,
+   * it will return the result on success, false on failure."
    */
   private function urlGetContents($url) {
     if (!function_exists('curl_init')) {
