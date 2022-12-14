@@ -62,7 +62,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
           \Drupal::logger('ecms_icon_library')->notice(
             'File ID ' . $fid . ' cannot be loaded as SVG.'
           );
-          return;
+          continue;
         }
 
         $svgRaw = preg_replace(
