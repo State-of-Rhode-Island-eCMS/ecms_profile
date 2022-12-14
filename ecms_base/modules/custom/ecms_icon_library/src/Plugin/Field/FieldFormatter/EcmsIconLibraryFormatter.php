@@ -94,7 +94,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
    * it will return the result on success, false on failure."
    */
   private function urlGetContents($url) {
-    if (!function_exists('curl_init')) {
+    if (!function_exists('curl_init') || !function_exists('curl_setopt') || !function_exists('curl_exec')) {
       \Drupal::logger('ecms_icon_library')->notice(
         '`urlGetContents()` cannot work because `CURL` is not available.'
       );
