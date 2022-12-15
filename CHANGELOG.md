@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-323: Added replacement function for file_get_contents().
 
 ### Security
+
+## [0.9.20] - 2022-12-15
+### Changed
+- RIGA-323: Added cURL-based replacement function for file_get_contents().
 
 ## [0.9.19] - 2022-12-08
 ### Changed
@@ -1009,7 +1012,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.19...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.20...HEAD
+[0.9.20]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.19...0.9.20
 [0.9.19]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.18...0.9.19
 [0.9.18]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.17...0.9.18
 [0.9.17]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.16...0.9.17
