@@ -56,25 +56,59 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         $file_url = file_create_url($file_uri);
 
         // Render as SVG tag.
-        $svgRaw = file_get_contents($file_url);
+        $svgRaw = $this->urlGetContents($file_url);
 
-        if ($svgRaw) {
-          $svgRaw = preg_replace(
-            ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
-            '',
-            $svgRaw
+        if ($svgRaw === FALSE) {
+          \Drupal::logger('ecms_icon_library')->notice(
+            'File ID ' . $fid . ' cannot be loaded as SVG.'
           );
-          $svgRaw = trim($svgRaw);
-
-          $elements[$delta]['media_library_icon'] = [
-            '#markup' => Markup::create($svgRaw),
-          ];
+          continue;
         }
+
+        $svgRaw = preg_replace(
+          ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
+          '',
+          $svgRaw
+        );
+        $svgRaw = trim($svgRaw);
+
+        $elements[$delta]['media_library_icon'] = [
+          '#markup' => Markup::create($svgRaw),
+        ];
       }
     }
 
     return $elements;
 
+  }
+
+  /**
+   * Replacement for function file_get_contents().
+   *
+   * See stackoverflow.com/questions/3979802/alternative-to-file-get-contents.
+   *
+   * From curl_exec() docs: "If the CURLOPT_RETURNTRANSFER option is set,
+   * it will return the result on success, false on failure."
+   *
+   * @param string $url
+   *   The URL of the file to be fetched.
+   *
+   * @return string|bool
+   *   The output of cURL response, if successful; or FALSE.
+   */
+  private function urlGetContents(string $url): string|bool {
+    if (!function_exists('curl_init')) {
+      \Drupal::logger('ecms_icon_library')->notice(
+        '`urlGetContents()` cannot work because `CURL` is not available.'
+      );
+      return FALSE;
+    }
+    $curl_handle = curl_init();
+    curl_setopt($curl_handle, CURLOPT_URL, $url);
+    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, TRUE);
+    $output = curl_exec($curl_handle);
+    curl_close($curl_handle);
+    return $output;
   }
 
 }
