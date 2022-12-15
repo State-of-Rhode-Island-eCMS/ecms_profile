@@ -54,9 +54,6 @@ class EcmsIconLibraryFormatter extends FormatterBase {
 
         $file_uri = File::load($fid)->getFileUri();
         $file_url = file_create_url($file_uri);
-        \Drupal::logger('ecms_icon_library')->notice(
-          'About to call urlGetContents... fid: ' . $fid . ' , file_uri: ' . $file_uri . ' , file_url: ' . $file_url
-        );
 
         // Render as SVG tag.
         $svgRaw = $this->urlGetContents($file_url);
@@ -94,7 +91,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
    * it will return the result on success, false on failure."
    */
   private function urlGetContents($url) {
-    if (!function_exists('curl_init') || !function_exists('curl_setopt') || !function_exists('curl_exec')) {
+    if (!function_exists('curl_init')) {
       \Drupal::logger('ecms_icon_library')->notice(
         '`urlGetContents()` cannot work because `CURL` is not available.'
       );
