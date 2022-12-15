@@ -89,8 +89,14 @@ class EcmsIconLibraryFormatter extends FormatterBase {
    *
    * From curl_exec() docs: "If the CURLOPT_RETURNTRANSFER option is set,
    * it will return the result on success, false on failure."
+   *
+   * @param string $url
+   *   The URL of the file to be fetched.
+   *
+   * @return string|bool
+   *   The output of cURL response, if successful; or FALSE.
    */
-  private function urlGetContents($url) {
+  private function urlGetContents(string $url): string|bool {
     if (!function_exists('curl_init')) {
       \Drupal::logger('ecms_icon_library')->notice(
         '`urlGetContents()` cannot work because `CURL` is not available.'
