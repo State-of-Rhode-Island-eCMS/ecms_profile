@@ -12,12 +12,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-336: Updated allowed formats to 2.x.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-336: Added patch for allowed formats issue 2950548.
 
 ### Security
 
