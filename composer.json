@@ -76,6 +76,9 @@
         },
         "drupal_git/migrate_process_trim": {
           "3141131 - D9 Readiness": "https://www.drupal.org/files/issues/2020-05-23/migrate_process_trim.1.x-dev.rector.patch"
+        },
+        "drupal/allowed_formats": {
+          "2950548 - Default value for format dropdown missing": "https://www.drupal.org/files/issues/2022-02-02/2950548-allowed_formats-missing_default_value.patch"
         }
       },
       "preserve-paths": [],
@@ -115,7 +118,7 @@
       "drupal/acsf": "2.73",
       "drupal/address": "^1.8",
       "drupal/admin_toolbar": "^3.1.0",
-      "drupal/allowed_formats": "^1.3",
+      "drupal/allowed_formats": "^2.0.0",
       "drupal/asset_injector": "^2.7",
       "drupal/auto_entitylabel": "^3.0@beta",
       "drupal/better_exposed_filters": "^5.0",
