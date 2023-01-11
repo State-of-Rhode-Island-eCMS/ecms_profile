@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-346: Install drupal/simple_menu_permissions 1.4.0.
 
 ### Changed
 
