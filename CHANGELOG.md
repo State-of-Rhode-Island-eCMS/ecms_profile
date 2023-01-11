@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-346: Install drupal/simple_menu_permissions 1.4.0.
+- RIGA-346: Install drupal/menu_admin_per_menu 1.5.
 
 ### Changed
 
