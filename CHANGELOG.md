@@ -12,8 +12,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-346: Install drupal/simple_menu_permissions 1.4.0.
 - RIGA-346: Install drupal/menu_admin_per_menu 1.5.
+- RIGA-346: Add update hook ecms_base_update_9094 to install menu modules.
 
 ### Changed
+- RIGA-346: Update Content Author and Publisher permissions to add menu links.
 
 ### Deprecated
 
