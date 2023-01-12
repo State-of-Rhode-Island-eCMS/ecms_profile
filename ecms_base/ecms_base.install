@@ -1710,3 +1710,17 @@ function ecms_base_update_9093(array &$sandbox): void {
     $active_storage->write("{$config}", $ecms_press_config_source->read("{$config}"));
   }
 }
+
+/**
+ * Updates to run for the 0.9.22 tag.
+ */
+function ecms_base_update_9094(array &$sandbox): void {
+
+  $modules_to_install = [
+    'menu_admin_per_menu',
+    'simple_menu_permissions',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
