@@ -52,6 +52,7 @@ dependencies:
   - media_library
   - media_library_form_element
   - media_library_theme_reset
+  - menu_admin_per_menu
   - menu_block
   - menu_link_content
   - menu_ui
@@ -82,6 +83,7 @@ dependencies:
   - search_api
   - search_api_db
   - shortcut
+  - simple_menu_permissions
   - simple_sitemap
   - smart_date
   - svg_image
