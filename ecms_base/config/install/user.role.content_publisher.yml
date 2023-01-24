@@ -21,7 +21,6 @@ permissions:
   - 'add scheduled transitions node publication'
   - 'add scheduled transitions node webform'
   - 'administer main menu items'
-  - 'administer menu'
   - 'bypass paragraphs type content access'
   - 'configure any layout'
   - 'configure editable landing_page node layout overrides'
