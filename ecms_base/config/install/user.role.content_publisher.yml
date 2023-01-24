@@ -6,7 +6,6 @@ label: 'Content Publisher'
 weight: 5
 is_admin: null
 permissions:
-  - 'access administration pages'
   - 'access contextual links'
   - 'access taxonomy overview'
   - 'add new links to main menu'
