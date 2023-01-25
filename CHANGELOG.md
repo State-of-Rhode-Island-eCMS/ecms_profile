@@ -16,7 +16,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-346: Add update hook ecms_base_update_9095 to update permissions.
 
 ### Changed
-- RIGA-346: Update Content Author and Publisher permissions to add menu links.
+- RIGA-346: Update Content Publisher permissions to add Main menu links.
 
 ### Deprecated
 
