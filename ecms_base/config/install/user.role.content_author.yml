@@ -7,8 +7,6 @@ weight: 4
 is_admin: null
 permissions:
   - 'access contextual links'
-  - 'add new links to main menu'
-  - 'administer main menu items'
   - 'bypass paragraphs type content access'
   - 'configure editable landing_page node layout overrides'
   - 'create and edit custom blocks'
@@ -82,7 +80,6 @@ permissions:
   - 'edit any publication content'
   - 'edit any publication_file media'
   - 'edit any webform content'
-  - 'edit links in main menu'
   - 'edit own basic_page content'
   - 'edit own event content'
   - 'edit own event_image media'
