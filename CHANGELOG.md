@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.9.22] - 2023-01-26
+### Added
 - RIGA-346: Install drupal/simple_menu_permissions 1.4.0.
 - RIGA-346: Install drupal/menu_admin_per_menu 1.5.
 - RIGA-346: Add update hook ecms_base_update_9094 to install menu modules.
@@ -18,14 +31,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-346: Update Content Publisher permissions to add Main menu links.
 
-### Deprecated
-
 ### Removed
-- RIGA-346: Revoke "Use the administration pages" from content publishers.
-
-### Fixed
-
-### Security
+- RIGA-346: Revoke "Use the administration pages" from Content Publishers.
 
 ## [0.9.21] - 2022-12-15
 ### Changed
@@ -1025,7 +1032,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.21...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.22...HEAD
+[0.9.22]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.21...0.9.22
 [0.9.21]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.20...0.9.21
 [0.9.20]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.19...0.9.20
 [0.9.19]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.18...0.9.19
