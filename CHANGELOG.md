@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-311: Update config formatting for new drupal/components API.
+- RIGA-364: Update drupal/smart_date version constraint ^3.5 => ^4.0@alpha.
 
 ### Deprecated
 
