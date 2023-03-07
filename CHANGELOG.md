@@ -12,7 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-311: Update config formatting for new drupal/components API.
+- RIGA-6: Update formatting of library imports for new drupal/components API.
+- RIGA-362: Switch from hard-coded to using saved text format value for footer.
 - RIGA-364: Update drupal/smart_date version constraint ^3.5 => ^4.0@alpha.
 
 ### Deprecated
