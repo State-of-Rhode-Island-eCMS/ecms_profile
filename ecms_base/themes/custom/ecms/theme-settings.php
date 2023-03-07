@@ -153,7 +153,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   $form['ecms_footer']['footer_left'] = [
     '#type' => 'text_format',
     '#title' => t('Footer: Left Column'),
-    '#format' => 'basic_html',
+    '#format' => theme_get_setting('footer_left')['format'] ?? 'basic_htmnl',
     '#description' => t('The left column of the footer.'),
     '#default_value' => theme_get_setting('footer_left')['value'],
   ];
@@ -161,7 +161,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   $form['ecms_footer']['footer_center'] = [
     '#type' => 'text_format',
     '#title' => t('Footer: Center Column'),
-    '#format' => 'basic_html',
+    '#format' => theme_get_setting('footer_center')['format'] ?? 'basic_htmnl',
     '#description' => t('The center column of the footer.'),
     '#default_value' => theme_get_setting('footer_center')['value'],
   ];
@@ -169,7 +169,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   $form['ecms_footer']['footer_right'] = [
     '#type' => 'text_format',
     '#title' => t('Footer: Right Column'),
-    '#format' => 'basic_html',
+    '#format' => theme_get_setting('footer_right')['format'] ?? 'basic_htmnl',
     '#description' => t('The right column of the footer.'),
     '#default_value' => theme_get_setting('footer_right')['value'],
   ];
@@ -177,7 +177,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   $form['ecms_footer']['footer_state_info'] = [
     '#type' => 'text_format',
     '#title' => t('Footer: State Info'),
-    '#format' => 'basic_html',
+    '#format' => theme_get_setting('footer_state_info')['format'] ?? 'basic_htmnl',
     '#description' => t('Universal state links.'),
     '#default_value' => theme_get_setting('footer_state_info')['value'],
   ];
