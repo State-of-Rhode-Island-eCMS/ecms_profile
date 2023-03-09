@@ -12,18 +12,23 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-6: Update formatting of library imports for new drupal/components API.
-- RIGA-362: Switch from hard-coded to using saved text format value for footer.
-- RIGA-364: Update drupal/smart_date version constraint ^3.5 => ^4.0@alpha.
 
 ### Deprecated
 
 ### Removed
-- RIGA-362: Remove Delete content and media Permission from Content Publishers.
 
 ### Fixed
 
 ### Security
+
+## [0.9.23] - 2023-03-09
+### Changed
+- RIGA-6: Update formatting of library imports for new drupal/components API.
+- RIGA-362: Switch from hard-coded to using saved text format value for footer.
+- RIGA-364: Update drupal/smart_date version constraint ^3.5 => ^4.0@alpha.
+
+### Removed
+- RIGA-362: Remove Delete content and media Permission from Content Publishers.
 
 ## [0.9.22] - 2023-01-26
 ### Added
@@ -1036,7 +1041,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.22...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.23...HEAD
+[0.9.23]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.22...0.9.23
 [0.9.22]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.21...0.9.22
 [0.9.21]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.20...0.9.21
 [0.9.20]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.19...0.9.20
