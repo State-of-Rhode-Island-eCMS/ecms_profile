@@ -496,6 +496,8 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
 
   // Guard against no nodes.
   if (empty($nids)) {
+    \Drupal::logger('test-test-test')->notice("NIDs is empty!");
+    \Drupal::messenger()->addMessage(print_r("NIDs is empty!", TRUE), 'info');
     return;
   }
 
@@ -545,6 +547,10 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
 
   // Check if the audience form is enabled.
   $variables['audience_form'] = FALSE;
+
+  $test_message = "field_publication_list_form = " . $paragraph->get('field_publication_list_form')->getString();
+  \Drupal::logger('test-test-test')->notice($test_message);
+  \Drupal::messenger()->addMessage(print_r($test_message, TRUE), 'info');
 
   if ($paragraph->get('field_publication_list_form')->getString() === '1') {
     $variables['audience_form'] = \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\PublicationAudienceForm');
