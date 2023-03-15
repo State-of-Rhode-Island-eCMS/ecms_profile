@@ -495,62 +495,54 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $nids = $query->execute();
 
   // Guard against no nodes.
-  if (empty($nids)) {
-    \Drupal::logger('test-test-test')->notice("NIDs is empty!");
-    \Drupal::messenger()->addMessage(print_r("NIDs is empty!", TRUE), 'info');
-    return;
-  }
+  if (!empty($nids)) {
+    // Load multiple nodes.
+    $nodes = $node_storage->loadMultiple($nids);
+    $publications_types = [];
 
-  // Load multiple nodes.
-  $nodes = $node_storage->loadMultiple($nids);
-  $publications_types = [];
+    foreach ($nodes as $node) {
+      // Get proper language name.
+      $language = $node->language()->getName();
 
-  foreach ($nodes as $node) {
-    // Get proper language name.
-    $language = $node->language()->getName();
+      // Get all referenced entities.
+      $types_field = $node->get('field_publication_types')->referencedEntities();
 
-    // Get all referenced entities.
-    $types_field = $node->get('field_publication_types')->referencedEntities();
-
-    // Build out mutli-dimensional array.
-    foreach ($types_field as $type) {
-      $publications_types[intval($type->getWeight())][$type->get('name')->value][$language][] = $node;
+      // Build out mutli-dimensional array.
+      foreach ($types_field as $type) {
+        $publications_types[intval($type->getWeight())][$type->get('name')->value][$language][] = $node;
+      }
     }
-  }
 
-  $builder = $entity_type_manager->getViewBuilder('node');
+    $builder = $entity_type_manager->getViewBuilder('node');
 
-  // Pop english to top and load our node views.
-  foreach ($publications_types as &$weight) {
-    foreach ($weight as &$type) {
+    // Pop english to top and load our node views.
+    foreach ($publications_types as &$weight) {
+      foreach ($weight as &$type) {
 
-      if (!empty($type['English'])) {
-        $type = ['English' => $type['English']] + $type;
-      }
-      else {
-        ksort($type);
-      }
+        if (!empty($type['English'])) {
+          $type = ['English' => $type['English']] + $type;
+        }
+        else {
+          ksort($type);
+        }
 
-      foreach ($type as &$language) {
-        // Return a list of rendered teaser nodes.
-        if ($language !== NULL) {
-          $language = $builder->viewMultiple($language, 'teaser');
+        foreach ($type as &$language) {
+          // Return a list of rendered teaser nodes.
+          if ($language !== NULL) {
+            $language = $builder->viewMultiple($language, 'teaser');
+          }
         }
       }
     }
+
+    // Sort publications by key.
+    ksort($publications_types);
+
+    $variables['publications'] = $publications_types;
   }
-
-  // Sort publications by key.
-  ksort($publications_types);
-
-  $variables['publications'] = $publications_types;
 
   // Check if the audience form is enabled.
   $variables['audience_form'] = FALSE;
-
-  $test_message = "field_publication_list_form = " . $paragraph->get('field_publication_list_form')->getString();
-  \Drupal::logger('test-test-test')->notice($test_message);
-  \Drupal::messenger()->addMessage(print_r($test_message, TRUE), 'info');
 
   if ($paragraph->get('field_publication_list_form')->getString() === '1') {
     $variables['audience_form'] = \Drupal::formBuilder()->getForm('Drupal\ecms_blocks\Form\PublicationAudienceForm');
