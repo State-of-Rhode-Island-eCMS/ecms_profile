@@ -1,0 +1,7 @@
+ecms_search_settings.settings_form:
+  path: 'admin/config/ecms_search_settings/settings'
+  defaults:
+    _form: '\Drupal\ecms_search_settings\Form\EcmsSearchSettingsConfigForm'
+    _title: 'eCMS Search Settings Configuration'
+  requirements:
+    _permission: 'administer site configuration'
