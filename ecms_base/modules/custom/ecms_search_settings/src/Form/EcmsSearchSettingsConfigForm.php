@@ -36,13 +36,18 @@ class EcmsSearchSettingsConfigForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildForm($form, $form_state);
 
+    $search_settings_config = $this->config('ecms_search_settings.settings');
+    if (isset($search_settings_config)) {
+      $current_character_count = $search_settings_config->get('character_count');
+    }
+
     $form['character_count'] = [
       '#title' => $this->t('Character Count in Search Results'),
       '#description' => $this->t(
         'Set the limit of characters in search results with long text. Defaults to 190.'
       ),
       '#type' => 'textfield',
-      '#default_value' => '190',
+      '#default_value' => $current_character_count ?? '190',
     ];
 
     return $form;
