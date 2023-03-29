@@ -12,14 +12,12 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @package Drupal\ecms_search_settings\Form
  */
-class EcmsSearchSettingsConfigForm extends ConfigFormBase
-{
+class EcmsSearchSettingsConfigForm extends ConfigFormBase {
 
   /**
    * {@inheritDoc}
    */
-  protected function get_editable_config_names(): array
-  {
+  protected function getEditableConfigNames(): array {
     return [
       'ecms_search_settings.settings',
     ];
@@ -28,16 +26,14 @@ class EcmsSearchSettingsConfigForm extends ConfigFormBase
   /**
    * {@inheritDoc}
    */
-  public function get_form_id(): string
-  {
+  public function getFormId(): string {
     return 'ecms_search_settings_form';
   }
 
   /**
    * {@inheritDoc}
    */
-  public function build_form(array $form, FormStateInterface $form_state): array
-  {
+  public function buildForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildForm($form, $form_state);
 
     $form['character_count'] = [
@@ -55,8 +51,7 @@ class EcmsSearchSettingsConfigForm extends ConfigFormBase
   /**
    * {@inheritDoc}
    */
-  public function submit_form(array &$form, FormStateInterface $form_state): void
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     parent::submitForm($form, $form_state);
 
     $character_count = $form_state->getValue('character_count');
