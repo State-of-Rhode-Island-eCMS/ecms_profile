@@ -1057,3 +1057,11 @@ function ecms_preprocess_node__landing_page(&$variables) {
     $variables['modal'] = $node_builder->viewMultiple($modal, 'default');
   }
 }
+
+/**
+ * Implements template_preprocess_views_view_fields().
+ */
+function ecms_preprocess_views_view_fields(&$variables) {
+  \Drupal::messenger()->addMessage(print_r("Bing bang boom, milady!", TRUE), 'info');
+  $variables['character_limit'] = 500;
+}
