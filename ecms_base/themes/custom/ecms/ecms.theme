@@ -1062,6 +1062,13 @@ function ecms_preprocess_node__landing_page(&$variables) {
  * Implements template_preprocess_views_view_fields().
  */
 function ecms_preprocess_views_view_fields(&$variables) {
-  \Drupal::messenger()->addMessage(print_r("Bing bang boom, milady!", TRUE), 'info');
-  $variables['character_limit'] = 500;
+  $view = $variables['view'];
+  $view_id = $view->id();
+  \Drupal::messenger()->addMessage(print_r("View id = " . $view_id, TRUE), 'info');
+  $search_settings_config = \Drupal::config('ecms_search_settings.settings');
+  if (isset($search_settings_config)) {
+    $current_character_count = $search_settings_config->get('character_count') ?? 190;
+    \Drupal::messenger()->addMessage(print_r("Bing bang boom ---> " . $current_character_count . " ! !", TRUE), 'info');
+    $variables['character_limit'] = $current_character_count;
+  }
 }
