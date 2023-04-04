@@ -133,6 +133,7 @@
       "drupal/features": "^3.11",
       "drupal/feeds": "^3.0@alpha",
       "drupal/file_delete": "^2.0",
+      "drupal/force_users_logout": "^2.0",
       "drupal/geocoder": "^3.15",
       "drupal/geofield": "^1.20",
       "drupal/geolocation": "^3.2",
