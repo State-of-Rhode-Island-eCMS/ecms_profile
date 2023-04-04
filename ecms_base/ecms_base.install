@@ -1773,3 +1773,16 @@ function ecms_base_update_9096(array &$sandbox): void {
   }
 
 }
+
+/**
+ * Updates to run for the 0.9.24 tag; install new contrib module.
+ */
+function ecms_base_update_9097(array &$sandbox): void {
+
+  $modules_to_install = [
+    'force_users_logout',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
