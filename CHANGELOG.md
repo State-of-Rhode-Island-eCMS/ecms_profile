@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-372: Install drupal/force_users_logout ^2.0, and enable by default.
 
 ### Changed
 
