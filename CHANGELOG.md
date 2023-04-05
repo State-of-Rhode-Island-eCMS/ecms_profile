@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-365: Add custom module to set search config on site by site basis.
-- RIGA-365: Add patch for drupal/search_api, issue 3321499, comment #7.
 
 ### Changed
 
@@ -20,10 +18,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-360: Fix disappearing dropdown selector on publications search.
-- RIGA-365: Fix undefined variable bug.
 
 ### Security
+
+## [0.9.24] - 2023-04-06
+### Added
+- RIGA-365: Add custom module to set search config on site by site basis.
+- RIGA-365: Add patch for drupal/search_api, issue 3321499, comment #7.
+
+### Fixed
+- RIGA-360: Fix disappearing dropdown selector on publications search.
+- RIGA-365: Fix undefined variable bug.
 
 ## [0.9.23] - 2023-03-09
 ### Changed
@@ -1045,7 +1050,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.23...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.24...HEAD
+[0.9.24]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.23...0.9.24
 [0.9.23]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.22...0.9.23
 [0.9.22]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.21...0.9.22
 [0.9.21]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.20...0.9.21
