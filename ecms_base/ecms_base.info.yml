@@ -115,6 +115,7 @@ install:
   - ecms_person
   - ecms_press_release
   - ecms_publications
+  - ecms_search_settings
   - ecms_workflow
   - file_delete
   - google_tag

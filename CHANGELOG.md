@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-365: Add custom module to set search config on site by site basis.
+- RIGA-365: Add patch for drupal/search_api, issue 3321499, comment #7.
 
 ### Changed
 
