@@ -1062,13 +1062,17 @@ function ecms_preprocess_node__landing_page(&$variables) {
  * Implements template_preprocess_views_view_fields().
  */
 function ecms_preprocess_views_view_fields(&$variables) {
+
+  // In the Acquia Search view, get the current character limit setting,
+  // Then, pass it as a variable to the Twig template:
+  // ecms_patternlab/source/_patterns/01-molecules/teaser-article/teaser-article.twig.
   $view = $variables['view'];
   $view_id = $view->id();
   \Drupal::messenger()->addMessage(print_r("View id = " . $view_id, TRUE), 'info');
   $search_settings_config = \Drupal::config('ecms_search_settings.settings');
   if (isset($search_settings_config)) {
-    $current_character_count = $search_settings_config->get('character_count') ?? 190;
-    \Drupal::messenger()->addMessage(print_r("Bing bang boom ---> " . $current_character_count . " ! !", TRUE), 'info');
-    $variables['character_limit'] = $current_character_count;
+    $current_character_limit = $search_settings_config->get('character_limit') ?? 190;
+    \Drupal::messenger()->addMessage(print_r("character_limit ---> " . $current_character_limit . " ! !", TRUE), 'info');
+    $variables['character_limit'] = $current_character_limit;
   }
 }
