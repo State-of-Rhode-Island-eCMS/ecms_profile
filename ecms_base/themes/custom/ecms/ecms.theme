@@ -995,6 +995,9 @@ function ecms_preprocess_node__person(array &$variables) {
   $categories = $node->get('field_person_category')->referencedEntities();
   $variables['categories'] = [];
 
+  // Get current language.
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
   // Loop over each term reference.
   foreach ($categories as $category) {
     $category_tid = $category->id();
@@ -1020,9 +1023,6 @@ function ecms_preprocess_node__person(array &$variables) {
 
   // Comma separate all categories.
   $variables['categories'] = implode(', ', $variables['categories']);
-
-  // Get current language.
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
   // Build out additional fields array for twig.
   if (!$node->field_person_additional_fields->isEmpty()) {
