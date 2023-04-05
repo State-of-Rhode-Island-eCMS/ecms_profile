@@ -67,9 +67,9 @@ class EcmsSearchSettingsConfigForm extends ConfigFormBase {
       ->save();
 
     // Set excerpt length in config for search index's 'highlighter' processor.
-//    $config = \Drupal::service('config.factory')->getEditable('search_api.index.acquia_search_index');
-    $this->config('search_api.index.acquia_search_index')
-      ->set('processor_settings.highlight.excerpt_length', $character_count)
+    $config = \Drupal::service('config.factory')
+      ->getEditable('search_api.index.acquia_search_index');
+    $config->set('processor_settings.highlight.excerpt_length', $character_count)
       ->save();
   }
 
