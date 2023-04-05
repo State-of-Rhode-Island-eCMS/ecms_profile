@@ -1068,12 +1068,14 @@ function ecms_preprocess_views_view_fields(&$variables) {
   // ecms_patternlab/source/_patterns/01-molecules/teaser-article/teaser-article.twig.
   $view_id = $variables['view']->id();
   if ($view_id === 'acquia_search') {
-    \Drupal::messenger()->addMessage(print_r("View id = " . $view_id, TRUE), 'info');
+
+    // Set a default value, in case none is saved in config.
+    $default_character_limit = 190;
+
     $search_settings_config = \Drupal::config('ecms_search_settings.settings');
     if (isset($search_settings_config)) {
-      $current_character_limit = $search_settings_config->get('character_limit') ?? 190;
-      \Drupal::messenger()->addMessage(print_r("character_limit ---> " . $current_character_limit . " ! !", TRUE), 'info');
-      $variables['character_limit'] = $current_character_limit;
+      $current_character_limit = $search_settings_config->get('character_limit');
     }
+    $variables['character_limit'] = $current_character_limit ?? $default_character_limit;
   }
 }
