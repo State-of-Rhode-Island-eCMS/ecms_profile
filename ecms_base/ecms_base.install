@@ -1786,3 +1786,16 @@ function ecms_base_update_9097(array &$sandbox): void {
   // Enable modules.
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Updates to run for the 0.9.25 tag; install new contrib module.
+ */
+function ecms_base_update_9098(array &$sandbox): void {
+
+  $modules_to_install = [
+    'autologout',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}

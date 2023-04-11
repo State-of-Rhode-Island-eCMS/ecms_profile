@@ -101,6 +101,7 @@ dependencies:
 
 # Install the required features.
 install:
+  - autologout
   - ecms_authentication
   - ecms_basic_page
   - ecms_blocks
