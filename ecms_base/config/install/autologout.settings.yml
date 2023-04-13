@@ -16,8 +16,8 @@ enforce_admin: true
 jstimer_format: '%hours%:%mins%:%secs%'
 jstimer_js_load_option: false
 use_alt_logout_method: false
-use_watchdog: false
-dialog_title: 'RI COVID-19 Information Portal Alert'
+use_watchdog: true
+dialog_title: 'Automated Logout Alert'
 disable_buttons: false
 yes_button: ''
 no_button: ''
