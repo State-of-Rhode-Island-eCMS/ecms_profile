@@ -1799,7 +1799,7 @@ function ecms_base_update_9098(array &$sandbox): void {
   // Enable module before importing related config.
   \Drupal::service('module_installer')->install($modules_to_install);
 
-  // Import Automated Logout config settings.
+  // Import user permissions and Automated Logout config settings.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   /** @var \Drupal\Core\Config\FileStorage $install_source */
@@ -1817,6 +1817,8 @@ function ecms_base_update_9098(array &$sandbox): void {
     'autologout.role.form_author',
     'autologout.role.site_admin',
     'autologout.settings',
+    'user.role.content_author',
+    'user.role.content_publisher',
     'user.role.site_admin',
   ];
 

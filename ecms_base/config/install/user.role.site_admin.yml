@@ -257,6 +257,7 @@ permissions:
   - 'publish own node type promotions'
   - 'publish own node type publication'
   - 'publish own node type webform'
+  - 'rabbit hole bypass node'
   - 'reschedule scheduled transitions node basic_page'
   - 'reschedule scheduled transitions node event'
   - 'reschedule scheduled transitions node landing_page'
