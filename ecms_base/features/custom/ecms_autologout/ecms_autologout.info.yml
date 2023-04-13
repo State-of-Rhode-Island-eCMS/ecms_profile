@@ -1,0 +1,8 @@
+name: 'eCMS Automated Logout'
+description: 'Installs default configuration for Automated Logout module'
+type: module
+core_version_requirement: '^8.9 || ^9'
+dependencies:
+  - autologout
+version: 9.x-1.0
+package: eCMS
