@@ -1809,14 +1809,14 @@ function ecms_base_update_9098(array &$sandbox): void {
   $active_storage = \Drupal::service('config.storage');
 
   $newConfig = [
-    'autologout.role.content_author.yml',
-    'autologout.role.content_publisher.yml',
-    'autologout.role.drupal_admin.yml',
-    'autologout.role.ecms_api_recipient.yml',
-    'autologout.role.embed_author.yml',
-    'autologout.role.form_author.yml',
-    'autologout.role.site_admin.yml',
-    'autologout.settings.yml',
+    'autologout.role.content_author',
+    'autologout.role.content_publisher',
+    'autologout.role.drupal_admin',
+    'autologout.role.ecms_api_recipient',
+    'autologout.role.embed_author',
+    'autologout.role.form_author',
+    'autologout.role.site_admin',
+    'autologout.settings',
     'user.role.site_admin',
   ];
 
