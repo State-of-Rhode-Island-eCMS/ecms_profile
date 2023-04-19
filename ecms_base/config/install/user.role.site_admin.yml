@@ -22,6 +22,7 @@ permissions:
   - 'add scheduled transitions node promotions'
   - 'add scheduled transitions node publication'
   - 'add scheduled transitions node webform'
+  - 'administer autologout'
   - 'administer menu'
   - 'administer redirects'
   - 'administer scheduled transitions'

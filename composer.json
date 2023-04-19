@@ -124,6 +124,7 @@
       "drupal/allowed_formats": "^2.0.0",
       "drupal/asset_injector": "^2.7",
       "drupal/auto_entitylabel": "^3.0@beta",
+      "drupal/autologout": "^1.4",
       "drupal/better_exposed_filters": "^5.0",
       "drupal/bigmenu": "^2.0@RC",
       "drupal/captcha": "^1.2",
