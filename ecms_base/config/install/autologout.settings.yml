@@ -1,5 +1,5 @@
 enabled: true
-timeout: 86400
+timeout: 28800
 max_timeout: 172800
 padding: 60
 logout_regardless_of_activity: false
