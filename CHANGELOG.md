@@ -12,8 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-372: Install, enable by default, and configure drupal/autologout ^1.4.
-- RIGA-371: Update user role permissions, add db update to import config.
 
 ### Deprecated
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.25] - 2023-04-20
+### Changed
+- RIGA-371: Update user role permissions, add db update to import config.
+- RIGA-372: Install, enable by default, and configure drupal/autologout ^1.4.
 
 ## [0.9.24] - 2023-04-06
 ### Added
@@ -1052,7 +1055,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.24...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.25...HEAD
+[0.9.25]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.24...0.9.25
 [0.9.24]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.23...0.9.24
 [0.9.23]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.22...0.9.23
 [0.9.22]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.21...0.9.22
