@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-380: Replace querypath/querypath with gravitypdf/querypath.
 
 ### Deprecated
 
