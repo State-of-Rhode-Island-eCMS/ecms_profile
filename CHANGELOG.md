@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-380: Install drupal/feeds_ex ^1.0@beta.
+- RIGA-380: Install softcreatr/jsonpath, a sub-module for feeds_ex.
 
 ### Changed
 - RIGA-380: Replace querypath/querypath with gravitypdf/querypath.
