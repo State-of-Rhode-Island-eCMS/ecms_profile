@@ -10,11 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-380: Install drupal/feeds_ex ^1.0@beta.
-- RIGA-380: Install softcreatr/jsonpath, a sub-module for feeds_ex.
 
 ### Changed
-- RIGA-380: Replace querypath/querypath with gravitypdf/querypath.
 
 ### Deprecated
 
@@ -23,6 +20,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.26] - 2023-04-27
+### Added
+- RIGA-380: Install drupal/feeds_ex ^1.0@beta.
+- RIGA-380: Install softcreatr/jsonpath, a sub-module for feeds_ex.
+
+### Changed
+- RIGA-380: Replace querypath/querypath with gravitypdf/querypath.
 
 ## [0.9.25] - 2023-04-20
 ### Changed
@@ -1058,7 +1063,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.25...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.26...HEAD
+[0.9.26]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.25...0.9.26
 [0.9.25]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.24...0.9.25
 [0.9.24]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.23...0.9.24
 [0.9.23]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.22...0.9.23
