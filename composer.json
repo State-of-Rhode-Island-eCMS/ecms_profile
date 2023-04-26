@@ -136,6 +136,7 @@
       "drupal/extlink": "^1.5",
       "drupal/features": "^3.11",
       "drupal/feeds": "^3.0@alpha",
+      "drupal/feeds_ex": "^1.0@beta",
       "drupal/file_delete": "^2.0",
       "drupal/geocoder": "^3.15",
       "drupal/geofield": "^1.20",
@@ -200,9 +201,10 @@
       "geocoder-php/arcgis-online-provider": "^4.3",
       "geocoder-php/google-maps-provider": "^4.6",
       "geocoder-php/ipstack-provider": "^0.3.0",
+      "gravitypdf/querypath": "^3.2",
       "johngrogg/ics-parser": "^2",
       "oomphinc/composer-installers-extender": "^2.0",
-      "querypath/querypath": "^3.0"
+      "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8"
     },
     "require-dev": {
       "behat/mink-goutte-driver": "^1.2",
