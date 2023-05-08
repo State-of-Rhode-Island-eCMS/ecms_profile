@@ -84,3 +84,10 @@ function ecms_languages_menu_local_tasks_alter(array &$data, ?string $route_name
     }
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function ecms_languages_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  \Drupal::messenger()->addMessage(print_r($form_id, TRUE), 'info');
+}
