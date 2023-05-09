@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 use Drupal\Core\Language\Language;
 use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_module_implements_alter().
@@ -87,9 +88,10 @@ function ecms_languages_menu_local_tasks_alter(array &$data, ?string $route_name
 
 /**
  * Implements hook_form_alter().
+ *
  *   Removes unwanted langcodes from dropdown selector.
  */
-function ecms_languages_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function ecms_languages_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Check we're only acting on 'langcode' views exposed filter.
   if ($form_id === 'views_exposed_form' && isset($form['langcode'])) {
     // Langcodes included by default, but should not be available to users.
