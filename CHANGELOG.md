@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-344: Add form alter hook to remove langcodes from publications selector.
 
 ### Deprecated
 
