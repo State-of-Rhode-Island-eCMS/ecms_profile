@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 use Drupal\Core\Language\Language;
 use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_module_implements_alter().
@@ -81,6 +82,28 @@ function ecms_languages_menu_local_tasks_alter(array &$data, ?string $route_name
     }
     if (!empty($data['tabs'][0]['entity.node.publish_translation'])) {
       unset($data['tabs'][0]['entity.node.publish_translation']);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ *   Removes unwanted langcodes from dropdown selector.
+ */
+function ecms_languages_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Check we're only acting on 'langcode' views exposed filter.
+  if ($form_id === 'views_exposed_form' && isset($form['langcode'])) {
+    // Langcodes included by default, but should not be available to users.
+    $langcodes_to_remove = [
+      '***LANGUAGE_site_default***',
+      '***LANGUAGE_language_interface***',
+      '***LANGUAGE_language_content***',
+      'und',
+      'zxx',
+    ];
+    foreach ($langcodes_to_remove as $key => $lang) {
+      unset($form['langcode']['#options'][$lang]);
     }
   }
 }

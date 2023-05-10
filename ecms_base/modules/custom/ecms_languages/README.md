@@ -1,6 +1,11 @@
 # ECMS Languages
 
-Provides configuration and logic to customize the language switcher.
+Provides :
+
+- Configuration and logic to customize the language switcher.
+  - i.e. to pick the language the whole site is translated into.
+- Form alter function to remove unwanted langcodes from search filter selector.
+  - i.e. the language of content to appear in search results.
 
 ## Configuration
 
