@@ -12,7 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-344: Add form alter hook to remove langcodes from publications selector.
 
 ### Deprecated
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.27] - 2023-05-11
+### Changed
+- RIGA-344: Add form alter hook to remove langcodes from publications selector.
 
 ## [0.9.26] - 2023-04-27
 ### Added
@@ -1064,7 +1067,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.26...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.27...HEAD
+[0.9.27]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.26...0.9.27
 [0.9.26]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.25...0.9.26
 [0.9.25]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.24...0.9.25
 [0.9.24]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.23...0.9.24
