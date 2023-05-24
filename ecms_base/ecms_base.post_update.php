@@ -223,3 +223,30 @@ function ecms_base_post_update_019_update_role_permissions(&$sandbox): void {
     }
   }
 }
+
+/**
+ * Grant 'use embed text format' permission to embed_author role.
+ */
+function ecms_base_post_update_020_fix_embed_author_permissions(&$sandbox): void {
+
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entityManager */
+  $entityManager = \Drupal::service('entity_type.manager');
+
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $roleStorage */
+  $roleStorage = $entityManager->getStorage('user_role');
+
+  /** @var \Drupal\user\RoleInterface $role */
+  $role = $roleStorage->load('embed_author');
+
+  if (!empty($role)) {
+
+    $role->grantPermission('use text format embed');
+
+    try {
+      $role->save();
+    }
+    catch (EntityStorageException $e) {
+      // Trap any storage errors.
+    }
+  }
+}
