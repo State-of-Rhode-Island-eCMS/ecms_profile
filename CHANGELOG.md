@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-384: Add post update, fix text format permissions for embed_author.
 
 ### Changed
 
@@ -21,6 +20,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.28] - 2023-05-25
+### Added
+- RIGA-384: Add post update, fix text format permissions for embed_author.
 
 ## [0.9.27] - 2023-05-11
 ### Changed
@@ -1068,7 +1071,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.27...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.28...HEAD
+[0.9.28]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.27...0.9.28
 [0.9.27]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.26...0.9.27
 [0.9.26]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.25...0.9.26
 [0.9.25]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.24...0.9.25
