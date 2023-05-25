@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-384: Add post update, fix text format permissions for embed_author.
 
 ### Changed
 
