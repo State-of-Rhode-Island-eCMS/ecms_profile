@@ -184,7 +184,7 @@
       "drupal/search_api_solr": "^4.2",
       "drupal/simple_menu_permissions": "^1.4",
       "drupal/simple_oauth": "^5.2",
-      "drupal/simple_sitemap": "^3.8",
+      "drupal/simple_sitemap": "^4.1",
       "drupal/smart_date": "^4.0@alpha",
       "drupal/svg_image": "^1.14",
       "drupal/token": "^1.7",

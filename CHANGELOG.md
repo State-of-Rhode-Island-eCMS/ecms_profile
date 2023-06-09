@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-390: Update drupal/simple_sitemap requirement to ^4.1.
 
 ### Deprecated
 
