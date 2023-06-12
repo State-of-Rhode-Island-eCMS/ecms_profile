@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-390: Update drupal/simple_sitemap requirement to ^4.1.
+- RIGA-388: Alphabetize 'Use' statements to fix codesniffer errors.
 
 ### Deprecated
 

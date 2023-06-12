@@ -5,12 +5,12 @@ declare(strict_types =1);
 namespace Drupal\ecms_workflow\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Setup the configuration form for the ecms_workflow module.

@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\ecms_workflow\Unit;
 
+use Drupal\Core\Config\Config;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -12,8 +14,6 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 use Drupal\workflows\WorkflowInterface;
 use Drupal\workflows\WorkflowTypeInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Config\Config;
 
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.

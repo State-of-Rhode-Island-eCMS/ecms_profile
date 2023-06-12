@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_publisher;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 
 /**
  * Access controller for the eCMS API Site entity.

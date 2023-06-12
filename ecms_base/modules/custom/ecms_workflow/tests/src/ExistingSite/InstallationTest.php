@@ -7,10 +7,10 @@ namespace Drupal\Tests\ecms_workflow\ExistingSite;
 // Require the all profiles abstract class since autoloading doesn't work.
 require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/AllProfileInstallationTestsAbstract.php';
 
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\node\Entity\NodeType;
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
-use Drupal\node\Entity\NodeType;
-use Drupal\Core\Entity\EntityStorageException;
 
 /**
  * ExistingSite tests for the ecms_workflow module.

@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_recipient;
 
+use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Component\Utility\Crypt;
 
 /**
  * Installation tasks for the ecms_api_recipient module.

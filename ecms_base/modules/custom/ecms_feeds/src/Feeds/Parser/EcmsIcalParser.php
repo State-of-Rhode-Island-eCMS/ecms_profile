@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_feeds\Feeds\Parser;
 
+use Drupal\ecms_feeds\Feeds\Item\EcmsIcalItem;
 use Drupal\feeds\Component\XmlParserTrait;
 use Drupal\feeds\Exception\EmptyFeedException;
 use Drupal\feeds\FeedInterface;
@@ -12,7 +13,6 @@ use Drupal\feeds\Plugin\Type\PluginBase;
 use Drupal\feeds\Result\FetcherResultInterface;
 use Drupal\feeds\Result\ParserResult;
 use Drupal\feeds\StateInterface;
-use Drupal\ecms_feeds\Feeds\Item\EcmsIcalItem;
 use ICal\ICal;
 
 /**

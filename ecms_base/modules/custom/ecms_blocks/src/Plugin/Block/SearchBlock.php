@@ -5,9 +5,9 @@ declare(strict_types = 1);
 namespace Drupal\ecms_blocks\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Form\FormBuilderInterface;
 
 /**
  * Provides a custom block for the site search form.
