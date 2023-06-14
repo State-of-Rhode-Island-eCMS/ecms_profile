@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_api_publisher\Form;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Queue\QueueFactory;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Url;
 use Drupal\ecms_api_publisher\Entity\EcmsApiSiteInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

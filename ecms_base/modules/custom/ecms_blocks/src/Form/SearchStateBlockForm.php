@@ -6,8 +6,8 @@ namespace Drupal\ecms_blocks\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
 
 /**
  * Provides a custom site search form.

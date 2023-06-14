@@ -5,10 +5,10 @@ declare(strict_types = 1);
 namespace Drupal\ecms_icon_library\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\media\Entity\Media;
-use Drupal\file\Entity\File;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Field\FormatterBase;
+use Drupal\Core\Render\Markup;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 
 /**
  * Plugin implementation of the 'image' formatter.

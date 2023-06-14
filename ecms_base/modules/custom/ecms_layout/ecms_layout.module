@@ -7,8 +7,8 @@
 
 declare(strict_types = 1);
 
-use Drupal\Core\Url;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_plugin_filter_TYPE__CONSUMER_alter().

@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_workflow;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Add node bundles to the editorial workflow.
