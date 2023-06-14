@@ -12,8 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-388: Alphabetize 'Use' statements to fix codesniffer errors.
-- RIGA-390: Update drupal/simple_sitemap requirement to ^4.1.
 
 ### Deprecated
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.29] - 2023-06-15
+### Changed
+- RIGA-388: Alphabetize 'Use' statements to fix codesniffer errors.
+- RIGA-390: Update drupal/simple_sitemap requirement to ^4.1.
 
 ## [0.9.28] - 2023-05-25
 ### Added
@@ -1073,7 +1076,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.28...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.29...HEAD
+[0.9.29]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.28...0.9.29
 [0.9.28]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.27...0.9.28
 [0.9.27]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.26...0.9.27
 [0.9.26]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.25...0.9.26
