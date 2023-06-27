@@ -1839,9 +1839,9 @@ function ecms_base_update_9099(array &$sandbox): void {
 
   // If active config has no data, load it from install file.
   if (!$active_workflow_config) {
-      $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
-      /** @var \Drupal\Core\Config\FileStorage $install_source */
-      $workflow_source = new FileStorage($path . "/modules/custom/ecms_workflow/config/install/");
-      $active_storage->write('workflows.workflow.editorial', $workflow_source->read('workflows.workflow.editorial'));
+    $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+    /** @var \Drupal\Core\Config\FileStorage $install_source */
+    $workflow_source = new FileStorage($path . "/modules/custom/ecms_workflow/config/install/");
+    $active_storage->write('workflows.workflow.editorial', $workflow_source->read('workflows.workflow.editorial'));
   }
 }

@@ -74,6 +74,8 @@ class EcmsWorkflowBundleCreate {
    *   The entity_type.manager service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
+   * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entityDisplayRepository
+   *   The entity_display.repository service.
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory, EntityDisplayRepositoryInterface $entityDisplayRepository) {
     $this->entityTypeManager = $entityTypeManager;
