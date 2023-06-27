@@ -229,6 +229,11 @@ class EcmsWorkflowBundleCreate {
       return;
     }
 
+    \Drupal::service('entity_display.repository')
+      ->getFormDisplay('node', $contentType, 'default')
+      ->setComponent('moderation_state')
+      ->save();
+
   }
 
   /**
