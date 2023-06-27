@@ -245,12 +245,15 @@ class EcmsWorkflowBundleCreate {
     $entityFormDisplay = $this->entityDisplayRepository
       ->getFormDisplay('node', $contentType, 'default');
 
-    try {
-      $entityFormDisplay->setComponent('moderation_state')
-        ->save();
-    }
-    catch (ConfigException $e) {
-      return;
+    if (isset($entityFormDisplay)) {
+      try {
+        $entityFormDisplay->setComponent('moderation_state', [
+          'type' => 'select',
+        ])->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
     }
   }
 
@@ -339,14 +342,15 @@ class EcmsWorkflowBundleCreate {
     $entityFormDisplay = $this->entityDisplayRepository
       ->getFormDisplay('node', $contentType, 'default');
 
-    try {
-      $entityFormDisplay->removeComponent('moderation_state')
-        ->save();
+    if (isset($entityFormDisplay)) {
+      try {
+        $entityFormDisplay->removeComponent('moderation_state')
+          ->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
     }
-    catch (ConfigException $e) {
-      return;
-    }
-
   }
 
   /**
