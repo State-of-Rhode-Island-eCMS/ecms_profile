@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_workflow;
 
+use Drupal\Core\Config\ConfigException;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
@@ -241,11 +242,16 @@ class EcmsWorkflowBundleCreate {
     }
 
     // Show moderation field in Entity From Display.
-    $this->entityDisplayRepository
-      ->getFormDisplay('node', $contentType, 'default')
-      ->setComponent('moderation_state')
-      ->save();
+    $entityFormDisplay = $this->entityDisplayRepository
+      ->getFormDisplay('node', $contentType, 'default');
 
+    try {
+      $entityFormDisplay->setComponent('moderation_state')
+        ->save();
+    }
+    catch (ConfigException $e) {
+      return;
+    }
   }
 
   /**
@@ -330,10 +336,16 @@ class EcmsWorkflowBundleCreate {
     }
 
     // Hide moderation field from Entity From Display.
-    $this->entityDisplayRepository
-      ->getFormDisplay('node', $contentType, 'default')
-      ->removeComponent('moderation_state')
-      ->save();
+    $entityFormDisplay = $this->entityDisplayRepository
+      ->getFormDisplay('node', $contentType, 'default');
+
+    try {
+      $entityFormDisplay->removeComponent('moderation_state')
+        ->save();
+    }
+    catch (ConfigException $e) {
+      return;
+    }
 
   }
 
