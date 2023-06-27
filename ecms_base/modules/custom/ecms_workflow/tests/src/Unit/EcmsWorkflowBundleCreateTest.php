@@ -7,6 +7,7 @@ namespace Drupal\Tests\ecms_workflow\Unit;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
@@ -66,6 +67,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
   private $configFactory;
 
   /**
+   * Mock of the EntityDisplayRepositoryInterface.
+   *
+   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $entityDisplayRepository;
+
+  /**
    * Mock of a mutable Config object.
    *
    * @var \Drupal\Core\Config\Config|\PHPUnit\Framework\MockObject\MockObject
@@ -81,6 +89,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->entityStorage = $this->createMock(EntityStorageInterface::class);
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
+    $this->entityDisplayRepository = $this->createMock(EntityDisplayRepositoryInterface::class);
     $this->config = $this->createMock(Config::class);
 
   }
@@ -132,6 +141,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $testClass = new EcmsWorkflowBundleCreate(
       $this->entityTypeManager,
       $this->configFactory,
+      $this->entityDisplayRepository,
     );
 
     $testClass->addTaxonomyTypePermissions($bundle);
@@ -262,6 +272,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $testClass = new EcmsWorkflowBundleCreate(
       $this->entityTypeManager,
       $this->configFactory,
+      $this->entityDisplayRepository,
     );
 
     $testClass->addContentTypeToWorkflow($contentType);
@@ -304,6 +315,7 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
         [
           $this->entityTypeManager,
           $this->configFactory,
+          $this->entityDisplayRepository,
         ]
       )
       ->getMock();
