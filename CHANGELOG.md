@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-395: Add 'ecms_base_update_9099' to re-import empty workflow config.
 
 ### Changed
 
