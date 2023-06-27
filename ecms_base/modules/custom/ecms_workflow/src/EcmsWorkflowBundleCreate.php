@@ -248,7 +248,7 @@ class EcmsWorkflowBundleCreate {
     if (isset($entityFormDisplay)) {
       try {
         $entityFormDisplay->setComponent('moderation_state', [
-          'type' => 'select',
+          'type' => 'options_select',
         ])->save();
       }
       catch (ConfigException $e) {
