@@ -1,4 +1,4 @@
 services:
   ecms_workflow.bundle_create:
     class: Drupal\ecms_workflow\EcmsWorkflowBundleCreate
-    arguments: ['@entity_type.manager', '@config.factory']
+    arguments: ['@entity_type.manager', '@config.factory', '@entity_display.repository']

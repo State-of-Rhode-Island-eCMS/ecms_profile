@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-395: Add 'ecms_base_update_9099' to re-import empty workflow config.
 
 ### Changed
+- RIGA-395: Update 'ecms_workflow.bundle_create' to show/hide moderation field.
 
 ### Deprecated
 
