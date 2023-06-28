@@ -241,10 +241,9 @@ class EcmsWorkflowBundleCreate {
       return;
     }
 
-    // Show moderation field in Entity From Display.
+    // Show Moderation State and hide Status checkbox in Entity Form Display.
     $entityFormDisplay = $this->entityDisplayRepository
       ->getFormDisplay('node', $contentType, 'default');
-
     if (isset($entityFormDisplay)) {
       try {
         $entityFormDisplay->setComponent('moderation_state', [
@@ -256,7 +255,15 @@ class EcmsWorkflowBundleCreate {
       catch (ConfigException $e) {
         return;
       }
+      try {
+        $entityFormDisplay->removeComponent('status')
+          ->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
     }
+
   }
 
   /**
@@ -340,11 +347,23 @@ class EcmsWorkflowBundleCreate {
       return;
     }
 
-    // Hide moderation field from Entity From Display.
+    // Show Status checkbox and hide Moderation State from Entity Form Display.
     $entityFormDisplay = $this->entityDisplayRepository
       ->getFormDisplay('node', $contentType, 'default');
-
     if (isset($entityFormDisplay)) {
+      try {
+        $entityFormDisplay->setComponent('status', [
+          'type' => 'boolean_checkbox',
+          'weight' => 19,
+          'region' => 'content',
+          'settings' => [
+            'display_label' => TRUE,
+          ],
+        ])->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
       try {
         $entityFormDisplay->removeComponent('moderation_state')
           ->save();
@@ -353,6 +372,7 @@ class EcmsWorkflowBundleCreate {
         return;
       }
     }
+
   }
 
   /**
