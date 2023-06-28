@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_workflow;
 
+use Drupal\Core\Config\ConfigException;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -60,16 +62,26 @@ class EcmsWorkflowBundleCreate {
   private $configFactory;
 
   /**
+   * The entity_display.repository service.
+   *
+   * @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface
+   */
+  private $entityDisplayRepository;
+
+  /**
    * EcmsWorkflowBundleCreate constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config.factory service.
+   * @param \Drupal\Core\Entity\EntityDisplayRepositoryInterface $entityDisplayRepository
+   *   The entity_display.repository service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory, EntityDisplayRepositoryInterface $entityDisplayRepository) {
     $this->entityTypeManager = $entityTypeManager;
     $this->configFactory = $configFactory;
+    $this->entityDisplayRepository = $entityDisplayRepository;
   }
 
   /**
@@ -229,6 +241,29 @@ class EcmsWorkflowBundleCreate {
       return;
     }
 
+    // Show Moderation State and hide Status checkbox in Entity Form Display.
+    $entityFormDisplay = $this->entityDisplayRepository
+      ->getFormDisplay('node', $contentType, 'default');
+    if (isset($entityFormDisplay)) {
+      try {
+        $entityFormDisplay->setComponent('moderation_state', [
+          'type' => 'moderation_state_default',
+          'weight' => 29,
+          'region' => 'content',
+        ])->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
+      try {
+        $entityFormDisplay->removeComponent('status')
+          ->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
+    }
+
   }
 
   /**
@@ -310,6 +345,32 @@ class EcmsWorkflowBundleCreate {
     }
     catch (EntityStorageException $e) {
       return;
+    }
+
+    // Show Status checkbox and hide Moderation State from Entity Form Display.
+    $entityFormDisplay = $this->entityDisplayRepository
+      ->getFormDisplay('node', $contentType, 'default');
+    if (isset($entityFormDisplay)) {
+      try {
+        $entityFormDisplay->setComponent('status', [
+          'type' => 'boolean_checkbox',
+          'weight' => 19,
+          'region' => 'content',
+          'settings' => [
+            'display_label' => TRUE,
+          ],
+        ])->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
+      try {
+        $entityFormDisplay->removeComponent('moderation_state')
+          ->save();
+      }
+      catch (ConfigException $e) {
+        return;
+      }
     }
 
   }
