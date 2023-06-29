@@ -10,10 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-395: Add 'ecms_base_update_9099' to re-import empty workflow config.
 
 ### Changed
-- RIGA-395: Update 'ecms_workflow.bundle_create' to show/hide moderation field.
 
 ### Deprecated
 
@@ -22,6 +20,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.30] - 2023-06-29
+### Added
+- RIGA-395: Add 'ecms_base_update_9099' to re-import empty workflow config.
+
+### Changed
+- RIGA-395: Update 'ecms_workflow.bundle_create' to show/hide moderation field.
 
 ## [0.9.29] - 2023-06-15
 ### Changed
@@ -1078,7 +1083,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.29...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.30...HEAD
+[0.9.30]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.29...0.9.30
 [0.9.29]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.28...0.9.29
 [0.9.28]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.27...0.9.28
 [0.9.27]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.26...0.9.27
