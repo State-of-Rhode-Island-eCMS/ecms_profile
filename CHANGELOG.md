@@ -13,7 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-399: Update drupal/core-recommended version constraint ~9.4.8 => ~9.5.9.
-- 1356276 - Update drupal/core patch issue 1356276,688 => issue 3266057,110.
+- RIGA-399: Update drupal/core patch issue 1356276,688 => issue 3266057,110.
 
 ### Deprecated
 
