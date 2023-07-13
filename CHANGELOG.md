@@ -12,9 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-399: Update drupal/core-recommended version constraint ~9.4.8 => ~9.5.9.
-- RIGA-399: Update drupal/core patch issue 1356276,688 => issue 3266057,110.
-- RIGA-399: Update DRUPAL_CORE_VERSION constant 9.4.8=>9.5.9 in ci-develop.sh.
 
 ### Deprecated
 
@@ -23,6 +20,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.9.31] - 2023-07-13
+### Changed
+- RIGA-399: Update drupal/core-recommended version constraint ~9.4.8 => ~9.5.9.
+- RIGA-399: Update drupal/core patch issue 1356276,688 => issue 3266057,110.
+- RIGA-399: Update DRUPAL_CORE_VERSION constant 9.4.8=>9.5.9 in ci-develop.sh.
 
 ## [0.9.30] - 2023-06-29
 ### Added
@@ -1086,7 +1089,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.30...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.31...HEAD
+[0.9.31]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.30...0.9.31
 [0.9.30]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.29...0.9.30
 [0.9.29]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.28...0.9.29
 [0.9.28]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.27...0.9.28
