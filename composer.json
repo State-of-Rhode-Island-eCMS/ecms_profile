@@ -134,6 +134,7 @@
       "drupal/core-recommended": "~9.5.9",
       "drupal/easy_breadcrumb": "^2.0",
       "drupal/entity_print": "^2.5",
+      "drupal/entity_usage": "^2.0@beta",
       "drupal/extlink": "^1.5",
       "drupal/features": "^3.11",
       "drupal/feeds": "^3.0@alpha",

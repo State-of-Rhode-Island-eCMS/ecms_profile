@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-401: Add drupal/focal_point ^2.0.1 to composer.json.
 - RIGA-401: Add drupal/iek (Image effect kit) ^1.3 to composer.json.
+- RIGA-401: Add drupal/entity_usage ^2.0@beta to composer.json.
 
 ### Changed
 
