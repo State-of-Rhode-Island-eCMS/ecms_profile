@@ -10,7 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-401: Add drupal/focal_point ^2.0 to composer.json.
+- RIGA-401: Add drupal/focal_point ^2.0.1 to composer.json.
 
 ### Changed
 
