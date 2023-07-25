@@ -1845,3 +1845,17 @@ function ecms_base_update_9099(array &$sandbox): void {
     $active_storage->write('workflows.workflow.editorial', $workflow_source->read('workflows.workflow.editorial'));
   }
 }
+
+/**
+ * Updates to run for the 0.10.1 tag. Install new modules.
+ */
+function ecms_base_update_9100(array &$sandbox): void {
+
+  $modules_to_install = [
+    'entity_usage',
+    'focal_point',
+    'iek',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
