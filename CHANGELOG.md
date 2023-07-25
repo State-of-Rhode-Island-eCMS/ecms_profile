@@ -13,7 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-401: Add drupal/focal_point ^2.0.1 to composer.json.
 - RIGA-401: Add drupal/iek (Image effect kit) ^1.3 to composer.json.
 - RIGA-401: Add drupal/entity_usage ^2.0@beta to composer.json.
-- RIGA-401: Add ecms_base_update_9100 update hook to enable new modules.
+- RIGA-401: Add ecms_base_update_9100 hook to enable modules and update config.
 
 ### Changed
 - RIGA-383: Update the Event List Type field config to be non-required.
