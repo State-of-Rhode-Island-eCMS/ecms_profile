@@ -11,7 +11,7 @@ entity_type: paragraph
 bundle: event_list
 label: 'Event type'
 description: '(Optional) Select a specific event type to show only events of that type. If not selected all events of all types will be shown.'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
