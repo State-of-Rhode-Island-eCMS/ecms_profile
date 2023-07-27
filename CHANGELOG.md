@@ -10,10 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-383: Add ecms_base_update_9100 hook to import updated config.
 
 ### Changed
-- RIGA-383: Update the Event List Type field config to be non-required.
 
 ### Deprecated
 
@@ -22,6 +20,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.10.1] - 2023-07-27
+### Added
+- RIGA-383: Add ecms_base_update_9100 hook to import updated config.
+
+### Changed
+- RIGA-383: Update the Event List Type field config to be non-required.
 
 ## [0.10.0] - 2023-07-13
 ### Changed
@@ -1095,7 +1100,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.1...HEAD
+[0.10.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.31...0.10.0
 [0.9.31]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.30...0.9.31
 [0.9.30]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.29...0.9.30
