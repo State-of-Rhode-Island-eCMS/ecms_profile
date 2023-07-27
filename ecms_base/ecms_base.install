@@ -1847,17 +1847,9 @@ function ecms_base_update_9099(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.10.1 tag. Install new modules and update config.
+ * Updates to run for the 0.10.1 tag. Import updated config.
  */
 function ecms_base_update_9100(array &$sandbox): void {
-
-  // Install new modules.
-  $modules_to_install = [
-    'entity_usage',
-    'focal_point',
-    'iek',
-  ];
-  \Drupal::service('module_installer')->install($modules_to_install);
 
   // Update config to make "Event List Type" field non-required".
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
