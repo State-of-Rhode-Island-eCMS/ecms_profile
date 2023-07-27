@@ -11,6 +11,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-322: Add hook 'ecms_base_update_9101' to install updated role config.
+- RIGA-401: Add drupal/focal_point ^2.0.1 to composer.json.
+- RIGA-401: Add drupal/iek (Image effect kit) ^1.3 to composer.json.
+- RIGA-401: Add drupal/entity_usage ^2.0@beta to composer.json.
+- RIGA-401: Add ecms_base_update_9101 update hook to enable new modules.
 
 ### Changed
 - RIGA-322: Update drupal/core-recommended version constraints to also include ^10.0.

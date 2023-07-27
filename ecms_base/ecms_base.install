@@ -1874,11 +1874,12 @@ function ecms_base_update_9100(array &$sandbox): void {
 }
 
 /**
- * Updates to run for the 0.10.5 tag.
+ * Updates to run for the 0.10.5 tag. Update Roles config.
  */
 function ecms_base_update_9101(array &$sandbox): void {
 
   // Update orphaned permissions to prep environment for D10 upgrade.
+
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   /** @var \Drupal\Core\Config\FileStorage $install_source */
@@ -1896,4 +1897,18 @@ function ecms_base_update_9101(array &$sandbox): void {
   foreach ($updated_user_role_config as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
+}
+
+/**
+ * Updates to run for the 0.10.5 tag. Install new modules.
+ */
+function ecms_base_update_9102(array &$sandbox): void {
+
+  $modules_to_install = [
+    'entity_usage',
+    'focal_point',
+    'iek',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
 }
