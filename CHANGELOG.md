@@ -10,8 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-383: Add ecms_base_update_9100 hook to import updated config.
 
 ### Changed
+- RIGA-383: Update the Event List Type field config to be non-required.
 
 ### Deprecated
 
