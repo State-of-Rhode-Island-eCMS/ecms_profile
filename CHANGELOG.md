@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-406: Update drupal/admin_toolbar 3.4.0 => 3.4.1
 
 ### Deprecated
 
