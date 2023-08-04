@@ -187,7 +187,7 @@
       "drupal/simple_sitemap": "^4.1",
       "drupal/smart_date": "^4.0@alpha",
       "drupal/svg_image": "^1.14",
-      "drupal/token": "^1.7",
+      "drupal/token": "^1.12",
       "drupal/twig_tweak": "^2.8",
       "drupal/twig_vardumper": "^3.0",
       "drupal/views_ajax_get": "1.x-dev@dev",
