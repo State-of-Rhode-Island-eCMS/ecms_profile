@@ -160,7 +160,7 @@
       "drupal/memcache": "^2.2",
       "drupal/menu_admin_per_menu": "^1.5",
       "drupal/menu_block": "1.x-dev",
-      "drupal/metatag": "^1.14",
+      "drupal/metatag": "^1.26",
       "drupal/migrate_plus": "^5.1",
       "drupal/migrate_tools": "^5.0",
       "drupal/moderated_content_bulk_publish": "^2.0",
