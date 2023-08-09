@@ -12,6 +12,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-406: Update drupal/admin_toolbar 3.4.0 => 3.4.1
+- RIGA-406: Update drupal/easy_breadcrumb ^2.0 => 2.0.5
+- RIGA-406: Update drupal/metatag ^1.14 => ^1.26
+- RIGA-406: Update drupal/token ^1.7 => ^1.12
 
 ### Deprecated
 
