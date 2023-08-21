@@ -12,6 +12,9 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-409: Update drupal/acsf 2.73 => 2.75
+- RIGA-409: Update drupal/acquia_connector 4.0.1 => 4.0.5
+- RIGA-409: Update drupal/acquia_search 3.0 => 3.1.10
 
 ### Deprecated
 
