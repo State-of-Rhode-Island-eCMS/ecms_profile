@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-378: Change from absolute to relative file path for downloadable files.
+- RIGA-409: Update drupal/acsf 2.73 => ^2.75
 
 ### Deprecated
 
