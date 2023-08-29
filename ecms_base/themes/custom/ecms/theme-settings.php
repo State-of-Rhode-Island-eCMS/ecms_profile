@@ -141,7 +141,8 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   $form['ecms_files']['use_file_path'] = [
     '#type' => 'checkbox',
     '#default_value' => theme_get_setting('use_file_path'),
-    '#title' => t('Use absolute file path for download links.'),
+    '#title' => t('Use specific file path for download links'),
+    '#description' => t('Use specific file path for download links, instead of Drupal media path.'),
   ];
 
   // Footer settings.

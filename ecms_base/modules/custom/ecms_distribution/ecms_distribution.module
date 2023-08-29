@@ -251,14 +251,3 @@ function ecms_distribution_preprocess_menu(&$variables): void {
     }
   }
 }
-
-/**
- * Implements hook_file_url_alter().
- */
-function ecms_distribution_file_url_alter(&$uri) {
-  $config = \Drupal::service('config.factory')->get('ecms.settings');
-  $use_absolute_path = $config->get('use_file_path');
-  if ($use_absolute_path) {
-    $uri = \Drupal::service('file_url_generator')->transformRelative($uri);
-  }
-}
