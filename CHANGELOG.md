@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-378: Change from absolute to relative file path for downloadable files.
 
 ### Deprecated
 
