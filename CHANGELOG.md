@@ -12,8 +12,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-378: Change from absolute to relative file path for downloadable files.
-- RIGA-409: Update drupal/acsf 2.73 => ^2.75
 
 ### Deprecated
 
@@ -22,6 +20,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.10.3] - 2023-08-31
+### Changed
+- RIGA-378: Change from absolute to relative file path for downloadable files.
+- RIGA-409: Update drupal/acsf 2.73 => ^2.75.
 
 ## [0.10.2] - 2023-08-10
 ### Changed
@@ -1109,7 +1112,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.3...HEAD
+[0.10.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.2...0.10.3
 [0.10.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.1...0.10.2
 [0.10.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.0...0.10.1
 [0.10.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.9.31...0.10.0
