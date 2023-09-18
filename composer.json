@@ -127,7 +127,7 @@
       "drupal/autologout": "^1.4",
       "drupal/better_exposed_filters": "^6.0",
       "drupal/bigmenu": "^2.0@RC",
-      "drupal/captcha": "^1.2",
+      "drupal/captcha": "^2.0",
       "drupal/components": "^2.0",
       "drupal/content_moderation_notifications": "^3.2",
       "drupal/core-recommended": "~9.5.9",

@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-322: Update development scripts to use PHP 8.1.
 - RIGA-322: Update better_exposed_filters version constraint ^5.0 => ^6.0.
+- RIGA-322: Update captcha version constraint ^1.2 => ^2.0.
 
 ### Deprecated
 
