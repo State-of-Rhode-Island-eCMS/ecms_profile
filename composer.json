@@ -141,7 +141,7 @@
       "drupal/geocoder": "^3.15",
       "drupal/geofield": "^1.20",
       "drupal/geolocation": "^3.2",
-      "drupal/google_tag": "^1.4",
+      "drupal/google_tag": "^2.0",
       "drupal/google_translator": "^1.0@RC",
       "drupal/honeypot": "^2.0",
       "drupal/http_cache_control": "^2.0",
