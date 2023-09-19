@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Update google_tag version constraint ^1.4 => ^2.0.
 - RIGA-322: Update google_translator version constraint ^1.0@RC => ^2.1.
 - RIGA-322: Update language_cookie version constraint 1.x-dev => ^2.0.
+- RIGA-322: Update menu_block version constraint 1.x-dev => ^1.10.
 
 ### Deprecated
 
