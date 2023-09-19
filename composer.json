@@ -142,7 +142,7 @@
       "drupal/geofield": "^1.20",
       "drupal/geolocation": "^3.2",
       "drupal/google_tag": "^2.0",
-      "drupal/google_translator": "^1.0@RC",
+      "drupal/google_translator": "^2.1",
       "drupal/honeypot": "^2.0",
       "drupal/http_cache_control": "^2.0",
       "drupal/jsonapi_extras": "^3.16",
