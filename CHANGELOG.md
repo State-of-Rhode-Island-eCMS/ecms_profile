@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Update language_cookie version constraint 1.x-dev => ^2.0.
 - RIGA-322: Update menu_block version constraint 1.x-dev => ^1.10.
 - RIGA-322: Update openid_connect version constraint 1.x-dev => ^2.0@beta.
+- RIGA-322: Update openid_connect_windows_aad version constraint ^1.3 => ^2.0@beta.
 
 ### Deprecated
 
