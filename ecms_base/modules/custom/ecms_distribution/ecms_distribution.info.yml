@@ -1,7 +1,7 @@
 name: eCMS Distribution
 description: 'Provides config for eCMS profile that is required by feature packages.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 package: eCMS
 dependencies:
   - image
