@@ -25,6 +25,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Update simple_menu_permissions version constraint ^1.4 => ^2.0.
 - RIGA-322: Update svg_image version constraint ^1.14 => ^3.0.
 - RIGA-322: Update twig_tweak version constraint ^2.8 => ^3.2.
+- RIGA-322: Update webform_encrypt version constraint 1.x-dev@dev => ^2.0@alpha.
 
 ### Deprecated
 
