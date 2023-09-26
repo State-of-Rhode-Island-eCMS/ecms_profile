@@ -96,7 +96,8 @@ class HotelListingBlock extends BlockBase implements ContainerFactoryPluginInter
     $node_storage = $this->entityTypeManager->getStorage('node');
 
     // Query all hotels.
-    $query = $node_storage->getQuery();
+    $query = $node_storage->getQuery()
+      ->accessCheck(FALSE);
     $query->condition('type', 'hotel')
       ->condition('status', 1)
       ->sort('title', "ASC");

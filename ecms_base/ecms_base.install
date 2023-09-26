@@ -862,9 +862,9 @@ function ecms_base_update_9051(array &$sandbox): void {
   $node_storage = \Drupal::entityTypeManager()->getStorage('node');
 
   // Query for all pages.
-  $query = $node_storage->getQuery();
-  $query->condition('type', 'basic_page')
+  $query = $node_storage->getQuery()
     ->accessCheck(FALSE);
+  $query->condition('type', 'basic_page');
 
   $nids = $query->execute();
 

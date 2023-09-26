@@ -79,7 +79,8 @@ class PromotionsGlobalBlock extends BlockBase implements ContainerFactoryPluginI
     $node_storage = $this->entityTypeManager->getStorage('node');
 
     // Query all global promotions.
-    $query = $node_storage->getQuery();
+    $query = $node_storage->getQuery()
+      ->accessCheck(FALSE);
     $query->condition('type', 'promotions')
       ->condition('status', 1)
       ->condition('field_promotion_global_display', 1)
