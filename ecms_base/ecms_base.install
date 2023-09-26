@@ -14,6 +14,7 @@ declare(strict_types = 1);
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\shortcut\Entity\Shortcut;
@@ -1027,7 +1028,7 @@ function ecms_base_update_9062(array &$sandbox): void {
 
   // Copy over generic icons from media module.
   // Taken directly from hook_install in media module.
-  $source = Drupal\Core\Extension\ExtensionPathResolver::getPath('module', 'media') . '/images/icons';
+  $source = ExtensionPathResolver::getPath('module', 'media') . '/images/icons';
   $destination = \Drupal::config('media.settings')->get('icon_base_uri');
   $file_system = \Drupal::service('file_system');
 

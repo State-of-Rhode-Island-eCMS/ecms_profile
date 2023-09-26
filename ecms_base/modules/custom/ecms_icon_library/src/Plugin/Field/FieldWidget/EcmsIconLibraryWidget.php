@@ -6,6 +6,7 @@ namespace Drupal\ecms_icon_library\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -89,7 +90,7 @@ class EcmsIconLibraryWidget extends WidgetBase {
     /** @var \Drupal\Core\Extension\ThemeHandler $themeHandler */
     $themeHandler = \Drupal::service('theme_handler');
     $defaultTheme = $themeHandler->getDefault();
-    $path = Drupal\Core\Extension\ExtensionPathResolver::getPath('theme', $defaultTheme);
+    $path = ExtensionPathResolver::getPath('theme', $defaultTheme);
 
     // If the source file doesn't exist, ignore the form alteration.
     if (!file_exists("{$path}/ecms_patternlab/source/images/icons/{$icon_filename}")) {
@@ -121,7 +122,7 @@ class EcmsIconLibraryWidget extends WidgetBase {
 
     $defaultTheme = $themeHandler->getDefault();
 
-    $path = Drupal\Core\Extension\ExtensionPathResolver::getPath('theme', $defaultTheme);
+    $path = ExtensionPathResolver::getPath('theme', $defaultTheme);
 
     // If the source file doesn't exist, ignore the form alteration.
     if (!file_exists("{$path}/ecms_patternlab/source/_data/icons.json")) {

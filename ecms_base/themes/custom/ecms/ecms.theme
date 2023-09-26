@@ -342,8 +342,8 @@ function ecms_preprocess_views_view_unformatted(array &$variables): void {
 
   if ($variables['view']->id() === "acquia_search") {
     $variables['search_link'] = "https://www.ri.gov/search/result.php?q=" . \Drupal::request()->query
-        ->accessCheck(FALSE)
-        ->get('search_api_fulltext');
+      ->accessCheck(FALSE)
+      ->get('search_api_fulltext');
   }
 }
 
