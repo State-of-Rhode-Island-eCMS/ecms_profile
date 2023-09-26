@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-322: Add hook 'ecms_base_update_9101' to install updated role config.
 
 ### Changed
 - RIGA-322: Update drupal/core-recommended version constraint to also include ^10.0.
