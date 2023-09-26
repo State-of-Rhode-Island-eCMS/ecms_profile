@@ -23,19 +23,3 @@ view unpublished ecms api site entities:
 
 manually clear ecms api publishing queue:
   title: 'Manually clear the Ecms API queue'
-#
-translate icon media:
-  title: 'translate icon media'
-
-schedule publishing of nodes:
-  title: 'schedule publishing of nodes'
-
-translate modal node:
-  title: 'translate modal node'
-
-view scheduled content:
-  title: 'view scheduled content'
-
-update paragraph content button:
-  title: 'update paragraph content button'
-
