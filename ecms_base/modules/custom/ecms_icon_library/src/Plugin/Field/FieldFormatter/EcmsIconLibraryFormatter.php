@@ -53,7 +53,7 @@ class EcmsIconLibraryFormatter extends FormatterBase {
         }
 
         $file_uri = File::load($fid)->getFileUri();
-        $file_url = file_create_url($file_uri);
+        $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
 
         // Render as SVG tag.
         $svgRaw = $this->urlGetContents($file_url);

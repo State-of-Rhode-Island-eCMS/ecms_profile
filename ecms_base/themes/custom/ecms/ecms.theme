@@ -95,7 +95,7 @@ function ecms_preprocess_html(array &$variables): void {
 
     if ($fid) {
       $file = File::load($fid);
-      $variables['apple_touch_icon'] = file_create_url($file->getFileUri());
+      $variables['apple_touch_icon'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
   }
 }
@@ -154,7 +154,7 @@ function ecms_preprocess_paragraph__media_item(array &$variables): void {
       // Load the media file and pass necessary variables.
       if (isset($paragraph->field_media_item->entity->field_media_item_audio_file->target_id)) {
         $file = File::load($paragraph->field_media_item->entity->field_media_item_audio_file->target_id);
-        $variables['audio_url'] = file_create_url($file->getFileUri());
+        $variables['audio_url'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
         $variables['audio_mimetype'] = $file->getMimeType();
       }
 
