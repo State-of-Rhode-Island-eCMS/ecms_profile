@@ -14,7 +14,6 @@ dependencies:
   - block_content
   - breakpoint
   - ckeditor
-  - color
   - components
   - config
   - 'drupal:content_moderation'
@@ -69,14 +68,12 @@ dependencies:
   - pathauto
   - page_cache
   - publishcontent
-  - quickedit
   - rabbit_hole
   - real_aes
   - redirect
   - rh_node
   - rh_taxonomy
   - responsive_image
-  - rdf
   - robotstxt
   - role_delegation
   - scheduled_transitions
@@ -127,7 +124,6 @@ install:
 
 # Theme dependencies for the distribution.
 themes:
-  - classy
   - claro
   - ecms
   - ecms_claro

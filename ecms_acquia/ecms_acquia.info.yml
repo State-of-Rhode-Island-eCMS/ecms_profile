@@ -2,7 +2,7 @@ name: Rhode Island eCMS System for Acquia Site Factory
 type: profile
 base profile: ecms_base
 description: "Drupal installation profile for the State of Rhode Island's eCMS system utilizing Acquia Site Factory"
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 
 # Module dependencies for the distribution.
 dependencies:
