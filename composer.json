@@ -62,7 +62,7 @@
         "drupal/paragraphs": {
           "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
           "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-          "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2022-07-26/paragraphs-translation-sync-2887353-54.patch"
+          "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
         },
         "drupal/layout_builder_tabs": {
           "3305095 - The callable passed to the filter must be a Closure in sandbox mode": "https://www.drupal.org/files/issues/2022-09-06/3305095-3-error-500-on-save.patch"
