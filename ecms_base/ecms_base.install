@@ -863,7 +863,8 @@ function ecms_base_update_9051(array &$sandbox): void {
 
   // Query for all pages.
   $query = $node_storage->getQuery();
-  $query->condition('type', 'basic_page');
+  $query->condition('type', 'basic_page')
+    ->accessCheck(FALSE);
 
   $nids = $query->execute();
 
@@ -953,12 +954,14 @@ function ecms_base_update_9055(array &$sandbox): void {
 function ecms_base_update_9056(array &$sandbox): void {
 
   // Find all the files that do have an extension.
-  $query = \Drupal::entityQuery("file");
+  $query = \Drupal::entityQuery("file")
+    ->accessCheck(FALSE);
   $query->condition('filename', '.', 'CONTAINS');
   $files_with_extensions = $query->execute();
 
   // Get all file ids.
-  $all_query = \Drupal::entityQuery("file");
+  $all_query = \Drupal::entityQuery("file")
+    ->accessCheck(FALSE);
   $all_files = $all_query->execute();
 
   // Result of the diff will be files that don't have extensions.
@@ -1222,7 +1225,8 @@ function ecms_base_update_9075(array &$sandbox): void {
   $media_storage = \Drupal::entityTypeManager()->getStorage('media');
 
   // Query all files with null list weight.
-  $query = $media_storage->getQuery();
+  $query = $media_storage->getQuery()
+    ->accessCheck(FALSE);
   $query->condition('bundle', 'file')
     ->notExists('field_file_list_weight');
 
