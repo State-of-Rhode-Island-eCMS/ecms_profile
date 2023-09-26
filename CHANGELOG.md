@@ -34,6 +34,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-322: Remove orphaned permission 'create content in disabled language'.
+- RIGA-322: Remove orphaned permission 'schedule publishing of nodes'.
+- RIGA-322: Remove orphaned permission 'translate icon media'.
+- RIGA-322: Remove orphaned permission 'translate modal node'.
+- RIGA-322: Remove orphaned permission 'translate webform node'.
+- RIGA-322: Remove orphaned permission 'update paragraph content button'.
+- RIGA-322: Remove orphaned permission 'view disabled languages'.
+- RIGA-322: Remove orphaned permission 'view scheduled content'.
 
 ### Fixed
 
