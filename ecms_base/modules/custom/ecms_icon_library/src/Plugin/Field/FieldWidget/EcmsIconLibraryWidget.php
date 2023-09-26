@@ -89,7 +89,7 @@ class EcmsIconLibraryWidget extends WidgetBase {
     /** @var \Drupal\Core\Extension\ThemeHandler $themeHandler */
     $themeHandler = \Drupal::service('theme_handler');
     $defaultTheme = $themeHandler->getDefault();
-    $path = drupal_get_path('theme', $defaultTheme);
+    $path = Drupal\Core\Extension\ExtensionPathResolver::getPath('theme', $defaultTheme);
 
     // If the source file doesn't exist, ignore the form alteration.
     if (!file_exists("{$path}/ecms_patternlab/source/images/icons/{$icon_filename}")) {
@@ -121,7 +121,7 @@ class EcmsIconLibraryWidget extends WidgetBase {
 
     $defaultTheme = $themeHandler->getDefault();
 
-    $path = drupal_get_path('theme', $defaultTheme);
+    $path = Drupal\Core\Extension\ExtensionPathResolver::getPath('theme', $defaultTheme);
 
     // If the source file doesn't exist, ignore the form alteration.
     if (!file_exists("{$path}/ecms_patternlab/source/_data/icons.json")) {

@@ -24,7 +24,7 @@ function ecms_distribution_get_patternlab_social_source(): ?array {
 
   $defaultTheme = $themeHandler->getDefault();
 
-  $path = drupal_get_path('theme', $defaultTheme);
+  $path = Drupal\Core\Extension\ExtensionPathResolver::getPath('theme', $defaultTheme);
 
   // If the source file doesn't exist, ignore the form alteration.
   if (!file_exists("{$path}/ecms_patternlab/source/_data/social-config.json")) {
