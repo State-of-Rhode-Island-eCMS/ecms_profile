@@ -149,7 +149,7 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
    */
   public function testGetEditableConfigNames(): void {
     $configNames = $this->configForm->getEditableConfigNames();
-    $this->assertArrayEquals(self::CONFIG_NAMES, $configNames);
+    $this->assertEquals(self::CONFIG_NAMES, $configNames);
   }
 
   /**

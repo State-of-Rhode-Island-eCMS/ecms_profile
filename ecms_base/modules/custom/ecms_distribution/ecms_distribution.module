@@ -226,10 +226,10 @@ function ecms_distribution_menu_link_callback(array $form, FormStateInterface $f
   $response = new AjaxResponse();
 
   $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', render($form['title'])));
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', Drupal\Core\Render\RendererInterface::render($form['title'])));
 
   $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', render($form['ecms_social_other_container'])));
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', Drupal\Core\Render\RendererInterface::render($form['ecms_social_other_container'])));
 
   return $response;
 }
