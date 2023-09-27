@@ -187,7 +187,6 @@
       "drupal/token": "^1.12",
       "drupal/twig_tweak": "^3.2",
       "drupal/twig_vardumper": "^3.0",
-      "drupal/views_ajax_get": "1.x-dev@dev",
       "drupal/views_database_connector": "^2.0",
       "drupal/webform": "^6.0",
       "drupal/webform_encrypt": "^2.0@alpha",
