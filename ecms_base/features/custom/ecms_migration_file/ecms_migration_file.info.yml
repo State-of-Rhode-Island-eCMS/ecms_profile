@@ -1,7 +1,7 @@
 name: 'eCMS Migration File'
 description: 'A simple media type to allow JSON file uploads in support of migrations.'
 type: module
-core_version_requirement: '^8.9 || ^9'
+core_version_requirement: '^9 || ^10'
 dependencies:
   - field
   - file
