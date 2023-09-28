@@ -16,8 +16,8 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="9.4.8"
-PHP_VERSION="8.0"
+DRUPAL_CORE_VERSION="9.5.11"
+PHP_VERSION="8.1"
 
 # Whether the source directory should be deleted before rebuilding lando
 DELETE_SRC=0

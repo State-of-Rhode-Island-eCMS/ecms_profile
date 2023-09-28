@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-322: Update development scripts to use PHP 8.1.
 
 ### Deprecated
 
