@@ -1912,3 +1912,24 @@ function ecms_base_update_9102(array &$sandbox): void {
 
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+function ecms_base_update_9102(array &$sandbox): void {
+  // Update config to make "Event List Type" field non-required".
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $ecms_event_config_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $updated_ecms_event_config = [
+    'crop.type.focal_point',
+    'entity_usage.settings',
+    'focal_point.settings'
+  ];
+
+  foreach ($updated_ecms_event_config as $config) {
+    $active_storage->write("{$config}", $ecms_event_config_source->read("{$config}"));
+  }
+}
