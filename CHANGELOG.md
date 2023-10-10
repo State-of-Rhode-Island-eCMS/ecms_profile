@@ -1155,6 +1155,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
+### Added
+- RIGA-415:
+  - Added the [Conditional Fields](https://www.drupal.org/project/conditional_fields) module.
+  - Added the [Quick Node Clone](https://www.drupal.org/project/quick_node_clone) module.
+  - Added the [Advanced CSS/JS Aggregation](https://www.drupal.org/project/advagg) module.
+  - Added the [Field Group](https://www.drupal.org/project/field_group) module.
+
 [Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...HEAD
 [0.10.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.3...0.10.4
 [0.10.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.2...0.10.3
