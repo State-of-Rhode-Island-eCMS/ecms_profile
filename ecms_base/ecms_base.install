@@ -1913,6 +1913,9 @@ function ecms_base_update_9102(array &$sandbox): void {
   \Drupal::service('module_installer')->install($modules_to_install);
 }
 
+/**
+ * Install new modules.
+ */
 function ecms_base_update_9102(array &$sandbox): void {
   // Update config to make "Event List Type" field non-required".
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
@@ -1926,7 +1929,7 @@ function ecms_base_update_9102(array &$sandbox): void {
   $updated_ecms_event_config = [
     'crop.type.focal_point',
     'entity_usage.settings',
-    'focal_point.settings'
+    'focal_point.settings',
   ];
 
   foreach ($updated_ecms_event_config as $config) {
