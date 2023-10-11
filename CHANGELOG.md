@@ -33,6 +33,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Update migrate_tools version constraint ^5.0 => ^6.0.
 - RIGA-322: Update views_database_connector version constraint ^1.4 => ^2.0.
 - RIGA-322: Update patch for drupal/paragraphs, issue 2887353, comment 54 => 58.
+- RIGA-322: Switch 'getPath()' method call to resolve deprecation error.
 
 ### Deprecated
 

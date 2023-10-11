@@ -26,7 +26,7 @@ function ecms_distribution_get_patternlab_social_source(): ?array {
 
   $defaultTheme = $themeHandler->getDefault();
 
-  $path = ExtensionPathResolver::getPath('theme', $defaultTheme);
+  $path = \Drupal::service('extension.list.theme')->getPath($defaultTheme);
 
   // If the source file doesn't exist, ignore the form alteration.
   if (!file_exists("{$path}/ecms_patternlab/source/_data/social-config.json")) {

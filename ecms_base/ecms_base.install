@@ -1028,7 +1028,7 @@ function ecms_base_update_9062(array &$sandbox): void {
 
   // Copy over generic icons from media module.
   // Taken directly from hook_install in media module.
-  $source = ExtensionPathResolver::getPath('module', 'media') . '/images/icons';
+  $source = \Drupal::service('extension.list.module')->getPath('media') . '/images/icons';
   $destination = \Drupal::config('media.settings')->get('icon_base_uri');
   $file_system = \Drupal::service('file_system');
 
