@@ -4,6 +4,9 @@ type: theme
 core_version_requirement: '^9 || ^10'
 base theme: classy
 
+dependencies:
+  - classy:classy
+
 version: 1.x
 
 # Libraries
