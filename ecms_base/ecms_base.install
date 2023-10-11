@@ -2007,13 +2007,6 @@ function ecms_base_update_9104(array &$sandbox): void {
  */
 function ecms_base_update_9105(array &$sandbox): void {
 
-  // Uninstall deprecated themes.
-  $themes_to_uninstall = [
-    'classy',
-    'stable',
-  ];
-  \Drupal::service('theme_installer')->uninstall($themes_to_uninstall);
-
   // Uninstall deprecated modules, and old layout builder admin theme modules.
   $modules_to_uninstall = [
     'color',
