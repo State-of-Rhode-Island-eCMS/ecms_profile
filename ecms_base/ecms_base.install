@@ -2000,5 +2000,33 @@ function ecms_base_update_9104(array &$sandbox): void {
   ];
 
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+}
 
+/**
+ * Updates to run for the 0.11.0 tag.
+ */
+function ecms_base_update_9105(array &$sandbox): void {
+
+  // Uninstall deprecated themes.
+  $themes_to_uninstall = [
+    'classy',
+    'stable',
+  ];
+  \Drupal::service('theme_installer')->uninstall($themes_to_uninstall);
+
+  // Uninstall deprecated modules, and old layout builder admin theme modules.
+  $modules_to_uninstall = [
+    'color',
+    'quickedit',
+    'rdf',
+    'media_library_theme_reset',
+    'layout_builder_modal',
+  ];
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Install replacement layout builder admin theme module.
+  $modules_to_install = [
+    'layout_builder_iframe_modal',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
 }
