@@ -66,13 +66,16 @@
 {# Link #}
 {% if content.field_hia_link|render is not empty %}
   {% set link_title = content.field_hia_link.0['#title'] %}
-  {% set external = content.field_hia_link.0['#options'].external %}
+  {% set external = content.field_hia_link.0['#url'].isExternal() %}
+  {% set routed = content.field_hia_link.0['#url'].isRouted() %}
 
   {% if external == true %}
     {% set link_url = content.field_hia_link.0['#url'].getUri() %}
-  {% else %}
+  {% elseif routed == true %}
     {% set link_url = content.field_hia_link.0['#url'].getInternalPath() %}
     {% set link_url = drupal_url(link_url) %}
+  {% else %}
+    {% set link_url = '' %}
   {% endif %}
 {% endif %}
 

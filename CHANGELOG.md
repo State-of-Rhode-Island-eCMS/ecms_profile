@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-429: Add check for unrouted links to fix layout builder error.
 
 ### Security
 
