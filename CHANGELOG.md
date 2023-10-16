@@ -94,6 +94,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Remove orphaned permission 'update paragraph content button'.
 - RIGA-322: Remove orphaned permission 'view disabled languages'.
 - RIGA-322: Remove orphaned permission 'view scheduled content'.
+- RIGA-322: Remove deprecated 'drupal_find_theme_functions()' method call.
 
 ### Fixed
 - RIGA-429: Add check for unrouted links to fix layout builder error.
