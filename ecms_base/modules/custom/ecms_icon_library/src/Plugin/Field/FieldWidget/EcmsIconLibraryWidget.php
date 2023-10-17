@@ -6,7 +6,6 @@ namespace Drupal\ecms_icon_library\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
-use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
