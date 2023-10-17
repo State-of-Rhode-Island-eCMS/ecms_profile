@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-322: Add hook 'ecms_base_update_9101' to install updated role config.
 - RIGA-322: Add hook 'ecms_base_update_9102' to install updated openid_connect config.
+- RIGA-322: Add environment variable 'OPENID_CONNECT_CLIENT_SECRET'.
 
 ### Changed
 - RIGA-322: Update drupal/core-recommended version constraints to also include ^10.0.
