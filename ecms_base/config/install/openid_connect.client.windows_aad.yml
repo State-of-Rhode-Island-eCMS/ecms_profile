@@ -20,3 +20,4 @@ settings:
   subject_key: sub
   enable_single_sign_out: 0
   redirect_url: ''
+  end_session_endpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/logout'
