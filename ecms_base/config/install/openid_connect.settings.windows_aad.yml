@@ -1,18 +1,27 @@
-enabled: true
+langcode: en
+status: true
+dependencies:
+  module:
+    - openid_connect_windows_aad
+id: windows_azure_ad
+label: 'Windows Azure AD'
+plugin: windows_aad
 settings:
   client_id: REDACTED
   client_secret: REDACTED
-  enable_single_sign_out: 0
   authorization_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/authorize'
   token_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/token'
-  map_ad_groups_to_roles: 1
-  group_mapping:
-    method: '0'
-    mappings: ''
-    strict: 0
-  userinfo_graph_api_wa: '1'
   userinfo_endpoint_wa: 'https://graph.microsoft.com/v1.0/me/memberOf'
-  userinfo_graph_api_use_other_mails: 0
-  userinfo_update_email: 1
-  hide_email_address_warning: 1
-  redirect_url: ''
+  map_ad_groups_to_roles: true
+  group_mapping:
+    method: 0
+    mappings: ''
+    strict: false
+  userinfo_graph_api_wa: 1
+  userinfo_graph_api_use_other_mails: false
+  userinfo_update_email: true
+  hide_email_address_warning: true
+  subject_key: sub
+  end_session_endpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/logout'
+  iss_allowed_domains: ''
+  front_channel_logout_url: ''
