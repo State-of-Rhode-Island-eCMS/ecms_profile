@@ -1,10 +1,13 @@
 status: true
+dependencies:
+  module:
+    - openid_connect_windows_aad
 id: windows_aad
 label: 'Windows Azure AD'
 plugin: windows_aad
 settings:
   client_id: REDACTED
-  client_secret: openid_connect_windows_aad_key
+  client_secret: REDACTED
   authorization_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/authorize'
   token_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/token'
   userinfo_endpoint_wa: 'https://graph.microsoft.com/v1.0/me/memberOf'
@@ -18,7 +21,6 @@ settings:
   userinfo_update_email: true
   hide_email_address_warning: true
   subject_key: sub
-  enable_single_sign_out: 0
-  redirect_url: ''
   end_session_endpoint: 'https://login.microsoftonline.com/common/oauth2/v2.0/logout'
   iss_allowed_domains: ''
+  front_channel_logout_url: ''
