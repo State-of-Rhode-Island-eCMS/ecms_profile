@@ -1,0 +1,46 @@
+_core:
+  default_config_hash: AXUBMTvVtpcNp0jKjDaWjSHqMy6HjuUf7j4yVbXgazI
+local_task_enabled_entity_types:
+  - media
+track_enabled_source_entity_types:
+  - node
+  - block_content
+  - media
+  - paragraph
+  - feeds_subscription
+  - taxonomy_term
+track_enabled_target_entity_types:
+  - consumer
+  - node
+  - content_moderation_state
+  - crop
+  - block_content
+  - menu_link_content
+  - feeds_feed
+  - media
+  - oauth2_token
+  - paragraph
+  - redirect
+  - scheduled_transition
+  - search_api_task
+  - shortcut
+  - feeds_subscription
+  - taxonomy_term
+  - path_alias
+  - webform_submission
+track_enabled_plugins:
+  - media_embed
+  - entity_reference
+  - entity_embed
+  - html_link
+  - layout_builder
+  - dynamic_entity_reference
+  - linkit
+  - ckeditor_image
+  - block_field
+  - link
+track_enabled_base_fields: false
+site_domains: {  }
+edit_warning_message_entity_types: {  }
+delete_warning_message_entity_types: {  }
+usage_controller_items_per_page: 25
