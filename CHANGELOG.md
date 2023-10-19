@@ -16,6 +16,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-401: Add drupal/focal_point ^2.0.1 to composer.json.
 - RIGA-401: Add drupal/iek (Image effect kit) ^1.3 to composer.json.
 - RIGA-401: Add drupal/entity_usage ^2.0@beta to composer.json.
+- RIGA-415: Add drupal/advagg ^6.0@alpha to composer.json.
+- RIGA-415: Add drupal/conditional_fields ^4.0@alpha to composer.json.
+- RIGA-415: Add drupal/field_group ^3.4 to composer.json.
+- RIGA-415: Add drupal/quick_node_clone ^1.16 to composer.json.
 
 ### Changed
 - RIGA-322: Update drupal/core-recommended version constraints to also include ^10.0.
