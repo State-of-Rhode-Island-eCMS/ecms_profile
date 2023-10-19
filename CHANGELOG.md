@@ -16,6 +16,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-401: Add drupal/focal_point ^2.0.1 to composer.json.
 - RIGA-401: Add drupal/iek (Image effect kit) ^1.3 to composer.json.
 - RIGA-401: Add drupal/entity_usage ^2.0@beta to composer.json.
+- RIGA-415: Add drupal/advagg ^6.0@alpha to composer.json.
+- RIGA-415: Add drupal/conditional_fields ^4.0@alpha to composer.json.
+- RIGA-415: Add drupal/field_group ^3.4 to composer.json.
+- RIGA-415: Add drupal/quick_node_clone ^1.16 to composer.json.
 
 ### Changed
 - RIGA-322: Update drupal/core-recommended version constraints to also include ^10.0.
@@ -1154,13 +1158,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
-
-### Added
-- RIGA-415:
-  - Added the [Conditional Fields](https://www.drupal.org/project/conditional_fields) module.
-  - Added the [Quick Node Clone](https://www.drupal.org/project/quick_node_clone) module.
-  - Added the [Advanced CSS/JS Aggregation](https://www.drupal.org/project/advagg) module.
-  - Added the [Field Group](https://www.drupal.org/project/field_group) module.
 
 [Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...HEAD
 [0.10.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.3...0.10.4
