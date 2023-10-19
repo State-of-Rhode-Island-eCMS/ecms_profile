@@ -59,6 +59,9 @@
           "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch",
           "2492171 - Provide options to sanitize filenames": "https://www.drupal.org/files/issues/2021-07-22/2492171-295_0.patch"
         },
+        "drupal/openid_connect_windows_aad": {
+          "3169996 - Incorrect configuration schema file": "https://www.drupal.org/files/issues/2020-09-09/openid_connect_windows_aad-schema-update-3169996-3.patch"
+        },
         "drupal/paragraphs": {
           "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
           "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
