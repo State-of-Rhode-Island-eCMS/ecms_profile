@@ -18,9 +18,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-426: Remove unneeded access check from search response.
 
 ### Security
+
+## [0.10.6] - 2023-10-19
+### Fixed
+- RIGA-426: Remove unneeded access check from search response.
 
 ## [0.10.5] - 2023-10-19
 ### Added
@@ -1171,7 +1174,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.6...HEAD
+[0.10.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.5...0.10.6
 [0.10.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...0.10.5
 [0.10.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.3...0.10.4
 [0.10.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.2...0.10.3
