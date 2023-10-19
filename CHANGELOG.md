@@ -11,8 +11,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-322: Add hook 'ecms_base_update_9101' to install updated role config.
-- RIGA-322: Add hook 'ecms_base_update_9102' to install updated openid_connect config.
-- RIGA-322: Add environment variable 'OPENID_CONNECT_CLIENT_SECRET'.
 
 ### Changed
 - RIGA-322: Update drupal/core-recommended version constraints to also include ^10.0.
@@ -25,8 +23,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Update google_translator version constraint ^1.0@RC => ^2.1.
 - RIGA-322: Update language_cookie version constraint 1.x-dev => ^2.0.
 - RIGA-322: Update menu_block version constraint 1.x-dev => ^1.10.
-- RIGA-322: Update openid_connect version constraint 1.x-dev => ^3.0@alpha.
-- RIGA-322: Update openid_connect_windows_aad version constraint ^1.3 => ^2.0@beta.
 - RIGA-322: Update simple_menu_permissions version constraint ^1.4 => ^2.0.
 - RIGA-322: Update svg_image version constraint ^1.14 => ^3.0.
 - RIGA-322: Update twig_tweak version constraint ^2.8 => ^3.2.
