@@ -12,7 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-6: Comment out code of error-causing hooks.
+- RIGA-6: Temporarily remove code of error-causing hooks.
 
 ### Deprecated
 
