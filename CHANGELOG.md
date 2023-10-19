@@ -12,7 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-6: Temporarily remove code of error-causing hooks.
+
 
 ### Deprecated
 
@@ -21,6 +21,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.10.7] - 2023-10-19
+### Changed
+- RIGA-6: Temporarily remove code of error-causing hooks.
 
 ## [0.10.6] - 2023-10-19
 ### Fixed
@@ -1175,7 +1179,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.7...HEAD
+[0.10.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.6...0.10.7
 [0.10.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.5...0.10.6
 [0.10.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...0.10.5
 [0.10.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.3...0.10.4
