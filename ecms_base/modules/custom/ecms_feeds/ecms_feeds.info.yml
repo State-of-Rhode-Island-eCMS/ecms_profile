@@ -1,7 +1,7 @@
 name: 'eCMS Feeds'
 description: 'Provides eCMS functionality to interface with the feeds module.'
 type: module
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 package: eCMS
 version: 9.x-1.0
 dependencies:

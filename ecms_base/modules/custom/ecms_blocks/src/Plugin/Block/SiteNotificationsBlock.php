@@ -88,7 +88,8 @@ class SiteNotificationsBlock extends BlockBase implements ContainerFactoryPlugin
     $now->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
 
     // Query all notifications.
-    $query = $node_storage->getQuery();
+    $query = $node_storage->getQuery()
+      ->accessCheck(FALSE);
     $query->condition('type', 'notification')
       ->condition('status', 1)
       ->condition('field_notification_expire_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '>')

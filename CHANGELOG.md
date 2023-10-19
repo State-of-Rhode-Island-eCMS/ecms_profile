@@ -10,12 +10,45 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-322: Add hook 'ecms_base_update_9101' to install updated role config.
 
 ### Changed
+- RIGA-322: Update drupal/core-recommended version constraints to also include ^10.0.
+- RIGA-322: Include ^10 in core_version_requirement for custom modules, themes, and features.
+- RIGA-322: Update development scripts to use PHP 8.1.
+- RIGA-322: Update better_exposed_filters version constraint ^5.0 => ^6.0.
+- RIGA-322: Update captcha version constraint ^1.2 => ^2.0.
+- RIGA-322: Update components version constraint ^2.0 => ^3.0@beta.
+- RIGA-322: Update google_tag version constraint ^1.4 => ^2.0.
+- RIGA-322: Update google_translator version constraint ^1.0@RC => ^2.1.
+- RIGA-322: Update language_cookie version constraint 1.x-dev => ^2.0.
+- RIGA-322: Update menu_block version constraint 1.x-dev => ^1.10.
+- RIGA-322: Update simple_menu_permissions version constraint ^1.4 => ^2.0.
+- RIGA-322: Update svg_image version constraint ^1.14 => ^3.0.
+- RIGA-322: Update twig_tweak version constraint ^2.8 => ^3.2.
+- RIGA-322: Update webform_encrypt version constraint 1.x-dev@dev => ^2.0@alpha.
+- RIGA-322: Update migrate_plus version constraint ^5.1 => ^6.0.
+- RIGA-322: Update migrate_tools version constraint ^5.0 => ^6.0.
+- RIGA-322: Update views_database_connector version constraint ^1.4 => ^2.0.
+- RIGA-322: Update patch for drupal/paragraphs, issue 2887353, comment 54 => 58.
 
 ### Deprecated
+- RIGA-322: Switch 'assertArrayEquals()' method call to resolve deprecation error.
+- RIGA-322: Switch 'drupal_get_path()' method calls to resolve deprecation error.
+- RIGA-322: Switch 'file_create_url()' method calls to resolve deprecation error.
+- RIGA-322: Switch 'render()' method calls to resolve deprecation error.
+- RIGA-322: Add an explicit 'accessCheck()' to all entity queries.
 
 ### Removed
+- RIGA-322: Remove module drupal/views_ajax_get from composer.
+- RIGA-322: Remove orphaned permission 'create content in disabled language'.
+- RIGA-322: Remove orphaned permission 'schedule publishing of nodes'.
+- RIGA-322: Remove orphaned permission 'translate icon media'.
+- RIGA-322: Remove orphaned permission 'translate modal node'.
+- RIGA-322: Remove orphaned permission 'translate webform node'.
+- RIGA-322: Remove orphaned permission 'update paragraph content button'.
+- RIGA-322: Remove orphaned permission 'view disabled languages'.
+- RIGA-322: Remove orphaned permission 'view scheduled content'.
 
 ### Fixed
 - RIGA-429: Add check for unrouted links to fix layout builder error.

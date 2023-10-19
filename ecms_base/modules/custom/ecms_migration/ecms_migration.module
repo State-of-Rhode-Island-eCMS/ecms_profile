@@ -7,6 +7,7 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
@@ -16,7 +17,7 @@ use Drupal\migrate\Row;
  */
 function ecms_migration_migrate_ecms_file_redirect_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
   // Ensure we have the right public files directory for the current site.
-  $public_file_path = rtrim(file_url_transform_relative(file_create_url('public://')), "/");
+  $public_file_path = rtrim(FileUrlGenerator::transformRelative(\Drupal::service('file_url_generator')->generateAbsoluteString('public://')), "/");
 
   // Make sure this is a valid internal Uri.
   $public_file_path = "internal:{$public_file_path}";

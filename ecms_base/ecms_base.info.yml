@@ -1,7 +1,7 @@
 name: Rhode Island eCMS System
 type: profile
 description: "Drupal installation profile for the State of Rhode Island's eCMS system"
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10
 
 # Module dependencies for the distribution.
 # Modules that sub-profiles need must be listed here and_not in install.
@@ -14,7 +14,6 @@ dependencies:
   - block_content
   - breakpoint
   - ckeditor
-  - color
   - components
   - config
   - 'drupal:content_moderation'
@@ -69,14 +68,12 @@ dependencies:
   - pathauto
   - page_cache
   - publishcontent
-  - quickedit
   - rabbit_hole
   - real_aes
   - redirect
   - rh_node
   - rh_taxonomy
   - responsive_image
-  - rdf
   - robotstxt
   - role_delegation
   - scheduled_transitions
@@ -127,7 +124,6 @@ install:
 
 # Theme dependencies for the distribution.
 themes:
-  - classy
   - claro
   - ecms
   - ecms_claro

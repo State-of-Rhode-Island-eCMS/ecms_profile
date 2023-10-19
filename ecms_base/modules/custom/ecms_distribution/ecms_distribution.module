@@ -10,6 +10,7 @@ declare(strict_types=1);
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\RendererInterface;
 
 /**
  * Get the social configuration from pattern lab if available.
@@ -24,7 +25,7 @@ function ecms_distribution_get_patternlab_social_source(): ?array {
 
   $defaultTheme = $themeHandler->getDefault();
 
-  $path = drupal_get_path('theme', $defaultTheme);
+  $path = \Drupal::service('extension.list.theme')->getPath($defaultTheme);
 
   // If the source file doesn't exist, ignore the form alteration.
   if (!file_exists("{$path}/ecms_patternlab/source/_data/social-config.json")) {
@@ -226,10 +227,10 @@ function ecms_distribution_menu_link_callback(array $form, FormStateInterface $f
   $response = new AjaxResponse();
 
   $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', render($form['title'])));
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', RendererInterface::render($form['title'])));
 
   $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', render($form['ecms_social_other_container'])));
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', RendererInterface::render($form['ecms_social_other_container'])));
 
   return $response;
 }

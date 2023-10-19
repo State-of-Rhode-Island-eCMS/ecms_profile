@@ -95,7 +95,7 @@ function ecms_preprocess_html(array &$variables): void {
 
     if ($fid) {
       $file = File::load($fid);
-      $variables['apple_touch_icon'] = file_create_url($file->getFileUri());
+      $variables['apple_touch_icon'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
     }
   }
 }
@@ -154,7 +154,7 @@ function ecms_preprocess_paragraph__media_item(array &$variables): void {
       // Load the media file and pass necessary variables.
       if (isset($paragraph->field_media_item->entity->field_media_item_audio_file->target_id)) {
         $file = File::load($paragraph->field_media_item->entity->field_media_item_audio_file->target_id);
-        $variables['audio_url'] = file_create_url($file->getFileUri());
+        $variables['audio_url'] = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
         $variables['audio_mimetype'] = $file->getMimeType();
       }
 
@@ -341,7 +341,9 @@ function ecms_preprocess_views_view_unformatted(array &$variables): void {
   $view = $variables['view'];
 
   if ($variables['view']->id() === "acquia_search") {
-    $variables['search_link'] = "https://www.ri.gov/search/result.php?q=" . \Drupal::request()->query->get('search_api_fulltext');
+    $variables['search_link'] = "https://www.ri.gov/search/result.php?q=" . \Drupal::request()->query
+      ->accessCheck(FALSE)
+      ->get('search_api_fulltext');
   }
 }
 
@@ -485,7 +487,8 @@ function ecms_preprocess_paragraph__publication_list(array &$variables): void {
   $node_storage = $entity_type_manager->getStorage('node');
 
   // Query all publications.
-  $query = $node_storage->getQuery();
+  $query = $node_storage->getQuery()
+    ->accessCheck(FALSE);
   $query->condition('type', 'publication')
     ->condition('status', 1)
     ->sort('title', "ASC");
@@ -574,7 +577,8 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
     ->loadTree('file_tags', $term_id);
 
   // Query all files with selected tag.
-  $query = $media_storage->getQuery();
+  $query = $media_storage->getQuery()
+    ->accessCheck(FALSE);
   $query->condition('bundle', 'file')
     ->condition('field_file_tags', $term_id)
     ->condition('status', 1)
@@ -606,7 +610,8 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
 
   // Handle any child terms.
   foreach ($child_terms as $term) {
-    $child_query = $media_storage->getQuery();
+    $child_query = $media_storage->getQuery()
+      ->accessCheck(FALSE);
     $child_query->condition('bundle', 'file')
       ->condition('field_file_tags', $term->tid)
       ->condition('status', 1)
@@ -737,7 +742,8 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
   }
 
   // Query all events.
-  $query = $node_storage->getQuery();
+  $query = $node_storage->getQuery()
+    ->accessCheck(FALSE);
   $query->condition('type', 'event')
     ->condition('status', 1);
 
@@ -818,7 +824,8 @@ function ecms_preprocess_paragraph__location_list(array &$variables): void {
   };
 
   // Query all locations.
-  $query = $node_storage->getQuery();
+  $query = $node_storage->getQuery()
+    ->accessCheck(FALSE);
   $query->condition('type', 'location')
     ->condition('status', 1)
     ->sort('title', "ASC");
@@ -863,7 +870,8 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
   if ($paragraph->get('field_department_category')->isEmpty()) {
 
     // Query all person nodes.
-    $query = $node_storage->getQuery();
+    $query = $node_storage->getQuery()
+      ->accessCheck(FALSE);
     $query->condition('type', 'person')
       ->condition('status', 1)
       ->sort('field_person_list_weight', "ASC")
@@ -944,7 +952,8 @@ function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, 
   }
 
   // See if any person nodes are tied directly to term.
-  $query = $node_storage->getQuery();
+  $query = $node_storage->getQuery()
+    ->accessCheck(FALSE);
   $query->condition('type', 'person')
     ->condition('field_person_category', $tid)
     ->condition('status', 1)

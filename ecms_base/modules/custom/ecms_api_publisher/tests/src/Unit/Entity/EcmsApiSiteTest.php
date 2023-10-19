@@ -272,7 +272,7 @@ class EcmsApiSiteTest extends UnitTestCase {
     $this->setGetterValue('content_type', $field);
 
     $result = $this->entity->getContentTypes();
-    $this->assertArrayEquals(['node_type_1', 'node_type_2'], $result);
+    $this->assertEquals(['node_type_1', 'node_type_2'], $result);
   }
 
   /**
@@ -287,7 +287,7 @@ class EcmsApiSiteTest extends UnitTestCase {
     $this->setGetterValue('content_type', $field);
 
     $result = $this->entity->getContentTypes();
-    $this->assertArrayEquals([], $result);
+    $this->assertEquals([], $result);
   }
 
   /**
