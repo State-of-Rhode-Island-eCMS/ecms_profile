@@ -31,9 +31,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Update migrate_tools version constraint ^5.0 => ^6.0.
 - RIGA-322: Update views_database_connector version constraint ^1.4 => ^2.0.
 - RIGA-322: Update patch for drupal/paragraphs, issue 2887353, comment 54 => 58.
-- RIGA-322: Switch 'getPath()' method call to resolve deprecation error.
 
 ### Deprecated
+- RIGA-322: Switch 'assertArrayEquals()' method call to resolve deprecation error.
+- RIGA-322: Switch 'drupal_get_path()' method calls to resolve deprecation error.
+- RIGA-322: Switch 'file_create_url()' method calls to resolve deprecation error.
+- RIGA-322: Switch 'render()' method calls to resolve deprecation error.
+- RIGA-322: Add an explicit 'accessCheck()' to all entity queries.
 
 ### Removed
 - RIGA-322: Remove module drupal/views_ajax_get from composer.
