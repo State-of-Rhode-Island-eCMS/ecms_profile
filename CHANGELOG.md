@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.10.5] - 2023-10-19
+### Added
 - RIGA-322: Add hook 'ecms_base_update_9101' to import updated role config.
 - RIGA-401: Add hook 'ecms_base_update_9102' to install new modules.
 - RIGA-401: Add hook 'ecms_base_update_9103' to import new module config.
@@ -61,8 +74,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-429: Add check for unrouted links to fix layout builder error.
-
-### Security
 
 ## [0.10.4] - 2023-09-28
 ### Changed
@@ -1159,7 +1170,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.5...HEAD
+[0.10.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...0.10.5
 [0.10.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.3...0.10.4
 [0.10.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.2...0.10.3
 [0.10.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.1...0.10.2
