@@ -1903,6 +1903,18 @@ function ecms_base_update_9101(array &$sandbox): void {
  */
 function ecms_base_update_9102(array &$sandbox): void {
 
+  // First install dependency 'crop.type.focal_point'.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  $active_storage->write('crop.type.focal_point', $install_source->read('crop.type.focal_point'));
+
+  // Then install modules after config dependency is available.
   $modules_to_install = [
     'entity_usage',
     'focal_point',
