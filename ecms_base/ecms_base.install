@@ -1898,10 +1898,10 @@ function ecms_base_update_9101(array &$sandbox): void {
   }
 }
 
-/**
- * Updates to run for the 0.10.8 tag. Enable new modules and reinstall config.
- */
-function ecms_base_update_9102(array &$sandbox): void {
+///**
+// * Updates to run for the 0.10.8 tag. Enable new modules and reinstall config.
+// */
+//function ecms_base_update_9102(array &$sandbox): void {
 
 //  // Get reference to config install directory.
 //  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
@@ -1942,4 +1942,4 @@ function ecms_base_update_9102(array &$sandbox): void {
 //  foreach ($new_module_config as $config) {
 //    $active_storage->write("{$config}", $install_source->read("{$config}"));
 //  }
-}
+//}
