@@ -116,6 +116,7 @@ install:
   - ecms_search_settings
   - ecms_workflow
   - file_delete
+  - focal_point
   - google_tag
   - media_entity_file_replace
   - media_file_delete
