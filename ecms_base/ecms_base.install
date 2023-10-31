@@ -1943,3 +1943,47 @@ function ecms_base_update_9102(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
+/**
+ * Updates to run for the 0.10.8 tag. Set GTM config to turn on for Anonymous.
+ */
+function ecms_base_update_9103(array &$sandbox): void {
+
+  // Only run update if Google Tag module is installed.
+  if (\Drupal::moduleHandler()->moduleExists('google_tag')) {
+
+    // Get array of all GTM 'Container' config entities.
+    $gtm_container_entities = \Drupal::entityTypeManager()
+      ->getStorage('google_tag_container')
+      ->loadMultiple();
+
+    // Loop through available Containers.
+    // Or, if site has only one Container, find it without knowing exact name.
+    foreach ($gtm_container_entities as $gtm_container_entity) {
+
+      // Add 'user' to 'dependencies' section.
+      $dependencies = $gtm_container_entity->get('dependencies');
+      if (!in_array('user', $dependencies['module'])) {
+        $dependencies['module'][] = 'user';
+        $gtm_container_entity->set('dependencies', $dependencies);
+      }
+
+      // Make sure 'conditions.user_role' section matches our standard config.
+      $conditions = $gtm_container_entity->get('conditions');
+      $conditions['user_role'] = [
+        'id' => 'user_role',
+        'negate' => FALSE,
+        'context_mapping' => [
+          'user' => '@user.current_user_context:current_user',
+        ],
+        'roles' => [
+          'anonymous' => 'anonymous',
+        ],
+      ];
+      $gtm_container_entity->set('conditions', $conditions);
+
+      // Save changes to config entity.
+      $gtm_container_entity->save();
+    }
+  }
+}
