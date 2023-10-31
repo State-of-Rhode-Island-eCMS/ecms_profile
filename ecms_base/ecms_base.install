@@ -1913,13 +1913,13 @@ function ecms_base_update_9102(array &$sandbox): void {
   $active_storage = \Drupal::service('config.storage');
 
   // Remove config that caused errors from being installed in wrong sequence.
-    $conflicting_config = [
-      'crop.type.focal_point',
-      'focal_point.settings',
-    ];
-    foreach ($conflicting_config as $config) {
-      $active_storage->delete("{$config}");
-    }
+  $conflicting_config = [
+    'crop.type.focal_point',
+    'focal_point.settings',
+  ];
+  foreach ($conflicting_config as $config) {
+    $active_storage->delete("{$config}");
+  }
 
   // Install all new modules now that conflicting config is removed.
   $modules_to_install = [
