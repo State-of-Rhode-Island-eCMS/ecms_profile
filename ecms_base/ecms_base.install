@@ -1927,7 +1927,7 @@ function ecms_base_update_9102(array &$sandbox): void {
     'conditional_fields',
     'entity_usage',
     'field_group',
-    'focal_point',
+//    'focal_point',
     'iek',
     'quick_node_clone',
   ];
