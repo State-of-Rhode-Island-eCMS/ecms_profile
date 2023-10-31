@@ -1922,16 +1922,16 @@ function ecms_base_update_9102(array &$sandbox): void {
 //  }
 
   // Install all new modules now that conflicting config is removed.
-  $modules_to_install = [
+//  $modules_to_install = [
 //    'advagg',
-    'conditional_fields',
+//    'conditional_fields',
 //    'entity_usage',
-    'field_group',
+//    'field_group',
 //    'focal_point',
 //    'iek',
 //    'quick_node_clone',
-  ];
-  \Drupal::service('module_installer')->install($modules_to_install);
+//  ];
+//  \Drupal::service('module_installer')->install($modules_to_install);
 
 //  // Import config, now that environment is prepped with installed modules.
 //  $new_module_config = [
