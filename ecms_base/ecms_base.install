@@ -1938,6 +1938,7 @@ function ecms_base_update_9102(array &$sandbox): void {
     'crop.type.focal_point',
     'entity_usage.settings',
     'focal_point.settings',
+    'user.role.site_admin',
   ];
   foreach ($new_module_config as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
