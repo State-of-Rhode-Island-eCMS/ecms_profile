@@ -10,9 +10,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-322: Add google_translator patch 3387636 to resolve HTML render error.
+- RIGA-401: Add hook ecms_base_update_9102, enable modules and install config.
+- RIGA-431: Add hook ecms_base_update_9103, enable Google Tag for anonymous.
 
 ### Changed
-
 
 ### Deprecated
 

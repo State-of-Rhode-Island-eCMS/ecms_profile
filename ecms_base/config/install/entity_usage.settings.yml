@@ -17,6 +17,7 @@ track_enabled_target_entity_types:
   - block_content
   - menu_link_content
   - feeds_feed
+  - file
   - media
   - oauth2_token
   - paragraph

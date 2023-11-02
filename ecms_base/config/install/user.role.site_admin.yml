@@ -8,6 +8,7 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access contextual links'
+  - 'access entity usage statistics'
   - 'access taxonomy overview'
   - 'access user profiles'
   - 'access site reports'
