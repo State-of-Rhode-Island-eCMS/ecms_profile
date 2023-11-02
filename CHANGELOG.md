@@ -10,9 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-322: Add google_translator patch 3387636 to resolve HTML render error.
-- RIGA-401: Add hook ecms_base_update_9102, enable modules and install config.
-- RIGA-431: Add hook ecms_base_update_9103, enable Google Tag for anonymous.
 
 ### Changed
 
@@ -23,6 +20,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.10.8] - 2023-11-02
+### Added
+- RIGA-322: Add google_translator patch 3387636 to resolve HTML render error.
+- RIGA-401: Add hook ecms_base_update_9102, enable modules and install config.
+- RIGA-431: Add hook ecms_base_update_9103, enable Google Tag for anonymous.
 
 ## [0.10.7] - 2023-10-19
 ### Changed
@@ -1181,7 +1184,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.8...HEAD
+[0.10.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.7...0.10.8
 [0.10.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.6...0.10.7
 [0.10.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.5...0.10.6
 [0.10.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.4...0.10.5
