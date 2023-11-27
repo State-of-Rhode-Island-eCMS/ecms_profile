@@ -1,0 +1,46 @@
+ecms_migration.settings:
+  type: config_object
+  mapping:
+    ecms_file:
+      type: mapping
+      label: 'Settings for the Basic Page migration'
+      mapping:
+        json_source_url:
+          type: string
+          label: "JSON file URL for the File Migration"
+    ecms_basic_page:
+      type: mapping
+      label: 'Settings for the Basic Page migration'
+      mapping:
+        json_source_url:
+          type: string
+          label: "JSON file URL for the Basic Page Migration"
+        css_selector_1:
+          type: string
+          label: "First CSS Selector"
+        css_selector_2:
+          type: string
+          label: "Second CSS Selector"
+        css_selector_3:
+          type: string
+          label: "Third CSS Selector"
+    ecms_publication:
+      type: mapping
+      label: 'Settings for the Publication migration'
+      mapping:
+        json_source_url:
+          type: string
+          label: "JSON file URL for the Publication Migration"
+
+ecms_migration.migrations:
+  type: config_object
+  mapping:
+    ecms_file:
+      type: sequence
+      label: 'Migration configuration objects for the ecms_file migration'
+    ecms_basic_page:
+      type: sequence
+      label: 'Migration configuration objects for the ecms_basic_page migration'
+    ecms_publication:
+      type: sequence
+      label: 'Migration configuration objects for the ecms_publication migration'

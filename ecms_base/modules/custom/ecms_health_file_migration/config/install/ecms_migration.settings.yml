@@ -1,0 +1,9 @@
+ecms_file:
+  json_source_url: REDACTED
+ecms_basic_page:
+  json_source_url: REDACTED
+  css_selector_1: REDACTED
+  css_selector_2: REDACTED
+  css_selector_3: REDACTED
+ecms_publications:
+  json_source_url: REDACTED
