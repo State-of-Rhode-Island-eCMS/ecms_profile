@@ -1988,3 +1988,17 @@ function ecms_base_update_9103(array &$sandbox): void {
     }
   }
 }
+
+/**
+ * Updates to run for the 0.10.9 tag. Uninstall advagg module by default.
+ */
+function ecms_base_update_9104(array &$sandbox): void {
+
+  // Now advagg will have to be turned on intentionally, instead of by default.
+  $modules_to_uninstall = [
+    'advagg',
+  ];
+
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+}

@@ -10,8 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-434: Add ecms_base_update_9104 to uninstall drupal/advagg.
 
 ### Changed
+- RIGA-434: Uninstall advagg by default, so it has to be explicitly enabled.
 
 ### Deprecated
 
