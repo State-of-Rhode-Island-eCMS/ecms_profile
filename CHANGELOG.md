@@ -10,10 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-434: Add ecms_base_update_9104 to uninstall drupal/advagg.
 
 ### Changed
-- RIGA-434: Uninstall advagg by default, so it has to be explicitly enabled.
 
 ### Deprecated
 
@@ -22,6 +20,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [0.10.9] - 2023-11-30
+### Added
+- RIGA-434: Add ecms_base_update_9104 to uninstall drupal/advagg.
+
+### Changed
+- RIGA-434: Uninstall advagg by default, so it has to be explicitly enabled.
 
 ## [0.10.8] - 2023-11-02
 ### Added
@@ -1186,7 +1191,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.9...HEAD
+[0.10.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.8...0.10.9
 [0.10.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.7...0.10.8
 [0.10.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.6...0.10.7
 [0.10.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.5...0.10.6
