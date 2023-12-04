@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-322: Upgrade drupal/openid_connect_windows_aad ^1.3 => ^2.0@beta.
 
 ### Deprecated
 - RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
