@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-322: Remove outdated openid_connect_windows_aad patch, issue 3169996.
 
 ### Fixed
 
