@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
 
 ### Removed
+- RIGA-322: Remove outdated openid_connect_windows_aad patch, issue 3169996.
 
 ### Fixed
 
