@@ -1,3 +1,7 @@
+dependencies:
+  enforced:
+    module:
+      - migrate_plus
 id: health_file_json_to_resource_media
 label: 'Import publications from JSON source to Resource type Media entities.'
 migration_group: files_json_to_resource_media
@@ -10,35 +14,42 @@ source:
   data_parser_plugin: json
   item_selector: '$.*'
   fields:
-    - name: type_of_material
+    -
+      name: type_of_material
       label: 'Type of Material'
-    - name: subtype_of_material
+    -
+      name: subtype_of_material
       label: 'Subtype of Material'
-    - name: entity
-      label: 'Entity'
-    - name: date_published
+    -
+      name: entity
+      label: Entity
+    -
+      name: date_published
       label: 'Date Published'
-    - name: date_covered
+    -
+      name: date_covered
       label: 'Date Covered'
-    - name: order_form
+    -
+      name: order_form
       label: 'Order Form'
-    - name: language
-      label: 'Language'
-    - name: topic
-      label: 'Topic'
-    - name: audience
-      label: 'Audience'
-    - name: profession
-      label: 'Profession'
-    - name: place
-      label: 'Place'
+    -
+      name: language
+      label: Language
+    -
+      name: topic
+      label: Topic
+    -
+      name: audience
+      label: Audience
+    -
+      name: profession
+      label: Profession
+    -
+      name: place
+      label: Place
   ids:
     path_name:
       type: string
-
-destination:
-  plugin: 'entity:media'
-  media_type: resource
 
 process:
   name: type_of_material
@@ -48,52 +59,57 @@ process:
     entity_type: node
     value_key: title
     bundle_key: type
-    bundle: 'ridoh_org'
+    bundle: ridoh_org
     source: entity
   field_topic:
     plugin: entity_lookup
     entity_type: node
     value_key: title
     bundle_key: type
-    bundle: 'topic'
+    bundle: topic
     source: topic
   field_audience:
-    - plugin: explode
+    -
+      plugin: explode
       delimiter: ','
-    - plugin: entity_generate
+    -
+      plugin: entity_generate
       entity_type: taxonomy_term
       value_key: name
       bundle_key: vid
-      bundle: 'audience'
+      bundle: audience
       ignore_case: true
   field_municipality:
     plugin: entity_generate
     entity_type: taxonomy_term
     value_key: name
     bundle_key: vid
-    bundle: 'municipality'
+    bundle: municipality
     ignore_case: true
   field_external_link:
-    - plugin: callback
+    -
+      plugin: callback
       callable: urldecode
       source: pseudo_path_name
-    - plugin: callback
+    -
+      plugin: callback
       callable: trim
   pseudo_path_name:
     -
       plugin: sub_process
       source: language
       process:
-        path_name: '$.en.path_name'
+        path_name: $.en.path_name
   pseudo_title:
     -
       plugin: sub_process
       source: language
       process:
-        title: '$.en.title'
+        title: $.en.title
 
   langcode:
-    - plugin: static_map
+    -
+      plugin: static_map
       source: language
       map:
         en: en
@@ -108,8 +124,8 @@ process:
         km: km
       default_value: en
 
-dependencies:
-  enforced:
-    module:
-      - ecms_health_file_migration
-      - migrate_plus
+destination:
+  plugin: 'entity:media'
+  media_type: resource
+
+migration_dependencies: null
