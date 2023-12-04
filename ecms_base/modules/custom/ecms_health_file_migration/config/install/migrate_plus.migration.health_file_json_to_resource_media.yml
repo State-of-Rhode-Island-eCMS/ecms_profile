@@ -1,0 +1,78 @@
+id: health_file_json_to_resource_media
+label: 'Import publications from JSON source to Resource type Media entities.'
+migration_group: files_json_to_resource_media
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+  data_parser_plugin: json
+  item_selector: '$.*'
+  fields:
+    - name: type_of_material
+      label: 'Type of Material'
+    - name: subtype_of_material
+      label: 'Subtype of Material'
+    - name: entity
+      label: 'Entity'
+    - name: date_published
+      label: 'Date Published'
+    - name: date_covered
+      label: 'Date Covered'
+    - name: order_form
+      label: 'Order Form'
+    - name: language
+      label: 'Language'
+    - name: topic
+      label: 'Topic'
+    - name: audience
+      label: 'Audience'
+    - name: profession
+      label: 'Profession'
+    - name: place
+      label: 'Place'
+
+destination:
+  plugin: 'entity:media'
+  media_type: resource
+
+process:
+  name: type_of_material
+  field_resource_category: type_of_material
+  field_ridoh_org:
+    plugin: entity_lookup
+    entity_type: node
+    value_key: title
+    bundle_key: type
+    bundle: 'ridoh_org'
+    source: entity
+  field_topic:
+    plugin: entity_lookup
+    entity_type: node
+    value_key: title
+    bundle_key: type
+    bundle: 'topic'
+    source: topic
+  field_audience:
+    - plugin: explode
+      delimiter: ','
+    - plugin: entity_generate
+      entity_type: taxonomy_term
+      value_key: name
+      bundle_key: vid
+      bundle: 'audience'
+      ignore_case: true
+  field_municipality:
+    plugin: entity_generate
+    entity_type: taxonomy_term
+    value_key: name
+    bundle_key: vid
+    bundle: 'municipality'
+    ignore_case: true
+
+dependencies:
+  enforced:
+    module:
+      - ecms_health_file_migration
+      - migrate_plus
