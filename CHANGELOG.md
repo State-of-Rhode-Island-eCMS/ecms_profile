@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-322: Add drupal/core patch issue 3375860 comment 4.
 
 ### Changed
 - RIGA-322: Upgrade drupal/openid_connect 1.x-dev=> ^3.0@alpha.
