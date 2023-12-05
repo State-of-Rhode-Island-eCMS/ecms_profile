@@ -13,7 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-322: Upgrade drupal/openid_connect 1.x-dev=> ^3.0@alpha.
-- RIGA-322: Upgrade drupal/openid_connect_windows_aad ^1.3 => ^2.0@beta.
+- RIGA-322: Upgrade drupal/openid_connect_windows_Update core patch issue 2492171, comment 295 => 404aad ^1.3 => ^2.0@beta.
+- RIGA-322: .
 
 ### Deprecated
 

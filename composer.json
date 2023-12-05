@@ -57,7 +57,7 @@
           "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
           "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2021-02-10/3025039_42.patch",
           "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch",
-          "2492171 - Provide options to sanitize filenames": "https://www.drupal.org/files/issues/2021-07-22/2492171-295_0.patch"
+          "2492171 - Provide options to sanitize filenames": "https://www.drupal.org/files/issues/2023-08-28/2492171-404.patch"
         },
         "drupal/paragraphs": {
           "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
