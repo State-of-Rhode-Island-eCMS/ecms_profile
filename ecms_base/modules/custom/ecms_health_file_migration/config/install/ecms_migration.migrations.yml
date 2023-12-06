@@ -1,9 +1,0 @@
-ecms_file:
-  - migrate_plus.migration.ecms_file
-  - migrate_plus.migration.ecms_file_media
-  - migrate_plus.migration.ecms_file_redirect
-ecms_basic_page:
-  - migrate_plus.migration.ecms_basic_page
-  - migrate_plus.migration.ecms_basic_page_url
-ecms_publications:
-  - migrate_plus.migration.ecms_publications
