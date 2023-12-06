@@ -4,3 +4,6 @@ override_registration_settings: true
 user_login_display: replace
 userinfo_mappings:
   timezone: zoneinfo
+redirect_login: user
+redirect_logout: ''
+end_session_enabled: true

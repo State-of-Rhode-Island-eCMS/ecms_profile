@@ -11,11 +11,13 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-322: Add drupal/core patch issue 3375860 comment 4.
+- RIGA-322: Add hook 'ecms_base_update_9106' to install updated openid_connect config.
 
 ### Changed
 - RIGA-322: Upgrade drupal/openid_connect 1.x-dev=> ^3.0@alpha.
 - RIGA-322: Upgrade drupal/openid_connect_windows_aad ^1.3 => ^2.0@beta.
 - RIGA-322: Update core patch issue 2492171, comment 295 => 404.
+- RIGA-322: Save changed config files for openid_connect update.
 
 ### Deprecated
 - RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
