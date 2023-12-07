@@ -151,15 +151,15 @@ class ResourceMediaEntity extends EntityContentBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, 'media', 'resource_media_destination', MigrationInterface $migration = NULL) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
     $entity_type = static::getEntityTypeId($plugin_id);
     return new static(
       $configuration,
-      $plugin_id,
-      $plugin_definition,
+      'media',
+      'resource_media_destination',
       $migration,
-      $container->get('entity_type.manager')->getStorage($entity_type),
-      array_keys($container->get('entity_type.bundle.info')->getBundleInfo($entity_type)),
+      $container->get('entity_type.manager')->getStorage('media'),
+      array_keys($container->get('entity_type.bundle.info')->getBundleInfo('media')),
       $container->get('entity_field.manager'),
       $container->get('plugin.manager.field.field_type'),
       $container->get('account_switcher')
