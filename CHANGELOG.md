@@ -14,6 +14,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 
 ### Deprecated
+- RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
 
 ### Removed
 
