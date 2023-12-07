@@ -2020,9 +2020,10 @@ function ecms_base_update_9106(array &$sandbox): void {
 
   $newConfig = [
     'migrate_plus.migration_group.files_json_to_resource_media',
-    'migrate_plus.migration.basic_node_create.yml',
-    'migrate_plus.migration.basic_media_create.yml',
-    'migrate_plus.migration.health_file_json_to_resource_media.yml',
+    'migrate_plus.migration.basic_node_create',
+    'migrate_plus.migration.basic_media_create',
+    'migrate_plus.migration.health_file_json_to_resource_media',
+    'migrate_plus.migration.ecms_file',
   ];
 
   // Remove old conflicting config versions first.
