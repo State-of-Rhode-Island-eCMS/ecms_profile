@@ -114,57 +114,57 @@ class ResourceMediaEntity extends EntityContentBase {
 //    * @var \Drupal\Core\Session\AccountSwitcherInterface
 //    */
 //   protected $accountSwitcher;
-//
-//   /**
-//    * Constructs a content entity.
-//    *
-//    * @param array $configuration
-//    *   A configuration array containing information about the plugin instance.
-//    * @param string $plugin_id
-//    *   The plugin ID for the plugin instance.
-//    * @param mixed $plugin_definition
-//    *   The plugin implementation definition.
-//    * @param \Drupal\migrate\Plugin\MigrationInterface $migration
-//    *   The migration entity.
-//    * @param \Drupal\Core\Entity\EntityStorageInterface $storage
-//    *   The storage for this entity type.
-//    * @param array $bundles
-//    *   The list of bundles this entity type has.
-//    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
-//    *   The entity field manager.
-//    * @param \Drupal\Core\Field\FieldTypePluginManagerInterface $field_type_manager
-//    *   The field type plugin manager service.
-//    * @param \Drupal\Core\Session\AccountSwitcherInterface $account_switcher
-//    *   The account switcher service.
-//    */
-//   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, EntityStorageInterface $storage, array $bundles, EntityFieldManagerInterface $entity_field_manager, FieldTypePluginManagerInterface $field_type_manager, AccountSwitcherInterface $account_switcher = NULL) {
-//     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration, $storage, $bundles);
-//     $this->entityFieldManager = $entity_field_manager;
-//     $this->fieldTypeManager = $field_type_manager;
-//     if ($account_switcher === NULL) {
-//       @trigger_error('Calling ' . __NAMESPACE__ . '\EntityContentBase::__construct() without the $account_switcher argument is deprecated in drupal:9.3.0 and will be required in drupal:10.0.0. See https://www.drupal.org/node/3142975', E_USER_DEPRECATED);
-//       $account_switcher = \Drupal::service('account_switcher');
-//     }
-//     $this->accountSwitcher = $account_switcher;
-//   }
 
   /**
-   * {@inheritdoc}
+   * Constructs a content entity.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin ID for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
+   *   The migration entity.
+   * @param \Drupal\Core\Entity\EntityStorageInterface $storage
+   *   The storage for this entity type.
+   * @param array $bundles
+   *   The list of bundles this entity type has.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
+   *   The entity field manager.
+   * @param \Drupal\Core\Field\FieldTypePluginManagerInterface $field_type_manager
+   *   The field type plugin manager service.
+   * @param \Drupal\Core\Session\AccountSwitcherInterface $account_switcher
+   *   The account switcher service.
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
-    $entity_type = static::getEntityTypeId($plugin_id);
-    return new static(
-      $configuration,
-      'media',
-      'resource_media_destination',
-      $migration,
-      $container->get('entity_type.manager')->getStorage('media'),
-      array_keys($container->get('entity_type.bundle.info')->getBundleInfo('media')),
-      $container->get('entity_field.manager'),
-      $container->get('plugin.manager.field.field_type'),
-      $container->get('account_switcher')
-    );
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, EntityStorageInterface $storage, array $bundles, EntityFieldManagerInterface $entity_field_manager, FieldTypePluginManagerInterface $field_type_manager, AccountSwitcherInterface $account_switcher = NULL) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $migration, $storage, $bundles);
+    $this->entityFieldManager = $entity_field_manager;
+    $this->fieldTypeManager = $field_type_manager;
+    if ($account_switcher === NULL) {
+      @trigger_error('Calling ' . __NAMESPACE__ . '\EntityContentBase::__construct() without the $account_switcher argument is deprecated in drupal:9.3.0 and will be required in drupal:10.0.0. See https://www.drupal.org/node/3142975', E_USER_DEPRECATED);
+      $account_switcher = \Drupal::service('account_switcher');
+    }
+    $this->accountSwitcher = $account_switcher;
   }
+
+//   /**
+//    * {@inheritdoc}
+//    */
+//   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
+//     $entity_type = static::getEntityTypeId($plugin_id);
+//     return new static(
+//       $configuration,
+//       'media',
+//       'resource_media_destination',
+//       $migration,
+//       $container->get('entity_type.manager')->getStorage('media'),
+//       array_keys($container->get('entity_type.bundle.info')->getBundleInfo('media')),
+//       $container->get('entity_field.manager'),
+//       $container->get('plugin.manager.field.field_type'),
+//       $container->get('account_switcher')
+//     );
+//   }
 
 //   /**
 //    * {@inheritdoc}
