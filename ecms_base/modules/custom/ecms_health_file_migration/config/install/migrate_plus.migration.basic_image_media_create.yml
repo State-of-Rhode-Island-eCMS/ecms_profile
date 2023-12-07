@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - migrate_plus
+_core:
+  default_config_hash: hIe0RoHpMmpxbDRo_-0IlyDPMqdVmjb-7a9YTBNuw8s
+id: basic_image_media_create
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: files_json_to_resource_media
+label: 'Basic: import JSON source to Drupal Image media entities.'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - 'https://jsonplaceholder.typicode.com/todos'
+  data_parser_plugin: json
+  item_selector: '[*]'
+  fields:
+    -
+      name: title
+      label: Title
+      selector: title
+    -
+      name: id
+      label: ID
+      selector: id
+  ids:
+    id:
+      type: integer
+process:
+  title:
+    -
+      plugin: get
+      source: title
+  bundle:
+    -
+      plugin: default_value
+      default_value: media_item_image
+destination:
+  plugin: 'entity:media'
+  default_bundle: media_item_image
+  validate: false
+migration_dependencies: null
