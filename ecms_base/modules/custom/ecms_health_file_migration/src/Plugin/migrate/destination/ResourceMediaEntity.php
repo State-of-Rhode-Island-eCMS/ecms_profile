@@ -19,6 +19,7 @@ use Drupal\migrate\Exception\EntityValidationException;
 use Drupal\migrate\Plugin\MigrateValidatableEntityInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\MigrateException;
+use Drupal\migrate\Plugin\migrate\destination\EntityContentBase;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
 use Drupal\migrate\Row;
 use Drupal\user\EntityOwnerInterface;
