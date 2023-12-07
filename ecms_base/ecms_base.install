@@ -2006,13 +2006,7 @@ function ecms_base_update_9104(array &$sandbox): void {
 /**
  * Updates to run for the 0.10.10 tag.
  */
-function ecms_base_update_9105(array &$sandbox): void {
-
-  // Install new migrations module.
-  $modules_to_install = [
-    'ecms_health_file_migration',
-  ];
-  \Drupal::service('module_installer')->install($modules_to_install);
+function ecms_base_update_9106(array &$sandbox): void {
 
   // Config updates for new modules.
   $base_path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
@@ -2031,14 +2025,18 @@ function ecms_base_update_9105(array &$sandbox): void {
     'migrate_plus.migration.health_file_json_to_resource_media.yml',
   ];
 
-  \Drupal::logger('my_module')->notice(print_r('pre-delete', TRUE));
-  // Remove old versions.
+  // Remove old conflicting config versions first.
   foreach ($newConfig as $config) {
     $active_storage->delete("{$config}");
   }
-  \Drupal::logger('my_module')->notice(print_r('post-delete, pre-save', TRUE));
-  foreach ($newConfig as $config) {
-    $active_storage->write("{$config}", $module_install_source->read("{$config}"));
-  }
-  \Drupal::logger('my_module')->notice(print_r('post-save', TRUE));
+
+  // Install new migrations module.
+  $modules_to_install = [
+    'ecms_health_file_migration',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+//  foreach ($newConfig as $config) {
+//    $active_storage->write("{$config}", $module_install_source->read("{$config}"));
+//  }
 }
