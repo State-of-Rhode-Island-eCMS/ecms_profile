@@ -1,6 +1,0 @@
-ecms_migration.ecms_migration_settings:
-  title: 'eCMS Migration Settings'
-  route_name: ecms_migration.settings_form
-  description: 'Setup the source data for the eCMS migration.'
-  parent: migrate_tools.menu
-  weight: 99

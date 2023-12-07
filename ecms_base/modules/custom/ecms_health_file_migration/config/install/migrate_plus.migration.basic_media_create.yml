@@ -40,5 +40,7 @@ process:
       plugin: default_value
       default_value: resource
 destination:
-  plugin: 'entity:media'
+  plugin: 'resource_media_destination'
+  default_bundle: resource
+  validate: false
 migration_dependencies: null

@@ -1,10 +1,9 @@
-name: 'eCMS Migration'
+name: 'eCMS Health File Migration'
 type: module
-description: 'Migrate a site into the eCMS platform.'
+description: 'Migrate files from JSON source to Resource Media entities.'
 core_version_requirement: ^9 || ^10
 package: 'Migration'
 dependencies:
   - drupal:migration_tools
   - drupal:migrate_tools
   - drupal:migrate_process_trim
-  - ecms_migration_file

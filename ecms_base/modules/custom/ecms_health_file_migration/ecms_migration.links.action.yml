@@ -1,5 +1,0 @@
-ecms_migration.ecms_settings_action:
-  route_name: ecms_migration.settings_form
-  title: 'Update eCMS migration settings'
-  appears_on:
-    - entity.migration_group.list

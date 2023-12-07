@@ -1,7 +1,0 @@
-ecms_migration.settings_form:
-  path: 'admin/structure/migrate/ecms_migration/settings'
-  defaults:
-    _form: '\Drupal\ecms_migration\Form\EcmsMigrationConfigForm'
-    _title: 'eCMS Migration Settings'
-  requirements:
-    _permission: 'administer site configuration'
