@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\ecms_health_file_migration\Plugin\migrate\destination;
 
+use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
