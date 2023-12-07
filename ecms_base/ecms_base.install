@@ -2003,7 +2003,6 @@ function ecms_base_update_9104(array &$sandbox): void {
 
 }
 
-
 /**
  * Updates to run for the 0.11.0 tag. Uninstall deprecated core modules.
  */
