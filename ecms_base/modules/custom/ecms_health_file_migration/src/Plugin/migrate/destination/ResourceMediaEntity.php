@@ -95,7 +95,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "resource_media_destination"
  * )
  */
-class ResourceMediaEntity extends Entity implements EntityContentBase {
+class ResourceMediaEntity extends EntityContentBase {
 
   /**
    * Field type plugin manager.
