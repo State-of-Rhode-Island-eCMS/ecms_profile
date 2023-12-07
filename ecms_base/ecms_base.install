@@ -2031,6 +2031,11 @@ function ecms_base_update_9105(array &$sandbox): void {
     'migrate_plus.migration.health_file_json_to_resource_media.yml',
   ];
 
+  // Remove old versions.
+  foreach ($newConfig as $config) {
+    $active_storage->delete("{$config}");
+  }
+
   foreach ($newConfig as $config) {
     $active_storage->write("{$config}", $module_install_source->read("{$config}"));
   }
