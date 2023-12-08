@@ -1,0 +1,110 @@
+id: health_json_resource
+migration_group: files_json_to_resource_media
+label: 'Import health JSON source to Drupal media entities - resources.'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+  data_parser_plugin: json
+  item_selector: '[*]'
+  fields:
+    -
+      name: title
+      label: Title
+      selector: title
+    -
+      name: type_of_material
+      label: Type of Material
+      selector: type_of_material
+    -
+      name: audience
+      label: ID
+      selector: audience
+    -
+      name: entity
+      label: Entity
+      selector: entity
+  ids:
+    entity:
+      type: string
+    audience:
+      type: string
+    type_of_material:
+      type: string
+process:
+  title:
+    -
+      plugin: get
+      source: title
+  field_description:id: health_json_resource
+migration_group: files_json_to_resource_media
+label: 'Import health JSON source to Drupal media entities - resources.'
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+  data_parser_plugin: json
+  item_selector: '[*]'
+  fields:
+    -
+      name: title
+      label: Title
+      selector: title
+    -
+      name: type_of_material
+      label: Type of Material
+      selector: type_of_material
+    -
+      name: audience
+      label: ID
+      selector: audience
+    -
+      name: entity
+      label: Entity
+      selector: entity
+  ids:
+    entity:
+      type: string
+    audience:
+      type: string
+    type_of_material:
+      type: string
+process:
+  title:
+    -
+      plugin: get
+      source: title
+  field_description:
+    -
+      plugin: get
+      source: entity
+  bundle:
+    -
+      plugin: default_value
+      default_value: 'resource'
+  field_media_file:
+    -
+      plugin: default_value
+      default_value: 11
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: resource
+
+    -
+      plugin: get
+      source: entity
+  bundle:
+    -
+      plugin: default_value
+      default_value: 'resource'
+  field_media_file:
+    -
+      plugin: default_value
+      default_value: 11
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: resource

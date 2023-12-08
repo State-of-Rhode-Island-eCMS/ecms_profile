@@ -28,7 +28,7 @@ process:
   bundle:
     -
       plugin: default_value
-      default_value: 'feature'
+      default_value: 'resource'
   field_media_file:
     -
       plugin: default_value
@@ -36,4 +36,4 @@ process:
 
 destination:
   plugin: 'entity:media'
-  default_bundle: feature
+  default_bundle: resource
