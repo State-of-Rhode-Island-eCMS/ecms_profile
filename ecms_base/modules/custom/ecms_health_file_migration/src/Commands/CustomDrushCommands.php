@@ -35,7 +35,7 @@ class CustomDrushCommands extends DrushCommands {
    * @aliases make-fake-media
    * @usage ecms_health_file_migration:make-fake-media-entity
    */
-  public function makeMediaEntity() {
+  public function makeFakeMediaEntity() {
 
     $entity = \Drupal::entityTypeManager()
       ->getStorage('media')
