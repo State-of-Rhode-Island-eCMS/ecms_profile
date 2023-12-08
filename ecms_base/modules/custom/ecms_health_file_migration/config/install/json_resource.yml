@@ -25,6 +25,14 @@ process:
     -
       plugin: get
       source: title
+  bundle:
+    -
+      plugin: default_value
+      default_value: 'feature'
+  field_media_file:
+    -
+      plugin: default_value
+      default_value: 11
 
 destination:
   plugin: 'entity:media'

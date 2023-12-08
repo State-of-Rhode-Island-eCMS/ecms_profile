@@ -1,0 +1,5 @@
+services:
+  ecms_health_file_migration.commands:
+    class: \Drupal\ecms_health_file_migration\Commands\CustomDrushCommands
+    tags:
+      - { name: drush.command }
