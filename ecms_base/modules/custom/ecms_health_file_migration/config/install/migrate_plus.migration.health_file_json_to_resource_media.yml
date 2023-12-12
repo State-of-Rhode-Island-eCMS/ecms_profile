@@ -1,0 +1,49 @@
+id: health_file_json_to_resource_media
+label: 'Import publications from JSON source to Resource type Media entities'
+migration_group: files_json_to_resource_media
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  urls:
+    - 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+  data_parser_plugin: json
+  item_selector: '[*]'
+  fields:
+    -
+      name: type_of_material
+      label: 'Type of Material'
+      selector: type_of_material
+    -
+      name: subtype_of_material
+      label: 'Subtype of Material'
+      selector: subtype_of_material
+    -
+      name: audience
+      label: Audience
+      selector: audience
+    -
+      name: place
+      label: Place
+      selector: place
+    -
+      name: path_name
+      label: Path Name
+      selector: /language/en/path_name
+    -
+      name: title
+      label: Title
+      selector: /language/en/title
+  ids:
+    title:
+      type: string
+    path_name:
+      type: string
+
+process:
+  name: title
+  field_description: type_of_material
+
+destination:
+  plugin: 'entity:media'
+  default_bundle: resource
