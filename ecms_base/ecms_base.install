@@ -2002,3 +2002,19 @@ function ecms_base_update_9104(array &$sandbox): void {
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
 }
+
+/**
+ * Updates to run for the 0.11.0 tag. Uninstall deprecated core modules.
+ */
+function ecms_base_update_9105(array &$sandbox): void {
+
+  // These modules are removed from D10, so we need to disable them now.
+  $modules_to_uninstall = [
+    'color',
+    'quickedit',
+    'rdf',
+  ];
+
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+}
