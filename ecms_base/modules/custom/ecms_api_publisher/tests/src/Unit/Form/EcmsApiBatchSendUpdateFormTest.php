@@ -89,7 +89,6 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
       ->setName('batch_set')
       ->setFunction(
         function (array $batch) {
-          return;
         }
       );
 

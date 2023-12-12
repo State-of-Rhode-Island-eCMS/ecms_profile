@@ -117,7 +117,6 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
       ->setName('drupal_flush_all_caches')
       ->setFunction(
         function () {
-          return;
         }
       );
 
