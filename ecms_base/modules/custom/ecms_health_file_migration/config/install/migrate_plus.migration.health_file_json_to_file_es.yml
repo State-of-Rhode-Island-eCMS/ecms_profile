@@ -1,0 +1,147 @@
+# Migrate a JSON file of URLs as file entities into the eCMS system.
+id: health_file_json_to_file_es
+label: Migrate health files into the eCMS system (ES).
+migration_group: files_json_to_resource_media
+
+destination:
+  plugin: 'entity:file'
+
+source:
+  constants:
+    DRUPAL_FILE_DIRECTORY: 'public://'
+    DIRECTORY_SEPERATOR: '/'
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  # The JSON source file URL for the migration.
+  urls: 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+  # Under 'fields', we list the data items to be imported. The first level keys
+  # are the source field names we want to populate (the names to be used as
+  # sources in the process configuration below). For each field we're importing,
+  # we provide a label (optional - this is for display in migration tools) and
+  # an selector (xpath) for retrieving that value. It's important to note that this xpath
+  # is relative to the elements retrieved by item_selector.
+
+  item_selector: '[*]'
+  fields:
+    -
+      name: id
+      label: 'ID'
+      selector: id
+    -
+      name: type_of_material
+      label: 'Type of Material'
+      selector: type_of_material
+    -
+      name: subtype_of_material
+      label: 'Subtype of Material'
+      selector: subtype_of_material
+    -
+      name: audience
+      label: Audience
+      selector: audience
+    -
+      name: place
+      label: Place
+      selector: place
+    -
+      name: path_name
+      label: 'Path Name'
+      selector: /language/es/path_name
+    -
+      name: title
+      label: Title
+      selector: /language/es/title
+  ids:
+    id:
+      type: integer
+
+  # Use the ID as the key unique migration identifier.
+  keys:
+    - id
+
+process:
+  # Extract the filepath from the url.
+  pseudo_file_path:
+    - plugin: callback
+      callable: parse_url
+      source: path_name
+    - plugin: extract
+      index:
+        - path
+
+  pseudo_directory_path:
+    - plugin: callback
+      callable: pathinfo
+      source: '@pseudo_file_path'
+    - plugin: extract
+      index:
+        - dirname
+
+  pseudo_directory:
+    - plugin: concat
+      source:
+        - '@pseudo_directory_path'
+        - constants/DIRECTORY_SEPERATOR
+
+  pseudo_filename:
+    - plugin: callback
+      callable: pathinfo
+      source: '@pseudo_file_path'
+    - plugin: extract
+      index:
+        - basename
+    - plugin: skip_on_empty
+      method: row
+      message: 'Cannot import empty filename.'
+    - plugin: callback
+      callable: urldecode
+    - plugin: service
+      service: transliteration
+      method: transliterate
+    - plugin: str_replace
+      search: ' '
+      replace: '-'
+    - plugin: callback
+      callable: trim
+
+
+  pseudo_basename:
+    - plugin: callback
+      callable: pathinfo
+      source: '@pseudo_file_path'
+    - plugin: extract
+      index:
+        - basename
+
+  pseudo_destination_path:
+    - plugin: concat
+      source:
+        - constants/DRUPAL_FILE_DIRECTORY
+        - '@pseudo_directory'
+        - '@pseudo_basename'
+    - plugin: callback
+      callable: urldecode
+    - plugin: service
+      service: transliteration
+      method: transliterate
+    - plugin: str_replace
+      search: ' '
+      replace: '-'
+    - plugin: callback
+      callable: trim
+
+  filename: '@pseudo_filename'
+  uri:
+    - plugin: file_copy
+      source:
+        - path_name
+        - '@pseudo_destination_path'
+      file_exists: replace
+      move: false
+
+# Add an enforced dependency so the config uninstalls with the module.
+dependencies:
+  enforced:
+    module:
+      - ecms_migration

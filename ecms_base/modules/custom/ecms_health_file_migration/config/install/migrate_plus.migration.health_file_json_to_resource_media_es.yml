@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies: {  }
 
-id: health_file_json_to_resource_media
+id: health_file_json_to_resource_media_es
 class: null
 field_plugin_method: null
 cck_plugin_method: null
 migration_tags: null
 migration_group: files_json_to_resource_media
-label: 'Import publications from JSON source to Resource type Media entities'
+label: 'Import publications from JSON source to Resource type Media entities (ES)'
 source:
   plugin: url
   data_fetcher_plugin: http
@@ -22,29 +22,13 @@ source:
       label: 'ID'
       selector: id
     -
-      name: type_of_material
-      label: 'Type of Material'
-      selector: type_of_material
-    -
-      name: subtype_of_material
-      label: 'Subtype of Material'
-      selector: subtype_of_material
-    -
-      name: audience
-      label: Audience
-      selector: audience
-    -
-      name: place
-      label: Place
-      selector: place
-    -
       name: path_name
       label: 'Path Name'
-      selector: /language/en/path_name
+      selector: /language/es/path_name
     -
       name: title
       label: Title
-      selector: /language/en/title
+      selector: /language/es/title
   ids:
     id:
       type: integer
@@ -54,15 +38,23 @@ source:
     - id
 
 process:
+  mid:
+    - plugin: migration_lookup
+      migration: health_file_json_to_resource_media
+      source: id
+  langcode:
+    - plugin: default_value
+      default_value: es
   name: title
-  field_description: type_of_material
   field_media_file/target_id:
     - plugin: migration_lookup
-      migration: health_file_json_to_file
+      migration: health_file_json_to_file_es
       source: id
 destination:
   plugin: 'entity:media'
   default_bundle: resource
+  translations: true
 migration_dependencies:
   required:
-    - health_file_json_to_file
+    - health_file_json_to_resource_media
+    - health_file_json_to_file_es
