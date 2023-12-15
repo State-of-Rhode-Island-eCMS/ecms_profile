@@ -14,7 +14,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   # The JSON source file URL for the migration.
-  urls: 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+  urls: 'https://health.ri.gov/rss/pubs/publications-all-es.json.php'
   # Under 'fields', we list the data items to be imported. The first level keys
   # are the source field names we want to populate (the names to be used as
   # sources in the process configuration below). For each field we're importing,
