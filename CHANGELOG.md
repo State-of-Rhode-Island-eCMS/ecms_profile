@@ -18,12 +18,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-322: Upgrade drupal/openid_connect_windows_aad ^1.3 => ^2.0@beta.
 - RIGA-322: Update core patch issue 2492171, comment 295 => 404.
 - RIGA-322: Save changed config files for openid_connect update.
+- RIGA-322: Upgrade hash for drupal_git/migration_tools.
+- RIGA-322: Upgrade hash for drupal_git/migrate_process_trim.
 
 ### Deprecated
 - RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
 
 ### Removed
 - RIGA-322: Remove outdated openid_connect_windows_aad patch, issue 3169996.
+- RIGA-322: Remove outdated patches for drupal_git/migration_tools.
+- RIGA-322: Remove outdated patch for drupal_git/migrate_process_trim.
 
 ### Fixed
 
