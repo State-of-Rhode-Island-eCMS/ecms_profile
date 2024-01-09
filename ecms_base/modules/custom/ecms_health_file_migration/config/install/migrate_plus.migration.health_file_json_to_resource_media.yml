@@ -1,7 +1,6 @@
 langcode: en
 status: true
 dependencies: {  }
-
 id: health_file_json_to_resource_media
 class: null
 field_plugin_method: null
@@ -19,8 +18,12 @@ source:
   fields:
     -
       name: id
-      label: 'ID'
+      label: ID
       selector: id
+    -
+      name: entity
+      label: Entity
+      selector: entity
     -
       name: type_of_material
       label: 'Type of Material'
@@ -48,18 +51,26 @@ source:
   ids:
     id:
       type: integer
-
-  # Use the ID as the key unique migration identifier.
   keys:
     - id
-
 process:
   name: title
   field_description: type_of_material
   field_media_file/target_id:
-    - plugin: migration_lookup
+    -
+      plugin: migration_lookup
       migration: health_file_json_to_file
       source: id
+  field_ridoh_org:
+    -
+      plugin: entity_lookup
+      source: entity
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: ridoh_org
 destination:
   plugin: 'entity:media'
   default_bundle: resource
