@@ -12,7 +12,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - 'https://health.ri.gov/rss/pubs/publications-all-en.json.php'
+    - 'https://health.ri.gov/rss/pubs/publications-media-en.json.php'
   data_parser_plugin: json
   item_selector: '[*]'
   fields:
