@@ -7,7 +7,6 @@
 
 declare(strict_types = 1);
 
-use Drupal\Core\File\FileUrlGenerator;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Row;
@@ -18,7 +17,7 @@ use Drupal\taxonomy\Entity\Term;
  */
 function ecms_health_file_migration_migrate_health_file_redirect_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
   // Ensure we have the right public files directory for the current site.
-  $public_file_path = rtrim(FileUrlGenerator::transformRelative(\Drupal::service('file_url_generator')->generateAbsoluteString('public://')), "/");
+  $public_file_path = rtrim(\Drupal::service('file_url_generator')->transformRelative(\Drupal::service('file_url_generator')->generateAbsoluteString('public://')), "/");
 
   // Make sure this is a valid internal Uri.
   $public_file_path = "internal:{$public_file_path}";
@@ -32,7 +31,7 @@ function ecms_health_file_migration_migrate_health_file_redirect_prepare_row(Row
  */
 function ecms_health_file_migration_migrate_health_file_redirect_es_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration): void {
   // Ensure we have the right public files directory for the current site.
-  $public_file_path = rtrim(FileUrlGenerator::transformRelative(\Drupal::service('file_url_generator')->generateAbsoluteString('public://')), "/");
+  $public_file_path = rtrim(\Drupal::service('file_url_generator')->transformRelative(\Drupal::service('file_url_generator')->generateAbsoluteString('public://')), "/");
 
   // Make sure this is a valid internal Uri.
   $public_file_path = "internal:{$public_file_path}";
