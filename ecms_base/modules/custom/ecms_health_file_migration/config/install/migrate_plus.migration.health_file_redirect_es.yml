@@ -28,29 +28,13 @@ source:
       label: ID
       selector: id
     -
-      name: type_of_material
-      label: 'Type of Material'
-      selector: type_of_material
-    -
-      name: subtype_of_material
-      label: 'Subtype of Material'
-      selector: subtype_of_material
-    -
-      name: audience
-      label: Audience
-      selector: audience
-    -
-      name: place
-      label: Place
-      selector: place
-    -
       name: path_name
       label: 'Path Name'
-      selector: /language/en/path_name
+      selector: /language/es/path_name
     -
       name: title
       label: Title
-      selector: /language/en/title
+      selector: /language/es/title
   ids:
     id:
       type: integer
