@@ -20,7 +20,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   urls:
-    - 'https://health.ri.gov/rss/pubs/publications-all-en.json.php'
+    - 'https://health.ri.gov/rss/pubs/publications-media-en.json.php'
   item_selector: '[*]'
   fields:
     -
