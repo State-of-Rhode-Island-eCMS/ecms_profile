@@ -25,6 +25,14 @@ source:
       label: Entity
       selector: entity
     -
+      name: topic
+      label: Topic
+      selector: topic
+    -
+      name: profession
+      label: Profession
+      selector: profession
+    -
       name: type_of_material
       label: 'Type of Material'
       selector: type_of_material
@@ -55,7 +63,6 @@ source:
     - id
 process:
   name: title
-  field_description: type_of_material
   field_media_file/target_id:
     -
       plugin: migration_lookup
@@ -71,6 +78,26 @@ process:
       entity_type: node
       value_key: title
       bundle: ridoh_org
+  field_topic:
+    -
+      plugin: entity_lookup
+      source: topic
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: topic
+  field_licensee:
+    -
+      plugin: entity_lookup
+      source: profession
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: licensee
 destination:
   plugin: 'entity:media'
   default_bundle: resource
