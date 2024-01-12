@@ -123,4 +123,4 @@ destination:
   plugin: 'entity:redirect'
 migration_dependencies:
   required:
-    - health_file_json_to_file_es
+    - health_file_json_to_file
