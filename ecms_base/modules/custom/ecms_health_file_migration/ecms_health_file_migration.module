@@ -83,7 +83,6 @@ function ecms_health_file_migration_migrate_health_file_json_to_resource_media_p
     $row->setDestinationProperty('field_licensee', $profession_nids);
   }
 
-
 }
 
 /**
