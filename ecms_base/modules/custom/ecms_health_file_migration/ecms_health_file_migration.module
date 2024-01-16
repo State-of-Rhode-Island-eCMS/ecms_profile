@@ -69,23 +69,21 @@ function ecms_health_file_migration_migrate_health_file_json_to_resource_media_p
   $municipality_term_ids = ecms_health_file_migration_get_or_create_term_ids($municipality, 'municipalities');
   $row->setDestinationProperty('field_municipality', $municipality_term_ids);
 
-  // Set file reference or external link.
-  $path_name = $row->getSourceProperty('path_name');
-  if (isset($path_name) && $path_name !== '') {
-    // Decode the URL to handle escape characters.
-    $path = rawurldecode($path_name);
-
-    // Use preg_match to check if the base URL is present.
-    // If so, create File and set 'field_media_file'.
-    if (preg_match("/health\.ri\.gov/", $path)) {
-
-      // If so, create File and set 'field_media_file' here.
-    }
-    else {
-      // If external, set as 'field_external_link'.
-      $row->setDestinationProperty('field_external_link', $path);
-    }
+  // Set topic references.
+  $health_topics = $row->getSourceProperty('topic');
+  $topic_nids = ecms_health_file_migration_get_node_reference_ids($health_topics, 'topic');
+  if (!empty($topic_nids)) {
+    $row->setDestinationProperty('field_topic', $topic_nids);
   }
+
+  // Set topic references.
+  $professions = $row->getSourceProperty('profession');
+  $profession_nids = ecms_health_file_migration_get_node_reference_ids($professions, 'licensee');
+  if (!empty($profession_nids)) {
+    $row->setDestinationProperty('field_licensee', $profession_nids);
+  }
+
+
 }
 
 /**
@@ -122,4 +120,30 @@ function ecms_health_file_migration_get_or_create_term_ids($taxonomy_names_array
 
   // Return the combined term IDs.
   return $term_ids;
+}
+
+/**
+ * Helper function, matches existing node titles.
+ */
+function ecms_health_file_migration_get_node_reference_ids($node_label_array, string $bundle): array {
+  // Get node ids from the bundle.
+  $node_ids = [];
+  foreach ($node_label_array as $k => $name) {
+    // Case-insensitive search for existing term in the given vocabulary.
+    $existing_node = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties([
+        'type' => mb_strtolower($bundle),
+        'title' => $name,
+      ]);
+
+    if (!empty($existing_node)) {
+      // Use the existing node id.
+      $node_ids[] = key($existing_node);
+    }
+
+  }
+
+  // Return the combined node IDs.
+  return $node_ids;
 }
