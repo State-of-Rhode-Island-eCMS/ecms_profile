@@ -10,17 +10,15 @@ field_plugin_method: null
 cck_plugin_method: null
 migration_tags: null
 migration_group: files_json_to_resource_media
-label: 'Setup file redirects for the ecms_health_file migration (ES).'
+label: 'Migrate health files into the eCMS system (ES).'
 source:
   constants:
-    DRUPAL_FILE_DIRECTORY: sites/default/files
+    DRUPAL_FILE_DIRECTORY: 'public://'
     DIRECTORY_SEPERATOR: /
-    REDIRECT_CODE: 301
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: json
-  urls:
-    - 'https://health.ri.gov/rss/pubs/publications-all-es.json.php'
+  urls: 'https://health.ri.gov/rss/pubs/publications-all-es.json.php'
   item_selector: '[*]'
   fields:
     -
@@ -41,7 +39,7 @@ source:
   keys:
     - id
 process:
-  pseudo_original_filepath:
+  pseudo_file_path:
     -
       plugin: callback
       callable: parse_url
@@ -54,7 +52,7 @@ process:
     -
       plugin: callback
       callable: pathinfo
-      source: '@pseudo_original_filepath'
+      source: '@pseudo_file_path'
     -
       plugin: extract
       index:
@@ -65,6 +63,19 @@ process:
       source:
         - '@pseudo_directory_path'
         - constants/DIRECTORY_SEPERATOR
+  pseudo_filename:
+    -
+      plugin: callback
+      callable: pathinfo
+      source: '@pseudo_file_path'
+    -
+      plugin: extract
+      index:
+        - basename
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Cannot import empty filename.'
     -
       plugin: callback
       callable: urldecode
@@ -83,11 +94,18 @@ process:
     -
       plugin: callback
       callable: pathinfo
-      source: '@pseudo_original_filepath'
+      source: '@pseudo_file_path'
     -
       plugin: extract
       index:
         - basename
+  pseudo_destination_path:
+    -
+      plugin: concat
+      source:
+        - constants/DRUPAL_FILE_DIRECTORY
+        - '@pseudo_directory'
+        - '@pseudo_basename'
     -
       plugin: callback
       callable: urldecode
@@ -102,25 +120,15 @@ process:
     -
       plugin: callback
       callable: trim
-  pseudo_new_file_path:
+  filename: '@pseudo_filename'
+  uri:
     -
-      plugin: concat
+      plugin: file_copy
       source:
-        - constants/DRUPAL_FILE_DIRECTORY
-        - '@pseudo_directory'
-        - '@pseudo_basename'
-  redirect_redirect: '@pseudo_new_file_path'
-  redirect_source:
-    -
-      plugin: ltrim
-      mask: /
-      source: '@pseudo_original_filepath'
-    -
-      plugin: callback
-      callable: urldecode
-  status_code: constants/REDIRECT_CODE
+        - path_name
+        - '@pseudo_destination_path'
+      file_exists: replace
+      move: false
 destination:
-  plugin: 'entity:redirect'
-migration_dependencies:
-  required:
-    - health_file_json_to_file
+  plugin: 'entity:file'
+migration_dependencies: null
