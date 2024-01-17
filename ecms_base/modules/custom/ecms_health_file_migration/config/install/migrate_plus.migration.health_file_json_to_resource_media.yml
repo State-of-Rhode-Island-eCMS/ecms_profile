@@ -56,6 +56,14 @@ source:
       name: title
       label: Title
       selector: /language/en/title
+    -
+      name: date_published
+      label: Date Published
+      selector: date_published
+    -
+      name: order_form
+      label: Order Form
+      selector: order_form
   ids:
     id:
       type: integer
@@ -98,6 +106,19 @@ process:
       entity_type: node
       value_key: title
       bundle: licensee
+  created:
+    -
+      plugin: format_date
+      source: date_published
+      from_format: 'Y-m-d'
+      to_format: 'U'
+      from_timezone: 'UTC'
+      to_timezone: 'UTC'
+  field_available_for_online_order:
+    -
+      plugin: get
+      source: order_form
+      default_value: false
 destination:
   plugin: 'entity:media'
   default_bundle: resource
