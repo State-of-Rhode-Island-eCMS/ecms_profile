@@ -83,6 +83,23 @@ function ecms_health_file_migration_migrate_health_file_json_to_resource_media_p
     $row->setDestinationProperty('field_licensee', $profession_nids);
   }
 
+  // Provide a default date if none is provided.
+  $created_date = $row->getSourceProperty('date_published');
+
+  if (is_null($created_date)) {
+    $row->setSourceProperty('date_published', date_format(new DateTime(), 'Y-m-d'));
+  }
+
+  // Provide a default order_form value.
+  $online_order = $row->getSourceProperty('order_form');
+
+  if (is_null($online_order)) {
+    $row->setSourceProperty('order_form', 0);
+  }
+  else {
+    $row->setSourceProperty('order_form', 1);
+  }
+
 }
 
 /**
