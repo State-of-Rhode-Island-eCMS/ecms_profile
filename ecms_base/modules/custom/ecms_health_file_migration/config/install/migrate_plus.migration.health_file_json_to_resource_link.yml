@@ -12,7 +12,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - 'https://ecms-distribution.lndo.site/sites/default/files/resource_link/resource_link_sample.json'
+    - 'http://healthv2.test-riecms.acsitefactory.com/sites/g/files/xkgbur1006/files/2024-01/Resource%20link%20sample.json'
   data_parser_plugin: json
   item_selector: '[*]'
   fields:
