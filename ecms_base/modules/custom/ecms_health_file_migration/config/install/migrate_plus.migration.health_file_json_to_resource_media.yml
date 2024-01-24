@@ -64,6 +64,10 @@ source:
       name: order_form
       label: Order Form
       selector: order_form
+    -
+      name: date_covered
+      label: Date Covered
+      selector: date_covered
   ids:
     id:
       type: integer
@@ -71,6 +75,7 @@ source:
     - id
 process:
   name: title
+  field_date_covered: date_covered
   field_media_file/target_id:
     -
       plugin: migration_lookup
