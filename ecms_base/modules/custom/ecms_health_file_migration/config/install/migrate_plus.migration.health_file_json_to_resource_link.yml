@@ -12,7 +12,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - 'https://ecms-distribution.lndo.site/sites/default/files/resource_link/resource_link_sample.json'
+    - 'https://health.ri.gov/rss/pubs/publications-resource-links.json.php'
   data_parser_plugin: json
   item_selector: '[*]'
   fields:
