@@ -124,7 +124,7 @@ function ecms_health_file_migration_get_or_create_term_ids($taxonomy_names_array
     else {
       // Create a new term.
       $term = Term::create([
-        'vid' => 'resource_category',
+        'vid' => $vocabulary_id,
         'name' => $name,
       ]);
       $term->save();
@@ -162,4 +162,63 @@ function ecms_health_file_migration_get_node_reference_ids($node_label_array, st
 
   // Return the combined node IDs.
   return $node_ids;
+}
+
+
+/**
+ * Implements hook_migrate_MIGRATION_ID_prepare_row() for ecms_health_file_migration.
+ */
+function ecms_health_file_migration_migrate_health_file_json_to_resource_link_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
+
+  // Set audience taxonomy.
+  $audience = $row->getSourceProperty('audience');
+  //  dump($audience);
+  $audience_term_ids = ecms_health_file_migration_get_or_create_term_ids($audience, 'audience');
+  $row->setDestinationProperty('field_audience', $audience_term_ids);
+
+  // Set topic references.
+  $health_topics = $row->getSourceProperty('topic');
+  $topic_nids = ecms_health_file_migration_get_node_reference_ids($health_topics, 'topic');
+  if (!empty($topic_nids)) {
+    $row->setDestinationProperty('field_topic', $topic_nids);
+  }
+
+  // Set profession references.
+  $professions = $row->getSourceProperty('profession');
+  $profession_nids = ecms_health_file_migration_get_node_reference_ids($professions, 'licensee');
+  if (!empty($profession_nids)) {
+    $row->setDestinationProperty('field_licensee', $profession_nids);
+  }
+
+  // Set municipality taxonomy.
+  $municipality = $row->getSourceProperty('place');
+  $municipality_term_ids = ecms_health_file_migration_get_or_create_term_ids($municipality, 'municipalities');
+  $row->setDestinationProperty('field_municipality', $municipality_term_ids);
+
+  // Combine the "resource type" values into a single array.
+  $type_of_material = $row->getSourceProperty('type_of_material');
+  $subtype_of_material = $row->getSourceProperty('subtype_of_material');
+  $combined_type_fields = [];
+  // Add the non-null and non-empty values to the array.
+  if ($type_of_material !== NULL && $type_of_material !== '') {
+    $combined_type_fields[] = $type_of_material;
+  }
+  if ($subtype_of_material !== NULL && $subtype_of_material !== '') {
+    $combined_type_fields[] = $subtype_of_material;
+  }
+  $resource_category_term_ids = ecms_health_file_migration_get_or_create_term_ids($combined_type_fields, 'resource_category');
+  $row->setDestinationProperty('field_resource_category', $resource_category_term_ids);
+
+  // Handle created date.
+  $date_published = $row->getSourceProperty('date_published');
+  if ($date_published !== NULL) {
+    // Convert the date string to a timestamp.
+    $timestamp = strtotime($date_published);
+    // Format the timestamp into the desired format.
+    $date = date('U', $timestamp);
+  } else {
+    // Get the current time in the desired format.
+    $date = date('U', \Drupal::time()->getCurrentTime());
+  }
+  $row->setDestinationProperty('created', $date);
 }
