@@ -14,13 +14,20 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 
 ### Deprecated
-- RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
 
 ### Removed
 
 ### Fixed
 
 ### Security
+
+## [0.11.0] - 2024-01-25
+### Added
+- RIGA-416: New health file migrations.
+- RIGA-444: New resource_link migration for health site.
+
+### Deprecated
+- RIGA-441: Disable Color, Quickedit, RDF core modules to prepare for D10.
 
 ## [0.10.9] - 2023-11-30
 ### Added
@@ -1192,7 +1199,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.11.0...HEAD
+[0.11.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.9...0.11.0
 [0.10.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.8...0.10.9
 [0.10.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.7...0.10.8
 [0.10.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.6...0.10.7
