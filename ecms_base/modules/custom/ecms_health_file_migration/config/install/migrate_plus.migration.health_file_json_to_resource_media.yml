@@ -1,15 +1,37 @@
+langcode: en
+status: true
+dependencies: {  }
 id: health_file_json_to_resource_media
-label: 'Import publications from JSON source to Resource type Media entities'
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
 migration_group: files_json_to_resource_media
-
+label: 'Import publications from JSON source to Resource type Media entities'
 source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - 'https://health.ri.gov/rss/pubs/publications-all-langs.json.php'
+    - 'https://health.ri.gov/rss/pubs/publications-media-en.json.php'
   data_parser_plugin: json
   item_selector: '[*]'
   fields:
+    -
+      name: id
+      label: ID
+      selector: id
+    -
+      name: entity
+      label: Entity
+      selector: entity
+    -
+      name: topic
+      label: Topic
+      selector: topic
+    -
+      name: profession
+      label: Profession
+      selector: profession
     -
       name: type_of_material
       label: 'Type of Material'
@@ -28,22 +50,83 @@ source:
       selector: place
     -
       name: path_name
-      label: Path Name
+      label: 'Path Name'
       selector: /language/en/path_name
     -
       name: title
       label: Title
       selector: /language/en/title
+    -
+      name: date_published
+      label: Date Published
+      selector: date_published
+    -
+      name: order_form
+      label: Order Form
+      selector: order_form
+    -
+      name: date_covered
+      label: Date Covered
+      selector: date_covered
   ids:
-    title:
-      type: string
-    path_name:
-      type: string
-
+    id:
+      type: integer
+  keys:
+    - id
 process:
   name: title
-  field_description: type_of_material
-
+  field_date_covered: date_covered
+  field_media_file/target_id:
+    -
+      plugin: migration_lookup
+      migration: health_file_json_to_file
+      source: id
+  field_ridoh_org:
+    -
+      plugin: entity_lookup
+      source: entity
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: ridoh_org
+  field_topic:
+    -
+      plugin: entity_lookup
+      source: topic
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: topic
+  field_licensee:
+    -
+      plugin: entity_lookup
+      source: profession
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: licensee
+  created:
+    -
+      plugin: format_date
+      source: date_published
+      from_format: 'Y-m-d'
+      to_format: 'U'
+      from_timezone: 'UTC'
+      to_timezone: 'UTC'
+  field_available_for_online_order:
+    -
+      plugin: get
+      source: order_form
+      default_value: false
 destination:
   plugin: 'entity:media'
   default_bundle: resource
+migration_dependencies:
+  required:
+    - health_file_json_to_file
