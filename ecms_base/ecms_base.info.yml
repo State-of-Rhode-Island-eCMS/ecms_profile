@@ -13,7 +13,7 @@ dependencies:
   - block
   - block_content
   - breakpoint
-  - ckeditor
+  - ckeditor5
   - components
   - config
   - 'drupal:content_moderation'
@@ -128,3 +128,5 @@ themes:
   - claro
   - ecms
   - ecms_claro
+  - classy
+  - stable

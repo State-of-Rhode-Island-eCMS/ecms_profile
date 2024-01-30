@@ -25,10 +25,10 @@ regarding the secrets.settings.php file in ACSF can be found here](https://docs.
 
 The settings for OIDC AAD should resemble this:
 ```php
-$config['openid_connect.settings.windows_aad']['settings']['client_id'] = 'CLIENT_ID_NEEDED';
-$config['openid_connect.settings.windows_aad']['settings']['client_secret'] = 'CLIENT_SECRET_NEEDED';
-$config['openid_connect.settings.windows_aad']['settings']['authorization_endpoint_wa'] = 'https://AUTHORIZATION_URL_ENDPOINT_NEEDED/oauth2/v2.0/authorize';
-$config['openid_connect.settings.windows_aad']['settings']['token_endpoint_wa'] = 'https://TOKEN_ENDPOINT_NEEDED/oauth2/v2.0/token';
+$config['openid_connect.client.windows_aad']['settings']['client_id'] = 'CLIENT_ID_OVERRIDDEN';
+$config['openid_connect.client.windows_aad']['settings']['client_secret'] = 'CLIENT_SECRET_OVERRIDDEN';
+$config['openid_connect.client.windows_aad']['settings']['authorization_endpoint_wa'] = 'https://AUTHORIZATION_URL_ENDPOINT_NEEDED/oauth2/v2.0/authorize';
+$config['openid_connect.client.windows_aad']['settings']['token_endpoint_wa'] = 'https://TOKEN_ENDPOINT_NEEDED/oauth2/v2.0/token';
 ```
 
 ## Managing multiple sites

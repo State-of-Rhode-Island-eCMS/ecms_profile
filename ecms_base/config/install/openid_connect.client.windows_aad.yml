@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - openid_connect_windows_aad
+id: windows_aad
+label: 'Windows AAD'
+plugin: windows_aad
+settings:
+  client_id: REDACTED
+  client_secret: REDACTED
+  authorization_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/authorize'
+  token_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/token'
+  userinfo_endpoint_wa: 'https://graph.microsoft.com/v1.0/me/memberOf'
+  map_ad_groups_to_roles: true
+  group_mapping:
+    method: 0
+    mappings: ''
+    strict: false
+  userinfo_graph_api_wa: 1
+  userinfo_graph_api_use_other_mails: false
+  userinfo_update_email: true
+  hide_email_address_warning: true
+  subject_key: sub
+  end_session_endpoint: ''
+  iss_allowed_domains: ''
+  front_channel_logout_url: ''

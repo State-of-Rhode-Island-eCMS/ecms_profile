@@ -2018,3 +2018,40 @@ function ecms_base_update_9105(array &$sandbox): void {
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
 }
+
+/**
+ * Update configuration for Drupal 10.2 preparation.
+ */
+function ecms_base_update_9106(array &$sandbox): void {
+  // Get reference to config install directory.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  // Get reference to active config storage.
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Install all new modules now that conflicting config is removed.
+  $modules_to_install = [
+    'ckeditor5',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Import config, now that environment is prepped with installed modules.
+  $new_module_config = [
+    'crop.type.focal_point.yml',
+    'editor.editor.basic_html.yml',
+    'editor.editor.full_html.yml',
+    'editor.editor.minimal.yml',
+    'entity_usage.settings.yml',
+    'focal_point.settings.yml',
+    'openid_connect.client.windows_aad.yml',
+    'user.role.site_admin.yml',
+  ];
+
+  foreach ($new_module_config as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+}
