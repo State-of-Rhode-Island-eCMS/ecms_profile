@@ -2040,14 +2040,14 @@ function ecms_base_update_9106(array &$sandbox): void {
 
   // Import config, now that environment is prepped with installed modules.
   $new_module_config = [
-    'crop.type.focal_point.yml',
-    'editor.editor.basic_html.yml',
-    'editor.editor.full_html.yml',
-    'editor.editor.minimal.yml',
-    'entity_usage.settings.yml',
-    'focal_point.settings.yml',
-    'openid_connect.client.windows_aad.yml',
-    'user.role.site_admin.yml',
+    'crop.type.focal_point',
+    'editor.editor.basic_html',
+    'editor.editor.full_html',
+    'editor.editor.minimal',
+    'entity_usage.settings',
+    'focal_point.settings',
+    'openid_connect.client.windows_aad',
+    'user.role.site_admin',
   ];
 
   foreach ($new_module_config as $config) {
