@@ -118,7 +118,7 @@ function ecms_theme(array $existing, string $type, string $theme, string $path):
     // Workaround for the core bug found here:
     // https://www.drupal.org/project/drupal/issues/3071201
     // html.twig files were being discovered outside of the templates directory.
-    $templates = drupal_find_theme_functions($existing, [$theme]);
+    $templates = ecms_base_find_theme_functions($existing, [$theme]);
     $templates += drupal_find_theme_templates($existing, '.html.twig', "{$path}/templates");
   }
   return $templates;
