@@ -30,15 +30,25 @@ cd $APP_NAME;
 $COMPOSER config minimum-stability "dev"
 
 # Add the development requirements for testing.
-$COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
+$COMPOSER require "drupal/core-dev:$DRUPAL_CORE_VERSION" --dev --no-update
+$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
+$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
 $COMPOSER require "php-mock/php-mock" --dev --no-update
 $COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
 $COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
 $COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
-$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
-$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
-$COMPOSER require "drupal/coder:^8.3" --dev --no-update
 $COMPOSER require "drush/drush:^12.0" --dev --no-update
+$COMPOSER require "drupal/coder:^8.3" --dev --no-update
+#$COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
+# $COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
+#$COMPOSER require "php-mock/php-mock" --dev --no-update
+#$COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
+#$COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
+#$COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
+#$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
+#$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
+#$COMPOSER require "drupal/coder:^8.3" --dev --no-update
+#$COMPOSER require "drush/drush:^12.0" --dev --no-update
 
 
 # Add the migrate_process_trim repository.
