@@ -15,7 +15,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="9.5.9"
+DRUPAL_CORE_VERSION="10.2.2"
 
 # Move up a directory.
 cd ..
@@ -35,10 +35,10 @@ $COMPOSER require "php-mock/php-mock" --dev --no-update
 $COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
 $COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
 $COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
-$COMPOSER require "phpunit/phpunit:^8" --dev --no-update
-$COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
+$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
+$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
 $COMPOSER require "drupal/coder:^8.3" --dev --no-update
-$COMPOSER require "drush/drush:^10.0" --dev --no-update
+$COMPOSER require "drush/drush:^12.0" --dev --no-update
 
 
 # Add the migrate_process_trim repository.
