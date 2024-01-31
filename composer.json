@@ -97,7 +97,7 @@
     },
     "provide": {},
     "require": {
-        "composer/installers": "^1.9",
+        "composer/installers": "^1.9 || ^2.0",
         "cweagans/composer-patches": "^1.6",
         "drupal/acquia_connector": "^4.0.1",
         "drupal/acquia_purge": "^1.1",
