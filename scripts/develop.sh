@@ -16,7 +16,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="9.5.11"
+DRUPAL_CORE_VERSION="10.2.2"
 PHP_VERSION="8.1"
 
 # Whether the source directory should be deleted before rebuilding lando
@@ -117,9 +117,10 @@ $COMPOSER require "drupal/core-composer-scaffold:${DRUPAL_CORE_VERSION}" --no-up
 $COMPOSER require "drupal/core-project-message:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
+$COMPOSER remove "drupal/devel" --no-update
 
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal9 --option php=$PHP_VERSION --webroot $DOCROOT --source cwd\n\n"
-$LANDO init --name ${APP_NAME} --recipe drupal9 --option php=${PHP_VERSION} --webroot ${DOCROOT} --source cwd
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal10 --option php=$PHP_VERSION --webroot $DOCROOT --source cwd\n\n"
+$LANDO init --name ${APP_NAME} --recipe drupal10 --option php=${PHP_VERSION} --webroot ${DOCROOT} --source cwd
 
 # Check for a lando local file.
 if [ -a "${DEST_DIR}/.lando.local.yml" ]; then
@@ -158,7 +159,7 @@ else
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'mysql://drupal9:drupal9@database/drupal9'
+        SIMPLETEST_DB: 'mysql://drupal10:drupal10@database/drupal10'
         DTT_BASE_URL: 'https://appserver'
         TEMP: '/app/web/sites/default/files/temp'
       volumes:
@@ -212,34 +213,43 @@ else
   echo -e  "COMPOSER_MEMORY_LIMIT=-1\nCOMPOSER_PROCESS_TIMEOUT=900\nTEMP=/tmp\nCOMPOSE_HTTP_TIMEOUT=900\nENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
 fi
 
+pwd
+
+# Remove the coffee module as it currently breaks unit testing.
+$COMPOSER remove drupal/coffee --no-update
+$COMPOSER remove sensiolabs/security-checker --no-update --dev
+$COMPOSER remove drupal-composer/preserve-paths --no-update
+
+
+# Add the development requirements for testing.
+$COMPOSER require "drupal/core-dev:$DRUPAL_CORE_VERSION" --dev --no-update
+$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
+$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
+$COMPOSER require "php-mock/php-mock" --dev --no-update
+$COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
+$COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
+$COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
+$COMPOSER require "drush/drush:^12.0" --no-update
+$COMPOSER require "drupal/coder:^8.3" --no-update
+
+$COMPOSER config allow-plugins.composer/installers true
+$COMPOSER config allow-plugins.cweagans/composer-patches true
+$COMPOSER config allow-plugins.oomphinc/composer-installers-extender true
+$COMPOSER config allow-plugins.drupal-composer/preserve-paths  true
+$COMPOSER config allow-plugins.drupal/core-composer-scaffold true
+$COMPOSER config allow-plugins.drupal/core-project-message true
+$COMPOSER config allow-plugins.drupal/core-vendor-hardening true
+$COMPOSER config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+$COMPOSER config allow-plugins.php-http/discovery true
+$COMPOSER config allow-plugins.zaporylie/composer-drupal-optimizations true
+$COMPOSER config allow-plugins.phpstan/extension-installer true
+
+$COMPOSER install
+
 # Start the app with lando.
 set +e
 $LANDO start
 set -e
-
-# Remove the coffee module as it currently breaks unit testing.
-$LANDO composer remove drupal/coffee
-
-# Add the development requirements for testing.
-$LANDO composer require "behat/mink-goutte-driver:~1.2" --dev --no-update
-$LANDO composer require "php-mock/php-mock" --dev --no-update
-$LANDO composer require "php-mock/php-mock-phpunit" --dev --no-update
-$LANDO composer require "weitzman/drupal-test-traits" --dev --no-update
-$LANDO composer require 'liuggio/fastest:^1.6' --dev --no-update
-$LANDO composer require "phpunit/phpunit:^8" --dev --no-update
-$LANDO composer require "symfony/phpunit-bridge:^5.1" --dev --no-update
-$LANDO composer require "drupal/coder:^8.3" --dev --no-update
-$LANDO composer require "drush/drush:^10.0" --dev --no-update
-
-
-$LANDO composer config --no-interaction allow-plugins.composer/installers true
-$LANDO composer config --no-interaction allow-plugins.cweagans/composer-patches true
-$LANDO composer config --no-interaction allow-plugins.oomphinc/composer-installers-extender true
-$LANDO composer config --no-interaction allow-plugins.drupal-composer/preserve-paths  true
-$LANDO composer config --no-interaction allow-plugins.drupal/core-composer-scaffold true
-$LANDO composer config --no-interaction allow-plugins.drupal/core-project-message true
-$LANDO composer config --no-interaction allow-plugins.drupal/core-vendor-hardening true
-$LANDO composer config --no-interaction allow-plugins.dealerdirect/phpcodesniffer-composer-installer  true
 
 echo "--------------------------------------------------"
 echo " Require ${REPOSITORY_NAME} using lando composer "
