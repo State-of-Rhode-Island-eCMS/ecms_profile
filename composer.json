@@ -43,7 +43,7 @@
           "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
           "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
           "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2021-02-10/3025039_42.patch",
-          "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch",
+          "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch"
         },
         "drupal/openid_connect_windows_aad": {
           "3169996 - Incorrect configuration schema file": "https://www.drupal.org/files/issues/2022-05-24/openid_connect_windows_aad-3169996-12.patch"
