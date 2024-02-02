@@ -38,7 +38,7 @@
     "extra": {
       "patches": {
         "drupal/core": {
-          "3266057 - #117 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2023-08-15/3266057-117.patch",
+          "3266057 - #121 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2023-12-05/3266057-121.patch",
           "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
           "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
           "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
