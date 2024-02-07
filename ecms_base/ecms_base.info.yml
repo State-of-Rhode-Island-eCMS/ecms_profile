@@ -26,6 +26,7 @@ dependencies:
   - dynamic_page_cache
   - easy_breadcrumb
   - 'ecms_distribution:ecms_distribution'
+  - ecms_publications
   - 'ecms_promotions:ecms_promotions'
   - editor
   - entity_print
@@ -112,7 +113,6 @@ install:
   - ecms_paragraphs
   - ecms_person
   - ecms_press_release
-  - ecms_publications
   - ecms_search_settings
   - ecms_workflow
   - file_delete
