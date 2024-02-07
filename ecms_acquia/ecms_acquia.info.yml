@@ -14,6 +14,7 @@ dependencies:
   - purge_processor_lateruntime
   - purge_queuer_coretags
   - purge_ui
+  - ecms_publications
 
 # Install the search modules.
 install:
