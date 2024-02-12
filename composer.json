@@ -121,6 +121,7 @@
         "drupal/acquia_search": "^3.0",
         "drupal/acsf": "^2.75",
         "drupal/address": "^1.8",
+        "drupal/address_phonenumber": "^10.0",
         "drupal/admin_toolbar": "3.4.1",
         "drupal/advagg": "^6.0@alpha",
         "drupal/allowed_formats": "^2.0.0",
