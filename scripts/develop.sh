@@ -6,7 +6,7 @@ set -eo pipefail
 # Move up a level starting from the scripts directory.
 BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"
 APP_NAME="develop-ecms-profile"
-INSTALL_PROFILE_NAME="ecms_base"
+INSTALL_PROFILE_NAME="ecms_acquia"
 INSTALL_PROFILE_DIRECTORY="ecms_profile"
 PATTERN_LAB_DIRECTORY="ecms_patternlab"
 REPOSITORY_NAME="rhodeislandecms/ecms_profile"

@@ -54,6 +54,47 @@ function ecms_base_install() {
 
   $shortcut->save();
 
+  // Install the memcache module.
+  $modules_to_install = [
+    'memcache',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Set the system site email address.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.site');
+  $config->set('mail', 'ecms@notification.ri.gov');
+  $config->save();
+
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function ecms_base_profile_tasks(): array {
+  $tasks = [];
+
+  // Add the task to install the ecms_base module.
+  $tasks['ecms_base_apply_workflows'] = [
+    'display_name' => t('Apply workflows to all content types.'),
+    'type' => 'module',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+    'function' => 'ecms_base_apply_workflows',
+  ];
+
+  return $tasks;
+}
+
+/**
+ * Apply the workflows to all content types after the full installation.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function ecms_base_apply_workflows() {
   // Call the workflow service to update configuration.
   \Drupal::service('ecms_workflow.bundle_create')
     ->assignWorkflowToActiveTypes();
@@ -115,23 +156,7 @@ function ecms_base_install() {
       $workflowBundleCreate->addTaxonomyTypePermissions($taxonomy);
     }
   }
-
-  // Install the memcache module.
-  $modules_to_install = [
-    'memcache',
-  ];
-
-  \Drupal::service('module_installer')->install($modules_to_install);
-
-  // Set the system site email address.
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = \Drupal::service('config.factory');
-  $config = $configFactory->getEditable('system.site');
-  $config->set('mail', 'ecms@notification.ri.gov');
-  $config->save();
-
 }
-
 /**
  * Update Basic HTML configuration.
  */
