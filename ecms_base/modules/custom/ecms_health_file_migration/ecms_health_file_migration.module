@@ -5,7 +5,7 @@
  * File ecms_health_file_migration.module.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Plugin\MigrationInterface;

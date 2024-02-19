@@ -5,7 +5,7 @@
  * ecms_covid_publication_migrate.install
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Database\Database;

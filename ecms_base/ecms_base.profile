@@ -5,7 +5,7 @@
  * Provides update hooks for previously installed sites.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Restore the drupal_find_theme_functions method.

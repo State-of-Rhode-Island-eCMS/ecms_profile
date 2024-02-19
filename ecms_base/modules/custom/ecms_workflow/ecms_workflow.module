@@ -5,7 +5,7 @@
  * ecms_workflow.module
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\node\Entity\Node;
 use Drupal\webform\WebformInterface;

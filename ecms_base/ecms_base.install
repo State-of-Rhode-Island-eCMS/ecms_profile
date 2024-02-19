@@ -5,7 +5,7 @@
  * ecms_base.install
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * @file
@@ -157,6 +157,7 @@ function ecms_base_apply_workflows() {
     }
   }
 }
+
 /**
  * Update Basic HTML configuration.
  */
