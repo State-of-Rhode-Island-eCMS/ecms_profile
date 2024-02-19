@@ -2058,11 +2058,14 @@ function ecms_base_update_9106(array &$sandbox): void {
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
 
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+
   // Install all new modules now that conflicting config is removed.
   $modules_to_install = [
     'ckeditor5',
   ];
-  \Drupal::service('module_installer')->install($modules_to_install);
+  $moduleInstaller->install($modules_to_install);
 
   // Import config, now that environment is prepped with installed modules.
   $new_module_config = [
@@ -2079,5 +2082,12 @@ function ecms_base_update_9106(array &$sandbox): void {
   foreach ($new_module_config as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
+
+  // Uninstall the ckeditor4 module.
+  $modules_to_uninstall = [
+    'ckeditor',
+  ];
+
+  $moduleInstaller->uninstall($modules_to_uninstall);
 
 }
