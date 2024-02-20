@@ -42,7 +42,7 @@ dependencies:
   - image
   - language
   - layout_builder
-  - layout_builder_modal
+  - layout_builder_modal_iframe
   - layout_builder_restrictions
   - language_cookie
   - layout_discovery
@@ -51,7 +51,6 @@ dependencies:
   - media_entity_download
   - media_library
   - media_library_form_element
-  - media_library_theme_reset
   - menu_admin_per_menu
   - menu_block
   - menu_link_content
