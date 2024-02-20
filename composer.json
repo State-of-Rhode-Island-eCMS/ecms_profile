@@ -42,7 +42,7 @@
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
                 "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2020-08-05/3049332-inline-35.patch",
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
-                "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2021-02-10/3025039_42.patch",
+                "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2023-10-25/3025039-89.patch",
                 "3186034 - Prevent language fallback to happen when a translation is unpublished": "https://www.drupal.org/files/issues/2020-12-02/3186034_2_respect_empty_translation_candidates.patch"
             },
             "drupal/paragraphs": {
