@@ -2064,7 +2064,7 @@ function ecms_base_update_9106(array &$sandbox): void {
   // Install all new modules now that conflicting config is removed.
   $modules_to_install = [
     'ckeditor5',
-    'layout_builder_modal_iframe',
+    'layout_builder_iframe_modal',
   ];
   $moduleInstaller->install($modules_to_install);
 
