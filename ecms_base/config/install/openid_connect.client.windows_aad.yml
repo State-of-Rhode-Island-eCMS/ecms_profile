@@ -8,7 +8,7 @@ label: 'Windows AAD'
 plugin: windows_aad
 settings:
   client_id: REDACTED
-  client_secret: REDACTED
+  client_secret: ecms_openid_connect_windows_aad_key
   authorization_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/authorize'
   token_endpoint_wa: 'https://login.microsoftonline.com/REDACTED/oauth2/token'
   userinfo_endpoint_wa: 'https://graph.microsoft.com/v1.0/me/memberOf'

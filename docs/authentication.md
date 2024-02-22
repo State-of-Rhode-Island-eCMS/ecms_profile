@@ -25,11 +25,16 @@ regarding the secrets.settings.php file in ACSF can be found here](https://docs.
 
 The settings for OIDC AAD should resemble this:
 ```php
+// D10 OIDC Settings.
 $config['openid_connect.client.windows_aad']['settings']['client_id'] = 'CLIENT_ID_OVERRIDDEN';
 $config['openid_connect.client.windows_aad']['settings']['client_secret'] = 'CLIENT_SECRET_OVERRIDDEN';
 $config['openid_connect.client.windows_aad']['settings']['authorization_endpoint_wa'] = 'https://AUTHORIZATION_URL_ENDPOINT_NEEDED/oauth2/v2.0/authorize';
 $config['openid_connect.client.windows_aad']['settings']['token_endpoint_wa'] = 'https://TOKEN_ENDPOINT_NEEDED/oauth2/v2.0/token';
+putenv("ECMS_WINDOWS_AAD_CLIENT_SECRET=CLIENT_SECRET_OVERRIDDEN");
 ```
+
+Note: Since `drupal/openid_connect_windows_aad:^2.0-beta`, the client secret
+became an environment variable and _must_ use the key module.
 
 ## Managing multiple sites
 Allowing multiple sites to use this single OIDC connection will require that a new
