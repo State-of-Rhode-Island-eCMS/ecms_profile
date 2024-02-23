@@ -38,7 +38,12 @@
     "extra": {
         "patches": {
             "drupal/core": {
-                "3266057 - #121 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2023-12-05/3266057-121.patch"
+                "3266057 - #121 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2023-12-05/3266057-121.patch",
+                "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
+                "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2024-01-09/drupal-core--2024-01-09--3049332-85.patch",
+                "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
+                "3025039 - New non translatable field on translatable content throws error": "https://www.drupal.org/files/issues/2023-10-25/3025039-89.patch",
+                "3308838 - EntityRepository::getTranslationFromContext() function forcibly adds default entity language to fallback candidates": "https://www.drupal.org/files/issues/2024-02-22/drupal-3308838-fix-fallback-to-default-lang-42.patch"
             },
             "drupal/paragraphs": {
                 "2901390 - Integrity constraint violation: 1048 Column 'langcode' cannot be null": "https://www.drupal.org/files/issues/2020-06-25/paragraphs-2901390-51.patch",
