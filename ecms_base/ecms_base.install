@@ -2089,7 +2089,7 @@ function ecms_base_update_9106(array &$sandbox): void {
   $modules_to_uninstall = [
     'ckeditor',
     'layout_builder_modal',
-    'media_library_theme_reset'
+    'media_library_theme_reset',
   ];
 
   $moduleInstaller->uninstall($modules_to_uninstall);
