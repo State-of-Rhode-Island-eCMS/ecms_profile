@@ -2076,7 +2076,7 @@ function ecms_base_update_9106(array &$sandbox): void {
     'editor.editor.minimal',
     'entity_usage.settings',
     'focal_point.settings',
-    'key.key.ecms_openid_connect_windows_aad_key.yml',
+    'key.key.ecms_openid_connect_windows_aad_key',
     'openid_connect.client.windows_aad',
     'user.role.site_admin',
   ];
