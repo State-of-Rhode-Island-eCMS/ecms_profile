@@ -16,8 +16,8 @@ function ecms_authentication_openid_connect_pre_authorize($account, array $conte
   $userGroups = [];
 
   // Get the user groups from the OIDC user information.
-  if ($context['plugin_id'] === 'windows_aad' && !empty($context['userinfo']['groups']['value'])) {
-    $userGroups = array_column($context['userinfo']['groups']['value'], 'displayName');
+  if ($context['plugin_id'] === 'windows_aad' && !empty($context['userinfo']['aad_groups'])) {
+    $userGroups = array_column($context['userinfo']['aad_groups'], 'displayName');
   }
 
   return \Drupal::service('ecms_user_authentication')->checkGroupAccess($userGroups);
@@ -27,12 +27,12 @@ function ecms_authentication_openid_connect_pre_authorize($account, array $conte
  * Implements hook_openid_connect_userinfo_save().
  */
 function ecms_authentication_openid_connect_userinfo_save(UserInterface $account, array $context): void {
-  if ($context['plugin_id'] !== 'windows_aad' || (!isset($context['user_data']['groups']) && !isset($context['userinfo']['groups']['value']))) {
+  if ($context['plugin_id'] !== 'windows_aad' || empty($context['userinfo']['aad_groups'])) {
     return;
   }
 
   // Get the active directory groups from the claim.
-  $userAadGroups = array_column($context['userinfo']['groups']['value'], 'displayName');
+  $userAadGroups = array_column($context['userinfo']['aad_groups'], 'displayName');
 
   // Remove the drupal_admin group if the user doesn't belong to that group
   // in active directory.

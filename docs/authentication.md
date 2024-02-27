@@ -27,7 +27,8 @@ The settings for OIDC AAD should resemble this:
 ```php
 // D10 OIDC Settings.
 $config['openid_connect.client.windows_aad']['settings']['client_id'] = 'CLIENT_ID_OVERRIDDEN';
-$config['openid_connect.client.windows_aad']['settings']['client_secret'] = 'CLIENT_SECRET_OVERRIDDEN';
+// This line must be removed so the `key` integration works.
+// $config['openid_connect.client.windows_aad']['settings']['client_secret'] = 'CLIENT_SECRET_OVERRIDDEN';
 $config['openid_connect.client.windows_aad']['settings']['authorization_endpoint_wa'] = 'https://AUTHORIZATION_URL_ENDPOINT_NEEDED/oauth2/v2.0/authorize';
 $config['openid_connect.client.windows_aad']['settings']['token_endpoint_wa'] = 'https://TOKEN_ENDPOINT_NEEDED/oauth2/v2.0/token';
 putenv("ECMS_WINDOWS_AAD_CLIENT_SECRET=CLIENT_SECRET_OVERRIDDEN");
