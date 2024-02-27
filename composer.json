@@ -54,7 +54,7 @@
                 "3305095 - The callable passed to the filter must be a Closure in sandbox mode": "https://www.drupal.org/files/issues/2022-09-06/3305095-3-error-500-on-save.patch"
             },
             "drupal/layout_builder_iframe_modal": {
-                "3344339 - Hide the ‘Rebuild layout’ link in the layout builder actions area": "./patches/layout_builder_iframe_modal/3344339-hide-rebuild-button.patch"
+                "3344339 - Hide the ‘Rebuild layout’ link in the layout builder actions area": "https://www.drupal.org/files/issues/2024-02-27/3344339-hide-rebuild-button.patch"
             },
             "drupal/allowed_formats": {
                 "2950548 - Default value for format dropdown missing": "https://www.drupal.org/files/issues/2022-02-02/2950548-allowed_formats-missing_default_value.patch"
