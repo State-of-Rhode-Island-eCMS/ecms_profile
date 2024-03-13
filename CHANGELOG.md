@@ -26,6 +26,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-451: Add the Address Phonenumber module to composer.
 - RIGA-452: Added the vbo_export module to composer.
 - RIGA-448: Added the path redirect import module to the codebase.
+
+### Fixed
 - RIGA-446: Drupal 10 upgrade fixes.
 
 ## [0.11.0] - 2024-01-25
