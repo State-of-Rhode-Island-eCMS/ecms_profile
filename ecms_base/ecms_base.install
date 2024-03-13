@@ -5,7 +5,7 @@
  * ecms_base.install
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * @file
@@ -54,6 +54,47 @@ function ecms_base_install() {
 
   $shortcut->save();
 
+  // Install the memcache module.
+  $modules_to_install = [
+    'memcache',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Set the system site email address.
+  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
+  $configFactory = \Drupal::service('config.factory');
+  $config = $configFactory->getEditable('system.site');
+  $config->set('mail', 'ecms@notification.ri.gov');
+  $config->save();
+
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function ecms_base_profile_tasks(): array {
+  $tasks = [];
+
+  // Add the task to install the ecms_base module.
+  $tasks['ecms_base_apply_workflows'] = [
+    'display_name' => t('Apply workflows to all content types.'),
+    'type' => 'module',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+    'function' => 'ecms_base_apply_workflows',
+  ];
+
+  return $tasks;
+}
+
+/**
+ * Apply the workflows to all content types after the full installation.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function ecms_base_apply_workflows() {
   // Call the workflow service to update configuration.
   \Drupal::service('ecms_workflow.bundle_create')
     ->assignWorkflowToActiveTypes();
@@ -115,21 +156,6 @@ function ecms_base_install() {
       $workflowBundleCreate->addTaxonomyTypePermissions($taxonomy);
     }
   }
-
-  // Install the memcache module.
-  $modules_to_install = [
-    'memcache',
-  ];
-
-  \Drupal::service('module_installer')->install($modules_to_install);
-
-  // Set the system site email address.
-  /** @var \Drupal\Core\Config\ConfigFactoryInterface $configFactory */
-  $configFactory = \Drupal::service('config.factory');
-  $config = $configFactory->getEditable('system.site');
-  $config->set('mail', 'ecms@notification.ri.gov');
-  $config->save();
-
 }
 
 /**
@@ -2017,4 +2043,54 @@ function ecms_base_update_9105(array &$sandbox): void {
 
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
+}
+
+/**
+ * Update configuration for Drupal 10.2 preparation.
+ */
+function ecms_base_update_9106(array &$sandbox): void {
+  // Get reference to config install directory.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  // Get reference to active config storage.
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  /** @var \Drupal\Core\Extension\ModuleInstallerInterface $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  // Install all new modules now that conflicting config is removed.
+  $modules_to_install = [
+    'ckeditor5',
+    'layout_builder_iframe_modal',
+  ];
+  $moduleInstaller->install($modules_to_install);
+
+  // Import config, now that environment is prepped with installed modules.
+  $new_module_config = [
+    'crop.type.focal_point',
+    'editor.editor.basic_html',
+    'editor.editor.full_html',
+    'editor.editor.minimal',
+    'entity_usage.settings',
+    'focal_point.settings',
+    'key.key.ecms_openid_connect_windows_aad_key',
+    'openid_connect.client.windows_aad',
+    'user.role.site_admin',
+  ];
+
+  foreach ($new_module_config as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+  // Uninstall the ckeditor4 module.
+  $modules_to_uninstall = [
+    'ckeditor',
+    'layout_builder_modal',
+    'media_library_theme_reset',
+  ];
+
+  $moduleInstaller->uninstall($modules_to_uninstall);
 }

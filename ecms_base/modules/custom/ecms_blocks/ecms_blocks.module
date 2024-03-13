@@ -5,7 +5,7 @@
  * Provide a custom theme hook for the site search form.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;

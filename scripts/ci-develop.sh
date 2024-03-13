@@ -15,7 +15,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="9.5.9"
+DRUPAL_CORE_VERSION="10.2.2"
 
 # Move up a directory.
 cd ..
@@ -30,21 +30,29 @@ cd $APP_NAME;
 $COMPOSER config minimum-stability "dev"
 
 # Add the development requirements for testing.
-$COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
+$COMPOSER require "drupal/core-dev:$DRUPAL_CORE_VERSION" --dev --no-update
+$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
+$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
 $COMPOSER require "php-mock/php-mock" --dev --no-update
 $COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
 $COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
 $COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
-$COMPOSER require "phpunit/phpunit:^8" --dev --no-update
-$COMPOSER require "symfony/phpunit-bridge:^5.1" --dev --no-update
+$COMPOSER require "drush/drush:^12.0" --dev --no-update
 $COMPOSER require "drupal/coder:^8.3" --dev --no-update
-$COMPOSER require "drush/drush:^10.0" --dev --no-update
+#$COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
+# $COMPOSER require "behat/mink-goutte-driver:~1.2" --dev --no-update
+#$COMPOSER require "php-mock/php-mock" --dev --no-update
+#$COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
+#$COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
+#$COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
+#$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
+#$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
+#$COMPOSER require "drupal/coder:^8.3" --dev --no-update
+#$COMPOSER require "drush/drush:^12.0" --dev --no-update
 
-# Add the migration_tools repository.
-$COMPOSER config repositories.migratation_tools '{"type": "package", "package": {"name": "drupal_git/migration_tools", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migration_tools.git", "reference": "3e193bc97d127ea2cff6b80f9509bc161bdee19f"}}}'
 
 # Add the migrate_process_trim repository.
-$COMPOSER config repositories.migratation_process_trim '{"type": "package", "package": {"name": "drupal_git/migrate_process_trim", "type": "drupal-module", "version": "1.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migrate_process_trim.git", "reference": "79c7ceb9113c1e21818bd124135e5d261ccbebbc"}}}'
+$COMPOSER config repositories.migratation_process_trim '{"type": "package", "package": {"name": "drupal_git/migrate_process_trim", "type": "drupal-module", "version": "2.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migrate_process_trim.git", "reference": "4bbec87f0ecdb6d49f9ff2d763ba4f40f5d63d5c"}}}'
 
 $COMPOSER config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "../'${INSTALL_PROFILE_DIRECTORY}'"}'
 

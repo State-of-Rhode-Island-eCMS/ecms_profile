@@ -5,7 +5,7 @@
  * Ecms_api_notification_publisher.module.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;

@@ -5,7 +5,7 @@
  * ecms_base.post_update.php
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 use Drupal\Core\Entity\EntityStorageException;
 

@@ -13,7 +13,7 @@ dependencies:
   - block
   - block_content
   - breakpoint
-  - ckeditor
+  - ckeditor5
   - components
   - config
   - 'drupal:content_moderation'
@@ -26,6 +26,7 @@ dependencies:
   - dynamic_page_cache
   - easy_breadcrumb
   - 'ecms_distribution:ecms_distribution'
+  - ecms_publications
   - 'ecms_promotions:ecms_promotions'
   - editor
   - entity_print
@@ -41,7 +42,7 @@ dependencies:
   - image
   - language
   - layout_builder
-  - layout_builder_modal
+  - layout_builder_iframe_modal
   - layout_builder_restrictions
   - language_cookie
   - layout_discovery
@@ -50,7 +51,6 @@ dependencies:
   - media_entity_download
   - media_library
   - media_library_form_element
-  - media_library_theme_reset
   - menu_admin_per_menu
   - menu_block
   - menu_link_content
@@ -112,7 +112,6 @@ install:
   - ecms_paragraphs
   - ecms_person
   - ecms_press_release
-  - ecms_publications
   - ecms_search_settings
   - ecms_workflow
   - file_delete
@@ -128,3 +127,5 @@ themes:
   - claro
   - ecms
   - ecms_claro
+  - classy
+  - stable

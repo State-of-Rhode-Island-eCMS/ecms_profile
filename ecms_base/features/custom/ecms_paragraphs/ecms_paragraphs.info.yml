@@ -4,7 +4,7 @@ type: module
 core_version_requirement: '^9 || ^10'
 dependencies:
   - 'allowed_formats:allowed_formats'
-  - 'drupal:ckeditor'
+  - 'drupal:ckeditor5'
   - 'drupal:content_translation'
   - 'drupal:editor'
   - 'drupal:field'
