@@ -10,9 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-451: Add the Address Phonenumber module to composer.
-- RIGA-452: Added the vbo_export module to composer.
-- RIGA-448: Added the path redirect import module to the codebase.
 
 ### Changed
 
@@ -23,6 +20,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [1.0.0] - 2024-03-13
+### Added
+- RIGA-451: Add the Address Phonenumber module to composer.
+- RIGA-452: Added the vbo_export module to composer.
+- RIGA-448: Added the path redirect import module to the codebase.
+
+### Fixed
+- RIGA-446: Drupal 10 upgrade fixes.
 
 ## [0.11.0] - 2024-01-25
 ### Added
@@ -1202,7 +1208,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.11.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.11.0...1.0.0
 [0.11.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.9...0.11.0
 [0.10.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.8...0.10.9
 [0.10.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.7...0.10.8
