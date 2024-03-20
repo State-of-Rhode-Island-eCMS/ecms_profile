@@ -2110,6 +2110,9 @@ function ecms_base_update_10200(array &$sandbox): void {
 
   // Import config, now that environment is prepped with installed modules.
   $new_module_config = [
+    'editor.editor.basic_html',
+    'editor.editor.full_html',
+    'editor.editor.minimal',
     'filter.format.basic_html',
     'filter.format.basic_html',
     'filter.format.full_html',
