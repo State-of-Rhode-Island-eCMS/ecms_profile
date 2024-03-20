@@ -214,7 +214,6 @@ class EcmsWorkflowBundleCreate {
       return;
     }
 
-    $this->setRolePermissions($contentType);
     $this->addSchedulerSettings($contentType);
 
     // Assign the new content type to the editorial workflow.
@@ -264,6 +263,8 @@ class EcmsWorkflowBundleCreate {
       }
     }
 
+    // The permissions need to come last.
+    $this->setRolePermissions($contentType);
   }
 
   /**
