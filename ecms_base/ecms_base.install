@@ -2094,3 +2094,38 @@ function ecms_base_update_9106(array &$sandbox): void {
 
   $moduleInstaller->uninstall($modules_to_uninstall);
 }
+
+/**
+ * Update the text format permissions.
+ */
+function ecms_base_update_10200(array &$sandbox): void {
+  // Get reference to config install directory.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  // Get reference to active config storage.
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Import config, now that environment is prepped with installed modules.
+  $new_module_config = [
+    'filter.format.basic_html',
+    'filter.format.basic_html',
+    'filter.format.full_html',
+    'filter.format.minimal',
+    'filter.format.plain_text',
+    'filter.format.restricted_html',
+    'filter.format.webform_default',
+    'user.role.anonymous',
+    'user.role.authenticated',
+    'user.role.content_author',
+    'user.role.content_publisher',
+    'user.role.form_author',
+    'user.role.site_admin',
+  ];
+
+  foreach ($new_module_config as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
