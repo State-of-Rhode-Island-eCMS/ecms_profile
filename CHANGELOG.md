@@ -10,6 +10,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-461: Added Drupal Commerce
+- RIGA-461: Added Drupal Commerce Stock
+- RIGA-461: Added Drupal LinkIt
+- RIGA-461: Added Drupal Facets
 
 ### Changed
 
