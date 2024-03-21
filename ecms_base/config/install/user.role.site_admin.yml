@@ -33,6 +33,8 @@ dependencies:
     - taxonomy.vocabulary.publication_audience
     - taxonomy.vocabulary.publication_topic
     - taxonomy.vocabulary.publication_type
+    - user.role.content_author
+    - user.role.content_publisher
     - workflows.workflow.editorial
   module:
     - autologout
@@ -69,7 +71,7 @@ dependencies:
     - webform_node
 id: site_admin
 label: 'Site Admin'
-weight: 5
+weight: 10
 is_admin: null
 permissions:
   - 'access administration pages'
