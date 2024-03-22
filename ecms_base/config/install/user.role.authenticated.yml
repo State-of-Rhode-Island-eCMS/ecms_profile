@@ -1,6 +1,21 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.minimal
+    - filter.format.webform_default
+  module:
+    - file
+    - filter
+    - media
+    - media_entity_download
+    - moderation_dashboard
+    - node
+    - paragraphs_type_permissions
+    - shortcut
+    - system
+    - toolbar
 id: authenticated
 label: 'Authenticated User'
 weight: 1
@@ -13,10 +28,12 @@ permissions:
   - 'access shortcuts'
   - 'access toolbar'
   - 'create media'
+  - 'delete own files'
   - 'download media'
   - 'use moderation dashboard'
   - 'use text format basic_html'
   - 'use text format minimal'
+  - 'use text format webform_default'
   - 'view media'
   - 'view own unpublished media'
   - 'view paragraph content accordion_builder'

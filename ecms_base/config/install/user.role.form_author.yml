@@ -3,6 +3,8 @@ status: true
 dependencies:
   module:
     - entity_print
+    - file
+    - help
     - system
     - webform
     - webform_encrypt
@@ -13,8 +15,10 @@ weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access help pages'
   - 'access webform help'
   - 'access webform overview'
+  - 'delete own files'
   - 'edit any webform submission'
   - 'entity print access type webform_submission'
   - 'view any webform submission'

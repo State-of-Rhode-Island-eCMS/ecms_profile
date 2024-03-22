@@ -1,18 +1,90 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - core.entity_view_display.node.landing_page.full
+    - filter.format.paragraph_text
+    - media.type.event_image
+    - media.type.file
+    - media.type.icon
+    - media.type.media_item_audio
+    - media.type.media_item_image
+    - media.type.media_item_video
+    - media.type.person_headshot
+    - media.type.promotional_image
+    - media.type.publication_file
+    - node.type.basic_page
+    - node.type.event
+    - node.type.landing_page
+    - node.type.location
+    - node.type.modal
+    - node.type.notification
+    - node.type.person
+    - node.type.press_release
+    - node.type.promotions
+    - node.type.publication
+    - node.type.webform
+    - taxonomy.vocabulary.event_taxonomy
+    - taxonomy.vocabulary.file_tags
+    - taxonomy.vocabulary.location_categories
+    - taxonomy.vocabulary.person_additional_fields
+    - taxonomy.vocabulary.person_taxonomy
+    - taxonomy.vocabulary.press_release_topics
+    - taxonomy.vocabulary.publication_audience
+    - taxonomy.vocabulary.publication_topic
+    - taxonomy.vocabulary.publication_type
+    - user.role.content_author
+    - user.role.content_publisher
+    - workflows.workflow.editorial
+  module:
+    - autologout
+    - block_content
+    - content_moderation
+    - content_translation
+    - contextual
+    - file
+    - filter
+    - help
+    - layout_builder
+    - locale
+    - media
+    - media_revisions_ui
+    - menu_admin_per_menu
+    - menu_link_content
+    - moderated_content_bulk_publish
+    - moderation_dashboard
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - publishcontent
+    - rabbit_hole
+    - redirect
+    - role_delegation
+    - scheduled_transitions
+    - simple_menu_permissions
+    - simple_sitemap
+    - system
+    - taxonomy
+    - webform
+    - webform_encrypt
+    - webform_node
 id: site_admin
 label: 'Site Admin'
-weight: 5
+weight: 10
 is_admin: null
 permissions:
   - 'access administration pages'
   - 'access contextual links'
+  - 'access help pages'
   - 'access site reports'
   - 'access taxonomy overview'
   - 'access user profiles'
   - 'access webform help'
   - 'access webform overview'
+  - 'add new links to footer menu'
+  - 'add new links to main menu'
+  - 'add new links to social-navigation menu'
   - 'add scheduled transitions node basic_page'
   - 'add scheduled transitions node event'
   - 'add scheduled transitions node landing_page'
@@ -23,29 +95,14 @@ permissions:
   - 'add scheduled transitions node publication'
   - 'add scheduled transitions node webform'
   - 'administer autologout'
-  - 'administer menu'
   - 'administer footer menu items'
-  - 'add new links to footer menu'
-  - 'delete links in footer menu'
-  - 'edit footer menu'
-  - 'edit links in footer menu'
-  - 'view footer menu in menu list'
   - 'administer main menu items'
-  - 'add new links to main menu'
-  - 'delete links in main menu'
-  - 'edit main menu'
-  - 'edit links in main menu'
-  - 'view main menu in menu list'
-  - 'administer social-navigation menu items'
-  - 'add new links to social-navigation menu'
-  - 'delete links in social-navigation menu'
-  - 'edit social-navigation menu'
-  - 'edit links in social-navigation menu'
-  - 'view social-navigation menu in menu list'
+  - 'administer menu'
   - 'administer redirects'
   - 'administer scheduled transitions'
   - 'administer site configuration'
   - 'administer sitemap settings'
+  - 'administer social-navigation menu items'
   - 'administer themes'
   - 'administer users'
   - 'assign content_author role'
@@ -131,6 +188,9 @@ permissions:
   - 'delete content translations'
   - 'delete event revisions'
   - 'delete landing_page revisions'
+  - 'delete links in footer menu'
+  - 'delete links in main menu'
+  - 'delete links in social-navigation menu'
   - 'delete location revisions'
   - 'delete media'
   - 'delete modal revisions'
@@ -139,6 +199,7 @@ permissions:
   - 'delete own event content'
   - 'delete own event_image media'
   - 'delete own file media'
+  - 'delete own files'
   - 'delete own landing_page content'
   - 'delete own location content'
   - 'delete own media_item_audio media'
@@ -209,6 +270,11 @@ permissions:
   - 'edit any webform'
   - 'edit any webform content'
   - 'edit any webform submission'
+  - 'edit footer menu'
+  - 'edit links in footer menu'
+  - 'edit links in main menu'
+  - 'edit links in social-navigation menu'
+  - 'edit main menu'
   - 'edit own basic_page content'
   - 'edit own event content'
   - 'edit own event_image media'
@@ -229,6 +295,7 @@ permissions:
   - 'edit own publication_file media'
   - 'edit own webform'
   - 'edit own webform content'
+  - 'edit social-navigation menu'
   - 'edit terms in event_taxonomy'
   - 'edit terms in file_tags'
   - 'edit terms in location_categories'
@@ -386,7 +453,6 @@ permissions:
   - 'use editorial transition create_new_draft'
   - 'use editorial transition publish'
   - 'use editorial transition review'
-  - 'use text format embed'
   - 'use text format paragraph_text'
   - 'view all media revisions'
   - 'view all revisions'
@@ -397,9 +463,11 @@ permissions:
   - 'view basic_page revisions'
   - 'view encrypted values'
   - 'view event revisions'
+  - 'view footer menu in menu list'
   - 'view landing_page revisions'
   - 'view latest version'
   - 'view location revisions'
+  - 'view main menu in menu list'
   - 'view modal revisions'
   - 'view notification revisions'
   - 'view own unpublished content'
@@ -417,6 +485,7 @@ permissions:
   - 'view scheduled transitions node promotions'
   - 'view scheduled transitions node publication'
   - 'view scheduled transitions node webform'
+  - 'view social-navigation menu in menu list'
   - 'view unpublished paragraphs'
   - 'view webform revisions'
   - 'view webform submissions any node'

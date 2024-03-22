@@ -1,6 +1,43 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - core.entity_view_display.node.landing_page.full
+    - filter.format.paragraph_text
+    - media.type.event_image
+    - media.type.file
+    - media.type.icon
+    - media.type.media_item_audio
+    - media.type.media_item_image
+    - media.type.media_item_video
+    - media.type.person_headshot
+    - media.type.promotional_image
+    - media.type.publication_file
+    - node.type.basic_page
+    - node.type.event
+    - node.type.landing_page
+    - node.type.location
+    - node.type.modal
+    - node.type.notification
+    - node.type.person
+    - node.type.press_release
+    - node.type.promotions
+    - node.type.publication
+    - node.type.webform
+    - workflows.workflow.editorial
+  module:
+    - block_content
+    - content_moderation
+    - content_translation
+    - contextual
+    - file
+    - filter
+    - layout_builder
+    - media
+    - media_revisions_ui
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
 id: content_author
 label: 'Content Author'
 weight: 4
@@ -52,6 +89,7 @@ permissions:
   - 'delete media'
   - 'delete own event_image media'
   - 'delete own file media'
+  - 'delete own files'
   - 'delete own icon media'
   - 'delete own media_item_audio media'
   - 'delete own media_item_image media'

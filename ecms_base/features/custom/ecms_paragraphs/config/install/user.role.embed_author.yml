@@ -1,7 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.embed
+  module:
+    - filter
 id: embed_author
 label: 'Embed Author'
 weight: 4
 is_admin: null
+permissions:
+  - 'use text format embed'

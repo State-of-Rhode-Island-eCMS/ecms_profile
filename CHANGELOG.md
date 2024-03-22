@@ -16,6 +16,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-461: Added Drupal Facets
 
 ### Changed
+- RIGA-459: Updated the text formatters and permissions.
 
 ### Deprecated
 

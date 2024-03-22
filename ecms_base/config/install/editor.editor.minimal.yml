@@ -15,17 +15,20 @@ settings:
       - '|'
       - link
       - '|'
+      - numberedList
       - bulletedList
       - '|'
       - sourceEditing
   plugins:
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
     ckeditor5_sourceEditing:
       allowed_tags:
         - '<a hreflang>'
         - '<ul type>'
-    ckeditor5_list:
-      reversed: false
-      startIndex: false
 image_upload:
   status: false
   scheme: public

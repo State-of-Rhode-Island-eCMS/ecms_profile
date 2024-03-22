@@ -1,6 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - content_translation
+    - media
+    - media_entity_download
+    - paragraphs
+    - paragraphs_type_permissions
+    - system
 id: anonymous
 label: 'Anonymous User'
 weight: 0
