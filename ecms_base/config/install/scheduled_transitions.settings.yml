@@ -22,6 +22,9 @@ bundles:
     bundle: location
   -
     entity_type: node
+    bundle: modal
+  -
+    entity_type: node
     bundle: person
   -
     entity_type: node
@@ -29,6 +32,9 @@ bundles:
   -
     entity_type: node
     bundle: promotions
+  -
+    entity_type: node
+    bundle: publication
   -
     entity_type: node
     bundle: webform
