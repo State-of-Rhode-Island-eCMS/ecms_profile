@@ -15,4 +15,3 @@ dependencies:
   - path
   - text
   - user
-  - scheduled_transitions
