@@ -25,6 +25,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 - RIGA-458: Fixed the workflow error.
 - RIGA-458: Fixed the site installation error.
+- RIGA-463: Patched the path redirect import module.
 
 ### Security
 
