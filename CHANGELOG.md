@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.1] - 2024-03-27
+### Added
 - RIGA-461: Added Drupal Commerce
 - RIGA-461: Added Drupal Commerce Stock
 - RIGA-461: Added Drupal LinkIt
@@ -18,16 +31,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-459: Updated the text formatters and permissions.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - RIGA-458: Fixed the workflow error.
 - RIGA-458: Fixed the site installation error.
 - RIGA-463: Patched the path redirect import module.
-
-### Security
 
 ## [1.0.0] - 2024-03-13
 ### Added
@@ -1216,7 +1223,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.11.0...1.0.0
 [0.11.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.9...0.11.0
 [0.10.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.8...0.10.9
