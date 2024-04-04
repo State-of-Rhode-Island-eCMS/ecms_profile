@@ -145,3 +145,4 @@ dependencies:
   enforced:
     module:
       - ecms_migration
+      - ecms_health_file_migration
