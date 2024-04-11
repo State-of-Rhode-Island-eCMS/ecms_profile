@@ -100,7 +100,6 @@ permissions:
   - 'administer menu'
   - 'administer redirects'
   - 'administer scheduled transitions'
-  - 'administer site configuration'
   - 'administer sitemap settings'
   - 'administer social-navigation menu items'
   - 'administer themes'

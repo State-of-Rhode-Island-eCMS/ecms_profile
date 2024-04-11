@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-462: Fixed the configuration dependencies.
+- RIGA-471: Fixed a misconfigured permission.
 
 ### Security
 
