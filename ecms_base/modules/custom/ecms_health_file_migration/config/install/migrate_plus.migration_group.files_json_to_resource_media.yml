@@ -1,6 +1,10 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - ecms_migration
+      - ecms_health_file_migration
 id: files_json_to_resource_media
 label: 'Files JSON to Resource Media'
 description: 'Migrations for importing files and creating Resource media from a JSON source'
