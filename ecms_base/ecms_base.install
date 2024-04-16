@@ -2134,9 +2134,22 @@ function ecms_base_update_10200(array &$sandbox): void {
 }
 
 /**
- * Revoke the site_admin role's permission to administer site configuration.
+ * Add ecms_ckeditor to the installed modules.
  */
 function ecms_base_update_10201(array &$sandbox): void {
+
+  $modules_to_install = [
+    'ecms_ckeditor',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Revoke the site_admin role's permission to administer site configuration.
+ */
+function ecms_base_update_10202(array &$sandbox): void {
   // Revoke permissions from the site_admin role.
   /** @var \Drupal\user\RoleInterface $siteAdminRole */
   $siteAdminRole = \Drupal::entityTypeManager()
@@ -2145,3 +2158,4 @@ function ecms_base_update_10201(array &$sandbox): void {
   $siteAdminRole->revokePermission('administer site configuration');
   $siteAdminRole->save();
 }
+

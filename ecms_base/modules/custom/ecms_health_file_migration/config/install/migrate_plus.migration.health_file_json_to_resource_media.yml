@@ -1,6 +1,10 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - ecms_migration
+      - ecms_health_file_migration
 id: health_file_json_to_resource_media
 class: null
 field_plugin_method: null
@@ -12,7 +16,7 @@ source:
   plugin: url
   data_fetcher_plugin: http
   urls:
-    - 'https://health.ri.gov/rss/pubs/publications-media-en.json.php'
+    - 'https://health.ri.gov/rss/pubs/publications-total-en.json.php'
   data_parser_plugin: json
   item_selector: '[*]'
   fields:
@@ -68,6 +72,9 @@ source:
       name: date_covered
       label: Date Covered
       selector: date_covered
+    - name: disease
+      label: Disease
+      selector: disease
   ids:
     id:
       type: integer
@@ -124,6 +131,15 @@ process:
       plugin: get
       source: order_form
       default_value: false
+  field_disease:
+    - plugin: entity_lookup
+      source: disease
+      ignore_case: true
+      access_check: false
+      bundle_key: type
+      entity_type: node
+      value_key: title
+      bundle: disease
 destination:
   plugin: 'entity:media'
   default_bundle: resource

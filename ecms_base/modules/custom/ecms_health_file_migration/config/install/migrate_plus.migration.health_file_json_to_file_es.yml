@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - ecms_migration
+      - ecms_health_file_migration
 id: health_file_json_to_file_es
 class: null
 field_plugin_method: null
