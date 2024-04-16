@@ -2134,7 +2134,7 @@ function ecms_base_update_10200(array &$sandbox): void {
 }
 
 /**
- * Add ecms_ckeditor to the installed modules
+ * Add ecms_ckeditor to the installed modules.
  */
 function ecms_base_update_10201(array &$sandbox): void {
 
