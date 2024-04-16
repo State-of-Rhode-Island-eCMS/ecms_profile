@@ -2145,3 +2145,16 @@ function ecms_base_update_10201(array &$sandbox): void {
   // Enable modules.
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Revoke the site_admin role's permission to administer site configuration.
+ */
+function ecms_base_update_10202(array &$sandbox): void {
+  // Revoke permissions from the site_admin role.
+  /** @var \Drupal\user\RoleInterface $siteAdminRole */
+  $siteAdminRole = \Drupal::entityTypeManager()
+    ->getStorage('user_role')
+    ->load('site_admin');
+  $siteAdminRole->revokePermission('administer site configuration');
+  $siteAdminRole->save();
+}
