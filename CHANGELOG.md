@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-462: Added the disease field to the media migration.
+- RIGA-467: Added module to enable plugin for CKEditor column widths
 
 ### Changed
 
