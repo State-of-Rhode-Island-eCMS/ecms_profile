@@ -1,0 +1,8 @@
+name: eCMS CKEditor
+description: Custom CKEditor5 functionality for eCMS.
+type: module
+core_version_requirement: ^9 || ^10
+package: eCMS
+
+dependencies:
+  - drupal:ckeditor5
