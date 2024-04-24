@@ -65,7 +65,7 @@ class EcmsApiPublisher extends EcmsApiBase {
     EcmsApiHelper $ecmsApiHelper,
     ConfigFactoryInterface $configFactory,
     EntityTypeManagerInterface $entityTypeManager,
-    AccountSwitcherInterface $accountSwitcher
+    AccountSwitcherInterface $accountSwitcher,
   ) {
     parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 

@@ -101,7 +101,7 @@ class NotificationPublisherTest extends UnitTestCase {
   public function testBroadcastNotification(
     string $nodeType,
     int $global,
-    string $moderation
+    string $moderation,
   ): void {
 
     $hasFieldCount = 1;
