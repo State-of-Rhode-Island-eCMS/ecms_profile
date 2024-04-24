@@ -10,8 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-462: Added the disease field to the media migration.
-- RIGA-467: Added module to enable plugin for CKEditor column widths
 
 ### Changed
 
@@ -20,10 +18,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
-- RIGA-471: Fixed a misconfigured permission.
-- RIGA-462: Fixed the configuration dependencies.
 
 ### Security
+
+## [1.0.2] - 2024-04-24
+### Added
+- RIGA-462: Added the disease field to the media migration.
+- RIGA-467: Added module to enable plugin for CKEditor column widths
+
+### Fixed
+- RIGA-471: Fixed a misconfigured permission.
+- RIGA-462: Fixed the configuration dependencies.
 
 ## [1.0.1] - 2024-03-27
 ### Added
@@ -1227,7 +1232,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.2...HEAD
+[1.0.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.11.0...1.0.0
 [0.11.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.10.9...0.11.0
