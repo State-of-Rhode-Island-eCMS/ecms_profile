@@ -100,7 +100,7 @@ class NotificationCreationQueueWorker extends QueueWorkerBase implements Contain
     EcmsApiRecipientRetrieveNotifications $ecmsApiRetriever,
     ClientInterface $httpClient,
     ConfigFactoryInterface $configFactory,
-    EcmsApiCreateNotifications $ecmsApiCreateNotification
+    EcmsApiCreateNotifications $ecmsApiCreateNotification,
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
 

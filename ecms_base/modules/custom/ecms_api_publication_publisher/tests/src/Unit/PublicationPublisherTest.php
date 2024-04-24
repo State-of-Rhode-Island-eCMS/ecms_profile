@@ -80,7 +80,7 @@ class PublicationPublisherTest extends UnitTestCase {
   public function testBroadcastPublication(
     string $nodeType,
     int $global,
-    string $moderation
+    string $moderation,
   ): void {
 
     $hasFieldCount = 1;
