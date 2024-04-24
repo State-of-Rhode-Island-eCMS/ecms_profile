@@ -32,7 +32,7 @@ class EcmsLanguageSettings extends ConfigFormBase {
    */
   public function __construct(
     ConfigFactoryInterface $config_factory,
-    LanguageManager $language_manager
+    LanguageManager $language_manager,
   ) {
     parent::__construct($config_factory);
     $this->languageManager = $language_manager;

@@ -58,7 +58,7 @@ class EcmsApiCreateNotifications extends EcmsApiBase {
     EntityToJsonApi $entityToJsonApi,
     EcmsApiHelper $ecmsApiHelper,
     EntityTypeManagerInterface $entityTypeManager,
-    JsonApiHelper $jsonApiHelper
+    JsonApiHelper $jsonApiHelper,
   ) {
     parent::__construct($httpClient, $entityToJsonApi, $ecmsApiHelper);
 
