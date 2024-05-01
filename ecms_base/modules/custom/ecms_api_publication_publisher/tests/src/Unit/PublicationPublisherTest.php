@@ -54,6 +54,20 @@ class PublicationPublisherTest extends UnitTestCase {
   private $httpclient;
 
   /**
+   * The ecms_api_helper service mock.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $entityToJsonApi;
+
+  /**
+   * The ecms_api_helper service mock.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $ecmsApiHelper;
+
+  /**
    * {@inheritDoc}
    */
   public function setUp(): void {
