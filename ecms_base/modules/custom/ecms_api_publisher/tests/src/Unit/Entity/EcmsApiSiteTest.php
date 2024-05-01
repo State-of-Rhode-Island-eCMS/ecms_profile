@@ -495,6 +495,7 @@ class EcmsApiSiteTest extends UnitTestCase {
        *
        * @var mixed
        */
+      // phpcs:ignore
       public $target_id;
 
       /**

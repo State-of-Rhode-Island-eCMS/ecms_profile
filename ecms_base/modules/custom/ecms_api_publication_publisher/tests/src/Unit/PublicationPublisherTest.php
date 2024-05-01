@@ -49,7 +49,7 @@ class PublicationPublisherTest extends UnitTestCase {
   /**
    * The Guzzle httpclient.
    *
-   * @var \GuzzleHttp\ClientInterface|(\object&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   private $httpclient;
 
