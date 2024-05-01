@@ -21,7 +21,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
 
       - name: Check PHP Version
         run: php -v
@@ -138,10 +138,9 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs-ci.xml
 
-# Comment out PHPUnit testing suite until D10 compatibility is sorted out.
-#      - name: Run unit tests.
-#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-#        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
+      - name: Run unit tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
 # Un-comment this section after D10-compatible PHPUnit upgrade is avaiolable.
 
 #      - name: Install the ecms base profile.
