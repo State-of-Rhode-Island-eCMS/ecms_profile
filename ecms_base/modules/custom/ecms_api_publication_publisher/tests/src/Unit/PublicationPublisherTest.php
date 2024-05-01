@@ -47,6 +47,13 @@ class PublicationPublisherTest extends UnitTestCase {
   private $node;
 
   /**
+   * The Guzzle httpclient.
+   *
+   * @var \GuzzleHttp\ClientInterface|(\object&\PHPUnit\Framework\MockObject\MockObject)|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $httpclient;
+
+  /**
    * {@inheritDoc}
    */
   public function setUp(): void {
