@@ -242,8 +242,8 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->withConsecutive(['user_role'], ['workflow'])
-      ->willReturnOnConsecutiveCalls($this->entityStorage, $workflowStorage);
+      ->withConsecutive(['workflow'], ['user_role'])
+      ->willReturnOnConsecutiveCalls($workflowStorage, $this->entityStorage);
 
     $this->config->expects($this->once())
       ->method('get')

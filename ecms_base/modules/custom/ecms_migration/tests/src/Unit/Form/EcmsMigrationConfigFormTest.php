@@ -127,7 +127,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
   /**
    * {@inheritDoc}
    */
-  protected function tearDown() {
+  protected function tearDown(): void {
     parent::tearDown();
 
     $this->mockFlushCache->disable();
