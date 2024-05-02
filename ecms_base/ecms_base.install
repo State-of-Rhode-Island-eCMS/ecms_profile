@@ -2158,3 +2158,16 @@ function ecms_base_update_10202(array &$sandbox): void {
   $siteAdminRole->revokePermission('administer site configuration');
   $siteAdminRole->save();
 }
+
+/**
+ * Add media_pdf_thumbnail to the installed modules.
+ */
+function ecms_base_update_10203(array &$sandbox): void {
+
+  $modules_to_install = [
+    'media_pdf_thumbnail',
+  ];
+
+  // Enable modules.
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
