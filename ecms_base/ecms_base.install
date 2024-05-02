@@ -2158,4 +2158,3 @@ function ecms_base_update_10202(array &$sandbox): void {
   $siteAdminRole->revokePermission('administer site configuration');
   $siteAdminRole->save();
 }
-
