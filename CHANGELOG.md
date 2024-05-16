@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-475: Added the Media PDF Thumbnail module.
 
 ### Changed
+ - RIGA-492: Changed the configuration for the basic page intro text field.
 
 ### Deprecated
 
