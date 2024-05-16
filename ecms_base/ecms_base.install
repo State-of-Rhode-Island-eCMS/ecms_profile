@@ -2162,7 +2162,7 @@ function ecms_base_update_10202(array &$sandbox): void {
 /**
  * Update configuration.
  *
- *   - basic page form display
+ *   - basic page form display.
  */
 function ecms_base_update_10203(array &$sandbox): void {
   // Get reference to config install directory.
