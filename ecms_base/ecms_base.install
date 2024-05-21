@@ -68,6 +68,10 @@ function ecms_base_install() {
   $config->set('mail', 'ecms@notification.ri.gov');
   $config->save();
 
+  $dashboardConfig = $configFactory->getEditable('moderation_dashboard.settings');
+  $dashboardConfig->set('chart_js_cdn', 'true');
+  $dashboardConfig->save();
+
 }
 
 /**
