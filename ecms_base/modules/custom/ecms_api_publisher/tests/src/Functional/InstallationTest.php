@@ -63,7 +63,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
       'edit-api-host-0-uri' => self::API_HOST,
     ];
 
-    $this->drupalPostForm('admin/config/ecms_api/ecms_api_publisher/site/add', $values, 'Save');
+    $this->submitForm($values, 'Save');
     $url = $this->getUrl();
 
     // Parse the url to get the user account id.
@@ -83,7 +83,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->drupalGet("admin/config/ecms_api/ecms_api_publisher/site/{$id}/delete");
     $this->assertSession()->statusCodeEquals(200);
 
-    $this->drupalPostForm("admin/config/ecms_api/ecms_api_publisher/site/{$id}/delete", [], 'Delete');
+    $this->submitForm([], 'Delete');
     $this->drupalGet('admin/config/ecms_api/ecms_api_publisher/sites');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->linkNotExists('Test Endpoint');

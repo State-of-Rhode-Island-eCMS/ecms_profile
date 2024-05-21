@@ -56,10 +56,10 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     // Ensure the role has the correct permission selected.
     $this->drupalGet('admin/people/permissions/ecms_api_publisher');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertSession()->checkBoxChecked('ecms_api_publisher[add ecms api site entities]');
-    $this->assertSession()->checkboxChecked('ecms_api_publisher[view any unpublished content]');
-    $this->assertSession()->checkboxChecked('ecms_api_publisher[view latest version]');
-    $this->assertSession()->checkboxChecked('ecms_api_publisher[view notification revisions]');
+    $this->assertSession()->fieldEnabled('ecms_api_publisher[add ecms api site entities]');
+    $this->assertSession()->fieldEnabled('ecms_api_publisher[view any unpublished content]');
+    $this->assertSession()->fieldEnabled('ecms_api_publisher[view latest version]');
+    $this->assertSession()->fieldEnabled('ecms_api_publisher[view notification revisions]');
 
     // Ensure the user account was created.
     $this->drupalGet('admin/people');
@@ -78,9 +78,9 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     // Browse to the user edit page.
     $this->drupalGet("{$accountUrl}/edit");
     // Ensure the user has the correct role selected.
-    $this->assertSession()->checkboxChecked('edit-roles-ecms-api-publisher');
+    $this->assertSession()->fieldEnabled('edit-roles-ecms-api-publisher');
     // Ensure the user is active.
-    $this->assertSession()->checkboxChecked('edit-status-1');
+    $this->assertSession()->fieldEnabled('edit-status-1');
 
     // Assert the consumer is in the consumer's list.
     $this->drupalGet('admin/config/services/consumer');
@@ -94,10 +94,9 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     $this->drupalGet("{$urlParts[0]}/edit");
     $this->assertSession()->statusCodeEquals(200);
     // Ensure the api user is set.
-    $this->assertSession()->fieldValueEquals('edit-user-id-0-target-id', "ecms_api_publisher ({$accountId})");
+    $this->assertSession()->elementTextEquals('css', 'edit-user-id-0-target-id', "ecms_api_publisher ({$accountId})");
     // Ensure the correct role is set.
-    $this->assertSession()->checkboxChecked('edit-roles-ecms-api-publisher');
-
+    $this->assertSession()->fieldEnabled('edit-roles-ecms-api-publisher');
   }
 
 }
