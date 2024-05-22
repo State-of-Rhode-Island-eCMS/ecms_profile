@@ -94,7 +94,7 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     $this->drupalGet("{$urlParts[0]}/edit");
     $this->assertSession()->statusCodeEquals(200);
     // Ensure the api user is set.
-    $this->assertSession()->elementTextEquals('css', 'edit-user-id-0-target-id', "ecms_api_publisher ({$accountId})");
+    $this->assertSession()->elementTextEquals('css', '#edit-user-id-0-target-id', "ecms_api_publisher ({$accountId})");
     // Ensure the correct role is set.
     $this->assertSession()->fieldEnabled('edit-roles-ecms-api-publisher');
   }
