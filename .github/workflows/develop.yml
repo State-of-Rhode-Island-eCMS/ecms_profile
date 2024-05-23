@@ -143,16 +143,15 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
 
+      - name: Install the ecms base profile.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
+
       - name: Update settings.php
         run: |
           echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
           echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
           echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
-          echo "\$databases['default']['default']['init_commands'] = ['isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',];" >> /var/www/html/sites/default/settings.php
-
-      - name: Install the ecms base profile.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
 
 #      - name: Run functional tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
