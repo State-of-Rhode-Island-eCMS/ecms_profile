@@ -88,7 +88,7 @@ class EcmsSpeechesInstallTest extends AllProfileInstallationTestsAbstract {
     // Enable the ecms_speeches feature.
     $edit = [];
     $edit["modules[ecms_speeches][enable]"] = TRUE;
-    $this->drupalPostForm(NULL, $edit, t('Install'));
+    $this->submitForm($edit, 'Install');
     $this->assertSession()->pageTextContainsOnce('Module eCMS Speeches has been enabled.');
 
     // Create the entities to test with after installation.
@@ -134,7 +134,7 @@ class EcmsSpeechesInstallTest extends AllProfileInstallationTestsAbstract {
       $translationTitle = "Translation in {$lang}";
       $postTranslation = self::SPEECH_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
-      $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
+      $this->submitForm($postTranslation, 'Save (this translation)');
       $this->assertSession()->pageTextContains("Speech {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
@@ -147,10 +147,10 @@ class EcmsSpeechesInstallTest extends AllProfileInstallationTestsAbstract {
     $edit = [];
     $edit["uninstall[ecms_speeches]"] = TRUE;
     // Submit the uninstall form.
-    $this->drupalPostForm(NULL, $edit, t('Uninstall'));
+    $this->submitForm($edit, 'Uninstall');
 
     // Submit the confirmation form.
-    $this->drupalPostForm(NULL, [], t('Uninstall'));
+    $this->submitForm([], 'Uninstall');
 
     $this->assertSession()->fieldNotExists('uninstall[ecms_speeches]');
 

@@ -120,7 +120,7 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     // Enable the ecms_publications feature.
     $edit = [];
     $edit["modules[ecms_publications][enable]"] = TRUE;
-    $this->drupalPostForm(NULL, $edit, t('Install'));
+    $this->submitForm($edit, 'Install');
     $this->assertSession()->pageTextContainsOnce('Module eCMS Publications has been enabled.');
 
     // Create the entities to test with after installation.
@@ -162,7 +162,7 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
       $translationTitle = "Translation in {$lang}";
       $postTranslation = self::PUBLICATION_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
-      $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
+      $this->submitForm($postTranslation, 'Save (this translation)');
       $this->assertSession()->pageTextContainsOnce("Publication {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
@@ -175,10 +175,10 @@ class EcmsPublicationsInstallTest extends AllProfileInstallationTestsAbstract {
     $edit = [];
     $edit["uninstall[ecms_publications]"] = TRUE;
     // Submit the uninstall form.
-    $this->drupalPostForm(NULL, $edit, t('Uninstall'));
+    $this->submitForm($edit, 'Uninstall');
 
     // Submit the confirmation form.
-    $this->drupalPostForm(NULL, [], t('Uninstall'));
+    $this->submitForm([], 'Uninstall');
 
     $this->assertSession()->fieldNotExists('uninstall[ecms_publications]');
 
