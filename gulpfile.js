@@ -4,120 +4,128 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const stylelint = require('gulp-stylelint');
-const sassGlob = require('gulp-sass-glob');
+const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
-const fileArgs = require('yargs').argv;
-
-// Directories to search SCSS files to compile. By default, node-sass does not
-// compile files that begin with _.
-const scssFilePaths = [
-  "modules/custom/**/*.scss",
-  "web/modules/custom/**/*.scss",
-  "/ecms_profile/modules/custom/**/*.scss",
-  "themes/custom/**/*.scss",
-  "web/themes/custom/**/*.scss",
-  "/ecms_profile/themes/custom/**/*.scss",
-];
 
 // Directories to search ES6 JavaScript files to compile. Files will be compiled
 // to a .js file extension.
 const javascriptFilePaths = [
-  "modules/custom/**/*.es6.js",
-  "web/modules/custom/**/*.es6.js",
-  "/ecms_profile/modules/custom/**/*.es6.js",
-  "themes/custom/**/*.es6.js",
-  "web/themes/custom/**/*.es6.js",
-  "/ecms_profile/themes/custom/**/*.es6.js",
+  "docroot/modules/custom/**/*.es6.js",
+  "docroot/themes/custom/**/*.es6.js",
+  "docroot/profiles/contrib/ecms_profile/*/modules/custom/**/*.es6.js",
+  "docroot/profiles/contrib/ecms_profile/*/themes/custom/**/*.es6.js",
 ];
 
-// Default task.
-gulp.task('default', ['build']);
+// Directories to search SCSS files to compile. By default, node-sass does not
+// compile files that begin with _.
+const scssFilePaths = [
+  "docroot/modules/custom/**/*.scss",
+  "docroot/themes/custom/**/*.scss",
+  "docroot/profiles/contrib/ecms_profile/*/modules/custom/**/*.scss",
+  "docroot/profiles/contrib/ecms_profile/*/themes/custom/**/*.scss",
+];
 
 // Build tasks.
-gulp
-  .task('build', ['build:js', 'build:sass'])
-  .task('build:js', () => {
-    return gulp
-      .src(javascriptFilePaths)
-      .pipe(babel({
-        presets: ['env']
-      }))
-      .pipe(rename((path) => {
-        path.basename = path.basename.replace('.es6', '');
-      }))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }));
-  })
-  .task('build:sass', () => {
-    return gulp
-      .src(scssFilePaths)
-      .pipe(sassGlob())
-      .pipe(autoprefixer({
-        browsers: ['last 2 versions']
-      }))
-      .pipe(sass({
-        includePaths: [
-          "node_modules",
-          "web/libraries",
-        ]
-      }))
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }));
-  });
+gulp.task('build:js', () => {
+  return gulp
+    .src(javascriptFilePaths)
+    .pipe(eslint({
+      parserOptions: {
+        ecmaVersion: "6",
+      }
+    }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(rename((path) => {
+      path.basename = path.basename.replace('.es6', '');
+    }))
+    .pipe(gulp.dest((file) => {
+      return file.base;
+    }));
+});
+
+gulp.task('build:sass', () => {
+  return gulp
+    .src(scssFilePaths)
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      includePaths: [
+        "node_modules",
+        "web/libraries",
+      ]
+    }))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest((file) => {
+      return file.base;
+    }));
+});
+
+gulp.task('build', gulp.parallel('build:js', 'build:sass'));
 
 // Watch tasks.
-gulp
-  .task('watch', ['watch:js', 'watch:sass'])
-  .task('watch:js', () => {
-    return gulp.watch(javascriptFilePaths, ['build:js']);
-  })
-  .task('watch:sass', () => {
-    return gulp.watch(scssFilePaths, ['build:sass']);
-  });
+gulp.task('watch:js', () => {
+  return gulp.watch(javascriptFilePaths, gulp.series('build:js'));
+});
 
-// Validate tasks.
-gulp
-  .task('validate', ['validate:js', 'validate:sass'])
-  .task('validate:sass', () => {
-    return gulp
-      .src(fileArgs.file ? fileArgs.file : scssFilePaths)
-      .pipe(stylelint({
-        reporters: [
-          {
-            formatter: 'verbose',
-            console: true,
-          }
-        ],
-        debug: true,
-      }));
-  })
-  .task('validate:js', () => {
-    return gulp
-      .src(fileArgs.file ? fileArgs.file : javascriptFilePaths)
-      .pipe(eslint())
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
-  });
+gulp.task('watch:sass', () => {
+  return gulp.watch(scssFilePaths, gulp.series('build:sass'));
+});
+
+gulp.task('watch', gulp.parallel('watch:js', 'watch:sass'));
+
+// Validation tasks
+gulp.task('validate:js', () => {
+  return gulp
+    .src(javascriptFilePaths)
+    .pipe(eslint({
+      parserOptions: {
+        ecmaVersion: "6",
+      }
+    }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('validate:sass', () => {
+  return gulp
+    .src(scssFilePaths)
+    .pipe(stylelint({
+      reporters: [
+        {
+          formatter: 'verbose',
+          console: true,
+        }
+      ],
+      debug: true,
+    }))
+});
+
+gulp.task('validate', gulp.parallel('validate:js', 'validate:sass'));
 
 // Syntax fixer tasks.
-gulp
-  .task('fix', ['fix:js', 'fix:sass'])
-  .task('fix:js', () => {
-    return gulp
-      .src(fileArgs.file ? fileArgs.file : javascriptFilePaths)
-      .pipe(eslint({fix: true}))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }))
-  })
-  .task('fix:sass', () => {
-    return gulp
-      .src(fileArgs.file ? fileArgs.file : scssFilePaths)
-      .pipe(stylelint({fix: true}))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }));
-  });
+gulp.task('fix:js', () => {
+  return gulp
+    .src(javascriptFilePaths)
+    .pipe(eslint({ fix: true }))
+    .pipe(gulp.dest((file) => {
+      return file.base;
+    }))
+});
+
+gulp.task('fix:sass', () => {
+  return gulp
+    .src(scssFilePaths)
+    .pipe(stylelint({ fix: true }))
+    .pipe(gulp.dest((file) => {
+      return file.base;
+    }));
+});
+
+gulp.task('fix', gulp.parallel('fix:js', 'fix:sass'));
