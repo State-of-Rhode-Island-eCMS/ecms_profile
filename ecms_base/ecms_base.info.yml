@@ -48,10 +48,10 @@ dependencies:
   - layout_discovery
   - locale
   - media
+  - menu_admin_per_menu
   - media_entity_download
   - media_library
   - media_library_form_element
-  - menu_admin_per_menu
   - menu_block
   - menu_link_content
   - menu_ui
