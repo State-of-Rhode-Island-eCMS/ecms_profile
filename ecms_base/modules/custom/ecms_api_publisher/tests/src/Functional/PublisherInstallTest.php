@@ -90,11 +90,20 @@ class PublisherInstallTest extends AllProfileInstallationTestsAbstract {
     $this->clickLink('eCMS Publisher');
     $url = $this->getUrl();
     $urlParts = explode('?', $url);
+    $pathSplit = explode('/', $urlParts[0]);
+    $consumerID = array_pop($pathSplit);
     // Edit the consumer.
     $this->drupalGet("{$urlParts[0]}/edit");
     $this->assertSession()->statusCodeEquals(200);
+
     // Ensure the api user is set.
-    $this->assertSession()->elementTextEquals('css', '#edit-user-id-0-target-id', "ecms_api_publisher ({$accountId})");
+    /** @var \Drupal\consumers\Entity\ConsumerInterface $consumer */
+    $consumer = \Drupal::entityTypeManager()->getStorage('consumer')->load($consumerID);
+    $userFieldValue = $consumer->get('user_id')->getValue();
+    $this->assertNotEmpty($userFieldValue);
+    $userId = $userFieldValue[0]['target_id'];
+    $this->assertEquals($accountId, $userId);
+
     // Ensure the correct role is set.
     $this->assertSession()->fieldEnabled('edit-roles-ecms-api-publisher');
   }
