@@ -142,11 +142,6 @@ jobs:
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
-# Un-comment this section after D10-compatible PHPUnit upgrade is avaiolable.
-
-      - name: Install the ecms base profile.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
 
       - name: Update settings.php
         run: |
@@ -155,17 +150,21 @@ jobs:
           echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
           echo "\$databases['default']['default']['init_commands'] = ['isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',];" >> /var/www/html/sites/default/settings.php
 
+      - name: Install the ecms base profile.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
+
 #      - name: Run functional tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
 #        run: sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
 
       - name: Run functional tests with fastest.
         working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --process=${{ env.ECMS_TEST_PROCESSES }} --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest --process=${{ env.ECMS_TEST_PROCESSES }} "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
 
       - name: Run existing site tests with fastest.
         working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --process=${{ env.ECMS_TEST_PROCESSES }} --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest --process=${{ env.ECMS_TEST_PROCESSES }} "/var/www/vendor/phpunit/phpunit/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
 
 #      - name: Run existing site tests.
 #        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
