@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-490: Removed the patch for Layout Builder Tabs
 
 ### Fixed
 
