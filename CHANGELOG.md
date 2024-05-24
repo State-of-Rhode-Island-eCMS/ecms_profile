@@ -13,7 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-475: Added the Media PDF Thumbnail module.
 
 ### Changed
- - RIGA-492: Changed the configuration for the basic page intro text field.
+- RIGA-492: Changed the configuration for the basic page intro text field.
+- RIGA-490: Changed the tabs.html.twig theme template to match the changes in V1.0.1 of the module template.
 
 ### Deprecated
 
