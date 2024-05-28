@@ -51,9 +51,6 @@
                 "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
 
             },
-            "drupal/layout_builder_tabs": {
-                "3305095 - The callable passed to the filter must be a Closure in sandbox mode": "https://www.drupal.org/files/issues/2022-09-06/3305095-3-error-500-on-save.patch"
-            },
             "drupal/layout_builder_iframe_modal": {
                 "3344339 - Hide the ‘Rebuild layout’ link in the layout builder actions area": "https://gist.githubusercontent.com/pfrilling/cce2cd4ce1f24e2c91a15fed0ce95412/raw/9058159f7ca199485692d3b4d1f052809ca8619d/3344339-hide-rebuild-layout-button.patch"
             },

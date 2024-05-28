@@ -21,21 +21,21 @@
 
 <!-- Nav tabs -->
 <ul class="tabs tab--primary layout-tabs">
-{% for block_id, block_data in blocks if content[region][block_id] %}
+{% for block_id, block_data in blocks|filter(v => v.content is not empty) %}
 {% set block_label = content[region][block_id]['content']['#title']['#markup'] %}
 {% if block_label is empty %}
   {% set block_label = content[region][block_id]['#configuration']['label'] %}
 {% endif %}
 <li class="tabs__tab"><a class="nav-item nav-link {{ loop.first ? 'is-active' }}"
   href="#panel-{{ block_id }}" id="tab-{{ block_id }}">
-  <div class="label"> {{ block_label }}</div>
+  <div class="label">{{ block_label }}</div>
 </a></li>
 {% endfor %}
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  {% for block_id, block_data in blocks if content[region][block_id] %}
+  {% for block_id, block_data in blocks|filter(v => v.content is not empty) %}
   <div class="tab-pane {{ loop.first ? 'active' }}" id="panel-{{ block_id }}">
     {{ content[region][block_id] }}
   </div>
@@ -44,7 +44,7 @@
 {% else %}
 {# Markup for layout builder #}
 <!-- Tab panes -->
-{% for block_id, block_data in blocks if content[region][block_id] %}
+{% for block_id, block_data in blocks %}
   {% if block_id starts with '#' %}
     {# Don't try to output attributes #}
   {% else %}
