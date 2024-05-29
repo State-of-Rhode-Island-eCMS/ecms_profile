@@ -10,20 +10,27 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.3] - 2024-05-29
+### Added
 - RIGA-475: Added the Media PDF Thumbnail module.
 
 ### Changed
 - RIGA-492: Changed the configuration for the basic page intro text field.
 - RIGA-490: Changed the tabs.html.twig theme template to match the changes in V1.0.1 of the module template.
 
-### Deprecated
-
 ### Removed
 - RIGA-490: Removed the patch for Layout Builder Tabs
-
-### Fixed
-
-### Security
 
 ## [1.0.2] - 2024-04-24
 ### Added
@@ -1236,7 +1243,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/0.11.0...1.0.0
