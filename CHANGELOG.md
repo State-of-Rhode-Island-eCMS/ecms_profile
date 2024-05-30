@@ -12,12 +12,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-492: Changed the configuration for the basic page intro text field.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-404: Fix develop script error - Update develop script to use PHP8.2
+- RIGA-404: Fix npm install error - Update gulp, stylelint, and node-sass
+- RIGA-404: Fix gulp build error - Update gulpfile for gulp4
 
 ### Security
 
