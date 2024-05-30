@@ -10,6 +10,7 @@
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
+    "browserslist": "4.21.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^3.0.1",
@@ -28,8 +29,8 @@
     "gulp-stylelint": "^9.0.0",
     "node-sass": "^4.9.3",
     "prettier": "^1.14.2",
-    "stylelint": "^10.1.0",
-    "stylelint-config-sass-guidelines": "^6.2.0",
+    "stylelint": "^10.0.1",
+    "stylelint-config-sass-guidelines": "^6.0.0",
     "stylelint-scss": "^3.3.0",
     "yargs": "^15.4.0"
   }
