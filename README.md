@@ -8,6 +8,12 @@ To develop this installation profile, start by running
 ./scripts/develop.sh
 ```
 
+Adding the `-d` flag will automatically delete an existing `../develop-ecms-profile` folder.
+
+```bash
+./scripts/develop.sh -d
+```
+
 This script will create a new lando project based on the Oomphinc scaffold file
 in the following directory:
 
