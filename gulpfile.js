@@ -4,6 +4,7 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const stylelint = require('gulp-stylelint');
+const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 
@@ -54,6 +55,7 @@ gulp.task('build:js', () => {
 gulp.task('build:sass', () => {
   return gulp
     .src(scssFilePaths)
+    .pipe(sassGlob())
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
