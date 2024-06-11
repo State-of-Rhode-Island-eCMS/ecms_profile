@@ -181,6 +181,7 @@
         "drupal/search_api": "^1.18",
         "drupal/search_api_exclude": "^2.0",
         "drupal/search_api_solr": "^4.2",
+        "drupal/seckit": "^2.0",
         "drupal/simple_menu_permissions": "^2.0",
         "drupal/simple_oauth": "^5.2",
         "drupal/simple_sitemap": "^4.1",
