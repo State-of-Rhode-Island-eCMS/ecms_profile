@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-510: Make the Basic Page's intro text summary visible.
 
 ### Deprecated
 

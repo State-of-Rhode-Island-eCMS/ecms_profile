@@ -1,3 +1,4 @@
+uuid: 0c18e06d-f49d-4e34-bcc8-50e45d879978
 langcode: en
 status: true
 dependencies:
@@ -5,7 +6,13 @@ dependencies:
     - field.storage.node.field_basic_page_body
     - node.type.basic_page
   module:
+    - allowed_formats
     - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+_core:
+  default_config_hash: wmNA1Ir8YkqIa-tJJ_ErI368_2d8tEV3kw37eIrfHhI
 id: node.basic_page.field_basic_page_body
 field_name: field_basic_page_body
 entity_type: node
@@ -17,6 +24,7 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: false
+  display_summary: true
   required_summary: false
+  allowed_formats: {  }
 field_type: text_with_summary
