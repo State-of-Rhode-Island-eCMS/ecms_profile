@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-508: Added the Security Kit module.
 - RIGA-488: Added WYSIWYG to views filtered text
 - RIGA-499: Added an aggregator-item twig template.
 
