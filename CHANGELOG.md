@@ -15,6 +15,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-499: Added an aggregator-item twig template.
 
 ### Changed
+- RIGA-510: Make the Basic Page's intro text summary visible.
 
 ### Deprecated
 
