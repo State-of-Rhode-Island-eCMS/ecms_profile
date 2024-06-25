@@ -99,7 +99,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
     // Enable the ecms_hotel feature.
     $edit = [];
     $edit["modules[ecms_hotel][enable]"] = TRUE;
-    $this->drupalPostForm(NULL, $edit, t('Install'));
+    $this->submitForm($edit, 'Install');
     $this->assertSession()->pageTextContainsOnce('Module eCMS Hotels has been enabled.');
 
     // Create the entities to test with after installation.
@@ -145,7 +145,7 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
       $translationTitle = "Translation in {$lang}";
       $postTranslation = self::HOTEL_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
-      $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
+      $this->submitForm($postTranslation, 'Save (this translation)');
       $this->assertSession()->pageTextContains("Hotel {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
@@ -158,10 +158,10 @@ class EcmsHotelInstallTest extends AllProfileInstallationTestsAbstract {
     $edit = [];
     $edit["uninstall[ecms_hotel]"] = TRUE;
     // Submit the uninstall form.
-    $this->drupalPostForm(NULL, $edit, t('Uninstall'));
+    $this->submitForm($edit, 'Uninstall');
 
     // Submit the confirmation form.
-    $this->drupalPostForm(NULL, [], t('Uninstall'));
+    $this->submitForm([], 'Uninstall');
 
     $this->assertSession()->fieldNotExists('uninstall[ecms_hotel]');
 

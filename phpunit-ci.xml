@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <phpunit bootstrap="/var/www/html/core/tests/bootstrap.php" colors="true"
-             beStrictAboutTestsThatDoNotTestAnything="true"
-             beStrictAboutOutputDuringTests="true"
-             beStrictAboutChangesToGlobalState="true"
-             failOnWarning="true"
-             printerClass="\Drupal\Tests\Listeners\HtmlOutputPrinter"
-             cacheResult="false">
+<phpunit
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  bootstrap="/var/www/html/core/tests/bootstrap.php"
+  colors="true"
+  beStrictAboutTestsThatDoNotTestAnything="true"
+  beStrictAboutOutputDuringTests="true"
+  beStrictAboutChangesToGlobalState="true"
+  failOnWarning="true"
+  printerClass="\Drupal\Tests\Listeners\HtmlOutputPrinter"
+  cacheResult="false"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+>
+  <coverage>
+    <include>
+      <directory>/var/www/html/profiles/contrib/ecms_profile/*</directory>
+    </include>
+    <exclude>
+      <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
+      <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests</directory>
+      <directory>/var/www/html/profiles/contrib/ecms_profile/tests</directory>
+      <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
+    </exclude>
+    <report>
+      <text outputFile="tests/phpunit/results/coverage.txt"/>
+    </report>
+  </coverage>
     <php>
         <!-- Set error reporting to E_ALL. -->
         <ini name="error_reporting" value="32767"/>
@@ -40,7 +59,6 @@
           <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/ExistingSite</directory>
           <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>
         </testsuite>
-
     </testsuites>
     <listeners>
         <listener class="\Drupal\Tests\Listeners\DrupalListener">
@@ -49,19 +67,4 @@
         <listener class="\Symfony\Bridge\PhpUnit\SymfonyTestsListener">
         </listener>
     </listeners>
-    <!-- Filter for coverage reports. -->
-    <filter>
-        <whitelist>
-            <directory>/var/www/html/profiles/contrib/ecms_profile/*</directory>
-            <exclude>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests</directory>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/tests</directory>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
-    </logging>
 </phpunit>

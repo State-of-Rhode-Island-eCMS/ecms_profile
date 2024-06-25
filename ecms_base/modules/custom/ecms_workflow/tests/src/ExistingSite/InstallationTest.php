@@ -66,7 +66,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxChecked('edit-content-author-create-basic-page-content');
     $this->assertSession()->checkboxChecked('edit-content-publisher-create-basic-page-content');
     $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-basic-page-content');
-    $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-basic-page-content');
+    $this->assertSession()->checkboxChecked('edit-content-author-edit-any-basic-page-content');
 
   }
 
@@ -96,7 +96,7 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->checkboxChecked('edit-content-author-create-test-content-type-content');
     $this->assertSession()->checkboxChecked('edit-content-publisher-create-test-content-type-content');
     $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-test-content-type-content');
-    $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-test-content-type-content');
+    $this->assertSession()->checkboxChecked('edit-content-author-edit-any-test-content-type-content');
 
     // We can remove the test content type now.
     try {
