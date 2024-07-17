@@ -136,6 +136,7 @@
         "drupal/geolocation": "^3.2",
         "drupal/google_tag": "^2.0",
         "drupal/google_translator": "^2.1",
+        "drupal/hal": "^2.0",
         "drupal/honeypot": "^2.0",
         "drupal/http_cache_control": "^2.0",
         "drupal/iek": "^1.3",
