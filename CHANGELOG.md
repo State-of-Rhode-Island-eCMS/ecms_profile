@@ -11,6 +11,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-522: Added the HAL module.
+- RIGA-514: Add agency select field to the Press Release content type through features
 
 ### Changed
 

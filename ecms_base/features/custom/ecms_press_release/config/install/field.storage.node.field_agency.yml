@@ -1,0 +1,155 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_agency
+field_name: field_agency
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: administration_department_of
+      label: 'Administration, Department of'
+    -
+      value: attorney_general_office_of
+      label: 'Attorney General, Office of'
+    -
+      value: attorney_general_consumer_news_and_alerts
+      label: 'Attorney General: Consumer News and Alerts'
+    -
+      value: attorney_general_open_government
+      label: 'Attorney General: Open Government'
+    -
+      value: board_of_elections
+      label: 'Board of Elections'
+    -
+      value: business_regulation_department_of
+      label: 'Business Regulation, Department of'
+    -
+      value: child_advocate_office_of_the
+      label: 'Child Advocate, Office of the'
+    -
+      value: contractor_registration_board
+      label: 'Contractor Registration Board'
+    -
+      value: department_of_children_youth_and_families
+      label: 'Department of Children, Youth and Families'
+    -
+      value: department_of_corrections
+      label: 'Department of Corrections'
+    -
+      value: department_of_human_services
+      label: 'Department of Human Services'
+    -
+      value: department_of_labor_and_training
+      label: 'Department of Labor and Training'
+    -
+      value: division_of_elderly_affairs
+      label: 'Division of Elderly Affairs'
+    -
+      value: division_of_municipal_finance
+      label: 'Division of Municipal Finance'
+    -
+      value: economic_recovery_and_reinvestment_office_of
+      label: 'Economic Recovery and Reinvestment, Office of'
+    -
+      value: emergency_management_agency
+      label: 'Emergency Management Agency'
+    -
+      value: en_espanol
+      label: 'En Espanol'
+    -
+      value: energy_resources_office_of
+      label: 'Energy Resources, Office of'
+    -
+      value: environmental_management_department_of
+      label: 'Environmental Management, Department of'
+    -
+      value: ethics_commission
+      label: 'Ethics Commission'
+    -
+      value: general_treasurer_office_of_the
+      label: 'General Treasurer, Office of the'
+    -
+      value: governor_mckee_executive_orders
+      label: 'Governor McKee Executive Orders'
+    -
+      value: governor_mckee_speeches
+      label: 'Governor McKee Speeches'
+    -
+      value: governor_office_of_the
+      label: 'Governor, Office of the'
+    -
+      value: health_and_human_services_executive_office_of
+      label: 'Health and Human Services, Executive Office of'
+    -
+      value: health_department_of
+      label: 'Health, Department of'
+    -
+      value: health_department_of_beach_monitoring
+      label: 'Health, Department of: Beach Monitoring'
+    -
+      value: health_department_of_drinking_water
+      label: 'Health, Department of: Drinking Water'
+    -
+      value: historical_preservation_and_heritage_commission
+      label: 'Historical Preservation and Heritage Commission'
+    -
+      value: labor_and_training_department_of
+      label: 'Labor and Training, Department of'
+    -
+      value: lt_governor_office_of_the
+      label: 'LT. Governor, Office of the'
+    -
+      value: minority_business_enterprise
+      label: 'Minority Business Enterprise'
+    -
+      value: motor_vehicles_division_of
+      label: 'Motor Vehicles, Division of'
+    -
+      value: office_of_diversity_equity_opportunity
+      label: 'Office of Diversity, Equity & Opportunity'
+    -
+      value: office_or_the_health_insurance_commissioner
+      label: 'Office or the Health Insurance Commissioner'
+    -
+      value: public_safety_department_of
+      label: 'Public Safety, Department of'
+    -
+      value: revenue_department_of
+      label: 'Revenue, Department of'
+    -
+      value: rhode_island_state_council_on_the_arts
+      label: 'Rhode Island State Council on the Arts'
+    -
+      value: ri_commerce_corporation
+      label: 'RI Commerce Corporation'
+    -
+      value: ri_higher_education_assistance_authority
+      label: 'RI Higher Education Assistance Authority'
+    -
+      value: secretary_of_state_office_of_the
+      label: 'Secretary of State, Office of the'
+    -
+      value: state_police_of_rhode_island
+      label: 'State Police of Rhode Island'
+    -
+      value: taxation_division_of
+      label: 'Taxation, Division of'
+    -
+      value: transportation_department_of
+      label: 'Transportation, Department of'
+    -
+      value: water_resources_board
+      label: 'Water Resources Board'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

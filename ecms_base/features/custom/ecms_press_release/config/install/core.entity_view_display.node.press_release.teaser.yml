@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.press_release.field_agency
     - field.field.node.press_release.field_meta_tags_press_release
     - field.field.node.press_release.field_press_release_body
     - field.field.node.press_release.field_press_release_date
@@ -23,23 +24,27 @@ mode: teaser
 content:
   field_press_release_body:
     type: text_summary_or_trimmed
-    weight: 0
-    region: content
     label: hidden
     settings:
       trim_length: 200
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_press_release_date:
     type: datetime_default
-    weight: 1
-    region: content
     label: hidden
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   content_moderation_control: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_agency: true
   field_meta_tags_press_release: true
   field_press_release_links: true
   field_press_release_paragraphs: true
