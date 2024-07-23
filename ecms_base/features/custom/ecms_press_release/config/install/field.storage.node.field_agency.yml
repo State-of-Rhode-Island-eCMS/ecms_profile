@@ -20,6 +20,9 @@ settings:
       value: attorney_general_consumer_news_and_alerts
       label: 'Attorney General: Consumer News and Alerts'
     -
+      value: attorney_general_grand_jury_reports
+      label: 'Attorney General: Grand Jury Reports'
+    -
       value: attorney_general_open_government
       label: 'Attorney General: Open Government'
     -
