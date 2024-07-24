@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_agency
+    - node.type.press_release
+  module:
+    - options
+id: node.press_release.field_agency
+field_name: field_agency
+entity_type: node
+bundle: press_release
+label: Agency
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
