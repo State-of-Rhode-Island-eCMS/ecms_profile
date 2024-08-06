@@ -70,6 +70,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     'description' => 'An oAuth client to receive content from an eCMS publishing site.',
     'third_party' => FALSE,
     'uuid' => self::CLIENT_ID,
+    'client_id' => self::CLIENT_ID,
     'secret' => self::CLIENT_SECRET,
   ];
 

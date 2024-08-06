@@ -123,6 +123,7 @@ class EcmsApiPublisherInstall {
       'description' => $this->t('An oAuth client to receive endpoints from an eCMS recipient site.'),
       'third_party' => FALSE,
       'uuid' => $this->getClientId(),
+      'client_id' => $this->getClientId(),
       'secret' => $this->getClientSecret(),
     ];
 

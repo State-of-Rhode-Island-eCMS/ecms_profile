@@ -63,6 +63,9 @@
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
+            },
+            "drupal/consumer": {
+                "Consumer list not working": "https://www.drupal.org/files/issues/2023-06-23/consumer_clinet_id.patch"
             }
         },
         "preserve-paths": [],
