@@ -2158,3 +2158,27 @@ function ecms_base_update_10202(array &$sandbox): void {
   $siteAdminRole->revokePermission('administer site configuration');
   $siteAdminRole->save();
 }
+
+/**
+ * Add google_translator to the installed modules.
+ */
+function ecms_base_update_10203(array &$sandbox): void {
+
+  $modules_to_install = [
+    'google_translator',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Add the google_translator block.
+  $active_storage->write('block.block.googletranslator', $theme_source->read('block.block.googletranslator'));
+}
