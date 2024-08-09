@@ -42,7 +42,7 @@ $config['ecms_api_publisher.settings']['recipient_client_secret'] = 'SECURE-CLIE
 
 #### oauth_client_id
 
-The OAuth client id is the UUID for the consumer entity and should follow normal
+The OAuth client id is saved as both the client_id and the UUID for the consumer entity and should follow normal
 UUID length and formats.
 
 #### oauth_client_secret
