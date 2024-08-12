@@ -53,6 +53,88 @@ class EcmsApiPublisherInstall {
   }
 
   /**
+   * Uninstall the Ecms API Publisher module.
+   */public function uninstallEcmsApiPublisher(): void {
+    // Remove the API User.
+    $this->removeApiPublisherUser();
+
+    // Remove the OAuth Consumer.
+    $this->removeSimpleOauthConsumer();
+
+    // Remove permissions for the ecms_api_publisher role.
+    $this->removeRolePermissions();
+  }
+
+  /**
+   * Remove the API User.
+   */
+  private function removeApiPublisherUser(): void
+  {
+    $storage = $this->entityTypeManager->getStorage('user');
+
+    $account = $storage->loadByProperties([
+      'name' => 'ecms_api_publisher',
+    ]);
+
+    // Guard against a NULL user.
+    if (empty($account)) {
+      return;
+    }
+
+    try {
+      $account->delete();
+    } catch (EntityStorageException $e) {
+      return;
+    }
+  }
+
+  /**
+   * Remove the OAuth Consumer.
+   */
+  private function removeSimpleOauthConsumer(): void {
+    $storage = $this->entityTypeManager->getStorage('consumer');
+
+    $consumer = $storage->loadByProperties([
+      'uuid' => $this->getClientId(),
+    ]);
+
+    // Guard against a NULL consumer.
+    if (empty($consumer)) {
+      return;
+    }
+
+    try {
+      $consumer->delete();
+    } catch (EntityStorageException $e) {
+      return;
+    }
+  }
+
+  /**
+   * Remove permissions for the ecms_api_publisher role.
+   */
+  private function removeRolePermissions(): void
+  {
+    $storage = $this->entityTypeManager->getStorage('user_role');
+
+    $role = $storage->load(self::PUBLISHER_ROLE);
+
+    // Guard against an empty role.
+    if (empty($role)) {
+      return;
+    }
+
+    // Remove the ability to create api site entities.
+    $role->revokePermission("add ecms api site entities");
+
+    try {
+      $role->save();
+    } catch (EntityStorageException $e) {
+      return;
+    }
+  }
+
+  /**
    * Install the Ecms API Publisher module.
    */
   public function installEcmsApiPublisher(): void {

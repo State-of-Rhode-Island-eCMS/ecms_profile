@@ -14,3 +14,8 @@ function ecms_api_publisher_install() {
   // Call the installer service.
   \Drupal::service('ecms_api_publisher.install')->installEcmsApiPublisher();
 }
+
+function ecms_api_publisher_uninstall() {
+  // Call the installer service.
+  \Drupal::service('ecms_api_publisher.install')->uninstallEcmsApiPublisher();
+}
