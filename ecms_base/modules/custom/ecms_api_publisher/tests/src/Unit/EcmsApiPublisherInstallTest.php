@@ -114,6 +114,62 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   }
 
   /**
+   * Test the uninstallEcmsApiPublisher() method.
+   */
+  public function testUninstallEcmsApiPublisher(): void {
+    //User Account
+    $userAccount = $this->createMock(UserInterface::class);
+    $userAccount->expects($this->once())
+      ->method('delete');
+
+    // User Storage
+    $userStorage = $this->createMock(EntityStorageInterface::class);
+    $userStorage->expects($this->once())
+      ->method('loadByProperties')
+      ->with(['name' => 'ecms_api_publisher'])
+      ->willReturn($userAccount);
+
+    // Consumer
+    $consumerEntity = $this->createMock(EntityInterface::class);
+    $consumerEntity->expects($this->once())
+      ->method('delete');
+
+    // Consumer Storage
+    $consumerStorage = $this->createMock(EntityStorageInterface::class);
+    $consumerStorage->expects($this->once())
+      ->method('loadByProperties')
+      ->with(['uuid' => self::CLIENT_ID])
+      ->willReturn($consumerEntity);
+
+    //Publisher Role
+    $roleEntity = $this->createMock(RoleInterface::class);
+    $roleEntity->expects($this->once())
+      ->method('revokePermission')
+      ->with('add ecms api site entities')
+      ->willReturnSelf();
+
+    //Role Storage
+    $roleStorage = $this->createMock(EntityStorageInterface::class);
+    $roleStorage->expects($this->once())
+      ->method('load')
+      ->with(self::PUBLISHER_ROLE)
+      ->willReturn($roleEntity);
+
+
+    $this->entityTypeManager->expects($this->exactly(3))
+      ->method('getStorage')
+      ->withConsecutive(['user'], ['consumer'], ['user_role'])
+      ->willReturnOnConsecutiveCalls(
+        $userStorage,
+        $consumerStorage,
+        $roleStorage
+      );
+
+    $ecmsApiPublisherInstall = new EcmsApiPublisherInstall($this->entityTypeManager, $this->configFactory);
+    $ecmsApiPublisherInstall->uninstallEcmsApiPublisher();
+  }
+
+  /**
    * Test the installEcmsApiPublisher() method.
    */
   public function testInstallEcmsApiPublisher(): void {
