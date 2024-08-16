@@ -54,7 +54,8 @@ class EcmsApiPublisherInstall {
 
   /**
    * Uninstall the Ecms API Publisher module.
-   */public function uninstallEcmsApiPublisher(): void {
+   */
+  public function uninstallEcmsApiPublisher(): void {
     // Remove the API User.
     $this->removeApiPublisherUser();
 
@@ -68,8 +69,7 @@ class EcmsApiPublisherInstall {
   /**
    * Remove the API User.
    */
-  private function removeApiPublisherUser(): void
-  {
+  private function removeApiPublisherUser(): void {
     $storage = $this->entityTypeManager->getStorage('user');
 
     $account = $storage->loadByProperties([
@@ -83,9 +83,11 @@ class EcmsApiPublisherInstall {
 
     try {
       $account->delete();
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       return;
     }
+
   }
 
   /**
@@ -105,16 +107,17 @@ class EcmsApiPublisherInstall {
 
     try {
       $consumer->delete();
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       return;
     }
+
   }
 
   /**
    * Remove permissions for the ecms_api_publisher role.
    */
-  private function removeRolePermissions(): void
-  {
+  private function removeRolePermissions(): void {
     $storage = $this->entityTypeManager->getStorage('user_role');
 
     $role = $storage->load(self::PUBLISHER_ROLE);
@@ -129,9 +132,11 @@ class EcmsApiPublisherInstall {
 
     try {
       $role->save();
-    } catch (EntityStorageException $e) {
+    }
+    catch (EntityStorageException $e) {
       return;
     }
+
   }
 
   /**
