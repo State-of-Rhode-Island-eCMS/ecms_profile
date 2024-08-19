@@ -2171,7 +2171,7 @@ function ecms_base_update_10203(array &$sandbox): void {
   // Make sure necessary modules are installed.
   \Drupal::service('module_installer')->install($modules_to_install);
 
-  // Base profile path
+  // Base profile path.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   /** @var \Drupal\Core\Config\FileStorage $install_source */
@@ -2194,8 +2194,7 @@ function ecms_base_update_10203(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 
-
-  // Update the language switch block config
+  // Update the language switch block config.
   /** @var \Drupal\Core\Config\FileStorage $install_source */
   $update_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
 
