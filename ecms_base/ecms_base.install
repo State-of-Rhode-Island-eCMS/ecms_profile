@@ -2199,10 +2199,10 @@ function ecms_base_update_10203(array &$sandbox): void {
   $update_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
 
   // Import updated configuration for language switcher block.
-  $new_module_config = [
+  $update_block_config = [
     'block.block.languageswitcher',
   ];
-  foreach ($new_module_config as $config) {
-    $active_storage->write("{$config}", $update_source->read("{$config}"));
+  foreach ($update_block_config as $configBlock) {
+    $active_storage->write("{$configBlock}", $update_source->read("{$configBlock}"));
   }
 }
