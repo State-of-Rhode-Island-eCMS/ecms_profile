@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - google_translator
+  theme:
+    - ecms
+id: googletranslator
+theme: ecms
+region: language_switcher
+weight: 0
+provider: null
+plugin: google_translator
+settings:
+  id: google_translator
+  label: 'Translate this page'
+  label_display: ''
+  provider: google_translator
+visibility: {  }

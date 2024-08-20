@@ -37,6 +37,7 @@ dependencies:
   - field_ui
   - file
   - features
+  - google_translator
   - help
   - honeypot
   - image

@@ -11,12 +11,15 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-511: Added the emergency_notifications feature
+- RIGA-483: Enable `google_translator` module
+- RIGA-483: Add `googletranslator` block
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+- RIGA-483: Disable `languageswitcher`block
 
 ### Fixed
 
