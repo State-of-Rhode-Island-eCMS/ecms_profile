@@ -2158,3 +2158,16 @@ function ecms_base_update_10202(array &$sandbox): void {
   $siteAdminRole->revokePermission('administer site configuration');
   $siteAdminRole->save();
 }
+
+/**
+ * Install the ecms_emergency_notification feature
+ */
+function ecms_base_update_10203(array &$sandbox): void
+{
+
+  $features_to_install = [
+    'ecms_emergency_notification',
+  ];
+
+  \Drupal::service('module_installer')->install($features_to_install);
+}
