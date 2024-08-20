@@ -12,6 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-526: Added patch to allow subprofiles to work with Drupal Core ^10.3
+- RIGA-526: Fixed develop and ci-develop scripts to use 10.3.x & php 8.2.
 
 ### Deprecated
 
