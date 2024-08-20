@@ -2158,3 +2158,51 @@ function ecms_base_update_10202(array &$sandbox): void {
   $siteAdminRole->revokePermission('administer site configuration');
   $siteAdminRole->save();
 }
+
+/**
+ * Add google_translator to the installed modules.
+ */
+function ecms_base_update_10203(array &$sandbox): void {
+
+  $modules_to_install = [
+    'google_translator',
+  ];
+
+  // Make sure necessary modules are installed.
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  // Base profile path.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Add the google_translator block.
+  $active_storage->write('block.block.googletranslator', $theme_source->read('block.block.googletranslator'));
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  // Install google_translator config.
+  $new_module_config = [
+    'google_translator.settings',
+  ];
+  foreach ($new_module_config as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+
+  // Update the language switch block config.
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $update_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+
+  // Import updated configuration for language switcher block.
+  $update_block_config = [
+    'block.block.languageswitcher',
+  ];
+  foreach ($update_block_config as $configBlock) {
+    $active_storage->write("{$configBlock}", $update_source->read("{$configBlock}"));
+  }
+}
