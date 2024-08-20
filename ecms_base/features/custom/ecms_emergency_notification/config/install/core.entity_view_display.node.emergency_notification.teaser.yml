@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.emergency_notification.field_emergency_background_color
+    - field.field.node.emergency_notification.field_emergency_message
+    - node.type.emergency_notification
+  module:
+    - user
+id: node.emergency_notification.teaser
+targetEntityType: node
+bundle: emergency_notification
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_emergency_background_color: true
+  field_emergency_message: true
+  langcode: true
+  search_api_excerpt: true

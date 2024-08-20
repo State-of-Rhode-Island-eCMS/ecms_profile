@@ -1,0 +1,58 @@
+name: 'Emergency Notification'
+description: 'Provides Emergency Notifications'
+type: module
+core_version_requirement: '^9.4 || ^10'
+dependencies:
+  - allowed_formats
+  - autologout
+  - block_content
+  - content_moderation
+  - content_translation
+  - contextual
+  - ecms_basic_page
+  - ecms_event
+  - ecms_landing_page
+  - ecms_location
+  - ecms_notification
+  - ecms_paragraphs
+  - ecms_person
+  - ecms_press_release
+  - ecms_promotions
+  - ecms_publications
+  - field
+  - file
+  - filter
+  - help
+  - language
+  - layout_builder
+  - locale
+  - media
+  - media_revisions_ui
+  - menu_admin_per_menu
+  - menu_link_content
+  - menu_ui
+  - moderated_content_bulk_publish
+  - moderation_dashboard
+  - node
+  - options
+  - paragraphs
+  - paragraphs_type_permissions
+  - path
+  - publishcontent
+  - rabbit_hole
+  - redirect
+  - role_delegation
+  - scheduled_transitions
+  - simple_menu_permissions
+  - simple_sitemap
+  - system
+  - taxonomy
+  - text
+  - user
+  - views
+  - webform
+  - webform_encrypt
+  - webform_node
+  - workflows
+version: 9.x-1.0
+package: eCMS
