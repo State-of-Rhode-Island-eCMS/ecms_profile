@@ -16,8 +16,8 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="10.2.4"
-PHP_VERSION="8.1"
+DRUPAL_CORE_VERSION="10.3"
+PHP_VERSION="8.2"
 
 # Whether the source directory should be deleted before rebuilding lando
 DELETE_SRC=0
@@ -119,7 +119,7 @@ $COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
 $COMPOSER remove "drupal/devel" --no-update
 
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal10 --option php=$PHP_VERSION --webroot $DOCROOT --source cwd\n\n"
+echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal10 --option php=$PHP_VERSION --option database=mysql:5.7 --webroot $DOCROOT --source cwd\n\n"
 $LANDO init --name ${APP_NAME} --recipe drupal10 --option php=${PHP_VERSION} --webroot ${DOCROOT} --source cwd
 
 # Check for a lando local file.
@@ -135,6 +135,7 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository found at${NO_C}: $PATTERN_LAB_FULL_PATH, symlinking for development."
     LANDO_SERVICES="services:
   appserver:
+    composer_version: 2-latest
     overrides:
       environment:
         SIMPLETEST_BASE_URL: 'https://appserver'
@@ -154,6 +155,7 @@ else
     echo -e  "${FG_C}${BG_C}Pattern lab git repository NOT found at${NO_C}: $PATTERN_LAB_FULL_PATH, ignoring symlink."
     LANDO_SERVICES="services:
   appserver:
+    composer_version: 2-latest
     run_as_root:
       - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
     overrides:
