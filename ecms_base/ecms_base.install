@@ -2175,7 +2175,7 @@ function ecms_base_update_10203(array &$sandbox): void {
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   /** @var \Drupal\Core\Config\FileStorage $install_source */
-  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/install/");
+  $theme_source = new FileStorage($path . "/themes/custom/ecms/config/optional/");
 
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
