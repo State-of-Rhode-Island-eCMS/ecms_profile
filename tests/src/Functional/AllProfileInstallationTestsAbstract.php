@@ -58,7 +58,7 @@ abstract class AllProfileInstallationTestsAbstract extends BrowserTestBase {
     $this->submitForm([
       'name' => $account->getAccountName(),
       'pass' => $account->passRaw,
-    ], t('Log in'));
+    ], 'Log in');
 
     // @see ::drupalUserIsLoggedIn()
     $account->sessionId = $this->getSession()->getCookie(\Drupal::service('session_configuration')->getOptions(\Drupal::request())['name']);

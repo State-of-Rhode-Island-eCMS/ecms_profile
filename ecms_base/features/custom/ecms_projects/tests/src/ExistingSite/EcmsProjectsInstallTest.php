@@ -98,7 +98,7 @@ class EcmsProjectsInstallTest extends AllProfileInstallationTestsAbstract {
     // Enable the ecms_projects feature.
     $edit = [];
     $edit["modules[ecms_projects][enable]"] = TRUE;
-    $this->drupalPostForm(NULL, $edit, t('Install'));
+    $this->submitForm($edit, 'Install');
     $this->assertSession()->pageTextContainsOnce('Module eCMS Projects has been enabled.');
 
     // Create the entities to test with after installation.
@@ -144,7 +144,7 @@ class EcmsProjectsInstallTest extends AllProfileInstallationTestsAbstract {
       $translationTitle = "Translation in {$lang}";
       $postTranslation = self::PROJECT_TRANSLATABLE_FIELDS;
       $postTranslation['title[0][value]'] = $translationTitle;
-      $this->drupalPostForm(NULL, $postTranslation, t('Save (this translation)'));
+      $this->submitForm($postTranslation, 'Save (this translation)');
       $this->assertSession()->pageTextContains("Project {$translationTitle} has been updated.");
       $translatedUrl = $this->getUrl();
       $translatedUrl = parse_url($translatedUrl, PHP_URL_PATH);
@@ -157,10 +157,10 @@ class EcmsProjectsInstallTest extends AllProfileInstallationTestsAbstract {
     $edit = [];
     $edit["uninstall[ecms_projects]"] = TRUE;
     // Submit the uninstall form.
-    $this->drupalPostForm(NULL, $edit, t('Uninstall'));
+    $this->submitForm($edit, 'Uninstall');
 
     // Submit the confirmation form.
-    $this->drupalPostForm(NULL, [], t('Uninstall'));
+    $this->submitForm([], 'Uninstall');
 
     $this->assertSession()->fieldNotExists('uninstall[ecms_projects]');
 

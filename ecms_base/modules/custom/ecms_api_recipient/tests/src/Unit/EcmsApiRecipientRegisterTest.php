@@ -141,7 +141,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
    *
    * @dataProvider dataProviderForTestRegisterSite
    */
-  public function testRegisterSite(?string $siteUrl, ?string $hubUrl, bool $expectContentTypes, bool $accessToken, bool $guzzleException, int $code): void {
+  public function testRegisterSite(string $siteUrl, string $hubUrl, bool $expectContentTypes, bool $accessToken, bool $guzzleException, int $code): void {
     $passedUrlGuards = FALSE;
     $recipientConfigCount = 0;
 
@@ -268,8 +268,8 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
 
     return [
       'test1' => [
-        NULL,
-        NULL,
+        '',
+        '',
         FALSE,
         FALSE,
         TRUE,
@@ -277,7 +277,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
       ],
       'test2' => [
         'invalid',
-        NULL,
+        '',
         FALSE,
         FALSE,
         TRUE,
@@ -285,7 +285,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
       ],
       'test3' => [
         'https://test.com',
-        NULL,
+        '',
         FALSE,
         FALSE,
         TRUE,

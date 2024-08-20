@@ -26,6 +26,11 @@ class EcmsApiPublisherInstall {
   const PUBLISHER_ROLE = 'ecms_api_publisher';
 
   /**
+   * The machine name for consumer entity.
+   */
+  const MACHINE_NAME = 'ecma_api_publisher';
+
+  /**
    * The entity_type.manager service.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -124,6 +129,7 @@ class EcmsApiPublisherInstall {
       'third_party' => FALSE,
       'uuid' => $this->getClientId(),
       'secret' => $this->getClientSecret(),
+      'client_id' => self::MACHINE_NAME,
     ];
 
     $consumer = $storage->create($values);

@@ -47,6 +47,27 @@ class PublicationPublisherTest extends UnitTestCase {
   private $node;
 
   /**
+   * The Guzzle httpclient.
+   *
+   * @var \GuzzleHttp\ClientInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $httpclient;
+
+  /**
+   * The ecms_api_helper service mock.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $entityToJsonApi;
+
+  /**
+   * The ecms_api_helper service mock.
+   *
+   * @var \Drupal\ecms_api\EcmsApiHelper|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $ecmsApiHelper;
+
+  /**
    * {@inheritDoc}
    */
   public function setUp(): void {

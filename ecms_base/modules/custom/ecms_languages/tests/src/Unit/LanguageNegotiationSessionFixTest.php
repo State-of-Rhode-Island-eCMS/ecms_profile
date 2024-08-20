@@ -7,6 +7,7 @@ namespace Drupal\Tests\ecms_languages\Unit;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Session\AccountInterface;
@@ -145,7 +146,8 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
 
     $languageManager = $this->createMock(ConfigurableLanguageManager::class);
 
-    $testClass = new LanguageNegotiationSessionFix();
+    $requestStack = $this->createMock(RequestStack::class);
+    $testClass = new LanguageNegotiationSessionFix($requestStack);
 
     $testClass->setCurrentUser($user);
     $testClass->setConfig($configFactory);
