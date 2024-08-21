@@ -2206,3 +2206,14 @@ function ecms_base_update_10203(array &$sandbox): void {
     $active_storage->write("{$configBlock}", $update_source->read("{$configBlock}"));
   }
 }
+
+/**
+ * Install the ecms_emergency_notification feature.
+ */
+function ecms_base_update_10204(array &$sandbox): void {
+  $features_to_install = [
+    'ecms_emergency_notification',
+  ];
+
+  \Drupal::service('module_installer')->install($features_to_install);
+}

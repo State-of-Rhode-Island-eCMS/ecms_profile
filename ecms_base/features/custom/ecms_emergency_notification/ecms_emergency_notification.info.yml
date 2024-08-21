@@ -1,0 +1,24 @@
+name: 'Emergency Notification'
+description: 'Provides Emergency Notifications'
+type: module
+core_version_requirement: '^9.4 || ^10' || ^11
+dependencies:
+  - 'allowed_formats:allowed_formats'
+  - 'drupal:content_moderation'
+  - 'drupal:content_translation'
+  - 'drupal:contextual'
+  - 'drupal:field'
+  - 'drupal:filter'
+  - 'drupal:media'
+  - 'drupal:menu_link_content'
+  - 'drupal:menu_ui'
+  - 'drupal:node'
+  - 'drupal:options'
+  - 'drupal:path'
+  - 'drupal:system'
+  - 'drupal:taxonomy'
+  - 'drupal:text'
+  - 'drupal:user'
+  - 'drupal:workflows'
+version: 9.x-1.0
+package: eCMS
