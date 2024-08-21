@@ -104,6 +104,7 @@ install:
   - ecms_basic_page
   - ecms_blocks
   - ecms_ckeditor
+  - ecms_emergency_notification
   - ecms_event
   - ecms_icon_library
   - ecms_landing_page
