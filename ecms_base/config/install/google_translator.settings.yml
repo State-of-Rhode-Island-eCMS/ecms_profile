@@ -1,14 +1,59 @@
 google_translator_active_languages_display_mode: SIMPLE
 google_translator_active_languages:
+  - af
+  - sq
+  - ar
+  - be
+  - bg
+  - ca
+  - zh-CN
+  - zh-TW
+  - hr
+  - cs
   - da
   - nl
   - en
+  - eo
+  - et
+  - tl
+  - fi
   - fr
+  - gl
+  - de
   - el
-  - haw
+  - ht
+  - iw
+  - hi
+  - hu
+  - is
+  - id
+  - ga
+  - it
+  - ja
+  - km
+  - ko
+  - lv
+  - lt
+  - mk
+  - ms
+  - mt
+  - 'no'
+  - fa
+  - pl
   - pt
+  - ro
+  - ru
+  - sr
+  - sk
+  - sl
   - es
+  - sw
+  - sv
+  - th
   - tr
-  - zu
+  - uk
+  - vi
+  - cy
+  - yi
 google_translator_disclaimer_title: ''
 google_translator_disclaimer: ''
