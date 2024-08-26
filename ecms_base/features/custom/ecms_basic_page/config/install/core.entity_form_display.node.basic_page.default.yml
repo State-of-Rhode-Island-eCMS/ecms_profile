@@ -1,4 +1,3 @@
-uuid: 9df1df4c-97d8-4d9a-9de9-2bcc259b38f4
 langcode: en
 status: true
 dependencies:
@@ -19,8 +18,6 @@ dependencies:
     - paragraphs
     - path
     - text
-_core:
-  default_config_hash: qnXlW0wIHBCaApAHPJ-a23_Cq0nZsu0Sddvzi2pko6A
 id: node.basic_page.default
 targetEntityType: node
 bundle: basic_page

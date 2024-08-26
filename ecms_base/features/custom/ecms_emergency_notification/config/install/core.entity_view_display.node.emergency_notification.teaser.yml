@@ -4,7 +4,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.emergency_notification.field_emergency_background_color
+    - field.field.node.emergency_notification.field_emergency_expire_date
     - field.field.node.emergency_notification.field_emergency_message
+    - field.field.node.emergency_notification.field_emergency_weight
     - node.type.emergency_notification
   module:
     - user
@@ -28,6 +30,8 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_emergency_background_color: true
+  field_emergency_expire_date: true
   field_emergency_message: true
+  field_emergency_weight: true
   langcode: true
   search_api_excerpt: true

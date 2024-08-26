@@ -3,11 +3,14 @@ status: true
 dependencies:
   config:
     - field.field.node.emergency_notification.field_emergency_background_color
+    - field.field.node.emergency_notification.field_emergency_expire_date
     - field.field.node.emergency_notification.field_emergency_message
+    - field.field.node.emergency_notification.field_emergency_weight
     - node.type.emergency_notification
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - datetime
     - path
     - text
 id: node.emergency_notification.default
@@ -27,6 +30,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_emergency_expire_date:
+    type: datetime_default
+    weight: 126
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_emergency_message:
     type: text_textarea
     weight: 52
@@ -34,6 +43,12 @@ content:
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_emergency_weight:
+    type: options_select
+    weight: 127
+    region: content
+    settings: {  }
     third_party_settings: {  }
   langcode:
     type: language_select
