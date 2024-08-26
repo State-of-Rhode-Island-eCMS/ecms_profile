@@ -3,9 +3,12 @@ status: true
 dependencies:
   config:
     - field.field.node.emergency_notification.field_emergency_background_color
+    - field.field.node.emergency_notification.field_emergency_expire_date
     - field.field.node.emergency_notification.field_emergency_message
+    - field.field.node.emergency_notification.field_emergency_weight
     - node.type.emergency_notification
   module:
+    - datetime
     - options
     - text
     - user
@@ -26,12 +29,28 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_emergency_expire_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 103
+    region: content
   field_emergency_message:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 102
+    region: content
+  field_emergency_weight:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
     region: content
   links:
     settings: {  }
