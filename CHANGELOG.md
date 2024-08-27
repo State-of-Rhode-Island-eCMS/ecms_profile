@@ -17,6 +17,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-526: Added patch to allow subprofiles to work with Drupal Core ^10.3
 - RIGA-526: Fixed develop and ci-develop scripts to use 10.3.x & php 8.2.
+- RIGA-483: Update the patternlab version
 
 ### Deprecated
 
