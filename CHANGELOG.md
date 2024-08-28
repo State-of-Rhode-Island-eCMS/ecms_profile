@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.6] - 2024-08-29
+### Added
 - RIGA-511: Added the emergency_notifications feature
 - RIGA-483: Enable `google_translator` module
 - RIGA-483: Add `googletranslator` block
@@ -19,14 +32,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-526: Fixed develop and ci-develop scripts to use 10.3.x & php 8.2.
 - RIGA-483: Update the patternlab version
 
-### Deprecated
-
 ### Removed
 - RIGA-483: Disable `languageswitcher`block
-
-### Fixed
-
-### Security
 
 ## [1.0.5] - 2024-07-25
 ### Added
