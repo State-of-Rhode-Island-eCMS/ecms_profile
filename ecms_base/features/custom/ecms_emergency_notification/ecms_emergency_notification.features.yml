@@ -1,0 +1,6 @@
+bundle: ecms
+excluded:
+  - language.content_settings.node.emergency_notification
+  - rabbit_hole.behavior_settings.node_type_emergency_notification
+  - views.view.moderated_content
+  - workflows.workflow.editorial

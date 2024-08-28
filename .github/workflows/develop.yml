@@ -21,7 +21,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
 
       - name: Check PHP Version
         run: php -v
@@ -72,11 +72,11 @@ jobs:
           path: /tmp/drupal-build.tar.gz
 
   test-php:
-    name: Test the site with PHP 8.1
+    name: Test the site with PHP 8.2
     needs: build
     runs-on: ubuntu-latest
     container:
-      image: drupalci/php-8.1-apache:production
+      image: drupalci/php-8.2-apache:production
     services:
       mysql:
         image: mysql:5.7
