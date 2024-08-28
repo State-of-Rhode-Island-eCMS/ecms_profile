@@ -1270,7 +1270,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.5...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...HEAD
+[1.0.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.2...1.0.3
