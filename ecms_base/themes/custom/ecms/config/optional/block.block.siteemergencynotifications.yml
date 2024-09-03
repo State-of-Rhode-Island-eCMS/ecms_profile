@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ecms_blocks
+  theme:
+    - ecms
+id: siteemergencynotifications
+theme: ecms
+region: highlighted
+weight: -3
+provider: null
+plugin: ecms_site_emergency_notifications
+settings:
+  id: ecms_site_emergency_notifications
+  label: 'Site Emergency Notifications'
+  provider: ecms_blocks
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }

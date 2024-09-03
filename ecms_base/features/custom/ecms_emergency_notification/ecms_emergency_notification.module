@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Additional emergency notification functionality for the site.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+
+/**
+ * Implements hook_cron().
+ *
+ * Unplublishes any emergency notification that has an expire date in the past.
+ */
+function ecms_emergency_notification_cron(): void {
+
+  // Query all emergency notifications that have expired.
+  $now = new DrupalDateTime('now');
+  $now->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+
+  $query = \Drupal::entityQuery("node")
+    ->accessCheck(FALSE);
+  $query->condition('type', 'emergency_notification')
+    ->condition('status', 1)
+    ->condition('field_emergency_expire_date', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<');
+
+  $nids = $query->execute();
+
+  // Guard against no nodes.
+  if (empty($nids)) {
+    return;
+  }
+
+  // Load multiple nodes.
+  $node_storage = \Drupal::entityTypeManager()->getStorage("node");
+  $nodes = $node_storage->loadMultiple($nids);
+
+  \Drupal::logger('ecms_emergency_notification')->notice('Unpublished emergency notification node(s): %nids.',
+  [
+    '%nids' => implode(", ", array_keys($nids)),
+  ]);
+
+  // Unpublish nodes.
+  foreach ($nodes as $node) {
+    $node->setUnpublished();
+    $node->save();
+  }
+}
