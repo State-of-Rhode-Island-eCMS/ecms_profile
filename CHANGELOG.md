@@ -22,6 +22,33 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [1.0.6] - 2024-08-29
+### Added
+- RIGA-511: Added the emergency_notifications feature
+- RIGA-483: Enable `google_translator` module
+- RIGA-483: Add `googletranslator` block
+
+### Changed
+- RIGA-526: Added patch to allow subprofiles to work with Drupal Core ^10.3
+- RIGA-526: Fixed develop and ci-develop scripts to use 10.3.x & php 8.2.
+- RIGA-483: Update the patternlab version
+
+### Removed
+- RIGA-483: Disable `languageswitcher`block
+
+## [1.0.5] - 2024-07-25
+### Added
+- RIGA-522: Added the HAL module.
+- RIGA-514: Add agency select field to the Press Release content type through features
+
+## [1.0.4] - 2024-06-24
+### Added
+- RIGA-508: Added the Security Kit module.
+- RIGA-488: Added WYSIWYG to views filtered text
+
+### Changed
+- RIGA-510: Make the Basic Page's intro text summary visible.
+
 ## [1.0.3] - 2024-05-29
 ### Added
 - RIGA-475: Added the Media PDF Thumbnail module.
@@ -1244,7 +1271,10 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...HEAD
+[1.0.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.5...1.0.6
+[1.0.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.4...1.0.5
+[1.0.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.0...1.0.1

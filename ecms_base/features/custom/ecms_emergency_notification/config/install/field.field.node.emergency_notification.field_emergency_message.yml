@@ -2,26 +2,24 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_basic_page_body
-    - node.type.basic_page
+    - field.storage.node.field_emergency_message
+    - node.type.emergency_notification
   module:
     - allowed_formats
     - text
 third_party_settings:
   allowed_formats:
     allowed_formats: {  }
-id: node.basic_page.field_basic_page_body
-field_name: field_basic_page_body
+id: node.emergency_notification.field_emergency_message
+field_name: field_emergency_message
 entity_type: node
-bundle: basic_page
-label: 'Intro text'
+bundle: emergency_notification
+label: Message
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
-  required_summary: false
   allowed_formats: {  }
-field_type: text_with_summary
+field_type: text_long
