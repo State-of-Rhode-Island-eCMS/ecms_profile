@@ -12,16 +12,21 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-548: Update the list of Google translation options.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- RIGA-546: Fixed the icon formatter.
 
 ### Security
+
+## [1.0.7] - 2024-09-04
+### Changed
+- RIGA-548: Update the list of Google translation options.
+
+### Fixed
+- RIGA-546: Fixed the icon formatter.
 
 ## [1.0.6] - 2024-08-29
 ### Added
@@ -1272,7 +1277,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.7...HEAD
+[1.0.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.3...1.0.4
