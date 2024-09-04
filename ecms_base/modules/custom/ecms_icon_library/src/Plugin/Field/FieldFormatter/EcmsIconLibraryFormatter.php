@@ -36,7 +36,9 @@ class EcmsIconLibraryFormatter extends FormatterBase {
 
       // Render each element as markup.
       if ($item->get('pl_icon')->getValue()) {
-        $elements[$delta]['pl_icon'] = $item->get('pl_icon')->getValue();
+        $elements[$delta]['pl_icon'] = [
+          '#plain_text' => $item->get('pl_icon')->getValue(),
+        ];
       }
 
       if ($item->get('media_library_icon')->getValue()) {
