@@ -2217,3 +2217,23 @@ function ecms_base_update_10204(array &$sandbox): void {
 
   \Drupal::service('module_installer')->install($features_to_install);
 }
+
+/**
+ * Update the Google translations
+ *
+ * part of 1.0.7 tag
+ */
+function ecms_base_update_10205(array &$sandbox): void {
+  $config = 'google_translator.settings';
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Base profile path.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  $active_storage->write("{$config}", $install_source->read("{$config}"));
+}
