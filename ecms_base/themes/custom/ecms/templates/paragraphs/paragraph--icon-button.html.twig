@@ -46,7 +46,7 @@
   {% set media_library_icon = TRUE %}
   {% set icon = content.field_icon_library_icon.0.media_library_icon %}
 {% else %}
-  {% set icon = content.field_icon_library_icon.0.pl_icon %}
+  {% set icon = content.field_icon_library_icon.0.pl_icon|render %}
 {% endif %}
 
 {# Link variables #}

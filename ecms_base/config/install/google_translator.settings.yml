@@ -1,14 +1,16 @@
+langcode: en
 google_translator_active_languages_display_mode: SIMPLE
 google_translator_active_languages:
-  - da
-  - nl
+  - zh-CN
   - en
+  - tl
   - fr
   - el
-  - haw
+  - ht
+  - hu
+  - it
+  - km
   - pt
   - es
-  - tr
-  - zu
 google_translator_disclaimer_title: ''
 google_translator_disclaimer: ''

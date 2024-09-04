@@ -12,12 +12,14 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-548: Update the list of Google translation options.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- RIGA-546: Fixed the icon formatter.
 
 ### Security
 
