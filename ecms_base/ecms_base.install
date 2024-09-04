@@ -2219,9 +2219,9 @@ function ecms_base_update_10204(array &$sandbox): void {
 }
 
 /**
- * Update the Google translations
+ * Update the Google translations.
  *
- * part of 1.0.7 tag
+ * Runs as part of 1.0.7 tag.
  */
 function ecms_base_update_10205(array &$sandbox): void {
   $config = 'google_translator.settings';
