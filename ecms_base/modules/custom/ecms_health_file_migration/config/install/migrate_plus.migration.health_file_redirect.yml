@@ -13,21 +13,29 @@ migration_tags: null
 migration_group: files_json_to_resource_media
 label: 'Setup file redirects for the ecms_health_file migration.'
 source:
-  constants:
-    DRUPAL_FILE_DIRECTORY: sites/default/files
-    DIRECTORY_SEPERATOR: /
-    REDIRECT_CODE: 301
   plugin: url
   data_fetcher_plugin: http
-  data_parser_plugin: json
   urls:
-    - 'https://health.ri.gov/rss/pubs/publications-media-en.json.php'
+    - 'https://health.ri.gov/rss/pubs/publications-total-en.json.php'
+  data_parser_plugin: json
   item_selector: '[*]'
   fields:
     -
       name: id
       label: ID
       selector: id
+    -
+      name: entity
+      label: Entity
+      selector: entity
+    -
+      name: topic
+      label: Topic
+      selector: topic
+    -
+      name: profession
+      label: Profession
+      selector: profession
     -
       name: type_of_material
       label: 'Type of Material'
@@ -52,6 +60,21 @@ source:
       name: title
       label: Title
       selector: /language/en/title
+    -
+      name: date_published
+      label: Date Published
+      selector: date_published
+    -
+      name: order_form
+      label: Order Form
+      selector: order_form
+    -
+      name: date_covered
+      label: Date Covered
+      selector: date_covered
+    - name: disease
+      label: Disease
+      selector: disease
   ids:
     id:
       type: integer
