@@ -12,6 +12,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-549: Update Allowed Formats module
+- RIGA-549: Update Automatic Entity Label module
+- RIGA-549: Update Automated Logout module
+- RIGA-549: Update Components! module
+- RIGA-549: Update Entity Print module
+- RIGA-549: Update External Links module
+- RIGA-549: Update Feeds module
+- RIGA-549: Update Layout Builder Restrictions module
+- RIGA-549: Update Page Manager module
+- RIGA-549: Update the github actions to V3
 
 ### Deprecated
 
