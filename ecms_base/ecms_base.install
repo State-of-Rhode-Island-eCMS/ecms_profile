@@ -2237,3 +2237,16 @@ function ecms_base_update_10205(array &$sandbox): void {
 
   $active_storage->write("{$config}", $install_source->read("{$config}"));
 }
+
+/**
+ * Install new modules after updating contrib modules.
+ *
+ * Runs as part of 1.0.8 tag.
+ */
+function ecms_base_update_10206(array &$sandbox): void {
+
+  $modules_to_install = [
+    'js_cookie',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+}

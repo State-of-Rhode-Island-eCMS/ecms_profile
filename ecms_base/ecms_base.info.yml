@@ -41,6 +41,7 @@ dependencies:
   - help
   - honeypot
   - image
+  - js_cookie
   - language
   - layout_builder
   - layout_builder_iframe_modal
