@@ -54,7 +54,6 @@ source:
       name: title
       label: Title
       selector: /language/en/title
-
   ids:
     id:
       type: integer
