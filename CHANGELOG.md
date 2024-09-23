@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-549: Update Feeds module
 - RIGA-549: Update Layout Builder Restrictions module
 - RIGA-549: Update Page Manager module
+- RIGA-549: Update the github actions to V3
 
 ### Deprecated
 
