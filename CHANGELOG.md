@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-520: Update the source file for English Health migration.
 - RIGA-549: Update Allowed Formats module
 - RIGA-549: Update Automatic Entity Label module
 - RIGA-549: Update Automated Logout module
