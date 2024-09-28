@@ -2247,6 +2247,7 @@ function ecms_base_update_10206(array &$sandbox): void {
 
   $modules_to_install = [
     'js_cookie',
+    'jquery_ui_accordion',
   ];
   \Drupal::service('module_installer')->install($modules_to_install);
 }
