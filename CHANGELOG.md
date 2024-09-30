@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-549: Add jQuery UI Accordion module
 
 ### Changed
 - RIGA-520: Update the source file for English Health migration.
