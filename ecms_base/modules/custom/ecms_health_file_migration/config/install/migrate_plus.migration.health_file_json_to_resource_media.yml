@@ -52,14 +52,14 @@ source:
       name: place
       label: Place
       selector: place
-    -
-      name: path_name
-      label: 'Path Name'
-      selector: /language/en/path_name
-    -
-      name: title
-      label: Title
-      selector: /language/en/title
+#    -
+#      name: path_name
+#      label: 'Path Name'
+#      selector: /language/en/path_name
+#    -
+#      name: title
+#      label: Title
+#      selector: /language/en/title
     -
       name: date_published
       label: Date Published
