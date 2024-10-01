@@ -22,7 +22,6 @@ source:
   # an selector (xpath) for retrieving that value. It's important to note that this xpath
   # is relative to the elements retrieved by item_selector.
 
-  item_selector: '[*]'
   fields:
     -
       name: id
