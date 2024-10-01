@@ -18,7 +18,6 @@ source:
   urls:
     - 'https://health.ri.gov/rss/pubs/publications-total-en.json.php'
   data_parser_plugin: json
-  item_selector: '[*]'
   fields:
     -
       name: id

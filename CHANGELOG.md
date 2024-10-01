@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-549: Add jQuery UI Accordion module
 
 ### Changed
+- RIGA-520: Fixed health migration.
 - RIGA-520: Update the source file for English Health migration.
 - RIGA-549: Update Allowed Formats module
 - RIGA-549: Update Automatic Entity Label module
