@@ -28,6 +28,15 @@ source:
       label: 'ID'
       selector: id
     -
+      name: entity
+      label: Entity
+      selector: entity
+    -
+      name: topic
+      label: Topic
+      selector: topic
+    -
+
       name: type_of_material
       label: 'Type of Material'
       selector: type_of_material

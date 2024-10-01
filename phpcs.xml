@@ -11,6 +11,9 @@
   <exclude-pattern>*.css</exclude-pattern>
   <exclude-pattern>*.js</exclude-pattern>
   <exclude-pattern>ecms_base/themes/custom/ecms/ecms_patternlab/*</exclude-pattern>
+  <exclude-pattern>*Mock.php</exclude-pattern>
+  <exclude-pattern>*Test.php</exclude-pattern>
+  <exclude-pattern>*TestCase.php</exclude-pattern>
 
   <!-- PHPCS argument overrides -->
   <arg name="colors" />
