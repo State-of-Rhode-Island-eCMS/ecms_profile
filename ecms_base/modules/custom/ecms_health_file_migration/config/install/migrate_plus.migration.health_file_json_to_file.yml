@@ -14,7 +14,7 @@ source:
   data_fetcher_plugin: http
   data_parser_plugin: json
   # The JSON source file URL for the migration.
-  urls: 'https://health.ri.gov/rss/pubs/publications-media-en.json.php'
+  urls: 'https://health.ri.gov/rss/pubs/publications-total-en.json.php'
   # Under 'fields', we list the data items to be imported. The first level keys
   # are the source field names we want to populate (the names to be used as
   # sources in the process configuration below). For each field we're importing,
@@ -22,13 +22,21 @@ source:
   # an selector (xpath) for retrieving that value. It's important to note that this xpath
   # is relative to the elements retrieved by item_selector.
 
-  item_selector: '[*]'
   fields:
     -
       name: id
       label: 'ID'
       selector: id
     -
+      name: entity
+      label: Entity
+      selector: entity
+    -
+      name: topic
+      label: Topic
+      selector: topic
+    -
+
       name: type_of_material
       label: 'Type of Material'
       selector: type_of_material
