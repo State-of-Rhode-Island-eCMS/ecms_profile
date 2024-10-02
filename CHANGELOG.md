@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.8] - 2024-10-03
+### Added
 - RIGA-549: Add jQuery UI Accordion module
 
 ### Changed
@@ -25,14 +38,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-549: Update Layout Builder Restrictions module
 - RIGA-549: Update Page Manager module
 - RIGA-549: Update the github actions to V3
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [1.0.7] - 2024-09-04
 ### Changed
@@ -1290,7 +1295,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.7...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.8...HEAD
+[1.0.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.4...1.0.5
