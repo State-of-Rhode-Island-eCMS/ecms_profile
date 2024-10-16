@@ -95,7 +95,6 @@ function _ecms_layout_block_exclude_list(): array {
 /**
  * Implements hook_ENTITY_TYPE_create_access().
  *
- * This fixes RIGA-524
  * @see https://www.drupal.org/project/drupal/issues/3106315
  */
 function ecms_layout_block_content_create_access(
