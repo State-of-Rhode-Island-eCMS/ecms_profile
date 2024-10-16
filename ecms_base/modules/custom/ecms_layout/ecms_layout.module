@@ -7,8 +7,11 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\media_library\MediaLibraryState;
 
 /**
  * Implements hook_plugin_filter_TYPE__CONSUMER_alter().
@@ -87,4 +90,44 @@ function _ecms_layout_block_exclude_list(): array {
   return [
     'system_menu_block:tools',
   ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ *
+ * This fixes RIGA-524
+ * @see https://www.drupal.org/project/drupal/issues/3106315
+ */
+function ecms_layout_block_content_create_access(
+  AccountInterface $account,
+  array $context,
+  string $entity_bundle,
+): AccessResult {
+  // Get the path info from the main request.
+  $mainRequest = \Drupal::requestStack()->getMainRequest();
+  $pathInfo = $mainRequest->getPathInfo();
+
+  // Get the route information from the path.
+  $router = \Drupal::service('router.no_access_checks');
+  $match = $router->match($pathInfo);
+
+  $route_name = $match['_route'] ?? NULL;
+
+  if ($route_name === 'media_library.ui') {
+    /** @var \Drupal\media_library\MediaLibraryState $state */
+    $state = MediaLibraryState::fromRequest(\Drupal::request());
+    $openerParameters = $state->getOpenerParameters();
+
+    // The field widget ends with `-settings-block_form` when adding a block.
+    // using layout builder.
+    if (
+      isset($openerParameters['field_widget_id']) &&
+      str_ends_with($openerParameters['field_widget_id'], ':-settings-block_form')
+    ) {
+      return AccessResult::allowedIfHasPermission($account, 'create and edit custom blocks');
+    }
+  }
+
+  // No opinion.
+  return AccessResult::neutral();
 }
