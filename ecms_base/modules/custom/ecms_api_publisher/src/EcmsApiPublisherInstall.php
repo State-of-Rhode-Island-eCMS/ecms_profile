@@ -118,6 +118,7 @@ class EcmsApiPublisherInstall {
 
     $values = [
       'user_id' => $user->id(),
+      'client_id' => $this->t('eCMS Publisher'),
       'roles' => [self::PUBLISHER_ROLE],
       'label' => $this->t('eCMS Publisher'),
       'description' => $this->t('An oAuth client to receive endpoints from an eCMS recipient site.'),
