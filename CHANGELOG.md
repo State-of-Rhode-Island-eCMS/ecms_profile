@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-531: Fixed error loading layout builder admin layout page.
 
 ### Security
 
