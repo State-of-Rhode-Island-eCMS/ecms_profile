@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-588: Added new feeds parser plugin for press releases.
 
 ### Changed
 
@@ -19,6 +20,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Fixed
 - RIGA-531: Fixed error loading layout builder admin layout page.
+- RIGA-534: Fix consumer creation
+- RIGA-524: Fixed layout builder issue with media library.
 
 ### Security
 
