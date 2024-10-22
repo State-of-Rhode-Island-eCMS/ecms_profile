@@ -668,7 +668,10 @@ function ecms_preprocess_paragraph__numbered_step_item(&$variables): void {
 
   $parent = $variables['paragraph']->getParentEntity();
 
-  if ($parent->bundle() === 'basic_page') {
+  if (
+    $parent instanceof NodeInterface &&
+    $parent->bundle() === 'basic_page'
+  ) {
 
     // Get entity_reference_revisions field.
     $components = $parent->get('field_basic_page_paragraphs');

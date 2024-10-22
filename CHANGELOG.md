@@ -19,6 +19,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-531: Fixed error loading layout builder admin layout page.
 - RIGA-534: Fix consumer creation
 - RIGA-524: Fixed layout builder issue with media library.
 
