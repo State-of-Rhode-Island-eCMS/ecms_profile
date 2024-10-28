@@ -10,7 +10,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-588: Added new feeds parser plugin for press releases.
 
 ### Changed
 
@@ -19,11 +18,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+
+### Security
+
+## [1.0.9] - 2024-10-28
+### Added
+- RIGA-588: Added new feeds parser plugin for press releases.
+
+### Fixed
 - RIGA-531: Fixed error loading layout builder admin layout page.
 - RIGA-534: Fix consumer creation
 - RIGA-524: Fixed layout builder issue with media library.
-
-### Security
 
 ## [1.0.8] - 2024-10-03
 ### Added
@@ -1299,7 +1304,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.8...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.9...HEAD
+[1.0.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.5...1.0.6
