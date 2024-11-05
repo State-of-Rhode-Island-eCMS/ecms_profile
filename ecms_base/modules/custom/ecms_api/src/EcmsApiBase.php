@@ -488,7 +488,8 @@ abstract class EcmsApiBase {
    */
   private function getFileEndpointUrl(EntityInterface $entity, string $fieldName, Url $url): string {
     $apiEndpoint = self::API_ENDPOINT;
-    return "{$url->toString()}/{$apiEndpoint}/{$entity->getEntityTypeId()}/{$entity->bundle()}/{$fieldName}";
+    $trimmedUrl = rtrim($url->toString(), '/');
+    return "{$trimmedUrl}/{$apiEndpoint}/{$entity->getEntityTypeId()}/{$entity->bundle()}/{$fieldName}";
   }
 
   /**

@@ -115,7 +115,7 @@ class EcmsApiRecipientInstall {
 
     $values = [
       'user_id' => $user->id(),
-      'client_id' => $this->t('eCMS Recipient'),
+      'client_id' => $this->getClientId(),
       'roles' => [self::RECIPIENT_ROLE],
       'label' => $this->t('eCMS Recipient'),
       'description' => $this->t('An oAuth client to receive content from an eCMS publishing site.'),
