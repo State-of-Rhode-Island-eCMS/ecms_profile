@@ -150,7 +150,8 @@ abstract class EcmsApiBase {
     ];
 
     // Get the endpoint of the entity.
-    $endpoint = "{$url->toString()}/oauth/token";
+    $trimmedUrl = rtrim($url->toString(), '/');
+    $endpoint = "{$trimmedUrl}/oauth/token";
 
     try {
       $response = $this->httpClient->request('POST', $endpoint, $payload);
@@ -594,13 +595,14 @@ abstract class EcmsApiBase {
       $entityPath = "{$entityPath}/{$entity->uuid()}";
     }
     $endPoint = self::API_ENDPOINT;
+    $trimmedUrl = rtrim($url->toString(), '/');
 
     // Append the language id if it is not the default language.
     if (!$language->isDefault()) {
-      return "{$url->toString()}/{$languageEndpoint}/{$endPoint}/{$entityPath}";
+      return "{$trimmedUrl}/{$languageEndpoint}/{$endPoint}/{$entityPath}";
     }
 
-    return "{$url->toString()}/{$endPoint}/{$entityPath}";
+    return "{$trimmedUrl}/{$endPoint}/{$entityPath}";
   }
 
   /**
