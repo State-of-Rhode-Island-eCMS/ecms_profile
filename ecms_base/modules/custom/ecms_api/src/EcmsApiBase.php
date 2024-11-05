@@ -243,7 +243,7 @@ abstract class EcmsApiBase {
           $fileEntity = $field->first()->entity;
           $sourceFieldName = $field->getName();
 
-          $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, (int) $fileEntity->id(), $sourceFieldName);
+          $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, (int) $fileEntity->id(), $sourceFieldName, $verify);
 
           if (empty($fileUuid)) {
             // Return false if the file entity for the
@@ -255,7 +255,7 @@ abstract class EcmsApiBase {
     }
 
     // Query the endpoint to get the correct HTTP method.
-    $method = $this->checkEntityExists($accessToken, $url, $entity);
+    $method = $this->checkEntityExists($accessToken, $url, $entity, $verify);
 
     // Only allow certain methods to be submitted.
     if (empty($method) || !in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
@@ -285,6 +285,7 @@ abstract class EcmsApiBase {
         'Content-Type' => 'application/vnd.api+json',
         'Authorization' => "Bearer {$accessToken}",
       ],
+      'verify' => $verify,
     ];
 
     // Alter the entity attributes before submission.
