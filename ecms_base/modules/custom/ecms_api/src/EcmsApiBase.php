@@ -157,6 +157,7 @@ abstract class EcmsApiBase {
       $response = $this->httpClient->request('POST', $endpoint, $payload);
     }
     catch (GuzzleException $exception) {
+      \Drupal::logger('ecms_api')->error($exception->getMessage());
       return NULL;
     }
 
