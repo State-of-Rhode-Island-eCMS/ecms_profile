@@ -165,7 +165,7 @@ abstract class EcmsApiBase {
     try {
       $response = $this->httpClient->request('POST', $endpoint, $payload);
     }
-    catch (GuzzleException $exception) {q
+    catch (GuzzleException $exception) {
       return NULL;
     }
 
