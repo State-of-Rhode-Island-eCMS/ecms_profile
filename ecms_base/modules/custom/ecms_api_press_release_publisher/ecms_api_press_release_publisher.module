@@ -30,22 +30,22 @@ function ecms_api_press_release_publisher_node_update(EntityInterface $entity): 
 function ecms_api_press_release_publisher_entity_presave(EntityInterface $entity): void {
 
   // Guard against non press releases or those missing the term ref field.
-  if ($entity->getEntityTypeId() !== 'node'
-  || $entity->bundle() !== 'press_release'
-  || !$entity->hasField('field_press_release_topics')) {
+  if (
+    $entity->getEntityTypeId() !== 'node' ||
+    $entity->bundle() !== 'press_release' ||
+    !$entity->hasField('field_press_release_topics')
+  ) {
     return;
   }
 
   \Drupal::service('ecms_api_press_release_publisher.press_release_manager')
     ->addSiteSourceTermToPressRelease($entity);
-
 }
 
 /**
  * Utility function for calling the syndication for press releases.
  */
 function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void {
-
   // Guard against a non-press_release.
   if ($node->getType() !== 'press_release') {
     return;
@@ -57,5 +57,22 @@ function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void 
     return;
   }
 
-  \Drupal::service('ecms_api_publisher.syndicate')->syndicateEntity($node);
+  // Get the moderated state of this revision.
+  $moderatedState = array_column(
+    $node->get('moderation_state')->getValue(),
+    'value'
+  );
+
+  // Guard against an empty array.
+  if (empty($moderatedState)) {
+    return;
+  }
+
+  if (
+    in_array('published', $moderatedState, TRUE) ||
+    in_array('archived', $moderatedState, TRUE)
+  ) {
+    \Drupal::service('ecms_api_publisher.syndicate')->syndicateEntity($node);
+  }
+
 }
