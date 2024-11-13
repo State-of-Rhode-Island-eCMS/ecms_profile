@@ -19,3 +19,6 @@ ecms_api_publisher.settings:
     recipient_client_scope:
       type: string
       label: 'OAuth scope for the recipient site'
+    verify_ssl:
+      type: boolean
+      label: 'Verify SSL'
