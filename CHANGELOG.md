@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-564: Fixed the syndication connections.
 
 ### Security
+- RIGA-565: Added hook to block user/1 for all sites.
 
 ## [1.0.9] - 2024-10-28
 ### Added
