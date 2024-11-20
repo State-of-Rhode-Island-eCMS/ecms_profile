@@ -12,11 +12,18 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
-- RIGA-555: Update the patternlab version
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+### Security
+
+## [1.1.0] - 2024-11-20
+### Changed
+- RIGA-555: Update the patternlab version
 
 ### Fixed
 - RIGA-564: Fixed the syndication connections.
