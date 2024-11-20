@@ -95,10 +95,7 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
     $form = parent::buildForm($form, $form_state);
 
     // Load the available nodes.
-    $nodes = $this->entityTypeBundleInfo->getBundleInfo('node');
-    $nodes = array_map(function ($bundle_info) {
-      return $bundle_info['label'];
-    }, $nodes);
+    $nodes = $this->getEntityBundles();
 
     // List of all available content types as checkboxes.
     $form['allowed_content_types'] = [
@@ -152,10 +149,14 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
       return;
     }
 
-    // Revoke all existing permissions.
-    $existingPermissions = $role->getPermissions();
-    foreach ($existingPermissions as $permission) {
-      $role->revokePermission($permission);
+    $allBundles = $this->getEntityBundles();
+    $notEnabled = array_diff_key($allBundles, $contentTypes);
+
+    // Revoke permissions for the non-enabled bundles.
+    foreach ($notEnabled as $bundle => $label) {
+      $role->revokePermission("create {$bundle} content");
+      $role->revokePermission("edit own {$bundle} content");
+      $role->revokePermission("translate {$bundle} node");
     }
 
     // Grant create and edit own permissions for the selected content types.
@@ -192,6 +193,19 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
     return $this->entityTypeManager
       ->getStorage('user_role')
       ->load(self::RECIPIENT_ROLE);
+  }
+
+  /**
+   * Get the available entity bundles.
+   *
+   * @return array
+   *   Array of entity bundles.
+   */
+  private function getEntityBundles(): array {
+    $nodes = $this->entityTypeBundleInfo->getBundleInfo('node');
+    return array_map(function ($bundle_info) {
+      return $bundle_info['label'];
+    }, $nodes);
   }
 
 }
