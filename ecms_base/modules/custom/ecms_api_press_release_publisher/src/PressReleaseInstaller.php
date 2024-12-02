@@ -58,7 +58,7 @@ class PressReleaseInstaller {
           'name' => 'Main Hub',
           'api_host' => $endpoint,
           'content_type' => [
-            'press_release' => TRUE,
+            ['target_id' => 'press_release']
           ],
         ]);
 
