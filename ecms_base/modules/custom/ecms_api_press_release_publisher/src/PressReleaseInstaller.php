@@ -47,16 +47,14 @@ class PressReleaseInstaller {
         'api_host' => $endpoint,
       ]);
 
-      var_dump($registeredSite);
       // Return early if it already exists.
-      if (empty($registeredSite)) {
+      if (!empty($registeredSite)) {
         return;
       }
-      var_dump('Hello');
 
       // If the main hub is not found, create it.
-//      try {
-      $host = $storage->create([
+      try {
+        $host = $storage->create([
           'name' => 'Main Hub',
           'api_host' => $endpoint,
           'content_type' => [
@@ -64,15 +62,13 @@ class PressReleaseInstaller {
           ],
         ]);
 
-      var_dump($host);
-
-      $host->save();
-//      }
-//      catch (EntityStorageException $e) {
-//        // Trap any errors.
-//        return;
-//      }
-
+        $host->save();
+      }
+      catch (EntityStorageException $e) {
+        var_dump($e);
+        // Trap any errors.
+        return;
+      }
     }
 
   /**
