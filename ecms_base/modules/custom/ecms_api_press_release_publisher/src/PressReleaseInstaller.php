@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\ecms_api_press_release_publisher;
 
-use Drupal\Core\DependencyInjection\AutowireTrait;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
@@ -42,7 +41,7 @@ class PressReleaseInstaller {
     public function install(): void {
       $endpoint = $this->getApiEndpoint();
       $storage = $this->entityTypeManager->getStorage('ecms_api_site');
-      // @todo Load the ecms_api_site entities and check for the main hub.
+      // Load the ecms_api_site entities and check for the main hub.
       $registeredSite = $storage->loadByProperties([
         'api_host' => $endpoint,
       ]);
@@ -60,12 +59,12 @@ class PressReleaseInstaller {
           'content_type' => [
             ['target_id' => 'press_release']
           ],
+          'uid' => 1,
         ]);
 
         $host->save();
       }
       catch (EntityStorageException $e) {
-        var_dump($e);
         // Trap any errors.
         return;
       }
