@@ -2,6 +2,3 @@ services:
   ecms_api_press_release_publisher.press_release_manager:
     class: Drupal\ecms_api_press_release_publisher\PressReleaseManager
     arguments: ['@config.factory', '@entity_type.manager']
-  ecms_api_press_release_publisher.installer:
-    class: Drupal\ecms_api_press_release_publisher\PressReleaseInstaller
-    autowire: true
