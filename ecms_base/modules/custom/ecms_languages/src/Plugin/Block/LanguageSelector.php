@@ -17,11 +17,12 @@ use Drupal\google_translator\Plugin\Block\GoogleTranslator;
  */
 class LanguageSelector extends GoogleTranslator {
 
-    /**
-    * {@inheritdoc}
-    */
-    public function build(): array {
-      // Return just the element and nothing else.
-      return parent::getElement();
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function build(): array {
+    // Return just the element and nothing else.
+    return parent::getElement();
+  }
+
 }
