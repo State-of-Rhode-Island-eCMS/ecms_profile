@@ -194,7 +194,7 @@
         "drupal/webform_encrypt": "^2.0@alpha",
         "drupal/webform_views": "^5.0@beta",
         "drupal_git/migrate_process_trim": "2.0.0",
-        "drush/drush": "^10.0 || ^11 || ^12",
+        "drush/drush": "^10.0 || ^11 || ^12 || ^13",
         "geocoder-php/arcgis-online-provider": "^4.3",
         "geocoder-php/google-maps-provider": "^4.6",
         "geocoder-php/ipstack-provider": "^0.3.0",
