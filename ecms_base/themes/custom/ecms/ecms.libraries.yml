@@ -1,5 +1,5 @@
 global-styling:
-  version: 1.0.1
+  version: 1.0.2
   css:
     theme:
       ecms_patternlab/dist/css/pattern-lab-compiled.css: {}
