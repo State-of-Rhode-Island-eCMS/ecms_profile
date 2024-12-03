@@ -200,6 +200,10 @@ tooling:
     description: Disable xdebug for apache.
     cmd: 'rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload'
     user: root
+  recipe-apply:
+    service: appserver
+    cmd: cd /app/web && php core/scripts/drupal recipe /ecms_profile/ecms_base/recipes/$0
+    user: root
 config:
   xdebug: false
 env_file:
