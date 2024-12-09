@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Ecms_api_notification_publisher.install.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function ecms_api_press_release_publisher_install(): void {
+  \Drupal::service('ecms_api_press_release_publisher.installer')->install();
+}
