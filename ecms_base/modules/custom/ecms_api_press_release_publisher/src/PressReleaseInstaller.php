@@ -57,7 +57,7 @@ class PressReleaseInstaller {
         'name' => 'Main Hub',
         'api_host' => $endpoint,
         'content_type' => [
-          ['target_id' => 'press_release']
+          ['target_id' => 'press_release'],
         ],
         'uid' => 1,
       ]);
@@ -78,14 +78,11 @@ class PressReleaseInstaller {
    */
   private function getApiEndpoint(): string {
     $env = getenv('AH_SITE_ENVIRONMENT');
-    switch ($env) {
-      case 'test':
-        return self::TEST_API_ENDPOINT;
-      case 'dev':
-        return self::DEV_API_ENDPOINT;
-      default:
-        return self::PROD_API_ENDPOINT;
-    }
+    return match ($env) {
+      'test' => self::TEST_API_ENDPOINT,
+      'dev' => self::DEV_API_ENDPOINT,
+      default => self::PROD_API_ENDPOINT,
+    };
   }
 
 }
