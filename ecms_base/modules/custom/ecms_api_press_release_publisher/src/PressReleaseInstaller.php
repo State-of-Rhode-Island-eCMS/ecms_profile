@@ -23,52 +23,52 @@ class PressReleaseInstaller {
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-    protected EntityTypeManagerInterface $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
-    /**
-    * PressReleaseInstaller constructor.
-    *
-    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-    *   The entity_type.manager service.
-    */
-    public function __construct(EntityTypeManagerInterface $entityTypeManager) {
-      $this->entityTypeManager = $entityTypeManager;
-    }
+  /**
+   * PressReleaseInstaller constructor.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity_type.manager service.
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
 
   /**
    * The method to handle installation.
    */
-    public function install(): void {
-      $endpoint = $this->getApiEndpoint();
-      $storage = $this->entityTypeManager->getStorage('ecms_api_site');
-      // Load the ecms_api_site entities and check for the main hub.
-      $registeredSite = $storage->loadByProperties([
+  public function install(): void {
+    $endpoint = $this->getApiEndpoint();
+    $storage = $this->entityTypeManager->getStorage('ecms_api_site');
+    // Load the ecms_api_site entities and check for the main hub.
+    $registeredSite = $storage->loadByProperties([
+      'api_host' => $endpoint,
+    ]);
+
+    // Return early if it already exists.
+    if (!empty($registeredSite)) {
+      return;
+    }
+
+    // If the main hub is not found, create it.
+    try {
+      $host = $storage->create([
+        'name' => 'Main Hub',
         'api_host' => $endpoint,
+        'content_type' => [
+          ['target_id' => 'press_release']
+        ],
+        'uid' => 1,
       ]);
 
-      // Return early if it already exists.
-      if (!empty($registeredSite)) {
-        return;
-      }
-
-      // If the main hub is not found, create it.
-      try {
-        $host = $storage->create([
-          'name' => 'Main Hub',
-          'api_host' => $endpoint,
-          'content_type' => [
-            ['target_id' => 'press_release']
-          ],
-          'uid' => 1,
-        ]);
-
-        $host->save();
-      }
-      catch (EntityStorageException $e) {
-        // Trap any errors.
-        return;
-      }
+      $host->save();
     }
+    catch (EntityStorageException $e) {
+      // Trap any errors.
+      return;
+    }
+  }
 
   /**
    * The API endpoint based on the environment variable.
@@ -76,16 +76,16 @@ class PressReleaseInstaller {
    * @return string
    *   The API endpoint.
    */
-    private function getApiEndpoint(): string {
-      $env = getenv('AH_SITE_ENVIRONMENT');
-      switch ($env) {
-        case 'test':
-          return self::TEST_API_ENDPOINT;
-        case 'dev':
-          return self::DEV_API_ENDPOINT;
-        default:
-          return self::PROD_API_ENDPOINT;
-      }
+  private function getApiEndpoint(): string {
+    $env = getenv('AH_SITE_ENVIRONMENT');
+    switch ($env) {
+      case 'test':
+        return self::TEST_API_ENDPOINT;
+      case 'dev':
+        return self::DEV_API_ENDPOINT;
+      default:
+        return self::PROD_API_ENDPOINT;
     }
+  }
 
 }
