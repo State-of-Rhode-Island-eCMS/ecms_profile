@@ -2251,3 +2251,16 @@ function ecms_base_update_10206(array &$sandbox): void {
   ];
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Install new modules after updating contrib modules.
+ *
+ * Runs as part of 1.1.1 tag.
+ */
+function ecms_base_update_10207(array &$sandbox): void {
+
+  $modules_to_install = [
+    'metatag_open_graph',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
