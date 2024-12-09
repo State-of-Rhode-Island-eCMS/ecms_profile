@@ -59,6 +59,7 @@ dependencies:
   - menu_link_content
   - menu_ui
   - metatag
+  - metatag_open_graph
   - moderated_content_bulk_publish
   - moderation_dashboard
   - node
