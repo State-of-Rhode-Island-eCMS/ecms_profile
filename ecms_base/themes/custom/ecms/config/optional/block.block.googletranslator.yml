@@ -1,10 +1,13 @@
+uuid: 3e102138-e5b3-4778-bf21-c39a1febf5b3
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - google_translator
   theme:
     - ecms
+_core:
+  default_config_hash: bXfh6vTtRdc4ErAlVIvuvCn87Foq5QqXRAzCG2F4aEk
 id: googletranslator
 theme: ecms
 region: language_switcher
