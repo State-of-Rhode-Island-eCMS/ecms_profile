@@ -2257,7 +2257,7 @@ function ecms_base_update_10206(array &$sandbox): void {
  *
  * Runs as part of 1.1.1 tag.
  */
-function ecms_base_update_10207(array &$sandbox): void {
+function ecms_base_update_10208(array &$sandbox): void {
 
   $modules_to_install = [
     'metatag_open_graph',
@@ -2281,6 +2281,10 @@ function ecms_base_update_10207(array &$sandbox): void {
   foreach ($new_module_config as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
+
+  $themePath = \Drupal::service('extension.list.theme')->getPath('ecms');
+  $themeInstallSource = new FileStorage($themePath . "/config/optional/");
+  $active_storage->write("block.block.ecms_ecmstranslatorgoogletranslator", $themeInstallSource->read("block.block.ecms_ecmstranslatorgoogletranslator"));
 
   /** @var \Drupal\block\BlockInterface $translateBlock */
   $translateBlock = \Drupal::entityTypeManager()
