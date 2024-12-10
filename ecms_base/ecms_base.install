@@ -2251,3 +2251,17 @@ function ecms_base_update_10206(array &$sandbox): void {
   ];
   \Drupal::service('module_installer')->install($modules_to_install);
 }
+
+/**
+ * Implements hook_update_n().
+ */
+function ecms_base_update_10207(): void {
+  /** @var \Drupal\block\BlockInterface $translateBlock */
+  $translateBlock = \Drupal::entityTypeManager()
+    ->getStorage('block')
+    ->load('block.block.googletranslator');
+
+  $translateBlock->setStatus(FALSE);
+  $translateBlock->save();
+
+}
