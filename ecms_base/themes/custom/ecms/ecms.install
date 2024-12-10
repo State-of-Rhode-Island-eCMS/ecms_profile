@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_update_n().
+ */
+function ecms_update_10300(): void {
+  /** @var \Drupal\block\BlockInterface $translateBlock */
+  $translateBlock = \Drupal::entityTypeManager()
+    ->getStorage('block')
+    ->load('block.block.googletranslator');
+
+  $translateBlock->setStatus(FALSE);
+  $translateBlock->save();
+
+}
