@@ -2281,4 +2281,12 @@ function ecms_base_update_10207(array &$sandbox): void {
   foreach ($new_module_config as $config) {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
+
+  /** @var \Drupal\block\BlockInterface $translateBlock */
+  $translateBlock = \Drupal::entityTypeManager()
+    ->getStorage('block')
+    ->load('googletranslator');
+
+  $translateBlock->setStatus(FALSE);
+  $translateBlock->save();
 }
