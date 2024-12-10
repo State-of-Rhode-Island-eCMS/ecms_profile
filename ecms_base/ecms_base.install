@@ -2264,10 +2264,11 @@ function ecms_base_update_10207(): void {
   $translateBlock->setStatus(FALSE);
   $translateBlock->save();
 
-  // Get reference to active config storage.
+  // Base profile path
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
-  $themePath = \Drupal::service('extension.list.theme')->getPath('ecms');
-  $themeInstallSource = new FileStorage($themePath . "/config/optional/");
+  $themeInstallSource = new FileStorage($path . "/themes/custom/ecms/config/optional/");
   $active_storage->write("block.block.ecms_ecmstranslatorgoogletranslator", $themeInstallSource->read("block.block.ecms_ecmstranslatorgoogletranslator"));
 }
