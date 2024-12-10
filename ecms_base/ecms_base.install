@@ -2264,7 +2264,7 @@ function ecms_base_update_10207(): void {
   $translateBlock->setStatus(FALSE);
   $translateBlock->save();
 
-  // Base profile path
+  // Base profile path.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
