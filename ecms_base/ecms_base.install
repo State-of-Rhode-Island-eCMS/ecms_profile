@@ -2259,7 +2259,7 @@ function ecms_base_update_10207(): void {
   /** @var \Drupal\block\BlockInterface $translateBlock */
   $translateBlock = \Drupal::entityTypeManager()
     ->getStorage('block')
-    ->load('block.block.googletranslator');
+    ->load('googletranslator');
 
   $translateBlock->setStatus(FALSE);
   $translateBlock->save();
