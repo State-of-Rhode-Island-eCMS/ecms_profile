@@ -2319,4 +2319,3 @@ function ecms_base_update_10209(): void {
   $newTranslateBlock->setRegion('language_switcher');
   $newTranslateBlock->save();
 }
-
