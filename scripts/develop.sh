@@ -16,7 +16,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 COMPOSER="$(which composer)"
 COMPOSER_BIN_DIR="$(composer config bin-dir)"
 DOCROOT="web"
-DRUPAL_CORE_VERSION="10.3"
+DRUPAL_CORE_VERSION="~10.3"
 PHP_VERSION="8.2"
 
 # Whether the source directory should be deleted before rebuilding lando
@@ -199,6 +199,10 @@ tooling:
     service: appserver
     description: Disable xdebug for apache.
     cmd: 'rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload'
+    user: root
+  recipe-apply:
+    service: appserver
+    cmd: cd /app/web && php core/scripts/drupal recipe /ecms_profile/ecms_base/recipes/$0
     user: root
 config:
   xdebug: false
