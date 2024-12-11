@@ -100,16 +100,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_press_release_topics:
-    type: entity_reference_autocomplete
-    weight: 126
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -195,4 +185,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_press_release_topics: true

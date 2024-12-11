@@ -90,9 +90,9 @@ class EcmsApiPublisher extends EcmsApiBase {
     $clientId = $this->getClientId();
     $clientSecret = $this->getClientSecret();
     $clientScope = $this->getClientScope();
-
+    $verify = $this->getVerification();
     // Get the access token to create this node.
-    $accessToken = $this->getAccessToken($recipientUrl, $clientId, $clientSecret, $clientScope);
+    $accessToken = $this->getAccessToken($recipientUrl, $clientId, $clientSecret, $clientScope, $verify);
 
     // Guard against a null access token.
     if (empty($accessToken)) {
@@ -110,7 +110,7 @@ class EcmsApiPublisher extends EcmsApiBase {
     $this->accountSwitcher->switchTo($publisherAccount);
 
     // Submit the entity to the API.
-    $result = $this->submitEntity($accessToken, $recipientUrl, $entity);
+    $result = $this->submitEntity($accessToken, $recipientUrl, $entity, $verify);
 
     $this->accountSwitcher->switchBack();
 
@@ -166,6 +166,18 @@ class EcmsApiPublisher extends EcmsApiBase {
    */
   private function getClientScope(): string {
     return $this->configFactory->get('ecms_api_publisher.settings')->get('recipient_client_scope');
+  }
+
+  /**
+   * Get the verification settings for the http calls..
+   *
+   * @return bool
+   *   The client scope for the recipient site.
+   */
+  private function getVerification(): bool {
+    return $this->configFactory
+      ->get('ecms_api_publisher.settings')
+      ->get('verify_ssl') ?? TRUE;
   }
 
 }

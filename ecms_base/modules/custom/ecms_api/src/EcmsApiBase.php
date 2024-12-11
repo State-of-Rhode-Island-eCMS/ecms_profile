@@ -135,11 +135,19 @@ abstract class EcmsApiBase {
    *   The client secret for the oauth connection.
    * @param string $scope
    *   The scope for the oauth connection.
+   * @param bool $verify
+   *   Verify the SSL connection.
    *
    * @return string|null
    *   The access token or NULL.
    */
-  protected function getAccessToken(Url $url, string $client_id, string $client_secret, string $scope): ?string {
+  protected function getAccessToken(
+    Url $url,
+    string $client_id,
+    string $client_secret,
+    string $scope,
+    bool $verify = TRUE,
+  ): ?string {
     $payload = [
       'form_params' => [
         'grant_type' => 'client_credentials',
@@ -147,10 +155,12 @@ abstract class EcmsApiBase {
         'client_secret' => $client_secret,
         'scope' => $scope,
       ],
+      'verify' => $verify,
     ];
 
     // Get the endpoint of the entity.
-    $endpoint = "{$url->toString()}/oauth/token";
+    $trimmedUrl = rtrim($url->toString(), '/');
+    $endpoint = "{$trimmedUrl}/oauth/token";
 
     try {
       $response = $this->httpClient->request('POST', $endpoint, $payload);
@@ -196,11 +206,18 @@ abstract class EcmsApiBase {
    *   The url of the endpoint.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity submitted.
+   * @param bool $verify
+   *   Verify the SSL connection.
    *
    * @return bool
    *   True if the entity was successfully submitted.
    */
-  protected function submitEntity(string $accessToken, Url $url, EntityInterface $entity): bool {
+  protected function submitEntity(
+    string $accessToken,
+    Url $url,
+    EntityInterface $entity,
+    bool $verify = TRUE,
+  ): bool {
     $sourceFieldName = '';
     if ($entity instanceof MediaInterface && $this->checkMediaSourceIsFile($entity)) {
       // Get the source.
@@ -210,7 +227,7 @@ abstract class EcmsApiBase {
       // Get the source file id.
       $sourceFileId = (int) $source->getSourceFieldValue($entity);
       // Submit the source file field before processing the media entity.
-      $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, $sourceFileId, $sourceFieldName);
+      $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, $sourceFileId, $sourceFieldName, $verify);
 
       if (empty($fileUuid)) {
         // Return false if the file entity for the media element was not saved.
@@ -225,7 +242,7 @@ abstract class EcmsApiBase {
           $fileEntity = $field->first()->entity;
           $sourceFieldName = $field->getName();
 
-          $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, (int) $fileEntity->id(), $sourceFieldName);
+          $fileUuid = $this->submitSourceFileEntity($entity, $accessToken, $url, (int) $fileEntity->id(), $sourceFieldName, $verify);
 
           if (empty($fileUuid)) {
             // Return false if the file entity for the
@@ -237,7 +254,7 @@ abstract class EcmsApiBase {
     }
 
     // Query the endpoint to get the correct HTTP method.
-    $method = $this->checkEntityExists($accessToken, $url, $entity);
+    $method = $this->checkEntityExists($accessToken, $url, $entity, $verify);
 
     // Only allow certain methods to be submitted.
     if (empty($method) || !in_array($method, self::ALLOWED_HTTP_METHODS, TRUE)) {
@@ -267,6 +284,7 @@ abstract class EcmsApiBase {
         'Content-Type' => 'application/vnd.api+json',
         'Authorization' => "Bearer {$accessToken}",
       ],
+      'verify' => $verify,
     ];
 
     // Alter the entity attributes before submission.
@@ -382,11 +400,20 @@ abstract class EcmsApiBase {
    *   The file id of the file to submit to json api.
    * @param string $fieldName
    *   The name of the field to upload the file to.
+   * @param bool $verify
+   *   Verify the SSL connection.
    *
    * @return string|null
    *   The uuid of the new file or null.
    */
-  protected function submitSourceFileEntity(EntityInterface $entity, string $accessToken, Url $url, int $fileId, string $fieldName): ?string {
+  protected function submitSourceFileEntity(
+    EntityInterface $entity,
+    string $accessToken,
+    Url $url,
+    int $fileId,
+    string $fieldName,
+    bool $verify = TRUE,
+  ): ?string {
     $filePath = $this->ecmsApiHelper->getFilePath($fileId);
 
     // Guard against an empty filepath.
@@ -405,6 +432,7 @@ abstract class EcmsApiBase {
         'Content-Disposition' => 'file; filename="' . $filename . '"',
       ],
       'body' => fopen($filePath, 'r'),
+      'verify' => $verify,
     ];
 
     $endpoint = $this->getFileEndpointUrl($entity, $fieldName, $url);
@@ -460,7 +488,8 @@ abstract class EcmsApiBase {
    */
   private function getFileEndpointUrl(EntityInterface $entity, string $fieldName, Url $url): string {
     $apiEndpoint = self::API_ENDPOINT;
-    return "{$url->toString()}/{$apiEndpoint}/{$entity->getEntityTypeId()}/{$entity->bundle()}/{$fieldName}";
+    $trimmedUrl = rtrim($url->toString(), '/');
+    return "{$trimmedUrl}/{$apiEndpoint}/{$entity->getEntityTypeId()}/{$entity->bundle()}/{$fieldName}";
   }
 
   /**
@@ -472,11 +501,18 @@ abstract class EcmsApiBase {
    *   The URL of the api site.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity being submitted.
+   * @param bool $verify
+   *   Verify the SSL connection.
    *
    * @return string|null
    *   The http method to use for submission or null on error.
    */
-  protected function checkEntityExists(string $accessToken, Url $url, EntityInterface $entity): ?string {
+  protected function checkEntityExists(
+    string $accessToken,
+    Url $url,
+    EntityInterface $entity,
+    bool $verify = TRUE,
+  ): ?string {
     // Get the endpoint and assume a patch to append the UUID to the url.
     $endpoint = $this->getEndpointUrl($url, $entity, 'PATCH');
 
@@ -486,6 +522,7 @@ abstract class EcmsApiBase {
         'Content-Type' => 'application/vnd.api+json',
         'Authorization' => "Bearer {$accessToken}",
       ],
+      'verify' => $verify,
     ];
 
     try {
@@ -516,11 +553,18 @@ abstract class EcmsApiBase {
    *   The URL of the endpoint.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity to try and fetch.
+   * @param bool $verify
+   *   Verify the SSL connection.
    *
    * @return object|null
    *   Return the object decoded from json or null if not exists or error.
    */
-  protected function fetchEntityFromApi(string $accessToken, Url $url, EntityInterface $entity): ?object {
+  protected function fetchEntityFromApi(
+    string $accessToken,
+    Url $url,
+    EntityInterface $entity,
+    bool $verify = TRUE,
+  ): ?object {
     // Get the endpoint and assume a patch to append the UUID to the url.
     $endpoint = $this->getEndpointUrl($url, $entity, 'PATCH');
 
@@ -530,6 +574,7 @@ abstract class EcmsApiBase {
         'Content-Type' => 'application/vnd.api+json',
         'Authorization' => "Bearer {$accessToken}",
       ],
+      'verify' => $verify,
     ];
 
     try {
@@ -594,13 +639,14 @@ abstract class EcmsApiBase {
       $entityPath = "{$entityPath}/{$entity->uuid()}";
     }
     $endPoint = self::API_ENDPOINT;
+    $trimmedUrl = rtrim($url->toString(), '/');
 
     // Append the language id if it is not the default language.
     if (!$language->isDefault()) {
-      return "{$url->toString()}/{$languageEndpoint}/{$endPoint}/{$entityPath}";
+      return "{$trimmedUrl}/{$languageEndpoint}/{$endPoint}/{$entityPath}";
     }
 
-    return "{$url->toString()}/{$endPoint}/{$entityPath}";
+    return "{$trimmedUrl}/{$endPoint}/{$entityPath}";
   }
 
   /**
@@ -669,11 +715,17 @@ abstract class EcmsApiBase {
    *   The url of the hub to get the content type uuid.
    * @param array $types
    *   The machine name of the content types to retrieve.
+   * @param bool $verify
+   *   Verify the SSL connection.
    *
    * @return array|null
    *   Return the data array from the json api or null if an error occurs.
    */
-  protected function getContentTypes(Url $url, array $types): ?array {
+  protected function getContentTypes(
+    Url $url,
+    array $types,
+    bool $verify = TRUE,
+  ): ?array {
     $filter = [];
 
     // Loop through the content types and build filters.
@@ -685,10 +737,11 @@ abstract class EcmsApiBase {
 
     $queryParams = http_build_query($filter);
     $apiEndpoint = self::API_ENDPOINT;
-    $endpoint = "{$url->toString()}/{$apiEndpoint}/node_type/node_type?{$queryParams}";
+    $trimmedUrl = rtrim($url->toString(), '/');
+    $endpoint = "{$trimmedUrl}/{$apiEndpoint}/node_type/node_type?{$queryParams}";
 
     try {
-      $request = $this->httpClient->request("GET", $endpoint);
+      $request = $this->httpClient->request("GET", $endpoint, ['verify' => $verify]);
     }
     catch (GuzzleException $exception) {
       return NULL;

@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-570: Added metatag_open_graph to the base install.
 
 ### Changed
 
@@ -20,6 +21,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 
 ### Security
+
+## [1.1.0] - 2024-11-20
+### Changed
+- RIGA-555: Update the patternlab version
+
+### Fixed
+- RIGA-564: Fixed the syndication connections.
+
+### Security
+- RIGA-565: Added hook to block user/1 for all sites.
 
 ## [1.0.9] - 2024-10-28
 ### Added
@@ -1304,7 +1315,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.9...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.9...1.1.0
 [1.0.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.6...1.0.7
