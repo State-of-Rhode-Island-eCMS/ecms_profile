@@ -2258,6 +2258,19 @@ function ecms_base_update_10206(array &$sandbox): void {
  * Runs as part of 1.1.1 tag.
  */
 function ecms_base_update_10207(array &$sandbox): void {
+
+  $modules_to_install = [
+    'metatag_open_graph',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Install new modules after updating contrib modules.
+ *
+ * Runs as part of 1.1.1 tag.
+ */
+function ecms_base_update_10208(array &$sandbox): void {
   // Get reference to config install directory.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
   /** @var \Drupal\Core\Config\FileStorage $install_source */
