@@ -2289,3 +2289,33 @@ function ecms_base_update_10208(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
+/**
+ * Implements hook_update_n().
+ */
+function ecms_base_update_10209(): void {
+  $blockStorage = \Drupal::entityTypeManager()
+    ->getStorage('block');
+
+  /** @var \Drupal\block\BlockInterface $translateBlock */
+  $translateBlock = $blockStorage
+    ->load('googletranslator');
+
+  $translateBlock->setStatus(FALSE);
+  $translateBlock->save();
+
+  // Base profile path.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  $themeInstallSource = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+  $active_storage->write("block.block.ecms_ecmstranslatorgoogletranslator", $themeInstallSource->read("block.block.ecms_ecmstranslatorgoogletranslator"));
+
+  // Set the region of the block.
+  /** @var \Drupal\block\BlockInterface $translateBlock */
+  $newTranslateBlock = $blockStorage
+    ->load('ecms_ecmstranslatorgoogletranslator');
+  $newTranslateBlock->setRegion('language_switcher');
+  $newTranslateBlock->save();
+}
