@@ -7,6 +7,7 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Url;
@@ -106,4 +107,18 @@ function ecms_languages_form_alter(&$form, FormStateInterface $form_state, $form
       unset($form['langcode']['#options'][$lang]);
     }
   }
+}
+
+/**
+ * Implements hook_js_alter().
+ */
+function ecms_languages_libraries_js_alter(
+  array &$javascript,
+  AttachedAssetsInterface $extension,
+): void {
+  // Append to the version number to ensure the latest version is loaded.
+  // This is necessary to prevent caching issues since our ecms_translator
+  // block is extending from this library.
+  $originalVersion = $javascript['modules/contrib/google_translator/js/init.js']['version'];
+  $javascript['modules/contrib/google_translator/js/init.js']['version'] = sprintf('%s-%s', $originalVersion, \Drupal::VERSION);
 }
