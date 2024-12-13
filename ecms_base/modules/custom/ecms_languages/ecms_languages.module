@@ -116,7 +116,7 @@ function ecms_languages_libraries_js_alter(
   array &$javascript,
   AttachedAssetsInterface $extension,
 ): void {
-  if ($javascript['modules/contrib/google_translator/js/init.js']['version']) {
+  if (isset($javascript['modules/contrib/google_translator/js/init.js'])) {
     // Append to the version number to ensure the latest version is loaded.
     // This is necessary to prevent caching issues since our ecms_translator
     // block is extending from this library.
