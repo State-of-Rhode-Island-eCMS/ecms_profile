@@ -112,7 +112,7 @@ function ecms_languages_form_alter(&$form, FormStateInterface $form_state, $form
 /**
  * Implements hook_js_alter().
  */
-function ecms_languages_libraries_js_alter(
+function ecms_languages_js_alter(
   array &$javascript,
   AttachedAssetsInterface $extension,
 ): void {
