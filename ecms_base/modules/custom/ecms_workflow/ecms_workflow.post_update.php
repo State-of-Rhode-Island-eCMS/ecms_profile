@@ -29,7 +29,7 @@ function ecms_workflow_post_update_revoke_emergency_notification_permissions(): 
 }
 
 /**
- * Revoke permissions from non-drupal_admin roles.
+ * Unpublish/archive all emergency_notifications.
  */
 function ecms_workflow_post_update_unpublish_all_emergency_notifications(array &$sandbox): void {
   // @see RIGA-588.
