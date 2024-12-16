@@ -22,7 +22,10 @@ class LanguageSelector extends GoogleTranslator {
    */
   public function build(): array {
     // Return just the element and nothing else.
-    return parent::getElement();
+    $element = parent::getElement();
+    $element['placeholder']['#attached']['library'][] = 'google_translator/disclaimer';
+
+    return $element;
   }
 
 }
