@@ -10,6 +10,8 @@ use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\user\RoleInterface;
+use Drupal\user\RoleStorage;
 
 /**
  * Add node bundles to the editorial workflow.
@@ -420,6 +422,53 @@ class EcmsWorkflowBundleCreate {
       catch (EntityStorageException $e) {
         // Trap any errors.
       }
+    }
+  }
+
+  /**
+   * Revoke content permissions from a role.
+   *
+   * @param string $role
+   *   The role to revoke permissions from.
+   * @param string $contentType
+   *   The content type to revoke permissions from.
+   */
+  public function revokeRolePermissions(string $role, string $contentType): void {
+    /** @var \Drupal\user\RoleStorage $storage */
+    $storage = $this->entityTypeManager->getStorage('user_role');
+
+    /** @var \Drupal\user\RoleInterfaceRoleInterface $role */
+    $role = $storage->load($role);
+
+    if (empty($role)) {
+      return;
+    }
+
+    if ($role->hasPermission("create {$contentType} content")) {
+      $role->revokePermission("create {$contentType} content");
+    }
+
+    if ($role->hasPermission("edit any {$contentType} content")) {
+      $role->revokePermission("edit any {$contentType} content");
+    }
+
+    if ($role->hasPermission("delete any {$contentType} content")) {
+      $role->revokePermission("delete any {$contentType} content");
+    }
+
+    if ($role->hasPermission("add scheduled transitions node {$contentType}")) {
+      $role->revokePermission("add scheduled transitions node {$contentType}");
+    }
+
+    if ($role->hasPermission("reschedule scheduled transitions node {$contentType}")) {
+      $role->revokePermission("reschedule scheduled transitions node {$contentType}");
+    }
+
+    try {
+      $role->save();
+    }
+    catch (EntityStorageException $e) {
+      return;
     }
   }
 
