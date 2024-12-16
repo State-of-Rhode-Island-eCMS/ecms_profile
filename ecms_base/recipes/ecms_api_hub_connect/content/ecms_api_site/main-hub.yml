@@ -18,6 +18,6 @@ default:
       target_id: press_release
   api_host:
     -
-      uri: 'https://rigov.ecms.ri.gov/EcmsApi'
+      uri: 'https://rigov.ecms.ri.gov'
       title: ''
       options: {  }
