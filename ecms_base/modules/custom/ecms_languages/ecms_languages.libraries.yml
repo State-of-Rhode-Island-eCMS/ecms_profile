@@ -1,0 +1,6 @@
+element:
+  version: 2.x
+  js:
+    https://translate.google.com/translate_a/element.js?cb=Drupal.behaviors.googleTranslatorElement.init: { type: external, minified: true }
+  dependencies:
+    - google_translator/element

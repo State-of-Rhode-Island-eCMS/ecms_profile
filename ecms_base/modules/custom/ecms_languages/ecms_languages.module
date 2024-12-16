@@ -123,7 +123,5 @@ function ecms_languages_js_alter(
     // Disable preprocess and caching to ensure the version is appended.
     $originalVersion = $javascript['modules/contrib/google_translator/js/init.js']['version'];
     $javascript['modules/contrib/google_translator/js/init.js']['version'] = sprintf('%s-%s', $originalVersion, \Drupal::VERSION);
-    $javascript['modules/contrib/google_translator/js/init.js']['cache'] = FALSE;
-    $javascript['modules/contrib/google_translator/js/init.js']['preprocess'] = FALSE;
   }
 }

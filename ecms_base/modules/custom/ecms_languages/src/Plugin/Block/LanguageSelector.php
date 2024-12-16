@@ -23,7 +23,9 @@ class LanguageSelector extends GoogleTranslator {
   public function build(): array {
     // Return just the element and nothing else.
     $element = parent::getElement();
-    $element['placeholder']['#attached']['library'][] = 'google_translator/disclaimer';
+    $element['placeholder']['#attached']['library'][] = 'ecms_languages/element';
+    // Remove the inline script in favor of our new library.
+    unset($element['script']);
 
     return $element;
   }
