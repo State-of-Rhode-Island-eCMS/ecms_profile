@@ -10,8 +10,6 @@ use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\user\RoleInterface;
-use Drupal\user\RoleStorage;
 
 /**
  * Add node bundles to the editorial workflow.
