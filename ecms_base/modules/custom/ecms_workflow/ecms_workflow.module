@@ -7,6 +7,7 @@
 
 declare(strict_types=1);
 
+use Drupal\ecms_workflow\EcmsWorkflowBundleCreate;
 use Drupal\node\Entity\Node;
 use Drupal\webform\WebformInterface;
 
@@ -22,6 +23,22 @@ function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
     // Call the workflow service to update configuration.
     \Drupal::service('ecms_workflow.bundle_create')
       ->addContentTypeToWorkflow($bundle);
+
+    if ($bundle === 'emergency_notification') {
+      // @see RIGA-588.
+      // Call the workflow service to update configuration.
+      \Drupal::service('ecms_workflow.bundle_create')
+        ->revokeRolePermissions(
+          EcmsWorkflowBundleCreate::CONTENT_PUBLISHER_ROLE,
+          $bundle
+        );
+
+      \Drupal::service('ecms_workflow.bundle_create')
+        ->revokeRolePermissions(
+          EcmsWorkflowBundleCreate::CONTENT_AUTHOR_ROLE,
+          $bundle
+        );
+    }
   }
 
   // Set taxonomy permissions when a new bundle is created.

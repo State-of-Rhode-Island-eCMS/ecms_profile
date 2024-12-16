@@ -13,6 +13,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-570: Added metatag_open_graph to the base install.
 
 ### Changed
+- RIGA-588: Revoked permission for the emergency_notification content.
+- RIGA-588: Unpublished all emergency_notification content.
 
 ### Deprecated
 
