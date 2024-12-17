@@ -38,6 +38,12 @@ function ecms_workflow_entity_bundle_create($entity_type_id, $bundle) : void {
           EcmsWorkflowBundleCreate::CONTENT_AUTHOR_ROLE,
           $bundle
         );
+
+      \Drupal::service('ecms_workflow.bundle_create')
+        ->revokeRolePermissions(
+          EcmsWorkflowBundleCreate::SITE_ADMIN_ROLE,
+          $bundle
+        );
     }
   }
 
