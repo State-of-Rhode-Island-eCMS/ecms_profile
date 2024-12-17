@@ -26,6 +26,12 @@ function ecms_workflow_post_update_revoke_emergency_notification_permissions(): 
       EcmsWorkflowBundleCreate::CONTENT_AUTHOR_ROLE,
       'emergency_notification'
     );
+
+  \Drupal::service('ecms_workflow.bundle_create')
+    ->revokeRolePermissions(
+      EcmsWorkflowBundleCreate::SITE_ADMIN_ROLE,
+      'emergency_notification'
+    );
 }
 
 /**
