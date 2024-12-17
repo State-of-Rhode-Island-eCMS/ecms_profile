@@ -450,6 +450,10 @@ class EcmsWorkflowBundleCreate {
       $role->revokePermission("edit any {$contentType} content");
     }
 
+    if ($role->hasPermission("edit own {$contentType} content")) {
+      $role->revokePermission("edit own {$contentType} content");
+    }
+
     if ($role->hasPermission("delete any {$contentType} content")) {
       $role->revokePermission("delete any {$contentType} content");
     }
