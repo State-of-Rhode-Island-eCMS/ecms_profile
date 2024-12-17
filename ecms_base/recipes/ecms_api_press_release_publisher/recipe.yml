@@ -1,0 +1,7 @@
+name: eCMS API Press Release Publisher
+type: eCMS
+description: 'Configures the eCMS API Press Release Publisher'
+recipes:
+  - ecms_api_hub_connect
+install:
+  - ecms_api_press_release_publisher
