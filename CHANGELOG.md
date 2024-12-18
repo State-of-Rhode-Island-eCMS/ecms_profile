@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.1.1] - 2024-12-18
+### Added
 - RIGA-570: Added metatag_open_graph to the base install.
 - RIGA-576: Added recipe to configure press release publisher module.
 - RIGA-576: Added recipe to configure hub site for publishing.
@@ -20,14 +33,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-586: Updated honeypot configuration
 - RIGA-572: Changed the Google Translate block/styles
 - RIGA-576: Hide the press release topics field from display.
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [1.1.0] - 2024-11-20
 ### Changed
@@ -1322,7 +1327,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.9...1.1.0
 [1.0.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.7...1.0.8
