@@ -1,5 +1,5 @@
 global-styling:
-  version: 1.0.2
+  version: 2.0.0
   css:
     theme:
       ecms_patternlab/dist/css/pattern-lab-compiled.css: {}
@@ -9,13 +9,13 @@ global-styling:
     - core/drupal
 
 header-scripts:
-  version: 1
+  version: 2.0.0
   header: true
   js:
     ecms_patternlab/dist/vendor/fontfaceobserver.js: {preprocess: false,weight: -100 }
 
 tiny-slider:
-  version: 2.9.2
+  version: 2.9.3
   css:
     theme:
        ecms_patternlab/dist/vendor/tiny-slider/tiny-slider.css: {}
@@ -25,14 +25,14 @@ tiny-slider:
     - ecms/global-styling
 
 rrule-js:
-  version: 2.6.6
+  version: 2.6.7
   js:
     ecms_patternlab/dist/vendor/rrule/rrule.min.js:  { weight: -1, attributes: { type: "module"} }
   dependencies:
     - ecms/global-styling
 
 modal:
-  version: 1.0
+  version: 1.1.1
   js:
     ecms_patternlab/dist/vendor/micromodal/micromodal.min.js:  { weight: -1, attributes: { type: "module"} }
   dependencies:

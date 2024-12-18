@@ -1,0 +1,23 @@
+_meta:
+  version: '1.0'
+  entity_type: ecms_api_site
+  uuid: 5d96edb1-ec06-464c-b348-d44eb2f9e18c
+  default_langcode: en
+default:
+  name:
+    -
+      value: 'Main Hub'
+  uid:
+    -
+      target_id: 0
+  created:
+    -
+      value: 1733167128
+  content_type:
+    -
+      target_id: press_release
+  api_host:
+    -
+      uri: 'https://rigov.ecms.ri.gov'
+      title: ''
+      options: {  }

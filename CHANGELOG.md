@@ -10,8 +10,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-570: Added metatag_open_graph to the base install.
+- RIGA-576: Added recipe to configure press release publisher module.
+- RIGA-576: Added recipe to configure hub site for publishing.
 
 ### Changed
+- RIGA-588: Revoked permission for the emergency_notification content.
+- RIGA-588: Unpublished all emergency_notification content.
+- RIGA-586: Updated honeypot configuration
+- RIGA-572: Changed the Google Translate block/styles
+- RIGA-576: Hide the press release topics field from display.
 
 ### Deprecated
 

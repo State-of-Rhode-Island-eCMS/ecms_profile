@@ -1,0 +1,7 @@
+name: eCMS API Hub Connect
+type: eCMS
+description: 'Configures the eCMS API hub connection'
+recipes: []
+install:
+  - ecms_press_release
+  - ecms_api_publisher
