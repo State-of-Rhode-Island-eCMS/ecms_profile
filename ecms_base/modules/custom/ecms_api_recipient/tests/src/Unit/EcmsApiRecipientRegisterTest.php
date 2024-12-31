@@ -268,7 +268,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
 
     return [
       'test1' => [
-        NULL,
+        '',
         NULL,
         FALSE,
         FALSE,
