@@ -76,7 +76,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     container:
-      image: drupalci/php-8.2-apache:production
+      image: drupalci/php-8.3-apache:production
     services:
       mysql:
         image: mysql:5.7
