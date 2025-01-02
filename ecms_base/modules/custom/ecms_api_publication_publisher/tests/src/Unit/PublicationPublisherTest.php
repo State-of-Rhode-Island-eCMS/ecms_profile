@@ -61,6 +61,13 @@ class PublicationPublisherTest extends UnitTestCase {
   private $node;
 
   /**
+   * Mock of the ecms_api_helper service.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject
+   */
+  protected $ecmsApiHelper;
+
+  /**
    * {@inheritDoc}
    */
   public function setUp(): void {
