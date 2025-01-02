@@ -14,6 +14,7 @@ use Drupal\ecms_languages\LanguageNegotiationSessionFix;
 use Drupal\language\ConfigurableLanguageManager;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -144,8 +145,9 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
       ->willReturn($immutableConfig);
 
     $languageManager = $this->createMock(ConfigurableLanguageManager::class);
+    $requestStack = $this->createMock(RequestStack::class);
 
-    $testClass = new LanguageNegotiationSessionFix();
+    $testClass = new LanguageNegotiationSessionFix($requestStack);
 
     $testClass->setCurrentUser($user);
     $testClass->setConfig($configFactory);
