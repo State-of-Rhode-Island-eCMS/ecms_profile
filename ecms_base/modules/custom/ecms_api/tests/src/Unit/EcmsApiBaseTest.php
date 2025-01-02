@@ -382,6 +382,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         'client_secret' => self::CLIENT_SECRET,
         'scope' => self::CLIENT_SCOPE,
       ],
+      'verify' => TRUE,
     ];
 
     $this->url->expects($this->once())
