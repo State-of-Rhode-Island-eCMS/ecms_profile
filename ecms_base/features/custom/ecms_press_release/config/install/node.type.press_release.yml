@@ -10,7 +10,7 @@ third_party_settings:
 name: 'Press release'
 type: press_release
 description: 'Manage press releases.'
-help: ''
+help: null
 new_revision: true
 preview_mode: 1
 display_submitted: false
