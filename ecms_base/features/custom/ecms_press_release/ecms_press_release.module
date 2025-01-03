@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @file ecms_press_release.module
+ * @file
+ * ecms_press_release.module
  */
 
 declare(strict_types=1);
