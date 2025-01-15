@@ -31,6 +31,7 @@ components:
       - templates/generic
 
 regions:
+  emergency_notification: 'Emergency Notification'
   language_switcher: 'Language Switcher'
   header_global: 'Header: Global'
   header_inner: 'Header: Inner'
