@@ -196,6 +196,11 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->with('allowed_content_types')
       ->willReturn(self::SELECTED_NODE_TYPES);
 
+    $this->entityBundleInfo->expects($this->once())
+      ->method('getBundleInfo')
+      ->with('node')
+      ->willReturn(self::NODE_TYPES);
+
     $settingsConfig = $this->createMock(Config::class);
     $settingsConfig->expects($this->once())
       ->method('set')
@@ -208,11 +213,7 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->willReturn($settingsConfig);
 
     $roleEntity = $this->createMock(RoleInterface::class);
-    $roleEntity->expects($this->once())
-      ->method('getPermissions')
-      ->willReturn(self::EXISTING_PERMISSIONS);
-
-    $roleEntity->expects($this->exactly(count(self::EXISTING_PERMISSIONS)))
+    $roleEntity->expects($this->exactly(count(self::EXISTING_PERMISSIONS) * 2))
       ->method('revokePermission')
       ->willReturnSelf();
 
@@ -303,6 +304,11 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->with('allowed_content_types')
       ->willReturn(self::SELECTED_NODE_TYPES);
 
+    $this->entityBundleInfo->expects($this->once())
+      ->method('getBundleInfo')
+      ->with('node')
+      ->willReturn(self::NODE_TYPES);
+
     $settingsConfig = $this->createMock(Config::class);
     $settingsConfig->expects($this->once())
       ->method('set')
@@ -315,11 +321,7 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
       ->willReturn($settingsConfig);
 
     $roleEntity = $this->createMock(RoleInterface::class);
-    $roleEntity->expects($this->once())
-      ->method('getPermissions')
-      ->willReturn(self::EXISTING_PERMISSIONS);
-
-    $roleEntity->expects($this->exactly(count(self::EXISTING_PERMISSIONS)))
+    $roleEntity->expects($this->exactly(count(self::EXISTING_PERMISSIONS) * 2))
       ->method('revokePermission')
       ->willReturnSelf();
 

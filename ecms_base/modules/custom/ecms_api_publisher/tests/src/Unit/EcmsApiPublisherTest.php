@@ -79,17 +79,17 @@ class EcmsApiPublisherTest extends UnitTestCase {
     parent::setUp();
 
     $immutableConfig = $this->createMock(ImmutableConfig::class);
-    $immutableConfig->expects($this->exactly(3))
+    $immutableConfig->expects($this->exactly(4))
       ->method('get')
-      ->withConsecutive(
-        ['recipient_client_id'],
-        ['recipient_client_secret'],
-        ['recipient_client_scope']
-      )
-      ->willReturnOnConsecutiveCalls(self::CLIENT_ID, self::CLIENT_SECRET, self::CLIENT_SCOPE);
+      ->will($this->returnValueMap([
+        ['recipient_client_id', self::CLIENT_ID],
+        ['recipient_client_secret', self::CLIENT_SECRET],
+        ['recipient_client_scope', self::CLIENT_SCOPE],
+        ['verify_ssl', TRUE],
+        ]));
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
 
-    $this->configFactory->expects($this->exactly(3))
+    $this->configFactory->expects($this->exactly(4))
       ->method('get')
       ->with('ecms_api_publisher.settings')
       ->willReturn($immutableConfig);

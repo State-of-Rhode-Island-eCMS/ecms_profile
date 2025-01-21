@@ -120,7 +120,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
   /**
    * {@inheritDoc}
    */
-  protected function tearDown() {
+  protected function tearDown(): void {
     parent::tearDown();
 
     $this->globalBatch->disable();

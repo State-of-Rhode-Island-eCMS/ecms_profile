@@ -91,7 +91,6 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
     $this->entityDisplayRepository = $this->createMock(EntityDisplayRepositoryInterface::class);
     $this->config = $this->createMock(Config::class);
-
   }
 
   /**
@@ -156,14 +155,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $adminRole = $this->createMock(RoleInterface::class);
     $adminRole->expects($this->exactly(5))
       ->method('grantPermission')
-      ->withConsecutive(
-        ["create {$contentType} content"],
-        ["edit any {$contentType} content"],
-        ["delete any {$contentType} content"],
-        ["add scheduled transitions node {$contentType}"],
-        ["reschedule scheduled transitions node {$contentType}"]
-      )
-      ->willReturnSelf();
+      ->will($this->returnValueMap([
+        ["create {$contentType} content", $adminRole],
+        ["edit any {$contentType} content", $adminRole],
+        ["delete any {$contentType} content", $adminRole],
+        ["add scheduled transitions node {$contentType}", $adminRole],
+        ["reschedule scheduled transitions node {$contentType}", $adminRole],
+      ]));
 
     $adminRole->expects($this->once())
       ->method('save')
@@ -172,14 +170,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $publisherRole = $this->createMock(RoleInterface::class);
     $publisherRole->expects($this->exactly(5))
       ->method('grantPermission')
-      ->withConsecutive(
-        ["create {$contentType} content"],
-        ["edit any {$contentType} content"],
-        ["delete any {$contentType} content"],
-        ["add scheduled transitions node {$contentType}"],
-        ["reschedule scheduled transitions node {$contentType}"]
-      )
-      ->willReturnSelf();
+      ->will($this->returnValueMap([
+        ["create {$contentType} content", $publisherRole],
+        ["edit any {$contentType} content", $publisherRole],
+        ["delete any {$contentType} content", $publisherRole],
+        ["add scheduled transitions node {$contentType}", $publisherRole],
+        ["reschedule scheduled transitions node {$contentType}", $publisherRole],
+      ]));
 
     $publisherRole->expects($this->once())
       ->method('save')
@@ -188,11 +185,10 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $authorRole = $this->createMock(RoleInterface::class);
     $authorRole->expects($this->exactly(2))
       ->method('grantPermission')
-      ->withConsecutive(
-        ["create {$contentType} content"],
-        ["edit own {$contentType} content"],
-      )
-      ->willReturnSelf();
+      ->will($this->returnValueMap([
+        ["create {$contentType} content", $authorRole],
+        ["edit own {$contentType} content", $authorRole],
+      ]));
 
     $authorRole->expects($this->once())
       ->method('save')
@@ -200,12 +196,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityStorage->expects($this->exactly(3))
       ->method('load')
-      ->withConsecutive([self::SITE_ADMIN_ROLE], [self::CONTENT_PUBLISHER_ROLE], [self::CONTENT_AUTHOR_ROLE])
-      ->willReturnOnConsecutiveCalls(
-        $adminRole,
-        $publisherRole,
-        $authorRole
-      );
+      ->will($this->returnValueMap([
+        [self::SITE_ADMIN_ROLE, $adminRole],
+        [self::CONTENT_PUBLISHER_ROLE, $publisherRole],
+        [self::CONTENT_AUTHOR_ROLE, $authorRole],
+      ]));
 
     $config = [
       "entity_types" => [
@@ -242,8 +237,10 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->withConsecutive(['user_role'], ['workflow'])
-      ->willReturnOnConsecutiveCalls($this->entityStorage, $workflowStorage);
+      ->will($this->returnValueMap([
+        ['user_role', $this->entityStorage],
+        ['workflow', $workflowStorage],
+      ]));
 
     $this->config->expects($this->once())
       ->method('get')

@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Drupal.
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       DRUPAL_DIRECTORY: ../develop-ecms-profile
     steps:
@@ -21,7 +21,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
 
       - name: Check PHP Version
         run: php -v
@@ -72,11 +72,11 @@ jobs:
           path: /tmp/drupal-build.tar.gz
 
   test-php:
-    name: Test the site with PHP 8.2
+    name: Test the site with PHP
     needs: build
     runs-on: ubuntu-latest
     container:
-      image: drupalci/php-8.2-apache:production
+      image: drupalci/php-8.3-apache:production
     services:
       mysql:
         image: mysql:5.7
@@ -135,16 +135,14 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs-ci.xml
 
-# Comment out PHPUnit testing suite until D10 compatibility is sorted out.
-#      - name: Run unit tests.
-#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-#        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
-# Un-comment this section after D10-compatible PHPUnit upgrade is avaiolable.
+      - name: Run unit tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
 
-#      - name: Install the ecms base profile.
-#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-#        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
-#
+      - name: Install the ecms base profile.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/drush si ecms_base --db-url=${{ env.SIMPLETEST_DB }} --yes --verbose
+
 #      - name: Update settings.php
 #        run: |
 #          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php

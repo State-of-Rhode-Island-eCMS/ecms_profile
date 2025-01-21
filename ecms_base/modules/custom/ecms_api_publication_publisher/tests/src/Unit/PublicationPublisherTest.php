@@ -40,11 +40,32 @@ class PublicationPublisherTest extends UnitTestCase {
   private $originalNode;
 
   /**
+   * Mock of the http_client service.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject
+   */
+  protected $httpclient;
+
+  /**
+   * Mock of the entity_to_jsonapi service.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject
+   */
+  protected $entityToJsonApi;
+
+  /**
    * The actual node to test with.
    *
    * @var \Drupal\node\NodeInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   private $node;
+
+  /**
+   * Mock of the ecms_api_helper service.
+   *
+   * @var \PHPUnit\Framework\MockObject\MockObject
+   */
+  protected $ecmsApiHelper;
 
   /**
    * {@inheritDoc}

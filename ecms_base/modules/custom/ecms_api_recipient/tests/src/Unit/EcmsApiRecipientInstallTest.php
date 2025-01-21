@@ -70,6 +70,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
     'description' => 'An oAuth client to receive content from an eCMS publishing site.',
     'third_party' => FALSE,
     'uuid' => self::CLIENT_ID,
+    'client_id' => self::CLIENT_ID,
     'secret' => self::CLIENT_SECRET,
   ];
 
@@ -119,7 +120,6 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
    * Test a successful installation.
    */
   public function testInstallEcmsApiRecipient(): void {
-
     $userEntity = $this->createMock(EntityInterface::class);
     $userEntity->expects($this->once())
       ->method('id')
@@ -145,24 +145,20 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
       ->with(self::CONSUMER)
       ->willReturn($consumerEntity);
 
-    $this->apiConfig->expects($this->exactly(3))
+    $this->apiConfig->expects($this->exactly(4))
       ->method('get')
-      ->willReturnOnConsecutiveCalls(
-        self::API_MAIL,
-        self::CLIENT_ID,
-        self::CLIENT_SECRET
-      );
+      ->will($this->returnValueMap([
+        ['api_recipient_mail', self::API_MAIL],
+        ['oauth_client_id', self::CLIENT_ID],
+        ['oauth_client_secret', self::CLIENT_SECRET],
+      ]));
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->withConsecutive(
-        ['user'],
-        ['consumer']
-      )
-      ->willReturnOnConsecutiveCalls(
-        $userStorage,
-        $consumerStorage
-      );
+      ->will($this->returnValueMap([
+        ['user', $userStorage],
+        ['consumer', $consumerStorage],
+      ]));
 
     $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -245,24 +241,20 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
       ->with(self::CONSUMER)
       ->willReturn($consumerEntity);
 
-    $this->apiConfig->expects($this->exactly(3))
+    $this->apiConfig->expects($this->exactly(4))
       ->method('get')
-      ->willReturnOnConsecutiveCalls(
-        self::API_MAIL,
-        self::CLIENT_ID,
-        self::CLIENT_SECRET
-      );
+      ->will($this->returnValueMap([
+        ['api_recipient_mail', self::API_MAIL],
+        ['oauth_client_id', self::CLIENT_ID],
+        ['oauth_client_secret', self::CLIENT_SECRET],
+      ]));
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->withConsecutive(
-        ['user'],
-        ['consumer']
-      )
-      ->willReturnOnConsecutiveCalls(
-        $userStorage,
-        $consumerStorage
-      );
+      ->will($this->returnValueMap([
+        ['user', $userStorage],
+        ['consumer', $consumerStorage],
+      ]));
 
     $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
       ->onlyMethods(['generatePassword'])
