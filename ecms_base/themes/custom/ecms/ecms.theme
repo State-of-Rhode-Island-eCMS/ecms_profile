@@ -203,7 +203,7 @@ function ecms_preprocess_media__file(array &$variables): void {
   // Check if we have a file entity.
   if (!isset($media->get('field_file')->entity)) {
     return;
-  };
+  }
 
   // Grab file filename.
   $variables['file_filename'] = $media->get('field_file')->entity->getFilename();
@@ -823,7 +823,7 @@ function ecms_preprocess_paragraph__location_list(array &$variables): void {
     // Get the category and disable the form.
     $category = $paragraph->get('field_location_list_category')->getString();
     $variables['category_form'] = FALSE;
-  };
+  }
 
   // Query all locations.
   $query = $node_storage->getQuery()
@@ -889,7 +889,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
     $nodes = $node_storage->loadMultiple($nids);
     if (_ecms_person_list_contains_photo($nodes)) {
       $variables['photo_list'] = TRUE;
-    };
+    }
 
     // Return a list of rendered person teaser nodes.
     $variables['person_listing'] = $node_builder->viewMultiple($nodes, 'teaser', $language);
@@ -972,7 +972,7 @@ function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, 
 
     if (_ecms_person_list_contains_photo($nodes)) {
       $variables['photo_list'] = TRUE;
-    };
+    }
 
     $teasers = $node_builder->viewMultiple($nodes, 'teaser', $language);
   }
