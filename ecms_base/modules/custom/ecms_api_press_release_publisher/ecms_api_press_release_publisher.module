@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Ecms_api_notification_publisher.module.
+ * ecms_api_press_release_publisher.module
  */
 
 declare(strict_types=1);
@@ -68,11 +68,15 @@ function _ecms_api_press_release_publisher_syndicate(NodeInterface $node): void 
     return;
   }
 
+  // Deny access to the node if Rabbit Hole is enabled.
+  if (\Drupal::moduleHandler()->moduleExists('rabbit_hole')) {
+    $node->set('rh_action', 'access_denied');
+  }
+
   if (
     in_array('published', $moderatedState, TRUE) ||
     in_array('archived', $moderatedState, TRUE)
   ) {
     \Drupal::service('ecms_api_publisher.syndicate')->syndicateEntity($node);
   }
-
 }

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.press_release_syndicated
+label: 'Syndicated Press Release'
+description: 'A display mode that links a syndicated press release back to the source site.'
+targetEntityType: node
+cache: true
