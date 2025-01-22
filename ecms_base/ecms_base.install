@@ -2319,3 +2319,23 @@ function ecms_base_update_10209(): void {
   $newTranslateBlock->setRegion('language_switcher');
   $newTranslateBlock->save();
 }
+
+/**
+ * Update ecms_emergency_notification features config.
+ */
+function ecms_base_update_10210(): void {
+  $blockStorage = \Drupal::entityTypeManager()
+    ->getStorage('block');
+
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  $themeInstallSource = new FileStorage($path . "/themes/custom/ecms/config/optional/");
+  $active_storage->write("block.block.ecms_views_block__emergency_notification_block_1", $themeInstallSource->read("block.block.ecms_views_block__emergency_notification_block_1"));
+
+  // Set the region of the block.
+  /** @var \Drupal\block\BlockInterface $translateBlock */
+  $newTranslateBlock = $blockStorage
+    ->load('block.block.ecms_views_block__emergency_notification_block_1');
+  $newTranslateBlock->setRegion('emergency_notification');
+  $newTranslateBlock->save();
+}
