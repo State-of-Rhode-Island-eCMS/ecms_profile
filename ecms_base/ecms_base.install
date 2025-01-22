@@ -2333,6 +2333,6 @@ function ecms_base_update_10210(): void {
   $ecms_emergency_notification_config_source = new FileStorage($path . "/features/custom/ecms_emergency_notification/config/install/");
 
   foreach ($ecms_emergency_notification_config_source as $config) {
-    $install_source->read("{$config}"));
+    $install_source->read("{$config}");
   }
 }
