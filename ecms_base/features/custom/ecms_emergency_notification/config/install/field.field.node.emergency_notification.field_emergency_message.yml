@@ -5,7 +5,6 @@ dependencies:
     - field.storage.node.field_emergency_message
     - node.type.emergency_notification
   module:
-    - allowed_formats
     - text
 id: node.emergency_notification.field_emergency_message
 field_name: field_emergency_message
