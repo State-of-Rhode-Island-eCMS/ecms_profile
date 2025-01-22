@@ -2324,23 +2324,15 @@ function ecms_base_update_10209(): void {
  * Update ecms_emergency_notification features config.
  */
 function ecms_base_update_10210(): void {
-  // Base profile path.
+  // Config updates.
   $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
 
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
-  $featureInstallSource = new FileStorage($path . "/features/custom/ecms_emergency_notification/config/install/");
 
-  $newFeatureConfig = [
-    'ecms_emergency_notification.settings',
-  ];
+  $ecms_emergency_notification_config_source = new FileStorage($path . "/features/custom/ecms_emergency_notification/config/install/");
 
-  foreach ($newFeatureConfig as $config) {
-    $active_storage->write("{$config}", $featureInstallSource->read("{$config}"));
+  foreach ($ecms_emergency_notification_config_source as $config) {
+    $install_source->read("{$config}"));
   }
-
-  // Add the views emergency_notification block to the emergency_notification region.
-  /** @var \Drupal\Core\Config\FileStorage $profile_install_source */
-  $themeInstallSource = new FileStorage($path . "/themes/custom/ecms/config/optional/");
-  $active_storage->write("block.block.ecms_emergency_notificationviewsblock", $themeInstallSource->read("block.block.ecms_emergency_notificationviewsblock"));
 }
