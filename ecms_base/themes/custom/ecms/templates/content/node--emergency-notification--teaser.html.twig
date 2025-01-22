@@ -72,8 +72,8 @@
 #}
 
 {% include '@molecules/teaser-emergency-notification/teaser-emergency-notification.twig' with {
-  <!-- Display the textfield field_emergency_message and select list value for field_emergency_background_color -->
-  'content': content.field_emergency_message,
-  'bg_color': content.field_emergency_background_color,
+  {# Display the textfield field_emergency_message and select list value for field_emergency_background_color #}
+  'emergency_message': content.field_emergency_message.0.value,
+  'emergency_bg_color': content.field_emergency_background_color,
   'label': label,
 } %}
