@@ -20,18 +20,26 @@ function ecms_press_release_preprocess_node(array &$variables): void {
     $node->hasField('field_press_release_topics') &&
     !$node->get('field_press_release_topics')->isEmpty()
   ) {
+    $urls = [];
     /** @var \Drupal\taxonomy\TermInterface[] $topics */
     $topics = $node->get('field_press_release_topics')->referencedEntities();
-    $topics = array_map(function ($topic) {
-      if (!str_starts_with($topic->label(), 'http')) {
-        return FALSE;
-      }
-      return filter_var($topic->label(), FILTER_VALIDATE_URL);
-    }, $topics);
+    array_walk($topics, function ($topic) use (&$urls) {
+      $url = $topic->label();
+      $urls[] = strpos($url, 'http') !== 0 ? "https://$url" : $url;
+    });
 
-    $topics = array_filter($topics);
-    $url = reset($topics);
+    $urls = array_map(function ($url) {
+      return filter_var($url, FILTER_VALIDATE_URL);
+    }, $urls);
 
-    $variables['url'] = Url::fromUri(sprintf('%s%s', $url, $variables['url']));
+    $urls = array_filter($urls);
+    $url = reset($urls);
+
+    try {
+      $variables['url'] = Url::fromUri(sprintf('%s%s', $url, $variables['url']));
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('ecms_press_release')->error($e->getMessage());
+    }
   }
 }
