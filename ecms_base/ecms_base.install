@@ -2337,8 +2337,8 @@ function ecms_base_update_10210(): void {
 
   // Set the region of the block.
   /** @var \Drupal\block\BlockInterface $translateBlock */
-  $newTranslateBlock = $blockStorage
-    ->load('block.block.ecms_views_block__emergency_notification_block_1');
-  $newTranslateBlock->setRegion('emergency_notification');
-  $newTranslateBlock->save();
+  $newBlock = $blockStorage
+    ->load('ecms_views_block__emergency_notification_block_1');
+  $newBlock->setRegion('emergency_notification');
+  $newBlock->save();
 }
