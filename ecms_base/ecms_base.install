@@ -2327,6 +2327,9 @@ function ecms_base_update_10210(): void {
   $blockStorage = \Drupal::entityTypeManager()
     ->getStorage('block');
 
+  // Get reference to config install directory.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+
   /** @var \Drupal\Core\Config\StorageInterface $active_storage */
   $active_storage = \Drupal::service('config.storage');
   $themeInstallSource = new FileStorage($path . "/themes/custom/ecms/config/optional/");
