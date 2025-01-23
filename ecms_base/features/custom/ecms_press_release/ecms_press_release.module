@@ -37,7 +37,8 @@ function ecms_press_release_preprocess_node(array &$variables): void {
 
     try {
       $variables['url'] = Url::fromUri(sprintf('%s%s', $url, $variables['url']));
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       \Drupal::logger('ecms_press_release')->error($e->getMessage());
     }
   }
