@@ -10,7 +10,6 @@ declare(strict_types=1);
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\RendererInterface;
 
 /**
  * Get the social configuration from pattern lab if available.
