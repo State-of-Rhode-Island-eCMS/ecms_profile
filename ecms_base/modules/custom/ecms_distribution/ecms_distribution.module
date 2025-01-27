@@ -10,7 +10,6 @@ declare(strict_types=1);
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\RendererInterface;
 
 /**
  * Get the social configuration from pattern lab if available.
@@ -42,7 +41,7 @@ function ecms_distribution_get_patternlab_social_source(): ?array {
     $return[$object->{'icon'}] = $object->{'link-title'};
   }
 
-  $return['other'] = t('Other');
+  $return['other'] = t('Other')->__toString();
 
   return $return;
 }
@@ -226,11 +225,13 @@ function _ecms_distribution_menu_form_submit(array $form, FormStateInterface $fo
 function ecms_distribution_menu_link_callback(array $form, FormStateInterface $form_state): AjaxResponse {
   $response = new AjaxResponse();
 
+  /** @var \Drupal\Core\Render\RendererInterface $renderer */
+  $renderer = \Drupal::service('renderer');
   $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', RendererInterface::render($form['title'])));
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-title', $renderer->render($form['title'])));
 
   $response
-    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', RendererInterface::render($form['ecms_social_other_container'])));
+    ->addCommand(new ReplaceCommand('#ecms-social-wrapper-other-title', $renderer->render($form['ecms_social_other_container'])));
 
   return $response;
 }
