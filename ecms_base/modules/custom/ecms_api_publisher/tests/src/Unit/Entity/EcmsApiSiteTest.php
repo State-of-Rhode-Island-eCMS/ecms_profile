@@ -491,6 +491,13 @@ class EcmsApiSiteTest extends UnitTestCase {
       public $entity;
 
       /**
+       * The target_id to be returned.
+       *
+       * @var mixed
+       */
+      public $target_id;
+
+      /**
        * Constructor.
        *
        * @param mixed $value

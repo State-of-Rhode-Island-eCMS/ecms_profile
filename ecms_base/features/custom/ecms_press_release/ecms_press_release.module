@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * ecms_press_release.module
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Url;
+
+/**
+ * Implements template_preprocess_node().
+ */
+function ecms_press_release_preprocess_node(array &$variables): void {
+  $node = $variables['node'];
+  if (
+    $node->getType() === 'press_release' &&
+    $variables['elements']['#view_mode'] === 'press_release_syndicated' &&
+    $node->hasField('field_press_release_topics') &&
+    !$node->get('field_press_release_topics')->isEmpty()
+  ) {
+    $urls = [];
+    /** @var \Drupal\taxonomy\TermInterface[] $topics */
+    $topics = $node->get('field_press_release_topics')->referencedEntities();
+    array_walk($topics, function ($topic) use (&$urls) {
+      $url = $topic->label();
+      $urls[] = strpos($url, 'http') !== 0 ? "https://$url" : $url;
+    });
+
+    $urls = array_map(function ($url) {
+      return filter_var($url, FILTER_VALIDATE_URL);
+    }, $urls);
+
+    $urls = array_filter($urls);
+    $url = reset($urls);
+
+    try {
+      $variables['url'] = Url::fromUri(sprintf('%s%s', $url, $variables['url']));
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('ecms_press_release')->error($e->getMessage());
+    }
+  }
+}

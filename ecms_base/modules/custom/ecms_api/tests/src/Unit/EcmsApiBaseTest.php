@@ -122,6 +122,7 @@ class EcmsApiBaseTest extends UnitTestCase {
       'Content-Type' => 'application/vnd.api+json',
       'Authorization' => "Bearer " . self::ACCESS_TOKEN,
     ],
+    'verify' => TRUE,
   ];
 
   /**
@@ -132,6 +133,7 @@ class EcmsApiBaseTest extends UnitTestCase {
       'Content-Type' => 'application/vnd.api+json',
       'Authorization' => "Bearer " . self::ACCESS_TOKEN,
     ],
+    'verify' => TRUE,
   ];
 
   /**
@@ -234,6 +236,7 @@ class EcmsApiBaseTest extends UnitTestCase {
       'Content-Type' => 'application/vnd.api+json',
       'Authorization' => "Bearer " . self::ACCESS_TOKEN,
     ],
+    'verify' => TRUE,
   ];
 
   const PARAGRAPH_ENTITY_UUID = 'bcf3f58d-8c27-4cab-bcac-18d3702c5dbb';
@@ -382,6 +385,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         'client_secret' => self::CLIENT_SECRET,
         'scope' => self::CLIENT_SCOPE,
       ],
+      'verify' => TRUE,
     ];
 
     $this->url->expects($this->once())
@@ -1155,6 +1159,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         'Accept' => "application/vnd.api+json",
         'Content-Disposition' => 'file; filename="test-image.png"',
       ],
+      'verify' => TRUE,
       'body' => self::FILE_BYTES,
     ];
 

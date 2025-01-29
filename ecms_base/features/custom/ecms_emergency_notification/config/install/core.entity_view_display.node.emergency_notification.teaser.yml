@@ -9,29 +9,35 @@ dependencies:
     - field.field.node.emergency_notification.field_emergency_weight
     - node.type.emergency_notification
   module:
+    - options
+    - text
     - user
 id: node.emergency_notification.teaser
 targetEntityType: node
 bundle: emergency_notification
 mode: teaser
 content:
-  content_moderation_control:
+  field_emergency_background_color:
+    type: list_key
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: -20
+    weight: 0
     region: content
-  links:
+  field_emergency_message:
+    type: text_default
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
 hidden:
+  content_moderation_control: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
-  field_emergency_background_color: true
   field_emergency_expire_date: true
-  field_emergency_message: true
   field_emergency_weight: true
   langcode: true
+  links: true
   search_api_excerpt: true
