@@ -34,7 +34,7 @@ final class RegisterWithHubCommand extends DrushCommands {
    */
   public function registerWithHub(): void {
     // Register with the hub site.
-    $this->apiRecipientRegister->registerWithHub();
+    $this->apiRecipientRegister->registerSite();
   }
 
   /**
@@ -47,8 +47,8 @@ final class RegisterWithHubCommand extends DrushCommands {
    *   Get all content that should be on the site from the hub.
    */
   public function retieveHubContent(): void {
-    // Register with the hub site.
-    $this->apiRecipientRetrieveNotifications->retrieveHubContent();
+    // Retrieve content from the hub.
+    $this->apiRecipientRetrieveNotifications->retrieveNotificationsFromHub();
   }
 
 }
