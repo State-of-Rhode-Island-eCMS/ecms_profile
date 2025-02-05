@@ -1,0 +1,9 @@
+name: eCMS API Emergency Notification Publisher
+description: 'Provides logic to post emergency notifications to syndicated sites.'
+type: module
+core_version_requirement: ^9 || ^10 || ^11
+package: eCMS API
+
+dependencies:
+  - ecms_api_publisher
+  - ecms_emergency_notification
