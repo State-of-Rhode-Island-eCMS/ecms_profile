@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Drupal\ecms_api_recipient\Drush\Commands;
+namespace Drupal\ecms_api_recipient\Commands;
 
 use Drupal\ecms_api_recipient\EcmsApiRecipientRegister;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
-use Drush\Attributes\Command;
-use Drush\Attributes\Usage;
 use Drush\Commands\AutowireTrait;
 use Drush\Commands\DrushCommands;
 
+/**
+ * Drush command for interacting with the ecms hub.
+ */
 final class RegisterWithHubCommand extends DrushCommands {
 
   use AutowireTrait;

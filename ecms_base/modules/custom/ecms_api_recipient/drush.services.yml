@@ -2,6 +2,6 @@ services:
   _defaults:
     autowire: true
   ecms_api.commands:
-    class: \Drupal\ecms_api_recipient\Drush\Commands\RegisterWithHubCommand
+    class: \Drupal\ecms_api_recipient\Commands\RegisterWithHubCommand
     tags:
       - { name: drush.command }
