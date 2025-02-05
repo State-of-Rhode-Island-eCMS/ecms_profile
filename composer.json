@@ -159,6 +159,7 @@
         "drupal/migration_tools": "^2.8",
         "drupal/moderated_content_bulk_publish": "^2.0",
         "drupal/moderation_dashboard": "^2.0",
+        "drupal/mysql57": "^1.0",
         "drupal/office_hours": "^1.3",
         "drupal/openid_connect": "^3.0",
         "drupal/openid_connect_windows_aad": "^2.0@beta",
