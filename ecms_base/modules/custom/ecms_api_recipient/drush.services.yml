@@ -1,7 +1,8 @@
 services:
-  _defaults:
-    autowire: true
   ecms_api.commands:
     class: \Drupal\ecms_api_recipient\Commands\RegisterWithHubCommand
+    arguments:
+      - '@ecms_api_recipient.register'
+      - '@ecms_api_recipient.retrieve_notifications'
     tags:
       - { name: drush.command }

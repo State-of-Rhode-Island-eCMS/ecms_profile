@@ -6,7 +6,6 @@ namespace Drupal\ecms_api_recipient\Commands;
 
 use Drupal\ecms_api_recipient\EcmsApiRecipientRegister;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
-use Drush\Commands\AutowireTrait;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -14,10 +13,8 @@ use Drush\Commands\DrushCommands;
  */
 final class RegisterWithHubCommand extends DrushCommands {
 
-  use AutowireTrait;
-
   /**
-   * Constructs an AptifyProductSync object.
+   * Constructs an RegisterWithHubCommand object.
    */
   public function __construct(
     private readonly EcmsApiRecipientRegister $apiRecipientRegister,
