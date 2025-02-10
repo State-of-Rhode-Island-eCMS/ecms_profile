@@ -8,3 +8,4 @@ api_main_hub: 'https://develop-ecms-profile.lndo.site'
 api_main_hub_client_id: 'REDACTED'
 api_main_hub_client_secret: 'REDACTED'
 api_main_hub_scope: 'ecms_api_publisher'
+verify_ssl: true
