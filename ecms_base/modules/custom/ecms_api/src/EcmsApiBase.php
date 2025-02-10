@@ -743,6 +743,7 @@ abstract class EcmsApiBase {
       $request = $this->httpClient->request("GET", $endpoint, ['verify' => $verify]);
     }
     catch (GuzzleException $exception) {
+      \Drupal::logger('ecms_api')->error('Error fetching content types from the API. @e', ['@e' => $exception->getMessage()]);
       return NULL;
     }
 
@@ -769,6 +770,7 @@ abstract class EcmsApiBase {
       // Return the content type id's that were requested.
       return $json->data;
     }
+    \Drupal::logger('ecms_api')->error('Status code. @e', ['@e' => $request->getStatusCode()]);
 
     return NULL;
   }
