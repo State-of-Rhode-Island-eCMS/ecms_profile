@@ -69,6 +69,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
 
     // Guard against an empty site url.
     if (empty($siteUrl)) {
+      \Drupal::logger('ecms_api_recipient')->error('Could not get the site URL.');
       return;
     }
 
@@ -77,12 +78,14 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
 
     // Guard against a null hub url.
     if (empty($hubUrl)) {
+      \Drupal::logger('ecms_api_recipient')->error('Could not get the HUB URL.');
       return;
     }
 
     // Get the content types from the hub.
     $allowedContentTypes = $this->getContentTypes($hubUrl, self::INSTALLED_CONTENT_TYPES);
     if (empty($allowedContentTypes)) {
+      \Drupal::logger('ecms_api_recipient')->error('Allowed content types are empty');
       return;
     }
 
@@ -99,6 +102,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
 
     // Guard against an empty access token.
     if (empty($accessToken)) {
+      \Drupal::logger('ecms_api_recipient')->error('Could not get the access token.');
       return;
     }
 
@@ -141,6 +145,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
       $request = $this->httpClient->request('POST', $endPoint, $payload);
     }
     catch (GuzzleException $exception) {
+      \Drupal::logger('ecms_api_recipient')->error('Error posting entity to the API.');
       return FALSE;
     }
 
