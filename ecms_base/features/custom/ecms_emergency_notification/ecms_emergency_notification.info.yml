@@ -11,6 +11,7 @@ dependencies:
   - 'drupal:datetime'
   - 'drupal:field'
   - 'drupal:filter'
+  - 'drupal:language'
   - 'drupal:media'
   - 'drupal:menu_link_content'
   - 'drupal:menu_ui'
@@ -23,5 +24,6 @@ dependencies:
   - 'drupal:user'
   - 'drupal:views'
   - 'drupal:workflows'
+  - 'rabbit_hole:rabbit_hole'
 version: 9.x-1.0
 package: eCMS
