@@ -1,6 +1,6 @@
 services:
   ecms_api_emergency_notification_publisher:
-    class: Drupal\ecms_api_notification_publisher\EmergencyNotificationPublisher
+    class: Drupal\ecms_api_emergency_notification_publisher\EmergencyNotificationPublisher
     arguments:
       - '@http_client'
       - '@jsonapi_extras.entity.to_jsonapi'
