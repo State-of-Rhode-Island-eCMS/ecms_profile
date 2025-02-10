@@ -23,7 +23,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
   /**
    * The content types to register with the hub by default.
    */
-  const INSTALLED_CONTENT_TYPES = ['notification'];
+  const INSTALLED_CONTENT_TYPES = ['notification', 'emergency_notification'];
 
   /**
    * The config.factory service.
@@ -101,6 +101,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     if (empty($accessToken)) {
       return;
     }
+
 
     // POST the entity to the API.
     $this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
@@ -208,7 +209,6 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    */
   private function getSiteUrl(): ?Url {
     $httpHost = $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost();
-
     // Trap any arguments in case the provided URI is invalid.
     try {
       $url = Url::fromUri($httpHost);
