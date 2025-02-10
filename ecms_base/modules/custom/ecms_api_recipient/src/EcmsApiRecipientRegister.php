@@ -80,8 +80,17 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
       return;
     }
 
+    $verifySsl = $this->configFactory
+      ->get('ecms_api_recipient.settings')
+      ->get('verify_ssl') ?? TRUE;
+
     // Get the content types from the hub.
-    $allowedContentTypes = $this->getContentTypes($hubUrl, self::INSTALLED_CONTENT_TYPES);
+    $allowedContentTypes = $this->getContentTypes(
+      $hubUrl,
+      self::INSTALLED_CONTENT_TYPES,
+      $verifySsl
+    );
+
     if (empty($allowedContentTypes)) {
       return;
     }
@@ -95,7 +104,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     $clientScope = $this->getApiScope();
 
     // Get the access token.
-    $accessToken = $this->getAccessToken($hubUrl, $clientId, $clientSecret, $clientScope);
+    $accessToken = $this->getAccessToken($hubUrl, $clientId, $clientSecret, $clientScope, $verifySsl);
 
     // Guard against an empty access token.
     if (empty($accessToken)) {
@@ -104,7 +113,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
 
 
     // POST the entity to the API.
-    $this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
+    $this->postEntity($accessToken, $hubUrl, $apiSiteEntity, $verifySsl);
   }
 
   /**
@@ -120,7 +129,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    * @return bool
    *   Returns true on successful creation.
    */
-  protected function postEntity(string $accessToken, Url $url, array $entityArray): bool {
+  protected function postEntity(string $accessToken, Url $url, array $entityArray, bool $verify = TRUE): bool {
     // Get the endpoint for the entity.
     $apiEndpoint = self::API_ENDPOINT;
 
@@ -135,6 +144,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
         'Content-Type' => 'application/vnd.api+json',
         'Authorization' => "Bearer {$accessToken}",
       ],
+      'verify' => $verify,
     ];
 
     try {
