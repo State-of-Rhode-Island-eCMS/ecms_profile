@@ -111,7 +111,6 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
       return;
     }
 
-
     // POST the entity to the API.
     $this->postEntity($accessToken, $hubUrl, $apiSiteEntity, $verifySsl);
   }
@@ -125,6 +124,8 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The URL of the hub site.
    * @param array $entityArray
    *   The entity to save. @see self::getSiteEntity().
+   * @param bool $verify
+   *   Whether to verify the SSL certificate.
    *
    * @return bool
    *   Returns true on successful creation.
