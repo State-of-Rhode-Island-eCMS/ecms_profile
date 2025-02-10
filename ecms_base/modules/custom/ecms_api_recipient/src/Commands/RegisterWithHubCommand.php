@@ -29,7 +29,7 @@ final class RegisterWithHubCommand extends DrushCommands {
    * @command ecms:register-hub
    * @aliases ecms:rh
    *
-   * @usage ons:register-hub
+   * @usage ecms:register-hub
    *   Register the site with the main hub.
    */
   public function registerWithHub(): void {
@@ -43,7 +43,7 @@ final class RegisterWithHubCommand extends DrushCommands {
    * @command ecms:get-hub-content
    * @aliases ecms:ghc
    *
-   * @usage ons:get-hub-content
+   * @usage ecms:get-hub-content
    *   Get all content that should be on the site from the hub.
    */
   public function retieveHubContent(): void {
