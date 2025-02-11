@@ -19,6 +19,8 @@ final class RegisterWithHubCommand extends DrushCommands {
   public function __construct(
     private readonly EcmsApiRecipientRegister $apiRecipientRegister,
     private readonly EcmsApiRecipientRetrieveNotifications $apiRecipientRetrieveNotifications,
+    private readonly ConfigFactoryInterface $configFactory,
+    private readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
     parent::__construct();
   }
@@ -35,6 +37,30 @@ final class RegisterWithHubCommand extends DrushCommands {
   public function registerWithHub(): void {
     // Register with the hub site.
     $this->apiRecipientRegister->registerSite();
+  }
+
+  /**
+   * Grant the ecms_api_recipient role access to syndicate
+   * emergency notifications.
+   *
+   * @command ecms:grant-emergency-notification-access
+   * @aliases ecms:gena
+   *
+   * @usage ecms:grant-emergency-notification-access
+   *   Grant the ecms_api_recipient role access to syndicate
+   *   emergency notifications.
+   */
+  public function grantEmergencyNotificationAccess(): void {
+    $role = $this->entityTypeManager->getStorage('user_role')->load('ecms_api_recipient');
+    if (!$role) {
+      $this->logger()->error('The ecms_api_recipient role does not exist.');
+      return;
+    }
+
+    $role->grantPermission("create emergency_notificaiton content");
+    $role->grantPermission("edit own emergency_notificaiton content");
+    $role->grantPermission("translate emergency_notificaiton node");
+    $role->save();
   }
 
   /**

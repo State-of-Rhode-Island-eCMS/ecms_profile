@@ -4,5 +4,7 @@ services:
     arguments:
       - '@ecms_api_recipient.register'
       - '@ecms_api_recipient.retrieve_notifications'
+      - '@config.factory'
+      - '@entity_type.manager'
     tags:
       - { name: drush.command }
