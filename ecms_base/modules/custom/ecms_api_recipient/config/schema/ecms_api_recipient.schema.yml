@@ -28,3 +28,7 @@ ecms_api_recipient.settings:
     api_main_hub_scope:
       type: string
       label: 'API hub Oauth scope'
+    verify_ssl:
+      type: boolean
+      label: 'Verify SSL'
+      description: 'Whether to verify SSL certificates when making requests to the API hub'

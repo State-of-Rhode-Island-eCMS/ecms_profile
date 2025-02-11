@@ -14,3 +14,10 @@ function ecms_api_publisher_install() {
   // Call the installer service.
   \Drupal::service('ecms_api_publisher.install')->installEcmsApiPublisher();
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function ecms_api_publisher_uninstall() {
+  \Drupal::service('ecms_api_publisher.uninstall')->uninstall();
+}

@@ -1,0 +1,12 @@
+services:
+  ecms_api.commands:
+    class: \Drupal\ecms_api_recipient\Commands\RegisterWithHubCommand
+    arguments:
+      - '@ecms_api_recipient.register'
+      - '@ecms_api_recipient.retrieve_notifications'
+      - '@entity_type.manager'
+      - '@config.factory'
+      - '@extension.list.module'
+      - '@config.storage'
+    tags:
+      - { name: drush.command }

@@ -727,12 +727,11 @@ abstract class EcmsApiBase {
     bool $verify = TRUE,
   ): ?array {
     $filter = [];
-
     // Loop through the content types and build filters.
+    $filter["filter[type-filter][condition][path]"] = "drupal_internal__type";
+    $filter["filter[type-filter][condition][operator]"] = "=";
     foreach ($types as $key => $value) {
-      $filter["filter[type-{$key}][condition][path]"] = "drupal_internal__type";
-      $filter["filter[type-{$key}][condition][operator]"] = "=";
-      $filter["filter[type-{$key}][condition][value]"] = "{$value}";
+      $filter["filter[type-filter][condition][value][{$key}"] = "{$value}";
     }
 
     $queryParams = http_build_query($filter);
@@ -752,7 +751,6 @@ abstract class EcmsApiBase {
 
       // Decode the json string.
       $json = json_decode($contents);
-
       // Guard against a json error.
       if (empty($json)) {
         return NULL;
@@ -773,7 +771,6 @@ abstract class EcmsApiBase {
     }
 
     return NULL;
-
   }
 
   /**
