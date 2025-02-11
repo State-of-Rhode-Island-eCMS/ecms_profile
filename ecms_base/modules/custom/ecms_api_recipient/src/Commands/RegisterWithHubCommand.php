@@ -7,7 +7,7 @@ namespace Drupal\ecms_api_recipient\Commands;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRegister;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Config\FileStorage
+use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleExtensionList;
 
