@@ -71,9 +71,9 @@ final class RegisterWithHubCommand extends DrushCommands {
         return;
       }
 
-      $member = $this->entityTypeManager->getStorage('user')->loadByProperties([
+      $member = reset($this->entityTypeManager->getStorage('user')->loadByProperties([
         'name' => 'ecms_api_recipient',
-      ]);
+      ]));
 
       $member->addRole('ecms_api_recipient');
       $member->save();
