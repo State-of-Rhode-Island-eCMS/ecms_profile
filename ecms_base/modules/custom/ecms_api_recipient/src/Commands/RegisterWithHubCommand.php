@@ -6,6 +6,9 @@ namespace Drupal\ecms_api_recipient\Commands;
 
 use Drupal\ecms_api_recipient\EcmsApiRecipientRegister;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+
 use Drush\Commands\DrushCommands;
 
 /**
@@ -19,8 +22,8 @@ final class RegisterWithHubCommand extends DrushCommands {
   public function __construct(
     private readonly EcmsApiRecipientRegister $apiRecipientRegister,
     private readonly EcmsApiRecipientRetrieveNotifications $apiRecipientRetrieveNotifications,
-    private readonly ConfigFactoryInterface $configFactory,
     private readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly ConfigFactoryInterface $configFactory,
   ) {
     parent::__construct();
   }
@@ -57,9 +60,9 @@ final class RegisterWithHubCommand extends DrushCommands {
       return;
     }
 
-    $role->grantPermission("create emergency_notificaiton content");
-    $role->grantPermission("edit own emergency_notificaiton content");
-    $role->grantPermission("translate emergency_notificaiton node");
+    $role->grantPermission("create emergency_notification content");
+    $role->grantPermission("edit own emergency_notification content");
+    $role->grantPermission("translate emergency_notification node");
     $role->save();
   }
 
