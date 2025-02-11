@@ -47,7 +47,6 @@ class EcmsApiPublisherUninstall {
   public function uninstall(): void {
     $this->removeRole();
     $this->removeUser();
-    $this->removeSyndicates();
   }
 
   /**
@@ -104,41 +103,6 @@ class EcmsApiPublisherUninstall {
     catch (EntityStorageException $e) {
       return FALSE;
     }
-  }
-
-  /**
-   * Remove the ecms_api_site entities.
-   *
-   * @return bool
-   *   True if the user was deleted successfully.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  private function removeSyndicates(): bool {
-    $storage = $this->entityTypeManager->getStorage('ecms_api_site');
-
-    $query = $storage->getQuery();
-    $ids = $query->condition(
-      'type',
-      'ecms_api_site'
-    )->execute();
-    $entities = $storage->loadMultiple($ids);
-
-    if (empty($entities)) {
-      return FALSE;
-    }
-
-    foreach ($entities as $entity) {
-      try {
-        $entity->delete();
-      }
-      catch (EntityStorageException $e) {
-        return FALSE;
-      }
-    }
-
-    return TRUE;
   }
 
 }
