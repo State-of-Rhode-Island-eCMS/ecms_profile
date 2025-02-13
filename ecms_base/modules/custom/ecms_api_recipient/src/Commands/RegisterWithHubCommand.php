@@ -48,8 +48,7 @@ final class RegisterWithHubCommand extends DrushCommands {
   }
 
   /**
-   * Grant the ecms_api_recipient role access to syndicate
-   * emergency notifications.
+   * Grant the recipient role access to syndicate emergency notifications.
    *
    * @command ecms:grant-emergency-notification-access
    * @aliases ecms:gena
@@ -64,7 +63,10 @@ final class RegisterWithHubCommand extends DrushCommands {
       $this->logger()->error('The ecms_api_recipient role does not exist.');
       $this->installEcmsApiRecipientRole();
       // Reload the role
-      $role = $this->entityTypeManager->getStorage('user_role')->load('ecms_api_recipient');
+      $role = $this->entityTypeManager
+        ->getStorage('user_role')
+        ->load('ecms_api_recipient');
+
       if (!$role) {
         $this->logger()
           ->error('The ecms_api_recipient role could not be installed.');
