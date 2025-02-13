@@ -1,11 +1,11 @@
-oauth_client_id: 'REDACTED'
-oauth_client_secret: 'REDACTED'
+oauth_client_id: 'recipient-REDACTED'
+oauth_client_secret: 'recipient-REDACTED'
 api_recipient_mail: 'ecms_api_recipient@ecms.com'
 allowed_content_types:
   notification: notification
   emergency_notification: emergency_notification
 api_main_hub: 'https://develop-ecms-profile.lndo.site'
-api_main_hub_client_id: 'REDACTED'
-api_main_hub_client_secret: 'REDACTED'
+api_main_hub_client_id: 'recipient-REDACTED'
+api_main_hub_client_secret: 'recipient-REDACTED'
 api_main_hub_scope: 'ecms_api_publisher'
 verify_ssl: true
