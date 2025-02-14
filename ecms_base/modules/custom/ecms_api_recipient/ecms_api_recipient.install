@@ -14,9 +14,6 @@ function ecms_api_recipient_install(): void {
   // Call the installation service.
   \Drupal::service('ecms_api_recipient.install')->installEcmsApiRecipient();
 
-  // Clear caches to ensure configuration overrides are respected.
-  drupal_flush_all_caches();
-
   // Call the site registration service.
   \Drupal::service('ecms_api_recipient.register')->registerSite();
 
