@@ -844,11 +844,11 @@ class EcmsApiBaseTest extends UnitTestCase {
   private function getQueryParams(array $types): string {
     $filter = [];
 
+    $filter["filter[type-{$key}][condition][path]"] = "drupal_internal__type";
+    $filter["filter[type-{$key}][condition][operator]"] = "=";
     // Loop through the content types and build filters.
     foreach ($types as $key => $value) {
-      $filter["filter[type-{$key}][condition][path]"] = "drupal_internal__type";
-      $filter["filter[type-{$key}][condition][operator]"] = "=";
-      $filter["filter[type-{$key}][condition][value]"] = "{$value}";
+      $filter["filter[type-filter][condition][value][{$key}"] = "{$value}";
     }
 
     return http_build_query($filter);
