@@ -177,6 +177,11 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
   private function getApiHub(): ?Url {
     $hubHost = $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub');
 
+    // Add an environment override for the setting.
+    if (!empty(getenv('API_MAIN_HUB'))) {
+      $hubHost = getenv('API_MAIN_HUB');
+    }
+
     try {
       $url = Url::fromUri($hubHost);
     }
@@ -194,6 +199,9 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The configuration value for api_main_hub_client_id.
    */
   private function getApiClientId(): string {
+    if (!empty(getenv('API_MAIN_HUB_CLIENT_ID'))) {
+      return getenv('API_MAIN_HUB_CLIENT_ID');
+    }
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_id');
   }
 
@@ -204,6 +212,9 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The configuration value for the api_main_hub_client_secret.
    */
   private function getApiClientSecret(): string {
+    if (!empty(getenv('API_MAIN_HUB_CLIENT_SECRET'))) {
+      return getenv('API_MAIN_HUB_CLIENT_SECRET');
+    }
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_secret');
   }
 
