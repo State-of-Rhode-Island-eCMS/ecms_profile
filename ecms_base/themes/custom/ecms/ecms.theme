@@ -66,6 +66,27 @@ function ecms_preprocess_page(array &$variables): void {
 }
 
 /**
+ * Implements hook_page_attachments_alter().
+ */
+function ecms_page_attachments_alter(array &$attachments) {
+  // Append the Apple touch icons to the head.
+  $apple_sizes = [57, 60, 72, 76, 114, 120, 144, 152, 180, 192];
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  foreach ($apple_sizes as $size) {
+    $favicon = [
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel' => 'apple-touch-icon',
+        'sizes' => sprintf('%sx%s', $size, $size),
+        'href' => sprintf('/%s/themes/custom/ecms/assets/icons/apple-touch-icon-%sx%s.png', $path, $size, $size),
+      ],
+    ];
+    $attachments['#attached']['html_head'][] = [$favicon, sprintf('apple-touch-icon%s', $size)];
+  }
+}
+
+/**
  * Implements hook_preprocess_html().
  */
 function ecms_preprocess_html(array &$variables): void {

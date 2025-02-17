@@ -20,6 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-613: Added missing Apple icons and Favicon to the theme.
 
 ### Security
 
