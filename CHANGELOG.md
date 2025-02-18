@@ -10,6 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-601: Added the `drupal/mysql57` module as a requirement.
 
 ### Changed
 - RIGA-605: Press Release Agency field updates
