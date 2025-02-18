@@ -21,6 +21,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-602: Uninstall drupal/tour from base install.
 
 ### Fixed
+- RIGA-613: Added missing Apple icons and Favicon to the theme.
 
 ### Security
 
