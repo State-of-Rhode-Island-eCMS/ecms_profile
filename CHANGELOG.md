@@ -13,10 +13,12 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-601: Added the `drupal/mysql57` module as a requirement.
 
 ### Changed
+- RIGA-605: Press Release Agency field updates
 
 ### Deprecated
 
 ### Removed
+- RIGA-602: Uninstall drupal/tour from base install.
 
 ### Fixed
 
