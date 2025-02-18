@@ -11,14 +11,18 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ## [Unreleased]
 ### Added
 - RIGA-512: Added emergency_notification publisher module.
+- RIGA-601: Added the `drupal/mysql57` module as a requirement.
 
 ### Changed
+- RIGA-605: Press Release Agency field updates
 
 ### Deprecated
 
 ### Removed
+- RIGA-602: Uninstall drupal/tour from base install.
 
 ### Fixed
+- RIGA-613: Added missing Apple icons and Favicon to the theme.
 
 ### Security
 

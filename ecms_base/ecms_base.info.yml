@@ -91,7 +91,6 @@ dependencies:
   - syslog
   - taxonomy
   - toolbar
-  - tour
   - twig_tweak
   - views
   - webform
@@ -126,6 +125,7 @@ install:
   - media_entity_file_replace
   - media_file_delete
   - media_revisions_ui
+  - mysql57
   - update
 
 # Theme dependencies for the distribution.
