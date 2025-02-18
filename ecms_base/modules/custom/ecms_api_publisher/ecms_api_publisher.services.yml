@@ -3,6 +3,10 @@ services:
     class: Drupal\ecms_api_publisher\EcmsApiPublisherInstall
     arguments: ['@entity_type.manager', '@config.factory']
 
+  ecms_api_publisher.uninstall:
+    class: Drupal\ecms_api_publisher\EcmsApiPublisherUninstall
+    arguments: ['@entity_type.manager']
+
   ecms_api_publisher.publisher:
     class: Drupal\ecms_api_publisher\EcmsApiPublisher
     arguments: ['@http_client', '@jsonapi_extras.entity.to_jsonapi', '@ecms_api_helper', '@config.factory', '@entity_type.manager', '@account_switcher']
