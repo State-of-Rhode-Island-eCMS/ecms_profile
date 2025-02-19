@@ -5,3 +5,12 @@ recipes:
   - ecms_api_hub_connect
 install:
   - ecms_api_press_release_publisher
+
+#config:
+#  # This will work after upgrade to ^10.4.
+#  #  strict: false
+#  import:
+#    ecms_api_publisher:
+#      - user.role.ecms_api_publisher
+#    ecms_api_recipient:
+#      - user.role.ecms_api_recipient

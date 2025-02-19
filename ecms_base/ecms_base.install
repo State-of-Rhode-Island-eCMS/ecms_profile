@@ -2342,3 +2342,23 @@ function ecms_base_update_10210(): void {
   $newBlock->setRegion('emergency_notification');
   $newBlock->save();
 }
+
+/**
+ * Unistall the drupal/tour module and install mysql57.
+ *
+ * Runs as part of 1.1.3 tag.
+ */
+function ecms_base_update_10211(array &$sandbox): void {
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'tour',
+  ];
+
+  // Make sure necessary module is uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  $modules_to_install = [
+    'mysql57',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
