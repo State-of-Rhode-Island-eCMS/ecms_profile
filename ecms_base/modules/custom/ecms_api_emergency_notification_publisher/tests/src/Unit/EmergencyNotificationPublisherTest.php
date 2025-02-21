@@ -137,6 +137,8 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
           ->willReturn($originalModerationItemList
           );
 
+        $this->node->original = $originalModerationItemList
+
         $this->node->expects($this->exactly(3))
           ->method('get')
           ->will($this->returnValueMap([
