@@ -9,6 +9,7 @@ use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\ecms_api_emergency_notification_publisher\EmergencyNotificationPublisher;
 use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\jsonapi_extras\EntityToJsonApi;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
@@ -63,7 +64,7 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
   /**
    * The actual node to test with.
    *
-   * @var \Drupal\node\NodeInterface|\PHPUnit\Framework\MockObject\MockObject
+   * @var \Drupal\node\Entity\Node|\PHPUnit\Framework\MockObject\MockObject
    */
   private $node;
 
@@ -77,7 +78,7 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
     $this->ecmsApiHelper = $this->createMock(EcmsApiHelper::class);
 
     $this->originalNode = $this->createMock(NodeInterface::class);
-    $this->node = $this->createMock(NodeInterface::class);
+    $this->node = $this->createMock(Node::class);
   }
 
   /**
@@ -116,6 +117,7 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
     if ($nodeType === 'emergency_notification') {
 
       $moderationItemList = $this->createMock(FieldItemListInterface::class);
+      $originalModerationItemList = $this->createMock(FieldItemListInterface::class);
 
       if ($hasModerationField) {
 
@@ -125,6 +127,28 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
           ->willReturn(TRUE);
 
         $moderationArray = [0 => ['value' => $moderation]];
+
+        $originalModerationItemList->expects($this->once())
+          ->method('getValue')
+          ->willReturn([0 => ['value' => 'archived']]);
+
+        $this->originalNode->expects($this->once())
+          ->method('get')
+          ->with('moderation_state')
+          ->willReturn($originalModerationItemList
+          );
+
+       // $this->node->original = $originalModerationItemList;
+        $this->node->expects($this->exactly(2))
+          ->method('__get')
+          ->with('original')
+          ->willReturn($this->originalNode);
+
+        $this->node->expects($this->once())
+          ->method('get')
+          ->will($this->returnValueMap([
+            ['moderation_state', $moderationItemList],
+          ]));
 
         if ($moderation === 'empty') {
           // Mimic an empty field.

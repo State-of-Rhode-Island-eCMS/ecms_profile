@@ -22,6 +22,11 @@ class EmergencyNotificationPublisher extends EcmsApiBase {
   const MODERATION_PUBLISHED = 'published';
 
   /**
+   * The unpublished moderation state.
+   */
+  const MODERATION_UNPUBLISHED = 'archived';
+
+  /**
    * The ecms_api_publisher.syndicate service.
    *
    * @var \Drupal\ecms_api_publisher\EcmsApiSyndicate
@@ -64,6 +69,11 @@ class EmergencyNotificationPublisher extends EcmsApiBase {
       return;
     }
 
+    $originalModeratedState = [];
+    if (!is_null($node->original)) {
+      $originalModeratedState = array_column($node->original->get('moderation_state')->getValue(), 'value');
+    }
+
     // Get the moderated state of this revision.
     $moderatedState = array_column($node->get('moderation_state')->getValue(), 'value');
     // Guard against an empty array.
@@ -72,6 +82,15 @@ class EmergencyNotificationPublisher extends EcmsApiBase {
     }
 
     if (in_array(self::MODERATION_PUBLISHED, $moderatedState, TRUE)) {
+      $this->ecmsApiSyndicate->syndicateEntity($node);
+    }
+
+    // If the moderation state goes from published to unpublished, syndicate it.
+    if (
+      !empty($originalModeratedState) &&
+      in_array(self::MODERATION_PUBLISHED, $originalModeratedState, TRUE) &&
+      in_array(self::MODERATION_UNPUBLISHED, $moderatedState, TRUE)
+    ) {
       $this->ecmsApiSyndicate->syndicateEntity($node);
     }
   }
