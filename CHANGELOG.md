@@ -12,6 +12,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 - RIGA-512: Added emergency_notification publisher module.
 - RIGA-601: Added the `drupal/mysql57` module as a requirement.
+- RIGA-624: Added the `drupal/purge_file` module as a requirement.
 
 ### Changed
 - RIGA-605: Press Release Agency field updates
