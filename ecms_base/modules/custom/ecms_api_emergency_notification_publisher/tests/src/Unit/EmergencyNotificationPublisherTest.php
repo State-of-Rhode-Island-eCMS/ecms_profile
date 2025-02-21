@@ -116,6 +116,7 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
     if ($nodeType === 'emergency_notification') {
 
       $moderationItemList = $this->createMock(FieldItemListInterface::class);
+      $originalModerationItemList = $this->createMock(FieldItemListInterface::class);
 
       if ($hasModerationField) {
 
@@ -125,6 +126,23 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
           ->willReturn(TRUE);
 
         $moderationArray = [0 => ['value' => $moderation]];
+
+        $originalModerationItemList->expects($this->once())
+          ->method('getValue')
+          ->willReturn([0 => ['value' => 'archived']]);
+
+        $this->originalNode->expects($this->once())
+          ->method('get')
+          ->with('moderation_state')
+          ->willReturn($originalModerationItemList
+          );
+
+        $this->node->expects($this->exactly(3))
+          ->method('get')
+          ->will($this->returnValueMap([
+            ['moderation_state', $moderationItemList],
+            ['original', $this->originalNode],
+          ]));
 
         if ($moderation === 'empty') {
           // Mimic an empty field.
