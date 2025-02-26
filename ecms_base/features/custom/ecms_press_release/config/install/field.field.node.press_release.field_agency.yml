@@ -11,8 +11,8 @@ field_name: field_agency
 entity_type: node
 bundle: press_release
 label: Agency
-description: ''
-required: false
+description: 'Agency category for press release syndication to display on <a href="http://ri.gov/" target="_blank">RIGOV</a>.'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

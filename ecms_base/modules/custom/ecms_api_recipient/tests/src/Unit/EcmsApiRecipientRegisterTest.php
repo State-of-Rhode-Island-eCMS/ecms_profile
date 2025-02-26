@@ -195,6 +195,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
 
     if ($passedUrlGuards) {
       if (!$expectContentTypes) {
+        $recipientConfigCount = 2;
         $apiRecipientRegister->expects($this->once())
           ->method('getContentTypes')
           ->willReturn(NULL);
@@ -205,7 +206,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
           ->willReturn(self::CONTENT_TYPES);
 
         // Increase the config count.
-        $recipientConfigCount = 4;
+        $recipientConfigCount = 5;
 
         if (!$accessToken) {
           $apiRecipientRegister->expects($this->once())
@@ -213,6 +214,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
             ->willReturn(NULL);
         }
         else {
+          $recipientConfigCount = 5;
           $apiRecipientRegister->expects($this->once())
             ->method('getAccessToken')
             ->willReturn(self::ACCESS_TOKEN);
@@ -240,14 +242,13 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
     $immutableHubConfig = $this->createMock(ImmutableConfig::class);
     $immutableHubConfig->expects($this->exactly($recipientConfigCount))
       ->method('get')
-      ->withConsecutive(['api_main_hub'], ['api_main_hub_client_id'], ['api_main_hub_client_secret'], ['api_main_hub_scope'])
-      ->willReturnOnConsecutiveCalls(
-        $hubUrl,
-        self::HUB_CLIENT_ID,
-        self::HUB_CLIENT_SECRET,
-        self::HUB_SCOPE
-      )
-      ->willReturn($hubUrl);
+      ->will($this->returnValueMap([
+        ['api_main_hub', $hubUrl],
+        ['api_main_hub_client_id', self::HUB_CLIENT_ID],
+        ['api_main_hub_client_secret', self::HUB_CLIENT_SECRET],
+        ['api_main_hub_scope', self::HUB_SCOPE],
+        ['verify_ssl', TRUE],
+      ]));
 
     $this->configFactory->expects($this->exactly($recipientConfigCount))
       ->method('get')

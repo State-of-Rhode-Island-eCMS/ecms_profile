@@ -23,7 +23,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
   /**
    * The content types to register with the hub by default.
    */
-  const INSTALLED_CONTENT_TYPES = ['notification'];
+  const INSTALLED_CONTENT_TYPES = ['notification', 'emergency_notification'];
 
   /**
    * The config.factory service.
@@ -80,8 +80,17 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
       return;
     }
 
+    $verifySsl = $this->configFactory
+      ->get('ecms_api_recipient.settings')
+      ->get('verify_ssl') ?? TRUE;
+
     // Get the content types from the hub.
-    $allowedContentTypes = $this->getContentTypes($hubUrl, self::INSTALLED_CONTENT_TYPES);
+    $allowedContentTypes = $this->getContentTypes(
+      $hubUrl,
+      self::INSTALLED_CONTENT_TYPES,
+      $verifySsl
+    );
+
     if (empty($allowedContentTypes)) {
       return;
     }
@@ -95,7 +104,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     $clientScope = $this->getApiScope();
 
     // Get the access token.
-    $accessToken = $this->getAccessToken($hubUrl, $clientId, $clientSecret, $clientScope);
+    $accessToken = $this->getAccessToken($hubUrl, $clientId, $clientSecret, $clientScope, $verifySsl);
 
     // Guard against an empty access token.
     if (empty($accessToken)) {
@@ -103,7 +112,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
     }
 
     // POST the entity to the API.
-    $this->postEntity($accessToken, $hubUrl, $apiSiteEntity);
+    $this->postEntity($accessToken, $hubUrl, $apiSiteEntity, $verifySsl);
   }
 
   /**
@@ -115,11 +124,13 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The URL of the hub site.
    * @param array $entityArray
    *   The entity to save. @see self::getSiteEntity().
+   * @param bool $verify
+   *   Whether to verify the SSL certificate.
    *
    * @return bool
    *   Returns true on successful creation.
    */
-  protected function postEntity(string $accessToken, Url $url, array $entityArray): bool {
+  protected function postEntity(string $accessToken, Url $url, array $entityArray, bool $verify = TRUE): bool {
     // Get the endpoint for the entity.
     $apiEndpoint = self::API_ENDPOINT;
 
@@ -134,6 +145,7 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
         'Content-Type' => 'application/vnd.api+json',
         'Authorization' => "Bearer {$accessToken}",
       ],
+      'verify' => $verify,
     ];
 
     try {
@@ -160,6 +172,11 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
   private function getApiHub(): ?Url {
     $hubHost = $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub');
 
+    // Add an environment override for the setting.
+    if (!empty(getenv('API_MAIN_HUB'))) {
+      $hubHost = getenv('API_MAIN_HUB');
+    }
+
     try {
       $url = Url::fromUri($hubHost);
     }
@@ -177,6 +194,9 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The configuration value for api_main_hub_client_id.
    */
   private function getApiClientId(): string {
+    if (!empty(getenv('API_MAIN_HUB_CLIENT_ID'))) {
+      return getenv('API_MAIN_HUB_CLIENT_ID');
+    }
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_id');
   }
 
@@ -187,6 +207,9 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    *   The configuration value for the api_main_hub_client_secret.
    */
   private function getApiClientSecret(): string {
+    if (!empty(getenv('API_MAIN_HUB_CLIENT_SECRET'))) {
+      return getenv('API_MAIN_HUB_CLIENT_SECRET');
+    }
     return $this->configFactory->get('ecms_api_recipient.settings')->get('api_main_hub_client_secret');
   }
 
@@ -208,7 +231,6 @@ class EcmsApiRecipientRegister extends EcmsApiBase {
    */
   private function getSiteUrl(): ?Url {
     $httpHost = $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost();
-
     // Trap any arguments in case the provided URI is invalid.
     try {
       $url = Url::fromUri($httpHost);
