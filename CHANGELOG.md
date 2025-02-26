@@ -10,6 +10,19 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.1.3] - 2025-02-26
+### Added
 - RIGA-512: Added emergency_notification publisher module.
 - RIGA-601: Added the `drupal/mysql57` module as a requirement.
 - RIGA-624: Added the `drupal/purge_file` module as a requirement.
@@ -17,15 +30,11 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Changed
 - RIGA-605: Press Release Agency field updates
 
-### Deprecated
-
 ### Removed
 - RIGA-602: Uninstall drupal/tour from base install.
 
 ### Fixed
 - RIGA-613: Added missing Apple icons and Favicon to the theme.
-
-### Security
 
 ## [1.1.1] - 2024-12-18
 ### Added
@@ -1333,7 +1342,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.1...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.3...HEAD
+[1.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.2...1.1.3
 [1.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.9...1.1.0
 [1.0.9]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.8...1.0.9
