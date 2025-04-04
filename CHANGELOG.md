@@ -12,6 +12,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Added
 
 ### Changed
+- RIGA-617: Move the language field to disabled on the form display.
+- RIGA-639: Move the promotions field to disabled on the press release form display.
 
 ### Deprecated
 
