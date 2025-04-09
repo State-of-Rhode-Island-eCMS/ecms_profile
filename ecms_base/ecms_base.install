@@ -2363,7 +2363,7 @@ function ecms_base_update_10211(array &$sandbox): void {
   \Drupal::service('module_installer')->install($modules_to_install);
 }
 
-/* *
+/**
  * Import new config for Content Publisher to syndicate Press Releases.
  *
  * Runs as part of 1.1.4 tag.
