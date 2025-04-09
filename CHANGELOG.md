@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Changed
 - RIGA-627: Press release content type field updates.
+- RIGA-630: Updated Content Publisher permissions to syndicate Press Releases.
 
 ### Deprecated
 
