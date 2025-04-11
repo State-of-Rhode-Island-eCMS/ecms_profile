@@ -17,7 +17,7 @@ settings:
     method: 0
     mappings: ''
     strict: false
-  userinfo_graph_api_wa: 1
+  userinfo_graph_api_wa: 2
   userinfo_graph_api_use_other_mails: false
   userinfo_update_email: true
   hide_email_address_warning: true
