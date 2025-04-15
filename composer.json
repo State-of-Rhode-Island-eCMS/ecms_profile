@@ -68,26 +68,21 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
-            "oomphinc/composer-installers-extender": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal-composer/preserve-paths": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true
+            "oomphinc/composer-installers-extender": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
         }
     },
     "scripts": {
         "develop": "scripts/develop.sh",
-        "clean-config": "scripts/clean-config.sh",
-        "post-package-install": [
-            "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
-        ],
-        "post-package-update": [
-            "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
-        ]
+        "clean-config": "scripts/clean-config.sh"
     },
-    "provide": {},
     "require": {
         "composer/installers": "^1.9 || ^2.0",
         "cweagans/composer-patches": "^1.6",
@@ -196,7 +191,7 @@
         "drupal/webform_encrypt": "^2.0@alpha",
         "drupal/webform_views": "^5.0@beta",
         "drupal_git/migrate_process_trim": "2.0.0",
-        "drush/drush": "^10.0 || ^11 || ^12 || ^13",
+        "drush/drush": "^12",
         "geocoder-php/arcgis-online-provider": "^4.3",
         "geocoder-php/google-maps-provider": "^4.6",
         "geocoder-php/ipstack-provider": "^0.3.0",
@@ -206,14 +201,8 @@
         "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8"
     },
     "require-dev": {
-        "behat/mink-goutte-driver": "^1.2",
-        "liuggio/fastest": "^1.6",
-        "drupal/coder": "^8.3",
-        "drupal/migrate_devel": "^2.0@alpha",
+        "drupal/core-dev": "^10 || ^11 || ^12",
         "php-mock/php-mock": "^2.2",
-        "php-mock/php-mock-phpunit": "^2.6",
-        "phpunit/phpunit": "^9",
-        "symfony/phpunit-bridge": "^5.1 || ^6.4",
-        "weitzman/drupal-test-traits": "^1.5"
+        "php-mock/php-mock-phpunit": "^2.6"
     }
 }
