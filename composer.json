@@ -215,6 +215,7 @@
         "drupal/core-dev": "^10 || ^11 || ^12",
         "liuggio/fastest": "^1.13",
         "php-mock/php-mock": "^2.2",
-        "php-mock/php-mock-phpunit": "^2.6"
+        "php-mock/php-mock-phpunit": "^2.6",
+        "weitzman/drupal-test-traits": "^2.5"
     }
 }
