@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: drupal-build-${{ matrix.drupal_core}}.tar.gz
-          path: /tmp/drupal-build.tar.gz
+          path: /tmp/drupal-build-${{ matrix.drupal_core}}.tar.gz
 
   test-php:
     name: Test the site with PHP
