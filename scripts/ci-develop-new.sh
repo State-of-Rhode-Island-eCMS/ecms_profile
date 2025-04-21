@@ -20,7 +20,7 @@ mkdir -p $DOCROOT/profiles/contrib/ecms_profile
 ln -s -f $(realpath -s --relative-to=${DOCROOT}/profiles/contrib/ecms_profile ecms_base) $DOCROOT/profiles/contrib/ecms_profile
 ln -s -f $(realpath -s --relative-to=${DOCROOT}/profiles/contrib/ecms_profile ecms_acquia) $DOCROOT/profiles/contrib/ecms_profile
 
-test -f develop/composer.lock || (./script/generate-composer.php > develop/merge.composer.json)
+test -f develop/composer.lock || (./scripts/generate-composer.php > develop/merge.composer.json)
 test -f develop/merge.composer.json && (mv develop/merge.composer.json develop/composer.json)
 
 composer install --working-dir=develop
