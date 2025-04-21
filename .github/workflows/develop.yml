@@ -88,15 +88,15 @@ jobs:
           - php_version: '8.3'
             drupal_core: '^10.4'
             experimental: false
-#          - php_version: '8.4'
-#            drupal_core: '^10.4'
-#            experimental: true
+          - php_version: '8.4'
+            drupal_core: '^10.4'
+            experimental: true
           - php_version: '8.3'
             drupal_core: '^11.1'
             experimental: true
-#          - php_version: '8.4'
-#            drupal_core: '^11.1'
-#            experimental: true
+          - php_version: '8.4'
+            drupal_core: '^11.1'
+            experimental: true
     container:
       image: drupalci/php-${{ matrix.php_version }}-apache:production
     services:
