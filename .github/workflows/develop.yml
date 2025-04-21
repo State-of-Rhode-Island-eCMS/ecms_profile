@@ -150,9 +150,9 @@ jobs:
 #        run: sudo -u www-data -E ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=functional
 
       - name: Run functional tests with fastest.
-        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/develop/vendor/liuggio/fastest/fastest "/var/www/develop/vendor/phpunit/phpunit/phpunit --configuration=/var/www/phpunit-ci.xml {};"
 
       - name: Run existing site tests.
-        working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/develop/vendor/liuggio/fastest/fastest "/var/www/develop/vendor/phpunit/phpunit/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml {};"
