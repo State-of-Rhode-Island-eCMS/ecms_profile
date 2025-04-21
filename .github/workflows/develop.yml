@@ -98,7 +98,7 @@ jobs:
             drupal_core: '^11.1'
             experimental: true
     container:
-      image: drupalci/php-${{ matrix.php_version }}-apache:production
+      image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production
     services:
       mysql:
         image: mysql:5.7
