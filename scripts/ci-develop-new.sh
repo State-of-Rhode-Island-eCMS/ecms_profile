@@ -12,6 +12,8 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 
 ln -s ./scripts/generate-composer.php /usr/local/bin/generate-composer
 
+which generate-composer
+
 rm -Rf develop
 
 composer create-project drupal/recommended-project:${DRUPAL_CORE} develop --no-install
