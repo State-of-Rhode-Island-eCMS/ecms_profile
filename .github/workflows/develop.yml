@@ -119,7 +119,7 @@ jobs:
           chmod -R 777 /var/www/html/sites/simpletest
 
       - name: Set permissions on the web and vendor directories.
-        run: chown -R www-data:www-data /var/www/web /var/www/vendor
+        run: chown -R www-data:www-data /var/www/html /var/www/vendor
 
       - name: Start Apache
         run: service apache2 start
