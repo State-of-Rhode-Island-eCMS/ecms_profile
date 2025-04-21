@@ -12,7 +12,7 @@ PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 
 pwd
 ls -l
-  #ln -s ./scripts/generate-composer.php /usr/local/bin/generate-composer
+  ln -s ./scripts/generate-composer.php /usr/local/bin/generate-composer
   #
   #which generate-composer
 
