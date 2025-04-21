@@ -129,11 +129,11 @@ jobs:
 
       - name: Check coding standards.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpcs --standard=${{ env.ECMS_PROFILE_DIRECTORY }}/phpcs-ci.xml
+        run: ../vendor/bin/phpcs --standard=/var/www/develop/phpcs-ci.xml
 
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml --testsuite=unit
+        run: ../vendor/bin/phpunit --configuration=/var/www/develop/phpunit-ci.xml --testsuite=unit
 
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
@@ -151,8 +151,8 @@ jobs:
 
       - name: Run functional tests with fastest.
         working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+        run: find . -type f -iname "*Test.php" | grep "Functional" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --configuration=/var/www/develop/phpunit-ci.xml {};"
 
       - name: Run existing site tests.
         working-directory: ${{ env.ECMS_PROFILE_DIRECTORY }}
-        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=${{ env.ECMS_PROFILE_DIRECTORY }}/phpunit-ci.xml {};"
+        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/vendor/liuggio/fastest/fastest "/var/www/vendor/phpunit/phpunit/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/develop/phpunit-ci.xml {};"
