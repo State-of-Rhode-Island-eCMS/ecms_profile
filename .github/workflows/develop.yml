@@ -103,7 +103,7 @@ jobs:
           path: /var/www/
 
       - name: Expand the build artifact.
-        run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www
+        run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www && ls -l && pwd
 
       - name: Remove the original html directory.
         run: rm -Rf /var/www/html
@@ -119,7 +119,7 @@ jobs:
           chmod -R 777 /var/www/html/sites/simpletest
 
       - name: Set permissions on the web and vendor directories.
-        run: chown -R www-data:www-data /var/www/web /var/www/vendor
+        run: chown -R www-data:www-data /var/www/develop/web /var/www/vendor
 
       - name: Start Apache
         run: service apache2 start
