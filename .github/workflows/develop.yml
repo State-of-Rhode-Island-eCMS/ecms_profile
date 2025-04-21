@@ -129,11 +129,11 @@ jobs:
 
       - name: Check coding standards.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpcs --standard=/var/www/develop/phpcs-ci.xml
+        run: ../vendor/bin/phpcs --standard=/var/www/phpcs-ci.xml
 
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --configuration=/var/www/develop/phpunit-ci.xml --testsuite=unit
+        run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit
 
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
