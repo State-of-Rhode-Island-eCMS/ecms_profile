@@ -23,11 +23,9 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - php_version: '8.3'
-            drupal_core: '^10.4'
+          - drupal_core: '^10.4'
             experimental: false
-          - php_version: '8.3'
-            drupal_core: '^11.1'
+          - drupal_core: '^11.1'
             experimental: true
 
     steps:
