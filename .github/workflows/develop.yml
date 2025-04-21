@@ -37,7 +37,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php_version }}
+          php-version: ${{ env.PHP_VERSION }}
 
       - name: Check PHP Version
         run: php -v
@@ -45,7 +45,7 @@ jobs:
       - name: Run the develop CI script.
         env:
           DRUPAL_CORE: ${{ matrix.drupal_core }}
-          PHP_VERSION: ${{ matrix.php_version }}
+          PHP_VERSION: ${{ env.PHP_VERSION }}
         run: ./scripts/ci-develop-new.sh
 
       - name: Set the full working directory environment variable.
@@ -90,9 +90,15 @@ jobs:
           - php_version: '8.3'
             drupal_core: '^10.4'
             experimental: false
+#          - php_version: '8.4'
+#            drupal_core: '^10.4'
+#            experimental: true
           - php_version: '8.3'
             drupal_core: '^11.1'
             experimental: true
+#          - php_version: '8.4'
+#            drupal_core: '^11.1'
+#            experimental: true
     container:
       image: drupalci/php-${{ matrix.php_version }}-apache:production
     services:
