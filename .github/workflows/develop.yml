@@ -13,7 +13,7 @@ jobs:
     name: Build Drupal.
     runs-on: ubuntu-latest
     env:
-      DRUPAL_DIRECTORY: ../develop-ecms-profile
+      DRUPAL_DIRECTORY: ../develop
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,13 +36,13 @@ jobs:
       - name: Set full path to the Drupal build directory.
         run: echo "drupal-directory=$( realpath ${{ env.DRUPAL_DIRECTORY }} )" >> $GITHUB_ENV
 
-      - name: Remove the ecms_profile symlink.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: rm -Rf web/profiles/contrib/ecms_profile
-
-      - name: Copy the ecms_profile into Drupal.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: cp -Rf ../ecms_profile web/profiles/contrib
+#      - name: Remove the ecms_profile symlink.
+#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+#        run: rm -Rf web/profiles/contrib/ecms_profile
+#
+#      - name: Copy the ecms_profile into Drupal.
+#        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+#        run: cp -Rf ../ecms_profile web/profiles/contrib
 
       - name: Get the node dependencies.
         uses: actions/setup-node@v1
