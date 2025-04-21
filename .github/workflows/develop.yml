@@ -35,15 +35,15 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ env.PHP_VERSION }}
+          php-version: env.PHP_VERSION
 
       - name: Check PHP Version
         run: php -v
 
       - name: Run the develop CI script.
         env:
-          DRUPAL_CORE: ${{ matrix.drupal_core }}
-          PHP_VERSION: ${{ env.PHP_VERSION }}
+          DRUPAL_CORE: matrix.drupal_core
+          PHP_VERSION: env.PHP_VERSION
         run: ./scripts/ci-develop-new.sh
 
       - name: Set the full working directory environment variable.
@@ -56,7 +56,7 @@ jobs:
       - name: Get the node dependencies.
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: env.NODE_VERSION
 
       - name: Install the profile node requirements.
         run: npm install
