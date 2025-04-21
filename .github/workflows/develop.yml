@@ -50,15 +50,12 @@ jobs:
           node-version: '10.x'
 
       - name: Install the profile node requirements.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
         run: npm install
 
       - name: Run gulp validate.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
         run: gulp validate
 
       - name: Run gulp build.
-        working-directory: ${{ env.DRUPAL_DIRECTORY }}/web/profiles/contrib/ecms_profile
         run: gulp build
 
       - name: Archive the Drupal files.
