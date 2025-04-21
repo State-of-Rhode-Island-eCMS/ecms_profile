@@ -26,5 +26,5 @@
   <autoload>/var/www/vendor/autoload.php</autoload>
 
   <!-- Project rulesets -->
-  <rule ref="/var/www/vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
+  <rule ref="/var/www/develop/vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
 </ruleset>
