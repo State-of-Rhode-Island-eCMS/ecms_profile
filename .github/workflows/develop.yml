@@ -88,8 +88,8 @@ jobs:
       SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
       SIMPLETEST_BASE_URL: http://localhost
       DTT_BASE_URL: http://localhost
-      DRUPAL_DIRECTORY: /var/www/develop/html
-      ECMS_PROFILE_DIRECTORY: /var/www/develop/html/profiles/contrib/ecms_profile
+      DRUPAL_DIRECTORY: /var/www/develop/web
+      ECMS_PROFILE_DIRECTORY: /var/www/develop/web/profiles/contrib/ecms_profile
       ENCRYPTION_PRIVATE_KEY: ''
     steps:
 
@@ -103,12 +103,12 @@ jobs:
           path: /var/www/
 
       - name: Expand the build artifact.
-        run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www && ls -l && pwd
+        run: tar -xzf /var/www/drupal-build.tar.gz -C /var/www && ls -l /var/www
 
       - name: Remove the original html directory.
         run: rm -Rf /var/www/html
 
-      - name: Symlink the original html path to web.
+      - name: Symlink the original html path to develop/web.
         run: ln -s /var/www/develop/web /var/www/html
 
       - name: Ensure a files directory exists.
@@ -119,7 +119,7 @@ jobs:
           chmod -R 777 /var/www/html/sites/simpletest
 
       - name: Set permissions on the web and vendor directories.
-        run: chown -R www-data:www-data /var/www/develop/web /var/www/vendor
+        run: chown -R www-data:www-data /var/www/web /var/www/vendor
 
       - name: Start Apache
         run: service apache2 start
