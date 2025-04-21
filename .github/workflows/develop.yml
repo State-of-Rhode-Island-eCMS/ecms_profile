@@ -44,7 +44,7 @@ jobs:
         env:
           DRUPAL_CORE: ${{ matrix.drupal_core }}
           PHP_VERSION: ${{ env.PHP_VERSION }}
-        run: ./scripts/ci-develop-new.sh
+        run: ./scripts/ci-develop.sh
 
       - name: Set the full working directory environment variable.
         run: |

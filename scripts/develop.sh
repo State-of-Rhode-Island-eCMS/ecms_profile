@@ -3,362 +3,56 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
-# Move up a level starting from the scripts directory.
-BASE_DIR="$(dirname $(cd ${0%/*} && pwd))"
-APP_NAME="develop-ecms-profile"
-INSTALL_PROFILE_NAME="ecms_acquia"
-INSTALL_PROFILE_DIRECTORY="ecms_profile"
+DRUPAL_CORE="${DRUPAL_CORE:-^10.4}"
+PHP_VERSION="${PHP_VERSION:-8.3}"
+APP_NAME="ecms-profile"
+DOCROOT="develop/web"
 PATTERN_LAB_DIRECTORY="ecms_patternlab"
-REPOSITORY_NAME="rhodeislandecms/ecms_profile"
-PATTERN_LAB_FULL_PATH="${BASE_DIR%/*}/${PATTERN_LAB_DIRECTORY}"
 PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 
-COMPOSER="$(which composer)"
-COMPOSER_BIN_DIR="$(composer config bin-dir)"
-DOCROOT="web"
-DRUPAL_CORE_VERSION="~10.4"
-PHP_VERSION="8.3"
-
-# Whether the source directory should be deleted before rebuilding lando
-DELETE_SRC=0
-
-while [ "$1" != "" ]; do
-    case $1 in
-        -d | --delete )         shift
-                                DELETE_SRC=1
-                                ;;
-    esac
-done
-
-# Make sure the system has lando.
-if ! [ -x "$(command -v lando)" ]; then
-  echo 'Error: Lando is not installed!' >&2
+# Make sure the system has ddev
+if ! [ -x "$(command -v ddev)" ]; then
+  echo 'Error: DDEV is not installed!' >&2
   exit 1
 fi
 
-LANDO="$(which lando)"
+ddev config \
+  --project-name="$APP_NAME" \
+  --project-type=drupal \
+  --php-version="$PHP_VERSION" \
+  --docroot="$DOCROOT" \
+  --database="mysql:5.7" \
+  --webserver-type="apache-fpm" \
+  --nodejs-version=10 \
+  --composer-root="develop"
 
-# Define the color scheme.
-FG_C='\033[1;37m'
-BG_C='\033[42m'
-WBG_C='\033[43m'
-EBG_C='\033[41m'
-NO_C='\033[0m'
+# Get ddev started.
+ddev start
 
-echo -e "\n"
-if [ $1 ] ; then
-  DEST_DIR="$1"
-  echo $1
-else
-  DEST_DIR="$( dirname $BASE_DIR )/$APP_NAME"
-  echo -e "${FG_C}${WBG_C} WARNING ${NO_C} No installation path provided. $INSTALL_PROFILE_NAME will be installed in $DEST_DIR."
-  echo -e "${FG_C}${BG_C} USAGE ${NO_C} ${0} [install_path] # to install in a different directory."
-fi
-DRUSH="$DEST_DIR/$COMPOSER_BIN_DIR/drush"
+# Remove the develop directory so it can be recreated.
+ddev exec 'rm -Rf develop'
 
-echo -e "\n\n\n"
-echo -e "******************"
-echo -e "*   Installing   *"
-echo -e "******************"
-echo -e "\n\n\n"
-echo -e "Installing to: $DEST_DIR\n"
+# Create the Drupal project.
+ddev exec "composer create-project drupal/recommended-project:${DRUPAL_CORE} develop --no-install"
+# Delete the lock file to add the profile's dependencies.
+ddev exec 'rm -f develop/composer.lock'
 
-if [ -d "$DEST_DIR" ] && [ "$DELETE_SRC" == "1" ]; then
-  set +e
-  echo -e "${FG_C}${WBG_C} WARNING ${NO_C} You are about to delete $DEST_DIR to install $INSTALL_PROFILE_NAME in that location."
+# Symlink the profile
+# Create a `contrib` profile directory
+ddev exec 'mkdir -p $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 
-  # Destroy the lando containers before deletion.
-  cd $DEST_DIR
-  lando destroy --yes
-  cd $BASE_DIR
+# Symlink the base profiles into the `ecms_profile` profile directory.
+ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib/ecms_profile ecms_base) $DDEV_DOCROOT/profiles/contrib/ecms_profile'
+ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib/ecms_profile ecms_acquia) $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 
-  rm -Rf $DEST_DIR
+## Merge the profile's composer into Drupal's default.
+ddev exec "test -f develop/composer.lock || (generate-composer > develop/merge.composer.json)"
 
-  if [ $? -ne 0 ]; then
-    echo -e "${FG_C}${EBG_C} ERROR ${NO_C} Sometimes drush adds some files with permissions that are not deletable by the current user."
-    echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} sudo rm -Rf $DEST_DIR"
-    sudo rm -Rf $DEST_DIR
-  fi
-  set -e
-fi
+## If the merge was successful, replace the original composer.json and install.
+ddev exec 'test -f develop/merge.composer.json && (mv develop/merge.composer.json develop/composer.json)'
 
-# Make sure the directory doesn't exist before making a new project.
-if [ ! -d "$DEST_DIR" ]; then
-  echo "-----------------------------------------------"
-  echo " Setup $INSTALL_PROFILE_NAME using composer "
-  echo "-----------------------------------------------"
-  echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $COMPOSER create-project --no-interaction oomphinc/drupal-scaffold:^1.2 ${DEST_DIR} --stability dev --no-interaction --no-install\n\n"
-  $COMPOSER create-project --no-interaction "oomphinc/drupal-scaffold:^1.2" ${DEST_DIR} --stability dev --no-interaction --no-install
+# Composer install the things.
+ddev exec 'composer install --working-dir=develop'
 
-  # Delete the composer.lock file to get the latest packages instead of the scaffolds outdated packages.
-  if [ -a "${DEST_DIR}/composer.lock" ]; then
-    echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} rm $DEST_DIR/composer.lock\n\n"
-    rm $DEST_DIR/composer.lock
-  fi
-
-  cd $DEST_DIR
-  $COMPOSER require "oomphinc/composer-installers-extender: ^2.0" --no-update
-  cd $BASE_DIR
-
-  if [ $? -ne 0 ]; then
-    echo -e "${FG_C}${EBG_C} ERROR ${NO_C} There was a problem setting up $INSTALL_PROFILE_NAME using composer."
-    echo "Please check your composer configuration and try again."
-    exit 2
-  fi
-fi
-
-echo "----------------------------------"
-echo " Initialize lando for local usage "
-echo "----------------------------------"
-cd ${DEST_DIR}
-
-echo "Lock Drupal core to version ${DRUPAL_CORE_VERSION}."
-$COMPOSER require "drupal/core-composer-scaffold:${DRUPAL_CORE_VERSION}" --no-update
-$COMPOSER require "drupal/core-project-message:${DRUPAL_CORE_VERSION}" --no-update
-$COMPOSER require "drupal/core-recommended:${DRUPAL_CORE_VERSION}" --no-update
-$COMPOSER require "drupal/core-vendor-hardening:${DRUPAL_CORE_VERSION}" --no-update
-$COMPOSER remove "drupal/devel" --no-update
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO init --name $APP_NAME --recipe drupal10 --option php=$PHP_VERSION --option database=mysql:5.7 --webroot $DOCROOT --source cwd\n\n"
-$LANDO init --name ${APP_NAME} --recipe drupal10 --option php=${PHP_VERSION} --webroot ${DOCROOT} --source cwd
-
-# Check for a lando local file.
-if [ -a "${DEST_DIR}/.lando.local.yml" ]; then
-  # Using an if/else block as the negate (!) operator
-  # doesn't seem to work with -a.
-  echo "Found a .lando.local.yml file."
-else
-  echo "Create a .lando.local.yml file."
-
-  # Include a .lando.local.yml to include the distribution in the app.
-  if [ -d "$PATTERN_LAB_FULL_PATH/.git" ]; then
-    echo -e  "${FG_C}${BG_C}Pattern lab git repository found at${NO_C}: $PATTERN_LAB_FULL_PATH, symlinking for development."
-    LANDO_SERVICES="services:
-  appserver:
-    composer_version: 2-latest
-    overrides:
-      environment:
-        SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'sqlite://appserver/sites/default/files/.ht.sqlite'
-        DTT_BASE_URL: 'https://appserver'
-        TEMP: '/app/web/sites/default/files/temp'
-      volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
-        - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY
-  nodejs:
-    overrides:
-      volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
-        - $PATTERN_LAB_FULL_PATH:/$PATTERN_LAB_DIRECTORY"
-  else
-
-    echo -e  "${FG_C}${BG_C}Pattern lab git repository NOT found at${NO_C}: $PATTERN_LAB_FULL_PATH, ignoring symlink."
-    LANDO_SERVICES="services:
-  appserver:
-    composer_version: 2-latest
-    run_as_root:
-      - echo 'deb http://deb.debian.org/debian stretch-backports main' >> /etc/apt/sources.list && apt-get update && apt-get install -y -t stretch-backports sqlite3 libsqlite3-dev
-    overrides:
-      environment:
-        SIMPLETEST_BASE_URL: 'https://appserver'
-        SIMPLETEST_DB: 'mysql://drupal10:drupal10@database/drupal10'
-        DTT_BASE_URL: 'https://appserver'
-        TEMP: '/app/web/sites/default/files/temp'
-      volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
-  nodejs:
-    overrides:
-      volumes:
-        - $BASE_DIR:/$INSTALL_PROFILE_DIRECTORY
-  cache:
-    type: memcached:1.5.11
-    mem: 256
-    portforward: 11222"
-  fi
-
-  echo "$LANDO_SERVICES
-tooling:
-  phpunit:
-    service: appserver
-    cmd: vendor/bin/phpunit --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
-  paratest:
-    service: appserver
-    cmd: vendor/bin/paratest --configuration /$INSTALL_PROFILE_DIRECTORY/phpunit.xml
-  gulp-distro:
-    service: nodejs
-    cmd: cd /$INSTALL_PROFILE_DIRECTORY && npm install
-  phpcs:
-    service: appserver
-    cmd: vendor/bin/phpcs --standard=/$INSTALL_PROFILE_DIRECTORY/phpcs.xml
-  xdebug-on:
-    service: appserver
-    description: Enable xdebug for apache.
-    cmd: 'docker-php-ext-enable xdebug && /etc/init.d/apache2 reload'
-    user: root
-  xdebug-off:
-    service: appserver
-    description: Disable xdebug for apache.
-    cmd: 'rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload'
-    user: root
-  recipe-apply:
-    service: appserver
-    cmd: cd /app/web && php core/scripts/drupal recipe /ecms_profile/ecms_base/recipes/$0
-    user: root
-config:
-  xdebug: false
-env_file:
-  - .env  " >> ${DEST_DIR}/.lando.local.yml
-fi
-
-# Check for an existing .env file.
-if [ -a "${DEST_DIR}/.env" ]; then
-  echo "Found a .env file."
-else
-  echo "Create a .env file."
-  # Create the environment file with a temp key for webform encrypt.
-  echo -e  "COMPOSER_MEMORY_LIMIT=-1\nCOMPOSER_PROCESS_TIMEOUT=900\nTEMP=/tmp\nCOMPOSE_HTTP_TIMEOUT=900\nENCRYPTION_PRIVATE_KEY=$(dd if=/dev/urandom bs=32 count=1 | base64 -i -)" >> .env
-fi
-
-pwd
-
-# Remove the coffee module as it currently breaks unit testing.
-$COMPOSER remove drupal/coffee --no-update
-$COMPOSER remove sensiolabs/security-checker --no-update --dev
-$COMPOSER remove drupal-composer/preserve-paths --no-update
-
-
-# Add the development requirements for testing.
-$COMPOSER require "drupal/core-dev:$DRUPAL_CORE_VERSION" --dev --no-update
-$COMPOSER require "phpunit/phpunit:^9" --dev --no-update
-$COMPOSER require "symfony/phpunit-bridge:^6.4" --dev --no-update
-$COMPOSER require "php-mock/php-mock" --dev --no-update
-$COMPOSER require "php-mock/php-mock-phpunit" --dev --no-update
-$COMPOSER require "weitzman/drupal-test-traits" --dev --no-update
-$COMPOSER require 'liuggio/fastest:^1.6' --dev --no-update
-$COMPOSER require "drush/drush:^12.0" --no-update
-$COMPOSER require "drupal/coder:^8.3" --no-update
-
-$COMPOSER config allow-plugins.composer/installers true
-$COMPOSER config allow-plugins.cweagans/composer-patches true
-$COMPOSER config allow-plugins.oomphinc/composer-installers-extender true
-$COMPOSER config allow-plugins.drupal-composer/preserve-paths  true
-$COMPOSER config allow-plugins.drupal/core-composer-scaffold true
-$COMPOSER config allow-plugins.drupal/core-project-message true
-$COMPOSER config allow-plugins.drupal/core-vendor-hardening true
-$COMPOSER config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
-$COMPOSER config allow-plugins.php-http/discovery true
-$COMPOSER config allow-plugins.zaporylie/composer-drupal-optimizations true
-$COMPOSER config allow-plugins.phpstan/extension-installer true
-
-$COMPOSER install
-
-# Start the app with lando.
-set +e
-$LANDO start
-set -e
-
-echo "--------------------------------------------------"
-echo " Require ${REPOSITORY_NAME} using lando composer "
-echo "--------------------------------------------------"
-
-$LANDO composer config repositories.${INSTALL_PROFILE_DIRECTORY} '{"type": "path", "url": "/'${INSTALL_PROFILE_DIRECTORY}'", "options": {"symlink": true}}'
-
-# Add the pattern lab installer type.
-$LANDO composer config extra.installer-types.2 "pattern-lab"
-
-# Add the installer path.
-$LANDO composer config extra.installer-paths./${INSTALL_PROFILE_DIRECTORY}/ecms_base/themes/custom/ecms/{\$name} PATTERN_LAB_REPLACE
-# Replace the "PATTERN_LAB_REPLACE" text with the actual value.
-# sed is different for Macs, detect that here.
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i '' 's/"PATTERN_LAB_REPLACE"/\["type:pattern-lab"]/g' composer.json
-else
-  sed -i 's/"PATTERN_LAB_REPLACE"/\["type:pattern-lab"]/g' composer.json
-fi
-
-# Add the migrate_process_trim repository.
-$LANDO composer config repositories.migratation_process_trim '{"type": "package", "package": {"name": "drupal_git/migrate_process_trim", "type": "drupal-module", "version": "2.0.0", "source": {"type": "git", "url": "https://git.drupalcode.org/project/migrate_process_trim.git", "reference": "4bbec87f0ecdb6d49f9ff2d763ba4f40f5d63d5c"}}}'
-
-$LANDO composer config extra.enable-patching true
-$LANDO composer require "${REPOSITORY_NAME}:*" --no-progress
-
-if [ -d "$PATTERN_LAB_FULL_PATH/.git" ]; then
-  # Symlink pattern lab for development.
-  $LANDO composer config repositories.${PATTERN_LAB_DIRECTORY} '{"type": "path", "url": "/'${PATTERN_LAB_DIRECTORY}'", "options": {"symlink": true}}'
-  $LANDO composer require "${PATTERN_LAB_REPOSITORY_NAME}:*" --no-progress
-else
-  # Require pattern lab master branch from Github.
-  $LANDO composer config repositories.${PATTERN_LAB_DIRECTORY} '{"type": "git", "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab.git"}'
-  $LANDO composer require "${PATTERN_LAB_REPOSITORY_NAME}:dev-master" --no-progress
-fi
-
-# Update the lock file to ensure core patches applied.
-$LANDO composer update --lock
-
-if [ -a "${DEST_DIR}/package-lock.json" ]; then
-  # Delete the package.lock file directory.
-  echo "Deleting: ${DEST_DIR}/package-lock.json"
-  rm -Rf $DEST_DIR/package-lock.json
-fi
-
-if [ -a "${DEST_DIR}/.stylelintrc.json" ] ; then
-  echo "Deleting ${DEST_DIR}/.stylelintrc.json and replacing with the distribution's copy.";
-  # Remove the stylelintrc file.
-  rm -Rf $DEST_DIR/.stylelintrc.json
-fi
-
-# Copy the distribution .stylintrc.json file to the app.
-cp $BASE_DIR/.stylelintrc.json $DEST_DIR
-
-if [ -a "${DEST_DIR}/gulpfile.js" ]; then
-  # Delete the gulpfile.js file directory.
-  echo "Deleting: ${DEST_DIR}/gulpfile.js"
-  rm -Rf $DEST_DIR/gulpfile.js
-fi
-
-# Copy the distribution gulpfile.js file to the app.
-cp $BASE_DIR/gulpfile.js $DEST_DIR
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install gulp@4.0"
-$LANDO npm install gulp@4.0
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install gulp-sourcemaps"
-$LANDO npm install gulp-sourcemaps
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO npm install"
-$LANDO npm install
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO gulp-distro"
-$LANDO gulp-distro
-
-# Install the profile.
-cd ${DOCROOT}
-
-# Ensure the sites/default directory is writeable.
-if [ -d "${DEST_DIR}/${DOCROOT}/sites/default/files" ]; then
-  chmod ug+w ${DEST_DIR}/${DOCROOT}/sites/default/files
-fi
-
-# Remove the CONFIG_SYNC_DIRECTORY constant.
-if [ -a "${DEST_DIR}/${DOCROOT}/sites/default/settings.php" ]; then
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' 's/CONFIG_SYNC_DIRECTORY/"CONFIG_SYNC_DIRECTORY_OFF"/g' ${DEST_DIR}/${DOCROOT}/sites/default/settings.php
-  else
-    sed -i 's/CONFIG_SYNC_DIRECTORY/"CONFIG_SYNC_DIRECTORY_OFF"/g' ${DEST_DIR}/${DOCROOT}/sites/default/settings.php
-  fi
-fi
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO drush site-install ${INSTALL_PROFILE_NAME}"
-$LANDO drush site-install ${INSTALL_PROFILE_NAME} --verbose --yes --site-mail=admin@localhost --account-mail=admin@localhost --site-name="${INSTALL_PROFILE_NAME} Distribution" --account-name=admin --account-pass=admin;
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO drush updb --yes"
-$LANDO drush updb --yes
-
-echo -e "${FG_C}${BG_C} EXECUTING ${NO_C} $LANDO drush cr --yes"
-$LANDO drush cr --yes
-
-echo -e "\n\n\n"
-echo -e "********************************"
-echo -e "*    Installation finished     *"
-echo -e "********************************"
-echo -e "\n\n\n"
+## Install the site profile.
+ddev exec 'drush site:install ecms_acquia --db-url=mysql://db:db@db:3306/db?module=mysql#tableprefix --yes'

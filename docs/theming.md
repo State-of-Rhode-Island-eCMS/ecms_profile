@@ -39,7 +39,7 @@ those folders before attempting to reinstall the profile.
 
 ### Theme debugging
 The [Twig VarDumper] is available for local theme debugging.
-The module is not enabled by default. To enable, run `lando drush en twig_vardumper`
+The module is not enabled by default. To enable, run `ddev drush en twig_vardumper`
 from the /develop-ecms-profile site root.
 Create or edit your local sites/default/settings.local.php file to include the following:
 ```php
