@@ -208,7 +208,7 @@
         "johngrogg/ics-parser": "^2",
         "oomphinc/composer-installers-extender": "^2.0",
         "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8",
-        "state-of-rhode-island-ecms/ecms_patternlab": "dev-master"
+        "state-of-rhode-island-ecms/ecms_patternlab": "dev-master || ^0.8.2"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
