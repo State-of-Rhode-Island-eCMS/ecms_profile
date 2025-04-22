@@ -33,19 +33,4 @@ $base = $read_json(realpath(sprintf('%s/composer.json', 'develop')));
 $profile = $read_json(realpath('composer.json'));
 $data = $merge_deep($base, $profile);
 
-//// If in a CI environment, make all path repository URLs absolute.
-//if (getenv('CI') || getenv('TUGBOAT_PREVIEW')) {
-//  array_walk($data['repositories'], function (array &$repository): void {
-//    if ($repository['type'] === 'path') {
-//      $repository['url'] = getcwd() . '/' . $repository['url'];
-//    }
-//  });
-//}
-//
-// Make packages.drupal.org the lowest-priority repository, which will force the
-// components' local path repositories to take precedence.
-//$repository = $data['repositories']['drupal'];
-//unset($data['repositories']['drupal']);
-//$data['repositories']['drupal'] = $repository;
-
 echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
