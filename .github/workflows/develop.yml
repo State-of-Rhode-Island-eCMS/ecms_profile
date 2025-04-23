@@ -76,7 +76,7 @@ jobs:
         run: gulp build
 
       - name: Archive the Drupal files.
-        run: tar -czf /tmp/drupal-build-${{ matrix.drupal_core}}.tar.gz .
+        run: tar -czf --exclude node_modules --exclude ecms_base/themes/custom/ecms/node_modules /tmp/drupal-build-${{ matrix.drupal_core}}.tar.gz .
 
       - name: Upload the artifact.
         uses: actions/upload-artifact@v4
