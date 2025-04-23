@@ -55,7 +55,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   }
 
   // Illustration options.
-  $illustration_json_string = file_get_contents("{$theme->getPath()}/ecms_patternlab/source/_data/illustrations.json");
+  $illustration_json_string = file_get_contents("{$theme->getPath()}/assets/data/illustrations.json");
   if ($illustration_json_string) {
 
     $json_decoded = json_decode($illustration_json_string, TRUE);
