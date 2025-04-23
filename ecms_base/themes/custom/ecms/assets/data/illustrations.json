@@ -1,0 +1,28 @@
+{
+  "illustrations": {
+    "Quahog": {
+      "filename": "quahog.svg"
+    },
+    "Steamer": {
+      "filename": "steamer.svg"
+    },
+    "Oyster": {
+      "filename": "oyster.svg"
+    },
+    "Bridge": {
+      "filename": "bridge.svg"
+    },
+    "Lighthouse": {
+      "filename": "lighthouse.svg"
+    },
+    "Lobster": {
+      "filename": "lobster.svg"
+    },
+    "Seagull": {
+      "filename": "seagull.svg"
+    },
+    "Skyline": {
+      "filename": "skyline.svg"
+    }
+  }
+}

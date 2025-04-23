@@ -23,8 +23,8 @@
   <ini name="memory_limit" value="-1" />
 
   <!-- Project autoloader -->
-  <autoload>/var/www/vendor/autoload.php</autoload>
+  <autoload>/var/www/develop/vendor/autoload.php</autoload>
 
   <!-- Project rulesets -->
-  <rule ref="/var/www/vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
+  <rule ref="/var/www/develop/vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
 </ruleset>

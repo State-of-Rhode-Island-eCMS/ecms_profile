@@ -1,0 +1,189 @@
+.qh__site-branding {
+  margin: $general-v-spacing 0;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+
+    &,
+    &:visited {
+      text-decoration: none;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 0.5rem;
+    width: 5rem;
+    min-height: 4.5rem;
+
+    @include onlyIE() {
+      display: block;
+    }
+
+    @include breakpoint-up($bp--small) {
+      margin-left: -0.5rem;
+      margin-right: 1rem;
+
+      &.--wide {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    &.--wide {
+      margin: 0 auto;
+      max-width: em(420);
+      width: auto;
+    }
+  }
+
+  &__name {
+    display: block;
+
+    &__top-line {
+      font-family: $font-sans-static;
+      font-weight: normal;
+      font-size: 0.75rem;
+      line-height: $st-lh-s;
+      display: block;
+      letter-spacing: $kerning-base;
+      text-transform: uppercase;
+      @include breakpoint-up($bp--medium) {
+        font-size: 0.8125rem;
+        line-height: $st-lh-m;
+      }
+      @include breakpoint-up($bp--large) {
+        font-size: 0.875rem;
+        line-height: $st-lh-l;
+      }
+
+      .wf-inactive & {
+        font-family: $font-sans-fallback;
+        font-weight: normal;
+        letter-spacing: 0.04em;
+      }
+      @supports (font-variation-settings: normal) {
+        html:not(.novf) & {
+          font-family: var(--font-sans-vf);
+          font-weight: 450;
+        }
+
+        html:not(.novf).wf-inactive & {
+          font-family: $font-sans-fallback;
+          font-weight: normal;
+          letter-spacing: 0.035em;
+        }
+      }
+      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+        --font-size-min: 0.75rem;
+        --font-size-max: 0.875rem;
+        --font-size-scaler-value: var(--st-scaler-value);
+
+        --font-lh-min: #{$st-lh-s};
+        --font-lh-max: #{$st-lh-l};
+        --font-lh-scaler-value: var(--st-lh-scaler-value);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+      }
+    }
+
+    &__main-line {
+      font-family: $font-serif-static;
+      font-weight: normal;
+      font-size: 2rem;
+      line-height: $h1-lh-s;
+      font-style: normal;
+      display: block;
+      @include breakpoint-up($bp--medium) {
+        font-size: 2.5rem;
+        line-height: $h1-lh-m;
+      }
+      @include breakpoint-up($bp--large) {
+        font-size: 3rem;
+        line-height: $h1-lh-l;
+      }
+
+      .wf-inactive & {
+        font-family: $font-serif-fallback;
+        font-weight: normal;
+        letter-spacing: 0.04em;
+      }
+      @supports (font-variation-settings: normal) {
+        html:not(.novf) & {
+          font-family: var(--font-serif-vf);
+          font-weight: 300;
+        }
+
+        html:not(.novf).wf-inactive & {
+          font-family: $font-serif-fallback;
+          font-weight: normal;
+          letter-spacing: 0.035em;
+        }
+      }
+      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+        --font-size-min: 1.5rem;
+        --font-size-max: 2rem;
+        --font-size-scaler-value: var(--h2-scaler-value);
+
+        --font-lh-min: #{$h1-lh-s};
+        --font-lh-max: #{$h1-lh-l};
+        --font-lh-scaler-value: var(--h1-lh-scaler-value);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+      }
+    }
+
+    &__bottom-line {
+      font-family: $font-sans-static;
+      font-weight: normal;
+      font-size: 0.81255rem;
+      line-height: $p-lh-s;
+      display: block;
+      @include breakpoint-up($bp--medium) {
+        font-size: 0.875rem;
+        line-height: $st-lh-m;
+      }
+      @include breakpoint-up($bp--large) {
+        font-size: 1rem;
+        line-height: $p-lh-l;
+      }
+
+      .wf-inactive & {
+        font-family: $font-sans-fallback;
+        font-weight: normal;
+        letter-spacing: 0.04em;
+      }
+      @supports (font-variation-settings: normal) {
+        html:not(.novf) & {
+          font-family: var(--font-sans-vf);
+          font-weight: 350;
+        }
+
+        html:not(.novf).wf-inactive & {
+          font-family: $font-sans-fallback;
+          font-weight: normal;
+          letter-spacing: 0.035em;
+        }
+      }
+      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+        --font-size-min: 0.8125rem;
+        --font-size-max: 1rem;
+        --font-size-scaler-value: var(--p-scaler-value);
+
+        --font-lh-min: #{$p-lh-s};
+        --font-lh-max: #{$p-lh-l};
+        --font-lh-scaler-value: var(--p-lh-scaler-value);
+        font-size: var(--font-size);
+        line-height: var(--line-height);
+      }
+    }
+  }
+}
