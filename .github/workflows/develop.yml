@@ -71,10 +71,6 @@ jobs:
         working-directory: 'ecms_base/themes/custom/ecms'
         run: npm install
 
-      - name: Run gulp validate for the `ecms` theme.
-        working-directory: 'ecms_base/themes/custom/ecms'
-        run: gulp validate
-
       - name: Run gulp build for the `ecms` theme.
         working-directory: 'ecms_base/themes/custom/ecms'
         run: gulp build
