@@ -21,6 +21,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Security
 
+## [1.1.4] - 2025-04-23
+### Changed
+- RIGA-617: Move the language field to disabled on the form display.
+- RIGA-639: Move the promotions field to disabled on the press release form display.
+- RIGA-627: Press release content type field updates.
+- RIGA-630: Updated Content Publisher permissions to syndicate Press Releases.
+
+### Fixed
+- RIGA-647: Changed endpoint for Microsoft API.
+
 ## [1.1.3] - 2025-02-26
 ### Added
 - RIGA-512: Added emergency_notification publisher module.
@@ -1342,7 +1352,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.3...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.4...HEAD
+[1.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.3...1.1.4
 [1.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.2...1.1.3
 [1.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.0.9...1.1.0
