@@ -44,6 +44,7 @@ composer.lock
 /ecms_base/themes/custom/ecms/assets/data/colors-generated.json
 /ecms_base/themes/custom/ecms/assets/data/listitems.json
 /ecms_base/themes/custom/ecms/assets/data/data.json
+!/ecms_base/themes/custom/ecms/gulpfile.js
 
 # ddev development site
 /develop
