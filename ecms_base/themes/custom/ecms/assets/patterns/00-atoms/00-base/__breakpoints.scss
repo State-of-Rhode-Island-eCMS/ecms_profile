@@ -1,0 +1,51 @@
+/**
+ * Breakpoint Configuration
+ */
+
+// mq values (no unit)
+$bp--small-value: 40;   // 640
+$bp--medium-value: 50;  // 800
+$bp--large-value: 62;     // 992
+$bp--xlarge-value: 75;    // 1200
+$bp--xxlarge-value: 86;   // 1386
+
+// mq's in ems
+$bp--small: $bp--small-value * 1em;
+$bp--medium: $bp--medium-value * 1em;
+$bp--large: $bp--large-value * 1em;
+$bp--xlarge: $bp--xlarge-value * 1em;
+$bp--xxlarge: $bp--xxlarge-value * 1em;
+
+
+// Stored common breakpoints across multiple molecules
+$bp__show__desktop-nav: $bp--large;
+$bp__single-col-content: $bp--medium;
+
+$bp__text-collection--2col: $bp--small;
+$bp__text-collection--between: $bp--medium;
+$bp__text-collection--3col: $bp--large;
+
+
+// Media query helpers
+// Oomph usually does not include "media" so that the styles apply to all media types
+@mixin breakpoint-up($bp) {
+  @media (min-width: #{$bp}) {
+    @content;
+  }
+}
+
+@mixin breakpoint-between($bp1, $bp2) {
+  @media (min-width: #{$bp1}) and (max-width: #{($bp2 - em(1))}) {
+    @content;
+  }
+}
+
+@mixin breakpoint-down($bp) {
+  @media (max-width: #{($bp - em(1))}) {
+    @content;
+  }
+}
+
+.poo-hole-one {
+  color: #ff00fs;
+}

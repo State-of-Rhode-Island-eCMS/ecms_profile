@@ -1,0 +1,169 @@
+/*
+ * Styling and functional best practices from:
+ * https://www.w3.org/TR/wai-aria-practices-1.1/examples/accordion/accordion.html
+ *
+ * Not all functional requirements can be met, as in arrow up/down, home, or end
+ * keys navigating from one accordion header to another because we are not able
+ * to put a single wrapper around all accordion elements on a page
+ */
+
+.qh__accordion {
+  //border: $border-xs solid transparent;
+
+  // When any other element is on top of an accordion:
+  margin-top: $text-spacer-fallback-value;
+
+  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
+    margin-top: var(--body-text-spacer);
+  }
+
+  // When two or more accordions are on top of one another:
+  & + & {
+    margin-top: ($general-v-spacing/2);
+
+    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
+      margin-top: calc(var(--body-text-spacer)/2);
+    }
+  }
+
+  // Removing… a proper accordion group needs these styles, but none
+  // of our accordions can be grouped together
+  //&:hover,
+  //&:focus-within {
+  //  border-color: var(--fc__default__link--focus);
+  //  transition: $transition-base;
+  //}
+
+  &__title {}
+
+  &__button {
+    --p-font-wght: 450;
+    @include qh__p;
+    background-color: var(--c__coffee-milk--trans25);
+    background-image: none; // Reset from .qh__btn
+    border-radius: 0; // Reset from .qh__btn
+    box-shadow: none; // Reset from .qh__btn
+    color: var(--fc__default__fg);
+    display: block;
+    max-width: none;
+    outline: none;
+    padding: $nav-a-v-spacing $nav-a-h-spacing;
+    text-align: left;
+    transition: $transition-base;
+    white-space: normal; // Reset from .qh__btn
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      background-color: var(--c__coffee-milk--trans10);
+      color: var(--fc__default__fg);
+    }
+
+    // Accordion titles are required to look focused
+    &:focus {
+      .qh__accordion__button__summary {
+        outline: $border-sm solid var(--fc__default__link--focus);
+        outline-offset: 3px;
+      }
+    }
+
+    &__summary {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      pointer-events: none;
+    }
+
+    .qh__icon {
+      margin: -0.5em ($nav-a-h-spacing/2) -0.5em -0.5em;
+      min-width: $icon-dimension;
+
+      &__plusminus {
+        &__circle {
+          fill: var(--fc__accordion__icon__bg);
+        }
+
+        &__vert,
+        &__horiz {
+          fill: var(--fc__accordion__icon__fg);
+        }
+
+        &__vert {
+          transition: $transition-medium;
+          transform: rotate(90deg); // in the SVG this shape is already transformed
+          transform-origin: center;
+        }
+      }
+    }
+
+    &[aria-expanded='true'] {
+      background-color: var(--c__coffee-milk--trans25);
+
+      .qh__icon__plusminus__vert {
+        // IE 11 doesn't support CSS transforms on SVG elements
+        transform: rotate(-360deg);
+
+        @include onlyIE() {
+          opacity: 0;
+        }
+      }
+    }
+
+    @media print {
+      padding-left: 0;
+    }
+  } // end &__button
+
+  &__content {
+    // In case any content inside is floated, which might be possible
+    @include clearfix();
+    background-color: var(--c__coffee-milk--trans10);
+    position: relative;
+
+    // Vertical rhythm inside an accordion is handled in 00-atoms/02-text/00-typography
+
+    // TODO: Transitions not firing as we want them to
+    .js & {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0s linear 1s, visibility 0s linear 0s;
+      visibility: hidden;
+
+      > div {
+        opacity: 0;
+        transition: $transition-base 0ms;
+      }
+    }
+
+    .js [aria-expanded='true'] + & {
+      max-height: none;
+      padding: $nav-a-v-spacing $nav-a-h-spacing;
+      transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+      visibility: visible;
+
+      > div {
+        opacity: 1;
+        transition: $transition-base 125ms;
+      }
+    }
+
+    // When JS is broken and accordions are open by default
+    .no-js & {
+      padding: $nav-a-v-spacing $nav-a-h-spacing;
+    }
+
+    // In print, accordions are always open
+    @media print {
+      .js & {
+        max-height: none;
+        overflow: visible;
+        visibility: visible;
+
+        > div {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

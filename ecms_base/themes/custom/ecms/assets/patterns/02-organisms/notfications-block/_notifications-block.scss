@@ -1,0 +1,152 @@
+.qh__notifications-block {
+  position: relative;
+
+  // If dark mode, dim slightly
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      opacity: 0.9;
+    }
+  }
+
+  &__wrapper {
+    //@include qh-content-maxwidth();
+    background-color: var(--fc__notification__bg);
+    margin: 0 auto;
+    max-width: calc(#{$content-max-small-screen} + 1.75rem);
+
+    @include breakpoint-up($bp--xxlarge) {
+      max-width: calc(#{$content-max-large-screen} + 1.75rem);
+    }
+
+    @supports (width: Min(10px, 5px)) {
+      max-width: Min(calc(#{$content-max-small-screen} + 1.75rem), #{$content-max-large-screen});
+    }
+
+    // Light colored background as a pseudo element with opacity applied
+    &::before {
+      @include qh-inset-supports(0);
+      background-color: var(--fc__notification__bg);
+      content: '';
+      opacity: 0.67;
+      position: absolute;
+      z-index: -2;
+    }
+  }
+
+  .qh__icon__svg {
+    color: var(--fc__notification__icon);
+    height: rem(32);
+    margin-right: 0.5em;
+    width: rem(38);
+  }
+
+  // <p>
+  &__title {
+    font-size: 1rem;
+    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+      --font-size-min-value: 0.925;
+      --font-size-max-value: 1;
+      --font-size-scaler-value: var(--p-scaler-value);
+      font-size: var(--font-size);
+    }
+  }
+
+  &__header {
+    color: var(--fc__notification__fg);
+    display: flex;
+    align-items: center;
+    margin: 0 $general-h-spacing;
+    padding: rem(12) 0;
+
+    .qh__btn {
+      margin-left: auto;
+
+      &,
+      &:visited {
+        background-color: var(--fc__notification__button__bg);
+        color: var(--fc__notification__button__fg);
+      }
+
+      &:hover,
+      &:focus {
+        background-color: var(--fc__notification__button__fg);
+        color: var(--fc__notification__button__bg);
+      }
+
+      &[aria-expanded='true']::before {
+        content: attr(data-text-true);
+      }
+
+      &[aria-expanded='false']::before {
+        content: attr(data-text-false);
+      }
+    }
+  }
+
+  &__content {
+    color: var(--fc__notification__fg);
+    padding: 0 $general-h-spacing;
+
+    .notifications-hidden & {
+      display: none;
+    }
+    // Restyle all anchors in case this bg color can not support the default colors
+    a,
+    a:visited {
+      color: var(--fc__notification__link, var(--fc__defauilt__link));
+    }
+
+    a:hover,
+    a:focus {
+      color: var(--fc__notification__link--hover, var(--fc__defauilt__link--hover));
+    }
+
+    a:focus {
+      outline-color: var(--fc__notification__link--focus, var(--fc__defauilt__link--focus));
+    }
+
+    a:active {
+      color: var(--fc__notification__link--active, var(--fc__defauilt__link--active));
+    }
+
+    h4 {
+      color: var(--fc__notification__fg);
+      margin: 0 0 0.25rem;
+    }
+
+    p {
+      max-width: 100em;
+      margin-left: auto;
+      margin-right: auto;
+
+      & + p {
+        margin-top: 0.75em;
+      }
+    }
+
+    // Expand and collapse if JS is present
+    .js & {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0s linear 1s, visibility 0s linear 0s;
+      visibility: hidden;
+
+      > article {
+        opacity: 0;
+        transition: $transition-base 0ms;
+      }
+
+      &.js__aria-expanded {
+        max-height: none;
+        transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+        visibility: visible;
+
+        > article {
+          opacity: 1;
+          transition: $transition-base 125ms;
+        }
+      }
+    }
+  }
+}
+
