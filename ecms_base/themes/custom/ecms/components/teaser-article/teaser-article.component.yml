@@ -1,0 +1,28 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Article
+description: Teaser view for articles
+props:
+  type: object
+  properties:
+    character_limit:
+      type: integer
+      title: Character limit for the excerpt
+    cta:
+      type: string
+      enum:
+        - enable
+        - disable
+
+  slots:
+    url:
+      title: URL for the article
+    title:
+      title: The article title
+    date:
+      title: Article date
+    excerpt:
+      title: The summary for the article
+    alt_read_text:
+      title: Text for the CTA.
+

@@ -74,11 +74,11 @@
 {% set publish_date = node.field_press_release_date.value|date('l, F d, Y') %}
 {% set excerpt = content|without('field_press_release_date')|render|striptags %}
 
-{% include '@molecules/teaser-article/teaser-article.twig' with {
+{% include('ecms:teaser-article', {
   title: node.label,
   date: publish_date,
   excerpt: excerpt,
   url: url,
   cta: 'disable'
-} %}
+}, with_context = false) %}
 
