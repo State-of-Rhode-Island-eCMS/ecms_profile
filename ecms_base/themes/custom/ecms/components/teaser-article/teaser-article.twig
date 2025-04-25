@@ -12,11 +12,10 @@
       {% endautoescape %}
     {% endif %}
     {% if cta|default('enable') != 'disable' %}
-      {% include "@molecules/cta-read-more/cta-read-more.twig" with {
+      {{ include('ecms:cta-read-more', {
         cta_read_text: alt_read_text,
         cta_url: url
-      }
-      %}
+      }, with_context = false) }}
     {% endif %}
   </div>
 </article>

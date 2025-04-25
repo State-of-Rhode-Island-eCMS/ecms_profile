@@ -74,9 +74,9 @@
 {% set publish_date = node.field_press_release_date.value|date('l, F d, Y') %}
 {% set excerpt = content|without('field_press_release_date')|render|striptags %}
 
-{% include('ecms:teaser-article', {
+{{ include('ecms:teaser-article', {
   title: node.label,
   date: publish_date,
   excerpt: excerpt,
   url: url
-}, with_context = false) %}
+}, with_context = false) }}

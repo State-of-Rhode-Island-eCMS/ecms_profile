@@ -1,0 +1,12 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Read More CTA
+description: CTA for the read more link.
+props:
+  type: object
+  slots:
+    cta_read_text:
+      title: The read more link text
+    cta_url:
+      title: The URL to link
+

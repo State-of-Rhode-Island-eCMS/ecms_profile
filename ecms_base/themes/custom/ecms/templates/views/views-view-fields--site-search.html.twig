@@ -37,12 +37,12 @@
 
 {% if fields %}
 
-  {% include('ecms:teaser-article', {
+  {{ include('ecms:teaser-article', {
     title: fields.title.content,
     excerpt: fields.search_api_excerpt.content,
     url: path,
     alt_read_text: 'View page'
-  }, with_context = false) %}
+  }, with_context = false) }}
 
 {% endif %}
 
