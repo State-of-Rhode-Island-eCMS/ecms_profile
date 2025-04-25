@@ -1,0 +1,45 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Media Item
+description: A media item component.
+props:
+  type: object
+  properties:
+    type:
+      type: string
+      title: Media type
+      enum:
+        - img
+        - video
+        - audio
+    size:
+      type: string
+      title: Media size
+      enum:
+        - small
+        - medium
+        - large
+    align:
+      - type: string
+        title: Alignment
+        enum:
+          - left
+          - center
+          - right
+  slots:
+    img:
+      title: HTML Image tag
+    alt:
+      title: Alt text for an image
+    caption:
+      title: Caption
+    link_title:
+      title: Title for a link
+    link_href:
+      title: Path to link the item
+    source:
+      title: The video source
+    audio_url:
+      title: URL to an audio file
+    audio_mimetype:
+      title: Mime type for an audio file.

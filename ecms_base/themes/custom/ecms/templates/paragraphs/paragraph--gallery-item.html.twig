@@ -69,21 +69,19 @@
     {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
   {% endif %}
 
-  {% include "@molecules/media-item/media-item.twig" with {
-      type: "img",
-      caption: text,
-      img: img,
-    }
-  %}
+  {% include ("ecms:media-item", {
+    type: "img",
+    caption: text,
+    img: img,
+  }, with_context = false) %}
 {% endif %}
 
 {% if media_type == 'media_item_video' %}
   {% set video_source = content.field_gallery_item|render|striptags("<iframe>") %}
 
-  {% include "@molecules/media-item/media-item.twig" with {
-      type: "video",
-      caption: text,
-      source: video_source
-    }
-  %}
+  {% include ("ecms:media-item", {
+    type: "video",
+    caption: text,
+    source: video_source
+  }, with_context = false) %}
 {% endif %}
