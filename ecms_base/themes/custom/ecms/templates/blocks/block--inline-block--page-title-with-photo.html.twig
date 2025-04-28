@@ -47,9 +47,9 @@
   {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
 {% endif %}
 
-{% include '@molecules/page_title_with_image/page_title_with_image.twig' with {
+{{ include('ecms:page_title_with_image', {
   title: label,
   img: img,
   title_prefix: title_prefix,
   title_suffix: title_suffix,
-} %}
+}, with_context = FALSE) }}
