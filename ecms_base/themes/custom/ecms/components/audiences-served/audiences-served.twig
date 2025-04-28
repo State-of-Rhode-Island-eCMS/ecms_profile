@@ -11,7 +11,11 @@
  */
 #}
 
-{{ include('ecms:audiences-served', {
-  label: label,
-  items: items
-}, with_context = FALSE) }}
+<h3>{{ label }}</h3>
+<ul class="audiences-served__list">
+{% for item in items %}
+  <li>{{ item.content }}</li>
+{% endfor %}
+</ul>
+
+
