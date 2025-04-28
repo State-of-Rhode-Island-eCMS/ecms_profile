@@ -1,0 +1,44 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Event
+description: Teaser view for events
+props:
+  type: object
+  properties:
+    datetime_startdate_format:
+      title: The starting date format.
+      type: string
+    datetime_enddate_format:
+      title: The format for the end date
+      type: string
+    datetime_starttime_format:
+      title: The format for the starting time
+      type: string
+    datetime_endtime_format:
+      title: The format for the end time
+      type: string
+  slots:
+    url:
+      title: The URL to the main page
+    title:
+      title: The node title
+    location:
+      title: The location of the event
+    rrule:
+      title: The repeat rule
+    month:
+      title: The month of the event
+    start_date:
+      title: The starting date of the event
+    end_date:
+      title: The end date of the event
+    start_time:
+      title: The starting time
+    end_time:
+      title: The end time for the event
+
+libraryOverrides:
+  dependencies:
+    - ecms/rrule-js
+  js:
+    teaser-event.js: {}
