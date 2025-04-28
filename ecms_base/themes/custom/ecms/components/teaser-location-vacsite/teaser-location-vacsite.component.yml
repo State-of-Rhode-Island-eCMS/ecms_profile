@@ -1,7 +1,7 @@
 # Media Item component
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
-name: Teaser Executive Order
-description: Teaser view for executive orders
+name: Teaser Vacsite list
+description: Teaser view for vacsite lists
 props:
   type: object
   slots:
