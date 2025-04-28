@@ -1,0 +1,18 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Promotion
+description: Teaser view for the promotion content type
+props:
+  type: object
+  properties: {}
+  slots:
+    name:
+      title: The promotion title.
+    publication_icon:
+      title: The icon to display
+    publication_readable:
+      title: Is the publication readable
+    url:
+      title: The publication url
+    enable_download:
+      title: Enable download option
