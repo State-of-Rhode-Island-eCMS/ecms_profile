@@ -1,0 +1,35 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Person
+description: Teaser view for the person content type
+props:
+  type: object
+  properties:
+    placeholder_path:
+      type: string
+      default: "/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/ecms_patternlab/source/images/person-placeholder.png"
+  slots:
+    last_name:
+      title: The last name field
+    first_name:
+      title: The first name field
+    phone:
+      title: The phone number field
+    fax:
+      title: The fax field
+    mobile:
+      title: The mobile phone field
+    extension:
+      title: The extension field
+    email:
+      title: The email field
+    job_title:
+      title: The job title field
+    categories:
+      title: The categories field
+    photo:
+      title: The photo field
+    additional_fields:
+      title: The additional fields
+
+
