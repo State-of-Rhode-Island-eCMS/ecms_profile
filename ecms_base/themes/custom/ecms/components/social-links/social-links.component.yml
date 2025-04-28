@@ -1,0 +1,9 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Social links
+description: Social links menu component
+props:
+  type: object
+  slots:
+    items:
+      title: The search items.
