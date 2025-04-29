@@ -1,0 +1,12 @@
+# Audiences list.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: File list
+description: File listing for paragraph entity.
+props:
+  type: object
+  properties: {}
+  slots:
+    list_title:
+      title: The title for the file list.
+    files:
+      title: Array of files
