@@ -10,8 +10,9 @@
  *   - content: The field item's content.
  */
 #}
-
-{{ include('ecms:vaccines-offered', {
-  label: label,
-  items: items
-}, with_context = FALSE) }}
+<h3>{{ label }}</h3>
+<ul class="vaccines-offered__list">
+{% for item in items %}
+  <li>{{ item.content }}</li>
+{% endfor %}
+</ul>
