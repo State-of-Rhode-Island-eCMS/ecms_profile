@@ -31,6 +31,7 @@ const scssSourcePaths = [
 ];
 
 const javascriptSourcePaths = [
+  "assets/js/*.js",
   "assets/patterns/**/*.js",
   "!assets/vendor/*.js"
 ];

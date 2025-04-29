@@ -3,7 +3,7 @@ global-styling:
     theme:
       assets/styles/styles.css: { preprocess: true }
   js:
-    assets/scripts/scripts-compiled.min.js: { preprocess: true, minified: true }
+    assets/scripts/scripts-compiled-min.js: { preprocess: true, minified: true }
   dependencies:
     - core/drupal
 
