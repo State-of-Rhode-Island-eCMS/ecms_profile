@@ -1,0 +1,15 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Navigation - Main
+description: Main navigation component.
+props:
+  type: object
+  properties: {}
+  slots:
+    items:
+      title: The menu items
+    front_page:
+      title: The path to the home page
+    menu_name:
+      title: The name of the menu
+    attributes:
+      title: Drupal attributes.
