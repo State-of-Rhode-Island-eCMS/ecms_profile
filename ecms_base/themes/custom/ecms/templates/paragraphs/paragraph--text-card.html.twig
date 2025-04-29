@@ -51,8 +51,7 @@
 {# Card Style #}
 {% set card_style = content.field_collection_card_style|render|striptags|trim|clean_class %}
 
-{% include "@molecules/text-card/text-card.twig" with {
-    title: paragraph.field_card_title.value,
-    text: text,
-  }
-%}
+{{ include('ecms:text-card', {
+  title: paragraph.field_card_title.value,
+  text: text,
+}, with_context = FALSE) }}

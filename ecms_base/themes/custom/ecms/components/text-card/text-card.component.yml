@@ -1,0 +1,12 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Text - Card Component
+description: Text card paragraph component
+props:
+  type: object
+  properties: {}
+  slots:
+    title:
+      title: The speech title.
+    text:
+      title: The text to display
