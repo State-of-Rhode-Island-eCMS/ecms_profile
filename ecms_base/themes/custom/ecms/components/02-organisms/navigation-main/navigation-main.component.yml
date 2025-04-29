@@ -13,3 +13,5 @@ props:
       title: The name of the menu
     attributes:
       title: Drupal attributes.
+    level_one_link:
+      title: The first link
