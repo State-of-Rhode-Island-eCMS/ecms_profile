@@ -41,3 +41,4 @@ composer.lock
 
 # ddev development site
 /develop
+./ddev/homeadditions/bin/generate-composer
