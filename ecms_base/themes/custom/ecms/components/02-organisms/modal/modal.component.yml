@@ -1,0 +1,25 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Modal dialog
+description: Modal
+props:
+  type: object
+  properties:
+    home_screen:
+      type: boolean
+      title: Is the modal on the home screen
+    media_library_icon:
+      type: boolean
+      title: The icon in media library
+  slots:
+    node:
+      title: The node object
+    content:
+      title: The node content
+    icon:
+      title: The icon to display
+libraryOverrides:
+  dependencies:
+    - ecms/modal
+  js:
+    modal.js: {}
+

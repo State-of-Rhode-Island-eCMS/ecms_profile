@@ -24,7 +24,7 @@ components:
     pages:
       - ecms_patternlab/source/_patterns/04-pages
     icons:
-      - ecms_patternlab/source/images/icons
+      - assets/images/icons
     illustrations:
       - ecms_patternlab/source/images/illustrations
     generic:
