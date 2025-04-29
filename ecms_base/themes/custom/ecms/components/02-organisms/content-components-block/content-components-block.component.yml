@@ -1,0 +1,19 @@
+# Audiences list.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Content Components block
+description: Content Components block.
+props:
+  type: object
+  properties:
+    bg_color_class:
+      title: Color class for the component.
+      type: string
+  slots:
+    title_prefix:
+      title: The title prefix variable.
+    title_suffix:
+      title: The title suffix variable.
+    label:
+      title: The label to display
+    rendered_components:
+      title: Render array of components
