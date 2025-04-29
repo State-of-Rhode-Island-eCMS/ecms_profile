@@ -37,6 +37,9 @@ ddev exec "composer create-project drupal/recommended-project:${DRUPAL_CORE} dev
 # Delete the lock file to add the profile's dependencies.
 ddev exec 'rm -f develop/composer.lock'
 
+# Copy the generate composer command to the ~/bin directory.
+ddev exec 'ln -s -f /var/www/html/scripts/generate-composer.php ~/bin/generate-composer'
+
 # Symlink the profile
 # Create a `contrib` profile directory
 ddev exec 'mkdir -p $DDEV_DOCROOT/profiles/contrib/ecms_profile'
