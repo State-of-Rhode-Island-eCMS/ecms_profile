@@ -16,6 +16,18 @@ if ! [ -x "$(command -v ddev)" ]; then
   exit 1
 fi
 
+# Whether to enable performance mode after installation.
+## This flag should be passed _if_ using Mac OS.
+PERFORMANCE_MODE=0
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -p | --performance )         shift
+                                PERFORMANCE_MODE=1
+                                ;;
+    esac
+done
+
 ddev config \
   --project-name="$APP_NAME" \
   --project-type=drupal \
@@ -24,7 +36,8 @@ ddev config \
   --database="mysql:5.7" \
   --webserver-type="apache-fpm" \
   --nodejs-version=10 \
-  --composer-root="develop"
+  --composer-root="develop" \
+  --performance-mode=none
 
 # Get ddev started.
 ddev start
@@ -59,3 +72,9 @@ ddev exec 'composer install --working-dir=develop'
 
 ## Install the site profile.
 ddev exec 'drush site:install ecms_acquia --db-url=mysql://db:db@db:3306/db?module=mysql#tableprefix --yes'
+
+if [ "$PERFORMANCE_MODE" == "1" ]; then
+  ddev stop
+  ddev config --performance-mode=mutagen;
+  ddev start
+fi
