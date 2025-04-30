@@ -1,0 +1,9 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Column Container - Paragraph
+description: Column container paragraph
+props:
+  type: object
+  properties: {}
+  slots:
+    content:
+      title: The rendered child paragraphs
