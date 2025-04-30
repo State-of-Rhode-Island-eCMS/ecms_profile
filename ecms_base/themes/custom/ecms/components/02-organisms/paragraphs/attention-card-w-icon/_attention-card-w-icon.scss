@@ -1,0 +1,141 @@
+.qh__icon-card {
+  $card-header-min-height--sm: rem(72); // approx 3 lines of an h3
+  $card-header-min-height--lg: rem(70); // approx 2 lines of an h3
+  $card-leftbar-width: rem(48);
+
+  background-color: var(--fc__default__bg);
+  color: var(--fc__default__fg);
+  flex: 0 0 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .qh-layout-section__col & {
+    &:first-child {
+      height: 100%;
+    }
+  }
+
+  // Light colored background
+  &::before {
+    background-color: var(--fc__attention-card__bar);
+    content: '';
+    opacity: 0.25;
+    position: absolute;
+    @include qh-inset-supports(0);
+    z-index: -2;
+  }
+
+  // Dark colored bar
+  &::after {
+    background-color: var(--fc__attention-card__bar);
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $card-leftbar-width;
+    z-index: -1;
+  }
+
+  &__icon {
+    color: var(--fc__attention-card__icon);
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: ($general-v-spacing / 2);
+    margin-left: ($general-h-spacing/2);
+    min-height: $card-header-min-height--sm;
+    width: ($card-leftbar-width + $general-h-spacing);
+
+    svg {
+      height: (($card-leftbar-width + $general-h-spacing) * .75);
+    }
+
+    path {
+      fill: currentColor;
+    }
+
+    // Assuming this will be the actual icon
+    // Same background color as the dark bar
+    > span {
+      position: relative;
+      overflow: visible;
+      z-index: 1;
+
+      &::before {
+        background-color: var(--fc__attention-card__bar);
+        border-radius: 50%;
+        content: '';
+        display: block;
+        height: ($icon-dimension * 1.5);
+        width: ($icon-dimension * 1.5);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+    }
+
+    @media (min-width: $bp--large) {
+      min-height: $card-header-min-height--lg;
+    }
+  }
+
+  &__content {
+    color: var(--fc__attention-card__fg);
+    padding: ($general-v-spacing / 2) $general-h-spacing ($general-v-spacing / 2) ($general-h-spacing / 2);
+    width: calc(100% - #{($card-leftbar-width + $general-h-spacing)});
+
+    p,
+    ul,
+    li {
+      font-size: 1rem;
+      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+        --font-size-min-value: 0.925;
+        --font-size-max-value: 1;
+        --font-size-scaler-value: var(--p-scaler-value);
+        font-size: var(--font-size);
+
+        --font-lh-min-value: #{$st-lh-s};
+        --font-lh-max-value: #{$st-lh-l};
+        --font-lh-scaler-value: var(--st-lh-scaler-value);
+        line-height: var(--line-height);
+
+      }
+    }
+  }
+
+  h3#{&}__title {
+    color: var(--fc__attention-card__fg);
+    display: flex;
+    flex-flow: column;
+    font-size: 1.25rem;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: $card-header-min-height--sm;
+    margin-top: 0;
+    margin-bottom: ($general-v-spacing/2);
+
+    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+      --font-size-min-value: 1.125;
+      --font-size-max-value: 1.5;
+      --font-size-scaler-value: var(--h3-scaler-value);
+      font-size: var(--font-size);
+    }
+
+    @media (min-width: $bp--large) {
+      min-height: $card-header-min-height--lg;
+    }
+
+    @include onlyIE() {
+      display: block; // negate flex because test strings were overflowing
+    }
+  }
+}

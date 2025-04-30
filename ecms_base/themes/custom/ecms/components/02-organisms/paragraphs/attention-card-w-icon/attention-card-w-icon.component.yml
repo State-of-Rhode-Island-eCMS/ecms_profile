@@ -1,0 +1,16 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Accordion - Paragraph
+description: Accordion paragraph
+props:
+  type: object
+  properties:
+    media_library_icon:
+      type: boolean
+      title: Use a media library icon
+  slots:
+    content:
+      title: The content of the accordion
+    paragraph:
+      title: The paragraph entity
+    icon:
+      title: The default icon.
