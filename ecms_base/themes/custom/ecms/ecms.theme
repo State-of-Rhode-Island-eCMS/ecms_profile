@@ -771,7 +771,7 @@ function ecms_preprocess_paragraph__event_list(array &$variables): void {
     ->condition('status', 1);
 
   // Add event type condition.
-  if ($event_type) {
+  if (isset($event_type)) {
     $query->condition('field_event_type', $event_type);
   }
 

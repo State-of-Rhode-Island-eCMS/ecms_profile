@@ -69,19 +69,19 @@
     {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
   {% endif %}
 
-  {% include ("ecms:media-item", {
+  {{ include ("ecms:media-item", {
     type: "img",
     caption: text,
     img: img,
-  }, with_context = false) %}
+  }, with_context = FALSE) }}
 {% endif %}
 
 {% if media_type == 'media_item_video' %}
   {% set video_source = content.field_gallery_item|render|striptags("<iframe>") %}
 
-  {% include ("ecms:media-item", {
+  {{ include ("ecms:media-item", {
     type: "video",
     caption: text,
     source: video_source
-  }, with_context = false) %}
+  }, with_context = FALSE) }}
 {% endif %}

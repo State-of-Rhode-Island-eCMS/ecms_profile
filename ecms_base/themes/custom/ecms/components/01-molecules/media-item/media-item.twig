@@ -28,8 +28,7 @@
 {% set classes = classes ~ " " ~ align %}
 
 <figure class="qh__media-item {{ classes }}">
-  {% switch type %}
-  {% case 'img' %}
+  {% if type == 'img' %}
     {% if link_url %}
       <a href={{ link_url }} title="{{ link_title }}">
         {{ img|raw }}
@@ -37,17 +36,19 @@
     {% else %}
       {{ img|raw }}
     {% endif %}
+  {% endif %}
 
-  {% case 'video' %}
+  {% if type == 'video' %}
     <div class="qh__media-item__video">{{ source|raw }}</div>
+  {% endif %}
 
-  {% case 'audio' %}
+  {% if type == 'audio' %}
     <div class="qh__media-item__audio">
       <audio controls>
         <source src="{{ audio_url }}" type="{{ audio_mimetype }}">
       </audio>
     </div>
-  {% endswitch %}
+  {% endif %}
 
   {% if caption %}
     <figcaption>{{ caption }}</figcaption>
