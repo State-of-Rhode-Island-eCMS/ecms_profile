@@ -47,10 +47,6 @@
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
                 "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
-
-            },
-            "drupal/layout_builder_iframe_modal": {
-                "3344339 - Hide the ‘Rebuild layout’ link in the layout builder actions area": "https://gist.githubusercontent.com/pfrilling/cce2cd4ce1f24e2c91a15fed0ce95412/raw/9058159f7ca199485692d3b4d1f052809ca8619d/3344339-hide-rebuild-layout-button.patch"
             },
             "drupal/search_api": {
                 "3321499 - #19 - Call to a member function preExecute() on null in SearchApiTimeCache::generateResultsKey()": "https://www.drupal.org/files/issues/2023-12-05/search_api-Call_to_a_member_function_preExecute%28%29_on_null-3321499.patch"
