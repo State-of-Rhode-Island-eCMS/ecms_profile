@@ -24,4 +24,3 @@ test -f develop/composer.lock || (./scripts/generate-composer.php > develop/merg
 test -f develop/merge.composer.json && (mv develop/merge.composer.json develop/composer.json)
 
 composer install --working-dir=develop
-#drush site:install ecms_acquia --db-url=mysql://db:db@db:3306/db?module=mysql#tableprefix --yes
