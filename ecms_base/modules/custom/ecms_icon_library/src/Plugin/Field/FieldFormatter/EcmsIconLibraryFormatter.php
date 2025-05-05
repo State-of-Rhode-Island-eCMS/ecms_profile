@@ -6,7 +6,6 @@ namespace Drupal\ecms_icon_library\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\Render\Markup;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\svg_image\Plugin\Field\FieldFormatter\SvgImageFormatterTrait;
