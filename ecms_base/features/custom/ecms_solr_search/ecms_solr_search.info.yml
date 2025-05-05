@@ -1,7 +1,7 @@
 name: 'eCMS Acquia Solr Search'
 description: 'Provides an optional Solr driven search'
 type: module
-core_version_requirement: '^9.4 || ^10' || ^11
+core_version_requirement: '^9.4 || ^10 || ^11'
 dependencies:
   - ':ecms_basic_page'
   - ':ecms_landing_page'
