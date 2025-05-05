@@ -8,11 +8,11 @@ To develop this installation profile, start by running
 ./scripts/develop.sh
 ```
 
-This script will create a new lando project based on the Oomphinc scaffold file
-in the following directory:
+This script will create a new ddev project from the drupal/core-recommended
+project in the following directory:
 
 ```bash
-../develop-ecms-profile
+./develop
 ```
 
 [Detailed development instructions can be found here](docs/development.md).

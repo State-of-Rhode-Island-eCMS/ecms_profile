@@ -32,18 +32,15 @@ putenv('ENCRYPTION_PRIVATE_KEY=[SECRET_KEY_VALUE]');
     dd if=/dev/urandom bs=32 count=1 | base64 -i - > path/to/encrypt.key
     ```
    Use the putenv() call as shown above in a settings.local.php file,
-   or use a Lando environment file as described in steps 2 & 3 below.
+   or use a ddev environment file as described in steps 2 & 3 below.
 
 2) Copy the contents from the generated file into your local ENV file.
-   Configure a [local environment file] for Lando (e.g.):
-    ```yml
-    env_file:
-      - .env
-    ```
-   This will require a `lando rebuild`
+   Configure a [local environment file] for DDEV (e.g.):
+    `./ddev/.env`
+   This will require a `ddev restart`
 3) with the following contents (at a minimum):
     ```env
     ENCRYPTION_PRIVATE_KEY=[SECRET_KEY_FROM_STEP_1]
 
     ```
-[local environment file]: https://docs.lando.dev/config/env.html#environment-files
+[local environment file]: https://ddev.readthedocs.io/en/stable/users/extend/customization-extendibility/#environment-variables-for-containers-and-services
