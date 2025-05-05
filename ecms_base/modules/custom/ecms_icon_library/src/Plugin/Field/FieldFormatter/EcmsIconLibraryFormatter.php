@@ -9,6 +9,7 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Render\Markup;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
+use Drupal\svg_image\Plugin\Field\FieldFormatter\SvgImageFormatterTrait;
 
 /**
  * Plugin implementation of the 'image' formatter.
@@ -25,6 +26,8 @@ use Drupal\media\Entity\Media;
  * )
  */
 class EcmsIconLibraryFormatter extends FormatterBase {
+
+  use SvgImageFormatterTrait;
 
   /**
    * {@inheritdoc}
@@ -54,63 +57,17 @@ class EcmsIconLibraryFormatter extends FormatterBase {
           return;
         }
 
-        $file_uri = File::load($fid)->getFileUri();
-        $file_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+        $file = File::load($fid);
 
-        // Render as SVG tag.
-        $svgRaw = $this->urlGetContents($file_url);
+        $tempElement = [];
+        $this->renderAsSvg($file, $tempElement, $elements[$delta]['#url']);
 
-        if ($svgRaw === FALSE) {
-          \Drupal::logger('ecms_icon_library')->notice(
-            'File ID ' . $fid . ' cannot be loaded as SVG.'
-          );
-          continue;
-        }
-
-        $svgRaw = preg_replace(
-          ['/<\?xml.*\?>/i', '/<!DOCTYPE((.|\n|\r)*?)">/i'],
-          '',
-          $svgRaw
-        );
-        $svgRaw = trim($svgRaw);
-
-        $elements[$delta]['media_library_icon'] = [
-          '#markup' => Markup::create($svgRaw),
-        ];
+        $elements[$delta]['media_library_icon'] = $tempElement;
       }
     }
 
     return $elements;
 
-  }
-
-  /**
-   * Replacement for function file_get_contents().
-   *
-   * See stackoverflow.com/questions/3979802/alternative-to-file-get-contents.
-   *
-   * From curl_exec() docs: "If the CURLOPT_RETURNTRANSFER option is set,
-   * it will return the result on success, false on failure."
-   *
-   * @param string $url
-   *   The URL of the file to be fetched.
-   *
-   * @return string|bool
-   *   The output of cURL response, if successful; or FALSE.
-   */
-  private function urlGetContents(string $url): string|bool {
-    if (!function_exists('curl_init')) {
-      \Drupal::logger('ecms_icon_library')->notice(
-        '`urlGetContents()` cannot work because `CURL` is not available.'
-      );
-      return FALSE;
-    }
-    $curl_handle = curl_init();
-    curl_setopt($curl_handle, CURLOPT_URL, $url);
-    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, TRUE);
-    $output = curl_exec($curl_handle);
-    curl_close($curl_handle);
-    return $output;
   }
 
 }

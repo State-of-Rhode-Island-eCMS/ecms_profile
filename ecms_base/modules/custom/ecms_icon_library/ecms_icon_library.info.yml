@@ -3,3 +3,6 @@ type: module
 description: 'Creates the necessary field plugins for the icon library'
 core_version_requirement: ^9 || ^10
 package: 'eCMS'
+
+dependencies:
+  - svg_image
