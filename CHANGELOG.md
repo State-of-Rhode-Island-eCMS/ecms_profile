@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-607: Removed unnecessary call to `curl` for image loading
 
 ### Security
 
