@@ -1,0 +1,15 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Publication list - Paragraph
+description: Publication list paragraph
+props:
+  type: object
+  properties: {}
+  slots:
+    publications:
+      title: The publication node list
+    list_title:
+      title: The list title
+    lang_label:
+      title: The lang label
+    audience_form:
+      title: The audience form.
