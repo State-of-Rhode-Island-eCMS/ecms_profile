@@ -1,0 +1,13 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Person list - Paragraph
+description: Person list paragraph
+props:
+  type: object
+  properties: {}
+  slots:
+    list_mode:
+      title: The type of list
+    person_listing:
+      title: The listing of persons
+    photo_list:
+      title: The photo listing.
