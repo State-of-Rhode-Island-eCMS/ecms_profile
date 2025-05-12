@@ -27,6 +27,7 @@
  *   comment/reply/12345).
  *
  * Regions:
+ * - page.emergency_notification: Items for the emergency notification region.
  * - page.header: Items for the header region.
  * - page.primary_menu: Items for the primary menu region.
  * - page.secondary_menu: Items for the secondary menu region.
@@ -42,18 +43,68 @@
  * @see html.html.twig
  */
 #}
+<div class="qh-layout qh-layout--sidebar">
 
-{% include "@templates/00-layouts/_page.html.pl.twig" with {
-  base_path: base_path,
-  is_front: is_front,
-  logged_in: logged_in,
-  is_admin: is_admin,
-  front_page: front_page,
-  page: page,
-  node: node,
-  header_preprocess_values: header_preprocess_values,
-  footer_preprocess_values: footer_preprocess_values,
-  illustration: illustration
-}
-%}
+  {% if page.emergency_notification %}
+    <div class="qh-layout__emergency-notification">
+      {{ page.emergency_notification }}
+    </div>
+  {% endif %}
 
+  {% include '@organisms/page-header/page-header.twig' with {
+    header_preprocess_values: header_preprocess_values,
+    front_page: front_page,
+    language_switcher: page.language_switcher,
+    header_inner: page.header_inner,
+    header_global: page.header_global
+  }
+  %}
+
+  {{ page.primary_menu }}
+  {{ page.secondary_menu }}
+
+  {{ page.highlighted }}
+
+  {{ page.breadcrumb }}
+
+  {{ page.help }}
+
+  <main id="main-content" tabindex="-1">
+    <div class="qh-layout__grid">
+      {% if page.sidebar_top %}
+        <div class="qh-layout__sidebar-top" role="complementary">
+          {{ page.sidebar_top }}
+        </div>
+      {% endif %}
+
+      <div class="qh-layout__content">
+        {{ page.admin_links }}
+        {{ page.content }}
+      </div>
+
+      {% if page.sidebar_middle %}
+        <aside class="qh-layout__sidebar-middle" role="complementary">
+          {{ page.sidebar_middle }}
+        </aside>
+      {% endif %}
+
+      {% if page.sidebar_bottom %}
+        <aside class="qh-layout__sidebar-bottom" role="complementary">
+          {{ page.sidebar_bottom }}
+        </aside>
+      {% endif %}
+    </div>
+
+    {% include '@molecules/illustration/illustration.twig' with {
+      illustration: illustration
+    }
+    %}
+
+  </main>
+
+  {% include '@organisms/page-footer/page-footer.twig' with {
+    footer_preprocess_values: footer_preprocess_values
+  }
+  %}
+
+</div>{# /.qh-layout #}
