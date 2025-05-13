@@ -1,0 +1,15 @@
+# User settings
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: User settings component
+description: User settings component.
+props:
+  type: object
+  properties: {}
+  slots:
+    language_switcher:
+      title: The language switcher if applicable\
+
+libraryOverrides:
+  js:
+    user-settings.js: {}
+
