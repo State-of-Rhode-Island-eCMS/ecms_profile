@@ -1,4 +1,5 @@
 global-styling:
+  version: 2.0.4
   css:
     theme:
       assets/styles/styles.css: { preprocess: true }
@@ -8,11 +9,13 @@ global-styling:
     - core/drupal
 
 header-scripts:
+  version: 2.0.4
   header: true
   js:
     assets/vendor/fontfaceobserver.js: { preprocess: false, weight: -100 }
 
 tiny-slider:
+  version: 2.9.7
   css:
     theme:
        assets/vendor/tiny-slider/tiny-slider.css: {}
@@ -22,12 +25,14 @@ tiny-slider:
     - ecms/global-styling
 
 rrule-js:
+  version: 2.7.1
   js:
     assets/vendor/rrule/rrule.min.js:  { weight: -1, attributes: { type: "module"}, minified: true }
   dependencies:
     - ecms/global-styling
 
 modal:
+  version: 1.1.5
   js:
     assets/vendor/micromodal/micromodal.min.js:  { weight: -1, attributes: { type: "module"}, minified: true }
   dependencies:
