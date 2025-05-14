@@ -1,0 +1,225 @@
+@mixin button-disabled-style {
+  background-color: transparent;
+  background: repeating-linear-gradient(-45deg,
+  var(--fc__default__button__bg),
+  var(--fc__default__button__bg) 0.5em,
+  var(--fc__default__button--hover__bg) 0.5em,
+  var(--fc__default__button--hover__bg) 1em);
+  cursor: default;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+// <p>-like typography styles applied via 02-text/00-typography
+button,
+.qh__btn,
+.button {
+  --p-font-wght: 500;
+  border: 0;
+  border-radius: $button-border-radius;
+  display: inline-block;
+  letter-spacing: $kerning-base;
+  overflow: hidden;
+  padding: $button-v-spacing $button-h-spacing;
+  transition: $transition-base;
+  user-select: none;
+  vertical-align: middle;
+
+  // Primary color theme (highlight, more colorful)
+  // :visited on a <button> is not a thing but most of the time these may be <a>s
+  &,
+  &:visited {
+    background-color: var(--fc__default__button__bg);
+    background-image: linear-gradient(rgba(#fff, 0.125) 10%,
+    rgba(#fff, 0) 50%,
+    rgba(#000, 0) 80%,
+    rgba(#000, 0.125) 100%);
+    color: var(--fc__default__button__fg);
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--fc__default__button--hover__bg);
+    color: var(--fc__default__button--hover__fg);
+  }
+
+  &:focus {
+    outline: $border-sm solid var(--fc__default__link--focus);
+    outline-offset: $border-sm;
+  }
+
+  &:disabled {
+    @include button-disabled-style;
+  }
+
+  // Opinionated: add "hand" cursor to non-disabled .btn elements
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.qh__btn {
+  // Uses the default accent colors. Inverses on hover.
+  &--accent {
+    &,
+    &:visited {
+      background-color: var(--fc__default__accent);
+      color: var(--fc__default__accent__fg);
+    }
+
+    &:hover,
+    &:focus {
+      background-color: var(--fc__default__fg);
+      color: var(--fc__default__accent);
+    }
+  }
+
+  // More subdued color theme based on primary--light
+  &--secondary {
+    &,
+    &:visited {
+      background-color: var(--fc__primary--light__bg);
+      color: var(--fc__primary--light__fg);
+    }
+
+    &:hover,
+    &:focus {
+      background-color: var(--fc__default__fg);
+      color: var(--fc__default__bg);
+    }
+
+    html:not(.light) {
+      &,
+      &:visited {
+        background-color: var(--fc__primary--light__bg--dark);
+        color: var(--fc__primary--light__fg--dark);
+      }
+
+      &:hover,
+      &:focus {
+        background-color: var(--fc__default__fg--dark);
+        color: var(--fc__default__bg--dark);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.light) {
+        &,
+        &:visited {
+          background-color: var(--fc__primary--light__bg--dark);
+          color: var(--fc__primary--light__fg--dark);
+        }
+
+        &:hover,
+        &:focus {
+          background-color: var(--fc__default__fg--dark);
+          color: var(--fc__default__bg--dark);
+        }
+      }
+    }
+  }
+
+  &--small {
+    font-size: rem(14);
+    padding: ($button-v-spacing / 2) ($button-h-spacing / 2);
+  }
+
+  // Button with SVG
+  // SVG should appear first and then text. Do not include wrapper around SVG.
+  &--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $h3-size-s;
+    line-height: $h3-lh-s;
+
+    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+      --font-size-min-value: #{$h3-size-s-value};
+      --font-size-max-value: #{$h3-size-l-value};
+      --font-size-scaler-value: var(--h3-scaler-value);
+      --font-lh-min-value: #{$h3-lh-s};
+      --font-lh-max-value: #{$h3-lh-l};
+      --font-lh-scaler-value: var(--h3-lh-scaler-value);
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+      word-spacing: var(--word-spacing);
+    }
+
+    @include breakpoint-between($bp--small, $bp--large) {
+      flex-direction: column;
+    }
+
+    &::after {
+      content: none !important;
+    }
+
+    > svg {
+      min-width: 6rem;
+      width: 6rem;
+      height: 6rem;
+      position: relative;
+      left: -0.75rem;
+
+      @include breakpoint-between($bp--small, $bp--large) {
+        left: 0;
+      }
+    }
+  }
+
+  &:disabled,
+  &--disabled {
+    @include button-disabled-style;
+  }
+
+  // Opinionated: add "hand" cursor to non-disabled .btn elements
+  &:not(&--disabled):not(&:disabled) {
+    cursor: pointer;
+  }
+
+  // Reset other button elements
+  button#{&},
+  &[type='button'],
+  &[type='reset'],
+  &[type='submit'] {
+    @include qh-button-reset();
+  }
+}
+
+// Utility
+
+// Treat a <button> visually like a text link
+.qh__u__btn-as-text {
+  border-radius: 0;
+  display: inline;
+  hyphens: none;
+  line-height: inherit;
+  padding: 0;
+  text-align: inherit;
+  user-select: auto;
+  white-space: normal;
+
+  &,
+  &:visited,
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    background-image: none;
+    color: var(--fc__default__link);
+  }
+
+  &,
+  &:visited {
+    color: var(--fc__default__link);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--fc__default__link--hover);
+  }
+
+  &:active {
+    color: var(--fc__default__link--active);
+  }
+}

@@ -1,0 +1,35 @@
+.qh__teaser-article {
+  padding-bottom: $general-v-spacing;
+
+  // <header>
+  &__header {
+    padding-bottom: ($general-v-spacing/3);
+  }
+
+  &__title {
+    margin: 0;
+
+    a,
+    a:visited {
+      text-decoration: none;
+    }
+  }
+
+  &__published {
+    margin-top: ($general-v-spacing/4);
+
+    time {
+      font-size: 87.5%; // about 16px
+      font-style: italic;
+      font-variant-numeric: oldstyle-nums;
+    }
+  }
+
+  // <div> wrapper
+  &__content {
+    padding-bottom: $general-v-spacing;
+  }
+
+  // <p>
+  &__excerpt {}
+}

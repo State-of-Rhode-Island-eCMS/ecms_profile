@@ -1,0 +1,75 @@
+.qh__global-header {
+  background-color: var(--fc__official__bg);
+  color: var(--fc__official__fg);
+
+  @media print {
+    display: none;
+  }
+
+  &__wrapper {
+    @include qh-content-maxwidth();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: ($general-v-spacing/2) $general-h-spacing;
+
+    &--multiple-region {
+      @include breakpoint-down($bp--small) {
+        margin: 0;
+        flex-direction: column;
+        align-items: flex-start;
+
+        > p {
+          margin-bottom: rem(5);
+        }
+      }
+    }
+  }
+
+  // <p>
+  &__tagline {}
+
+  // <p><a role="button'>
+  &__settings {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  a,
+  .qh__settings-menu__toggle,
+  .qh__language-menu__toggle {
+    text-decoration: none;
+
+    &,
+    &:visited {
+      color: var(--fc__official__link);
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--fc__official__link--hover);
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline-color: var(--fc__official__link--focus);
+    }
+
+    &:active {
+      color: var(--fc__official__link--active);
+    }
+  }
+
+  p,
+  .qh__settings-menu__toggle,
+  .qh__language-menu__toggle,
+  .google-translator-switch {
+    font-size: 87.5%;
+    font-weight: 375;
+
+    // Remove later once there are vertical rhythm rules in place for content containers only
+    & + p {
+      margin-top: 0;
+    }
+  }
+}
