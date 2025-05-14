@@ -13,10 +13,6 @@
     "prefer-stable": true,
     "license": "GPL-2.0-or-later",
     "repositories": {
-        "ecms_patternlab": {
-            "type": "git",
-            "url": "https://github.com/State-of-Rhode-Island-eCMS/ecms_patternlab.git"
-        },
         "0": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
@@ -64,12 +60,8 @@
         },
         "preserve-paths": [],
         "drupal-scaffold": [],
-        "installer-types": ["pattern-lab"],
-        "installer-paths": {
-            "web/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/{$name}": [
-                "type:pattern-lab"
-            ]
-        }
+        "installer-types": [],
+        "installer-paths": {}
     },
     "config": {
         "process-timeout": 0,
@@ -207,8 +199,7 @@
         "gravitypdf/querypath": "^3.2",
         "johngrogg/ics-parser": "^2",
         "oomphinc/composer-installers-extender": "^2.0",
-        "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8",
-        "state-of-rhode-island-ecms/ecms_patternlab": "dev-master || ^0.8.2"
+        "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
