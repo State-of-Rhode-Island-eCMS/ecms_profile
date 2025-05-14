@@ -115,10 +115,9 @@
       {% endif %}
     </div>
 
-    {% include '@molecules/illustration/illustration.twig' with {
+    {{ include('ecms:illustration', {
       illustration: illustration
-    }
-    %}
+    }, with_context = FALSE) }}
 
   </main>
 
