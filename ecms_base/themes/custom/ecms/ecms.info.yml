@@ -1,7 +1,7 @@
 name: Rhode Island eCMS Theme
 description: "Drupal custom theme for the State of Rhode Island's eCMS system"
 type: theme
-core_version_requirement: '^9 || ^10'
+core_version_requirement: '^9 || ^10 || ^11'
 base theme: classy
 
 version: 1.x
@@ -13,20 +13,8 @@ libraries:
 
 components:
   namespaces:
-    atoms:
-      - ecms_patternlab/source/_patterns/00-atoms
-    molecules:
-      - ecms_patternlab/source/_patterns/01-molecules
-    organisms:
-      - ecms_patternlab/source/_patterns/02-organisms
-    templates:
-      - ecms_patternlab/source/_patterns/03-templates
-    pages:
-      - ecms_patternlab/source/_patterns/04-pages
     icons:
       - assets/images/icons
-    illustrations:
-      - ecms_patternlab/source/images/illustrations
     generic:
       - templates/generic
 
