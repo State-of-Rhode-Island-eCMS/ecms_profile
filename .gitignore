@@ -1,3 +1,8 @@
+# Drupal
+/libraries
+/modules/contrib
+/themes/contrib
+
 # Compiled assets
 /**/*.css
 /**/*.js
@@ -48,6 +53,7 @@ composer.lock
 
 # ddev development site
 /develop
+./ddev/homeadditions/bin/generate-composer
 
 # Git merge artifacts
 *.orig
