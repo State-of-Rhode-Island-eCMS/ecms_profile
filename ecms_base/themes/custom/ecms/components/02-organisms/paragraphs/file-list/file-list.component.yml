@@ -5,8 +5,8 @@ description: File listing for paragraph entity.
 props:
   type: object
   properties: {}
-  slots:
-    list_title:
-      title: The title for the file list.
-    files:
-      title: Array of files
+slots:
+  list_title:
+    title: The title for the file list.
+  files:
+    title: Array of files

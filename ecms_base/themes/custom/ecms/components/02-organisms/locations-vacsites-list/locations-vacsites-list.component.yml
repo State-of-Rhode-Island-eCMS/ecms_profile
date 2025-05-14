@@ -7,16 +7,16 @@ props:
     rows_loop:
       type: boolean
       title: Loop over the rows.
-  slots:
-    title:
-      title: The view title.
-    rows:
-      title: The content of the list.
-    exposed:
-      title: Exposed view filters
-    pager:
-      title: Pager display
-    more:
-      title: More link for view.
-    feed_icons:
-      title: Feed icons for the view.
+slots:
+  title:
+    title: The view title.
+  rows:
+    title: The content of the list.
+  exposed:
+    title: Exposed view filters
+  pager:
+    title: Pager display
+  more:
+    title: More link for view.
+  feed_icons:
+    title: Feed icons for the view.

@@ -4,15 +4,16 @@ name: Pagination
 description: Pagination display
 props:
   type: object
-  slots:
-    header_id:
-      title: The header id.
-    items:
-      title: Array of pager items.
-    current:
-      title: The current item
-    ellipses:
-      title: Array of ellipses information.
+  properties: {}
+slots:
+  header_id:
+    title: The header id.
+  items:
+    title: Array of pager items.
+  current:
+    title: The current item
+  ellipses:
+    title: Array of ellipses information.
 
 
 

@@ -9,11 +9,11 @@ props:
       type: boolean
     list_end:
       type: boolean
-  slots:
-    title:
-      title: The component title
-    rendered_components:
-      title: The nested paragraph componenets.
+slots:
+  title:
+    title: The component title
+  rendered_components:
+    title: The nested paragraph componenets.
 
 
 

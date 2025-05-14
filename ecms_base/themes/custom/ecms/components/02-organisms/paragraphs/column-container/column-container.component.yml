@@ -4,6 +4,6 @@ description: Column container paragraph
 props:
   type: object
   properties: {}
-  slots:
-    content:
-      title: The rendered child paragraphs
+slots:
+  content:
+    title: The rendered child paragraphs

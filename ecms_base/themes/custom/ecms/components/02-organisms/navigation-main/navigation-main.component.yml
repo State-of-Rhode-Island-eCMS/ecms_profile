@@ -4,14 +4,14 @@ description: Main navigation component.
 props:
   type: object
   properties: {}
-  slots:
-    items:
-      title: The menu items
-    front_page:
-      title: The path to the home page
-    menu_name:
-      title: The name of the menu
-    attributes:
-      title: Drupal attributes.
-    level_one_link:
-      title: The first link
+slots:
+  items:
+    title: The menu items
+  front_page:
+    title: The path to the home page
+  menu_name:
+    title: The name of the menu
+  attributes:
+    title: Drupal attributes.
+  level_one_link:
+    title: The first link

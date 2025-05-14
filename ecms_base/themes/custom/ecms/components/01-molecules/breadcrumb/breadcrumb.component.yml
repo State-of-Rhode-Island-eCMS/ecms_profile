@@ -4,6 +4,7 @@ name: Breadcrumb
 description: The breadcrumb trail
 props:
   type: object
-  slots:
-    breadcrumb:
-      title: The breadcrumb array of navigation items.
+  properties: {}
+slots:
+  breadcrumb:
+    title: The breadcrumb array of navigation items.

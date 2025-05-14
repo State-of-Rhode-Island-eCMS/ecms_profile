@@ -7,10 +7,10 @@ props:
     media_library_icon:
       type: boolean
       title: Use a media library icon
-  slots:
-    content:
-      title: The content of the accordion
-    paragraph:
-      title: The paragraph entity
-    icon:
-      title: The default icon.
+slots:
+  content:
+    title: The content of the accordion
+  paragraph:
+    title: The paragraph entity
+  icon:
+    title: The default icon.

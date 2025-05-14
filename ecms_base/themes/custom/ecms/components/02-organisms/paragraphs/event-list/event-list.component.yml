@@ -4,12 +4,12 @@ description: Event list paragraph
 props:
   type: object
   properties: {}
-  slots:
-    events:
-      title: The rendered events
-    title:
-      title: The list title
-    more_url:
-      title: The more url
-    more_title:
-      title: The title of the link.
+slots:
+  events:
+    title: The rendered events
+  title:
+    title: The list title
+  more_url:
+    title: The more url
+  more_title:
+    title: The title of the link.

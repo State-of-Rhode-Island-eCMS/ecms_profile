@@ -4,9 +4,9 @@ name: Teaser Notification
 description: Teaser view for notification
 props:
   type: object
-  slots:
-    label:
-      title: The title of the notification
-    text:
-      title: The message of the notification
-
+  properties: {}
+slots:
+  label:
+    title: The title of the notification
+  text:
+    title: The message of the notification

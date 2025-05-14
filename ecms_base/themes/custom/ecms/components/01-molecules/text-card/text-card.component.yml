@@ -5,8 +5,8 @@ description: Text card paragraph component
 props:
   type: object
   properties: {}
-  slots:
-    title:
-      title: The speech title.
-    text:
-      title: The text to display
+slots:
+  title:
+    title: The speech title.
+  text:
+    title: The text to display

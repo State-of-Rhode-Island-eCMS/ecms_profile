@@ -4,6 +4,7 @@ name: Search State CTA
 description: Search state CTA
 props:
   type: object
-  slots:
-    search_link:
-      title: The global search link.
+  properties: {}
+slots:
+  search_link:
+    title: The global search link.

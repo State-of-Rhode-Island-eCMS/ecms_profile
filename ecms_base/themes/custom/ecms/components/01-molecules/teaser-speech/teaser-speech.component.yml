@@ -5,12 +5,12 @@ description: Teaser view for the speech content type
 props:
   type: object
   properties: {}
-  slots:
-    title:
-      title: The speech title.
-    url:
-      title: The publication url
-    date:
-      title: The publish date
-    excerpt:
-      title: The summary
+slots:
+  title:
+    title: The speech title.
+  url:
+    title: The publication url
+  date:
+    title: The publish date
+  excerpt:
+    title: The summary

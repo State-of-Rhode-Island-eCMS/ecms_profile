@@ -4,10 +4,10 @@ description: Card paragraph
 props:
   type: object
   properties: {}
-  slots:
-    rendered_components:
-      title: The rendered child paragraphs
-    title:
-      title: The title of the card
-    bg_color_class:
-      title: The background color class
+slots:
+  rendered_components:
+    title: The rendered child paragraphs
+  title:
+    title: The title of the card
+  bg_color_class:
+    title: The background color class

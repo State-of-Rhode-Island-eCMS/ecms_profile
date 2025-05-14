@@ -17,25 +17,25 @@ props:
     datetime_endtime_format:
       title: The format for the end time
       type: string
-  slots:
-    url:
-      title: The URL to the main page
-    title:
-      title: The node title
-    location:
-      title: The location of the event
-    rrule:
-      title: The repeat rule
-    month:
-      title: The month of the event
-    start_date:
-      title: The starting date of the event
-    end_date:
-      title: The end date of the event
-    start_time:
-      title: The starting time
-    end_time:
-      title: The end time for the event
+slots:
+  url:
+    title: The URL to the main page
+  title:
+    title: The node title
+  location:
+    title: The location of the event
+  rrule:
+    title: The repeat rule
+  month:
+    title: The month of the event
+  start_date:
+    title: The starting date of the event
+  end_date:
+    title: The end date of the event
+  start_time:
+    title: The starting time
+  end_time:
+    title: The end time for the event
 
 libraryOverrides:
   dependencies:

@@ -5,14 +5,14 @@ description: Teaser view for the promotion content type
 props:
   type: object
   properties: {}
-  slots:
-    name:
-      title: The promotion title.
-    publication_icon:
-      title: The icon to display
-    publication_readable:
-      title: Is the publication readable
-    url:
-      title: The publication url
-    enable_download:
-      title: Enable download option
+slots:
+  name:
+    title: The promotion title.
+  publication_icon:
+    title: The icon to display
+  publication_readable:
+    title: Is the publication readable
+  url:
+    title: The publication url
+  enable_download:
+    title: Enable download option

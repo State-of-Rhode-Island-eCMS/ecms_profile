@@ -13,23 +13,23 @@ props:
     file_type_icon:
       type: string
 
-  slots:
-    edit_permission:
-      title: Does the user have edit permission.
-    edit_url:
-      title: The url to edit the file.
-    file_url:
-      title: The url to the file.
-    name:
-      title: The name of the file.
-    file_description:
-      title: The optional description of the file.
-    file_type_readable:
-      title: Readable file type name.
-    file_size_amount:
-      title: The file size without the unit
-    file_size_short_amount:
-      title: The short format of the unit
-    file_size_long_format:
-      title: The long format of the unit.
+slots:
+  edit_permission:
+    title: Does the user have edit permission.
+  edit_url:
+    title: The url to edit the file.
+  file_url:
+    title: The url to the file.
+  name:
+    title: The name of the file.
+  file_description:
+    title: The optional description of the file.
+  file_type_readable:
+    title: Readable file type name.
+  file_size_amount:
+    title: The file size without the unit
+  file_size_short_amount:
+    title: The short format of the unit
+  file_size_long_format:
+    title: The long format of the unit.
 

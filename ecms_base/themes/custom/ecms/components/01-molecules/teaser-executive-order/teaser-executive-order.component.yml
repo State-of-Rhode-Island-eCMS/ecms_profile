@@ -8,14 +8,14 @@ props:
     datetime_date_format:
       type: string
       title: The format of the date.
-  slots:
-    title:
-      title: The title of the node
-    long_title:
-      title: The long title of the node
-    summary:
-      title: The summary to display
-    date:
-      title: The published date
-    url:
-      title: The URL to link.
+slots:
+  title:
+    title: The title of the node
+  long_title:
+    title: The long title of the node
+  summary:
+    title: The summary to display
+  date:
+    title: The published date
+  url:
+    title: The URL to link.

@@ -4,8 +4,9 @@ name: Audiences served
 description: Audiences served list.
 props:
   type: object
-  slots:
-    label:
-      title: The label for the list.
-    items:
-      title: The content of the list.
+  properties: {}
+slots:
+  label:
+    title: The label for the list.
+  items:
+    title: The content of the list.

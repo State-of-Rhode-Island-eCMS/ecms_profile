@@ -4,10 +4,10 @@ description: Accordion paragraph
 props:
   type: object
   properties: {}
-  slots:
-    content:
-      title: The content of the accordion
-    paragraph:
-      title: The paragraph entity
-    pid:
-      title: The Parent ID
+slots:
+  content:
+    title: The content of the accordion
+  paragraph:
+    title: The paragraph entity
+  pid:
+    title: The Parent ID

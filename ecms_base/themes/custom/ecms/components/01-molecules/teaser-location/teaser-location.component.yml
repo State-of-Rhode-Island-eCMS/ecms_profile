@@ -4,16 +4,17 @@ name: Teaser location
 description: Teaser for location nodes
 props:
   type: object
-  slots:
-    title:
-      title: The title of the node
-    location:
-      title: The location.
-    url:
-      title: The URL to link.
-    website_url:
-      title: Website of the location
-    phone:
-      title: Phone of the location
-    extension:
-      title: Phone extension
+  properties: {}
+slots:
+  title:
+    title: The title of the node
+  location:
+    title: The location.
+  url:
+    title: The URL to link.
+  website_url:
+    title: Website of the location
+  phone:
+    title: Phone of the location
+  extension:
+    title: Phone extension

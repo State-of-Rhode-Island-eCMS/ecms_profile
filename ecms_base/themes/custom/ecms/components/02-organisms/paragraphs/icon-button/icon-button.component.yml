@@ -4,18 +4,18 @@ description: Icon button paragraph
 props:
   type: object
   properties: {}
-  slots:
-    content:
-      title: The rendered content.
-    paragraph:
-      title: The paragraph entity.
-    media_library_icon:
-      title: THe icon to be used.
-    icon:
-      title: The default icon to use.
-    link_url:
-      title: The URL to link to.
-    link_title:
-      title: The title of the link.
-    button_color_class:
-        title: The color class to use.
+slots:
+  content:
+    title: The rendered content.
+  paragraph:
+    title: The paragraph entity.
+  media_library_icon:
+    title: THe icon to be used.
+  icon:
+    title: The default icon to use.
+  link_url:
+    title: The URL to link to.
+  link_title:
+    title: The title of the link.
+  button_color_class:
+      title: The color class to use.

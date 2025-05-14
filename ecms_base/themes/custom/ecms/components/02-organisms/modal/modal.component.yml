@@ -10,13 +10,13 @@ props:
     media_library_icon:
       type: boolean
       title: The icon in media library
-  slots:
-    node:
-      title: The node object
-    content:
-      title: The node content
-    icon:
-      title: The icon to display
+slots:
+  node:
+    title: The node object
+  content:
+    title: The node content
+  icon:
+    title: The icon to display
 libraryOverrides:
   dependencies:
     - ecms/modal

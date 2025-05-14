@@ -4,9 +4,10 @@ name: Language switcher
 description: Display the language switcher
 props:
   type: object
-  slots:
-    languages:
-      title: Array of available language links.
+  properties: {}
+slots:
+  languages:
+    title: Array of available language links.
 
 
 

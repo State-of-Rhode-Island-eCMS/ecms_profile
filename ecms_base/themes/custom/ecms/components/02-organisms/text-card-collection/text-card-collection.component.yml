@@ -7,14 +7,14 @@ props:
     card_style:
       type: string
       title: The class modifier
-  slots:
-    label:
-      title: The label of the block
-    cards:
-      title: The content list
-    description:
-      title: The description field\
-    title_prefix:
-      title: The title prefix
-    title_suffix:
-      title: The title suffix
+slots:
+  label:
+    title: The label of the block
+  cards:
+    title: The content list
+  description:
+    title: The description field\
+  title_prefix:
+    title: The title prefix
+  title_suffix:
+    title: The title suffix

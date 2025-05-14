@@ -4,10 +4,10 @@ description: Person list paragraph
 props:
   type: object
   properties: {}
-  slots:
-    list_mode:
-      title: The type of list
-    person_listing:
-      title: The listing of persons
-    photo_list:
-      title: The photo listing.
+slots:
+  list_mode:
+    title: The type of list
+  person_listing:
+    title: The listing of persons
+  photo_list:
+    title: The photo listing.

@@ -5,8 +5,8 @@ description: User settings component.
 props:
   type: object
   properties: {}
-  slots:
-    header_preprocess_values:
-      title: Values determined by the preprocess function
-    front_page:
-      title: Is this the home page
+slots:
+  header_preprocess_values:
+    title: Values determined by the preprocess function
+  front_page:
+    title: Is this the home page

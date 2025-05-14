@@ -4,12 +4,12 @@ description: Publication list paragraph
 props:
   type: object
   properties: {}
-  slots:
-    publications:
-      title: The publication node list
-    list_title:
-      title: The list title
-    lang_label:
-      title: The lang label
-    audience_form:
-      title: The audience form.
+slots:
+  publications:
+    title: The publication node list
+  list_title:
+    title: The list title
+  lang_label:
+    title: The lang label
+  audience_form:
+    title: The audience form.

@@ -4,6 +4,6 @@ description: Site notifications block
 props:
   type: object
   properties: {}
-  slots:
-    content:
-      title: The block content
+slots:
+  content:
+    title: The block content

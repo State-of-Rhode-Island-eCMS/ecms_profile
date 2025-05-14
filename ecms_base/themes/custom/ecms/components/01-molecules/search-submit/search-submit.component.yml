@@ -11,6 +11,6 @@ props:
     data_drupal_selector:
       type: string
       description: 'Optional selector attribute for the button'
-  slots:
-    children:
-      description: 'Additional elements to render after the button'
+slots:
+  children:
+    description: 'Additional elements to render after the button'

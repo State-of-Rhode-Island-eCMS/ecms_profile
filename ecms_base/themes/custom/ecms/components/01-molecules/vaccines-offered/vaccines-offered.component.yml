@@ -5,8 +5,8 @@ description: Vaccines offered component
 props:
   type: object
   properties: {}
-  slots:
-    label:
-      title: The title.
-    items:
-      title: Items array
+slots:
+  label:
+    title: The title.
+  items:
+    title: Items array

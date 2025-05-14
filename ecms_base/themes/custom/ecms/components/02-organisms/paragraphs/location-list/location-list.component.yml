@@ -4,12 +4,12 @@ description: Location list paragraph
 props:
   type: object
   properties: {}
-  slots:
-    locations:
-      title: The locations content
-    form_title:
-      title: The form title
-    node_link:
-      title: The link to the node.
-    category_form:
-      title: The category form to display
+slots:
+  locations:
+    title: The locations content
+  form_title:
+    title: The form title
+  node_link:
+    title: The link to the node.
+  category_form:
+    title: The category form to display

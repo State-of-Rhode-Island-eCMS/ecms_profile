@@ -5,9 +5,9 @@ description: User settings component.
 props:
   type: object
   properties: {}
-  slots:
-    language_switcher:
-      title: The language switcher if applicable\
+slots:
+  language_switcher:
+    title: The language switcher if applicable\
 
 libraryOverrides:
   js:

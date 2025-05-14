@@ -11,9 +11,8 @@ props:
       enum:
         - rhody-red--bright
         - hope-gold--bright
-  slots:
-    emergency_label:
-      title: The title of the notification
-    emergency_message:
-      title: The message of the notification
-
+slots:
+  emergency_label:
+    title: The title of the notification
+  emergency_message:
+    title: The message of the notification

@@ -13,16 +13,14 @@ props:
       enum:
         - enable
         - disable
-
-  slots:
-    url:
-      title: URL for the article
-    title:
-      title: The article title
-    date:
-      title: Article date
-    excerpt:
-      title: The summary for the article
-    alt_read_text:
-      title: Text for the CTA.
-
+slots:
+  url:
+    title: URL for the article
+  title:
+    title: The article title
+  date:
+    title: Article date
+  excerpt:
+    title: The summary for the article
+  alt_read_text:
+    title: Text for the CTA.

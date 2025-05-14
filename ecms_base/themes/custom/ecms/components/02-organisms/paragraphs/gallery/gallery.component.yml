@@ -4,13 +4,13 @@ description: Gallery paragraph
 props:
   type: object
   properties: {}
-  slots:
-    content:
-      title: The rendered content
-    pid:
-      title: The paragraph id
-    slides_raw:
-      title: The raw slides
+slots:
+  content:
+    title: The rendered content
+  pid:
+    title: The paragraph id
+  slides_raw:
+    title: The raw slides
 libraryOverrides:
   dependencies:
     - ecms/tiny-slider

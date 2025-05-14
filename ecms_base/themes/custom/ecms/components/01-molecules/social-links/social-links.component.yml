@@ -4,6 +4,7 @@ name: Social links
 description: Social links menu component
 props:
   type: object
-  slots:
-    items:
-      title: The search items.
+  properties: {}
+slots:
+  items:
+    title: The search items.

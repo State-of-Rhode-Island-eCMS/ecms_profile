@@ -8,12 +8,12 @@ props:
     display_title:
       title: Display the title
       type: string
-  slots:
-    title:
-      title: The promotion title.
-    img:
-      title: The image to display
-    text:
-      title: The text to display
-    url:
-      title: The url to display.
+slots:
+  title:
+    title: The promotion title.
+  img:
+    title: The image to display
+  text:
+    title: The text to display
+  url:
+    title: The url to display.

@@ -4,15 +4,16 @@ name: Page title with image
 description: Page title with image block
 props:
   type: object
-  slots:
-    title:
-      title: The block title
-    img:
-      title: The image to render
-    title_prefix:
-      title: The title prefix render meta.
-    title_suffix:
-      title: The title suffix render meta.
+  properties: {}
+slots:
+  title:
+    title: The block title
+  img:
+    title: The image to render
+  title_prefix:
+    title: The title prefix render meta.
+  title_suffix:
+    title: The title suffix render meta.
 
 
 
