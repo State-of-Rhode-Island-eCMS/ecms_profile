@@ -207,6 +207,7 @@ permissions:
   - 'edit terms in publication_audience'
   - 'edit terms in publication_topic'
   - 'edit terms in publication_type'
+  - 'manually clear ecms api publishing queue'
   - 'publish any content'
   - 'publish any node type basic_page'
   - 'publish any node type event'

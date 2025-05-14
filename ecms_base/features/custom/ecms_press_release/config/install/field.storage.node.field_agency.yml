@@ -44,6 +44,9 @@ settings:
       value: department_of_corrections
       label: 'Department of Corrections'
     -
+      value: department_of_housing
+      label: 'Department of Housing'
+    -
       value: department_of_human_services
       label: 'Department of Human Services'
     -
@@ -148,6 +151,9 @@ settings:
     -
       value: water_resources_board
       label: 'Water Resources Board'
+    -
+      value: other
+      label: 'Other'
   allowed_values_function: ''
 module: options
 locked: false

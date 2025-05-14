@@ -28,19 +28,19 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   field_agency:
     type: options_buttons
-    weight: 129
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
   field_meta_tags_press_release:
     type: metatag_firehose
-    weight: 128
+    weight: 16
     region: content
     settings:
       sidebar: true
@@ -48,7 +48,7 @@ content:
     third_party_settings: {  }
   field_press_release_body:
     type: text_textarea_with_summary
-    weight: 121
+    weight: 11
     region: content
     settings:
       rows: 9
@@ -58,13 +58,13 @@ content:
     third_party_settings: {  }
   field_press_release_date:
     type: datetime_default
-    weight: 122
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   field_press_release_links:
     type: link_default
-    weight: 123
+    weight: 13
     region: content
     settings:
       placeholder_url: ''
@@ -72,7 +72,7 @@ content:
     third_party_settings: {  }
   field_press_release_paragraphs:
     type: entity_reference_paragraphs
-    weight: 125
+    weight: 15
     region: content
     settings:
       title: 'Content Component'
@@ -82,46 +82,29 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-  field_press_release_promotions:
-    type: entity_reference_autocomplete
-    weight: 127
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_press_release_source:
     type: text_textarea
-    weight: 124
+    weight: 14
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  langcode:
-    type: language_select
-    weight: 2
-    region: content
-    settings:
-      include_locked: true
-    third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 15
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -133,40 +116,40 @@ content:
     settings: {  }
     third_party_settings: {  }
   simple_sitemap:
-    weight: 10
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 120
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 16
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS
@@ -181,9 +164,11 @@ content:
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_press_release_promotions: true
   field_press_release_topics: true
+  langcode: true
