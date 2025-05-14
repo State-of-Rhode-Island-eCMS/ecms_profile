@@ -47,12 +47,12 @@
 
   {% if rows %}
 
-    {% include '@organisms/articles-latest/articles-latest.twig' with {
+    {{ include('ecms:articles-latest', {
       title: title,
       rows: rows,
       more_title: more['#title'],
       more_url: more['#url'].toString()
-    } %}
+    }, with_context = FALSE) }}
 
   {% elseif empty %}
       {{ empty }}

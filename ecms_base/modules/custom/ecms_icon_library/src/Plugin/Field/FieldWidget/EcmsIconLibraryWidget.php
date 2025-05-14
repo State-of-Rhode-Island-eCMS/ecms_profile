@@ -124,11 +124,11 @@ class EcmsIconLibraryWidget extends WidgetBase {
     $path = \Drupal::service('extension.list.theme')->getPath($defaultTheme);
 
     // If the source file doesn't exist, ignore the form alteration.
-    if (!file_exists("{$path}/ecms_patternlab/source/_data/icons.json")) {
+    if (!file_exists("{$path}/assets/data/icons.json")) {
       return [];
     }
 
-    $json = json_decode(file_get_contents("{$path}/ecms_patternlab/source/_data/icons.json"));
+    $json = json_decode(file_get_contents("{$path}/assets/data/icons.json"));
 
     if (!property_exists($json, 'icons')) {
       return [];

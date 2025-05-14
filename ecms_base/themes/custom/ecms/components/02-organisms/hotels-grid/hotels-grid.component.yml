@@ -1,0 +1,16 @@
+# Google translate block.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Hotels grid block
+description: Hotels grid block
+props:
+  type: object
+  properties: {}
+slots:
+  label:
+    title: The block title
+  cards:
+    title: Array of cards to display.
+  title_prefix:
+    title: Title prefix variable
+  title_suffix:
+    title: Title suffix variable.

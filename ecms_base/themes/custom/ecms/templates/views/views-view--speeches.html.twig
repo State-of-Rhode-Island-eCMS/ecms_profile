@@ -48,12 +48,12 @@
 
 {% if rows %}
 
-  {% include '@organisms/speeches-latest/speeches-latest.twig' with {
+  {{ include('ecms:speeches-latest', {
     title: title,
     rows: rows,
     more_title: more['#title'],
     more_url: more['#url'].toString()
-  } %}
+  }, with_context = FALSE) }}
 
 {% elseif empty %}
     {{ empty }}

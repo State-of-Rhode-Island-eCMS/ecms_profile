@@ -48,9 +48,8 @@
   {% set bg_color_class = 'qh__tc__' ~ paragraph.field_background_color.value %}
 {% endif %}
 
-{% include "@organisms/paragraphs/card/card.twig" with {
-    rendered_components: rendered_components,
-    title: paragraph.field_card_title.value,
-    bg_color_class: bg_color_class,
-  }
-%}
+{{ include('ecms:card', {
+  rendered_components: rendered_components,
+  title: paragraph.field_card_title.value,
+  bg_color_class: bg_color_class,
+}, with_context = FALSE) }}

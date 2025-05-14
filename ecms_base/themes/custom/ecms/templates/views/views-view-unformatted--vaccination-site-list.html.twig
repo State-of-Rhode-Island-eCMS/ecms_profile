@@ -47,11 +47,11 @@
 
   {% if rows %}
 
-    {% include '@organisms/locations-vacsites-list/locations-vacsites-list.twig' with {
+    {{ include('ecms:locations-vacsites-list', {
       title: title,
       rows: rows,
       rows_loop: TRUE
-    } %}
+    }, with_context = FALSE) }}
 
   {% elseif empty %}
       {{ empty }}

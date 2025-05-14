@@ -1,0 +1,78 @@
+// NOTE
+// This is not all the mixins or functions for the project
+// Some files have mixins of their own
+//
+// Examples:
+// _00-colors.scss: functions for getting color from the master color map
+
+
+// Used to remove browser styles from button elements
+@mixin qh-button-reset {
+  border: 0;
+  margin: 0;
+  -webkit-appearance: none;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+// Content max-width
+@mixin qh-content-maxwidth() {
+  margin: 0 auto;
+  max-width: $content-max-small-screen;
+
+  @include breakpoint-up($bp--xxlarge) {
+    max-width: $content-max-large-screen;
+  }
+
+  @supports (width: Min(10px, 5px)) {
+    max-width: var(--content-max-width);
+  }
+}
+
+// Icons
+@mixin qh-icon-size() {
+  display: block;
+  height: $icon-dimension;
+  width: $icon-dimension;
+}
+
+// Inset
+// One value must be declared
+@mixin qh-inset-supports($value) {
+  $split-value: str-split($value, ' ');
+  top: $value;
+  right: $value;
+  bottom: $value;
+  left: $value;
+  @supports (inset: $value) {
+    inset: $value;
+  }
+}
+
+// Lists
+@mixin qh-list-reset() {
+  list-style: none;
+  margin: 0;
+
+  li {
+    margin-left: 0;
+
+    + li {
+      margin-top: 0;
+    }
+  }
+}
+
+// Browser Hacking
+@mixin onlyIE() {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
+
+// Z-index map-get helper
+@function z($key) {
+  @return map-get($zindex, $key);
+}

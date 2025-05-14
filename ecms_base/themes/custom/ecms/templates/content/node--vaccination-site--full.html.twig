@@ -85,25 +85,27 @@
 {% set type_in_out = content.field_vacsite_location_type|render|striptags ~ ' – ' ~ content.field_vacsite_indoor_or_outdoor|render|striptags %}
 {% set special_instructions = node.field_vacsite_spec_instructions.value %}
 
-{% include "@templates/01-content/node--vaccination-site--full.html.pl.twig" with {
-  node: node,
-  label: node.label,
-  content: content,
-  type_in_out: type_in_out,
-  special_instructions: special_instructions,
-  url: url,
-  attributes: attributes,
-  title_attributes: title_attributes,
-  content_attributes: content_attributes,
-  author_attributes: author_attributes,
-  title_prefix: title_prefix,
-  title_suffix: title_suffix,
-  view_mode: view_mode,
-  teaser: teaser,
-  page: page,
-  readmore: readmore,
-  logged_in: logged_in,
-  is_admin: is_admin,
-  classes: classes
-}
-%}
+<article{{ attributes.addClass(classes) }}>
+
+  {% if node.label  %}
+    <h1>{{ node.label }}</h1>
+  {% endif %}
+
+  <p><em>{{ type_in_out }}</em></p>
+
+  <div class="vaccine-audience-aside qh__t__coffee-milk">
+    {{ content.field_vacsite_vaccines_offered }}
+
+    {{ content.field_vacsite_audiences }}
+
+    <p><a href="{{ content.field_vacsite_schedule_link.uri }}" class="qh__btn">Check scheduler site</a></p>
+  </div>
+
+  {{ content.field_vacsite_body }}
+
+  {% if special_instructions %}
+    <h3>{{ 'Special Instructions'|t }}</h3>
+    {{ special_instructions|raw }}
+  {% endif %}
+
+</article>
