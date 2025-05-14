@@ -27,7 +27,8 @@ const Hjson = require('gulp-hjson');
 // By default, node-sass does not compile files that begin with _.
 const scssSourcePaths = [
   // "./assets/patterns/**/*.scss",
-  "./assets/styles/*.scss"
+  "./assets/styles/*.scss",
+  "./components/**/*.scss",
 ];
 
 const javascriptSourcePaths = [

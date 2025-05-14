@@ -14,3 +14,5 @@ slots:
 libraryOverrides:
   dependencies:
     - ecms/tiny-slider
+  js:
+    gallery.js: { }
