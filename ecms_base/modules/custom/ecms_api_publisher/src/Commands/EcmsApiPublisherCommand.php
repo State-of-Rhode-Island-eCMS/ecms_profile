@@ -4,8 +4,8 @@ namespace Drupal\ecms_api_publisher\Commands;
 
 use Drupal\consumers\Entity\ConsumerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drush\Commands\DrushCommands;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drush\Commands\DrushCommands;
 
 /**
  * Drush commands for the ECMS API Publisher module.
