@@ -45,7 +45,7 @@ final class EcmsApiPublisherCommand extends DrushCommands {
       $consumers = $this->entityTypeManager->getStorage('consumer')->loadByProperties(['label' => self::PUBLISHER_ID]);
       $consumer = reset($consumers);
 
-      if (!$consumer instanceof ConsumerInterface)  {
+      if (!$consumer instanceof ConsumerInterface) {
         $this->logger()->error(dt('Consumer with ID @id not found.', ['@id' => self::PUBLISHER_ID]));
         return;
       }
