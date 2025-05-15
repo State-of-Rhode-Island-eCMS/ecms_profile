@@ -75,7 +75,9 @@ final class EcmsApiPublisherCommand extends DrushCommands {
    */
   public function updateSyndicates(string $environment): void {
     if (!in_array($environment, self::ENVIRONMENTS)) {
-      $this->logger()->notice(dt('Environment specified is not allowed.'));
+      $this->logger()->notice(dt('Environment @env specified is not allowed.', [
+        '@env' => $environment,
+      ]));
       return;
     }
     try {
