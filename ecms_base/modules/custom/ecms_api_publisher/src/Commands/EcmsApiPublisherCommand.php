@@ -16,7 +16,7 @@ final class EcmsApiPublisherCommand extends DrushCommands {
 
   const SITE_PATTERN = 'riecms.acsitefactory.com';
 
-  const ENVIRONMENTS = ['dev', 'test'];
+  const ENVIRONMENTS = ['01dev' => 'dev', '01test' => 'test'];
 
   /**
    * Construct the EcmsApiPublisherCommand.
@@ -74,7 +74,7 @@ final class EcmsApiPublisherCommand extends DrushCommands {
    * @command ecms:update-syndicates
    */
   public function updateSyndicates(string $environment): void {
-    if (!in_array($environment, self::ENVIRONMENTS)) {
+    if (!array_key_exists($environment, self::ENVIRONMENTS, TRUE)) {
       $this->logger()->notice(dt('Environment @env specified is not allowed.', [
         '@env' => $environment,
       ]));
@@ -105,7 +105,7 @@ final class EcmsApiPublisherCommand extends DrushCommands {
         }
 
         // Replace the environment in the API endpoint.
-        $newEndpoint = sprintf('https://%s.%s-%s', $firstSubdomain, $environment, self::SITE_PATTERN);
+        $newEndpoint = sprintf('https://%s.%s-%s', $firstSubdomain, self::ENVIRONMENTS[$environment], self::SITE_PATTERN);
         $site->set('api_host', $newEndpoint);
         $site->save();
         $this->logger()
