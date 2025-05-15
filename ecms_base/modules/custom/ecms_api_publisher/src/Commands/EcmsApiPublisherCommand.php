@@ -93,7 +93,7 @@ final class EcmsApiPublisherCommand extends DrushCommands {
 
         $url = parse_url(reset($currentEndpoint));
 
-        // Extract the first subdomain from current endpoint
+        // Extract the first subdomain from the current endpoint.
         $matches = [];
         preg_match('/^([^.]+)\./', $url['host'], $matches);
         $firstSubdomain = array_pop($matches);
