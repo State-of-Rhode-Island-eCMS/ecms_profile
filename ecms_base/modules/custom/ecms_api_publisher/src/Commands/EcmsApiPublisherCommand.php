@@ -14,6 +14,10 @@ final class EcmsApiPublisherCommand extends DrushCommands {
 
   const PUBLISHER_ID = 'eCMS Publisher';
 
+  const SITE_PATTERN = 'riecms.acsitefactory.com';
+
+  const ENVIRONMENTS = ['dev', 'test'];
+
   /**
    * Construct the EcmsApiPublisherCommand.
    */
@@ -55,6 +59,60 @@ final class EcmsApiPublisherCommand extends DrushCommands {
       $consumer->set('secret', $clientSecret);
       $consumer->save();
       $this->logger()->success(dt('Consumer with ID @id has been saved successfully.', ['@id' => self::PUBLISHER_ID]));
+    }
+    catch (\Exception $e) {
+      $this->logger()->error($e->getMessage());
+    }
+  }
+
+  /**
+   * Updates the syndicates based on the specified environment.
+   *
+   * @param string $environment
+   *   The environment in which to update the syndicates.
+   *
+   * @command ecms:update-syndicates
+   */
+  public function updateSyndicates(string $environment): void {
+    if (!in_array($environment, self::ENVIRONMENTS)) {
+      $this->logger()->notice(dt('Environment specified is not allowed.'));
+      return;
+    }
+    try {
+      // Load all ecms_api_site entities.
+      $sites = $this->entityTypeManager->getStorage('ecms_api_site')
+        ->loadMultiple();
+
+      if (empty($sites)) {
+        $this->logger()->notice(dt('No API sites found to update.'));
+        return;
+      }
+
+      foreach ($sites as $site) {
+        $currentEndpoint = array_column($site->get('api_host')->getValue(), 'uri');
+
+        $url = parse_url(reset($currentEndpoint));
+
+        // Extract the first subdomain from current endpoint
+        $matches = [];
+        preg_match('/^([^.]+)\./', $url['host'], $matches);
+        $firstSubdomain = array_pop($matches);
+
+        if (empty($firstSubdomain)) {
+          return;
+        }
+
+        // Replace the environment in the API endpoint.
+        $newEndpoint = sprintf('https://%s.%s-%s', $firstSubdomain, $environment, self::SITE_PATTERN);
+        $site->set('api_host', $newEndpoint);
+        $site->save();
+        $this->logger()
+          ->success(dt('Updated API endpoint for site id @id from @old to @new', [
+            '@id' => $site->id(),
+            '@old' => $url['host'],
+            '@new' => $newEndpoint,
+          ]));
+      }
     }
     catch (\Exception $e) {
       $this->logger()->error($e->getMessage());
