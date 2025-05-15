@@ -2387,3 +2387,14 @@ function ecms_base_update_10212(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+/**
+ * Install drupal/password_policy module.
+ * 
+ * Runs as part of 1.1.5 tag.
+ */
+function ecms_base_update_10213(array &$sandbox): void {
+  $modules_to_install = [
+    'password_policy',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+}

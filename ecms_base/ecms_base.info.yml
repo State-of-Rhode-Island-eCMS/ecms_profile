@@ -71,6 +71,7 @@ dependencies:
   - path
   - pathauto
   - page_cache
+  - password_policy
   - publishcontent
   - rabbit_hole
   - real_aes
