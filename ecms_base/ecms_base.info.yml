@@ -92,6 +92,7 @@ dependencies:
   - taxonomy
   - toolbar
   - twig_tweak
+  - ultimate_cron
   - views
   - webform
   - webform_encrypt
