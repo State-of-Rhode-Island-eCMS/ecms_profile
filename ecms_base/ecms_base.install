@@ -2387,6 +2387,7 @@ function ecms_base_update_10212(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
 /**
  * Install drupal/password_policy module.
  * 
