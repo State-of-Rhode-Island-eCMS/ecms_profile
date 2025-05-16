@@ -2390,7 +2390,7 @@ function ecms_base_update_10212(array &$sandbox): void {
 
 /**
  * Install drupal/password_policy module.
- * 
+ *
  * Runs as part of 1.1.5 tag.
  */
 function ecms_base_update_10213(array &$sandbox): void {
