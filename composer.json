@@ -192,6 +192,7 @@
         "drupal/token": "^1.12",
         "drupal/twig_tweak": "^3.2",
         "drupal/twig_vardumper": "^3.0",
+        "drupal/ultimate_cron": "^2.0@beta",
         "drupal/vbo_export": "^4.1",
         "drupal/views_database_connector": "^2.0",
         "drupal/webform": "^6.0",
