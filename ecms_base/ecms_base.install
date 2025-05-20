@@ -2396,6 +2396,8 @@ function ecms_base_update_10212(array &$sandbox): void {
 function ecms_base_update_10213(array &$sandbox): void {
   $modules_to_install = [
     'password_policy',
+    'password_policy_character_types',
+    'password_policy_length',
   ];
   \Drupal::service('module_installer')->install($modules_to_install);
   // Config updates.
