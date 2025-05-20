@@ -1,0 +1,8 @@
+services:
+  ecms_api_publisher.commands:
+    class: \Drupal\ecms_api_publisher\Commands\EcmsApiPublisherCommand
+    arguments:
+      - '@entity_type.manager'
+      - '@config.factory'
+    tags:
+      - { name: drush.command }
