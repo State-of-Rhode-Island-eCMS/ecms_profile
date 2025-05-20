@@ -2389,14 +2389,13 @@ function ecms_base_update_10212(array &$sandbox): void {
 }
 
 /**
- * Install drupal/password_policy, ultimate_cron module.
+ * Install drupal/password_policy module.
  *
  * Runs as part of 1.1.5 tag.
  */
 function ecms_base_update_10213(array &$sandbox): void {
   $modules_to_install = [
     'password_policy',
-    'ultimate_cron',
   ];
   \Drupal::service('module_installer')->install($modules_to_install);
   // Config updates.
