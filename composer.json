@@ -48,6 +48,9 @@
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
             },
+            "drupal/layout_builder_iframe_modal": {
+                "3344339 - Patternlab causing Regression in ^1.3.5. Temporary fix and should be fixed in the theme css": "https://gist.githubusercontent.com/pfrilling/bfcc11f173c0f5e697557f70ea087612/raw/2531994d06daf867d3735f33786280186d800108/riga-hide-rebuild-layout.patch"
+            },
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
                 "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
