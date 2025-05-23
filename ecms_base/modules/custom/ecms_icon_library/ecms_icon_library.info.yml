@@ -1,5 +1,5 @@
 name: 'eCMS Icon Library'
 type: module
 description: 'Creates the necessary field plugins for the icon library'
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: 'eCMS'

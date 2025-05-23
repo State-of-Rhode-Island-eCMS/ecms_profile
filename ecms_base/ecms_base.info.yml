@@ -1,7 +1,7 @@
 name: Rhode Island eCMS System
 type: profile
 description: "Drupal installation profile for the State of Rhode Island's eCMS system"
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 
 # Module dependencies for the distribution.
 # Modules that sub-profiles need must be listed here and_not in install.
