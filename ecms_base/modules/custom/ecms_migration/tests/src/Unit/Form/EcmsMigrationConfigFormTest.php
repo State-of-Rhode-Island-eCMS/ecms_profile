@@ -238,14 +238,16 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $testForm->expects($this->exactly(2))
       ->method('setJsonUrl')
-      ->will($this->returnValueMap([[
-        self::MIGRATION_SETTINGS_CONFIG['ecms_file']['json_source_url'],
-        self::MIGRATION_MIGRATIONS_CONFIG['ecms_file'],
-      ],
+      ->will($this->returnValueMap([
+        [
+          self::MIGRATION_SETTINGS_CONFIG['ecms_file']['json_source_url'],
+          self::MIGRATION_MIGRATIONS_CONFIG['ecms_file'],
+        ],
         [
           self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']['json_source_url'],
           self::MIGRATION_MIGRATIONS_CONFIG['ecms_basic_page'],
-        ]]));
+        ]
+      ]));
 
     $testForm->expects($this->exactly(3))
       ->method('setCssSelector')
