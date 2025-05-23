@@ -177,7 +177,7 @@ class EcmsApiPublisherTest extends UnitTestCase {
    * @return array[]
    *   Parameters to pass to testSyndicateNode.
    */
-  public function dataProviderForTestSyndicateNode(): array {
+  public static function dataProviderForTestSyndicateNode(): array {
     return [
       'test1' => [NULL, FALSE, FALSE],
       'test2' => ['123456', FALSE, FALSE],
