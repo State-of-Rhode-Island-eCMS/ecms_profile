@@ -123,14 +123,10 @@ class EcmsApiRecipientRetrieveNotificationsTest extends UnitTestCase {
 
     $queueFactory->expects($this->exactly(2))
       ->method('get')
-      ->withConsecutive(
-        ['ecms_api_recipient_notification_creation_queue'],
-        ['ecms_api_recipient_notification_pager_queue']
-      )
-      ->willReturnOnConsecutiveCalls(
-        $this->notificationQueue,
-        $this->pagerQueue
-      );
+      ->will($this->returnValueMap([
+        ['ecms_api_recipient_notification_creation_queue', $this->notificationQueue],
+        ['ecms_api_recipient_notification_pager_queue', $this->pagerQueue]
+      ]));
 
     $container = new ContainerBuilder();
     $container->set('unrouted_url_assembler', $this->urlAssembler);
