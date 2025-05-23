@@ -1,7 +1,7 @@
 name: 'Basic page'
 description: 'Provides Basic page content type and related configuration. Add a basic page to the site.'
 type: module
-core_version_requirement: '^9 || ^10'
+core_version_requirement: '^9 || ^10 || ^11'
 dependencies:
   - 'allowed_formats:allowed_formats'
   - 'drupal:content_moderation'

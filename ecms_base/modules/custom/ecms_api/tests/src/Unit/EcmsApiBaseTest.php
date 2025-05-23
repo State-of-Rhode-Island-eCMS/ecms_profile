@@ -453,7 +453,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array[]
    *   Array of parameters to pass to the testGetAccessToken method.
    */
-  public function dataProviderForGetAccessToken(): array {
+  public static function dataProviderForGetAccessToken(): array {
     return [
       'test1' => [
         200,
@@ -651,7 +651,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array[]
    *   Array of parameters for the testSubmitEntity method.
    */
-  public function dataProviderForTestSubmitEntity(): array {
+  public static function dataProviderForTestSubmitEntity(): array {
     return [
       'test1' => [
         'DELETE',
@@ -792,7 +792,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array[]
    *   Array of method parameters for testGetContentTypes().
    */
-  public function dataProviderForTestGetContentTypes(): array {
+  public static function dataProviderForTestGetContentTypes(): array {
     return [
       'test1' => [
         ['notification'],
@@ -997,7 +997,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array[]
    *   Array of parameters to pass to the testCheckEntityExists method.
    */
-  public function dataProviderForTestCheckEntityExists(): array {
+  public static function dataProviderForTestCheckEntityExists(): array {
     return [
       'test1' => [
         -1,
@@ -1136,7 +1136,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array
    *   Array of parameters for testCheckMediaSourceIsFile.
    */
-  public function dataProviderForTestCheckMediaSourceIsFile(): array {
+  public static function dataProviderForTestCheckMediaSourceIsFile(): array {
     return [
       'test1' => [TRUE],
       'test2' => [FALSE],
@@ -1339,7 +1339,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array[]
    *   Parameters to pass to the testFetchEntityFromApi method.
    */
-  public function dataProviderForTestFetchEntityFromApi(): array {
+  public static function dataProviderForTestFetchEntityFromApi(): array {
     return [
       'test1' => [
         -1,
@@ -1513,7 +1513,7 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @return array[]
    *   Array of parameters to pass to testSubmitEntityWithFileFields.
    */
-  public function dataProviderForTestSubmitEntityWithFileFields(): array {
+  public static function dataProviderForTestSubmitEntityWithFileFields(): array {
     return [
       'test1' => ['media', TRUE],
       'test2' => ['fieldable', TRUE],

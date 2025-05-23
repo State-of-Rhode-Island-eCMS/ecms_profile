@@ -317,9 +317,7 @@ class EcmsApiSiteTest extends UnitTestCase {
     $this->setupPluginManager();
 
     // Mock the entitytypeinterface to pass to the baseFieldDefinitions method.
-    $entityTypeInterface = $this->getMockBuilder(
-      EntityTypeInterface::class
-    )->getMock();
+    $entityTypeInterface = $this->createMock(EntityTypeInterface::class);
 
     // Setup a array for our fields.
     $fields = [];

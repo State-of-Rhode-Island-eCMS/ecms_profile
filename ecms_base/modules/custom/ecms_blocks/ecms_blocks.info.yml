@@ -1,7 +1,7 @@
 name: eCMS Blocks
 description: 'Provides block plugins to be used on site.'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS
 dependencies:
   - block

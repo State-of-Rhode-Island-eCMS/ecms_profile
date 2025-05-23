@@ -99,6 +99,7 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
    * {@inheritDoc}
    */
   protected function setUp(): void {
+    parent::setUp();
     // Mock the immutable config for the recipient module.
     $this->apiConfig = $this->createMock(ImmutableConfig::class);
 
