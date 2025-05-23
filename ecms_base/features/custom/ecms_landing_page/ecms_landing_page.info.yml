@@ -1,7 +1,7 @@
 name: 'Landing page'
 description: 'Provides Landing page content type and related configuration.'
 type: module
-core_version_requirement: '^9 || ^10'
+core_version_requirement: '^9 || ^10 || ^11'
 dependencies:
   - 'allowed_formats:allowed_formats'
   - 'drupal:block_content'

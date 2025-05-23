@@ -1,7 +1,7 @@
 name: Location
 description: 'Provides Location content type and related configuration. Manage building and office locations.'
 type: module
-core_version_requirement: '^9 || ^10'
+core_version_requirement: '^9 || ^10 || ^11'
 dependencies:
   - 'address:address'
   - 'drupal:content_moderation'
