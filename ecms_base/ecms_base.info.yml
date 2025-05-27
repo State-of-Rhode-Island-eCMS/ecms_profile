@@ -124,7 +124,6 @@ install:
   - google_tag
   - media_entity_file_replace
   - media_file_delete
-  - media_revisions_ui
   - mysql57
   - update
 
