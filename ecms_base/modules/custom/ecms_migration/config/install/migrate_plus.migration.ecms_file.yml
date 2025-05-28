@@ -76,7 +76,9 @@ process:
       message: 'Cannot import empty filename.'
     - plugin: callback
       callable: urldecode
-    - plugin: transliteration
+    - plugin: service
+      service: transliteration
+      method: transliterate
     - plugin: str_replace
       search: ' '
       replace: '-'
@@ -100,7 +102,9 @@ process:
         - '@pseudo_basename'
     - plugin: callback
       callable: urldecode
-    - plugin: transliteration
+    - plugin: service
+      service: transliteration
+      method: transliterate
     - plugin: str_replace
       search: ' '
       replace: '-'

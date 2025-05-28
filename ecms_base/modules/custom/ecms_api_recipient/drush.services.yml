@@ -10,3 +10,11 @@ services:
       - '@config.storage'
     tags:
       - { name: drush.command }
+
+  ecms_api_recipient.command:
+    class: \Drupal\ecms_api_recipient\Commands\EcmsApiRecipientCommand
+    arguments:
+      - '@entity_type.manager'
+      - '@config.factory'
+    tags:
+      - { name: drush.command }

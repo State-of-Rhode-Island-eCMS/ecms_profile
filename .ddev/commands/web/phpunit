@@ -1,0 +1,1 @@
+cd develop/web && ../vendor/bin/phpunit --configuration=/var/www/html/phpunit.xml "$@"
