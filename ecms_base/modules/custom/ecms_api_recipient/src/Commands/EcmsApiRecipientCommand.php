@@ -53,6 +53,7 @@ final class EcmsApiRecipientCommand extends DrushCommands {
       }
 
       // Save the consumer entity.
+      $consumer->set('client_id', $clientId);
       $consumer->set('uuid', $clientId);
       $consumer->set('secret', $clientSecret);
       $consumer->save();
