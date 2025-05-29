@@ -18,6 +18,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Deprecated
 
 ### Removed
+- RIGA-649: Remove drupal/advagg
 
 ### Fixed
 - RIGA-597: Fixed SOLR field type that was causing log errors.

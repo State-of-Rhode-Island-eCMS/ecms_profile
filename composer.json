@@ -102,7 +102,6 @@
         "drupal/address": "^1.8",
         "drupal/address_phonenumber": "^10.0",
         "drupal/admin_toolbar": "^3.4",
-        "drupal/advagg": "^6.0@alpha",
         "drupal/aggregator": "^2.2",
         "drupal/allowed_formats": "^3.0.0",
         "drupal/asset_injector": "^2.7",
