@@ -2421,7 +2421,7 @@ function ecms_base_update_10213(array &$sandbox): void {
 
 /**
  * Uninstall the media_revisions_ui module.
- * 
+ *
  * Runs as part of 1.1.6 tag.
  */
 function ecms_base_update_10214(array &$sandbox): void {
