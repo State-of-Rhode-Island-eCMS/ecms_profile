@@ -68,7 +68,9 @@ process:
         - constants/DIRECTORY_SEPERATOR
     - plugin: callback
       callable: urldecode
-    - plugin: transliteration
+    - plugin: service
+      service: transliteration
+      method: transliterate
     - plugin: str_replace
       search: ' '
       replace: '-'
@@ -85,7 +87,9 @@ process:
         - basename
     - plugin: callback
       callable: urldecode
-    - plugin: transliteration
+    - plugin: service
+      service: transliteration
+      method: transliterate
     - plugin: str_replace
       search: ' '
       replace: '-'

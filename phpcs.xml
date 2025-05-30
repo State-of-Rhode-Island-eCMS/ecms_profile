@@ -11,6 +11,7 @@
   <exclude-pattern>*.css</exclude-pattern>
   <exclude-pattern>*.js</exclude-pattern>
   <exclude-pattern>ecms_base/themes/custom/ecms/ecms_patternlab/*</exclude-pattern>
+  <exclude-pattern>ecms_base/themes/custom/ecms/node_modules/*</exclude-pattern>
   <exclude-pattern>*Mock.php</exclude-pattern>
   <exclude-pattern>*Test.php</exclude-pattern>
   <exclude-pattern>*TestCase.php</exclude-pattern>
@@ -23,8 +24,8 @@
   <ini name="memory_limit" value="-1" />
 
   <!-- Project autoloader -->
-  <autoload>vendor/autoload.php</autoload>
+  <autoload>../vendor/autoload.php</autoload>
 
   <!-- Project rulesets -->
-  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
+  <rule ref="../vendor/drupal/coder/coder_sniffer/Drupal/ruleset.xml" />
 </ruleset>
