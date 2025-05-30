@@ -41,6 +41,9 @@
     },
     "extra": {
         "patches": {
+            "drupal/address_phonenumber": {
+                "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
+            },
             "drupal/core": {
                 "3266057 - #129 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2024-07-03/3266057-129.patch",
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
