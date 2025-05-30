@@ -1,7 +1,7 @@
 name: eCMS Workflow
 description: 'Provides helper functions for managing the editorial workflow.'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS
 dependencies:
   - content_moderation

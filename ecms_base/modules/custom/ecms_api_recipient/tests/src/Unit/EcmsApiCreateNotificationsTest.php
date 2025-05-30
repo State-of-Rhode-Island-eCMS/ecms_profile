@@ -359,8 +359,9 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->withConsecutive(['user'], ['node'])
-          ->willReturnOnConsecutiveCalls($this->userStorage, $this->nodeStorage);
+          ->will($this->returnValueMap([
+            ['user', $this->userStorage], ['node', $this->nodeStorage]
+          ]));
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
@@ -392,8 +393,9 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->withConsecutive(['user'], ['node'])
-          ->willReturnOnConsecutiveCalls($this->userStorage, $this->nodeStorage);
+          ->will($this->returnValueMap([
+            ['user', $this->userStorage], ['node', $this->nodeStorage]
+          ]));
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
@@ -431,8 +433,10 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->withConsecutive(['user'], ['node'])
-          ->willReturnOnConsecutiveCalls($this->userStorage, $this->nodeStorage);
+          ->will($this->returnValueMap([
+            ['user', $this->userStorage],
+            ['node', $this->nodeStorage]
+          ]));
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
@@ -468,8 +472,9 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->withConsecutive(['user'], ['node'])
-          ->willReturnOnConsecutiveCalls($this->userStorage, $this->nodeStorage);
+          ->will($this->returnValueMap([
+            ['user', $this->userStorage], ['node', $this->nodeStorage]
+          ]));
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
