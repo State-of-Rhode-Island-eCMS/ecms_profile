@@ -10,6 +10,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
+- RIGA-600: Install module password policy
+- RIGA-628: Install module ultimate cron
 
 ### Changed
 
@@ -18,6 +20,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Removed
 
 ### Fixed
+- RIGA-597: Fixed SOLR field type that was causing log errors.
+- RIGA-607: Removed unnecessary call to `curl` for image loading
 
 ### Security
 
