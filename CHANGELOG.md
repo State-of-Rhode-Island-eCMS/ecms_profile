@@ -1364,7 +1364,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
 [Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.5...HEAD
-[1.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.4A...1.1.5
+[1.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.4...1.1.5
 [1.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.3...1.1.4
 [1.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.2...1.1.3
 [1.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...1.1.1
