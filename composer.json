@@ -60,11 +60,16 @@
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
+            },
+            "drupal_git/migrate_process_trim": {
+                "3288638 - Automated Drupal 11 compatibility fixes": "https://git.drupalcode.org/project/migrate_process_trim/-/merge_requests/1.patch"
             }
         },
         "preserve-paths": [],
         "drupal-scaffold": [],
-        "installer-types": ["pattern-lab"],
+        "installer-types": [
+            "pattern-lab"
+        ],
         "installer-paths": {
             "web/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/{$name}": [
                 "type:pattern-lab"

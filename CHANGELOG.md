@@ -10,8 +10,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ## [Unreleased]
 ### Added
-- RIGA-600: Install module password policy
-- RIGA-628: Install module ultimate cron
+- RIGA-670: Added D11 Patch: Migrate Process Trim
 
 ### Changed
 
@@ -21,10 +20,17 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-649: Remove drupal/advagg
 
 ### Fixed
-- RIGA-597: Fixed SOLR field type that was causing log errors.
-- RIGA-607: Removed unnecessary call to `curl` for image loading
 
 ### Security
+
+## [1.1.5] - 2025-05-28
+### Added
+- RIGA-600: Install module password policy
+- RIGA-628: Install module ultimate cron
+
+### Fixed
+- RIGA-597: Fixed SOLR field type that was causing log errors.
+- RIGA-607: Removed unnecessary call to `curl` for image loading
 
 ## [1.1.4] - 2025-04-23
 ### Changed
@@ -1357,7 +1363,8 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIG-37: Fixed the develop script to properly pull in the pattern lab repo.
 - RIG-89: Fixed the Ecms API to work with syndicating translations.
 
-[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.4...HEAD
+[Unreleased]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.5...HEAD
+[1.1.5]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.4A...1.1.5
 [1.1.4]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.3...1.1.4
 [1.1.3]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.2...1.1.3
 [1.1.1]: https://github.com/State-of-Rhode-Island-eCMS/ecms_profile/compare/1.1.0...1.1.1
