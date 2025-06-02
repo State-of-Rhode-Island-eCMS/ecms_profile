@@ -122,6 +122,7 @@
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
         "drupal/facets": "^2.0",
+        "drupal/fast_404": "^3.4",
         "drupal/features": "^3.11",
         "drupal/feeds": "^3.0@RC",
         "drupal/feeds_ex": "^1.0@beta",

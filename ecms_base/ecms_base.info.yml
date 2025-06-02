@@ -32,6 +32,7 @@ dependencies:
   - entity_print
   - entity_reference_revisions
   - extlink
+  - fast_404
   - features_ui
   - feeds
   - field_ui

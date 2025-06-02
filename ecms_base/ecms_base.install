@@ -2418,3 +2418,15 @@ function ecms_base_update_10213(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
+/**
+ * Install drupal/fast_404 module.
+ *
+ * Runs as part of 1.1.6 tag.
+ */
+function ecms_base_update_10214(array &$sandbox): void {
+  $modules_to_install = [
+    'fast_404',
+  ];
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
