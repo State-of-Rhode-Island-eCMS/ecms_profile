@@ -15,6 +15,7 @@ declare(strict_types=1);
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\user\Entity\User;
@@ -1068,7 +1069,7 @@ function ecms_base_update_9062(array &$sandbox): void {
     // possible to copy the files is also confusing, we silently do nothing.
     if (!file_exists($destination . DIRECTORY_SEPARATOR . $file->filename)) {
       try {
-        $file_system->copy($file->uri, $destination, FileSystemInterface::EXISTS_ERROR);
+        $file_system->copy($file->uri, $destination, FileExists::Error);
       }
       catch (FileException $e) {
         // Ignore and continue.
@@ -2420,13 +2421,22 @@ function ecms_base_update_10213(array &$sandbox): void {
 }
 
 /**
+ * Uninstall the media_revisions_ui module.
  * Install drupal/fast_404 module.
- *
  * Runs as part of 1.1.6 tag.
  */
 function ecms_base_update_10214(array &$sandbox): void {
-  $modules_to_install = [
+   $modules_to_install = [
     'fast404',
   ];
+  
+  // Enable new modules.
   \Drupal::service('module_installer')->install($modules_to_install);
+
+  $modules_to_uninstall = [
+    'media_revisions_ui',
+  ];
+
+  // Uninstall the unnecessary modules.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 }

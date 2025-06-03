@@ -41,12 +41,19 @@
     },
     "extra": {
         "patches": {
+            "drupal/address_phonenumber": {
+                "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
+            },
             "drupal/core": {
                 "3266057 - #129 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2024-07-03/3266057-129.patch",
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
                 "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2024-01-09/drupal-core--2024-01-09--3049332-85.patch",
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
+            },
+            "drupal/iek": {
+                "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
+                "3430975 - #9 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/interdiff-last-bot.6938818.txt"
             },
             "drupal/layout_builder_iframe_modal": {
                 "3344339 - Patternlab causing Regression in ^1.3.5. Temporary fix and should be fixed in the theme css": "https://gist.githubusercontent.com/pfrilling/bfcc11f173c0f5e697557f70ea087612/raw/2531994d06daf867d3735f33786280186d800108/riga-hide-rebuild-layout.patch"
@@ -60,7 +67,11 @@
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
+            },
+            "drupal/webform_encrypt": {
+                "3462998 - #3 - Drupal 11 compatibility.": "https://www.drupal.org/files/issues/2025-05-30/3462998-6-2.0.x-webform_encrypt.patch"
             }
+
         },
         "preserve-paths": [],
         "drupal-scaffold": [],

@@ -1,7 +1,7 @@
 name: eCMS API Notification Publisher
 description: 'Provides logic to post notifications to syndicated sites.'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS API
 
 dependencies:

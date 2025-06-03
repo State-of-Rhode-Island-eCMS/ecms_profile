@@ -1,7 +1,7 @@
 name: eCMS API Publisher
 description: 'Provides functionality to allow this site to be a publishing site for syndicated content.'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS API
 
 dependencies:
