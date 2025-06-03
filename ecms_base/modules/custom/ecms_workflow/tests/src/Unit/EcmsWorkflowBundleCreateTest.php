@@ -102,12 +102,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $adminRole = $this->createMock(RoleInterface::class);
     $adminRole->expects($this->exactly(3))
       ->method('grantPermission')
-      ->withConsecutive(
-        ["create terms in {$bundle}"],
-        ["edit terms in {$bundle}"],
-        ["delete terms in {$bundle}"]
-      )
-      ->willReturnSelf();
+      ->will($this->returnValueMap([
+        ["create terms in {$bundle}", $adminRole],
+        ["edit terms in {$bundle}", $adminRole],
+        ["delete terms in {$bundle}", $adminRole]
+      ]));
 
     $adminRole->expects($this->once())
       ->method('save')
@@ -116,12 +115,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $publisherRole = $this->createMock(RoleInterface::class);
     $publisherRole->expects($this->exactly(3))
       ->method('grantPermission')
-      ->withConsecutive(
-        ["create terms in {$bundle}"],
-        ["edit terms in {$bundle}"],
-        ["delete terms in {$bundle}"]
-      )
-      ->willReturnSelf();
+      ->will($this->returnValueMap([
+        ["create terms in {$bundle}", $publisherRole],
+        ["edit terms in {$bundle}", $publisherRole],
+        ["delete terms in {$bundle}", $publisherRole]
+      ]));
 
     $publisherRole->expects($this->once())
       ->method('save')
@@ -129,8 +127,9 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityStorage->expects($this->exactly(2))
       ->method('load')
-      ->withConsecutive([self::SITE_ADMIN_ROLE], [self::CONTENT_PUBLISHER_ROLE])
-      ->willReturnOnConsecutiveCalls($adminRole, $publisherRole);
+      ->will($this->returnValueMap([
+        [self::SITE_ADMIN_ROLE, $adminRole], [self::CONTENT_PUBLISHER_ROLE, $publisherRole]
+      ]));
 
     $this->entityTypeManager->expects($this->once())
       ->method('getStorage')

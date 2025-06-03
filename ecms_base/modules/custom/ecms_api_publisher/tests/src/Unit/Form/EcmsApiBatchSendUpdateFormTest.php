@@ -180,7 +180,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @return array
    *   Array of parameters to pass to the testGetDescription method.
    */
-  public function dataProviderForTestGetDescription(): array {
+  public static function dataProviderForTestGetDescription(): array {
     return [
       'test1' => [1],
       'test2' => [5],
@@ -287,7 +287,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @return array[]
    *   Parameters to pass to the testSubmitForm method.
    */
-  public function dataProviderForTestSubmitForm(): array {
+  public static function dataProviderForTestSubmitForm(): array {
     return [
       'test1' => [3, TRUE],
       'test2' => [1, TRUE],
@@ -400,7 +400,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @return array[]
    *   Parameters for the testPostSyndicateContentFinished method.
    */
-  public function dataProviderForFinishedMethod(): array {
+  public static function dataProviderForFinishedMethod(): array {
     return [
       'test1' => [
         TRUE,
@@ -506,7 +506,7 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @return array
    *   Parameters for the testPostSyndicateContent method.
    */
-  public function dataProviderForTestPostSyndicateContent(): array {
+  public static function dataProviderForTestPostSyndicateContent(): array {
     return [
       'test1' => [TRUE],
       'test2' => [FALSE],

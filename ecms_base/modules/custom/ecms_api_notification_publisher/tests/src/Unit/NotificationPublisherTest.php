@@ -71,6 +71,7 @@ class NotificationPublisherTest extends UnitTestCase {
    * {@inheritDoc}
    */
   public function setUp(): void {
+    parent::setUp();
     $this->httpclient = $this->createMock(ClientInterface::class);
     $this->entityToJsonApi = $this->createMock(EntityToJsonApi::class);
     $this->ecmsApiSyndicate = $this->createMock(EcmsApiSyndicate::class);
@@ -128,8 +129,10 @@ class NotificationPublisherTest extends UnitTestCase {
 
       $this->node->expects($this->exactly($hasFieldCount))
         ->method('hasField')
-        ->withConsecutive(['field_notification_global'], ['moderation_state'])
-        ->willReturnOnConsecutiveCalls($hasGlobalField, $hasModerationField);
+        ->will($this->returnValueMap([
+          ['field_notification_global',$hasGlobalField],
+          ['moderation_state', $hasModerationField],
+        ]));
 
       if ($hasGlobalField) {
         $getFieldCount = 1;
@@ -165,8 +168,10 @@ class NotificationPublisherTest extends UnitTestCase {
 
         $this->node->expects($this->exactly($getFieldCount))
           ->method('get')
-          ->withConsecutive(['field_notification_global'], ['moderation_state'])
-          ->willReturnOnConsecutiveCalls($fieldItemList, $moderationItemList);
+          ->will($this->returnValueMap([
+            ['field_notification_global', $fieldItemList],
+            ['moderation_state', $moderationItemList],
+          ]));
       }
     }
 

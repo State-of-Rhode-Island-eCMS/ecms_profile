@@ -1,6 +1,6 @@
 name: eCMS Search Settings
 description: 'Provides a config form to set character count in search results on site by site basis.'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS
 dependencies: {  }

@@ -72,11 +72,10 @@ class EcmsApiInstallTest extends UnitTestCase {
     $oauthConfig = $this->createMock(Config::class);
     $oauthConfig->expects($this->exactly(2))
       ->method('set')
-      ->withConsecutive(
-        ['public_key', self::OAUTH_PUBLIC_KEY],
-        ['private_key', self::OAUTH_PRIVATE_KEY],
-      )
-      ->willReturnSelf();
+      ->will($this->returnValueMap([
+        ['public_key', self::OAUTH_PUBLIC_KEY, $oauthConfig],
+        ['private_key', self::OAUTH_PRIVATE_KEY, $oauthConfig],
+      ]));
     $oauthConfig->expects($this->once())
       ->method('save')
       ->willReturnSelf();
@@ -86,17 +85,11 @@ class EcmsApiInstallTest extends UnitTestCase {
 
     $this->configFactory->expects($this->exactly(3))
       ->method('getEditable')
-      ->withConsecutive(
-        ['jsonapi.settings'],
-        ['jsonapi_extras.settings'],
-        ['simple_oauth.settings'],
-      )
-      ->willReturnOnConsecutiveCalls(
-        $jsonConfig,
-        $jsonExtraConfig,
-        $oauthConfig,
-      );
-
+      ->will($this->returnValueMap([
+        ['jsonapi.settings', $jsonConfig],
+        ['jsonapi_extras.settings', $jsonExtraConfig],
+        ['simple_oauth.settings', $oauthConfig],
+      ]));
   }
 
   /**
