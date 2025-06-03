@@ -51,6 +51,9 @@
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
             },
+            "drupal/features": {
+                "3447460 - D11 Upgrades": "https://gist.githubusercontent.com/pfrilling/e27933a1a4b8577d3d69d0d4f0bec6a2/raw/0c5df9bd798a0298a6a1c2675ec34881c290aff2/gistfile1.txt"
+            },
             "drupal/iek": {
                 "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
                 "3430975 - #9 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/interdiff-last-bot.6938818.txt"
@@ -133,7 +136,7 @@
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
         "drupal/facets": "^2.0",
-        "drupal/features": "^3.11",
+        "drupal/features": "3.x-dev",
         "drupal/feeds": "^3.0@RC",
         "drupal/feeds_ex": "^1.0@beta",
         "drupal/field_group": "^3.4",
