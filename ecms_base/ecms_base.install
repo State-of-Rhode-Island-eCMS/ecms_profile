@@ -2419,3 +2419,18 @@ function ecms_base_update_10213(array &$sandbox): void {
     $active_storage->write("{$config}", $install_source->read("{$config}"));
   }
 }
+
+/**
+ * Uninstall the media_revisions_ui module.
+ *
+ * Runs as part of 1.1.6 tag.
+ */
+function ecms_base_update_10214(array &$sandbox): void {
+  // Enable new modules.
+  $modules_to_uninstall = [
+    'media_revisions_ui',
+  ];
+
+  // Uninstall the unnecessary modules.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+}
