@@ -62,7 +62,7 @@
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
             },
             "drupal_git/migrate_process_trim": {
-                "3288638 - Automated Drupal 11 compatibility fixes": "https://git.drupalcode.org/project/migrate_process_trim/-/merge_requests/1.patch"
+                "3288638 - Automated Drupal 11 compatibility fixes": "https://gist.githubusercontent.com/juniabiswas/f3420b6608806c4fe8011648c7cffa46/raw/fb41a13b3bd30e8471f111da44598a05c0943b21/migrate_process_trim_d11_compatibility.patch"
             }
         },
         "preserve-paths": [],
