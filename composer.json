@@ -24,19 +24,6 @@
         "1": {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        "2": {
-            "type": "package",
-            "package": {
-                "name": "drupal_git/migrate_process_trim",
-                "type": "drupal-module",
-                "version": "2.0.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://git.drupalcode.org/project/migrate_process_trim.git",
-                    "reference": "4bbec87f0ecdb6d49f9ff2d763ba4f40f5d63d5c"
-                }
-            }
         }
     },
     "extra": {
@@ -61,6 +48,9 @@
             "drupal/layout_builder_iframe_modal": {
                 "3344339 - Patternlab causing Regression in ^1.3.5. Temporary fix and should be fixed in the theme css": "https://gist.githubusercontent.com/pfrilling/bfcc11f173c0f5e697557f70ea087612/raw/2531994d06daf867d3735f33786280186d800108/riga-hide-rebuild-layout.patch"
             },
+            "drupal/migrate_process_trim": {
+                "3288638 - Automated Drupal 11 compatibility fixes": "https://gist.githubusercontent.com/juniabiswas/f1d012dbfe5d83d2738cc8e0f84c8570/raw/f13d1ca37b8b39190972fcda84d8aded9c5521e2/migrate-process-trim-d11.diff"
+            },
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
                 "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
@@ -78,7 +68,9 @@
         },
         "preserve-paths": [],
         "drupal-scaffold": [],
-        "installer-types": ["pattern-lab"],
+        "installer-types": [
+            "pattern-lab"
+        ],
         "installer-paths": {
             "web/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/{$name}": [
                 "type:pattern-lab"
@@ -113,7 +105,7 @@
         "drupal/acquia_purge": "^1.1",
         "drupal/acquia_search": "^3.0",
         "drupal/acsf": "^2.75",
-        "drupal/address": "^1.8",
+        "drupal/address": "^2.0.4",
         "drupal/address_phonenumber": "^10.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/aggregator": "^2.2",
@@ -121,26 +113,27 @@
         "drupal/asset_injector": "^2.7",
         "drupal/auto_entitylabel": "^3.3",
         "drupal/autologout": "^2.0.0",
-        "drupal/better_exposed_filters": "^6.0",
+        "drupal/better_exposed_filters": "^7.0.5",
         "drupal/bigmenu": "^2.0@RC",
         "drupal/captcha": "^2.0",
-        "drupal/classy": "^1.0",
-        "drupal/commerce": "^2.13",
-        "drupal/commerce_stock": "^1.3",
+        "drupal/classy": "^2.0",
+        "drupal/commerce": "^3.0.2",
+        "drupal/commerce_stock": "^3.0.0-beta1",
         "drupal/components": "^3.1",
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/content_moderation_notifications": "^3.2",
         "drupal/core-recommended": "^9.5 || ^10.0",
-        "drupal/easy_breadcrumb": "2.0.5",
+        "drupal/easy_breadcrumb": "2.0.9",
         "drupal/entity_print": "^2.15",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
         "drupal/facets": "^2.0",
+        "drupal/fast_404": "^3.4",
         "drupal/features": "3.x-dev",
         "drupal/feeds": "^3.0@RC",
         "drupal/feeds_ex": "^1.0@beta",
         "drupal/field_group": "^3.4",
-        "drupal/file_delete": "^2.0",
+        "drupal/file_delete": "^3.0",
         "drupal/focal_point": "^2.0.1",
         "drupal/geocoder": "^3.15 || ^4.21",
         "drupal/geofield": "^1.20",
@@ -151,6 +144,7 @@
         "drupal/honeypot": "^2.0",
         "drupal/http_cache_control": "^2.0",
         "drupal/iek": "^1.3",
+        "drupal/inline_entity_form": "^3.0.0-rc21",
         "drupal/jquery_ui_accordion": "^2.1",
         "drupal/jsonapi_extras": "^3.16",
         "drupal/language_cookie": "^2.0",
@@ -159,30 +153,31 @@
         "drupal/layout_builder_modal": "^1.1",
         "drupal/layout_builder_restrictions": "^3.0",
         "drupal/layout_builder_tabs": "^1.0",
-        "drupal/linkit": "^6.1",
+        "drupal/linkit": "^7.0.4",
         "drupal/media_entity_download": "^2.0",
         "drupal/media_entity_file_replace": "^1.1",
         "drupal/media_file_delete": "^1.3",
         "drupal/media_library_form_element": "^2.0.4",
-        "drupal/media_library_theme_reset": "^1.0",
+        "drupal/media_library_theme_reset": "^2.0.0-beta1",
         "drupal/media_pdf_thumbnail": "^6.1@RC",
         "drupal/media_revisions_ui": "^2.1",
         "drupal/memcache": "^2.2",
         "drupal/menu_admin_per_menu": "^1.5",
         "drupal/menu_block": "^1.10",
-        "drupal/metatag": "^1.26",
+        "drupal/metatag": "^2.1.1",
         "drupal/migrate_plus": "^6.0",
+        "drupal/migrate_process_trim": "^2.0",
         "drupal/migrate_tools": "^6.0",
         "drupal/migration_tools": "^2.8",
         "drupal/moderated_content_bulk_publish": "^2.0",
-        "drupal/moderation_dashboard": "^2.0",
+        "drupal/moderation_dashboard": "^3.1",
         "drupal/mysql57": "^1.0",
         "drupal/office_hours": "^1.3",
         "drupal/openid_connect": "^3.0",
         "drupal/openid_connect_windows_aad": "^2.0@beta",
         "drupal/page_manager": "^4.0@RC",
         "drupal/panels": "^4.6.0",
-        "drupal/paragraphs": "^1.15",
+        "drupal/paragraphs": "^1.19",
         "drupal/password_policy": "^4.0",
         "drupal/path_redirect_import": "^2.0",
         "drupal/pathauto": "^1.8",
@@ -199,8 +194,8 @@
         "drupal/search_api_exclude": "^2.0",
         "drupal/search_api_solr": "^4.2",
         "drupal/seckit": "^2.0",
-        "drupal/simple_menu_permissions": "^2.0",
-        "drupal/simple_oauth": "^5.2",
+        "drupal/simple_menu_permissions": "^3.0.1",
+        "drupal/simple_oauth": "^6.0",
         "drupal/simple_sitemap": "^4.1",
         "drupal/smart_date": "^4.0@alpha",
         "drupal/stable": "^2.0",
@@ -211,10 +206,9 @@
         "drupal/ultimate_cron": "^2.0@beta",
         "drupal/vbo_export": "^4.1",
         "drupal/views_database_connector": "^2.0",
-        "drupal/webform": "^6.0",
+        "drupal/webform": "^6.3.0-beta2",
         "drupal/webform_encrypt": "^2.0@alpha",
         "drupal/webform_views": "^5.0@beta",
-        "drupal_git/migrate_process_trim": "2.0.0",
         "drush/drush": "^12 || ^13",
         "geocoder-php/arcgis-online-provider": "^4.3",
         "geocoder-php/google-maps-provider": "^4.6",
