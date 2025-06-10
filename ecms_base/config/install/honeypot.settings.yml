@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: 2AeY10GbJGsBSuTmSuxfh7BRAQSvGDIjiVYsDDwNzPE
 protect_all_forms: false
 unprotected_forms:
   - user_login_form
@@ -13,9 +15,11 @@ form_settings:
   user_register_form: true
   user_pass: true
   node_basic_page_form: false
+  node_emergency_notification_form: false
   node_event_form: false
   node_landing_page_form: false
   node_location_form: false
+  node_modal_form: false
   node_notification_form: false
   node_person_form: false
   node_press_release_form: false
