@@ -2435,6 +2435,7 @@ function ecms_base_update_10214(array &$sandbox): void {
 
   $modules_to_uninstall = [
     'media_revisions_ui',
+    'layout_builder_expose_all_field_blocks',
   ];
 
   // Uninstall the unnecessary modules.
