@@ -2421,7 +2421,7 @@ function ecms_base_update_10213(array &$sandbox): void {
 }
 
 /**
- * Uninstall the media_revisions_ui module and install fast404 module.
+ * Uninstall media_revisions_ui, install fast404, new config for Honeypot.
  *
  * Runs as part of 1.1.6 tag.
  */
@@ -2437,6 +2437,7 @@ function ecms_base_update_10214(array &$sandbox): void {
     'media_revisions_ui',
     'layout_builder_expose_all_field_blocks',
   ];
+
   // Uninstall the unnecessary modules.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
 
