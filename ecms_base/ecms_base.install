@@ -2421,7 +2421,7 @@ function ecms_base_update_10213(array &$sandbox): void {
 }
 
 /**
- * Uninstall the media_revisions_ui module and install fast404 module.
+ * Uninstall media_revisions_ui, install fast404, new config for Honeypot.
  *
  * Runs as part of 1.1.6 tag.
  */
@@ -2440,4 +2440,22 @@ function ecms_base_update_10214(array &$sandbox): void {
 
   // Uninstall the unnecessary modules.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Get reference to config install directory.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  // Get reference to active config storage.
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Import config, now that environment is prepped with installed modules.
+  $new_module_config = [
+    'honeypot.settings',
+  ];
+
+  foreach ($new_module_config as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
 }
