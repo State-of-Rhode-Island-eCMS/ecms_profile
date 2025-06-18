@@ -1,7 +1,7 @@
 name: eCMS API
 description: 'Provides the base configuration for the eCMS API'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS API
 
 dependencies:

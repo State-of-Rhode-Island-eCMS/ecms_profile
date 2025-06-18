@@ -1,5 +1,5 @@
 name: eCMS Authentication
 description: 'Provides helper functions for managing user authentication with Active Directory'
 type: module
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: eCMS
