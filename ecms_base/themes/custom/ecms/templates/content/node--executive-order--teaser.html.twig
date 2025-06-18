@@ -85,11 +85,11 @@
 {% set date = translated_node.field_executive_order_date.value|date('F j, Y') %}
 {% set datetime_date_format = translated_node.field_executive_order_date.value|date('Y-m-d') %}
 
-{% include '@molecules/teaser-executive-order/teaser-execorder.twig' with {
+{{ include('ecms:teaser-executive-order', {
   title: node.label,
   long_title: translated_node.field_executive_order_long_title.value,
   summary: translated_node.field_executive_order_text.summary,
   date: date,
   datetime_date_format: datetime_date_format,
   url: url
-} %}
+}, with_context = FALSE) }}

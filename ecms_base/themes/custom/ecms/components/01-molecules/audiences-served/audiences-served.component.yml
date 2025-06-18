@@ -1,0 +1,12 @@
+# Audiences list.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Audiences served
+description: Audiences served list.
+props:
+  type: object
+  properties: {}
+slots:
+  label:
+    title: The label for the list.
+  items:
+    title: The content of the list.

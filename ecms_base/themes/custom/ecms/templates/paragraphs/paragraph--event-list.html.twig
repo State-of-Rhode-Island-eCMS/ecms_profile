@@ -53,10 +53,9 @@
   {% endif %}
 {% endif %}
 
-{% include "@organisms/paragraphs/event-list/event-list.twig" with {
-    events: events,
-    title: paragraph.field_event_list_title.value,
-    more_url: more_url,
-    more_title: more_title
-  }
-%}
+{{ include('ecms:event-list', {
+  events: events,
+  title: paragraph.field_event_list_title.value,
+  more_url: more_url,
+  more_title: more_title
+}, with_context = FALSE) }}

@@ -73,10 +73,9 @@
 
 {% set publish_date = node.field_speech_date.value|date('l, F d, Y') %}
 
-{% include '@molecules/teaser-speech/teaser-speech.twig' with {
+{{ include('ecms:teaser-speech', {
   title: node.label,
   url: url,
   date: publish_date,
   excerpt: content.field_speech_text
-} %}
-
+}, with_context = FALSE) }}

@@ -1,0 +1,225 @@
+// Mini-themes: Author selected row/column color overrides
+
+// Grouping styles here for Text Card Themes, which use a different class structure
+@mixin qh-primary-theme {
+  background-color: var(--fc__primary__bg);
+  color: var(--fc__primary__fg);
+
+  #{$all-headers} {
+    color: currentColor;
+  }
+
+  a:not(.qh__btn),
+  a:not(.qh__btn):visited {
+    color: var(--fc__primary__link, currentColor);
+  }
+
+  a:not(.qh__btn):hover,
+  a:not(.qh__btn):focus,
+  a:not(.qh__btn):active {
+    color: var(--fc__primary__link--hover, var(--fc__primary__link), currentColor);
+  }
+
+  a:not(.qh__btn):focus {
+    outline-color: var(--fc__primary__link--hover, var(--fc__primary__link), currentColor);
+  }
+
+  .dark & {
+    background-color: var(--fc__primary__bg--dark); // Over the bg, compiles to #2c3243
+    color: var(--fc__primary__fg--dark);
+
+    a:not(.qh__btn),
+    a:not(.qh__btn):visited {
+      color: var(--fc__primary__link--dark, currentColor);
+    }
+
+    a:not(.qh__btn):hover,
+    a:not(.qh__btn):focus,
+    a:not(.qh__btn):active {
+      color: var(--fc__primary__link--dark--hover, var(--fc__primary__link), currentColor);
+    }
+
+    a:not(.qh__btn):focus {
+      outline-color: var(--fc__primary--dark__link--hover, var(--fc__primary__link), currentColor);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      background-color: var(--fc__primary__bg--dark);
+      color: var(--fc__primary__fg--dark);
+
+      a:not(.qh__btn),
+      a:not(.qh__btn):visited {
+        color: var(--fc__primary__link--dark, currentColor);
+      }
+
+      a:not(.qh__btn):hover,
+      a:not(.qh__btn):focus,
+      a:not(.qh__btn):active {
+        color: var(--fc__primary__link--dark--hover, var(--fc__primary__link), currentColor);
+      }
+
+      a:not(.qh__btn):focus {
+        outline-color: var(--fc__primary--dark__link--hover, var(--fc__primary__link), currentColor);
+      }
+    }
+  }
+}
+
+@mixin qh-primary-light-theme {
+  background-color: var(--fc__primary--light__bg);
+  color: var(--fc__primary--light__fg);
+
+  #{$all-headers} {
+    color: currentColor;
+  }
+
+  a:not(.qh__btn),
+  a:not(.qh__btn):visited {
+    color: var(--fc__primary--light__link, currentColor);
+  }
+
+  a:not(.qh__btn):hover,
+  a:not(.qh__btn):focus,
+  a:not(.qh__btn):active {
+    color: var(--fc__primary--light__link--hover, var(--fc__primary--light__link), currentColor);
+  }
+
+  a:not(.qh__btn):focus {
+    outline-color: var(--fc__primary--light__link--hover, var(--fc__primary--light__link), currentColor);
+  }
+
+  .dark & {
+    background-color: var(--fc__primary--light__bg--dark); // Over the bg, compiles to #47515a
+    color: var(--fc__primary--light__fg--dark);
+
+    a:not(.qh__btn),
+    a:not(.qh__btn):visited {
+      color: var(--fc__primary--light--dark__link, currentColor);
+    }
+
+    a:not(.qh__btn):hover,
+    a:not(.qh__btn):focus,
+    a:not(.qh__btn):active {
+      color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
+    }
+
+    a:not(.qh__btn):focus {
+      outline-color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      background-color: var(--fc__primary--light__bg--dark);
+      color: var(--fc__primary--light__fg--dark);
+
+      a:not(.qh__btn),
+      a:not(.qh__btn):visited {
+        color: var(--fc__primary--light--dark__link, currentColor);
+      }
+
+      a:not(.qh__btn):hover,
+      a:not(.qh__btn):focus,
+      a:not(.qh__btn):active {
+        color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
+      }
+
+      a:not(.qh__btn):focus {
+        outline-color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
+      }
+    }
+  }
+}
+
+// Primary
+.qh__t__primary,
+.qh__collection__primary-bg .qh__text-card {
+  @include qh-primary-theme;
+}
+
+// Primary Light
+.qh__t__primary--light,
+.qh__collection__primary-light-bg .qh__text-card {
+  @include qh-primary-light-theme;
+}
+
+// Declare them again… hate the repetitiveness of it, but we are combating inheritance here
+.qh__tc__primary {
+  @include qh-primary-theme;
+}
+
+.qh__tc__primary--light {
+  @include qh-primary-light-theme;
+}
+
+
+// Coffee Milk
+.qh__t__coffee-milk,
+.qh__collection__coffee-milk-bg .qh__text-card,
+.qh__tc__coffee-milk {
+  background-color: var(--c__coffee-milk--trans25);
+  color: var(--c__quahog--dark);
+
+  #{$all-headers} {
+    color: currentColor;
+  }
+
+  a:not(.qh__btn),
+  a:not(.qh__btn):visited {
+    color: var(--c__navy);
+  }
+
+  a:not(.qh__btn):hover,
+  a:not(.qh__btn):focus,
+  a:not(.qh__btn):active {
+    color: var(--c__quahog--medium);
+  }
+
+  a:not(.qh__btn):focus {
+    outline-color: var(--c__navy);
+  }
+
+  .dark & {
+    background-color: var(--c__coffee-milk--trans25); // Over the bg, compiles to #57554f
+    color: var(--c__coffee-milk--light);
+
+    a:not(.qh__btn),
+    a:not(.qh__btn):visited {
+      color: var(--c__white);
+    }
+
+    a:not(.qh__btn):hover,
+    a:not(.qh__btn):focus,
+    a:not(.qh__btn):active {
+      color: var(--fc__default__accent);
+    }
+
+    a:not(.qh__btn):focus {
+      outline-color: var(--c__white);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      background-color: var(--c__coffee-milk--trans25);
+      color: var(--c__coffee-milk--light);
+
+      a:not(.qh__btn),
+      a:not(.qh__btn):visited {
+        color: var(--c__white);
+      }
+
+      a:not(.qh__btn):hover,
+      a:not(.qh__btn):focus,
+      a:not(.qh__btn):active {
+        color: var(--fc__default__accent);
+      }
+
+      a:not(.qh__btn):focus {
+        outline-color: var(--c__white);
+      }
+    }
+  }
+}

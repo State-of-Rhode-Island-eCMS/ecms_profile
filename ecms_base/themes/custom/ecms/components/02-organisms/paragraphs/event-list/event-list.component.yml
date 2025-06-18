@@ -1,0 +1,15 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Event list - Paragraph
+description: Event list paragraph
+props:
+  type: object
+  properties: {}
+slots:
+  events:
+    title: The rendered events
+  title:
+    title: The list title
+  more_url:
+    title: The more url
+  more_title:
+    title: The title of the link.

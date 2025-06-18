@@ -1,0 +1,60 @@
+.qh__hotels-grid {
+
+  // <h3>
+  &__title {
+    font-size: 1.125rem;
+    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+      --font-size-min-value: 1.125;
+      --font-size-max-value: 1.33;
+      --font-size-scaler-value: var(--h4-scaler-value);
+      font-size: var(--font-size);
+
+      --font-lh-min-value: #{$h4-lh-s};
+      --font-lh-max-value: #{$h4-lh-l};
+      --font-lh-scaler-value: var(--h4-lh-scaler-value);
+      line-height: var(--line-height);
+    }
+
+  }
+
+  // <ul>
+  &__list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 0 #{- ($general-h-spacing/2)};
+    max-width: unset;
+    list-style: none;
+
+    > li {
+      margin: 0;
+      padding: 0 ($general-h-spacing/2) $general-v-spacing;
+      flex: 0 1 100%;
+
+      @include breakpoint-up($bp--small) {
+        flex: 0 1 50%;
+      }
+
+      @include breakpoint-up($bp--large) {
+        flex: 0 1 33%;
+      }
+
+      > div {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        margin-bottom: 0;
+      }
+
+      .qh__teaser-hotel__content {
+        flex: 1 0 auto;
+      }
+
+      .qh__teaser-hotel__location,
+      .qh__teaser-hotel__cta {
+        margin-top: auto;
+      }
+    }
+  }
+}

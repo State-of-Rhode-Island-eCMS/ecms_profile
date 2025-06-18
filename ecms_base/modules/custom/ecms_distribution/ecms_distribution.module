@@ -27,11 +27,11 @@ function ecms_distribution_get_patternlab_social_source(): ?array {
   $path = \Drupal::service('extension.list.theme')->getPath($defaultTheme);
 
   // If the source file doesn't exist, ignore the form alteration.
-  if (!file_exists("{$path}/ecms_patternlab/source/_data/social-config.json")) {
+  if (!file_exists("{$path}/assets/data/social-config.json")) {
     return NULL;
   }
 
-  $json = json_decode(file_get_contents("{$path}/ecms_patternlab/source/_data/social-config.json"));
+  $json = json_decode(file_get_contents("{$path}/assets/data/social-config.json"));
 
   if (!property_exists($json, 'social-platforms')) {
     return NULL;

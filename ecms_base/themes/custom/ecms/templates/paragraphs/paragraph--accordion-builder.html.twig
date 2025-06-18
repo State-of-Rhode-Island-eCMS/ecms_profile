@@ -41,9 +41,8 @@
 
 {% set pid = paragraph.id() %}
 
-{% include "@organisms/paragraphs/accordion/accordion.pl.twig" with {
-    content: content,
-    paragraph: paragraph,
-    pid: pid
-  }
-%}
+{{ include('ecms:accordion', {
+  content: content,
+  paragraph: paragraph,
+  pid: pid
+}, with_context = FALSE) }}

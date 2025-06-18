@@ -1,0 +1,19 @@
+# Audiences list.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Articles latest
+description: Latest articles component.
+props:
+  type: object
+  properties:
+    rows_loop:
+      type: boolean
+      title: Loop over the rows.
+slots:
+  title:
+    title: The label for the list.
+  rows:
+    title: The content of the list.
+  more_url:
+    title: The url for the more link.
+  more_title:
+    title: Title for the more link.
