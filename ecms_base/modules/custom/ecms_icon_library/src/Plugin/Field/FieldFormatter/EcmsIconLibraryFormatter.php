@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\ecms_icon_library\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\file\Entity\File;
@@ -58,8 +59,10 @@ class EcmsIconLibraryFormatter extends FormatterBase {
 
         $file = File::load($fid);
 
-        $tempElement = [];
-        $this->renderAsSvg($file, $tempElement, $elements[$delta]['#url']);
+        $tempElement = ['#cache' => [
+          'tags' => Cache::mergeTags($file->getCacheTags(), $media->getCacheTags())
+        ]];
+        $this->renderAsSvg($file, $tempElement, $elements[$delta]['#url'] ?? NULL);
 
         $elements[$delta]['media_library_icon'] = $tempElement;
       }
