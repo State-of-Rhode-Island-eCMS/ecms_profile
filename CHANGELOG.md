@@ -22,6 +22,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 ### Fixed
 - RIGA-703: Fixed phpcodesniffer build error
 ### Security
+- RIGA-659: update simple sitemap [SA-CONTRIB-2025-083](https://www.drupal.org/sa-contrib-2025-083)
 
 ## [1.1.5] - 2025-05-28
 ### Added
