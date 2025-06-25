@@ -50,6 +50,8 @@ composer.lock
 /ecms_base/themes/custom/ecms/assets/data/listitems.json
 /ecms_base/themes/custom/ecms/assets/data/data.json
 !/ecms_base/themes/custom/ecms/gulpfile.js
+!/ecms_base/themes/custom/ecms/components/**/*.js
+!/ecms_base/themes/custom/ecms/assets/scripts/**/*.js
 
 # ddev development site
 /develop

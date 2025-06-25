@@ -26,7 +26,7 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
   $theme = \Drupal::theme()->getActiveTheme();
 
   // Pallete options.
-  $color_config_json_string = file_get_contents("{$theme->getPath()}/ecms_patternlab/source/_data/color-config.json");
+  $color_config_json_string = file_get_contents("{$theme->getPath()}/assets/data/color-config.json");
   if ($color_config_json_string) {
 
     $json_decoded = json_decode($color_config_json_string, TRUE);
