@@ -20,7 +20,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-649: Remove drupal/advagg
 
 ### Fixed
-
+- RIGA-703: Fixed phpcodesniffer build error
 ### Security
 
 ## [1.1.5] - 2025-05-28
