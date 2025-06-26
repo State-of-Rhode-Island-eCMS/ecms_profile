@@ -105,7 +105,7 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
    * @return array
    *   Parameters to pass to testProcessItem().
    */
-  public function dataProviderForProcessItem(): array {
+  public static function dataProviderForProcessItem(): array {
     return [
       'test1' => [FALSE],
       'test2' => [TRUE],

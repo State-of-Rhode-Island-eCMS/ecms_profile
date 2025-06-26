@@ -468,7 +468,7 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
    * @return array
    *   Arguments to pass to the testProcessItem method.
    */
-  public function dataProviderForTestProcessItem(): array {
+  public static function dataProviderForTestProcessItem(): array {
     return [
       'test1' => [1],
       'test2' => [2],

@@ -265,7 +265,7 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
    * @return array[]
    *   The array of parameters to pass to testRegisterSite().
    */
-  public function dataProviderForTestRegisterSite(): array {
+  public static function dataProviderForTestRegisterSite(): array {
 
     return [
       'test1' => [

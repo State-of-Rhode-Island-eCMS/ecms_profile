@@ -1,7 +1,7 @@
 name: 'eCMS Migration'
 type: module
 description: 'Migrate a site into the eCMS platform.'
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 package: 'Migration'
 dependencies:
   - drupal:migration_tools
