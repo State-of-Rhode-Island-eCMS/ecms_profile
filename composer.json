@@ -196,7 +196,7 @@
         "drupal/seckit": "^2.0",
         "drupal/simple_menu_permissions": "^3.0.1",
         "drupal/simple_oauth": "^6.0",
-        "drupal/simple_sitemap": "^4.1",
+        "drupal/simple_sitemap": "^4.2",
         "drupal/smart_date": "^4.0@alpha",
         "drupal/stable": "^2.0",
         "drupal/svg_image": "^3.2.1",
