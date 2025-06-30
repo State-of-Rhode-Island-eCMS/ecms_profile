@@ -66,11 +66,9 @@ class EcmsApiRecipientUninstallTest extends UnitTestCase {
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->withConsecutive(['user_role'], ['user'])
-      ->willReturnOnConsecutiveCalls(
-        $this->roleStorage,
-        $this->userStorage
-      );
+      ->will($this->returnValueMap([
+        ['user_role', $this->roleStorage], ['user', $this->userStorage]
+      ]));
   }
 
   /**
