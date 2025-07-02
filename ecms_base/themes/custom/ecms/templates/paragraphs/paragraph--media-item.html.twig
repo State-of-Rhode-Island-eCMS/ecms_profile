@@ -43,7 +43,7 @@
   {% set langcode = 'en' %}
 {% endif %}
 
-{% set align = '' %}
+{% set align = 'left' %}
 {% if not paragraph.field_alignment.value is empty %}
   {% set align = paragraph.field_alignment.value %}
 {% endif %}
@@ -79,7 +79,7 @@
     {% set img = drupal_image(img_uri, 'wide', {alt: img_alt}, true) %}
   {% endif %}
 
-  {% include ("ecms:media-item", {
+  {{  include ("ecms:media-item", {
     content: content,
     type: media_type,
     caption: paragraph.field_caption.value,
@@ -87,24 +87,24 @@
     align: align,
     link_url: link_url,
     link_title: paragraph.field_link.title,
-    img: img,
-  }, with_context = false) %}
+    img: img
+  }, with_context = false) }}
 {% endif %}
 
 {% if media_type == 'video' %}
   {% set video_source = content.field_media_item|render|striptags("<iframe>") %}
-  {% include ("ecms:media-item", {
+  {{ include ("ecms:media-item", {
     content: content,
     type: media_type,
     caption: paragraph.field_caption.value,
     size: paragraph.field_size.value,
     align: align,
     source: video_source
-  }, with_context = false) %}
+  }, with_context = false) }}
 {% endif %}
 
 {% if media_type == 'audio' %}
-  {% include ("ecms:media-item", {
+  {{ include ("ecms:media-item", {
     content: content,
     type: media_type,
     caption: paragraph.field_caption.value,
@@ -112,5 +112,5 @@
     align: align,
     audio_url: audio_url,
     audio_mimetype: audio_mimetype
-  }, with_context = false) %}
+  }, with_context = false) }}
 {% endif %}

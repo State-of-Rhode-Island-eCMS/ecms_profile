@@ -20,12 +20,12 @@ props:
         - medium
         - large
     align:
-      - type: string
-        title: Alignment
-        enum:
-          - left
-          - center
-          - right
+      type: string
+      title: Alignment
+      enum:
+        - left
+        - center
+        - right
 slots:
   img:
     title: HTML Image tag
