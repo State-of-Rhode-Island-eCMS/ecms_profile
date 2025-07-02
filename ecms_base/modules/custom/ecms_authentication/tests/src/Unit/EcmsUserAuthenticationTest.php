@@ -260,7 +260,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
    * @return array
    *   Array or parameters to pass to testRemoveAdminGroup.
    */
-  public function dataProviderForTestRemoveAdminGroup(): array {
+  public static function dataProviderForTestRemoveAdminGroup(): array {
     return [
       'test1' => [FALSE, FALSE, FALSE],
       'test2' => [FALSE, TRUE, FALSE],

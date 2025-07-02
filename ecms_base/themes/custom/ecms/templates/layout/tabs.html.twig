@@ -8,11 +8,11 @@
     'qh-layout-section--col-count-1'
   ]
 %}
-
 {% if content %}
+  {% set region = 'tabs' %}
+  {% set unsorted_blocks = content[region] %}
+  {% set blocks = unsorted_blocks|sortbyweight %}
 
-{% set region = 'tabs' %}
-{% set blocks = content[region]|sortbyweight %}
   <div{{ attributes.addClass(classes) }}>
     <div {{ region_attributes.tabs.addClass('layout__region', 'layout__region--tabs', 'tabs-region', 'qh-layout-section__col', 'qh-layout-section__col--first') }}>
 {# Our custom structure breaks layout builder, so omit #}

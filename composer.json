@@ -20,23 +20,13 @@
         "1": {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        "2": {
-            "type": "package",
-            "package": {
-                "name": "drupal_git/migrate_process_trim",
-                "type": "drupal-module",
-                "version": "2.0.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://git.drupalcode.org/project/migrate_process_trim.git",
-                    "reference": "4bbec87f0ecdb6d49f9ff2d763ba4f40f5d63d5c"
-                }
-            }
         }
     },
     "extra": {
         "patches": {
+            "drupal/address_phonenumber": {
+                "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
+            },
             "drupal/core": {
                 "3266057 - #129 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2024-07-03/3266057-129.patch",
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
@@ -44,18 +34,31 @@
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
             },
+            "drupal/features": {
+                "3447460 - D11 Upgrades": "https://gist.githubusercontent.com/pfrilling/e27933a1a4b8577d3d69d0d4f0bec6a2/raw/0c5df9bd798a0298a6a1c2675ec34881c290aff2/gistfile1.txt"
+            },
+            "drupal/iek": {
+                "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
+                "3430975 - #9 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/interdiff-last-bot.6938818.txt"
+            },
+            "drupal/layout_builder_iframe_modal": {
+                "3344339 - Patternlab causing Regression in ^1.3.5. Temporary fix and should be fixed in the theme css": "https://gist.githubusercontent.com/pfrilling/bfcc11f173c0f5e697557f70ea087612/raw/2531994d06daf867d3735f33786280186d800108/riga-hide-rebuild-layout.patch"
+            },
+            "drupal/migrate_process_trim": {
+                "3288638 - Automated Drupal 11 compatibility fixes": "https://gist.githubusercontent.com/juniabiswas/f1d012dbfe5d83d2738cc8e0f84c8570/raw/f13d1ca37b8b39190972fcda84d8aded9c5521e2/migrate-process-trim-d11.diff"
+            },
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
                 "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
-            },
-            "drupal/layout_builder_iframe_modal": {
-                "3344339 - Hide the ‘Rebuild layout’ link in the layout builder actions area": "https://gist.githubusercontent.com/pfrilling/cce2cd4ce1f24e2c91a15fed0ce95412/raw/9058159f7ca199485692d3b4d1f052809ca8619d/3344339-hide-rebuild-layout-button.patch"
             },
             "drupal/search_api": {
                 "3321499 - #19 - Call to a member function preExecute() on null in SearchApiTimeCache::generateResultsKey()": "https://www.drupal.org/files/issues/2023-12-05/search_api-Call_to_a_member_function_preExecute%28%29_on_null-3321499.patch"
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
+            },
+            "drupal/webform_encrypt": {
+                "3462998 - #3 - Drupal 11 compatibility.": "https://www.drupal.org/files/issues/2025-05-30/3462998-6-2.0.x-webform_encrypt.patch"
             }
         },
         "preserve-paths": [],
@@ -87,39 +90,40 @@
     "require": {
         "composer/installers": "^1.9 || ^2.0",
         "cweagans/composer-patches": "^1.6",
+        "dealerdirect/phpcodesniffer-composer-installer": "1.0.0",
         "drupal/acquia_connector": "^4.0.1",
         "drupal/acquia_purge": "^1.1",
         "drupal/acquia_search": "^3.0",
         "drupal/acsf": "^2.75",
-        "drupal/address": "^1.8",
+        "drupal/address": "^2.0.4",
         "drupal/address_phonenumber": "^10.0",
         "drupal/admin_toolbar": "^3.4",
-        "drupal/advagg": "^6.0@alpha",
         "drupal/aggregator": "^2.2",
         "drupal/allowed_formats": "^3.0.0",
         "drupal/asset_injector": "^2.7",
         "drupal/auto_entitylabel": "^3.3",
         "drupal/autologout": "^2.0.0",
-        "drupal/better_exposed_filters": "^6.0",
+        "drupal/better_exposed_filters": "^7.0.5",
         "drupal/bigmenu": "^2.0@RC",
         "drupal/captcha": "^2.0",
-        "drupal/classy": "^1.0",
-        "drupal/commerce": "^2.13",
-        "drupal/commerce_stock": "^1.3",
+        "drupal/classy": "^2.0",
+        "drupal/commerce": "^3.0.2",
+        "drupal/commerce_stock": "^3.0.0-beta1",
         "drupal/components": "^3.1",
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/content_moderation_notifications": "^3.2",
         "drupal/core-recommended": "^9.5 || ^10.0",
-        "drupal/easy_breadcrumb": "2.0.5",
+        "drupal/easy_breadcrumb": "2.0.9",
         "drupal/entity_print": "^2.15",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
         "drupal/facets": "^2.0",
-        "drupal/features": "^3.11",
+        "drupal/fast_404": "^3.4",
+        "drupal/features": "3.x-dev",
         "drupal/feeds": "^3.0@RC",
         "drupal/feeds_ex": "^1.0@beta",
         "drupal/field_group": "^3.4",
-        "drupal/file_delete": "^2.0",
+        "drupal/file_delete": "^3.0",
         "drupal/focal_point": "^2.0.1",
         "drupal/geocoder": "^3.15 || ^4.21",
         "drupal/geofield": "^1.20",
@@ -127,9 +131,10 @@
         "drupal/google_tag": "^2.0",
         "drupal/google_translator": "^2.1",
         "drupal/hal": "^2.0",
-        "drupal/honeypot": "^2.0",
+        "drupal/honeypot": "2.1.4",
         "drupal/http_cache_control": "^2.0",
         "drupal/iek": "^1.3",
+        "drupal/inline_entity_form": "^3.0.0-rc21",
         "drupal/jquery_ui_accordion": "^2.1",
         "drupal/jsonapi_extras": "^3.16",
         "drupal/language_cookie": "^2.0",
@@ -138,30 +143,32 @@
         "drupal/layout_builder_modal": "^1.1",
         "drupal/layout_builder_restrictions": "^3.0",
         "drupal/layout_builder_tabs": "^1.0",
-        "drupal/linkit": "^6.1",
+        "drupal/linkit": "^7.0.4",
         "drupal/media_entity_download": "^2.0",
         "drupal/media_entity_file_replace": "^1.1",
         "drupal/media_file_delete": "^1.3",
         "drupal/media_library_form_element": "^2.0.4",
-        "drupal/media_library_theme_reset": "^1.0",
+        "drupal/media_library_theme_reset": "^2.0.0-beta1",
         "drupal/media_pdf_thumbnail": "^6.1@RC",
         "drupal/media_revisions_ui": "^2.1",
         "drupal/memcache": "^2.2",
         "drupal/menu_admin_per_menu": "^1.5",
         "drupal/menu_block": "^1.10",
-        "drupal/metatag": "^1.26",
+        "drupal/metatag": "^2.1.1",
         "drupal/migrate_plus": "^6.0",
+        "drupal/migrate_process_trim": "^2.0",
         "drupal/migrate_tools": "^6.0",
         "drupal/migration_tools": "^2.8",
         "drupal/moderated_content_bulk_publish": "^2.0",
-        "drupal/moderation_dashboard": "^2.0",
+        "drupal/moderation_dashboard": "^3.1",
         "drupal/mysql57": "^1.0",
         "drupal/office_hours": "^1.3",
         "drupal/openid_connect": "^3.0",
         "drupal/openid_connect_windows_aad": "^2.0@beta",
         "drupal/page_manager": "^4.0@RC",
         "drupal/panels": "^4.6.0",
-        "drupal/paragraphs": "^1.15",
+        "drupal/paragraphs": "^1.19",
+        "drupal/password_policy": "^4.0",
         "drupal/path_redirect_import": "^2.0",
         "drupal/pathauto": "^1.8",
         "drupal/publishcontent": "^1.3",
@@ -177,21 +184,21 @@
         "drupal/search_api_exclude": "^2.0",
         "drupal/search_api_solr": "^4.2",
         "drupal/seckit": "^2.0",
-        "drupal/simple_menu_permissions": "^2.0",
-        "drupal/simple_oauth": "^5.2",
-        "drupal/simple_sitemap": "^4.1",
+        "drupal/simple_menu_permissions": "^3.0.1",
+        "drupal/simple_oauth": "^6.0",
+        "drupal/simple_sitemap": "^4.2",
         "drupal/smart_date": "^4.0@alpha",
         "drupal/stable": "^2.0",
-        "drupal/svg_image": "^3.0",
+        "drupal/svg_image": "^3.2.1",
         "drupal/token": "^1.12",
         "drupal/twig_tweak": "^3.2",
         "drupal/twig_vardumper": "^3.0",
+        "drupal/ultimate_cron": "^2.0@beta",
         "drupal/vbo_export": "^4.1",
         "drupal/views_database_connector": "^2.0",
-        "drupal/webform": "^6.0",
+        "drupal/webform": "^6.3.0-beta2",
         "drupal/webform_encrypt": "^2.0@alpha",
         "drupal/webform_views": "^5.0@beta",
-        "drupal_git/migrate_process_trim": "2.0.0",
         "drush/drush": "^12 || ^13",
         "geocoder-php/arcgis-online-provider": "^4.3",
         "geocoder-php/google-maps-provider": "^4.6",
@@ -199,7 +206,8 @@
         "gravitypdf/querypath": "^3.2",
         "johngrogg/ics-parser": "^2",
         "oomphinc/composer-installers-extender": "^2.0",
-        "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8"
+        "softcreatr/jsonpath": "^0.5 || ^0.7 || ^0.8",
+        "state-of-rhode-island-ecms/ecms_patternlab": "dev-master || dev-rc/0.8.4 || ^0.8.2"
     },
     "require-dev": {
         "drupal/coder": "^8.3",

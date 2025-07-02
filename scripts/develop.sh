@@ -76,6 +76,14 @@ ddev exec 'composer install --working-dir=develop'
 ## Install the site profile.
 ddev exec 'drush site:install ecms_acquia --db-url=mysql://db:db@db:3306/db?module=mysql#tableprefix --yes'
 
+## Install fast404.settings.php
+ddev exec 'chmod +w develop/web/sites/default develop/web/sites/default/settings.php && cp scripts/fast404.settings.php develop/web/sites/default/'
+ddev exec 'echo "\$fast404Settings = sprintf(\"%s/%s/fast404.settings.php\", \$app_root, \$site_path);
+if (file_exists(\$fast404Settings)) {
+  require(\$fast404Settings);
+}" >> develop/web/sites/default/settings.php'
+
+
 if [ "$PERFORMANCE_MODE" == "1" ]; then
   ddev stop
   ddev config --performance-mode=mutagen;
