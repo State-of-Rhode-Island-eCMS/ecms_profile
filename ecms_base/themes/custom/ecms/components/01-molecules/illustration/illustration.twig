@@ -13,10 +13,10 @@
       {% set zeroBasedKey = randomKey - 1 %}
 
       {# Print out SVG #}
-      {% include ('@illustrations/' ~ filenameArray[zeroBasedKey]) ignore missing %}
+      {{ source('@ecms/assets/images/illustrations/' ~ filenameArray[zeroBasedKey]) }}
     {% endif %}
   {% else %}
-    {% include ('@illustrations/' ~ illustration) ignore missing %}
+    {{ source('@ecms/assets/images/illustrations/' ~ illustration) }}
   {% endif %}
   </div>
 {% endif %}
