@@ -1,0 +1,12 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Notification
+description: Teaser view for notification
+props:
+  type: object
+  properties: {}
+slots:
+  label:
+    title: The title of the notification
+  text:
+    title: The message of the notification

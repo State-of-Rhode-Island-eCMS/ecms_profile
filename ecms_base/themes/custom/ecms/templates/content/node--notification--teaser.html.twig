@@ -71,8 +71,7 @@
  */
 #}
 
-{% include '@molecules/teaser-notification/teaser-notification.twig' with {
+{{ include('ecms:teaser-notification', {
   text: node.field_notification_text.0.value,
   label: label,
-} %}
-
+}, with_context = FALSE) }}

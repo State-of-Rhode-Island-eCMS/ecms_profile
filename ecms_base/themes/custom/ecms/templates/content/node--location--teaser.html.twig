@@ -94,16 +94,11 @@
   {% endif %}
 {% endif %}
 
-
-
-{% include "@molecules/teaser-location/teaser-location.twig" with {
-    title: node.label,
-    location: content.field_location_address|render,
-    url: url,
-    website_url: website_url,
-    phone: translated_node.field_location_phone.value,
-    extension: translated_node.field_location_phone_extension.value,
-  }
-%}
-
-
+{{ include('ecms:teaser-location', {
+  title: node.label,
+  location: content.field_location_address|render,
+  url: url,
+  website_url: website_url,
+  phone: translated_node.field_location_phone.value,
+  extension: translated_node.field_location_phone_extension.value,
+}, with_context = FALSE) }}

@@ -1,7 +1,7 @@
 name: Rhode Island eCMS System
 type: profile
 description: "Drupal installation profile for the State of Rhode Island's eCMS system"
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 
 # Module dependencies for the distribution.
 # Modules that sub-profiles need must be listed here and_not in install.
@@ -32,6 +32,7 @@ dependencies:
   - entity_print
   - entity_reference_revisions
   - extlink
+  - fast404
   - features_ui
   - feeds
   - field_ui
@@ -71,6 +72,9 @@ dependencies:
   - path
   - pathauto
   - page_cache
+  - password_policy
+  - password_policy_character_types
+  - password_policy_length
   - publishcontent
   - rabbit_hole
   - real_aes
@@ -124,7 +128,6 @@ install:
   - google_tag
   - media_entity_file_replace
   - media_file_delete
-  - media_revisions_ui
   - mysql57
   - update
 

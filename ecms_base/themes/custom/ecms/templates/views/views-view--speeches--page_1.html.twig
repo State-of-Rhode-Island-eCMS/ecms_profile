@@ -42,7 +42,7 @@
 
   {% if rows %}
 
-    {% include '@organisms/speeches-list/speeches-list.twig' with {
+    {{ include('ecms:speeches-list', {
       title: title,
       rows: rows,
       rows_loop: FALSE,
@@ -50,7 +50,7 @@
       pager: pager,
       more: more,
       feed_icons: feed_icons
-    } %}
+    }, with_context = FALSE) }}
 
   {% elseif empty %}
     {{ empty }}

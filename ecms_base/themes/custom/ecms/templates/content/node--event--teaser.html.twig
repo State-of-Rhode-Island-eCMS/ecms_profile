@@ -94,13 +94,12 @@
 {% set end_time = node.field_event_date.end_value|date('g:ia') %}
 {% set datetime_endtime_format = node.field_event_date.end_value|date('H:i:s') %}
 
-{% include '@molecules/teaser-event/teaser-event.twig' with {
+{{ include('ecms:teaser-event', {
   title: node.label,
   url: url,
   location: node.field_event_location.value,
   rrule: node.field_event_rrule.value,
   month: month,
-  datetime_month_format: datetime_month_format,
   start_date: start_date,
   datetime_startdate_format: datetime_startdate_format,
   end_date: end_date,
@@ -109,5 +108,4 @@
   datetime_starttime_format: datetime_starttime_format,
   end_time: end_time,
   datetime_endtime_format: datetime_endtime_format
-} %}
-
+}, with_context = FALSE) }}

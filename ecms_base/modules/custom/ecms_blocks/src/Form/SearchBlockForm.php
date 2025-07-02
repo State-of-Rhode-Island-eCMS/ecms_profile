@@ -56,7 +56,7 @@ class SearchBlockForm extends FormBase {
     $params['query'] = [
       'search_api_fulltext' => $input,
     ];
-    $form_state->setRedirectUrl(Url::fromUri('internal:' . '/search', $params));
+    $form_state->setRedirectUrl(Url::fromUri('internal:/search', $params));
   }
 
 }

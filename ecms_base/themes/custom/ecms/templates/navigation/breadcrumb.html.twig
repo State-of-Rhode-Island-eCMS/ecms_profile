@@ -8,7 +8,6 @@
  */
 #}
 
-{% include "@molecules/breadcrumb/breadcrumb.twig" with {
-    breadcrumb: breadcrumb
-  }
-%}
+{{ include('ecms:breadcrumb', {
+  breadcrumb: breadcrumb
+}, with_context = FALSE) }}

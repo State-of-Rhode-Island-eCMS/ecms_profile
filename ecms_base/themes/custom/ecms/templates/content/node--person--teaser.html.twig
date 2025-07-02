@@ -92,7 +92,7 @@
   {% set photo = drupal_image(photo_uri, 'wide', {alt: photo_alt}, true) %}
 {% endif %}
 
-{% include '@molecules/teaser-person/teaser-person.twig' with {
+{{ include('ecms:teaser-person', {
   last_name: translated_node.field_person_last_name.value,
   first_name: translated_node.field_person_first_name.value,
   phone: translated_node.field_person_phone.value,
@@ -105,4 +105,4 @@
   photo: photo,
   additional_fields: additional_fields,
   placeholder_path: "/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/ecms_patternlab/source/images/person-placeholder.png"
-} %}
+}, with_context = FALSE) }}

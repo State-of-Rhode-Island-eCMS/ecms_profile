@@ -47,11 +47,11 @@
 
   {% if rows %}
 
-    {% include '@organisms/articles-list/articles-list.twig' with {
+    {{ include('ecms:articles-list', {
       title: title,
       rows: rows,
       rows_loop: TRUE
-    } %}
+    }, with_context = FALSE) }}
 
   {% elseif empty %}
       {{ empty }}

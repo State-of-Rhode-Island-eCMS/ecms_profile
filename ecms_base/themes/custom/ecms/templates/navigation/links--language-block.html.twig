@@ -32,7 +32,6 @@
  */
 #}
 
-{% include "@molecules/language-switcher/language-switcher.twig" with {
-    languages: links
-  }
-%}
+{{ include('ecms:language-switcher', {
+  languages: links
+}, with_context = FALSE) }}

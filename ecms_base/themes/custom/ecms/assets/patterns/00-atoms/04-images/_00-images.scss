@@ -1,0 +1,24 @@
+figure {
+  margin: 0;
+  padding: 0;
+
+  p + & {
+    margin-top: var(--body-text-spacer);
+  }
+}
+
+figcaption {
+  @extend .small-text;
+}
+
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+
+  .auto-width &,
+  &.auto-width {
+    width: auto;
+  }
+}

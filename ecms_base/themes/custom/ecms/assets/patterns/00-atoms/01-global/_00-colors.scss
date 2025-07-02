@@ -1,0 +1,163 @@
+// stylelint-disable property-no-unknown
+:root {
+  color-scheme: light dark;
+}
+// stylelint-enable property-no-unknown
+
+
+// Mixin getter for Colors
+@function qh-get-color($colorName) {
+  @if map-has-key($colors, $colorName) == false {
+    @error 'Key `#{$colorName}` is not a valid color name from $colors.';
+  }
+  @return map-get(map-get($colors, $colorName), 'hsl');
+}
+
+// Expected return values:
+// - dark-text
+// - light-text
+@function qh-which-color-fg($colorName) {
+  @if map-has-key($colors, $colorName) == false {
+    @error 'Key `#{$colorName}` is not a valid color name from $colors.';
+  }
+  @return map-get(map-get($colors, $colorName), 'needs');
+}
+
+
+// Keep things DRY
+// Outputs the theme's functional color definition. Used a bunch of times in the loops below
+@mixin qh-output-color-var($block, $section, $palette) {
+  // If $section is a map then that means there is only one element inside the section. Do not loop over it.
+  @if is-map($section) {
+    // Specific error message for $section when we pass a color name that does not fetch a color value
+    @if map-has-key($colors, map-get($section, 'colorName')) == false {
+      @error "Key `#{map-get($section, 'colorName')}` is not a valid color name from $colors. From #{map-get($palette, humanName)} > #{$block}";
+    }
+    --fc__#{$block}__#{map-get($section,'fnName')}: #{map-get(map-get($colors, map-get($section, 'colorName')), 'hsl')};
+  } @else {
+    // Section is a list, so this needs to loop over it. In each list are a set of maps.
+    @each $element in $section {
+      // Specific error message for $element when we pass a color name that does not fetch a color value
+      @if map-has-key($colors, map-get($element, 'colorName')) == false {
+        @error "Key `#{map-get($element, 'colorName')}` is not a valid color name from $colors. From #{map-get($palette, humanName)} > #{$block}";
+      }
+      @if type-of($element) != 'list' and map-has-key($colors, map-get($element, 'colorName')) {
+        --fc__#{$block}__#{map-get($element,'fnName')}: #{map-get(map-get($colors, map-get($element, 'colorName')), 'hsl')};
+      }
+    }
+  }
+}
+
+// These loops needs to generate:
+//
+// All color values
+// --c__[color-name]: [color-value]
+//
+// All theme palettes
+// [first loop]
+//   html {
+//     [first color theme without a class around it]
+//     --fc__[block]__[functional color name]: [color value]
+//   }
+//
+//   html .qh__t__[theme-slug] {
+//     [colors vars…]
+//   }
+//
+//   [in the loop, theme-slug has "--dark" removed]
+//   html.dark .qh__t__[theme-slug] {
+//     [colors vars…]
+//   }
+// [end first loop]
+//
+// [second loop on only "--dark" themes]
+//   @media (prefers-color-scheme: dark) {
+//     html:not(.light) {
+//       [first color theme without a class around it]
+//     }
+//   }
+//
+//   [theme-slug has "--dark" removed]
+//   html:not(.light) .qh__t__[theme-slug] {
+//     [colors vars…]
+//   }
+// [end second loop]
+
+
+// Outputs all the colors from colors.json as custom props
+html {
+  //@debug #{$colors};
+  //@debug #{$palettes};
+
+  // Default color CSS vars
+  @each $key, $value in $colors {
+    --c__#{$key}: #{map-get($value, hsl)};
+  }
+
+  $num: 1;
+  @each $key, $palette in $palettes {
+    $values: map-get($palette, 'values');
+    @if $num == 1 {
+      // First palette of colors is the default — no theme class around them
+      // This is our default light theme with fallback color declarations
+      @each $block, $section in $values {
+        @include qh-output-color-var($block, $section, $palette);
+      }
+    } @else {
+      // First time we encounter a dark theme, which will be the second time through this loop
+      @if $num == 2 {
+        // Output colors without surrounding them with a class name
+        // This is our default dark theme with fallback color declarations
+        &.dark {
+          @each $block, $section in $values {
+            @include qh-output-color-var($block, $section, $palette);
+          }
+        }
+      } @else {
+        $classString: '&.qh__t__#{$key}';
+        // Remove the "--dark" modifier
+        @if str-index($key, '--dark') {
+          $newKey: str-slice($key, 0, -7);
+          $classString: '&.dark.qh__t__#{$newKey}';
+        }
+
+        #{$classString} {
+          @each $block, $section in $values {
+            @include qh-output-color-var($block, $section, $palette);
+          }
+        }
+      }
+    }
+    $num: $num + 1;
+  }
+
+  // Loop again on Dark palettes only. Repetitive, but it works
+  @media (prefers-color-scheme: dark) {
+    $darknum: 1;
+    @each $key, $palette in $palettes {
+      $values: map-get($palette, 'values');
+      //@debug #{'key= ' + $key};
+
+      // Only proceed if this is a dark palette
+      @if str-index($key, '--dark') {
+        @if $darknum == 1 {
+          // First time around the loop has no class
+          &:not(.light) {
+            // This is our default dark theme with fallback color declarations (again)
+            @each $block, $section in $values {
+              @include qh-output-color-var($block, $section, $palette);
+            }
+          }
+        } @else {
+          // Remove the "--dark" from the theme slug
+          &:not(.light) .qh__t__#{str-slice($key, 0, -7)} {
+            @each $block, $section in $values {
+              @include qh-output-color-var($block, $section, $palette);
+            }
+          }
+        }
+        $darknum: $darknum + 1;
+      }
+    }
+  }
+}

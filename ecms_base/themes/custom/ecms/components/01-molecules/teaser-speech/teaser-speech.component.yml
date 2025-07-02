@@ -1,0 +1,16 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Spech
+description: Teaser view for the speech content type
+props:
+  type: object
+  properties: {}
+slots:
+  title:
+    title: The speech title.
+  url:
+    title: The publication url
+  date:
+    title: The publish date
+  excerpt:
+    title: The summary

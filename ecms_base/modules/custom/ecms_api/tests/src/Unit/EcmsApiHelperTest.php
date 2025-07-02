@@ -96,7 +96,7 @@ class EcmsApiHelperTest extends UnitTestCase {
    * @return array
    *   Array of parameters to pass to the testGetFilePath method.
    */
-  public function dataProviderForTestGetFilePath(): array {
+  public static function dataProviderForTestGetFilePath(): array {
     return [
       'test1' => [NULL, NULL],
       'test2' => [

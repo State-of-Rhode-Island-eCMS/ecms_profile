@@ -1,0 +1,18 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Article
+description: Teaser view for articles
+props:
+  type: object
+  properties:
+    emergency_bg_color:
+      type: string
+      title: The background color
+      enum:
+        - rhody-red--bright
+        - hope-gold--bright
+slots:
+  emergency_label:
+    title: The title of the notification
+  emergency_message:
+    title: The message of the notification

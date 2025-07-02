@@ -37,13 +37,13 @@
 
 {% if fields %}
 
-  {% include '@molecules/teaser-article/teaser-article.twig' with {
+  {{ include('ecms:teaser-article', {
     title: fields.title.content,
     excerpt: fields.search_api_excerpt.content,
     url: path,
     alt_read_text: 'View page',
     character_limit: character_limit
-  } %}
+  }, with_context = false) }}
 
 {% endif %}
 

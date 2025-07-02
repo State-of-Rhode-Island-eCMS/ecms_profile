@@ -47,11 +47,11 @@
 
   {% if rows %}
 
-    {% include '@organisms/articles-list/articles-list.twig' with {
+    {{ include('ecms:articles-list', {
       title: title,
       rows: rows,
       rows_loop: TRUE
-    } %}
+    }, with_context = FALSE) }}
 
   {% elseif empty %}
       {{ empty }}
@@ -61,9 +61,9 @@
     {{ pager }}
   {% endif %}
 
-  {% include '@molecules/search-state-cta/search-state-cta.twig' with {
+  {{ include('ecms:search-state-cta', {
     search_link: search_link,
-  } %}
+  }, with_context = FALSE) }}
 
   {% if feed_icons %}
     <div class="feed-icons">

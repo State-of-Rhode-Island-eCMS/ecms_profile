@@ -49,10 +49,9 @@
   {% set icon = content.field_icon.0.pl_icon|render %}
 {% endif %}
 
-{% include "@organisms/paragraphs/attention-card-w-icon/attention-card-w-icon.twig" with {
-    content: content,
-    paragraph: paragraph,
-    media_library_icon: media_library_icon,
-    icon: icon
-  }
-%}
+{{ include('ecms:attention-card-w-icon', {
+  content: content,
+  paragraph: paragraph,
+  media_library_icon: media_library_icon,
+  icon: icon
+}, with_context = FALSE) }}
