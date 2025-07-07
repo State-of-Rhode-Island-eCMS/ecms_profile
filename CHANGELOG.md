@@ -13,6 +13,7 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-670: Added D11 Patch: Migrate Process Trim
 
 ### Changed
+- RIGA-693: Update Honeypot to 2.2
 
 ### Deprecated
 
