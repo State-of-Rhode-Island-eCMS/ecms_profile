@@ -25,6 +25,8 @@ jobs:
         include:
           - drupal_core: '^10.4'
             experimental: false
+          - drupal_core: '^10.5'
+            experimental: true
           - drupal_core: '^11.1'
             experimental: true
 
@@ -67,13 +69,13 @@ jobs:
       - name: Run gulp build for the profile.
         run: gulp build
 
-      - name: Install the `ecms` theme requirements.
-        working-directory: 'ecms_base/themes/custom/ecms'
-        run: npm install
-
-      - name: Run gulp build for the `ecms` theme.
-        working-directory: 'ecms_base/themes/custom/ecms'
-        run: gulp build
+#      - name: Install the `ecms` theme requirements.
+#        working-directory: 'ecms_base/themes/custom/ecms'
+#        run: npm install
+#
+#      - name: Run gulp build for the `ecms` theme.
+#        working-directory: 'ecms_base/themes/custom/ecms'
+#        run: gulp build
 
       - name: Archive the Drupal files.
         run: tar -cz --exclude node_modules --exclude ecms_base/themes/custom/ecms/node_modules -f /tmp/drupal-build-${{ matrix.drupal_core}}.tar.gz .
