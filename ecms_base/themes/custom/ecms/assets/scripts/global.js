@@ -51,15 +51,15 @@ function allMenuCloser() {
 
 // Add screen overlay
 function addPageOverlay() {
-  var pageOverlay = document.createElement("div");
-  var divContent = document.createTextNode(" ");
+  var pageOverlay = document.createElement('div');
+  var divContent = document.createTextNode(' ');
   pageOverlay.appendChild(divContent);
   pageOverlay.id = 'page_overlay';
   pageOverlay.classList.add('page-overlay');
-  document.getElementsByTagName("body")[0].appendChild(pageOverlay);
+  document.getElementsByTagName('body')[0].appendChild(pageOverlay);
 
   if (pageOverlay) {
-    document.getElementsByTagName("html")[0].classList.add('touch-nav');
+    document.getElementsByTagName('html')[0].classList.add('touch-nav');
 
     pageOverlay.addEventListener('click', function(e) {
       e.preventDefault();
@@ -89,16 +89,16 @@ var _forEach = function (array, callback, scope) {
 
 // Cookie getter
 function getCookie(name) {
-	var value = "; " + document.cookie;
-	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) return parts.pop().split(";").shift();
-};
+  var value = '; ' + document.cookie;
+  var parts = value.split('; ' + name + '=');
+  if (parts.length == 2) return parts.pop().split(';').shift();
+}
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
 
   // If JS is loaded, change the no-js class
-  document.documentElement.classList.remove("no-js");
-  document.documentElement.classList.add("js");
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
 
   // Add an empty element that is styled when a menu is open
   addPageOverlay();
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //
   // This function ONLY toggles a show/hide class on the target and toggles aria-expanded
   // Any other functionality (like swapping the text content if true/false) needs to be in the component JS
-  document.querySelectorAll(".js__expand-collapse").forEach(function(toggle_element) {
+  document.querySelectorAll('.js__expand-collapse').forEach(function(toggle_element) {
     toggle_element.addEventListener('click', function(event) {
       event.preventDefault();
       if (a11yClick(event) === true) {
@@ -126,13 +126,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (expanded == 'true') {
           toggle_element.setAttribute('aria-expanded', 'false');
-          target_element.classList.remove('js__aria-expanded')
+          target_element.classList.remove('js__aria-expanded');
         } else {
           toggle_element.setAttribute('aria-expanded', 'true');
-          target_element.classList.add('js__aria-expanded')
+          target_element.classList.add('js__aria-expanded');
         }
       }
-    })
+    });
   });
 
 });

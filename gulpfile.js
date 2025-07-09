@@ -18,6 +18,7 @@ const sassImportJson = require('gulp-sass-import-json');
 const jeditor = require('gulp-json-editor');
 const streamify = require('gulp-streamify');
 const Hjson = require('gulp-hjson');
+const eslint = require('gulp-eslint');
 
 /******************************************************
  * Custom Tasks - CSS / JS Compilation
