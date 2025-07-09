@@ -1,0 +1,20 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser Executive Order
+description: Teaser view for executive orders
+props:
+  type: object
+  properties: {}
+slots:
+  title:
+    title: The title of the node
+  url:
+    title: The URL to link.
+  rate_unit:
+    title: The unit of price
+  rate:
+    title: The rate of the property
+  img:
+    title: The image of the hotel
+  location:
+    title: The location data.

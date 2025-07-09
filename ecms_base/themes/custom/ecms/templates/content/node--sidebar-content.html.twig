@@ -79,14 +79,4 @@
 %}
 
 
-{% include "@templates/01-content/node--sidebar-content.html.pl.twig" with {
-  node: node,
-  label: node.label,
-  content: content,
-  attributes: attributes,
-  view_mode: view_mode,
-  teaser: teaser,
-  page: page,
-  classes: classes
-}
-%}
+{{ content }}

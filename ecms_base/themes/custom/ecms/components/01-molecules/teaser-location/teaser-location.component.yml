@@ -1,0 +1,20 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Teaser location
+description: Teaser for location nodes
+props:
+  type: object
+  properties: {}
+slots:
+  title:
+    title: The title of the node
+  location:
+    title: The location.
+  url:
+    title: The URL to link.
+  website_url:
+    title: Website of the location
+  phone:
+    title: Phone of the location
+  extension:
+    title: Phone extension

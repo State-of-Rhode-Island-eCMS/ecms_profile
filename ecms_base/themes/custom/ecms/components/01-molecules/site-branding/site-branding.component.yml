@@ -1,0 +1,12 @@
+# User settings
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: User settings component
+description: User settings component.
+props:
+  type: object
+  properties: {}
+slots:
+  header_preprocess_values:
+    title: Values determined by the preprocess function
+  front_page:
+    title: Is this the home page

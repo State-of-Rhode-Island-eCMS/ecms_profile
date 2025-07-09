@@ -34,7 +34,6 @@ dependencies:
     - filter
     - layout_builder
     - media
-    - media_revisions_ui
     - node
     - paragraphs
     - paragraphs_type_permissions
@@ -136,7 +135,6 @@ permissions:
   - 'edit own publication content'
   - 'edit own publication_file media'
   - 'edit own webform content'
-  - 'revert all media revisions'
   - 'translate basic_page node'
   - 'translate block_content'
   - 'translate event node'

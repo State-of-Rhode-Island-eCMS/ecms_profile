@@ -61,6 +61,9 @@ ddev exec 'mkdir -p $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib/ecms_profile ecms_base) $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib/ecms_profile ecms_acquia) $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 
+# Symlink the drush directory to the ddev environment.
+ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_APPROOT}/develop drush) $DDEV_APPROOT/develop/drush'
+
 ## Merge the profile's composer into Drupal's default.
 ddev exec "test -f develop/composer.lock || (generate-composer > develop/merge.composer.json)"
 
@@ -72,6 +75,14 @@ ddev exec 'composer install --working-dir=develop'
 
 ## Install the site profile.
 ddev exec 'drush site:install ecms_acquia --db-url=mysql://db:db@db:3306/db?module=mysql#tableprefix --yes'
+
+## Install fast404.settings.php
+ddev exec 'chmod +w develop/web/sites/default develop/web/sites/default/settings.php && cp scripts/fast404.settings.php develop/web/sites/default/'
+ddev exec 'echo "\$fast404Settings = sprintf(\"%s/%s/fast404.settings.php\", \$app_root, \$site_path);
+if (file_exists(\$fast404Settings)) {
+  require(\$fast404Settings);
+}" >> develop/web/sites/default/settings.php'
+
 
 if [ "$PERFORMANCE_MODE" == "1" ]; then
   ddev stop

@@ -70,10 +70,10 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     // Enable the ecms_api_recipient module.
     $edit = [];
     $edit["modules[ecms_api_recipient][enable]"] = TRUE;
-    $this->drupalPostForm(NULL, $edit, t('Install'));
+    $this->submitForm($edit, t('Install'));
 
     // Submit the confirmation form.
-    $this->drupalPostForm(NULL, [], t('Continue'));
+    $this->submitForm([], t('Continue'));
 
     // Give the user the correct permissions.
     $role = Role::load($this->role);
@@ -142,7 +142,8 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
       'edit-allowed-content-types-basic-page' => 1,
       'edit-allowed-content-types-notification' => 1,
     ];
-    $this->drupalPostForm('admin/config/ecms_api/ecms_api_recipient/settings', $configFormSubmission, 'Save configuration');
+    $this->drupalGet('admin/config/ecms_api/ecms_api_recipient/settings');
+    $this->submitForm($configFormSubmission, 'Save configuration');
     $this->drupalGet('admin/people/permissions/ecms_api_recipient');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-ecms-api-recipient-use-editorial-transition-publish');

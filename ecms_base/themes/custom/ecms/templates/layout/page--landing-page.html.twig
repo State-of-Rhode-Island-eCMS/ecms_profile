@@ -27,6 +27,7 @@
  *   comment/reply/12345).
  *
  * Regions:
+ * - page.emergency_notification: Items for the emergency notification region.
  * - page.header: Items for the header region.
  * - page.primary_menu: Items for the primary menu region.
  * - page.secondary_menu: Items for the secondary menu region.
@@ -42,18 +43,106 @@
  * @see html.html.twig
  */
 #}
+<div class="layout-container">
 
-{% include "@templates/00-layouts/_page--landing-page.html.pl.twig" with {
-  base_path: base_path,
-  is_front: is_front,
-  logged_in: logged_in,
-  is_admin: is_admin,
-  front_page: front_page,
-  page: page,
-  node: node,
-  header_preprocess_values: header_preprocess_values,
-  footer_preprocess_values: footer_preprocess_values,
-  illustration: illustration
-}
-%}
+  {% if page.emergency_notification %}
+    <div class="qh-layout__emergency-notification">
+      {{ page.emergency_notification }}
+    </div>
+  {% endif %}
 
+  <header class="qh__page-header">
+    <div class="qh__global-header">
+      <div class="qh__global-header__wrapper {{ page.header_global ? 'qh__global-header__wrapper--multiple-region' : '' }}">
+        <p class="qh__global-header__tagline">Official State of Rhode Island website</p>
+
+        <div class="qh__global-header__settings">
+          {% if page.header_global %}
+            <div class="qh__global-header__blocks">
+              {{ page.header_global }}
+            </div>
+          {% endif %}
+
+          {{ include('ecms:user-settings', {
+            language_switcher: page.language_switcher
+          }, with_context = FALSE) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="qh__page-header__wrapper">
+      {{ include('ecms:site-branding', {
+        header_preprocess_values: header_preprocess_values,
+        front_page: front_page
+      }, with_context = FALSE) }}
+      <div id="js__search-social" class="qh__page-header__inner">
+        {{ page.header_inner }}
+      </div>
+    </div>
+  </header>
+
+  {{ page.primary_menu }}
+  {{ page.secondary_menu }}
+
+  {{ page.highlighted }}
+
+  {{ page.breadcrumb }}
+
+  {{ page.help }}
+
+  <main>
+    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+
+    {{ page.admin_links }}
+
+    <div class="layout-content landing-page">
+      {{ page.content }}
+    </div>{# /.layout-content #}
+
+    {% if page.sidebar_first %}
+      <aside class="layout-sidebar-first" role="complementary">
+        {{ page.sidebar_first }}
+      </aside>
+    {% endif %}
+
+    {% if page.sidebar_second %}
+      <aside class="layout-sidebar-second" role="complementary">
+        {{ page.sidebar_second }}
+      </aside>
+    {% endif %}
+
+    {{ include('ecms:illustration', {
+      illustration: illustration
+    }, with_context = FALSE) }}
+
+  </main>
+
+  <footer class="qh__site-footer">
+    <div class="qh__site-footer__inner">
+      <div class="qh__site-footer__content qh__site-footer__first">
+        {{ footer_preprocess_values.footer_left }}
+      </div>
+      <div class="qh__site-footer__content qh__site-footer__second">
+        {{ footer_preprocess_values.footer_center }}
+      </div>
+      <div class="qh__site-footer__content qh__site-footer__third">
+        {{ footer_preprocess_values.footer_right }}
+      </div>
+      <div class="qh__site-footer__content qh__site-footer__fourth">
+        {{ footer_preprocess_values.state_info }}
+      </div>
+    </div>
+    <div class="qh__site-footer__copyright">
+      <div class="qh__site-footer__inner">
+        <div class="qh__site-footer__copyright__content">
+          {% include ('@icons/ri-state-seal.svg') %}
+          <p>
+            © {{ "now"|date("Y") }}
+            RI.gov. This page last updated on {{ node.changed.value|date('F jS, Y') }}. <a href="https://www.ri.gov/policies/">Accessibility, data, and privacy policies</a> | <a href="#top">Top of page</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>{# /.layout-container #}

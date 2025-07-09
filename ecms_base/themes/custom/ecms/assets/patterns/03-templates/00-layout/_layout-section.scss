@@ -1,0 +1,369 @@
+.qh-layout-section {
+  @include qh-content-maxwidth();
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  justify-content: center;
+
+  // Temp gutters and VR
+  padding: $general-v-spacing 0;
+
+  // Column sizing
+  &--col-size {
+
+    // One Column sizing
+    &-25 {
+      display: block;
+      width: 25%;
+    }
+
+    &-50 {
+      display: block;
+      width: 50%;
+    }
+
+    &-75 {
+      display: block;
+      width: 75%;
+    }
+
+    &-100 {
+      display: block;
+      width: 100%;
+    }
+
+    // Two Column sizing
+    &-25-75 {
+      @include breakpoint-up($bp--small) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-up($bp--small) {
+          &--first {
+            flex: 1 1 calc(33% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(33% - #{$grid-gap/2});
+            }
+          }
+
+          &--second {
+            flex: 1 1 calc(67% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(67% - #{$grid-gap/2});
+            }
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+
+        @include breakpoint-up($bp--large) {
+          &--first {
+            flex: 1 1 calc(25% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(25% - #{$grid-gap/2});
+            }
+          }
+
+          &--second {
+            flex: 1 1 calc(75% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(75% - #{$grid-gap/2});
+            }
+          }
+        }
+
+        @include breakpoint-up($bp--xlarge) {
+          &--second {
+            padding-left: 2vw;
+          }
+        }
+      }
+    }
+
+    &-33-67 {
+      @include breakpoint-up($bp--medium) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-up($bp--medium) {
+          &--first {
+            flex: 1 1 calc(33% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(33% - #{$grid-gap/2});
+            }
+          }
+
+          &--second {
+            flex: 1 1 calc(67% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(67% - #{$grid-gap/2});
+            }
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+
+        @include breakpoint-up($bp--xlarge) {
+          &--second {
+            padding-left: 2vw;
+          }
+        }
+      }
+    }
+
+    &-50-50 {
+      @include breakpoint-up($bp--medium) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-up($bp--medium) {
+          flex: 1 1 calc(50% - #{$grid-gap});
+
+          @include onlyIE() {
+            width: calc(50% - #{$grid-gap/2});
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+      }
+    }
+
+    &-67-33 {
+      @include breakpoint-up($bp--medium) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-up($bp--medium) {
+          &--first {
+            flex: 1 1 calc(67% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(67% - #{$grid-gap/2});
+            }
+          }
+
+          &--second {
+            flex: 1 1 calc(33% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(33% - #{$grid-gap/2});
+            }
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+
+        @include breakpoint-up($bp--xlarge) {
+          &--first {
+            padding-right: 2vw;
+          }
+        }
+      }
+    }
+
+    &-75-25 {
+      @include breakpoint-up($bp--small) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-up($bp--small) {
+          &--first {
+            flex: 1 1 calc(67% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(67% - #{$grid-gap/2});
+            }
+          }
+
+          &--second {
+            flex: 1 1 calc(33% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(33% - #{$grid-gap/2});
+            }
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+
+        @include breakpoint-up($bp--large) {
+          &--first {
+            flex: 1 1 calc(75% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(75% - #{$grid-gap/2});
+            }
+          }
+
+          &--second {
+            flex: 1 1 calc(25% - #{$grid-gap});
+
+            @include onlyIE() {
+              width: calc(25% - #{$grid-gap/2});
+            }
+          }
+        }
+
+        @include breakpoint-up($bp--xlarge) {
+          &--first {
+            padding-right: 2vw;
+          }
+        }
+      }
+    }
+
+
+    // Three and four column grids are repeated with equal columns.
+    &-33-repeat {
+      @include breakpoint-up($bp--medium) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-up($bp--medium) {
+          flex: 1 1 calc(33.3% - #{$grid-gap});
+
+          @include onlyIE() {
+            width: calc(33% - #{($grid-gap * 3)/4});
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+      }
+    }
+
+    &-25-repeat {
+      @include breakpoint-up($bp--small) {
+        flex-flow: row wrap;
+      }
+
+      .qh-layout-section__col {
+
+        @include breakpoint-between($bp--small, $bp--xlarge) {
+          flex: 1 1 calc(50% - #{$grid-gap});
+
+          @include onlyIE() {
+            flex: 1 1 40%;
+          }
+
+          &:nth-child(even) {
+            margin-left: $grid-gap;
+          }
+        }
+
+        @include breakpoint-up($bp--xlarge) {
+          flex: 1 1 calc(25% - #{$grid-gap});
+
+          @include onlyIE() {
+            flex: 1 1 20%;
+          }
+
+          + .qh-layout-section__col {
+            margin-left: $grid-gap;
+          }
+        }
+      }
+    }
+  }
+
+  // Column elements
+  &__col {
+    margin-bottom: $general-v-spacing;
+    overflow: auto;
+
+    .block:first-child:last-child {
+      display: flex;
+      height: 100%;
+      flex: 0 0 100%;
+      flex-direction: column;
+
+      &.block-ecms-promotions-global {
+        flex-direction: column;
+      }
+
+      .qh-layout-section--col-size-100 &.block-ecms-promotions-global {
+        flex-direction: row;
+      }
+
+      &[iecp-needed='true'] {
+        display: block;
+      }
+    }
+
+    > * + * {
+      margin-top: $general-v-spacing;
+    }
+  }
+
+  // Full width
+  &--full-width {
+    max-width: 100%;
+    padding: 0;
+
+    > *:first-child:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Tabs
+  &--tabs {
+    .tabs {
+      display: flex;
+      gap: $general-v-spacing;
+
+      > li {
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Temp styles
+.layout-container.layout-builder-page {
+  max-width: 100%;
+}
+
+
+.qh-background {
+  &--rhodyred {
+    background-color: var(--c__rhody-red);
+  }
+
+  &--calamari {
+    background-color: var(--c__calamari);
+  }
+
+  &--navy {
+    background-color: var(--c__navy);
+    color: var(--c__white);
+  }
+}

@@ -85,30 +85,24 @@
 {% set byline_translatable = byline|t %}
 {% set publish_date = 'Published on ' ~ node.field_press_release_date.value|date('l, F d, Y') %}
 
-{% include "@templates/01-content/node--full.html.pl.twig" with {
-  node: node,
-  label: node.label,
-  byline_translatable: byline_translatable,
-  content: content|without('field_press_release_date'),
-  author_picture: author_picture,
-  metadata: metadata,
-  date: date,
-  publish_date: publish_date,
-  author_name: author_name,
-  url: url,
-  display_submitted: display_submitted,
-  attributes: attributes,
-  title_attributes: title_attributes,
-  content_attributes: content_attributes,
-  author_attributes: author_attributes,
-  title_prefix: title_prefix,
-  title_suffix: title_suffix,
-  view_mode: view_mode,
-  teaser: teaser,
-  page: page,
-  readmore: readmore,
-  logged_in: logged_in,
-  is_admin: is_admin,
-  classes: classes
-}
-%}
+<article{{ attributes.addClass(classes) }}>
+  {% if node.label  %}
+    <h1>{{ node.label }}</h1>
+  {% endif %}
+
+  {% if display_submitted %}
+    <footer class="node__meta">
+      {{ author_picture }}
+      <div{{ author_attributes.addClass('node__submitted') }}>
+        {{ byline_translatable }}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+  {% if publish_date %}
+    <p class="publish-date">{{ publish_date }}</p>
+  {% endif %}
+
+  {{ content }}
+
+</article>

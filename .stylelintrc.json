@@ -3,9 +3,14 @@
     "stylelint-config-sass-guidelines"
   ],
   "rules": {
-    "max-nesting-depth": 4,
+    "max-nesting-depth": 5,
     "selector-no-qualifying-type": null,
     "selector-max-compound-selectors": 4,
-    "order/properties-alphabetical-order": null
+    "selector-max-id": 1,
+    "order/properties-alphabetical-order": null,
+    "selector-class-pattern": null,
+    "order/order": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "scss/selector-no-redundant-nesting-selector": null
   }
 }

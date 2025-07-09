@@ -78,18 +78,19 @@
   {% set media_library_icon = TRUE %}
   {% set icon = content.field_modal_icon.0.media_library_icon %}
 {% else %}
-  {% set icon = content.field_modal_icon.0.pl_icon %}
+  {% set icon = content.field_modal_icon.0.pl_icon|render %}
 {% endif %}
 
 {# Home Screen help text #}
+{% set home_screen = FALSE %}
 {% if node.field_home_screen.value %}
   {% set home_screen = TRUE %}
 {% endif %}
 
-{% include '@organisms/modal/modal.twig' with {
+{{ include('ecms:modal', {
   node: node,
   content: content,
   icon: icon,
   media_library_icon: media_library_icon,
   home_screen
-} %}
+}, with_context = FALSE) }}

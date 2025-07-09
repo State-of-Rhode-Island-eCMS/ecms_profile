@@ -17,8 +17,7 @@
 {{ q }}
 {% endif %}
 
-{% include '@molecules/site-search/site-search--inner.twig' with {
-    form: form
-  }
-%}
+{{ include('ecms:site-search-inner',  {
+  form: form
+}, with_context = FALSE) }}
 

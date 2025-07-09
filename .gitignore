@@ -32,6 +32,9 @@ composer.lock
 /modules
 /themes
 /profiles
+/libraries
+/modules/contrib
+/themes/contrib
 
 # Mac
 .DS_Store
@@ -39,6 +42,29 @@ composer.lock
 # Pattern Lab package will be pulled in by Composer.
 /ecms_base/themes/custom/ecms/ecms_patternlab
 
+# Pattern Lab SDC Migration.
+/ecms_base/themes/custom/ecms/node_modules/
+## Color config and colors-generated are compiled with Gulp.
+/ecms_base/themes/custom/ecms/assets/data/color-config.json
+/ecms_base/themes/custom/ecms/assets/data/colors-generated.json
+/ecms_base/themes/custom/ecms/assets/data/listitems.json
+/ecms_base/themes/custom/ecms/assets/data/data.json
+!/ecms_base/themes/custom/ecms/gulpfile.js
+!/ecms_base/themes/custom/ecms/components/**/*.js
+!/ecms_base/themes/custom/ecms/assets/vendor/**/*.js
+!/ecms_base/themes/custom/ecms/assets/scripts/**/*.js
+/ecms_base/themes/custom/ecms/assets/scripts/scripts-compiled-min.js
+/ecms_base/themes/custom/ecms/assets/scripts/scripts-compiled.js
+
 # ddev development site
 /develop
 ./ddev/homeadditions/bin/generate-composer
+
+# Git merge artifacts
+*.orig
+
+# Development artifacts
+*.tar.gz
+*.sql
+*.sql.gz
+

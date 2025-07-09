@@ -11,7 +11,7 @@
  */
 #}
 
-{% include '@molecules/vaccines-offered/vaccines-offered.twig' with {
+{{ include('ecms:vaccines-offered', {
   label: label,
   items: items
-} %}
+}, with_context = FALSE) }}

@@ -70,8 +70,8 @@
  *   in different view modes.
  */
 #}
-{% include '@molecules/teaser-emergency-notification/teaser-emergency-notification.twig' with {
+{{ include('ecms:teaser-emergency-notification', {
   'emergency_message': content.field_emergency_message,
   'emergency_bg_color': node.field_emergency_background_color.0.value|default('rhody-red--bright'),
   'emergency_label': label,
-} %}
+}, with_context = FALSE) }}

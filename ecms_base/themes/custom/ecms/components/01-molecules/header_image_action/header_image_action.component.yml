@@ -1,0 +1,37 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Header, Image Action
+description: Display a header_image_action block
+props:
+  type: object
+  properties:
+    page_title_enabled:
+      type: boolean
+    enable_overlay:
+      type: boolean
+    text_position_class:
+      type: string
+    bg_color_class:
+      type: string
+    hia_modifier_class:
+      type: string
+
+slots:
+  title:
+    title: The title of the header
+  title_prefix:
+    title: The title prefix meta.
+  title_suffix:
+    title: The title suffix meta.
+  img:
+    title: The image to display
+  text:
+    title: The text to display.
+  link_title:
+    title: The title of the link.
+  link_url:
+    title: The URl to link to.
+
+
+
+

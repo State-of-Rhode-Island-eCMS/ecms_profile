@@ -71,6 +71,7 @@ class PublicationPublisherTest extends UnitTestCase {
    * {@inheritDoc}
    */
   public function setUp(): void {
+    parent::setUp();
     $this->httpclient = $this->createMock(ClientInterface::class);
     $this->entityToJsonApi = $this->createMock(EntityToJsonApi::class);
     $this->ecmsApiSyndicate = $this->createMock(EcmsApiSyndicate::class);
