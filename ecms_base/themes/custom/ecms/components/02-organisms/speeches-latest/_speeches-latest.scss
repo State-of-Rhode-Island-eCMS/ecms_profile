@@ -12,7 +12,8 @@
   &__title &__all {
     font-size: 50%;
     position: absolute;
-      top: 0.5em; right: 0;
+    top: 0.5em;
+    right: 0;
 
     @include breakpoint-down($bp--medium) {
       display: none;

@@ -120,20 +120,29 @@ gulp.task('watch', gulp.parallel('watch:js', 'watch:sass'));
 // Default task
 gulp.task('default', gulp.series(gulp.parallel('convert-hjson'), 'generate-colors', 'build:no-patterns', 'watch'));
 
-// Linting
+// // Linting
 gulp.task('validate:sass', () => {
-  return gulp
-    .src(scssSourcePaths)
-    .pipe(stylelint({
-      reporters: [
-        {
-          formatter: 'verbose',
-          console: true,
-        }
-      ],
-      debug: true,
-    }))
-});
+    return gulp
+      .src(scssSourcePaths)
+      .pipe(stylelint({
+        reporters: [
+          {
+            formatter: 'verbose',
+            console: true,
+          }
+        ],
+        debug: true,
+      }));
+  });
+gulp.task('validate:js', () => {
+    return gulp
+      .src(javascriptSourcePaths)
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
+  });
+
+gulp.task('validate', gulp.parallel('validate:js', 'validate:sass'));
 
 gulp.task('fix:sass', () => {
   return gulp

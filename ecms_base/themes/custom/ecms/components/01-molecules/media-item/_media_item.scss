@@ -19,11 +19,11 @@
 
     @include breakpoint-up($bp--small) {
       width: 32%;
-      width: calc( (100% / 3) - 1rem );
+      width: calc((100% / 3) - 1rem);
     }
     @media print {
       width: 25%;
-      width: calc( (100% / 4) - 1rem );
+      width: calc((100% / 4) - 1rem);
     }
   }
 
@@ -32,12 +32,12 @@
 
     @include breakpoint-up($bp--small) {
       width: 49%;
-      width: calc( (100% / 2) - 1rem );
+      width: calc((100% / 2) - 1rem);
     }
 
     @media print {
       width: 32%;
-      width: calc( (100% / 3) - 1rem );
+      width: calc((100% / 3) - 1rem);
     }
   }
 

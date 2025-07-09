@@ -36,7 +36,7 @@
       font-size: 87.5%;
     }
 
-    &:before {
+    &::before {
       display: block;
       mask: url('../../source/images/icons/globe.svg');
       background-color: var(--fc__official__link);
@@ -66,7 +66,6 @@
 
 // Google link/dropdown styles
 [id='google_translator_element'] {
-
   .goog-te-gadget-icon {
     display: none !important;
   }
@@ -99,7 +98,7 @@
     vertical-align: middle;
     margin-top: -1px;
 
-    &:before {
+    &::before {
       display: block;
       mask: url('../../source/images/icons/globe.svg');
       background-color: var(--fc__official__link);
@@ -108,7 +107,7 @@
       content: '';
 
       &:hover,
-      &:focus{
+      &:focus {
         background-color: var(--fc__official__link--hover);
       }
     }

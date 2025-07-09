@@ -34,7 +34,7 @@
   //  transition: $transition-base;
   //}
 
-  &__title {}
+  //&__title {}
 
   &__button {
     @include qh__p;
@@ -83,10 +83,13 @@
         &__circle {
           fill: var(--fc__accordion__icon__bg);
         }
+
         &__vert,
+
         &__horiz {
           fill: var(--fc__accordion__icon__fg);
         }
+
         &__vert {
           transition: $transition-medium;
           transform: rotate(90deg); // in the SVG this shape is already transformed
@@ -95,7 +98,7 @@
       }
     }
 
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       background-color: var(--c__coffee-milk--trans25);
 
       .qh__icon__plusminus__vert {
@@ -134,7 +137,7 @@
       }
     }
 
-    .js [aria-expanded="true"] + & {
+    .js [aria-expanded='true'] + & {
       max-height: none;
       padding: $nav-a-v-spacing $nav-a-h-spacing;
       transition: max-height 0s linear 500s, visibility 0s linear 0ms;

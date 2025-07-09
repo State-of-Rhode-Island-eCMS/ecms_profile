@@ -6,9 +6,10 @@
     // Remove padding when a figure is first.
     figure:first-child {
       margin: ($general-v-spacing * -1) ($general-h-spacing * -1) $general-v-spacing;
-      width: calc( 100% + (#{$general-h-spacing} * 2));
+      width: calc(100% + (#{$general-h-spacing} * 2));
     }
   }
+
   &__title {
     margin-top: 0;
   }

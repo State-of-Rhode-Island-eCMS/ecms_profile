@@ -4,7 +4,7 @@
   // If dark mode, dim slightly
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
-      opacity: .9;
+      opacity: 0.9;
     }
   }
 
@@ -52,7 +52,7 @@
   }
 
   &__header {
-    color:  var(--fc__notification__fg);
+    color: var(--fc__notification__fg);
     display: flex;
     align-items: center;
     margin: 0 $general-h-spacing;
@@ -73,18 +73,18 @@
         color: var(--fc__notification__button__bg);
       }
 
-      &[aria-expanded="true"]::before {
+      &[aria-expanded='true']::before {
         content: attr(data-text-true);
       }
 
-      &[aria-expanded="false"]::before {
+      &[aria-expanded='false']::before {
         content: attr(data-text-false);
       }
     }
   }
 
   &__content {
-    color:  var(--fc__notification__fg);
+    color: var(--fc__notification__fg);
     padding: 0 $general-h-spacing;
 
     .notifications-hidden & {
@@ -113,10 +113,12 @@
       color: var(--fc__notification__fg);
       margin: 0 0 0.25rem;
     }
+
     p {
       max-width: 100em;
       margin-left: auto;
       margin-right: auto;
+
       & + p {
         margin-top: 0.75em;
       }

@@ -9,7 +9,6 @@
   }
 
   &__image-wrap {
-
     a {
       display: block;
       overflow: hidden;
@@ -21,7 +20,7 @@
       }
     }
 
-    img {}
+    //img {}
   }
 
   // <span>
@@ -30,7 +29,8 @@
     font-family: var(--font-sans-vf);
     font-size: 200%;
     position: absolute;
-      top: 0.25rem; right: 0.25rem;
+    top: 0.25rem;
+    right: 0.25rem;
     z-index: 1;
     transition: color $transition-duration-base $transition-timing-base;
 
@@ -38,7 +38,8 @@
       background-color: var(--fc__default__accent);
       content: '';
       position: absolute;
-        top: -2.5em; left: 3.5em;
+      top: -2.5em;
+      left: 3.5em;
       height: 7em;
       width: 7em;
       z-index: -1;
@@ -51,7 +52,7 @@
       font-size: 50%;
     }
 
-    p { 
+    p {
       margin-top: 0;
       text-align: right;
     }
@@ -90,7 +91,7 @@
       --font-lh-scaler-value: var(--h4-lh-scaler-value);
       line-height: var(--line-height);
     }
-}
+  }
 
   // <p>
   &__location {
@@ -123,7 +124,7 @@
       --font-lh-scaler-value: var(--st-lh-scaler-value);
       line-height: var(--line-height);
     }
-}
+  }
 
   &__link {
     display: block;

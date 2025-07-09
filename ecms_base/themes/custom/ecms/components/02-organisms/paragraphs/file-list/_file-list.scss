@@ -38,11 +38,10 @@
   }
 
   // UL
-  &__list {}
+  //&__list {}
 
   // LI
   &__item {
-
     & + & {
       border-top: $border-xs solid var(--fc__default__border);
     }
@@ -121,7 +120,7 @@
 
   // Hover on elements
   &__link &__item__label,
-  &__link &__item__download  {
+  &__link &__item__download {
     transition: $transition-base;
   }
 

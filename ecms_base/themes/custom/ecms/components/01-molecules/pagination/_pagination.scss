@@ -22,7 +22,7 @@
   &__link,
   &__ellipses {
     display: block;
-    font-feature-settings: "lnum";
+    font-feature-settings: 'lnum';
     line-height: 1;
     min-height: rem(44);
     min-width: rem(44);
@@ -35,10 +35,10 @@
       text-decoration: none;
     }
 
-    &:hover,
-    &:focus {}
+    //&:hover,
+    //&:focus {}
 
-    &:active {}
+    //&:active {}
 
     // All pagers with icons do not need padding
     &--first,
@@ -50,13 +50,13 @@
       padding: 0;
     }
 
-    &--first {}
+    //&--first {}
 
-    &--last {}
+    //&--last {}
 
-    &--prev {}
+    //&--prev {}
 
-    &--next {}
+    //&--next {}
 
     &--current {
       background-color: var(--fc__default__link);

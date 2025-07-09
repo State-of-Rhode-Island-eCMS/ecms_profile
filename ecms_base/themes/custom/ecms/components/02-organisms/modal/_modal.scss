@@ -15,7 +15,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +88,7 @@
         fill: var(--fc__default__fg);
       }
 
-      *[class^="qh__icon"] {
+      *[class^='qh__icon'] {
         stroke: var(--fc__default__fg);
         fill: var(--fc__default__fg);
       }
@@ -97,7 +97,7 @@
 
   &--disabled {
     .qh__modal__container {
-      opacity: .7;
+      opacity: 0.7;
     }
   }
 
@@ -105,21 +105,21 @@
     Demo Animation Style
   \**************************/
   @keyframes mm-fadeIn {
-      from { opacity: 0; }
-        to { opacity: 1; }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes mm-slideIn {
     from { transform: translateY(15%); }
-      to { transform: translateY(0); }
+    to { transform: translateY(0); }
   }
 
-  .micromodal-slide[aria-hidden="false"] .modal__overlay {
-    animation: mm-fadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+  .micromodal-slide[aria-hidden='false'] .modal__overlay {
+    animation: mm-fadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
   }
 
-  .micromodal-slide[aria-hidden="false"] .modal__container {
-    animation: mm-slideIn .3s cubic-bezier(0, 0, .2, 1);
+  .micromodal-slide[aria-hidden='false'] .modal__container {
+    animation: mm-slideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
   }
 
   .micromodal-slide .modal__container,
@@ -184,8 +184,8 @@
       background: transparent;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       position: absolute;
       left: 15px;
       top: 0;
@@ -195,11 +195,11 @@
       background-color: var(--fc__header__fg);
     }
 
-    &:before {
+    &::before {
       transform: rotate(45deg);
     }
 
-    &:after {
+    &::after {
       transform: rotate(-45deg);
     }
   }
@@ -209,8 +209,8 @@
     background-color: var(--fc__nav-main__fg);
 
     .qh__modal-homescreen__close-icon {
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         background-color: var(--fc__nav-main__bg);
       }
     }

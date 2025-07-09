@@ -53,6 +53,7 @@
       font-weight: normal;
       font-size: 0.75rem;
       line-height: $st-lh-s;
+
       .wf-inactive & {
         font-family: $font-sans-fallback;
         font-weight: normal;
@@ -63,6 +64,7 @@
           font-family: var(--font-sans-vf);
           font-weight: 450;
         }
+
         html:not(.novf).wf-inactive & {
           font-family: $font-sans-fallback;
           font-weight: normal;
@@ -98,6 +100,7 @@
       font-weight: normal;
       font-size: 2rem;
       line-height: $h1-lh-s;
+
       .wf-inactive & {
         font-family: $font-serif-fallback;
         font-weight: normal;
@@ -108,6 +111,7 @@
           font-family: var(--font-serif-vf);
           font-weight: 300;
         }
+
         html:not(.novf).wf-inactive & {
           font-family: $font-serif-fallback;
           font-weight: normal;
@@ -142,6 +146,7 @@
       font-weight: normal;
       font-size: 0.81255rem;
       line-height: $p-lh-s;
+
       .wf-inactive & {
         font-family: $font-sans-fallback;
         font-weight: normal;
@@ -152,6 +157,7 @@
           font-family: var(--font-sans-vf);
           font-weight: 350;
         }
+
         html:not(.novf).wf-inactive & {
           font-family: $font-sans-fallback;
           font-weight: normal;

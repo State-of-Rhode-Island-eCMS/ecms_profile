@@ -1,7 +1,7 @@
 .qh__execorders {
 
   // h1
-  &__title {}
+  //&__title {}
 
   // ul
   &__list {
@@ -15,7 +15,7 @@
   }
 
   // li
-  &__item {}
+  //&__item {}
 
   &__item + &__item {
     border-top: $border-xs solid var(--fc__default__border);

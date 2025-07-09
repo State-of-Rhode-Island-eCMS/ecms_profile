@@ -1,6 +1,4 @@
-
 .qh__person-list {
-
   &__header {
     padding-bottom: ($text-spacer-fallback-value);
 
@@ -9,30 +7,30 @@
     }
   }
 
-  // <h1>
-  &__title {}
-
-  // <ul>
-  &__contact {
-
-    // <p>
-    &__label {}
-
-    // <span>
-    &__email {}
-
-    // <span>
-    &__phone {}
-  }
-
-  // <ul>
-  &__list {}
+  //// <h1>
+  //&__title {}
+  //
+  //// <ul>
+  //&__contact {
+  //
+  //  // <p>
+  //  &__label {}
+  //
+  //  // <span>
+  //  &__email {}
+  //
+  //  // <span>
+  //  &__phone {}
+  //}
+  //
+  //// <ul>
+  //&__list {}
 
   // <li>
   &__item {
-   padding-top: ($text-spacer-fallback-value);
-   padding-bottom: ($text-spacer-fallback-value);
-   max-width: 100%;
+    padding-top: ($text-spacer-fallback-value);
+    padding-bottom: ($text-spacer-fallback-value);
+    max-width: 100%;
 
     @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
       padding-top: calc(var(--body-text-spacer));

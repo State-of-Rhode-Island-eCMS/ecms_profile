@@ -33,6 +33,7 @@
     "prettier": "^1.14.2",
     "stylelint": "^9.0.0",
     "stylelint-config-sass-guidelines": "^5.0.0",
+    "stylelint-order": "^2.2.1",
     "stylelint-scss": "^3.0.0"
   },
   "babel": {

@@ -1,5 +1,4 @@
 .qh__social-links {
-
   &__list {
     display: flex;
     flex-flow: row nowrap;
@@ -7,7 +6,7 @@
     justify-content: flex-start;
   }
 
-  &__item {}
+  //&__item {}
 
   // When in Header, specificity of the <a> styles needs to have the element present
   a#{&}__link {

@@ -29,7 +29,7 @@ body {
   }
 
   // There is one of this in the UL and one outside for mobile
-  .qh__icon__home {}
+  //.qh__icon__home {}
 
   // <div>
   &__wrapper {
@@ -37,6 +37,7 @@ body {
     position: relative;
     overflow: hidden;
     z-index: z(desktop-nav-bar);
+
     &.open {
       overflow: visible;
     }
@@ -82,7 +83,7 @@ body {
       background-color: transparent;
     }
 
-    &__label {}
+    //&__label {}
 
     // Hidden for desktop
     @include breakpoint-up($bp__show__desktop-nav) {
@@ -136,14 +137,14 @@ body {
       .qh__icon__menu::after {
         left: rem(10);
       }
+
       .qh__icon__menu > span {
         left: rem(14);
       }
     }
 
     // Icon animation on aria-expanded change
-    &[aria-expanded="false"] {
-
+    &[aria-expanded='false'] {
       .qh__icon__menu::before,
       .qh__icon__menu::after,
       .qh__icon__menu > span {
@@ -168,8 +169,7 @@ body {
       }
     }
 
-    &[aria-expanded="true"] {
-
+    &[aria-expanded='true'] {
       .qh__icon__menu::before,
       .qh__icon__menu::after {
         transition:
@@ -233,7 +233,7 @@ body {
           transform: translateX(em(240));
         }
 
-        [aria-expanded="true"] + & {
+        [aria-expanded='true'] + & {
           opacity: 1;
           transform: translateX(0);
           transition:
@@ -273,7 +273,7 @@ body {
           transition: $transition-base 0ms;
         }
 
-        .js [aria-expanded="true"] + & {
+        .js [aria-expanded='true'] + & {
           max-height: unset;
           transition: max-height 0s linear 500s, visibility 0s linear 0ms;
           visibility: visible;
@@ -289,8 +289,8 @@ body {
         box-shadow: $box-shadow-base;
         opacity: 0;
         position: absolute;
-          top: 100%;
-          left: 0;
+        top: 100%;
+        left: 0;
         transition: $transition-duration-medium opacity ease 0s, 0s visibility linear $transition-duration-medium;
         visibility: hidden;
 
@@ -372,6 +372,7 @@ body {
       &__circle {
         fill: var(--fc__nav-main__icon__bg);
       }
+
       &__arrow {
         fill: var(--fc__nav-main__icon__fg);
         transition: $transition-base;
@@ -398,8 +399,8 @@ body {
   // Ideally CSS hovers are only present when JS does not load
   .no-js &__link:hover + &__list__sub,
   .no-js &__link:focus + &__list__sub,
-  //.no-js &__item:focus-within > &__list__sub, !ACK focus-within BREAKS ie11
-  &__link[aria-expanded="true"] + &__list__sub {
+
+  &__link[aria-expanded='true'] + &__list__sub {
     opacity: 1;
     transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
     visibility: visible;
@@ -409,8 +410,8 @@ body {
   &__item:not(&__item__sub) > &__link:hover,
   &__item:not(&__item__sub) > &__link:focus,
   &__item:not(&__item__sub):hover > &__link:not(&__link--current):not(&__link--home),
-  //&__item:not(&__item__sub):focus-within > &__link:not(&__link--current):not(&__link--home), !ACK focus-within BREAKS ie11
-  &__link[aria-expanded="true"] {
+
+  &__link[aria-expanded='true'] {
     background-color: var(--fc__nav-main__link--hover__bg);
     color: var(--fc__nav-main__link--hover);
     padding-top: $nav-a-v-spacing;
@@ -420,6 +421,7 @@ body {
       &__circle {
         fill: var(--fc__nav-main__icon__bg--hover);
       }
+
       &__arrow {
         fill: var(--fc__nav-main__icon__fg--hover);
       }
@@ -430,8 +432,7 @@ body {
   .no-js &__link:hover,
   .no-js &__link:focus,
   .no-js &__item:not(&__item__sub):hover > &__link,
-  &__link[aria-expanded="true"] {
-
+  &__link[aria-expanded='true'] {
     .qh__icon__chevron-down {
       &__arrow {
         transform: rotate(-0.5turn);

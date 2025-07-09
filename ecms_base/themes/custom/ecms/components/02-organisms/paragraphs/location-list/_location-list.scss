@@ -4,10 +4,10 @@
     padding-bottom: ($text-spacer-fallback-value);
     max-width: 100%;
 
-     @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-       padding-top: calc(var(--body-text-spacer));
-       padding-bottom: calc(var(--body-text-spacer));
-     }
+    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
+      padding-top: calc(var(--body-text-spacer));
+      padding-bottom: calc(var(--body-text-spacer));
+    }
   }
 
   &__item + &__item {

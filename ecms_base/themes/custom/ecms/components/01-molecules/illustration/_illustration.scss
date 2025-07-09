@@ -6,6 +6,7 @@ $max-height: Max(35vh, 25vw);
   left: calc(((100vw - var(--content-max-width)) / 4) - 2.5vw);
   height: $max-height;
   z-index: -1;
+
   html:not(.dark) & {
     opacity: 0.25;
   }
@@ -14,6 +15,7 @@ $max-height: Max(35vh, 25vw);
       opacity: unset;
     }
   }
+
   svg {
     height: $max-height;
   }

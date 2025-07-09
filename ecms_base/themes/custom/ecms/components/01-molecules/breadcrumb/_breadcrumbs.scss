@@ -1,12 +1,11 @@
 .qh__breadcrumb {
-
   &__wrapper {
     @include qh-content-maxwidth();
     margin-top: 2rem;
   }
 
   // <ol>
-  &__list {}
+  //&__list {}
 
   // <li>
   &__item {

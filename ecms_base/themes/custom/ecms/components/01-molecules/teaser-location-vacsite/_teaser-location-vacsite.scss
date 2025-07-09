@@ -31,8 +31,10 @@
       flex-direction: row;
       justify-content: space-between;
     }
+
     &__col {
       flex: 1 1 0;
+
       &:last-child {
         align-self: center;
         @media (min-width: $bp--medium) {
@@ -43,7 +45,7 @@
   }
 
   // <p>
-  &__excerpt {}
+  //&__excerpt {}
 
   // <p>
   &__cta {
@@ -58,7 +60,7 @@
     align-items: center;
     display: flex;
     flex-direction: row;
-    margin-left: -0.5rem;  
+    margin-left: -0.5rem;
   }
 
   // <a> with "Read article"

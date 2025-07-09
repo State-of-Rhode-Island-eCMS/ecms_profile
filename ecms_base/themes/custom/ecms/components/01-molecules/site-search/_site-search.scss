@@ -7,9 +7,9 @@
       display: grid;
       grid-template-columns: auto 3rem;
     }
-}
+  }
 
-  &__container {}
+  //&__container {}
 
   // <input>
   &__query {
@@ -17,7 +17,7 @@
     min-width: 10rem;
   }
   // needed a bit more specificity for the site search form in the header
-  label + input[type="text"].qh__site-search__query {
+  label + input[type='text'].qh__site-search__query {
     margin-top: 0;
     @include breakpoint-up($bp__show__desktop-nav) {
       grid-column: 1/2;
@@ -33,6 +33,6 @@
       grid-column: 2/3;
     }
 
-    .qh__icon {}
+    //.qh__icon {}
   }
 }

@@ -1,6 +1,7 @@
 .qh__paragraph__column-container {
   display: flex;
   flex-wrap: wrap;
+
   > * {
     flex: 0 0 100%;
     @media (min-width: $bp--medium) {
@@ -9,6 +10,7 @@
       @include onlyIE() {
         width: 49%;
       }
+
       &:nth-child(2n-1) {
         margin-right: 2%;
       }

@@ -6,7 +6,7 @@
     margin-top: 0;
   }
 
-  &__description {}
+  //&__description {}
 
   &__cards {
 
@@ -41,7 +41,6 @@
     }
 
     @include breakpoint-up($bp__text-collection--3col) {
-
       .qh__collection__primary-bg &,
       .qh__collection__primary-light-bg &,
       .qh__collection__coffee-milk-bg & {

@@ -14,7 +14,7 @@
 
     // Hide external link indicator.
     &::before,
-    &[target="_blank"]::after {
+    &[target='_blank']::after {
       display: none;
     }
 
@@ -33,7 +33,7 @@
       @include breakpoint-up($bp--xlarge) {
         flex-direction: row;
 
-        .qh__teaser-promotion__content  {
+        .qh__teaser-promotion__content {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -42,6 +42,7 @@
         }
       }
     }
+
     .qh__paragraph__column-container & {
       flex-direction: row;
       @include breakpoint-up($bp--medium) {

@@ -23,7 +23,6 @@
   // Expand the size of the link with a pseudo element
   // The entire parent is clickable now BUT the text is no longer selectable
   &__content &__link {
-
     &::before {
       content: '';
       display: block;

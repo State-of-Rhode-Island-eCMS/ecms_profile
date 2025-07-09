@@ -47,8 +47,8 @@
   }
 
   // Interaction styles come from .qh__accordion
-  &:hover,
-  &:focus {}
+  //&:hover,
+  //&:focus {}
 
   a {
     display: block;
@@ -64,8 +64,8 @@
     padding: ($button-v-spacing/8) $button-h-spacing ($button-v-spacing/8) 0;
     overflow: visible;
     position: absolute;
-      top: - $border-lg;
-      right: 0;
+    top: - $border-lg;
+    right: 0;
     transform: rotate(-90deg);
     transform-origin: top right;
 
@@ -78,13 +78,13 @@
     &::before {
       background-color: var(--fc__nav-minor__border);
       background-image: none;
-      content: " ";
+      content: ' ';
       display: block;
       height: 100%;
       width: rem(40);
       position: absolute;
-        top: 0;
-        left: - rem(30);
+      top: 0;
+      left: - rem(30);
       transform: skew(25deg, 0deg);
       transition: $transition-base;
       z-index: -1;
@@ -139,7 +139,7 @@
       }
     }
 
-    &__sub {}
+    //&__sub {}
 
     &:not(&__sub) + &:not(&__sub)::before {
       border-top: $border-sm solid var(--fc__default__bg);
@@ -193,8 +193,7 @@
 
   // Restyling accordion elements classes
   .qh__accordion__button {
-
-    &[aria-expanded="true"] {
+    &[aria-expanded='true'] {
       background-color: var(--fc__nav-minor__link--hover__bg);
     }
 
@@ -202,6 +201,7 @@
       &__circle {
         fill: var(--fc__nav-minor__link--hover__bg);
       }
+
       &__vert,
       &__horiz {
         fill: var(--fc__nav-minor__link);
@@ -210,11 +210,12 @@
 
     &:hover,
     &:focus,
-    .js &[aria-expanded="true"] {
+    .js &[aria-expanded='true'] {
       .qh__icon__plusminus {
         &__circle {
           fill: var(--fc__default__bg);
         }
+
         &__vert,
         &__horiz {
           fill: var(--fc__nav-minor__link--hover);
@@ -226,7 +227,6 @@
   // <a> & <button> colors
   .qh__accordion__button,
   &__link {
-
     &,
     &:visited {
       background-color: var(--fc__nav-minor__link__bg);
@@ -273,7 +273,7 @@
     //}
 
     &--current,
-    .js &--current.qh__accordion__button[aria-expanded="true"] {
+    .js &--current.qh__accordion__button[aria-expanded='true'] {
       background-color: var(--fc__nav-minor__bg);
       color: var(--fc__nav-minor__fg);
       font-weight: 650; // Bumped up from 550 2020.11.18 by J.
@@ -284,13 +284,13 @@
   // Treat the Minor Nav like a breadcrumb trail at the top of the first page
   @media print {
     // Only allow the current page link to show
-    a:not(#{&}__link--current):not([href="/"]) {
+    a:not(#{&}__link--current):not([href='/']) {
       display: none;
     }
 
     // Label the current link with the destination URL, which should be this page
     a#{&}__link--current[href]::after {
-      content: " (" attr(href) ")";
+      content: ' (' attr(href) ')';
     }
 
     // Hide border
