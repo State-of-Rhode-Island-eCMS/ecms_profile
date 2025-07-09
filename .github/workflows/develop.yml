@@ -25,8 +25,6 @@ jobs:
         include:
           - drupal_core: '^10.4'
             experimental: false
-          - drupal_core: '^10.5'
-            experimental: true
           - drupal_core: '^11.1'
             experimental: true
 
