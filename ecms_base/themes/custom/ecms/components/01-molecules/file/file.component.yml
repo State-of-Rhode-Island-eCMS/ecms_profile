@@ -28,7 +28,7 @@ slots:
     title: Readable file type name.
   file_size_amount:
     title: The file size without the unit
-  file_size_short_amount:
+  file_size_short_format:
     title: The short format of the unit
   file_size_long_format:
     title: The long format of the unit.
