@@ -53,9 +53,9 @@
     min-height: $card-header-min-height--sm;
     width: ($card-leftbar-width + $general-h-spacing);
 
-    svg {
-      height: (($card-leftbar-width + $general-h-spacing) * 0.75);
-    }
+    //svg {
+    //  height: (($card-leftbar-width + $general-h-spacing) * 0.75);
+    //}
 
     path {
       fill: currentColor;
