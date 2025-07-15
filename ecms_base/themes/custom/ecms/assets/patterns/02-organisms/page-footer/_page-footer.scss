@@ -98,7 +98,8 @@
   }
 
   &__content {
-    padding: $general-v-spacing 0;
+    padding-top: $general-v-spacing;
+    padding-bottom: $general-v-spacing;
     position: relative;
 
     @include breakpoint-down($qh__footer-sm-bp) {
