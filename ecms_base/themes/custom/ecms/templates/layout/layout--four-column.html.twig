@@ -6,8 +6,12 @@
  * Available variables:
  * - content: The content for this layout.
  * - attributes: HTML attributes for the layout <div>.
+ * - hasContent: Boolean FALSE if all regions have no content.
+ * - regionsWithContent: array keyed by region name containing a boolean FALSE if the region was empty
  *
  * @ingroup themeable
+ *
+ * @see ecms_preprocess_layout()
  */
 #}
 
@@ -20,28 +24,29 @@
 ]
 %}
 
+{% if hasContent %}
 <div class="{{ background_class }}">
   <div{{ attributes.addClass(classes) }}>
 
-    {% if content.first %}
+    {% if regionsWithContent.first %}
       <div {{ region_attributes.first.addClass('qh-layout-section__col', 'qh-layout-section__col--first') }}>
         {{ content.first }}
       </div>
     {% endif %}
 
-    {% if content.second %}
+    {% if regionsWithContent.second %}
       <div {{ region_attributes.second.addClass('qh-layout-section__col', 'qh-layout-section__col--second') }}>
         {{ content.second }}
       </div>
     {% endif %}
 
-    {% if content.third %}
+    {% if regionsWithContent.third %}
       <div {{ region_attributes.third.addClass('qh-layout-section__col', 'qh-layout-section__col--third') }}>
         {{ content.third }}
       </div>
     {% endif %}
 
-    {% if content.fourth %}
+    {% if regionsWithContent.fourth %}
       <div {{ region_attributes.fourth.addClass('qh-layout-section__col', 'qh-layout-section__col--fourth') }}>
         {{ content.fourth }}
       </div>
@@ -49,3 +54,4 @@
 
   </div>
 </div>
+{% endif %}

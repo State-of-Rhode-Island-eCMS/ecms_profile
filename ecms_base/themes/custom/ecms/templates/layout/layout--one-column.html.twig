@@ -6,8 +6,12 @@
  * Available variables:
  * - content: The content for this layout.
  * - attributes: HTML attributes for the layout <div>.
+ * - hasContent: Boolean FALSE if all regions have no content.
+ * - regionsWithContent: array keyed by region name containing a boolean FALSE if the region was empty
  *
  * @ingroup themeable
+ *
+ * @see ecms_preprocess_layout()
  */
 #}
 
@@ -19,15 +23,14 @@
   settings.full_width == 1 ? 'qh-layout-section--full-width' : '',
 ]
 %}
-
+{% if hasContent %}
 <div class="{{ background_class }}">
   <div{{ attributes.addClass(classes) }}>
-
-    {% if content.first %}
+    {% if regionsWithContent.first %}
       <div {{ region_attributes.first.addClass('qh-layout-section__col', 'qh-layout-section__col--first') }}>
         {{ content.first }}
       </div>
     {% endif %}
-
   </div>
 </div>
+{% endif %}
