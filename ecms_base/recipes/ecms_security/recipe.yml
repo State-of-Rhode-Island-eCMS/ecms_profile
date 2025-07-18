@@ -1,0 +1,12 @@
+name: eCMS Security
+type: eCMS
+description: 'Configures the security kit for eCMS'
+install:
+  - seckit
+
+config:
+  actions:
+    seckit.settings:
+      simpleConfigUpdate:
+        seckit_various.coop: true
+        seckit_various.coop_policy: 'same-origin'

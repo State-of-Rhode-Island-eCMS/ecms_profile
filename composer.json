@@ -58,6 +58,9 @@
             "drupal/search_api": {
                 "3321499 - #19 - Call to a member function preExecute() on null in SearchApiTimeCache::generateResultsKey()": "https://www.drupal.org/files/issues/2023-12-05/search_api-Call_to_a_member_function_preExecute%28%29_on_null-3321499.patch"
             },
+            "drupal/seckit": {
+                "3536611 - Add support for the Cross-Origin-Opener-Policy (COOP) header": "https://gist.githubusercontent.com/pfrilling/9e27b66ee95c85ae510c1a8fcb24593b/raw/49e4da0b175fa1064b5827f9bd76242596212bc9/gistfile1.txt"
+            },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
             },
