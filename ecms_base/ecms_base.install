@@ -88,7 +88,7 @@ function ecms_base_install_tasks(): array {
     'function' => 'ecms_base_apply_workflows',
   ];
 
-  // Apply default recipes
+  // Apply default recipes.
   $tasks['ecms_base_apply_default_recipes'] = [
     'display_name' => t('Apply recipes to the installation profile.'),
     'type' => 'batch',
