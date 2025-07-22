@@ -10,3 +10,8 @@ config:
       simpleConfigUpdate:
         seckit_various.coop: true
         seckit_various.coop_policy: 'same-origin'
+        seckit_ssl:
+          hsts: true
+          hsts_subdomains: true
+          hsts_max_age: 31536000
+          hsts_preload: false
