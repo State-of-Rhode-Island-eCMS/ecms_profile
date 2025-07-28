@@ -86,7 +86,6 @@ $hia-gutter--xxlarge: calc((100vw - #{$content-max-large-screen}) / 2);
       &.qh__tc__primary {
         color: var(--fc__primary__fg);
         background-color: var(--fc__primary__overlay__bg);
-
         @media (prefers-color-scheme: dark) {
           html:not(.light) & {
             color: var(--fc__primary__fg--dark);
@@ -118,6 +117,11 @@ $hia-gutter--xxlarge: calc((100vw - #{$content-max-large-screen}) / 2);
             color: var(--fc__primary--light__fg--dark);
             background-color: var(--fc__primary--light__overlay__bg--dark);
           }
+        }
+
+        html.dark & {
+          color: var(--fc__primary--light__fg--dark);
+          background-color: var(--fc__primary--light__overlay__bg--dark);
         }
       }
 
