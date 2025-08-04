@@ -139,7 +139,6 @@ function ecms_preprocess_node(array &$variables): void {
     $variables['teaser_image'] = NULL;
 
     if (!$variables['node']->field_promotion_image->isEmpty()) {
-      // Fallback to English
       $references = $variables['node']->field_promotion_image->referencedEntities();
       /** @var \Drupal\media\MediaInterface $reference */
       $reference = array_shift($references);
@@ -148,12 +147,17 @@ function ecms_preprocess_node(array &$variables): void {
         $reference->hasField('field_promotion_image') &&
         !$reference->get('field_promotion_image')->isEmpty()
       ) {
+        // Default to the original language values.
         $img_uri = $reference->get('field_promotion_image')->entity->getFileUri();
         $img_alt = $reference->get('field_promotion_image')->alt;
         $img_width = $reference->get('field_promotion_image')->width;
         $img_height = $reference->get('field_promotion_image')->height;
 
-        if ($reference->hasTranslation($language)) {
+        if (
+          $reference->language()->getId() !== $language &&
+          $reference->hasTranslation($language)
+        ) {
+          // Override the defaults if the language is available.
           $translatedReference = $reference->getTranslation($language);
           $img_uri = $translatedReference->get('field_promotion_image')->entity->getFileUri();
           $img_alt = $translatedReference->get('field_promotion_image')->alt;
