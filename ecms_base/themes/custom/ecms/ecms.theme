@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
+use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
 
 /**
@@ -128,6 +129,56 @@ function ecms_preprocess_node(array &$variables): void {
   // We need to know the current language for some requests.
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['langcode'] = $language;
+
+  if ($variables['node']->bundle() === 'promotions') {
+    // Define img variables.
+    $img_uri = NULL;
+    $img_alt = NULL;
+    $img_width = NULL;
+    $img_height = NULL;
+    $variables['teaser_image'] = NULL;
+
+    if (!$variables['node']->field_promotion_image->isEmpty()) {
+      // Fallback to English
+      $references = $variables['node']->field_promotion_image->referencedEntities();
+      /** @var \Drupal\media\MediaInterface $reference */
+      $reference = array_shift($references);
+      if (
+        $reference instanceof MediaInterface &&
+        $reference->hasField('field_promotion_image') &&
+        !$reference->get('field_promotion_image')->isEmpty()
+      ) {
+        $img_uri = $reference->get('field_promotion_image')->entity->getFileUri();
+        $img_alt = $reference->get('field_promotion_image')->alt;
+        $img_width = $reference->get('field_promotion_image')->width;
+        $img_height = $reference->get('field_promotion_image')->height;
+
+        if ($reference->hasTranslation($language)) {
+          $translatedReference = $reference->getTranslation($language);
+          $img_uri = $translatedReference->get('field_promotion_image')->entity->getFileUri();
+          $img_alt = $translatedReference->get('field_promotion_image')->alt;
+          $img_width = $translatedReference->get('field_promotion_image')->width;
+          $img_height = $translatedReference->get('field_promotion_image')->height;
+        }
+      }
+
+      $elements = [
+        '#theme' => 'image_style',
+        '#style_name' => 'large',
+        '#uri' => $img_uri,
+        '#alt' => $img_alt,
+        '#width' => $img_width,
+        '#height' => $img_height,
+      ];
+
+      if (
+        !is_null($img_uri) &&
+        file_exists($img_uri)
+      ) {
+        $variables['teaser_image'] = $elements;
+      }
+    }
+  }
 }
 
 /**
