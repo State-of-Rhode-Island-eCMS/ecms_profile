@@ -13,20 +13,8 @@ libraries:
 
 components:
   namespaces:
-    atoms:
-      - ecms_patternlab/source/_patterns/00-atoms
-    molecules:
-      - ecms_patternlab/source/_patterns/01-molecules
-    organisms:
-      - ecms_patternlab/source/_patterns/02-organisms
-    templates:
-      - ecms_patternlab/source/_patterns/03-templates
-    pages:
-      - ecms_patternlab/source/_patterns/04-pages
     icons:
-      - ecms_patternlab/source/images/icons
-    illustrations:
-      - ecms_patternlab/source/images/illustrations
+      - assets/images/icons
     generic:
       - templates/generic
 

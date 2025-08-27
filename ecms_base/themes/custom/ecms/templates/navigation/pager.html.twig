@@ -31,10 +31,10 @@
  */
 #}
 {% if items %}
-    {% include '@molecules/pagination/pagination.twig' with {
-      header_id: header_id,
-      items: items,
-      current: current,
-      ellipses: ellipses
-    } %}
+  {{ include('ecms:pagination', {
+    header_id: header_id,
+    items: items,
+    current: current,
+    ellipses: ellipses
+  }, with_context = FALSE) }}
 {% endif %}

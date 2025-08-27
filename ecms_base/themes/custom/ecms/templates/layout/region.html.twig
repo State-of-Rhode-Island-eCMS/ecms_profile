@@ -12,20 +12,7 @@
  * @see template_preprocess_region()
  */
 #}
-{%
-  set classes = [
-    'region',
-    'region-' ~ region|clean_class,
-  ]
-%}
 
 {% if content %}
-  {% include "@templates/00-layouts/_region.html.pl.twig" with {
-    content: content,
-    attributes: attributes,
-    region: region,
-    classes: classes
-  }
-  %}
+  {{ content }}
 {% endif %}
-

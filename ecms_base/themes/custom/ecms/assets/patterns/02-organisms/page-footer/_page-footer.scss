@@ -1,0 +1,172 @@
+.qh__site-footer {
+
+  $qh__footer-sm-bp: $bp--small;
+  $qh__footer-lg-bp: em(1020);
+
+  background-color: var(--fc__footer__bg);
+  border-top: $border-xl solid var(--fc__footer__border-top);
+  color: var(--fc__footer__fg);
+
+  // Four column 2 over 2 layout. Horizontal borders in between
+  @include breakpoint-between($qh__footer-sm-bp, $qh__footer-lg-bp) {
+    &__first,
+    &__third {
+      padding-right: $general-h-spacing;
+
+      &::before {
+        border-right: $border-xs solid var(--fc__footer__fg);
+        content: '';
+        opacity: 0.33;
+        position: absolute;
+        top: $general-h-spacing;
+        right: 0;
+        bottom: $general-h-spacing;
+      }
+    }
+
+    &__second,
+    &__fourth {
+      padding-left: $general-h-spacing;
+    }
+  }
+
+  // Four columns across. Borders only on last element
+  @include breakpoint-up($qh__footer-lg-bp) {
+    &__first,
+    &__second,
+    &__third {
+      padding-right: $general-h-spacing;
+    }
+
+    &__fourth {
+      padding-left: $general-h-spacing;
+
+      &::before {
+        border-left: $border-xs solid var(--fc__footer__fg);
+        content: '';
+        opacity: 0.33;
+        position: absolute;
+        top: $general-h-spacing;
+        left: 0;
+        bottom: $general-h-spacing;
+      }
+    }
+  }
+
+  a {
+    color: var(--fc__footer__fg);
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: var(--fc__footer__fg);
+    }
+
+    &:visited {
+      color: var(--fc__footer__fg);
+    }
+  }
+
+  p {
+    font-size: 1rem; // stop any other rules from making this type size grow
+    margin-top: 0;
+    hyphens: auto !important; // Please forgive me
+
+    + p {
+      margin-top: var(--body-text-spacer);
+    }
+  }
+
+  p,
+  li {
+    font-variant-numeric: lining-nums;
+  }
+
+  &__inner {
+    @include qh-content-maxwidth();
+  }
+
+  & > &__inner {
+    padding: $general-v-spacing 0;
+
+    @include breakpoint-up($qh__footer-sm-bp) {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+  }
+
+  &__content {
+    padding-top: $general-v-spacing;
+    padding-bottom: $general-v-spacing;
+    position: relative;
+
+    @include breakpoint-down($qh__footer-sm-bp) {
+      & + &::before {
+        border-top: $border-xs solid var(--fc__footer__fg);
+        content: '';
+        opacity: 0.33;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
+
+    // Four column 2 over 2 layout
+    @include breakpoint-up($qh__footer-sm-bp) {
+      flex: 0 0 50%;
+
+      @include onlyIE() {
+        flex: 0 1 47.5%;
+      }
+    }
+
+    // Four columns across layout
+    @include breakpoint-up($qh__footer-lg-bp) {
+      flex: 0 0 25%;
+
+      @include onlyIE() {
+        flex: 0 1 23%;
+      }
+    }
+  }
+
+  &__copyright {
+    background-color: var(--fc__footer__copyright__bg);
+    color: var(--fc__footer__fg);
+    padding: $general-v-spacing $general-h-spacing;
+
+    &__content {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+
+      p {
+        flex: 1 1 auto;
+        font-size: 87.5%;
+        margin-left: 1rem;
+        max-width: unset;
+      }
+    }
+
+    svg:first-of-type {
+      flex: 0 0 rem(50);
+      margin: -0.75rem 0;
+
+      @include breakpoint-up($qh__footer-sm-bp) {
+        flex: 0 0 rem(62);
+      }
+
+      @include breakpoint-up($qh__footer-lg-bp) {
+        flex: 0 0 rem(75);
+      }
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}

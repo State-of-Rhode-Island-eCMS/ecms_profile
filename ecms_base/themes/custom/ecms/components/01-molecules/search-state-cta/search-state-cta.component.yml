@@ -1,0 +1,10 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Search State CTA
+description: Search state CTA
+props:
+  type: object
+  properties: {}
+slots:
+  search_link:
+    title: The global search link.

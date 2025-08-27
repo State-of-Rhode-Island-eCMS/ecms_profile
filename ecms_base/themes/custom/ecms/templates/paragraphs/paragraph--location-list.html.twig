@@ -47,11 +47,9 @@
 
 {% set form_title = paragraph.translation(langcode).field_location_list_form_title.value %}
 
-{% include "@organisms/paragraphs/location-list/location-list.twig" with {
-    locations: locations,
-    form_title: form_title,
-    node_link: paragraph.field_location_list_link_node.value,
-    category_form: category_form,
-  }
-%}
-
+{{ include('ecms:location-list', {
+  locations: locations,
+  form_title: form_title,
+  node_link: paragraph.field_location_list_link_node.value,
+  category_form: category_form,
+}, with_context = FALSE) }}

@@ -41,9 +41,7 @@
 
 {% set files = content.field_files|render %}
 
-{% include "@organisms/paragraphs/file-list/file-list.pl.twig" with {
-    files: files,
-    list_title: paragraph.field_list_title.value,
-  }
-%}
-
+{{ include('ecms:file-list', {
+  files: files,
+  list_title: paragraph.field_list_title.value,
+}, with_context = FALSE) }}

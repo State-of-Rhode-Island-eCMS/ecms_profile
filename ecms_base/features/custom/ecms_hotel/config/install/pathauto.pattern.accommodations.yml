@@ -11,12 +11,11 @@ pattern: 'accommodations/[node:title]'
 selection_criteria:
   de570a7b-a064-44f3-b908-9b5931e4a4eb:
    id: 'entity_bundle:node'
-    bundles:
-      hotel: hotel
-    negate: false
-    context_mapping:
-      node: node
-    uuid: de570a7b-a064-44f3-b908-9b5931e4a4eb
+   bundles:
+     hotel: hotel
+   negate: false
+   context_mapping:
+     node: node
   213a90b2-4a90-4cc5-8c2e-7154c23ffd9b:
     id: language
     langcodes:
@@ -24,7 +23,6 @@ selection_criteria:
     negate: false
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 213a90b2-4a90-4cc5-8c2e-7154c23ffd9b
 selection_logic: and
 weight: -5
 relationships:
