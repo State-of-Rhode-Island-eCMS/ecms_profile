@@ -2520,7 +2520,7 @@ function ecms_base_update_10214(array &$sandbox): void {
 /**
  * Apply the ecms_security recipe.
  *
- * Runs as part of the 1.1.7 tag.
+ * Runs as part of the 1.1.8 tag.
  */
 function ecms_base_update_10216(array &$sandbox): void {
   $recipes = [
