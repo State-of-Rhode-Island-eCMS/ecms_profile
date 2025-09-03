@@ -46,10 +46,10 @@
   <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
 {% endif %}
 
-{% include '@organisms/content-components-block/content-components-block.twig' with {
+{{ include('ecms:content-components-block', {
   label: label,
   title_prefix: title_prefix,
   title_suffix: title_suffix,
   rendered_components: content|without('field_components_bg_color'),
   bg_color_class: bg_color_class
-} %}
+} , with_context = TRUE) }}

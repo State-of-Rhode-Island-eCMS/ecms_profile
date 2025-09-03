@@ -84,11 +84,11 @@
 {# Build location string #}
 {% set location = node.field_hotel_address.locality ~ ', RI' %}
 
-{% include '@molecules/teaser-hotel/teaser-hotel.twig' with {
+{{ include('ecms:teaser-hotel', {
   title: node.label,
   url: url,
   rate_unit: node.field_hotel_promo_rate_unit.value,
   rate: node.field_hotel_promo_rate.value,
   img: img,
   location: location
-} %}
+}, with_context = FALSE) }}

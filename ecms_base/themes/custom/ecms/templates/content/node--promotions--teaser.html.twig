@@ -82,11 +82,11 @@
 {% endif %}
 
 {# @see ecms_preprocess_node(). #}
-{% include '@molecules/teaser-promotion/teaser-promotion.twig' with {
+{{ include('ecms:teaser-promotion', {
   title: translated_node.label,
   display_title: translated_node.field_promotion_display_title.value,
   img: teaser_image,
   text: translated_node.field_promotion_text.0.value,
   url: content.field_promotion_url.0['#url']
-} %}
+}, with_context = FALSE) }}
 

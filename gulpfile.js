@@ -1,89 +1,130 @@
-const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
+/******************************************************
+ * RI Gov Pattern Lab - Gulp File
+ * Uses pattern-lab/edition-node-gulp as a scaffold
+ * and then adds on CSS / JS compilation
+ ******************************************************/
+
 const gulp = require('gulp');
+const babel = require('gulp-babel');
+const argv = require('minimist')(process.argv.slice(2));
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
-const stylelint = require('gulp-stylelint');
 const sassGlob = require('gulp-sass-glob');
+const concat = require('gulp-concat');
+const minify = require('gulp-minify');
 const autoprefixer = require('gulp-autoprefixer');
-const fileArgs = require('yargs').argv;
+const stylelint = require('gulp-stylelint');
+const sassImportJson = require('gulp-sass-import-json');
+const jeditor = require('gulp-json-editor');
+const streamify = require('gulp-streamify');
+const Hjson = require('gulp-hjson');
+const eslint = require('gulp-eslint');
 
-// Directories to search SCSS files to compile. By default, node-sass does not
-// compile files that begin with _.
-const scssFilePaths = [
-  "modules/custom/**/*.scss",
-  "web/modules/custom/**/*.scss",
-  "/ecms_profile/modules/custom/**/*.scss",
-  "themes/custom/**/*.scss",
-  "web/themes/custom/**/*.scss",
-  "/ecms_profile/themes/custom/**/*.scss",
+/******************************************************
+ * Custom Tasks - CSS / JS Compilation
+ ******************************************************/
+
+// Source directories to search for SCSS / JS files to compile.
+// By default, node-sass does not compile files that begin with _.
+const scssSourcePaths = [
+  // "./assets/patterns/**/*.scss",
+  "ecms_base/themes/custom/ecms/assets/styles/*.scss",
+  "ecms_base/themes/custom/ecms/components/**/*.scss",
 ];
 
-// Directories to search ES6 JavaScript files to compile. Files will be compiled
-// to a .js file extension.
-const javascriptFilePaths = [
-  "modules/custom/**/*.es6.js",
-  "web/modules/custom/**/*.es6.js",
-  "/ecms_profile/modules/custom/**/*.es6.js",
-  "themes/custom/**/*.es6.js",
-  "web/themes/custom/**/*.es6.js",
-  "/ecms_profile/themes/custom/**/*.es6.js",
+const javascriptSourcePaths = [
+  "ecms_base/themes/custom/ecms/assets/scripts/*.js",
+  "!ecms_base/themes/custom/ecms/assets/scripts/scripts-compiled*.js",
 ];
 
-// Default task.
-gulp.task('default', ['build']);
+// Generate colors file
+gulp.task('convert-hjson', function () {
+  return gulp
+    .src("ecms_base/themes/custom/ecms/assets/data/color-config.hjson")
+    .pipe(Hjson({ to: 'json' }))
+    .pipe(gulp.dest('ecms_base/themes/custom/ecms/assets/data/'));
+});
 
-// Build tasks.
-gulp
-  .task('build', ['build:js', 'build:sass'])
-  .task('build:js', () => {
-    return gulp
-      .src(javascriptFilePaths)
-      .pipe(babel({
-        presets: ['env']
-      }))
-      .pipe(rename((path) => {
-        path.basename = path.basename.replace('.es6', '');
-      }))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }));
-  })
-  .task('build:sass', () => {
-    return gulp
-      .src(scssFilePaths)
-      .pipe(sassGlob())
-      .pipe(autoprefixer({
-        browsers: ['last 2 versions']
-      }))
-      .pipe(sass({
-        includePaths: [
-          "node_modules",
-          "web/libraries",
-        ]
-      }))
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }));
-  });
+gulp.task('generate-colors', function () {
+  return gulp
+    .src("ecms_base/themes/custom/ecms/assets/data/color-config.json")
+    .pipe(streamify(jeditor(function (json) {
+      const generatedJson = {}
+      const colorArray = [];
 
-// Watch tasks.
-gulp
-  .task('watch', ['watch:js', 'watch:sass'])
-  .task('watch:js', () => {
-    return gulp.watch(javascriptFilePaths, ['build:js']);
-  })
-  .task('watch:sass', () => {
-    return gulp.watch(scssFilePaths, ['build:sass']);
-  });
+      for (let [color, value] of Object.entries(json.colors)) {
+        colorArray.push({
+          name: color,
+          hsl: value.hsl
+        })
+      }
 
-// Validate tasks.
-gulp
-  .task('validate', ['validate:js', 'validate:sass'])
-  .task('validate:sass', () => {
+      for (let [palette, value] of Object.entries(json.palettes)) {
+        for (let [block, blockValue] of Object.entries(value.values)) {
+          blockValue.map((modifier) => {
+            const hslValue = colorArray.find((item) => item.name === modifier.colorName);
+            if(hslValue) {
+              generatedJson[`t__${palette}__${block}__${modifier.fnName}`] = hslValue.hsl;
+            } else {
+              console.error(palette + '-' + modifier.fnName + ': does not contain a color name in colors array.');
+            }
+          })
+        };
+      }
+
+      return generatedJson;
+    })))
+    .pipe(rename('colors-generated.json'))
+    .pipe(gulp.dest('ecms_base/themes/custom/ecms/assets/data/'));
+});
+
+// Build Tasks
+gulp.task('build:js', () => {
+  return gulp
+    .src(javascriptSourcePaths)
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(concat("scripts-compiled.js"))
+    .pipe(minify())
+    .pipe(gulp.dest('ecms_base/themes/custom/ecms/assets/scripts'));
+});
+
+gulp.task('build:sass', () => {
+  return gulp
+    .src(scssSourcePaths)
+    .pipe(sassGlob())
+    .pipe(sassImportJson({isScss: true}))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest((file) => {
+      return file.base;
+    }));
+});
+
+// Build All
+gulp.task('build', gulp.series('build:js', gulp.parallel('convert-hjson'), 'generate-colors', 'build:sass'));
+
+// Build only SASS JS
+gulp.task('build:no-patterns', gulp.parallel('build:js', 'build:sass'));
+
+// Watch tasks
+gulp.task('watch:js', () => {
+  return gulp.watch(javascriptSourcePaths, gulp.series('build:js'));
+});
+
+gulp.task('watch:sass', () => {
+  return gulp.watch(scssSourcePaths, gulp.series('build:sass'));
+});
+
+gulp.task('watch', gulp.parallel('watch:js', 'watch:sass'));
+
+// Default task
+gulp.task('default', gulp.series(gulp.parallel('convert-hjson'), 'generate-colors', 'build:no-patterns', 'watch'));
+
+// // Linting
+gulp.task('validate:sass', () => {
     return gulp
-      .src(fileArgs.file ? fileArgs.file : scssFilePaths)
+      .src(scssSourcePaths)
       .pipe(stylelint({
         reporters: [
           {
@@ -93,31 +134,22 @@ gulp
         ],
         debug: true,
       }));
-  })
-  .task('validate:js', () => {
+  });
+gulp.task('validate:js', () => {
     return gulp
-      .src(fileArgs.file ? fileArgs.file : javascriptFilePaths)
+      .src(javascriptSourcePaths)
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
   });
 
-// Syntax fixer tasks.
-gulp
-  .task('fix', ['fix:js', 'fix:sass'])
-  .task('fix:js', () => {
-    return gulp
-      .src(fileArgs.file ? fileArgs.file : javascriptFilePaths)
-      .pipe(eslint({fix: true}))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }))
-  })
-  .task('fix:sass', () => {
-    return gulp
-      .src(fileArgs.file ? fileArgs.file : scssFilePaths)
-      .pipe(stylelint({fix: true}))
-      .pipe(gulp.dest((file) => {
-        return file.base;
-      }));
-  });
+gulp.task('validate', gulp.parallel('validate:js', 'validate:sass'));
+
+gulp.task('fix:sass', () => {
+  return gulp
+    .src(scssSourcePaths)
+    .pipe(stylelint({fix: true}))
+    .pipe(gulp.dest((file) => {
+      return file.base;
+    }));
+});

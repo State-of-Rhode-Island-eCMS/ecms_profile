@@ -50,12 +50,11 @@
 {# Card Style #}
 {% set card_style = content.field_collection_card_style|render|striptags|trim|clean_class %}
 
-{% include '@organisms/text-card-collection/text-card-collection.twig' with {
+{{ include('ecms:text-card-collection', {
   label: label,
   cards: content.field_cards,
   description: description,
   card_style: card_style,
   title_prefix: title_prefix,
   title_suffix: title_suffix,
-} %}
-
+}, with_context = TRUE) }}

@@ -1,0 +1,16 @@
+# Search Submit component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Search Submit
+description: A search button component with an icon
+props:
+  type: object
+  properties:
+    id:
+      type: string
+      description: 'Optional ID attribute for the button'
+    data_drupal_selector:
+      type: string
+      description: 'Optional selector attribute for the button'
+slots:
+  children:
+    description: 'Additional elements to render after the button'

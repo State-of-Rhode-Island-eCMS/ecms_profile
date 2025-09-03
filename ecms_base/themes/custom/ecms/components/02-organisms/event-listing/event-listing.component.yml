@@ -1,0 +1,23 @@
+# Audiences list.
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: File list
+description: File listing for paragraph entity.
+props:
+  type: object
+  properties:
+    rows_loop:
+      type: boolean
+      title: Loop over the rows.
+slots:
+  title:
+    title: The view title.
+  rows:
+    title: The content of the list.
+  exposed:
+    title: Exposed view filters
+  pager:
+    title: Pager display
+  more:
+    title: More link for view.
+  feed_icons:
+    title: Feed icons for the view.
