@@ -75,7 +75,6 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal-composer/preserve-paths": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
@@ -93,7 +92,6 @@
     "require": {
         "composer/installers": "^1.9 || ^2.0",
         "cweagans/composer-patches": "^1.6",
-        "dealerdirect/phpcodesniffer-composer-installer": "1.0.0",
         "drupal/acquia_connector": "^4.1",
         "drupal/acquia_purge": "^1.1",
         "drupal/acquia_search": "^3.0",
