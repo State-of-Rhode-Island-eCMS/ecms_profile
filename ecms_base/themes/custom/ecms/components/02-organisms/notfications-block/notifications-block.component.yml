@@ -1,0 +1,9 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Site notifications block
+description: Site notifications block
+props:
+  type: object
+  properties: {}
+slots:
+  content:
+    title: The block content

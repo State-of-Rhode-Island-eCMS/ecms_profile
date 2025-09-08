@@ -72,11 +72,10 @@
 #}
 {% set cachebust = content|render %}
 
-{% include "@molecules/teaser-publication/teaser-publication.twig" with {
-    name: node.label,
-    publication_icon: publication_icon,
-    publication_readable: publication_readable,
-    url: publication_url,
-    enable_download: enable_download
-  }
-%}
+{{ include('ecms:teaser-publication', {
+  name: node.label,
+  publication_icon: publication_icon,
+  publication_readable: publication_readable,
+  url: publication_url,
+  enable_download: enable_download
+}, with_context = FALSE) }}

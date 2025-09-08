@@ -39,17 +39,15 @@
  */
 #}
 
-{% include "@organisms/paragraphs/file-list/file-list.pl.twig" with {
+{{ include('ecms:file-list', {
   files: parent_files,
   list_title: parent_title,
-}
-%}
+}, with_context = FALSE) }}
 
 {% for child in children %}
-  {% include "@organisms/paragraphs/file-list/file-list.pl.twig" with {
+  {{ include('ecms:file-list', {
     files: child.files,
     list_title: child.title,
-  }
-  %}
+  }, with_context = FALSE) }}
 {% endfor %}
 

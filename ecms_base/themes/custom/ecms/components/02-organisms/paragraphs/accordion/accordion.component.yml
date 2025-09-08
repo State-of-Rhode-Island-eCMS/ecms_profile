@@ -1,0 +1,13 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Accordion - Paragraph
+description: Accordion paragraph
+props:
+  type: object
+  properties: {}
+slots:
+  content:
+    title: The content of the accordion
+  paragraph:
+    title: The paragraph entity
+  pid:
+    title: The Parent ID

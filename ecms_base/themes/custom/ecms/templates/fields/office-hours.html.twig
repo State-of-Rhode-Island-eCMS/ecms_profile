@@ -1,7 +1,7 @@
 
-{% include '@organisms/office-hours/office-hours.twig' with {
+{{ include('ecms:office-hours', {
   items: items,
   label: label,
   label_length: label_length,
   schema: schema
-} %}
+}, with_context = FALSE) }}

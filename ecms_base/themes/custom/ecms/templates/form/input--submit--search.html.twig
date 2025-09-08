@@ -11,8 +11,7 @@
  */
 #}
 
-{% include '@atoms/05-forms/search-submit.twig' with {
+{{ include('ecms:search-submit', {
     children: children,
-    id: attributes.id.__toString(),
-  }
-%}
+    id: attributes.id.__toString()
+  }, with_context = false) }}

@@ -67,8 +67,9 @@ shell script to remove the UUIDs.
 3. Change directories into the ecms_profile and run `./scripts/develop.sh`.
    This will create a new ddev project in the `./develop` directory of the
    project's repository.
-4. Once complete run `ddev gulp build` and it should build without error.
-5. You can log into the newly spun up website with user: admin / pass: admin.
+4. Once complete run `ddev npm install` to add packages.
+5. Then run `ddev gulp build` and it should build without error.
+6. You can log into the newly spun up website with user: admin / pass: admin.
    `https://ecms-profile.ddev.site/user/login?showcore=1`
 
 With the distribution site now fully installed, you can make your code updates

@@ -1,0 +1,15 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Office hours
+description: Office hours
+props:
+  type: object
+  properties: {}
+slots:
+  items:
+    title: The field items
+  label:
+    title: The field label
+  label_length:
+    title: The length of the label
+  schema:
+    title: The office hour schema

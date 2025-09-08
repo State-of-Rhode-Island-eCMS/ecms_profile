@@ -61,6 +61,9 @@ ddev exec 'mkdir -p $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib/ecms_profile ecms_base) $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib/ecms_profile ecms_acquia) $DDEV_DOCROOT/profiles/contrib/ecms_profile'
 
+# Symlink the drush directory to the ddev environment.
+ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_APPROOT}/develop drush) $DDEV_APPROOT/develop/drush'
+
 ## Merge the profile's composer into Drupal's default.
 ddev exec "test -f develop/composer.lock || (generate-composer > develop/merge.composer.json)"
 
