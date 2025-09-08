@@ -1,0 +1,79 @@
+.qh__teaser-promotion {
+  background-color: var(--fc__default__bg);
+  border: $border-sm solid var(--fc__default__border);
+  color: var(--fc__default__fg);
+  text-align: center;
+  text-decoration: none;
+
+  & + & {
+    margin-top: $general-v-spacing;
+  }
+
+  &__link {
+    display: block;
+
+    // Hide external link indicator.
+    &::before,
+    &[target='_blank']::after {
+      display: none;
+    }
+
+    &:hover {
+      border: $border-sm solid var(--fc__default__link--hover);
+    }
+  }
+
+  &__layout {
+    display: flex;
+    flex-direction: column;
+
+    // Styles pertaining to promotions inside flexible content areas.
+    .qh-layout__content & {
+
+      @include breakpoint-up($bp--xlarge) {
+        flex-direction: row;
+
+        .qh__teaser-promotion__content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin: 0 auto;
+          text-align: left;
+        }
+      }
+    }
+
+    .qh__paragraph__column-container & {
+      flex-direction: row;
+      @include breakpoint-up($bp--medium) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__title {
+    margin: $general-v-spacing $general-h-spacing;
+  }
+
+  &__text {
+    margin: $general-v-spacing $general-h-spacing;
+    color: var(--fc__default__fg);
+
+    p,
+    ul,
+    li {
+      font-size: 1rem;
+      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+        --font-size-min-value: 0.925;
+        --font-size-max-value: 1;
+        --font-size-scaler-value: var(--p-scaler-value);
+        font-size: var(--font-size);
+
+        --font-lh-min-value: #{$st-lh-s};
+        --font-lh-max-value: #{$st-lh-l};
+        --font-lh-scaler-value: var(--st-lh-scaler-value);
+        line-height: var(--line-height);
+      }
+    }
+  }
+}

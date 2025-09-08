@@ -43,10 +43,9 @@
 
 {% set rendered_components = content|without('field_step_title') %}
 
-{% include "@molecules/numbered-step-item/numbered-step-item.twig" with {
-    rendered_components: rendered_components,
-    title: paragraph.field_step_title.value,
-    list_start: list_start,
-    list_end: list_end,
-  }
-%}
+{{ include('ecms:numbered-step-item', {
+  rendered_components: rendered_components,
+  title: paragraph.field_step_title.value,
+  list_start: list_start,
+  list_end: list_end,
+}, with_context = FALSE) }}

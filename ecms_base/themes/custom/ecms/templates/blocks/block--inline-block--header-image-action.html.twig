@@ -86,11 +86,12 @@
 {% endif %}
 
 {# Text position #}
+{% set page_title_enabled = FALSE %}
 {% if content.field_hia_page_title_enabled|render|striptags|trim == "True" %}
   {% set page_title_enabled = TRUE %}
 {% endif %}
 
-{% include '@molecules/header_image_action/header_image_action.twig' with {
+{{ include('ecms:header_image_action', {
   title: label,
   page_title_enabled: page_title_enabled,
   img: img,
@@ -103,5 +104,4 @@
   bg_color_class: bg_color_class,
   title_prefix: title_prefix,
   title_suffix: title_suffix,
-
-} %}
+}, with_context = TRUE) }}

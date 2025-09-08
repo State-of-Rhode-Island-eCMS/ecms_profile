@@ -1,0 +1,301 @@
+.qh-layout__sidebar-top {
+  position: sticky;
+  top: 3rem;
+  z-index: z(mobile-nav-bar);
+
+  @include breakpoint-up($bp__single-col-content) {
+    position: relative;
+    top: auto;
+    z-index: z(side-nav-menu);
+  }
+}
+
+.qh__nav-minor {
+  background-color: var(--fc__default__bg);
+  border-top: $border-lg solid var(--fc__nav-minor__border);
+  overflow: visible;
+
+  @include breakpoint-down($bp__single-col-content) {
+    $button-trigger-height: 28;
+
+    position: absolute;
+    // This calc replicates the spacing variable to negate it, and push the button trigger over to the edge of the viewport
+    left: calc((1.125rem + 3.5vw) * -1);
+    min-width: unset;
+    width: rem(320 - $button-trigger-height);
+    transform: translateX(- rem(320 - $button-trigger-height));
+    transition: transform $transition-duration-base $transition-timing-base;
+
+    // The above calc does not work for iOS 12 — unclear why
+    // iOS 11–13 do not support clamp(), so we use it as a check
+    @supports not (font-size: clamp(1rem, 2vw, 1.25rem)) {
+      left: 0;
+    }
+
+    > ul {
+      transform: translateX(- rem(48));
+      transition: transform $transition-duration-base $transition-timing-base ($transition-duration-base/2);
+    }
+
+    &#{&}--expanded {
+      transform: translateX(0);
+
+      > ul {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  // Interaction styles come from .qh__accordion
+  //&:hover,
+  //&:focus {}
+
+  a {
+    display: block;
+    transition: $transition-base;
+  }
+
+  // <button>
+  &__toggle {
+    background-color: var(--fc__nav-minor__border);
+    background-image: none;
+    border-radius: 0;
+    color: var(--fc__nav-minor__fg);
+    padding: ($button-v-spacing/8) $button-h-spacing ($button-v-spacing/8) 0;
+    overflow: visible;
+    position: absolute;
+    top: - $border-lg;
+    right: 0;
+    transform: rotate(-90deg);
+    transform-origin: top right;
+
+    &:hover::before,
+    &:focus::before {
+      background-color: var(--fc__default__button--hover__bg);
+    }
+
+    // Little triangle at the bottom
+    &::before {
+      background-color: var(--fc__nav-minor__border);
+      background-image: none;
+      content: ' ';
+      display: block;
+      height: 100%;
+      width: rem(40);
+      position: absolute;
+      top: 0;
+      left: - rem(30);
+      transform: skew(25deg, 0deg);
+      transition: $transition-base;
+      z-index: -1;
+    }
+
+    @include breakpoint-up($bp__single-col-content) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  // <ul>
+  .qh__accordion {
+    margin-top: 0;
+  }
+
+  &__list {
+    background-color: var(--fc__nav-minor__bg);
+    position: relative;
+    z-index: z(drop-down-menu);
+    @include breakpoint-up($bp__single-col-content) {
+      max-height: unset;
+      z-index: unset;
+    }
+
+    // When a left drawer menu, don't let it get bigger than the viewport and
+    // allow interior scrolling for very long lists of page nav items
+    @include breakpoint-down($bp__single-col-content) {
+      &.qh__accordion {
+        margin-top: 0;
+        max-height: 80vh;
+        overflow-y: scroll;
+      }
+    }
+
+    &__sub {
+      background-color: var(--fc__nav-minor__sub__bg);
+      border-left: 0.85rem solid var(--fc__nav-minor__link--hover__bg);
+    }
+  }
+
+  // <li>
+  &__item {
+    position: relative;
+    overflow: visible;
+
+    .qh__nav-minor > .qh__nav-minor__list > &:first-child {
+      a {
+        @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+          font-size: clamp(1rem, 1.5vw, 1.125rem);
+        }
+      }
+    }
+
+    //&__sub {}
+
+    &:not(&__sub) + &:not(&__sub)::before {
+      border-top: $border-sm solid var(--fc__default__bg);
+      content: '';
+      display: block;
+      height: 0;
+      margin: 0 em(8);
+      flex-basis: 100%;
+    }
+  }
+
+  // <li>
+  &__has-children {
+    // Set up a split button design
+    $button-width: rem(44);
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    justify-content: space-between;
+
+    .qh__nav-minor__link {
+      flex: 1 0 calc(100% - #{$button-width});
+      margin-left: auto;
+      max-width: calc(100% - #{$button-width});
+    }
+
+    .qh__nav-minor__list__sub .qh__nav-minor__link {
+      max-width: none;
+      //padding-left: 1.5rem;
+    }
+
+    .qh__accordion__button {
+      display: block;
+      flex: 0 0 $icon-dimension;
+      margin: 0 0 0 auto;
+      padding: 0.25rem 0;
+
+      .qh__icon {
+        margin: 0;
+      }
+    }
+
+    .qh__accordion__content {
+      background-color: transparent;
+      flex-basis: 100%;
+      padding: 0 !important; // sigh
+      // Needed to override the specificity of .js [aria-expanded="true"] + .qh__accordion__content
+    }
+  }
+
+  // Restyling accordion elements classes
+  .qh__accordion__button {
+    &[aria-expanded='true'] {
+      background-color: var(--fc__nav-minor__link--hover__bg);
+    }
+
+    .qh__icon__plusminus {
+      &__circle {
+        fill: var(--fc__nav-minor__link--hover__bg);
+      }
+
+      &__vert,
+      &__horiz {
+        fill: var(--fc__nav-minor__link);
+      }
+    }
+
+    &:hover,
+    &:focus,
+    .js &[aria-expanded='true'] {
+      .qh__icon__plusminus {
+        &__circle {
+          fill: var(--fc__default__bg);
+        }
+
+        &__vert,
+        &__horiz {
+          fill: var(--fc__nav-minor__link--hover);
+        }
+      }
+    }
+  }
+
+  // <a> & <button> colors
+  .qh__accordion__button,
+  &__link {
+    &,
+    &:visited {
+      background-color: var(--fc__nav-minor__link__bg);
+      color: var(--fc__nav-minor__link);
+      text-decoration: none;
+    }
+
+    &:not(.qh__nav-minor__link--current):hover,
+    &:not(.qh__nav-minor__link--current):focus {
+      background-color: var(--fc__nav-minor__link--hover__bg);
+      color: var(--fc__nav-minor__link--hover);
+    }
+
+    &:focus {
+      outline-color: var(--fc__nav-main__link--focus);
+      outline-offset: -2px;
+    }
+
+    &:active {
+      color: var(--fc__nav-main__link--active);
+    }
+  }
+
+  // <a>
+  &__link {
+    padding: $nav-a-v-spacing $nav-a-h-spacing--sm;
+    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+      font-size: clamp(0.925rem, 1.5vw, 1rem);
+      line-height: clamp(1.2rem, 3vw, 1.3rem);
+    }
+
+    &__sub {
+      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+        font-size: clamp(0.875rem, 1.5vw, 0.925rem);
+        line-height: clamp(1.2rem, 3vw, 1.3rem);
+      }
+    }
+
+    // Treat a current link as disabled. It should not have a visual state change
+    // Not working well if that current link is a parent to an accordion
+    //&--current {
+    //  cursor: default;
+    //  pointer-events: none;
+    //}
+
+    &--current,
+    .js &--current.qh__accordion__button[aria-expanded='true'] {
+      background-color: var(--fc__nav-minor__bg);
+      color: var(--fc__nav-minor__fg);
+      font-weight: 650; // Bumped up from 550 2020.11.18 by J.
+      text-decoration: none;
+    }
+  }
+
+  // Treat the Minor Nav like a breadcrumb trail at the top of the first page
+  @media print {
+    // Only allow the current page link to show
+    a:not(#{&}__link--current):not([href='/']) {
+      display: none;
+    }
+
+    // Label the current link with the destination URL, which should be this page
+    a#{&}__link--current[href]::after {
+      content: ' (' attr(href) ')';
+    }
+
+    // Hide border
+    &__item:not(#{&}__item__sub) + &__item:not(#{&}__item__sub)::before {
+      border-top: 0;
+    }
+  }
+}

@@ -19,7 +19,6 @@
  */
 #}
 
-{% include "@molecules/social-links/social-links.twig" with {
-    items: items,
-  }
-%}
+{{ include('ecms:social-links', {
+  items: items,
+}, with_context = FALSE) }}

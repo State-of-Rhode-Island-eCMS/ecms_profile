@@ -61,14 +61,22 @@ jobs:
       - name: Install the profile node requirements.
         run: npm install
 
-      - name: Run gulp validate.
+      - name: Run gulp validate for the profile.
         run: gulp validate
 
-      - name: Run gulp build.
+      - name: Run gulp build for the profile.
         run: gulp build
 
+#      - name: Install the `ecms` theme requirements.
+#        working-directory: 'ecms_base/themes/custom/ecms'
+#        run: npm install
+#
+#      - name: Run gulp build for the `ecms` theme.
+#        working-directory: 'ecms_base/themes/custom/ecms'
+#        run: gulp build
+
       - name: Archive the Drupal files.
-        run: tar -czf /tmp/drupal-build-${{ matrix.drupal_core}}.tar.gz .
+        run: tar -cz --exclude node_modules --exclude ecms_base/themes/custom/ecms/node_modules -f /tmp/drupal-build-${{ matrix.drupal_core}}.tar.gz .
 
       - name: Upload the artifact.
         uses: actions/upload-artifact@v4

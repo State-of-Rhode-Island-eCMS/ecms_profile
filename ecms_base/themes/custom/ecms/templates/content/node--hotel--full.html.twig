@@ -103,14 +103,27 @@
   {% set location = location ~ node.field_hotel_address.postal_code %}
 {% endif %}
 
-{% include '@templates/01-content/node--hotel--full.twig' with {
-  title: node.label,
-  rate_description: node.field_hotel_rate_description.value,
-  img: img,
-  location: location,
-  phone: node.field_hotel_phone.value,
-  body: node.field_hotel_body.value,
-  booking_info: node.field_hotel_booking_notes.0.value,
-  booking_url: content.field_hotel_booking_url.0['#url'],
-  more_info: content.field_hotel_more_info_url.0['#url'],
-} %}
+<article{{ attributes.addClass(classes) }}>
+
+  <h1>{{ label }}</h1>
+
+  <p>{{ location }}<br>
+    {{ node.field_hotel_phone.value }}</p>
+
+  <h2>{{ node.field_hotel_rate_description.value }}</h2>
+
+  {{ node.field_hotel_booking_notes.0.value|check_markup('basic_html') }}
+
+  {% if (booking_url) %}
+    <p><a class="button" href="{{ content.field_hotel_booking_url.0['#url'] }}">Book now</a></p>
+  {% endif %}
+
+  <figure class="hotel-image-container">
+    {{ img }}
+  </figure>
+
+  <p>
+    {{ node.field_hotel_body.value|check_markup('basic_html') }}
+    <a href="{{ content.field_hotel_more_info_url.0['#url'] }}">Read More</a>
+  </p>
+</article>

@@ -73,13 +73,54 @@
 
 {% set cachebust = content|render %}
 
-{% include '@templates/01-content/location/node--location--full.html.twig' with {
-  title: node.label,
-  additional_information: content.field_location_body,
-  map: content.field_location_geofield,
-  office_hours: content.field_location_office_hours,
-  phone: node.field_location_phone.value,
-  extension: translated_node.field_location_phone_extension.value,
-  website: content.field_location_website.0['#url'],
-  address: content.field_location_address
-} %}
+
+<article class="qh__single-location node node--type-location">
+
+  <h1>{{ label }}</h1>
+
+  <div class="qh__single-location__row">
+    <div>
+      {% if content.field_location_address|default %}
+        {{ content.field_location_address }}
+      {% endif %}
+
+      {% if content.field_location_phone|default %}
+        {% set phone = node.field_location_phone.value %}
+        {% set extension = node.field_location_phone_extension.value %}
+        <span class="qh__single-location__phone">
+          <a href="tel:1+{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
+        </span>
+      {% endif %}
+
+      {% if content.field_location_website|default %}
+        <span class="qh__single-location__website">
+          <a href="{{ content.field_location_website.0['#url'] }}" class="qh__single-location__icon-link">
+            <span class="qh__icon">{% include ('@icons/globe.svg') %}</span>
+            {{ "View Website"|t }}
+          </a>
+        </span>
+      {% endif %}
+
+      {% if content.field_location_office_hours|default %}
+        {{ content.field_location_office_hours }}
+      {% endif %}
+    </div>
+
+    <div>
+      {% if content.field_location_geofield|default %}
+        {{ content.field_location_geofield }}
+      {% endif %}
+
+      {% if content.field_location_address|default %}
+        <a href="https://www.google.com/maps/dir/?api=1&destination={{- content.field_location_address|render|striptags|trim -}}" class="qh__single-location__icon-link">
+          <span class="qh__icon">{% include ('@icons/map.svg') %}</span>
+          {{ "Google Maps"|t }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if content.field_location_body|default %}
+    {{ content.field_location_body }}
+  {% endif %}
+</article>
