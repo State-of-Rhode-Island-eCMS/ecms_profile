@@ -21,8 +21,6 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 
 ### Removed
 - RIGA-649: Remove drupal/advagg
-- RIGA-245: Remove drupal/media_revisions_ui
-- RIGA-705: Remove temporary fix for phpcodesniffer build error
 
 ### Fixed
 - RIGA-703: Fixed phpcodesniffer build error
