@@ -1,0 +1,10 @@
+# User settings
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Site search inner component
+description: Site search inner component.
+props:
+  type: object
+  properties: {}
+slots:
+  form:
+    title: The search form

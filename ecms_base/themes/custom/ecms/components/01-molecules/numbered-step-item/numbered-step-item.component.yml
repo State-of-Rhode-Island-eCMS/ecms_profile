@@ -1,0 +1,20 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Language switcher
+description: Display the language switcher
+props:
+  type: object
+  properties:
+    list_start:
+      type: boolean
+    list_end:
+      type: boolean
+slots:
+  title:
+    title: The component title
+  rendered_components:
+    title: The nested paragraph componenets.
+
+
+
+

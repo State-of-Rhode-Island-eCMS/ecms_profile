@@ -39,7 +39,6 @@
  */
 #}
 
-{% include "@organisms/paragraphs/column-container/column-container.twig" with {
-    content: content,
-  }
-%}
+{{ include('ecms:column-container', {
+  content: content,
+}, with_context = FALSE) }}

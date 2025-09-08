@@ -38,15 +38,13 @@
  * @ingroup themeable
  */
 #}
-{{ attach_library('ecms/tiny-slider') }}
 
-{% set cachebust = content|render %}
+{#{% set cachebust = content|render %}#}
 {% set pid = paragraph.id() %}
-{% set slide_count = paragraph.field_gallery_items|length %}
+{#{% set slide_count = paragraph.field_gallery_items|length %}#}
 
-{% include "@organisms/paragraphs/gallery/gallery.twig" with {
-    content: content,
-    id: pid,
-    slides_raw: paragraph.field_gallery_items
-  }
-%}
+{{ include('ecms:gallery', {
+  content: content,
+  pid: pid,
+  slides_raw: paragraph.field_gallery_items
+}, with_context = FALSE) }}

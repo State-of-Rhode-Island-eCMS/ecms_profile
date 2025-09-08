@@ -11,12 +11,11 @@ pattern: 'newsroom/speeches/[node:field_speech_date:date:custom:Y]/[node:title]'
 selection_criteria:
   a99c2095-d425-4d8f-98f4-d4e360cf14ec:
    id: 'entity_bundle:node'
-    bundles:
-      speech: speech
-    negate: false
-    context_mapping:
-      node: node
-    uuid: a99c2095-d425-4d8f-98f4-d4e360cf14ec
+   bundles:
+     speech: speech
+   negate: false
+   context_mapping:
+    node: node
   23f5d4fe-51a8-413c-a750-d943f62d4263:
     id: language
     langcodes:

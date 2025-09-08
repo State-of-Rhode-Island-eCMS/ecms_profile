@@ -1,0 +1,18 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Gallery - Paragraph
+description: Gallery paragraph
+props:
+  type: object
+  properties: {}
+slots:
+  content:
+    title: The rendered content
+  pid:
+    title: The paragraph id
+  slides_raw:
+    title: The raw slides
+libraryOverrides:
+  dependencies:
+    - ecms/tiny-slider
+  js:
+    gallery.js: { }

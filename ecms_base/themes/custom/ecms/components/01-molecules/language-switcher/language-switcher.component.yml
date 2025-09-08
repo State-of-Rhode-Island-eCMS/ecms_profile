@@ -1,0 +1,14 @@
+# Media Item component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Language switcher
+description: Display the language switcher
+props:
+  type: object
+  properties: {}
+slots:
+  languages:
+    title: Array of available language links.
+
+
+
+

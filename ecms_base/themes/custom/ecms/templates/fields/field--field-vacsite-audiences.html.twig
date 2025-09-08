@@ -11,7 +11,7 @@
  */
 #}
 
-{% include '@molecules/audiences-served/audiences-served.twig' with {
+{{ include('ecms:audiences-served', {
   label: label,
   items: items
-} %}
+}, with_context = FALSE) }}

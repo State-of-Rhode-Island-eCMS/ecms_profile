@@ -37,7 +37,7 @@
 {% set distance = fields.field_vacsite_geofield_proximity.content|render|striptags|trim %}
 {% if fields %}
 
-  {% include '@molecules/teaser-location-vacsite/teaser-location-vacsite.twig' with {
+  {{ include('ecms:teaser-location-vacsite', {
     title: fields.title.content,
     distance: distance,
     address: fields.field_vacsite_location_address.content,
@@ -46,7 +46,7 @@
     vaccines: fields.field_vacsite_vaccines_offered.content,
     url: path,
     alt_read_text: 'Details & Scheduling'
-  } %}
+  }, with_context = FALSE) }}
 
 {% endif %}
 
