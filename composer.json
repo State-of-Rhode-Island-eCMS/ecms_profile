@@ -108,6 +108,7 @@
         "drupal/autologout": "^2.0.0",
         "drupal/better_exposed_filters": "^7.0.5",
         "drupal/bigmenu": "^2.0@RC",
+        "drupal/book": "^1.0.0",
         "drupal/captcha": "^2.0",
         "drupal/classy": "^2.0",
         "drupal/commerce": "^3.1",
