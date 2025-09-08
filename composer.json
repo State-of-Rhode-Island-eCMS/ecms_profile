@@ -155,7 +155,6 @@
         "drupal/media_library_form_element": "^2.0.4",
         "drupal/media_library_theme_reset": "^2.0.0-beta1",
         "drupal/media_pdf_thumbnail": "^6.1@RC",
-        "drupal/media_revisions_ui": "^2.1",
         "drupal/memcache": "^2.2",
         "drupal/menu_admin_per_menu": "^1.7",
         "drupal/menu_block": "^1.10",
