@@ -67,14 +67,12 @@
   {% set button_color_class = 'qh__btn--' ~ paragraph.field_button_color.value %}
 {% endif %}
 
-
-{% include "@organisms/paragraphs/icon-button/icon-button.twig" with {
-    content: content,
-    paragraph: paragraph,
-    media_library_icon: media_library_icon,
-    icon: icon,
-    link_url: link_url,
-    link_title: link_title,
-    button_color_class: button_color_class
-  }
-%}
+{{ include('ecms:icon-button', {
+  content: content,
+  paragraph: paragraph,
+  media_library_icon: media_library_icon,
+  icon: icon,
+  link_url: link_url,
+  link_title: link_title,
+  button_color_class: button_color_class
+}, with_context = FALSE) }}

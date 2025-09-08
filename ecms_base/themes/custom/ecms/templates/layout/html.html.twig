@@ -31,24 +31,171 @@
     db_offline ? 'db-offline'
   ]
 %}
-{% set head_title_string = head_title|safe_join(' | ') %}
 
 {% set skip_link = 'Skip to main content'|t %}
 
-{% include "@templates/00-layouts/_html.html.pl.twig" with {
-  logged_in: logged_in,
-  root_path: root_path,
-  node_type: node_type,
-  placeholder_token: placeholder_token,
-  db_offline: db_offline,
-  html_attributes: html_attributes,
-  body_classes: body_classes,
-  head_title: head_title_string,
-  skip_link: skip_link,
-  page_top: page_top,
-  page: page,
-  page_bottom: page_bottom,
-  palette: palette,
-  apple_touch_icon: apple_touch_icon
-}
-%}
+<!DOCTYPE html>
+<html{{ html_attributes.addClass(palette) }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    {% autoescape false %}
+      <title>{{ head_titlehead_title|safe_join(' | ') }}</title>
+    {% endautoescape %}
+
+    {% if apple_touch_icon %}
+      <link rel="apple-touch-icon" href="{{ apple_touch_icon }}">
+      {# Android #}
+      <link rel="icon" sizes="192x192" href="{{ apple_touch_icon }}">
+    {% endif %}
+
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+    <script>window.MSInputMethodContext && document.documentMode && document.write('<script src="/profiles/contrib/ecms_profile/ecms_base/themes/custom/ecms/assets/vendor/ie11CustomProperties.min.js"><\/script>');</script>
+
+    <script type="text/javascript">
+      (function() {
+        document.documentElement.className += " wf-inactive";
+
+        // Optimization for Notifications
+        if(sessionStorage.getItem('siteNotificationsHidden')) {
+          document.documentElement.classList.add("notifications-hidden");
+        }
+
+        const cookies = document.cookie.split(';');
+        var lightSetting = false;
+        for (let i = 0; i < cookies.length; i++) {
+
+          // Check for Light Mode preference
+          if (cookies[i].indexOf('lightMode=dark') !== -1) {
+            // set a cookie to save the setting
+            document.cookie = "lightMode=dark;max-age=31536000;path=/;samesite=strict";
+            document.documentElement.className += " dark";
+            lightSetting = true;
+          } else if (cookies[i].indexOf('lightMode=light') !== -1) {
+            document.cookie = "lightMode=light;max-age=31536000;path=/;samesite=strict";
+            document.documentElement.className += " light";
+            lightSetting = true;
+
+            // Check for Font size preference
+          } else if (cookies[i].indexOf('fontSizeModifier') !== -1) {
+            let fontSizeCookieString = cookies[i];
+            // get the value
+            let fontSizeModifier = fontSizeCookieString.split('=');
+            let fontSizeModifierValue = fontSizeModifier[1];
+            document.cookie = "fontSizeModifier="+fontSizeModifierValue+";max-age=31536000;path=/;samesite=strict";
+            document.documentElement.style.setProperty('--fontSizeModifier', fontSizeModifierValue);
+
+            // Check for Line-height preference
+          } else if (cookies[i].indexOf('lineHeightModifier') !== -1) {
+            let lineHeightCookieString = cookies[i];
+            // get the value
+            let lineHeightModifier = lineHeightCookieString.split('=');
+            let lineHeightModifierValue = lineHeightModifier[1];
+            document.cookie = "lineHeightModifier="+lineHeightModifierValue+";max-age=31536000;path=/;samesite=strict";
+            document.documentElement.style.setProperty('--lineHeightModifier', lineHeightModifierValue);
+
+            // Check for word space preference
+          } else if (cookies[i].indexOf('wordSpaceModifier') !== -1) {
+            let wordSpaceCookieString = cookies[i];
+            // get the value
+            let wordSpaceModifier = wordSpaceCookieString.split('=');
+            let wordSpaceModifierValue = wordSpaceModifier[1];
+            document.cookie = "wordSpaceModifier="+wordSpaceModifierValue+";max-age=31536000;path=/;samesite=strict";
+            document.documentElement.style.setProperty('--wordSpaceModifier', wordSpaceModifierValue);
+          }
+
+        } // end for
+
+        if (lightSetting == false) {
+          document.cookie = "lightMode=auto;max-age=31536000;path=/;samesite=strict";
+        }
+
+        // set initial var for support of variable fonts
+        // starting with true since most browsers support them now
+        var vfSupport = true;
+
+        // Check for browser support of variable fonts
+        var vfSupport = "CSS" in window && "supports" in CSS && CSS.supports("(font-variation-settings: normal)");
+        // should return true if the browser supports variable fonts
+        //console.log('vfSupport: '+vfSupport);
+
+        // Optimization for Repeat Views
+        if( sessionStorage.foutFontsLoaded ) {
+          document.documentElement.classList.remove("wf-inactive");
+          document.documentElement.classList.add("wf-active");
+          return;
+        }
+
+        if( vfSupport == true ) { // Check for variable fonts
+          var fontA = new FontFaceObserver('Roboto Slab VF', {
+            weight: 400,
+            style: 'normal'
+          });
+          var fontB = new FontFaceObserver('Work Sans VF', {
+            weight: 400,
+            style: 'normal'
+          });
+          var fontC = new FontFaceObserver('Work Sans VF', {
+            weight: 400,
+            style: 'italic'
+          });
+
+          Promise.all([fontA.load(), fontB.load(), fontC.load()]).then(function () {
+            document.documentElement.classList.remove("wf-inactive");
+            document.documentElement.classList.add("wf-active");
+
+            // Optimization for Repeat Views
+            sessionStorage.foutFontsLoaded = true;
+          });
+        } else { // Else check for static web fonts
+          var fontA = new FontFaceObserver('Roboto Slab', {
+            weight: 'normal',
+            style: 'normal'
+          });
+          var fontB = new FontFaceObserver('Roboto Slab', {
+            weight: 'bold',
+            style: 'normal'
+          });
+          var fontC = new FontFaceObserver('Work Sans', {
+            weight: 'normal',
+            style: 'normal'
+          });
+          var fontD = new FontFaceObserver('Work Sans', {
+            weight: 'bold',
+            style: 'normal'
+          });
+          var fontE = new FontFaceObserver('Work Sans', {
+            weight: 'normal',
+            style: 'italic'
+          });
+          var fontF = new FontFaceObserver('Work Sans', {
+            weight: 'bold',
+            style: 'italic'
+          });
+
+          Promise.all([fontA.load(), fontB.load(), fontC.load(), fontD.load(), fontE.load(), fontF.load()]).then(function () {
+            document.documentElement.classList.remove("wf-inactive");
+            document.documentElement.classList.add("wf-active");
+
+            // Optimization for Repeat Views
+            sessionStorage.foutFontsLoaded = true;
+          });
+        }
+      })();
+    </script>
+  </head>
+  <body{{ attributes.addClass(body_classes) }}>
+
+    {#
+    Keyboard navigation/accessibility link to main content section in
+    page.html.twig.
+    #}
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      {{ skip_link }}
+    </a>
+    {{ page_top }}
+    {{ page }}
+    {{ page_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+  </body>
+</html>

@@ -6,10 +6,37 @@
  * Available variables:
  * - content: The content for this layout.
  * - attributes: HTML attributes for the layout <div>.
+ * - hasContent: Boolean FALSE if all regions have no content.
+ * - regionsWithContent: array keyed by region name containing a boolean FALSE if the region was empty
  *
  * @ingroup themeable
+ *
+ * @see ecms_preprocess_layout()
  */
 #}
-{% if content|render %}
-	{% include "@templates/00-layout/two-column.twig" %}
+{% set background_class = 'qh__t__' ~ settings.background_color %}
+{%
+  set classes = [
+  'qh-layout-section',
+  'qh-layout-section--col-count-2',
+  settings.full_width.checkbox == 1 ? 'qh-layout-section--full-width',
+]
+%}
+{% if hasContent %}
+<div class="{{ background_class }}">
+  <div{{ attributes.addClass(classes) }}>
+
+    {% if regionsWithContent.first %}
+      <div {{ region_attributes.first.addClass('qh-layout-section__col', 'qh-layout-section__col--first') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+
+    {% if regionsWithContent.second %}
+      <div {{ region_attributes.second.addClass('qh-layout-section__col', 'qh-layout-section__col--second') }}>
+        {{ content.second }}
+      </div>
+    {% endif %}
+  </div>
+</div>
 {% endif %}

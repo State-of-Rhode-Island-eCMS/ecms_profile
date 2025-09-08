@@ -34,6 +34,6 @@
 
 {% set cachebust = content|render %}
 
-{% include '@organisms/google-translator-block/google-translator-block.twig' with {
+{{ include('ecms:google-translator-block', {
   content: content
-} %}
+}, with_context = TRUE) }}
