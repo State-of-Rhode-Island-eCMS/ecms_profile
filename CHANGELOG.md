@@ -14,12 +14,16 @@ modified Semantic Versioning scheme. See the "Versioning scheme" section of the
 - RIGA-652: Add vendor folder of package libraries
 
 ### Changed
+- RIGA-693: Update Honeypot to 2.2
+- RIGA-690: Update robots.txt with sitemap.xml link
 - RIGA-652: Update and move package and gulp files
 
 ### Deprecated
 
 ### Removed
 - RIGA-649: Remove drupal/advagg
+- RIGA-705: Remove temporary fix for phpcodesniffer build error
+- RIGA-245: Remove drupal/media_revisions_ui
 
 ### Fixed
 - RIGA-703: Fixed phpcodesniffer build error
