@@ -28,9 +28,9 @@
                 "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
             },
             "drupal/core": {
-                "3266057 - #129 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2024-07-03/3266057-129.patch",
+                "3266057 - #138 - Allow profiles to define a base/parent profile [continue of #1356276] - D11.2 compatible": "https://gist.githubusercontent.com/pfrilling/61c06ec738c2176cda7d6329954a948f/raw/6caa22a89c763de73c2331a2150ccedd7dd73eb8/3266057-d11.2.x.patch",
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
-                "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2024-01-09/drupal-core--2024-01-09--3049332-85.patch",
+                "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2025-07-09/drupal-core--2025-07-09--3049332--mr-12460.patch",
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
             },
@@ -49,10 +49,7 @@
             },
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-                "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
-            },
-            "drupal/search_api": {
-                "3321499 - #19 - Call to a member function preExecute() on null in SearchApiTimeCache::generateResultsKey()": "https://www.drupal.org/files/issues/2023-12-05/search_api-Call_to_a_member_function_preExecute%28%29_on_null-3321499.patch"
+                "2887353 - Paragraph Translation Sync": "https://gist.githubusercontent.com/pfrilling/87798df963feab76fbef5f4abe65fa10/raw/e037dc38a1b599003dc639259f9ff00a06fc9eb9/paragraphs-translation-sync-2887353-60.patch"
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
@@ -99,7 +96,7 @@
         "drupal/address_phonenumber": "^10.0",
         "drupal/admin_toolbar": "^3.4",
         "drupal/aggregator": "^2.2",
-        "drupal/allowed_formats": "^3.0.0",
+        "drupal/allowed_formats": "^3.0.x-dev",
         "drupal/asset_injector": "^2.7",
         "drupal/auto_entitylabel": "^3.3",
         "drupal/autologout": "^2.0.0",
@@ -112,7 +109,7 @@
         "drupal/components": "^3.1",
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/content_moderation_notifications": "^3.2",
-        "drupal/core-recommended": "^9.5 || ^10.0",
+        "drupal/core-recommended": "^11.2",
         "drupal/easy_breadcrumb": "2.0.9",
         "drupal/entity_print": "^2.15",
         "drupal/entity_usage": "^2.0@beta",
@@ -131,7 +128,7 @@
         "drupal/google_tag": "^2.0",
         "drupal/google_translator": "^2.1",
         "drupal/hal": "^2.0",
-        "drupal/honeypot": "2.1.4",
+        "drupal/honeypot": "^2.2",
         "drupal/http_cache_control": "^2.0",
         "drupal/iek": "^1.3",
         "drupal/inline_entity_form": "^3.0.0-rc21",
@@ -150,7 +147,6 @@
         "drupal/media_library_form_element": "^2.0.4",
         "drupal/media_library_theme_reset": "^2.0.0-beta1",
         "drupal/media_pdf_thumbnail": "^6.1@RC",
-        "drupal/media_revisions_ui": "^2.1",
         "drupal/memcache": "^2.2",
         "drupal/menu_admin_per_menu": "^1.5",
         "drupal/menu_block": "^1.10",
@@ -211,9 +207,7 @@
     "require-dev": {
         "drupal/coder": "^8.3",
         "drupal/core-dev": "^10 || ^11 || ^12",
-        "liuggio/fastest": "^1.13",
         "php-mock/php-mock": "^2.2",
-        "php-mock/php-mock-phpunit": "^2.6",
-        "weitzman/drupal-test-traits": "^2.5"
+        "php-mock/php-mock-phpunit": "^2.6"
     }
 }

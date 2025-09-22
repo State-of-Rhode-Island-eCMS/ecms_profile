@@ -3,12 +3,10 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
-DRUPAL_CORE="${DRUPAL_CORE:-^10.4}"
+DRUPAL_CORE="${DRUPAL_CORE:-^11.2}"
 PHP_VERSION="${PHP_VERSION:-8.3}"
 APP_NAME="ecms-profile"
 DOCROOT="develop/web"
-PATTERN_LAB_DIRECTORY="ecms_patternlab"
-PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 
 rm -Rf develop
 
