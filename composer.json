@@ -49,7 +49,7 @@
             },
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-                "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2025-01-29/paragraphs-translation-sync-2887353-59.patch"
+                "2887353 - Paragraph Translation Sync": "https://gist.githubusercontent.com/pfrilling/87798df963feab76fbef5f4abe65fa10/raw/0537b9e4244a3381a5058f759ba89220c7d83ff3/paragraphs-translation-sync-2887353-60.patch"
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
