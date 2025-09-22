@@ -12,11 +12,14 @@ declare(strict_types=1);
  * Install, update and uninstall functions for the ecms_base profile.
  */
 
+use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\File\Exception\FileException;
 use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Recipe\Recipe;
+use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\user\Entity\User;
 
@@ -74,7 +77,7 @@ function ecms_base_install() {
 /**
  * Implements hook_install_tasks().
  */
-function ecms_base_profile_tasks(): array {
+function ecms_base_install_tasks(): array {
   $tasks = [];
 
   // Add the task to install the ecms_base module.
@@ -85,7 +88,61 @@ function ecms_base_profile_tasks(): array {
     'function' => 'ecms_base_apply_workflows',
   ];
 
+  // Apply default recipes.
+  $tasks['ecms_base_apply_default_recipes'] = [
+    'display_name' => t('Apply recipes to the installation profile.'),
+    'type' => 'batch',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+  ];
+
   return $tasks;
+}
+
+/**
+ * Installation task function to apply the base recipes on profile installation.
+ */
+function ecms_base_apply_default_recipes(): array {
+  $recipesToApply = [
+    'ecms_security',
+  ];
+  $operations = ecms_base_apply_recipes($recipesToApply, FALSE);
+  return $operations;
+}
+
+/**
+ * A reusable function to apply Drupal recipes to the codebase.
+ *
+ * @param array $recipes
+ *   Array of recipe names that should be installed.
+ * @param bool $startBatch
+ *   Whether to start the batch or return the batch operations as an array.
+ *
+ * @return array|null
+ *   The
+ */
+function ecms_base_apply_recipes(
+  array $recipes,
+  bool $startBatch = TRUE,
+): ?array {
+  $profilePath = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  // Batch the recipe installation.
+  $batch = new BatchBuilder();
+  foreach ($recipes as $recipeName) {
+    $path = sprintf('%s/recipes/%s', $profilePath, $recipeName);
+    $recipe = Recipe::createFromDirectory($path);
+    foreach (RecipeRunner::toBatchOperations($recipe) as $operation) {
+      $batch->addOperation(...$operation);
+    }
+  }
+
+  $operations = $batch->toArray();
+  // Finally, to kick off the job:
+  if ($startBatch) {
+    batch_set($batch->toArray());
+  }
+
+  return $operations;
+
 }
 
 /**
@@ -2453,6 +2510,37 @@ function ecms_base_update_10214(array &$sandbox): void {
   // Import config, now that environment is prepped with installed modules.
   $new_module_config = [
     'honeypot.settings',
+  ];
+
+  foreach ($new_module_config as $config) {
+    $active_storage->write("{$config}", $install_source->read("{$config}"));
+  }
+}
+
+/**
+ * Apply the ecms_security recipe.
+ *
+ * Runs as part of the 1.1.8 tag.
+ */
+function ecms_base_update_10216(array &$sandbox): void {
+  $recipes = [
+    'ecms_security',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+
+  // Get reference to config install directory.
+  $path = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  /** @var \Drupal\Core\Config\FileStorage $install_source */
+  $install_source = new FileStorage($path . "/config/install/");
+
+  // Get reference to active config storage.
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+
+  // Import config, now that environment is prepped with installed modules.
+  $new_module_config = [
+    'robotstxt.settings',
   ];
 
   foreach ($new_module_config as $config) {
