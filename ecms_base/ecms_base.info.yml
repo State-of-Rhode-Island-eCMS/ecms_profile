@@ -38,6 +38,7 @@ dependencies:
   - field_ui
   - file
   - features
+  - gtranslate
   - help
   - honeypot
   - image
