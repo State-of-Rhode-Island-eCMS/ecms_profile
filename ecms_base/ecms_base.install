@@ -2566,39 +2566,4 @@ function ecms_base_update_10217(array &$sandbox): void {
 
   // Make sure necessary modules are installed.
   \Drupal::service('module_installer')->install($modules_to_install);
-
-
-  //////
-  // Uninstall the google_translator module.
-  $modules_to_uninstall = [
-    'google_translator',
-  ];
-
-  //Remove google_translator configuration.
-  $config_factory = \Drupal::configFactory();
-  $config_factory->getEditable('google_translator.settings')->delete();
-
-  // Check if the module is installed before trying to uninstall it.
-  $module_handler = \Drupal::service('module_handler');
-  if ($module_handler->moduleExists('google_translator')) {
-    \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
-  }
-/*
-  // Remove google_translator related block configurations.
-  $block_storage = \Drupal::entityTypeManager()->getStorage('block');
-
-  // Remove the google_translator block.
-  $google_translator_block = $block_storage->load('googletranslator');
-  if ($google_translator_block) {
-    $google_translator_block->delete();
-  }
-
-  // Remove the ecms_languages_google_translator block.
-  $ecms_google_translator_block = $block_storage->load('ecms_ecmstranslatorgoogletranslator');
-  if ($ecms_google_translator_block) {
-    $ecms_google_translator_block->delete();
-  }
-*/
-
-
 }
