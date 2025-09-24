@@ -7,7 +7,6 @@
 
 declare(strict_types=1);
 
-use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\Language;
 use Drupal\Core\Url;
@@ -108,4 +107,3 @@ function ecms_languages_form_alter(&$form, FormStateInterface $form_state, $form
     }
   }
 }
-

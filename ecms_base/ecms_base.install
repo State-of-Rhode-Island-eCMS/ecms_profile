@@ -2559,7 +2559,7 @@ function ecms_base_update_10217(array &$sandbox): void {
 
   // Make sure necessary modules are uninstalled.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
-    // Install new modules.
+  // Install new modules.
   $modules_to_install = [
     'gtranslate',
   ];
