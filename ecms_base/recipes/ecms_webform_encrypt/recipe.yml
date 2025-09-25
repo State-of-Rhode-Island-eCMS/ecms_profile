@@ -1,0 +1,16 @@
+name: 'ECMS - Webform Encrypt'
+description: 'Provides webform encryptions for the ECMS system.'
+type: 'Site'
+recipes:
+  - ecms_webform
+install:
+  - key
+  - real_aes
+  - webform_encrypt
+config:
+  # If Webform's config already exists, we don't really care what it looks like.
+  strict: false
+  actions:
+    user.role.form_author:
+      grantPermissions:
+        - 'view encrypted values'

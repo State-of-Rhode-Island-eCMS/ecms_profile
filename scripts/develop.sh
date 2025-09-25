@@ -73,7 +73,7 @@ ddev exec 'test -f develop/merge.composer.json && (mv develop/merge.composer.jso
 
 ## Remove packages that require Drupal 11 patches to avoid conflicts
 ## @todo: Remove this workaround once the below modules are D11 compatible.
-ddev exec 'composer remove --working-dir=develop --no-update drupal/address_phonenumber drupal/features drupal/iek drupal/migrate_process_trim drupal/webform_encrypt || true'
+ddev exec 'composer remove --working-dir=develop --no-update drupal/address_phonenumber drupal/iek drupal/migrate_process_trim drupal/webform_encrypt || true'
 
 ## Allow lenient package installation without user interaction
 ## @todo: Remove this workaround once the above modules are D11 compatible.
@@ -83,13 +83,13 @@ ddev exec 'composer config --working-dir=develop allow-plugins.mglaman/composer-
 ddev exec 'composer require --working-dir=develop --no-update mglaman/composer-drupal-lenient'
 
 ## Configure lenient plugin allow list for D11 packages
-ddev exec 'composer config --working-dir=develop --merge --json extra.drupal-lenient.allowed-list '\''["drupal/address_phonenumber", "drupal/features", "drupal/iek", "drupal/migrate_process_trim", "drupal/webform_encrypt"]'\'''
+ddev exec 'composer config --working-dir=develop --merge --json extra.drupal-lenient.allowed-list '\''["drupal/address_phonenumber", "drupal/iek", "drupal/migrate_process_trim", "drupal/webform_encrypt"]'\'''
 
 # Composer install the things.
 ddev exec 'composer install --working-dir=develop'
 
 ## Re-add the D11 packages that were removed with no-update flag
-ddev exec 'composer require --working-dir=develop --no-update "drupal/address_phonenumber:^10.0" "drupal/features:3.x-dev" "drupal/iek:^1.3" "drupal/migrate_process_trim:^2.0" "drupal/webform_encrypt:^2.0@alpha"'
+ddev exec 'composer require --working-dir=develop --no-update "drupal/address_phonenumber:^10.0" "drupal/iek:^1.3" "drupal/migrate_process_trim:^2.0" "drupal/webform_encrypt:^2.0@alpha"'
 
 ## Run composer update with dependencies to resolve everything
 ddev exec 'composer update --with-all-dependencies --working-dir=develop'

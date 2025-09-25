@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: { }
+id: form_author
+label: 'Form Submissions Editor'
+weight: 4
+is_admin: false
+permissions: { }

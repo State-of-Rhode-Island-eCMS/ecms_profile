@@ -1,0 +1,7 @@
+name: eCMS Base
+type: eCMS Base Profile Recipe
+description: 'Configures the ecms base profile'
+recipes:
+  - ecms_security
+  - ecms_webform
+  - ecms_webform_encrypt

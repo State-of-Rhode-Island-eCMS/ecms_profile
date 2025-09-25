@@ -1,0 +1,114 @@
+name: 'ECMS Webform'
+description: 'Provides webform functionality including content type and user roles for the ECMS system'
+type: 'Site'
+recipes: []
+install:
+  - help
+  - language
+  - node
+  - pathauto
+  - system
+  - user
+  - webform
+  - webform_entity_print
+  - webform_node
+  - webform_ui
+config:
+  # If Webform's config already exists, we don't really care what it looks like.
+  strict: false
+  import:
+    system:
+      - system.menu.main
+    webform:
+      - system.action.webform_archive_action
+      - system.action.webform_close_action
+      - system.action.webform_delete_action
+      - system.action.webform_open_action
+      - system.action.webform_submission_delete_action
+      - system.action.webform_submission_make_lock_action
+      - system.action.webform_submission_make_sticky_action
+      - system.action.webform_submission_make_unlock_action
+      - system.action.webform_submission_make_unsticky_action
+      - system.action.webform_unarchive_action
+      - editor.editor.webform_default
+      - filter.format.webform_default
+      - views.view.webform_submissions
+    webform_node:
+      - core.base_field_override.node.webform.promote
+      - core.entity_form_display.node.webform.default
+      - core.entity_view_display.node.webform.default
+      - core.entity_view_display.node.webform.teaser
+      - field.field.node.webform.body
+      - field.field.node.webform.field_webform
+      - field.storage.node.webform
+      - node.type.webform
+  actions:
+    webform.settings:
+      simpleConfigUpdate:
+        ui.promotions_disabled: true
+    user.role.authenticated:
+      grantPermissions:
+        - 'use text format webform_default'
+    user.role.content_author:
+      grantPermissions:
+        - 'use text format webform_default'
+        - 'create webform content'
+        - 'edit any webform content'
+        - 'edit own webform content'
+        - 'view webform revisions'
+    user.role.form_author:
+      grantPermissions:
+        - 'access webform help'
+        - 'access webform overview'
+        - 'delete own files'
+        - 'edit any webform submission'
+        - 'entity print access type webform_submission'
+        - 'view any webform submission'
+        - 'view webform submissions any node'
+    user.role.content_publisher:
+      grantPermissions:
+        - 'add scheduled transitions node webform'
+        - 'create webform content'
+        - 'delete webform revisions'
+        - 'edit any webform content'
+        - 'edit own webform content'
+        - 'publish any node type webform'
+        - 'publish editable node type webform'
+        - 'publish own node type webform'
+        - 'reschedule scheduled transitions node webform'
+        - 'revert webform revisions'
+        - 'unpublish any node type webform'
+        - 'unpublish editable node type webform'
+        - 'unpublish own node type webform'
+        - 'view scheduled transitions node webform'
+        - 'view webform revisions'
+    user.role.site_admin:
+      grantPermissions:
+        - 'access webform help'
+        - 'access webform overview'
+        - 'add scheduled transitions node webform'
+        - 'create webform'
+        - 'create webform content'
+        - 'delete any webform'
+        - 'delete any webform content'
+        - 'delete own webform'
+        - 'delete own webform content'
+        - 'delete webform revisions'
+        - 'edit any webform'
+        - 'edit any webform content'
+        - 'edit any webform submission'
+        - 'edit own webform'
+        - 'edit own webform content'
+        - 'publish any node type webform'
+        - 'publish editable node type webform'
+        - 'publish own node type webform'
+        - 'reschedule scheduled transitions node webform'
+        - 'revert webform revisions'
+        - 'unpublish any node type webform'
+        - 'unpublish editable node type webform'
+        - 'unpublish own node type webform'
+        - 'view any webform submission'
+        - 'view own webform submission'
+        - 'view scheduled transitions node webform'
+        - 'view webform revisions'
+        - 'view webform submissions any node'
