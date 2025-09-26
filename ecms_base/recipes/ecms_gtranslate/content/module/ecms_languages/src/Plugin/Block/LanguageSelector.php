@@ -12,7 +12,7 @@ use Drupal\gtranslate\Plugin\Block\GTranslateBlock;
  * @Block(
  *   id = "ecms_languages_gtranslate",
  *   admin_label = @Translation("ECMS Translator (GTranslate)"),
- * 
+ *
  *   category = @Translation("ECMS Translator")
  * )
  */
