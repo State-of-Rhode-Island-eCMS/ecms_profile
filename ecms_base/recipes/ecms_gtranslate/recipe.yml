@@ -8,4 +8,4 @@ config:
   strict: false
   actions:
   import:
-
+    - ecms_base/recipes/ecms_gtranslate/content/block/block.block.gtranslate_block.yml
