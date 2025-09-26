@@ -1,0 +1,7 @@
+element:
+  version: 2.x
+  css:
+    theme:
+      css/gtranslate-custom.css: {}
+  dependencies:
+    - gtranslate/gtranslate

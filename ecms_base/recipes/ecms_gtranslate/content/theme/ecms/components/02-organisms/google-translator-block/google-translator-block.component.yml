@@ -1,0 +1,9 @@
+name: Google Translator Block
+status: ready
+group: Organisms
+description: 'Google Translator block component for eCMS'
+props:
+  content:
+    type: string
+    title: Content
+    description: 'The Google Translator block content'

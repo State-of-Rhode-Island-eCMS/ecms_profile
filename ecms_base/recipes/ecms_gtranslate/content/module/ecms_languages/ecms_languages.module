@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Language logic for various aspects on the site.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Asset\AttachedAssetsInterface;
+
+/**
+ * Implements hook_js_alter().
+ */
+function ecms_languages_js_alter(
+  array &$javascript,
+  AttachedAssetsInterface $extension,
+): void {
+  // Add custom JavaScript modifications for gtranslate if needed.
+  if (isset($javascript['modules/contrib/gtranslate/js/dropdown.js'])) {
+    // Append to the version number to ensure the latest version is loaded.
+    $originalVersion = $javascript['modules/contrib/gtranslate/js/dropdown.js']['version'];
+    $javascript['modules/contrib/gtranslate/js/dropdown.js']['version'] = sprintf('%s-%s', $originalVersion, \Drupal::VERSION);
+  }
+}

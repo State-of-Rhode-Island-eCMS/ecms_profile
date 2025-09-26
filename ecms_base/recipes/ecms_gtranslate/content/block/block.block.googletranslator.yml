@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - gtranslate
+  theme:
+    - ecms
+id: gtranslate
+theme: ecms
+region: language_switcher
+weight: 0
+provider: null
+plugin: gtranslate
+settings:
+  id: gtranslate
+  label: 'Translate this page'
+  label_display: ''
+  provider: gtranslate
+visibility: {  }

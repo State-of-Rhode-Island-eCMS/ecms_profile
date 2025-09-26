@@ -1,0 +1,11 @@
+name: eCMS Google Translate
+type: eCMS
+description: 'Configures Google Translate module for eCMS with custom settings and block placement'
+install:
+  - gtranslate
+
+config:
+  strict: false
+  actions:
+  import:
+
