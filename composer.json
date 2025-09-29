@@ -37,6 +37,9 @@
             "drupal/features": {
                 "3447460 - D11 Upgrades": "https://gist.githubusercontent.com/pfrilling/e27933a1a4b8577d3d69d0d4f0bec6a2/raw/0c5df9bd798a0298a6a1c2675ec34881c290aff2/gistfile1.txt"
             },
+            "drupal/gtranslate": {
+                "3375925 - TypeError: array_values(): Argument #1 ($array) must be of type array": "https://www.drupal.org/files/issues/2023-08-31/gtranslate-3375925-update-default-config-11.diff"
+            },
             "drupal/iek": {
                 "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
                 "3430975 - #9 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/interdiff-last-bot.6938818.txt"

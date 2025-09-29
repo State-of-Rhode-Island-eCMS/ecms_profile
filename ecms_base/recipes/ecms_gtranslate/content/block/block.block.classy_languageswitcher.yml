@@ -1,0 +1,30 @@
+uuid: 881ba1d1-c7d8-4317-89b5-6f90060d867a
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+  theme:
+    - classy
+_core:
+  default_config_hash: UJo5DTpXoD-ZLyOIBD24Ub6aVuVm_YVxgCrVUvY8n5o
+id: classy_languageswitcher
+theme: classy
+region: sidebar_first
+weight: -2
+provider: null
+plugin: 'language_block:language_interface'
+settings:
+  id: 'language_block:language_interface'
+  label: 'Seletor de idioma'
+  label_display: '0'
+  provider: language
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      es: es
