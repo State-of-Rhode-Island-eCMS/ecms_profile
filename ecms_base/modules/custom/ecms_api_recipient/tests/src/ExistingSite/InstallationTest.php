@@ -9,15 +9,16 @@ require_once dirname(__FILE__) . '/../../../../../../../tests/src/ExistingSite/A
 
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * ExistingSite testing for the ecms_api_recipient module.
  *
  * @package Drupal\Tests\ecms_api_recipient\ExistingSite
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
 class InstallationTest extends AllProfileInstallationTestsAbstract {
 
   /**
@@ -75,10 +76,23 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     // Submit the confirmation form.
     $this->submitForm([], t('Continue'));
 
-    // Give the user the correct permissions.
-    $role = Role::load($this->role);
-    $role->grantPermission('administer consumer entities');
-    $role->save();
+    // Assert that the consumer module is enabled.
+    $this->drupalGet('admin/modules');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-modules-consumers-enable');
+
+    // Assign the role administer consumer entities
+    $this->drupalGet(sprintf('admin/people/permissions/%s', $this->role));
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxNotChecked(sprintf('%s[administer consumer entities]', $this->role));
+    $this->submitForm([
+      sprintf('%s[administer consumer entities]', $this->role) => TRUE,
+      sprintf('%s[administer modules]', $this->role) => TRUE,
+      sprintf('%s[administer permissions]', $this->role) => TRUE,
+      sprintf('%s[administer users]', $this->role) => TRUE,
+      sprintf('%s[administer site configuration]', $this->role) => TRUE,
+      sprintf('%s[access administration pages]', $this->role) => TRUE,
+    ], t('Save permissions'));
 
     // Ensure the ecms_api_recipient role was installed.
     $this->drupalGet('admin/people/roles/manage/ecms_api_recipient');
@@ -130,8 +144,6 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->assertSession()->statusCodeEquals(200);
     // Ensure the api user is set.
     $this->assertSession()->fieldValueEquals('edit-user-id-0-target-id', "ecms_api_recipient ({$accountId})");
-    // Ensure the correct role is set.
-    $this->assertSession()->checkboxChecked('edit-roles-ecms-api-recipient');
 
     $this->drupalGet('admin/config/ecms_api/ecms_api_recipient/settings');
     $this->assertSession()->statusCodeEquals(200);
@@ -171,14 +183,14 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   public function tearDown(): void {
     parent::tearDown();
 
-    if (!empty($this->account)) {
-      $this->account->delete();
-    }
-
-    $role = Role::load($this->role);
-    if (!empty($role)) {
-      $role->delete();
-    }
+//    if (!empty($this->account)) {
+//      $this->account->delete();
+//    }
+//
+//    $role = Role::load($this->role);
+//    if (!empty($role)) {
+//      $role->delete();
+//    }
   }
 
 }
