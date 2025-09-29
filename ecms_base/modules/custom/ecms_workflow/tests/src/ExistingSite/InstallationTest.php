@@ -11,14 +11,15 @@ use Drupal\Core\Entity\EntityStorageException;
 use Drupal\node\Entity\NodeType;
 use Drupal\Tests\ecms_profile\ExistingSite\AllProfileInstallationTestsAbstract;
 use Drupal\user\Entity\Role;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * ExistingSite tests for the ecms_workflow module.
  *
  * @package Drupal\Tests\ecms_workflow\ExistingSite
- * @group ecms
- * @group ecms_workflow
  */
+#[Group("ecms_workflow")]
+#[Group("ecms")]
 class InstallationTest extends AllProfileInstallationTestsAbstract {
 
   /**
@@ -61,13 +62,15 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     $this->drupalLogin($this->account);
 
     // Ensure content types have proper permissions.
-    $this->drupalGet('admin/people/permissions');
+    $this->drupalGet('admin/people/permissions/content_author');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-content-author-create-basic-page-content');
-    $this->assertSession()->checkboxChecked('edit-content-publisher-create-basic-page-content');
-    $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-basic-page-content');
     $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-basic-page-content');
 
+    $this->drupalGet('admin/people/permissions/content_publisher');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->checkboxChecked('edit-content-publisher-create-basic-page-content');
+    $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-basic-page-content');
   }
 
   /**
@@ -91,12 +94,15 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
     }
 
     // Ensure the new test content type has proper permissions.
-    $this->drupalGet('admin/people/permissions');
+    $this->drupalGet('admin/people/permissions/content_author');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-content-author-create-test-content-type-content');
+    $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-test-content-type-content');
+
+    $this->drupalGet('admin/people/permissions/content_publisher');
+    $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-content-publisher-create-test-content-type-content');
     $this->assertSession()->checkboxChecked('edit-content-publisher-edit-any-test-content-type-content');
-    $this->assertSession()->checkboxNotChecked('edit-content-author-edit-any-test-content-type-content');
 
     // We can remove the test content type now.
     try {
