@@ -1,0 +1,19 @@
+name: 'ECMS Acquia'
+description: 'Provides required configuration for Acquia Site Factory.'
+type: 'Site'
+recipes: []
+install:
+  - acquia_connector
+  - acquia_purge
+  - acsf
+  - purge
+  - purge_drush
+  - purge_processor_cron
+  - purge_processor_lateruntime
+  - purge_queuer_coretags
+  - purge_ui
+config:
+  strict: false
+  import:
+    system:
+      - system.menu.main
