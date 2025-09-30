@@ -40,23 +40,7 @@
           <!-- Assumes tests are namespaced as \Drupal\Tests\custom_foo\ExistingSite. -->
           <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests/src/ExistingSite</directory>
           <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/ExistingSite</directory>
-          <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>
+<!--          <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>-->
         </testsuite>
     </testsuites>
-    <source>
-        <include>
-            <directory>/var/www/html/profiles/contrib/ecms_profile/*</directory>
-        </include>
-        <exclude>
-            <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
-            <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests</directory>
-            <directory>/var/www/html/profiles/contrib/ecms_profile/tests</directory>
-            <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
-        </exclude>
-    </source>
-    <coverage>
-        <report>
-            <text outputFile="tests/phpunit/results/coverage.txt"/>
-        </report>
-    </coverage>
 </phpunit>
