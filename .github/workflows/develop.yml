@@ -208,4 +208,4 @@ jobs:
 #
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml
+        run: ../vendor/bin/phpunit --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml
