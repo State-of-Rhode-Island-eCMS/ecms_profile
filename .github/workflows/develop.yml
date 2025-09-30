@@ -165,20 +165,38 @@ jobs:
         run: cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
 
       - name: Add MySQL requirement to settings.php
-        run: echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
+        run: |
+          echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
+          echo '$databases["default"]["default"] = array (' >> /var/www/html/sites/default/settings.php
+          echo '  "database" => "drupal",' >> /var/www/html/sites/default/settings.php
+          echo '  "username" => "drupal",' >> /var/www/html/sites/default/settings.php
+          echo '  "password" => "drupal",' >> /var/www/html/sites/default/settings.php
+          echo '  "prefix" => "",' >> /var/www/html/sites/default/settings.php
+          echo '  "host" => "database",' >> /var/www/html/sites/default/settings.php
+          echo '  "port" => "3306",' >> /var/www/html/sites/default/settings.php
+          echo '  "namespace" => "Drupal\\mysql\\Driver\\Database\\mysql",' >> /var/www/html/sites/default/settings.php
+          echo '  "driver" => "mysql",' >> /var/www/html/sites/default/settings.php
+          echo ');' >> /var/www/html/sites/default/settings.php
+
+      - name: Add Fast404 settings
+        run: |
+          echo '$fast404Settings = sprintf("%s/%s/fast404.settings.php", $app_root, $site_path);' >> /var/www/html/sites/default/settings.php
+          echo 'if (file_exists($fast404Settings)) {' >> /var/www/html/sites/default/settings.php
+          echo '  require($fast404Settings);' >> /var/www/html/sites/default/settings.php
+          echo '}' >> /var/www/html/sites/default/settings.php
 
       - name: Set settings.php permissions
         run: chmod 666 /var/www/html/sites/default/settings.php
 
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/drush site:install ecms_base --db-url=mysql://drupal:drupal@database:3306/drupal?module=mysql#tableprefix --yes --verbose
+        run: ../vendor/bin/drush site:install ecms_base --yes --verbose
 
-#      - name: Update settings.php
-#        run: |
-#          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
-#          echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
-#          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
+      - name: Update settings.php
+        run: |
+          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
 
 #      - name: Run functional tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
