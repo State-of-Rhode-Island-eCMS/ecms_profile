@@ -10,6 +10,7 @@ use Drupal\jsonapi\ResourceType\ResourceType;
 use Drupal\jsonapi\ResourceType\ResourceTypeRepositoryInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -17,9 +18,9 @@ use Symfony\Component\Serializer\SerializerInterface;
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
  *
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
 class JsonApiHelperTest extends UnitTestCase {
 
   /**

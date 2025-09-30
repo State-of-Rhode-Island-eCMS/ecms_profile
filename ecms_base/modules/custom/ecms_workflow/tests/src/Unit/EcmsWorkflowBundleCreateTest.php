@@ -15,14 +15,15 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 use Drupal\workflows\WorkflowInterface;
 use Drupal\workflows\WorkflowTypeInterface;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsWorkflowBundleCreate class.
  *
  * @package Drupal\Tests\ecms_workflow\Unit
- * @group ecms
- * @group ecms_workflow
  */
+#[Group("ecms_workflow")]
+#[Group("ecms")]
 class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
   /**

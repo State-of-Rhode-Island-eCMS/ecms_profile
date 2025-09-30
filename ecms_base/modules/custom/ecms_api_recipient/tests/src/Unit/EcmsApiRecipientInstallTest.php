@@ -13,15 +13,16 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_api_recipient\EcmsApiRecipientInstall;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiRecipientInstall class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
 class EcmsApiRecipientInstallTest extends UnitTestCase {
 
   /**

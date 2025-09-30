@@ -17,16 +17,18 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiRecipientConfigForm class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
- * @covers \Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm::class)]
 class EcmsApiRecipientConfigFormTest extends UnitTestCase {
 
   /**

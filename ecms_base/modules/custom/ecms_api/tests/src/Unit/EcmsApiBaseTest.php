@@ -26,6 +26,9 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use phpmock\MockBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -34,10 +37,10 @@ use Psr\Http\Message\StreamInterface;
  * Unit tests for the EcmsApiBase class.
  *
  * @package Drupal\Tests\ecms_api\Unit
- * @covers \Drupal\ecms_api\EcmsApiBase
- * @group ecms
- * @group ecms_api
  */
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api\EcmsApiBase::class)]
 class EcmsApiBaseTest extends UnitTestCase {
 
   /**
@@ -375,8 +378,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param string|null $expectation
    *   The expected result to be returned.
    *
-   * @dataProvider dataProviderForGetAccessToken
    */
+  #[DataProvider('dataProviderForGetAccessToken')]
   public function testGetAccessToken(int $code, string $oauthResponse, ?string $expectation): void {
     $payload = [
       'form_params' => [
@@ -505,8 +508,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param bool $expected
    *   The expected response.
    *
-   * @dataProvider dataProviderForTestSubmitEntity
    */
+  #[DataProvider('dataProviderForTestSubmitEntity')]
   public function testSubmitEntity(string $method, int $code, bool $defaultLanguage, int $entityExistsCode, bool $expected): void {
 
     switch ($entityExistsCode) {
@@ -715,8 +718,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param bool $expectation
    *   The expected result of the method.
    *
-   * @dataProvider dataProviderForTestGetContentTypes
    */
+  #[DataProvider('dataProviderForTestGetContentTypes')]
   public function testGetContentTypes(array $types, int $code, bool $expectation): void {
     $queryParams = $this->getQueryParams($types);
     $returnTypes = $this->buildNodeTypeReturn($types);
@@ -902,8 +905,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param string|null $expected
    *   The expected result from the method call.
    *
-   * @dataProvider dataProviderForTestCheckEntityExists
    */
+  #[DataProvider('dataProviderForTestCheckEntityExists')]
   public function testCheckEntityExists(int $code, bool $defaultLanguage, ?string $expected): void {
     if ($defaultLanguage) {
       $endpoint = self::ENTITY_ENDPOINT;
@@ -1094,8 +1097,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param bool $isFile
    *   Is the source a file or not.
    *
-   * @dataProvider dataProviderForTestCheckMediaSourceIsFile
    */
+  #[DataProvider('dataProviderForTestCheckMediaSourceIsFile')]
   public function testCheckMediaSourceIsFile(bool $isFile): void {
     if ($isFile) {
       $source = $this->createMock(File::class);
@@ -1233,8 +1236,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param string|null $expected
    *   The expected return result.
    *
-   * @dataProvider dataProviderForTestFetchEntityFromApi
    */
+  #[DataProvider('dataProviderForTestFetchEntityFromApi')]
   public function testFetchEntityFromApi(int $code, bool $defaultLanguage, ?string $expected): void {
     if ($defaultLanguage) {
       $endpoint = self::ENTITY_ENDPOINT;
@@ -1367,8 +1370,8 @@ class EcmsApiBaseTest extends UnitTestCase {
    * @param bool $expected
    *   The expected result.
    *
-   * @dataProvider dataProviderForTestSubmitEntityWithFileFields
    */
+  #[DataProvider('dataProviderForTestSubmitEntityWithFileFields')]
   public function testSubmitEntityWithFileFields(string $type, bool $expected): void {
     switch ($type) {
       case 'media':

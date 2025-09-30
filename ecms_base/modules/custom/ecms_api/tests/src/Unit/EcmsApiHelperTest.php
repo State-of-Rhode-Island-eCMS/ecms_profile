@@ -10,13 +10,15 @@ use Drupal\Core\StreamWrapper\PublicStream;
 use Drupal\ecms_api\EcmsApiHelper;
 use Drupal\file\FileInterface;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiHelper class.
  *
  * @package Drupal\Tests\ecms_api\Unit
- * @group ecms_api
  */
+#[Group("ecms_api")]
 class EcmsApiHelperTest extends UnitTestCase {
 
   /**
@@ -56,8 +58,8 @@ class EcmsApiHelperTest extends UnitTestCase {
    * @param string|null $expected
    *   The expected full path to the file or null.
    *
-   * @dataProvider dataProviderForTestGetFilePath
    */
+  #[DataProvider('dataProviderForTestGetFilePath')]
   public function testGetFilePath(?string $fileUri, ?string $expected): void {
     $file = $expected;
 

@@ -8,16 +8,18 @@ use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\ecms_api\EcmsApiInstall;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiInstall class.
  *
  * @package Drupal\Tests\ecms_api\Unit
  *
- * @covers \Drupal\ecms_api\EcmsApiInstall
- * @group ecms
- * @group ecms_api
  */
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api\EcmsApiInstall::class)]
 class EcmsApiInstallTest extends UnitTestCase {
 
   /**

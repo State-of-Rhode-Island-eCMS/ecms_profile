@@ -14,14 +14,15 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\ecms_migration\Form\EcmsMigrationConfigForm;
 use Drupal\Tests\UnitTestCase;
 use phpmock\MockBuilder;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsMigrationConfigForm.
  *
  * @package Drupal\Tests\ecms_migration\Unit\Form
  *
- * @group ecms_migration
  */
+#[Group("ecms_migration")]
 class EcmsMigrationConfigFormTest extends UnitTestCase {
 
   /**

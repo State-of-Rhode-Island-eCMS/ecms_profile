@@ -15,15 +15,16 @@ use Drupal\ecms_api_publisher\EcmsApiPublisherInstall;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiPublisherInstall class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  */
+#[Group("ecms_api_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
 class EcmsApiPublisherInstallTest extends UnitTestCase {
 
   /**

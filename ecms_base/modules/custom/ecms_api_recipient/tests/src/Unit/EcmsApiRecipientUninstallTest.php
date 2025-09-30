@@ -10,17 +10,19 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_api_recipient\EcmsApiRecipientUninstall;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiRecipientUninstall class.
  *
- * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientUninstall
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_recipient\EcmsApiRecipientUninstall::class)]
 class EcmsApiRecipientUninstallTest extends UnitTestCase {
 
   /**
