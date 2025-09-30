@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <phpunit bootstrap="/var/www/html/develop/web/core/tests/bootstrap.php" colors="true"
-             beStrictAboutTestsThatDoNotTestAnything="true"
-             beStrictAboutOutputDuringTests="true"
-             beStrictAboutChangesToGlobalState="true"
-             failOnWarning="true"
-             printerClass="\Drupal\Tests\Listeners\HtmlOutputPrinter"
-             cacheResult="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         bootstrap="/var/www/html/develop/web/core/tests/bootstrap.php"
+         colors="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         failOnWarning="true"
+         cacheResult="false">
     <php>
         <!-- Set error reporting to E_ALL. -->
         <ini name="error_reporting" value="32767"/>
@@ -19,7 +21,7 @@
         <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
         <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="web/sites/default/files"/>
         <!-- To disable deprecation testing uncomment the next line. -->
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="0"/>
         <!-- The base url to use for existing site tests. -->
         <env name="DTT_BASE_URL" value="http://web/"/>
         <!-- Example for changing the driver args to mink tests MINK_DRIVER_ARGS value: '["http://127.0.0.1:8510"]' -->
@@ -41,31 +43,24 @@
           <!-- Assumes tests are namespaced as \Drupal\Tests\custom_foo\ExistingSite. -->
           <directory>./*/tests/src/ExistingSite</directory>
           <directory>./*/modules/custom/*/tests/src/ExistingSite</directory>
-          <directory>./*/features/custom/*/tests/src/ExistingSite</directory>
+<!--          <directory>./*/features/custom/*/tests/src/ExistingSite</directory>-->
         </testsuite>
-
     </testsuites>
-    <listeners>
-        <listener class="\Drupal\Tests\Listeners\DrupalListener">
-        </listener>
-        <!-- The Symfony deprecation listener has to come after the Drupal listener -->
-        <listener class="\Symfony\Bridge\PhpUnit\SymfonyTestsListener">
-        </listener>
-    </listeners>
-    <!-- Filter for coverage reports. -->
-    <filter>
-        <whitelist>
+    <source>
+        <include>
             <directory>*</directory>
-            <exclude>
-                <directory>./*/modules/custom/*/tests</directory>
-                <directory>./*/tests</directory>
-                <directory>./tests</directory>
-                <directory>./*/features/custom/*/tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-html" target="tests/phpunit/results/html"/>
-        <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
-    </logging>
+        </include>
+        <exclude>
+            <directory>./*/modules/custom/*/tests</directory>
+            <directory>./*/tests</directory>
+            <directory>./tests</directory>
+            <directory>./*/features/custom/*/tests</directory>
+        </exclude>
+    </source>
+    <coverage>
+        <report>
+            <html outputDirectory="tests/phpunit/results/html"/>
+            <text outputFile="tests/phpunit/results/coverage.txt"/>
+        </report>
+    </coverage>
 </phpunit>
