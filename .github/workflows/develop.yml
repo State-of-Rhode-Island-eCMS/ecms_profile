@@ -166,7 +166,7 @@ jobs:
 
       - name: Add MySQL requirement to settings.php
         run: |
-          echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
+          pwd
           echo '$databases["default"]["default"] = array (' >> /var/www/html/sites/default/settings.php
           echo '  "database" => "drupal",' >> /var/www/html/sites/default/settings.php
           echo '  "username" => "drupal",' >> /var/www/html/sites/default/settings.php
@@ -177,6 +177,8 @@ jobs:
           echo '  "namespace" => "Drupal\\mysql\\Driver\\Database\\mysql",' >> /var/www/html/sites/default/settings.php
           echo '  "driver" => "mysql",' >> /var/www/html/sites/default/settings.php
           echo ');' >> /var/www/html/sites/default/settings.php
+          echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
+          tail -n 20 /var/www/html/sites/default/settings.php
 
       - name: Add Fast404 settings
         run: |
