@@ -166,7 +166,6 @@ jobs:
 
       - name: Add MySQL requirement to settings.php
         run: |
-          pwd
           echo '$databases["default"]["default"] = array (' >> /var/www/html/sites/default/settings.php
           echo '  "database" => "drupal",' >> /var/www/html/sites/default/settings.php
           echo '  "username" => "drupal",' >> /var/www/html/sites/default/settings.php
@@ -178,7 +177,6 @@ jobs:
           echo '  "driver" => "mysql",' >> /var/www/html/sites/default/settings.php
           echo ');' >> /var/www/html/sites/default/settings.php
           echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
-          tail -n 20 /var/www/html/sites/default/settings.php
 
       - name: Add Fast404 settings
         run: |
@@ -210,4 +208,4 @@ jobs:
 #
       - name: Run existing site tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml {};"
+        run: ../vendor/bin/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml
