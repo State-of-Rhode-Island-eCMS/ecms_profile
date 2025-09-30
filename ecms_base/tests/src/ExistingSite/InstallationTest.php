@@ -33,6 +33,13 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   protected $defaultTheme = 'ecms';
 
   /**
+   * Disable failure for watchdog messages.
+   *
+   * @var bool
+   */
+  protected $failOnPhpWatchdogMessages = FALSE;
+
+  /**
     * Test the openid_connect module is installed properly.
     */
   public function testOpenIdConnect(): void {
