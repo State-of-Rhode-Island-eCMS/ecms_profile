@@ -7,6 +7,7 @@ namespace Drupal\Tests\ecms_migration\Unit\Form;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -96,6 +97,13 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
   private $mockFlushCache;
 
   /**
+   * Mock of the typed config manager.
+   *
+   * @var \Drupal\Core\Config\TypedConfigManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private TypedConfigManagerInterface $typedConfigManager;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -105,8 +113,9 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
     $this->formState = $this->createMock(FormStateInterface::class);
     $this->settingsConfig = $this->createMock(Config::class);
     $this->migrationConfig = $this->createMock(ImmutableConfig::class);
-
+    $this->typedConfigManager = $this->createMock(TypedConfigManagerInterface::class);
     $container = new ContainerBuilder();
+    $container->set('config.typed', $this->typedConfigManager);
     $container->set('string_translation', $this->getStringTranslationStub());
     $container->set('messenger', $this->createMock(MessengerInterface::class));
 
@@ -137,7 +146,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
    * Test the getFormId() method.
    */
   public function testGetFormId(): void {
-    $form = new EcmsMigrationConfigForm($this->configFactory);
+    $form = new EcmsMigrationConfigForm($this->configFactory, $this->typedConfigManager);
 
     $id = $form->getFormId();
 
@@ -168,7 +177,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
       ->with('ecms_migration.settings')
       ->willReturn($this->settingsConfig);
 
-    $testForm = new EcmsMigrationConfigForm($this->configFactory);
+    $testForm = new EcmsMigrationConfigForm($this->configFactory, $this->typedConfigManager);
 
     $actualFormValues = $testForm->buildForm($form, $this->formState);
 
@@ -233,7 +242,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $testForm = $this->getMockBuilder(EcmsMigrationConfigForm::class)
       ->onlyMethods(['setJsonUrl', 'setCssSelector'])
-      ->setConstructorArgs([$this->configFactory])
+      ->setConstructorArgs([$this->configFactory, $this->typedConfigManager])
       ->getMock();
 
     $testForm->expects($this->exactly(2))
