@@ -161,6 +161,15 @@ jobs:
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit
 
+      - name: Copy default settings file
+        run: cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
+
+      - name: Add MySQL requirement to settings.php
+        run: echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
+
+      - name: Set settings.php permissions
+        run: chmod 666 /var/www/html/sites/default/settings.php
+
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush site:install ecms_base --db-url=mysql://drupal:drupal@database:3306/drupal?module=mysql#tableprefix --yes --verbose
