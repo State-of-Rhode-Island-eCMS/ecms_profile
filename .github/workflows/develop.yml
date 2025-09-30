@@ -159,7 +159,7 @@ jobs:
 
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit
+        run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit --no-coverage
 
       - name: Copy default settings file
         run: cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
