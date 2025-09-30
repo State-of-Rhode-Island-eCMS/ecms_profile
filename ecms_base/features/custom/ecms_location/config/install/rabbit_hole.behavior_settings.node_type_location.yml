@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.location
+dependencies: { }
 id: node_type_location
 entity_type_id: node_type
 entity_id: location

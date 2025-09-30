@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.basic_page
+dependencies: { }
 id: node_type_basic_page
 entity_type_id: node_type
 entity_id: basic_page

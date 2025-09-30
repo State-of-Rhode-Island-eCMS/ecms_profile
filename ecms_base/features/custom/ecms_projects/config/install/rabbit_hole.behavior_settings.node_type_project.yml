@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.project
+dependencies: { }
 id: node_type_project
 entity_type_id: node_type
 entity_id: project

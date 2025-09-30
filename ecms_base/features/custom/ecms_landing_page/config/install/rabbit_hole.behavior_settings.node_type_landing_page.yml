@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.landing_page
+dependencies: { }
 id: node_type_landing_page
 entity_type_id: node_type
 entity_id: landing_page

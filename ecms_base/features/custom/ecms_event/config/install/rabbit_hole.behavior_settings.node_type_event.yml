@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.event
+dependencies: { }
 id: node_type_event
 entity_type_id: node_type
 entity_id: event

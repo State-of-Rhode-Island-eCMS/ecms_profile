@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.hotel
+dependencies: { }
 id: node_type_hotel
 entity_type_id: node_type
 entity_id: hotel

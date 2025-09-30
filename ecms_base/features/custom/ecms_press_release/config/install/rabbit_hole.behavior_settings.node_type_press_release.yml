@@ -1,11 +1,9 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - node.type.press_release
+dependencies: { }
 id: node_type_press_release
-entity_type_id: node_type
-entity_id: press_release
+entity_type_id: null
+entity_id: null
 action: display_page
 allow_override: 1
 redirect: ''

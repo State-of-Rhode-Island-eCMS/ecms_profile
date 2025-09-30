@@ -1,11 +1,9 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - taxonomy.vocabulary.press_release_topics_taxonomy
+dependencies: { }
 id: taxonomy_vocabulary_press_release_topics
-entity_type_id: taxonomy_vocabulary
-entity_id: press_release_topics_taxonomy
+entity_type_id: null
+entity_id: null
 action: page_not_found
 allow_override: 0
 redirect: ''
