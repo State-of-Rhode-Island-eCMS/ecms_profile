@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <phpunit bootstrap="/var/www/html/core/tests/bootstrap.php" colors="true"
-             beStrictAboutTestsThatDoNotTestAnything="true"
-             beStrictAboutOutputDuringTests="true"
-             beStrictAboutChangesToGlobalState="true"
-             failOnWarning="true"
-             printerClass="\Drupal\Tests\Listeners\HtmlOutputPrinter"
-             cacheResult="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         bootstrap="/var/www/html/core/tests/bootstrap.php"
+         colors="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         failOnWarning="true"
+         cacheResult="false">
     <php>
         <!-- Set error reporting to E_ALL. -->
         <ini name="error_reporting" value="32767"/>
@@ -40,28 +42,21 @@
           <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests/src/ExistingSite</directory>
           <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests/src/ExistingSite</directory>
         </testsuite>
-
     </testsuites>
-    <listeners>
-        <listener class="\Drupal\Tests\Listeners\DrupalListener">
-        </listener>
-        <!-- The Symfony deprecation listener has to come after the Drupal listener -->
-        <listener class="\Symfony\Bridge\PhpUnit\SymfonyTestsListener">
-        </listener>
-    </listeners>
-    <!-- Filter for coverage reports. -->
-    <filter>
-        <whitelist>
+    <source>
+        <include>
             <directory>/var/www/html/profiles/contrib/ecms_profile/*</directory>
-            <exclude>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests</directory>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/tests</directory>
-                <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-text" target="tests/phpunit/results/coverage.txt"/>
-    </logging>
+        </include>
+        <exclude>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/modules/custom/*/tests</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/tests</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/tests</directory>
+            <directory>/var/www/html/profiles/contrib/ecms_profile/*/features/custom/*/tests</directory>
+        </exclude>
+    </source>
+    <coverage>
+        <report>
+            <text outputFile="tests/phpunit/results/coverage.txt"/>
+        </report>
+    </coverage>
 </phpunit>
