@@ -89,7 +89,7 @@ ddev exec 'composer config --working-dir=develop --merge --json extra.drupal-len
 ddev exec 'composer install --working-dir=develop'
 
 ## Re-add the D11 packages that were removed with no-update flag
-ddev exec 'composer require --working-dir=develop --no-update "drupal/address_phonenumber:^10.0" "drupal/iek:^1.3" "drupal/migrate_process_trim:^2.0" "drupal/webform_encrypt:^2.0@alpha"'
+ddev exec 'composer require --working-dir=develop --no-update "drupal/address_phonenumber:^10.0" "drupal/iek:^1.3" "drupal/migrate_process_trim:2.0.x-dev@dev" "drupal/webform_encrypt:^2.0@alpha"'
 
 ## Run composer update with dependencies to resolve everything
 ddev exec 'composer update --with-all-dependencies --working-dir=develop'
