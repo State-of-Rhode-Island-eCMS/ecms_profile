@@ -120,11 +120,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   public function testInstallEcmsApiPublisher(): void {
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET],
-        ]));
+        ]);
 
     $roleEntity = $this->createMock(RoleInterface::class);
     $roleEntity->expects($this->once())
@@ -164,9 +164,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -186,11 +186,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   public function testInstallEcmsApiPublisherEmptyRole(): void {
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET]
-      ]));
+      ]);
 
     $roleEntity = $this->createMock(RoleInterface::class);
     $roleEntity->expects($this->never())
@@ -230,9 +230,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -252,11 +252,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   public function testInstallEcmsApiPublisherRoleException(): void {
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET]
-      ]));
+      ]);
 
     $exception = $this->createMock(EntityStorageException::class);
     $roleEntity = $this->createMock(RoleInterface::class);
@@ -298,9 +298,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -385,11 +385,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET]
-      ]));
+      ]);
 
     $roleEntity = $this->createMock(RoleInterface::class);
     $roleEntity->expects($this->once())
@@ -430,9 +430,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])

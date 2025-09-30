@@ -84,12 +84,12 @@ class EcmsApiPublisherTest extends UnitTestCase {
     $immutableConfig = $this->createMock(ImmutableConfig::class);
     $immutableConfig->expects($this->exactly(4))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['recipient_client_id', self::CLIENT_ID],
         ['recipient_client_secret', self::CLIENT_SECRET],
         ['recipient_client_scope', self::CLIENT_SCOPE],
         ['verify_ssl', TRUE],
-        ]));
+        ]);
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
 
     $this->configFactory->expects($this->exactly(4))

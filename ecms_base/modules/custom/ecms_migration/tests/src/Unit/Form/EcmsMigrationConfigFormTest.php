@@ -208,10 +208,10 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $this->settingsConfig->expects($this->exactly(2))
       ->method('set')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['ecms_file', self::MIGRATION_SETTINGS_CONFIG['ecms_file'], $this->settingsConfig],
         ['ecms_basic_page', self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page'], $this->settingsConfig]
-      ]));
+      ]);
 
     $this->migrationConfig->expects($this->any())
       ->method('getRawData')
@@ -219,10 +219,10 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $this->migrationConfig->expects($this->exactly(2))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['ecms_file', self::MIGRATION_MIGRATIONS_CONFIG['ecms_file']],
         ['ecms_basic_page', self::MIGRATION_MIGRATIONS_CONFIG['ecms_basic_page']]
-      ]));
+      ]);
 
     $this->configFactory->expects($this->any())
       ->method('get')
@@ -236,10 +236,10 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $this->formState->expects($this->exactly(2))
       ->method('getValue')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['ecms_file', NULL, self::MIGRATION_SETTINGS_CONFIG['ecms_file']],
         ['ecms_basic_page', NULL, self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']],
-      ]));
+      ]);
 
     $testForm = $this->getMockBuilder(EcmsMigrationConfigForm::class)
       ->onlyMethods(['setJsonUrl', 'setCssSelector'])
@@ -248,7 +248,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
 
     $testForm->expects($this->exactly(2))
       ->method('setJsonUrl')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         [
           self::MIGRATION_SETTINGS_CONFIG['ecms_file']['json_source_url'],
           self::MIGRATION_MIGRATIONS_CONFIG['ecms_file'],
@@ -257,11 +257,11 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
           self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']['json_source_url'],
           self::MIGRATION_MIGRATIONS_CONFIG['ecms_basic_page'],
         ]
-      ]));
+      ]);
 
     $testForm->expects($this->exactly(3))
       ->method('setCssSelector')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         [
           'css_selector_1',
           self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']['css_selector_1'],
@@ -277,7 +277,7 @@ class EcmsMigrationConfigFormTest extends UnitTestCase {
           self::MIGRATION_SETTINGS_CONFIG['ecms_basic_page']['css_selector_3'],
           self::MIGRATION_MIGRATIONS_CONFIG['ecms_basic_page'],
         ]
-      ]))->willReturnSelf();
+      ])->willReturnSelf();
 
     $testForm->submitForm($form, $this->formState);
   }

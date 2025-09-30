@@ -103,11 +103,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $adminRole = $this->createMock(RoleInterface::class);
     $adminRole->expects($this->exactly(3))
       ->method('grantPermission')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ["create terms in {$bundle}", $adminRole],
         ["edit terms in {$bundle}", $adminRole],
         ["delete terms in {$bundle}", $adminRole]
-      ]));
+      ]);
 
     $adminRole->expects($this->once())
       ->method('save')
@@ -116,11 +116,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $publisherRole = $this->createMock(RoleInterface::class);
     $publisherRole->expects($this->exactly(3))
       ->method('grantPermission')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ["create terms in {$bundle}", $publisherRole],
         ["edit terms in {$bundle}", $publisherRole],
         ["delete terms in {$bundle}", $publisherRole]
-      ]));
+      ]);
 
     $publisherRole->expects($this->once())
       ->method('save')
@@ -128,9 +128,9 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityStorage->expects($this->exactly(2))
       ->method('load')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         [self::SITE_ADMIN_ROLE, $adminRole], [self::CONTENT_PUBLISHER_ROLE, $publisherRole]
-      ]));
+      ]);
 
     $this->entityTypeManager->expects($this->once())
       ->method('getStorage')
@@ -155,13 +155,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $adminRole = $this->createMock(RoleInterface::class);
     $adminRole->expects($this->exactly(5))
       ->method('grantPermission')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ["create {$contentType} content", $adminRole],
         ["edit any {$contentType} content", $adminRole],
         ["delete any {$contentType} content", $adminRole],
         ["add scheduled transitions node {$contentType}", $adminRole],
         ["reschedule scheduled transitions node {$contentType}", $adminRole],
-      ]));
+      ]);
 
     $adminRole->expects($this->once())
       ->method('save')
@@ -170,13 +170,13 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $publisherRole = $this->createMock(RoleInterface::class);
     $publisherRole->expects($this->exactly(5))
       ->method('grantPermission')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ["create {$contentType} content", $publisherRole],
         ["edit any {$contentType} content", $publisherRole],
         ["delete any {$contentType} content", $publisherRole],
         ["add scheduled transitions node {$contentType}", $publisherRole],
         ["reschedule scheduled transitions node {$contentType}", $publisherRole],
-      ]));
+      ]);
 
     $publisherRole->expects($this->once())
       ->method('save')
@@ -185,10 +185,10 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
     $authorRole = $this->createMock(RoleInterface::class);
     $authorRole->expects($this->exactly(2))
       ->method('grantPermission')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ["create {$contentType} content", $authorRole],
         ["edit own {$contentType} content", $authorRole],
-      ]));
+      ]);
 
     $authorRole->expects($this->once())
       ->method('save')
@@ -196,11 +196,11 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityStorage->expects($this->exactly(3))
       ->method('load')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         [self::SITE_ADMIN_ROLE, $adminRole],
         [self::CONTENT_PUBLISHER_ROLE, $publisherRole],
         [self::CONTENT_AUTHOR_ROLE, $authorRole],
-      ]));
+      ]);
 
     $config = [
       "entity_types" => [
@@ -237,10 +237,10 @@ class EcmsWorkflowBundleCreateTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user_role', $this->entityStorage],
         ['workflow', $workflowStorage],
-      ]));
+      ]);
 
     $this->config->expects($this->once())
       ->method('get')

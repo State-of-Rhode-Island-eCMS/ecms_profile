@@ -151,9 +151,9 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
 
         $this->node->expects($this->once())
           ->method('get')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['moderation_state', $moderationItemList],
-          ]));
+          ]);
 
         if ($moderation === 'empty') {
           // Mimic an empty field.
@@ -166,9 +166,9 @@ class EmergencyNotificationPublisherTest extends UnitTestCase {
 
         $this->node->expects($this->once())
           ->method('get')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['moderation_state', $moderationItemList],
-          ]));
+          ]);
       }
     }
 

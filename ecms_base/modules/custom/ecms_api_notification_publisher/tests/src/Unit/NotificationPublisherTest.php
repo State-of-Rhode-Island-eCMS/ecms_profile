@@ -133,10 +133,10 @@ class NotificationPublisherTest extends UnitTestCase {
 
       $this->node->expects($this->exactly($hasFieldCount))
         ->method('hasField')
-        ->will($this->returnValueMap([
+        ->willReturnMap([
           ['field_notification_global',$hasGlobalField],
           ['moderation_state', $hasModerationField],
-        ]));
+        ]);
 
       if ($hasGlobalField) {
         $getFieldCount = 1;
@@ -172,10 +172,10 @@ class NotificationPublisherTest extends UnitTestCase {
 
         $this->node->expects($this->exactly($getFieldCount))
           ->method('get')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['field_notification_global', $fieldItemList],
             ['moderation_state', $moderationItemList],
-          ]));
+          ]);
       }
     }
 

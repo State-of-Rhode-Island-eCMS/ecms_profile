@@ -149,18 +149,18 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
 
     $this->apiConfig->expects($this->exactly(4))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_recipient_mail', self::API_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET],
-      ]));
+      ]);
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage],
         ['consumer', $consumerStorage],
-      ]));
+      ]);
 
     $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -245,18 +245,18 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
 
     $this->apiConfig->expects($this->exactly(4))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_recipient_mail', self::API_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET],
-      ]));
+      ]);
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage],
         ['consumer', $consumerStorage],
-      ]));
+      ]);
 
     $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
       ->onlyMethods(['generatePassword'])

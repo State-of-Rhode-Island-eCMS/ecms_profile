@@ -245,13 +245,13 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
     $immutableHubConfig = $this->createMock(ImmutableConfig::class);
     $immutableHubConfig->expects($this->exactly($recipientConfigCount))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_main_hub', $hubUrl],
         ['api_main_hub_client_id', self::HUB_CLIENT_ID],
         ['api_main_hub_client_secret', self::HUB_CLIENT_SECRET],
         ['api_main_hub_scope', self::HUB_SCOPE],
         ['verify_ssl', TRUE],
-      ]));
+      ]);
 
     $this->configFactory->expects($this->exactly($recipientConfigCount))
       ->method('get')

@@ -361,9 +361,9 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['user', $this->userStorage], ['node', $this->nodeStorage]
-          ]));
+          ]);
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
@@ -395,9 +395,9 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['user', $this->userStorage], ['node', $this->nodeStorage]
-          ]));
+          ]);
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
@@ -435,10 +435,10 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['user', $this->userStorage],
             ['node', $this->nodeStorage]
-          ]));
+          ]);
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
@@ -474,9 +474,9 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
         $this->entityTypeManager->expects($this->exactly(2))
           ->method('getStorage')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['user', $this->userStorage], ['node', $this->nodeStorage]
-          ]));
+          ]);
 
         $this->jsonApiHelper->expects($this->once())
           ->method('convertJsonDataToArray')
