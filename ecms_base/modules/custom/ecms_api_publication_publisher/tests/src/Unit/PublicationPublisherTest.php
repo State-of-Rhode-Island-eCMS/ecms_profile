@@ -11,18 +11,22 @@ use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\TestTools\Random;
 use GuzzleHttp\ClientInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the PublicationPublisher class.
  *
  * @package Drupal\Tests\ecms_api_publication_publisher\Unit
- * @covers \Drupal\ecms_api_publication_publisher\PublicationPublisher
  *
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publication_publisher
  */
+#[Group("ecms_api_publication_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_publication_publisher\PublicationPublisher::class)]
 class PublicationPublisherTest extends UnitTestCase {
 
   /**
@@ -97,8 +101,8 @@ class PublicationPublisherTest extends UnitTestCase {
    *   none: assume the field doe not exist.
    *   empty: assume the field is empty.
    *
-   * @dataProvider dataProviderForBroadcastPublication
    */
+  #[DataProvider('dataProviderForBroadcastPublication')]
   public function testBroadcastPublication(
     string $nodeType,
     int $global,
@@ -154,17 +158,17 @@ class PublicationPublisherTest extends UnitTestCase {
    * @return array
    *   Array of parameters to pass to testBroadcastPublication.
    */
-  public function dataProviderForBroadcastPublication(): array {
+  public static function dataProviderForBroadcastPublication(): array {
     return [
       'test1' => [
-        $this->randomMachineName(),
+        Random::machineName(8),
         -1,
-        $this->randomMachineName(),
+        Random::machineName(8),
       ],
       'test2' => [
         'publication',
         -1,
-        $this->randomMachineName(),
+        Random::machineName(8),
       ],
       'test3' => [
         'publication',
@@ -189,7 +193,7 @@ class PublicationPublisherTest extends UnitTestCase {
       'test7' => [
         'publication',
         1,
-        $this->randomMachineName(),
+        Random::machineName(8),
       ],
       'test8' => [
         'publication',

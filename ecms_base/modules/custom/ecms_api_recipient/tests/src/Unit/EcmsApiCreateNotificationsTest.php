@@ -15,14 +15,16 @@ use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiCreateNotifications class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
 class EcmsApiCreateNotificationsTest extends UnitTestCase {
 
   /**
@@ -161,8 +163,8 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    * @param bool $expected
    *   The expected result.
    *
-   * @dataProvider dataProviderForTestCreateNotificationFromJson
    */
+  #[DataProvider('dataProviderForTestCreateNotificationFromJson')]
   public function testCreateNotificationFromJson(int $testNumber, bool $expected): void {
     $object = json_decode(self::JSON_DATA_OBJECT_STRING);
 
@@ -298,7 +300,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    * @return array[]
    *   Array of parameters to pass to the testCreateNotificationFromJson method.
    */
-  public function dataProviderForTestCreateNotificationFromJson(): array {
+  public static function dataProviderForTestCreateNotificationFromJson(): array {
     return [
       'test1' => [
         1,
@@ -327,8 +329,8 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    * @param bool $expected
    *   The expected result of the method.
    *
-   * @dataProvider dataProviderForTestCreateNotificationTranslationFromJson
    */
+  #[DataProvider('dataProviderForTestCreateNotificationTranslationFromJson')]
   public function testCreateNotificationTranslationFromJson(int $testNumber, bool $expected): void {
     $object = json_decode(self::JSON_DATA_OBJECT_STRING);
 
@@ -503,7 +505,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    *   Array of parameters for the
    *   testCreateNotificationTranslationFromJson method.
    */
-  public function dataProviderForTestCreateNotificationTranslationFromJson(): array {
+  public static function dataProviderForTestCreateNotificationTranslationFromJson(): array {
     return [
       'test1' => [
         1,
@@ -536,8 +538,8 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    * @param bool $expected
    *   The expected result of the method.
    *
-   * @dataProvider dataProviderForTestCheckEntityUuidExists
    */
+  #[DataProvider('dataProviderForTestCheckEntityUuidExists')]
   public function testCheckEntityUuidExists(string $uuid, bool $expected): void {
     $return = [$this->node];
 
@@ -574,7 +576,7 @@ class EcmsApiCreateNotificationsTest extends UnitTestCase {
    * @return array[]
    *   Array of parameters to pass to the testCheckEntityUuidExists method.
    */
-  public function dataProviderForTestCheckEntityUuidExists(): array {
+  public static function dataProviderForTestCheckEntityUuidExists(): array {
     return [
       'test1' => [
         self::ENTITY_UUID,

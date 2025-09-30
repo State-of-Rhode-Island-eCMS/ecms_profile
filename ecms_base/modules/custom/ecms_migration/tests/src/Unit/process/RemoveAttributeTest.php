@@ -6,15 +6,16 @@ namespace Drupal\Tests\ecms_migration\Unit\process;
 
 use Drupal\ecms_migration\Plugin\migrate\process\RemoveAttribute;
 use Drupal\Tests\migrate\Unit\process\MigrateProcessTestCase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Tests the remove_attribute process plugin.
  *
  * @package Drupal\Tests\ecms_migration\Unit\process
  *
- * @group ecms_migration
  * @coversDefaultClass \Drupal\ecms_migration\Plugin\migrate\process\RemoveAttribute
  */
+#[Group("ecms_migration")]
 class RemoveAttributeTest extends MigrateProcessTestCase {
 
   /**

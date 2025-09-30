@@ -9,14 +9,17 @@ use Drupal\Core\Url;
 use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
 use Drupal\ecms_api_recipient\Plugin\QueueWorker\NotificationPagerQueueWorker;
 use Drupal\Tests\UnitTestCase;
+use Drupal\TestTools\Random;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the NotificationPagerQueueWorker class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit\Plugin\QueueWorker
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
 class NotificationPagerQueueWorkerTest extends UnitTestCase {
 
   /**
@@ -55,8 +58,8 @@ class NotificationPagerQueueWorkerTest extends UnitTestCase {
    * @param \Drupal\Core\Url|null $url
    *   The url expected or null.
    *
-   * @dataProvider dataProviderForProcessItem
    */
+  #[DataProvider('dataProviderForProcessItem')]
   public function testProcessItem(?Url $url): void {
     $methodCount = 1;
 
@@ -77,8 +80,9 @@ class NotificationPagerQueueWorkerTest extends UnitTestCase {
    * @return array
    *   Parameters to pass to the testProcessItem method.
    */
-  public function dataProviderForProcessItem(): array {
-    $path = "http://{$this->randomMachineName()}";
+  public static function dataProviderForProcessItem(): array {
+    $machineName = Random::machineName(8);
+    $path = "http://{$machineName}.com/";
     $url = Url::fromUri($path);
     return [
       'test1' => [NULL],

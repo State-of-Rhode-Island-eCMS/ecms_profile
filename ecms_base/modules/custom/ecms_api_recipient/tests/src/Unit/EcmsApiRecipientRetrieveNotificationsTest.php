@@ -16,17 +16,20 @@ use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
  * Unit tests for the EcmsApiRecipientRetrieveNotifications class.
  *
- * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications::class)]
 class EcmsApiRecipientRetrieveNotificationsTest extends UnitTestCase {
 
   /**
@@ -146,8 +149,8 @@ class EcmsApiRecipientRetrieveNotificationsTest extends UnitTestCase {
    * @param int $testNumber
    *   The test number being run.
    *
-   * @dataProvider dataProviderForTestRetrieveNotificationsFromHub
    */
+  #[DataProvider('dataProviderForTestRetrieveNotificationsFromHub')]
   public function testRetrieveNotificationsFromHub(int $testNumber): void {
 
     $languageArray = [];
@@ -263,7 +266,7 @@ class EcmsApiRecipientRetrieveNotificationsTest extends UnitTestCase {
    * @return array
    *   The parameters to pass to the testRetrieveNotificationsFromHub method.
    */
-  public function dataProviderForTestRetrieveNotificationsFromHub() :array {
+  public static function dataProviderForTestRetrieveNotificationsFromHub() :array {
     return [
       'test1' => [1],
       'test2' => [2],
