@@ -188,15 +188,18 @@ jobs:
       - name: Set settings.php permissions
         run: chmod 666 /var/www/html/sites/default/settings.php
 
+      - name: Update settings.php
+        run: |
+          mkdir -p /var/www/html/sites/default/files && chmod -R 777 /var/www/html/sites/default/files
+          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_temp_path'] = '/tmp';" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
+
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/drush site:install ecms_base --yes --verbose
 
-      - name: Update settings.php
-        run: |
-          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
-          echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
-          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
+
 
 #      - name: Run functional tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
