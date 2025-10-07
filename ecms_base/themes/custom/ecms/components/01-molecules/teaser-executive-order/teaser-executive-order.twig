@@ -17,10 +17,9 @@
     <p>{{ summary }}</p>
     {% endif %}
 
-    {% include "@molecules/cta-read-more/cta-read-more.twig" with {
-        cta_read_text: "Read Full Order",
-        cta_url: url
-      }
-    %}
+    {{ include('ecms:cta-read-more', {
+      cta_read_text: "Read Full Order",
+      cta_url: url
+    }, with_context = FALSE) }}
   </div>
 </article>
