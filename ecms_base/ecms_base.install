@@ -192,3 +192,17 @@ function ecms_base_update_11201() {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Apply missing configuration values.
+ */
+function ecms_base_update_11202() {
+  // Manually set the publish content settings as they were installed
+  // incorrectly and missing values.
+  $config = \Drupal::configFactory()->getEditable('publishcontent.settings');
+  $config->set('publish_text_value', 'Publish');
+  $config->set('unpublish_text_value', 'Unpublish');
+  $config->set('ui_localtask', 1);
+  $config->set('ui_checkbox', 0);
+  $config->save(TRUE);
+}
