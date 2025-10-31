@@ -103,6 +103,7 @@ function ecms_base_install_tasks(): array {
  */
 function ecms_base_apply_default_recipes(): array {
   $recipesToApply = [
+    'ecms_gtranslate',
     'ecms_security',
   ];
   $operations = ecms_base_apply_recipes($recipesToApply, FALSE);

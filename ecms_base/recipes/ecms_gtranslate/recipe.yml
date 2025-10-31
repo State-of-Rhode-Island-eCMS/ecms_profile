@@ -1,11 +1,12 @@
-name: eCMS Google Translate
+name: eCMS GTranslate
 type: eCMS
-description: 'Configures Google Translate module for eCMS with custom settings and block placement'
+description: 'Configures the GTranslate module for eCMS with custom settings and block placement'
 install:
   - gtranslate
 config:
   strict: false
-  import:
-    block:
-      - block.block.gtranslate_block
-      - block.block.ecms_ecmstranslatorgoogletranslator
+  actions:
+    gtranslate.settings:
+      simpleConfigUpdate:
+        widget_look: 'dropdown'
+

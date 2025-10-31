@@ -15,7 +15,7 @@ plugin: gtranslate_block
 settings:
   id: gtranslate_block
   label: GTranslate
-  label_display: visible
+  label_display: '0'
   provider: gtranslate
 visibility:
   language:
