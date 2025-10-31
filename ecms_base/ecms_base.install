@@ -2575,7 +2575,6 @@ function ecms_base_update_10217(array &$sandbox): void {
     }
   }
 
-
   // Install new modules.
   $recipes = [
     'ecms_gtranslate',
