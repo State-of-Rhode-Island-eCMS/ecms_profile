@@ -1,0 +1,14 @@
+# GTranslate component
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: GTranslate component
+description: Google Translate language selector with popup menu.
+props:
+  type: object
+  properties: {}
+slots:
+  gtranslate_html:
+    title: The gtranslate HTML output
+
+libraryOverrides:
+  js:
+    gtranslate.js: {}

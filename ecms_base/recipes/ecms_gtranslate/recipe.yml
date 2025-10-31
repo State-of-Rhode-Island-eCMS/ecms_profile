@@ -1,6 +1,6 @@
 name: eCMS GTranslate
 type: eCMS
-description: 'Configures the GTranslate module for eCMS with custom settings and block placement'
+description: "Configures the GTranslate module for eCMS with custom settings and block placement"
 install:
   - gtranslate
 config:
@@ -8,5 +8,4 @@ config:
   actions:
     gtranslate.settings:
       simpleConfigUpdate:
-        widget_look: 'dropdown'
-
+        widget_look: "lang_names"
