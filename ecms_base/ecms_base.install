@@ -2560,6 +2560,22 @@ function ecms_base_update_10217(array &$sandbox): void {
 
   // Make sure necessary modules are uninstalled.
   \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Remove the language switcher block if it exists.
+  $configToDelete = [
+    'block.block.ecms_ecmstranslatorgoogletranslator',
+    'block.block.languageswitcher',
+    'block.block.googletranslator',
+  ];
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  foreach ($configToDelete as $config) {
+    if ($active_storage->exists($config)) {
+      $active_storage->delete($config);
+    }
+  }
+
+
   // Install new modules.
   $recipes = [
     'ecms_gtranslate',
