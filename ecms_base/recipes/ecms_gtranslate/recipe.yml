@@ -9,3 +9,16 @@ config:
     gtranslate.settings:
       simpleConfigUpdate:
         widget_look: "lang_names"
+        languages:
+          en: en
+          ar: ar
+          zh-CN: zh-CN
+          zh-TW: zh-TW
+          fr: fr
+          it: it
+          pl: pl
+          pt: pt
+          es: es
+          vi: vi
+          ht: ht
+          km: km
