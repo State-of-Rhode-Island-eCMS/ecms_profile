@@ -18,40 +18,41 @@ This Drupal recipe configures a site to receive notifications from a hub site wi
 
 ## Recipe Inputs
 
-The recipe accepts the following inputs (can be provided via environment variables or will fall back to existing config):
+The recipe accepts the following inputs with defaults from existing configuration:
 
 - **oauth_client_id**: OAuth client ID for the recipient
-  - Environment variable: `ECMS_RECIPIENT_CLIENT_ID`
-  - Fallback: `ecms_api_recipient.settings` config key `oauth_client_id`
+  - Default: `ecms_api_recipient.settings` config key `oauth_client_id`
 
 - **oauth_client_secret**: OAuth client secret for the recipient
-  - Environment variable: `ECMS_RECIPIENT_CLIENT_SECRET`
-  - Fallback: `ecms_api_recipient.settings` config key `oauth_client_secret`
+  - Default: `ecms_api_recipient.settings` config key `oauth_client_secret`
 
 - **api_recipient_mail**: Email address for the API recipient user
-  - Source: `ecms_api_recipient.settings` config key `api_recipient_mail`
+  - Default: `ecms_api_recipient.settings` config key `api_recipient_mail`
 
 ## Applying the Recipe
 
-### Using Environment Variables
+### Using Command-line Input Options
 
-```bash
-export ECMS_RECIPIENT_CLIENT_ID="your-client-id"
-export ECMS_RECIPIENT_CLIENT_SECRET="your-client-secret"
-php core/scripts/drupal recipe ecms_base/recipes/ecms_api_recipient
-```
-
-### Using Command-line Options
+You can override the default values using `--input` options:
 
 ```bash
 php core/scripts/drupal recipe ecms_base/recipes/ecms_api_recipient \
   --input=ecms_api_recipient.oauth_client_id=your-client-id \
-  --input=ecms_api_recipient.oauth_client_secret=your-client-secret
+  --input=ecms_api_recipient.oauth_client_secret=your-client-secret \
+  --input=ecms_api_recipient.api_recipient_mail=api@example.com
 ```
 
-### Using Existing Configuration
+### Using Existing Configuration (Default Behavior)
 
-If `ecms_api_recipient.settings` config already exists, the recipe will use those values:
+If `ecms_api_recipient.settings` config already exists, the recipe will use those values by default:
+
+```bash
+php core/scripts/drupal recipe ecms_base/recipes/ecms_api_recipient
+```
+
+### Interactive Mode
+
+Run without `--input` options and the recipe will prompt for each value (with defaults shown):
 
 ```bash
 php core/scripts/drupal recipe ecms_base/recipes/ecms_api_recipient
