@@ -1,8 +1,0 @@
-<?php
-
-/**
- * @file
- * ecms_api_recipient.module
- */
-
-declare(strict_types=1);
