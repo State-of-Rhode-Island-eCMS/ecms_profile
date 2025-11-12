@@ -2,32 +2,52 @@ name: 'eCMS API Recipient'
 description: 'Provides configuration for a site to receive notifications from a hub site within the eCMS network.'
 type: 'API'
 install:
+  - consumers
   - ecms_api_recipient
 input:
-  oauth_client_id:
+  clientId:
     data_type: string
     description: 'The OAuth client ID for the recipient'
+    constraints:
+      NotBlank: [ ]
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the OAuth client ID for the recipient'
+    form:
+      '#type': text
+      '#title': 'Recipient OAuth Client ID'
     default:
-      source: config
-      config:
-        - ecms_api_recipient.settings
-        - oauth_client_id
-  oauth_client_secret:
+      source: value
+      value: 'REDACTED'
+  clientSecret:
     data_type: string
-    description: 'The OAuth client secret for the recipient'
+    description: 'The OAuth client Secret for the recipient'
+    constraints:
+      NotBlank: [ ]
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the OAuth client secret for the recipient'
+    form:
+      '#type': text
+      '#title': 'Recipient OAuth Client Secret'
     default:
-      source: config
-      config:
-        - ecms_api_recipient.settings
-        - oauth_client_secret
-  api_recipient_mail:
-    data_type: string
+      source: value
+      value: 'REDACTED'
+  recipientMail:
+    data_type: email
     description: 'The email address for the API recipient user'
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the email address for the recipient'
+    form:
+      '#type': text
+      '#title': 'Recipient email address'
     default:
-      source: config
-      config:
-        - ecms_api_recipient.settings
-        - api_recipient_mail
+      source: value
+      value: 'test@example.com'
 config:
   # Don't enforce strict config checking since we're creating entities dynamically
   strict: false
@@ -35,6 +55,11 @@ config:
     ecms_api_recipient:
       - user.role.ecms_api_recipient
   actions:
+    ecms_api_recipient.settings:
+      simpleConfigUpdate:
+        api_recipient_mail: ${recipientMail}
+        oauth_client_id: ${clientId}
+        oauth_client_secret: ${clientSecret}
     # Grant permissions to the ecms_api_recipient user role
     user.role.ecms_api_recipient:
       grantPermissionsForEachNodeType:
@@ -44,17 +69,14 @@ config:
         - 'delete any %bundle content'
         - 'delete own %bundle content'
         - 'delete %bundle revisions'
-        - 'add scheduled transitions node %bundle'
         - 'publish any node type %bundle'
         - 'publish editable node type %bundle'
         - 'publish own node type %bundle'
-        - 'reschedule scheduled transitions node %bundle'
         - 'revert %bundle revisions'
         - 'translate %bundle node'
         - 'unpublish editable node type %bundle'
         - 'unpublish own node type %bundle'
         - 'view %bundle revisions'
-        - 'view scheduled transitions node %bundle'
       grantPermissionsForEachMediaType:
         - 'create %bundle media'
         - 'edit any %bundle media'
@@ -149,7 +171,6 @@ config:
         - 'use text format paragraph_text'
         - 'view all media revisions'
         - 'view all revisions'
-        - 'view all scheduled transitions'
         - 'view any unpublished content'
       simpleConfigUpdate:
         label: 'eCMS API Recipient'

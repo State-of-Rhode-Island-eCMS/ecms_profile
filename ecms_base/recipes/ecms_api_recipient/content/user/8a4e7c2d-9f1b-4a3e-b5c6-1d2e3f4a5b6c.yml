@@ -9,7 +9,7 @@ default:
       value: ecms_api_recipient
   mail:
     -
-      value: '${api_recipient_mail}'
+      value: ecms_api_recipient@ri.gov
   status:
     -
       value: 1

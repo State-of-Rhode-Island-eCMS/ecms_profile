@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: consumer
+  uuid: 9b5e8d3e-0f2c-5b4f-c6d7-2e3f4a5b6c7d
+  default_langcode: en
+  depends:
+    8a4e7c2d-9f1b-4a3e-b5c6-1d2e3f4a5b6c: user
+default:
+  owner_id:
+    -
+      target_id: 1
+  client_id:
+    -
+      value: 'test'
+  label:
+    -
+      value: 'ecms api recipient'
+  third_party:
+    -
+      value: true
+  is_default:
+    -
+      value: false
+
+  grant_types:
+    -
+      value: client_credentials
+  confidential:
+    -
+      value: true
+  scopes:
+    -
+      scope_id: ecms_api_recipient
+  access_token_expiration:
+    -
+      value: 300
+  refresh_token_expiration:
+    -
+      value: 1209600
+  user_id:
+    -
+      entity: 8a4e7c2d-9f1b-4a3e-b5c6-1d2e3f4a5b6c
+  pkce:
+    -
+      value: false
+  automatic_authorization:
+    -
+      value: false
+  remember_approval:
+    -
+      value: true
