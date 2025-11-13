@@ -6,12 +6,28 @@
  */
 
 declare(strict_types=1);
+use Drupal\Core\Batch\BatchBuilder;
+use Drupal\Core\Recipe\Recipe;
+use Drupal\Core\Recipe\RecipeRunner;
 
 /**
  * Implements hook_install().
  */
 function ecms_api_publisher_install() {
-  // @todo Add a recipe installation.
+  // This is a stopgap measure until the full of eCMS recipes are available
+  // and project browser is used to install everything.
+  // @todo Remove this once the full eCMS recipe system is in play.
+  $recipeName = 'ecms_api_publisher';
+  $profilePath = \Drupal::service('extension.list.profile')->getPath('ecms_base');
+  // Batch the recipe installation.
+  $batch = new BatchBuilder();
+  $path = sprintf('%s/recipes/%s', $profilePath, $recipeName);
+  $recipe = Recipe::createFromDirectory($path);
+  foreach (RecipeRunner::toBatchOperations($recipe) as $operation) {
+    $batch->addOperation(...$operation);
+  }
+
+  batch_set($batch->toArray());
 }
 
 /**
