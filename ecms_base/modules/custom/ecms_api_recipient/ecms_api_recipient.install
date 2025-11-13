@@ -11,9 +11,7 @@ declare(strict_types=1);
  * Implements hook_install().
  */
 function ecms_api_recipient_install(): void {
-  // Call the installation service.
-  \Drupal::service('ecms_api_recipient.install')->installEcmsApiRecipient();
-
+  // @todo Add recipe installation step here.
   // Call the site registration service.
   \Drupal::service('ecms_api_recipient.register')->registerSite();
 
