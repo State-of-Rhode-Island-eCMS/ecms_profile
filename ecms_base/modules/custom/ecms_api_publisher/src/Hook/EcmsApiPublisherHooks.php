@@ -10,6 +10,7 @@ use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\user\UserInterface;
 use Drupal\Core\Password\PasswordGeneratorInterface;
 use Drupal\Core\Password\PasswordInterface;
+
 /**
  * Hook implementations for ecms_api_publisher.
  */

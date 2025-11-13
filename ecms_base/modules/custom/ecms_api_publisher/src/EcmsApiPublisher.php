@@ -169,7 +169,7 @@ class EcmsApiPublisher extends EcmsApiBase {
   }
 
   /**
-   * Get the verification settings for the http calls..
+   * Get the verification settings for the http calls.
    *
    * @return bool
    *   The client scope for the recipient site.
