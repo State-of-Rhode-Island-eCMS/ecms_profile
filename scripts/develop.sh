@@ -3,12 +3,10 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
-DRUPAL_CORE="${DRUPAL_CORE:-^10.4}"
+DRUPAL_CORE="${DRUPAL_CORE:-^11.2}"
 PHP_VERSION="${PHP_VERSION:-8.3}"
 APP_NAME="ecms-profile"
 DOCROOT="develop/web"
-PATTERN_LAB_DIRECTORY="ecms_patternlab"
-PATTERN_LAB_REPOSITORY_NAME="state-of-rhode-island-ecms/ecms_patternlab"
 
 # Make sure the system has ddev
 if ! [ -x "$(command -v ddev)" ]; then
@@ -28,16 +26,19 @@ while [ "$1" != "" ]; do
     esac
 done
 
-ddev config \
+DDEV_CONFIG="ddev config \
   --project-name="$APP_NAME" \
-  --project-type=drupal \
+  --project-type=drupal11 \
   --php-version="$PHP_VERSION" \
   --docroot="$DOCROOT" \
   --database="mysql:5.7" \
   --webserver-type="apache-fpm" \
   --nodejs-version=10 \
   --composer-root="develop" \
-  --performance-mode=none
+  --performance-mode=none"
+
+# Configure DDEV for the profile.
+$DDEV_CONFIG
 
 # Get ddev started.
 ddev start
@@ -70,11 +71,37 @@ ddev exec "test -f develop/composer.lock || (generate-composer > develop/merge.c
 ## If the merge was successful, replace the original composer.json and install.
 ddev exec 'test -f develop/merge.composer.json && (mv develop/merge.composer.json develop/composer.json)'
 
+## Remove packages that require Drupal 11 patches to avoid conflicts
+## @todo: Remove this workaround once the below modules are D11 compatible.
+ddev exec 'composer remove --working-dir=develop --no-update drupal/address_phonenumber drupal/iek drupal/migrate_process_trim drupal/webform_encrypt || true'
+
+## Allow lenient package installation without user interaction
+## @todo: Remove this workaround once the above modules are D11 compatible.
+ddev exec 'composer config --working-dir=develop allow-plugins.mglaman/composer-drupal-lenient true'
+
+## Add composer-drupal-lenient package to handle version constraints
+ddev exec 'composer require --working-dir=develop --no-update mglaman/composer-drupal-lenient'
+
+## Configure lenient plugin allow list for D11 packages
+ddev exec 'composer config --working-dir=develop --merge --json extra.drupal-lenient.allowed-list '\''["drupal/address_phonenumber", "drupal/iek", "drupal/migrate_process_trim", "drupal/webform_encrypt"]'\'''
+
 # Composer install the things.
 ddev exec 'composer install --working-dir=develop'
 
+## Re-add the D11 packages that were removed with no-update flag
+ddev exec 'composer require --working-dir=develop --no-update "drupal/address_phonenumber:^10.0" "drupal/iek:^1.3" "drupal/migrate_process_trim:2.0.x-dev@dev" "drupal/webform_encrypt:^2.0@alpha"'
+
+## Run composer update with dependencies to resolve everything
+ddev exec 'composer update --with-all-dependencies --working-dir=develop'
+
+# Reconfigure DDEV to ensure settings.php is created.
+$DDEV_CONFIG
+
+## Add MySQL 57 settings requirement to the default prior to site install.
+ddev exec 'echo "require DRUPAL_ROOT . \"/modules/contrib/mysql57/settings.inc\";" >> $DDEV_DOCROOT/sites/default/settings.ddev.php'
+
 ## Install the site profile.
-ddev exec 'drush site:install ecms_acquia --db-url=mysql://db:db@db:3306/db?module=mysql#tableprefix --yes'
+ddev exec 'drush site:install ecms_base --yes'
 
 ## Install fast404.settings.php
 ddev exec 'chmod +w develop/web/sites/default develop/web/sites/default/settings.php && cp scripts/fast404.settings.php develop/web/sites/default/'
@@ -89,3 +116,4 @@ if [ "$PERFORMANCE_MODE" == "1" ]; then
   ddev config --performance-mode=mutagen;
   ddev start
 fi
+

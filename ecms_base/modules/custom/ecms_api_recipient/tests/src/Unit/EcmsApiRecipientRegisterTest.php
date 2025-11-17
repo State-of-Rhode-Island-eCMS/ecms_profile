@@ -15,6 +15,9 @@ use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\ResponseInterface;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -23,12 +26,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Unit testing for the EcmsApiRecipientRegister class.
  *
- * @covers \Drupal\ecms_api_recipient\EcmsApiRecipientRegister
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  * @package Drupal\Tests\ecms_api_recipient\Unit
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_recipient\EcmsApiRecipientRegister::class)]
 class EcmsApiRecipientRegisterTest extends UnitTestCase {
 
   /**
@@ -139,8 +142,8 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
    * @param int $code
    *   The http status code to expect.
    *
-   * @dataProvider dataProviderForTestRegisterSite
    */
+  #[DataProvider('dataProviderForTestRegisterSite')]
   public function testRegisterSite(string $siteUrl, string $hubUrl, bool $expectContentTypes, bool $accessToken, bool $guzzleException, int $code): void {
     $passedUrlGuards = FALSE;
     $recipientConfigCount = 0;
@@ -242,13 +245,13 @@ class EcmsApiRecipientRegisterTest extends UnitTestCase {
     $immutableHubConfig = $this->createMock(ImmutableConfig::class);
     $immutableHubConfig->expects($this->exactly($recipientConfigCount))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_main_hub', $hubUrl],
         ['api_main_hub_client_id', self::HUB_CLIENT_ID],
         ['api_main_hub_client_secret', self::HUB_CLIENT_SECRET],
         ['api_main_hub_scope', self::HUB_SCOPE],
         ['verify_ssl', TRUE],
-      ]));
+      ]);
 
     $this->configFactory->expects($this->exactly($recipientConfigCount))
       ->method('get')

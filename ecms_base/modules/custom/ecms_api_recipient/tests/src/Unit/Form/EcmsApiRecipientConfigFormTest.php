@@ -6,6 +6,7 @@ namespace Drupal\Tests\ecms_api_recipient\Unit;
 
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -16,16 +17,18 @@ use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiRecipientConfigForm class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
- * @covers \Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_recipient\Form\EcmsApiRecipientConfigForm::class)]
 class EcmsApiRecipientConfigFormTest extends UnitTestCase {
 
   /**
@@ -126,6 +129,7 @@ class EcmsApiRecipientConfigFormTest extends UnitTestCase {
     $messenger = $this->createMock(MessengerInterface::class);
     $this->container = new ContainerBuilder();
     $this->container->set('config.factory', $this->configFactory);
+    $this->container->set('config.typed', $this->createMock(TypedConfigManagerInterface::class));;
     $this->container->set('entity_type.manager', $this->entityTypeManager);
     $this->container->set('entity_type.bundle.info', $this->entityBundleInfo);
     $this->container->set('string_translation', $this->getStringTranslationStub());

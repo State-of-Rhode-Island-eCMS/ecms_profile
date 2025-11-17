@@ -20,16 +20,18 @@ use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiSyndicate class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit
- * @covers \Drupal\ecms_api_publisher\EcmsApiSyndicate
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  */
+#[Group("ecms_api_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_publisher\EcmsApiSyndicate::class)]
 class EcmsApiSyndicateTest extends UnitTestCase {
 
   /**

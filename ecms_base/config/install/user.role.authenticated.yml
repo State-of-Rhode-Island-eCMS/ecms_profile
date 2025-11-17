@@ -4,7 +4,6 @@ dependencies:
   config:
     - filter.format.basic_html
     - filter.format.minimal
-    - filter.format.webform_default
   module:
     - file
     - filter
@@ -33,7 +32,6 @@ permissions:
   - 'use moderation dashboard'
   - 'use text format basic_html'
   - 'use text format minimal'
-  - 'use text format webform_default'
   - 'view media'
   - 'view own unpublished media'
   - 'view paragraph content accordion_builder'

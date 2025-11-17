@@ -28,14 +28,10 @@
                 "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
             },
             "drupal/core": {
-                "3266057 - #129 - Allow profiles to define a base/parent profile [continue of #1356276]": "https://www.drupal.org/files/issues/2024-07-03/3266057-129.patch",
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
-                "3049332 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2024-01-09/drupal-core--2024-01-09--3049332-85.patch",
+                "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2025-07-09/drupal-core--2025-07-09--3049332--mr-12460.patch",
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
-            },
-            "drupal/features": {
-                "3447460 - D11 Upgrades": "https://gist.githubusercontent.com/pfrilling/e27933a1a4b8577d3d69d0d4f0bec6a2/raw/0c5df9bd798a0298a6a1c2675ec34881c290aff2/gistfile1.txt"
             },
             "drupal/iek": {
                 "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
@@ -45,14 +41,11 @@
                 "3344339 - Patternlab causing Regression in ^1.3.5. Temporary fix and should be fixed in the theme css": "https://gist.githubusercontent.com/pfrilling/bfcc11f173c0f5e697557f70ea087612/raw/2531994d06daf867d3735f33786280186d800108/riga-hide-rebuild-layout.patch"
             },
             "drupal/migrate_process_trim": {
-                "3288638 - Automated Drupal 11 compatibility fixes": "https://gist.githubusercontent.com/juniabiswas/f1d012dbfe5d83d2738cc8e0f84c8570/raw/f13d1ca37b8b39190972fcda84d8aded9c5521e2/migrate-process-trim-d11.diff"
+                "3288638 - Automated Drupal 11 compatibility fixes": "https://gist.githubusercontent.com/pfrilling/0c65512c56ade5d240d7af025ae4938a/raw/0c2b363a9ab493ffccf10ce10c6ade1215b689e0/gistfile1.txt"
             },
             "drupal/paragraphs": {
                 "3090200 - Paragraphs do not render: access check for 'view' fail when using layout builder": "https://www.drupal.org/files/issues/2020-07-08/access-controll-issue-3090200-22.patch",
-                "2887353 - Paragraph Translation Sync": "https://www.drupal.org/files/issues/2023-09-07/paragraphs-translation-sync-2887353-58.patch"
-            },
-            "drupal/search_api": {
-                "3321499 - #19 - Call to a member function preExecute() on null in SearchApiTimeCache::generateResultsKey()": "https://www.drupal.org/files/issues/2023-12-05/search_api-Call_to_a_member_function_preExecute%28%29_on_null-3321499.patch"
+                "2887353 - Paragraph Translation Sync": "https://gist.githubusercontent.com/pfrilling/87798df963feab76fbef5f4abe65fa10/raw/76c8f8cd06574b16b7da71ea2a0c1708d6d21871/paragraphs-translation-sync-2887353-60.patch"
             },
             "drupal/seckit": {
                 "3536611 - Add support for the Cross-Origin-Opener-Policy (COOP) header": "https://gist.githubusercontent.com/pfrilling/9e27b66ee95c85ae510c1a8fcb24593b/raw/49e4da0b175fa1064b5827f9bd76242596212bc9/gistfile1.txt"
@@ -100,7 +93,7 @@
         "drupal/address_phonenumber": "^10.0",
         "drupal/admin_toolbar": "^3.6",
         "drupal/aggregator": "^2.2",
-        "drupal/allowed_formats": "^3.0.0",
+        "drupal/allowed_formats": "^3.0.1",
         "drupal/asset_injector": "^2.7",
         "drupal/auto_entitylabel": "^3.3",
         "drupal/autologout": "^2.0.0",
@@ -115,14 +108,14 @@
         "drupal/conditional_fields": "^4.0@alpha",
         "drupal/consumers": "^1.20",
         "drupal/content_moderation_notifications": "^3.2",
-        "drupal/core-recommended": "^9.5 || ^10.0",
+        "drupal/core-recommended": "^11.2",
         "drupal/easy_breadcrumb": "2.0.9",
         "drupal/entity_print": "^2.18",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
         "drupal/facets": "^2.0",
         "drupal/fast_404": "^3.4",
-        "drupal/features": "3.x-dev",
+        "drupal/features": "^3.15",
         "drupal/feeds": "^3.0@RC",
         "drupal/feeds_ex": "^1.0@beta",
         "drupal/field_group": "^3.4",
@@ -158,7 +151,7 @@
         "drupal/menu_block": "^1.10",
         "drupal/metatag": "^2.1.1",
         "drupal/migrate_plus": "^6.0",
-        "drupal/migrate_process_trim": "^2.0",
+        "drupal/migrate_process_trim": "2.0.x-dev@dev",
         "drupal/migrate_tools": "^6.1",
         "drupal/migration_tools": "^2.8",
         "drupal/moderated_content_bulk_publish": "^2.0",
@@ -198,7 +191,7 @@
         "drupal/ultimate_cron": "^2.0@beta",
         "drupal/vbo_export": "^4.1",
         "drupal/views_database_connector": "^2.0",
-        "drupal/webform": "^6.3@beta",
+        "drupal/webform": "6.3.x-dev",
         "drupal/webform_encrypt": "^2.0@alpha",
         "drupal/webform_views": "^5.0@beta",
         "drush/drush": "^12 || ^13",
@@ -213,9 +206,8 @@
     "require-dev": {
         "drupal/coder": "^8.3",
         "drupal/core-dev": "^10 || ^11 || ^12",
-        "liuggio/fastest": "^1.13",
         "php-mock/php-mock": "^2.2",
         "php-mock/php-mock-phpunit": "^2.6",
-        "weitzman/drupal-test-traits": "^2.5"
+        "weitzman/drupal-test-traits": "^2.6"
     }
 }

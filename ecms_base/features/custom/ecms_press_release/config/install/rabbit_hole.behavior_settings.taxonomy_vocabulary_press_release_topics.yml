@@ -1,6 +1,6 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies: { }
 id: taxonomy_vocabulary_press_release_topics
 entity_type_id: null
 entity_id: null
@@ -8,4 +8,4 @@ action: page_not_found
 allow_override: 0
 redirect: ''
 redirect_code: 301
-redirect_fallback_action: null
+redirect_fallback_action: access_denied

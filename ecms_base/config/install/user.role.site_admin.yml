@@ -23,7 +23,6 @@ dependencies:
     - node.type.press_release
     - node.type.promotions
     - node.type.publication
-    - node.type.webform
     - taxonomy.vocabulary.event_taxonomy
     - taxonomy.vocabulary.file_tags
     - taxonomy.vocabulary.location_categories
@@ -65,13 +64,10 @@ dependencies:
     - simple_sitemap
     - system
     - taxonomy
-    - webform
-    - webform_encrypt
-    - webform_node
 id: site_admin
 label: 'Site Admin'
 weight: 10
-is_admin: null
+is_admin: false
 permissions:
   - 'access administration pages'
   - 'access contextual links'
@@ -79,8 +75,6 @@ permissions:
   - 'access site reports'
   - 'access taxonomy overview'
   - 'access user profiles'
-  - 'access webform help'
-  - 'access webform overview'
   - 'add new links to footer menu'
   - 'add new links to main menu'
   - 'add new links to social-navigation menu'
@@ -92,7 +86,6 @@ permissions:
   - 'add scheduled transitions node press_release'
   - 'add scheduled transitions node promotions'
   - 'add scheduled transitions node publication'
-  - 'add scheduled transitions node webform'
   - 'administer autologout'
   - 'administer footer menu items'
   - 'administer main menu items'
@@ -157,8 +150,6 @@ permissions:
   - 'create terms in publication_topic'
   - 'create terms in publication_type'
   - 'create url aliases'
-  - 'create webform'
-  - 'create webform content'
   - 'delete all revisions'
   - 'delete any basic_page content'
   - 'delete any event content'
@@ -180,8 +171,6 @@ permissions:
   - 'delete any promotions content'
   - 'delete any publication content'
   - 'delete any publication_file media'
-  - 'delete any webform'
-  - 'delete any webform content'
   - 'delete basic_page revisions'
   - 'delete content translations'
   - 'delete event revisions'
@@ -212,8 +201,6 @@ permissions:
   - 'delete own promotions content'
   - 'delete own publication content'
   - 'delete own publication_file media'
-  - 'delete own webform'
-  - 'delete own webform content'
   - 'delete paragraph content accordion_builder'
   - 'delete paragraph content card'
   - 'delete paragraph content column_container'
@@ -245,7 +232,6 @@ permissions:
   - 'delete terms in publication_audience'
   - 'delete terms in publication_topic'
   - 'delete terms in publication_type'
-  - 'delete webform revisions'
   - 'edit any basic_page content'
   - 'edit any event content'
   - 'edit any event_image media'
@@ -265,9 +251,6 @@ permissions:
   - 'edit any promotions content'
   - 'edit any publication content'
   - 'edit any publication_file media'
-  - 'edit any webform'
-  - 'edit any webform content'
-  - 'edit any webform submission'
   - 'edit footer menu'
   - 'edit links in footer menu'
   - 'edit links in main menu'
@@ -291,8 +274,6 @@ permissions:
   - 'edit own promotions content'
   - 'edit own publication content'
   - 'edit own publication_file media'
-  - 'edit own webform'
-  - 'edit own webform content'
   - 'edit social-navigation menu'
   - 'edit terms in event_taxonomy'
   - 'edit terms in file_tags'
@@ -317,7 +298,6 @@ permissions:
   - 'publish any node type press_release'
   - 'publish any node type promotions'
   - 'publish any node type publication'
-  - 'publish any node type webform'
   - 'publish editable node type basic_page'
   - 'publish editable node type event'
   - 'publish editable node type landing_page'
@@ -328,7 +308,6 @@ permissions:
   - 'publish editable node type press_release'
   - 'publish editable node type promotions'
   - 'publish editable node type publication'
-  - 'publish editable node type webform'
   - 'publish own node type basic_page'
   - 'publish own node type event'
   - 'publish own node type landing_page'
@@ -339,7 +318,6 @@ permissions:
   - 'publish own node type press_release'
   - 'publish own node type promotions'
   - 'publish own node type publication'
-  - 'publish own node type webform'
   - 'rabbit hole bypass node'
   - 'reschedule scheduled transitions node basic_page'
   - 'reschedule scheduled transitions node event'
@@ -349,7 +327,6 @@ permissions:
   - 'reschedule scheduled transitions node press_release'
   - 'reschedule scheduled transitions node promotions'
   - 'reschedule scheduled transitions node publication'
-  - 'reschedule scheduled transitions node webform'
   - 'revert all revisions'
   - 'revert basic_page revisions'
   - 'revert event revisions'
@@ -361,7 +338,6 @@ permissions:
   - 'revert press_release revisions'
   - 'revert promotions revisions'
   - 'revert publication revisions'
-  - 'revert webform revisions'
   - 'translate any entity'
   - 'translate basic_page node'
   - 'translate block_content'
@@ -401,7 +377,6 @@ permissions:
   - 'unpublish any node type press_release'
   - 'unpublish any node type promotions'
   - 'unpublish any node type publication'
-  - 'unpublish any node type webform'
   - 'unpublish editable node type basic_page'
   - 'unpublish editable node type event'
   - 'unpublish editable node type landing_page'
@@ -412,7 +387,6 @@ permissions:
   - 'unpublish editable node type press_release'
   - 'unpublish editable node type promotions'
   - 'unpublish editable node type publication'
-  - 'unpublish editable node type webform'
   - 'unpublish own node type basic_page'
   - 'unpublish own node type event'
   - 'unpublish own node type landing_page'
@@ -423,7 +397,6 @@ permissions:
   - 'unpublish own node type press_release'
   - 'unpublish own node type promotions'
   - 'unpublish own node type publication'
-  - 'unpublish own node type webform'
   - 'update any media'
   - 'update content translations'
   - 'update media'
@@ -456,7 +429,6 @@ permissions:
   - 'view all scheduled transitions'
   - 'view any moderation dashboard'
   - 'view any unpublished content'
-  - 'view any webform submission'
   - 'view basic_page revisions'
   - 'view encrypted values'
   - 'view event revisions'
@@ -468,7 +440,6 @@ permissions:
   - 'view modal revisions'
   - 'view notification revisions'
   - 'view own unpublished content'
-  - 'view own webform submission'
   - 'view person revisions'
   - 'view press_release revisions'
   - 'view promotions revisions'
@@ -481,8 +452,5 @@ permissions:
   - 'view scheduled transitions node press_release'
   - 'view scheduled transitions node promotions'
   - 'view scheduled transitions node publication'
-  - 'view scheduled transitions node webform'
   - 'view social-navigation menu in menu list'
   - 'view unpublished paragraphs'
-  - 'view webform revisions'
-  - 'view webform submissions any node'

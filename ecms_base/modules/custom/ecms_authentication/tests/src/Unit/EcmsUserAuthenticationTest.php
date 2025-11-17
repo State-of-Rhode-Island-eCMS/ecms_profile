@@ -7,7 +7,11 @@ namespace Drupal\Tests\ecms_authentication\Unit;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\ecms_authentication\EcmsUserAuthentication;
 use Drupal\Tests\UnitTestCase;
+use Drupal\TestTools\Random;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -16,9 +20,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @package Drupal\Tests\ecms_authentication\Unit
  *
- * @covers \Drupal\ecms_authentication\EcmsUserAuthentication
- * @group ecms_authentication
  */
+#[Group("ecms_authentication")]
+#[CoversClass(\Drupal\ecms_authentication\EcmsUserAuthentication::class)]
 class EcmsUserAuthenticationTest extends UnitTestCase {
 
   /**
@@ -54,8 +58,8 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
    * @param bool $expected
    *   The expected result.
    *
-   * @dataProvider dataProviderForCheckGroupAccess
    */
+  #[DataProvider('dataProviderForCheckGroupAccess')]
   public function testCheckGroupAccess(array $groups, bool $expected): void {
 
     if (in_array(self::ADMIN_GROUP, $groups, TRUE)) {
@@ -87,7 +91,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
    * @return array[]
    *   Array of params to pass to testAdministratorAccess.
    */
-  public function dataProviderForCheckGroupAccess(): array {
+  public static function dataProviderForCheckGroupAccess(): array {
     return [
       'test1' => [
         [
@@ -163,7 +167,7 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
       'test10' => [
         [
           'test group one',
-          $this->randomMachineName(),
+          Random::machineName(8),
           'drupal_admin',
         ],
         FALSE,
@@ -181,8 +185,8 @@ class EcmsUserAuthenticationTest extends UnitTestCase {
    * @param bool $exception
    *   Whether a storage exception should be expected.
    *
-   * @dataProvider dataProviderForTestRemoveAdminGroup
    */
+  #[DataProvider('dataProviderForTestRemoveAdminGroup')]
   public function testRemoveAdminGroup(bool $hasAadAdminGroup, bool $hasDrupalAdminRole, bool $exception): void {
     $aadGroups = [
       $this->randomMachineName(),

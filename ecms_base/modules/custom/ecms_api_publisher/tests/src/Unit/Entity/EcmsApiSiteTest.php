@@ -20,15 +20,17 @@ use Drupal\Tests\UnitTestCase;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\user\UserInterface;
 use phpmock\MockBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiSite class.
  *
- * @covers \Drupal\ecms_api_publisher\Entity\EcmsApiSite
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  */
+#[Group("ecms_api_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_publisher\Entity\EcmsApiSite::class)]
 class EcmsApiSiteTest extends UnitTestCase {
 
   /**

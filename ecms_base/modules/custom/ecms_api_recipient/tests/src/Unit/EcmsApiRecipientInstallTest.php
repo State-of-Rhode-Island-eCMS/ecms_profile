@@ -13,15 +13,16 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\ecms_api_recipient\EcmsApiRecipientInstall;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiRecipientInstall class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit
- * @group ecms
- * @group ecms_api
- * @group ecms_api_recipient
  */
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
+#[Group("ecms")]
 class EcmsApiRecipientInstallTest extends UnitTestCase {
 
   /**
@@ -148,18 +149,18 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
 
     $this->apiConfig->expects($this->exactly(4))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_recipient_mail', self::API_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET],
-      ]));
+      ]);
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage],
         ['consumer', $consumerStorage],
-      ]));
+      ]);
 
     $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -244,18 +245,18 @@ class EcmsApiRecipientInstallTest extends UnitTestCase {
 
     $this->apiConfig->expects($this->exactly(4))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_recipient_mail', self::API_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET],
-      ]));
+      ]);
 
     $this->entityTypeManager->expects($this->exactly(2))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage],
         ['consumer', $consumerStorage],
-      ]));
+      ]);
 
     $ecmsApiRecipientInstall = $this->getMockBuilder(EcmsApiRecipientInstall::class)
       ->onlyMethods(['generatePassword'])

@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - taxonomy.vocabulary.person_additional_fields
+dependencies: { }
 id: taxonomy_vocabulary_person_additional_fields
 entity_type_id: taxonomy_vocabulary
 entity_id: person_additional_fields

@@ -15,15 +15,16 @@ use Drupal\ecms_api_publisher\EcmsApiPublisherInstall;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\RoleInterface;
 use Drupal\user\UserInterface;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiPublisherInstall class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  */
+#[Group("ecms_api_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
 class EcmsApiPublisherInstallTest extends UnitTestCase {
 
   /**
@@ -119,11 +120,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   public function testInstallEcmsApiPublisher(): void {
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET],
-        ]));
+        ]);
 
     $roleEntity = $this->createMock(RoleInterface::class);
     $roleEntity->expects($this->once())
@@ -163,9 +164,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -185,11 +186,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   public function testInstallEcmsApiPublisherEmptyRole(): void {
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET]
-      ]));
+      ]);
 
     $roleEntity = $this->createMock(RoleInterface::class);
     $roleEntity->expects($this->never())
@@ -229,9 +230,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -251,11 +252,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
   public function testInstallEcmsApiPublisherRoleException(): void {
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET]
-      ]));
+      ]);
 
     $exception = $this->createMock(EntityStorageException::class);
     $roleEntity = $this->createMock(RoleInterface::class);
@@ -297,9 +298,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])
@@ -384,11 +385,11 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->immutableConfig->expects($this->exactly(3))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['api_publisher_mail', self::USER_MAIL],
         ['oauth_client_id', self::CLIENT_ID],
         ['oauth_client_secret', self::CLIENT_SECRET]
-      ]));
+      ]);
 
     $roleEntity = $this->createMock(RoleInterface::class);
     $roleEntity->expects($this->once())
@@ -429,9 +430,9 @@ class EcmsApiPublisherInstallTest extends UnitTestCase {
 
     $this->entityTypeManager->expects($this->exactly(3))
       ->method('getStorage')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['user', $userStorage], ['consumer', $consumerStorage], ['user_role', $roleStorage]
-      ]));
+      ]);
 
     $ecmsApiPublisherInstall = $this->getMockBuilder(EcmsApiPublisherInstall::class)
       ->onlyMethods(['generatePassword'])

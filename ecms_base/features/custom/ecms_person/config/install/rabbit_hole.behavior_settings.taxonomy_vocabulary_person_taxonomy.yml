@@ -1,11 +1,11 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies: { }
 id: taxonomy_vocabulary_person_taxonomy
-entity_type_id: null
-entity_id: null
+entity_type_id: taxonomy_vocabulary
+entity_id: person_taxonomy
 action: page_not_found
 allow_override: 0
 redirect: ''
 redirect_code: 301
-redirect_fallback_action: null
+redirect_fallback_action: access_denied

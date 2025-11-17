@@ -97,11 +97,6 @@ dependencies:
   - toolbar
   - twig_tweak
   - views
-  - webform
-  - webform_encrypt
-  - webform_entity_print
-  - webform_node
-  - webform_ui
 
 # Install the required features.
 install:

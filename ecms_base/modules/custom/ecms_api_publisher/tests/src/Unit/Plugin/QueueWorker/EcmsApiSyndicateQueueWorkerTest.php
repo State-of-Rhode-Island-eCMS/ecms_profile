@@ -13,17 +13,20 @@ use Drupal\ecms_api_publisher\Plugin\QueueWorker\EcmsApiSyndicateQueueWorker;
 use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiSyndicateQueueWorker class.
  *
- * @covers \Drupal\ecms_api_publisher\Plugin\QueueWorker\EcmsApiSyndicateQueueWorker
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit\Plugin\QueueWorker
  */
+#[Group("ecms_api_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_publisher\Plugin\QueueWorker\EcmsApiSyndicateQueueWorker::class)]
 class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
 
   /**
@@ -66,13 +69,15 @@ class EcmsApiSyndicateQueueWorkerTest extends UnitTestCase {
    *
    * @param bool $expected
    *   The expected result of the http call.
-   *
-   * @dataProvider dataProviderForProcessItem
    */
+  #[DataProvider('dataProviderForProcessItem')]
   public function testProcessItem(bool $expected): void {
     $url = $this->createMock(Url::class);
     $node = $this->createMock(NodeInterface::class);
 
+    $url->expects($this->exactly($expected ? 0 : 1))
+      ->method('toUriString')
+      ->willReturn('https://www.example.com');
     $linkItem = $this->createMock(LinkItem::class);
     $linkItem->expects($this->once())
       ->method('getUrl')

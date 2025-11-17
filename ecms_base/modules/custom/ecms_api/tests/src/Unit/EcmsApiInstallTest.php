@@ -8,16 +8,18 @@ use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\ecms_api\EcmsApiInstall;
 use Drupal\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the EcmsApiInstall class.
  *
  * @package Drupal\Tests\ecms_api\Unit
  *
- * @covers \Drupal\ecms_api\EcmsApiInstall
- * @group ecms
- * @group ecms_api
  */
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api\EcmsApiInstall::class)]
 class EcmsApiInstallTest extends UnitTestCase {
 
   /**
@@ -72,10 +74,10 @@ class EcmsApiInstallTest extends UnitTestCase {
     $oauthConfig = $this->createMock(Config::class);
     $oauthConfig->expects($this->exactly(2))
       ->method('set')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['public_key', self::OAUTH_PUBLIC_KEY, $oauthConfig],
         ['private_key', self::OAUTH_PRIVATE_KEY, $oauthConfig],
-      ]));
+      ]);
     $oauthConfig->expects($this->once())
       ->method('save')
       ->willReturnSelf();
@@ -85,11 +87,11 @@ class EcmsApiInstallTest extends UnitTestCase {
 
     $this->configFactory->expects($this->exactly(3))
       ->method('getEditable')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['jsonapi.settings', $jsonConfig],
         ['jsonapi_extras.settings', $jsonExtraConfig],
         ['simple_oauth.settings', $oauthConfig],
-      ]));
+      ]);
   }
 
   /**

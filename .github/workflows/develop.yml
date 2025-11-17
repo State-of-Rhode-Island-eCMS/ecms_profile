@@ -8,7 +8,7 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
 env:
-  DRUPAL_CORE: '^10.4'
+  DRUPAL_CORE: '^11.2'
   PHP_VERSION: '8.3'
   NODE_VERSION: '10.x'
 
@@ -23,10 +23,8 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - drupal_core: '^10.4'
+          - drupal_core: '^11.2'
             experimental: false
-          - drupal_core: '^11.1'
-            experimental: true
 
     steps:
       - name: Checkout
@@ -94,16 +92,10 @@ jobs:
       matrix:
         include:
           - php_version: '8.3'
-            drupal_core: '^10.4'
+            drupal_core: '^11.2'
             experimental: false
           - php_version: '8.4'
-            drupal_core: '^10.4'
-            experimental: true
-          - php_version: '8.3'
-            drupal_core: '^11.1'
-            experimental: true
-          - php_version: '8.4'
-            drupal_core: '^11.1'
+            drupal_core: '^11.2'
             experimental: true
     container:
       image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production
@@ -167,17 +159,47 @@ jobs:
 
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit
+        run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit --no-coverage
+
+      - name: Copy default settings file
+        run: cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
+
+      - name: Add MySQL requirement to settings.php
+        run: |
+          echo '$databases["default"]["default"] = array (' >> /var/www/html/sites/default/settings.php
+          echo '  "database" => "drupal",' >> /var/www/html/sites/default/settings.php
+          echo '  "username" => "drupal",' >> /var/www/html/sites/default/settings.php
+          echo '  "password" => "drupal",' >> /var/www/html/sites/default/settings.php
+          echo '  "prefix" => "",' >> /var/www/html/sites/default/settings.php
+          echo '  "host" => "database",' >> /var/www/html/sites/default/settings.php
+          echo '  "port" => "3306",' >> /var/www/html/sites/default/settings.php
+          echo '  "namespace" => "Drupal\\mysql\\Driver\\Database\\mysql",' >> /var/www/html/sites/default/settings.php
+          echo '  "driver" => "mysql",' >> /var/www/html/sites/default/settings.php
+          echo ');' >> /var/www/html/sites/default/settings.php
+          echo 'require DRUPAL_ROOT . "/modules/contrib/mysql57/settings.inc";' >> /var/www/html/sites/default/settings.php
+
+      - name: Add Fast404 settings
+        run: |
+          echo '$fast404Settings = sprintf("%s/%s/fast404.settings.php", $app_root, $site_path);' >> /var/www/html/sites/default/settings.php
+          echo 'if (file_exists($fast404Settings)) {' >> /var/www/html/sites/default/settings.php
+          echo '  require($fast404Settings);' >> /var/www/html/sites/default/settings.php
+          echo '}' >> /var/www/html/sites/default/settings.php
+
+      - name: Set settings.php permissions
+        run: chmod 666 /var/www/html/sites/default/settings.php
+
+      - name: Update settings.php
+        run: |
+          mkdir -p /var/www/html/sites/default/files && chmod -R 777 /var/www/html/sites/default/files
+          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_temp_path'] = '/tmp';" >> /var/www/html/sites/default/settings.php
+          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
 
       - name: Install the ecms base profile.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
-        run: ../vendor/bin/drush site:install ecms_base --db-url=mysql://drupal:drupal@database:3306/drupal?module=mysql#tableprefix --yes --verbose
+        run: ../vendor/bin/drush site:install ecms_base --yes --verbose
 
-#      - name: Update settings.php
-#        run: |
-#          echo "\$settings['file_chmod_directory'] = 02775;" >> /var/www/html/sites/default/settings.php
-#          echo "\$settings['file_temp_path'] = '/var/www/html/sites/default/files/tmp';" >> /var/www/html/sites/default/settings.php
-#          echo "\$settings['file_public_path'] = '/var/www/html/sites/default/files';" >> /var/www/html/sites/default/settings.php
+
 
 #      - name: Run functional tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
@@ -189,4 +211,4 @@ jobs:
 #
 #      - name: Run existing site tests.
 #        working-directory: ${{ env.DRUPAL_DIRECTORY }}
-#        run: find . -type f -iname "*Test.php" | grep "ExistingSite" | sudo -u www-data -E /var/www/develop/vendor/liuggio/fastest/fastest "/var/www/develop/vendor/phpunit/phpunit/phpunit --bootstrap=/var/www/vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml {};"
+#        run: ../vendor/bin/phpunit --bootstrap=../vendor/weitzman/drupal-test-traits/src/bootstrap-fast.php --configuration=/var/www/phpunit-ci.xml --testsuite=existing

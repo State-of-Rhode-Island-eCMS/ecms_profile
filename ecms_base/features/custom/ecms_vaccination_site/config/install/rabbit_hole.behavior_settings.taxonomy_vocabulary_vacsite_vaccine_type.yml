@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - taxonomy.vocabulary.vacsite_vaccine_type
+dependencies: {}
 id: taxonomy_vocabulary_vacsite_vaccine_type
 entity_type_id: taxonomy_vocabulary
 entity_id: vacsite_vaccine_type
