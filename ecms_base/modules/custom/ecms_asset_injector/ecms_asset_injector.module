@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for eCMS Asset Injector module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\ecms_asset_injector\Entity\EcmsAssetInjectorCss;
+
+/**
+ * Implements hook_entity_type_alter().
+ *
+ * Replaces the AssetInjectorCss entity class with our extended version
+ * that wraps color-related CSS rules in light-mode media queries.
+ */
+function ecms_asset_injector_entity_type_alter(array &$entity_types): void {
+  if (isset($entity_types['asset_injector_css'])) {
+    $entity_types['asset_injector_css']->setClass(EcmsAssetInjectorCss::class);
+  }
+}

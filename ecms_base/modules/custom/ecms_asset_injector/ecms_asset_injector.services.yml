@@ -1,0 +1,3 @@
+services:
+  ecms_asset_injector.css_color_processor:
+    class: Drupal\ecms_asset_injector\CssColorProcessor

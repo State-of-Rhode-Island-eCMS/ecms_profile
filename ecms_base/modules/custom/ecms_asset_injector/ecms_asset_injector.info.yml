@@ -1,0 +1,8 @@
+name: eCMS Asset Injector
+description: 'Extends Asset Injector to wrap color-related CSS rules in light-mode media queries for dark mode compatibility.'
+type: module
+core_version_requirement: ^10 || ^11
+package: eCMS
+
+dependencies:
+  - asset_injector:asset_injector
