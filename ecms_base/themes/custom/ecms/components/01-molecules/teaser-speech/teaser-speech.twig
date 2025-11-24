@@ -14,10 +14,9 @@
     <!-- truncation rules: 100 words, stop at the next period-space -->
     <p>{{ excerpt }}</p>
 
-    {% include "@molecules/cta-read-more/cta-read-more.twig" with {
-        cta_read_text: "Read Speech",
-        cta_url: url
-      }
-    %}
+    {{ include('ecms:cta-read-more', {
+      cta_read_text: "Read Speech",
+      cta_url: url
+    }, with_context = FALSE) }}
   </div>
 </article>

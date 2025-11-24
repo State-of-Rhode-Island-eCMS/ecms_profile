@@ -11,18 +11,22 @@ use Drupal\ecms_api_publisher\EcmsApiSyndicate;
 use Drupal\jsonapi_extras\EntityToJsonApi;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\TestTools\Random;
 use GuzzleHttp\ClientInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit tests for the NotificationPublisher class.
  *
  * @package Drupal\Tests\ecms_api_notification_publisher\Unit
- * @covers \Drupal\ecms_api_notification_publisher\NotificationPublisher
  *
- * @group ecms
- * @group ecms_api
- * @group ecms_api_notification_publisher
  */
+#[Group("ecms_api_notification_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_notification_publisher\NotificationPublisher::class)]
 class NotificationPublisherTest extends UnitTestCase {
 
   /**
@@ -97,8 +101,8 @@ class NotificationPublisherTest extends UnitTestCase {
    *   none: assume the field doe not exist.
    *   empty: assume the field is empty.
    *
-   * @dataProvider dataProviderForBroadcastNotification
    */
+  #[DataProvider('dataProviderForBroadcastNotification')]
   public function testBroadcastNotification(
     string $nodeType,
     int $global,
@@ -129,10 +133,10 @@ class NotificationPublisherTest extends UnitTestCase {
 
       $this->node->expects($this->exactly($hasFieldCount))
         ->method('hasField')
-        ->will($this->returnValueMap([
+        ->willReturnMap([
           ['field_notification_global',$hasGlobalField],
           ['moderation_state', $hasModerationField],
-        ]));
+        ]);
 
       if ($hasGlobalField) {
         $getFieldCount = 1;
@@ -168,10 +172,10 @@ class NotificationPublisherTest extends UnitTestCase {
 
         $this->node->expects($this->exactly($getFieldCount))
           ->method('get')
-          ->will($this->returnValueMap([
+          ->willReturnMap([
             ['field_notification_global', $fieldItemList],
             ['moderation_state', $moderationItemList],
-          ]));
+          ]);
       }
     }
 
@@ -186,17 +190,17 @@ class NotificationPublisherTest extends UnitTestCase {
    * @return array
    *   Array of parameters to pass to testBroadcastNotification.
    */
-  public function dataProviderForBroadcastNotification(): array {
+  public static function dataProviderForBroadcastNotification(): array {
     return [
       'test1' => [
-        $this->randomMachineName(),
+        Random::machineName(8),
         -1,
-        $this->randomMachineName(),
+        Random::machineName(8),
       ],
       'test2' => [
         'notification',
         -1,
-        $this->randomMachineName(),
+        Random::machineName(8),
       ],
       'test3' => [
         'notification',
@@ -221,7 +225,7 @@ class NotificationPublisherTest extends UnitTestCase {
       'test7' => [
         'notification',
         1,
-        $this->randomMachineName(),
+        Random::machineName(8),
       ],
       'test8' => [
         'notification',

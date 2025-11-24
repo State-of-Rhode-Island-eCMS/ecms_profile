@@ -23,7 +23,6 @@ dependencies:
     - node.type.press_release
     - node.type.promotions
     - node.type.publication
-    - node.type.webform
     - workflows.workflow.editorial
   module:
     - block_content
@@ -40,7 +39,7 @@ dependencies:
 id: content_author
 label: 'Content Author'
 weight: 4
-is_admin: null
+is_admin: false
 permissions:
   - 'access contextual links'
   - 'bypass paragraphs type content access'
@@ -84,7 +83,6 @@ permissions:
   - 'create promotions content'
   - 'create publication content'
   - 'create publication_file media'
-  - 'create webform content'
   - 'delete media'
   - 'delete own event_image media'
   - 'delete own file media'
@@ -96,26 +94,16 @@ permissions:
   - 'delete own person_headshot media'
   - 'delete own promotional_image media'
   - 'delete own publication_file media'
-  - 'edit any basic_page content'
-  - 'edit any event content'
   - 'edit any event_image media'
   - 'edit any file media'
   - 'edit any icon media'
-  - 'edit any landing_page content'
-  - 'edit any location content'
   - 'edit any media_item_audio media'
   - 'edit any media_item_image media'
   - 'edit any media_item_video media'
-  - 'edit any modal content'
   - 'edit any notification content'
-  - 'edit any person content'
   - 'edit any person_headshot media'
-  - 'edit any press_release content'
   - 'edit any promotional_image media'
-  - 'edit any promotions content'
-  - 'edit any publication content'
   - 'edit any publication_file media'
-  - 'edit any webform content'
   - 'edit own basic_page content'
   - 'edit own event content'
   - 'edit own event_image media'
@@ -134,7 +122,6 @@ permissions:
   - 'edit own promotions content'
   - 'edit own publication content'
   - 'edit own publication_file media'
-  - 'edit own webform content'
   - 'translate basic_page node'
   - 'translate block_content'
   - 'translate event node'
@@ -192,4 +179,3 @@ permissions:
   - 'view press_release revisions'
   - 'view promotions revisions'
   - 'view publication revisions'
-  - 'view webform revisions'

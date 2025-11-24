@@ -13,6 +13,8 @@ use Drupal\ecms_api_recipient\EcmsApiRecipientRetrieveNotifications;
 use Drupal\ecms_api_recipient\Plugin\QueueWorker\NotificationCreationQueueWorker;
 use Drupal\Tests\UnitTestCase;
 use GuzzleHttp\ClientInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -20,10 +22,10 @@ use Psr\Http\Message\StreamInterface;
  * Unit tests for the NotificationCreationQueueWorker class.
  *
  * @package Drupal\Tests\ecms_api_recipient\Unit\Plugin\QueueWorker
- * @group ecms_api
- * @group ecms_api_recipient
- * @group ecms_api_test
  */
+#[Group("ecms_api_test")]
+#[Group("ecms_api_recipient")]
+#[Group("ecms_api")]
 class NotificationCreationQueueWorkerTest extends UnitTestCase {
 
   /**
@@ -155,8 +157,8 @@ class NotificationCreationQueueWorkerTest extends UnitTestCase {
    * @param int $testNumber
    *   The test number currently running.
    *
-   * @dataProvider dataProviderForTestProcessItem
    */
+  #[DataProvider('dataProviderForTestProcessItem')]
   public function testProcessItem(int $testNumber = 1): void {
     $notification = NULL;
 

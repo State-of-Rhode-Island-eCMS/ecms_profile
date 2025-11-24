@@ -13,6 +13,9 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\ecms_languages\LanguageNegotiationSessionFix;
 use Drupal\language\ConfigurableLanguageManager;
 use Drupal\Tests\UnitTestCase;
+use Drupal\TestTools\Random;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
@@ -21,8 +24,8 @@ use Symfony\Component\Routing\Route;
  * Unit tests for the LanguageNegotiationSessionFix class.
  *
  * @package Drupal\Tests\ecms_languages\Unit
- * @group ecms_languages
  */
+#[Group("ecms_languages")]
 class LanguageNegotiationSessionFixTest extends UnitTestCase {
 
   /**
@@ -87,8 +90,8 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
    * @param bool $methodsCalled
    *   Whether the custom process methods will be called.
    *
-   * @dataProvider dataProviderForTestProcessOutbound
    */
+  #[DataProvider('dataProviderForTestProcessOutbound')]
   public function testProcessOutbound(string $path, bool $entity, ?string $entityFormRoute, bool $langCode, bool $methodsCalled): void {
 
     $options = [];
@@ -164,7 +167,7 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
    * @return array[]
    *   Parameters to pass to testProcessOutbound.
    */
-  public function dataProviderForTestProcessOutbound(): array {
+  public static function dataProviderForTestProcessOutbound(): array {
     return [
       'test0' => [
         'node/123',
@@ -176,63 +179,63 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
       'test1' => [
         'node/123/edit',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
       'test2' => [
         'node/123/delete',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
       'test3' => [
         'node/123/edit',
         FALSE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         FALSE,
       ],
       'test4' => [
         'node/123/delete',
         FALSE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         FALSE,
       ],
       'test5' => [
         'node/123/edit',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         FALSE,
         FALSE,
       ],
       'test6' => [
         'node/123/delete',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         FALSE,
         FALSE,
       ],
       'test7' => [
         'not/a/node/path',
         FALSE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         FALSE,
         FALSE,
       ],
       'test8' => [
         'media/123/delete',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
       'test9' => [
         'media/123/edit',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
@@ -246,42 +249,42 @@ class LanguageNegotiationSessionFixTest extends UnitTestCase {
       'test10' => [
         'taxonomy/term/123/edit',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
       'test11' => [
         'taxonomy/term/123/delete',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
       'test12' => [
         'taxonomy/term/123/edit',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         FALSE,
         FALSE,
       ],
       'test13' => [
         'taxonomy/term/123/delete',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         FALSE,
         FALSE,
       ],
       'test14' => [
         'block/123/?language=de',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],
       'test15' => [
         'block/123/delete?language=de',
         TRUE,
-        $this->randomMachineName(),
+        Random::machineName(8),
         TRUE,
         TRUE,
       ],

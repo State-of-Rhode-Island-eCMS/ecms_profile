@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\ecms_api_recipient\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -31,34 +32,24 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
   const EDITORIAL_PUBLISH = 'use editorial transition publish';
 
   /**
-   * The entity_type.manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  private $entityTypeManager;
-
-  /**
-   * The entity_type.bundle.info service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeBundleInfoInterface
-   */
-  private $entityTypeBundleInfo;
-
-  /**
    * EcmsApiRecipientConfigForm constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config.factory service.
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The typed config manager.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The entity_type.manager service.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entityTypeBundleInfo
    *   The entity_type.bundle.info service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entityTypeManager, EntityTypeBundleInfoInterface $entityTypeBundleInfo) {
-    parent::__construct($config_factory);
-
-    $this->entityTypeManager = $entityTypeManager;
-    $this->entityTypeBundleInfo = $entityTypeBundleInfo;
+  public function __construct(
+    ConfigFactoryInterface $config_factory,
+    TypedConfigManagerInterface $typedConfigManager,
+    protected EntityTypeManagerInterface $entityTypeManager,
+    protected EntityTypeBundleInfoInterface $entityTypeBundleInfo,
+  ) {
+    parent::__construct($config_factory, $typedConfigManager);
   }
 
   /**
@@ -67,6 +58,7 @@ class EcmsApiRecipientConfigForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
+      $container->get('config.typed'),
       $container->get('entity_type.manager'),
       $container->get('entity_type.bundle.info')
     );

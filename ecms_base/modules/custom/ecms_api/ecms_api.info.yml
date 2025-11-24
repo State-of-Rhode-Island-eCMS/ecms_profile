@@ -5,6 +5,7 @@ core_version_requirement: ^9 || ^10 || ^11
 package: eCMS API
 
 dependencies:
+  - consumers
   - jsonapi
   - jsonapi_extras
   - simple_oauth

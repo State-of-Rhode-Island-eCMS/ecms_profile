@@ -17,16 +17,19 @@ use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
 use GuzzleHttp\ClientInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiPublisher class.
  *
- * @covers \Drupal\ecms_api_publisher\EcmsApiPublisher
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  * @package Drupal\Tests\ecms_api_publisher\Unit
  */
+#[Group("ecms_api_publisher")]
+#[Group("ecms_api")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_publisher\EcmsApiPublisher::class)]
 class EcmsApiPublisherTest extends UnitTestCase {
 
   /**
@@ -81,12 +84,12 @@ class EcmsApiPublisherTest extends UnitTestCase {
     $immutableConfig = $this->createMock(ImmutableConfig::class);
     $immutableConfig->expects($this->exactly(4))
       ->method('get')
-      ->will($this->returnValueMap([
+      ->willReturnMap([
         ['recipient_client_id', self::CLIENT_ID],
         ['recipient_client_secret', self::CLIENT_SECRET],
         ['recipient_client_scope', self::CLIENT_SCOPE],
         ['verify_ssl', TRUE],
-        ]));
+        ]);
     $this->configFactory = $this->createMock(ConfigFactoryInterface::class);
 
     $this->configFactory->expects($this->exactly(4))
@@ -129,8 +132,8 @@ class EcmsApiPublisherTest extends UnitTestCase {
    * @param bool $expected
    *   The expected result.
    *
-   * @dataProvider dataProviderForTestSyndicateNode
    */
+  #[DataProvider('dataProviderForTestSyndicateNode')]
   public function testSyndicateNode(?string $accessToken, bool $publisherAccount, bool $expected): void {
     $url = $this->createMock(Url::class);
     $node = $this->createMock(NodeInterface::class);

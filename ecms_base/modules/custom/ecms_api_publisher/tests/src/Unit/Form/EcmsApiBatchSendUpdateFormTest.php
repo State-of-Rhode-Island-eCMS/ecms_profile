@@ -18,17 +18,20 @@ use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\node\NodeInterface;
 use Drupal\Tests\UnitTestCase;
 use phpmock\MockBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Unit testing for the EcmsApiBatchSendUpdateForm class.
  *
  * @package Drupal\Tests\ecms_api_publisher\Unit\Form
  *
- * @covers \Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm
- * @group ecms
- * @group ecms_api
- * @group ecms_api_publisher
  */
+#[Group("ecms_api")]
+#[Group("ecms_api_publisher")]
+#[Group("ecms")]
+#[CoversClass(\Drupal\ecms_api_publisher\Form\EcmsApiBatchSendUpdatesForm::class)]
 class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
 
   /**
@@ -154,8 +157,8 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @param int $count
    *   The count of items in the queue.
    *
-   * @dataProvider dataProviderForTestGetDescription
    */
+  #[DataProvider('dataProviderForTestGetDescription')]
   public function testGetDescription(int $count): void {
     $this->setFormContainer();
     $this->queue->expects($this->once())
@@ -227,8 +230,8 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
   /**
    * Test the submitForm method.
    *
-   * @dataProvider dataProviderForTestSubmitForm
    */
+  #[DataProvider('dataProviderForTestSubmitForm')]
   public function testSubmitForm(int $queueCount = 3, bool $batchExpected = TRUE): void {
     $this->setFormContainer();
     $form = [];
@@ -340,8 +343,8 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @param array $operations
    *   The expected operations array.
    *
-   * @dataProvider dataProviderForFinishedMethod
    */
+  #[DataProvider('dataProviderForFinishedMethod')]
   public function testPostSyndicateContentFinished(bool $success, array $results, array $operations): void {
     $this->setStaticMethodContainer();
 
@@ -447,8 +450,8 @@ class EcmsApiBatchSendUpdateFormTest extends UnitTestCase {
    * @param bool $result
    *   Mock the result of the EcmsApiPublisher::syndicateEntity method.
    *
-   * @dataProvider dataProviderForTestPostSyndicateContent
    */
+  #[DataProvider('dataProviderForTestPostSyndicateContent')]
   public function testPostSyndicateContent(bool $result): void {
     $this->setStaticMethodContainer();
 

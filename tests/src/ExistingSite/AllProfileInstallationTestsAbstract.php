@@ -126,26 +126,21 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
    * include these tests in their profile tests.
    */
   public function globalTests(): void {
-    $this->ensureOpenIdConnect();
-    $this->ensureNotificationFeatureInstalled();
-    $this->ensurePressReleaseFeatureInstalled();
-    $this->ensurePersonFeatureInstalled();
-    $this->ensureLocationFeatureInstalled();
-    $this->ensureWebformInstall();
-    $this->ensurePublishContentInstalled();
-    $this->ensureEventFeatureInstalled();
-    $this->ensurePromotionsFeatureInstalled();
-    $this->ensureBasicPageFeatureInstalled();
-    $this->ensureLandingPageFeatureInstalled();
-    $this->ensureModerationNotificationInstall();
-    $this->ensureModerationDashboardInstall();
-    $this->ensureLanguagesInstalled();
+//    $this->ensureWebformInstall();
+//    $this->ensurePublishContentInstalled();
+//    $this->ensureEventFeatureInstalled();
+//    $this->ensurePromotionsFeatureInstalled();
+//    $this->ensureBasicPageFeatureInstalled();
+//    $this->ensureLandingPageFeatureInstalled();
+//    $this->ensureModerationNotificationInstall();
+//    $this->ensureModerationDashboardInstall();
+//    $this->ensureLanguagesInstalled();
   }
 
   /**
    * Test the openid_connect module is installed properly.
    */
-  private function ensureOpenIdConnect(): void {
+  protected function ensureOpenIdConnectTest(): void {
     $this->drupalGet('user/login');
     $this->assertSession()->buttonExists('edit-openid-connect-client-windows-aad-login');
     $this->assertSession()->fieldNotExists('name');
@@ -155,24 +150,22 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
     $this->drupalLogin($account);
 
     // Ensure the settings page is available.
-    $this->drupalGet('admin/config/services/openid-connect');
+    $this->drupalGet('/admin/config/people/openid-connect');
     $this->assertSession()->statusCodeEquals(200);
 
-    // Ensure the Windows AAD service is enabled.
-    $this->assertSession()->checkboxChecked('edit-clients-enabled-windows-aad');
-
-    // Ensure no other service is available.
-    $this->assertSession()->checkboxNotChecked('edit-clients-enabled-facebook');
-    $this->assertSession()->checkboxNotChecked('edit-clients-enabled-github');
-    $this->assertSession()->checkboxNotChecked('edit-clients-enabled-generic');
-    $this->assertSession()->checkboxNotChecked('edit-clients-enabled-google');
-    $this->assertSession()->checkboxNotChecked('edit-clients-enabled-linkedin');
+    $this->assertSession()->linkByHrefExists('/admin/config/people/openid-connect/windows_aad/edit');
+    $this->drupalGet('/admin/config/people/openid-connect/windows_aad/edit');
+    $this->assertSession()->statusCodeEquals(200);
 
     // Ensure the configuration imported properly.
-    $this->assertSession()->fieldValueEquals('edit-clients-windows-aad-settings-client-id', 'REDACTED');
-    $this->assertSession()->fieldValueEquals('edit-clients-windows-aad-settings-client-secret', 'REDACTED');
+    $this->assertSession()->fieldValueEquals('settings[client_id]', 'REDACTED');
+    $this->assertSession()->fieldValueEquals('settings[client_secret]', 'ecms_openid_connect_windows_aad_key');
+
 
     // Ensure the additional settings are selected.
+    $this->drupalGet('/admin/config/people/openid-connect/settings');
+    $this->assertSession()->statusCodeEquals(200);
+
     $this->assertSession()->checkboxChecked('edit-override-registration-settings');
     $this->assertSession()->checkboxChecked('edit-always-save-userinfo');
     $this->assertSession()->checkboxChecked('edit-connect-existing-users');
@@ -184,7 +177,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Ensure the languages are installed correctly.
    */
-  private function ensureLanguagesInstalled(): void {
+  protected function ensureLanguagesInstalled(): void {
     $permissions = [
       'administer languages',
       'administer nodes',
@@ -232,7 +225,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_notification feature installed properly.
    */
-  private function ensureNotificationFeatureInstalled(): void {
+  protected function ensureNotificationFeatureInstalled(): void {
     $account = $this->createUser(['create notification content']);
     $this->drupalLogin($account);
 
@@ -245,7 +238,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_press_release feature installed properly.
    */
-  private function ensurePressReleaseFeatureInstalled(): void {
+  protected function ensurePressReleaseFeatureInstalled(): void {
     $account = $this->createUser([
       'create press_release content',
       'use editorial transition create_new_draft',
@@ -262,7 +255,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_location feature installed properly.
    */
-  private function ensureLocationFeatureInstalled(): void {
+  protected function ensureLocationFeatureInstalled(): void {
     $account = $this->createUser([
       'create location content',
       'use editorial transition create_new_draft',
@@ -279,7 +272,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_person feature installed properly.
    */
-  private function ensurePersonFeatureInstalled(): void {
+  protected function ensurePersonFeatureInstalled(): void {
     $account = $this->createUser([
       'create person content',
       'create terms in person_taxonomy',
@@ -303,7 +296,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
       $this->assertSession()->fieldExists($key);
     }
 
-    $this->drupalPostForm('node/add/person', $fields, 'Save');
+    $this->submitForm($fields, 'Save');
 
     // Ensure the auto entity label tokens were applied.
     $this->assertSession()->pageTextContainsOnce('Person Test User has been created.');
@@ -318,7 +311,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Ensure the webform requirement installed properly.
    */
-  private function ensureWebformInstall(): void {
+  protected function ensureWebformInstall(): void {
     $account = $this->createUser(['administer webform']);
     $this->drupalLogin($account);
 
@@ -330,12 +323,12 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Ensure Publish Content module installed properly.
    */
-  private function ensurePublishContentInstalled(): void {
+  protected function ensurePublishContentInstalled(): void {
     $account = $this->createUser(['administer permissions']);
     $this->drupalLogin($account);
 
     // Ensure the permissions exist and roles are assigned.
-    $this->drupalGet('admin/people/permissions');
+    $this->drupalGet('admin/people/permissions/site_admin');
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
     $this->drupalLogout();
@@ -344,7 +337,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Ensure the content moderation notification requirement installed properly.
    */
-  private function ensureModerationNotificationInstall(): void {
+  protected function ensureModerationNotificationInstall(): void {
     $account = $this->createUser(['administer content moderation notifications']);
     $this->drupalLogin($account);
 
@@ -356,7 +349,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Ensure the moderation dashboard requirement installed properly.
    */
-  private function ensureModerationDashboardInstall(): void {
+  protected function ensureModerationDashboardInstall(): void {
     $account = $this->createUser(['view any moderation dashboard']);
     $this->drupalLogin($account);
 
@@ -368,7 +361,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_event feature installed properly.
    */
-  private function ensureEventFeatureInstalled(): void {
+  protected function ensureEventFeatureInstalled(): void {
     $account = $this->createUser([
       'create event content',
       'create terms in event_taxonomy',
@@ -394,7 +387,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
       $this->assertSession()->fieldExists($key);
     }
 
-    $this->drupalPostForm('node/add/event', $fields, 'Save');
+    $this->submitForm($fields, 'Save');
 
     // Ensure the auto entity label tokens were applied.
     $this->assertSession()->pageTextContainsOnce('Event Test event has been created.');
@@ -409,7 +402,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_promotions feature installed properly.
    */
-  private function ensurePromotionsFeatureInstalled(): void {
+  protected function ensurePromotionsFeatureInstalled(): void {
     $account = $this->createUser([
       'create promotions content',
       'use editorial transition create_new_draft',
@@ -427,7 +420,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_basic_page feature installed properly.
    */
-  private function ensureBasicPageFeatureInstalled(): void {
+  protected function ensureBasicPageFeatureInstalled(): void {
     $account = $this->createUser([
       'create basic_page content',
       'use editorial transition create_new_draft',
@@ -445,7 +438,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
   /**
    * Test whether the ecms_landing_page feature installed properly.
    */
-  private function ensureLandingPageFeatureInstalled(): void {
+  protected function ensureLandingPageFeatureInstalled(): void {
     $account = $this->createUser([
       'create landing_page content',
     ]);

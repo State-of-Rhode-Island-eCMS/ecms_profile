@@ -1,11 +1,11 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies: { }
 id: node_type_promotions
-entity_type_id: null
-entity_id: null
+entity_type_id: node_type
+entity_id: promotions
 action: access_denied
 allow_override: 0
 redirect: ''
 redirect_code: 301
-redirect_fallback_action: null
+redirect_fallback_action: access_denied

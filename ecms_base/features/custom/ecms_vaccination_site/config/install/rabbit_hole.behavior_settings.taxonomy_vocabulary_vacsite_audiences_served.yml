@@ -1,8 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  config:
-    - taxonomy.vocabulary.vacsite_audiences_served
+dependencies: { }
 id: taxonomy_vocabulary_vacsite_audiences_served
 entity_type_id: taxonomy_vocabulary
 entity_id: vacsite_audiences_served
