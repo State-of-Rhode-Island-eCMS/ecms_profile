@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ecms_api_recipient
+label: 'eCMS API Recipient'
+weight: 6
+is_admin: false
+permissions: {  }

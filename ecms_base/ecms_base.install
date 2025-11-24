@@ -243,3 +243,71 @@ function ecms_base_update_11203(array &$sandbox): void {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Apply the ecms_api_publisher recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11204(): void {
+  $recipes = [];
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  // Check if the ecms_api_publisher module is enabled.
+  if ($moduleHandler->moduleExists('ecms_api_publisher')) {
+    $userStorage = $entityTypeManager->getStorage('user');
+    $publisher = $userStorage->loadByProperties(['name' => 'ecms_api_publisher']);
+    if (!empty($publisher)) {
+      // Block the publisher account and rename the email address.
+      // This will allow the recipe to run successfully.
+      $account = reset($publisher);
+      $email = $account->getEmail();
+      $account->setUsername('ecms_api_publisher_legacy');
+      $account->setEmail(str_replace('@', '_legacy@', $email));
+      $account->block();
+      $account->save();
+    }
+
+    $recipes[] = 'ecms_api_publisher';
+  }
+
+  // Apply recipes for the modules that were uninstalled.
+  if (!empty($recipes)) {
+    ecms_base_apply_recipes($recipes);
+  }
+}
+
+/**
+ * Apply the ecms_api_recipient recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11205(): void {
+  $recipes = [];
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  // Check if the ecms_api_publisher module is enabled.
+  if ($moduleHandler->moduleExists('ecms_api_recipient')) {
+    $userStorage = $entityTypeManager->getStorage('user');
+    $recipient = $userStorage->loadByProperties(['name' => 'ecms_api_recipient']);
+    if (!empty($recipient)) {
+      // Block the recipient account and rename the email address.
+      // This will allow the recipe to run successfully.
+      $account = reset($recipient);
+      $email = $account->getEmail();
+      $account->setUsername('ecms_api_recipient_legacy');
+      $account->setEmail(str_replace('@', '_legacy@', $email));
+      $account->block();
+      $account->save();
+    }
+
+    $recipes[] = 'ecms_api_recipient';
+  }
+
+  // Apply recipes for the modules that were uninstalled.
+  if (!empty($recipes)) {
+    ecms_base_apply_recipes($recipes);
+  }
+}

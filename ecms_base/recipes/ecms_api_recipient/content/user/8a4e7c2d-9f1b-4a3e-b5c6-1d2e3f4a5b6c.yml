@@ -1,0 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 8a4e7c2d-9f1b-4a3e-b5c6-1d2e3f4a5b6c
+  default_langcode: en
+default:
+  name:
+    -
+      value: ecms_api_recipient
+  mail:
+    -
+      value: ecms_api_recipient@ri.gov
+  status:
+    -
+      value: 1
+  roles:
+    -
+      target_id: ecms_api_recipient

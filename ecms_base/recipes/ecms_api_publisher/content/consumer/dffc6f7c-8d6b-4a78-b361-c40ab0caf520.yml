@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: consumer
+  uuid: dffc6f7c-8d6b-4a78-b361-c40ab0caf520
+  default_langcode: en
+  depends:
+    7c3e2b1a-8d5f-4e6c-9a7b-1f2e3d4c5b6a: user
+default:
+  owner_id:
+    - target_id: 1
+  client_id:
+    - value: 'REDACTED'
+  label:
+    - value: 'eCMS Api Publisher'
+  third_party:
+    - value: true
+  is_default:
+    - value: false
+  grant_types:
+    - value: client_credentials
+  confidential:
+    - value: true
+  scopes:
+    - scope_id: ecms_api_publisher
+  access_token_expiration:
+    - value: 300
+  refresh_token_expiration:
+    - value: 1209600
+  user_id:
+    - entity: 7c3e2b1a-8d5f-4e6c-9a7b-1f2e3d4c5b6a
+  pkce:
+    - value: false
+  automatic_authorization:
+    - value: false
+  remember_approval:
+    - value: true

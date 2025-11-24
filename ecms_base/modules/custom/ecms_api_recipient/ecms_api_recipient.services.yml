@@ -1,8 +1,4 @@
 services:
-  ecms_api_recipient.install:
-    class: Drupal\ecms_api_recipient\EcmsApiRecipientInstall
-    arguments: ['@entity_type.manager', '@config.factory']
-
   ecms_api_recipient.uninstall:
     class: Drupal\ecms_api_recipient\EcmsApiRecipientUninstall
     arguments: ['@entity_type.manager']

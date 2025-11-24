@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: {}
+id: ecms_api_recipient
+name: ecms_api_recipient
+description: 'eCMS API Recipient'
+grant_types:
+  client_credentials:
+    status: true
+    description: ''
+umbrella: false
+parent: _none
+granularity_id: role
+granularity_configuration:
+  role: ecms_api_recipient
