@@ -1,0 +1,14 @@
+{#
+/**
+ * @file
+ * Template for the gtranslate block
+ * Available variables:
+ * - gtranslate_html: html of the gtranslate block.
+ */
+#}
+
+{% embed 'ecms:gtranslate' %}
+  {% block gtranslate_html %}
+    {{ gtranslate_html|raw }}
+  {% endblock %}
+{% endembed %}

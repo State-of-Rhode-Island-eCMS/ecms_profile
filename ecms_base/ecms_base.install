@@ -98,6 +98,7 @@ function ecms_base_install_tasks(): array {
  */
 function ecms_base_apply_default_recipes(): array {
   $recipesToApply = [
+    'ecms_gtranslate',
     'ecms_security',
     'ecms_webform',
     'ecms_acquia',
@@ -205,4 +206,40 @@ function ecms_base_update_11202() {
   $config->set('ui_localtask', 1);
   $config->set('ui_checkbox', 0);
   $config->save(TRUE);
+}
+
+/**
+ * Uninstall google_translator module and remove related configurations.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11203(array &$sandbox): void {
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'google_translator',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Remove the language switcher block if it exists.
+  $configToDelete = [
+    'block.block.ecms_ecmstranslatorgoogletranslator',
+    'block.block.languageswitcher',
+    'block.block.googletranslator',
+  ];
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  foreach ($configToDelete as $config) {
+    if ($active_storage->exists($config)) {
+      $active_storage->delete($config);
+    }
+  }
+
+  // Install new modules.
+  $recipes = [
+    'ecms_gtranslate',
+  ];
+
+  ecms_base_apply_recipes($recipes);
 }

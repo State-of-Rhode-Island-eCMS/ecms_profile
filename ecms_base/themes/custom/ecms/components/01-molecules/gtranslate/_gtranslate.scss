@@ -1,0 +1,21 @@
+.gtranslate_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+
+  a {
+    @extend .small-text;
+    font-family: var(--font-sans-vf);
+    font-weight: var(--st-font-wght);
+    line-height: 2.25;
+  }
+}
+
+.block-gtranslate-block {
+  .qh__language-menu {
+    &__list {
+      min-height: unset;
+    }
+  }
+}

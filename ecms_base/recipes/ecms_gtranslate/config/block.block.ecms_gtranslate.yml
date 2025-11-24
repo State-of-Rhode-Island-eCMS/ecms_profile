@@ -1,27 +1,29 @@
 langcode: en
-status: false
+status: true
 dependencies:
   module:
+    - gtranslate
     - language
   theme:
     - ecms
-id: languageswitcher
+id: ecms_gtranslate
 theme: ecms
 region: language_switcher
-weight: -2
+weight: 0
 provider: null
-plugin: 'language_block:language_interface'
+plugin: gtranslate_block
 settings:
-  id: 'language_block:language_interface'
-  label: 'Language switcher'
-  provider: language
+  id: gtranslate_block
+  label: GTranslate
   label_display: '0'
+  provider: gtranslate
 visibility:
   language:
     id: language
-    langcodes:
-      en: en
-      es: es
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      es: es
+      pt-pt: pt-pt
