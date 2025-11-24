@@ -32,7 +32,10 @@ class EcmsApiRecipientHooks {
   #[Hook('user_presave')]
   public function userPresave(UserInterface $account): void {
     // Add your user presave logic here.
-    if ($account->uuid() === '8a4e7c2d-9f1b-4a3e-b5c6-1d2e3f4a5b6c') {
+    if (
+      $account->uuid() === '8a4e7c2d-9f1b-4a3e-b5c6-1d2e3f4a5b6c' &&
+      $account->isNew()
+    ) {
       // UUID matches the ecms_api_recipient recipe.
       // Set the mail to the overridden configuration value.
       $account->set('mail', $this->configFactory
@@ -50,7 +53,10 @@ class EcmsApiRecipientHooks {
    */
   #[Hook('consumer_presave')]
   public function consumerPresave(ConsumerInterface $consumer): void {
-    if ($consumer->uuid() === '9b5e8d3e-0f2c-5b4f-c6d7-2e3f4a5b6c7d') {
+    if (
+      $consumer->uuid() === '9b5e8d3e-0f2c-5b4f-c6d7-2e3f4a5b6c7d' &&
+      $consumer->isNew()
+    ) {
       // UUID matches the ecms_api_recipient recipe.
       // Set the client id and secret. to the overridden configuration values.
       $consumer->set('client_id', $this->configFactory
