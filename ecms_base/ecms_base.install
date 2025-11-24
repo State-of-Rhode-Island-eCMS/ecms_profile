@@ -245,11 +245,31 @@ function ecms_base_update_11203(array &$sandbox): void {
 }
 
 /**
- * Apply the ecms_api_publisher recipe if the module is installed.
+ * Delete all consumer entities.
  *
  * Runs with 2.0.1.
  */
 function ecms_base_update_11204(): void {
+  try {
+    $entityTypeManager = \Drupal::entityTypeManager();
+    $storage = $entityTypeManager->getStorage('consumer');
+    $entities = $storage->loadMultiple();
+    if (!empty($entities)) {
+      $storage->delete($entities);
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('ecms_base')
+      ->error('Failed to delete consumer entities: @message', ['@message' => $e->getMessage()]);
+  }
+}
+
+/**
+ * Apply the ecms_api_publisher recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11205(): void {
   $recipes = [];
   $moduleHandler = \Drupal::moduleHandler();
   $entityTypeManager = \Drupal::entityTypeManager();
@@ -283,7 +303,7 @@ function ecms_base_update_11204(): void {
  *
  * Runs with 2.0.1.
  */
-function ecms_base_update_11205(): void {
+function ecms_base_update_11206(): void {
   $recipes = [];
   $moduleHandler = \Drupal::moduleHandler();
   $entityTypeManager = \Drupal::entityTypeManager();
