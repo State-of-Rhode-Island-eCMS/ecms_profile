@@ -210,8 +210,10 @@ function ecms_base_update_11202() {
 
 /**
  * Uninstall google_translator module and remove related configurations.
+ *
+ * Runs with 2.0.1.
  */
-function ecms_base_update_10217(array &$sandbox): void {
+function ecms_base_update_11203(array &$sandbox): void {
   // Disable existing modules.
   $modules_to_uninstall = [
     'google_translator',
