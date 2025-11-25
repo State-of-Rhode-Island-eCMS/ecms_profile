@@ -17,6 +17,7 @@ use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
 
 /**
  * Implements hook_install().
@@ -289,6 +290,13 @@ function ecms_base_update_11205(): void {
       $account->save();
     }
 
+    // Delete the ecms_api_publisher role if it exists.
+    $role_storage = $entityTypeManager->getStorage('user_role');
+    $role = $role_storage->load('ecms_api_publisher');
+    if ($role instanceof RoleInterface) {
+      $role->delete();
+    }
+
     $recipes[] = 'ecms_api_publisher';
   }
 
@@ -321,6 +329,13 @@ function ecms_base_update_11206(): void {
       $account->setEmail(str_replace('@', '_legacy@', $email));
       $account->block();
       $account->save();
+    }
+
+    // Delete the ecms_api_publisher role if it exists.
+    $role_storage = $entityTypeManager->getStorage('user_role');
+    $role = $role_storage->load('ecms_api_recipient');
+    if ($role instanceof RoleInterface) {
+      $role->delete();
     }
 
     $recipes[] = 'ecms_api_recipient';
