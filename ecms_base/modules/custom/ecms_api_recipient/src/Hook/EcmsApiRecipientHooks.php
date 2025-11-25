@@ -64,10 +64,11 @@ class EcmsApiRecipientHooks {
         ->get('oauth_client_id')
       );
 
-      $consumer->set('secret', $this->configFactory
-        ->get('ecms_api_recipient.settings')
-        ->get('oauth_client_secret')
-      );
+      $consumer->set('secret', $this->password->hash(
+        $this->configFactory
+          ->get('ecms_api_recipient.settings')
+          ->get('oauth_client_secret')
+      ));
     }
   }
 
