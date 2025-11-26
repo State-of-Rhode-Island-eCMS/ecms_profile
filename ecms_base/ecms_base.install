@@ -246,11 +246,40 @@ function ecms_base_update_11203(array &$sandbox): void {
 }
 
 /**
- * Delete all consumer entities.
+ * Remove missing jQuery UI modules from core.extension configuration.
  *
  * Runs with 2.0.1.
  */
 function ecms_base_update_11204(): void {
+  $config = \Drupal::configFactory()->getEditable('core.extension');
+  $modules = $config->get('module');
+
+  $missing_modules = [
+    'jquery_ui_datepicker',
+    'jquery_ui_slider',
+    'jquery_ui_touch_punch',
+  ];
+
+  $changed = FALSE;
+  foreach ($missing_modules as $module) {
+    if (isset($modules[$module])) {
+      unset($modules[$module]);
+      $changed = TRUE;
+    }
+  }
+
+  if ($changed) {
+    $config->set('module', $modules);
+    $config->save(TRUE);
+  }
+}
+
+/**
+ * Delete all consumer entities.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11205(): void {
   try {
     $entityTypeManager = \Drupal::entityTypeManager();
     $storage = $entityTypeManager->getStorage('consumer');
@@ -270,7 +299,7 @@ function ecms_base_update_11204(): void {
  *
  * Runs with 2.0.1.
  */
-function ecms_base_update_11205(): void {
+function ecms_base_update_11206(): void {
   $recipes = [];
   $moduleHandler = \Drupal::moduleHandler();
   $entityTypeManager = \Drupal::entityTypeManager();
@@ -311,7 +340,7 @@ function ecms_base_update_11205(): void {
  *
  * Runs with 2.0.1.
  */
-function ecms_base_update_11206(): void {
+function ecms_base_update_11207(): void {
   $recipes = [];
   $moduleHandler = \Drupal::moduleHandler();
   $entityTypeManager = \Drupal::entityTypeManager();
