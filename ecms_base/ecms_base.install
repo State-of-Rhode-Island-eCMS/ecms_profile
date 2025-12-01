@@ -16,6 +16,7 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\shortcut\Entity\Shortcut;
+use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
 
@@ -326,6 +327,13 @@ function ecms_base_update_11206(): void {
       $role->delete();
     }
 
+    // Delete the scope if it exists.
+    $scope_storage = $entityTypeManager->getStorage('oauth2_scope');
+    $scope = $scope_storage->load('ecms_api_publisher');
+    if ($scope instanceof Oauth2ScopeEntityInterface) {
+      $scope->delete();
+    }
+
     $recipes[] = 'ecms_api_publisher';
   }
 
@@ -365,6 +373,13 @@ function ecms_base_update_11207(): void {
     $role = $role_storage->load('ecms_api_recipient');
     if ($role instanceof RoleInterface) {
       $role->delete();
+    }
+
+    // Delete the scope if it exists.
+    $scope_storage = $entityTypeManager->getStorage('oauth2_scope');
+    $scope = $scope_storage->load('ecms_api_recipient');
+    if ($scope instanceof Oauth2ScopeEntityInterface) {
+      $scope->delete();
     }
 
     $recipes[] = 'ecms_api_recipient';
