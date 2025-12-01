@@ -90,6 +90,7 @@ config:
         - 'delete terms in %bundle'
         - 'translate %bundle taxonomy_term'
       grantPermissions:
+        - 'access content'
         - 'access contextual links'
         - 'access taxonomy overview'
         - 'bypass paragraphs type content access'

@@ -118,6 +118,7 @@ config:
         - 'delete terms in %bundle'
         - 'translate %bundle taxonomy_term'
       grantPermissions:
+        - 'access content'
         - 'add ecms api site entities'
         - 'bypass paragraphs type content access'
         - 'create content translations'
