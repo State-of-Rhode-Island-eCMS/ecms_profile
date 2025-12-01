@@ -77,6 +77,9 @@ input:
 config:
   # Don't enforce strict config checking since we're creating entities dynamically
   strict: false
+  import:
+    ecms_api_publisher:
+      - user.role.ecms_api_publisher
   actions:
     ecms_api_publisher.settings:
       simpleConfigUpdate:
