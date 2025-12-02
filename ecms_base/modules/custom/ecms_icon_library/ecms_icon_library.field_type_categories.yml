@@ -1,0 +1,4 @@
+Icons:
+  label: 'Icons'
+  description: 'Field to store icon references.'
+  weight: -20
