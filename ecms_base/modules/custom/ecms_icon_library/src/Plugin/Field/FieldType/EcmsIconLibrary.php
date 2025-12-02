@@ -16,7 +16,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *   id = "ecms_icon_library",
  *   label = @Translation("eCMS Icon Library Icon"),
  *   module = "ecms_icon_libary",
- *   category = "Icons",
+ *   category = "icons",
  *   description = @Translation("A eCMS Icon Library icon"),
  *   default_widget = "ecms_icon_library_widget",
  *   default_formatter = "ecms_icon_library_formatter"
