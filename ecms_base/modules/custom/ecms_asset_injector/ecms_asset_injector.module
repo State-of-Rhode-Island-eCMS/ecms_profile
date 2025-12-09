@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for eCMS Asset Injector module.
+ *
+ * Note: Hook implementations have been moved to a class-based approach
+ * using PHP Attributes for better reliability and modern code practices.
+ *
+ * @see \Drupal\ecms_asset_injector\Hook\EcmsAssetInjectorHooks
+ */
+
+declare(strict_types=1);

@@ -1,0 +1,13 @@
+# Config schema for eCMS Asset Injector module.
+#
+# Extends the asset_injector.css.* schema to add the processedCode field
+# which stores the CSS after dark mode processing has been applied.
+
+asset_injector.css.*:
+  type: config_entity
+  label: "CSS Injector config"
+  mapping:
+    processedCode:
+      type: text
+      label: "Processed CSS with dark mode handling"
+      description: "Automatically generated from 'code' field with color-related rules wrapped in html:not(.dark) selectors"

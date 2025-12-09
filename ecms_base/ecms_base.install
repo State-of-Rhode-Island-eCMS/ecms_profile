@@ -259,6 +259,7 @@ function ecms_base_update_11204(): void {
     'jquery_ui_datepicker',
     'jquery_ui_slider',
     'jquery_ui_touch_punch',
+    'menu_force',
   ];
 
   $changed = FALSE;
@@ -272,6 +273,17 @@ function ecms_base_update_11204(): void {
   if ($changed) {
     $config->set('module', $modules);
     $config->save(TRUE);
+  }
+
+  // Remove schema entries from key/value storage.
+  $key_value = \Drupal::keyValue('system.schema');
+  foreach ($missing_modules as $module) {
+    if ($key_value->has($module)) {
+      $key_value->delete($module);
+      \Drupal::logger('ecms_base')->info('Removed schema entry for missing module: @module', [
+        '@module' => $module,
+      ]);
+    }
   }
 }
 
@@ -388,5 +400,35 @@ function ecms_base_update_11207(): void {
   // Apply recipes for the modules that were uninstalled.
   if (!empty($recipes)) {
     ecms_base_apply_recipes($recipes);
+  }
+}
+
+/**
+ * Install the ecms_asset_injector module for dark mode CSS handling.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11208(): void {
+  $modules_to_install = [
+    'ecms_asset_injector',
+  ];
+
+  try {
+    // Install the module.
+    \Drupal::service('module_installer')->install($modules_to_install);
+
+    \Drupal::logger('ecms_base')->info('Installed ecms_asset_injector module for dark mode CSS processing.');
+  }
+  catch (\Exception $e) {
+    // Log the error occured, which is expected because of the entity alter.
+    \Drupal::logger('ecms_base')->error('Failed to install ecms_asset_injector: @message', [
+      '@message' => $e->getMessage(),
+    ]);
+  }
+  finally {
+    // Clear caches to ensure hook_entity_type_alter is properly registered.
+    // This prevents "Call to undefined function" errors when the entity
+    // type manager tries to invoke the hook during entity definition rebuild.
+    drupal_flush_all_caches();
   }
 }
