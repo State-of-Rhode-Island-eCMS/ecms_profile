@@ -16,7 +16,9 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\shortcut\Entity\Shortcut;
+use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
 
 /**
  * Implements hook_install().
@@ -98,6 +100,7 @@ function ecms_base_install_tasks(): array {
  */
 function ecms_base_apply_default_recipes(): array {
   $recipesToApply = [
+    'ecms_gtranslate',
     'ecms_security',
     'ecms_webform',
     'ecms_acquia',
@@ -205,4 +208,185 @@ function ecms_base_update_11202() {
   $config->set('ui_localtask', 1);
   $config->set('ui_checkbox', 0);
   $config->save(TRUE);
+}
+
+/**
+ * Uninstall google_translator module and remove related configurations.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11203(array &$sandbox): void {
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'google_translator',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Remove the language switcher block if it exists.
+  $configToDelete = [
+    'block.block.ecms_ecmstranslatorgoogletranslator',
+    'block.block.languageswitcher',
+    'block.block.googletranslator',
+  ];
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  foreach ($configToDelete as $config) {
+    if ($active_storage->exists($config)) {
+      $active_storage->delete($config);
+    }
+  }
+
+  // Install new modules.
+  $recipes = [
+    'ecms_gtranslate',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
+
+/**
+ * Remove missing jQuery UI modules from core.extension configuration.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11204(): void {
+  $config = \Drupal::configFactory()->getEditable('core.extension');
+  $modules = $config->get('module');
+
+  $missing_modules = [
+    'jquery_ui_datepicker',
+    'jquery_ui_slider',
+    'jquery_ui_touch_punch',
+  ];
+
+  $changed = FALSE;
+  foreach ($missing_modules as $module) {
+    if (isset($modules[$module])) {
+      unset($modules[$module]);
+      $changed = TRUE;
+    }
+  }
+
+  if ($changed) {
+    $config->set('module', $modules);
+    $config->save(TRUE);
+  }
+}
+
+/**
+ * Delete all consumer entities.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11205(): void {
+  try {
+    $entityTypeManager = \Drupal::entityTypeManager();
+    $storage = $entityTypeManager->getStorage('consumer');
+    $entities = $storage->loadMultiple();
+    if (!empty($entities)) {
+      $storage->delete($entities);
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('ecms_base')
+      ->error('Failed to delete consumer entities: @message', ['@message' => $e->getMessage()]);
+  }
+}
+
+/**
+ * Apply the ecms_api_publisher recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11206(): void {
+  $recipes = [];
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  // Check if the ecms_api_publisher module is enabled.
+  if ($moduleHandler->moduleExists('ecms_api_publisher')) {
+    $userStorage = $entityTypeManager->getStorage('user');
+    $publisher = $userStorage->loadByProperties(['name' => 'ecms_api_publisher']);
+    if (!empty($publisher)) {
+      // Block the publisher account and rename the email address.
+      // This will allow the recipe to run successfully.
+      $account = reset($publisher);
+      $email = $account->getEmail();
+      $account->setUsername('ecms_api_publisher_legacy');
+      $account->setEmail(str_replace('@', '_legacy@', $email));
+      $account->block();
+      $account->save();
+    }
+
+    // Delete the ecms_api_publisher role if it exists.
+    $role_storage = $entityTypeManager->getStorage('user_role');
+    $role = $role_storage->load('ecms_api_publisher');
+    if ($role instanceof RoleInterface) {
+      $role->delete();
+    }
+
+    // Delete the scope if it exists.
+    $scope_storage = $entityTypeManager->getStorage('oauth2_scope');
+    $scope = $scope_storage->load('ecms_api_publisher');
+    if ($scope instanceof Oauth2ScopeEntityInterface) {
+      $scope->delete();
+    }
+
+    $recipes[] = 'ecms_api_publisher';
+  }
+
+  // Apply recipes for the modules that were uninstalled.
+  if (!empty($recipes)) {
+    ecms_base_apply_recipes($recipes);
+  }
+}
+
+/**
+ * Apply the ecms_api_recipient recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11207(): void {
+  $recipes = [];
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  // Check if the ecms_api_publisher module is enabled.
+  if ($moduleHandler->moduleExists('ecms_api_recipient')) {
+    $userStorage = $entityTypeManager->getStorage('user');
+    $recipient = $userStorage->loadByProperties(['name' => 'ecms_api_recipient']);
+    if (!empty($recipient)) {
+      // Block the recipient account and rename the email address.
+      // This will allow the recipe to run successfully.
+      $account = reset($recipient);
+      $email = $account->getEmail();
+      $account->setUsername('ecms_api_recipient_legacy');
+      $account->setEmail(str_replace('@', '_legacy@', $email));
+      $account->block();
+      $account->save();
+    }
+
+    // Delete the ecms_api_publisher role if it exists.
+    $role_storage = $entityTypeManager->getStorage('user_role');
+    $role = $role_storage->load('ecms_api_recipient');
+    if ($role instanceof RoleInterface) {
+      $role->delete();
+    }
+
+    // Delete the scope if it exists.
+    $scope_storage = $entityTypeManager->getStorage('oauth2_scope');
+    $scope = $scope_storage->load('ecms_api_recipient');
+    if ($scope instanceof Oauth2ScopeEntityInterface) {
+      $scope->delete();
+    }
+
+    $recipes[] = 'ecms_api_recipient';
+  }
+
+  // Apply recipes for the modules that were uninstalled.
+  if (!empty($recipes)) {
+    ecms_base_apply_recipes($recipes);
+  }
 }

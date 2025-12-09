@@ -1,0 +1,180 @@
+name: 'eCMS API Recipient'
+description: 'Provides configuration for a site to receive notifications from a hub site within the eCMS network.'
+type: 'API'
+install:
+  - consumers
+  - ecms_api_recipient
+input:
+  clientId:
+    data_type: string
+    description: 'The OAuth client ID for the recipient'
+    constraints:
+      NotBlank: [ ]
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the OAuth client ID for the recipient'
+    form:
+      '#type': text
+      '#title': 'Recipient OAuth Client ID'
+    default:
+      source: value
+      value: 'REDACTED'
+  clientSecret:
+    data_type: string
+    description: 'The OAuth client Secret for the recipient'
+    constraints:
+      NotBlank: [ ]
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the OAuth client secret for the recipient'
+    form:
+      '#type': text
+      '#title': 'Recipient OAuth Client Secret'
+    default:
+      source: value
+      value: 'REDACTED'
+  recipientMail:
+    data_type: email
+    description: 'The email address for the API recipient user'
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the email address for the recipient'
+    form:
+      '#type': text
+      '#title': 'Recipient email address'
+    default:
+      source: value
+      value: 'test@example.com'
+config:
+  # Don't enforce strict config checking since we're creating entities dynamically
+  strict: false
+  import:
+    ecms_api_recipient:
+      - user.role.ecms_api_recipient
+  actions:
+    ecms_api_recipient.settings:
+      simpleConfigUpdate:
+        api_recipient_mail: ${recipientMail}
+        oauth_client_id: ${clientId}
+        oauth_client_secret: ${clientSecret}
+    # Grant permissions to the ecms_api_recipient user role
+    user.role.ecms_api_recipient:
+      grantPermissionsForEachNodeType:
+        - 'create %bundle content'
+        - 'edit any %bundle content'
+        - 'edit own %bundle content'
+        - 'delete any %bundle content'
+        - 'delete own %bundle content'
+        - 'delete %bundle revisions'
+        - 'publish any node type %bundle'
+        - 'publish editable node type %bundle'
+        - 'publish own node type %bundle'
+        - 'revert %bundle revisions'
+        - 'translate %bundle node'
+        - 'unpublish editable node type %bundle'
+        - 'unpublish own node type %bundle'
+        - 'view %bundle revisions'
+      grantPermissionsForEachMediaType:
+        - 'create %bundle media'
+        - 'edit any %bundle media'
+        - 'edit own %bundle media'
+        - 'delete any %bundle media'
+        - 'delete own %bundle media'
+        - 'translate %bundle media'
+      grantPermissionsForEachTaxonomyVocabulary:
+        - 'create terms in %bundle'
+        - 'edit terms in %bundle'
+        - 'delete terms in %bundle'
+        - 'translate %bundle taxonomy_term'
+      grantPermissions:
+        - 'access content'
+        - 'access contextual links'
+        - 'access taxonomy overview'
+        - 'bypass paragraphs type content access'
+        - 'configure editable landing_page node layout overrides'
+        - 'create and edit custom blocks'
+        - 'create content translations'
+        - 'create paragraph content accordion_builder'
+        - 'create paragraph content card'
+        - 'create paragraph content column_container'
+        - 'create paragraph content embed'
+        - 'create paragraph content file_list'
+        - 'create paragraph content file_list_by_tag'
+        - 'create paragraph content formatted_text'
+        - 'create paragraph content gallery'
+        - 'create paragraph content gallery_item'
+        - 'create paragraph content icon_button'
+        - 'create paragraph content icon_card'
+        - 'create paragraph content location_list'
+        - 'create paragraph content media_item'
+        - 'create paragraph content numbered_step_item'
+        - 'create paragraph content person_list'
+        - 'create paragraph content promotion_reference'
+        - 'create paragraph content publication_list'
+        - 'create paragraph content text_card'
+        - 'create url aliases'
+        - 'delete content translations'
+        - 'delete media'
+        - 'delete paragraph content accordion_builder'
+        - 'delete paragraph content card'
+        - 'delete paragraph content column_container'
+        - 'delete paragraph content embed'
+        - 'delete paragraph content file_list'
+        - 'delete paragraph content file_list_by_tag'
+        - 'delete paragraph content formatted_text'
+        - 'delete paragraph content gallery'
+        - 'delete paragraph content gallery_item'
+        - 'delete paragraph content icon_button'
+        - 'delete paragraph content icon_card'
+        - 'delete paragraph content location_list'
+        - 'delete paragraph content media_item'
+        - 'delete paragraph content numbered_step_item'
+        - 'delete paragraph content person_list'
+        - 'delete paragraph content promotion_reference'
+        - 'delete paragraph content publication_list'
+        - 'delete paragraph content text_card'
+        - 'publish any content'
+        - 'revert all revisions'
+        - 'unpublish any content'
+        - 'update any media'
+        - 'update content translations'
+        - 'update media'
+        - 'update paragraph content accordion_builder'
+        - 'update paragraph content card'
+        - 'update paragraph content column_container'
+        - 'update paragraph content embed'
+        - 'update paragraph content file_list'
+        - 'update paragraph content file_list_by_tag'
+        - 'update paragraph content formatted_text'
+        - 'update paragraph content gallery'
+        - 'update paragraph content gallery_item'
+        - 'update paragraph content icon_button'
+        - 'update paragraph content icon_card'
+        - 'update paragraph content location_list'
+        - 'update paragraph content media_item'
+        - 'update paragraph content numbered_step_item'
+        - 'update paragraph content person_list'
+        - 'update paragraph content promotion_reference'
+        - 'update paragraph content publication_list'
+        - 'update paragraph content text_card'
+        - 'use editorial transition archive'
+        - 'use editorial transition archived_published'
+        - 'use editorial transition create_new_draft'
+        - 'use editorial transition publish'
+        - 'use editorial transition review'
+        - 'use text format basic_html'
+        - 'use text format embed'
+        - 'use text format full_html'
+        - 'use text format minimal'
+        - 'use text format paragraph_text'
+        - 'use text format plain_text'
+        - 'use text format restricted_html'
+        - 'view all media revisions'
+        - 'view all revisions'
+        - 'view any unpublished content'
+      simpleConfigUpdate:
+        label: 'eCMS API Recipient'
+        weight: 6

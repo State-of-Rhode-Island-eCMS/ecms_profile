@@ -33,6 +33,10 @@
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
             },
+            "drupal/gtranslate": {
+                "3375925 - TypeError: array_values(): Argument #1 ($array) must be of type array": "https://www.drupal.org/files/issues/2023-08-31/gtranslate-3375925-update-default-config-11.diff",
+                "3555400: Add schema for gtranslate.settings ": "https://www.drupal.org/files/issues/2025-10-31/3555400-add-schema-gtranslate-6.patch"
+            },
             "drupal/iek": {
                 "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
                 "3430975 - #9 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/interdiff-last-bot.6938818.txt"
@@ -126,6 +130,7 @@
         "drupal/geolocation": "^3.2",
         "drupal/google_tag": "^2.0",
         "drupal/google_translator": "^2.1",
+        "drupal/gtranslate": "^3.0",
         "drupal/hal": "^2.0",
         "drupal/honeypot": "^2.2",
         "drupal/http_cache_control": "^2.0",

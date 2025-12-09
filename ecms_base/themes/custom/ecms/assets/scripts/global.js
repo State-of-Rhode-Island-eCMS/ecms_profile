@@ -47,6 +47,12 @@ function allMenuCloser() {
   if (qh_userlanguage_btn !== null) {
     qh_userlanguage_btn.setAttribute('aria-expanded', 'false');
   }
+
+  // Close gtranslate nav
+  var qh_gtranslate_btn = document.getElementById('js__gtranslate__toggle');
+  if (qh_gtranslate_btn !== null) {
+    qh_gtranslate_btn.setAttribute('aria-expanded', 'false');
+  }
 }
 
 // Add screen overlay
