@@ -390,3 +390,18 @@ function ecms_base_update_11207(): void {
     ecms_base_apply_recipes($recipes);
   }
 }
+
+/**
+ * Install the ecms_asset_injector module for dark mode CSS handling.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11208(): void {
+  $modules_to_install = [
+    'ecms_asset_injector',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+
+  \Drupal::logger('ecms_base')->info('Installed ecms_asset_injector module for dark mode CSS processing.');
+}
