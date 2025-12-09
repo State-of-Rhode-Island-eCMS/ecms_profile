@@ -128,10 +128,7 @@ class CssColorProcessor {
 
       // Create a new declaration block with the same selectors.
       $newBlock = new DeclarationBlock();
-      foreach ($block->getSelectors() as $selector) {
-        $newBlock->setSelectors($block->getSelectors());
-        break;
-      }
+      $newBlock->setSelectors($block->getSelectors());
 
       // Add the color rules to the new block.
       foreach ($colorRules as $rule) {
@@ -152,12 +149,7 @@ class CssColorProcessor {
    *   TRUE if the property affects colors.
    */
   protected function isColorProperty(string $property): bool {
-    foreach (self::COLOR_PROPERTIES as $colorProperty) {
-      if ($property === $colorProperty) {
-        return TRUE;
-      }
-    }
-    return FALSE;
+    return in_array($property, self::COLOR_PROPERTIES, TRUE);
   }
 
   /**
