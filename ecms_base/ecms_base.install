@@ -274,6 +274,17 @@ function ecms_base_update_11204(): void {
     $config->set('module', $modules);
     $config->save(TRUE);
   }
+
+  // Remove schema entries from key/value storage.
+  $key_value = \Drupal::keyValue('system.schema');
+  foreach ($missing_modules as $module) {
+    if ($key_value->has($module)) {
+      $key_value->delete($module);
+      \Drupal::logger('ecms_base')->info('Removed schema entry for missing module: @module', [
+        '@module' => $module,
+      ]);
+    }
+  }
 }
 
 /**
