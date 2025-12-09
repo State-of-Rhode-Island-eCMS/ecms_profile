@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the eCMS Asset Injector module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ *
+ * Process all existing CSS Injector assets to generate processedCode.
+ * This ensures existing assets get the dark mode handling without manual resave.
+ */
+function ecms_asset_injector_install(): void {
+  // Load all CSS Injector entities.
+  $storage = \Drupal::entityTypeManager()->getStorage('asset_injector_css');
+  $css_assets = $storage->loadMultiple();
+
+  if (empty($css_assets)) {
+    \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed. No existing CSS assets to process.'));
+    return;
+  }
+
+  $processed_count = 0;
+  $failed_count = 0;
+
+  /** @var \Drupal\asset_injector\Entity\AssetInjectorCss $asset */
+  foreach ($css_assets as $asset) {
+    try {
+      // Resave the entity to trigger preSave() and generate processedCode.
+      $asset->save();
+      $processed_count++;
+      \Drupal::logger('ecms_asset_injector')->info('Processed CSS asset: @label (@id)', [
+        '@label' => $asset->label(),
+        '@id' => $asset->id(),
+      ]);
+    }
+    catch (\Exception $e) {
+      $failed_count++;
+      \Drupal::logger('ecms_asset_injector')->error('Failed to process CSS asset: @label (@id). Error: @error', [
+        '@label' => $asset->label(),
+        '@id' => $asset->id(),
+        '@error' => $e->getMessage(),
+      ]);
+    }
+  }
+
+  // Display summary message.
+  if ($processed_count > 0) {
+    \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed and processed @count CSS asset(s) with dark mode handling.', [
+      '@count' => $processed_count,
+    ]));
+  }
+
+  if ($failed_count > 0) {
+    \Drupal::messenger()->addWarning(t('Failed to process @count CSS asset(s). Check logs for details.', [
+      '@count' => $failed_count,
+    ]));
+  }
+}
