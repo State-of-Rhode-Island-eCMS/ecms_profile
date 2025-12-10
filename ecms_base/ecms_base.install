@@ -404,11 +404,24 @@ function ecms_base_update_11207(): void {
 }
 
 /**
- * Install the ecms_asset_injector module for dark mode CSS handling.
+ * Install the asset_injector module.
  *
  * Runs with 2.0.1.
  */
 function ecms_base_update_11208(): void {
+  $modules_to_install = [
+    'asset_injector',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Install the ecms_asset_injector module for dark mode CSS handling.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11209(): void {
   $modules_to_install = [
     'ecms_asset_injector',
   ];
@@ -421,7 +434,7 @@ function ecms_base_update_11208(): void {
  *
  * Runs with 2.0.1.
  */
-function ecms_base_update_11209(array &$sandbox): void {
+function ecms_base_update_11210(array &$sandbox): void {
   // Load all CSS Injector entities storage.
   $storage = \Drupal::entityTypeManager()->getStorage('asset_injector_css');
 
