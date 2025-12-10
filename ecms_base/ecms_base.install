@@ -421,63 +421,63 @@ function ecms_base_update_11208(): void {
  * Runs with 2.0.1.
  */
 function ecms_base_update_11209(array &$sandbox): void {
-      // Load all CSS Injector entities storage.
-      $storage = \Drupal::entityTypeManager()->getStorage('asset_injector_css');
+  // Load all CSS Injector entities storage.
+  $storage = \Drupal::entityTypeManager()->getStorage('asset_injector_css');
 
-      if (!isset($sandbox['total'])) {
-        $ids = $storage->getQuery()->accessCheck(FALSE)->execute();
-        $sandbox['total'] = count($ids);
-        $sandbox['ids'] = array_values($ids);
-        $sandbox['current'] = 0;
-        $sandbox['processed_count'] = 0;
-        $sandbox['failed_count'] = 0;
+  if (!isset($sandbox['total'])) {
+    $ids = $storage->getQuery()->accessCheck(FALSE)->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['ids'] = array_values($ids);
+    $sandbox['current'] = 0;
+    $sandbox['processed_count'] = 0;
+    $sandbox['failed_count'] = 0;
 
-        if (empty($sandbox['ids'])) {
-          $sandbox['#finished'] = 1;
-          \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed. No existing CSS assets to process.'));
-          return;
-        }
-      }
-
-      $limit = 10;
-      $ids_to_process = array_slice($sandbox['ids'], $sandbox['current'], $limit);
-      $assets = $storage->loadMultiple($ids_to_process);
-
-      foreach ($assets as $asset) {
-        try {
-          // Resave the entity to trigger preSave() and generate processedCode.
-          $asset->save();
-          $sandbox['processed_count']++;
-          \Drupal::logger('ecms_asset_injector')->info('Processed CSS asset: @label (@id)', [
-            '@label' => $asset->label(),
-            '@id' => $asset->id(),
-          ]);
-        }
-        catch (\Exception $e) {
-          $sandbox['failed_count']++;
-          \Drupal::logger('ecms_asset_injector')->error('Failed to process CSS asset: @label (@id). Error: @error', [
-            '@label' => $asset->label(),
-            '@id' => $asset->id(),
-            '@error' => $e->getMessage(),
-          ]);
-        }
-      }
-
-      $sandbox['current'] += count($ids_to_process);
-      $sandbox['#finished'] = empty($sandbox['total']) ? 1 : ($sandbox['current'] / $sandbox['total']);
-
-      // Display a summary message.
-      if ($sandbox['#finished'] >= 1) {
-        if ($sandbox['processed_count'] > 0) {
-          \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed and processed @count CSS asset(s) with dark mode handling.', [
-            '@count' => $sandbox['processed_count'],
-          ]));
-        }
-
-        if ($sandbox['failed_count'] > 0) {
-          \Drupal::messenger()->addWarning(t('Failed to process @count CSS asset(s). Check logs for details.', [
-            '@count' => $sandbox['failed_count'],
-          ]));
-        }
-      }
+    if (empty($sandbox['ids'])) {
+      $sandbox['#finished'] = 1;
+      \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed. No existing CSS assets to process.'));
+      return;
     }
+  }
+
+  $limit = 10;
+  $ids_to_process = array_slice($sandbox['ids'], $sandbox['current'], $limit);
+  $assets = $storage->loadMultiple($ids_to_process);
+
+  foreach ($assets as $asset) {
+    try {
+      // Resave the entity to trigger preSave() and generate processedCode.
+      $asset->save();
+      $sandbox['processed_count']++;
+      \Drupal::logger('ecms_asset_injector')->info('Processed CSS asset: @label (@id)', [
+        '@label' => $asset->label(),
+        '@id' => $asset->id(),
+      ]);
+    }
+    catch (\Exception $e) {
+      $sandbox['failed_count']++;
+      \Drupal::logger('ecms_asset_injector')->error('Failed to process CSS asset: @label (@id). Error: @error', [
+        '@label' => $asset->label(),
+        '@id' => $asset->id(),
+        '@error' => $e->getMessage(),
+      ]);
+    }
+  }
+
+  $sandbox['current'] += count($ids_to_process);
+  $sandbox['#finished'] = empty($sandbox['total']) ? 1 : ($sandbox['current'] / $sandbox['total']);
+
+  // Display a summary message.
+  if ($sandbox['#finished'] >= 1) {
+    if ($sandbox['processed_count'] > 0) {
+      \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed and processed @count CSS asset(s) with dark mode handling.', [
+        '@count' => $sandbox['processed_count'],
+      ]));
+    }
+
+    if ($sandbox['failed_count'] > 0) {
+      \Drupal::messenger()->addWarning(t('Failed to process @count CSS asset(s). Check logs for details.', [
+        '@count' => $sandbox['failed_count'],
+      ]));
+    }
+  }
+}
