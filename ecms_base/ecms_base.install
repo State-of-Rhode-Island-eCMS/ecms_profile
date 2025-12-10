@@ -470,15 +470,17 @@ function ecms_base_update_11209(array &$sandbox): void {
   // Display a summary message.
   if ($sandbox['#finished'] >= 1) {
     if ($sandbox['processed_count'] > 0) {
-      \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed and processed @count CSS asset(s) with dark mode handling.', [
-        '@count' => $sandbox['processed_count'],
-      ]));
+      \Drupal::logger('ecms_asset_injector')
+        ->info('eCMS Asset Injector installed and processed @count CSS asset(s) with dark mode handling.', [
+          '@count' => $sandbox['processed_count'],
+        ]);
     }
 
     if ($sandbox['failed_count'] > 0) {
-      \Drupal::messenger()->addWarning(t('Failed to process @count CSS asset(s). Check logs for details.', [
-        '@count' => $sandbox['failed_count'],
-      ]));
+      \Drupal::logger('ecms_asset_injector')
+        ->warning('Failed to process @count CSS asset(s). Check logs for details.', [
+          '@count' => $sandbox['failed_count'],
+        ]);
     }
   }
 }
