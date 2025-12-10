@@ -435,7 +435,7 @@ function ecms_base_update_11209(array &$sandbox): void {
 
     if (empty($sandbox['ids'])) {
       $sandbox['#finished'] = 1;
-      \Drupal::messenger()->addStatus(t('eCMS Asset Injector installed. No existing CSS assets to process.'));
+      \Drupal::logger('ecms_asset_injector')->info('eCMS Asset Injector installed. No existing CSS assets to process.');
       return;
     }
   }
