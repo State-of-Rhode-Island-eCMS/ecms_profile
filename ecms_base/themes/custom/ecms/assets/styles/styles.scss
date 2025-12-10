@@ -1,22 +1,22 @@
 /*------------------------------------*\
     $JSON Variables
 \*------------------------------------*/
-@import '../data/color-config.json';
-@import '../data/colors-generated.json';
+@import "../data/color-config.json";
+@import "../data/colors-generated.json";
 
 /*------------------------------------*\
     $PATTERNS
 \*------------------------------------*/
-@import '../patterns/**/*';
+@import "../patterns/**/*";
 
 /*------------------------------------*\
     $COMPONENTS
 \*------------------------------------*/
-@import '../../components/**/*';
+@import "../../components/**/*";
 
 /*------------------------------------*\
     $Admin
 \*------------------------------------*/
-@import './admin/*';
+@import "./admin/*";
 
 //@import

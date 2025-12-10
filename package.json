@@ -11,10 +11,6 @@
   "dependencies": {
     "@babel/core": "7.12.9",
     "@babel/preset-env": "7.12.7",
-    "@pattern-lab/cli": "5.13.1",
-    "@pattern-lab/core": "5.13.1",
-    "@pattern-lab/engine-twig-php": "5.13.1",
-    "@pattern-lab/uikit-workshop": "5.13.1",
     "gulp": "4.0.2",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-babel": "8.0.0",
@@ -24,7 +20,8 @@
     "gulp-json-editor": "2.5.4",
     "gulp-minify": "3.1.0",
     "gulp-rename": "^1.2.3",
-    "gulp-sass": "^4.0.0",
+    "gulp-sass": "^5.1.0",
+    "sass": "1.32.13",
     "gulp-sass-glob": "^1.0.9",
     "gulp-sass-import-json": "1.0.2",
     "gulp-streamify": "1.0.2",
@@ -42,7 +39,6 @@
     ]
   },
   "scripts": {
-    "gulp": "gulp -- ",
-    "patternlab": "patternlab"
+    "gulp": "gulp -- "
   }
 }
