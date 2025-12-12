@@ -1,15 +1,34 @@
 $text-spacer-fallback-value: 1.25rem;
 
-/* text-size proportional spacer */
 body {
+  /* text-size proportional spacer */
   --body-text-spacer: clamp(1rem, 2vw, 1.25rem);
+  /* using this for any small bits of text that should be 'next size down' from paragraphs */
+  --st-font-wght: var(--default-body-wght);
+  word-break: break-word;
 }
 
-/* following element spacing selector, just inside node content */
+/* Writing all new in 2025 */
 .node,
 .qh__accordion__content > div,
 .qh__numbered-step__content,
 .qh__single-event__content {
+
+}
+
+
+
+
+
+
+/* following element spacing selector, just inside node content
+.node,
+.qh__accordion__content > div,
+.qh__numbered-step__content,
+.qh__single-event__content {
+  /*
+   * CHANGE MGMT 2025 — Replace with line-height unit 1lh, remove clamp
+
   > * + * {
     margin-top: $text-spacer-fallback-value;
 
@@ -18,7 +37,8 @@ body {
     }
   }
 }
-/* Any time paragraphs follow something else */
+
+/* Any time paragraphs follow something else
 main {
   * + p {
     margin-top: $text-spacer-fallback-value;
@@ -60,6 +80,9 @@ main {
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
       font-family: var(--font-sans-vf);
@@ -82,6 +105,9 @@ main {
     }
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$p-size-s-value};
     --font-size-max-value: #{$p-size-l-value};
@@ -97,11 +123,6 @@ main {
 
 #{$all-headers} {
   color: var(--fc__default__hx__fg);
-}
-
-// As a general rule, make H2s colorful
-h2 {
-  color: var(--fc__default__text-accent);
 }
 
 h1 {
@@ -130,6 +151,9 @@ h1 {
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf):not(.wf-inactive) & {
       font-family: var(--font-serif-vf);
@@ -144,6 +168,9 @@ h1 {
     }
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$h1-size-s-value};
     --font-size-max-value: #{$h1-size-l-value};
@@ -157,12 +184,17 @@ h1 {
     word-spacing: var(--word-spacing);
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
     margin-bottom: var(--body-text-spacer);
   }
 }
 
 h2 {
+  // As a general rule, make H2s colorful
+  color: var(--fc__default__text-accent);
   font-family: $font-serif-static;
   font-weight: normal;
 
@@ -172,6 +204,9 @@ h2 {
     font-weight: normal;
     letter-spacing: $kerning-base;
   }
+
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
 
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
@@ -198,6 +233,9 @@ h2 {
     margin-bottom: ($text-spacer-fallback-value * 0.85);
     width: 1.125em;
 
+    /*
+     * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
     @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
       margin-top: calc(var(--body-text-spacer) * 0.85);
       margin-bottom: calc(var(--body-text-spacer) * 0.85);
@@ -205,7 +243,7 @@ h2 {
   }
 }
 
-// Only sizing and spacing now
+/* Only sizing and spacing now
 h2,
 .qh__h2 {
   font-size: $h2-size-s;
@@ -224,6 +262,9 @@ h2,
     line-height: $h2-lh-l;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$h2-size-s-value};
     --font-size-max-value: #{$h2-size-l-value};
@@ -235,6 +276,9 @@ h2,
     line-height: var(--line-height);
     word-spacing: var(--word-spacing);
   }
+
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
 
   @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
     margin-top: calc(var(--body-text-spacer) * 0.5);
@@ -269,6 +313,9 @@ h3,
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
       font-family: var(--font-serif-vf);
@@ -283,6 +330,9 @@ h3,
     }
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$h3-size-s-value};
     --font-size-max-value: #{$h3-size-l-value};
@@ -294,6 +344,9 @@ h3,
     line-height: var(--line-height);
     word-spacing: var(--word-spacing);
   }
+
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
 
   @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
     margin-top: calc(var(--body-text-spacer) * 0.75);
@@ -327,6 +380,9 @@ h4 {
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
       font-family: var(--font-serif-vf);
@@ -341,6 +397,9 @@ h4 {
     }
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$h4-size-s-value};
     --font-size-max-value: #{$h4-size-l-value};
@@ -352,6 +411,9 @@ h4 {
     line-height: var(--line-height);
     word-spacing: var(--word-spacing);
   }
+
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
 
   @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
     margin-top: calc(var(--body-text-spacer) * 0.5);
@@ -385,6 +447,9 @@ h5 {
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
       font-family: var(--font-serif-vf);
@@ -399,6 +464,9 @@ h5 {
     }
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$h5-size-s-value};
     --font-size-max-value: #{$h5-size-l-value};
@@ -410,6 +478,9 @@ h5 {
     line-height: var(--line-height);
     word-spacing: var(--word-spacing);
   }
+
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
 
   @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
     margin-top: calc(var(--body-text-spacer) * 0.5);
@@ -443,6 +514,9 @@ h6 {
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
       font-family: var(--font-serif-vf);
@@ -457,6 +531,9 @@ h6 {
     }
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$h6-size-s-value};
     --font-size-max-value: #{$h6-size-l-value};
@@ -469,13 +546,16 @@ h6 {
     word-spacing: var(--word-spacing);
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
   @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
     margin-top: calc(var(--body-text-spacer) * 0.5);
     margin-bottom: calc(var(--body-text-spacer) * 0.5);
   }
 }
 
-// Grouped declarations of similar elements
+/* Grouped declarations of similar elements
 li,
 dt,
 dd,
@@ -499,6 +579,7 @@ li {
 
 strong,
 b {
+  /* Does this need to be a font-variation-setting declaration?
   font-weight: 575;
 }
 
@@ -533,6 +614,9 @@ blockquote {
       letter-spacing: $kerning-base;
     }
 
+    /*
+     * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
     @supports (font-variation-settings: normal) {
       html:not(.novf) & {
         font-family: var(--font-serif-vf);
@@ -547,6 +631,9 @@ blockquote {
       }
     }
 
+    /*
+     * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
+
     @supports (font-size: clamp(1rem, 2vw, 2rem)) {
       --font-size-min-value: #{$bq-size-s-value};
       --font-size-max-value: #{$bq-size-l-value};
@@ -559,11 +646,6 @@ blockquote {
       word-spacing: var(--word-spacing);
     }
   }
-}
-
-/* using this for any small bits of text that should be 'next size down' from paragraphs */
-body {
-  --st-font-wght: var(--default-body-wght);
 }
 
 label,
@@ -590,6 +672,9 @@ label,
     letter-spacing: $kerning-base;
   }
 
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, aligned across all in 2025
+
   @supports (font-variation-settings: normal) {
     html:not(.novf) & {
       font-family: var(--font-sans-vf);
@@ -603,6 +688,9 @@ label,
       letter-spacing: $kerning-base;
     }
   }
+
+  /*
+   * CHANGE MGMT 2025 — @supports no longer needed, widely available in 2025
 
   @supports (font-size: clamp(1rem, 2vw, 2rem)) {
     --font-size-min-value: #{$st-size-s-value};
@@ -620,9 +708,4 @@ label,
 label {
   --st-font-wght: 475;
   display: block;
-}
-
-/* using this for global text styles */
-body {
-  word-break: break-word;
 }
