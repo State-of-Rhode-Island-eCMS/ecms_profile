@@ -8,7 +8,7 @@ on:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
 env:
-  DRUPAL_CORE: '^11.2'
+  DRUPAL_CORE: '~11.2.0'
   PHP_VERSION: '8.3'
   NODE_VERSION: '10.x'
 
@@ -23,8 +23,10 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - drupal_core: '^11.2'
+          - drupal_core: '~11.2.0'
             experimental: false
+          - drupal_core: '^11.3'
+            experimental: true
 
     steps:
       - name: Checkout
@@ -92,10 +94,16 @@ jobs:
       matrix:
         include:
           - php_version: '8.3'
-            drupal_core: '^11.2'
+            drupal_core: '~11.2.0'
             experimental: false
           - php_version: '8.4'
-            drupal_core: '^11.2'
+            drupal_core: '~11.2.0'
+            experimental: true
+          - php_version: '8.3'
+            drupal_core: '^11.3'
+            experimental: true
+          - php_version: '8.4'
+            drupal_core: '^11.3'
             experimental: true
     container:
       image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production

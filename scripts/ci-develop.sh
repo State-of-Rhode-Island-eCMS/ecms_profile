@@ -21,6 +21,9 @@ ln -s -f $(realpath -s --relative-to=${DOCROOT}/profiles/contrib/ecms_profile ec
 test -f develop/composer.lock || (./scripts/generate-composer.php > develop/merge.composer.json)
 test -f develop/merge.composer.json && (mv develop/merge.composer.json develop/composer.json)
 
+## Explicitly constrain drupal/core-recommended to the DRUPAL_CORE version
+composer require --working-dir=develop --no-update "drupal/core-recommended:${DRUPAL_CORE}"
+
 ## @todo: Remove this workaround once the below modules are D11 compatible.
 composer remove --working-dir=develop --no-update drupal/address_phonenumber drupal/iek drupal/migrate_process_trim drupal/webform_encrypt || true
 
