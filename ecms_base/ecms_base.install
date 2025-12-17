@@ -16,7 +16,9 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\shortcut\Entity\Shortcut;
+use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
 
 /**
  * Implements hook_install().
@@ -98,6 +100,7 @@ function ecms_base_install_tasks(): array {
  */
 function ecms_base_apply_default_recipes(): array {
   $recipesToApply = [
+    'ecms_gtranslate',
     'ecms_security',
     'ecms_webform',
     'ecms_acquia',
@@ -205,4 +208,292 @@ function ecms_base_update_11202() {
   $config->set('ui_localtask', 1);
   $config->set('ui_checkbox', 0);
   $config->save(TRUE);
+}
+
+/**
+ * Uninstall google_translator module and remove related configurations.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11203(array &$sandbox): void {
+  // Disable existing modules.
+  $modules_to_uninstall = [
+    'google_translator',
+  ];
+
+  // Make sure necessary modules are uninstalled.
+  \Drupal::service('module_installer')->uninstall($modules_to_uninstall);
+
+  // Remove the language switcher block if it exists.
+  $configToDelete = [
+    'block.block.ecms_ecmstranslatorgoogletranslator',
+    'block.block.languageswitcher',
+    'block.block.googletranslator',
+  ];
+  /** @var \Drupal\Core\Config\StorageInterface $active_storage */
+  $active_storage = \Drupal::service('config.storage');
+  foreach ($configToDelete as $config) {
+    if ($active_storage->exists($config)) {
+      $active_storage->delete($config);
+    }
+  }
+
+  // Install new modules.
+  $recipes = [
+    'ecms_gtranslate',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
+
+/**
+ * Remove missing jQuery UI modules from core.extension configuration.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11204(): void {
+  $config = \Drupal::configFactory()->getEditable('core.extension');
+  $modules = $config->get('module');
+
+  $missing_modules = [
+    'jquery_ui_datepicker',
+    'jquery_ui_slider',
+    'jquery_ui_touch_punch',
+    'menu_force',
+  ];
+
+  $changed = FALSE;
+  foreach ($missing_modules as $module) {
+    if (isset($modules[$module])) {
+      unset($modules[$module]);
+      $changed = TRUE;
+    }
+  }
+
+  if ($changed) {
+    $config->set('module', $modules);
+    $config->save(TRUE);
+  }
+
+  // Remove schema entries from key/value storage.
+  $key_value = \Drupal::keyValue('system.schema');
+  foreach ($missing_modules as $module) {
+    if ($key_value->has($module)) {
+      $key_value->delete($module);
+      \Drupal::logger('ecms_base')->info('Removed schema entry for missing module: @module', [
+        '@module' => $module,
+      ]);
+    }
+  }
+}
+
+/**
+ * Delete all consumer entities.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11205(): void {
+  try {
+    $entityTypeManager = \Drupal::entityTypeManager();
+    $storage = $entityTypeManager->getStorage('consumer');
+    $entities = $storage->loadMultiple();
+    if (!empty($entities)) {
+      $storage->delete($entities);
+    }
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('ecms_base')
+      ->error('Failed to delete consumer entities: @message', ['@message' => $e->getMessage()]);
+  }
+}
+
+/**
+ * Apply the ecms_api_publisher recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11206(): void {
+  $recipes = [];
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  // Check if the ecms_api_publisher module is enabled.
+  if ($moduleHandler->moduleExists('ecms_api_publisher')) {
+    $userStorage = $entityTypeManager->getStorage('user');
+    $publisher = $userStorage->loadByProperties(['name' => 'ecms_api_publisher']);
+    if (!empty($publisher)) {
+      // Block the publisher account and rename the email address.
+      // This will allow the recipe to run successfully.
+      $account = reset($publisher);
+      $email = $account->getEmail();
+      $account->setUsername('ecms_api_publisher_legacy');
+      $account->setEmail(str_replace('@', '_legacy@', $email));
+      $account->block();
+      $account->save();
+    }
+
+    // Delete the ecms_api_publisher role if it exists.
+    $role_storage = $entityTypeManager->getStorage('user_role');
+    $role = $role_storage->load('ecms_api_publisher');
+    if ($role instanceof RoleInterface) {
+      $role->delete();
+    }
+
+    // Delete the scope if it exists.
+    $scope_storage = $entityTypeManager->getStorage('oauth2_scope');
+    $scope = $scope_storage->load('ecms_api_publisher');
+    if ($scope instanceof Oauth2ScopeEntityInterface) {
+      $scope->delete();
+    }
+
+    $recipes[] = 'ecms_api_publisher';
+  }
+
+  // Apply recipes for the modules that were uninstalled.
+  if (!empty($recipes)) {
+    ecms_base_apply_recipes($recipes);
+  }
+}
+
+/**
+ * Apply the ecms_api_recipient recipe if the module is installed.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11207(): void {
+  $recipes = [];
+  $moduleHandler = \Drupal::moduleHandler();
+  $entityTypeManager = \Drupal::entityTypeManager();
+
+  // Check if the ecms_api_publisher module is enabled.
+  if ($moduleHandler->moduleExists('ecms_api_recipient')) {
+    $userStorage = $entityTypeManager->getStorage('user');
+    $recipient = $userStorage->loadByProperties(['name' => 'ecms_api_recipient']);
+    if (!empty($recipient)) {
+      // Block the recipient account and rename the email address.
+      // This will allow the recipe to run successfully.
+      $account = reset($recipient);
+      $email = $account->getEmail();
+      $account->setUsername('ecms_api_recipient_legacy');
+      $account->setEmail(str_replace('@', '_legacy@', $email));
+      $account->block();
+      $account->save();
+    }
+
+    // Delete the ecms_api_publisher role if it exists.
+    $role_storage = $entityTypeManager->getStorage('user_role');
+    $role = $role_storage->load('ecms_api_recipient');
+    if ($role instanceof RoleInterface) {
+      $role->delete();
+    }
+
+    // Delete the scope if it exists.
+    $scope_storage = $entityTypeManager->getStorage('oauth2_scope');
+    $scope = $scope_storage->load('ecms_api_recipient');
+    if ($scope instanceof Oauth2ScopeEntityInterface) {
+      $scope->delete();
+    }
+
+    $recipes[] = 'ecms_api_recipient';
+  }
+
+  // Apply recipes for the modules that were uninstalled.
+  if (!empty($recipes)) {
+    ecms_base_apply_recipes($recipes);
+  }
+}
+
+/**
+ * Install the asset_injector module.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11208(): void {
+  $modules_to_install = [
+    'asset_injector',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Install the ecms_asset_injector module for dark mode CSS handling.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11209(): void {
+  $modules_to_install = [
+    'ecms_asset_injector',
+  ];
+
+  \Drupal::service('module_installer')->install($modules_to_install);
+}
+
+/**
+ * Update any existing CSS assets to include dark mode CSS handling.
+ *
+ * Runs with 2.0.1.
+ */
+function ecms_base_update_11210(array &$sandbox): void {
+  // Load all CSS Injector entities storage.
+  $storage = \Drupal::entityTypeManager()->getStorage('asset_injector_css');
+
+  if (!isset($sandbox['total'])) {
+    $ids = $storage->getQuery()->accessCheck(FALSE)->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['ids'] = array_values($ids);
+    $sandbox['current'] = 0;
+    $sandbox['processed_count'] = 0;
+    $sandbox['failed_count'] = 0;
+
+    if (empty($sandbox['ids'])) {
+      $sandbox['#finished'] = 1;
+      \Drupal::logger('ecms_asset_injector')->info('eCMS Asset Injector installed. No existing CSS assets to process.');
+      return;
+    }
+  }
+
+  $limit = 10;
+  $ids_to_process = array_slice($sandbox['ids'], $sandbox['current'], $limit);
+  $assets = $storage->loadMultiple($ids_to_process);
+
+  foreach ($assets as $asset) {
+    try {
+      // Resave the entity to trigger preSave() and generate processedCode.
+      $asset->save();
+      $sandbox['processed_count']++;
+      \Drupal::logger('ecms_asset_injector')->info('Processed CSS asset: @label (@id)', [
+        '@label' => $asset->label(),
+        '@id' => $asset->id(),
+      ]);
+    }
+    catch (\Exception $e) {
+      $sandbox['failed_count']++;
+      \Drupal::logger('ecms_asset_injector')->error('Failed to process CSS asset: @label (@id). Error: @error', [
+        '@label' => $asset->label(),
+        '@id' => $asset->id(),
+        '@error' => $e->getMessage(),
+      ]);
+    }
+  }
+
+  $sandbox['current'] += count($ids_to_process);
+  $sandbox['#finished'] = empty($sandbox['total']) ? 1 : ($sandbox['current'] / $sandbox['total']);
+
+  // Display a summary message.
+  if ($sandbox['#finished'] >= 1) {
+    if ($sandbox['processed_count'] > 0) {
+      \Drupal::logger('ecms_asset_injector')
+        ->info('eCMS Asset Injector installed and processed @count CSS asset(s) with dark mode handling.', [
+          '@count' => $sandbox['processed_count'],
+        ]);
+    }
+
+    if ($sandbox['failed_count'] > 0) {
+      \Drupal::logger('ecms_asset_injector')
+        ->warning('Failed to process @count CSS asset(s). Check logs for details.', [
+          '@count' => $sandbox['failed_count'],
+        ]);
+    }
+  }
 }

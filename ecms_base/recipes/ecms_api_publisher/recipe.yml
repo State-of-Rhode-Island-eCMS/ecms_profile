@@ -1,0 +1,148 @@
+name: 'eCMS API Publisher'
+description: 'Provides configuration for a site to publish syndicated content to other eCMS sites.'
+type: 'API'
+install:
+  - consumers
+  - ecms_api_publisher
+input:
+  clientId:
+    data_type: string
+    description: 'The OAuth client ID (UUID) for the publisher'
+    constraints:
+      NotBlank: [ ]
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the OAuth client ID (UUID) for the publisher'
+    form:
+      '#type': text
+      '#title': 'Publisher OAuth Client ID'
+    default:
+      source: value
+      value: 'REDACTED'
+  clientSecret:
+    data_type: string
+    description: 'The OAuth client secret for the publisher'
+    constraints:
+      NotBlank: [ ]
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the OAuth client secret for the publisher'
+    form:
+      '#type': text
+      '#title': 'Publisher OAuth Client Secret'
+    default:
+      source: value
+      value: 'REDACTED'
+  publisherMail:
+    data_type: email
+    description: 'The email address for the API publisher user'
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the email address for the publisher user'
+    form:
+      '#type': text
+      '#title': 'Publisher email address'
+    default:
+      source: value
+      value: 'ecms_api_publisher@ecms.com'
+  recipientClientId:
+    data_type: string
+    description: 'The OAuth client ID used to connect to recipient sites'
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the recipient OAuth client ID'
+    form:
+      '#type': text
+      '#title': 'Recipient Client ID'
+    default:
+      source: value
+      value: 'REDACTED'
+  recipientClientSecret:
+    data_type: string
+    description: 'The OAuth client secret used to connect to recipient sites'
+    prompt:
+      method: ask
+      arguments:
+        question: 'Enter the recipient OAuth client secret'
+    form:
+      '#type': text
+      '#title': 'Recipient Client Secret'
+    default:
+      source: value
+      value: 'REDACTED'
+config:
+  # Don't enforce strict config checking since we're creating entities dynamically
+  strict: false
+  import:
+    ecms_api_publisher:
+      - user.role.ecms_api_publisher
+  actions:
+    ecms_api_publisher.settings:
+      simpleConfigUpdate:
+        api_publisher_mail: ${publisherMail}
+        oauth_client_id: ${clientId}
+        oauth_client_secret: ${clientSecret}
+        recipient_client_id: ${recipientClientId}
+        recipient_client_secret: ${recipientClientSecret}
+    # Update the ecms_api_publisher user role
+    user.role.ecms_api_publisher:
+      grantPermissionsForEachNodeType:
+        - 'create %bundle content'
+        - 'edit any %bundle content'
+        - 'edit own %bundle content'
+        - 'delete any %bundle content'
+        - 'delete own %bundle content'
+        - 'delete %bundle revisions'
+        - 'publish any node type %bundle'
+        - 'publish editable node type %bundle'
+        - 'publish own node type %bundle'
+        - 'revert %bundle revisions'
+        - 'translate %bundle node'
+        - 'unpublish editable node type %bundle'
+        - 'unpublish own node type %bundle'
+        - 'view %bundle revisions'
+      grantPermissionsForEachMediaType:
+        - 'create %bundle media'
+        - 'edit any %bundle media'
+        - 'edit own %bundle media'
+        - 'delete any %bundle media'
+        - 'delete own %bundle media'
+        - 'translate %bundle media'
+      grantPermissionsForEachTaxonomyVocabulary:
+        - 'create terms in %bundle'
+        - 'edit terms in %bundle'
+        - 'delete terms in %bundle'
+        - 'translate %bundle taxonomy_term'
+      grantPermissions:
+        - 'access content'
+        - 'add ecms api site entities'
+        - 'bypass paragraphs type content access'
+        - 'create content translations'
+        - 'create press_release content'
+        - 'translate any entity'
+        - 'translate paragraph'
+        - 'update content translations'
+        - 'use editorial transition archive'
+        - 'use editorial transition archived_published'
+        - 'use editorial transition create_new_draft'
+        - 'use editorial transition publish'
+        - 'use editorial transition review'
+        - 'use text format basic_html'
+        - 'use text format embed'
+        - 'use text format full_html'
+        - 'use text format minimal'
+        - 'use text format paragraph_text'
+        - 'use text format plain_text'
+        - 'use text format restricted_html'
+        - 'view any unpublished content'
+        - 'view latest version'
+        - 'view notification revisions'
+        - 'view own unpublished content'
+        - 'view unpublished paragraphs'
+      simpleConfigUpdate:
+        label: 'eCMS API Publisher'
+        weight: 7

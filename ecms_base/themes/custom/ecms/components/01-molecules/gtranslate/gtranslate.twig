@@ -1,0 +1,11 @@
+<div class="qh__language-menu">
+  {# GTranslate Menu #}
+  <button id="js__gtranslate__toggle" class="qh__u__btn-as-text qh__language-menu__toggle" aria-expanded="false" aria-controls="js__gtranslate__list">
+    <span class="qh__language-menu__icon" aria-hidden="true">
+      {% include ('@icons/globe.svg') %}
+    </span><span class="qh__language-menu__text js__text__hidden">{{ "Select Language"|t }}</span>{# keep this on the same line to avoid an underlined space #}
+  </button>
+  <div id="js__gtranslate__list" class="qh__language-menu__list" aria-labelledby="js__gtranslate__toggle">
+    {{ gtranslate_html|raw }}
+  </div>
+</div>
