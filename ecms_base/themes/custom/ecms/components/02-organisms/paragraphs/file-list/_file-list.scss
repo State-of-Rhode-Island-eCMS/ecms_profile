@@ -69,7 +69,7 @@
     &__description {
       color: var(--fc__default__fg);
       display: block;
-      @extend .small-text;
+      @extend .small-text !optional;
       max-width: 40em;
       margin: 0.25rem 0 0.5rem;
     }
@@ -77,7 +77,7 @@
     // span
     &__filesize {
       color: var(--fc__default__fg);
-      @extend .small-text;
+      @extend .small-text !optional;
       display: block;
     }
 
