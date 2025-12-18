@@ -8,26 +8,13 @@
  */
 
 .qh__accordion {
-  //border: $border-xs solid transparent;
 
-  // When any other element is on top of an accordion:
-  margin-top: $text-spacer-fallback-value;
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: var(--body-text-spacer);
-  }
-
-  // When two or more accordions are on top of one another:
+  // When two or more accordions are on top of one another, cut space in half
   & + & {
-    margin-top: ($general-v-spacing/2);
-
-    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-      margin-top: calc(var(--body-text-spacer)/2);
-    }
+    margin-block-start: calc(var(--body-text-spacer) * 0.5);
   }
 
-  // Removing… a proper accordion group needs these styles, but none
-  // of our accordions can be grouped together
+  // Removing… a proper accordion group needs these styles, but none of our accordions can be grouped together
   //&:hover,
   //&:focus-within {
   //  border-color: var(--fc__default__link--focus);
@@ -37,14 +24,14 @@
   //&__title {}
 
   &__button {
-    @include qh__p;
+    //@include qh__p;
     background-color: var(--c__coffee-milk--trans25);
     background-image: none; // Reset from .qh__btn
     border-radius: 0; // Reset from .qh__btn
     box-shadow: none; // Reset from .qh__btn
     color: var(--fc__default__fg);
     display: block;
-    --p-font-wght: 450;
+    --p-font-wght: 475;
     max-width: none;
     outline: none;
     padding: $nav-a-v-spacing $nav-a-h-spacing;
@@ -85,7 +72,6 @@
         }
 
         &__vert,
-
         &__horiz {
           fill: var(--fc__accordion__icon__fg);
         }
@@ -125,6 +111,7 @@
     // Vertical rhythm inside an accordion is handled in 00-atoms/02-text/00-typography
 
     // TODO: Transitions not firing as we want them to
+    // We can replace this with new CSS where auto-height is allowed
     .js & {
       max-height: 0;
       overflow: hidden;
@@ -139,7 +126,7 @@
 
     .js [aria-expanded='true'] + & {
       max-height: none;
-      padding: $nav-a-v-spacing $nav-a-h-spacing;
+      padding: $nav-a-v-spacing $nav-a-h-spacing ($nav-a-v-spacing/2);
       transition: max-height 0s linear 500s, visibility 0s linear 0ms;
       visibility: visible;
 
