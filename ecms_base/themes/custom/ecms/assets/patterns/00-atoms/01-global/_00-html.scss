@@ -1,6 +1,12 @@
 html {
   box-sizing: border-box;
   font-size: 100%;
+
+  // Color mode JS beacon in user-settings.js
+  --osLightMode: light;
+  @media (prefers-color-scheme:dark) {
+    --osLightMode: dark;
+  }
 }
 
 *,
@@ -9,27 +15,23 @@ html {
   box-sizing: inherit;
 }
 
-body {
-  background-color: var(--fc__default__bg);
-  color: var(--fc__default__fg);
+// Remove default spacing from text block & media elements
+// Normalize is still in this project, and we should remove that as well
+body, h1, h2, h3, h4, h5, h6, p,
+figure, blockquote, ul, ol, dl, video, audio {
   margin: 0;
   padding: 0;
 }
 
-::selection {
-  background-color: var(--fc__default__fg);
-  color: var(--fc__default__bg);
+body {
+  background-color: var(--fc__default__bg);
+  color: var(--fc__default__fg);
 }
 
-// IE 11 still needs this
-header,
-nav,
-article,
-main,
-section,
-aside,
-footer {
-  display: block;
+::selection,
+::target-text {
+  background-color: var(--fc__default__fg);
+  color: var(--fc__default__bg);
 }
 
 nav ul,
@@ -43,12 +45,29 @@ nav ol {
   outline: none;
 }
 
-// Suppress the focus outline on elements that cannot be accessed via keyboard.
-// This prevents an unwanted focus outline from appearing around elements that
-// might still respond to pointer events.
-// Credit: https://github.com/suitcss/base
+/*
+  Suppress the focus outline on elements that cannot be accessed via keyboard.
+  This prevents an unwanted focus outline from appearing around elements that might still respond to pointer events.
+  Credit: https://github.com/suitcss/base
+  */
 [tabindex='-1']:focus {
   outline: 0 !important;
+}
+
+/*
+  When an element has an ID, give it space so that it is not at the very top of the viewport
+  The rlh unit is "relative line-height"
+  Credit to https://cssence.com/2025/scroll-margin-scroll-padding/
+  */
+[id] {
+  scroll-margin-block-start: 2rlh;
+}
+
+// Opt in to upcoming browser-based view transitions
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 // Remove all animations and transitions for people that prefer not to see them
