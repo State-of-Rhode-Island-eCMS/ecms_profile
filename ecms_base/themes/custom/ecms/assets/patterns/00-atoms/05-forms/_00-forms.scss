@@ -36,7 +36,7 @@ fieldset {
 }
 
 // <label>
-// Handled in conjunction with .small-text in 00-atoms/02-text/00-typography
+// Handled in conjunction with .qh__fs-st in 00-atoms/02-text/00-typography
 // (increased max font size)
 
 label {
@@ -326,7 +326,7 @@ input[type='range'] {}
 
 // Spacing elements
 .form-item,
- 
+
 .form-actions {
   margin-top: 1.25em;
   margin-bottom: 1.75em;
