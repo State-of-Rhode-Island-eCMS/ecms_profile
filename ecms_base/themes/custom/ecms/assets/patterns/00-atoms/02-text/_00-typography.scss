@@ -335,44 +335,18 @@ hr {
 }
 
 label,
-.small-text {
-  font-family: $font-sans-static;
-  font-size: $st-size-s;
-  line-height: $st-lh-s;
-  font-style: normal;
+.qh__fs-st {
+  --font-size-min-value: #{$st-size-s-value};
+  --font-size-max-value: #{$st-size-l-value};
+  --font-size-scaler-value: var(--st-scaler-value);
+  --font-lh-min: #{$st-lh-s};
+  --font-lh-max: #{$st-lh-l};
+  --font-lh-scaler-value: var(--st-lh-scaler-value);
 
-  .wf-inactive & {
-    font-family: $font-sans-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-sans-vf);
-      font-weight: var(--st-font-wght);
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-sans-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$st-size-s-value};
-    --font-size-max-value: #{$st-size-l-value};
-    --font-size-scaler-value: var(--st-scaler-value);
-    --font-lh-min: #{$st-lh-s};
-    --font-lh-max: #{$st-lh-l};
-    --font-lh-scaler-value: var(--st-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
+  // We duplicate these here for those elements that have extended .qh__fs-st
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  word-spacing: var(--word-spacing);
 }
 
 label {
