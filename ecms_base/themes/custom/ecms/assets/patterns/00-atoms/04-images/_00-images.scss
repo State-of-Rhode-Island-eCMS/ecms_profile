@@ -8,7 +8,7 @@ figure {
 }
 
 figcaption {
-  @extend .small-text;
+  @extend .small-text !optional;
 }
 
 img {
