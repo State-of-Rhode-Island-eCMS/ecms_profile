@@ -1,17 +1,15 @@
 @mixin button-disabled-style {
   background-color: transparent;
   background: repeating-linear-gradient(-45deg,
-  var(--fc__default__button__bg),
-  var(--fc__default__button__bg) 0.5em,
-  var(--fc__default__button--hover__bg) 0.5em,
-  var(--fc__default__button--hover__bg) 1em);
+    var(--fc__default__button__bg),
+    var(--fc__default__button__bg) 0.5em,
+    var(--fc__default__button--hover__bg) 0.5em,
+    var(--fc__default__button--hover__bg) 1em);
   cursor: default;
   opacity: 0.6;
   pointer-events: none;
 }
 
-
-// <p>-like typography styles applied via 02-text/00-typography
 button,
 .qh__btn,
 .button {
@@ -32,9 +30,9 @@ button,
   &:visited {
     background-color: var(--fc__default__button__bg);
     background-image: linear-gradient(rgba(#fff, 0.125) 10%,
-    rgba(#fff, 0) 50%,
-    rgba(#000, 0) 80%,
-    rgba(#000, 0.125) 100%);
+      rgba(#fff, 0) 50%,
+      rgba(#000, 0) 80%,
+      rgba(#000, 0.125) 100%);
     color: var(--fc__default__button__fg);
     text-decoration: none;
   }
@@ -122,7 +120,7 @@ button,
   }
 
   &--small {
-    font-size: rem(14);
+    font-size: 75%;
     padding: ($button-v-spacing / 2) ($button-h-spacing / 2);
   }
 
@@ -132,20 +130,20 @@ button,
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: $h3-size-s;
-    line-height: $h3-lh-s;
-
-    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-      --font-size-min-value: #{$h3-size-s-value};
-      --font-size-max-value: #{$h3-size-l-value};
-      --font-size-scaler-value: var(--h3-scaler-value);
-      --font-lh-min-value: #{$h3-lh-s};
-      --font-lh-max-value: #{$h3-lh-l};
-      --font-lh-scaler-value: var(--h3-lh-scaler-value);
-      font-size: var(--font-size);
-      line-height: var(--line-height);
-      word-spacing: var(--word-spacing);
-    }
+//     font-size: $h3-size-s;
+//     line-height: $h3-lh-s;
+//
+//     @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+//       --font-size-min-value: #{$h3-size-s-value};
+//       --font-size-max-value: #{$h3-size-l-value};
+//       --font-size-scaler-value: var(--h3-scaler-value);
+//       --font-lh-min-value: #{$h3-lh-s};
+//       --font-lh-max-value: #{$h3-lh-l};
+//       --font-lh-scaler-value: var(--h3-lh-scaler-value);
+//       font-size: var(--font-size);
+//       line-height: var(--line-height);
+//       word-spacing: var(--word-spacing);
+//     }
 
     @include breakpoint-between($bp--small, $bp--large) {
       flex-direction: column;
@@ -156,9 +154,11 @@ button,
     }
 
     > svg {
-      min-width: 6rem;
-      width: 6rem;
-      height: 6rem;
+      --icon-size: 3em;
+
+      min-width: var(--icon-size);
+      width: var(--icon-size);
+      height: var(--icon-size);
       position: relative;
       left: -0.75rem;
 
