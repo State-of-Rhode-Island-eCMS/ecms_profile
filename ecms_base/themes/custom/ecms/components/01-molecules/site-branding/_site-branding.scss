@@ -73,7 +73,7 @@
       }
       @include breakpoint-up($bp--medium) {
         font-size: 0.8125rem;
-        line-height: $st-lh-m;
+        line-height: $line-height-tight;
       }
       @include breakpoint-up($bp--large) {
         font-size: 0.875rem;
@@ -120,7 +120,7 @@
       }
       @include breakpoint-up($bp--medium) {
         font-size: 2.5rem;
-        line-height: $h1-lh-m;
+        line-height: $line-height-tightest;
       }
       @include breakpoint-up($bp--large) {
         font-size: 3rem;
@@ -166,7 +166,7 @@
       }
       @include breakpoint-up($bp--medium) {
         font-size: 0.875rem;
-        line-height: $st-lh-m;
+        line-height: $line-height-tight;
       }
       @include breakpoint-up($bp--large) {
         font-size: 1rem;
