@@ -1,10 +1,13 @@
 // All headers
 $all-headers: 'h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6';
 
+// All block-level text elements
+$all-typography-block: 'p, li, dt, dd, th, td, address, label, figcaption, .qh__fs-base';
+
 // Borders
 $border-xs: rem(1);
 $border-sm: rem(2);
-$border-md: rem(6); // Not used yet, feel free to change
+$border-md: rem(6);
 $border-lg: rem(14);
 $border-xl: rem(21);
 
@@ -13,22 +16,24 @@ $box-shadow-base: 0 0.125em 0.5em var(--c__quahog--dark--trans33);
 
 // Buttons
 $button-border-radius: rem(3);
-$button-v-spacing: 0.75rem;
-$button-h-spacing: 1.25rem;
+$button-v-spacing: 0.625em;
+$button-h-spacing: 1.125em;
 
 // Content max-width
 $content-max-small-screen: 93vw;
-$content-max-large-screen: 86rem;
-
-body {
-  --content-max-width: Min(#{$content-max-small-screen}, #{$content-max-large-screen});
-}
+$content-max-large-screen: 86rem; /* 1376px */
 
 // Generic page gutter, column spacing, vertical spacing
 $general-v-spacing: 1.5rem;
 $general-h-spacing: 1rem;
 
 $grid-gap: 1.5rem;
+
+// Line-height when static and not affected by user controls
+$line-height-tightest: 1;
+$line-height-tight: 1.25;
+$line-height-normal: 1.4;
+$line-height-loose: 1.625;
 
 // Icon sizing
 $icon-dimension: rem(44);
@@ -39,12 +44,13 @@ $input-v-spacing: 0.75em;
 $input-h-spacing: 0.75em;
 
 // Kerning
-//$kerning-loose: 0.0625em; not used yet
-$kerning-base: 0.035em;
+$kerning-loose: 0.0625em;
+$kerning-base: 0.03125em;
 //$kerning-tight: -0.03125em; not used yet
 
 // Max-width on type elements for line-length legibility
 $max-line-length: em(640);
+$max-line-length-ch: 68ch; // renders ~84 in FF
 
 // Transitions
 $transition-duration-base: 250ms;
@@ -73,19 +79,22 @@ $zindex: (
 
 
 html {
-  // Light mode
+  // Color mode JS beacon in user-settings.js
   --osLightMode: light;
   @media (prefers-color-scheme:dark) {
     --osLightMode: dark;
   }
 
   // Font size modifier
+  // JS reads this value and resets it based on the preference slider
   --fontSizeModifier: 1;
 
-  // Line-height modifier/
+  // Line-height modifier
+  // JS reads this value and resets it based on the preference slider
   --lineHeightModifier: 1;
 
   // word space modifier
+  // JS reads this value and resets it based on the preference slider
   --wordSpaceModifier: 0;
 }
 
@@ -96,54 +105,40 @@ html {
 // Default 'normal' weight for body text
 $default-body-wght: 350;
 
-body {
-  --default-body-wght: #{$default-body-wght};
-  --p-font-wght: #{$default-body-wght};
-  --st-font-wght: #{$default-body-wght};
-}
-
 // Set base text size for all calcs
 $text-base-size: 16;
 
 // Change px values here for all font sizing
 $p-size-s-px: 16;
-$p-size-m-px: 18;
-$p-size-l-px: 20;
+$p-size-l-px: 18;
 
-$h1-size-s-px: 32;
-$h1-size-m-px: 36;
-$h1-size-l-px: 39;
+$h6-size-s-px: 16;
+$h6-size-l-px: 18;
+
+$h5-size-s-px: 18;
+$h5-size-l-px: 20;
+
+$h4-size-s-px: 19;
+$h4-size-l-px: 22;
+
+$h3-size-s-px: 21;
+$h3-size-l-px: 25;
 
 $h2-size-s-px: 24;
-$h2-size-m-px: 26;
-$h2-size-l-px: 28;
+$h2-size-l-px: 30;
 
-$h3-size-s-px: 20;
-$h3-size-m-px: 22;
-$h3-size-l-px: 24;
+$h1-size-s-px: 30;
+$h1-size-l-px: 36;
 
-$h4-size-s-px: 16;
-$h4-size-m-px: 18;
-$h4-size-l-px: 20;
-
-$h5-size-s-px: 15;
-$h5-size-m-px: 16;
-$h5-size-l-px: 18;
-
-$h6-size-s-px: 14;
-$h6-size-m-px: 15;
-$h6-size-l-px: 16;
-
-$bq-size-s-px: 20;
-$bq-size-m-px: 22;
-$bq-size-l-px: 24;
+// Blockquote
+$bq-size-s-px: 18;
+$bq-size-l-px: 22;
 
 // small text
 $st-size-s-px: 12;
-$st-size-m-px: 13;
 $st-size-l-px: 14;
 
-// Font size REM values
+// Font size unitless values
 $p-size-s-value: $p-size-s-px / $text-base-size;
 $p-size-l-value: $p-size-l-px / $text-base-size;
 
@@ -172,155 +167,121 @@ $st-size-s-value: $st-size-s-px / $text-base-size;
 $st-size-l-value: $st-size-l-px / $text-base-size;
 
 // Font size REMs
-$p-size-s: $p-size-s-px / $text-base-size * 1rem;
-$p-size-m: $p-size-m-px / $text-base-size * 1rem;
-$p-size-l: $p-size-l-px / $text-base-size * 1rem;
+$p-size-s: $p-size-s-value * 1rem;
+$p-size-l: $p-size-l-value * 1rem;
 
-$h1-size-s: $h1-size-s-px / $text-base-size * 1rem;
-$h1-size-m: $h1-size-m-px / $text-base-size * 1rem;
-$h1-size-l: $h1-size-l-px / $text-base-size * 1rem;
+$h1-size-s: $h1-size-s-value * 1rem;
+$h1-size-l: $h1-size-l-px * 1rem;
 
-$h2-size-s: $h2-size-s-px / $text-base-size * 1rem;
-$h2-size-m: $h2-size-m-px / $text-base-size * 1rem;
-$h2-size-l: $h2-size-l-px / $text-base-size * 1rem;
+$h2-size-s: $h2-size-s-value * 1rem;
+$h2-size-l: $h2-size-l-value * 1rem;
 
-$h3-size-s: $h3-size-s-px / $text-base-size * 1rem;
-$h3-size-m: $h3-size-m-px / $text-base-size * 1rem;
-$h3-size-l: $h3-size-l-px / $text-base-size * 1rem;
+$h3-size-s: $h3-size-s-value * 1rem;
+$h3-size-l: $h3-size-l-value * 1rem;
 
-$h4-size-s: $h4-size-s-px / $text-base-size * 1rem;
-$h4-size-m: $h4-size-m-px / $text-base-size * 1rem;
-$h4-size-l: $h4-size-l-px / $text-base-size * 1rem;
+$h4-size-s: $h4-size-s-value * 1rem;
+$h4-size-l: $h4-size-l-value * 1rem;
 
-$h5-size-s: $h5-size-s-px / $text-base-size * 1rem;
-$h5-size-m: $h5-size-m-px / $text-base-size * 1rem;
-$h5-size-l: $h5-size-l-px / $text-base-size * 1rem;
+$h5-size-s: $h5-size-s-value * 1rem;
+$h5-size-l: $h5-size-l-value * 1rem;
 
-$h6-size-s: $h6-size-s-px / $text-base-size * 1rem;
-$h6-size-m: $h6-size-m-px / $text-base-size * 1rem;
-$h6-size-l: $h6-size-l-px / $text-base-size * 1rem;
+$h6-size-s: $h6-size-s-value * 1rem;
+$h6-size-l: $h6-size-l-value * 1rem;
 
-$bq-size-s: $bq-size-s-px / $text-base-size * 1rem;
-$bq-size-m: $bq-size-m-px / $text-base-size * 1rem;
-$bq-size-l: $bq-size-l-px / $text-base-size * 1rem;
+$bq-size-s: $bq-size-s-value * 1rem;
+$bq-size-l: $bq-size-l-value * 1rem;
 
-$st-size-s: $st-size-s-px / $text-base-size * 1rem;
-$st-size-m: $st-size-m-px / $text-base-size * 1rem;
-$st-size-l: $st-size-l-px / $text-base-size * 1rem;
+$st-size-s: $st-size-s-value * 1rem;
+$st-size-l: $st-size-l-value * 1rem;
 
 // Line-height (needs to be in EMs)
+// While we prefer ratio units, the scaling via user preferences requires these declarations
 $p-lh-s: 1.35;
-$p-lh-m: 1.4;
 $p-lh-l: 1.45;
 
 $h1-lh-s: 1.05;
-$h1-lh-m: 1.075;
 $h1-lh-l: 1.1;
 
 $h2-lh-s: 1.1;
-$h2-lh-m: 1.125;
 $h2-lh-l: 1.15;
 
 $h3-lh-s: 1.1;
-$h3-lh-m: 1.125;
 $h3-lh-l: 1.15;
 
 $h4-lh-s: 1.1;
-$h4-lh-m: 1.2;
 $h4-lh-l: 1.3;
 
 $h5-lh-s: 1.1;
-$h5-lh-m: 1.2;
 $h5-lh-l: 1.3;
 
 $h6-lh-s: 1.1;
-$h6-lh-m: 1.2;
 $h6-lh-l: 1.3;
 
 $bq-lh-s: 1.5;
-$bq-lh-m: 1.525;
 $bq-lh-l: 1.55;
 
 $st-lh-s: 1.1;
-$st-lh-m: 1.2;
 $st-lh-l: 1.3;
 
 // Custom props for modern browsers
 body {
+  // These all point to REM values
   --p-size-s: #{$p-size-s};
-  --p-size-m: #{$p-size-m};
   --p-size-l: #{$p-size-l};
 
   --h1-size-s: #{$h1-size-s};
-  --h1-size-m: #{$h1-size-m};
   --h1-size-l: #{$h1-size-l};
 
   --h2-size-s: #{$h2-size-s};
-  --h2-size-m: #{$h2-size-m};
   --h2-size-l: #{$h2-size-l};
 
   --h3-size-s: #{$h3-size-s};
-  --h3-size-m: #{$h3-size-m};
   --h3-size-l: #{$h3-size-l};
 
   --h4-size-s: #{$h4-size-s};
-  --h4-size-m: #{$h4-size-m};
   --h4-size-l: #{$h4-size-l};
 
   --h5-size-s: #{$h5-size-s};
-  --h5-size-m: #{$h5-size-m};
   --h5-size-l: #{$h5-size-l};
 
   --h6-size-s: #{$h6-size-s};
-  --h6-size-m: #{$h6-size-m};
   --h6-size-l: #{$h6-size-l};
 
   --bq-size-s: #{$bq-size-s};
-  --bq-size-m: #{$bq-size-m};
   --bq-size-l: #{$bq-size-l};
 
   --st-size-s: #{$st-size-s};
-  --st-size-m: #{$st-size-m};
   --st-size-l: #{$st-size-l};
 
   --p-lh-s: #{$p-lh-s};
-  --p-lh-m: #{$p-lh-m};
   --p-lh-l: #{$p-lh-l};
 
   --h1-lh-s: #{$h1-lh-s};
-  --h1-lh-m: #{$h1-lh-m};
   --h1-lh-l: #{$h1-lh-l};
 
   --h2-lh-s: #{$h2-lh-s};
-  --h2-lh-m: #{$h2-lh-m};
   --h2-lh-l: #{$h2-lh-l};
 
   --h3-lh-s: #{$h3-lh-s};
-  --h3-lh-m: #{$h3-lh-m};
   --h3-lh-l: #{$h3-lh-l};
 
   --h4-lh-s: #{$h4-lh-s};
-  --h4-lh-m: #{$h4-lh-m};
   --h4-lh-l: #{$h4-lh-l};
 
   --h5-lh-s: #{$h5-lh-s};
-  --h5-lh-m: #{$h5-lh-m};
   --h5-lh-l: #{$h5-lh-l};
 
   --h6-lh-s: #{$h6-lh-s};
-  --h6-lh-m: #{$h6-lh-m};
   --h6-lh-l: #{$h6-lh-l};
 
   --bq-lh-s: #{$bq-lh-s};
-  --bq-lh-m: #{$bq-lh-m};
   --bq-lh-l: #{$bq-lh-l};
 
   --st-lh-s: #{$st-lh-s};
-  --st-lh-m: #{$st-lh-m};
   --st-lh-l: #{$st-lh-l};
 
 
-  // Scaling accessible typography setup
+  // Accessible fluid typography scaling setup
 
   // Set scaling values
   --p-scaler-value: 1.25;
@@ -349,30 +310,10 @@ body {
 
   --st-scaler-value: 1;
   --st-lh-scaler-value: 2;
-}
 
-* {
-  // default starting values for scaling formulas
-  --font-size-min-value: #{$p-size-s};
-  --font-size-max-value: #{$p-size-l};
-  --font-size-scaler-value: var(--p-scaler-value);
-  --font-lh-min-value: #{$p-lh-s};
-  --font-lh-max-value: #{$p-lh-l};
-  --font-lh-scaler-value: var(--p-lh-scaler-value);
-
-  // factor in fontSizeModifier preference
-  --font-size-min: calc(var(--font-size-min-value) * var(--fontSizeModifier) * 1rem);
-  --font-size-max: calc(var(--font-size-max-value) * var(--fontSizeModifier)  * 1rem);
-
-  // reusable font-size var for each text element
-  --font-size: clamp(var(--font-size-min), calc(0.5rem + (var(--font-size-scaler-value) * 1vw)), var(--font-size-max));
-
-  // factor in lineHeightModifier preference
-  --font-lh-min: calc(var(--font-lh-min-value) * var(--lineHeightModifier) * 1em);
-  --font-lh-max: calc(var(--font-lh-max-value) * var(--lineHeightModifier) * 1em);
-
-  // reusable line-height var for each text element
-  --line-height: clamp(var(--font-lh-min), calc(var(--font-lh-scaler-value) * 1vw), var(--font-lh-max));
-
-  --word-spacing: calc(1em * var(--wordSpaceModifier));
+  // Other useful variables
+  --content-max-width: Min(#{$content-max-small-screen}, #{$content-max-large-screen});
+  --default-body-wght: #{$default-body-wght};
+  --p-font-wght: #{$default-body-wght};
+  --st-font-wght: #{$default-body-wght};
 }
