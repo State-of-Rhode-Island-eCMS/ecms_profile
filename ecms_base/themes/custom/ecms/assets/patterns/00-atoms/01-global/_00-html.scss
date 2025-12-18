@@ -1,12 +1,6 @@
 html {
   box-sizing: border-box;
   font-size: 100%;
-
-  // Color mode JS beacon in user-settings.js
-  --osLightMode: light;
-  @media (prefers-color-scheme:dark) {
-    --osLightMode: dark;
-  }
 }
 
 *,
