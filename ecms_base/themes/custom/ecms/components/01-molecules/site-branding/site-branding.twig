@@ -47,11 +47,11 @@
     {% if logo_only == FALSE %}
       <span class="qh__site-branding__name" role="text">
       {% if (header_preprocess_values.top_line) %}
-        <span class="qh__site-branding__name__top-line">{{ header_preprocess_values.top_line }}<span class="visually-hidden">, </span></span>
+        <span class="qh__fs-st qh__site-branding__name__top-line">{{ header_preprocess_values.top_line }}</span>
       {% endif %}
-        <span class="qh__site-branding__name__main-line">{{ header_preprocess_values.main_line }}</span>
+        <span class="qh__h1 qh__site-branding__name__main-line">{{ header_preprocess_values.main_line }}</span>
       {% if (header_preprocess_values.bottom_line) %}
-        <span class="qh__site-branding__name__bottom-line"><span class="visually-hidden">, </span>{{ header_preprocess_values.bottom_line }}</span>
+        <span class="qh__fs-base qh__site-branding__name__bottom-line">{{ header_preprocess_values.bottom_line }}</span>
       {% endif %}
       </span>
     {% endif %}
