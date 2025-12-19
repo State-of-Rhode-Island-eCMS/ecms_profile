@@ -44,7 +44,8 @@ $input-v-spacing: 0.75em;
 $input-h-spacing: 0.75em;
 
 // Kerning
-$kerning-loose: 0.0625em;
+$kerning-loosest: 0.0625em;
+$kerning-loose: 0.03125em;
 $kerning-base: 0.015625em;
 //$kerning-tight: -0.03125em; not used yet
 
@@ -169,33 +170,32 @@ $st-size-l-value: $st-size-l-px / $text-base-size;
 
 // Line-height (needs to be in EMs)
 // While we prefer ratio units, the scaling via user preferences requires these declarations
-$p-lh-s: 1.35;
+$p-lh-s: 1.4;
 $p-lh-l: 1.5;
 
 $h1-lh-s: 1.05;
 $h1-lh-l: 1.1;
 
-$h2-lh-s: 1.1;
-$h2-lh-l: 1.15;
+$h2-lh-s: 1.15;
+$h2-lh-l: 1.25;
 
-$h3-lh-s: 1.1;
-$h3-lh-l: 1.15;
+$h3-lh-s: 1.15;
+$h3-lh-l: 1.25;
 
 $h4-lh-s: 1.1;
-$h4-lh-l: 1.3;
+$h4-lh-l: 1.2;
 
 $h5-lh-s: 1.1;
-$h5-lh-l: 1.3;
+$h5-lh-l: 1.2;
 
 $h6-lh-s: 1.1;
-$h6-lh-l: 1.3;
+$h6-lh-l: 1.2;
 
 $bq-lh-s: 1.5;
 $bq-lh-l: 1.625;
 
-// Unsure why, but only pixel values work here
-$st-lh-s: em(22);
-$st-lh-l: em(26);
+$st-lh-s: 1.3;
+$st-lh-l: 1.4;
 
 // Custom props for modern browsers
 :root {
@@ -287,7 +287,7 @@ $st-lh-l: em(26);
 
   // Other useful variables
   --content-max-width: Min(#{$content-max-small-screen}, #{$content-max-large-screen});
-  --default-body-wght: #{vf-body-wght};
-  --p-font-wght: #{vf-body-wght};
-  --st-font-wght: #{vf-body-wght};
+  --default-body-wght: #{$vf-body-wght};
+  --default-bold-wght: #{$vf-bold-wght};
+  --p-font-wght: #{$vf-body-wght};
 }
