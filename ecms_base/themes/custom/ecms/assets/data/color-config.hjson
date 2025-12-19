@@ -458,7 +458,7 @@
           { "fnName": "accent", "colorName": "calamari" },
           { "fnName": "accent__fg", "colorName": "quahog--dark" },
           # text-accent currently used for bullet mark color & the H2
-          { "fnName": "text-accent", "colorName": "quahog--medium" },
+          { "fnName": "text-accent", "colorName": "navy" },
           { "fnName": "button__bg", "colorName": "navy" },
           { "fnName": "button__fg", "colorName": "hope-gold" },
           { "fnName": "button--hover__bg", "colorName": "navy--dark" },
@@ -617,9 +617,9 @@
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
-          # text-accent currently used for bullet mark color & the H2
           #{ "fnName": "accent", "colorName": "hope-gold" },
-          { "fnName": "text-accent", "colorName": "quahog--light" }
+          # text-accent currently used for bullet mark color & the H2
+          { "fnName": "text-accent", "colorName": "hope-gold" }
           #{ "fnName": "button__bg", "colorName": "navy" },
           #{ "fnName": "button__fg", "colorName": "hope-gold" },
           #{ "fnName": "button--hover__bg", "colorName": "navy--dark" },
