@@ -1629,20 +1629,20 @@
           { "fnName": "social__link--hover", "colorName": "quahog--light" }
         ],
         "nav-main": [
-          #{ "fnName": "fg", "colorName": "quahog--dark" },
-          { "fnName": "bg", "colorName": "cliff-walk--dark" }, # Just for the palette preview
-          #{ "fnName": "link", "colorName": "quahog--dark" },
-          #{ "fnName": "link--hover", "colorName": "navy" },
+          { "fnName": "fg", "colorName": "quahog--dark" },
+          { "fnName": "bg", "colorName": "cliff-walk--dark" },
+          { "fnName": "link", "colorName": "quahog--dark" },
+          { "fnName": "link--hover", "colorName": "navy" },
           # Hover bg used for bg of link AND for border top of current parent
           # Should be the same color as the Header BG to look like a notch
-          #{ "fnName": "link--hover__bg", "colorName": "cliff-walk" },
-          #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--active", "colorName": "navy" },
-          #{ "fnName": "link__sub--hover__bg", "colorName": "white--trans25" },
-          #{ "fnName": "icon__bg", "colorName": "cliff-walk" },
-          #{ "fnName": "icon__fg", "colorName": "quahog--dark" },
-          #{ "fnName": "icon__bg--hover", "colorName": "white" },
-          #{ "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
+          { "fnName": "link--hover__bg", "colorName": "cliff-walk" },
+          { "fnName": "link--focus", "colorName": "navy" },
+          { "fnName": "link--active", "colorName": "navy" },
+          { "fnName": "link__sub--hover__bg", "colorName": "white--trans25" },
+          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__fg", "colorName": "quahog--dark" },
+          { "fnName": "icon__bg--hover", "colorName": "white" },
+          { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
           { "fnName": "fg", "colorName": "coffee-milk--light" },
