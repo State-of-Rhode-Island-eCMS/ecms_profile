@@ -120,7 +120,7 @@ button,
   }
 
   &--small {
-    font-size: 75%;
+    font-size: 87.5%;
     padding: ($button-v-spacing / 2) ($button-h-spacing / 2);
   }
 
@@ -130,20 +130,6 @@ button,
     display: flex;
     align-items: center;
     justify-content: center;
-//     font-size: $h3-size-s;
-//     line-height: $h3-lh-s;
-//
-//     @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-//       --font-size-min-value: #{$h3-size-s-value};
-//       --font-size-max-value: #{$h3-size-l-value};
-//       --font-size-scaler-value: var(--h3-scaler-value);
-//       --font-lh-min-value: #{$h3-lh-s};
-//       --font-lh-max-value: #{$h3-lh-l};
-//       --font-lh-scaler-value: var(--h3-lh-scaler-value);
-//       font-size: var(--font-size);
-//       line-height: var(--line-height);
-//       word-spacing: var(--word-spacing);
-//     }
 
     @include breakpoint-between($bp--small, $bp--large) {
       flex-direction: column;
@@ -160,7 +146,7 @@ button,
       width: var(--icon-size);
       height: var(--icon-size);
       position: relative;
-      left: -0.75rem;
+      left: -0.625em;
 
       @include breakpoint-between($bp--small, $bp--large) {
         left: 0;
