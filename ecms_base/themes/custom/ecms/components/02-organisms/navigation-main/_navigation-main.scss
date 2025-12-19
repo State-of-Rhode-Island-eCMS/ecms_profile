@@ -24,7 +24,6 @@ body {
   }
 
   a {
-    //display: block;
     transition: $transition-base;
   }
 
@@ -45,7 +44,6 @@ body {
     @include breakpoint-up($bp__show__desktop-nav) {
       overflow: visible;
     }
-
 
     // For mobile we need to flex
     @include breakpoint-down($bp__show__desktop-nav) {
@@ -359,6 +357,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+
     @include breakpoint-down($bp__show__desktop-nav) {
       justify-content: space-between;
     }
@@ -399,7 +398,6 @@ body {
   // Ideally CSS hovers are only present when JS does not load
   .no-js &__link:hover + &__list__sub,
   .no-js &__link:focus + &__list__sub,
-
   &__link[aria-expanded='true'] + &__list__sub {
     opacity: 1;
     transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
@@ -410,7 +408,6 @@ body {
   &__item:not(&__item__sub) > &__link:hover,
   &__item:not(&__item__sub) > &__link:focus,
   &__item:not(&__item__sub):hover > &__link:not(&__link--current):not(&__link--home),
-
   &__link[aria-expanded='true'] {
     background-color: var(--fc__nav-main__link--hover__bg);
     color: var(--fc__nav-main__link--hover);
@@ -444,19 +441,16 @@ body {
   &__link {
     padding: ($nav-a-v-spacing * 0.75) $nav-a-h-spacing--sm $nav-a-v-spacing;
 
-    @include onlyIE() {
-      padding-left: ($nav-a-h-spacing--sm * 0.5);
-      padding-right: ($nav-a-h-spacing--sm * 0.5);
-    }
-
     &,
     &:visited {
+      --p-font-wght: 450;
+
       background-color: transparent;
       color: var(--fc__nav-main__link);
       display: block;
-      font-size: clamp(0.875rem, 1.125vw, 1rem);
-      font-weight: 450;
-      line-height: clamp(1.2rem, 3vw, 1.3rem);
+      //font-size: clamp(0.875rem, 1.125vw, 1rem);
+      //font-weight: 450;
+      //line-height: clamp(1.2rem, 3vw, 1.3rem);
       text-decoration: none;
       word-break: normal;
 
@@ -545,20 +539,11 @@ body {
     &--home,
     &--home:visited {
       border-top: 0;
-      padding: em(1);
+      padding: 0.0625em 0.1875em;
 
       &:hover,
       &:focus {
-        padding: em(1) !important;
-      }
-
-      @include onlyIE() {
-        padding-top: 0.5rem;
-
-        &:hover,
-        &:focus {
-          padding-top: 0.5rem !important;
-        }
+        padding: 0.0625em 0.1875em !important;
       }
     }
   }

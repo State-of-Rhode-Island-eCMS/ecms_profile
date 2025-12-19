@@ -1,7 +1,7 @@
 .qh__icon-card {
-  $card-header-min-height--sm: rem(72); // approx 3 lines of an h3
-  $card-header-min-height--lg: rem(70); // approx 2 lines of an h3
-  $card-leftbar-width: rem(48);
+  $card-header-min-height--sm: em(72); // approx 3 lines of an h3
+  $card-header-min-height--lg: em(70); // approx 2 lines of an h3
+  $card-leftbar-width: em(48);
 
   background-color: var(--fc__default__bg);
   color: var(--fc__default__fg);
@@ -48,16 +48,12 @@
     flex-flow: column;
     align-items: flex-start;
     justify-content: center;
-    margin-top: ($general-v-spacing / 2);
-    margin-left: ($general-h-spacing/2);
+    margin-block-start: ($general-v-spacing / 2);
+    margin-inline-start: ($general-h-spacing/2);
     min-height: $card-header-min-height--sm;
     width: ($card-leftbar-width + $general-h-spacing);
 
-    //svg {
-    //  height: (($card-leftbar-width + $general-h-spacing) * 0.75);
-    //}
-
-    path {
+    svg * {
       fill: currentColor;
     }
 
@@ -96,19 +92,7 @@
     p,
     ul,
     li {
-      font-size: 1rem;
-      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-        --font-size-min-value: 0.925;
-        --font-size-max-value: 1;
-        --font-size-scaler-value: var(--p-scaler-value);
-        font-size: var(--font-size);
-
-        --font-lh-min-value: #{$st-lh-s};
-        --font-lh-max-value: #{$st-lh-l};
-        --font-lh-scaler-value: var(--st-lh-scaler-value);
-        line-height: var(--line-height);
-
-      }
+      @extend .qh__fs-st !optional;
     }
   }
 
@@ -116,19 +100,19 @@
     color: var(--fc__attention-card__fg);
     display: flex;
     flex-flow: column;
-    font-size: 1.25rem;
+    //font-size: 1.25rem;
     align-items: flex-start;
     justify-content: center;
     min-height: $card-header-min-height--sm;
-    margin-top: 0;
-    margin-bottom: ($general-v-spacing/2);
+    margin-block-start: 0;
+    margin-block-end: ($general-v-spacing/2);
 
-    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-      --font-size-min-value: 1.125;
-      --font-size-max-value: 1.5;
-      --font-size-scaler-value: var(--h3-scaler-value);
-      font-size: var(--font-size);
-    }
+    // @supports (font-size: clamp(1rem, 2vw, 2rem)) {
+    //   --font-size-min-value: 1.125;
+    //   --font-size-max-value: 1.5;
+    //   --font-size-scaler-value: var(--h3-scaler-value);
+    //   font-size: var(--font-size);
+    // }
 
     @media (min-width: $bp--large) {
       min-height: $card-header-min-height--lg;
