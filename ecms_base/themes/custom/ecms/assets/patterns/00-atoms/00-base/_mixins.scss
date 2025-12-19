@@ -20,15 +20,7 @@
 // Content max-width
 @mixin qh-content-maxwidth() {
   margin: 0 auto;
-  max-width: $content-max-small-screen;
-
-  @include breakpoint-up($bp--xxlarge) {
-    max-width: $content-max-large-screen;
-  }
-
-  @supports (width: Min(10px, 5px)) {
-    max-width: var(--content-max-width);
-  }
+  max-width: var(--content-max-width);
 }
 
 // Icons
@@ -62,6 +54,14 @@
     + li {
       margin-top: 0;
     }
+  }
+}
+
+@mixin qh-fw-bold() {
+  font-weight: bold;
+
+  html.wf-active:not(.novf) & {
+    font-weight: $vf-bold-wght;
   }
 }
 
