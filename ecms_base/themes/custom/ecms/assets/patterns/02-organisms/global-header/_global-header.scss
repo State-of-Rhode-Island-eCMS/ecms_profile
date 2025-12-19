@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: ($general-v-spacing/2) $general-h-spacing;
+    padding: 0.25em $general-h-spacing;
 
     &--multiple-region {
       @include breakpoint-down($bp--small) {
@@ -64,8 +64,8 @@
   .qh__settings-menu__toggle,
   .qh__language-menu__toggle,
   .google-translator-switch {
-    font-size: 87.5%;
-    font-weight: 375;
+    //font-size: 87.5%;
+    //font-weight: 375;
 
     // Remove later once there are vertical rhythm rules in place for content containers only
     & + p {

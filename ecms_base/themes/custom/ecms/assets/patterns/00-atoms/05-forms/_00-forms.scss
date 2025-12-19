@@ -1,6 +1,5 @@
 form {
-  margin-top: calc(var(--body-text-spacer) * 1);
-  margin-bottom: calc(var(--body-text-spacer) * 1);
+  margin-block: var(--body-text-spacer);
 }
 
 fieldset {
@@ -8,30 +7,12 @@ fieldset {
   padding: $general-v-spacing $general-h-spacing ($general-v-spacing / 2) $general-h-spacing;
 
   > legend {
+    --p-font-wght: 575;
     display: block;
-    font-family: $font-sans-static;
-    font-size: 1.125rem;
-    font-weight: 575;
-    letter-spacing: $kerning-base;
-
-    .wf-inactive & {
-      font-family: $font-sans-fallback;
-      font-weight: bold;
-    }
-    @supports (font-variation-settings: normal) {
-      html:not(.novf) & {
-        font-family: var(--font-sans-vf);
-      }
-
-      html:not(.novf).wf-inactive & {
-        font-family: $font-sans-fallback;
-        font-weight: bold;
-      }
-    }
   }
 
   + fieldset {
-    margin-top: calc(var(--body-text-spacer) * 1.5);
+    margin-block-start: calc(var(--body-text-spacer) * 1.5);
   }
 }
 
@@ -43,9 +24,11 @@ label {
   --font-size-max-value: 1;
 }
 
-input:not([type='checkbox']):not([type='radio']):not([type='range']),
+input:where(:not([type='checkbox']):not([type='radio']):not([type='range'])),
 textarea,
 select {
+  --p-font-wght: 525;
+
   background-color: var(--fc__default__bg);
   border: $border-sm solid var(--fc__default__border);
   border-radius: $input-border-radius;
@@ -55,26 +38,6 @@ select {
   padding: $input-v-spacing $input-h-spacing;
   transition: $transition-base;
   width: 100%;
-
-  // Font face settings
-  font-family: $font-sans-static;
-  font-size: 1rem;
-  font-weight: 500;
-
-  .wf-inactive & {
-    font-family: $font-sans-fallback;
-    font-weight: normal;
-  }
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-sans-vf);
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-sans-fallback;
-      font-weight: normal;
-    }
-  }
 
   // Interactive
   &:hover {
@@ -95,7 +58,7 @@ select {
 
 textarea,
 select {
-  font-weight: 400;
+  --p-font-wght: 400;
 }
 
 select {
@@ -152,14 +115,14 @@ input[type='range'] {}
 .flexbox-container {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 0;
+  padding-block-start: 0;
 
   > * {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
-    margin-right: 1rem;
-    margin-top: 1rem;
+    margin-inline-end: 1rem;
+    margin-block-start: 1rem;
     min-width: 18rem;
     @include breakpoint-up($bp__single-col-content) {
       min-width: 21rem;
@@ -191,7 +154,7 @@ input[type='range'] {}
   padding: 1rem;
 
   * & {
-    margin-top: calc(var(--body-text-spacer) * 1.5);
+    margin-block-start: calc(var(--body-text-spacer) * 1.5);
   }
 }
 
@@ -218,7 +181,7 @@ input[type='range'] {}
     > input {
       // Oddly, a size larger than any button width does not make the input too small
       flex: 1 0 calc(100% - 12rem);
-      margin-right: 0.5rem;
+      margin-inline-end: 0.5rem;
     }
   }
 
@@ -248,7 +211,7 @@ input[type='range'] {}
         border-radius: 0.25rem;
         cursor: pointer;
         height: 2rem;
-        margin-top: -0.5rem;
+        margin-block-start: -0.5rem;
         width: 0.5rem;
       }
 
@@ -310,13 +273,13 @@ input[type='range'] {}
   --font-size-min-value: 0.75rem;
   --font-size-max-value: 0.925rem;
   font-size: var(--font-size);
-  margin-top: calc(var(--body-text-spacer) * 0.25);
-  margin-bottom: calc(var(--body-text-spacer) * 0.5);
+  margin-block-start: calc(var(--body-text-spacer) * 0.25);
+  margin-block-end: calc(var(--body-text-spacer) * 0.5);
 }
 
 .form-composite > legend {
+  --p-font-wght: 575;
   font-size: 1.125rem;
-  font-weight: 575;
 }
 
 .form-composite > .fieldset-wrapper > .description,
@@ -328,11 +291,11 @@ input[type='range'] {}
 .form-item,
 
 .form-actions {
-  margin-top: 1.25em;
-  margin-bottom: 1.75em;
+  margin-block-start: 1.25em;
+  margin-block-end: 1.75em;
 }
 
 // Spacing from label elements
 label + div {
-  margin-top: 0.25em;
+  margin-block-start: 0.25em;
 }

@@ -13,22 +13,29 @@
 
   // <input>
   &__query {
-    max-width: 12rem;
-    min-width: 10rem;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-color: var(--fc__default__button--hover__fg);
+    max-width: 12em;
+    min-width: 10em;
   }
   // needed a bit more specificity for the site search form in the header
   label + input[type='text'].qh__site-search__query {
     margin-top: 0;
+
     @include breakpoint-up($bp__show__desktop-nav) {
       grid-column: 1/2;
     }
   }
   // <button>
   &__submit {
-    background-color: var(--fc__default__accent);
-    color: var(--fc__default__accent__fg);
-    padding: 0.125rem;
-    min-width: rem(48);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    background-color: var(--fc__default__button--hover__fg);
+    color: var(--fc__default__button--hover__bg);
+    padding: 0.125em;
+    min-width: em(48);
+
     @include breakpoint-up($bp__show__desktop-nav) {
       grid-column: 2/3;
     }
