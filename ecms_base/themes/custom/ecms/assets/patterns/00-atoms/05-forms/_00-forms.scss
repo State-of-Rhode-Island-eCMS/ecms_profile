@@ -7,8 +7,8 @@ fieldset {
   padding: $general-v-spacing $general-h-spacing ($general-v-spacing / 2) $general-h-spacing;
 
   > legend {
-    --p-font-wght: 575;
     display: block;
+    font-weight: var(--defauilt-bold-wght);
   }
 
   + fieldset {
@@ -21,19 +21,19 @@ fieldset {
 // (increased max font size)
 
 label {
-  --font-size-max-value: 1;
+  display: block;
+  font-weight: 475;
 }
 
 input:where(:not([type='checkbox']):not([type='radio']):not([type='range'])),
 textarea,
 select {
-  --p-font-wght: 525;
-
   background-color: var(--fc__default__bg);
   border: $border-sm solid var(--fc__default__border);
   border-radius: $input-border-radius;
   color: var(--fc__default__fg);
   display: inline-block;
+  font-weight: 525;
   line-height: 1.25;
   padding: $input-v-spacing $input-h-spacing;
   transition: $transition-base;
@@ -58,7 +58,7 @@ select {
 
 textarea,
 select {
-  --p-font-wght: 400;
+  font-weight: 400;
 }
 
 select {
@@ -160,7 +160,7 @@ input[type='range'] {}
 
 .form__actions {
   a {
-    --p-font-wght: 400;
+    font-weight: var(--default-body-wght);
     @include qh__p;
   }
 }
@@ -265,7 +265,6 @@ input[type='range'] {}
   small {
     font-size: inherit;
   }
-
 }
 
 .description,
@@ -278,8 +277,8 @@ input[type='range'] {}
 }
 
 .form-composite > legend {
-  --p-font-wght: 575;
   font-size: 1.125rem;
+  font-weight: 575;
 }
 
 .form-composite > .fieldset-wrapper > .description,

@@ -443,14 +443,10 @@ body {
 
     &,
     &:visited {
-      --p-font-wght: 450;
-
       background-color: transparent;
       color: var(--fc__nav-main__link);
       display: block;
-      //font-size: clamp(0.875rem, 1.125vw, 1rem);
-      //font-weight: 450;
-      //line-height: clamp(1.2rem, 3vw, 1.3rem);
+      font-weight: 475;
       text-decoration: none;
       word-break: normal;
 
