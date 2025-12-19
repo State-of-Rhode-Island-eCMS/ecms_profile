@@ -97,8 +97,8 @@ table {
   }
 
   th {
-    --p-font-wght: 550;
     border-bottom: $border-xs solid var(--fc__table__border__h);
+    font-weight: 550;
 
     & + th,
     & + td {

@@ -13,10 +13,10 @@
 button,
 .qh__btn,
 .button {
-  --p-font-wght: 500;
   border: 0;
   border-radius: $button-border-radius;
   display: inline-block;
+  font-weight: 500;
   letter-spacing: $kerning-base;
   overflow: hidden;
   padding: $button-v-spacing $button-h-spacing;
@@ -121,7 +121,7 @@ button,
 
   &--small {
     font-size: 87.5%;
-    padding: ($button-v-spacing / 2) ($button-h-spacing / 2);
+    padding: 0.5em 0.625em;
   }
 
   // Button with SVG

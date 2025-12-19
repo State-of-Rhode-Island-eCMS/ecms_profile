@@ -58,8 +58,8 @@
     // span
     &__label {
       @include qh__p;
-      --p-font-wght: 525;
       display: block;
+      font-weight: 525;
     }
 
     &__description {
