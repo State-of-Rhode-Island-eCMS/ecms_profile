@@ -69,7 +69,7 @@ button,
 
     &:hover,
     &:focus {
-      background-color: var(--fc__default__fg);
+      background-color: var(--fc__default__accent__fg);
       color: var(--fc__default__accent);
     }
   }
@@ -88,7 +88,7 @@ button,
       color: var(--fc__default__bg);
     }
 
-    html:not(.light) {
+    html:where(:not(.light)) {
       &,
       &:visited {
         background-color: var(--fc__primary--light__bg--dark);
@@ -103,7 +103,7 @@ button,
     }
 
     @media (prefers-color-scheme: dark) {
-      html:not(.light) {
+      html:where(:not(.light)) {
         &,
         &:visited {
           background-color: var(--fc__primary--light__bg--dark);
