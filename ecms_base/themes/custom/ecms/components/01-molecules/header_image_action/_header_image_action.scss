@@ -186,15 +186,4 @@ $hia-gutter--xxlarge: calc((100vw - #{$content-max-large-screen}) / 2);
       line-height: var(--line-height);
     }
   }
-
-  // Completely different approach for IE11
-  // @include onlyIE() {
-  //   display: block;
-
-  //   &__title {
-  //     position: absolute;
-  //       left: $general-h-spacing;
-  //       bottom: $general-h-spacing;
-  //   }
-  // }
 }

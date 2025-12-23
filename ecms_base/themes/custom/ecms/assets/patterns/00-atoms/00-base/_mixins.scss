@@ -65,13 +65,6 @@
   }
 }
 
-// Browser Hacking
-@mixin onlyIE() {
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    @content;
-  }
-}
-
 // Z-index map-get helper
 @function z($key) {
   @return map-get($zindex, $key);

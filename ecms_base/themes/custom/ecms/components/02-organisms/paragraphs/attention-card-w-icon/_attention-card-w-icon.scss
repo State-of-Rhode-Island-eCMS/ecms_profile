@@ -117,9 +117,5 @@
     @media (min-width: $bp--large) {
       min-height: $card-header-min-height--lg;
     }
-
-    @include onlyIE() {
-      display: block; // negate flex because test strings were overflowing
-    }
   }
 }
