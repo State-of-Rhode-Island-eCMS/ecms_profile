@@ -20,7 +20,7 @@
 
     position: absolute;
     // This calc replicates the spacing variable to negate it, and push the button trigger over to the edge of the viewport
-    left: calc((1.125rem + 3.5vw) * -1);
+    left: calc((1.125em + 3.5vw) * -1);
     min-width: unset;
     width: rem(320 - $button-trigger-height);
     transform: translateX(- rem(320 - $button-trigger-height));
@@ -33,7 +33,7 @@
     }
 
     > ul {
-      transform: translateX(- rem(48));
+      transform: translateX(- em(48));
       transition: transform $transition-duration-base $transition-timing-base ($transition-duration-base/2);
     }
 
@@ -105,6 +105,7 @@
     background-color: var(--fc__nav-minor__bg);
     position: relative;
     z-index: z(drop-down-menu);
+
     @include breakpoint-up($bp__single-col-content) {
       max-height: unset;
       z-index: unset;
@@ -130,14 +131,6 @@
   &__item {
     position: relative;
     overflow: visible;
-
-    // Removing for now — I don’t think I like it. Really remove it if we all agree.
-    // .qh__nav-minor > .qh__nav-minor__list > &:first-child {
-    //   a {
-    //     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    //     font-weight: calc(var(--p-font-wght) * 1.25);
-    //   }
-    // }
 
     //&__sub {}
 
@@ -252,18 +245,7 @@
 
   // <a>
   &__link {
-    padding: $nav-a-v-spacing $nav-a-h-spacing--sm;
-    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-      font-size: clamp(0.925rem, 1.5vw, 1rem);
-      line-height: clamp(1.2rem, 3vw, 1.3rem);
-    }
-
-    &__sub {
-      @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-        font-size: clamp(0.875rem, 1.5vw, 0.925rem);
-        line-height: clamp(1.2rem, 3vw, 1.3rem);
-      }
-    }
+    padding: ($nav-a-v-spacing * 0.75) $nav-a-h-spacing--sm;
 
     // Treat a current link as disabled. It should not have a visual state change
     // Not working well if that current link is a parent to an accordion
@@ -276,7 +258,7 @@
     .js &--current.qh__accordion__button[aria-expanded='true'] {
       background-color: var(--fc__nav-minor__bg);
       color: var(--fc__nav-minor__fg);
-      font-weight: 650; // Bumped up from 550 2020.11.18 by J.
+      font-weight: var(--vf-bold-wght);
       text-decoration: none;
     }
   }

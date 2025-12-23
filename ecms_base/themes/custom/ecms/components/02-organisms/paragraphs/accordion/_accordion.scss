@@ -30,7 +30,7 @@
     box-shadow: none; // Reset from .qh__btn
     color: var(--fc__default__fg);
     display: block;
-    font-weight: 475;
+    font-weight: calc(var(--p-font-wght) * 1.25);
     max-width: none;
     outline: none;
     padding: $nav-a-v-spacing $nav-a-h-spacing;
@@ -87,12 +87,7 @@
       background-color: var(--c__coffee-milk--trans25);
 
       .qh__icon__plusminus__vert {
-        // IE 11 doesn't support CSS transforms on SVG elements
         transform: rotate(-360deg);
-
-        @include onlyIE() {
-          opacity: 0;
-        }
       }
     }
 
@@ -109,35 +104,49 @@
 
     // Vertical rhythm inside an accordion is handled in 00-atoms/02-text/00-typography
 
-    // TODO: Transitions not firing as we want them to
-    // We can replace this with new CSS where auto-height is allowed
     .js & {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0s linear 1s, visibility 0s linear 0s;
+      padding-inline: $general-h-spacing;
+      transition: max-height 250ms ease-in-out 250ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500s;
       visibility: hidden;
 
       > div {
         opacity: 0;
-        transition: $transition-base 0ms;
+        transition: opacity 250ms ease-in-out 0ms;
       }
     }
 
     .js [aria-expanded='true'] + & {
-      max-height: none;
-      padding: $nav-a-v-spacing $nav-a-h-spacing ($nav-a-v-spacing/2);
-      transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+      max-height: none; // This will not transition smoothly
+      padding-block: $general-v-spacing;
+      transition: max-height 250ms ease-in-out 250ms, padding 500ms ease-in-out 0ms, visibility 0s linear 0ms;
       visibility: visible;
 
       > div {
         opacity: 1;
-        transition: $transition-base 125ms;
+        transition: opacity 250ms ease-in-out 250ms;
+      }
+    }
+
+    // New calc auto size property not available in FF or Safari as of 2025-12-12
+    @supports (height: calc-size(auto)) {
+      .js & {
+        height: calc-size(auto);
+        max-height: unset;
+        transition: height 500ms ease-in-out 0ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500s;
+      }
+
+      .js [aria-expanded='true'] + & {
+        height: 20em;
+        max-height: unset;
+        transition: height 500ms ease-in-out 0ms, padding 500ms ease-in-out 0ms, visibility 0s linear 0ms;
       }
     }
 
     // When JS is broken and accordions are open by default
     .no-js & {
-      padding: $nav-a-v-spacing $nav-a-h-spacing;
+      padding: $general-v-spacing $general-h-spacing;
     }
 
     // In print, accordions are always open

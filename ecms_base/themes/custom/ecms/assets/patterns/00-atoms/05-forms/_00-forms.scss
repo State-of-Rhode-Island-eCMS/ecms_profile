@@ -1,5 +1,9 @@
 form {
-  margin-block: var(--body-text-spacer);
+  margin-block-start: var(--body-text-spacer);
+
+  *:where(h2, h3, p, ul, ol) {
+    margin-block-end: var(--body-text-spacer);
+  }
 }
 
 fieldset {
@@ -12,20 +16,30 @@ fieldset {
   }
 
   + fieldset {
-    margin-block-start: calc(var(--body-text-spacer) * 1.5);
+    margin-block-start: calc(var(--body-text-spacer) * 2);
   }
 }
 
 // <label>
 // Handled in conjunction with .qh__fs-st in 00-atoms/02-text/00-typography
-// (increased max font size)
-
 label {
-  display: block;
+  display: inline-block;
   font-weight: 475;
 }
 
-input:where(:not([type='checkbox']):not([type='radio']):not([type='range'])),
+label,
+input,
+textarea,
+select {
+  /* Gracefully falls back when the font is NOT the variable version
+   * Though this is the cascade default on the vbody element, p tags get oldstyle-nums, and therefore,
+   * when an input is inside a p tag, it will as well.
+   * But we'd rather not, so we need to declare this twice to override the cascade
+   */
+  font-variant-numeric: lining-nums;
+}
+
+input:where(:not([type='checkbox'], [type='radio'], [type='range'], [type='submit'], [type='reset'])),
 textarea,
 select {
   background-color: var(--fc__default__bg);
@@ -160,8 +174,7 @@ input[type='range'] {}
 
 .form__actions {
   a {
-    font-weight: var(--default-body-wght);
-    @include qh__p;
+    font-weight: var(--vf-body-wght);
   }
 }
 
