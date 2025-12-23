@@ -4,18 +4,15 @@
     flex-flow: row wrap;
     align-items: stretch;
     justify-content: center;
-    
+
     .qh__teaser-promotion {
       flex: 0 1 100%;
-      
+
       @include breakpoint-up($bp--medium) {
         flex: 0 1 calc(50% - 1rem);
         margin-left: 0;
         margin-top: 1.5rem;
-
-        @include onlyIE() {
-          flex: 0 1 47.5%;
-        }
+        
 
         &:nth-child(2n) {
           margin-left: 1rem;
@@ -24,10 +21,6 @@
 
       @include breakpoint-up($bp--large) {
         flex: 0 1 calc(33% - 0.5rem);
-
-        @include onlyIE() {
-          flex: 0 1 31%;
-        }
 
         &:nth-child(2n) {
           margin-left: 0;
