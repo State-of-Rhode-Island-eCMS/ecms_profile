@@ -1,7 +1,7 @@
 .qh__breadcrumb {
   &__wrapper {
     @include qh-content-maxwidth();
-    margin-top: 2rem;
+    margin-block-start: 1lh;
   }
 
   // <ol>
@@ -10,7 +10,7 @@
   // <li>
   &__item {
     display: inline-block;
-    margin-right: - rem(4);
+    margin-inline-end: - rem(4);
     vertical-align: middle;
 
     &--home {
@@ -29,7 +29,6 @@
   // <a> and <span>
   &__page {
     display: block;
-    font-size: 87.5%;
   }
 
   @at-root {
