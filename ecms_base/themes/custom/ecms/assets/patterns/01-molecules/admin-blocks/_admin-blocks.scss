@@ -1,0 +1,9 @@
+.block-local-tasks-block {
+  border: $border-xs solid var(--fc__default__border);
+  padding: $nav-a-v-spacing--sm $nav-a-h-spacing--sm;
+  margin-block-end: calc( var(--body-text-spacer) * 2 );
+
+  .tabs {
+    margin-block-end: 0;
+  }
+}
