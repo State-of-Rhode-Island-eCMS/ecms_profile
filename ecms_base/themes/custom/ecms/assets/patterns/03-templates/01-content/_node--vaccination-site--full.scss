@@ -6,7 +6,6 @@
 .node--type-vaccination-site {
   .field__label {
     font-weight: 525;
-    @include qh__p;
     margin-bottom: ($general-v-spacing/4);
   }
 

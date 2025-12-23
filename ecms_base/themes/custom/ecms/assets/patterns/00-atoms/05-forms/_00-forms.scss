@@ -260,7 +260,6 @@ input[type='range'] {}
 // Webform module styles
 .description,
 .text-count-message {
-  @include qh__p;
 
   small {
     font-size: inherit;
