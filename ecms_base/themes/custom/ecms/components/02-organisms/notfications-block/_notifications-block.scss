@@ -2,8 +2,11 @@
   position: relative;
 
   // If dark mode, dim slightly
+  html:where(.dark) & {
+    opacity: 0.9;
+  }
   @media (prefers-color-scheme: dark) {
-    html:not(.light) & {
+    html:where(:not(.light)) & {
       opacity: 0.9;
     }
   }
@@ -11,7 +14,7 @@
   &__wrapper {
     background-color: var(--fc__notification__bg);
     margin: 0 auto;
-    max-width: Min(calc(#{$content-max-small-screen} + 1.75rem), #{$content-max-large-screen});
+    max-width: Min(calc(#{$content-max-small-screen} + 1.75rem), calc(#{$content-max-large-screen} * var(--fontSizeModifier)));
 
     // Light colored background as a pseudo element with opacity applied
     &::before {
@@ -27,7 +30,7 @@
   .qh__icon__svg {
     color: var(--fc__notification__icon);
     height: rem(32);
-    margin: 0 0.5em 0 -0.25em;
+    margin: 0 1.125em 0 -0.5em;
     width: em(38);
   }
 
@@ -77,12 +80,10 @@
     }
 
     p {
-      max-width: 100em;
-      margin-inline-start: auto;
-      margin-inline-end: auto;
+      max-width: $max-line-length-ch;
 
       & + p {
-        margin-top: 0.75em;
+        margin-top: var(--body-text-spacer);
       }
     }
 

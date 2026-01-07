@@ -36,17 +36,18 @@
         content: ' to dark';
       }
     }
+
+    .light & {
+      &.switch::after {
+        content: ' to dark';
+      }
+    }
+
     @media (prefers-color-scheme:dark) {
       html:not(.light) & {
         &.switch::after {
           content: ' to light';
         }
-      }
-    }
-
-    .light & {
-      &.switch::after {
-        content: ' to dark';
       }
     }
   }
@@ -75,22 +76,17 @@
   }
 
   &__icon {
-    display: inline-block;
-    //height: 1.25em;
-    //margin: -0.125em 0.5em 0 0;
-    vertical-align: middle;
-    //width: 1.25em;
+    display: grid;
+    place-content: center;
 
     svg {
       width: 1.75em;
       height: 1.75em;
-      //position: relative;
-      //top: -40%;
-      //left: -50%;
     }
   }
 
   &__text {
+    // Hide text visually but make available to screen readers
     @include breakpoint-down($bp__show__desktop-nav) {
       position: absolute;
       clip: rect(1px, 1px, 1px, 1px);
@@ -103,8 +99,11 @@
 
   // <button>
   &__toggle {
-    display: inline-block;
-    padding: 0.15em 0.25em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.25em;
     position: relative;
     text-align: right;
     z-index: z(mobile-nav-bar);
@@ -136,10 +135,10 @@
     color: var(--fc__official__fg);
     opacity: 0;
     max-height: 80vh;
-    min-height: 50vh;
-    max-width: rem(480);
-    min-width: rem(288); // 320 phone minus 32px
-    width: 50vw;
+    min-height: 48vh;
+    max-width: 36rem;
+    min-width: 18rem;
+    width: 82vw;
     overflow-y: scroll;
     padding: 0.5em 0;
     position: absolute;
