@@ -6,7 +6,8 @@ $qh__footer-v-space: clamp(1.5rem, 1rem + 1.6667vw, 2.25rem); // this ends up be
 $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
 
 .qh__site-footer {
-  background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg),rgb(0, 0, 0, 0.25) 100% );
+  background-color: var(--fc__footer__bg);
+  background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(0, 0, 0, 0.25) 100% );
   border-block-start: $border-xl solid var(--fc__footer__border-top);
   color: var(--fc__footer__fg);
 
