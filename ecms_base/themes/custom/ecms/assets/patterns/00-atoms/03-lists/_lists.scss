@@ -4,18 +4,24 @@ dl {
 
   li,
   dd {
-    line-height: calc(var(--body-text-spacer) * 1.375);
-    margin-block-start: 0;
-    margin-inline-start: calc(var(--body-text-spacer) * 0.75);
-    padding-inline-start: calc(var(--body-text-spacer) * 0.25);
+    // Rules for when these items are in main content
+    .node &,
+    .qh__accordion__content > div &,
+    .qh__numbered-step__content &,
+    .qh__single-event__content & {
+      line-height: calc(var(--body-text-spacer) * 1.375);
+      margin-block-start: 0;
+      margin-inline-start: calc(var(--body-text-spacer) * 0.75);
+      padding-inline-start: calc(var(--body-text-spacer) * 0.25);
 
-    &::marker {
-      color: var(--fc__default__text-accent);
-      font-size: 0.875em;
-    }
+      &::marker {
+        color: var(--fc__default__text-accent);
+        font-size: 0.875em;
+      }
 
-    + li {
-      margin-top: calc(var(--body-text-spacer) * 0.25);
+      + li {
+        margin-top: calc(var(--body-text-spacer) * 0.25);
+      }
     }
   }
 }

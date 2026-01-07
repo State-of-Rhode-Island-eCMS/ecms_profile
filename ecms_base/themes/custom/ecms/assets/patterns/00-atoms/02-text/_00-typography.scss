@@ -86,21 +86,22 @@ body {
 .qh__single-event__content {
 
   // Set up ideal character max-widths in content
-  p,
-  li,
-  dt,
-  dd {
+  :where(p, li, dt, dd) {
     max-width: $max-line-length-ch;
   }
 
   // Set up vertical rhythm inside main content containers
-  > *:where(:not(h4, .qh__h4, h5, .qh__h5, h6, .qh__h6, .qh__accordion, hr)) {
+  > :where(:not(h4, .qh__h4, h5, .qh__h5, h6, .qh__h6, .qh__accordion, hr)) {
     /*
       A LH unit changes with the size of the element’s font-size and line height
       It also collapses when used on the margin property.
       Therefore, we should achieve a balanced rhythm with only a few simple declarations.
       */
     margin-block-end: var(--body-text-spacer);
+  }
+
+  > :where(.qh__paragraph) {
+    margin-block-end: calc(var(--body-text-spacer) * 2);
   }
 
   > *:last-child  {
@@ -174,6 +175,7 @@ h3,
 
   font-style: normal;
   letter-spacing: $kerning-base;
+  margin-block-start: var(--body-text-spacer);
 
   html:where(.wf-active:not(.novf)) & {
     font-weight: 475;
@@ -307,8 +309,8 @@ label,
   --font-size-min-value: var(--st-size-s);
   --font-size-max-value: var(--st-size-l);
   --font-size-scaler-value: var(--st-scaler-value);
-  --font-lh-min: var(--st-lh-s);
-  --font-lh-max: var(--st-lh-l);
+  --font-lh-min-value: var(--st-lh-s);
+  --font-lh-max-value: var(--st-lh-l);
   --font-lh-scaler-value: var(--st-lh-scaler-value);
   font-weight: calc(var(--vf-body-wght) + 50);
 }
