@@ -1,6 +1,6 @@
 .qh-layout__sidebar-top {
   position: sticky;
-  top: 3rem;
+  top: 3em;
   z-index: z(mobile-nav-bar);
 
   @include breakpoint-up($bp__single-col-content) {
@@ -13,6 +13,7 @@
 .qh__nav-minor {
   background-color: var(--fc__default__bg);
   border-top: $border-lg solid var(--fc__nav-minor__border);
+  border-start-start-radius: $brad-sm;
   overflow: visible;
 
   @include breakpoint-down($bp__single-col-content) {
@@ -22,15 +23,9 @@
     // This calc replicates the spacing variable to negate it, and push the button trigger over to the edge of the viewport
     left: calc((1.125em + 3.5vw) * -1);
     min-width: unset;
-    width: rem(320 - $button-trigger-height);
-    transform: translateX(- rem(320 - $button-trigger-height));
+    width: em(320 - $button-trigger-height);
+    transform: translateX(- em(320 - $button-trigger-height));
     transition: transform $transition-duration-base $transition-timing-base;
-
-    // The above calc does not work for iOS 12 — unclear why
-    // iOS 11–13 do not support clamp(), so we use it as a check
-    @supports not (font-size: clamp(1rem, 2vw, 1.25rem)) {
-      left: 0;
-    }
 
     > ul {
       transform: translateX(- em(48));
@@ -46,6 +41,21 @@
     }
   }
 
+  @include breakpoint-up($bp__single-col-content) {
+    border-start-end-radius: $brad-sm;
+    // Light mode layered shadows
+    box-shadow: 0 0.125em 2vw rgba(255,255,255,0.85), 0.25em 0.75em 10vw rgba(0,0,0,0.15);
+
+    html:where(.dark) & {
+      box-shadow: 0.25em 0.75em 8vw rgba(0,0,0,0.25);
+    }
+    @media (prefers-color-scheme: dark) {
+      html:where(:not(.light)) & {
+        box-shadow: 0.25em 0.75em 8vw rgba(0,0,0,0.25);
+      }
+    }
+  }
+
   // Interaction styles come from .qh__accordion
   //&:hover,
   //&:focus {}
@@ -57,10 +67,10 @@
 
   // <button>
   &__toggle {
-    background-color: var(--fc__nav-minor__border);
+    background-color: var(--fc__nav-minor__link--hover);
     background-image: none;
     border-radius: 0;
-    color: var(--fc__nav-minor__fg);
+    color: var(--fc__nav-minor__link--hover__bg);
     padding: ($button-v-spacing/8) $button-h-spacing ($button-v-spacing/8) 0;
     overflow: visible;
     position: absolute;
@@ -69,25 +79,28 @@
     transform: rotate(-90deg);
     transform-origin: top right;
 
-    &:hover::before,
-    &:focus::before {
-      background-color: var(--fc__default__button--hover__bg);
-    }
-
     // Little triangle at the bottom
     &::before {
-      background-color: var(--fc__nav-minor__border);
+      background-color: var(--fc__nav-minor__link--hover);
       background-image: none;
       content: ' ';
       display: block;
       height: 100%;
-      width: rem(40);
+      width: em(36);
       position: absolute;
       top: 0;
-      left: - rem(30);
+      left: - em(30);
       transform: skew(25deg, 0deg);
       transition: $transition-base;
       z-index: -1;
+    }
+
+    &:hover,
+    &:focus,
+    &:hover::before,
+    &:focus::before {
+      background-color: var(--fc__nav-minor__link--hover__bg);
+      color: var(--fc__nav-minor__link--hover);
     }
 
     @include breakpoint-up($bp__single-col-content) {
@@ -103,6 +116,9 @@
 
   &__list {
     background-color: var(--fc__nav-minor__bg);
+    border-end-start-radius: $brad-sm;
+    border-end-end-radius: $brad-sm;
+    overflow: hidden;
     position: relative;
     z-index: z(drop-down-menu);
 
@@ -123,7 +139,7 @@
 
     &__sub {
       background-color: var(--fc__nav-minor__sub__bg);
-      border-left: 0.85rem solid var(--fc__nav-minor__link--hover__bg);
+      border-left: ($general-h-spacing * 0.5) solid var(--fc__nav-minor__link--hover__bg);
     }
   }
 
@@ -132,7 +148,8 @@
     position: relative;
     overflow: visible;
 
-    //&__sub {}
+    // Also <li>, but nested
+    &__sub {}
 
     &:not(&__sub) + &:not(&__sub)::before {
       border-top: $border-sm solid var(--fc__default__bg);
@@ -147,7 +164,7 @@
   // <li>
   &__has-children {
     // Set up a split button design
-    $button-width: rem(44);
+    $button-width: em(44);
 
     display: flex;
     flex-flow: row wrap;
@@ -155,21 +172,14 @@
     justify-content: space-between;
 
     .qh__nav-minor__link {
-      flex: 1 0 calc(100% - #{$button-width});
-      margin-left: auto;
-      max-width: calc(100% - #{$button-width});
-    }
-
-    .qh__nav-minor__list__sub .qh__nav-minor__link {
-      max-width: none;
-      //padding-left: 1.5rem;
+      flex: 1 0 0;
     }
 
     .qh__accordion__button {
       display: block;
       flex: 0 0 $icon-dimension;
       margin: 0 0 0 auto;
-      padding: 0.25rem 0;
+      padding: 0.25em 0;
 
       .qh__icon {
         margin: 0;
@@ -185,6 +195,11 @@
   }
 
   // Restyling accordion elements classes
+  .qh__accordion__content > div ul .qh__nav-minor__item {
+    margin: 0;
+    padding: 0;
+  }
+
   .qh__accordion__button {
     &[aria-expanded='true'] {
       background-color: var(--fc__nav-minor__link--hover__bg);
@@ -222,13 +237,14 @@
   &__link {
     &,
     &:visited {
+      // Remove visited styles by declaring them the same as static anchor styles
       background-color: var(--fc__nav-minor__link__bg);
       color: var(--fc__nav-minor__link);
       text-decoration: none;
     }
 
-    &:not(.qh__nav-minor__link--current):hover,
-    &:not(.qh__nav-minor__link--current):focus {
+    &:not([aria-current]):hover,
+    &:not([aria-current]):focus {
       background-color: var(--fc__nav-minor__link--hover__bg);
       color: var(--fc__nav-minor__link--hover);
     }
@@ -254,12 +270,24 @@
     //  pointer-events: none;
     //}
 
-    &--current,
-    .js &--current.qh__accordion__button[aria-expanded='true'] {
-      background-color: var(--fc__nav-minor__bg);
+    &[aria-current],
+    &[aria-current]:hover,
+    &[aria-current]:focus,
+    &[aria-current]:visited,
+    .js &[aria-current].qh__accordion__button[aria-expanded='true'] {
+      background-color: var(--fc__nav-minor__link--hover__bg);
       color: var(--fc__nav-minor__fg);
       font-weight: var(--vf-bold-wght);
       text-decoration: none;
+    }
+
+    &__sub[aria-current],
+    &__sub[aria-current]:hover,
+    &__sub[aria-current]:focus,
+    &__sub[aria-current]:visited,
+    .js &__sub[aria-current].qh__accordion__button[aria-expanded='true'] {
+      background-color: var(--fc__nav-minor__sub__bg);
+      color: var(--fc__nav-minor__fg);
     }
   }
 
@@ -271,7 +299,7 @@
     }
 
     // Label the current link with the destination URL, which should be this page
-    a#{&}__link--current[href]::after {
+    a[aria-current][href]::after {
       content: ' (' attr(href) ')';
     }
 
