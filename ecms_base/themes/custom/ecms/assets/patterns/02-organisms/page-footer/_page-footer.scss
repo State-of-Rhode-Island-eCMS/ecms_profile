@@ -1,56 +1,26 @@
+$qh__footer-sm-bp: $bp--small;
+$qh__footer-lg-bp: em(1020);
+// Starting to introduce fluid spacing using these metrics:
+// https://utopia.fyi/space/calculator?c=480,16,1.2,1200,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+$qh__footer-v-space: clamp(1.5rem, 1rem + 1.6667vw, 2.25rem); // this ends up being doubled in use
+$qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
+
 .qh__site-footer {
-
-  $qh__footer-sm-bp: $bp--small;
-  $qh__footer-lg-bp: em(1020);
-
-  background-color: var(--fc__footer__bg);
+  background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg),rgb(0, 0, 0, 0.25) 100% );
   border-block-start: $border-xl solid var(--fc__footer__border-top);
   color: var(--fc__footer__fg);
 
-  // Four column 2 over 2 layout. Horizontal borders in between
-  @include breakpoint-between($qh__footer-sm-bp, $qh__footer-lg-bp) {
-    &__first,
-    &__third {
-      padding-inline-end: $general-h-spacing;
-
-      &::before {
-        border-inline-end: $border-xs solid var(--fc__footer__fg);
-        content: '';
-        opacity: 0.33;
-        position: absolute;
-        top: $general-h-spacing;
-        right: 0;
-        bottom: $general-h-spacing;
-      }
-    }
-
-    &__second,
-    &__fourth {
-      padding-inline-start: $general-h-spacing;
-    }
-  }
-
-  // Four columns across. Borders only on last element
-  @include breakpoint-up($qh__footer-lg-bp) {
-    &__first,
-    &__second,
-    &__third {
-      padding-inline-end: $general-h-spacing;
-    }
-
-    &__fourth {
-      padding-inline-start: $general-h-spacing;
-
-      &::before {
-        border-inline-start: $border-xs solid var(--fc__footer__fg);
-        content: '';
-        opacity: 0.33;
-        position: absolute;
-        top: $general-h-spacing;
-        left: 0;
-        bottom: $general-h-spacing;
-      }
-    }
+  :where(#{$all-headers}) {
+    // There should be heading elements inside the footer, but if there are, we don't want them to look huge
+    // So we make all of them, regardless of semantic weight, the same visual size
+    --font-size-min-value: var(--h5-size-s);
+    --font-size-max-value: var(--h5-size-l);
+    --font-size-scaler-value: var(--h5-scaler-value);
+    --font-lh-min-value: var(--h5-lh-s);
+    --font-lh-max-value: var(--h5-lh-l);
+    --font-lh-scaler-value: var(--h5-lh-scaler-value);
+    color: var(--fc__footer__headings) !important;
+    margin-block-start: 0;
   }
 
   a {
@@ -68,12 +38,12 @@
   }
 
   p {
-    @extend .qh__fs-st !optional;
+    --font-lh-min-value: 1.5;
+    --font-lh-max-value: 1.75;
     hyphens: auto !important; // Please forgive me
+    margin-block-start: var(--body-text-spacer);
 
-    + p {
-      margin-block-start: var(--body-text-spacer);
-    }
+    @extend .qh__fs-st !optional;
   }
 
   p,
@@ -83,28 +53,30 @@
 
   &__inner {
     @include qh-content-maxwidth();
-  }
-
-  & > &__inner {
-    padding: $general-v-spacing 0;
+    display: flex;
+    flex-flow: column;
+    column-gap: $qh__footer-h-space;
+    row-gap: 0;
+    padding-block: $qh__footer-v-space;
 
     @include breakpoint-up($qh__footer-sm-bp) {
-      display: flex;
       flex-flow: row wrap;
-      align-items: stretch;
-      justify-content: flex-start;
     }
   }
 
   &__content {
-    padding-block: $general-v-spacing;
     position: relative;
+    margin-block: $qh__footer-v-space;
 
     @include breakpoint-down($qh__footer-sm-bp) {
+      // Make room on the left for the section navigation sticky button
+      padding-inline-start: $qh__footer-h-space;
+
+      // Border between each column except the first one
       & + &::before {
-        border-top: $border-xs solid var(--fc__footer__fg);
+        border-block-start: $border-xs solid var(--fc__footer__fg);
         content: '';
-        opacity: 0.33;
+        opacity: 0.25;
         position: absolute;
         top: 0;
         left: 0;
@@ -114,43 +86,58 @@
 
     // Four column 2 over 2 layout
     @include breakpoint-up($qh__footer-sm-bp) {
-      flex: 0 0 50%;
+      flex: 1 0 46%;
     }
 
     // Four columns across layout
     @include breakpoint-up($qh__footer-lg-bp) {
-      flex: 0 0 25%;
+      flex: 1 0 22%;
+      max-width: em(300);
+
+      &:last-child {
+        margin-inline-start: auto;
+        padding-inline-start: $qh__footer-h-space;
+
+        &::before {
+          border-inline-start: $border-xs solid var(--fc__footer__fg);
+          content: '';
+          opacity: 0.25;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+        }
+      }
     }
   }
 
   &__copyright {
-    background-color: var(--fc__footer__copyright__bg);
     color: var(--fc__footer__fg);
-    padding: $general-v-spacing $general-h-spacing;
 
     &__content {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
       justify-content: flex-start;
+      width: 100%;
 
       p {
         flex: 1 1 auto;
-        margin-inline-start: 1rem;
-        max-width: unset;
+        margin-inline-start: $qh__footer-h-space;
+        margin-block-start: 0;
       }
     }
 
     svg:first-of-type {
-      flex: 0 0 rem(50);
+      flex: 0 0 em(50);
       margin: -0.75rem 0;
 
       @include breakpoint-up($qh__footer-sm-bp) {
-        flex: 0 0 rem(62);
+        flex: 0 0 em(62);
       }
 
       @include breakpoint-up($qh__footer-lg-bp) {
-        flex: 0 0 rem(75);
+        flex: 0 0 em(75);
       }
     }
   }
