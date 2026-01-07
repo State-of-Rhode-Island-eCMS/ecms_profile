@@ -66,6 +66,13 @@
     }
 
     &__main-line {
+      // Typography and class of the H1 but size of an H2
+      --font-size-min-value: var(--h2-size-s);
+      --font-size-max-value: var(--h2-size-l);
+      --font-size-scaler-value: var(--h2-scaler-value);
+      --font-lh-min-value: var(--h2-lh-s);
+      --font-lh-max-value: var(--h2-lh-l);
+      --font-lh-scaler-value: var(--h2-lh-scaler-value);
       color: var(--fc__header__fg);
     }
 
