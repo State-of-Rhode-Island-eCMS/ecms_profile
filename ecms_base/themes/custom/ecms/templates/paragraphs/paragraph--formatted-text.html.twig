@@ -39,4 +39,13 @@
  */
 #}
 
-{{ content }}
+{% set parent = paragraph.getParentEntity() %}
+{% set in_column_container = parent.getEntityTypeId() is defined and parent.getEntityTypeId() == 'paragraph' and parent.bundle() == 'column_container' %}
+
+{% if in_column_container %}
+  <div class="formatted-text-wrapper">
+    {{ content }}
+  </div>
+{% else %}
+  {{ content }}
+{% endif %}
