@@ -2,7 +2,9 @@
 
   // <from>
   form {
+    display: flex;
     margin: 0;
+
     @include breakpoint-up($bp__show__desktop-nav) {
       display: grid;
       grid-template-columns: auto 3rem;
@@ -16,8 +18,11 @@
     border-start-end-radius: 0;
     border-end-end-radius: 0;
     border-color: var(--fc__default__button--hover__fg);
-    max-width: 12em;
-    min-width: 10em;
+
+    @include breakpoint-up($bp__show__desktop-nav) {
+      max-width: 12em;
+      min-width: 10em;
+    }
   }
   // needed a bit more specificity for the site search form in the header
   label + input[type='text'].qh__site-search__query {
