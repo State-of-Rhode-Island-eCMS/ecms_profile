@@ -32,16 +32,11 @@ body {
 
   // <div>
   &__wrapper {
-    @include qh-content-maxwidth();
     position: relative;
     overflow: hidden;
     z-index: z(desktop-nav-bar);
 
     &.open {
-      overflow: visible;
-    }
-
-    @include breakpoint-up($bp__show__desktop-nav) {
       overflow: visible;
     }
 
@@ -52,6 +47,11 @@ body {
       align-items: center;
       justify-content: space-between;
       z-index: z(mobile-nav-bar);
+    }
+
+    @include breakpoint-up($bp__show__desktop-nav) {
+      @include qh-content-maxwidth();
+      overflow: visible;
     }
   }
 
@@ -101,29 +101,29 @@ body {
       > span {
         display: block;
         background-color: currentColor;
-        height: rem(2);
+        height: em(2);
         position: absolute;
-        width: rem(20);
+        width: em(20);
       }
 
       // Top bar
       &::before {
         content: '';
-        top: rem(12);
-        left: rem(12);
+        top: em(12);
+        left: em(12);
       }
 
       // Mid bar
       > span {
-        top: rem(21);
-        left: rem(12);
+        top: em(20);
+        left: em(12);
       }
 
       // Bottom bar
       &::after {
         content: '';
-        top: rem(30);
-        left: rem(12);
+        top: em(28);
+        left: em(12);
       }
     } // end .qh__icon__menu
 
@@ -133,11 +133,11 @@ body {
     &:active {
       .qh__icon__menu::before,
       .qh__icon__menu::after {
-        left: rem(10);
+        left: em(10);
       }
 
       .qh__icon__menu > span {
-        left: rem(14);
+        left: em(14);
       }
     }
 
@@ -478,8 +478,8 @@ body {
       color: var(--fc__nav-main__fg);
       // cursor: default;
       font-weight: 550;
-      padding-top: ($nav-a-v-spacing * 0.75);
-      padding-bottom: $nav-a-v-spacing;
+      padding-block-start: ($nav-a-v-spacing * 0.75);
+      padding-block-end: $nav-a-v-spacing;
       // pointer-events: none;
 
       @include breakpoint-down($bp__show__desktop-nav) {
@@ -512,6 +512,7 @@ body {
 
     // Home button in navbar
     .qh__nav-main__wrapper > &--home {
+
       // Hide for desktop
       @include breakpoint-up($bp__show__desktop-nav) {
         display: none;
@@ -535,12 +536,7 @@ body {
     &--home,
     &--home:visited {
       border-top: 0;
-      padding: 0.0625em 0.1875em;
-
-      &:hover,
-      &:focus {
-        padding: 0.0625em 0.1875em !important;
-      }
+      padding: 0.5em;
     }
   }
 }
