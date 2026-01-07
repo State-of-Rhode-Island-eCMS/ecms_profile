@@ -408,13 +408,14 @@
     "scarborough": {
       "humanName": "Scarborough Beach",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "navy--dark" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "calamari" },
-          { "fnName": "link--focus", "colorName": "calamari" }
-        ],
+        # Removing in new design; using values from header
+        #"official": [
+        #  { "fnName": "fg", "colorName": "quahog--light" },
+        #  { "fnName": "bg", "colorName": "navy--dark" },
+        #  { "fnName": "link", "colorName": "white" },
+        #  { "fnName": "link--hover", "colorName": "calamari" },
+        #  { "fnName": "link--focus", "colorName": "calamari" }
+        #],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "navy" },
@@ -573,13 +574,13 @@
     "scarborough--dark": {
       "humanName": "Scarborough Beach dark",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "ocean" },
-          { "fnName": "link--hover", "colorName": "hope-gold" },
-          { "fnName": "link--focus", "colorName": "hope-gold" }
-        ],
+        #"official": [
+        #  { "fnName": "fg", "colorName": "quahog--light" },
+        #  { "fnName": "bg", "colorName": "quahog--darker" },
+        #  { "fnName": "link", "colorName": "ocean" },
+        #  { "fnName": "link--hover", "colorName": "hope-gold" },
+        #  { "fnName": "link--focus", "colorName": "hope-gold" }
+        #],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "navy--dark" },
@@ -703,13 +704,13 @@
     "federal-hill": {
       "humanName": "Federal Hill",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "rhody-red" },
-          { "fnName": "link--focus", "colorName": "rhody-red" }
-        ],
+        #"official": [
+        #  { "fnName": "fg", "colorName": "quahog--light" },
+        #  { "fnName": "bg", "colorName": "quahog--darker" },
+        #  { "fnName": "link", "colorName": "white" },
+        #  { "fnName": "link--hover", "colorName": "rhody-red" },
+        #  { "fnName": "link--focus", "colorName": "rhody-red" }
+        #],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "rhody-red--dark" },
@@ -841,13 +842,13 @@
     "federal-hill--dark": {
       "humanName": "Federal Hill dark",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "rhody-red" },
-          { "fnName": "link--focus", "colorName": "rhody-red" }
-        ],
+        #"official": [
+        #  { "fnName": "fg", "colorName": "quahog--light" },
+        #  { "fnName": "bg", "colorName": "quahog--darker" },
+        #  { "fnName": "link", "colorName": "white" },
+        #  { "fnName": "link--hover", "colorName": "rhody-red" },
+        #  { "fnName": "link--focus", "colorName": "rhody-red" }
+        #],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "rhody-red--trans15" },
@@ -1094,13 +1095,13 @@
     "wickaboxet--dark": {
       "humanName": "Wickaboxet Forest dark",
       "values": {
-        "official": [
-          #{ "fnName": "fg", "colorName": "coffee-milk--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          #{ "fnName": "link", "colorName": "white" },
-          #{ "fnName": "link--hover", "colorName": "green-animals" },
-          #{ "fnName": "link--focus", "colorName": "green-animals" }
-        ],
+        #"official": [
+        #  { "fnName": "fg", "colorName": "coffee-milk--light" },
+        #  { "fnName": "bg", "colorName": "quahog--darker" },
+        #  { "fnName": "link", "colorName": "white" },
+        #  { "fnName": "link--hover", "colorName": "green-animals" },
+        #  { "fnName": "link--focus", "colorName": "green-animals" }
+        #],
         "header": [
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "green-animals--trans15" },
