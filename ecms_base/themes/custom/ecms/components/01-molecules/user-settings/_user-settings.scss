@@ -131,8 +131,8 @@
   } // end &__toggle
 
   &__list {
-    background-color: var(--fc__official__bg);
-    color: var(--fc__official__fg);
+    background-color: var(--fc__header__bg);
+    color: var(--fc__header__fg);
     opacity: 0;
     max-height: 80vh;
     min-height: 48vh;
@@ -153,7 +153,7 @@
     z-index: z(drop-down-menu);
 
     &::before {
-      background-color: var(--fc__official__bg);
+      background-color: var(--fc__header__bg);
       content: '';
       position: absolute;
       @include qh-inset-supports(0);
