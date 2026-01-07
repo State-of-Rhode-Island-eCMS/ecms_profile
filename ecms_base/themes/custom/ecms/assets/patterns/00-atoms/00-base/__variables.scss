@@ -5,23 +5,27 @@ $all-headers: 'h1, .qh__h1, h2, .qh__h2, h3, .qh__h3, h4, .qh__h4, h5, .qh__h5, 
 $all-typography-block: 'p, li, dt, dd, th, td, address, label, figcaption, input, select, textarea, button, legend, .qh__fs-base, .qh__fs-st';
 
 // Borders
-$border-xs: rem(1);
-$border-sm: rem(2);
-$border-md: rem(6);
-$border-lg: rem(14);
-$border-xl: rem(21);
+$border-xs: rem(0.5);
+$border-sm: rem(1);
+$border-md: rem(4);
+$border-lg: rem(8);
+$border-xl: rem(15);
+
+// Border radius
+$brad-xs: rem(3);
+$brad-sm: rem(5);
 
 // Box Shadows
 $box-shadow-base: 0 0.125em 0.5em var(--c__quahog--dark--trans33);
 
 // Buttons
-$button-border-radius: rem(3);
+$button-border-radius: $brad-xs;
 $button-v-spacing: 0.625em;
 $button-h-spacing: 1.125em;
 
 // Content max-width
 $content-max-small-screen: 93vw;
-$content-max-large-screen: 86rem; /* 1376px */
+$content-max-large-screen: 86em; /* 1376px */
 
 // Generic page gutter, column spacing, vertical spacing
 $general-v-spacing: 1.5em;
@@ -90,6 +94,10 @@ $vf-bold-wght: 625;
 $text-base-size: 16;
 
 // Change px values here for all font sizing
+// small text
+$st-size-s-px: 14;
+$st-size-l-px: 15;
+
 $p-size-s-px: 16;
 $p-size-l-px: 18;
 
@@ -97,27 +105,23 @@ $h6-size-s-px: 16;
 $h6-size-l-px: 18;
 
 $h5-size-s-px: 18;
-$h5-size-l-px: 20;
-
-$h4-size-s-px: 19;
-$h4-size-l-px: 22;
-
-$h3-size-s-px: 21;
-$h3-size-l-px: 25;
-
-$h2-size-s-px: 24;
-$h2-size-l-px: 30;
-
-$h1-size-s-px: 30;
-$h1-size-l-px: 36;
+$h5-size-l-px: 21;
 
 // Blockquote
-$bq-size-s-px: 18;
-$bq-size-l-px: 22;
+$bq-size-s-px: 19;
+$bq-size-l-px: 23;
 
-// small text
-$st-size-s-px: 13;
-$st-size-l-px: 15;
+$h4-size-s-px: 20;
+$h4-size-l-px: 25;
+
+$h3-size-s-px: 23;
+$h3-size-l-px: 30;
+
+$h2-size-s-px: 26;
+$h2-size-l-px: 36;
+
+$h1-size-s-px: 29;
+$h1-size-l-px: 43;
 
 // Font size unitless values
 $p-size-s-value: $p-size-s-px / $text-base-size;
@@ -147,8 +151,7 @@ $bq-size-l-value: $bq-size-l-px / $text-base-size;
 $st-size-s-value: $st-size-s-px / $text-base-size;
 $st-size-l-value: $st-size-l-px / $text-base-size;
 
-// Line-height (needs to be in EMs)
-// While we prefer ratio units, the scaling via user preferences requires these declarations
+// Line-height (evaluates to EM units)
 $p-lh-s: 1.4;
 $p-lh-l: 1.5;
 
@@ -267,7 +270,7 @@ $st-lh-l: 1.4;
   // Other useful variables
   --body-text-spacer: 1lh;
 
-  --content-max-width: Min(#{$content-max-small-screen}, #{$content-max-large-screen});
+  --content-max-width: Min(#{$content-max-small-screen}, calc(#{$content-max-large-screen} * var(--fontSizeModifier)));
 
   --vf-body-wght: #{$vf-body-wght};
   --vf-bold-wght: #{$vf-bold-wght};
