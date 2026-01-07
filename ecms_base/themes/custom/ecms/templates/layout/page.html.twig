@@ -92,7 +92,7 @@
   <main id="main-content" tabindex="-1">
     <div class="qh-layout__grid">
       {% if page.sidebar_top %}
-        <div class="qh-layout__sidebar-top" role="complementary">
+        <div class="qh-layout__sidebar-top">
           {{ page.sidebar_top }}
         </div>
       {% endif %}
@@ -103,13 +103,13 @@
       </div>
 
       {% if page.sidebar_middle %}
-        <aside class="qh-layout__sidebar-middle" role="complementary">
+        <aside class="qh-layout__sidebar-middle">
           {{ page.sidebar_middle }}
         </aside>
       {% endif %}
 
       {% if page.sidebar_bottom %}
-        <aside class="qh-layout__sidebar-bottom" role="complementary">
+        <aside class="qh-layout__sidebar-bottom">
           {{ page.sidebar_bottom }}
         </aside>
       {% endif %}
@@ -121,7 +121,7 @@
 
   </main>
 
-  <footer class="qh__site-footer">
+  <footer class="qh__site-footer" aria-label="Department Contact Information and Related State Links">
     <div class="qh__site-footer__inner">
       <div class="qh__site-footer__content qh__site-footer__first">
         {{ footer_preprocess_values.footer_left }}

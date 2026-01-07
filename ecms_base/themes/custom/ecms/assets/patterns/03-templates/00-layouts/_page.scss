@@ -89,6 +89,10 @@ main {
       margin-right: $sidebar-column-gap;
       margin-top: unset;
     }
+
+    &:empty {
+      display: none;
+    }
   }
 
   &__sidebar-bottom {
@@ -98,6 +102,10 @@ main {
     @include breakpoint-up($bp__single-col-content) {
       max-width: $sidebar-max;
       margin-right: $sidebar-column-gap;
+    }
+
+    &:empty {
+      display: none;
     }
   }
 
