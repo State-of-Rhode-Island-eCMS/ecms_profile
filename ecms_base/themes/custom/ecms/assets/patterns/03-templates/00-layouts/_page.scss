@@ -1,23 +1,24 @@
-$sidebar-min: rem(200);
-$sidebar-max: rem(380);
+$sidebar-min: em(200);
+$sidebar-max: em(380);
 $sidebar-column-gap: 3vw;
-$sidebar-row-gap: rem(36);
+$sidebar-row-gap: em(36);
 
 main {
   position: relative;
 }
 
 .qh-layout {
+
   &__grid {
     @include qh-content-maxwidth();
+
     display: grid;
     grid-template-areas:
       'sidebar-top'
       'content'
       'sidebar-middle'
       'sidebar-bottom';
-    margin-top: 5rem;
-    padding-bottom: 5rem;
+    padding-block: 1lh 2lh;
     padding-left: 1rem;
 
     @include breakpoint-up($bp__single-col-content) {
@@ -27,6 +28,7 @@ main {
         'sidebar-bottom content';
       grid-template-columns: minmax(calc(#{$sidebar-min} * var(--fontSizeModifier)), calc(18rem * var(--fontSizeModifier))) minmax(0, 1fr);
       grid-template-rows: min-content min-content 1fr;
+      padding-block: 2lh 3lh;
       padding-left: 0;
 
       .path-user & {
