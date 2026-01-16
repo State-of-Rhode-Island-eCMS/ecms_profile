@@ -3,50 +3,38 @@ $table-cell-h-padding: 0.75rem;
 
 body {
   // Light as default
-  --fc__table__color-bright: #{qh-get-color('quahog--dark')};
-  --fc__table__border__h: #{qh-get-color('quahog--dark--trans25')};
-  --fc__table__border__v: #{qh-get-color('quahog--dark--trans15')};
+  --fc__table__color-bright: #{qh-get-color("quahog--dark")};
+  --fc__table__border__h: #{qh-get-color("quahog--dark--trans25")};
+  --fc__table__border__v: #{qh-get-color("quahog--dark--trans15")};
 
   // User changed theme to dark manually
   .dark & {
     // TODO: 'white' does not come back as valid map. Need to investigate further.
     --fc__table__color-bright: #{qh-get-color(white)};
-    --fc__table__border__h: #{qh-get-color('white--trans25')};
-    --fc__table__border__v: #{qh-get-color('white--trans15')};
+    --fc__table__border__h: #{qh-get-color("white--trans25")};
+    --fc__table__border__v: #{qh-get-color("white--trans15")};
   }
 
   // System preference dark mode but light class is not present
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
       --fc__table__color-bright: #{qh-get-color(white)};
-      --fc__table__border__h: #{qh-get-color('white--trans25')};
-      --fc__table__border__v: #{qh-get-color('white--trans15')};
+      --fc__table__border__h: #{qh-get-color("white--trans25")};
+      --fc__table__border__v: #{qh-get-color("white--trans15")};
     }
   }
 }
 
-// Adding affordance with an overflowing table is only possible if we can
-// add a wrapper element in some sort of Twig template
-// https://codepen.io/huijing/pen/XBGaNQ?editors=1100
-// More ideas on accessible tables from Adrian Roselli:
-// https://adrianroselli.com/2020/11/under-engineered-responsive-tables.html
+// Responsive table approach based on:
+// https://codepen.io/geoffyuen/pen/DZxEKy
+// JS adds data-th attributes and .qh__table class automatically
+$table-label-width: 8em;
+
 table {
   background-color: transparent;
   border-spacing: 0;
   margin-bottom: $general-v-spacing;
   width: 100%;
-
-  @include breakpoint-down($bp--medium) {
-    // Make small viewports allow horizontal scrolling
-    display: block;
-    position: relative;
-    overflow-y: auto;
-    max-height: 100%;
-    max-width: 100%;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-  }
 
   // keep text from getting larger than 1rem
   th,
@@ -84,12 +72,6 @@ table {
     text-align: left;
   }
 
-  // Row highlighting
-  tr:hover td {
-    background-color: var(--c__coffee-milk--trans10);
-    color: var(--fc__table__color-bright);
-  }
-
   // <p>-like typography styles applied via 02-text/00-typography
   th,
   td {
@@ -99,19 +81,10 @@ table {
   th {
     border-bottom: $border-xs solid var(--fc__table__border__h);
     font-weight: 550;
-
-    & + th,
-    & + td {
-      border-left: $border-xs solid var(--fc__table__border__v);
-    }
   }
 
   td {
     border-bottom: $border-xs solid var(--fc__table__border__h);
-
-    & + td {
-      border-left: $border-xs solid var(--fc__table__border__v);
-    }
   }
 
   // use a '.finance' class on a cell to align right and use tabular nums
@@ -122,5 +95,88 @@ table {
 
   .finance-header {
     text-align: center;
+  }
+}
+
+// Responsive table styles using container queries
+// JS wraps tables in .qh__table-container and adds .qh__table class
+// Uses container queries so tables respond to their container width, not viewport
+$table-container-breakpoint: 750px;
+
+.qh__table-container {
+  container-type: inline-size;
+  overflow-x: auto;
+
+  table.qh__table {
+    min-width: 300px;
+
+    // Prevent headers from wrapping awkwardly
+    thead th {
+      white-space: nowrap;
+    }
+
+    // Stacked layout for narrow containers
+    @container (max-width: #{$table-container-breakpoint}) {
+      tr {
+        border-top: $border-xs solid var(--fc__table__border__h);
+        border-bottom: $border-xs solid var(--fc__table__border__h);
+      }
+
+      thead th {
+        // Visually hidden but accessible to screen readers
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      tbody td {
+        display: block;
+        border-bottom: 0;
+        border-left: 0;
+
+        &:first-child {
+          padding-top: calc(#{$table-cell-v-padding} * 4);
+        }
+
+        &:last-child {
+          padding-bottom: calc(#{$table-cell-v-padding} * 4);
+        }
+
+        // Display the column header as a label
+        &::before {
+          content: attr(data-th) ": ";
+          font-weight: 550;
+          color: var(--fc__table__color-bright);
+          width: $table-label-width;
+          display: inline-block;
+          vertical-align: top;
+        }
+      }
+    }
+
+    // Wide container styles
+    @container (min-width: #{$table-container-breakpoint}) {
+      th {
+        & + th,
+        & + td {
+          border-left: $border-xs solid var(--fc__table__border__v);
+        }
+      }
+
+      td + td {
+        border-left: $border-xs solid var(--fc__table__border__v);
+      }
+
+      tr:hover td {
+        background-color: var(--c__coffee-milk--trans10);
+        color: var(--fc__table__color-bright);
+      }
+    }
   }
 }
