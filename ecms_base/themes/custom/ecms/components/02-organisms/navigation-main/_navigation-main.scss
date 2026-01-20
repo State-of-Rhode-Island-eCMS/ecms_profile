@@ -538,5 +538,11 @@ body {
       border-top: 0;
       padding: 0.5em;
     }
+
+    // Repeat padding because other anchors change their opadding when hovered, but this one should not
+    &--home:hover,
+    &--home:focus {
+      padding: 0.5em !important;
+    }
   }
 }
