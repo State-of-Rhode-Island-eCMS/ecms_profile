@@ -1,8 +1,8 @@
 form {
-  margin-block-start: var(--body-text-spacer);
+  margin-block-start: var(--vertical-rhythm);
 
   *:where(h2, h3, p, ul, ol) {
-    margin-block-end: var(--body-text-spacer);
+    margin-block-end: var(--vertical-rhythm);
   }
 }
 
@@ -16,7 +16,7 @@ fieldset {
   }
 
   + fieldset {
-    margin-block-start: calc(var(--body-text-spacer) * 2);
+    margin-block-start: calc(var(--vertical-rhythm) * 2);
   }
 }
 
@@ -168,7 +168,7 @@ input[type='range'] {}
   padding: 1rem;
 
   * & {
-    margin-block-start: calc(var(--body-text-spacer) * 1.5);
+    margin-block-start: calc(var(--vertical-rhythm) * 1.5);
   }
 }
 
@@ -284,8 +284,8 @@ input[type='range'] {}
   --font-size-min-value: 0.75rem;
   --font-size-max-value: 0.925rem;
   font-size: var(--font-size);
-  margin-block-start: calc(var(--body-text-spacer) * 0.25);
-  margin-block-end: calc(var(--body-text-spacer) * 0.5);
+  margin-block-start: calc(var(--vertical-rhythm) * 0.25);
+  margin-block-end: calc(var(--vertical-rhythm) * 0.5);
 }
 
 .form-composite > legend {

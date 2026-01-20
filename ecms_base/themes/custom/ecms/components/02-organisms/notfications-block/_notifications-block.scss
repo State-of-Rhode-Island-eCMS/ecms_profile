@@ -14,7 +14,7 @@
   &__wrapper {
     background-color: var(--fc__notification__bg);
     margin: 0 auto;
-    max-width: Min(calc(#{$content-max-small-screen} + 1.75rem), calc(#{$content-max-large-screen} * var(--fontSizeModifier)));
+    max-width: var(--content-max-width);
 
     // Light colored background as a pseudo element with opacity applied
     &::before {
@@ -83,7 +83,7 @@
       max-width: $max-line-length-ch;
 
       & + p {
-        margin-top: var(--body-text-spacer);
+        margin-top: var(--vertical-rhythm);
       }
     }
 
