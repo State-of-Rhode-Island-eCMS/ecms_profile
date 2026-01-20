@@ -1,7 +1,5 @@
 $sidebar-min: em(200);
 $sidebar-max: em(380);
-$sidebar-column-gap: 3vw;
-$sidebar-row-gap: em(36);
 
 main {
   position: relative;
@@ -18,8 +16,9 @@ main {
       'content'
       'sidebar-middle'
       'sidebar-bottom';
-    padding-block: 1lh 2lh;
-    padding-left: 1rem;
+    gap: Max(4lh, 4vmax);
+    padding-block: 1lh 3lh;
+    padding-inline-start: 1rem;
 
     @include breakpoint-up($bp__single-col-content) {
       grid-template-areas:
@@ -28,13 +27,12 @@ main {
         'sidebar-bottom content';
       grid-template-columns: minmax(calc(#{$sidebar-min} * var(--fontSizeModifier)), calc(18rem * var(--fontSizeModifier))) minmax(0, 1fr);
       grid-template-rows: min-content min-content 1fr;
-      padding-block: 2lh 3lh;
-      padding-left: 0;
+      padding-block: 2lh 4lh;
+      padding-inline-start: 0;
 
       .path-user & {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin-inline: auto;
         max-width: $content-max-small-screen;
       }
 
@@ -45,12 +43,7 @@ main {
 
     @include breakpoint-up($bp--xlarge) {
       grid-template-columns: minmax(calc(#{$sidebar-min} * var(--fontSizeModifier)), calc(22rem * var(--fontSizeModifier))) minmax(0, 1fr);
-      padding-block: 3lh 4lh;
-    }
-
-    // Vertical spacing if both sidebar regions are present.
-    aside + aside {
-      margin-top: $general-v-spacing;
+      padding-block: 3lh 5lh;
     }
   }
 
@@ -70,28 +63,14 @@ main {
   &__sidebar-top {
     grid-area: sidebar-top;
     max-width: calc(#{$sidebar-max} * var(--fontSizeModifier));
-    margin-right: $sidebar-column-gap;
-    margin-bottom: $sidebar-row-gap;
-
-    @include breakpoint-down($bp__single-col-content) {
-      margin: 0;
-    }
-
-    [dir='rtl'] & {
-      margin-left: $sidebar-column-gap;
-      margin-right: 0;
-    }
   }
 
   &__sidebar-middle {
     grid-area: sidebar-middle;
     max-width: 89vw; // Magic number?
-    margin-top: $general-v-spacing;
 
     @include breakpoint-up($bp__single-col-content) {
       max-width: calc(#{$sidebar-max} * var(--fontSizeModifier));
-      margin-right: $sidebar-column-gap;
-      margin-top: unset;
     }
 
     &:empty {
@@ -105,7 +84,6 @@ main {
 
     @include breakpoint-up($bp__single-col-content) {
       max-width: calc(#{$sidebar-max} * var(--fontSizeModifier));
-      margin-right: $sidebar-column-gap;
     }
 
     &:empty {
