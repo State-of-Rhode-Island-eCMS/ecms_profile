@@ -4,9 +4,9 @@ $all-headers: 'h1, .qh__h1, h2, .qh__h2, h3, .qh__h3, h4, .qh__h4, h5, .qh__h5, 
 // All block-level text elements
 $all-typography-block: 'p, li, dt, dd, th, td, address, label, figcaption, input, select, textarea, button, legend, .qh__fs-base, .qh__fs-st';
 
-// Borders
-$border-xs: rem(0.5);
-$border-sm: rem(1);
+// Border Thickness
+$border-xs: rem(0.5); // Half pixel as REM value
+$border-sm: rem(1); // One pixel as REM value, etc.
 $border-md: rem(4);
 $border-lg: rem(8);
 $border-xl: rem(15);
@@ -14,6 +14,7 @@ $border-xl: rem(15);
 // Border radius
 $brad-xs: rem(3);
 $brad-sm: rem(5);
+$brad-md: rem(8);
 
 // Box Shadows
 $box-shadow-base: 0 0.125em 0.5em var(--c__quahog--dark--trans33);
@@ -25,7 +26,7 @@ $button-h-spacing: 1.125em;
 
 // Content max-width
 $content-max-small-screen: 93vw;
-$content-max-large-screen: 86em; /* 1376px */
+$content-max-large-screen: 86rem; /* 1376px */
 
 // Generic page gutter, column spacing, vertical spacing
 $general-v-spacing: 1.5em;
@@ -269,6 +270,9 @@ $st-lh-l: 1.4;
 
   // Other useful variables
   --body-text-spacer: 1lh;
+  // Transitioning the name to this new variable, which is more descriptive of what it is
+  // When we need to touch a file, use the new name. At the end, do a site wide find and replace
+  --vertical-rhythm: 1lh;
 
   --content-max-width: Min(#{$content-max-small-screen}, calc(#{$content-max-large-screen} * var(--fontSizeModifier)));
 

@@ -13,6 +13,7 @@ body {
   font-weight: normal;
   font-style: normal;
   font-variant-numeric: lining-nums;
+  line-height: 1lh;
   word-break: break-word;
 
   // If this class is present, any custom fonts have loaded
@@ -22,6 +23,7 @@ body {
   }
 
   // If the .novf class is present, variable fonts are not supported
+  // So with this statement, custom fonts have loaded AND variable fonts are supported
   html:where(.wf-active:not(.novf)) & {
     font-family: var(--font-sans-vf);
     font-weight: var(--p-font-wght);
@@ -99,12 +101,36 @@ body {
       It also collapses when used on the margin property.
       Therefore, we should achieve a balanced rhythm with only a few simple declarations.
       */
-    margin-block-end: var(--body-text-spacer);
+    margin-block-end: var(--vertical-rhythm);
+  }
+
+  // Add space to certain elements when we are inside nodes that want vertical rhythm
+  /*
+   * H2 spacing and the lh unit:
+   * 1lh and 1rlh are one line-height and one relative line height unit, respectively.
+   * In this theme, the body element has no scaling or fluid type sizes applied to it.
+   * (To refactor it to do so will have unintended consequences whenever EM values are used.)
+   * Therefore, the 1rlh unit is constant and does not scale with the type as we would prefer.
+   * The desired effect is to use the 1rlh unit, and as the base font size scales up, so does the value of 1rlh
+   * Here, when using 1lh, the unit's value is tied to the element, much like the value of 1em.
+   * But this does not have the desired effect of vertical rhythm.
+   * The H2 element with its larger line-height has a higher value than the neighboring <p> tags.
+   * Therefore, unfortunately, we scale the 1lh value with some odd calculations just to make things look as desired.
+   */
+  > h2:not(:first-child),
+  > .qh__h2:not(:first-child) {
+    margin-block-start: calc(var(--vertical-rhythm) * 1.25);
+    margin-block-end: calc(var(--vertical-rhythm) * 0.625);
+  }
+
+  > h3:not(:first-child),
+  > .qh__h3:not(:first-child) {
+    margin-block-start: calc(var(--vertical-rhythm) * 0.875);
   }
 
   > :where(.qh__accordion + *:not(.qh__accordion)),
   > :where(.qh__paragraph) {
-    margin-block-start: calc(var(--body-text-spacer) * 2);
+    margin-block-start: calc(var(--vertical-rhythm) * 2);
   }
 
   > *:last-child  {
@@ -165,7 +191,6 @@ h2,
   // Make H2s stand out even more by using the sans font
   font-family: $font-sans-fallback;
   letter-spacing: $kerning-base;
-  margin-block-start: calc(var(--body-text-spacer) * 1.5);
 
   html:where(.wf-active:not(.novf)) & {
     font-family: var(--font-sans-vf);
@@ -184,7 +209,6 @@ h3,
 
   font-style: normal;
   letter-spacing: $kerning-base;
-  margin-block-start: var(--body-text-spacer);
 
   html:where(.wf-active:not(.novf)) & {
     font-weight: 475;
@@ -201,7 +225,7 @@ h4,
   --font-lh-scaler-value: var(--h4-lh-scaler-value);
 
   letter-spacing: $kerning-base;
-  margin-block-end: calc(var(--body-text-spacer) * 0.5);
+  margin-block-end: calc(var(--vertical-rhythm) * 0.5);
 
   html:where(.wf-active:not(.novf)) & {
     font-weight: 500;
@@ -253,9 +277,6 @@ h6,
     margin-top: ($text-spacer-fallback-value * 0.85);
     margin-bottom: ($text-spacer-fallback-value * 0.85);
     width: 1.125em;
-
-    //margin-top: calc(var(--body-text-spacer) * 0.85);
-    //margin-bottom: calc(var(--body-text-spacer) * 0.85);
   }
 }
 
@@ -273,7 +294,7 @@ b {
 
 blockquote {
   border-inline-start: $border-md solid var(--fc__default__text-accent);
-  padding-inline-start: calc(var(--body-text-spacer) * 1.75);
+  padding-inline-start: calc(var(--vertical-rhythm) * 1.5);
 
   p {
     --font-size-min-value: var(--bq-size-s);
@@ -297,12 +318,12 @@ blockquote {
     }
 
     + p {
-      margin-block-start: calc(var(--body-text-spacer) * 0.5);
+      margin-block-start: calc(var(--vertical-rhythm) * 0.5);
     }
   }
 
   .qh__card > & {
-    margin-inline-start: calc(var(--body-text-spacer) * 0.5);
+    margin-inline-start: calc(var(--vertical-rhythm) * 0.5);
   }
 }
 
@@ -310,7 +331,7 @@ hr {
   border-width: 0.5px;
   border-color: var(--fc__default__border);
   color: var(--fc__default__border);
-  margin-block: calc(var(--body-text-spacer) * 2);
+  margin-block: calc(var(--vertical-rhythm) * 2);
 }
 
 label,
