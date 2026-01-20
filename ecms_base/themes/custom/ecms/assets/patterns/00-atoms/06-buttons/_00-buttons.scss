@@ -88,6 +88,11 @@ button,
       color: var(--fc__default__bg);
     }
 
+    // Inside a column container, add space between
+    .qh__paragraph__column-container & + & {
+      margin-block-start: var(--vertical-rhythm);
+    }
+
     html:where(:not(.light)) {
       &,
       &:visited {
@@ -135,12 +140,10 @@ button,
   // SVG should appear first and then text. Do not include wrapper around SVG.
   &--icon {
     display: flex;
+    flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-
-    @include breakpoint-between($bp--small, $bp--large) {
-      flex-direction: column;
-    }
+    gap: 0.5em;
 
     &::after {
       content: none !important;
@@ -161,12 +164,16 @@ button,
     }
   }
 
+  > span {
+    flex: inherit;
+  }
+
   &:disabled,
   &--disabled {
     @include button-disabled-style;
   }
 
-  // Opinionated: add "hand" cursor to non-disabled .btn elements
+  // Opinionated: Add "hand" cursor to non-disabled .btn elements
   &:not(&--disabled):not(&:disabled) {
     cursor: pointer;
   }
