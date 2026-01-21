@@ -2,25 +2,19 @@
   position: relative;
 
   // If dark mode, dim slightly
+  html:where(.dark) & {
+    opacity: 0.9;
+  }
   @media (prefers-color-scheme: dark) {
-    html:not(.light) & {
+    html:where(:not(.light)) & {
       opacity: 0.9;
     }
   }
 
   &__wrapper {
-    //@include qh-content-maxwidth();
     background-color: var(--fc__notification__bg);
     margin: 0 auto;
-    max-width: calc(#{$content-max-small-screen} + 1.75rem);
-
-    @include breakpoint-up($bp--xxlarge) {
-      max-width: calc(#{$content-max-large-screen} + 1.75rem);
-    }
-
-    @supports (width: Min(10px, 5px)) {
-      max-width: Min(calc(#{$content-max-small-screen} + 1.75rem), #{$content-max-large-screen});
-    }
+    max-width: var(--content-max-width);
 
     // Light colored background as a pseudo element with opacity applied
     &::before {
@@ -36,27 +30,19 @@
   .qh__icon__svg {
     color: var(--fc__notification__icon);
     height: rem(32);
-    margin-right: 0.5em;
-    width: rem(38);
+    margin: 0 1.125em 0 -0.5em;
+    width: em(38);
   }
 
   // <p>
-  &__title {
-    font-size: 1rem;
-    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-      --font-size-min-value: 0.925;
-      --font-size-max-value: 1;
-      --font-size-scaler-value: var(--p-scaler-value);
-      font-size: var(--font-size);
-    }
-  }
+  &__title {}
 
   &__header {
     color: var(--fc__notification__fg);
     display: flex;
     align-items: center;
     margin: 0 $general-h-spacing;
-    padding: rem(12) 0;
+    padding: em(12) 0;
 
     .qh__btn {
       margin-left: auto;
@@ -84,43 +70,20 @@
   }
 
   &__content {
-    color: var(--fc__notification__fg);
+    background-color: var(--fc__default__bg);
+    color: var(--fc__default__fg);
+    border-block-end: $border-sm solid var(--fc__notification__bg);
     padding: 0 $general-h-spacing;
 
     .notifications-hidden & {
       display: none;
     }
-    // Restyle all anchors in case this bg color can not support the default colors
-    a,
-    a:visited {
-      color: var(--fc__notification__link, var(--fc__defauilt__link));
-    }
-
-    a:hover,
-    a:focus {
-      color: var(--fc__notification__link--hover, var(--fc__defauilt__link--hover));
-    }
-
-    a:focus {
-      outline-color: var(--fc__notification__link--focus, var(--fc__defauilt__link--focus));
-    }
-
-    a:active {
-      color: var(--fc__notification__link--active, var(--fc__defauilt__link--active));
-    }
-
-    h4 {
-      color: var(--fc__notification__fg);
-      margin: 0 0 0.25rem;
-    }
 
     p {
-      max-width: 100em;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: $max-line-length-ch;
 
       & + p {
-        margin-top: 0.75em;
+        margin-top: var(--vertical-rhythm);
       }
     }
 
@@ -149,4 +112,3 @@
     }
   }
 }
-

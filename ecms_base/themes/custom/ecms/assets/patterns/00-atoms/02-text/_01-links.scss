@@ -6,7 +6,6 @@ a {
   text-decoration-skip-ink: auto;
   transition: $transition-base;
 
-
   &:hover,
   &:focus {
     color: var(--fc__default__link--hover);
@@ -38,10 +37,6 @@ a {
       height: 0.875em;
       vertical-align: baseline;
       width: 0.875em;
-
-      @include onlyIE() {
-        display: none;
-      }
     }
 
     &:hover::before,
@@ -93,7 +88,9 @@ a {
 }
 
 p,
-ul {
+li,
+dt,
+dd {
   a {
     font-weight: calc(var(--p-font-wght) * 1.25);
   }

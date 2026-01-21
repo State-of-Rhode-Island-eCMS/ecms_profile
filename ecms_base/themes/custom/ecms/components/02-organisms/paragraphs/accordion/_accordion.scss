@@ -8,26 +8,13 @@
  */
 
 .qh__accordion {
-  //border: $border-xs solid transparent;
 
-  // When any other element is on top of an accordion:
-  margin-top: $text-spacer-fallback-value;
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: var(--body-text-spacer);
-  }
-
-  // When two or more accordions are on top of one another:
+  // When two or more accordions are on top of one another, cut space in half
   & + & {
-    margin-top: ($general-v-spacing/2);
-
-    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-      margin-top: calc(var(--body-text-spacer)/2);
-    }
+    margin-block-start: calc(var(--body-text-spacer) * 0.5);
   }
 
-  // Removing… a proper accordion group needs these styles, but none
-  // of our accordions can be grouped together
+  // Removing… a proper accordion group needs these styles, but none of our accordions can be grouped together
   //&:hover,
   //&:focus-within {
   //  border-color: var(--fc__default__link--focus);
@@ -37,14 +24,13 @@
   //&__title {}
 
   &__button {
-    @include qh__p;
     background-color: var(--c__coffee-milk--trans25);
     background-image: none; // Reset from .qh__btn
     border-radius: 0; // Reset from .qh__btn
     box-shadow: none; // Reset from .qh__btn
     color: var(--fc__default__fg);
     display: block;
-    --p-font-wght: 450;
+    font-weight: calc(var(--p-font-wght) * 1.25);
     max-width: none;
     outline: none;
     padding: $nav-a-v-spacing $nav-a-h-spacing;
@@ -85,7 +71,6 @@
         }
 
         &__vert,
-
         &__horiz {
           fill: var(--fc__accordion__icon__fg);
         }
@@ -102,17 +87,12 @@
       background-color: var(--c__coffee-milk--trans25);
 
       .qh__icon__plusminus__vert {
-        // IE 11 doesn't support CSS transforms on SVG elements
         transform: rotate(-360deg);
-
-        @include onlyIE() {
-          opacity: 0;
-        }
       }
     }
 
     @media print {
-      padding-left: 0;
+      padding-block-start: 0;
     }
   } // end &__button
 
@@ -124,34 +104,49 @@
 
     // Vertical rhythm inside an accordion is handled in 00-atoms/02-text/00-typography
 
-    // TODO: Transitions not firing as we want them to
     .js & {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0s linear 1s, visibility 0s linear 0s;
+      padding-inline: $general-h-spacing;
+      transition: max-height 250ms ease-in-out 250ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500s;
       visibility: hidden;
 
       > div {
         opacity: 0;
-        transition: $transition-base 0ms;
+        transition: opacity 250ms ease-in-out 0ms;
       }
     }
 
     .js [aria-expanded='true'] + & {
-      max-height: none;
-      padding: $nav-a-v-spacing $nav-a-h-spacing;
-      transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+      max-height: none; // This will not transition smoothly
+      padding-block: $general-v-spacing;
+      transition: max-height 250ms ease-in-out 250ms, padding 500ms ease-in-out 0ms, visibility 0s linear 0ms;
       visibility: visible;
 
       > div {
         opacity: 1;
-        transition: $transition-base 125ms;
+        transition: opacity 250ms ease-in-out 250ms;
+      }
+    }
+
+    // New calc auto size property not available in FF or Safari as of 2025-12-12
+    @supports (height: calc-size(auto)) {
+      .js & {
+        height: calc-size(auto);
+        max-height: unset;
+        transition: height 500ms ease-in-out 0ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500s;
+      }
+
+      .js [aria-expanded='true'] + & {
+        height: 20em;
+        max-height: unset;
+        transition: height 500ms ease-in-out 0ms, padding 500ms ease-in-out 0ms, visibility 0s linear 0ms;
       }
     }
 
     // When JS is broken and accordions are open by default
     .no-js & {
-      padding: $nav-a-v-spacing $nav-a-h-spacing;
+      padding: $general-v-spacing $general-h-spacing;
     }
 
     // In print, accordions are always open

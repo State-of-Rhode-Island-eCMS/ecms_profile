@@ -22,20 +22,12 @@
         .qh__text-card {
           flex: 1 0 calc(50% - #{$grid-gap/2});
           max-width: 50%;
-
-          @include onlyIE() {
-            flex: 1 1 40%;
-          }
         }
       }
 
       .qh__collection__border-btwn & {
         .qh__text-card {
           flex: 0 1 50%;
-
-          @include onlyIE() {
-            flex: 1 1 40%;
-          }
         }
       }
     }
@@ -47,20 +39,12 @@
         .qh__text-card {
           flex: 1 0 calc(33% - #{($grid-gap * 2)/3});
           max-width: 33%;
-
-          @include onlyIE() {
-            flex: 1 1 30%;
-          }
         }
       }
 
       .qh__collection__border-btwn & {
         .qh__text-card {
           flex: 0 1 33%;
-
-          @include onlyIE() {
-            flex: 1 1 30%;
-          }
         }
       }
     }

@@ -1,6 +1,18 @@
 .qh__page-header {
-  background-color: var(--fc__header__bg);
+  background-image:
+    radial-gradient( circle at 25%, rgba(0, 0, 0,0.15), rgba(0, 0, 0, 0) ),
+    linear-gradient( var(--fc__header__bg), var(--fc__header__bg) );
   color: var(--fc__header__fg);
+
+  // Specific themes need overrides
+  html.qh__t__block-island.light & {
+    background-image: none;
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__block-island.light:where(:not(.dark)) & {
+      background-image: none;
+    }
+  }
 
   &__wrapper {
     @include qh-content-maxwidth();
@@ -10,6 +22,7 @@
     align-items: center;
 
     .qh__site-branding {
+
       @include breakpoint-up($bp--small) {
         flex: 1 1 66%;
       }

@@ -2,7 +2,7 @@
 # Welcome to Megalord
 # ===================
 #
-# This is the one color and palette defintion file to rule them all!
+# This is the one color and palette definition file to rule them all!
 #
 # Using HJSON to allow comments in a JSON file
 #
@@ -13,7 +13,7 @@
 # "hue"       -> How would the color be described? Useful for named colors like "Calamari"
 # "hsl"       -> The programmatic color value using the HSL colorspace
 # "needs"     -> Accessibility-wise, what color text would this background color support?
-#             -> Not perfect, but a decent startng place for accessibility
+#             -> Not perfect, but a decent starting place for accessibility
 #
 {
   "colors": {
@@ -408,13 +408,14 @@
     "scarborough": {
       "humanName": "Scarborough Beach",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "navy--dark" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "calamari" },
-          { "fnName": "link--focus", "colorName": "calamari" }
-        ],
+        # Removing in new design; using values from header
+        #"official": [
+        #  { "fnName": "fg", "colorName": "quahog--light" },
+        #  { "fnName": "bg", "colorName": "navy--dark" },
+        #  { "fnName": "link", "colorName": "white" },
+        #  { "fnName": "link--hover", "colorName": "calamari" },
+        #  { "fnName": "link--focus", "colorName": "calamari" }
+        #],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "navy" },
@@ -458,7 +459,7 @@
           { "fnName": "accent", "colorName": "calamari" },
           { "fnName": "accent__fg", "colorName": "quahog--dark" },
           # text-accent currently used for bullet mark color & the H2
-          { "fnName": "text-accent", "colorName": "quahog--medium" },
+          { "fnName": "text-accent", "colorName": "navy" },
           { "fnName": "button__bg", "colorName": "navy" },
           { "fnName": "button__fg", "colorName": "hope-gold" },
           { "fnName": "button--hover__bg", "colorName": "navy--dark" },
@@ -485,10 +486,10 @@
           { "fnName": "link", "colorName": "navy" },
           { "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "navy--dark" },
-          { "fnName": "link--hover__bg", "colorName": "ocean--trans25" },
+          { "fnName": "link--hover__bg", "colorName": "ocean" },
           { "fnName": "link--focus", "colorName": "calamari" },
           { "fnName": "link--active", "colorName": "calamari" },
-          { "fnName": "sub__bg", "colorName": "white--trans25" }
+          { "fnName": "sub__bg", "colorName": "white--trans33" }
         ],
         #
         # Site Notifications component
@@ -517,7 +518,7 @@
         #
         # Do not use transparent colors for "bar" and "fg"
         # "bar" is applied to the background shape behind the icon as well,
-        # and we will see transparent colors multiply over eachother
+        # and we will see transparent colors multiply over each other
         #
         "attention-card": [
           { "fnName": "fg", "colorName": "navy--dark" },
@@ -532,7 +533,7 @@
           { "fnName": "border-top", "colorName": "ocean" },
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "quahog--dark" },
-          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          { "fnName": "headings", "colorName": "ocean" }
         ],
         #
         # These sub-themes need to provide the light and dark variations
@@ -569,17 +570,12 @@
     #
     # If a functional color pair is commented out, it is not being used, and therefore,
     # in CSS, the value will come from the default color palette
+    # That means that a different color palette like Wickaboxet will fallback to values from
+    # the Scarborough color palette if the theme color is not specifically defined.
     #
     "scarborough--dark": {
       "humanName": "Scarborough Beach dark",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "ocean" },
-          { "fnName": "link--hover", "colorName": "hope-gold" },
-          { "fnName": "link--focus", "colorName": "hope-gold" }
-        ],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "navy--dark" },
@@ -617,9 +613,9 @@
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
-          # text-accent currently used for bullet mark color & the H2
           #{ "fnName": "accent", "colorName": "hope-gold" },
-          { "fnName": "text-accent", "colorName": "quahog--light" }
+          # text-accent currently used for bullet mark color & the H2
+          { "fnName": "text-accent", "colorName": "hope-gold" }
           #{ "fnName": "button__bg", "colorName": "navy" },
           #{ "fnName": "button__fg", "colorName": "hope-gold" },
           #{ "fnName": "button--hover__bg", "colorName": "navy--dark" },
@@ -633,16 +629,16 @@
           { "fnName": "download", "colorName": "white--trans33" }
         ],
         "nav-minor": [
-          { "fnName": "border", "colorName": "navy" },
+          { "fnName": "border", "colorName": "ocean--trans75" },
           { "fnName": "fg", "colorName": "quahog--light" },
           { "fnName": "bg", "colorName": "navy--trans50" },
           { "fnName": "link", "colorName": "coffee-milk--light" },
           { "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "white" },
-          { "fnName": "link--hover__bg", "colorName": "quahog--dark" },
+          { "fnName": "link--hover__bg", "colorName": "navy--dark" },
           { "fnName": "link--focus", "colorName": "hope-gold" },
           { "fnName": "link--active", "colorName": "hope-gold" },
-          { "fnName": "sub__bg", "colorName": "quahog--dark--trans33" }
+          { "fnName": "sub__bg", "colorName": "quahog--dark--trans25" }
         ],
         #
         # Notification colors usually fall back to the same palette as the Light theme
@@ -670,14 +666,13 @@
           { "fnName": "icon", "colorName": "coffee-milk--light" }
         ],
         "footer": [
-          { "fnName": "border-top", "colorName": "ocean" },
-          { "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "quahog" },
-          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          { "fnName": "border-top", "colorName": "navy" },
+          #{ "fnName": "fg", "colorName": "white" },
+          #{ "fnName": "bg", "colorName": "quahog--dark" },
+          { "fnName": "headings", "colorName": "ocean" }
         ],
         #
         # These sub-themes need to provide the light and dark variations
-        # In dark theme definitions, they need only contain the dark theme colors
         #
         "primary": [
           { "fnName": "fg", "colorName": "white" },
@@ -703,13 +698,6 @@
     "federal-hill": {
       "humanName": "Federal Hill",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "rhody-red" },
-          { "fnName": "link--focus", "colorName": "rhody-red" }
-        ],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "rhody-red--dark" },
@@ -769,7 +757,7 @@
           #{ "fnName": "fg", "colorName": "quahog--darker" },
           { "fnName": "bg", "colorName": "rhody-red--trans15" },
           { "fnName": "link", "colorName": "quahog" },
-          #{ "fnName": "link__bg", "colorName": "transparent" },
+          { "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "quahog--darker" },
           { "fnName": "link--hover__bg", "colorName": "rhody-red--trans15" },
           { "fnName": "link--focus", "colorName": "rhody-red" },
@@ -802,7 +790,7 @@
           { "fnName": "border-top", "colorName": "rhody-red" },
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "quahog--dark" },
-          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          { "fnName": "headings", "colorName": "rhody-red" }
         ],
         "primary": [
           { "fnName": "fg", "colorName": "coffee-milk" },
@@ -841,13 +829,6 @@
     "federal-hill--dark": {
       "humanName": "Federal Hill dark",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "rhody-red" },
-          { "fnName": "link--focus", "colorName": "rhody-red" }
-        ],
         "header": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "rhody-red--trans15" },
@@ -906,7 +887,7 @@
           { "fnName": "link", "colorName": "coffee-milk--light" },
           #{ "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "white" },
-          #{ "fnName": "link--hover__bg", "colorName": "rhody-red--trans15" },
+          { "fnName": "link--hover__bg", "colorName": "rhody-red--dark" },
           { "fnName": "link--focus", "colorName": "ocean" },
           { "fnName": "link--active", "colorName": "hope-gold" },
           { "fnName": "sub__bg", "colorName": "quahog--dark--trans15" }
@@ -921,10 +902,10 @@
           { "fnName": "icon", "colorName": "coffee-milk--light" }
         ],
         "footer": [
-          { "fnName": "border-top", "colorName": "rhody-red" },
-          { "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "quahog" },
-          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          { "fnName": "border-top", "colorName": "rhody-red--dark" },
+          #{ "fnName": "fg", "colorName": "white" },
+          #{ "fnName": "bg", "colorName": "quahog--dark" },
+          #{ "fnName": "headings", "colorName": "rhody-red" }
         ],
         "primary": [
           #{ "fnName": "fg", "colorName": "coffee-milk--light" },
@@ -960,13 +941,6 @@
     "wickaboxet": {
       "humanName": "Wickaboxet Forest",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "coffee-milk--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "green-animals" },
-          { "fnName": "link--focus", "colorName": "green-animals" }
-        ],
         "header": [
           #{ "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "green-animals--dark" },
@@ -1003,11 +977,11 @@
           #{ "fnName": "link--focus", "colorName": "navy" },
           #{ "fnName": "link--visited", "colorName": "navy--warm" },
           { "fnName": "link--active", "colorName": "green-animals" },
-          { "fnName": "hx__fg", "colorName": "green-animals--dark" },
+          #{ "fnName": "hx__fg", "colorName": "quahog" },
           { "fnName": "violator", "colorName": "calamari" },
           { "fnName": "accent", "colorName": "hope-gold" },
           #{ "fnName": "accent__fg", "colorName": "quahog--dark" },
-          #{ "fnName": "text-accent", "colorName": "quahog--medium" },
+          { "fnName": "text-accent", "colorName": "green-animals--dark" },
           { "fnName": "button__bg", "colorName": "green-animals" },
           { "fnName": "button__fg", "colorName": "quahog--darker" },
           { "fnName": "button--hover__bg", "colorName": "green-animals--dark" },
@@ -1055,10 +1029,10 @@
           { "fnName": "icon", "colorName": "quahog--lightest" }
         ],
         "footer": [
-          { "fnName": "border-top", "colorName": "green-animals" },
+          { "fnName": "border-top", "colorName": "green-animals--trans75" },
           #{ "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "quahog--dark" },
-          #{ "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          #{ "fnName": "bg", "colorName": "quahog--dark" },
+          { "fnName": "headings", "colorName": "green-animals" }
         ],
         "primary": [
           { "fnName": "fg", "colorName": "quahog--dark" },
@@ -1089,18 +1063,11 @@
     #
     # Wickaboxet Forest dark theme: dark green with bright green and yellow highlights
     #
-    # Commented out colors fall back to the values in the LIGHT theme
+    # Commented out colors fall back to the values in the DARK Scarborough theme
     #
     "wickaboxet--dark": {
       "humanName": "Wickaboxet Forest dark",
       "values": {
-        "official": [
-          #{ "fnName": "fg", "colorName": "coffee-milk--light" },
-          { "fnName": "bg", "colorName": "quahog--darker" },
-          #{ "fnName": "link", "colorName": "white" },
-          #{ "fnName": "link--hover", "colorName": "green-animals" },
-          #{ "fnName": "link--focus", "colorName": "green-animals" }
-        ],
         "header": [
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "green-animals--trans15" },
@@ -1135,7 +1102,7 @@
           { "fnName": "link--focus", "colorName": "ocean" },
           { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
-          { "fnName": "hx__fg", "colorName": "green-animals" },
+          { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
           #{ "fnName": "accent", "colorName": "hope-gold" },
           #{ "fnName": "accent__fg", "colorName": "quahog--dark" },
@@ -1153,14 +1120,14 @@
           #{ "fnName": "download", "colorName": "quahog--medium" }
         #],
         "nav-minor": [
-          #{ "fnName": "border", "colorName": "green-animals" },
+          { "fnName": "border", "colorName": "green-animals" },
           { "fnName": "fg", "colorName": "coffee-milk" },
           { "fnName": "bg", "colorName": "green-animals--trans15" },
           { "fnName": "link", "colorName": "coffee-milk--light" },
-          #{ "fnName": "link__bg", "colorName": "transparent" },
+          { "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "white" },
-          #{ "fnName": "link--hover__bg", "colorName": "green-animals--trans15" },
-          #{ "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--hover__bg", "colorName": "green-animals--dark" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
           { "fnName": "link--active", "colorName": "hope-gold" },
           { "fnName": "sub__bg", "colorName": "quahog--dark--trans25" }
         ],
@@ -1187,10 +1154,10 @@
           { "fnName": "icon", "colorName": "quahog--lightest" }
         ],
         "footer": [
-          #{ "fnName": "border-top", "colorName": "green-animals" },
+          { "fnName": "border-top", "colorName": "green-animals--trans15" },
           #{ "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "quahog--dark" },
-          #{ "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          #{ "fnName": "bg", "colorName": "quahog--dark" },
+          { "fnName": "headings", "colorName": "green-animals" }
         ],
         "primary": [
           { "fnName": "fg", "colorName": "coffee-milk--light" },
@@ -1216,13 +1183,6 @@
     "block-island": {
       "humanName": "Block Island Lighthouse",
       "values": {
-        "official": [
-          { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog" },
-          { "fnName": "link", "colorName": "white" },
-          { "fnName": "link--hover", "colorName": "hope-gold" },
-          { "fnName": "link--focus", "colorName": "hope-gold" }
-        ],
         "header": [
           { "fnName": "fg", "colorName": "quahog" },
           { "fnName": "bg", "colorName": "ocean--trans10" }, # equivalent to #f4f8fc
@@ -1286,8 +1246,8 @@
           #{ "fnName": "link__bg", "colorName": "transparent" },
           #{ "fnName": "link--hover", "colorName": "navy--dark" },
           { "fnName": "link--hover__bg", "colorName": "ocean--trans10" },
-          { "fnName": "link--focus", "colorName": "rhody-red" },
-          { "fnName": "link--active", "colorName": "rhody-red" },
+          #{ "fnName": "link--focus", "colorName": "rhody-red" },
+          #{ "fnName": "link--active", "colorName": "rhody-red" },
           #{ "fnName": "sub__bg", "colorName": "white--trans25" }
         ],
         "notification": [
@@ -1314,9 +1274,9 @@
         ],
         "footer": [
           { "fnName": "border-top", "colorName": "ocean--trans25" },
-          { "fnName": "fg", "colorName": "quahog" },
-          { "fnName": "bg", "colorName": "ocean--light" },
-          { "fnName": "copyright__bg", "colorName": "ocean--light" }
+          { "fnName": "fg", "colorName": "quahog--dark" },
+          { "fnName": "bg", "colorName": "ocean--trans25" },
+          { "fnName": "headings", "colorName": "navy--sat-lgt" }
         ],
         "primary": [
           { "fnName": "fg", "colorName": "navy" },
@@ -1347,18 +1307,11 @@
     #
     # Block Island dark theme: dark and subdued use of color with yellow highlights
     #
-    # Commented out colors fall back to colors defined in the LIGHT Block Island theme
+    # Commented out colors fall back to colors defined in the DARK Scarborough theme
     #
     "block-island--dark": {
       "humanName": "Block Island Lighthouse",
       "values": {
-        "official": [
-          #{ "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "quahog--dark" },
-          #{ "fnName": "link", "colorName": "white" },
-          #{ "fnName": "link--hover", "colorName": "hope-gold" },
-          #{ "fnName": "link--focus", "colorName": "hope-gold" }
-        ],
         "header": [
           { "fnName": "fg", "colorName": "quahog--light" },
           { "fnName": "bg", "colorName": "ocean--trans10" }, # over #2e2e2e, equivalent to #383c40
@@ -1414,15 +1367,15 @@
           #{ "fnName": "download", "colorName": "quahog--medium" }
         #],
         "nav-minor": [
-          { "fnName": "border", "colorName": "ocean--trans25" },
+          { "fnName": "border", "colorName": "ocean" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "ocean--trans10" },
           { "fnName": "link", "colorName": "white" },
           #{ "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "quahog--light" },
-          #{ "fnName": "link--hover__bg", "colorName": "ocean--trans10" },
-          #{ "fnName": "link--focus", "colorName": "rhody-red" },
-          #{ "fnName": "link--active", "colorName": "rhody-red" },
+          { "fnName": "link--hover__bg", "colorName": "ocean--trans10" },
+          #{ "fnName": "link--focus", "colorName": "hope-gold" },
+          #{ "fnName": "link--active", "colorName": "hope-gold" },
           { "fnName": "sub__bg", "colorName": "quahog--dark--trans15" }
         ],
         "notification": [
@@ -1448,10 +1401,10 @@
           { "fnName": "icon", "colorName": "quahog--light" }
         ],
         "footer": [
-          { "fnName": "border-top", "colorName": "ocean--trans25" }, # double layers of trans25, now #5b6c7c
+          { "fnName": "border-top", "colorName": "ocean--trans25" },
           { "fnName": "fg", "colorName": "quahog--light" },
-          { "fnName": "bg", "colorName": "ocean--trans25" }, # over #2e2e2e, now #47515a
-          { "fnName": "copyright__bg", "colorName": "transparent" }
+          { "fnName": "bg", "colorName": "quahog--dark" },
+          { "fnName": "headings", "colorName": "ocean" }
         ],
         "primary": [
           { "fnName": "fg--dark", "colorName": "quahog--light" },

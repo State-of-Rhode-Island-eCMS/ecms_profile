@@ -1,24 +1,22 @@
 @mixin button-disabled-style {
   background-color: transparent;
   background: repeating-linear-gradient(-45deg,
-  var(--fc__default__button__bg),
-  var(--fc__default__button__bg) 0.5em,
-  var(--fc__default__button--hover__bg) 0.5em,
-  var(--fc__default__button--hover__bg) 1em);
+    var(--fc__default__button__bg),
+    var(--fc__default__button__bg) 0.5em,
+    var(--fc__default__button--hover__bg) 0.5em,
+    var(--fc__default__button--hover__bg) 1em);
   cursor: default;
   opacity: 0.6;
   pointer-events: none;
 }
 
-
-// <p>-like typography styles applied via 02-text/00-typography
 button,
 .qh__btn,
 .button {
-  --p-font-wght: 500;
   border: 0;
   border-radius: $button-border-radius;
   display: inline-block;
+  font-weight: 500;
   letter-spacing: $kerning-base;
   overflow: hidden;
   padding: $button-v-spacing $button-h-spacing;
@@ -32,9 +30,9 @@ button,
   &:visited {
     background-color: var(--fc__default__button__bg);
     background-image: linear-gradient(rgba(#fff, 0.125) 10%,
-    rgba(#fff, 0) 50%,
-    rgba(#000, 0) 80%,
-    rgba(#000, 0.125) 100%);
+      rgba(#fff, 0) 50%,
+      rgba(#000, 0) 80%,
+      rgba(#000, 0.125) 100%);
     color: var(--fc__default__button__fg);
     text-decoration: none;
   }
@@ -71,7 +69,7 @@ button,
 
     &:hover,
     &:focus {
-      background-color: var(--fc__default__fg);
+      background-color: var(--fc__default__accent__fg);
       color: var(--fc__default__accent);
     }
   }
@@ -90,7 +88,12 @@ button,
       color: var(--fc__default__bg);
     }
 
-    html:not(.light) {
+    // Inside a column container, add space between
+    .qh__paragraph__column-container & + & {
+      margin-block-start: var(--vertical-rhythm);
+    }
+
+    html:where(:not(.light)) {
       &,
       &:visited {
         background-color: var(--fc__primary--light__bg--dark);
@@ -105,7 +108,7 @@ button,
     }
 
     @media (prefers-color-scheme: dark) {
-      html:not(.light) {
+      html:where(:not(.light)) {
         &,
         &:visited {
           background-color: var(--fc__primary--light__bg--dark);
@@ -122,45 +125,38 @@ button,
   }
 
   &--small {
-    font-size: rem(14);
-    padding: ($button-v-spacing / 2) ($button-h-spacing / 2);
+    // font-size: 87.5%; !important rule is overriding this temporarily
+    // Using variable defintions might be the best way to do it anyway
+    --font-size-min-value: var(--st-size-s);
+    --font-size-max-value: var(--st-size-l);
+    --font-size-scaler-value: var(--st-scaler-value);
+    --font-lh-min-value: var(--st-lh-s);
+    --font-lh-max-value: var(--st-lh-l);
+    --font-lh-scaler-value: var(--st-lh-scaler-value);
+    padding: 0.5em 0.625em;
   }
 
   // Button with SVG
   // SVG should appear first and then text. Do not include wrapper around SVG.
   &--icon {
     display: flex;
+    flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    font-size: $h3-size-s;
-    line-height: $h3-lh-s;
-
-    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-      --font-size-min-value: #{$h3-size-s-value};
-      --font-size-max-value: #{$h3-size-l-value};
-      --font-size-scaler-value: var(--h3-scaler-value);
-      --font-lh-min-value: #{$h3-lh-s};
-      --font-lh-max-value: #{$h3-lh-l};
-      --font-lh-scaler-value: var(--h3-lh-scaler-value);
-      font-size: var(--font-size);
-      line-height: var(--line-height);
-      word-spacing: var(--word-spacing);
-    }
-
-    @include breakpoint-between($bp--small, $bp--large) {
-      flex-direction: column;
-    }
+    gap: 0.5em;
 
     &::after {
       content: none !important;
     }
 
     > svg {
-      min-width: 6rem;
-      width: 6rem;
-      height: 6rem;
+      --icon-size: 3em;
+
+      min-width: var(--icon-size);
+      width: var(--icon-size);
+      height: var(--icon-size);
       position: relative;
-      left: -0.75rem;
+      left: -0.625em;
 
       @include breakpoint-between($bp--small, $bp--large) {
         left: 0;
@@ -168,12 +164,16 @@ button,
     }
   }
 
+  > span {
+    flex: inherit;
+  }
+
   &:disabled,
   &--disabled {
     @include button-disabled-style;
   }
 
-  // Opinionated: add "hand" cursor to non-disabled .btn elements
+  // Opinionated: Add "hand" cursor to non-disabled .btn elements
   &:not(&--disabled):not(&:disabled) {
     cursor: pointer;
   }

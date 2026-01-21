@@ -1,194 +1,274 @@
+// Replace this with fluid spacers when used as a vertical spacing element?
 $text-spacer-fallback-value: 1.25rem;
 
-/* text-size proportional spacer */
+/* Why so many :where() declarations?
+ * :where() removes specificity and makes it easier to override these definitions in the cascade later
+ */
+
 body {
-  --body-text-spacer: clamp(1rem, 2vw, 1.25rem);
+  // Root-level typography rules set on Body to start the cascade
+
+  // Fallback value if variable fonts are not loaded
+  font-family: $font-sans-fallback;
+  font-weight: normal;
+  font-style: normal;
+  font-variant-numeric: lining-nums;
+  line-height: 1lh;
+  word-break: break-word;
+
+  // If this class is present, any custom fonts have loaded
+  html:where(.wf-active) & {
+    font-family: $font-sans-static;
+    letter-spacing: $kerning-base;
+  }
+
+  // If the .novf class is present, variable fonts are not supported
+  // So with this statement, custom fonts have loaded AND variable fonts are supported
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-sans-vf);
+    font-weight: var(--p-font-wght);
+  }
+
+  // Lighten the font weight in dark mode
+  // Two stacked Dark mode checks are needed: One for the presence of the dark class, and one for when the system OS is dark
+  html:where(.dark) & {
+    --p-font-wght: calc(var(--vf-body-wght) - 25);
+    letter-spacing: $kerning-loose;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:where(:not(.light)) & {
+      --p-font-wght: calc(var(--vf-body-wght) - 25);
+      letter-spacing: $kerning-loose;
+    }
+  }
 }
 
-/* following element spacing selector, just inside node content */
+// Individual calculations must now be done on block child elements of Body
+/* Can't use an asterisk here — issue with nested elements: For example,
+   A blockquote P is larger than regular P tags. But a em element inside a P tag inside a blockquote is regular size,
+   resulting in an EM tag rendering at default P size, and blockquote P rendering larger.
+   Must declare all block-level type element we want to control with these sizes
+   AND any custom classes that need to also control them.
+
+   DO NOT use :where() here, it needs to override Normalize rules
+   */
+#{$all-headers},
+#{$all-typography-block} {
+  // Default starting values for scaling formulas
+  --font-size-min-value: var(--p-size-s);
+  --font-size-max-value: var(--p-size-l);
+  --font-size-scaler-value: var(--p-scaler-value);
+  --font-lh-min-value: var(--p-lh-s);
+  --font-lh-max-value: var(--p-lh-l);
+  --font-lh-scaler-value: var(--p-lh-scaler-value);
+
+  // factor in fontSizeModifier preference
+  --font-size-min: calc(var(--font-size-min-value) * var(--fontSizeModifier) * 1rem);
+  --font-size-max: calc(var(--font-size-max-value) * var(--fontSizeModifier)  * 1rem);
+
+  // reusable font-size var for each text element
+  --font-size: clamp(var(--font-size-min), calc(0.5rem + (var(--font-size-scaler-value) * 1vw)), var(--font-size-max));
+
+  // factor in lineHeightModifier preference
+  --font-lh-min: calc(var(--font-lh-min-value) * var(--lineHeightModifier) * 1em);
+  --font-lh-max: calc(var(--font-lh-max-value) * var(--lineHeightModifier) * 1em);
+
+  // reusable line-height var
+  --line-height: clamp(var(--font-lh-min), calc(var(--font-lh-scaler-value) * 1vw), var(--font-lh-max));
+
+  // reusable line-height var
+  --word-spacing: calc(1em * var(--wordSpaceModifier));
+
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  word-spacing: var(--word-spacing);
+}
+
 .node,
 .qh__accordion__content > div,
 .qh__numbered-step__content,
 .qh__single-event__content {
-  > * + * {
-    margin-top: $text-spacer-fallback-value;
 
-    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-      margin-top: var(--body-text-spacer);
-    }
-  }
-}
-/* Any time paragraphs follow something else */
-main {
-  * + p {
-    margin-top: $text-spacer-fallback-value;
-
-    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-      margin-top: var(--body-text-spacer);
-    }
-  }
-}
-
-// Defining this mixin here so things are all in one place
-@mixin qh__p {
-  font-family: $font-sans-static;
-  font-weight: normal;
-  font-size: $p-size-s;
-  line-height: $p-lh-s;
-  font-style: normal;
-  margin: 0;
-  max-width: $max-line-length;
-  hyphens: auto;
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $p-size-m;
-    line-height: $p-lh-m;
+  // Set up ideal character max-widths in content
+  :where(p, li, dt, dd) {
+    max-width: $max-line-length-ch;
   }
 
-  @include breakpoint-up($bp--large) {
-    font-size: $p-size-l;
-    line-height: $p-lh-l;
+  // Set up vertical rhythm inside main content containers
+  > :where(:not(h4, .qh__h4, h5, .qh__h5, h6, .qh__h6, .qh__accordion, hr)) {
+    /*
+      A LH unit changes with the size of the element’s font-size and line height
+      It also collapses when used on the margin property.
+      Therefore, we should achieve a balanced rhythm with only a few simple declarations.
+      */
+    margin-block-end: var(--vertical-rhythm);
   }
 
-  @include breakpoint-up($bp--medium) {
-    hyphens: none;
+  // Add space to certain elements when we are inside nodes that want vertical rhythm
+  /*
+   * H2 spacing and the lh unit:
+   * 1lh and 1rlh are one line-height and one relative line height unit, respectively.
+   * In this theme, the body element has no scaling or fluid type sizes applied to it.
+   * (To refactor it to do so will have unintended consequences whenever EM values are used.)
+   * Therefore, the 1rlh unit is constant and does not scale with the type as we would prefer.
+   * The desired effect is to use the 1rlh unit, and as the base font size scales up, so does the value of 1rlh
+   * Here, when using 1lh, the unit's value is tied to the element, much like the value of 1em.
+   * But this does not have the desired effect of vertical rhythm.
+   * The H2 element with its larger line-height has a higher value than the neighboring <p> tags.
+   * Therefore, unfortunately, we scale the 1lh value with some odd calculations just to make things look as desired.
+   */
+  > h2:not(:first-child),
+  > .qh__h2:not(:first-child) {
+    margin-block-start: calc(var(--vertical-rhythm) * 1.25);
+    margin-block-end: calc(var(--vertical-rhythm) * 0.625);
   }
 
-  .wf-inactive & {
-    font-family: $font-sans-fallback;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
+  > h3:not(:first-child),
+  > .qh__h3:not(:first-child) {
+    margin-block-start: calc(var(--vertical-rhythm) * 0.875);
   }
 
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-sans-vf);
-      font-weight: var(--p-font-wght);
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-sans-fallback;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-
-    .dark & {
-      --p-font-wght: calc(var(--default-body-wght) - 25);
-    }
-    @media (prefers-color-scheme: dark) {
-      html:not(.light) & {
-        --p-font-wght: calc(var(--default-body-wght) - 25);
-      }
-    }
+  > :where(.qh__accordion + *:not(.qh__accordion)),
+  > :where(.qh__paragraph) {
+    margin-block-start: calc(var(--vertical-rhythm) * 2);
   }
 
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$p-size-s-value};
-    --font-size-max-value: #{$p-size-l-value};
-    --font-size-scaler-value: var(--p-scaler-value);
-    --font-lh-min-value: #{$p-lh-s};
-    --font-lh-max-value: #{$p-lh-l};
-    --font-lh-scaler-value: var(--p-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
+  > *:last-child  {
+    margin-block-end: 0;
+  }
+
+  // Remove empty p tags used for spacing
+  // MAY BREAK THE WAY SOME AUTHORS CONTROL SPACING ON THEIR SITES
+  p:empty {
+    display: none;
   }
 }
 
+// All headers shared styles
 #{$all-headers} {
   color: var(--fc__default__hx__fg);
+  font-family: $font-serif-fallback;
+  font-weight: bold;
+
+  html:where(.wf-active) & {
+    font-family: $font-serif-static;
+  }
+
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-serif-vf);
+  }
 }
 
-// As a general rule, make H2s colorful
-h2 {
+// Individual header elements
+h1,
+.qh__h1 {
+  --font-size-min-value: var(--h1-size-s);
+  --font-size-max-value: var(--h1-size-l);
+  --font-size-scaler-value: var(--h1-scaler-value);
+  --font-lh-min-value: var(--h1-lh-s);
+  --font-lh-max-value: var(--h1-lh-l);
+  --font-lh-scaler-value: var(--h1-lh-scaler-value);
+
+  font-weight: normal;
+  letter-spacing: $kerning-base;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 275;
+  }
+}
+
+h2,
+.qh__h2 {
+  --font-size-min-value: var(--h2-size-s);
+  --font-size-max-value: var(--h2-size-l);
+  --font-size-scaler-value: var(--h2-scaler-value);
+  --font-lh-min-value: var(--h2-lh-s);
+  --font-lh-max-value: var(--h2-lh-l);
+  --font-lh-scaler-value: var(--h2-lh-scaler-value);
+
+  // As a general rule, make H2s colorful
   color: var(--fc__default__text-accent);
+  // Make H2s stand out even more by using the sans font
+  font-family: $font-sans-fallback;
+  letter-spacing: $kerning-base;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-sans-vf);
+    font-weight: var(--vf-bold-wght);
+  }
 }
 
-h1 {
-  font-family: $font-serif-static;
-  font-weight: normal;
-  font-size: $h1-size-s;
-  line-height: $h1-lh-s;
+h3,
+.qh__h3 {
+  --font-size-min-value: var(--h3-size-s);
+  --font-size-max-value: var(--h3-size-l);
+  --font-size-scaler-value: var(--h3-scaler-value);
+  --font-lh-min-value: var(--h3-lh-s);
+  --font-lh-max-value: var(--h3-lh-l);
+  --font-lh-scaler-value: var(--h3-lh-scaler-value);
+
   font-style: normal;
-  margin-top: 0;
-  margin-bottom: $text-spacer-fallback-value;
+  letter-spacing: $kerning-base;
 
-  @include breakpoint-up($bp--medium) {
-    font-size: $h1-size-m;
-    line-height: $h1-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $h1-size-l;
-    line-height: $h1-lh-l;
-  }
-
-  .wf-inactive & {
-    font-family: $font-serif-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf):not(.wf-inactive) & {
-      font-family: var(--font-serif-vf);
-      font-weight: 275;
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-serif-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$h1-size-s-value};
-    --font-size-max-value: #{$h1-size-l-value};
-    --font-size-scaler-value: var(--h1-scaler-value);
-
-    --font-lh-min-value: #{$h1-lh-s};
-    --font-lh-max-value: #{$h1-lh-l};
-    --font-lh-scaler-value: var(--h1-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-bottom: var(--body-text-spacer);
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 475;
   }
 }
 
-h2 {
-  font-family: $font-serif-static;
-  font-weight: normal;
+h4,
+.qh__h4 {
+  --font-size-min-value: var(--h4-size-s);
+  --font-size-max-value: var(--h4-size-l);
+  --font-size-scaler-value: var(--h4-scaler-value);
+  --font-lh-min-value: var(--h4-lh-s);
+  --font-lh-max-value: var(--h4-lh-l);
+  --font-lh-scaler-value: var(--h4-lh-scaler-value);
 
-  .wf-inactive & {
-    font-family: $font-serif-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
+  letter-spacing: $kerning-base;
+  margin-block-end: calc(var(--vertical-rhythm) * 0.5);
 
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-serif-vf);
-      font-weight: 400;
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-serif-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 500;
   }
 }
 
-// h2:first-of-type:not(.qh__no-decoration),
+h5,
+.qh__h5,
+.qh__btn,
+.button,
+legend {
+  --font-size-min-value: var(--h5-size-s);
+  --font-size-max-value: var(--h5-size-l);
+  --font-size-scaler-value: var(--h5-scaler-value);
+  --font-lh-min-value: var(--h5-lh-s);
+  --font-lh-max-value: var(--h5-lh-l);
+  --font-lh-scaler-value: var(--h5-lh-scaler-value);
+
+  letter-spacing: $kerning-base;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 550;
+  }
+}
+
+h6,
+.qh__h6 {
+  --font-size-min-value: var(--h6-size-s);
+  --font-size-max-value: var(--h6-size-l);
+  --font-size-scaler-value: var(--h6-scaler-value);
+  --font-lh-min-value: var(--h6-lh-s);
+  --font-lh-max-value: var(--h6-lh-l);
+  --font-lh-scaler-value: var(--h6-lh-scaler-value);
+
+  letter-spacing: $kerning-loosest;
+  text-transform: uppercase;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: var(--vf-bold-wght);
+  }
+}
+
+// What is this element? Can we find an example?
 .qh__emphasis {
   &::after {
     content: ' ';
@@ -197,432 +277,71 @@ h2 {
     margin-top: ($text-spacer-fallback-value * 0.85);
     margin-bottom: ($text-spacer-fallback-value * 0.85);
     width: 1.125em;
-
-    @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-      margin-top: calc(var(--body-text-spacer) * 0.85);
-      margin-bottom: calc(var(--body-text-spacer) * 0.85);
-    }
   }
 }
 
-// Only sizing and spacing now
-h2,
-.qh__h2 {
-  font-size: $h2-size-s;
-  line-height: $h2-lh-s;
-  font-style: normal;
-  margin-top: ($text-spacer-fallback-value * 0.5);
-  margin-bottom: ($text-spacer-fallback-value * 0.5);
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $h2-size-m;
-    line-height: $h2-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $h2-size-l;
-    line-height: $h2-lh-l;
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$h2-size-s-value};
-    --font-size-max-value: #{$h2-size-l-value};
-    --font-size-scaler-value: var(--h2-scaler-value);
-    --font-lh-min-value: #{$h2-lh-s};
-    --font-lh-max-value: #{$h2-lh-l};
-    --font-lh-scaler-value: var(--h2-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: calc(var(--body-text-spacer) * 0.5);
-    margin-bottom: calc(var(--body-text-spacer) * 0.5);
-  }
-}
-
-h3,
-.qh__h3 {
-  font-family: $font-sans-static;
-  font-weight: bold;
-  font-size: $h3-size-s;
-  line-height: $h3-lh-s;
-  font-style: normal;
-  margin-top: ($text-spacer-fallback-value * 0.75);
-  margin-bottom: ($text-spacer-fallback-value * 0.75);
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $h3-size-m;
-    line-height: $h3-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $h3-size-l;
-    line-height: $h3-lh-l;
-  }
-
-  .wf-inactive & {
-    font-family: $font-serif-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-serif-vf);
-      font-weight: 450;
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-serif-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$h3-size-s-value};
-    --font-size-max-value: #{$h3-size-l-value};
-    --font-size-scaler-value: var(--h3-scaler-value);
-    --font-lh-min-value: #{$h3-lh-s};
-    --font-lh-max-value: #{$h3-lh-l};
-    --font-lh-scaler-value: var(--h3-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: calc(var(--body-text-spacer) * 0.75);
-    margin-bottom: calc(var(--body-text-spacer) * 0.75);
-  }
-}
-
-h4 {
-  font-family: $font-serif-static;
-  font-weight: normal;
-  font-size: $h4-size-s;
-  line-height: $h4-lh-s;
-  font-style: normal;
-  margin-top: ($text-spacer-fallback-value * 0.5);
-  margin-bottom: ($text-spacer-fallback-value * 0.5);
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $h4-size-m;
-    line-height: $h4-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $h4-size-l;
-    line-height: $h4-lh-l;
-  }
-
-  .wf-inactive & {
-    font-family: $font-serif-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-serif-vf);
-      font-weight: 400;
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-serif-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$h4-size-s-value};
-    --font-size-max-value: #{$h4-size-l-value};
-    --font-size-scaler-value: var(--h4-scaler-value);
-    --font-lh-min-value: #{$h4-lh-s};
-    --font-lh-max-value: #{$h4-lh-l};
-    --font-lh-scaler-value: var(--h4-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: calc(var(--body-text-spacer) * 0.5);
-    margin-bottom: calc(var(--body-text-spacer) * 0.5);
-  }
-}
-
-h5 {
-  font-family: $font-serif-static;
-  font-weight: bold;
-  font-size: $h5-size-s;
-  line-height: $h5-lh-s;
-  font-style: normal;
-  margin-top: ($text-spacer-fallback-value * 0.5);
-  margin-bottom: ($text-spacer-fallback-value * 0.5);
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $h5-size-m;
-    line-height: $h5-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $h5-size-l;
-    line-height: $h5-lh-l;
-  }
-
-  .wf-inactive & {
-    font-family: $font-serif-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-serif-vf);
-      font-weight: 500;
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-serif-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$h5-size-s-value};
-    --font-size-max-value: #{$h5-size-l-value};
-    --font-size-scaler-value: var(--h5-scaler-value);
-    --font-lh-min-value: #{$h5-lh-s};
-    --font-lh-max-value: #{$h5-lh-l};
-    --font-lh-scaler-value: var(--h5-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: calc(var(--body-text-spacer) * 0.5);
-    margin-bottom: calc(var(--body-text-spacer) * 0.5);
-  }
-}
-
-h6 {
-  font-family: $font-serif-static;
-  font-weight: bold;
-  font-size: $h6-size-s;
-  line-height: $h6-lh-s;
-  font-style: normal;
-  margin-top: ($text-spacer-fallback-value * 0.5);
-  margin-bottom: ($text-spacer-fallback-value * 0.5);
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $h6-size-m;
-    line-height: $h6-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $h6-size-l;
-    line-height: $h6-lh-l;
-  }
-
-  .wf-inactive & {
-    font-family: $font-serif-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-serif-vf);
-      font-weight: 600;
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-serif-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$h6-size-s-value};
-    --font-size-max-value: #{$h6-size-l-value};
-    --font-size-scaler-value: var(--h6-scaler-value);
-    --font-lh-min-value: #{$h6-lh-s};
-    --font-lh-max-value: #{$h6-lh-l};
-    --font-lh-scaler-value: var(--h6-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-
-  @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
-    margin-top: calc(var(--body-text-spacer) * 0.5);
-    margin-bottom: calc(var(--body-text-spacer) * 0.5);
-  }
-}
-
-// Grouped declarations of similar elements
+p,
 li,
 dt,
-dd,
-th,
-td,
-p,
-address,
-button,
-time,
-caption,
-.qh__btn,
-.button,
-.skip-link {
-  @include qh__p;
-}
-
-p,
-li {
+dd {
   font-variant-numeric: oldstyle-nums;
 }
 
 strong,
 b {
-  font-weight: 575;
+  @include qh-fw-bold();
 }
 
 blockquote {
-  //border-top: solid 0.33rem $color-rhody-red;
-  margin: 0;
-  max-width: var(--content-width);
+  border-inline-start: $border-md solid var(--fc__default__text-accent);
+  padding-inline-start: calc(var(--vertical-rhythm) * 1.5);
 
   p {
-    font-family: $font-serif-static;
-    font-weight: normal;
-    font-size: $bq-size-s;
-    line-height: $bq-lh-s;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0.75rem;
+    --font-size-min-value: var(--bq-size-s);
+    --font-size-max-value: var(--bq-size-l);
+    --font-size-scaler-value: var(--bq-scaler-value);
+    --font-lh-min-value: var(--bq-lh-s);
+    --font-lh-max-value: var(--bq-lh-l);
+    --font-lh-scaler-value: var(--bq-lh-scaler-value);
 
-    @include breakpoint-up($bp--medium) {
-      font-size: $bq-size-m;
-      line-height: $bq-lh-m;
-    }
+    font-family: $font-serif-fallback;
+    font-weight: light;
 
-    @include breakpoint-up($bp--large) {
-      font-size: $bq-size-l;
-      line-height: $bq-lh-l;
-    }
-
-    .wf-inactive & {
-      font-family: $font-serif-fallback;
+    html:where(.wf-active) & {
+      font-family: $font-serif-static;
       font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
     }
 
-    @supports (font-variation-settings: normal) {
-      html:not(.novf) & {
-        font-family: var(--font-serif-vf);
-        font-weight: 150;
-      }
-
-      html:not(.novf).wf-inactive & {
-        font-family: $font-serif-fallback;
-        font-variant-numeric: lining-nums;
-        font-weight: normal;
-        letter-spacing: $kerning-base;
-      }
+    html:where(.wf-active:not(.novf)) & {
+      font-family: var(--font-serif-vf);
+      font-weight: 175;
     }
 
-    @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-      --font-size-min-value: #{$bq-size-s-value};
-      --font-size-max-value: #{$bq-size-l-value};
-      --font-size-scaler-value: var(--bq-scaler-value);
-      --font-lh-min-value: #{$bq-lh-s};
-      --font-lh-max-value: #{$bq-lh-l};
-      --font-lh-scaler-value: var(--bq-lh-scaler-value);
-      font-size: var(--font-size);
-      line-height: var(--line-height);
-      word-spacing: var(--word-spacing);
+    + p {
+      margin-block-start: calc(var(--vertical-rhythm) * 0.5);
     }
+  }
+
+  .qh__card > & {
+    margin-inline-start: calc(var(--vertical-rhythm) * 0.5);
   }
 }
 
-/* using this for any small bits of text that should be 'next size down' from paragraphs */
-body {
-  --st-font-wght: var(--default-body-wght);
+hr {
+  border-width: 0.5px;
+  border-color: var(--fc__default__border);
+  color: var(--fc__default__border);
+  margin-block: calc(var(--vertical-rhythm) * 2);
 }
 
+figcaption,
 label,
-.small-text {
-  font-family: $font-sans-static;
-  font-size: $st-size-s;
-  line-height: $st-lh-s;
-  font-style: normal;
-
-  @include breakpoint-up($bp--medium) {
-    font-size: $st-size-m;
-    line-height: $st-lh-m;
-  }
-
-  @include breakpoint-up($bp--large) {
-    font-size: $st-size-l;
-    line-height: $st-lh-l;
-  }
-
-  .wf-inactive & {
-    font-family: $font-sans-fallback;
-    font-variant-numeric: lining-nums;
-    font-weight: normal;
-    letter-spacing: $kerning-base;
-  }
-
-  @supports (font-variation-settings: normal) {
-    html:not(.novf) & {
-      font-family: var(--font-sans-vf);
-      font-weight: var(--st-font-wght);
-    }
-
-    html:not(.novf).wf-inactive & {
-      font-family: $font-sans-fallback;
-      font-variant-numeric: lining-nums;
-      font-weight: normal;
-      letter-spacing: $kerning-base;
-    }
-  }
-
-  @supports (font-size: clamp(1rem, 2vw, 2rem)) {
-    --font-size-min-value: #{$st-size-s-value};
-    --font-size-max-value: #{$st-size-l-value};
-    --font-size-scaler-value: var(--st-scaler-value);
-    --font-lh-min: #{$st-lh-s};
-    --font-lh-max: #{$st-lh-l};
-    --font-lh-scaler-value: var(--st-lh-scaler-value);
-    font-size: var(--font-size);
-    line-height: var(--line-height);
-    word-spacing: var(--word-spacing);
-  }
-}
-
-label {
-  --st-font-wght: 475;
-  display: block;
-}
-
-/* using this for global text styles */
-body {
-  word-break: break-word;
+.qh__fs-st {
+  --font-size-min-value: var(--st-size-s);
+  --font-size-max-value: var(--st-size-l);
+  --font-size-scaler-value: var(--st-scaler-value);
+  --font-lh-min-value: var(--st-lh-s);
+  --font-lh-max-value: var(--st-lh-l);
+  --font-lh-scaler-value: var(--st-lh-scaler-value);
+  font-weight: calc(var(--vf-body-wght) + 50);
 }

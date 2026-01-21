@@ -1,30 +1,31 @@
 ul,
 ol,
 dl {
-  padding: 0;
 
   li,
   dd {
-    margin-top: 0;
-    margin-left: 1.5em;
+    // Rules for when these items are in main content
+    .node &,
+    .qh__accordion__content > div &,
+    .qh__numbered-step__content &,
+    .qh__single-event__content & {
+      // Do not use a lh unit here; it multiplies when accordions are nested
+      line-height: 1.375em;
+      margin-block-start: 0;
+      margin-inline-start: 0.75em;
+      padding-inline-start: 0.25em;
 
-    &::marker {
-      color: var(--fc__default__text-accent);
-      font-size: 0.875em;
+      &::marker {
+        color: var(--fc__default__text-accent);
+        font-size: 0.875em;
+      }
+
+      + li {
+        margin-top: 0.25em;
+      }
     }
-
-    + li {
-      margin-top: calc(var(--body-text-spacer) * 0.5);
-    }
-  }
-
-  ul,
-  ol,
-  dl {
-    margin: 0;
   }
 }
-
 
 // Utilities
 .qh-u__list-reset {

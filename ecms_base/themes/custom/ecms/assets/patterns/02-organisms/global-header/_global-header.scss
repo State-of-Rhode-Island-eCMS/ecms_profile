@@ -1,17 +1,23 @@
 .qh__global-header {
-  background-color: var(--fc__official__bg);
-  color: var(--fc__official__fg);
+  color: var(--fc__header__fg);
 
+  // TO DO: Search for this pattern and apply a .do-not-print utility class instead
   @media print {
     display: none;
   }
 
   &__wrapper {
-    @include qh-content-maxwidth();
+    border-block-end: $border-xs solid rgba(255,255,255,0.25);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: ($general-v-spacing/2) $general-h-spacing;
+    padding: 0.5em $general-h-spacing;
+
+    // Later in the stack we restrict the width of the global bar.
+    // Previous, only padding prevents it from touching the edges
+    @include breakpoint-up($bp__show__desktop-nav) {
+      @include qh-content-maxwidth();
+    }
 
     &--multiple-region {
       @include breakpoint-down($bp--small) {
@@ -42,34 +48,17 @@
 
     &,
     &:visited {
-      color: var(--fc__official__link);
+      color: var(--fc__header__link);
     }
 
     &:hover,
     &:focus {
-      color: var(--fc__official__link--hover);
+      color: var(--fc__header__link--hover);
       text-decoration: underline;
     }
 
     &:focus {
-      outline-color: var(--fc__official__link--focus);
-    }
-
-    &:active {
-      color: var(--fc__official__link--active);
-    }
-  }
-
-  p,
-  .qh__settings-menu__toggle,
-  .qh__language-menu__toggle,
-  .google-translator-switch {
-    font-size: 87.5%;
-    font-weight: 375;
-
-    // Remove later once there are vertical rhythm rules in place for content containers only
-    & + p {
-      margin-top: 0;
+      outline-color: var(--fc__header__social__link--hover);
     }
   }
 }
