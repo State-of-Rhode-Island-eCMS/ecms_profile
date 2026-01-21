@@ -212,8 +212,8 @@ input[type='range'] {}
       @mixin range-track {
         -webkit-appearance: none;
         background: linear-gradient(to bottom right,
-        transparent 50%,
-        var(--c__white--trans33) 50%);
+          transparent 50%,
+          var(--c__white--trans33) 50%);
         cursor: pointer;
         height: 1rem;
       }
@@ -257,13 +257,13 @@ input[type='range'] {}
       }
 
       &:focus {
-        outline: $border-sm solid var(--fc__official__link--focus, currentColor);
+        outline: $border-sm solid var(--fc__default__link--focus, currentColor);
         outline-offset: ($border-sm * 2);
       }
 
       // Repeating… because "focus-within" will break IE11 and invalidate the entire block
       &:focus-within {
-        outline: $border-sm solid var(--fc__official__link--focus, currentColor);
+        outline: $border-sm solid var(--fc__default__link--focus, currentColor);
         outline-offset: ($border-sm * 2);
       }
     }
