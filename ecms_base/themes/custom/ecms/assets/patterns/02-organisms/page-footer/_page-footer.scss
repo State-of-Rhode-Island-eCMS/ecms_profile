@@ -11,6 +11,16 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
   border-block-start: $border-xl solid var(--fc__footer__border-top);
   color: var(--fc__footer__fg);
 
+  // Specific themes need overrides
+  html.qh__t__block-island.light & {
+    background-image: none;
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__block-island.light:where(:not(.dark)) & {
+      background-image: none;
+    }
+  }
+
   :where(#{$all-headers}) {
     // There should be heading elements inside the footer, but if there are, we don't want them to look huge
     // So we make all of them, regardless of semantic weight, the same visual size
