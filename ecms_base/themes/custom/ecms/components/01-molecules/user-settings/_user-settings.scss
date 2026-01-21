@@ -165,6 +165,16 @@
       z-index: -1;
     }
 
+    // Specific themes need overrides
+    html.qh__t__block-island.light & {
+      background-color: var(--c__ocean--trans75);
+    }
+    @media (prefers-color-scheme: light) {
+      html.qh__t__block-island.light:where(:not(.dark)) & {
+        background-color: var(--c__ocean--trans75);
+      }
+    }
+
     [aria-expanded='true'] + & {
       opacity: 1;
       transition:
