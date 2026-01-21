@@ -2,7 +2,7 @@
 $all-headers: 'h1, .qh__h1, h2, .qh__h2, h3, .qh__h3, h4, .qh__h4, h5, .qh__h5, h6, .qh__h6';
 
 // All block-level text elements
-$all-typography-block: 'p, li, dt, dd, th, td, address, label, figcaption, input, select, textarea, button, legend, .qh__fs-base, .qh__fs-st';
+$all-typography-block: 'p, li, dt, dd, th, td, address, label, figcaption, input, select, textarea, button, legend, .qh__btn, .qh__fs-base, .qh__fs-st';
 
 // Border Thickness
 $border-xs: rem(0.5); // Half pixel as REM value
@@ -20,7 +20,7 @@ $brad-md: rem(8);
 $box-shadow-base: 0 0.125em 0.5em var(--c__quahog--dark--trans33);
 
 // Buttons
-$button-border-radius: $brad-xs;
+$button-border-radius: $brad-sm;
 $button-v-spacing: 0.625em;
 $button-h-spacing: 1.125em;
 
