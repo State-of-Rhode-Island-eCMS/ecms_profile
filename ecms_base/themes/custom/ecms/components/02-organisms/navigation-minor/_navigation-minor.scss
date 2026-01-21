@@ -127,6 +127,11 @@
       z-index: unset;
     }
 
+    // When nested, remove border radius
+    .qh__nav-minor__list {
+      border-radius: 0;
+    }
+
     // When a left drawer menu, don't let it get bigger than the viewport and
     // allow interior scrolling for very long lists of page nav items
     @include breakpoint-down($bp__single-col-content) {
