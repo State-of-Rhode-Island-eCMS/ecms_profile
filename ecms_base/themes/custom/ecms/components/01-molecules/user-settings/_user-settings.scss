@@ -2,6 +2,7 @@
 
 .qh__settings-menu {
   --text-opsz: 10;
+
   display: inline-flex;
   position: relative;
   margin-inline-start: $general-h-spacing;
@@ -131,12 +132,15 @@
   } // end &__toggle
 
   &__list {
-    background-color: var(--fc__header__bg);
+    // In dark themes, the header color might be transparent.
+    // Always provide the body color under the background color
+    background-color: var(--fc__default__bg);
+    border-radius: $brad-sm;
     color: var(--fc__header__fg);
     opacity: 0;
     max-height: 80vh;
     min-height: 48vh;
-    max-width: 36rem;
+    max-width: 32rem;
     min-width: 18rem;
     width: 82vw;
     overflow-y: scroll;
@@ -152,6 +156,7 @@
     word-spacing: 0;
     z-index: z(drop-down-menu);
 
+    // The actual color is set here, we intentionally layer colors
     &::before {
       background-color: var(--fc__header__bg);
       content: '';
@@ -184,16 +189,16 @@
     .qh__u__btn-as-text {
       &,
       &:visited {
-        color: var(--fc__official__link);
+        color: var(--fc__header__fg);
       }
 
       &:hover,
       &:focus {
-        color: var(--fc__official__link--hover);
+        color: var(--fc__header_link);
       }
 
       &:focus {
-        outline-color: var(--fc__official__link);
+        outline-color: var(--fc__header__link);
       }
     }
 
