@@ -4,6 +4,16 @@
     linear-gradient( var(--fc__header__bg), var(--fc__header__bg) );
   color: var(--fc__header__fg);
 
+  // Specific themes need overrides
+  html.qh__t__block-island.light & {
+    background-image: none;
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__block-island.light:where(:not(.dark)) & {
+      background-image: none;
+    }
+  }
+
   &__wrapper {
     @include qh-content-maxwidth();
     display: flex;

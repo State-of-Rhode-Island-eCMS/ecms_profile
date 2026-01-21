@@ -3,6 +3,16 @@
   background-image: radial-gradient( circle at 50%, rgba(0, 0, 0,.15), rgba(0, 0, 0, 0) );
   padding-block: $general-v-spacing;
 
+  // Specific themes need overrides
+  html.qh__t__block-island.light & {
+    background-image: radial-gradient( circle at 50%, rgba(0, 0, 0,.05), rgba(0, 0, 0, 0) );
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__block-island.light:where(:not(.dark)) & {
+      background-image: radial-gradient( circle at 50%, rgba(0, 0, 0,.05), rgba(0, 0, 0, 0) );
+    }
+  }
+
   &__inner {
     display: flex;
     align-items: center;
