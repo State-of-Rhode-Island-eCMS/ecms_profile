@@ -1,4 +1,5 @@
 .qh__content-components-block {
+
   // Add padding to block when there is a background color.
   &[class*='qh__tc'] {
     padding: $general-v-spacing $general-h-spacing;
@@ -8,5 +9,17 @@
       margin: ($general-v-spacing * -1) ($general-h-spacing * -1) $general-v-spacing;
       width: calc(100% + (#{$general-h-spacing} * 2));
     }
+  }
+
+  // When an H2 title is present, add space and reduce size slightly
+  &__title {
+    --font-size-min-value: var(--h3-size-s);
+    --font-size-max-value: var(--h3-size-l);
+    --font-size-scaler-value: var(--h3-scaler-value);
+    --font-lh-min-value: var(--h3-lh-s);
+    --font-lh-max-value: var(--h3-lh-l);
+    --font-lh-scaler-value: var(--h3-lh-scaler-value);
+
+    margin-block-end: calc( var(--vertical-rhythm) * 0.625);
   }
 }
