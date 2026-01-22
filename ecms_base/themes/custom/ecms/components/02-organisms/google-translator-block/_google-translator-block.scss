@@ -1,6 +1,6 @@
 .qh__google-translator {
   font-family: var(--font-sans-vf);
-  color: var(--fc__official__link);
+  color: var(--fc__default__link);
   display: flex;
   padding-top: 3.5px;
 
@@ -39,7 +39,7 @@
     &::before {
       display: block;
       mask: url('../images/icons/globe.svg');
-      background-color: var(--fc__official__link);
+      background-color: var(--fc__default__link);
       height: 2rem;
       width: 2rem;
       content: '';
@@ -73,19 +73,19 @@
   .goog-te-gadget-simple {
     background-color: transparent;
     border: 0;
-    color: var(--fc__official__link);
+    color: var(--fc__default__link);
   }
 
   a,
   span,
   div {
-    color: var(--fc__official__link) !important;
+    color: var(--fc__default__link) !important;
     font-size: var(--font-size-min);
     font-family: var(--font-sans-vf);
 
     &:hover,
     &:focus {
-      color: var(--fc__official__link--hover) !important;
+      color: var(--fc__default__link--hover) !important;
     }
   }
 
@@ -101,14 +101,14 @@
     &::before {
       display: block;
       mask: url('../images/icons/globe.svg');
-      background-color: var(--fc__official__link);
+      background-color: var(--fc__default__link);
       height: 2rem;
       width: 2rem;
       content: '';
 
       &:hover,
       &:focus {
-        background-color: var(--fc__official__link--hover);
+        background-color: var(--fc__default__link--hover);
       }
     }
   }
