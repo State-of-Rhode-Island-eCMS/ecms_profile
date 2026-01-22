@@ -20,6 +20,14 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
       background-image: none;
     }
   }
+  html.qh__t__misquamicut.light & {
+    background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(255, 255, 255, 0.25) 100% );
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__misquamicut.light:where(:not(.dark)) & {
+      background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(255, 255, 255, 0.25) 100% );
+    }
+  }
 
   :where(#{$all-headers}) {
     // There should be heading elements inside the footer, but if there are, we don't want them to look huge
