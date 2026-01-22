@@ -19,6 +19,16 @@
       @include qh-content-maxwidth();
     }
 
+    // Some color themes need color overrides
+    html.qh__t__blue-shutters.light & {
+      border-block-end: $border-xs solid rgba(255,255,255,0.5);
+    }
+    @media (prefers-color-scheme: light) {
+      html.qh__t__blue-shutters.light:where(:not(.dark)) & {
+        border-block-end: $border-xs solid rgba(255,255,255,0.5);
+      }
+    }
+
     &--multiple-region {
       @include breakpoint-down($bp--small) {
         margin: 0;
