@@ -21,7 +21,7 @@ window.onload = function(){
 
 function handleFontSizeSliderUpdate(e) {
   document.documentElement.style.setProperty("--fontSizeModifier", this.value);
-  document.cookie = "fontSizeModifier="+this.value+"; max-age=31536000; path=/; samesite=strict";
+  document.cookie = "fontSizeModifier="+this.value+"; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
 }
 
 function fontSizeSliderSet() {
@@ -34,7 +34,7 @@ function fontSizeSliderSet() {
 
 function handleLineHeightSliderUpdate(e) {
   document.documentElement.style.setProperty("--lineHeightModifier", this.value);
-  document.cookie = "lineHeightModifier="+this.value+"; max-age=31536000; path=/; samesite=strict";
+  document.cookie = "lineHeightModifier="+this.value+"; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
 }
 
 function lineHeightSliderSet() {
@@ -47,7 +47,7 @@ function lineHeightSliderSet() {
 
 function handleWordSpaceSliderUpdate(e) {
   document.documentElement.style.setProperty("--wordSpaceModifier", this.value);
-  document.cookie = "wordSpaceModifier="+this.value+"; max-age=31536000; path=/; samesite=strict";
+  document.cookie = "wordSpaceModifier="+this.value+"; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
 }
 
 function wordSpaceSliderSet() {
@@ -114,16 +114,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Always check the value of the custom property before determining state.
       if (getComputedStyle(document.documentElement).getPropertyValue('--osLightMode').trim() == 'dark' && !document.getElementsByTagName("html")[0].classList.contains('light')) {
-        document.cookie = "lightMode=light; max-age=31536000; path=/; samesite=strict";
+        document.cookie = "lightMode=light; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
         document.getElementsByTagName("html")[0].classList.remove('dark');
         document.getElementsByTagName("html")[0].classList.add('light');
       } else if( getComputedStyle(document.documentElement).getPropertyValue('--osLightMode').trim() == 'light' && document.getElementsByTagName("html")[0].classList.contains('dark')) {
-        document.cookie = "lightMode=dark; max-age=31536000; path=/; samesite=strict";
+        document.cookie = "lightMode=dark; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
         document.getElementsByTagName("html")[0].classList.remove('dark');
         document.getElementsByTagName("html")[0].classList.add('light');
       } else {
         // set a cookie to save the setting
-        document.cookie = "lightMode=dark; max-age=31536000; path=/; samesite=strict";
+        document.cookie = "lightMode=dark; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
         document.getElementsByTagName("html")[0].classList.remove('light');
         document.getElementsByTagName("html")[0].classList.add('dark');
       }
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (lightModeReset !== null && lightModeReset !== undefined) {
     lightModeReset.addEventListener('click', function(e) {
       e.preventDefault();
-      document.cookie = "lightMode=auto; max-age=31536000; path=/; samesite=strict";
+      document.cookie = "lightMode=auto; max-age=31536000; path=/; samesite=strict; domain=.ri.gov";
 
       // Remove any current body classes.
       document.getElementsByTagName("html")[0].classList.remove('dark');
