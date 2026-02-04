@@ -14,6 +14,7 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -1148,15 +1149,13 @@ function ecms_preprocess_node__person(array &$variables) {
     /** @var \Drupal\Core\Render\Renderer $renderer */
     $renderer = \Drupal::service('renderer');
     $paragraphs = $node->field_person_additional_fields->referencedEntities();
-    $variables['additional_fields'] = [
-
-    ];
+    $variables['additional_fields'] = [];
     foreach ($paragraphs as $paragraph) {
       $field_label = NULL;
       if (
         $paragraph->hasField('field_person_field_label') &&
         !$paragraph->get('field_person_field_label')->isEmpty() &&
-        $paragraph->get('field_person_field_label')->entity instanceof \Drupal\taxonomy\TermInterface
+        $paragraph->get('field_person_field_label')->entity instanceof TermInterface
       ) {
         // Get the translated version of the entity if available.
         $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
