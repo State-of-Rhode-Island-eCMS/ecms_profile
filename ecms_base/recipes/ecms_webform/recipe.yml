@@ -38,7 +38,6 @@ config:
       - core.entity_form_display.node.webform.default
       - core.entity_view_display.node.webform.default
       - core.entity_view_display.node.webform.teaser
-      - field.field.node.webform.body
       - field.field.node.webform.field_webform
       - field.storage.node.webform
       - node.type.webform
@@ -67,7 +66,6 @@ config:
         - 'view webform submissions any node'
     user.role.content_publisher:
       grantPermissions:
-        - 'add scheduled transitions node webform'
         - 'create webform content'
         - 'delete webform revisions'
         - 'edit any webform content'
@@ -75,18 +73,15 @@ config:
         - 'publish any node type webform'
         - 'publish editable node type webform'
         - 'publish own node type webform'
-        - 'reschedule scheduled transitions node webform'
         - 'revert webform revisions'
         - 'unpublish any node type webform'
         - 'unpublish editable node type webform'
         - 'unpublish own node type webform'
-        - 'view scheduled transitions node webform'
         - 'view webform revisions'
     user.role.site_admin:
       grantPermissions:
         - 'access webform help'
         - 'access webform overview'
-        - 'add scheduled transitions node webform'
         - 'create webform'
         - 'create webform content'
         - 'delete any webform'
@@ -102,13 +97,11 @@ config:
         - 'publish any node type webform'
         - 'publish editable node type webform'
         - 'publish own node type webform'
-        - 'reschedule scheduled transitions node webform'
         - 'revert webform revisions'
         - 'unpublish any node type webform'
         - 'unpublish editable node type webform'
         - 'unpublish own node type webform'
         - 'view any webform submission'
         - 'view own webform submission'
-        - 'view scheduled transitions node webform'
         - 'view webform revisions'
         - 'view webform submissions any node'
