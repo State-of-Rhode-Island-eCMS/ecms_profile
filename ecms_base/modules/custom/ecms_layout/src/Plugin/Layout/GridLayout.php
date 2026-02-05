@@ -18,6 +18,7 @@ final class GridLayout extends LayoutBase {
     $configuration = parent::defaultConfiguration();
     $configuration['title'] = '';
     $configuration['heading_level'] = 'h2';
+    $configuration['max_columns'] = '4';
     return $configuration;
   }
 
@@ -26,6 +27,9 @@ final class GridLayout extends LayoutBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
+
+    // Remove layout options for grid layout (always auto-fit, never full-width).
+    unset($form['layout']);
 
     $form['content'] = [
       '#type' => 'details',
@@ -54,6 +58,17 @@ final class GridLayout extends LayoutBase {
       '#default_value' => $this->configuration['heading_level'],
     ];
 
+    $form['content']['max_columns'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Max Columns'),
+      '#description' => $this->t('Maximum number of columns in the grid.'),
+      '#options' => [
+        '3' => $this->t('3 (larger cards)'),
+        '4' => $this->t('4 (smaller cards)'),
+      ],
+      '#default_value' => $this->configuration['max_columns'],
+    ];
+
     return $form;
   }
 
@@ -61,11 +76,14 @@ final class GridLayout extends LayoutBase {
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    parent::submitConfigurationForm($form, $form_state);
-
+    // Don't call parent - it expects layout fields we removed.
     $values = $form_state->getValues();
+
+    $this->configuration['background_color'] = $values['background']['background_color'];
+    $this->configuration['class'] = $values['extra']['class'];
     $this->configuration['title'] = $values['content']['title'];
     $this->configuration['heading_level'] = $values['content']['heading_level'];
+    $this->configuration['max_columns'] = $values['content']['max_columns'];
   }
 
   /**
