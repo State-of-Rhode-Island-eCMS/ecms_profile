@@ -1,0 +1,10 @@
+name: 'eCMS Icon Card Block'
+description: 'Provides the Icon Card block type for displaying icons with links in card format.'
+type: 'eCMS'
+install:
+  - block_content
+  - link
+  - ecms_icon_library
+  - language
+config:
+  strict: false

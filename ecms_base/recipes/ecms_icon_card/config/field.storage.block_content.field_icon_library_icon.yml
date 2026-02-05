@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - ecms_icon_library
+id: block_content.field_icon_library_icon
+field_name: field_icon_library_icon
+entity_type: block_content
+type: ecms_icon_library
+settings: {  }
+module: ecms_icon_library
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
