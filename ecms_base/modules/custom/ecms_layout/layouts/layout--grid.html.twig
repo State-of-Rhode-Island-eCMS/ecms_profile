@@ -16,7 +16,7 @@
   set classes = [
     'qh-layout-section',
     'qh__grid',
-    settings.full_width == 1 ? 'qh-layout-section--full-width' : '',
+    'qh__grid--max-' ~ (settings.max_columns|default('4')),
   ]
 %}
 
