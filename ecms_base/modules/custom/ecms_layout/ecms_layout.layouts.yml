@@ -61,3 +61,16 @@ ecms_layout__four_column:
       label: Three
     fourth:
       label: Fourth
+
+ecms_layout__grid:
+  label: 'Grid'
+  path: layouts
+  template: layout--grid
+  class: Drupal\ecms_layout\Plugin\Layout\GridLayout
+  category: 'Grid'
+  default_region: items
+  icon_map:
+    - [items]
+  regions:
+    items:
+      label: Items
