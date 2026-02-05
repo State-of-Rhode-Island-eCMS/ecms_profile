@@ -1,11 +1,12 @@
-.qh__image-card {
+.qh__grid-card {
   position: relative;
   border: 1px solid var(--fc__default__border);
   border-radius: rem(9);
   overflow: hidden;
   height: 100%;
 
-  &__media {
+  // Image variant
+  &__image {
     aspect-ratio: 16 / 10;
 
     img {
@@ -16,8 +17,19 @@
     }
   }
 
+  &__icon {
+    padding: calc(#{$general-v-spacing} * 0.75) $general-h-spacing 0;
+
+    svg,
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
   &__cta {
     padding: calc(#{$general-v-spacing} * 0.75) $general-h-spacing;
+    margin-top: auto;
 
     a {
       display: flex;
@@ -36,15 +48,6 @@
       }
     }
   }
-
-  // External link icon - position top right
-  // a[target="_blank"]::after {
-  //   position: absolute;
-  //   top: 0.75rem;
-  //   right: 0.75rem;
-  //   left: auto;
-  //   margin-left: 0;
-  // }
 
   &__arrow {
     flex-shrink: 0;
