@@ -1,0 +1,11 @@
+name: 'eCMS Image Card Block'
+description: 'Provides the Image Card block type for displaying images with optional links.'
+type: 'eCMS'
+install:
+  - block_content
+  - link
+  - media
+  - media_library
+  - language
+config:
+  strict: false
