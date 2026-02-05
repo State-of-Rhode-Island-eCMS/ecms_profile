@@ -81,6 +81,15 @@ function ecms_layout_plugin_filter_block__layout_builder_alter(array &$definitio
       }
     }
   }
+
+  // Restrict grid layout to only allow image_card blocks.
+  if (_ecms_layout_is_grid_context($extra)) {
+    foreach ($definitions as $id => $definition) {
+      if ($id !== 'inline_block:image_card') {
+        unset($definitions[$id]);
+      }
+    }
+  }
 }
 
 /**
@@ -90,6 +99,35 @@ function _ecms_layout_block_exclude_list(): array {
   return [
     'system_menu_block:tools',
   ];
+}
+
+/**
+ * Helper function to check if we're in a grid layout context.
+ */
+function _ecms_layout_is_grid_context(array $extra): bool {
+  // Check if section_storage is available.
+  if (!isset($extra['section_storage'])) {
+    return FALSE;
+  }
+
+  // Get the delta (section index) from the route parameters.
+  $route_match = \Drupal::routeMatch();
+  $delta = $route_match->getParameter('delta');
+
+  if ($delta === NULL) {
+    return FALSE;
+  }
+
+  try {
+    $section_storage = $extra['section_storage'];
+    $section = $section_storage->getSection($delta);
+    $layout_id = $section->getLayoutId();
+
+    return $layout_id === 'ecms_layout__grid';
+  }
+  catch (\Exception $e) {
+    return FALSE;
+  }
 }
 
 /**
