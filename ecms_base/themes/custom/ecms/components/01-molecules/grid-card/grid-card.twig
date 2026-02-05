@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Grid card component.
+ *
+ * A card for use in grid layouts. Supports either an image or icon
+ * in the media area. The entire card is clickable via the qh__cta pattern.
+ *
+ * Variables:
+ * - variant: 'image' or 'icon'
+ * - img: Rendered responsive image HTML (for image variant)
+ * - icon: Icon filename (PL) or rendered media (ML) (for icon variant)
+ * - media_library_icon: Boolean indicating if icon is from media library
+ * - link_url: URL for the card link
+ * - link_text: Display text for the CTA link
+ */
+#}
+
+{% set variant = variant|default('image') %}
+
+<article class="qh__grid-card qh__grid-card--{{ variant }}">
+  {% if variant == 'image' and img %}
+    <div class="qh__grid-card__image">
+      {{ img|raw }}
+    </div>
+  {% endif %}
+
+  {% if variant == 'icon' %}
+    <div class="qh__grid-card__icon">
+      {% if media_library_icon %}
+        {{ icon }}
+      {% elseif icon|default %}
+        {% include ('@icons/' ~ icon) %}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if link_url %}
+    <div class="qh__grid-card__cta qh__u__no-external">
+      <a class="qh__h5 qh__cta__link" href="{{ link_url }}">
+        <span class="qh__grid-card__text">{{ link_text }}</span>
+        <span class="qh__grid-card__arrow" aria-hidden="true">
+          {% include '@icons/arrow-right.svg' %}
+        </span>
+      </a>
+    </div>
+  {% endif %}
+</article>

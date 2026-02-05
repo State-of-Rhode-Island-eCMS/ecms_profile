@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.icon_card
+    - field.storage.block_content.field_icon_library_icon
+  module:
+    - ecms_icon_library
+id: block_content.icon_card.field_icon_library_icon
+field_name: field_icon_library_icon
+entity_type: block_content
+bundle: icon_card
+label: Icon
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: ecms_icon_library

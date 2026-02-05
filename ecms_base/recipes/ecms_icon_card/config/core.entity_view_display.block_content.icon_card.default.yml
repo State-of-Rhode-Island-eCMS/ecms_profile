@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.icon_card
+    - field.field.block_content.icon_card.field_icon_library_icon
+    - field.field.block_content.icon_card.field_link
+  module:
+    - ecms_icon_library
+    - link
+id: block_content.icon_card.default
+targetEntityType: block_content
+bundle: icon_card
+mode: default
+content:
+  field_icon_library_icon:
+    type: ecms_icon_library_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  search_api_excerpt: true

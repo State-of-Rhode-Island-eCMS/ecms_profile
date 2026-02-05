@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.icon_card
+id: block_content.icon_card
+target_entity_type_id: block_content
+target_bundle: icon_card
+default_langcode: site_default
+language_alterable: false
