@@ -49,7 +49,7 @@
   {% else %}
     {% set link_url = content.field_link.0['#url'] %}
   {% endif %}
-  {% set link_text = block_content.field_link.title %}
+  {% set link_text = label %}
 {% endif %}
 
 <div{{ attributes }}>

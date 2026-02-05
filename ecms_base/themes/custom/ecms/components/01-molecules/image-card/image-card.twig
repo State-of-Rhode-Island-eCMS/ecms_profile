@@ -21,8 +21,13 @@
   {% endif %}
 
   {% if link_url %}
-    <div class="qh__image-card__cta">
-      <a class="qh__cta__link qh__h5" href="{{ link_url }}">{{ link_text }}</a>
+    <div class="qh__image-card__cta qh__u__no-external">
+      <a class="qh__h5 qh__cta__link" href="{{ link_url }}">
+        <span class="qh__image-card__text">{{ link_text }}</span>
+        <span class="qh__image-card__arrow" aria-hidden="true">
+          {% include '@icons/arrow-right.svg' %}
+        </span>
+      </a>
     </div>
   {% endif %}
 </article>

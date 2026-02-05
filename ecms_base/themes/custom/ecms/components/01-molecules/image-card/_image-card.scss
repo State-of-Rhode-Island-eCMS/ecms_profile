@@ -3,6 +3,7 @@
   border: 1px solid var(--fc__default__border);
   border-radius: rem(9);
   overflow: hidden;
+  height: 100%;
 
   &__media {
     aspect-ratio: 16 / 10;
@@ -16,21 +17,46 @@
   }
 
   &__cta {
-    display: flex;
-    align-items: center;
-    padding: calc(#{$general-v-spacing} * 0.75)
-      calc(#{$general-h-spacing} * 1.5);
+    padding: calc(#{$general-v-spacing} * 0.75) $general-h-spacing;
 
     a {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
       margin: 0;
       text-decoration: none;
       font-family: $font-sans-vf;
 
+      // Support hovering entire card.
       &::after {
         content: "";
         position: absolute;
         inset: 0;
       }
     }
+  }
+
+  // External link icon - position top right
+  // a[target="_blank"]::after {
+  //   position: absolute;
+  //   top: 0.75rem;
+  //   right: 0.75rem;
+  //   left: auto;
+  //   margin-left: 0;
+  // }
+
+  &__arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &:hover &__arrow {
+    transform: translateX(5px);
   }
 }
