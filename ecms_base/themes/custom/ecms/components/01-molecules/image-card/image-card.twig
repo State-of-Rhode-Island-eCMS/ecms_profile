@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Image card component.
+ *
+ * An image with a CTA link below. The entire card is clickable
+ * via the qh__cta pattern (absolute-positioned pseudo-element on the link).
+ *
+ * Variables:
+ * - img: Rendered responsive image HTML
+ * - link_url: URL for the card link
+ * - link_text: Display text for the CTA link
+ */
+#}
+
+<article class="qh__image-card">
+  {% if img %}
+    <div class="qh__image-card__media">
+      {{ img|raw }}
+    </div>
+  {% endif %}
+
+  {% if link_url %}
+    <div class="qh__image-card__cta">
+      <a class="qh__cta__link qh__h5" href="{{ link_url }}">{{ link_text }}</a>
+    </div>
+  {% endif %}
+</article>

@@ -1,0 +1,17 @@
+.qh__grid {
+  --grid-min: #{rem(280)};
+  --grid-gap: #{$grid-gap};
+
+  padding: $general-v-spacing $general-h-spacing;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-min)), 1fr)
+  );
+  gap: var(--grid-gap);
+
+  &__title-cell {
+    display: flex;
+    align-items: flex-end;
+  }
+}
