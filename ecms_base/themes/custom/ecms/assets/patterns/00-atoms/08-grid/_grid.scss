@@ -25,5 +25,10 @@
   &__title-cell {
     display: flex;
     align-items: flex-end;
+    margin-bottom: 1.25em;
+
+    > * {
+      font-weight: normal !important;
+    }
   }
 }
