@@ -14,6 +14,7 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -1145,19 +1146,36 @@ function ecms_preprocess_node__person(array &$variables) {
 
   // Build out additional fields array for twig.
   if (!$node->field_person_additional_fields->isEmpty()) {
+    /** @var \Drupal\Core\Render\Renderer $renderer */
+    $renderer = \Drupal::service('renderer');
     $paragraphs = $node->field_person_additional_fields->referencedEntities();
     $variables['additional_fields'] = [];
     foreach ($paragraphs as $paragraph) {
-
-      $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
-      $paragraph_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph, $language);
-
-      $field_label = $term_trans->getName();
-      $field_value = $paragraph_trans->get('field_person_field_value')->getString();
-
-      if ($field_value && $field_label) {
-        $variables['additional_fields'][$field_label] = $field_value;
+      $field_label = NULL;
+      if (
+        $paragraph->hasField('field_person_field_label') &&
+        !$paragraph->get('field_person_field_label')->isEmpty() &&
+        $paragraph->get('field_person_field_label')->entity instanceof TermInterface
+      ) {
+        // Get the translated version of the entity if available.
+        $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
+        $field_label = $term_trans->getName();
+        $renderer->addCacheableDependency($variables['additional_fields'], $term_trans);
       }
+
+      $paragraph_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph, $language);
+      $field_value = $paragraph_trans->get('field_person_field_value')->getString();
+      $variables['additional_fields'][] = [
+        'label' => [
+          '#markup' => $field_label,
+          '#access' => !is_null($field_label),
+        ],
+        'value' => [
+          '#markup' => $field_value,
+          '#access' => !empty($field_value),
+        ],
+      ];
+      $renderer->addCacheableDependency($variables['additional_fields'], $paragraph);
     }
   }
 }
