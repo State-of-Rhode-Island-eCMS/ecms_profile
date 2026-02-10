@@ -67,11 +67,11 @@
           // Check for Light Mode preference
           if (cookies[i].indexOf('lightMode=dark') !== -1) {
             // set a cookie to save the setting
-            document.cookie = "lightMode=dark;max-age=31536000;path=/;samesite=strict";
+            document.cookie = "lightMode=dark;max-age=31536000;path=/;samesite=strict;domain=.ri.gov";
             document.documentElement.className += " dark";
             lightSetting = true;
           } else if (cookies[i].indexOf('lightMode=light') !== -1) {
-            document.cookie = "lightMode=light;max-age=31536000;path=/;samesite=strict";
+            document.cookie = "lightMode=light;max-age=31536000;path=/;samesite=strict;domain=.ri.gov";
             document.documentElement.className += " light";
             lightSetting = true;
 
@@ -81,7 +81,7 @@
             // get the value
             let fontSizeModifier = fontSizeCookieString.split('=');
             let fontSizeModifierValue = fontSizeModifier[1];
-            document.cookie = "fontSizeModifier="+fontSizeModifierValue+";max-age=31536000;path=/;samesite=strict";
+            document.cookie = "fontSizeModifier="+fontSizeModifierValue+";max-age=31536000;path=/;samesite=strict;domain=.ri.gov";
             document.documentElement.style.setProperty('--fontSizeModifier', fontSizeModifierValue);
 
             // Check for Line-height preference
@@ -90,7 +90,7 @@
             // get the value
             let lineHeightModifier = lineHeightCookieString.split('=');
             let lineHeightModifierValue = lineHeightModifier[1];
-            document.cookie = "lineHeightModifier="+lineHeightModifierValue+";max-age=31536000;path=/;samesite=strict";
+            document.cookie = "lineHeightModifier="+lineHeightModifierValue+";max-age=31536000;path=/;samesite=strict;domain=.ri.gov";
             document.documentElement.style.setProperty('--lineHeightModifier', lineHeightModifierValue);
 
             // Check for word space preference
@@ -99,14 +99,14 @@
             // get the value
             let wordSpaceModifier = wordSpaceCookieString.split('=');
             let wordSpaceModifierValue = wordSpaceModifier[1];
-            document.cookie = "wordSpaceModifier="+wordSpaceModifierValue+";max-age=31536000;path=/;samesite=strict";
+            document.cookie = "wordSpaceModifier="+wordSpaceModifierValue+";max-age=31536000;path=/;samesite=strict;domain=.ri.gov";
             document.documentElement.style.setProperty('--wordSpaceModifier', wordSpaceModifierValue);
           }
 
         } // end for
 
         if (lightSetting == false) {
-          document.cookie = "lightMode=auto;max-age=31536000;path=/;samesite=strict";
+          document.cookie = "lightMode=auto;max-age=31536000;path=/;samesite=strict;domain=.ri.gov";
         }
 
         // set initial var for support of variable fonts

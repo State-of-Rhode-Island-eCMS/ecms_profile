@@ -51,16 +51,21 @@
         </div>
 
          {% if additional_fields %}
-          <div class="qh__teaser-person__additional-fields">
-            {% for field_label, field_value in additional_fields %}
-              <div class="qh__teaser-person__additional-field">
-                <span class="qh__teaser-person__additional-field-label">{{ field_label }}: </span>
-                {{ field_value }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
+           {{ additional_fields|cache_metadata }}
+            <div class="qh__teaser-person__additional-fields">
+              {% if additional_fields %}
+                {% for field in additional_fields|children %}
+                  <div class="qh__teaser-person__additional-field">
+                    {% if field.label['#access'] %}
+                      <span
+                        class="qh__teaser-person__additional-field-label">{{ field.label }}: </span>
+                    {% endif %}
+                    {{ field.value }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+         {% endif %}
       </div>
     </div>
   </article>
