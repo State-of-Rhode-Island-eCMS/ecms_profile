@@ -7,7 +7,7 @@
 
   // Image variant
   &__image {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 8 / 5;
 
     img {
       display: block;
@@ -18,7 +18,7 @@
   }
 
   &__icon {
-    padding: calc(#{$general-v-spacing} * 0.75) $general-h-spacing 0;
+    padding: var(--vertical-rhythm) $general-h-spacing 0;
 
     svg,
     img {
@@ -28,14 +28,14 @@
   }
 
   &__cta {
-    padding: calc(#{$general-v-spacing} * 0.75) $general-h-spacing;
+    padding: calc(var(--vertical-rhythm) * 1.25) $general-h-spacing var(--vertical-rhythm);
     margin-top: auto;
 
     a {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1em;
       margin: 0;
       text-decoration: none;
       font-family: $font-sans-vf;
