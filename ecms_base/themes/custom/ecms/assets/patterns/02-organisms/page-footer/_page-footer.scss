@@ -56,6 +56,13 @@
   a {
     color: var(--fc__footer__fg);
 
+    // Ensure touch targets meet minimum size on mobile.
+    @include breakpoint-down($qh__footer-sm-bp) {
+      display: inline-flex;
+      align-items: center;
+      min-height: rem(48);
+    }
+
     &:hover,
     &:focus {
       text-decoration: none;
