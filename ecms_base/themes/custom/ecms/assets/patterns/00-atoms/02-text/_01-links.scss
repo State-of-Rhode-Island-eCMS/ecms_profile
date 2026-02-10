@@ -85,13 +85,20 @@ a {
       display: none;
     }
   }
+  // Removing the icons in specific scenarios
+  .qh__media-item &[target='_blank']:has(img) {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
 }
 
 p,
 li,
 dt,
 dd {
-  a {
+  html:where(.wf-active:not(.novf)) & a {
     font-weight: calc(var(--p-font-wght) * 1.25);
   }
 }

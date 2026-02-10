@@ -129,6 +129,7 @@ body {
   }
 
   > :where(.qh__accordion + *:not(.qh__accordion)),
+  > :where(p, ul, ol, dl, blockquote) + .qh__accordion,
   > :where(.qh__paragraph) {
     margin-block-start: calc(var(--vertical-rhythm) * 2);
   }
