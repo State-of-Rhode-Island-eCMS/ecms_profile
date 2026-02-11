@@ -54,8 +54,8 @@
       --font-size-scaler-value: var(--h2-scaler-value);
       font-size: var(--font-size);
 
-      --font-lh-min: #{$h2-lh-s};
-      --font-lh-max: #{$h2-lh-l};
+      --font-lh-min-value: #{$h2-lh-s};
+      --font-lh-max-value: #{$h2-lh-l};
       --font-lh-scaler-value: var(--h2-lh-scaler-value);
       line-height: var(--line-height);
     }
