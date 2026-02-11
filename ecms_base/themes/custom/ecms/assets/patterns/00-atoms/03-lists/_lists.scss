@@ -1,6 +1,10 @@
 ul,
 ol,
 dl {
+  // Add padding for bullet/marker visibility when in layout columns (overflow: auto)
+  .qh-layout-section__col & {
+    padding-inline-start: 1.25em;
+  }
 
   li,
   dd {
@@ -8,7 +12,8 @@ dl {
     .node &,
     .qh__accordion__content > div &,
     .qh__numbered-step__content &,
-    .qh__single-event__content & {
+    .qh__single-event__content &,
+    .qh__content-components-block & {
       // Do not use a lh unit here; it multiplies when accordions are nested
       line-height: 1.375em;
       margin-block-start: 0;

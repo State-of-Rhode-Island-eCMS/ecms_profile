@@ -63,18 +63,34 @@ body {
   --font-lh-scaler-value: var(--p-lh-scaler-value);
 
   // factor in fontSizeModifier preference
-  --font-size-min: calc(var(--font-size-min-value) * var(--fontSizeModifier) * 1rem);
-  --font-size-max: calc(var(--font-size-max-value) * var(--fontSizeModifier)  * 1rem);
+  --font-size-min: calc(
+    var(--font-size-min-value) * var(--fontSizeModifier) * 1rem
+  );
+  --font-size-max: calc(
+    var(--font-size-max-value) * var(--fontSizeModifier) * 1rem
+  );
 
   // reusable font-size var for each text element
-  --font-size: clamp(var(--font-size-min), calc(0.5rem + (var(--font-size-scaler-value) * 1vw)), var(--font-size-max));
+  --font-size: clamp(
+    var(--font-size-min),
+    calc(0.5rem + (var(--font-size-scaler-value) * 1vw)),
+    var(--font-size-max)
+  );
 
   // factor in lineHeightModifier preference
-  --font-lh-min: calc(var(--font-lh-min-value) * var(--lineHeightModifier) * 1em);
-  --font-lh-max: calc(var(--font-lh-max-value) * var(--lineHeightModifier) * 1em);
+  --font-lh-min: calc(
+    var(--font-lh-min-value) * var(--lineHeightModifier) * 1em
+  );
+  --font-lh-max: calc(
+    var(--font-lh-max-value) * var(--lineHeightModifier) * 1em
+  );
 
   // reusable line-height var
-  --line-height: clamp(var(--font-lh-min), calc(var(--font-lh-scaler-value) * 1vw), var(--font-lh-max));
+  --line-height: clamp(
+    var(--font-lh-min),
+    calc(var(--font-lh-scaler-value) * 1vw),
+    var(--font-lh-max)
+  );
 
   // reusable line-height var
   --word-spacing: calc(1em * var(--wordSpaceModifier));
@@ -87,8 +103,10 @@ body {
 .node,
 .qh__accordion__content > div,
 .qh__numbered-step__content,
-.qh__single-event__content {
-
+.qh__single-event__content,
+.qh__content-components-block,
+.qh__icon-card__content,
+.field--name-field-emergency-message {
   // Set up ideal character max-widths in content
   :where(p, li, dt, dd) {
     max-width: $max-line-length-ch;
@@ -134,7 +152,7 @@ body {
     margin-block-start: calc(var(--vertical-rhythm) * 2);
   }
 
-  > *:last-child  {
+  > *:last-child {
     margin-block-end: 0;
   }
 
@@ -272,7 +290,7 @@ h6,
 // What is this element? Can we find an example?
 .qh__emphasis {
   &::after {
-    content: ' ';
+    content: " ";
     display: block;
     border-bottom: solid 0.4rem var(--fc__default__violator);
     margin-top: ($text-spacer-fallback-value * 0.85);
