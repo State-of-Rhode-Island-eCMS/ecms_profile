@@ -16,7 +16,7 @@
 
       {% if phone %}
         <p class="qh__teaser-location__phone">
-          <a href="tel:1+{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
+          <a href="tel:+1{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
         </p>
       {% endif %}
 

@@ -88,7 +88,7 @@
         {% set phone = node.field_location_phone.value %}
         {% set extension = node.field_location_phone_extension.value %}
         <span class="qh__single-location__phone">
-          <a href="tel:1+{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
+          <a href="tel:+1{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
         </span>
       {% endif %}
 

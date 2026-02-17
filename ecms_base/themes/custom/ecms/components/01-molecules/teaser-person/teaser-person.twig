@@ -23,21 +23,21 @@
             {% if phone %}
               <span class="qh__teaser-person__phone">
                 <span class="qh__teaser-person__contact-label">Phone: </span>
-                <a href="tel:1+{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
+                <a href="tel:+1{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
               </span>
             {% endif %}
 
             {% if mobile %}
               <span class="qh__teaser-person__phone">
                 <span class="qh__teaser-person__contact-label">Mobile: </span>
-                <a href="tel:1+{{ mobile }}">{{ mobile }}</a>
+                <a href="tel:+1{{ mobile }}">{{ mobile }}</a>
               </span>
             {% endif %}
 
             {% if fax %}
               <span class="qh__teaser-person__phone">
                 <span class="qh__teaser-person__contact-label">Fax: </span>
-                <a href="tel:1+{{ fax }}">{{ fax }}</a>
+                <a href="tel:+1{{ fax }}">{{ fax }}</a>
               </span>
             {% endif %}
           </div>
