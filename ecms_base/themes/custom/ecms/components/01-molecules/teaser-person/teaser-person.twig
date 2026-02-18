@@ -23,21 +23,21 @@
             {% if phone %}
               <span class="qh__teaser-person__phone">
                 <span class="qh__teaser-person__contact-label">Phone: </span>
-                <a href="tel:1+{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
+                <a href="tel:+1{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
               </span>
             {% endif %}
 
             {% if mobile %}
               <span class="qh__teaser-person__phone">
                 <span class="qh__teaser-person__contact-label">Mobile: </span>
-                <a href="tel:1+{{ mobile }}">{{ mobile }}</a>
+                <a href="tel:+1{{ mobile }}">{{ mobile }}</a>
               </span>
             {% endif %}
 
             {% if fax %}
               <span class="qh__teaser-person__phone">
                 <span class="qh__teaser-person__contact-label">Fax: </span>
-                <a href="tel:1+{{ fax }}">{{ fax }}</a>
+                <a href="tel:+1{{ fax }}">{{ fax }}</a>
               </span>
             {% endif %}
           </div>
@@ -51,16 +51,21 @@
         </div>
 
          {% if additional_fields %}
-          <div class="qh__teaser-person__additional-fields">
-            {% for field_label, field_value in additional_fields %}
-              <div class="qh__teaser-person__additional-field">
-                <span class="qh__teaser-person__additional-field-label">{{ field_label }}: </span>
-                {{ field_value }}
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
+           {{ additional_fields|cache_metadata }}
+            <div class="qh__teaser-person__additional-fields">
+              {% if additional_fields %}
+                {% for field in additional_fields|children %}
+                  <div class="qh__teaser-person__additional-field">
+                    {% if field.label['#access'] %}
+                      <span
+                        class="qh__teaser-person__additional-field-label">{{ field.label }}: </span>
+                    {% endif %}
+                    {{ field.value }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+         {% endif %}
       </div>
     </div>
   </article>

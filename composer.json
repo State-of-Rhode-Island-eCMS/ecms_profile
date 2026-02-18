@@ -30,7 +30,7 @@
             "drupal/core": {
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
                 "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2025-07-09/drupal-core--2025-07-09--3049332--mr-12460.patch",
-                "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2827921-remove-missing-responsive-image-width-exception.patch",
+                "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2026-01-22/responsive_image-remove_missing_response_image_width_exception.patch",
                 "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
             },
             "drupal/gtranslate": {
@@ -56,9 +56,6 @@
             },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
-            },
-            "drupal/webform_encrypt": {
-                "3462998 - #3 - Drupal 11 compatibility.": "https://www.drupal.org/files/issues/2025-05-30/3462998-6-2.0.x-webform_encrypt.patch"
             }
         },
         "preserve-paths": [],
@@ -167,7 +164,7 @@
         "drupal/openid_connect_windows_aad": "^2.0@beta",
         "drupal/page_manager": "^4.0@RC",
         "drupal/panels": "^4.6.0",
-        "drupal/paragraphs": "^1.19",
+        "drupal/paragraphs": "^1.20",
         "drupal/password_policy": "^4.0",
         "drupal/path_redirect_import": "^2.0",
         "drupal/pathauto": "^1.8",
