@@ -1,6 +1,6 @@
 .qh__grid-card {
   position: relative;
-  border: 1px solid var(--fc__default__border);
+  border: 1px solid currentColor;
   border-radius: rem(9);
   overflow: hidden;
   height: 100%;
@@ -28,7 +28,8 @@
   }
 
   &__cta {
-    padding: calc(var(--vertical-rhythm) * 1.25) $general-h-spacing var(--vertical-rhythm);
+    padding: calc(var(--vertical-rhythm) * 1.25) $general-h-spacing
+      var(--vertical-rhythm);
     margin-top: auto;
 
     a {
