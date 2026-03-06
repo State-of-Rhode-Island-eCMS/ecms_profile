@@ -521,7 +521,7 @@ function ecms_base_update_11211(): void {
 
   if ($entity_type_manager->hasDefinition('consumer')) {
     // Update the consumer entity type to sync the stored definition with the
-    // live code definition (which added 'published' => 'status' to entity keys).
+    // live code definition (added 'published' => 'status' to entity keys).
     $live_entity_type = $entity_type_manager->getDefinition('consumer');
     if ($live_entity_type) {
       $manager->updateEntityType($live_entity_type);
