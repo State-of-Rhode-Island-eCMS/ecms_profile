@@ -7,6 +7,8 @@ props:
   properties:
     page_title_enabled:
       type: boolean
+    title_visually_hidden:
+      type: boolean
     enable_overlay:
       type: boolean
     text_position_class:

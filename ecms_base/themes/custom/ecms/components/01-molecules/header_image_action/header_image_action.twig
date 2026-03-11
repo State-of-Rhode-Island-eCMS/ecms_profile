@@ -41,9 +41,9 @@
       <div class="qh__header-image-action__overlay-inner {{ bg_color_class }}">
 
         {% if page_title_enabled %}
-          <h1 class="qh__header-image-action__overlay-title">{{ title }}</h1>
+          <h1 class="qh__header-image-action__overlay-title{{ title_visually_hidden ? ' visually-hidden' : '' }}">{{ title }}</h1>
         {% else %}
-          <h2 class="qh__header-image-action__overlay-title">{{ title }}</h2>
+          <h2 class="qh__header-image-action__overlay-title{{ title_visually_hidden ? ' visually-hidden' : '' }}">{{ title }}</h2>
         {% endif %}
 
         {{ text }}
@@ -57,9 +57,9 @@
   {% else %}
 
     {% if page_title_enabled %}
-      <h1 class="qh__header-image-action__title ">{{ title }}</h1>
+      <h1 class="qh__header-image-action__title{{ title_visually_hidden ? ' visually-hidden' : '' }}">{{ title }}</h1>
     {% else %}
-      <h2 class="qh__header-image-action__title qh__no-decoration">{{ title }}</h2>
+      <h2 class="qh__header-image-action__title qh__no-decoration{{ title_visually_hidden ? ' visually-hidden' : '' }}">{{ title }}</h2>
     {% endif %}
 
   {% endif %}
