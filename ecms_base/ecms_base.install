@@ -497,3 +497,41 @@ function ecms_base_update_11210(array &$sandbox): void {
     }
   }
 }
+
+/**
+ * Fix mismatched entity definitions for commerce_store and consumer.
+ */
+function ecms_base_update_11211(): void {
+  // @see RIGA-805.
+  $manager = \Drupal::entityDefinitionUpdateManager();
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  // Check if the commerce_store entity type exists before attempting to update.
+  if ($entity_type_manager->hasDefinition('commerce_store')) {
+    // Update the commerce_store 'status' (Enabled) field storage definition.
+    $commerce_fields = $entity_field_manager->getFieldStorageDefinitions('commerce_store');
+    if (!empty($commerce_fields['status'])) {
+      $manager->updateFieldStorageDefinition($commerce_fields['status']);
+    }
+  }
+
+  if ($entity_type_manager->hasDefinition('consumer')) {
+    // Update the consumer entity type to sync the stored definition with the
+    // live code definition (added 'published' => 'status' to entity keys).
+    $live_entity_type = $entity_type_manager->getDefinition('consumer');
+    if ($live_entity_type) {
+      $manager->updateEntityType($live_entity_type);
+    }
+
+    // Update the consumer 'status' field storage definition after the entity
+    // type update, which may require schema changes (e.g. index updates).
+    $consumer_fields = $entity_field_manager->getFieldStorageDefinitions('consumer');
+    if (!empty($consumer_fields['status'])) {
+      $manager->updateFieldStorageDefinition($consumer_fields['status']);
+    }
+  }
+}
