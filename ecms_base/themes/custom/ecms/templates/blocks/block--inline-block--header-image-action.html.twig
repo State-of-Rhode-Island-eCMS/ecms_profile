@@ -91,9 +91,13 @@
   {% set page_title_enabled = TRUE %}
 {% endif %}
 
+{# If h1 is enabled but title display is set to none, visually hide the title for screen readers. #}
+{% set title_visually_hidden = page_title_enabled and not configuration.label_display %}
+
 {{ include('ecms:header_image_action', {
-  title: label,
+  title: title_visually_hidden ? configuration.label : label,
   page_title_enabled: page_title_enabled,
+  title_visually_hidden: title_visually_hidden,
   img: img,
   text: content.field_hia_text|render,
   text_position_class: text_position_class,
