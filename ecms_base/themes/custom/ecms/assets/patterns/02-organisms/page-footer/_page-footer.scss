@@ -7,27 +7,8 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
 
 .qh__site-footer {
   background-color: var(--fc__footer__bg);
-  background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(0, 0, 0, 0.25) 100% );
   border-block-start: $border-xl solid var(--fc__footer__border-top);
   color: var(--fc__footer__fg);
-
-  // Specific themes need overrides
-  html.qh__t__block-island.light & {
-    background-image: none;
-  }
-  @media (prefers-color-scheme: light) {
-    html.qh__t__block-island.light:where(:not(.dark)) & {
-      background-image: none;
-    }
-  }
-  html.qh__t__misquamicut.light & {
-    background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(255, 255, 255, 0.25) 100% );
-  }
-  @media (prefers-color-scheme: light) {
-    html.qh__t__misquamicut.light:where(:not(.dark)) & {
-      background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(255, 255, 255, 0.25) 100% );
-    }
-  }
 
   :where(#{$all-headers}) {
     // There should be heading elements inside the footer, but if there are, we don't want them to look huge
@@ -38,7 +19,6 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
     --font-lh-min-value: var(--h5-lh-s);
     --font-lh-max-value: var(--h5-lh-l);
     --font-lh-scaler-value: var(--h5-lh-scaler-value);
-    color: var(--fc__footer__headings) !important;
     margin-block-start: 0;
   }
 
@@ -138,6 +118,7 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
   }
 
   &__copyright {
+    background-color: var(--fc__footer__copyright__bg);
     color: var(--fc__footer__fg);
 
     &__content {
