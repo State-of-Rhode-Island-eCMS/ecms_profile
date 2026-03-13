@@ -132,11 +132,9 @@
   } // end &__toggle
 
   &__list {
-    // In dark themes, the header color might be transparent.
-    // Always provide the body color under the background color
-    background-color: var(--fc__default__bg);
+    background-color: var(--fc__official__bg);
     border-radius: $brad-sm;
-    color: var(--fc__header__fg);
+    color: var(--fc__official__fg);
     opacity: 0;
     max-height: 80vh;
     min-height: 48vh;
@@ -156,23 +154,12 @@
     word-spacing: 0;
     z-index: z(drop-down-menu);
 
-    // The actual color is set here, we intentionally layer colors
     &::before {
-      background-color: var(--fc__header__bg);
+      background-color: var(--fc__official__bg);
       content: '';
       position: absolute;
       @include qh-inset-supports(0);
       z-index: -1;
-    }
-
-    // Specific themes need overrides
-    html.qh__t__block-island.light & {
-      background-color: var(--c__ocean--trans75);
-    }
-    @media (prefers-color-scheme: light) {
-      html.qh__t__block-island.light:where(:not(.dark)) & {
-        background-color: var(--c__ocean--trans75);
-      }
     }
 
     [aria-expanded='true'] + & {
@@ -199,16 +186,16 @@
     .qh__u__btn-as-text {
       &,
       &:visited {
-        color: var(--fc__header__fg);
+        color: var(--fc__official__link);
       }
 
       &:hover,
       &:focus {
-        color: var(--fc__header_link);
+        color: var(--fc__official__link--hover);
       }
 
       &:focus {
-        outline-color: var(--fc__header__link);
+        outline-color: var(--fc__official__link);
       }
     }
 

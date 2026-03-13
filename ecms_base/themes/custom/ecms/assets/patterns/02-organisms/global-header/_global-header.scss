@@ -1,5 +1,6 @@
 .qh__global-header {
-  color: var(--fc__header__fg);
+  background-color: var(--fc__official__bg);
+  color: var(--fc__official__fg);
 
   // TO DO: Search for this pattern and apply a .do-not-print utility class instead
   @media print {
@@ -7,7 +8,6 @@
   }
 
   &__wrapper {
-    border-block-end: $border-xs solid rgba(255,255,255,0.25);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,16 +17,6 @@
     // Previous, only padding prevents it from touching the edges
     @include breakpoint-up($bp__show__desktop-nav) {
       @include qh-content-maxwidth();
-    }
-
-    // Some color themes need color overrides
-    html.qh__t__blue-shutters.light & {
-      border-block-end: $border-xs solid rgba(255,255,255,0.5);
-    }
-    @media (prefers-color-scheme: light) {
-      html.qh__t__blue-shutters.light:where(:not(.dark)) & {
-        border-block-end: $border-xs solid rgba(255,255,255,0.5);
-      }
     }
 
     &--multiple-region {
@@ -58,17 +48,17 @@
 
     &,
     &:visited {
-      color: var(--fc__header__link);
+      color: var(--fc__official__link);
     }
 
     &:hover,
     &:focus {
-      color: var(--fc__header__link--hover);
+      color: var(--fc__official__link--hover);
       text-decoration: underline;
     }
 
     &:focus {
-      outline-color: var(--fc__header__social__link--hover);
+      outline-color: var(--fc__official__link--focus);
     }
   }
 }

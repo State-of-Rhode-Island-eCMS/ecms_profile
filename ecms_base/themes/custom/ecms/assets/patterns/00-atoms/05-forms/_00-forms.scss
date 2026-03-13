@@ -257,13 +257,13 @@ input[type='range'] {}
       }
 
       &:focus {
-        outline: $border-sm solid var(--fc__default__link--focus, currentColor);
+        outline: $border-sm solid var(--fc__official__link--focus, currentColor);
         outline-offset: ($border-sm * 2);
       }
 
       // Repeating… because "focus-within" will break IE11 and invalidate the entire block
       &:focus-within {
-        outline: $border-sm solid var(--fc__default__link--focus, currentColor);
+        outline: $border-sm solid var(--fc__official__link--focus, currentColor);
         outline-offset: ($border-sm * 2);
       }
     }
