@@ -1,6 +1,5 @@
 .qh__global-header {
-  background-color: var(--fc__official__bg);
-  color: var(--fc__official__fg);
+  color: var(--fc__header__fg);
 
   @media print {
     display: none;
@@ -8,10 +7,21 @@
 
   &__wrapper {
     @include qh-content-maxwidth();
+    border-block-end: $border-xs solid rgba(255,255,255,0.25);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: ($general-v-spacing/2) $general-h-spacing;
+
+    // Some color themes need color overrides
+    html.qh__t__blue-shutters.light & {
+      border-block-end: $border-xs solid rgba(255,255,255,0.5);
+    }
+    @media (prefers-color-scheme: light) {
+      html.qh__t__blue-shutters.light:where(:not(.dark)) & {
+        border-block-end: $border-xs solid rgba(255,255,255,0.5);
+      }
+    }
 
     &--multiple-region {
       @include breakpoint-down($bp--small) {
@@ -42,21 +52,17 @@
 
     &,
     &:visited {
-      color: var(--fc__official__link);
+      color: var(--fc__header__link);
     }
 
     &:hover,
     &:focus {
-      color: var(--fc__official__link--hover);
+      color: var(--fc__header__link--hover);
       text-decoration: underline;
     }
 
     &:focus {
-      outline-color: var(--fc__official__link--focus);
-    }
-
-    &:active {
-      color: var(--fc__official__link--active);
+      outline-color: var(--fc__header__social__link--hover);
     }
   }
 

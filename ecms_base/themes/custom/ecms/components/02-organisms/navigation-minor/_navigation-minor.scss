@@ -46,6 +46,20 @@
     }
   }
 
+  @include breakpoint-up($bp__single-col-content) {
+    // Light mode layered shadows
+    box-shadow: 0 0.125em 2vw rgba(255,255,255,0.85), 0.25em 0.75em 10vw rgba(0,0,0,0.15);
+
+    html:where(.dark) & {
+      box-shadow: 0.25em 0.75em 8vw rgba(0,0,0,0.25);
+    }
+    @media (prefers-color-scheme: dark) {
+      html:where(:not(.light)) & {
+        box-shadow: 0.25em 0.75em 8vw rgba(0,0,0,0.25);
+      }
+    }
+  }
+
   // Interaction styles come from .qh__accordion
   //&:hover,
   //&:focus {}
@@ -57,10 +71,10 @@
 
   // <button>
   &__toggle {
-    background-color: var(--fc__nav-minor__border);
+    background-color: var(--fc__nav-minor__link--hover);
     background-image: none;
     border-radius: 0;
-    color: var(--fc__nav-minor__fg);
+    color: var(--fc__nav-minor__link--hover__bg);
     padding: ($button-v-spacing/8) $button-h-spacing ($button-v-spacing/8) 0;
     overflow: visible;
     position: absolute;
@@ -69,14 +83,9 @@
     transform: rotate(-90deg);
     transform-origin: top right;
 
-    &:hover::before,
-    &:focus::before {
-      background-color: var(--fc__default__button--hover__bg);
-    }
-
     // Little triangle at the bottom
     &::before {
-      background-color: var(--fc__nav-minor__border);
+      background-color: var(--fc__nav-minor__link--hover);
       background-image: none;
       content: ' ';
       display: block;
@@ -88,6 +97,14 @@
       transform: skew(25deg, 0deg);
       transition: $transition-base;
       z-index: -1;
+    }
+
+    &:hover,
+    &:focus,
+    &:hover::before,
+    &:focus::before {
+      background-color: var(--fc__nav-minor__link--hover__bg);
+      color: var(--fc__nav-minor__link--hover);
     }
 
     @include breakpoint-up($bp__single-col-content) {

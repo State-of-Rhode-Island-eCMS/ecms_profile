@@ -4,8 +4,31 @@
   $qh__footer-lg-bp: em(1020);
 
   background-color: var(--fc__footer__bg);
+  background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(0, 0, 0, 0.25) 100% );
   border-top: $border-xl solid var(--fc__footer__border-top);
   color: var(--fc__footer__fg);
+
+  // Specific themes need overrides
+  html.qh__t__block-island.light & {
+    background-image: none;
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__block-island.light:where(:not(.dark)) & {
+      background-image: none;
+    }
+  }
+  html.qh__t__misquamicut.light & {
+    background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(255, 255, 255, 0.25) 100% );
+  }
+  @media (prefers-color-scheme: light) {
+    html.qh__t__misquamicut.light:where(:not(.dark)) & {
+      background-image: radial-gradient( circle at bottom center, var(--fc__footer__bg), rgb(255, 255, 255, 0.25) 100% );
+    }
+  }
+
+  :where(#{$all-headers}) {
+    color: var(--fc__footer__headings) !important;
+  }
 
   // Four column 2 over 2 layout. Horizontal borders in between
   @include breakpoint-between($qh__footer-sm-bp, $qh__footer-lg-bp) {
@@ -141,7 +164,6 @@
   }
 
   &__copyright {
-    background-color: var(--fc__footer__copyright__bg);
     color: var(--fc__footer__fg);
     padding: $general-v-spacing $general-h-spacing;
 
