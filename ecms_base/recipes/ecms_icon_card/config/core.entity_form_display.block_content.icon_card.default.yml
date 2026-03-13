@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.icon_card
+    - field.field.block_content.icon_card.field_icon_library_icon
+    - field.field.block_content.icon_card.field_link
+  module:
+    - ecms_icon_library
+    - link
+id: block_content.icon_card.default
+targetEntityType: block_content
+bundle: icon_card
+mode: default
+content:
+  field_icon_library_icon:
+    type: ecms_icon_library_widget
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

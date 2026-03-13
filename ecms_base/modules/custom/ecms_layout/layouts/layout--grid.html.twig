@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a grid layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ * - settings: The layout settings.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set background_class = 'qh__t__' ~ settings.background_color %}
+{%
+  set classes = [
+    'qh-layout-section',
+    'qh__grid',
+    'qh__grid--max-' ~ (settings.max_columns|default('4')),
+  ]
+%}
+
+{% if content.items|render %}
+  <div class="{{ background_class }}">
+    <div{{ attributes.addClass(classes) }}>
+      {% if settings.title %}
+        <div class="qh__grid__title-cell">
+          <{{ settings.heading_level|default('h2') }} class="qh__grid__title">
+            {{ settings.title }}
+          </{{ settings.heading_level|default('h2') }}>
+        </div>
+      {% endif %}
+      {{ content.items }}
+    </div>
+  </div>
+{% endif %}

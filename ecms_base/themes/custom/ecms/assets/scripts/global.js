@@ -100,6 +100,49 @@ function getCookie(name) {
   if (parts.length == 2) return parts.pop().split(';').shift();
 }
 
+// Responsive Tables
+// Adds data-th attributes to table cells based on their column headers
+// Wraps table in container div for container queries
+// This enables CSS-based responsive table layouts
+function initResponsiveTables() {
+  var tables = document.querySelectorAll('table');
+
+  tables.forEach(function(table) {
+    var headerCells = table.querySelectorAll('thead th');
+
+    // Skip tables without thead or already processed
+    if (headerCells.length === 0 || table.parentElement.classList.contains('qh__table-container')) {
+      return;
+    }
+
+    // Get header text for each column
+    var headers = [];
+    headerCells.forEach(function(th) {
+      headers.push(th.textContent.trim());
+    });
+
+    // Apply data-th to each td in tbody
+    var bodyRows = table.querySelectorAll('tbody tr');
+    bodyRows.forEach(function(row) {
+      var cells = row.querySelectorAll('td');
+      cells.forEach(function(td, index) {
+        if (headers[index]) {
+          td.setAttribute('data-th', headers[index]);
+        }
+      });
+    });
+
+    // Wrap table in container div for container queries
+    var wrapper = document.createElement('div');
+    wrapper.classList.add('qh__table-container');
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+
+    // Mark table as processed for responsive styling
+    table.classList.add('qh__table');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
   // If JS is loaded, change the no-js class
@@ -108,6 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add an empty element that is styled when a menu is open
   addPageOverlay();
+
+  // Initialize responsive tables
+  initResponsiveTables();
 
 
   // Expand / Collapse utility

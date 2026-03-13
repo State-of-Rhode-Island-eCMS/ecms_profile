@@ -1,0 +1,25 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Grid Card
+description: A card for use in grid layouts. Supports either an image or icon in the media area.
+props:
+  type: object
+  properties:
+    variant:
+      type: string
+      title: Card variant
+      description: Either 'image' or 'icon'
+      enum:
+        - image
+        - icon
+      default: image
+slots:
+  img:
+    title: The rendered responsive image (for image variant)
+  icon:
+    title: The icon markup (for icon variant)
+  media_library_icon:
+    title: Whether the icon is from the media library
+  link_url:
+    title: The URL for the card link
+  link_text:
+    title: The CTA link text

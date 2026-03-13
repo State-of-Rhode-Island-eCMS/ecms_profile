@@ -6,7 +6,6 @@ a {
   text-decoration-skip-ink: auto;
   transition: $transition-base;
 
-
   &:hover,
   &:focus {
     color: var(--fc__default__link--hover);
@@ -38,10 +37,6 @@ a {
       height: 0.875em;
       vertical-align: baseline;
       width: 0.875em;
-
-      @include onlyIE() {
-        display: none;
-      }
     }
 
     &:hover::before,
@@ -90,11 +85,20 @@ a {
       display: none;
     }
   }
+  // Removing the icons in specific scenarios
+  .qh__media-item &[target='_blank']:has(img) {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
 }
 
 p,
-ul {
-  a {
+li,
+dt,
+dd {
+  html:where(.wf-active:not(.novf)) & a {
     font-weight: calc(var(--p-font-wght) * 1.25);
   }
 }

@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Theme override for the grid layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ * - settings: The layout settings.
+ * - hasContent: Boolean FALSE if all regions have no content.
+ * - regionsWithContent: array keyed by region name containing a boolean FALSE if the region was empty
+ *
+ * @ingroup themeable
+ *
+ * @see ecms_preprocess_layout()
+ */
+#}
+
+{% set background_class = 'qh__t__' ~ settings.background_color %}
+{%
+  set classes = [
+    'qh__grid',
+    'qh__grid--max-' ~ (settings.max_columns|default('4')),
+  ]
+%}
+{% if hasContent %}
+<div class="{{ background_class }}">
+  <div{{ attributes.addClass(classes) }}>
+    {% if settings.title %}
+      <div class="qh__grid__title-cell">
+        <{{ settings.heading_level|default('h3') }} class="qh__grid__title">
+          {{ settings.title }}
+        </{{ settings.heading_level|default('h3') }}>
+      </div>
+    {% endif %}
+    {{ content.items }}
+  </div>
+</div>
+{% endif %}

@@ -16,9 +16,7 @@
 
 // style for all icon button icons
 .qh__btn--icon {
-  svg {
-    path {
-      fill: currentColor;
-    }
+  svg > * {
+    fill: currentColor;
   }
 }

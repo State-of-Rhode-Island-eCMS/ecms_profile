@@ -1,0 +1,66 @@
+.qh__grid-card {
+  position: relative;
+  border: 1px solid currentColor;
+  border-radius: rem(9);
+  overflow: hidden;
+  height: 100%;
+
+  // Image variant
+  &__image {
+    aspect-ratio: 8 / 5;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__icon {
+    padding: var(--vertical-rhythm) $general-h-spacing 0;
+
+    svg,
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  &__cta {
+    padding: calc(var(--vertical-rhythm) * 1.25) $general-h-spacing
+      var(--vertical-rhythm);
+    margin-top: auto;
+
+    a {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1em;
+      margin: 0;
+      text-decoration: none;
+      font-family: $font-sans-vf;
+
+      // Support hovering entire card.
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &:hover &__arrow {
+    transform: translateX(5px);
+  }
+}

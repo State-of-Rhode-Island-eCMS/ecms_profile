@@ -497,3 +497,17 @@ function ecms_base_update_11210(array &$sandbox): void {
     }
   }
 }
+
+/**
+ * Apply recipes for new blocks for site modernization effort.
+ */
+function ecms_base_update_11211(): void {
+  // Add newbloc.
+  $recipes = [
+    'ecms_image_card',
+    'ecms_icon_card'
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
+

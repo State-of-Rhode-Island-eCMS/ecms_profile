@@ -53,13 +53,4 @@
       padding-right: $general-h-spacing;
     }
   }
-
-  // Remove all flex column declarations
-  @include onlyIE() {
-    &__list .qh__teaser-events,
-    &__list .qh__teaser-events__header,
-    &__list .qh__teaser-events__content {
-      display: block !important;
-    }
-  }
 }

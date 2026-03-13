@@ -26,7 +26,7 @@
 <article class="qh__teaser-event">
   <div class="qh__teaser-event__date">
     <time>
-      <span class="small-text">{{ month }}</span>
+      <span class="qh__fs-st">{{ month }}</span>
 
       <time datetime="{{ datetime_startdate_format }}" class="qh__teaser-event__start-date">{{ start_date }}</time>
 
@@ -42,22 +42,22 @@
     </h3>
 
     {% if location|default %}
-      <p class="qh__teaser-event__location small-text"><strong>{{ "Location:"|t }}</strong> {{ location }}</p>
+      <p class="qh__fs-st qh__teaser-event__location"><strong>{{ "Location:"|t }}</strong> {{ location }}</p>
     {% endif %}
 
     {% if start_time|default or rrule|default %}
 
-      <p class="qh__teaser-event__time small-text {{ time and rrule ? 'qh__teaser-event__time--separator' }}">
+      <p class="qh__fs-st qh__teaser-event__time {{ time and rrule ? 'qh__teaser-event__time--separator' }}">
 
         {# There is no flag for all day so we have to check both strings #}
         {% if start_time == '12:00am' and end_time == '11:59pm' %}
-          <time class="qh__teaser-event__start-time small-text">{{ "All day"|t }}</time>
+          <time class="qh__teaser-event__start-time">{{ "All day"|t }}</time>
 
         {% else %}
-          <time datetime="{{ datetime_starttime_format }}" class="qh__teaser-event__start-time small-text">{{ start_time }}</time>
+          <time datetime="{{ datetime_starttime_format }}" class="qh__teaser-event__start-time">{{ start_time }}</time>
 
           {% if start_time != end_time %}
-            <time datetime="{{ datetime_endtime_format }}" class="qh__teaser-event__end-time small-text">{{ end_time }}</time>
+            <time datetime="{{ datetime_endtime_format }}" class="qh__teaser-event__end-time">{{ end_time }}</time>
           {% endif %}
 
           {% if rrule %}
