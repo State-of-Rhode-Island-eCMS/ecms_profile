@@ -35,7 +35,8 @@
             },
             "drupal/gtranslate": {
                 "3375925 - TypeError: array_values(): Argument #1 ($array) must be of type array": "https://www.drupal.org/files/issues/2023-08-31/gtranslate-3375925-update-default-config-11.diff",
-                "3555400: Add schema for gtranslate.settings ": "https://www.drupal.org/files/issues/2025-10-31/3555400-add-schema-gtranslate-6.patch"
+                "3555400: Add schema for gtranslate.settings ": "https://www.drupal.org/files/issues/2025-10-31/3555400-add-schema-gtranslate-6.patch",
+                "RIGA-826: Portuguese Langugage": "https://gist.githubusercontent.com/pfrilling/5b43049ad0f6b78ac882abb27148ff5d/raw/0919102bb4c14f8824beb2396b6483d9395002f8/gtranslate-allow-portuguese.patch"
             },
             "drupal/iek": {
                 "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
