@@ -4,7 +4,7 @@ dependencies:
   module:
     - openid_connect_windows_aad
 id: windows_aad
-label: 'Windows AAD'
+label: 'Windows Azure AD'
 plugin: windows_aad
 settings:
   client_id: REDACTED
@@ -17,11 +17,14 @@ settings:
     method: 0
     mappings: ''
     strict: false
-  userinfo_graph_api_wa: 2
+  userinfo_graph_api_wa: 1
   userinfo_graph_api_use_other_mails: false
   userinfo_update_email: true
   hide_email_address_warning: true
   subject_key: sub
-  end_session_endpoint: ''
+  enable_single_sign_out: 0
+  redirect_url: ''
   iss_allowed_domains: ''
+  end_session_endpoint: ''
   front_channel_logout_url: ''
+  prompt: { }
