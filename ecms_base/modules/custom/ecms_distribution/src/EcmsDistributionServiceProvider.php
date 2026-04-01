@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Overrides views.views_data to use a database-backed cache bin.
  *
- * services.yml definitions are merged in module load order, so an override
+ * The services.yml definitions are merged in module load order, so an override
  * in ecms_distribution.services.yml can be silently overwritten by
  * views.services.yml if views loads later. ServiceProvider::alter() runs
  * after all *.services.yml files are merged, guaranteeing the override sticks.
