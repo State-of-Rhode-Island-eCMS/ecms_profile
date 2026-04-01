@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\Tests\ecms_distribution\Kernel;
 
 use Drupal\Core\Cache\DatabaseBackend;
+use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\ecms_distribution\EcmsDistributionServiceProvider;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\views\ViewsData;
