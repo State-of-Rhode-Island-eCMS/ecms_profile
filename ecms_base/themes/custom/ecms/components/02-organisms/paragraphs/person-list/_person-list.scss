@@ -1,4 +1,15 @@
 .qh__person-list {
+  &__section-title {
+    margin-bottom: $general-v-spacing / 2;
+  }
+
+  &__content {
+    // Add padding when there is a background color.
+    &[class*="qh__tc"] {
+      padding: $general-v-spacing $general-h-spacing;
+    }
+  }
+
   &__header {
     padding-bottom: ($text-spacer-fallback-value);
 
