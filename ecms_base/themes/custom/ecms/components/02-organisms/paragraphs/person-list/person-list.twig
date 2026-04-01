@@ -13,7 +13,7 @@
       {% endif %}
 
       {% if person_listing.persons %}
-        <ul class="qh-u__list-reset qh__person-list__list" role="list">
+        <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--col-{{ columns }}" role="list">
           {{ person_listing.persons }}
         </ul>
       {% endif %}
@@ -24,7 +24,7 @@
             <h3 class="qh__person-list__title">{{ child_term_name }}</h1>
           </header>
 
-          <ul class="qh-u__list-reset qh__person-list__list" role="list">
+          <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--col-{{ columns }}" role="list">
             {{ child_term_persons }}
           </ul>
         {% endfor %}
@@ -32,7 +32,7 @@
 
     {% else %}
       {# Complete person listing #}
-      <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--full" role="list">
+      <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--full qh__person-list__list--col-{{ columns }}" role="list">
         {{ person_listing }}
       </ul>
     {% endif %}

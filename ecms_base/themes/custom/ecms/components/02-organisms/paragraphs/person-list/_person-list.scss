@@ -37,11 +37,36 @@
   //// <ul>
   //&__list {}
 
+  &__list {
+    &--col-2,
+    &--col-3 {
+      display: grid;
+      gap: 2rem;
+    }
+
+    &--col-2 {
+      @include breakpoint-up($bp--small) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    &--col-3 {
+      @include breakpoint-up($bp--small) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include breakpoint-up($bp--large) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
   // <li>
   &__item {
     padding-top: ($text-spacer-fallback-value);
     padding-bottom: ($text-spacer-fallback-value);
     max-width: 100%;
+    margin: 0 !important;
 
     @supports (margin-top: clamp(1rem, 2vw, 1.25rem)) {
       padding-top: calc(var(--body-text-spacer));
@@ -51,5 +76,18 @@
 
   &__item + &__item {
     border-top: $border-xs solid var(--fc__default__border);
+  }
+
+  // Remove item borders in multi-column grid layouts
+  &__list--col-2,
+  &__list--col-3 {
+    .qh__person-list__item {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .qh__person-list__item + .qh__person-list__item {
+      border-top: none;
+    }
   }
 }

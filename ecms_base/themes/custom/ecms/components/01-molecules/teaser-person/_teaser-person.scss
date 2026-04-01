@@ -12,6 +12,26 @@
     }
   }
 
+  // Stack photo above content in multi-column layouts
+  .qh__person-list__list--col-2 &,
+  .qh__person-list__list--col-3 & {
+    flex-direction: column;
+
+    .qh__teaser-person__photo {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: $general-v-spacing;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
   &__content {
     flex-grow: 1;
 
@@ -19,6 +39,10 @@
     display: flex;
     flex-direction: column;
     gap: ($text-spacer-fallback-value/2);
+
+    a {
+      font-weight: var(--p-font-wght);
+    }
   }
 
   // <div>
@@ -40,14 +64,32 @@
     }
   }
 
+  &__contact {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: $general-h-spacing;
+
+    a[href^="mailto:"],
+    a[href^="tel:"] {
+      position: relative;
+      padding-left: 1.5em;
+      overflow-wrap: break-word;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 3px;
+        margin-right: 0;
+      }
+    }
+  }
+
   &__phone,
   &__email {
-    word-break: break-all;
-    display: block;
+    display: contents;
   }
 
   &__contact-label {
-    display: inline-block;
-    min-width: 5rem;
+    align-self: baseline;
   }
 }
