@@ -1,0 +1,25 @@
+services:
+  # ViewsData lives in cache.default, which routes to the shared
+  # memcache pool on ACSF. Each site stores an independent copy (per-site key
+  # prefix), creating pool pressure proportional to site count. When the pool
+  # is near capacity (observed at ~86% in production), LRU eviction causes
+  # cache misses and concurrent rebuilds across load-balanced servers. Because
+  # the Drupal memcache module splits entries larger than item_size_max into
+  # multiple chunks, a concurrent read can retrieve a partially-written entry
+  # and deserialize a handler definition with entity_type: '', causing
+  # PluginNotFoundException and Varnish cache poisoning platform-wide.
+  #
+  # Give ViewsData its own cache bin backed directly by the database.
+  # The database write is atomic — no chunk-splitting, no race window.
+  # cache.default (and cache.discovery) remain in memcache for everything else.
+  cache.views_data:
+    class: Drupal\Core\Cache\DatabaseBackend
+    arguments:
+      - '@database'
+      - '@cache_tags.invalidator.checksum'
+      - 'views_data'
+      - '@serialization.phpserialize'
+      - '@datetime.time'
+    tags:
+      - { name: cache.bin }
+

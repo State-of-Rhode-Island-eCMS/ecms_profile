@@ -110,6 +110,13 @@ if (file_exists(\$fast404Settings)) {
   require(\$fast404Settings);
 }" >> develop/web/sites/default/settings.php'
 
+## Install acsfd8+.memcache.settings.php
+ddev exec 'chmod +w develop/web/sites/default develop/web/sites/default/settings.php && cp scripts/acsfd8+.memcache.settings.php develop/web/sites/default/'
+ddev exec 'echo "\$memcacheSettings = sprintf(\"%s/%s/acsfd8+.memcache.settings.php\", \$app_root, \$site_path);
+if (file_exists(\$memcacheSettings)) {
+  require(\$memcacheSettings);
+}" >> develop/web/sites/default/settings.php'
+
 
 if [ "$PERFORMANCE_MODE" == "1" ]; then
   ddev stop
