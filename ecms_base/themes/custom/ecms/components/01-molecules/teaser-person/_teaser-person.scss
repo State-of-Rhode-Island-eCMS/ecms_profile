@@ -92,4 +92,24 @@
   &__contact-label {
     align-self: baseline;
   }
+
+  // In 3-col layouts at desktop, stack contact fields vertically
+  @include breakpoint-up($bp--large) {
+    .qh__person-list__list--col-3 & {
+      .qh__teaser-person__contact {
+        display: flex;
+        flex-direction: column;
+        gap: ($text-spacer-fallback-value/2);
+      }
+
+      .qh__teaser-person__phone,
+      .qh__teaser-person__email {
+        display: block;
+      }
+
+      .qh__teaser-person__contact-label {
+        display: block;
+      }
+    }
+  }
 }
