@@ -12,9 +12,8 @@
     }
   }
 
-  // Stack photo above content in multi-column layouts
-  .qh__person-list__list--col-2 &,
-  .qh__person-list__list--col-3 & {
+  // Stack photo above content when container is narrow
+  @container (max-width: 400px) {
     flex-direction: column;
 
     .qh__teaser-person__photo {
@@ -93,23 +92,21 @@
     align-self: baseline;
   }
 
-  // In 3-col layouts at desktop, stack contact fields vertically
-  @include breakpoint-up($bp--large) {
-    .qh__person-list__list--col-3 & {
-      .qh__teaser-person__contact {
-        display: flex;
-        flex-direction: column;
-        gap: ($text-spacer-fallback-value/2);
-      }
+  // Stack contact labels when container is narrow
+  @container (max-width: 300px) {
+    .qh__teaser-person__contact {
+      display: flex;
+      flex-direction: column;
+      gap: ($text-spacer-fallback-value/2);
+    }
 
-      .qh__teaser-person__phone,
-      .qh__teaser-person__email {
-        display: block;
-      }
+    .qh__teaser-person__phone,
+    .qh__teaser-person__email {
+      display: block;
+    }
 
-      .qh__teaser-person__contact-label {
-        display: block;
-      }
+    .qh__teaser-person__contact-label {
+      display: block;
     }
   }
 }

@@ -63,6 +63,7 @@
 
   // <li>
   &__item {
+    container-type: inline-size;
     padding-top: ($text-spacer-fallback-value);
     padding-bottom: ($text-spacer-fallback-value);
     max-width: 100%;
