@@ -109,7 +109,7 @@ jobs:
       image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8
         ports:
           - 33306:3306
         env:
