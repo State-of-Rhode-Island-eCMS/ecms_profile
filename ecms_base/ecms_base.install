@@ -549,13 +549,13 @@ function ecms_base_update_11212(): void {
 }
 
 /**
- * Apply recipes for new blocks for site modernization effort.
+ * Apply recipes for image card, icon card, and person list.
  */
 function ecms_base_update_11213(): void {
-  // Add newbloc.
   $recipes = [
     'ecms_image_card',
     'ecms_icon_card',
+    'ecms_person_list',
   ];
 
   ecms_base_apply_recipes($recipes);
