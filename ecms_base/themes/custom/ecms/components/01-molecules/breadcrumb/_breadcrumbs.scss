@@ -1,7 +1,7 @@
 .qh__breadcrumb {
   &__wrapper {
     @include qh-content-maxwidth();
-    padding-block: 1lh;
+    padding-top: 2lh;
   }
 
   // <ol>
@@ -10,7 +10,7 @@
   // <li>
   &__item {
     display: inline-block;
-    margin-inline-end: - em(4);
+    margin-inline-end: -em(4);
     vertical-align: middle;
 
     &--home {
@@ -21,7 +21,7 @@
 
     &:last-child {
       .qh__breadcrumb__page::after {
-        content: '';
+        content: "";
       }
     }
   }
@@ -34,7 +34,7 @@
   @at-root {
     *#{&}__page::after {
       display: inline-block;
-      content: '»';
+      content: "»";
       margin: 0 0.5em;
     }
   }
