@@ -13,7 +13,7 @@
   }
 
   // Stack photo above content when container is narrow
-  @container (max-width: 400px) {
+  @container (max-width: 350px) {
     flex-direction: column;
 
     .qh__teaser-person__photo {
