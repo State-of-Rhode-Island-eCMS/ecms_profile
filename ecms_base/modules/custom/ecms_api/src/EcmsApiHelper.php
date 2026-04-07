@@ -44,6 +44,8 @@ class EcmsApiHelper {
    *   The entity_type.manager service.
    * @param \Drupal\Core\StreamWrapper\PublicStream $publicStream
    *   The stream_wrapper.public service.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   The request.stack service.
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, PublicStream $publicStream, RequestStack $requestStack) {
     $this->entityTypeManager = $entityTypeManager;

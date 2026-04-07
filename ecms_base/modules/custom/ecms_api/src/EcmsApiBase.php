@@ -42,7 +42,7 @@ abstract class EcmsApiBase {
   /**
    * Header carrying the HMAC-signed environment identifier.
    *
-   * Format: "{AH_SITE_ENVIRONMENT}:{Crypt::hmacBase64(ECMS_SHARED_SECRET, env)}"
+   * Format: {AH_SITE_ENVIRONMENT}:{Crypt::hmacBase64(ECMS_SHARED_SECRET, env)}
    * Falls back to "local" with no signature when running outside Acquia.
    */
   const ENV_HEADER = 'X-ECMS-Env';
