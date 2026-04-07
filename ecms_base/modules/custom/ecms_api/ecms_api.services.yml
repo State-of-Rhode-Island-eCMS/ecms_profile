@@ -7,7 +7,7 @@ services:
 
   ecms_api_helper:
     class: Drupal\ecms_api\EcmsApiHelper
-    arguments: ['@entity_type.manager', '@stream_wrapper.public']
+    arguments: ['@entity_type.manager', '@stream_wrapper.public', '@request_stack']
 
   ecms_api.oauth_route_restriction_subscriber:
     class: Drupal\ecms_api\EventSubscriber\OAuthRouteRestrictionSubscriber

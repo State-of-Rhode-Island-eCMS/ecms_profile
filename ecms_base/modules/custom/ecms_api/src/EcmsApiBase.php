@@ -161,7 +161,7 @@ abstract class EcmsApiBase {
     }
 
     return [
-      self::ORIGIN_HEADER => \Drupal::requestStack()->getCurrentRequest()->getHost(),
+      self::ORIGIN_HEADER => $this->ecmsApiHelper->getCurrentRequest()->getHost(),
       self::ENV_HEADER => $envHeaderValue,
     ];
   }

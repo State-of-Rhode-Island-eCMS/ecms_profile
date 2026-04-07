@@ -6,6 +6,8 @@ namespace Drupal\ecms_api;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StreamWrapper\PublicStream;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Helper service for the ecms_api base class.
@@ -29,6 +31,13 @@ class EcmsApiHelper {
   private $publicStreamWrapper;
 
   /**
+   * The request.stack service.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
    * EcmsApiHelper constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
@@ -36,9 +45,10 @@ class EcmsApiHelper {
    * @param \Drupal\Core\StreamWrapper\PublicStream $publicStream
    *   The stream_wrapper.public service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, PublicStream $publicStream) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, PublicStream $publicStream, RequestStack $requestStack) {
     $this->entityTypeManager = $entityTypeManager;
     $this->publicStreamWrapper = $publicStream;
+    $this->requestStack = $requestStack;
   }
 
   /**
@@ -71,6 +81,16 @@ class EcmsApiHelper {
     $realpath = $this->publicStreamWrapper->realpath();
 
     return "{$realpath}/{$host}{$path}";
+  }
+
+  /**
+   * Get the current request object.
+   *
+   * @return \Symfony\Component\HttpFoundation\Request|null
+   *   The current request object.
+   */
+  public function getCurrentRequest(): ?Request {
+    return $this->requestStack->getCurrentRequest();
   }
 
 }
