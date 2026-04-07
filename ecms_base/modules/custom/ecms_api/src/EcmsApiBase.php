@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\ecms_api;
 
+use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Url;
@@ -32,6 +33,19 @@ abstract class EcmsApiBase {
    * The API endpoint prefix.
    */
   const API_ENDPOINT = 'EcmsApi';
+
+  /**
+   * Header identifying the requesting site's hostname.
+   */
+  const ORIGIN_HEADER = 'X-ECMS-Origin';
+
+  /**
+   * Header carrying the HMAC-signed environment identifier.
+   *
+   * Format: "{AH_SITE_ENVIRONMENT}:{Crypt::hmacBase64(ECMS_SHARED_SECRET, env)}"
+   * Falls back to "local" with no signature when running outside Acquia.
+   */
+  const ENV_HEADER = 'X-ECMS-Env';
 
   /**
    * Allowed HTTP methods to accept for submission to the API endpoints.
@@ -125,6 +139,34 @@ abstract class EcmsApiBase {
   }
 
   /**
+   * Build the ECMS authentication headers for outbound API requests.
+   *
+   * Sends the current site's hostname as X-ECMS-Origin (for logging/audit)
+   * and an HMAC-signed environment identifier as X-ECMS-Env. On local dev
+   * (no AH_SITE_ENVIRONMENT or ECMS_SHARED_SECRET), the env value falls back
+   * to "local" without a signature — satisfying the .htaccess presence check
+   * while the EventSubscriber skips validation entirely.
+   *
+   * @return array
+   *   Associative array of header name => value.
+   */
+  protected function getEcmsRequestHeaders(): array {
+    $env = (string) getenv('AH_SITE_ENVIRONMENT') ?: 'local';
+    $sharedSecret = (string) getenv('ECMS_SHARED_SECRET');
+
+    $envHeaderValue = $env;
+    if (!empty($sharedSecret)) {
+      $signature = Crypt::hmacBase64($env, $sharedSecret);
+      $envHeaderValue = "{$env}:{$signature}";
+    }
+
+    return [
+      self::ORIGIN_HEADER => \Drupal::requestStack()->getCurrentRequest()->getHost(),
+      self::ENV_HEADER => $envHeaderValue,
+    ];
+  }
+
+  /**
    * Get an access token to authorize the request.
    *
    * @param \Drupal\Core\Url $url
@@ -155,6 +197,7 @@ abstract class EcmsApiBase {
         'client_secret' => $client_secret,
         'scope' => $scope,
       ],
+      'headers' => $this->getEcmsRequestHeaders(),
       'verify' => $verify,
     ];
 

@@ -74,6 +74,14 @@ class EcmsApiBaseTest extends UnitTestCase {
   const ACCESS_TOKEN = 'test-access-token-123';
 
   /**
+   * The test ECMS request headers returned by the mocked getEcmsRequestHeaders.
+   */
+  const ECMS_REQUEST_HEADERS = [
+    'X-ECMS-Origin' => 'test.example.com',
+    'X-ECMS-Env' => 'local',
+  ];
+
+  /**
    * The oauth success return values.
    */
   const OAUTH_SUCCESS = [
@@ -388,6 +396,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         'client_secret' => self::CLIENT_SECRET,
         'scope' => self::CLIENT_SCOPE,
       ],
+      'headers' => self::ECMS_REQUEST_HEADERS,
       'verify' => TRUE,
     ];
 
@@ -433,7 +442,12 @@ class EcmsApiBaseTest extends UnitTestCase {
         $this->entityToJsonApi,
         $this->ecmsApiHelper,
       ])
+      ->onlyMethods(['getEcmsRequestHeaders'])
       ->getMock();
+
+    $ecmsApi->expects($this->once())
+      ->method('getEcmsRequestHeaders')
+      ->willReturn(self::ECMS_REQUEST_HEADERS);
 
     $getAccessToken = new \ReflectionMethod(EcmsApiBase::class, 'getAccessToken');
     $getAccessToken->setAccessible(TRUE);
