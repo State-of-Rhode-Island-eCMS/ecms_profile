@@ -42,7 +42,7 @@ abstract class EcmsApiBase {
   /**
    * Header carrying the HMAC-signed environment identifier.
    *
-   * Format: {AH_SITE_ENVIRONMENT}:{Crypt::hmacBase64(ECMS_SHARED_SECRET, env)}
+   * Format: {AH_SITE_ENVIRONMENT}:{Crypt::hmacBase64(env, ECMS_SHARED_SECRET)}
    * Falls back to "local" with no signature when running outside Acquia.
    */
   const ENV_HEADER = 'X-ECMS-Env';
@@ -160,8 +160,11 @@ abstract class EcmsApiBase {
       $envHeaderValue = "{$env}:{$signature}";
     }
 
+    $currentRequest = $this->ecmsApiHelper->getCurrentRequest();
+    $originHeaderValue = ($currentRequest !== NULL) ? $currentRequest->getHost() : 'localhost';
+
     return [
-      self::ORIGIN_HEADER => $this->ecmsApiHelper->getCurrentRequest()->getHost(),
+      self::ORIGIN_HEADER => $originHeaderValue,
       self::ENV_HEADER => $envHeaderValue,
     ];
   }
