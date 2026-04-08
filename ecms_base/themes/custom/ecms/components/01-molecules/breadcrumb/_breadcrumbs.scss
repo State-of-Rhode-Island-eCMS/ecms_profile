@@ -21,7 +21,7 @@
 
     &:last-child {
       .qh__breadcrumb__page::after {
-        content: "";
+        content: '';
       }
     }
   }
@@ -34,7 +34,7 @@
   @at-root {
     *#{&}__page::after {
       display: inline-block;
-      content: "»";
+      content: '»';
       margin: 0 0.5em;
     }
   }

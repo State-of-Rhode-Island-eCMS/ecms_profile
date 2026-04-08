@@ -43,7 +43,7 @@
 
       // Support hovering entire card.
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
       }

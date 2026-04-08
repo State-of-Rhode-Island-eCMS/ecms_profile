@@ -5,7 +5,7 @@
 
   &__content {
     // Add padding when there is a background color.
-    &[class*="qh__tc"] {
+    &[class*='qh__tc'] {
       padding: $general-v-spacing $general-h-spacing;
     }
   }
@@ -88,7 +88,7 @@
     }
 
     .qh__person-list__item + .qh__person-list__item {
-      border-top: none;
+      border-top: 0;
     }
   }
 }

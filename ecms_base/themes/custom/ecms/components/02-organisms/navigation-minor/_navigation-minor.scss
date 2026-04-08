@@ -139,9 +139,6 @@
     position: relative;
     overflow: visible;
 
-    // Also <li>, but nested
-    &__sub {}
-
     &:not(&__sub) + &:not(&__sub)::before {
       border-top: $border-sm solid var(--fc__default__bg);
       content: '';
@@ -186,6 +183,7 @@
   }
 
   // Restyling accordion elements classes
+  // stylelint-disable-next-line selector-max-compound-selectors
   .qh__accordion__content > div ul .qh__nav-minor__item {
     margin: 0;
     padding: 0;

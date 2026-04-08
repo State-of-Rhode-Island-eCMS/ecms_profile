@@ -24,7 +24,7 @@
   // Light colored background
   &::before {
     background-color: var(--fc__attention-card__bar);
-    content: "";
+    content: '';
     opacity: 0.25;
     position: absolute;
     @include qh-inset-supports(0);
@@ -34,7 +34,7 @@
   // Dark colored bar
   &::after {
     background-color: var(--fc__attention-card__bar);
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     bottom: 0;
@@ -68,7 +68,7 @@
       &::before {
         background-color: var(--fc__attention-card__bar);
         border-radius: 50%;
-        content: "";
+        content: '';
         display: block;
         height: ($icon-dimension * 1.5);
         width: ($icon-dimension * 1.5);
