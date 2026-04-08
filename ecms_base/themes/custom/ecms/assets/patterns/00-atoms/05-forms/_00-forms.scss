@@ -8,7 +8,8 @@ form {
 
 fieldset {
   border: $border-xs solid var(--fc__default__border);
-  padding: $general-v-spacing $general-h-spacing ($general-v-spacing / 2) $general-h-spacing;
+  padding: $general-v-spacing $general-h-spacing ($general-v-spacing / 2)
+    $general-h-spacing;
 
   > legend {
     display: block;
@@ -23,7 +24,6 @@ fieldset {
 // <label>
 // Handled in conjunction with .qh__fs-st in 00-atoms/02-text/00-typography
 label {
-  display: inline-block;
   font-weight: 475;
 }
 
@@ -39,7 +39,7 @@ select {
   font-variant-numeric: lining-nums;
 }
 
-input:where(:not([type='checkbox'], [type='radio'], [type='range'], [type='submit'], [type='reset'])),
+input:where(:not([type="checkbox"], [type="radio"], [type="range"], [type="submit"], [type="reset"])),
 textarea,
 select {
   background-color: var(--fc__default__bg);
@@ -67,7 +67,6 @@ select {
   label + & {
     margin-top: 0.25em;
   }
-
 }
 
 textarea,
@@ -81,9 +80,12 @@ select {
   appearance: none;
   // Light theme by default
   /* autoprefixer: ignore next */
-  background-image:
-    url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23404040' d='M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 18.5l-8.8-8.8 2.4-2.4 6.4 6.4 6.4-6.4 2.4 2.4-8.8 8.8z'/%3E%3C/svg%3E"),
-    linear-gradient(to bottom, transparent 25%, var(--c__quahog--dark--trans15) 100%);
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23404040' d='M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 18.5l-8.8-8.8 2.4-2.4 6.4 6.4 6.4-6.4 2.4 2.4-8.8 8.8z'/%3E%3C/svg%3E"),
+    linear-gradient(
+      to bottom,
+      transparent 25%,
+      var(--c__quahog--dark--trans15) 100%
+    );
   background-repeat: no-repeat, repeat;
   background-position: right 0.75em top 50%, 0 0;
   background-size: 2em auto, 100%;
@@ -95,20 +97,26 @@ select {
 
   .dark & {
     /* autoprefixer: ignore next */
-    background-image:
-      url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23d4d4d4' d='M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 18.5l-8.8-8.8 2.4-2.4 6.4 6.4 6.4-6.4 2.4 2.4-8.8 8.8z'/%3E%3C/svg%3E"),
-      linear-gradient(to bottom, transparent 0%, var(--c__quahog--dark--trans33) 95%);
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23d4d4d4' d='M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 18.5l-8.8-8.8 2.4-2.4 6.4 6.4 6.4-6.4 2.4 2.4-8.8 8.8z'/%3E%3C/svg%3E"),
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--c__quahog--dark--trans33) 95%
+      );
   }
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
       /* autoprefixer: ignore next */
-      background-image:
-        url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23d4d4d4' d='M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 18.5l-8.8-8.8 2.4-2.4 6.4 6.4 6.4-6.4 2.4 2.4-8.8 8.8z'/%3E%3C/svg%3E"),
-        linear-gradient(to bottom, transparent 0%, var(--c__quahog--dark--trans33) 95%);
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath fill='%23d4d4d4' d='M22 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm0 18.5l-8.8-8.8 2.4-2.4 6.4 6.4 6.4-6.4 2.4 2.4-8.8 8.8z'/%3E%3C/svg%3E"),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          var(--c__quahog--dark--trans33) 95%
+        );
     }
   }
 
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     background-position: left 0.75em top 50%, 0 0;
   }
 
@@ -122,8 +130,8 @@ select {
   }
 }
 
-input[type='range'] {}
-
+input[type="range"] {
+}
 
 // Named classes
 .flexbox-container {
@@ -183,7 +191,6 @@ input[type='range'] {}
 
 // Form elements with classes
 .qh__form {
-
   // Sets a button and input next to each other
   &__nowrap {
     display: flex;
@@ -204,16 +211,18 @@ input[type='range'] {}
     height: 2rem;
     margin: 0.25rem 0;
 
-    input[type='range'] {
+    input[type="range"] {
       -webkit-appearance: none;
       background: transparent;
       width: 100%;
 
       @mixin range-track {
         -webkit-appearance: none;
-        background: linear-gradient(to bottom right,
+        background: linear-gradient(
+          to bottom right,
           transparent 50%,
-          var(--c__white--trans33) 50%);
+          var(--c__white--trans33) 50%
+        );
         cursor: pointer;
         height: 1rem;
       }
@@ -273,7 +282,6 @@ input[type='range'] {}
 // Webform module styles
 .description,
 .text-count-message {
-
   small {
     font-size: inherit;
   }
@@ -294,13 +302,12 @@ input[type='range'] {}
 }
 
 .form-composite > .fieldset-wrapper > .description,
- .form-item .description {
+.form-item .description {
   font-size: inherit;
 }
 
 // Spacing elements
 .form-item,
-
 .form-actions {
   margin-block-start: 1.25em;
   margin-block-end: 1.75em;
