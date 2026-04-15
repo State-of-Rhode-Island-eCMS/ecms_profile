@@ -12,6 +12,7 @@ use Drupal\file\FileInterface;
 use Drupal\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Unit tests for the EcmsApiHelper class.
@@ -41,6 +42,13 @@ class EcmsApiHelperTest extends UnitTestCase {
   private $publicStreamWrapper;
 
   /**
+   * Mock of the request_stack service.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack|\PHPUnit\Framework\MockObject\MockObject
+   */
+  private $requestStack;
+
+  /**
    * {@inheritDoc}
    */
   protected function setUp(): void {
@@ -48,6 +56,7 @@ class EcmsApiHelperTest extends UnitTestCase {
 
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->publicStreamWrapper = $this->createMock(PublicStream::class);
+    $this->requestStack = $this->createMock(RequestStack::class);
   }
 
   /**
@@ -86,7 +95,7 @@ class EcmsApiHelperTest extends UnitTestCase {
       ->with('file')
       ->willReturn($fileStorage);
 
-    $testClass = new EcmsApiHelper($this->entityTypeManager, $this->publicStreamWrapper);
+    $testClass = new EcmsApiHelper($this->entityTypeManager, $this->publicStreamWrapper, $this->requestStack);
     $actual = $testClass->getFilePath(self::FILE_ID);
 
     $this->assertEquals($expected, $actual);
