@@ -547,4 +547,3 @@ function ecms_base_update_11212(): void {
 
   ecms_base_apply_recipes($recipes);
 }
-
