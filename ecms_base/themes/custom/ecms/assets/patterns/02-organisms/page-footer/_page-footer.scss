@@ -1,5 +1,4 @@
 .qh__site-footer {
-
   $qh__footer-sm-bp: $bp--small;
   $qh__footer-lg-bp: em(1020);
 
@@ -15,7 +14,7 @@
 
       &::before {
         border-right: $border-xs solid var(--fc__footer__fg);
-        content: '';
+        content: "";
         opacity: 0.33;
         position: absolute;
         top: $general-h-spacing;
@@ -43,7 +42,7 @@
 
       &::before {
         border-left: $border-xs solid var(--fc__footer__fg);
-        content: '';
+        content: "";
         opacity: 0.33;
         position: absolute;
         top: $general-h-spacing;
@@ -55,13 +54,9 @@
 
   a {
     color: var(--fc__footer__fg);
-
-    // Ensure touch targets meet minimum size on mobile.
-    @include breakpoint-down($qh__footer-sm-bp) {
-      display: inline-flex;
-      align-items: center;
-      min-height: rem(48);
-    }
+    display: inline-flex;
+    align-items: center;
+    min-height: rem(48);
 
     &:hover,
     &:focus {
@@ -112,7 +107,7 @@
     @include breakpoint-down($qh__footer-sm-bp) {
       & + &::before {
         border-top: $border-xs solid var(--fc__footer__fg);
-        content: '';
+        content: "";
         opacity: 0.33;
         position: absolute;
         top: 0;
