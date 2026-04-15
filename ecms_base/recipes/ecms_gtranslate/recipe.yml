@@ -8,6 +8,7 @@ config:
   actions:
     gtranslate.settings:
       simpleConfigUpdate:
+        enable_cdn: false
         widget_look: "lang_names"
         languages:
           en: en
@@ -17,7 +18,7 @@ config:
           fr: fr
           it: it
           pl: pl
-          pt: pt
+          pt-pt: pt-pt
           es: es
           vi: vi
           ht: ht

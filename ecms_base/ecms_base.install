@@ -535,3 +535,15 @@ function ecms_base_update_11211(): void {
     }
   }
 }
+
+/**
+ * Re-apply the gtranslate updated default settings.
+ */
+function ecms_base_update_11212(): void {
+  // Re-apply the gtranslate settings.
+  $recipes = [
+    'ecms_gtranslate',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
