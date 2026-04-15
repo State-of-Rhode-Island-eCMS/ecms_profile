@@ -109,7 +109,7 @@ jobs:
       image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8
         ports:
           - 33306:3306
         env:
@@ -168,6 +168,10 @@ jobs:
       - name: Run unit tests.
         working-directory: ${{ env.DRUPAL_DIRECTORY }}
         run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=unit --no-coverage
+
+      - name: Run kernel tests.
+        working-directory: ${{ env.DRUPAL_DIRECTORY }}
+        run: ../vendor/bin/phpunit --configuration=/var/www/phpunit-ci.xml --testsuite=kernel --no-coverage
 
       - name: Copy default settings file
         run: cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php

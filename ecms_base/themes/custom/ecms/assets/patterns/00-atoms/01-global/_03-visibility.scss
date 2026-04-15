@@ -1,4 +1,4 @@
-.visually-hidden:not(:focus):not(:active) { 
+.visually-hidden:not(:focus):not(:active) {
   position: absolute !important;
   height: 1px;
   width: 1px;
@@ -6,4 +6,8 @@
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap; /* added line */
+}
+
+.hidden {
+  display: none;
 }
