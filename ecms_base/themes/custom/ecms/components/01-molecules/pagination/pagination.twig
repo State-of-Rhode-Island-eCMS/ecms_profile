@@ -15,7 +15,7 @@
     {# Add an ellipsis if there are further previous pages. #}
     {% if ellipses.previous %}
       <li class="qh__pagination__item">
-        <span class="qh__pagination__ellipses" aria-label="{{ 'Full list of pages is truncated'|t }}" role="text">&hellip;</span>
+        <span class="qh__pagination__ellipses" aria-label="{{ 'Full list of pages is truncated'|t }}">&hellip;</span>
       </li>
     {% endif %}
     {# Now generate the actual pager piece. #}
@@ -34,7 +34,7 @@
     {# Add an ellipsis if there are further next pages. #}
     {% if ellipses.previous %}
       <li class="qh__pagination__item">
-        <span class="qh__pagination__ellipses" aria-label="{{ 'Full list of pages is truncated'|t }}" role="text">&hellip;</span>
+        <span class="qh__pagination__ellipses" aria-label="{{ 'Full list of pages is truncated'|t }}">&hellip;</span>
       </li>
     {% endif %}
     {# Print next item if we are not on the last page. #}

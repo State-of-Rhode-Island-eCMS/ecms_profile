@@ -133,7 +133,8 @@
 
 <article class="qh__single-event">
   <header class="qh__single-event__header">
-    <h1 class="qh__h2">{{ title }}</h1>
+    {% set rendered_title = title|render|trim %}
+    <h1 class="qh__h2">{{ rendered_title ?: node.label }}</h1>
 
     {% if img|default %}
       <figure class="qh__single-event__image">
