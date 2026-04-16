@@ -26,18 +26,11 @@ class EcmsWorkflowFormHooks {
   }
 
   /**
-   * Implements hook_form_FORM_ID_alter() for the person node add form.
+   * Implements hook_form_FORM_ID_alter() for the person node form.
    */
   #[Hook('form_node_person_form_alter')]
-  public function personNodeFormAlter(array &$form, FormStateInterface $form_state, string $form_id): void {
-    $this->checkPersonAdditionalFieldsVocabulary($form);
-  }
-
-  /**
-   * Implements hook_form_FORM_ID_alter() for the person node edit form.
-   */
   #[Hook('form_node_person_edit_form_alter')]
-  public function personNodeEditFormAlter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  public function personNodeFormAlter(array &$form, FormStateInterface $form_state, string $form_id): void {
     $this->checkPersonAdditionalFieldsVocabulary($form);
   }
 
