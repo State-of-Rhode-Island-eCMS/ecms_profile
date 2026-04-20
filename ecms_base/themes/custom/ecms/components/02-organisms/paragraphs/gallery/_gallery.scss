@@ -27,6 +27,7 @@
   }
 
   &__button {
+    @include qh-button-reset();
     display: block;
     width: rem(44);
     height: rem(44);
@@ -39,9 +40,11 @@
     display: flex;
 
     &-radio {
+      @include qh-button-reset();
       display: block;
       height: rem(18);
       width: rem(18);
+      background: transparent;
       border: 1px solid var(--fc__default__fg);
       border-radius: rem(9);
       padding: 0;
@@ -115,7 +118,4 @@
     }
   }
 
-  button {
-    @include qh-button-reset();
-  }
 }

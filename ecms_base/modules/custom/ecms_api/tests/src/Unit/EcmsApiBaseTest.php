@@ -27,11 +27,13 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use phpmock\MockBuilder;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Drupal\Component\Utility\Crypt;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Unit tests for the EcmsApiBase class.
@@ -72,6 +74,14 @@ class EcmsApiBaseTest extends UnitTestCase {
    * The access token to test with.
    */
   const ACCESS_TOKEN = 'test-access-token-123';
+
+  /**
+   * The test ECMS request headers returned by the mocked getEcmsRequestHeaders.
+   */
+  const ECMS_REQUEST_HEADERS = [
+    'X-ECMS-Origin' => 'test.example.com',
+    'X-ECMS-Env' => 'local',
+  ];
 
   /**
    * The oauth success return values.
@@ -388,6 +398,7 @@ class EcmsApiBaseTest extends UnitTestCase {
         'client_secret' => self::CLIENT_SECRET,
         'scope' => self::CLIENT_SCOPE,
       ],
+      'headers' => self::ECMS_REQUEST_HEADERS,
       'verify' => TRUE,
     ];
 
@@ -433,7 +444,12 @@ class EcmsApiBaseTest extends UnitTestCase {
         $this->entityToJsonApi,
         $this->ecmsApiHelper,
       ])
+      ->onlyMethods(['getEcmsRequestHeaders'])
       ->getMock();
+
+    $ecmsApi->expects($this->once())
+      ->method('getEcmsRequestHeaders')
+      ->willReturn(self::ECMS_REQUEST_HEADERS);
 
     $getAccessToken = new \ReflectionMethod(EcmsApiBase::class, 'getAccessToken');
     $getAccessToken->setAccessible(TRUE);
@@ -1588,6 +1604,106 @@ class EcmsApiBaseTest extends UnitTestCase {
 
     $this->assertEquals(58, $relationships['field_test']['meta']['target_revision_id']);
 
+  }
+
+  /**
+   * Test getEcmsRequestHeaders() directly.
+   *
+   * @param string|null $ahEnv
+   *   Value for AH_SITE_ENVIRONMENT, or NULL to leave unset.
+   * @param string|null $secret
+   *   Value for ECMS_SHARED_SECRET, or NULL to leave unset.
+   * @param string|null $requestHost
+   *   Host to return from the current request, or NULL to simulate no request.
+   * @param string $expectedOrigin
+   *   Expected value of X-ECMS-Origin header.
+   * @param string $expectedEnv
+   *   Expected value of X-ECMS-Env header.
+   */
+  #[DataProvider('dataProviderForGetEcmsRequestHeaders')]
+  public function testGetEcmsRequestHeaders(
+    ?string $ahEnv,
+    ?string $secret,
+    ?string $requestHost,
+    string $expectedOrigin,
+    string $expectedEnv,
+  ): void {
+    if ($ahEnv !== NULL) {
+      putenv("AH_SITE_ENVIRONMENT={$ahEnv}");
+    }
+    if ($secret !== NULL) {
+      putenv("ECMS_SHARED_SECRET={$secret}");
+    }
+
+    $this->ecmsApiHelper = $this->getMockBuilder(EcmsApiHelper::class)
+      ->disableOriginalConstructor()
+      ->onlyMethods(['getCurrentRequest'])
+      ->getMock();
+
+    $mockRequest = $requestHost !== NULL ? Request::create('/', 'GET', [], [], [], ['HTTP_HOST' => $requestHost]) : NULL;
+
+    $this->ecmsApiHelper->expects($this->once())
+      ->method('getCurrentRequest')
+      ->willReturn($mockRequest);
+
+    $ecmsApi = $this->getMockBuilder(EcmsApiBase::class)
+      ->setConstructorArgs([
+        $this->httpclient,
+        $this->entityToJsonApi,
+        $this->ecmsApiHelper,
+      ])
+      ->getMock();
+
+    $method = new \ReflectionMethod(EcmsApiBase::class, 'getEcmsRequestHeaders');
+    $headers = $method->invoke($ecmsApi);
+
+    $this->assertEquals($expectedOrigin, $headers[EcmsApiBase::ORIGIN_HEADER]);
+    $this->assertEquals($expectedEnv, $headers[EcmsApiBase::ENV_HEADER]);
+
+    putenv('AH_SITE_ENVIRONMENT');
+    putenv('ECMS_SHARED_SECRET');
+  }
+
+  /**
+   * Data provider for testGetEcmsRequestHeaders().
+   *
+   * @return array[]
+   *   Keyed test cases.
+   */
+  public static function dataProviderForGetEcmsRequestHeaders(): array {
+    $secret = 'test-secret';
+    return [
+      'local dev — no env vars, has request' => [
+        NULL, NULL, 'example.ddev.site',
+        'example.ddev.site',
+        'local',
+      ],
+      'local dev — no env vars, no request (CLI)' => [
+        NULL, NULL, NULL,
+        'localhost',
+        'local',
+      ],
+      'env set, no secret, has request' => [
+        'test_env', NULL, 'site.example.com',
+        'site.example.com',
+        'test_env',
+      ],
+      'env set, secret set, has request — signed header' => [
+        'test_env', $secret, 'site.example.com',
+        'site.example.com',
+        'test_env:' . Crypt::hmacBase64('test_env', $secret),
+      ],
+      'env set, secret set, no request (CLI) — signed header, localhost origin' => [
+        'test_env', $secret, NULL,
+        'localhost',
+        'test_env:' . Crypt::hmacBase64('test_env', $secret),
+      ],
+      'custom domain, env set, secret set' => [
+        'test_env', $secret, 'custom.example.org',
+        'custom.example.org',
+        'test_env:' . Crypt::hmacBase64('test_env', $secret),
+      ],
+    ];
   }
 
 }
