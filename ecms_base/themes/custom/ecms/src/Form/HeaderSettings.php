@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\ecms\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-
 /**
  * Builds the Header section of the ecms theme settings form.
  */
