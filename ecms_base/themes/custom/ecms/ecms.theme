@@ -15,6 +15,25 @@ use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\ecms\Form\FilesSettings;
+use Drupal\ecms\Form\FooterSettings;
+use Drupal\ecms\Form\HeaderSettings;
+use Drupal\ecms\Form\ThemeOptions;
+
+/**
+ * {@inheritdoc}
+ */
+function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+  \Drupal::classResolver(ThemeOptions::class)->alterForm($form);
+  \Drupal::classResolver(HeaderSettings::class)->alterForm($form);
+  \Drupal::classResolver(FilesSettings::class)->alterForm($form);
+  \Drupal::classResolver(FooterSettings::class)->alterForm($form);
+}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
