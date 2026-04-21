@@ -8,7 +8,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Psr\Log\LoggerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
@@ -44,7 +44,7 @@ class EcmsIconLibraryFormatter extends FormatterBase implements ContainerFactory
     $label,
     $view_mode,
     array $third_party_settings,
-    protected LoggerChannelFactoryInterface $logger,
+    protected LoggerInterface $logger,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
   }
@@ -61,7 +61,7 @@ class EcmsIconLibraryFormatter extends FormatterBase implements ContainerFactory
       $configuration['label'],
       $configuration['view_mode'],
       $configuration['third_party_settings'],
-      $container->get('logger.factory')
+      $container->get('logger.factory')->get('ecms_icon_library')
     );
   }
 

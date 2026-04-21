@@ -57,3 +57,23 @@ function ecms_blocks_block_content_create_access(AccountInterface $account, arra
   // No opinion.
   return AccessResult::neutral();
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function ecms_blocks_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Force title to always display for card blocks in Layout Builder.
+  if (in_array($form_id, ['layout_builder_add_block', 'layout_builder_update_block'])) {
+    $component = $form_state->getFormObject()->getCurrentComponent();
+    $plugin_id = $component->getPluginId();
+
+    // Check if this is an image_card or icon_card inline block.
+    $card_blocks = ['inline_block:image_card', 'inline_block:icon_card'];
+    if (in_array($plugin_id, $card_blocks)) {
+      // Hide the "Display title" checkbox and force it to always show.
+      $form['settings']['label_display']['#access'] = FALSE;
+      $form['settings']['label_display']['#default_value'] = TRUE;
+      $form['settings']['label_display']['#value'] = TRUE;
+    }
+  }
+}

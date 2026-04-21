@@ -84,13 +84,4 @@
       }
     }
   }
-
-  // Remove all flex column declarations
-  @include onlyIE() {
-    &__list .qh__teaser-speech,
-    &__list .qh__teaser-speech__header,
-    &__list .qh__teaser-speech__content {
-      display: block !important;
-    }
-  }
 }

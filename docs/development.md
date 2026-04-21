@@ -77,6 +77,12 @@ from within the main "ecms_profile" repository directory.
 Changes will show in your demo site "develop-ecms-profile"
 as the distro is symlinked.
 
+### Install a Database from an existing site (optional)
+
+```bash
+ddev import-db </path/to/db-filename.sql
+```
+
 ### Feature branches
 When making changes to the "ecms_profile" repository in a feature branch, you may
 have to update the composer.json package version in the "develop-ecms-profile" to

@@ -3,7 +3,10 @@ name: Person list - Paragraph
 description: Person list paragraph
 props:
   type: object
-  properties: {}
+  properties:
+    columns:
+      type: string
+      default: 1
 slots:
   list_mode:
     title: The type of list
@@ -11,3 +14,7 @@ slots:
     title: The listing of persons
   photo_list:
     title: The photo listing.
+  title:
+    title: The list title
+  bg_color_class:
+    title: The background color class
