@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Drupal\ecms\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-
 /**
  * Builds the Theme Options section of the ecms theme settings form.
  */
@@ -16,8 +14,6 @@ class ThemeOptions extends EcmsSettingsBase {
    *
    * @param array $form
    *   The form array, passed by reference.
-   * @param string $theme_path
-   *   The active theme's filesystem path (from ActiveTheme::getPath()).
    */
   public function alterForm(array &$form): void {
     $form['ecms_theme_options'] = [
@@ -46,7 +42,7 @@ class ThemeOptions extends EcmsSettingsBase {
     $paletteOptions = [];
     foreach ($json_decoded['palettes'] as $key => $palette) {
       // Do not add dark mode themes to list.
-      if (strpos($key, '--dark') !== FALSE) {
+      if (str_contains($key, '--dark')) {
         continue;
       }
       $paletteOptions[$key] = $palette['humanName'];
