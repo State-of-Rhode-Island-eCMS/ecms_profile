@@ -149,9 +149,10 @@ function ecms_page_attachments_alter(array &$attachments) {
  * Implements hook_preprocess_html().
  */
 function ecms_preprocess_html(array &$variables): void {
-
+  /** @var \Drupal\Core\Extension\ThemeSettingsProvider $theme_settings_provider */
+  $theme_settings_provider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
   // Add paletteClass from theme settings form.
-  $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
+  $paletteClass = 'qh__t__' . $theme_settings_provider->getSetting('color_palette');
   $variables['palette'] = $paletteClass;
 
   $node = \Drupal::routeMatch()->getParameter('node');
@@ -318,6 +319,9 @@ function ecms_preprocess_paragraph__gallery_item(array &$variables): void {
  * Implements hook_preprocess_media() for the media__file element.
  */
 function ecms_preprocess_media__file(array &$variables): void {
+  /** @var \Drupal\Core\Extension\ThemeSettingsProvider $theme_settings_provider */
+  $theme_settings_provider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
+
   // We need to know the current language for download requests.
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -354,7 +358,7 @@ function ecms_preprocess_media__file(array &$variables): void {
 
   // Grab file URL, accounting for global "use absolute file" setting.
   $variables['file_url'] = '/media/' . $media->id() . '/download?language=' . $language;
-  if (theme_get_setting('use_file_path')) {
+  if ($theme_settings_provider->getSetting('use_file_path')) {
     // Get service for generating and converting file URLs.
     $file_url_generator = \Drupal::service('file_url_generator');
     // Get URL with specific file path, as opposed to Drupal-routed media path.
