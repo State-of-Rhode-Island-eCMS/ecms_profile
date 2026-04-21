@@ -1897,6 +1897,275 @@
     # If a functional color pair is commented out, it is not being used, and therefore,
     # in CSS, the value will come from the default color palette
     #
+    #
+    # RIGov theme: navy header+nav unified with cliff-walk teal as featured/accent color
+    #
+    # Derived from the RIGov Figma design (node 2656-383).
+    # Key distinction from Scarborough: header and nav share a continuous navy band;
+    # cliff-walk teal appears on hover states, icons, featured sections (primary),
+    # and sidebar nav — NOT as the nav background.
+    #
+    "rigov": {
+      "humanName": "RIGov",
+      "values": {
+        "official": [
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "navy--dark" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "hope-gold" },
+          { "fnName": "link--focus", "colorName": "hope-gold" }
+        ],
+        "header": [
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" },
+          { "fnName": "social__link", "colorName": "cliff-walk" },
+          # Hover should use the accent or violator color
+          { "fnName": "social__link--hover", "colorName": "hope-gold" }
+        ],
+        #
+        # Navy bg — visually continuous with the header per the Figma design.
+        # Cliff-walk appears on hover/active states and the mega-menu icons.
+        #
+        "nav-main": [
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" },
+          # Hover bg matches header so the active tab looks notched into the header
+          { "fnName": "link--hover__bg", "colorName": "navy--dark" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--active", "colorName": "cliff-walk" },
+          { "fnName": "link__sub--hover__bg", "colorName": "white--trans25" },
+          # Cliff-walk icons make the mega-menu distinctly RIGov
+          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__fg", "colorName": "navy" },
+          { "fnName": "icon__bg--hover", "colorName": "hope-gold" },
+          { "fnName": "icon__fg--hover", "colorName": "navy--dark" }
+        ],
+        "default": [
+          { "fnName": "fg", "colorName": "quahog" },
+          { "fnName": "bg", "colorName": "white" },
+          { "fnName": "overlay__bg", "colorName": "white--trans75" },
+          { "fnName": "border", "colorName": "quahog--dark--trans15" },
+          { "fnName": "link", "colorName": "navy--sat" },
+          { "fnName": "link--hover", "colorName": "navy--sat-lgt" },
+          { "fnName": "link--focus", "colorName": "navy" },
+          { "fnName": "link--visited", "colorName": "navy--warm" },
+          { "fnName": "link--active", "colorName": "cliff-walk--darkest" },
+          # ALL headers get this color
+          { "fnName": "hx__fg", "colorName": "quahog--medium" },
+          { "fnName": "violator", "colorName": "hope-gold" },
+          # Accent pair, bg and fg
+          { "fnName": "accent", "colorName": "hope-gold" },
+          { "fnName": "accent__fg", "colorName": "navy--dark" },
+          # text-accent currently used for bullet mark color & the H2
+          { "fnName": "text-accent", "colorName": "cliff-walk--darkest" },
+          { "fnName": "button__bg", "colorName": "navy" },
+          { "fnName": "button__fg", "colorName": "hope-gold" },
+          { "fnName": "button--hover__bg", "colorName": "navy--dark" },
+          { "fnName": "button--hover__fg", "colorName": "cliff-walk" }
+        ],
+        #
+        # System icons used throughout
+        # but right now only in the File List component
+        #
+        "icon": [
+          { "fnName": "pdf", "colorName": "rhody-red" },
+          { "fnName": "word", "colorName": "navy" },
+          { "fnName": "excel", "colorName": "green-animals" },
+          { "fnName": "generic", "colorName": "quahog--medium" },
+          { "fnName": "download", "colorName": "quahog--medium" }
+        ],
+        #
+        # Left sidebar navigation component
+        #
+        "nav-minor": [
+          { "fnName": "border", "colorName": "cliff-walk--darkest" },
+          { "fnName": "fg", "colorName": "quahog--darker" },
+          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "link", "colorName": "navy" },
+          { "fnName": "link__bg", "colorName": "transparent" },
+          { "fnName": "link--hover", "colorName": "navy--dark" },
+          { "fnName": "link--hover__bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--active", "colorName": "cliff-walk--darkest" },
+          { "fnName": "sub__bg", "colorName": "white--trans25" }
+        ],
+        #
+        # Site Notifications component
+        #
+        "notification": [
+          { "fnName": "fg", "colorName": "navy--dark" },
+          { "fnName": "bg", "colorName": "hope-gold" },
+          { "fnName": "icon", "colorName": "navy" },
+          { "fnName": "link", "colorName": "navy--dark" },
+          { "fnName": "link--hover", "colorName": "navy--sat" },
+          { "fnName": "link--focus", "colorName": "navy--dark" },
+          { "fnName": "link--active", "colorName": "navy--sat-lgt" },
+          # Hover will always reverse these button colors
+          { "fnName": "button__fg", "colorName": "navy" },
+          { "fnName": "button__bg", "colorName": "white" },
+          { "fnName": "border", "colorName": "quahog--dark--trans33" }
+        ],
+        "accordion": [
+          { "fnName": "icon__fg", "colorName": "navy--dark" },
+          { "fnName": "icon__bg", "colorName": "cliff-walk" }
+        ],
+        "attention-card": [
+          { "fnName": "fg", "colorName": "navy--dark" },
+          { "fnName": "bar", "colorName": "cliff-walk" },
+          { "fnName": "icon", "colorName": "navy--dark" }
+        ],
+        "footer": [
+          { "fnName": "border-top", "colorName": "cliff-walk--dark" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--dark" },
+          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
+        ],
+        #
+        # Primary: cliff-walk teal bg — used for featured/highlighted sections
+        # (active tabs, "Manage Your Services" panels, hero callouts per Figma).
+        # Dark text on teal for accessibility.
+        #
+        "primary": [
+          { "fnName": "fg", "colorName": "navy--dark" },
+          { "fnName": "bg", "colorName": "cliff-walk" },
+          { "fnName": "overlay__bg", "colorName": "cliff-walk--dark--trans75" },
+          { "fnName": "link", "colorName": "navy" },
+          { "fnName": "link--hover", "colorName": "navy--dark" },
+          { "fnName": "fg--dark", "colorName": "white" },
+          { "fnName": "bg--dark", "colorName": "navy" },
+          { "fnName": "overlay__bg--dark", "colorName": "navy--trans75" },
+          { "fnName": "link--dark", "colorName": "cliff-walk" },
+          { "fnName": "link--dark--hover", "colorName": "hope-gold" }
+        ],
+        "primary--light": [
+          { "fnName": "fg", "colorName": "navy" },
+          { "fnName": "bg", "colorName": "cliff-walk--light" },
+          { "fnName": "overlay__bg", "colorName": "white--trans75" },
+          { "fnName": "link", "colorName": "navy--dark" },
+          { "fnName": "link--hover", "colorName": "quahog--darker" },
+          { "fnName": "fg--dark", "colorName": "coffee-milk--light" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
+          { "fnName": "link--dark", "colorName": "white" },
+          { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
+        ]
+      }
+    },
+    #
+    # RIGov dark theme: dark navy base with cliff-walk teal as the primary accent.
+    # Commented-out lines fall back to the RIGov light theme values.
+    #
+    "rigov--dark": {
+      "humanName": "RIGov dark",
+      "values": {
+        "official": [
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "quahog--darker" },
+          { "fnName": "link", "colorName": "cliff-walk" },
+          { "fnName": "link--hover", "colorName": "hope-gold" },
+          { "fnName": "link--focus", "colorName": "hope-gold" }
+        ],
+        "header": [
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--dark" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" },
+          { "fnName": "social__link", "colorName": "cliff-walk" },
+          { "fnName": "social__link--hover", "colorName": "hope-gold" }
+        ],
+        "nav-main": [
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "navy" },
+          { "fnName": "link", "colorName": "quahog--light" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" },
+          # Hover bg matches header dark background
+          { "fnName": "link--hover__bg", "colorName": "quahog--darker" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--active", "colorName": "cliff-walk" },
+          { "fnName": "link__sub--hover__bg", "colorName": "quahog--dark--trans15" },
+          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__fg", "colorName": "navy" },
+          { "fnName": "icon__bg--hover", "colorName": "hope-gold" },
+          { "fnName": "icon__fg--hover", "colorName": "navy--dark" }
+        ],
+        "default": [
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bg", "colorName": "quahog--dark" },
+          { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
+          { "fnName": "border", "colorName": "white--trans25" },
+          { "fnName": "link", "colorName": "cliff-walk--dark" },
+          { "fnName": "link--hover", "colorName": "hope-gold" },
+          { "fnName": "link--focus", "colorName": "cliff-walk--dark" },
+          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
+          { "fnName": "link--active", "colorName": "calamari" },
+          { "fnName": "hx__fg", "colorName": "cliff-walk--light" },
+          { "fnName": "text-accent", "colorName": "cliff-walk" },
+          { "fnName": "button__bg", "colorName": "navy" },
+          { "fnName": "button__fg", "colorName": "hope-gold" },
+          { "fnName": "button--hover__bg", "colorName": "navy--dark" },
+          { "fnName": "button--hover__fg", "colorName": "cliff-walk" }
+        ],
+        "icon": [
+          #{ "fnName": "pdf", "colorName": "rhody-red" },
+          { "fnName": "word", "colorName": "cliff-walk" },
+          #{ "fnName": "excel", "colorName": "green-animals" },
+          { "fnName": "generic", "colorName": "white--trans33" },
+          { "fnName": "download", "colorName": "white--trans33" }
+        ],
+        "nav-minor": [
+          { "fnName": "border", "colorName": "cliff-walk--darkest" },
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "link", "colorName": "coffee-milk--light" },
+          { "fnName": "link__bg", "colorName": "transparent" },
+          { "fnName": "link--hover", "colorName": "white" },
+          { "fnName": "link--hover__bg", "colorName": "quahog--dark" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--active", "colorName": "cliff-walk" },
+          { "fnName": "sub__bg", "colorName": "quahog--dark--trans33" }
+        ],
+        "notification": [
+          # Falls back to rigov light values for most notification colors
+          { "fnName": "bg", "colorName": "hope-gold" }
+        ],
+        "accordion": [
+          { "fnName": "icon__fg", "colorName": "navy--dark" },
+          { "fnName": "icon__bg", "colorName": "cliff-walk" }
+        ],
+        "attention-card": [
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bar", "colorName": "cliff-walk--darkest" },
+          { "fnName": "icon", "colorName": "cliff-walk--light" }
+        ],
+        "footer": [
+          { "fnName": "border-top", "colorName": "cliff-walk--dark" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--dark" },
+          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
+        ],
+        "primary": [
+          { "fnName": "fg--dark", "colorName": "white" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest" },
+          { "fnName": "overlay__bg", "colorName": "cliff-walk--darkest--trans75" },
+          { "fnName": "overlay__bg--dark", "colorName": "cliff-walk--darkest--trans75" },
+          { "fnName": "link--dark", "colorName": "white" },
+          { "fnName": "link--dark--hover", "colorName": "hope-gold" }
+        ],
+        "primary--light": [
+          { "fnName": "fg--dark", "colorName": "coffee-milk--light" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "overlay__bg", "colorName": "cliff-walk--darkest--trans75" },
+          { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
+          { "fnName": "link--dark", "colorName": "white" },
+          { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
+        ]
+      }
+    },
+    #
     "misquamicut--dark": {
       "humanName": "Misquamicut Beach dark",
       "values": {
