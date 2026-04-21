@@ -504,6 +504,19 @@ function ecms_preprocess_menu__minor(array &$variables): void {
 }
 
 /**
+ * Implements hook_theme_suggestions_menu_alter().
+ */
+function ecms_theme_suggestions_menu_alter(array &$suggestions, array $variables): void {
+  if (
+    $variables['menu_name'] === 'main' &&
+    \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')
+      ->getSetting('mega_menu')
+  ) {
+    $suggestions[] = 'menu__main__megamenu';
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_input_alter().
  */
 function ecms_theme_suggestions_input_alter(array &$suggestions, array $variables): void {
