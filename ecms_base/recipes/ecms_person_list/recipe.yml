@@ -1,0 +1,149 @@
+name: 'eCMS Person List Fields'
+description: 'Adds background color, list title, columns, and display images fields to the person list paragraph type.'
+type: 'eCMS'
+
+install:
+  - ecms_person
+  - options
+
+config:
+  strict:
+    - field.storage.paragraph.field_columns
+    - field.storage.paragraph.field_display_images
+  actions:
+    field.field.paragraph.person_list.field_list_title:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_list
+        field_name: field_list_title
+        field_type: string
+      setLabel: 'List Title'
+      setRequired: false
+      setTranslatable: true
+
+    field.field.paragraph.person_list.field_background_color:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_list
+        field_name: field_background_color
+        field_type: list_string
+      setLabel: 'Background color'
+      setDescription: '(Optional) Select a background color for the person list.'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.paragraph.person_list.field_columns:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_list
+        field_name: field_columns
+        field_type: integer
+        settings:
+          min: 1
+          max: 3
+          prefix: ''
+          suffix: ''
+      setLabel: Columns
+      setDescription: 'Set the number of columns for desktop displays. Smaller screens will fallback to defaults.'
+      setRequired: true
+      setTranslatable: false
+      setDefaultValue:
+        - value: 1
+
+    field.field.paragraph.person_list.field_display_images:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_list
+        field_name: field_display_images
+        field_type: boolean
+        settings:
+          on_label: 'On'
+          off_label: 'Off'
+      setLabel: 'Display Images?'
+      setRequired: false
+      setTranslatable: false
+      setDefaultValue:
+        - value: 1
+
+    core.entity_form_display.paragraph.person_list.default:
+      createIfNotExists:
+        targetEntityType: paragraph
+        bundle: person_list
+        mode: default
+        status: true
+      setComponents:
+        - name: field_list_title
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: field_department_category
+          options:
+            type: entity_reference_autocomplete
+            weight: 1
+            region: content
+            settings:
+              match_operator: CONTAINS
+              match_limit: 10
+              size: 60
+              placeholder: ''
+        - name: field_background_color
+          options:
+            type: options_select
+            weight: 2
+            region: content
+            settings: {}
+        - name: field_columns
+          options:
+            type: number
+            weight: 3
+            region: content
+            settings:
+              placeholder: ''
+        - name: field_display_images
+          options:
+            type: boolean_checkbox
+            weight: 4
+            region: content
+            settings:
+              display_label: true
+      hideComponents:
+        - created
+        - status
+
+    core.entity_view_display.paragraph.person_list.default:
+      createIfNotExists:
+        targetEntityType: paragraph
+        bundle: person_list
+        mode: default
+        status: true
+      setComponents:
+        - name: field_list_title
+          options:
+            type: string
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              link_to_entity: false
+        - name: field_background_color
+          options:
+            type: list_key
+            label: hidden
+            weight: 1
+            region: content
+            settings: {}
+        - name: field_department_category
+          options:
+            type: entity_reference_label
+            label: above
+            weight: 2
+            region: content
+            settings:
+              link: true
+      hideComponents:
+        - field_columns
+        - field_display_images

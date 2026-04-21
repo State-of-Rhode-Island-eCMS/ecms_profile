@@ -5,16 +5,14 @@
 
 .node--type-vaccination-site {
   .field__label {
-    --p-font-wght: 500;
-    @include qh__p;
+    font-weight: 525;
     margin-bottom: ($general-v-spacing/4);
   }
-
-
 
   .vaccine-audience-aside {
     margin-bottom: 1rem;
     padding: 1rem;
+
     @media (min-width: $bp--medium) {
       float: right;
       margin-left: 1rem;

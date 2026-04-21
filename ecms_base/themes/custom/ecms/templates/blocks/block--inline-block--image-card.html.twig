@@ -1,0 +1,72 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display an image card inline block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules.
+ * - title_prefix: Additional output populated by modules.
+ * - title_suffix: Additional output populated by modules.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set cachebust = content|render %}
+
+{# Prepare the image #}
+{% set img = '' %}
+{% set block_content = content['#block_content'] %}
+
+{% if block_content.field_image is not empty %}
+  {% if langcode is null %}
+    {% set langcode = 'en' %}
+  {% endif %}
+
+  {% if block_content.field_image.entity.hasTranslation(langcode) %}
+    {% set img_uri = block_content.field_image.entity.translation(langcode).field_media_item_image.entity.getFileUri() %}
+    {% set img_alt = block_content.field_image.entity.translation(langcode).field_media_item_image.alt %}
+  {% else %}
+    {% set img_uri = block_content.field_image.entity.translation('en').field_media_item_image.entity.getFileUri() %}
+    {% set img_alt = block_content.field_image.entity.translation('en').field_media_item_image.alt %}
+  {% endif %}
+
+  {% set img = drupal_image(img_uri, 'narrow', {alt: img_alt}, true) %}
+{% endif %}
+
+{# Prepare the link #}
+{% set link_url = FALSE %}
+{% set link_text = '' %}
+{% if not block_content.field_link is empty %}
+  {% if block_content.field_link.0.url.external %}
+    {% set link_url = content.field_link.0['#url'].getUri() %}
+  {% else %}
+    {% set link_url = content.field_link.0['#url'] %}
+  {% endif %}
+  {% set link_text = label %}
+{% endif %}
+
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {# Add block translate link manually for now until core contextual links issue is resolved.
+     @see: https://www.drupal.org/node/3020876
+  #}
+  {% if logged_in and current_node_has_translation %}
+    <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
+  {% endif %}
+
+  {{ include('ecms:grid-card', {
+    variant: 'image',
+    img: img,
+    link_url: link_url,
+    link_text: link_text,
+  }, with_context = FALSE) }}
+</div>

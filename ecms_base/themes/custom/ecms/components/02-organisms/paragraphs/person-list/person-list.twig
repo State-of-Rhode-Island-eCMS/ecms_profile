@@ -1,32 +1,40 @@
 <section class="qh__person-list {{ photo_list ? 'qh__person-list--contains-photo' }}">
-  {% if list_mode == 'term-list' %}
-    {# Specific category person listing #}
-    <header class="qh__person-list__header">
-      <h2 class="qh__person-list__title">{{ person_listing.term_name }}</h1>
-    </header>
+  {% if title %}
+    <h2 class="qh__person-list__section-title">{{ title }}</h2>
+  {% endif %}
 
-    {% if person_listing.persons %}
-      <ul class="qh-u__list-reset qh__person-list__list" role="list">
-        {{ person_listing.persons }}
+  <div class="qh__person-list__content {{ bg_color_class }}">
+    {% if list_mode == 'term-list' %}
+      {# Specific category person listing #}
+      {% if not title %}
+        <header class="qh__person-list__header">
+          <h2 class="qh__person-list__title">{{ person_listing.term_name }}</h1>
+        </header>
+      {% endif %}
+
+      {% if person_listing.persons %}
+        <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--col-{{ columns }}" role="list">
+          {{ person_listing.persons }}
+        </ul>
+      {% endif %}
+
+      {% if person_listing.child_terms %}
+        {% for child_term_name, child_term_persons in person_listing.child_terms %}
+          <header class="qh__person-list__header">
+            <h3 class="qh__person-list__title">{{ child_term_name }}</h1>
+          </header>
+
+          <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--col-{{ columns }}" role="list">
+            {{ child_term_persons }}
+          </ul>
+        {% endfor %}
+      {% endif %}
+
+    {% else %}
+      {# Complete person listing #}
+      <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--full qh__person-list__list--col-{{ columns }}" role="list">
+        {{ person_listing }}
       </ul>
     {% endif %}
-
-    {% if person_listing.child_terms %}
-      {% for child_term_name, child_term_persons in person_listing.child_terms %}
-        <header class="qh__person-list__header">
-          <h3 class="qh__person-list__title">{{ child_term_name }}</h1>
-        </header>
-
-        <ul class="qh-u__list-reset qh__person-list__list" role="list">
-          {{ child_term_persons }}
-        </ul>
-      {% endfor %}
-    {% endif %}
-
-  {% else %}
-    {# Complete person listing #}
-    <ul class="qh-u__list-reset qh__person-list__list qh__person-list__list--full" role="list">
-      {{ person_listing }}
-    </ul>
-  {% endif %}
+  </div>
 </section>
