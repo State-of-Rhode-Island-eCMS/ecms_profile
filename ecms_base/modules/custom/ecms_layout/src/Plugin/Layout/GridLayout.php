@@ -28,7 +28,8 @@ final class GridLayout extends LayoutBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildConfigurationForm($form, $form_state);
 
-    // Remove layout options for grid layout (always auto-fit, never full-width).
+    // Remove layout options for grid layout
+    // (always auto-fit, never full-width).
     unset($form['layout']);
 
     $form['content'] = [
