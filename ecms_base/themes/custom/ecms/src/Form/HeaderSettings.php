@@ -53,6 +53,12 @@ class HeaderSettings extends EcmsSettingsBase {
       '#default_value' => $this->themeSettingsProvider->getSetting('logo_only'),
       '#title' => $this->t('Display logo only. Do not show any text.'),
     ];
+
+    $form['ecms_header']['mega_menu'] = [
+      '#type' => 'checkbox',
+      '#default_value' => $this->themeSettingsProvider->getSetting('mega_menu') ?? FALSE,
+      '#title' => $this->t('Should the menu display as a mega menu..'),
+    ];
   }
 
 }
