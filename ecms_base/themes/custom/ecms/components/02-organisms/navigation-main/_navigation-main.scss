@@ -546,3 +546,166 @@ body {
     }
   }
 }
+
+
+// ─── Mega menu variant ────────────────────────────────────────────────────────
+
+.qh__nav-main--megamenu {
+
+  // Top-level items that have a mega panel need position:static so the panel
+  // breaks out of the list item and positions relative to the nav wrapper.
+  .qh__nav-main__has-megamenu {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      position: static;
+    }
+  }
+
+  // The mega panel itself
+  .qh__megamenu {
+    background-color: var(--fc__default__bg);
+
+    // Mobile: hidden by default, revealed below
+    @include breakpoint-down($bp__show__desktop-nav) {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0s linear 1s, visibility 0s linear 0s;
+      visibility: hidden;
+    }
+
+    // Desktop: full-width panel below the nav bar
+    @include breakpoint-up($bp__show__desktop-nav) {
+      box-shadow: $box-shadow-base;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      transition: $transition-duration-medium opacity ease 0s, 0s visibility linear $transition-duration-medium;
+      visibility: hidden;
+      z-index: z(drop-down-menu);
+    }
+  }
+
+  // Desktop: reveal on aria-expanded and no-js hover
+  // The + combinator selector must be scoped to this parent so it correctly
+  // selects .qh__megamenu adjacent to the expanded link.
+  .qh__nav-main__link[aria-expanded='true'] + .qh__megamenu {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      opacity: 1;
+      transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
+      visibility: visible;
+    }
+  }
+
+  .no-js .qh__nav-main__item:hover .qh__nav-main__link + .qh__megamenu,
+  .no-js .qh__nav-main__item:focus-within .qh__nav-main__link + .qh__megamenu {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      opacity: 1;
+      transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
+      visibility: visible;
+    }
+  }
+
+  // Three-column grid
+  .qh__megamenu__columns {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      @include qh-content-maxwidth();
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .qh__megamenu__column {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      padding: 1rem 1.5rem;
+
+      & + & {
+        border-left: $border-sm solid var(--fc__default__border);
+      }
+    }
+
+    @include breakpoint-down($bp__show__desktop-nav) {
+      padding: 0;
+    }
+  }
+
+  // Individual child link wrapper
+  .qh__megamenu__item {
+    & + & {
+      border-top: $border-sm solid var(--fc__default__border);
+    }
+  }
+
+  // Child link — sits on a white panel so uses default (not nav) color tokens
+  .qh__megamenu__link {
+    align-items: center;
+    display: flex;
+    font-weight: 600;
+    justify-content: space-between;
+    padding: $nav-a-v-spacing--sm 0;
+    text-decoration: none;
+
+    @include breakpoint-down($bp__show__desktop-nav) {
+      padding: $nav-a-v-spacing--sm $nav-a-h-spacing--sm;
+    }
+
+    &,
+    &:visited {
+      color: var(--fc__default__fg);
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+    }
+
+    &:focus {
+      outline-color: var(--fc__default__link--focus);
+      outline-offset: $border-sm;
+    }
+
+    // Constrain the arrow/external icon — the global qh__icon is em(40) which
+    // is too large for inline use inside a link.
+    .qh__icon {
+      flex: 0 0 em(20);
+      height: em(20);
+      margin-left: 0.75rem;
+      width: em(20);
+    }
+  }
+
+  // Optional subtitle shown below a child link title
+  .qh__megamenu__item__desc {
+    color: var(--fc__default__fg);
+    font-size: rem(14);
+    margin: 0 0 $nav-a-v-spacing--sm;
+    opacity: 0.65;
+
+    @include breakpoint-down($bp__show__desktop-nav) {
+      padding: 0 $nav-a-h-spacing--sm $nav-a-v-spacing--sm;
+      margin: 0;
+    }
+  }
+
+  // Footer row: "All [Section]" overview button
+  .qh__megamenu__footer {
+    border-top: $border-sm solid var(--fc__default__border);
+    padding: 1.5rem;
+    text-align: center;
+
+    @include breakpoint-up($bp__show__desktop-nav) {
+      @include qh-content-maxwidth();
+    }
+  }
+}
+
+// Mobile reveal for mega menu — written outside any nesting because the SCSS
+// adjacent-sibling + & pattern incorrectly includes the parent selector chain.
+// .js is on <html>, so it cannot be a descendant of .qh__nav-main--megamenu.
+@include breakpoint-down($bp__show__desktop-nav) {
+  .js .qh__nav-main--megamenu [aria-expanded='true'] + .qh__megamenu {
+    max-height: unset;
+    transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+    visibility: visible;
+  }
+}

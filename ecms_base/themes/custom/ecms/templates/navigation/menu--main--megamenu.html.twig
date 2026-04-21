@@ -1,1 +1,120 @@
-@todo: Need to implement markup.
+{#
+/**
+ * @file
+ * Mega menu variant of the main navigation.
+ *
+ * Top-level items with children render as a mega panel with child links
+ * distributed across three columns. When the parent menu link has a
+ * description, an "All [Section]" button appears below the columns linking
+ * back to the parent page.
+ *
+ * Top-level items without children render as standard nav links.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url.
+ *   - description: Added by ecms_preprocess_menu__main__megamenu(). The
+ *     menu link description, sourced from the link's URL title attribute.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+
+{% set front_page = path('<front>') %}
+
+<nav class="qh__nav-main qh__nav-main--megamenu" aria-label="{{ 'Primary'|t }}">
+  <div class="qh__nav-main__wrapper">
+
+    <a href="{{ front_page }}" class="qh__nav-main__link qh__nav-main__link--home" title="{{ 'Back to Home'|t }}" aria-hidden="true">
+      <span class="qh__icon">
+        {% include ('@icons/home.svg') %}
+        <span class="visually-hidden">{{ 'Home'|t }}</span>
+      </span>
+    </a>
+
+    <button id="js__toggle-nav" class="qh__nav-main__toggle" type="button" aria-controls="js__primary-menu" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'Toggle navigation'|t }}">
+      <span class="qh__icon__menu">
+        <span></span>
+      </span>
+      <span class="qh__nav-main__toggle__label">{{ 'Menu'|t }}</span>
+    </button>
+
+    <ul id="js__primary-menu" class="qh__nav-main__list qh__nav-main__list__outermost" role="list" aria-labelledby="js__toggle-nav">
+      <li class="qh__nav-main__item qh__nav-main__item--home">
+        <a href="{{ front_page }}" class="qh__nav-main__link qh__nav-main__link--home" title="{{ 'Back to Home'|t }}">
+          <span class="qh__icon">
+            {% include ('@icons/home.svg') %}
+            <span class="visually-hidden">{{ 'Home'|t }}</span>
+          </span>
+        </a>
+      </li>
+
+      {% for item in items %}
+        {% set link_id = random(10000) %}
+
+        {% if item.is_expanded and item.below %}
+          {# Top-level item with children: render mega panel #}
+          <li class="qh__nav-main__item qh__nav-main__has-children qh__nav-main__has-megamenu">
+            <a href="{{ item.url }}" class="js__qh-dd-toggle qh__nav-main__link{{ item.in_active_trail ? ' qh__nav-main__link--current' }}" id="menu-{{ link_id }}" role="button" aria-haspopup="true" aria-expanded="false">
+              {{ item.title }}
+              <span class="qh__icon">
+                {% include ('@icons/chevron-down.svg') %}
+                <span class="visually-hidden">{{ 'Toggle child menu'|t }}</span>
+              </span>
+            </a>
+
+            <div class="qh__megamenu" aria-labelledby="menu-{{ link_id }}">
+              {% set children = item.below %}
+              {% set total = children|length %}
+              {% set per_col = (total / 3)|round(0, 'ceil') %}
+
+              <div class="qh__megamenu__columns">
+                {% for col_index in 0..2 %}
+                  <div class="qh__megamenu__column">
+                    {% for child in children|slice(col_index * per_col, per_col) %}
+                      <div class="qh__megamenu__item">
+                        <a href="{{ child.url }}" class="qh__megamenu__link{{ child.in_active_trail ? ' qh__nav-main__link--current' }}">
+                          <span class="qh__megamenu__link__title">{{ child.title }}</span>
+                          <span class="qh__icon" aria-hidden="true">
+                            {% if child.url.external %}
+                              {% include ('@icons/link-external.svg') %}
+                            {% else %}
+                              {% include ('@icons/arrow-right.svg') %}
+                            {% endif %}
+                          </span>
+                        </a>
+                        {% if child.description %}
+                          <p class="qh__megamenu__item__desc">{{ child.description }}</p>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
+
+              <div class="qh__megamenu__footer">
+                <a href="{{ item.url }}" class="qh__btn qh__megamenu__overview">
+                  {{- item.description ? item.description : 'Overview'|t -}}
+                </a>
+              </div>
+            </div>
+          </li>
+
+        {% else %}
+          {# Top-level item without children: standard nav link #}
+          <li class="qh__nav-main__item">
+            <a href="{{ item.url }}" class="qh__nav-main__link{{ item.in_active_trail ? ' qh__nav-main__link--current' }}">{{ item.title }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+  </div>
+</nav>

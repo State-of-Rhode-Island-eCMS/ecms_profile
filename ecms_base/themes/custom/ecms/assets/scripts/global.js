@@ -168,6 +168,40 @@ document.addEventListener('DOMContentLoaded', function() {
   //
   // This function ONLY toggles a show/hide class on the target and toggles aria-expanded
   // Any other functionality (like swapping the text content if true/false) needs to be in the component JS
+  // Navigation dropdown toggle
+  // Handles .js__qh-dd-toggle links in both the standard nav and mega menu.
+  // Sets href="#" to prevent navigation, then toggles aria-expanded on click.
+  var qh_dd_btns = document.querySelectorAll('.js__qh-dd-toggle');
+  qh_dd_btns.forEach(function(toggle_element) {
+    toggle_element.setAttribute('href', '#');
+    toggle_element.addEventListener('click', function(event) {
+      if (a11yClick(event) === true) {
+        event.preventDefault();
+        var expanded = toggle_element.getAttribute('aria-expanded');
+        // Close all open dropdowns first
+        qh_dd_btns.forEach(function(btn) {
+          btn.setAttribute('aria-expanded', 'false');
+        });
+        // Open this one if it was closed
+        if (expanded == 'false') {
+          toggle_element.setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+  });
+
+  // Expand / Collapse utility
+  //
+  //Minimum expected markup:
+  //<div>
+  //  <div>
+  //    <button id="summaryId" class="js__expand-collapse" aria-expanded="false" aria-controls="targetId">See More</button>
+  //  </div>
+  //  <div id="targetId" aria-labelledby="summaryId" class="">Content to reveal here</div>
+  //</div>
+  //
+  // This function ONLY toggles a show/hide class on the target and toggles aria-expanded
+  // Any other functionality (like swapping the text content if true/false) needs to be in the component JS
   document.querySelectorAll('.js__expand-collapse').forEach(function(toggle_element) {
     toggle_element.addEventListener('click', function(event) {
       event.preventDefault();
