@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Partial template for the site footer.
+ *
+ * Available variables:
+ * - footer_preprocess_values: Footer configuration values from ecms_preprocess_page().
+ * - node: The current node, used to render the last-updated date.
+ * - copyright_inner_class: Optional class for the copyright inner wrapper.
+ *   Defaults to 'qh__site-footer__inner'.
+ */
+#}
+<footer class="qh__site-footer">
+  {% if footer_preprocess_values.footer_wave %}
+    <div class='wave'>
+      {{ footer_preprocess_values.footer_above }}
+    </div>
+  {% endif %}
+
+  {% set inner_classes = [
+    'qh__site-footer__inner',
+    footer_preprocess_values.footer_divider == false ? 'no-divider',
+  ] %}
+  <div class="{{ inner_classes|join(' ') }}">
+    <div class="qh__site-footer__content qh__site-footer__first">
+      {{ footer_preprocess_values.footer_left }}
+    </div>
+    <div class="qh__site-footer__content qh__site-footer__second">
+      {{ footer_preprocess_values.footer_center }}
+    </div>
+    <div class="qh__site-footer__content qh__site-footer__third">
+      {{ footer_preprocess_values.footer_right }}
+    </div>
+    <div class="qh__site-footer__content qh__site-footer__fourth">
+      {{ footer_preprocess_values.state_info }}
+    </div>
+  </div>
+  <div class="qh__site-footer__copyright">
+    <div class="{{ copyright_inner_class|default('qh__site-footer__inner') }}">
+      <div class="qh__site-footer__copyright__content">
+        {% include ('@icons/ri-state-seal.svg') %}
+        <p>
+          © {{ "now"|date("Y") }}
+          RI.gov. This page last updated on {{ node.changed.value|date('F jS, Y') }}. <a href="https://www.ri.gov/policies/">Accessibility, data, and privacy policies</a> | <a href="#top">Top of page</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
