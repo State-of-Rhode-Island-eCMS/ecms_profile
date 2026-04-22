@@ -1,1 +1,19 @@
-@todo: Need to implement markup.
+{#
+/**
+ * @file
+ * Mega menu variant of the main navigation.
+ *
+ * Delegates to the ecms:navigation-main SDC component with mega_menu: true,
+ * which renders top-level items with children as a three-column mega panel
+ * and loads navigation-main.js automatically via the SDC library system.
+ */
+#}
+
+{% set front_page = path('<front>') %}
+
+{{ include('ecms:navigation-main', {
+  items: items,
+  front_page: front_page,
+  attributes: attributes,
+  mega_menu: true,
+}, with_context = FALSE) }}
