@@ -572,11 +572,16 @@ body {
       visibility: hidden;
     }
 
-    // Desktop: full-width panel below the nav bar
+    // Desktop: full-width panel below the nav bar.
+    // Horizontal padding creates the left/right margin for the columns card —
+    // both the panel and the wrapper share qh-content-maxwidth(), so using
+    // padding here (rather than a nested qh-content-maxwidth() on the card)
+    // is the only way to get inset side margins.
     @include breakpoint-up($bp__show__desktop-nav) {
       box-shadow: $box-shadow-base;
       left: 0;
       opacity: 0;
+      padding: 1.5rem;
       position: absolute;
       right: 0;
       top: 100%;
@@ -606,26 +611,42 @@ body {
     }
   }
 
-  // Three-column grid
+  // Three-column grid — fills the padded panel area, no qh-content-maxwidth()
+  // needed since the panel itself already handles centering via left/right:0.
   .qh__megamenu__columns {
     @include breakpoint-up($bp__show__desktop-nav) {
-      @include qh-content-maxwidth();
+      border: $border-sm solid var(--fc__default__border);
+      border-radius: $brad-md;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      overflow: hidden; // clips column border-left to the card's rounded corners
     }
   }
 
   .qh__megamenu__column {
     @include breakpoint-up($bp__show__desktop-nav) {
       padding: 1rem 1.5rem;
-
-      & + & {
-        border-left: $border-sm solid var(--fc__default__border);
-      }
     }
 
     @include breakpoint-down($bp__show__desktop-nav) {
       padding: 0;
+    }
+  }
+
+  // Column dividers — pseudo-element so the line is inset from the card's top
+  // and bottom borders rather than running the full height of the column.
+  @include breakpoint-up($bp__show__desktop-nav) {
+    .qh__megamenu__column + .qh__megamenu__column {
+      position: relative;
+
+      &::before {
+        border-left: $border-sm solid var(--fc__default__border);
+        bottom: 1rem;
+        content: '';
+        left: 0;
+        position: absolute;
+        top: 1rem;
+      }
     }
   }
 
@@ -687,9 +708,8 @@ body {
     }
   }
 
-  // Footer row: "All [Section]" overview button
+  // Footer row: "All [Section]" overview button — sits below the card
   .qh__megamenu__footer {
-    border-top: $border-sm solid var(--fc__default__border);
     padding: 1.5rem;
     text-align: center;
 
