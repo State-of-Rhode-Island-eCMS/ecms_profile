@@ -12,6 +12,21 @@ use Drupal\Core\Hook\Attribute\Hook;
 class EcmsThemeHooks {
 
   /**
+   * Implements hook_preprocess_menu().
+   *
+   * Ensures the main menu's render cache is invalidated whenever theme settings
+   * change. Without this, toggling the mega_menu setting has no effect until
+   * the cache is manually cleared, because the block render cache has no
+   * dependency on the theme settings config object.
+   */
+  #[Hook('preprocess_menu')]
+  public function preprocessMenu(array &$variables): void {
+    if ($variables['menu_name'] === 'main') {
+      $variables['#cache']['tags'][] = 'config:ecms.settings';
+    }
+  }
+
+  /**
    * Implements hook_preprocess_menu__main__megamenu().
    *
    * Adds a 'description' key to each menu item, sourced from the title
