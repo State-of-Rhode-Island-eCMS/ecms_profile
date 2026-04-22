@@ -39,10 +39,22 @@ function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables): void {
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $route_match = \Drupal::routeMatch();
+  $node = $route_match->getParameter('node');
   if ($node instanceof EntityInterface) {
     $content_type = $node->bundle();
     $suggestions[] = 'page__' . $content_type;
+  }
+
+  // Add page template suggestions for canvas_page entities, including the
+  // Canvas editor preview route which uses a generic 'entity' parameter.
+  $canvas_page = $route_match->getParameter('canvas_page')
+    ?? $route_match->getParameter('entity');
+  if (
+    $canvas_page instanceof EntityInterface &&
+    $canvas_page->getEntityTypeId() === 'canvas_page'
+  ) {
+    $suggestions[] = 'page__page';
   }
 }
 
