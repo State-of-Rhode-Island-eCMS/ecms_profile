@@ -602,15 +602,6 @@ body {
     }
   }
 
-  .no-js .qh__nav-main__item:hover .qh__nav-main__link + .qh__megamenu,
-  .no-js .qh__nav-main__item:focus-within .qh__nav-main__link + .qh__megamenu {
-    @include breakpoint-up($bp__show__desktop-nav) {
-      opacity: 1;
-      transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
-      visibility: visible;
-    }
-  }
-
   // Three-column grid — fills the padded panel area, no qh-content-maxwidth()
   // needed since the panel itself already handles centering via left/right:0.
   .qh__megamenu__columns {
@@ -726,6 +717,18 @@ body {
   .js .qh__nav-main--megamenu [aria-expanded='true'] + .qh__megamenu {
     max-height: unset;
     transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+    visibility: visible;
+  }
+}
+
+// Desktop no-js hover/focus reveal — written outside .qh__nav-main--megamenu to
+// keep compound-selector count within the 4-selector lint limit.
+// .no-js is on <html> so it cannot be a descendant of .qh__nav-main--megamenu.
+@include breakpoint-up($bp__show__desktop-nav) {
+  .no-js .qh__nav-main__item:hover .qh__nav-main__link + .qh__megamenu,
+  .no-js .qh__nav-main__item:focus-within .qh__nav-main__link + .qh__megamenu {
+    opacity: 1;
+    transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
     visibility: visible;
   }
 }
