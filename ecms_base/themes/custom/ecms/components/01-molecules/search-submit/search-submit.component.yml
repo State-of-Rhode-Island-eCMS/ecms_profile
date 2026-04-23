@@ -1,6 +1,8 @@
 # Search Submit component
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Search Submit
+group: 'ZZ-Incompatible'
+noUi: true
 description: A search button component with an icon
 props:
   type: object
