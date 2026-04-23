@@ -1,0 +1,7 @@
+name: 'ECMS Role: Drupal Admin'
+description: 'Provides the Drupal Admin user role stub'
+type: 'content'
+install:
+  - user
+config:
+  strict: false

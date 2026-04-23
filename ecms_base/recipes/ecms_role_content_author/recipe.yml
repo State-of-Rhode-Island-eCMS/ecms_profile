@@ -1,0 +1,7 @@
+name: 'ECMS Role: Content Author'
+description: 'Provides the Content Author user role stub'
+type: 'content'
+install:
+  - user
+config:
+  strict: false
