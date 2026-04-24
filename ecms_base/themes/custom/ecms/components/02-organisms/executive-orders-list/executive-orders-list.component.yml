@@ -1,6 +1,8 @@
 # Audiences list.
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Executive orders component
+group: 'ZZ-Incompatible'
+noUi: true
 description: Executive orders component.
 props:
   type: object

@@ -1,0 +1,80 @@
+// canvas-icon-link
+// Linked icon + label with a right-side vertical divider.
+// Designed for horizontal row use inside canvas-hero__icon-links.
+
+.canvas-icon-link {
+  align-items: stretch;
+  display: flex;
+
+  &:last-child {
+    .canvas-icon-link__divider {
+      display: none;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // The link (or non-linked span)
+  // ---------------------------------------------------------------------------
+  &__link {
+    align-items: center;
+    color: var(--c__white, #fff);
+    display: flex;
+    gap: 0.625rem;
+    padding: 0.75rem 1.25rem 0.75rem 0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:is(a):hover,
+    &:is(a):focus {
+      color: var(--c__hope-gold, hsl(46, 95%, 61%));
+      text-decoration: underline;
+    }
+
+    &:is(a):focus-visible {
+      border-radius: 4px;
+      outline: 2px solid var(--c__hope-gold, hsl(46, 95%, 61%));
+      outline-offset: 2px;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Icon (inline SVG via @icons namespace, wrapped in .qh__icon)
+  // ---------------------------------------------------------------------------
+  &__icon {
+    flex-shrink: 0;
+    height: 1.75rem;
+    width: 1.75rem;
+
+    svg {
+      display: block;
+      fill: currentColor;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Label text
+  // ---------------------------------------------------------------------------
+  &__title {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Vertical divider between items
+  // ---------------------------------------------------------------------------
+  &__divider {
+    align-self: center;
+    background-color: rgba(255, 255, 255, 0.33);
+    display: block;
+    flex-shrink: 0;
+    height: 1.5rem;
+    margin: 0 0.75rem;
+    width: 1px;
+  }
+}

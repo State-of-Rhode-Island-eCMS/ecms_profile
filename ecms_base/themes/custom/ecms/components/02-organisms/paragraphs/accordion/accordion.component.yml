@@ -1,5 +1,7 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Accordion - Paragraph
+group: 'ZZ-Incompatible'
+noUi: true
 description: Accordion paragraph
 props:
   type: object

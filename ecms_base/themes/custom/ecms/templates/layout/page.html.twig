@@ -90,30 +90,32 @@
   {{ page.help }}
 
   <main id="main-content" tabindex="-1">
-    <div class="qh-layout__grid">
-      {% if page.sidebar_top %}
-        <div class="qh-layout__sidebar-top">
-          {{ page.sidebar_top }}
+    {% block content_grid %}
+      <div class="qh-layout__grid">
+        {% if page.sidebar_top %}
+          <div class="qh-layout__sidebar-top">
+            {{ page.sidebar_top }}
+          </div>
+        {% endif %}
+
+        <div class="qh-layout__content">
+          {{ page.admin_links }}
+          {{ page.content }}
         </div>
-      {% endif %}
 
-      <div class="qh-layout__content">
-        {{ page.admin_links }}
-        {{ page.content }}
+        {% if page.sidebar_middle %}
+          <aside class="qh-layout__sidebar-middle">
+            {{ page.sidebar_middle }}
+          </aside>
+        {% endif %}
+
+        {% if page.sidebar_bottom %}
+          <aside class="qh-layout__sidebar-bottom">
+            {{ page.sidebar_bottom }}
+          </aside>
+        {% endif %}
       </div>
-
-      {% if page.sidebar_middle %}
-        <aside class="qh-layout__sidebar-middle">
-          {{ page.sidebar_middle }}
-        </aside>
-      {% endif %}
-
-      {% if page.sidebar_bottom %}
-        <aside class="qh-layout__sidebar-bottom">
-          {{ page.sidebar_bottom }}
-        </aside>
-      {% endif %}
-    </div>
+    {% endblock %}
 
     {{ include('ecms:illustration', {
       illustration: illustration

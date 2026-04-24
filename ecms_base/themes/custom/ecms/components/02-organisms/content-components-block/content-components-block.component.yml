@@ -1,6 +1,8 @@
 # Audiences list.
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Content Components block
+group: 'ZZ-Incompatible'
+noUi: true
 description: Content Components block.
 props:
   type: object

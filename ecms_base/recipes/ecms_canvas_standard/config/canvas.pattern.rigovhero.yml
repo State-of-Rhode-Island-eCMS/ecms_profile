@@ -1,0 +1,82 @@
+uuid: 402c1fd4-0bd4-4951-b2cb-d217c635e467
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.component.block.ecms_search_block
+    - canvas.component.sdc.ecms.hero
+    - canvas.component.sdc.ecms.icon-link
+  module:
+    - link
+    - options
+id: rigovhero
+label: 'RIGov Hero'
+component_tree:
+  0:
+    uuid: 05364b29-9ee2-4f15-aef1-5d3a63b330b2
+    component_id: sdc.ecms.hero
+    component_version: c4ed8622169cff79
+    inputs:
+      image:
+        sourceType: default-relative-url
+        value:
+          src: images/placeholder.webp
+          alt: 'Placeholder image'
+          width: 1400
+          height: 900
+        jsonSchema:
+          type: object
+          properties:
+            src:
+              type: string
+              contentMediaType: 'image/*'
+              format: uri-reference
+              x-allowed-schemes:
+                - http
+                - https
+            alt:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+          required:
+            - src
+        componentId: sdc.ecms.hero
+      background_image_opacity: 100
+      title: 'Welcome to the Ocean State'
+      heading_level: h1
+      image_location: 'Newport, RI'
+  '0:icon_links:0':
+    parent_uuid: 05364b29-9ee2-4f15-aef1-5d3a63b330b2
+    slot: icon_links
+    uuid: 98da3a16-1ee4-49f1-bbf4-b136080514b6
+    component_id: sdc.ecms.icon-link
+    component_version: a7c8277a9953136b
+    inputs:
+      icon: search-glass
+      href:
+        uri: 'http://www.example.com'
+        options: {  }
+      text: 'Find a Service'
+  '0:icon_links:1':
+    parent_uuid: 05364b29-9ee2-4f15-aef1-5d3a63b330b2
+    slot: icon_links
+    uuid: 28d9c29a-a429-4308-880a-b85d16ba0a45
+    component_id: sdc.ecms.icon-link
+    component_version: a7c8277a9953136b
+    inputs:
+      icon: cog
+      href:
+        uri: 'http://www.example.com'
+        options: {  }
+      text: 'Find an Agency'
+  '0:search_box:0':
+    parent_uuid: 05364b29-9ee2-4f15-aef1-5d3a63b330b2
+    slot: search_box
+    uuid: 9c360cdf-6246-4a16-aaa1-b2b5d11c49ca
+    component_id: block.ecms_search_block
+    component_version: 82f8e2781f47fa54
+    inputs:
+      label: 'Search Block'
+      label_display: '0'

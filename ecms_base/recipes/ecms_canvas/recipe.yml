@@ -1,0 +1,60 @@
+name: 'ECMS Canvas'
+description: 'Standardized Drupal Canvas base configuration'
+type: 'content'
+recipes:
+  - ecms_role_content_author
+  - ecms_role_content_publisher
+  - ecms_role_site_admin
+  - ecms_role_drupal_admin
+install:
+  - canvas
+  - image
+  - user
+  - system
+config:
+  strict: false
+  import:
+    canvas:
+      - image.style.canvas_parametrized_width
+  actions:
+    canvas.component.sdc.*.*:
+      setStatus: false
+
+    user.role.content_author:
+      grantPermissions:
+        - 'create canvas_page'
+        - 'edit canvas_page'
+        - 'delete canvas_page'
+        - 'publish auto-saves'
+    user.role.content_publisher:
+      grantPermissions:
+        - 'create canvas_page'
+        - 'edit canvas_page'
+        - 'delete canvas_page'
+        - 'publish auto-saves'
+    user.role.site_admin:
+      grantPermissions:
+        - 'administer components'
+        - 'administer code components'
+        - 'administer folders'
+        - 'administer patterns'
+        - 'administer page template'
+        - 'administer content templates'
+        - 'administer brand kit'
+        - 'create canvas_page'
+        - 'edit canvas_page'
+        - 'delete canvas_page'
+        - 'publish auto-saves'
+    user.role.drupal_admin:
+      grantPermissions:
+        - 'administer components'
+        - 'administer code components'
+        - 'administer folders'
+        - 'administer patterns'
+        - 'administer page template'
+        - 'administer content templates'
+        - 'administer brand kit'
+        - 'create canvas_page'
+        - 'edit canvas_page'
+        - 'delete canvas_page'
+        - 'publish auto-saves'
