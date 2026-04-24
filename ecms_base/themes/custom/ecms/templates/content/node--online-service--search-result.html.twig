@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Theme override for online service nodes in search result view mode.
+ *
+ * Available variables:
+ * - node: The node entity (online_service bundle).
+ * - label: The node title.
+ * - url: Internal node URL.
+ *
+ * Online service fields accessed directly from the node object:
+ * - node.field_service_url.uri        - External service URL.
+ * - content.field_agency_or_muni     - Rendered agency/municipality field.
+ * - node.field_service_type           - Taxonomy terms (online_services vocab).
+ * - search_api_excerpt               - Highlighted excerpt from Search API (Markup object, renders <strong> tags).
+ *
+ * The external link icon is injected into the <a> by the extlink module as
+ * a <span data-extlink-placement="append"> and is positioned to the top-right
+ * corner via CSS.
+ */
+#}
+{% set service_url = node.field_service_url.uri ?: url %}
+
+<article class="os-result">
+  <a class="os-result__link" href="{{ service_url }}"{% if node.field_service_url.uri %} target="_blank" rel="noopener noreferrer"{% endif %}>
+    <div class="os-result__content">
+      <h3 class="os-result__title">{{ label }}</h3>
+
+      {% if content.field_agency_or_muni %}
+        <p class="os-result__agency">{{ content.field_agency_or_muni }}</p>
+      {% endif %}
+
+      {% if search_api_excerpt %}
+        <p class="os-result__excerpt">{{ search_api_excerpt }}</p>
+      {% endif %}
+
+      {% if node.field_service_type is not empty %}
+        <ul class="os-result__tags" aria-label="Service categories">
+          {% for term in node.field_service_type %}
+            <li class="os-result__tag{% if loop.first %} os-result__tag--primary{% endif %}">
+              {{ term.entity.label }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </a>
+</article>
