@@ -1,0 +1,18 @@
+{#
+  Canvas Container Component
+  Applies the theme's max-width constraint, side padding, and auto centering.
+
+  Props:
+    modifier - Optional BEM modifier class
+
+  Slots:
+    content - Container content
+
+  Usage (via Drupal SDC embed):
+  {% embed "@canvas/container/container.twig" %}
+    {% block content %}...{% endblock %}
+  {% endembed %}
+#}
+<div {{ attributes.addClass('canvas-container', modifier ? 'canvas-container--' ~ modifier) }}>
+  {% block content %}{% endblock %}
+</div>

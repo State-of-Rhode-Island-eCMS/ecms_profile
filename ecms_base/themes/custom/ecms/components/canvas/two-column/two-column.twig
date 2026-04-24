@@ -1,0 +1,35 @@
+{#
+  Canvas Two Column Component
+  Two-column layout contained within the theme's max-width container.
+  Column widths are controlled by the column_width prop and collapse to a
+  single stack on narrow viewports.
+
+  Props:
+    column_width - Width ratio: '25-75' | '50-50' | '75-25' (default: '50-50')
+    modifier     - Optional BEM modifier class
+
+  Slots:
+    left  - Left column content
+    right - Right column content
+
+  Usage (via Drupal SDC embed):
+  {% embed "@canvas/two-column/two-column.twig" with { column_width: '25-75' } %}
+    {% block left %}...{% endblock %}
+    {% block right %}...{% endblock %}
+  {% endembed %}
+#}
+{% set width = column_width|default('50-50') %}
+<section {{ attributes.addClass(
+  'canvas-two-column',
+  'canvas-two-column--' ~ width,
+  modifier ? 'canvas-two-column--' ~ modifier
+) }}>
+  <div class="canvas-two-column__inner">
+    <div class="canvas-two-column__left">
+      {% block left %}{% endblock %}
+    </div>
+    <div class="canvas-two-column__right">
+      {% block right %}{% endblock %}
+    </div>
+  </div>
+</section>
