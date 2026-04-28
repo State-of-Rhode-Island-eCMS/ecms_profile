@@ -1171,9 +1171,6 @@ function _ecms_person_list_contains_photo(array $nodes): bool {
 /**
  * Implements hook_preprocess_node().
  */
-/**
- * Implements hook_preprocess_node().
- */
 function ecms_preprocess_node__landing_page(&$variables) {
   $node = $variables['node'];
 
