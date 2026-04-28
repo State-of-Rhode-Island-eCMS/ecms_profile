@@ -21,11 +21,12 @@
   }
 
   // Title occupies the first grid cell; scaled to fit alongside card siblings
-  > h1,
   > h2 {
-    align-self: center;
+    align-self: end;
+    font-family: 'Roboto Slab', serif;
     font-size: clamp(1.125rem, 3vw, 1.5rem);
     font-weight: 400;
+    letter-spacing: $kerning-base;
     margin: 0;
   }
 
