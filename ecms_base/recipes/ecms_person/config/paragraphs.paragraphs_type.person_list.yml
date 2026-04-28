@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: person_list
+label: 'Person List'
+icon_uuid: null
+icon_default: null
+description: 'A listing of the person content type with the option to show only certain departments.'
+behavior_plugins: {  }

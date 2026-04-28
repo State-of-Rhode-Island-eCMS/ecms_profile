@@ -1,0 +1,1185 @@
+name: 'eCMS Person'
+description: 'Person content type with Personal Photo media type, Staff/Department taxonomy, person additional fields paragraph type, and person list paragraph type.'
+type: 'eCMS'
+
+# Prerequisites:
+# - The editorial workflow (workflows.workflow.editorial) must exist for the
+#   moderation_state form widget to function correctly.
+# - The ecms_workflow and ecms_promotions modules must be installed.
+
+install:
+  - auto_entitylabel
+  - content_moderation
+  - content_translation
+  - entity_reference_revisions
+  - image
+  - language
+  - media
+  - media_library
+  - metatag
+  - node
+  - options
+  - paragraphs
+  - paragraphs_translation_sync
+  - pathauto
+  - rabbit_hole
+  - scheduled_transitions
+  - simple_sitemap
+  - svg_image
+  - taxonomy
+  - telephone
+  - token
+  - views
+
+config:
+  strict:
+    # Field storages are strict because they affect the database schema.
+    - field.storage.media.field_personal_photo_image
+    - field.storage.node.field_meta_tags_person
+    - field.storage.node.field_person_additional_fields
+    - field.storage.node.field_person_category
+    - field.storage.node.field_person_email
+    - field.storage.node.field_person_fax
+    - field.storage.node.field_person_first_name
+    - field.storage.node.field_person_job_title
+    - field.storage.node.field_person_last_name
+    - field.storage.node.field_person_list_weight
+    - field.storage.node.field_person_mobile
+    - field.storage.node.field_person_phone
+    - field.storage.node.field_person_phone_extension
+    - field.storage.node.field_person_photo
+    - field.storage.paragraph.field_department_category
+    - field.storage.paragraph.field_person_field_label
+    - field.storage.paragraph.field_person_field_value
+  import:
+    node:
+      - node.type.person
+      - core.base_field_override.node.person.changed
+      - core.base_field_override.node.person.created
+      - core.base_field_override.node.person.menu_link
+      - core.base_field_override.node.person.moderation_state
+      - core.base_field_override.node.person.path
+      - core.base_field_override.node.person.promote
+      - core.base_field_override.node.person.status
+      - core.base_field_override.node.person.sticky
+      - core.base_field_override.node.person.title
+      - core.base_field_override.node.person.uid
+    taxonomy:
+      - taxonomy.vocabulary.person_taxonomy
+      - taxonomy.vocabulary.person_additional_fields
+      - core.base_field_override.taxonomy_term.person_taxonomy.changed
+    media:
+      - media.type.person_headshot
+      - core.base_field_override.media.person_headshot.changed
+      - core.base_field_override.media.person_headshot.created
+      - core.base_field_override.media.person_headshot.metatag
+      - core.base_field_override.media.person_headshot.name
+      - core.base_field_override.media.person_headshot.path
+      - core.base_field_override.media.person_headshot.status
+      - core.base_field_override.media.person_headshot.thumbnail
+      - core.base_field_override.media.person_headshot.uid
+    paragraphs:
+      - paragraphs.paragraphs_type.person_additional_fields
+      - paragraphs.paragraphs_type.person_list
+      - core.base_field_override.paragraph.person_additional_fields.created
+      - core.base_field_override.paragraph.person_additional_fields.status
+      - core.base_field_override.paragraph.person_list.created
+      - core.base_field_override.paragraph.person_list.status
+    paragraphs_translation_sync:
+      - paragraphs_translation_sync.person_list
+    rabbit_hole:
+      - rabbit_hole.behavior_settings.node_type_person
+      - rabbit_hole.behavior_settings.taxonomy_vocabulary_person_taxonomy
+      - rabbit_hole.behavior_settings.taxonomy_vocabulary_person_additional_fields
+    auto_entitylabel:
+      - auto_entitylabel.settings.node.person
+    pathauto:
+      - pathauto.pattern.people
+    simple_sitemap:
+      - simple_sitemap.bundle_settings.default.node.person
+    views:
+      - views.view.person_list_reference_filter
+  actions:
+    # -------------------------------------------------------------------------
+    # Node: person field instances
+    # -------------------------------------------------------------------------
+    field.field.node.person.field_person_first_name:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_first_name
+        field_type: string
+      setLabel: 'First name'
+      setRequired: true
+      setTranslatable: false
+
+    field.field.node.person.field_person_last_name:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_last_name
+        field_type: string
+      setLabel: 'Last name'
+      setRequired: true
+      setTranslatable: false
+
+    field.field.node.person.field_person_job_title:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_job_title
+        field_type: string
+      setLabel: 'Job title'
+      setRequired: true
+      setTranslatable: true
+
+    field.field.node.person.field_person_email:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_email
+        field_type: email
+      setLabel: Email
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_phone:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_phone
+        field_type: telephone
+      setLabel: 'Phone number'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_phone_extension:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_phone_extension
+        field_type: integer
+        settings:
+          min: 0
+          max: null
+          prefix: ''
+          suffix: ''
+      setLabel: 'Phone extension'
+      setDescription: '(Optional) Provide an extension for the person''s phone number.'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_mobile:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_mobile
+        field_type: telephone
+      setLabel: 'Mobile number'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_fax:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_fax
+        field_type: telephone
+      setLabel: 'Fax number'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_category:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_category
+        field_type: entity_reference
+        settings:
+          handler: 'default:taxonomy_term'
+          handler_settings:
+            target_bundles:
+              person_taxonomy: person_taxonomy
+            sort:
+              field: name
+              direction: asc
+            auto_create: true
+            auto_create_bundle: ''
+      setLabel: Category
+      setDescription: 'Select the category/department(s) this person belongs to. If an item has a "-" prefix on its name it means it''s a subcategory of the first term listed above it which doesn''t contain a prefix. Please select only a subcategory OR the main category. Do not select both or it will appear in this category''s list twice.'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_list_weight:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_list_weight
+        field_type: list_integer
+      setLabel: 'List weight'
+      setDescription: 'Weight this person in person lists. -10 appears at the top of the list. 10 appears at the bottom. Leave at 0 for default alphabetical sorting.'
+      setRequired: true
+      setTranslatable: false
+      setDefaultValue:
+        - value: 0
+
+    field.field.node.person.field_person_photo:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_photo
+        field_type: entity_reference
+        settings:
+          handler: 'default:media'
+          handler_settings:
+            target_bundles:
+              person_headshot: person_headshot
+            sort:
+              field: _none
+            auto_create: false
+            auto_create_bundle: ''
+      setLabel: Photo
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_person_additional_fields:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_additional_fields
+        field_type: entity_reference_revisions
+        settings:
+          handler: 'default:paragraph'
+          handler_settings:
+            negate: 0
+            target_bundles:
+              person_additional_fields: person_additional_fields
+      setLabel: 'Additional fields'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.person.field_meta_tags_person:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_meta_tags_person
+        field_type: metatag
+      setLabel: 'Meta Tags Person'
+      setRequired: false
+      setTranslatable: true
+
+    # -------------------------------------------------------------------------
+    # Node: person form display
+    # -------------------------------------------------------------------------
+    core.entity_form_display.node.person.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: person
+        mode: default
+        status: true
+      setComponents:
+        - name: langcode
+          options:
+            type: language_select
+            weight: 0
+            region: content
+            settings:
+              include_locked: true
+            third_party_settings: {  }
+        - name: title
+          options:
+            type: string_textfield
+            weight: 1
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_first_name
+          options:
+            type: string_textfield
+            weight: 2
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_last_name
+          options:
+            type: string_textfield
+            weight: 3
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_job_title
+          options:
+            type: string_textfield
+            weight: 4
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_email
+          options:
+            type: email_default
+            weight: 5
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_phone
+          options:
+            type: telephone_default
+            weight: 6
+            region: content
+            settings:
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_phone_extension
+          options:
+            type: number
+            weight: 7
+            region: content
+            settings:
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_mobile
+          options:
+            type: telephone_default
+            weight: 8
+            region: content
+            settings:
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_fax
+          options:
+            type: telephone_default
+            weight: 9
+            region: content
+            settings:
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_person_photo
+          options:
+            type: media_library_widget
+            weight: 10
+            region: content
+            settings:
+              media_types: {  }
+            third_party_settings: {  }
+        - name: field_person_category
+          options:
+            type: options_buttons
+            weight: 11
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_list_weight
+          options:
+            type: options_select
+            weight: 12
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: translation
+          options:
+            weight: 13
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_additional_fields
+          options:
+            type: entity_reference_paragraphs
+            weight: 14
+            region: content
+            settings:
+              title: Field
+              title_plural: Fields
+              edit_mode: preview
+              add_mode: dropdown
+              form_display_mode: default
+              default_paragraph_type: _none
+            third_party_settings: {  }
+        - name: uid
+          options:
+            type: entity_reference_autocomplete
+            weight: 15
+            region: content
+            settings:
+              match_operator: CONTAINS
+              size: 60
+              placeholder: ''
+              match_limit: 10
+            third_party_settings: {  }
+        - name: created
+          options:
+            type: datetime_timestamp
+            weight: 16
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: promote
+          options:
+            type: boolean_checkbox
+            weight: 17
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+        - name: sticky
+          options:
+            type: boolean_checkbox
+            weight: 18
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+        - name: path
+          options:
+            type: path
+            weight: 19
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: status
+          options:
+            type: boolean_checkbox
+            weight: 20
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+        - name: url_redirects
+          options:
+            weight: 21
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: moderation_state
+          options:
+            type: moderation_state_default
+            weight: 22
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_meta_tags_person
+          options:
+            type: metatag_firehose
+            weight: 24
+            region: content
+            settings:
+              sidebar: true
+              use_details: true
+            third_party_settings: {  }
+        - name: publish_on
+          options:
+            type: datetime_timestamp_no_default
+            weight: 30
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: unpublish_on
+          options:
+            type: datetime_timestamp_no_default
+            weight: 30
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+
+    # -------------------------------------------------------------------------
+    # Node: person default view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.node.person.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: person
+        mode: default
+        status: true
+      setComponents:
+        - name: content_moderation_control
+          options:
+            weight: 0
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_email
+          options:
+            type: basic_string
+            label: above
+            weight: 1
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_first_name
+          options:
+            type: string
+            label: above
+            weight: 2
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_last_name
+          options:
+            type: string
+            label: above
+            weight: 3
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_job_title
+          options:
+            type: string
+            label: above
+            weight: 4
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_category
+          options:
+            type: entity_reference_label
+            label: above
+            weight: 5
+            region: content
+            settings:
+              link: true
+            third_party_settings: {  }
+        - name: field_meta_tags_person
+          options:
+            type: metatag_empty_formatter
+            label: above
+            weight: 7
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_phone
+          options:
+            type: telephone_link
+            label: hidden
+            weight: 8
+            region: content
+            settings:
+              title: ''
+            third_party_settings: {  }
+        - name: field_person_phone_extension
+          options:
+            type: number_integer
+            label: hidden
+            weight: 9
+            region: content
+            settings:
+              thousand_separator: ''
+              prefix_suffix: true
+            third_party_settings: {  }
+        - name: field_person_mobile
+          options:
+            type: telephone_link
+            label: hidden
+            weight: 10
+            region: content
+            settings:
+              title: ''
+            third_party_settings: {  }
+        - name: field_person_fax
+          options:
+            type: telephone_link
+            label: hidden
+            weight: 11
+            region: content
+            settings:
+              title: ''
+            third_party_settings: {  }
+        - name: field_person_additional_fields
+          options:
+            type: entity_reference_revisions_entity_view
+            label: above
+            weight: 12
+            region: content
+            settings:
+              view_mode: default
+              link: ''
+            third_party_settings: {  }
+        - name: field_person_list_weight
+          options:
+            type: list_default
+            label: above
+            weight: 13
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - field_person_photo
+        - langcode
+        - links
+        - search_api_excerpt
+
+    # -------------------------------------------------------------------------
+    # Node: person teaser view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.node.person.teaser:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: person
+        mode: teaser
+        status: true
+      setComponents:
+        - name: field_person_first_name
+          options:
+            type: string
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_last_name
+          options:
+            type: string
+            label: hidden
+            weight: 1
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_category
+          options:
+            type: entity_reference_label
+            label: hidden
+            weight: 2
+            region: content
+            settings:
+              link: false
+            third_party_settings: {  }
+        - name: field_person_job_title
+          options:
+            type: string
+            label: hidden
+            weight: 3
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_email
+          options:
+            type: basic_string
+            label: hidden
+            weight: 4
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_phone
+          options:
+            type: string
+            label: hidden
+            weight: 5
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_phone_extension
+          options:
+            type: number_integer
+            label: hidden
+            weight: 6
+            region: content
+            settings:
+              thousand_separator: ''
+              prefix_suffix: true
+            third_party_settings: {  }
+        - name: field_person_additional_fields
+          options:
+            type: entity_reference_revisions_entity_view
+            label: hidden
+            weight: 7
+            region: content
+            settings:
+              view_mode: default
+              link: ''
+            third_party_settings: {  }
+        - name: field_person_photo
+          options:
+            type: entity_reference_entity_view
+            label: hidden
+            weight: 8
+            region: content
+            settings:
+              link: true
+              view_mode: default
+            third_party_settings: {  }
+        - name: content_moderation_control
+          options:
+            weight: 9
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: links
+          options:
+            weight: 10
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - field_meta_tags_person
+        - field_person_fax
+        - field_person_list_weight
+        - field_person_mobile
+        - langcode
+        - search_api_excerpt
+
+    # -------------------------------------------------------------------------
+    # Media: person_headshot field instance
+    # -------------------------------------------------------------------------
+    field.field.media.person_headshot.field_personal_photo_image:
+      ensure_exists:
+        entity_type: media
+        bundle: person_headshot
+        field_name: field_personal_photo_image
+        field_type: image
+        settings:
+          file_directory: personal-photos
+          file_extensions: 'png gif jpg jpeg'
+          max_filesize: ''
+          max_resolution: ''
+          min_resolution: ''
+          alt_field: true
+          alt_field_required: true
+          title_field: false
+          title_field_required: false
+          default_image:
+            uuid: ''
+            alt: ''
+            title: ''
+            width: null
+            height: null
+      setLabel: Image
+      setRequired: true
+      setTranslatable: true
+
+    # -------------------------------------------------------------------------
+    # Media: person_headshot form displays
+    # -------------------------------------------------------------------------
+    core.entity_form_display.media.person_headshot.default:
+      createIfNotExists:
+        targetEntityType: media
+        bundle: person_headshot
+        mode: default
+        status: true
+      setComponents:
+        - name: name
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_personal_photo_image
+          options:
+            type: image_image
+            weight: 1
+            region: content
+            settings:
+              progress_indicator: throbber
+              preview_image_style: thumbnail
+            third_party_settings: {  }
+        - name: langcode
+          options:
+            type: language_select
+            weight: 2
+            region: content
+            settings:
+              include_locked: true
+            third_party_settings: {  }
+        - name: uid
+          options:
+            type: entity_reference_autocomplete
+            weight: 3
+            region: content
+            settings:
+              match_operator: CONTAINS
+              size: 60
+              placeholder: ''
+              match_limit: 10
+            third_party_settings: {  }
+        - name: created
+          options:
+            type: datetime_timestamp
+            weight: 4
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: translation
+          options:
+            weight: 5
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: status
+          options:
+            type: boolean_checkbox
+            weight: 6
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+      hideComponents:
+        - path
+
+    core.entity_form_display.media.person_headshot.media_library:
+      createIfNotExists:
+        targetEntityType: media
+        bundle: person_headshot
+        mode: media_library
+        status: true
+      setComponents:
+        - name: name
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: langcode
+          options:
+            type: language_select
+            weight: 2
+            region: content
+            settings:
+              include_locked: true
+            third_party_settings: {  }
+        - name: field_personal_photo_image
+          options:
+            type: image_image
+            weight: 5
+            region: content
+            settings:
+              progress_indicator: throbber
+              preview_image_style: thumbnail
+            third_party_settings: {  }
+        - name: translation
+          options:
+            weight: 10
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - created
+        - path
+        - status
+        - uid
+
+    # -------------------------------------------------------------------------
+    # Media: person_headshot view displays
+    # -------------------------------------------------------------------------
+    core.entity_view_display.media.person_headshot.default:
+      createIfNotExists:
+        targetEntityType: media
+        bundle: person_headshot
+        mode: default
+        status: true
+      setComponents:
+        - name: field_personal_photo_image
+          options:
+            type: image
+            label: visually_hidden
+            weight: 0
+            region: content
+            settings:
+              image_style: ''
+              image_link: ''
+              svg_render_as_image: true
+              svg_attributes:
+                width: null
+                height: null
+            third_party_settings: {  }
+      hideComponents:
+        - created
+        - langcode
+        - name
+        - search_api_excerpt
+        - thumbnail
+        - uid
+
+    core.entity_view_display.media.person_headshot.media_library:
+      createIfNotExists:
+        targetEntityType: media
+        bundle: person_headshot
+        mode: media_library
+        status: true
+      setComponents:
+        - name: thumbnail
+          options:
+            type: image
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              image_style: medium
+              image_link: ''
+            third_party_settings: {  }
+      hideComponents:
+        - created
+        - field_personal_photo_image
+        - langcode
+        - name
+        - search_api_excerpt
+        - uid
+
+    # -------------------------------------------------------------------------
+    # Paragraph: person_additional_fields field instances
+    # -------------------------------------------------------------------------
+    field.field.paragraph.person_additional_fields.field_person_field_label:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_additional_fields
+        field_name: field_person_field_label
+        field_type: entity_reference
+        settings:
+          handler: 'default:taxonomy_term'
+          handler_settings:
+            target_bundles:
+              person_additional_fields: person_additional_fields
+            sort:
+              field: name
+              direction: asc
+            auto_create: false
+            auto_create_bundle: person_additional_fields
+      setLabel: 'Field label'
+      setRequired: true
+      setTranslatable: false
+
+    field.field.paragraph.person_additional_fields.field_person_field_value:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_additional_fields
+        field_name: field_person_field_value
+        field_type: string
+      setLabel: 'Field value'
+      setRequired: true
+      setTranslatable: true
+
+    # -------------------------------------------------------------------------
+    # Paragraph: person_additional_fields form display
+    # -------------------------------------------------------------------------
+    core.entity_form_display.paragraph.person_additional_fields.default:
+      createIfNotExists:
+        targetEntityType: paragraph
+        bundle: person_additional_fields
+        mode: default
+        status: true
+      setComponents:
+        - name: field_person_field_label
+          options:
+            type: options_buttons
+            weight: 0
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_person_field_value
+          options:
+            type: string_textfield
+            weight: 1
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: status
+          options:
+            type: boolean_checkbox
+            weight: 2
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+      hideComponents:
+        - created
+
+    # -------------------------------------------------------------------------
+    # Paragraph: person_additional_fields view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.paragraph.person_additional_fields.default:
+      createIfNotExists:
+        targetEntityType: paragraph
+        bundle: person_additional_fields
+        mode: default
+        status: true
+      setComponents:
+        - name: field_person_field_label
+          options:
+            type: entity_reference_label
+            label: above
+            weight: 0
+            region: content
+            settings:
+              link: true
+            third_party_settings: {  }
+        - name: field_person_field_value
+          options:
+            type: string
+            label: above
+            weight: 1
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+      hideComponents:
+        - search_api_excerpt
+
+    # -------------------------------------------------------------------------
+    # Paragraph: person_list field instance
+    # -------------------------------------------------------------------------
+    field.field.paragraph.person_list.field_department_category:
+      ensure_exists:
+        entity_type: paragraph
+        bundle: person_list
+        field_name: field_department_category
+        field_type: entity_reference
+        settings:
+          handler: views
+          handler_settings:
+            view:
+              view_name: person_list_reference_filter
+              display_name: entity_reference_1
+              arguments: {  }
+      setLabel: 'Department/Category'
+      setDescription: '(Optional) Select a specific department or category person listing. If not selected the entire person list will be shown.'
+      setRequired: false
+      setTranslatable: false
+
+    # -------------------------------------------------------------------------
+    # Paragraph: person_list form display
+    # -------------------------------------------------------------------------
+    core.entity_form_display.paragraph.person_list.default:
+      createIfNotExists:
+        targetEntityType: paragraph
+        bundle: person_list
+        mode: default
+        status: true
+      setComponents:
+        - name: field_department_category
+          options:
+            type: entity_reference_autocomplete
+            weight: 1
+            region: content
+            settings:
+              match_operator: CONTAINS
+              match_limit: 10
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+      hideComponents:
+        - created
+        - status
+
+    # -------------------------------------------------------------------------
+    # Paragraph: person_list view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.paragraph.person_list.default:
+      createIfNotExists:
+        targetEntityType: paragraph
+        bundle: person_list
+        mode: default
+        status: true
+      setComponents:
+        - name: field_department_category
+          options:
+            type: entity_reference_label
+            label: above
+            weight: 1
+            region: content
+            settings:
+              link: true
+            third_party_settings: {  }
+      hideComponents:
+        - search_api_excerpt
+
+    # -------------------------------------------------------------------------
+    # Language content settings
+    # -------------------------------------------------------------------------
+    language.content_settings.node.person:
+      ensure_exists:
+        id: node.person
+        target_entity_type_id: node
+        target_bundle: person
+      setProperties:
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+
+    language.content_settings.media.person_headshot:
+      ensure_exists:
+        id: media.person_headshot
+        target_entity_type_id: media
+        target_bundle: person_headshot
+      setProperties:
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+
+    language.content_settings.paragraph.person_additional_fields:
+      ensure_exists:
+        id: paragraph.person_additional_fields
+        target_entity_type_id: paragraph
+        target_bundle: person_additional_fields
+      setProperties:
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+
+    language.content_settings.paragraph.person_list:
+      ensure_exists:
+        id: paragraph.person_list
+        target_entity_type_id: paragraph
+        target_bundle: person_list
+      setProperties:
+        language_alterable: false
+        third_party_settings:
+          content_translation:
+            enabled: false
+            bundle_settings:
+              untranslatable_fields_hide: '0'
+
+    language.content_settings.taxonomy_term.person_taxonomy:
+      ensure_exists:
+        id: taxonomy_term.person_taxonomy
+        target_entity_type_id: taxonomy_term
+        target_bundle: person_taxonomy
+      setProperties:
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+
+    language.content_settings.taxonomy_term.person_additional_fields:
+      ensure_exists:
+        id: taxonomy_term.person_additional_fields
+        target_entity_type_id: taxonomy_term
+        target_bundle: person_additional_fields
+      setProperties:
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
