@@ -1,0 +1,67 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: 'Icon Card'
+group: 'RI.Gov'
+status: stable
+description: |
+  Card with a 4rem icon (chosen from the `@icons` SVG set) and a CTA link. Thin
+  Canvas wrapper around the existing `.qh__grid-card .qh__grid-card--icon`
+  design-system markup. The whole card is clickable.
+props:
+  type: object
+  required:
+    - icon
+    - link_url
+    - link_text
+  properties:
+    icon:
+      title: Icon
+      type: string
+      enum:
+        - alarm-bell
+        - anchor-small
+        - arrow-right
+        - bus
+        - chevron-down
+        - chevron-left
+        - chevron-right
+        - close-x
+        - cog
+        - default-logo
+        - download
+        - feed
+        - file-excel
+        - file-generic
+        - file-pdf
+        - file-powerpoint
+        - file-word
+        - globe
+        - guillemot-left
+        - guillemot-right
+        - home
+        - icon-ios-share
+        - information
+        - link-external
+        - map
+        - map-marker
+        - maple-leaf
+        - plus-minus
+        - ri-state-seal
+        - search-glass
+        - social-blogger
+        - social-blusky
+        - social-facebook
+        - social-flickr
+        - social-instagram
+        - social-linkedin
+        - social-twitter
+        - social-youtube
+      examples: ['home']
+    link_url:
+      type: string
+      title: Link URL
+      format: uri-reference
+      examples: ['/services']
+    link_text:
+      type: string
+      title: Link text
+      examples: ['Find a Service']
