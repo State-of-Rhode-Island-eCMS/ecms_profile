@@ -117,6 +117,13 @@ if (file_exists(\$memcacheSettings)) {
   require(\$memcacheSettings);
 }" >> develop/web/sites/default/settings.php'
 
+## Install solr.settings.php
+ddev exec 'chmod +w develop/web/sites/default develop/web/sites/default/settings.php && cp scripts/solr.settings.php develop/web/sites/default/'
+ddev exec 'echo "\$solrSettings = sprintf(\"%s/%s/solr.settings.php\", \$app_root, \$site_path);
+if (file_exists(\$solrSettings)) {
+  require(\$solrSettings);
+}" >> develop/web/sites/default/settings.php'
+
 
 if [ "$PERFORMANCE_MODE" == "1" ]; then
   ddev stop

@@ -1,0 +1,10 @@
+// canvas-container
+// Applies the theme's max-width constraint, horizontal side padding, and
+// auto centering. Mirrors the inner-container pattern used throughout canvas
+// components (hero__bar-inner, two-column__inner, etc.).
+
+.canvas-container {
+  margin-inline: auto;
+  max-width: var(--content-max-width, 86rem);
+  padding-inline: var(--section-sides, 1.5rem);
+}

@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.online_service
+id: node.online_service.title
+field_name: title
+entity_type: node
+bundle: online_service
+label: 'Service Name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

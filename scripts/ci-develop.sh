@@ -3,7 +3,7 @@
 # Fail safely if any errors occur.
 set -eo pipefail
 
-DRUPAL_CORE="${DRUPAL_CORE:-^11.2}"
+DRUPAL_CORE="${DRUPAL_CORE:-^11.3}"
 PHP_VERSION="${PHP_VERSION:-8.3}"
 APP_NAME="ecms-profile"
 DOCROOT="develop/web"
