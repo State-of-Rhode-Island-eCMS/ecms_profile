@@ -1,0 +1,9 @@
+name: 'eCMS RIGov'
+description: 'Meta recipe to setup the RI.gov site'
+type: 'eCMS'
+
+recipes:
+  - ecms_canvas
+  - ecms_canvas_standard
+  - ecms_online_services
+  - ecms_online_services_search
