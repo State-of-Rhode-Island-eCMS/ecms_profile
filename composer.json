@@ -27,6 +27,9 @@
             "drupal/address_phonenumber": {
                 "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
             },
+            "drupal/canvas": {
+                "3571366: Allow Canvas Patterns+PageRegions+ContentTemplates provided by Recipes to NOT specify component versions": "https://git.drupalcode.org/project/canvas/-/merge_requests/811.diff"
+            },
             "drupal/core": {
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
                 "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2025-07-09/drupal-core--2025-07-09--3049332--mr-12460.patch",
