@@ -25,6 +25,7 @@ install:
   - rabbit_hole
   - scheduled_transitions
   - simple_sitemap
+  - link
   - svg_image
   - taxonomy
   - telephone
@@ -48,11 +49,13 @@ config:
     - field.storage.node.field_person_phone
     - field.storage.node.field_person_phone_extension
     - field.storage.node.field_person_photo
+    - field.storage.node.field_person_social_links
     - field.storage.paragraph.field_department_category
     - field.storage.paragraph.field_person_field_label
     - field.storage.paragraph.field_person_field_value
   import:
     node:
+      - core.entity_view_mode.node.card
       - node.type.person
       - core.base_field_override.node.person.changed
       - core.base_field_override.node.person.created
@@ -98,6 +101,7 @@ config:
     simple_sitemap:
       - simple_sitemap.bundle_settings.default.node.person
     views:
+      - views.view.person_cards
       - views.view.person_list_reference_filter
   actions:
     # -------------------------------------------------------------------------
@@ -267,6 +271,16 @@ config:
       setLabel: 'Meta Tags Person'
       setRequired: false
       setTranslatable: true
+
+    field.field.node.person.field_person_social_links:
+      ensure_exists:
+        entity_type: node
+        bundle: person
+        field_name: field_person_social_links
+        field_type: link
+      setLabel: 'Social links'
+      setRequired: false
+      setTranslatable: false
 
     # -------------------------------------------------------------------------
     # Node: person form display
@@ -465,6 +479,15 @@ config:
             weight: 22
             region: content
             settings: {  }
+            third_party_settings: {  }
+        - name: field_person_social_links
+          options:
+            type: link_default
+            weight: 23
+            region: content
+            settings:
+              placeholder_url: ''
+              placeholder_title: ''
             third_party_settings: {  }
         - name: field_meta_tags_person
           options:
@@ -1183,3 +1206,84 @@ config:
             enabled: true
             bundle_settings:
               untranslatable_fields_hide: '1'
+
+    # -------------------------------------------------------------------------
+    # Node: person card view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.node.person.card:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: person
+        mode: card
+        status: true
+      setComponents:
+        - name: field_person_photo
+          options:
+            type: entity_reference_entity_view
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              view_mode: default
+              link: false
+            third_party_settings: {  }
+        - name: field_person_job_title
+          options:
+            type: string
+            label: hidden
+            weight: 1
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_first_name
+          options:
+            type: string
+            label: hidden
+            weight: 2
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_last_name
+          options:
+            type: string
+            label: hidden
+            weight: 3
+            region: content
+            settings:
+              link_to_entity: false
+            third_party_settings: {  }
+        - name: field_person_social_links
+          options:
+            type: link
+            label: hidden
+            weight: 4
+            region: content
+            settings:
+              trim_length: 80
+              url_only: false
+              url_plain: false
+              rel: ''
+              target: ''
+            third_party_settings: {  }
+      hideComponents:
+        - content_moderation_control
+        - field_meta_tags_person
+        - field_person_additional_fields
+        - field_person_category
+        - field_person_email
+        - field_person_fax
+        - field_person_list_weight
+        - field_person_mobile
+        - field_person_phone
+        - field_person_phone_extension
+        - langcode
+        - links
+        - search_api_excerpt
+
+    # -------------------------------------------------------------------------
+    # Canvas: enable card-person component
+    # -------------------------------------------------------------------------
+#    canvas.component.sdc.ecms.card-person:
+#      setStatus: true
