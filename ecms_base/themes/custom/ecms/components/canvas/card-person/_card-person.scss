@@ -1,0 +1,211 @@
+// Person cards view — 4-column grid with the view title as the first cell.
+// .view-content uses display:contents so its <article> children flow
+// directly into this grid alongside the heading.
+.view-person-cards {
+  align-items: stretch;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  position: relative;
+
+  // Contextual admin edit links — removed from grid flow
+  > .contextual {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  // Flatten view-content so articles are direct grid children
+  > .view-content {
+    display: contents;
+  }
+
+  // Title occupies the first grid cell; scaled to fit alongside card siblings
+  > h1,
+  > h2 {
+    align-self: center;
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
+    font-weight: 400;
+    margin: 0;
+  }
+
+  @include breakpoint-up($bp--small) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint-up($bp--medium) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoint-up($bp--large) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.qh__card-person {
+  border: 1px solid var(--c__coffee-milk, hsl(47, 26%, 76%));
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  padding: 24px;
+
+  &__image-wrapper {
+    padding: 0 16%;
+  }
+
+  &__headshot {
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__headshot-img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__job-title {
+    color: var(--c__quahog--medium, hsl(0, 0%, 43%));
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  &__full-name {
+    color: var(--c__navy, #293557);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__social-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__social-link {
+    align-items: center;
+    background-color: var(--c__coffee-milk--light, hsl(47, 27%, 92%));
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: center;
+    padding: 8px;
+    transition: background-color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background-color: var(--c__coffee-milk, hsl(47, 26%, 76%));
+    }
+
+    &--website {
+      background-color: var(--c__hope-gold, hsl(46, 95%, 61%));
+      color: var(--c__navy, #293557);
+
+      &:hover,
+      &:focus {
+        background-color: var(--c__hope-gold--bright, hsl(46, 95%, 70%));
+        color: var(--c__navy, #293557);
+      }
+    }
+
+    .qh__icon {
+      height: auto;
+      width: auto;
+    }
+
+    .qh__icon svg {
+      display: block;
+      fill: currentColor;
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  // Dark mode — explicit class on <html>
+  .dark & {
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &__job-title {
+      color: var(--c__coffee-milk, hsl(47, 26%, 76%));
+    }
+
+    &__full-name {
+      color: var(--c__white, #fff);
+    }
+
+    &__social-link {
+      background-color: rgba(255, 255, 255, 0.1);
+
+      &:hover,
+      &:focus {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      &--website {
+        background-color: var(--c__hope-gold, hsl(46, 95%, 61%));
+
+        &:hover,
+        &:focus {
+          background-color: var(--c__hope-gold--bright, hsl(46, 95%, 70%));
+        }
+      }
+    }
+  }
+
+  // Dark mode — system preference (respects html.light override)
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      border-color: rgba(255, 255, 255, 0.15);
+
+      &__job-title {
+        color: var(--c__coffee-milk, hsl(47, 26%, 76%));
+      }
+
+      &__full-name {
+        color: var(--c__white, #fff);
+      }
+
+      &__social-link {
+        background-color: rgba(255, 255, 255, 0.1);
+
+        &:hover,
+        &:focus {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &--website {
+          background-color: var(--c__hope-gold, hsl(46, 95%, 61%));
+
+          &:hover,
+          &:focus {
+            background-color: var(--c__hope-gold--bright, hsl(46, 95%, 70%));
+          }
+        }
+      }
+    }
+  }
+}
