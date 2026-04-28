@@ -92,10 +92,10 @@ jobs:
       matrix:
         include:
           - php_version: '8.3'
-            drupal_core: '~11.3'
+            drupal_core: '~11.3.0'
             experimental: false
           - php_version: '8.4'
-            drupal_core: '~11.3'
+            drupal_core: '~11.3.0'
             experimental: true
     container:
       image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production
