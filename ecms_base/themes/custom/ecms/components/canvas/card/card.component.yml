@@ -1,0 +1,55 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card
+status: experimental
+group: RI.Gov
+description: |
+  Themed card container with 1–3 columns of slottable content.
+  Background fills via the theme's existing `qh__t__*` classes
+  (same vocabulary as Dynamic Section). Editors drop other
+  components — Heading, Text, Button, Block: Most Recent
+  Press Releases, etc. — into each column slot.
+props:
+  type: object
+  required:
+    - column_count
+  properties:
+    theme:
+      title: Theme
+      type: string
+      description: Background + foreground color palette. Maps to the `qh__t__*` theme classes. `inherit` leaves colors up to the surrounding page.
+      enum:
+        - inherit
+        - white
+        - primary
+        - primary-light
+        - coffee-milk
+      meta:enum:
+        inherit: Inherit
+        white: White
+        primary: Primary
+        primary-light: Primary — light
+        coffee-milk: Coffee milk
+      examples: [ primary-light ]
+
+    column_count:
+      title: Column count
+      type: integer
+      enum: [1, 2, 3]
+      meta:enum:
+        1: One
+        2: Two
+        3: Three
+      examples: [ 1 ]
+
+slots:
+  card_1:
+    title: Column 1
+  card_2:
+    title: Column 2
+  card_3:
+    title: Column 3
+
+thirdPartySettings:
+  sdcStorybook:
+    disabledStories:
+      - all

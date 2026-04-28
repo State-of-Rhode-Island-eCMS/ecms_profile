@@ -1,0 +1,11 @@
+// canvas-cta
+// Keeps the button at its natural inline-block width when it's a
+// direct child of a flex column (e.g. dropped straight into a
+// `canvas-dynamic-section__cell`). Without this, `align-items: stretch`
+// blockifies the `<a>` and stretches it across the cell's cross-axis,
+// so an unwrapped CTA looks wider than one rendered through
+// `canvas-section-title` (where it sits inside a wrapper div).
+
+.canvas-cta {
+  align-self: flex-start;
+}

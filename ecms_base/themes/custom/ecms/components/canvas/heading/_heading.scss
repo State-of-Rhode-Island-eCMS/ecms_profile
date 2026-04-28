@@ -1,0 +1,24 @@
+// canvas-heading
+// Canvas-only override for the Heading SDC. The global `h2 / .qh__h2`
+// rule in assets/patterns/00-atoms/02-text/_00-typography.scss switches
+// H2 to sans-serif, bold, and the brand text-accent color. Canvas pages
+// follow a different typographic direction (Roboto Slab, regular
+// weight, neutral text color), so we re-assert serif + 400 + default
+// foreground on `.canvas-heading.qh__h2` only — legacy non-Canvas
+// templates keep the existing H2 treatment untouched.
+
+.canvas-heading.qh__h2 {
+  font-family: $font-serif-fallback;
+  font-weight: 400;
+  color: var(--fc__default__fg);
+  letter-spacing: 0.02em;
+
+  html:where(.wf-active) & {
+    font-family: $font-serif-static;
+  }
+
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-serif-vf);
+    font-weight: 400;
+  }
+}

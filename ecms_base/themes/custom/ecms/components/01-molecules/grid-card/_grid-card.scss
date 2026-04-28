@@ -4,6 +4,8 @@
   border-radius: rem(9);
   overflow: hidden;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 
   // Image variant
   &__image {
@@ -22,8 +24,8 @@
 
     svg,
     img {
-      width: 4rem;
-      height: 4rem;
+      width: 6rem;
+      height: 6rem;
     }
   }
 
@@ -43,11 +45,33 @@
 
       // Support hovering entire card.
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
       }
     }
+  }
+
+  // Icon variant: keep the icon, heading, and arrow visually anchored at the
+  // bottom of the card. Reserve 3 lines of heading space so cards in a row
+  // with 1-, 2-, or 3-line titles all share the same CTA wrapper height —
+  // that is what keeps icons aligned to a single Y. min-height (rather than
+  // a fixed height) still lets longer titles wrap further without clipping.
+  // Image variant is unaffected; it relies on the default
+  // `&__cta { margin-top: auto }` to pin the CTA to the bottom while the
+  // image stays at the top.
+  &--icon &__icon {
+    margin-top: auto;
+  }
+
+  &--icon &__cta {
+    margin-top: 0;
+  }
+
+  &--icon &__text {
+    display: flex;
+    align-items: flex-start;
+    min-height: 2lh;
   }
 
   &__arrow {

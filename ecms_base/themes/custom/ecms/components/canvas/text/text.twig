@@ -1,0 +1,12 @@
+{#
+  Canvas Text Component
+
+  WYSIWYG content. Inner `<p>` / `<li>` / etc. inherit the project's
+  existing typography rules.
+
+  Props:
+    text - HTML content (rich-text editor)
+#}
+<div{{ attributes.addClass(['canvas-text']) }}>
+  {{ text|raw }}
+</div>

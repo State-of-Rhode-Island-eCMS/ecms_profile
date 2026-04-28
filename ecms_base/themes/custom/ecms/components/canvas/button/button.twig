@@ -1,0 +1,20 @@
+{#
+  Canvas CTA Component
+
+  Emits the theme's existing `.qh__btn` link markup. All visual styling
+  lives in `assets/patterns/00-atoms/06-buttons/`.
+
+  Props:
+    text    - Button label (required)
+    link    - URL (required)
+    variant - primary | secondary | accent (required)
+#}
+{% set variant_classes = {
+  primary:   '',
+  secondary: 'qh__btn--secondary',
+  accent:    'qh__btn--accent',
+} %}
+
+<a href="{{ link }}"{{ attributes.addClass(['canvas-cta', 'qh__btn', variant_classes[variant]|default('')]) }}>
+  {{ text }}
+</a>

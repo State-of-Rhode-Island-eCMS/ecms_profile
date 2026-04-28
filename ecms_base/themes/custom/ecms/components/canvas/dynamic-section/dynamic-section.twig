@@ -1,0 +1,96 @@
+{#
+  Canvas Dynamic Section Component
+  Full-bleed themed section with a 1–4 column × 1–2 row grid (max 8 cells)
+  and an optional header area above. Background paints edge-to-edge; inner
+  content clamps to `--content-max-width` (matches footer/header/page
+  layout). Theme prop maps to the theme's existing `qh__t__*` classes.
+
+  Props:
+    theme              - inherit | primary | primary-light | coffee-milk
+    additional_classes - extra CSS classes appended to the root
+    column_count       - 1 | 2 | 3 | 4
+    row_count          - 1 | 2
+    two_column_layout  - split option when column_count == 2
+    three_column_layout- split option when column_count == 3
+    cell_align_x       - default | start | center | end
+    cell_align_y       - default | top | center | bottom
+
+  Slots:
+    header            - heading / intro above the grid
+    cell_1..cell_8    - grid cells (column_count × row_count ≤ 8)
+#}
+
+{# Enum → class lookups (never concatenate — canvas-sdc-AGENTS.md §3.4). #}
+{% set theme_classes = {
+  'primary':       'qh__t__primary',
+  'primary-light': 'qh__t__primary--light',
+  'coffee-milk':   'qh__t__coffee-milk',
+} %}
+
+{% set columns_classes = {
+  1: 'canvas-dynamic-section--cols-1',
+  2: 'canvas-dynamic-section--cols-2',
+  3: 'canvas-dynamic-section--cols-3',
+  4: 'canvas-dynamic-section--cols-4',
+} %}
+
+{% set two_col_classes = {
+  '50 / 50': 'canvas-dynamic-section--2col-50-50',
+  '25 / 75': 'canvas-dynamic-section--2col-25-75',
+  '33 / 67': 'canvas-dynamic-section--2col-33-67',
+  '75 / 25': 'canvas-dynamic-section--2col-75-25',
+  '67 / 33': 'canvas-dynamic-section--2col-67-33',
+} %}
+
+{% set three_col_classes = {
+  '33 / 33 / 33': 'canvas-dynamic-section--3col-33-33-33',
+  '50 / 25 / 25': 'canvas-dynamic-section--3col-50-25-25',
+  '25 / 50 / 25': 'canvas-dynamic-section--3col-25-50-25',
+  '25 / 25 / 50': 'canvas-dynamic-section--3col-25-25-50',
+} %}
+
+{% set align_x_classes = {
+  'start':  'canvas-dynamic-section--align-x-start',
+  'center': 'canvas-dynamic-section--align-x-center',
+  'end':    'canvas-dynamic-section--align-x-end',
+} %}
+
+{% set align_y_classes = {
+  'top':    'canvas-dynamic-section--align-y-top',
+  'center': 'canvas-dynamic-section--align-y-center',
+  'bottom': 'canvas-dynamic-section--align-y-bottom',
+} %}
+
+{% set section_classes = [
+  'canvas-dynamic-section',
+  theme_classes[theme]|default(''),
+  columns_classes[column_count]|default(''),
+  column_count == 2 ? two_col_classes[two_column_layout]|default('') : '',
+  column_count == 3 ? three_col_classes[three_column_layout]|default('') : '',
+  align_x_classes[cell_align_x]|default(''),
+  align_y_classes[cell_align_y]|default(''),
+  additional_classes|default(''),
+] %}
+
+{% set header_content %}{% block header %}{% endblock %}{% endset %}
+
+<section {{ attributes.addClass(section_classes) }}>
+  <div class="canvas-dynamic-section__inner">
+    {% if header_content|trim %}
+      <div class="canvas-dynamic-section__header">{{ header_content|raw }}</div>
+    {% endif %}
+
+    <div class="canvas-dynamic-section__grid">
+      {% for r in 1..row_count %}
+        {% for c in 1..column_count %}
+          {% set n = (r - 1) * column_count + c %}
+          <div class="canvas-dynamic-section__cell">
+            {% if block('cell_' ~ n) is defined %}
+              {{ block('cell_' ~ n) }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
