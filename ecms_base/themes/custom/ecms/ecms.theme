@@ -14,7 +14,6 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
-use Drupal\taxonomy\TermInterface;
 use Drupal\ecms\Form\FilesSettings;
 use Drupal\ecms\Form\FooterSettings;
 use Drupal\ecms\Form\HeaderSettings;
@@ -1172,82 +1171,6 @@ function _ecms_person_list_contains_photo(array $nodes): bool {
 /**
  * Implements hook_preprocess_node().
  */
-function ecms_preprocess_node__person(array &$variables) {
-  $node = $variables['node'];
-
-  // Get necessary services.
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $term_storage = $entity_type_manager->getStorage('taxonomy_term');
-
-  // Get each term reference.
-  $categories = $node->get('field_person_category')->referencedEntities();
-  $variables['categories'] = [];
-
-  // Get current language.
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-  // Loop over each term reference.
-  foreach ($categories as $category) {
-    $category_tid = $category->id();
-
-    // Load parent terms.
-    $category_parent = $term_storage->loadParents($category_tid);
-
-    if (!empty($category_parent)) {
-      // Get first item of keyed array.
-      $category_parent = reset($category_parent);
-
-      // Get translated version of term.
-      $category_parent_trans = \Drupal::service('entity.repository')->getTranslationFromContext($category_parent, $language);
-
-      $variables['categories'][] = $category_parent_trans->getName();
-    }
-    else {
-      // No parent term. Just fetch translated term name of referenced term.
-      $category_trans = \Drupal::service('entity.repository')->getTranslationFromContext($category, $language);
-      $variables['categories'][] = $category_trans->getName();
-    }
-  }
-
-  // Comma separate all categories.
-  $variables['categories'] = implode(', ', $variables['categories']);
-
-  // Build out additional fields array for twig.
-  if (!$node->field_person_additional_fields->isEmpty()) {
-    /** @var \Drupal\Core\Render\Renderer $renderer */
-    $renderer = \Drupal::service('renderer');
-    $paragraphs = $node->field_person_additional_fields->referencedEntities();
-    $variables['additional_fields'] = [];
-    foreach ($paragraphs as $paragraph) {
-      $field_label = NULL;
-      if (
-        $paragraph->hasField('field_person_field_label') &&
-        !$paragraph->get('field_person_field_label')->isEmpty() &&
-        $paragraph->get('field_person_field_label')->entity instanceof TermInterface
-      ) {
-        // Get the translated version of the entity if available.
-        $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
-        $field_label = $term_trans->getName();
-        $renderer->addCacheableDependency($variables['additional_fields'], $term_trans);
-      }
-
-      $paragraph_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph, $language);
-      $field_value = $paragraph_trans->get('field_person_field_value')->getString();
-      $variables['additional_fields'][] = [
-        'label' => [
-          '#markup' => $field_label,
-          '#access' => !is_null($field_label),
-        ],
-        'value' => [
-          '#markup' => $field_value,
-          '#access' => !empty($field_value),
-        ],
-      ];
-      $renderer->addCacheableDependency($variables['additional_fields'], $paragraph);
-    }
-  }
-}
-
 /**
  * Implements hook_preprocess_node().
  */
