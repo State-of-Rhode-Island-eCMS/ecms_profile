@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: 'Image Card'
+group: 'RI.Gov'
+status: stable
+description: |
+  Card with an 8:5 image and a CTA link. Thin Canvas wrapper around the existing
+  `.qh__grid-card .qh__grid-card--image` design-system markup. The whole card is
+  clickable.
+props:
+  type: object
+  required:
+    - image
+    - link_url
+    - link_text
+  properties:
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+      examples:
+        - src: https://picsum.photos/1200/750
+          alt: 'Placeholder card image'
+          width: 1200
+          height: 750
+    link_url:
+      type: string
+      title: Link URL
+      format: uri-reference
+      examples: ['/services']
+    link_text:
+      type: string
+      title: Link text
+      examples: ['Find a Service']

@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Text
+status: stable
+group: RI.Gov
+description: |
+  WYSIWYG prose block. Inherits all typography (font, size, color,
+  spacing) from the project's existing rules and the parent section
+  theme.
+props:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      title: Text
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>'

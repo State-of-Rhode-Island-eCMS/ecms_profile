@@ -1,0 +1,68 @@
+// canvas-card
+// Themed card container with 1–3 slottable columns. Background colors
+// come from the theme's existing `qh__t__*` classes (declared in
+// assets/patterns/00-atoms/01-global/_00-themes.scss); this file owns
+// only the card shell — radius, padding, grid, and column collapse.
+// Container queries track the card's own width so a card nested in a
+// narrow dynamic-section cell collapses sensibly without affecting
+// other cards on the same viewport.
+
+.canvas-card {
+  container-name: canvas-card;
+  container-type: inline-size;
+  border-radius: $brad-md;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+
+  // Forced-white surface — used when the card lives inside a themed
+  // section (e.g. a primary-light dynamic-section) and the design calls
+  // for an explicit white card on top of that fill. The qh__t__* themes
+  // don't include a white option since "no theme" already inherits from
+  // the page; this modifier sets a hard fill regardless of context.
+  &--white {
+    background-color: var(--c__white);
+    color: var(--c__quahog--dark);
+  }
+
+  &__grid {
+    display: grid;
+    gap: $grid-gap;
+    grid-template-columns: 1fr;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Column count. 2-col collapses below 30rem (~480px) — tighter than the
+  // dynamic-section default since cards typically hold simpler content and
+  // can stay side-by-side at narrower widths. 3-col collapses below
+  // $bp--medium (50rem / 800px).
+  // ---------------------------------------------------------------------------
+  &--cols-2 .canvas-card__grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    @container canvas-card (max-width: 30rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--cols-3 .canvas-card__grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    @container canvas-card (max-width: #{$bp--medium-value * 1rem}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Cell — flex column so authors can drop Heading + Text + CTA into a
+  // column without each SDC owning its own outer spacing. Replicates the
+  // sibling-spacing pattern from _dynamic-section.scss.
+  // ---------------------------------------------------------------------------
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    > * + * {
+      margin-block-start: 1rem;
+    }
+  }
+}
