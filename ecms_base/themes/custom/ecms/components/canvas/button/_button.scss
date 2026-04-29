@@ -37,6 +37,20 @@
     }
   }
 
+  &--text {
+    color: var(--fc__default__link);
+    display: block;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.125em;
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+      text-decoration-thickness: 2px;
+    }
+  }
+
   &__label {
     text-decoration: underline;
     text-decoration-thickness: 1px;

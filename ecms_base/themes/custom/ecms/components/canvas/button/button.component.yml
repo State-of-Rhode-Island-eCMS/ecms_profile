@@ -33,9 +33,11 @@ props:
         - secondary
         - accent
         - link
+        - text
       meta:enum:
         primary: Primary (default)
         secondary: Secondary
         accent: Accent
-        link: Text Link
+        link: Text Link (with icon)
+        text: Text Link (plain)
       examples: [ primary ]
