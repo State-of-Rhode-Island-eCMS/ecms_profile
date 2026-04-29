@@ -1,0 +1,22 @@
+name: 'eCMS Multisite Search'
+description: 'Installs the ecms_multisite_search module, which provides cross-site Solr search across all Acquia Site Factory sites sharing a single Solr core. Includes the multisite server, index, and a generic all-types search page at /multisite-search.'
+type: 'eCMS'
+recipes:
+  - ecms_solr_search
+install:
+  - ecms_multisite_search
+config:
+  strict: false
+  import:
+    ecms_multisite_search:
+      - search_api.server.ecms_multisite_server
+      - search_api.index.ecms_multisite_index
+  actions:
+    search_api.index.acquia_search_index:
+      simpleConfigUpdate:
+        field_settings.url:
+          label: URI
+          property_path: search_api_url
+          type: string
+          configuration:
+            absolute: true

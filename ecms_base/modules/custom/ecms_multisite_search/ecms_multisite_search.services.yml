@@ -1,0 +1,13 @@
+services:
+  ecms_multisite_search.multisite_query_subscriber:
+    class: Drupal\ecms_multisite_search\EventSubscriber\MultisiteQuerySubscriber
+    tags:
+      - { name: event_subscriber }
+
+  # The Search API Solr backend resolves the result item factory via
+  # get($datasource_plugin_id . '.factory'). For unknown datasource IDs it
+  # falls back to an empty string, producing get('.factory'). Alias this to
+  # the existing multisite document factory so item loading works correctly.
+  '.factory':
+    alias: solr_multisite_document.factory
+    public: true
