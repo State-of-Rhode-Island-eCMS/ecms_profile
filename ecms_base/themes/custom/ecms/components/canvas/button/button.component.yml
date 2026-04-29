@@ -27,13 +27,17 @@ props:
     variant:
       type: string
       title: Variant
-      description: Maps to existing `.qh__btn` modifier classes.
+      description: Maps to existing `.qh__btn` modifier classes or a text link.
       enum:
         - primary
         - secondary
         - accent
+        - link
+        - text
       meta:enum:
         primary: Primary (default)
         secondary: Secondary
         accent: Accent
+        link: Text Link (with icon)
+        text: Text Link (plain)
       examples: [ primary ]

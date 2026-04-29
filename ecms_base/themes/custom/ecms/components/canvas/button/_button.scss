@@ -8,4 +8,65 @@
 
 .canvas-cta {
   align-self: flex-start;
+
+  &--link {
+    align-items: center;
+    align-self: stretch;
+    color: var(--fc__default__link);
+    display: flex;
+    font-weight: 600;
+    gap: $input-v-spacing; // 0.75em ≈ 12px
+    justify-content: space-between;
+    padding-block: em(19);
+    padding-inline: 0;
+    text-decoration: none;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+      text-decoration: none;
+
+      .canvas-cta__label {
+        text-decoration-thickness: 2px;
+      }
+
+      .canvas-cta__icon {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  &--text {
+    color: var(--fc__default__link);
+    display: block;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.125em;
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  &__label {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.125em;
+  }
+
+  &__icon {
+    display: block;
+    height: 1.125rem;
+    transition: $transition-base;
+    width: 1.125rem;
+
+    svg {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
