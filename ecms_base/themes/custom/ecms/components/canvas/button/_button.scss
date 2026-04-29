@@ -15,7 +15,10 @@
     color: var(--fc__default__link);
     display: flex;
     font-weight: 600;
+    gap: $input-v-spacing; // 0.75em ≈ 12px
     justify-content: space-between;
+    padding-block: em(19);
+    padding-inline: 0;
     text-decoration: none;
     width: 100%;
 

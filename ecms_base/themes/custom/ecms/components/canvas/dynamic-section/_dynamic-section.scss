@@ -127,6 +127,10 @@
     > * + * {
       margin-block-start: 1rem;
     }
+
+    > .canvas-cta--link + .canvas-cta--link {
+      margin-block-start: 0;
+    }
   }
 
   &--align-x-start  > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-start; }
