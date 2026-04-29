@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.person_headshot
+  module:
+    - path
+id: media.person_headshot.path
+field_name: path
+entity_type: media
+bundle: person_headshot
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

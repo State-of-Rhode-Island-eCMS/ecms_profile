@@ -2,8 +2,10 @@ name: 'eCMS Person List Fields'
 description: 'Adds background color, list title, columns, and display images fields to the person list paragraph type.'
 type: 'eCMS'
 
-install:
+recipes:
   - ecms_person
+
+install:
   - options
 
 config:
