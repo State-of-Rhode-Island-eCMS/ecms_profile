@@ -7,14 +7,20 @@
   Props:
     text    - Button label (required)
     link    - URL (required)
-    variant - primary | secondary | accent (required)
+    variant - primary | secondary | accent | link (required)
 #}
 {% set variant_classes = {
-  primary:   '',
-  secondary: 'qh__btn--secondary',
-  accent:    'qh__btn--accent',
+  primary:   'qh__btn',
+  secondary: 'qh__btn qh__btn--secondary',
+  accent:    'qh__btn qh__btn--accent',
+  link:      'canvas-cta--link',
 } %}
 
-<a href="{{ link }}"{{ attributes.addClass(['canvas-cta', 'qh__btn', variant_classes[variant]|default('')]) }}>
+<a href="{{ link }}"{{ attributes.addClass(['canvas-cta', variant_classes[variant]|default('')]) }}>
   {{ text }}
+  {% if variant == 'link' %}
+    <span class="canvas-cta__icon qh__icon" aria-hidden="true">
+      {% include '@icons/arrow-right.svg' %}
+    </span>
+  {% endif %}
 </a>

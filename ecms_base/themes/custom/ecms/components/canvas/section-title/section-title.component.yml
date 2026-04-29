@@ -61,8 +61,10 @@ props:
         - primary
         - secondary
         - accent
+        - link
       meta:enum:
         primary: Primary
         secondary: Secondary
         accent: Accent
+        link: Text Link
       examples: [ primary ]
