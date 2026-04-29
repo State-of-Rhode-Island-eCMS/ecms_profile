@@ -15,6 +15,13 @@ config:
   strict: false
   import:
     canvas:
+      - canvas.asset_library.global
+      - canvas.brand_kit.global
+      - editor.editor.canvas_html_block
+      - editor.editor.canvas_html_inline
+      - filter.format.canvas_html_block
+      - filter.format.canvas_html_inline
+      - image.style.canvas_avatar
       - image.style.canvas_parametrized_width
   actions:
     canvas.component.sdc.*.*:
