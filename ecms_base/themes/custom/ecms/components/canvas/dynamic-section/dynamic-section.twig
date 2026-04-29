@@ -56,9 +56,21 @@
 } %}
 
 {% set align_y_classes = {
-  'top':    'canvas-dynamic-section--align-y-top',
-  'center': 'canvas-dynamic-section--align-y-center',
-  'bottom': 'canvas-dynamic-section--align-y-bottom',
+  'top':     'canvas-dynamic-section--align-y-top',
+  'center':  'canvas-dynamic-section--align-y-center',
+  'bottom':  'canvas-dynamic-section--align-y-bottom',
+  'stretch': 'canvas-dynamic-section--align-y-stretch',
+} %}
+
+{% set gap_classes = {
+  'default':   '',
+  'none':      'canvas-dynamic-section--gap-none',
+  'condensed': 'canvas-dynamic-section--gap-condensed',
+  'spacious':  'canvas-dynamic-section--gap-spacious',
+} %}
+
+{% set divider_classes = {
+  'line': 'canvas-dynamic-section--divider-line',
 } %}
 
 {% set section_classes = [
@@ -69,6 +81,8 @@
   column_count == 3 ? three_col_classes[three_column_layout]|default('') : '',
   align_x_classes[cell_align_x]|default(''),
   align_y_classes[cell_align_y]|default(''),
+  gap_classes[grid_gap]|default(''),
+  divider_classes[cell_divider]|default(''),
   additional_classes|default(''),
 ] %}
 

@@ -89,6 +89,34 @@ props:
         '25 / 25 / 50': '25% / 25% / 50%'
       examples: [ '33 / 33 / 33' ]
 
+    grid_gap:
+      title: Gap
+      type: string
+      description: "Space between grid cells. `default` uses the standard grid gap; `none` removes it entirely (useful when a cell divider is the only separator)."
+      enum:
+        - default
+        - none
+        - condensed
+        - spacious
+      meta:enum:
+        default: Default
+        none: None
+        condensed: Condensed
+        spacious: Spacious
+      examples: [ default ]
+
+    cell_divider:
+      title: Cell divider
+      type: string
+      description: "Draws a 1 px line centred in the column gap between adjacent cells. Adapts to the active theme colour."
+      enum:
+        - none
+        - line
+      meta:enum:
+        none: None
+        line: Line
+      examples: [ none ]
+
     cell_align_x:
       title: Cell horizontal alignment
       type: string
@@ -107,17 +135,19 @@ props:
     cell_align_y:
       title: Cell vertical alignment
       type: string
-      description: Vertical alignment of content within every grid cell.
+      description: Vertical alignment of content within every grid cell. `stretch` makes all columns equal height by expanding cell children to fill the row.
       enum:
         - default
         - top
         - center
         - bottom
+        - stretch
       meta:enum:
         default: Default
         top: Top
         center: Center
         bottom: Bottom
+        stretch: Stretch (equal-height columns)
       examples: [ default ]
 
 slots:
