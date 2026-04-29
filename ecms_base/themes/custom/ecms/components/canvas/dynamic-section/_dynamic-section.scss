@@ -38,7 +38,7 @@
   // narrow containers so Canvas editor preview and public view behave the
   // same regardless of iframe scaling (hero.scss convention).
   // ---------------------------------------------------------------------------
-  &--cols-2 .canvas-dynamic-section__grid {
+  &--cols-2 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
     grid-template-columns: repeat(2, 1fr);
 
     @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
@@ -46,7 +46,7 @@
     }
   }
 
-  &--cols-3 .canvas-dynamic-section__grid {
+  &--cols-3 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
     grid-template-columns: repeat(3, 1fr);
 
     @container canvas-dynamic-section (max-width: #{$bp--medium-value * 1rem}) {
@@ -54,7 +54,7 @@
     }
   }
 
-  &--cols-4 .canvas-dynamic-section__grid {
+  &--cols-4 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
     grid-template-columns: repeat(4, 1fr);
 
     @container canvas-dynamic-section (max-width: #{$bp--large-value * 1rem}) {
@@ -70,18 +70,18 @@
   // 2-column fractional splits. Modifier overrides the equal split from
   // &--cols-2 above. Collapse to 1 column on narrow containers regardless.
   // ---------------------------------------------------------------------------
-  &--2col-50-50 .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr; }
-  &--2col-25-75 .canvas-dynamic-section__grid { grid-template-columns: 1fr 3fr; }
-  &--2col-33-67 .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr; }
-  &--2col-75-25 .canvas-dynamic-section__grid { grid-template-columns: 3fr 1fr; }
-  &--2col-67-33 .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr; }
+  &--2col-50-50 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr; }
+  &--2col-25-75 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 3fr; }
+  &--2col-33-67 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr; }
+  &--2col-75-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 3fr 1fr; }
+  &--2col-67-33 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr; }
 
   &--2col-50-50,
   &--2col-25-75,
   &--2col-33-67,
   &--2col-75-25,
   &--2col-67-33 {
-    .canvas-dynamic-section__grid {
+    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
       @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
         grid-template-columns: 1fr;
       }
@@ -91,16 +91,16 @@
   // ---------------------------------------------------------------------------
   // 3-column fractional splits.
   // ---------------------------------------------------------------------------
-  &--3col-33-33-33 .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 1fr; }
-  &--3col-50-25-25 .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr 1fr; }
-  &--3col-25-50-25 .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr 1fr; }
-  &--3col-25-25-50 .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 2fr; }
+  &--3col-33-33-33 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 1fr; }
+  &--3col-50-25-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr 1fr; }
+  &--3col-25-50-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr 1fr; }
+  &--3col-25-25-50 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 2fr; }
 
   &--3col-33-33-33,
   &--3col-50-25-25,
   &--3col-25-50-25,
   &--3col-25-25-50 {
-    .canvas-dynamic-section__grid {
+    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
       @container canvas-dynamic-section (max-width: #{$bp--medium-value * 1rem}) {
         grid-template-columns: 1fr;
       }
@@ -124,11 +124,11 @@
     }
   }
 
-  &--align-x-start  .canvas-dynamic-section__cell { align-items: flex-start; }
-  &--align-x-center .canvas-dynamic-section__cell { align-items: center; }
-  &--align-x-end    .canvas-dynamic-section__cell { align-items: flex-end; }
+  &--align-x-start  > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-start; }
+  &--align-x-center > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: center; }
+  &--align-x-end    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-end; }
 
-  &--align-y-top    .canvas-dynamic-section__cell { justify-content: flex-start; }
-  &--align-y-center .canvas-dynamic-section__cell { justify-content: center; }
-  &--align-y-bottom .canvas-dynamic-section__cell { justify-content: flex-end; }
+  &--align-y-top    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: flex-start; }
+  &--align-y-center > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: center; }
+  &--align-y-bottom > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: flex-end; }
 }
