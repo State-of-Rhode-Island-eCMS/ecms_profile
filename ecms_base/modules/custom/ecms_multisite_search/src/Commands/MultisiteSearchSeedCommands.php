@@ -19,16 +19,17 @@ final class MultisiteSearchSeedCommands extends DrushCommands {
   // Default DDEV Solr endpoint — matches settings.local.php override.
   const DEFAULT_SOLR_URL = 'http://solr:8983/solr/ecms';
 
-  // Documents will be indexed under this index ID (the target of ecms_multisite_index).
+  // Documents will be indexed under this index ID
+  // (the target of ecms_multisite_index).
   const TARGET_INDEX_ID = 'acquia_search_index';
 
   /**
    * Mock factory sites used to generate seed documents.
    */
   const MOCK_SITES = [
-    ['site_url' => 'https://tax.ri.gov/',  'hash' => 'taxriv', 'label' => 'RI Division of Taxation'],
-    ['site_url' => 'https://doh.ri.gov/',  'hash' => 'dohriv', 'label' => 'RI Department of Health'],
-    ['site_url' => 'https://dem.ri.gov/',  'hash' => 'demriv', 'label' => 'RI Dept of Environmental Management'],
+    ['site_url' => 'https://tax.ri.gov/', 'hash' => 'taxriv', 'label' => 'RI Division of Taxation'],
+    ['site_url' => 'https://doh.ri.gov/', 'hash' => 'dohriv', 'label' => 'RI Department of Health'],
+    ['site_url' => 'https://dem.ri.gov/', 'hash' => 'demriv', 'label' => 'RI Dept of Environmental Management'],
   ];
 
   public function __construct(
@@ -38,7 +39,7 @@ final class MultisiteSearchSeedCommands extends DrushCommands {
   }
 
   /**
-   * Seeds Solr with mock press release documents simulating other factory sites.
+   * Seeds Solr with mock press release documents simulating other sites.
    *
    * Documents are POSTed directly to the Solr HTTP API using the field names
    * that Search API Solr's acquia_search_index would produce, allowing
@@ -59,12 +60,14 @@ final class MultisiteSearchSeedCommands extends DrushCommands {
    * @usage drush emss --solr-url=http://solr:8983/solr/mycore
    *   Seed against a different Solr core.
    */
-  public function seedSolr(array $options = [
-    'delete' => FALSE,
-    'solr-url' => self::DEFAULT_SOLR_URL,
-    'solr-user' => 'solr',
-    'solr-password' => 'SolrRocks',
-  ]): void {
+  public function seedSolr(
+    array $options = [
+      'delete' => FALSE,
+      'solr-url' => self::DEFAULT_SOLR_URL,
+      'solr-user' => 'solr',
+      'solr-password' => 'SolrRocks',
+    ],
+  ): void {
     $documents = $this->buildMockDocuments();
     $auth = [$options['solr-user'], $options['solr-password']];
 
