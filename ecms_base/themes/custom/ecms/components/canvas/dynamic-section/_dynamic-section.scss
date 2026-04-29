@@ -146,9 +146,9 @@
   // default; spacious doubles it. `none` collapses the gap entirely (useful
   // when a cell divider is the only desired visual separator).
   // ---------------------------------------------------------------------------
-  &--gap-none      { --_gap: 0px; }
+  &--gap-none { --_gap: 0; }
   &--gap-condensed { --_gap: calc(#{$grid-gap} / 2); }
-  &--gap-spacious  { --_gap: calc(#{$grid-gap} * 2); }
+  &--gap-spacious { --_gap: calc(#{$grid-gap} * 2); }
 
   // ---------------------------------------------------------------------------
   // Nested dynamic-sections — suppress horizontal padding on the root element.
@@ -241,6 +241,7 @@
   // Multiple children (e.g. heading + body + CTA) — pin the last child to
   // the bottom with margin auto so CTAs align across equal-height columns;
   // all other children stay their natural height.
+  /* stylelint-disable selector-max-compound-selectors */
   &--align-y-stretch > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell {
     > *:only-child {
       flex: 1;
@@ -251,4 +252,5 @@
       margin-block-start: auto;
     }
   }
+  /* stylelint-enable selector-max-compound-selectors */
 }
