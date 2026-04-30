@@ -7,3 +7,4 @@ recipes:
   - ecms_canvas_standard
   - ecms_online_services
   - ecms_online_services_search
+  - ecms_multisite_press_release_search
