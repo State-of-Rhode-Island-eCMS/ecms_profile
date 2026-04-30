@@ -1,0 +1,29 @@
+{#
+  Canvas Tab
+  A single tab item for use inside a Canvas Tab Group. Renders a button (for
+  the tab strip) and a panel (for the content area). The Tab Group's JS moves
+  the button into the shared tablist and wires up all ARIA attributes.
+
+  Props:
+    label - Visible tab label (required)
+    icon  - Optional icon name from the @icons SVG set (e.g. "home")
+
+  Slots:
+    panel - Content shown when this tab is active.
+#}
+<div class="canvas-tab" data-canvas-tab>
+  <button class="canvas-tab__button" data-canvas-tab-button type="button">
+    {% if icon %}
+      <span class="canvas-tab__icon" aria-hidden="true">
+        {% include '@icons/' ~ icon ~ '.svg' %}
+      </span>
+    {% endif %}
+    <span class="canvas-tab__label">{{ label }}</span>
+  </button>
+
+  <div class="canvas-tab__panel" data-canvas-tab-panel>
+    <div class="canvas-tab__panel-inner">
+      {% block panel %}{% endblock %}
+    </div>
+  </div>
+</div>

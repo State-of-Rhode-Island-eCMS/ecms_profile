@@ -1,0 +1,25 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas Tab Group
+status: experimental
+group: RI.Gov
+description: |
+  Accessible tab group. Place one or more Canvas Tab components in the `tabs`
+  slot. The component collects each Tab's button into a shared tablist and
+  wires up all ARIA attributes and keyboard navigation automatically.
+
+slots:
+  tabs:
+    title: Tabs
+    description: Place one or more Canvas Tab components here.
+
+libraryOverrides:
+  js:
+    tab-group.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+
+thirdPartySettings:
+  sdcStorybook:
+    disabledStories:
+      - all
