@@ -6,7 +6,7 @@
   layout). Theme prop maps to the theme's existing `qh__t__*` classes.
 
   Props:
-    theme              - inherit | primary | primary-light | coffee-milk
+    theme              - inherit | primary | primary-light | secondary | tertiary | coffee-milk
     additional_classes - extra CSS classes appended to the root
     column_count       - 1 | 2 | 3 | 4
     row_count          - 1 | 2
@@ -24,6 +24,8 @@
 {% set theme_classes = {
   'primary':       'qh__t__primary',
   'primary-light': 'qh__t__primary--light',
+  'secondary':     'qh__t__secondary',
+  'tertiary':      'qh__t__tertiary',
   'coffee-milk':   'qh__t__coffee-milk',
 } %}
 

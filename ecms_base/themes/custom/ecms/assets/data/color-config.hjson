@@ -561,6 +561,30 @@
           { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           { "fnName": "link--dark", "colorName": "white" },
           { "fnName": "link--dark--hover", "colorName": "hope-gold" }
+        ],
+        "secondary": [
+          { "fnName": "fg", "colorName": "ocean--dark" },
+          { "fnName": "bg", "colorName": "ocean--trans75" },
+          { "fnName": "overlay__bg", "colorName": "white--trans75" },
+          { "fnName": "link", "colorName": "ocean--dark" },
+          { "fnName": "link--hover", "colorName": "navy--dark" },
+          { "fnName": "fg--dark", "colorName": "white" },
+          { "fnName": "bg--dark", "colorName": "navy--trans75" },
+          { "fnName": "overlay__bg--dark", "colorName": "navy--trans75" },
+          { "fnName": "link--dark", "colorName": "ocean--light" },
+          { "fnName": "link--dark--hover", "colorName": "hope-gold" }
+        ],
+        "tertiary": [
+          { "fnName": "fg", "colorName": "navy" },
+          { "fnName": "bg", "colorName": "cliff-walk--light" },
+          { "fnName": "overlay__bg", "colorName": "white--trans75" },
+          { "fnName": "link", "colorName": "navy" },
+          { "fnName": "link--hover", "colorName": "navy--dark" },
+          { "fnName": "fg--dark", "colorName": "coffee-milk--light" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
+          { "fnName": "link--dark", "colorName": "white" },
+          { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
         ]
       }
     },
@@ -692,6 +716,18 @@
           #{ "fnName": "overlay__bg", "colorName": "ocean--trans75" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "hope-gold" }
+        ],
+        "secondary": [
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--trans75" },
+          { "fnName": "link", "colorName": "ocean--light" },
+          { "fnName": "link--hover", "colorName": "hope-gold" }
+        ],
+        "tertiary": [
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" }
         ]
       }
     },
@@ -1963,7 +1999,7 @@
           # text-accent currently used for bullet mark color & the H2
           { "fnName": "text-accent", "colorName": "cliff-walk--darkest" },
           { "fnName": "button__bg", "colorName": "navy" },
-          { "fnName": "button__fg", "colorName": "hope-gold" },
+          { "fnName": "button__fg", "colorName": "white" },
           { "fnName": "button--hover__bg", "colorName": "navy--dark" },
           { "fnName": "button--hover__fg", "colorName": "cliff-walk" }
         ],
@@ -2047,6 +2083,30 @@
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
           { "fnName": "link", "colorName": "navy--dark" },
           { "fnName": "link--hover", "colorName": "quahog--darker" },
+          { "fnName": "fg--dark", "colorName": "coffee-milk--light" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
+          { "fnName": "link--dark", "colorName": "white" },
+          { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
+        ],
+        "secondary": [
+          { "fnName": "fg", "colorName": "ocean--dark" },
+          { "fnName": "bg", "colorName": "ocean--trans75" },
+          { "fnName": "overlay__bg", "colorName": "white--trans75" },
+          { "fnName": "link", "colorName": "ocean--dark" },
+          { "fnName": "link--hover", "colorName": "navy--dark" },
+          { "fnName": "fg--dark", "colorName": "white" },
+          { "fnName": "bg--dark", "colorName": "navy--trans75" },
+          { "fnName": "overlay__bg--dark", "colorName": "navy--trans75" },
+          { "fnName": "link--dark", "colorName": "ocean--light" },
+          { "fnName": "link--dark--hover", "colorName": "hope-gold" }
+        ],
+        "tertiary": [
+          { "fnName": "fg", "colorName": "navy" },
+          { "fnName": "bg", "colorName": "cliff-walk--light" },
+          { "fnName": "overlay__bg", "colorName": "white--trans75" },
+          { "fnName": "link", "colorName": "navy" },
+          { "fnName": "link--hover", "colorName": "navy--dark" },
           { "fnName": "fg--dark", "colorName": "coffee-milk--light" },
           { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
           { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
@@ -2162,6 +2222,18 @@
           { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           { "fnName": "link--dark", "colorName": "white" },
           { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
+        ],
+        "secondary": [
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--trans75" },
+          { "fnName": "link", "colorName": "ocean--light" },
+          { "fnName": "link--hover", "colorName": "hope-gold" }
+        ],
+        "tertiary": [
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" }
         ]
       }
     },

@@ -13,6 +13,25 @@ props:
     - link_url
     - link_text
   properties:
+    theme:
+      title: Theme
+      type: string
+      description: Background + foreground color palette. Maps to the `qh__t__*` theme classes. `inherit` leaves colors up to the surrounding page.
+      enum:
+        - inherit
+        - primary
+        - primary-light
+        - secondary
+        - tertiary
+        - coffee-milk
+      meta:enum:
+        inherit: Inherit
+        primary: Primary
+        primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
+        coffee-milk: Coffee milk
+      examples: [ inherit ]
     icon:
       title: Icon
       type: string
@@ -20,10 +39,14 @@ props:
         - alarm-bell
         - anchor-small
         - arrow-right
+        - box-ballot
+        - building-user
         - bus
+        - capitol-building
         - chevron-down
         - chevron-left
         - chevron-right
+        - city
         - close-x
         - cog
         - default-logo
@@ -37,7 +60,9 @@ props:
         - globe
         - guillemot-left
         - guillemot-right
+        - handshake
         - home
+        - house-chimney
         - icon-ios-share
         - information
         - link-external
@@ -55,6 +80,8 @@ props:
         - social-linkedin
         - social-twitter
         - social-youtube
+        - users
+        - users-line
       examples: ['home']
     link_url:
       type: string

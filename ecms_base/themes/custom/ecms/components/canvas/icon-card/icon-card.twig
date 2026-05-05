@@ -5,11 +5,21 @@
   paints all visual styling.
 
   Props:
+    theme     - inherit | primary | primary-light | secondary | tertiary | coffee-milk
     icon      - SVG filename (without extension) from @icons/
     link_url  - URL the card links to
     link_text - Visible CTA text rendered as h5
 #}
-<article {{ attributes.addClass(['qh__grid-card', 'qh__grid-card--icon']) }}>
+{# Enum → class lookup (never concatenate — canvas-sdc-AGENTS.md §3.4). #}
+{% set theme_classes = {
+  'primary':       'qh__t__primary',
+  'primary-light': 'qh__t__primary--light',
+  'secondary':     'qh__t__secondary',
+  'tertiary':      'qh__t__tertiary',
+  'coffee-milk':   'qh__t__coffee-milk',
+} %}
+
+<article {{ attributes.addClass(['qh__grid-card', 'qh__grid-card--icon', theme_classes[theme]|default('')]) }}>
   <div class="qh__grid-card__icon">
     {% include '@icons/' ~ icon ~ '.svg' %}
   </div>

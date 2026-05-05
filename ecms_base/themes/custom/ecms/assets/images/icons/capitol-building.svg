@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><svg class="qh__icon__svg qh__icon__capitol-building" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+	<g transform="translate(10 10) scale(0.6)">
+		<path class="qh__icon__path qh__icon__capitol-building__path" d="M21.25 0V2.57812C28.9844 3.20312 35 9.60938 35 17.5H37.5V20H35V31.25H37.5V33.75H2.5V31.25H5V20H2.5V17.5H5C5 9.60938 11.0156 3.20312 18.75 2.57812V0H21.25ZM7.5 17.5H32.5C32.5 10.625 26.875 5 20 5C13.125 5 7.5 10.625 7.5 17.5ZM7.5 20V31.25H13.75V20H7.5ZM16.25 20V31.25H23.75V20H16.25ZM26.25 20V31.25H32.5V20H26.25ZM0 37.5H40V40H0V37.5Z"/>
+	</g>
+</svg>

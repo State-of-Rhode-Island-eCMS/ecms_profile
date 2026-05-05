@@ -23,11 +23,15 @@ props:
         - inherit
         - primary
         - primary-light
+        - secondary
+        - tertiary
         - coffee-milk
       meta:enum:
         inherit: Inherit
         primary: Primary
         primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
         coffee-milk: Coffee milk
       examples: [ inherit ]
 
