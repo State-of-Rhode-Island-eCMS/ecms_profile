@@ -38,6 +38,6 @@ props:
         primary: Primary (default)
         secondary: Secondary
         accent: Accent
-        link: Text Link (with icon)
+        link: Text Link (with arrow icon)
         text: Text Link (plain)
-      examples: [ primary ]
+      examples: [primary]

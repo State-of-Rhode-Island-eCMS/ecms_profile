@@ -25,10 +25,14 @@ props:
         - alarm-bell
         - anchor-small
         - arrow-right
+        - box-ballot
+        - building-user
         - bus
+        - capitol-building
         - chevron-down
         - chevron-left
         - chevron-right
+        - city
         - close-x
         - cog
         - default-logo
@@ -42,7 +46,9 @@ props:
         - globe
         - guillemot-left
         - guillemot-right
+        - handshake
         - home
+        - house-chimney
         - icon-ios-share
         - information
         - link-external
@@ -60,6 +66,8 @@ props:
         - social-linkedin
         - social-twitter
         - social-youtube
+        - users
+        - users-line
       examples: ['home']
 
 slots:

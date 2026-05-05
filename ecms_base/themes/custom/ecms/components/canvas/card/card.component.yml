@@ -22,12 +22,16 @@ props:
         - white
         - primary
         - primary-light
+        - secondary
+        - tertiary
         - coffee-milk
       meta:enum:
         inherit: Inherit
         white: White
         primary: Primary
         primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
         coffee-milk: Coffee milk
       examples: [ primary-light ]
 
