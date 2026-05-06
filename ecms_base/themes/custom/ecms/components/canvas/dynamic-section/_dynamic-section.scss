@@ -15,7 +15,11 @@
   container-name: canvas-dynamic-section;
   container-type: inline-size;
   display: block;
-  padding: var(--_gap, #{$general-v-spacing});
+  // Vertical breathing room is decoupled from --_gap so author-driven gap
+  // changes don't shrink the section's top/bottom padding. Horizontal padding
+  // tracks --_gap for symmetry with the grid-cell rhythm.
+  padding-block: 3.75rem; // 60px
+  padding-inline: var(--_gap, #{$general-v-spacing});
 
   &__inner {
     @include qh-content-maxwidth();
