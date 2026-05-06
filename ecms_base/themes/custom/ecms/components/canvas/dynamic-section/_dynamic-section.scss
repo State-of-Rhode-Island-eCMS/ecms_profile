@@ -155,6 +155,16 @@
   &--gap-spacious { --_gap: calc(#{$grid-gap} * 2); }
 
   // ---------------------------------------------------------------------------
+  // Inside a tab panel — the panel's `.canvas-tab__panel-inner` already owns
+  // the outer padding (see _tab.scss), so the section's own padding would
+  // double up. Strip it on the root; the section's `__inner` still handles
+  // max-width clamping and internal grid layout.
+  // ---------------------------------------------------------------------------
+  .canvas-tab__panel & {
+    padding: 0;
+  }
+
+  // ---------------------------------------------------------------------------
   // Nested dynamic-sections — suppress horizontal padding on the root element.
   //
   // container-type: inline-size measures the *content-box* width (padding
