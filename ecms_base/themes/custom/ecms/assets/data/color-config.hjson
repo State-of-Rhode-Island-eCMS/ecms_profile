@@ -469,6 +469,7 @@
         # but right now only in the File List component
         #
         "icon": [
+          { "fnName": "icon-card", "colorName": "ocean--medium" },
           { "fnName": "pdf", "colorName": "rhody-red" },
           { "fnName": "word", "colorName": "navy" },
           { "fnName": "excel", "colorName": "green-animals" },
@@ -580,8 +581,8 @@
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
           { "fnName": "link", "colorName": "navy" },
           { "fnName": "link--hover", "colorName": "navy--dark" },
-          { "fnName": "fg--dark", "colorName": "coffee-milk--light" },
-          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "fg--dark", "colorName": "navy" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--dark" },
           { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           { "fnName": "link--dark", "colorName": "white" },
           { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
@@ -1978,12 +1979,12 @@
           #{ "fnName": "bg", "colorName": "white" },
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
           #{ "fnName": "border", "colorName": "quahog--dark--trans15" },
-          #{ "fnName": "link", "colorName": "navy--sat" },
-          #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
+          { "fnName": "link", "colorName": "navy" },
+          { "fnName": "link--hover", "colorName": "navy--sat" },
           #{ "fnName": "link--focus", "colorName": "navy" },
           #{ "fnName": "link--visited", "colorName": "navy--warm" },
           #{ "fnName": "link--active", "colorName": "calamari" },
-          #{ "fnName": "hx__fg", "colorName": "quahog--medium" },
+          { "fnName": "hx__fg", "colorName": "navy" },
           #{ "fnName": "violator", "colorName": "hope-gold" },
           #{ "fnName": "accent", "colorName": "calamari" },
           #{ "fnName": "accent__fg", "colorName": "quahog--dark" },
@@ -2043,7 +2044,7 @@
           #{ "fnName": "fg", "colorName": "white" },
           #{ "fnName": "bg", "colorName": "navy" },
           #{ "fnName": "overlay__bg", "colorName": "navy--trans75" },
-          #{ "fnName": "link", "colorName": "navy--light" },
+          { "fnName": "link", "colorName": "white" },
           #{ "fnName": "link--hover", "colorName": "hope-gold" },
           #{ "fnName": "fg--dark", "colorName": "white" },
           #{ "fnName": "bg--dark", "colorName": "navy--trans50" },
