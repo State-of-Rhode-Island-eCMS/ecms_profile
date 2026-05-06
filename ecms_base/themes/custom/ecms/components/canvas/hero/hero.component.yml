@@ -1,7 +1,7 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Hero
 group: RI.Gov
-description: Full-bleed photo banner with wave bottom, overlaid page heading, and a navy bar below for a search form and icon navigation links.
+description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs).
 props:
   type: object
   properties:
@@ -14,27 +14,13 @@ props:
           alt: 'Placeholder image'
           width: 1400
           height: 900
-    background_image_opacity:
-      type: integer
-      title: Background image opacity (percentage)
-      minimum: 1
-      maximum: 100
-      examples: [ 100 ]
     title:
       title: Heading text
-      type: string
-    heading_level:
-      title: Heading level (h1–h6)
-      type: string
-      enum: [h1, h2, h3, h4, h5, h6]
-    image_location:
-      title: Image location label
-      type: string
-    modifier:
-      title: BEM modifier class
       type: string
 slots:
   search_box:
     title: Search form block
   icon_links:
     title: Icon link items (one or more canvas/icon-link components)
+  footer:
+    title: Footer slot (full-width to max container — intended for tabs)
