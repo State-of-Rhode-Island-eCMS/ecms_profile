@@ -8,6 +8,8 @@
   Props:
     theme        - inherit | primary | primary-light | secondary | tertiary | coffee-milk
     column_count - 1 | 2 | 3
+    show_divider - boolean; renders a vertical rule between adjacent columns
+    show_border  - boolean; renders a 1px outer border using `currentColor`
 
   Slots:
     card_1..card_3 - one slot per possible column
@@ -33,6 +35,8 @@
   'canvas-card',
   theme_classes[theme]|default(''),
   columns_classes[column_count]|default(''),
+  show_divider ? 'canvas-card--with-divider' : '',
+  show_border ? 'canvas-card--with-border' : '',
 ] %}
 
 <div {{ attributes.addClass(card_classes) }}>

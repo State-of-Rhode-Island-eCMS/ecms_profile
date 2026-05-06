@@ -11,7 +11,7 @@
   container-name: canvas-card;
   container-type: inline-size;
   border-radius: $brad-md;
-  padding: clamp(1.25rem, 2.5vw, 2rem);
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
 
   // Forced-white surface — used when the card lives inside a themed
   // section (e.g. a primary-light dynamic-section) and the design calls
@@ -23,10 +23,22 @@
     color: var(--c__quahog--dark);
   }
 
+  // Outer border — opt-in via `show_border`. Uses `currentColor` so the
+  // stroke follows the active theme's foreground (matches `.qh__grid-card`).
+  &--with-border {
+    border: 1px solid currentColor;
+  }
+
   &__grid {
     display: grid;
-    gap: $grid-gap;
+    gap: 1.5rem; // 24px between adjacent column cells when no divider
     grid-template-columns: 1fr;
+  }
+
+  // With a divider, widen the gap so the rule has breathing room on either
+  // side. The divider's `inset-inline-end` math below assumes this 3rem gap.
+  &--with-divider .canvas-card__grid {
+    gap: 3rem;
   }
 
   // ---------------------------------------------------------------------------
@@ -60,9 +72,55 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
+    position: relative;
 
     > * + * {
       margin-block-start: 1rem;
+    }
+
+    // Adjacent link CTAs already carry their own padding-block; suppress the
+    // inherited sibling spacing so a stack of city-link rows reads as a
+    // continuous list rather than a series of buttons with extra gap.
+    > .canvas-cta--link + .canvas-cta--link {
+      margin-block-start: 0;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Column divider — opt-in via the `show_divider` prop. 1px vertical rule
+  // between adjacent cells; uses an explicit dark-translucent fill
+  // (rgba(20, 20, 20, 0.15)) so the rule reads consistently across themes
+  // regardless of the surrounding text color. Suppressed on the trailing cell
+  // of each row and hidden when the grid collapses to a single column.
+  // ---------------------------------------------------------------------------
+  &--with-divider#{&}--cols-2 .canvas-card__cell::after,
+  &--with-divider#{&}--cols-3 .canvas-card__cell::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: calc(-1.5rem - 0.5px); // half of the 3rem grid gap
+    width: 1px;
+    background-color: rgba(20, 20, 20, 0.15);
+  }
+
+  &--with-divider#{&}--cols-2 .canvas-card__cell:nth-child(2n)::after,
+  &--with-divider#{&}--cols-3 .canvas-card__cell:nth-child(3n)::after {
+    display: none;
+  }
+
+  &--with-divider#{&}--cols-2 .canvas-card__grid {
+    @container canvas-card (max-width: 30rem) {
+      .canvas-card__cell::after {
+        display: none;
+      }
+    }
+  }
+
+  &--with-divider#{&}--cols-3 .canvas-card__grid {
+    @container canvas-card (max-width: #{$bp--medium-value * 1rem}) {
+      .canvas-card__cell::after {
+        display: none;
+      }
     }
   }
 }

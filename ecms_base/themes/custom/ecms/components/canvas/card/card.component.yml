@@ -45,6 +45,18 @@ props:
         3: Three
       examples: [ 1 ]
 
+    show_divider:
+      title: Show divider
+      type: boolean
+      description: Renders a 1px vertical rule between adjacent columns. Has no effect on single-column cards or when the grid collapses to one column.
+      examples: [ false ]
+
+    show_border:
+      title: Show border
+      type: boolean
+      description: Renders a 1px outer border using `currentColor`, matching the grid-card pattern so the border adapts to the active theme.
+      examples: [ false ]
+
 slots:
   card_1:
     title: Column 1
