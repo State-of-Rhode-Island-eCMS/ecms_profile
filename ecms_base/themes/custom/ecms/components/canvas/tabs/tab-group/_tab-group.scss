@@ -1,6 +1,5 @@
 .canvas-tab-group {
-  background-color: var(--c__navy);
-  padding: 5rem var(--section-sides, 1rem) 2.5rem;
+  padding: 5rem 0 2.5rem;
 
   // Tablist injected by JS above the panels.
   &__tablist {

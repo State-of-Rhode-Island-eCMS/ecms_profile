@@ -1,34 +1,13 @@
 .canvas-tab {
-  // Button — visual styles; layout/ARIA wired by Tab Group JS.
+  // Base tab styles — the active state is handled by a modifier class
   &__button {
-    align-items: center;
-    background-color: var(--c__cliff-walk--light);
-    border: 0;
-    border-radius: 8px;
-    // color drives both the label and the SVG icon via currentColor.
-    color: var(--c__quahog, #404040);
-    cursor: pointer;
-    display: flex;
-    gap: 0.625rem;
-    padding: 0.8125rem 1.5rem 0.8125rem 1rem;
-    position: relative;
-
-    &--active {
-      background-color: var(--c__cliff-walk);
-      border: 2px solid var(--c__cliff-walk--darkest--trans75, rgba(19, 134, 96, 0.75));
-      color: var(--c__navy);
-    }
-
-    &:hover:not(&--active) {
-      background-color: var(--c__cliff-walk);
-      color: var(--c__navy);
-    }
-
-    // Keyboard focus ring: white outline with a gap so it reads against both
-    // the navy group background and the cliff-walk button surface.
-    &:focus-visible {
-      outline: 3px solid var(--c__white, #fff);
-      outline-offset: 3px;
+    &--active,
+    &--active:hover,
+    &--active:focus {
+      background-color: var(--fc__tertiary__bg--dark);
+      border: 2px solid
+        color-mix(in srgb, var(--fc__tertiary__fg) 50%, transparent);
+      color: var(--fc__tertiary__fg);
     }
   }
 
@@ -36,34 +15,21 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 1.75rem;   // 28px — matches Figma icon canvas
+    height: 2rem; // 28px — matches Figma icon canvas
     justify-content: center;
-    width: 1.75rem;
+    width: 2rem;
 
     svg {
-      fill: currentColor; // Inherits button color — always matches the label.
-      height: 1.75rem;    // Fill the full 28px canvas
-      width: 1.75rem;
+      height: 2rem; // Fill the full 28px canvas
+      width: 2rem;
     }
-  }
-
-  &__label {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 1.125rem; // 18px
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    line-height: 1.2;
-    text-transform: uppercase;
-    white-space: nowrap;
   }
 
   // Panel — shown/hidden and ARIA-wired by Tab Group JS.
   &__panel {
-    background-color: #fff;
-    background-image:
-      linear-gradient(90deg, rgba(210, 203, 178, 0.1) 0%, rgba(210, 203, 178, 0.1) 100%),
-      linear-gradient(90deg, #fff 0%, #fff 100%);
-    border-radius: 0 8px 8px;
+    background-color: hsl(
+      52.5deg 25% 93.73%
+    ); // Coffee milk without transparency since it sits on navy, not white
     margin-top: -1.625rem; // pulls up behind the tablist row
     position: relative;
     z-index: 1;
@@ -74,6 +40,6 @@
   }
 
   &__panel-inner {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
   }
 }
