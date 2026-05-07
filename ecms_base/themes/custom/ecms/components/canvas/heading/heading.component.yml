@@ -4,10 +4,11 @@ status: stable
 group: RI.Gov
 description: |
   Thin wrapper around the theme's existing `.qh__h1`–`.qh__h6` type
-  scale. The `level` prop sets both the semantic element and the
-  visual class — no separate style picker. Color, font, weight, and
-  spacing all come from the global typography rules and the parent
-  section theme.
+  scale. `level` sets the semantic element and `style` (optional) sets
+  the visual class — so an `h2` can be styled like an `h4`. When
+  `style` is unset the visual class follows `level`. Color, font,
+  weight, and spacing all come from the global typography rules and
+  the parent section theme.
 props:
   type: object
   required:
@@ -22,6 +23,7 @@ props:
     level:
       type: string
       title: Level
+      description: Semantic HTML element.
       enum:
         - h1
         - h2
@@ -37,3 +39,22 @@ props:
         h5: H5
         h6: H6
       examples: [ h2 ]
+    style:
+      type: string
+      title: Style
+      description: Visual style. Leave unset to match the level.
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+      meta:enum:
+        h1: H1
+        h2: H2
+        h3: H3
+        h4: H4
+        h5: H5
+        h6: H6
+      examples: [ h4 ]

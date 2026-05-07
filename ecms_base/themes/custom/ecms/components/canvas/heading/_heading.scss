@@ -26,3 +26,21 @@
     font-weight: 400;
   }
 }
+
+.canvas-heading.qh__h3 {
+  font-family: $font-sans-fallback;
+  font-size: 2rem; // 32px
+  line-height: 1.2; // 38px at 32px
+  // currentColor lets mini-themes (qh__t__*) repaint via the cascade —
+  // outside any theme this still resolves to the palette default fg.
+  color: currentColor;
+
+  html:where(.wf-active) & {
+    font-family: $font-sans-static;
+  }
+
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-sans-vf);
+    font-weight: 400;
+  }
+}
