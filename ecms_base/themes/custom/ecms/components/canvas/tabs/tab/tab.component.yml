@@ -66,6 +66,7 @@ props:
         - social-linkedin
         - social-twitter
         - social-youtube
+        - sparkles
         - users
         - users-line
       examples: ['home']
