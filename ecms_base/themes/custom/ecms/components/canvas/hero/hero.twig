@@ -46,7 +46,25 @@
   <div class="canvas-hero__bar">
     <div class="canvas-hero__bar-inner">
       <div class="canvas-hero__search">
-        {% block search_box %}{% endblock %}
+        {# TODO: replace with the live Drupal search block once wired up #}
+        <form class="canvas-hero__search-form" role="search" action="/" method="get">
+          <span class="canvas-hero__search-icon qh__icon" aria-hidden="true">
+            {% include '@icons/sparkles.svg' %}
+          </span>
+          <input
+            class="canvas-hero__search-input"
+            type="search"
+            name="search_input"
+            aria-label="{{ 'Search'|t }}"
+            placeholder="{{ 'How can we help you today?'|t }}"
+          />
+          <button class="canvas-hero__search-submit" type="submit">
+            <span class="qh__icon" aria-hidden="true">
+              {% include '@icons/search-glass.svg' %}
+            </span>
+            <span class="visually-hidden">{{ 'Submit'|t }}</span>
+          </button>
+        </form>
       </div>
 
       <div class="canvas-hero__icon-links">
@@ -58,6 +76,10 @@
   <div class="canvas-hero__footer">
     <div class="canvas-hero__footer-inner">
       {% block footer %}{% endblock %}
+    </div>
+
+    <div class="canvas-hero__wave canvas-hero__wave--bottom" aria-hidden="true">
+      {% include '@icons/brand-wave.svg' %}
     </div>
   </div>
 </section>
