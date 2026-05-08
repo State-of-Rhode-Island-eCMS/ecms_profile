@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Drupal\ecms_multisite_search\Plugin\search_api\backend;
 
-use Drupal\acquia_search\Plugin\search_api\backend\AcquiaSearchSolrBackend;
 use Drupal\search_api\IndexInterface;
+use Drupal\search_api_solr\Plugin\search_api\backend\SearchApiSolrBackend;
 
 /**
- * Extends Acquia Search Solr to recognise the solr_multisite_all datasource.
+ * Extends Search API Solr to recognise the solr_multisite_all datasource.
  *
  * SearchApiSolrBackend::getDatasourceConfig() only checks for the
  * 'solr_document' and 'solr_multisite_document' plugin IDs. When the index
@@ -22,11 +22,11 @@ use Drupal\search_api\IndexInterface;
  *
  * @SearchApiBackend(
  *   id = "ecms_acquia_search_solr",
- *   label = @Translation("eCMS Acquia Search Solr"),
- *   description = @Translation("Acquia Search Solr backend with support for the solr_multisite_all datasource used by the eCMS cross-site aggregator.")
+ *   label = @Translation("eCMS Multisite Search Solr"),
+ *   description = @Translation("SearchStax-backed Solr backend with support for the solr_multisite_all datasource used by the eCMS cross-site aggregator.")
  * )
  */
-class EcmsMultisiteSolrBackend extends AcquiaSearchSolrBackend {
+class EcmsMultisiteSolrBackend extends SearchApiSolrBackend {
 
   /**
    * {@inheritdoc}

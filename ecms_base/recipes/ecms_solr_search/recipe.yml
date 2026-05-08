@@ -6,6 +6,7 @@ install:
   - acquia_search
   - search_api
   - search_api_solr
+  - searchstax
   - ecms_basic_page
   - ecms_landing_page
   - ecms_location
@@ -15,6 +16,7 @@ config:
   import:
     search_api:
       - search_api.server.acquia_search_server
+      - search_api.server.searchstax
       - search_api.index.acquia_search_index
     views:
       - views.view.acquia_search
