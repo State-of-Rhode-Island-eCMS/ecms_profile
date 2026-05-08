@@ -182,6 +182,7 @@
         "drupal/search_api": "^1.18",
         "drupal/search_api_exclude": "^2.0",
         "drupal/search_api_solr": "^4.2",
+        "drupal/searchstax": "^1.6",
         "drupal/seckit": "^2.0",
         "drupal/simple_menu_permissions": "^3.0.1",
         "drupal/simple_oauth": "^6.0",
