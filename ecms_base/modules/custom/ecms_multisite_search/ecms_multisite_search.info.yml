@@ -1,0 +1,10 @@
+name: 'eCMS Multisite Search'
+description: 'Provides cross-site Solr search across all factory sites.'
+type: module
+core_version_requirement: ^9 || ^10 || ^11
+package: eCMS
+dependencies:
+  - search_api:search_api
+  - search_api_solr:search_api_solr
+  - acquia_search:acquia_search
+  - ecms_solr_search:ecms_solr_search

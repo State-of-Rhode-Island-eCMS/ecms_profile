@@ -1,0 +1,7 @@
+services:
+  ecms_multisite_search.seed_commands:
+    class: \Drupal\ecms_multisite_search\Commands\MultisiteSearchSeedCommands
+    arguments:
+      - '@http_client'
+    tags:
+      - { name: drush.command }

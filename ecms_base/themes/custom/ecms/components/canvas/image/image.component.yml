@@ -1,0 +1,26 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Image
+group: 'RI.Gov'
+status: stable
+description: |
+  Standalone image for Canvas pages. Renders a media-library or
+  URL-sourced image via the Canvas image pipeline, wrapped in a <figure>.
+  Optional caption renders as <figcaption>.
+props:
+  type: object
+  required:
+    - image
+  properties:
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+      examples:
+        - src: images/placeholder.png
+          alt: 'Placeholder image'
+          width: 190
+          height: 287
+    caption:
+      type: [string, 'null']
+      title: Caption
+      default: null

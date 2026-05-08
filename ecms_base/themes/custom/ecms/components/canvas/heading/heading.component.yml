@@ -1,0 +1,39 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Heading
+status: stable
+group: RI.Gov
+description: |
+  Thin wrapper around the theme's existing `.qh__h1`–`.qh__h6` type
+  scale. The `level` prop sets both the semantic element and the
+  visual class — no separate style picker. Color, font, weight, and
+  spacing all come from the global typography rules and the parent
+  section theme.
+props:
+  type: object
+  required:
+    - text
+    - level
+  properties:
+    text:
+      type: string
+      title: Text
+      examples:
+        - Get to Know Rhode Island
+    level:
+      type: string
+      title: Level
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+      meta:enum:
+        h1: H1
+        h2: H2
+        h3: H3
+        h4: H4
+        h5: H5
+        h6: H6
+      examples: [ h2 ]

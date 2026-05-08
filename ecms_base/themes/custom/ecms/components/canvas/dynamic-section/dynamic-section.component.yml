@@ -1,0 +1,181 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Dynamic Section
+status: experimental
+group: RI.Gov
+description: |
+  Full-bleed themed section with a configurable 1–4 column × 1–2 row grid
+  (max 8 cells) and a header area above. Background paints edge-to-edge;
+  content inside is clamped to the site's `--content-max-width`, matching
+  the footer/header convention. Theme maps to existing `qh__t__*` classes.
+props:
+  type: object
+  required:
+    - column_count
+    - row_count
+    - cell_align_x
+    - cell_align_y
+  properties:
+    theme:
+      title: Theme
+      type: string
+      description: Background + foreground color palette. Maps to the `qh__t__*` theme classes. `inherit` leaves colors up to the surrounding page.
+      enum:
+        - inherit
+        - primary
+        - primary-light
+        - secondary
+        - tertiary
+        - coffee-milk
+      meta:enum:
+        inherit: Inherit
+        primary: Primary
+        primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
+        coffee-milk: Coffee milk
+      examples: [ inherit ]
+
+    additional_classes:
+      title: Additional CSS classes
+      type: string
+      description: Additional CSS classes added to the section root (space-separated).
+
+    column_count:
+      title: Column count
+      type: integer
+      enum: [1, 2, 3, 4]
+      meta:enum:
+        1: One
+        2: Two
+        3: Three
+        4: Four
+      examples: [ 1 ]
+    row_count:
+      title: Row count
+      type: integer
+      description: Max 2 rows. Combined with up to 4 columns, yields 8 cells maximum.
+      enum: [1, 2]
+      meta:enum:
+        1: One
+        2: Two
+      examples: [ 1 ]
+
+    two_column_layout:
+      title: Two-column split
+      type: string
+      description: Only applies when Column count is 2.
+      enum:
+        - '50 / 50'
+        - '25 / 75'
+        - '33 / 67'
+        - '75 / 25'
+        - '67 / 33'
+      meta:enum:
+        '50 / 50': '50% / 50%'
+        '25 / 75': '25% / 75%'
+        '33 / 67': '33% / 67%'
+        '75 / 25': '75% / 25%'
+        '67 / 33': '67% / 33%'
+      examples: [ '50 / 50' ]
+    three_column_layout:
+      title: Three-column split
+      type: string
+      description: Only applies when Column count is 3.
+      enum:
+        - '33 / 33 / 33'
+        - '50 / 25 / 25'
+        - '25 / 50 / 25'
+        - '25 / 25 / 50'
+      meta:enum:
+        '33 / 33 / 33': '33% / 33% / 33%'
+        '50 / 25 / 25': '50% / 25% / 25%'
+        '25 / 50 / 25': '25% / 50% / 25%'
+        '25 / 25 / 50': '25% / 25% / 50%'
+      examples: [ '33 / 33 / 33' ]
+
+    grid_gap:
+      title: Gap
+      type: string
+      description: "Space between grid cells. `default` uses the standard grid gap; `none` removes it entirely (useful when a cell divider is the only separator)."
+      enum:
+        - default
+        - none
+        - condensed
+        - spacious
+      meta:enum:
+        default: Default
+        none: None
+        condensed: Condensed
+        spacious: Spacious
+      examples: [ default ]
+
+    cell_divider:
+      title: Cell divider
+      type: string
+      description: "Draws a 1 px line centred in the column gap between adjacent cells. Adapts to the active theme colour."
+      enum:
+        - none
+        - line
+      meta:enum:
+        none: None
+        line: Line
+      examples: [ none ]
+
+    cell_align_x:
+      title: Cell horizontal alignment
+      type: string
+      description: Horizontal alignment of content within every grid cell.
+      enum:
+        - default
+        - start
+        - center
+        - end
+      meta:enum:
+        default: Default
+        start: Start
+        center: Center
+        end: End
+      examples: [ default ]
+    cell_align_y:
+      title: Cell vertical alignment
+      type: string
+      description: Vertical alignment of content within every grid cell. `stretch` makes all columns equal height by expanding cell children to fill the row.
+      enum:
+        - default
+        - top
+        - center
+        - bottom
+        - stretch
+      meta:enum:
+        default: Default
+        top: Top
+        center: Center
+        bottom: Bottom
+        stretch: Stretch (equal-height columns)
+      examples: [ default ]
+
+slots:
+  header:
+    title: Header
+    description: Heading / intro content above the grid.
+  cell_1:
+    title: Cell 1
+  cell_2:
+    title: Cell 2
+  cell_3:
+    title: Cell 3
+  cell_4:
+    title: Cell 4
+  cell_5:
+    title: Cell 5
+  cell_6:
+    title: Cell 6
+  cell_7:
+    title: Cell 7
+  cell_8:
+    title: Cell 8
+
+thirdPartySettings:
+  sdcStorybook:
+    disabledStories:
+      - all

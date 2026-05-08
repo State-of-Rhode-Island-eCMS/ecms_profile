@@ -1,0 +1,32 @@
+{#
+  Canvas Image Card
+  Thin wrapper around `.qh__grid-card .qh__grid-card--image`. The whole card is
+  clickable via the qh__cta pattern; the existing `_grid-card.scss` partial
+  paints all visual styling.
+
+  Props:
+    image     - Canvas image object: { src, alt, width, height, … }
+    link_url  - URL the card links to
+    link_text - Visible CTA text rendered as h5
+#}
+<article {{ attributes.addClass(['qh__grid-card', 'qh__grid-card--image']) }}>
+  {% if image.src %}
+    <div class="qh__grid-card__image">
+      {% include 'canvas:image' with image|merge({
+        alt: image.alt|default(''),
+        loading: 'lazy',
+      }) only %}
+    </div>
+  {% endif %}
+
+  {% if link_url %}
+    <div class="qh__grid-card__cta qh__u__no-external">
+      <a class="qh__h5 qh__cta__link" href="{{ link_url }}">
+        <span class="qh__grid-card__text">{{ link_text }}</span>
+        <span class="qh__grid-card__arrow" aria-hidden="true">
+          {% include '@icons/arrow-right.svg' %}
+        </span>
+      </a>
+    </div>
+  {% endif %}
+</article>

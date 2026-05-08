@@ -1,6 +1,8 @@
 # Media Item component
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Teaser Executive Order
+group: 'ZZ-Incompatible'
+noUi: true
 description: Teaser view for executive orders
 props:
   type: object

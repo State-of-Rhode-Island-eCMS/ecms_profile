@@ -1,0 +1,25 @@
+{#
+  Canvas Image
+  Standalone image for Canvas pages. Wraps the Canvas image renderer
+  in a <figure> with an optional <figcaption>.
+
+  Props:
+    image   - Canvas image object: { src, alt, width, height, srcset, ... }
+    caption - Optional caption text
+#}
+<figure {{ attributes.addClass('canvas-image') }}>
+  {% if image and image.src %}
+    <img
+      src="{{ image.src }}"
+      alt="{{ image.alt|default('') }}"
+      {% if image.width %}width="{{ image.width }}"{% endif %}
+      {% if image.height %}height="{{ image.height }}"{% endif %}
+      loading="lazy"
+      {% if image.srcset %}srcset="{{ image.srcset }}"{% endif %}
+    />
+  {% endif %}
+
+  {% if caption %}
+    <figcaption>{{ caption }}</figcaption>
+  {% endif %}
+</figure>

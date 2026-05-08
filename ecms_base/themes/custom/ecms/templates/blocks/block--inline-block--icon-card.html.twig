@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display an icon card inline block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules.
+ * - title_prefix: Additional output populated by modules.
+ * - title_suffix: Additional output populated by modules.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set cachebust = content|render %}
+
+{% set block_content = content['#block_content'] %}
+
+{# Determine which icon to render #}
+{% set media_library_icon = FALSE %}
+{% set icon = '' %}
+
+{% if content.field_icon_library_icon.0.media_library_icon %}
+  {% set media_library_icon = TRUE %}
+  {% set icon = content.field_icon_library_icon.0.media_library_icon %}
+{% elseif content.field_icon_library_icon.0.pl_icon %}
+  {% set icon = content.field_icon_library_icon.0.pl_icon|render %}
+{% endif %}
+
+{# Prepare the link #}
+{% set link_url = FALSE %}
+{% if not block_content.field_link is empty %}
+  {% if block_content.field_link.0.url.external %}
+    {% set link_url = content.field_link.0['#url'].getUri() %}
+  {% else %}
+    {% set link_url = content.field_link.0['#url'] %}
+  {% endif %}
+{% endif %}
+
+{# Link text comes from block label #}
+{% set link_text = label %}
+
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {# Add block translate link manually for now until core contextual links issue is resolved.
+     @see: https://www.drupal.org/node/3020876
+  #}
+  {% if logged_in and current_node_has_translation %}
+    <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
+  {% endif %}
+
+  {{ include('ecms:grid-card', {
+    variant: 'icon',
+    icon: icon,
+    media_library_icon: media_library_icon,
+    link_url: link_url,
+    link_text: link_text,
+  }, with_context = FALSE) }}
+</div>

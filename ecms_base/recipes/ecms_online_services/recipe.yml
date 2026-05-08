@@ -1,0 +1,447 @@
+name: 'eCMS RIGov Online Services'
+description: 'Online Service node content type with taxonomy vocabulary and all associated fields for RI.gov online services.'
+type: 'eCMS'
+
+# Prerequisites:
+# - The editorial workflow (workflows.workflow.editorial) must exist for the
+#   moderation_state form widget to function correctly.
+
+install:
+  - node
+  - field
+  - text
+  - link
+  - options
+  - taxonomy
+  - metatag
+  - content_moderation
+  - language
+  - content_translation
+  - rabbit_hole
+
+config:
+  strict:
+    # Field storages are strict because they affect the database schema.
+    - field.storage.node.field_agency_or_muni
+    - field.storage.node.field_service_description
+    - field.storage.node.field_service_type
+    - field.storage.node.field_service_url
+    - field.storage.node.field_meta_tags_online_services
+  import:
+    node:
+      - node.type.online_service
+      - core.base_field_override.node.online_service.title
+      - core.base_field_override.node.online_service.promote
+    taxonomy:
+      - taxonomy.vocabulary.online_services
+    rabbit_hole:
+      - rabbit_hole.behavior_settings.node_type_online_service
+      - rabbit_hole.behavior_settings.taxonomy_vocabulary_online_services
+  actions:
+    # -------------------------------------------------------------------------
+    # Node: online_service field instances
+    # -------------------------------------------------------------------------
+    field.field.node.online_service.field_agency_or_muni:
+      ensure_exists:
+        entity_type: node
+        bundle: online_service
+        field_name: field_agency_or_muni
+        field_type: list_string
+      setLabel: 'Agency or Muni'
+      setTranslatable: false
+
+    field.field.node.online_service.field_service_description:
+      ensure_exists:
+        entity_type: node
+        bundle: online_service
+        field_name: field_service_description
+        field_type: text_long
+      setLabel: 'Service Description'
+      setRequired: true
+      setTranslatable: false
+
+    field.field.node.online_service.field_service_type:
+      ensure_exists:
+        entity_type: node
+        bundle: online_service
+        field_name: field_service_type
+        field_type: entity_reference
+      setLabel: 'Online-Service Taxonomy'
+      setTranslatable: false
+
+    field.field.node.online_service.field_service_url:
+      ensure_exists:
+        entity_type: node
+        bundle: online_service
+        field_name: field_service_url
+        field_type: link
+      setLabel: 'Service URL'
+      setTranslatable: false
+
+    field.field.node.online_service.field_meta_tags_online_services:
+      ensure_exists:
+        entity_type: node
+        bundle: online_service
+        field_name: field_meta_tags_online_services
+        field_type: metatag
+      setLabel: 'Meta Tags Online Services'
+      setTranslatable: false
+
+    # -------------------------------------------------------------------------
+    # Node: online_service form display
+    # -------------------------------------------------------------------------
+    core.entity_form_display.node.online_service.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: online_service
+        mode: default
+        status: true
+      setComponents:
+        - name: title
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: field_service_url
+          options:
+            type: link_default
+            weight: 1
+            region: content
+            settings:
+              placeholder_url: ''
+              placeholder_title: ''
+            third_party_settings: {  }
+        - name: field_service_description
+          options:
+            type: text_textarea
+            weight: 2
+            region: content
+            settings:
+              rows: 5
+              placeholder: ''
+            third_party_settings: {  }
+        - name: langcode
+          options:
+            type: language_select
+            weight: 3
+            region: content
+            settings:
+              include_locked: true
+            third_party_settings: {  }
+        - name: uid
+          options:
+            type: entity_reference_autocomplete
+            weight: 4
+            region: content
+            settings:
+              match_operator: CONTAINS
+              match_limit: 10
+              size: 60
+              placeholder: ''
+            third_party_settings: {  }
+        - name: created
+          options:
+            type: datetime_timestamp
+            weight: 5
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: translation
+          options:
+            weight: 6
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: promote
+          options:
+            type: boolean_checkbox
+            weight: 7
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+        - name: sticky
+          options:
+            type: boolean_checkbox
+            weight: 8
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+        - name: path
+          options:
+            type: path
+            weight: 9
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: simple_sitemap
+          options:
+            weight: 10
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: url_redirects
+          options:
+            weight: 11
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: moderation_state
+          options:
+            type: moderation_state_default
+            weight: 12
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: status
+          options:
+            type: boolean_checkbox
+            weight: 13
+            region: content
+            settings:
+              display_label: true
+            third_party_settings: {  }
+        - name: field_meta_tags_online_services
+          options:
+            type: metatag_firehose
+            weight: 14
+            region: content
+            settings:
+              sidebar: true
+              use_details: true
+            third_party_settings: {  }
+        - name: field_agency_or_muni
+          options:
+            type: options_select
+            weight: 15
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_type
+          options:
+            type: options_buttons
+            weight: 16
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+
+    # -------------------------------------------------------------------------
+    # Node: online_service default view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.node.online_service.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: online_service
+        mode: default
+        status: true
+      setComponents:
+        - name: search_api_excerpt
+          options:
+            weight: 0
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_description
+          options:
+            type: text_default
+            label: hidden
+            weight: 1
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_url
+          options:
+            type: link
+            label: hidden
+            weight: 2
+            region: content
+            settings:
+              trim_length: 80
+              url_only: true
+              url_plain: false
+              rel: '0'
+              target: '0'
+            third_party_settings: {  }
+        - name: field_agency_or_muni
+          options:
+            type: list_default
+            label: hidden
+            weight: 3
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_type
+          options:
+            type: entity_reference_label
+            label: hidden
+            weight: 4
+            region: content
+            settings:
+              link: false
+            third_party_settings: {  }
+        - name: links
+          options:
+            weight: 5
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - content_moderation_control
+        - entity_print_view_epub
+        - entity_print_view_pdf
+        - entity_print_view_word_docx
+        - field_meta_tags_online_services
+        - langcode
+
+    # -------------------------------------------------------------------------
+    # Node: online_service teaser view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.node.online_service.teaser:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: online_service
+        mode: teaser
+        status: true
+      setComponents:
+        - name: field_service_description
+          options:
+            type: text_default
+            label: hidden
+            weight: 0
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_url
+          options:
+            type: link
+            label: hidden
+            weight: 1
+            region: content
+            settings:
+              trim_length: 80
+              url_only: false
+              url_plain: false
+              rel: ''
+              target: ''
+            third_party_settings: {  }
+        - name: content_moderation_control
+          options:
+            weight: 2
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: links
+          options:
+            weight: 3
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - entity_print_view_epub
+        - entity_print_view_pdf
+        - entity_print_view_word_docx
+        - field_agency_or_muni
+        - field_meta_tags_online_services
+        - field_service_type
+        - langcode
+        - search_api_excerpt
+
+    # -------------------------------------------------------------------------
+    # Node: online_service search_result view display
+    # -------------------------------------------------------------------------
+    core.entity_view_display.node.online_service.search_result:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: online_service
+        mode: search_result
+        status: true
+      setComponents:
+        - name: field_service_url
+          options:
+            type: link
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              trim_length: 80
+              url_only: false
+              url_plain: false
+              rel: ''
+              target: ''
+            third_party_settings: {  }
+        - name: field_service_description
+          options:
+            type: text_default
+            label: hidden
+            weight: 1
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: search_api_excerpt
+          options:
+            weight: 2
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: content_moderation_control
+          options:
+            weight: 3
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: links
+          options:
+            weight: 4
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_type
+          options:
+            type: entity_reference_label
+            label: hidden
+            weight: 5
+            region: content
+            settings:
+              link: true
+            third_party_settings: {  }
+        - name: field_agency_or_muni
+          options:
+            type: list_default
+            label: hidden
+            weight: 6
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - entity_print_view_epub
+        - entity_print_view_pdf
+        - entity_print_view_word_docx
+        - field_meta_tags_online_services
+        - langcode
+
+    # -------------------------------------------------------------------------
+    # Language content settings
+    # -------------------------------------------------------------------------
+    language.content_settings.node.online_service:
+      ensure_exists:
+        id: node.online_service
+        target_entity_type_id: node
+        target_bundle: online_service
+      setProperties:
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+
+    language.content_settings.taxonomy_term.online_services:
+      ensure_exists:
+        id: taxonomy_term.online_services
+        target_entity_type_id: taxonomy_term
+        target_bundle: online_services
+      setProperties:
+        language_alterable: false

@@ -30,3 +30,19 @@ compilations:
 
 - web/profiles/contrib/ecms_profile/themes/custom/**/*.scss
 - web/profiles/contrib/ecms_profile/modules/custom/**/*.es6.js
+
+And/or run:
+
+```bash
+# If not already installed
+ddev npm install
+# then
+ddev gulp build
+```
+
+## Logging into Drupal
+
+The production system uses Windows SSO via Azure. The login to the Drupal admin locally, use the URL `/user/login?showcore`.
+
+Alternatively, to reset the user and get into the admin, use `ddev drush uli`.
+

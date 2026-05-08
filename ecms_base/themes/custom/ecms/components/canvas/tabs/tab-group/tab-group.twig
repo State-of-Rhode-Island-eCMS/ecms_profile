@@ -1,0 +1,28 @@
+{#
+  Canvas Tab Group
+  Wrapper for one or more Canvas Tab components. JavaScript collects each
+  Tab's button into a shared tablist rendered above the panels, then wires
+  ARIA attributes and keyboard navigation.
+
+  Slots:
+    tabs - Place Canvas Tab components here.
+
+  Usage:
+  {% embed "@canvas/tabs/tabs.twig" %}
+    {% block tabs %}
+      {% embed "@canvas/tab/tab.twig" with { label: 'Residents', icon: 'home' } %}
+        {% block panel %}
+          {% include "@canvas/text-cta/text-cta.twig" with { ... } %}
+        {% endblock %}
+      {% endembed %}
+      {% embed "@canvas/tab/tab.twig" with { label: 'Businesses', icon: 'globe' } %}
+        {% block panel %}
+          {% include "@canvas/grid/grid.twig" with { ... } %}
+        {% endblock %}
+      {% endembed %}
+    {% endblock %}
+  {% endembed %}
+#}
+<div class="canvas-tab-group" data-canvas-tab-group>
+  {% block tabs %}{% endblock %}
+</div>

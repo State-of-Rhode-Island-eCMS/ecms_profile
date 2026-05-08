@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: { }
+id: content_publisher
+label: 'Content Publisher'
+weight: 5
+is_admin: false
+permissions: { }

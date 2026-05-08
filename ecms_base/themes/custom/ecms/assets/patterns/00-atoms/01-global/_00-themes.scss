@@ -133,6 +133,138 @@
   }
 }
 
+@mixin qh-secondary-theme {
+  background-color: var(--fc__secondary__bg);
+  color: var(--fc__secondary__fg);
+
+  #{$all-headers} {
+    color: currentColor;
+  }
+
+  a:not(.qh__btn),
+  a:not(.qh__btn):visited {
+    color: var(--fc__secondary__link, currentColor);
+  }
+
+  a:not(.qh__btn):hover,
+  a:not(.qh__btn):focus,
+  a:not(.qh__btn):active {
+    color: var(--fc__secondary__link--hover, var(--fc__secondary__link), currentColor);
+  }
+
+  a:not(.qh__btn):focus {
+    outline-color: var(--fc__secondary__link--hover, var(--fc__secondary__link), currentColor);
+  }
+
+  .dark & {
+    background-color: var(--fc__secondary__bg--dark);
+    color: var(--fc__secondary__fg--dark);
+
+    a:not(.qh__btn),
+    a:not(.qh__btn):visited {
+      color: var(--fc__secondary__link--dark, currentColor);
+    }
+
+    a:not(.qh__btn):hover,
+    a:not(.qh__btn):focus,
+    a:not(.qh__btn):active {
+      color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
+    }
+
+    a:not(.qh__btn):focus {
+      outline-color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      background-color: var(--fc__secondary__bg--dark);
+      color: var(--fc__secondary__fg--dark);
+
+      a:not(.qh__btn),
+      a:not(.qh__btn):visited {
+        color: var(--fc__secondary__link--dark, currentColor);
+      }
+
+      a:not(.qh__btn):hover,
+      a:not(.qh__btn):focus,
+      a:not(.qh__btn):active {
+        color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
+      }
+
+      a:not(.qh__btn):focus {
+        outline-color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
+      }
+    }
+  }
+}
+
+@mixin qh-tertiary-theme {
+  background-color: var(--fc__tertiary__bg);
+  color: var(--fc__tertiary__fg);
+
+  #{$all-headers} {
+    color: currentColor;
+  }
+
+  a:not(.qh__btn),
+  a:not(.qh__btn):visited {
+    color: var(--fc__tertiary__link, currentColor);
+  }
+
+  a:not(.qh__btn):hover,
+  a:not(.qh__btn):focus,
+  a:not(.qh__btn):active {
+    color: var(--fc__tertiary__link--hover, var(--fc__tertiary__link), currentColor);
+  }
+
+  a:not(.qh__btn):focus {
+    outline-color: var(--fc__tertiary__link--hover, var(--fc__tertiary__link), currentColor);
+  }
+
+  .dark & {
+    background-color: var(--fc__tertiary__bg--dark);
+    color: var(--fc__tertiary__fg--dark);
+
+    a:not(.qh__btn),
+    a:not(.qh__btn):visited {
+      color: var(--fc__tertiary__link--dark, currentColor);
+    }
+
+    a:not(.qh__btn):hover,
+    a:not(.qh__btn):focus,
+    a:not(.qh__btn):active {
+      color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
+    }
+
+    a:not(.qh__btn):focus {
+      outline-color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light) & {
+      background-color: var(--fc__tertiary__bg--dark);
+      color: var(--fc__tertiary__fg--dark);
+
+      a:not(.qh__btn),
+      a:not(.qh__btn):visited {
+        color: var(--fc__tertiary__link--dark, currentColor);
+      }
+
+      a:not(.qh__btn):hover,
+      a:not(.qh__btn):focus,
+      a:not(.qh__btn):active {
+        color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
+      }
+
+      a:not(.qh__btn):focus {
+        outline-color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
+      }
+    }
+  }
+}
+
 // Primary
 .qh__t__primary,
 .qh__collection__primary-bg .qh__text-card {
@@ -152,6 +284,18 @@
 
 .qh__tc__primary--light {
   @include qh-primary-light-theme;
+}
+
+// Secondary
+.qh__t__secondary,
+.qh__tc__secondary {
+  @include qh-secondary-theme;
+}
+
+// Tertiary
+.qh__t__tertiary,
+.qh__tc__tertiary {
+  @include qh-tertiary-theme;
 }
 
 

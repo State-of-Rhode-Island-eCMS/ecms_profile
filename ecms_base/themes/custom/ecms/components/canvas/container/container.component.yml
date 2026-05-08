@@ -1,0 +1,16 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Container
+group: RI.Gov
+description: >
+  Applies the theme's max-width container constraint (--content-max-width) with
+  standard side padding (--section-sides) and auto centering. Use this to wrap
+  any content that should be constrained to the page layout width.
+props:
+  type: object
+  properties:
+    modifier:
+      title: Optional BEM modifier class
+      type: string
+slots:
+  content:
+    title: Container content

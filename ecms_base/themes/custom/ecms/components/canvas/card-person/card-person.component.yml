@@ -1,0 +1,28 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card Person
+group: RI.Gov
+description: Compact person profile card with circular headshot, name, job title, and social media links.
+props:
+  type: object
+  properties:
+    photo:
+      title: Headshot image
+      type: object
+      $ref: 'json-schema-definitions://canvas.module/image'
+      examples:
+        - src: images/placeholder.png
+          alt: 'Person placeholder'
+          width: 400
+          height: 400
+    job_title:
+      title: Job title
+      type: string
+    first_name:
+      title: First name
+      type: string
+    last_name:
+      title: Last name
+      type: string
+slots:
+  social_links:
+    title: Social link buttons

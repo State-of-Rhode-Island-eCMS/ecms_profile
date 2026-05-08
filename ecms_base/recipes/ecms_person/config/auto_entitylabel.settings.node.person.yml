@@ -1,0 +1,6 @@
+status: 1
+pattern: '[node:field_person_first_name] [node:field_person_last_name]'
+escape: false
+dependencies:
+  config:
+    - node.type.person

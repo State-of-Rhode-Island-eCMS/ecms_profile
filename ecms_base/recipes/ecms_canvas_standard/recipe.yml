@@ -1,0 +1,55 @@
+name: 'ECMS Canvas Standard'
+description: 'Enables standard Canvas components for ECMS'
+type: 'content'
+recipes:
+  - ecms_canvas
+config:
+  strict: false
+  import:
+    canvas:
+      - canvas.pattern.rigovhero
+  actions:
+    canvas.component.sdc.ecms.*:
+      setStatus: true
+    canvas.component.block.autologout_warning_block:
+      setStatus: false
+    canvas.component.block.ecms_hotel_listing:
+      setStatus: false
+    canvas.component.block.ecms_promotions_global:
+      setStatus: false
+    canvas.component.block.ecms_search_block:
+      setStatus: true
+    canvas.component.block.ecms_search_state_block:
+      setStatus: false
+    canvas.component.block.gtranslate_block:
+      setStatus: false
+    canvas.component.block.moderation_dashboard_activity:
+      setStatus: false
+    canvas.component.block.moderation_dashboard_add_links:
+      setStatus: false
+    canvas.component.block.openid_connect_login:
+      setStatus: false
+    canvas.component.block.language_block.*:
+      setStatus: false
+    canvas.component.block.moderation_dashboard.*:
+      setStatus: false
+    canvas.component.block.system_branding_block:
+      setStatus: false
+    canvas.component.block.system_breadcrumb_block:
+      setStatus: false
+    canvas.component.block.system_clear_cache_block:
+      setStatus: false
+    canvas.component.block.system_messages_block:
+      setStatus: false
+    canvas.component.block.system_powered_by_block:
+      setStatus: false
+#    canvas.component.block.purge_ui_block:
+#      setStatus: false
+    canvas.component.block.webform_block:
+      setStatus: false
+    canvas.component.block.system_menu_block.*:
+      setStatus: false
+    canvas.component.block.views_block.*:
+      setStatus: false
+    canvas.component.block.views_exposed_filter_block.*:
+      setStatus: false

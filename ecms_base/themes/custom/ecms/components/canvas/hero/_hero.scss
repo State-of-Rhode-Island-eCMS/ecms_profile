@@ -1,0 +1,246 @@
+// canvas-hero
+// Full-bleed photo banner with a wave bottom edge; navy bar below for search + icon-links.
+// Image URL and opacity are passed via inline CSS custom properties on the <section>.
+//
+// Container queries (not viewport queries) are used for layout breakpoints so that
+// edit mode and public view behave identically regardless of Canvas's iframe scaling.
+
+.canvas-hero {
+  container-name: canvas-hero;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+
+  // ---------------------------------------------------------------------------
+  // Banner — the full-width photo section
+  // ---------------------------------------------------------------------------
+  &__banner {
+    height: 480px;
+    overflow: hidden;
+    position: relative;
+
+    @container canvas-hero (max-width: #{$bp--large-value * 1rem}) {
+      height: 320px;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Photo layer — background-image div, fills the banner
+  // ---------------------------------------------------------------------------
+  &__image {
+    background-image: var(--hero-image);
+    background-position: center center;
+    background-size: cover;
+    inset: 0;
+    opacity: var(--hero-image-opacity, 1);
+    position: absolute;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Banner inner — max-width container for title and location badge.
+  // Image and wave sit outside this and remain full-bleed.
+  // ---------------------------------------------------------------------------
+  &__banner-inner {
+    height: 100%;
+    margin: 0 auto;
+    max-width: var(--content-max-width, 86rem);
+    padding: 0 var(--section-sides, 1.5rem);
+    position: relative;
+    width: 100%;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Heading — absolute lower-left of the banner inner container
+  // ---------------------------------------------------------------------------
+  &__title-area {
+    bottom: 1.25rem;
+    left: var(--section-sides, 1.5rem);
+    max-width: min(55%, 40rem);
+    position: absolute;
+    z-index: 3;
+
+    @container canvas-hero (max-width: #{$bp--large-value * 1rem}) {
+      bottom: 0.75rem;
+      max-width: 85%;
+    }
+  }
+
+  &__title {
+    color: var(--c__white, #fff);
+    font-family: 'Roboto Slab', serif;
+    font-size: clamp(2rem, 4cqi, 3.5rem);
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Location badge — absolute top-right of the banner (full-bleed)
+  // ---------------------------------------------------------------------------
+  &__location {
+    align-items: center;
+    background-color: rgba(20, 20, 20, 0.75);
+    color: #f0eee5;
+    display: flex;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.875rem;
+    gap: 0.375rem;
+    letter-spacing: 0.02em;
+    padding: 0.375rem 0.625rem;
+    position: absolute;
+    right: 0;
+    top: 1rem;
+    z-index: 2;
+  }
+
+  &__location-icon {
+    flex-shrink: 0;
+    height: 1rem;
+    width: 1rem;
+
+    svg {
+      display: block;
+      fill: currentColor;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Wave SVG — absolute bottom, creates a wavy transition into the navy bar.
+  // Fill inherits currentColor (set to var(--c__navy) on this element) so the
+  // wave blends seamlessly with the bar below.
+  // ---------------------------------------------------------------------------
+  &__wave {
+    bottom: 0;
+    color: var(--c__navy, #293557);
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    z-index: 2;
+
+    svg {
+      display: block;
+      height: 80px;
+      width: 100%;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Bar — full-bleed navy background strip
+  // ---------------------------------------------------------------------------
+  &__bar {
+    background-color: var(--c__navy, #293557);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Bar inner — max-width container; two equal columns: search | icon-links.
+  // Stacks to a single column on narrow containers.
+  //
+  // Uses auto-fit intrinsic grid (not @container) so the responsive collapse
+  // is aggregation-proof — Drupal's CSS optimizer cannot corrupt it.
+  // min(29rem, 100%) ensures each column is at least 29rem wide before a
+  // second column is added; at 1024px viewport this gives 2 columns (≈488px
+  // each), and collapses to 1 column below ≈1000px viewport — close to the
+  // original 62rem / 992px container-query threshold.
+  // ---------------------------------------------------------------------------
+  &__bar-inner {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(29rem, 100%), 1fr));
+    margin: 0 auto;
+    max-width: var(--content-max-width, 86rem);
+    padding: 1.25rem var(--section-sides, 1.5rem);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Search slot wrapper (in bar) — occupies the left column
+  // ---------------------------------------------------------------------------
+  &__search {
+    align-items: center;
+    display: flex;
+    min-width: 0;
+
+    > * {
+      width: 100%;
+    }
+
+    form {
+      display: flex;
+      width: 100%;
+    }
+
+    input[type='search'],
+    input[type='text'] {
+      background-color: #fff;
+      border: 2px solid var(--c__ocean, #95bddf);
+      border-right: 0;
+      border-radius: 6px 0 0 6px;
+      color: var(--c__navy--dark, hsl(224, 37%, 17%));
+      flex: 1 1 auto;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 1rem;
+      height: auto;
+      max-width: 100%;
+      min-width: 0;
+      padding: 0.75rem 1rem;
+      transition: border-color 0.2s ease;
+      width: auto;
+
+      &:focus {
+        border-color: var(--c__hope-gold, hsl(46, 95%, 61%));
+        outline: none;
+      }
+    }
+
+    button[type='submit'],
+    input[type='submit'] {
+      background-color: var(--c__hope-gold, hsl(46, 95%, 61%));
+      border: 2px solid rgba(255, 255, 255, 0.33);
+      border-radius: 0 6px 6px 0;
+      color: var(--c__navy--dark, hsl(224, 37%, 17%));
+      cursor: pointer;
+      flex-shrink: 0;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      padding: 0.75rem 1.25rem;
+      transition: background-color 0.2s ease;
+      width: auto;
+
+      &:hover,
+      &:focus {
+        background-color: var(--c__calamari, hsl(23, 100%, 64%));
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Icon-links grid (in bar) — two-column grid, occupies the right column.
+  // Scale icons and labels up to match the bar's visual weight.
+  // Stacks to a single column on narrow containers (mobile).
+  // ---------------------------------------------------------------------------
+  &__icon-links {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr 1fr;
+
+    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+      grid-template-columns: 1fr;
+    }
+
+    .canvas-icon-link__icon {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+
+    .canvas-icon-link__title {
+      font-size: 1.4375rem;
+    }
+
+    .canvas-icon-link__divider {
+      display: none;
+    }
+  }
+}
