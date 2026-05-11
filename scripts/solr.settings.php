@@ -1,3 +1,4 @@
+<?php
 
 // Search API
 // By default, both servers are redirected to the DDEV-managed local Solr
