@@ -19,8 +19,8 @@ default_value_callback: ''
 settings:
   file_directory: uploaded-icons
   file_extensions: svg
-  max_filesize: ''
-  max_resolution: ''
+  max_filesize: '10 MB'
+  max_resolution: '4000x4000'
   min_resolution: ''
   alt_field: true
   alt_field_required: true
