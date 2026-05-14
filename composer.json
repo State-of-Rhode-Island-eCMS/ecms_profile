@@ -169,7 +169,7 @@
         "drupal/paragraphs": "^1.20",
         "drupal/password_policy": "^4.0",
         "drupal/path_redirect_import": "^2.0",
-        "drupal/pathauto": "^1.15",
+        "drupal/pathauto": "^1.8",
         "drupal/publishcontent": "^1.8",
         "drupal/purge_file": "^1.2",
         "drupal/quick_node_clone": "^1.16",
