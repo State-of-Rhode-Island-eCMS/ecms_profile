@@ -4,35 +4,40 @@
   bar below containing a search form and icon links, and a lower slot
   (max-container width) intended for the tabs component.
 
+  The hero image and its top-right location label are driven by
+  `hero-images.json` (colocated). The manifest is embedded verbatim as a
+  `<script type="application/json">` block; `hero.js` picks one entry at
+  random on every page load, sets `--hero-image`, the image's `aria-label`,
+  and the location pill text. The page cache stays fully warm — randomness
+  is per page-load, client-side.
+
   Props:
-    image - Image object with src, alt, width, height (Canvas image ref)
-    title - Heading text (required)
+    title - Heading text
 
   Slots:
     search_box - Search form block (placed in the navy bar)
     icon_links - One or more canvas/icon-link components (placed in the navy bar)
     footer     - Slot rendered below the bar, max-width container (e.g. tabs)
-
-  Usage:
-  {% include "@canvas/hero/hero.twig" with {
-    image: { src: "/path/to/marina.jpg", alt: "Newport marina", width: 1440, height: 480 },
-    title: "Welcome to the Ocean State",
-  } %}
 #}
-{% if image %}
-  {% set attributes = attributes.setAttribute('style', '--hero-image: url(\'' ~ image.src ~ '\');') %}
-{% endif %}
-<section {{ attributes.addClass('canvas-hero', 'qh__t__primary') }}>
+{% set manifest_json = ecms_read_file('components/canvas/hero/hero-images.json') %}
+{% set image_base = '/' ~ active_theme_path() ~ '/components/canvas/hero/images/' %}
+<section
+  {{ attributes
+    .addClass('canvas-hero', 'qh__t__primary')
+    .setAttribute('data-canvas-hero-image-base', image_base)
+  }}
+>
   <div class="canvas-hero__banner">
-    {% if image %}
-      <div
-        class="canvas-hero__image"
-        role="img"
-        {% if image.alt %}aria-label="{{ image.alt }}"{% else %}aria-hidden="true"{% endif %}
-      ></div>
-    {% endif %}
+    <div class="canvas-hero__image" role="img" aria-hidden="true"></div>
 
     <div class="canvas-hero__banner-inner">
+      <div class="canvas-hero__location" data-canvas-hero-location hidden>
+        <span class="qh__icon" aria-hidden="true">
+          {% include '@icons/map-marker.svg' %}
+        </span>
+        <span class="canvas-hero__location-text"></span>
+      </div>
+
       <div class="canvas-hero__title-area">
         <h1>{{ title }}</h1>
       </div>
@@ -41,6 +46,10 @@
     <div class="canvas-hero__wave" aria-hidden="true">
       {% include '@icons/brand-wave.svg' %}
     </div>
+
+    {% if manifest_json %}
+      <script type="application/json" class="canvas-hero__manifest">{{ manifest_json|raw }}</script>
+    {% endif %}
   </div>
 
   <div class="canvas-hero__bar">

@@ -1,19 +1,10 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Hero
 group: RI.Gov
-description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs).
+description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs). Image is randomized per page load from hero-images.json; the location label in the top-right travels with the chosen image.
 props:
   type: object
   properties:
-    image:
-      title: Image
-      type: object
-      $ref: 'json-schema-definitions://canvas.module/image'
-      examples:
-        - src: images/placeholder.webp
-          alt: 'Placeholder image'
-          width: 1400
-          height: 900
     title:
       title: Heading text
       type: string
@@ -24,3 +15,9 @@ slots:
     title: Icon link items (one or more canvas/icon-link components)
   footer:
     title: Footer slot (full-width to max container — intended for tabs)
+libraryOverrides:
+  js:
+    hero.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
