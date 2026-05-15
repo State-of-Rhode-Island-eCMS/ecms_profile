@@ -24,8 +24,8 @@
 
     svg,
     img {
-      width: 6rem;
-      height: 6rem;
+      width: 7rem;
+      height: 7rem;
     }
   }
 
@@ -45,7 +45,7 @@
 
       // Support hovering entire card.
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
       }
@@ -60,8 +60,16 @@
   // Image variant is unaffected; it relies on the default
   // `&__cta { margin-top: auto }` to pin the CTA to the bottom while the
   // image stays at the top.
+  &--icon {
+    // Icon color uses the per-palette icon-card token. CTA text intentionally
+    // has no override here — global link cascade in _00-themes.scss paints it
+    // per active mini-theme (qh__t__*) or per palette default outside themes.
+    --qh__grid-card__icon-color: var(--fc__icon__icon-card);
+  }
+
   &--icon &__icon {
     margin-top: auto;
+    color: var(--qh__grid-card__icon-color);
   }
 
   &--icon &__cta {

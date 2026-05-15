@@ -14,10 +14,13 @@
     align-self: stretch;
     color: var(--fc__default__link);
     display: flex;
+    font-size: 1.3125rem; // 21px
     font-weight: 600;
     gap: $input-v-spacing; // 0.75em ≈ 12px
     justify-content: space-between;
-    padding-block: em(19);
+    letter-spacing: 0.02em; // ~0.42px at 21px
+    line-height: 1.2;
+    padding-block: 1.1875rem; // 19px — fixed regardless of font-size
     padding-inline: 0;
     text-decoration: none;
     width: 100%;
@@ -28,7 +31,9 @@
       text-decoration: none;
 
       .canvas-cta__label {
+        text-decoration: underline;
         text-decoration-thickness: 2px;
+        text-underline-offset: 0.125em;
       }
 
       .canvas-cta__icon {
@@ -52,16 +57,15 @@
   }
 
   &__label {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.125em;
+    text-decoration: none;
   }
 
   &__icon {
     display: block;
-    height: 1.125rem;
+    flex-shrink: 0;
+    height: 1.5625rem; // ~25px
     transition: $transition-base;
-    width: 1.125rem;
+    width: 1.5625rem;
 
     svg {
       display: block;

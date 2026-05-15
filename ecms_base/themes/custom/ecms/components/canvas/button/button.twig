@@ -7,11 +7,13 @@
   Props:
     text    - Button label (required)
     link    - URL (required)
-    variant - primary | secondary | accent | link (required)
+    variant - primary | secondary | tertiary | accent | link | text (required)
+    icon    - Optional `@icons` filename (no extension); renders left of label.
 #}
 {% set variant_classes = {
   primary:   'qh__btn',
   secondary: 'qh__btn qh__btn--secondary',
+  tertiary:  'qh__btn qh__btn--tertiary',
   accent:    'qh__btn qh__btn--accent',
   link:      'canvas-cta--link',
   text:      'canvas-cta--text',
@@ -24,6 +26,11 @@
       {% include '@icons/arrow-right.svg' %}
     </span>
   {% else %}
+    {% if icon %}
+      <span class="qh__btn__icon" aria-hidden="true">
+        {% include '@icons/' ~ icon ~ '.svg' %}
+      </span>
+    {% endif %}
     {{ text }}
   {% endif %}
 </a>

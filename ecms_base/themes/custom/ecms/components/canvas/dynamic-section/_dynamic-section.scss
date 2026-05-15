@@ -15,7 +15,11 @@
   container-name: canvas-dynamic-section;
   container-type: inline-size;
   display: block;
-  padding: var(--_gap, #{$general-v-spacing});
+  // Vertical breathing room is decoupled from --_gap so author-driven gap
+  // changes don't shrink the section's top/bottom padding. Horizontal padding
+  // tracks --_gap for symmetry with the grid-cell rhythm.
+  padding-block: 3.75rem; // 60px
+  padding-inline: var(--_gap, #{$general-v-spacing});
 
   &__inner {
     @include qh-content-maxwidth();
@@ -149,6 +153,16 @@
   &--gap-none { --_gap: 0; }
   &--gap-condensed { --_gap: calc(#{$grid-gap} / 2); }
   &--gap-spacious { --_gap: calc(#{$grid-gap} * 2); }
+
+  // ---------------------------------------------------------------------------
+  // Inside a tab panel — the panel's `.canvas-tab__panel-inner` already owns
+  // the outer padding (see _tab.scss), so the section's own padding would
+  // double up. Strip it on the root; the section's `__inner` still handles
+  // max-width clamping and internal grid layout.
+  // ---------------------------------------------------------------------------
+  .canvas-tab__panel & {
+    padding: 0;
+  }
 
   // ---------------------------------------------------------------------------
   // Nested dynamic-sections — suppress horizontal padding on the root element.

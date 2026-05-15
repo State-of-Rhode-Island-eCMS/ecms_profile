@@ -1,0 +1,48 @@
+// canvas-image
+// Standalone image SDC. Two orthogonal controls:
+//   - `size` caps max-width with preset values (full/large/medium/small).
+//   - `aspect_ratio` optionally crops the image to a fixed shape via
+//     aspect-ratio + object-fit: cover. `auto` preserves natural ratio.
+// The figure centers itself within its cell so a capped image doesn't
+// hug the left edge of a wide column. Inner img overrides the global
+// `img { width: 100% }` rule when a size cap is active.
+
+.canvas-image {
+  display: block;
+  margin-inline: auto;
+  max-width: 100%;
+
+  > img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  // Size caps. Without a modifier the figure stays full-width.
+  &--size-large  { max-width: 600px; }
+  &--size-medium { max-width: 400px; }
+  &--size-small  { max-width: 240px; }
+
+  // Aspect-ratio crops. When applied, the inner img fills the figure
+  // and crops via object-fit. `auto` is the unmodified default.
+  &--ratio-16-9 > img,
+  &--ratio-4-3 > img,
+  &--ratio-1-1 > img,
+  &--ratio-3-2 > img,
+  &--ratio-2-3 > img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  &--ratio-16-9 { aspect-ratio: 16 / 9; }
+  &--ratio-4-3  { aspect-ratio: 4 / 3; }
+  &--ratio-1-1  { aspect-ratio: 1 / 1; }
+  &--ratio-3-2  { aspect-ratio: 3 / 2; }
+  &--ratio-2-3  { aspect-ratio: 2 / 3; }
+
+  > figcaption {
+    margin-block-start: 0.5rem;
+  }
+}

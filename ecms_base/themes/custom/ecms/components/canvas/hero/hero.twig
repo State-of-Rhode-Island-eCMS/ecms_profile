@@ -1,31 +1,28 @@
 {#
   Canvas Hero Component
-  Full-bleed photo banner with a wave bottom edge, page heading overlaid at
-  the lower-left, and a navy bar below containing a search form and icon links.
+  Full-bleed photo banner with a wave bottom edge and an overlaid h1, a navy
+  bar below containing a search form and icon links, and a lower slot
+  (max-container width) intended for the tabs component.
 
   Props:
-    image                    - Image object with src, alt, width, height (Canvas image ref)
-    background_image_opacity - Opacity percentage 1–100 (default: 100)
-    title                    - Heading text (required)
-    heading_level            - HTML heading level, 1–6 (default: h1)
-    image_location           - Optional location label shown top-right over the photo
-    modifier                 - Optional BEM modifier class
+    image - Image object with src, alt, width, height (Canvas image ref)
+    title - Heading text (required)
 
   Slots:
-    search_box  - Search form block (placed in the navy bar)
-    icon_links  - One or more canvas/icon-link components (placed in the navy bar)
+    search_box - Search form block (placed in the navy bar)
+    icon_links - One or more canvas/icon-link components (placed in the navy bar)
+    footer     - Slot rendered below the bar, max-width container (e.g. tabs)
 
   Usage:
   {% include "@canvas/hero/hero.twig" with {
     image: { src: "/path/to/marina.jpg", alt: "Newport marina", width: 1440, height: 480 },
     title: "Welcome to the Ocean State",
-    image_location: "Newport",
   } %}
 #}
 {% if image %}
-  {% set attributes = attributes.setAttribute('style', '--hero-image: url(\'' ~ image.src ~ '\'); --hero-image-opacity: ' ~ (background_image_opacity|default(100)) / 100 ~ ';') %}
+  {% set attributes = attributes.setAttribute('style', '--hero-image: url(\'' ~ image.src ~ '\');') %}
 {% endif %}
-<section {{ attributes.addClass('canvas-hero' ~ (modifier ? ' canvas-hero--' ~ modifier : '')) }}>
+<section {{ attributes.addClass('canvas-hero', 'qh__t__primary') }}>
   <div class="canvas-hero__banner">
     {% if image %}
       <div
@@ -37,37 +34,52 @@
 
     <div class="canvas-hero__banner-inner">
       <div class="canvas-hero__title-area">
-        <{{ heading_level|default('h1') }} class="canvas-hero__title">
-          {{ title }}
-        </{{ heading_level|default('h1') }}>
+        <h1>{{ title }}</h1>
       </div>
     </div>
 
-    {% if image_location %}
-      <div class="canvas-hero__location">
-        <span class="canvas-hero__location-icon qh__icon" aria-hidden="true">
-          {% include '@icons/map-marker.svg' %}
-        </span>
-        <span class="canvas-hero__location-text">{{ image_location }}</span>
-      </div>
-    {% endif %}
-
     <div class="canvas-hero__wave" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 C240,80 480,10 720,38 C960,66 1200,18 1440,44 L1440,80 L0,80 Z" fill="currentColor" />
-      </svg>
+      {% include '@icons/brand-wave.svg' %}
     </div>
   </div>
 
   <div class="canvas-hero__bar">
     <div class="canvas-hero__bar-inner">
       <div class="canvas-hero__search">
-        {% block search_box %}{% endblock %}
+        {# TODO: replace with the live Drupal search block once wired up #}
+        <form class="canvas-hero__search-form" role="search" action="/" method="get">
+          <span class="canvas-hero__search-icon qh__icon" aria-hidden="true">
+            {% include '@icons/sparkles.svg' %}
+          </span>
+          <input
+            class="canvas-hero__search-input"
+            type="search"
+            name="search_input"
+            aria-label="{{ 'Search'|t }}"
+            placeholder="{{ 'How can we help you today?'|t }}"
+          />
+          <button class="canvas-hero__search-submit" type="submit">
+            <span class="qh__icon" aria-hidden="true">
+              {% include '@icons/search-glass.svg' %}
+            </span>
+            <span class="visually-hidden">{{ 'Submit'|t }}</span>
+          </button>
+        </form>
       </div>
 
       <div class="canvas-hero__icon-links">
         {% block icon_links %}{% endblock %}
       </div>
+    </div>
+  </div>
+
+  <div class="canvas-hero__footer">
+    <div class="canvas-hero__footer-inner">
+      {% block footer %}{% endblock %}
+    </div>
+
+    <div class="canvas-hero__wave canvas-hero__wave--bottom" aria-hidden="true">
+      {% include '@icons/brand-wave.svg' %}
     </div>
   </div>
 </section>

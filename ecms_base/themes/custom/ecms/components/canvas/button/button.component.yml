@@ -31,13 +31,19 @@ props:
       enum:
         - primary
         - secondary
+        - tertiary
         - accent
         - link
         - text
       meta:enum:
         primary: Primary (default)
         secondary: Secondary
+        tertiary: Tertiary
         accent: Accent
         link: Text Link (with arrow icon)
         text: Text Link (plain)
       examples: [primary]
+    icon:
+      type: string
+      title: Icon (optional, left)
+      description: Icon filename from the `@icons` set without extension (e.g. `house-chimney`). Renders before the label. Most useful with the `tertiary` variant.
