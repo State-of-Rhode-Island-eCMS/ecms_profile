@@ -1,0 +1,20 @@
+[
+  {
+    "key": "newport-1",
+    "file": "hero-newport-1.png",
+    "alt": "Sailboats moored in Newport harbor with the Claiborne Pell Bridge in the background",
+    "location": "Newport"
+  },
+  {
+    "key": "newport-2",
+    "file": "hero-newport-2.png",
+    "alt": "Lighthouse in Newport at sunset",
+    "location": "Newport"
+  },
+  {
+    "key": "pvd-1",
+    "file": "hero-pvd-1.png",
+    "alt": "Providence skyline reflected on the river",
+    "location": "Providence"
+  }
+]
