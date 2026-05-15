@@ -1,4 +1,13 @@
 services:
+  # Twig functions exposed by the ecms distribution.
+  # Hosted here (not in the theme) because Drupal's DrupalKernel only loads
+  # services.yml from modules, never from themes.
+  ecms_distribution.twig_extension:
+    class: Drupal\ecms_distribution\TwigExtension\EcmsTwigExtension
+    arguments: ['@extension.list.theme']
+    tags:
+      - { name: twig.extension }
+
   # ViewsData lives in cache.default, which routes to the shared
   # memcache pool on ACSF. Each site stores an independent copy (per-site key
   # prefix), creating pool pressure proportional to site count. When the pool
