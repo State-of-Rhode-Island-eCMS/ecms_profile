@@ -560,3 +560,14 @@ function ecms_base_update_11213(): void {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Apply recipe to expose landing_page title as a placeable field block.
+ */
+function ecms_base_update_11214(): void {
+  $recipes = [
+    'ecms_landing_page_title_block',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
