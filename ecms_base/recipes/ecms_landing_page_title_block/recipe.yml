@@ -1,0 +1,32 @@
+name: 'eCMS Landing Page — Allow Title Field Block'
+description: 'Exposes the node title as a placeable field_block in Layout Builder for the landing_page full view mode. Adds the title component to the view display (additively) and allowlists its field_block derivative.'
+type: 'eCMS'
+
+install:
+  - ecms_layout
+  - layout_builder
+  - layout_builder_restrictions
+
+config:
+  actions:
+    core.entity_view_display.node.landing_page.full:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: landing_page
+        mode: full
+        status: true
+      setComponent:
+        name: title
+        options:
+          label: hidden
+          type: string
+          settings:
+            link_to_entity: false
+          third_party_settings: {  }
+          weight: -10
+          region: content
+      setProperties:
+        'third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowlisted_blocks.Content fields':
+          - 'field_block:node:landing_page:field_add_modal'
+          - 'field_block:node:landing_page:title'
+          - 'field_block:user:user:changed'
