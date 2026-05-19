@@ -1,0 +1,22 @@
+<article class="qh__card-person">
+  <div class="qh__card-person__image-wrapper">
+    <div class="qh__card-person__headshot">
+      {% if photo and photo.src %}
+        <img src="{{ photo.src }}" alt="{{ photo.alt ?? '' }}" class="qh__card-person__headshot-img">
+      {% endif %}
+    </div>
+  </div>
+  <div class="qh__card-person__content">
+    <div class="qh__card-person__name">
+      {% if job_title %}
+        <p class="qh__card-person__job-title">{{ job_title }}</p>
+      {% endif %}
+      <p class="qh__card-person__full-name">{{ first_name }} {{ last_name }}</p>
+    </div>
+    {% if social_links is not empty %}
+      <div class="qh__card-person__social qh__u__no-external">
+        {% block social_links %}{{ social_links }}{% endblock %}
+      </div>
+    {% endif %}
+  </div>
+</article>

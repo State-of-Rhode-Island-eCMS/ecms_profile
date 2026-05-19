@@ -1,0 +1,90 @@
+name: 'eCMS RIGov Online Services'
+description: 'Search API index, Views exposed search, and Facets for the Online Services feature.'
+type: 'eCMS'
+
+recipes:
+  - ecms_online_services
+
+# Requires: The Acquia Search server (search_api.server.acquia_search_server)
+# must also be configured in the target environment.
+
+install:
+  - search_api
+  - facets
+  - views
+
+config:
+  strict: false
+  import:
+    search_api:
+      - search_api.index.rigov_online_services
+    views:
+      - views.view.online_services
+    facets:
+      - facets.facet_source.search_api__views_block__online_services__block_1
+      - facets.facet.services
+  actions:
+    core.entity_view_display.node.online_service.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: online_service
+        mode: default
+        status: true
+      setComponents:
+        - name: search_api_excerpt
+          options:
+            weight: 0
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_description
+          options:
+            type: text_default
+            label: hidden
+            weight: 1
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_url
+          options:
+            type: link
+            label: hidden
+            weight: 2
+            region: content
+            settings:
+              trim_length: 80
+              url_only: true
+              url_plain: false
+              rel: '0'
+              target: '0'
+            third_party_settings: {  }
+        - name: field_agency_or_muni
+          options:
+            type: list_default
+            label: hidden
+            weight: 3
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+        - name: field_service_type
+          options:
+            type: entity_reference_label
+            label: hidden
+            weight: 4
+            region: content
+            settings:
+              link: false
+            third_party_settings: {  }
+        - name: links
+          options:
+            weight: 5
+            region: content
+            settings: {  }
+            third_party_settings: {  }
+      hideComponents:
+        - content_moderation_control
+        - entity_print_view_epub
+        - entity_print_view_pdf
+        - entity_print_view_word_docx
+        - field_meta_tags_online_services
+        - langcode

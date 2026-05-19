@@ -1,0 +1,13 @@
+.canvas-tab-group {
+  padding: 5rem 0 2.5rem;
+
+  // Tablist injected by JS above the panels.
+  &__tablist {
+    align-items: flex-end;
+    display: flex;
+    gap: 1.25rem;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+}

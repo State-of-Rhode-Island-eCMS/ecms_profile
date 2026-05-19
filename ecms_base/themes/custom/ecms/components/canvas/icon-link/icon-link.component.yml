@@ -1,0 +1,75 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Icon Link
+group: RI.Gov
+description: A linked icon + label with a vertical right-side divider. Designed for horizontal rows inside the canvas/hero icon_links slot.
+props:
+  type: object
+  properties:
+    icon:
+      title: Icon
+      type: string
+      enum:
+        - alarm-bell
+        - anchor-small
+        - arrow-right
+        - box-ballot
+        - building-user
+        - bus
+        - capitol-building
+        - chevron-down
+        - chevron-left
+        - chevron-right
+        - city
+        - close-x
+        - cog
+        - default-logo
+        - download
+        - feed
+        - file-excel
+        - file-generic
+        - file-pdf
+        - file-powerpoint
+        - file-word
+        - globe
+        - guillemot-left
+        - guillemot-right
+        - handshake
+        - home
+        - house-chimney
+        - icon-ios-share
+        - information
+        - link-external
+        - map
+        - map-marker
+        - maple-leaf
+        - plus-minus
+        - ri-state-seal
+        - search-glass
+        - social-blogger
+        - social-blusky
+        - social-facebook
+        - social-flickr
+        - social-instagram
+        - social-linkedin
+        - social-twitter
+        - social-youtube
+        - sparkles
+        - users
+        - users-line
+      examples: [ 'home' ]
+    href:
+      type:
+        - string
+        - 'null'
+      title: Link
+      format: uri-reference
+      examples: [ 'http://www.example.com' ]
+    text:
+      title: Link label text
+      type: string
+    modifier:
+      title: BEM modifier class
+      type: string
+slots:
+  title:
+    title: Link label text

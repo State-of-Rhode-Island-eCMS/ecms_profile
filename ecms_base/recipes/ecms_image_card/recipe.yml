@@ -1,0 +1,124 @@
+name: 'eCMS Image Card Block'
+description: 'Provides the Image Card block type for displaying images with optional links.'
+type: 'eCMS'
+
+install:
+  - block_content
+  - link
+  - media
+  - media_library
+  - language
+  - content_translation
+
+config:
+  strict:
+    - field.storage.block_content.field_link
+  import:
+    block_content:
+      - block_content.type.image_card
+  actions:
+    field.field.block_content.image_card.field_image:
+      ensure_exists:
+        entity_type: block_content
+        bundle: image_card
+        field_name: field_image
+        field_type: entity_reference
+        settings:
+          handler: 'default:media'
+          handler_settings:
+            target_bundles:
+              media_item_image: media_item_image
+            sort:
+              field: _none
+              direction: ASC
+            auto_create: false
+            auto_create_bundle: ''
+      setLabel: Image
+      setRequired: true
+      setTranslatable: false
+
+    field.field.block_content.image_card.field_link:
+      ensure_exists:
+        entity_type: block_content
+        bundle: image_card
+        field_name: field_link
+        field_type: link
+      setLabel: Link
+      setRequired: true
+      setTranslatable: false
+
+    core.entity_form_display.block_content.image_card.default:
+      createIfNotExists:
+        targetEntityType: block_content
+        bundle: image_card
+        mode: default
+        status: true
+      setComponents:
+        - name: info
+          options:
+            type: string_textfield
+            weight: -5
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: langcode
+          options:
+            type: language_select
+            weight: 2
+            region: content
+            settings:
+              include_locked: true
+        - name: field_image
+          options:
+            type: media_library_widget
+            weight: 4
+            region: content
+            settings:
+              media_types: {}
+        - name: field_link
+          options:
+            type: link_default
+            weight: 26
+            region: content
+            settings:
+              placeholder_url: ''
+              placeholder_title: ''
+
+    core.entity_view_display.block_content.image_card.default:
+      createIfNotExists:
+        targetEntityType: block_content
+        bundle: image_card
+        mode: default
+        status: true
+      setComponents:
+        - name: field_image
+          options:
+            type: entity_reference_entity_view
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              view_mode: default
+              link: false
+        - name: field_link
+          options:
+            type: link
+            label: above
+            weight: 1
+            region: content
+            settings:
+              trim_length: 80
+              url_only: false
+              url_plain: false
+              rel: ''
+              target: ''
+
+    language.content_settings.block_content.image_card:
+      ensure_exists:
+        id: block_content.image_card
+        target_entity_type_id: block_content
+        target_bundle: image_card
+      setProperties:
+        default_langcode: site_default
+        language_alterable: false

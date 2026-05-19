@@ -14,16 +14,46 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
-use Drupal\taxonomy\TermInterface;
+use Drupal\ecms\Form\FilesSettings;
+use Drupal\ecms\Form\FooterSettings;
+use Drupal\ecms\Form\HeaderSettings;
+use Drupal\ecms\Form\ThemeOptions;
+
+/**
+ * {@inheritdoc}
+ */
+function ecms_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+  \Drupal::classResolver(ThemeOptions::class)->alterForm($form);
+  \Drupal::classResolver(HeaderSettings::class)->alterForm($form);
+  \Drupal::classResolver(FilesSettings::class)->alterForm($form);
+  \Drupal::classResolver(FooterSettings::class)->alterForm($form);
+}
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function ecms_theme_suggestions_page_alter(array &$suggestions, array $variables): void {
-  $node = \Drupal::routeMatch()->getParameter('node');
+  $route_match = \Drupal::routeMatch();
+  $node = $route_match->getParameter('node');
   if ($node instanceof EntityInterface) {
     $content_type = $node->bundle();
     $suggestions[] = 'page__' . $content_type;
+  }
+
+  // Add page template suggestions for canvas_page entities, including the
+  // Canvas editor preview route which uses a generic 'entity' parameter.
+  $canvas_page = $route_match->getParameter('canvas_page')
+    ?? $route_match->getParameter('entity');
+  if (
+    $canvas_page instanceof EntityInterface &&
+    $canvas_page->getEntityTypeId() === 'canvas_page'
+  ) {
+    $suggestions[] = 'page__page';
   }
 }
 
@@ -57,39 +87,52 @@ function ecms_preprocess_layout(array &$variables): void {
 function ecms_preprocess_page(array &$variables): void {
   $config = \Drupal::config('system.site');
 
+  /** @var \Drupal\Core\Extension\ThemeSettingsProvider $theme_settings_provider */
+  $theme_settings_provider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
   // Attach header variables.
   $variables['header_preprocess_values']['site_name'] = $config->get('name');
-  $variables['header_preprocess_values']['site_logo'] = theme_get_setting('logo.url');
-  $variables['header_preprocess_values']['logo_only'] = theme_get_setting('logo_only');
-  $variables['header_preprocess_values']['top_line'] = ['#plain_text' => theme_get_setting('header_top_line')];
-  $variables['header_preprocess_values']['main_line'] = ['#plain_text' => theme_get_setting('header_main_line')];
-  $variables['header_preprocess_values']['bottom_line'] = ['#plain_text' => theme_get_setting('header_bottom_line')];
-  $variables['illustration'] = theme_get_setting('illustration_option');
+  $variables['header_preprocess_values']['site_logo'] = $theme_settings_provider->getSetting('logo.url');
+  $variables['header_preprocess_values']['logo_only'] = $theme_settings_provider->getSetting('logo_only');
+  $variables['header_preprocess_values']['top_line'] = ['#plain_text' => $theme_settings_provider->getSetting('header_top_line')];
+  $variables['header_preprocess_values']['main_line'] = ['#plain_text' => $theme_settings_provider->getSetting('header_main_line')];
+  $variables['header_preprocess_values']['bottom_line'] = ['#plain_text' => $theme_settings_provider->getSetting('header_bottom_line')];
+  $variables['header_preprocess_values']['mega_menu'] = $theme_settings_provider->getSetting('mega_menu');
+  $variables['illustration'] = $theme_settings_provider->getSetting('illustration_option');
 
   // Attach footer variables.
   $variables['footer_preprocess_values']['footer_left'] = [
     '#type' => 'processed_text',
-    '#text' => theme_get_setting('footer_left')['value'],
-    '#format' => theme_get_setting('footer_left')['format'],
+    '#text' => $theme_settings_provider->getSetting('footer_left')['value'],
+    '#format' => $theme_settings_provider->getSetting('footer_left')['format'],
   ];
 
   $variables['footer_preprocess_values']['footer_center'] = [
     '#type' => 'processed_text',
-    '#text' => theme_get_setting('footer_center')['value'],
-    '#format' => theme_get_setting('footer_center')['format'],
+    '#text' => $theme_settings_provider->getSetting('footer_center')['value'],
+    '#format' => $theme_settings_provider->getSetting('footer_center')['format'],
   ];
 
   $variables['footer_preprocess_values']['footer_right'] = [
     '#type' => 'processed_text',
-    '#text' => theme_get_setting('footer_right')['value'],
-    '#format' => theme_get_setting('footer_right')['format'],
+    '#text' => $theme_settings_provider->getSetting('footer_right')['value'],
+    '#format' => $theme_settings_provider->getSetting('footer_right')['format'],
   ];
 
   $variables['footer_preprocess_values']['state_info'] = [
     '#type' => 'processed_text',
-    '#text' => theme_get_setting('footer_state_info')['value'],
-    '#format' => theme_get_setting('footer_state_info')['format'],
+    '#text' => $theme_settings_provider->getSetting('footer_state_info')['value'],
+    '#format' => $theme_settings_provider->getSetting('footer_state_info')['format'],
   ];
+
+  $footer_above = $theme_settings_provider->getSetting('footer_above');
+  $variables['footer_preprocess_values']['footer_above'] = [
+    '#type' => 'processed_text',
+    '#text' => $footer_above['value'] ?? '',
+    '#format' => $footer_above['format'] ?? 'basic_html',
+  ];
+
+  $variables['footer_preprocess_values']['footer_divider'] = $theme_settings_provider->getSetting('footer_divider');
+  $variables['footer_preprocess_values']['footer_wave'] = $theme_settings_provider->getSetting('footer_wave');
 }
 
 /**
@@ -117,9 +160,10 @@ function ecms_page_attachments_alter(array &$attachments) {
  * Implements hook_preprocess_html().
  */
 function ecms_preprocess_html(array &$variables): void {
-
+  /** @var \Drupal\Core\Extension\ThemeSettingsProvider $theme_settings_provider */
+  $theme_settings_provider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
   // Add paletteClass from theme settings form.
-  $paletteClass = 'qh__t__' . theme_get_setting('color_palette');
+  $paletteClass = 'qh__t__' . $theme_settings_provider->getSetting('color_palette');
   $variables['palette'] = $paletteClass;
 
   $node = \Drupal::routeMatch()->getParameter('node');
@@ -286,6 +330,9 @@ function ecms_preprocess_paragraph__gallery_item(array &$variables): void {
  * Implements hook_preprocess_media() for the media__file element.
  */
 function ecms_preprocess_media__file(array &$variables): void {
+  /** @var \Drupal\Core\Extension\ThemeSettingsProvider $theme_settings_provider */
+  $theme_settings_provider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
+
   // We need to know the current language for download requests.
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -322,7 +369,7 @@ function ecms_preprocess_media__file(array &$variables): void {
 
   // Grab file URL, accounting for global "use absolute file" setting.
   $variables['file_url'] = '/media/' . $media->id() . '/download?language=' . $language;
-  if (theme_get_setting('use_file_path')) {
+  if ($theme_settings_provider->getSetting('use_file_path')) {
     // Get service for generating and converting file URLs.
     $file_url_generator = \Drupal::service('file_url_generator');
     // Get URL with specific file path, as opposed to Drupal-routed media path.
@@ -468,6 +515,20 @@ function ecms_preprocess_menu__minor(array &$variables): void {
         $variables['level_one_link']['active'] = TRUE;
       }
     }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_menu_alter().
+ */
+function ecms_theme_suggestions_menu_alter(array &$suggestions, array $variables): void {
+  if (
+    $variables['menu_name'] === 'main' &&
+    !in_array('menu__minor', $suggestions) &&
+    \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider')
+      ->getSetting('mega_menu')
+  ) {
+    $suggestions[] = 'menu__main__megamenu';
   }
 }
 
@@ -970,6 +1031,10 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
   // Get current language.
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
+  // Check if images should be displayed. Treat NULL (field not yet set on
+  // existing paragraphs) as TRUE to preserve behavior on existing sites.
+  $display_images = $paragraph->get('field_display_images')->value !== '0';
+
   // Check if we're listing all person nodes or a specific department.
   if ($paragraph->get('field_department_category')->isEmpty()) {
 
@@ -989,7 +1054,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
     }
 
     $nodes = $node_storage->loadMultiple($nids);
-    if (_ecms_person_list_contains_photo($nodes)) {
+    if ($display_images && _ecms_person_list_contains_photo($nodes)) {
       $variables['photo_list'] = TRUE;
     }
 
@@ -1012,7 +1077,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
     $term_person_list = [
       'term_name' => $parent_term->get('name')->value,
       'child_terms' => [],
-      'persons' => _ecms_query_persons_by_category_tid($parent_tid, $node_storage, $node_builder, $language, $variables),
+      'persons' => _ecms_query_persons_by_category_tid($parent_tid, $node_storage, $node_builder, $language, $variables, $display_images),
     ];
 
     // Load child terms.
@@ -1020,7 +1085,7 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
 
     foreach ($child_terms as $child_term) {
       // Check to see if this child term has person nodes associated.
-      $child_term_persons = _ecms_query_persons_by_category_tid($child_term->get('tid')->value, $node_storage, $node_builder, $language, $variables);
+      $child_term_persons = _ecms_query_persons_by_category_tid($child_term->get('tid')->value, $node_storage, $node_builder, $language, $variables, $display_images);
 
       if (!empty($child_term_persons)) {
         // Store the child term's person teasers on parent list.
@@ -1046,11 +1111,13 @@ function ecms_preprocess_paragraph__person_list(array &$variables): void {
  *   The langcode to render.
  * @param array $variables
  *   The variables array.
+ * @param bool $display_images
+ *   Whether to check for and display person photos.
  *
  * @return array
  *   A render array of person teasers.
  */
-function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, object $node_builder, string $language, array &$variables): array {
+function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, object $node_builder, string $language, array &$variables, bool $display_images = TRUE): array {
   if (!$tid) {
     return [];
   }
@@ -1072,7 +1139,7 @@ function _ecms_query_persons_by_category_tid(string $tid, object $node_storage, 
   if (!empty($nids)) {
     $nodes = $node_storage->loadMultiple($nids);
 
-    if (_ecms_person_list_contains_photo($nodes)) {
+    if ($display_images && _ecms_person_list_contains_photo($nodes)) {
       $variables['photo_list'] = TRUE;
     }
 
@@ -1099,85 +1166,6 @@ function _ecms_person_list_contains_photo(array $nodes): bool {
   }
 
   return FALSE;
-}
-
-/**
- * Implements hook_preprocess_node().
- */
-function ecms_preprocess_node__person(array &$variables) {
-  $node = $variables['node'];
-
-  // Get necessary services.
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $term_storage = $entity_type_manager->getStorage('taxonomy_term');
-
-  // Get each term reference.
-  $categories = $node->get('field_person_category')->referencedEntities();
-  $variables['categories'] = [];
-
-  // Get current language.
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-  // Loop over each term reference.
-  foreach ($categories as $category) {
-    $category_tid = $category->id();
-
-    // Load parent terms.
-    $category_parent = $term_storage->loadParents($category_tid);
-
-    if (!empty($category_parent)) {
-      // Get first item of keyed array.
-      $category_parent = reset($category_parent);
-
-      // Get translated version of term.
-      $category_parent_trans = \Drupal::service('entity.repository')->getTranslationFromContext($category_parent, $language);
-
-      $variables['categories'][] = $category_parent_trans->getName();
-    }
-    else {
-      // No parent term. Just fetch translated term name of referenced term.
-      $category_trans = \Drupal::service('entity.repository')->getTranslationFromContext($category, $language);
-      $variables['categories'][] = $category_trans->getName();
-    }
-  }
-
-  // Comma separate all categories.
-  $variables['categories'] = implode(', ', $variables['categories']);
-
-  // Build out additional fields array for twig.
-  if (!$node->field_person_additional_fields->isEmpty()) {
-    /** @var \Drupal\Core\Render\Renderer $renderer */
-    $renderer = \Drupal::service('renderer');
-    $paragraphs = $node->field_person_additional_fields->referencedEntities();
-    $variables['additional_fields'] = [];
-    foreach ($paragraphs as $paragraph) {
-      $field_label = NULL;
-      if (
-        $paragraph->hasField('field_person_field_label') &&
-        !$paragraph->get('field_person_field_label')->isEmpty() &&
-        $paragraph->get('field_person_field_label')->entity instanceof TermInterface
-      ) {
-        // Get the translated version of the entity if available.
-        $term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph->get('field_person_field_label')->entity, $language);
-        $field_label = $term_trans->getName();
-        $renderer->addCacheableDependency($variables['additional_fields'], $term_trans);
-      }
-
-      $paragraph_trans = \Drupal::service('entity.repository')->getTranslationFromContext($paragraph, $language);
-      $field_value = $paragraph_trans->get('field_person_field_value')->getString();
-      $variables['additional_fields'][] = [
-        'label' => [
-          '#markup' => $field_label,
-          '#access' => !is_null($field_label),
-        ],
-        'value' => [
-          '#markup' => $field_value,
-          '#access' => !empty($field_value),
-        ],
-      ];
-      $renderer->addCacheableDependency($variables['additional_fields'], $paragraph);
-    }
-  }
 }
 
 /**

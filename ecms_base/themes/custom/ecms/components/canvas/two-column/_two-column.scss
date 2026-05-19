@@ -1,0 +1,64 @@
+// canvas-two-column
+// Two-column layout contained within the theme's max-width container.
+// Column widths are set via BEM modifiers; the layout stacks on narrow viewports.
+// Uses container queries so responsive behaviour is consistent in both
+// Drupal's edit mode (iframe) and the public view.
+
+.canvas-two-column {
+  // CSS custom properties for the column widths, overridden by each modifier.
+  --left-col: 1fr;
+  --right-col: 1fr;
+
+  container-name: canvas-two-column;
+  container-type: inline-size;
+
+  // ---------------------------------------------------------------------------
+  // Column width modifiers
+  // ---------------------------------------------------------------------------
+
+  &--25-75 {
+    --left-col: 1fr;
+    --right-col: 3fr;
+  }
+
+  &--50-50 {
+    --left-col: 1fr;
+    --right-col: 1fr;
+  }
+
+  &--75-25 {
+    --left-col: 3fr;
+    --right-col: 1fr;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Inner container — max-width constrained, grid layout
+  // ---------------------------------------------------------------------------
+
+  &__inner {
+    align-items: start;
+    display: grid;
+    // Gap scales with container width, matching the ~74px gap in the design at
+    // full width. Collapses to 1.5rem on narrow containers.
+    gap: clamp(1.5rem, 5cqi, 4.75rem);
+    grid-template-columns: var(--left-col) var(--right-col);
+    margin-inline: auto;
+    max-width: var(--content-max-width, 86rem);
+    padding-block: 2.5rem;
+    padding-inline: var(--section-sides, 1.5rem);
+
+    // Stack to single column below 50rem (≈800px).
+    @container canvas-two-column (max-width: 50rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Column wrappers — prevent content overflow
+  // ---------------------------------------------------------------------------
+
+  &__left,
+  &__right {
+    min-width: 0;
+  }
+}

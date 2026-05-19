@@ -1,0 +1,49 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: CTA
+status: stable
+group: RI.Gov
+description: |
+  Thin wrapper around the theme's existing `.qh__btn` styles. Renders
+  as <a class="qh__btn ...">. Variant maps directly to the project's
+  existing `.qh__btn--*` modifiers — no new button styling lives here.
+props:
+  type: object
+  required:
+    - text
+    - link
+    - variant
+  properties:
+    text:
+      type: string
+      title: Text
+      examples:
+        - All Municipalities
+    link:
+      type: string
+      title: Link
+      format: uri-reference
+      examples:
+        - /municipalities
+    variant:
+      type: string
+      title: Variant
+      description: Maps to existing `.qh__btn` modifier classes or a text link.
+      enum:
+        - primary
+        - secondary
+        - tertiary
+        - accent
+        - link
+        - text
+      meta:enum:
+        primary: Primary (default)
+        secondary: Secondary
+        tertiary: Tertiary
+        accent: Accent
+        link: Text Link (with arrow icon)
+        text: Text Link (plain)
+      examples: [primary]
+    icon:
+      type: string
+      title: Icon (optional, left)
+      description: Icon filename from the `@icons` set without extension (e.g. `house-chimney`). Renders before the label. Most useful with the `tertiary` variant.

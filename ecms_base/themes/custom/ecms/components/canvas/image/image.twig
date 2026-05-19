@@ -1,0 +1,47 @@
+{#
+  Canvas Image
+  Standalone image for Canvas pages. Wraps the Canvas image renderer
+  in a <figure> with an optional <figcaption>.
+
+  Props:
+    image        - Canvas image object: { src, alt, width, height, srcset, ... }
+    size         - full | large | medium | small (caps max-width)
+    aspect_ratio - auto | 16-9 | 4-3 | 1-1 | 3-2 | 2-3
+    caption      - Optional caption text
+#}
+{% set size_classes = {
+  full:   '',
+  large:  'canvas-image--size-large',
+  medium: 'canvas-image--size-medium',
+  small:  'canvas-image--size-small',
+} %}
+
+{% set ratio_classes = {
+  'auto': '',
+  '16-9': 'canvas-image--ratio-16-9',
+  '4-3':  'canvas-image--ratio-4-3',
+  '1-1':  'canvas-image--ratio-1-1',
+  '3-2':  'canvas-image--ratio-3-2',
+  '2-3':  'canvas-image--ratio-2-3',
+} %}
+
+<figure {{ attributes.addClass([
+  'canvas-image',
+  size_classes[size|default('full')]|default(''),
+  ratio_classes[aspect_ratio|default('auto')]|default(''),
+]) }}>
+  {% if image and image.src %}
+    <img
+      src="{{ image.src }}"
+      alt="{{ image.alt|default('') }}"
+      {% if image.width %}width="{{ image.width }}"{% endif %}
+      {% if image.height %}height="{{ image.height }}"{% endif %}
+      loading="lazy"
+      {% if image.srcset %}srcset="{{ image.srcset }}"{% endif %}
+    />
+  {% endif %}
+
+  {% if caption %}
+    <figcaption>{{ caption }}</figcaption>
+  {% endif %}
+</figure>

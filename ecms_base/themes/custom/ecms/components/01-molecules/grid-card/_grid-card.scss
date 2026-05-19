@@ -1,0 +1,98 @@
+.qh__grid-card {
+  position: relative;
+  border: 1px solid currentColor;
+  border-radius: rem(9);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  // Image variant
+  &__image {
+    aspect-ratio: 8 / 5;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__icon {
+    padding: var(--vertical-rhythm) $general-h-spacing 0 0;
+
+    svg,
+    img {
+      width: 7rem;
+      height: 7rem;
+    }
+  }
+
+  &__cta {
+    padding: calc(var(--vertical-rhythm) * 1.25) $general-h-spacing
+      var(--vertical-rhythm);
+    margin-top: auto;
+
+    a {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1em;
+      margin: 0;
+      text-decoration: none;
+      font-family: $font-sans-vf;
+
+      // Support hovering entire card.
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+
+  // Icon variant: keep the icon, heading, and arrow visually anchored at the
+  // bottom of the card. Reserve 3 lines of heading space so cards in a row
+  // with 1-, 2-, or 3-line titles all share the same CTA wrapper height —
+  // that is what keeps icons aligned to a single Y. min-height (rather than
+  // a fixed height) still lets longer titles wrap further without clipping.
+  // Image variant is unaffected; it relies on the default
+  // `&__cta { margin-top: auto }` to pin the CTA to the bottom while the
+  // image stays at the top.
+  &--icon {
+    // Icon color uses the per-palette icon-card token. CTA text intentionally
+    // has no override here — global link cascade in _00-themes.scss paints it
+    // per active mini-theme (qh__t__*) or per palette default outside themes.
+    --qh__grid-card__icon-color: var(--fc__icon__icon-card);
+  }
+
+  &--icon &__icon {
+    margin-top: auto;
+    color: var(--qh__grid-card__icon-color);
+  }
+
+  &--icon &__cta {
+    margin-top: 0;
+  }
+
+  &--icon &__text {
+    display: flex;
+    align-items: flex-start;
+    min-height: 2lh;
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &:hover &__arrow {
+    transform: translateX(5px);
+  }
+}

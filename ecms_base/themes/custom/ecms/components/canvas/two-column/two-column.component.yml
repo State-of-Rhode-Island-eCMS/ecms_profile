@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Two Column
+group: RI.Gov
+description: >
+  Two-column layout contained within the theme's max-width container.
+  Supports three width splits — 25/75, 50/50, 75/25 — and stacks to a
+  single column on narrow viewports. Each column accepts arbitrary slot content.
+props:
+  type: object
+  properties:
+    column_width:
+      title: Column width ratio
+      type: string
+      enum: ['25-75', '50-50', '75-25']
+      default: '50-50'
+      examples: ['25-75']
+    modifier:
+      title: Optional BEM modifier class
+      type: string
+slots:
+  left:
+    title: Left column content
+  right:
+    title: Right column content

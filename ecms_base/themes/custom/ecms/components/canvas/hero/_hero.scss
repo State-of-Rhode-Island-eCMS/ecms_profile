@@ -1,0 +1,311 @@
+// canvas-hero
+// Full-bleed photo banner with a wave bottom edge; navy bar below for
+// search + icon-links; max-width footer slot below that (intended for tabs).
+// Image URL is passed via an inline CSS custom property on the <section>.
+//
+// Container queries (not viewport queries) are used for layout breakpoints so that
+// edit mode and public view behave identically regardless of Canvas's iframe scaling.
+
+.canvas-hero {
+  container-name: canvas-hero;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  // Clip horizontal overflow so the wave shapes (which extend past the
+  // viewport edges via width:137% + right offsets) never trigger a horizontal
+  // scrollbar. `clip` (not `hidden`) leaves the y-axis visible so the bottom
+  // wave can still hang below the footer.
+  overflow-x: clip;
+
+  // ---------------------------------------------------------------------------
+  // Banner — the full-width photo section. Height is driven by aspect-ratio
+  // (not a fixed pixel value) so the photo scales with the container width.
+  // The ratio gets progressively taller (smaller W/H number) at narrower
+  // widths so the photo keeps a strong vertical presence on mobile instead
+  // of collapsing into a thin strip.
+  //   ≥large (992):  3/1   → 1440w ≈ 480 tall (Figma reference)
+  //   ≥medium (800): 5/2   → 992w  ≈ 397 tall
+  //   ≥small (640):  16/9  → 800w  ≈ 450 tall
+  //   <small:        4/3   → 480w  = 360 tall
+  // ---------------------------------------------------------------------------
+  &__banner {
+    aspect-ratio: 3 / 1;
+    overflow: hidden;
+    position: relative;
+
+    @container canvas-hero (max-width: #{$bp--large-value * 1rem}) {
+      aspect-ratio: 5 / 2;
+    }
+
+    @container canvas-hero (max-width: #{$bp--medium-value * 1rem}) {
+      aspect-ratio: 16 / 9;
+    }
+
+    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Photo layer — background-image div, fills the banner
+  // ---------------------------------------------------------------------------
+  &__image {
+    background-image: var(--hero-image);
+    background-position: center center;
+    background-size: cover;
+    inset: 0;
+    position: absolute;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Banner inner — max-width container for the title.
+  // Image and wave sit outside this and remain full-bleed.
+  // ---------------------------------------------------------------------------
+  &__banner-inner {
+    height: 100%;
+    margin: 0 auto;
+    max-width: var(--content-max-width, 86rem);
+    padding: 0 var(--section-sides, 1.5rem);
+    position: relative;
+    width: 100%;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Heading — absolute lower-left of the banner inner container
+  // ---------------------------------------------------------------------------
+  &__title-area {
+    bottom: 1.25rem;
+    left: var(--section-sides, 1.5rem);
+    max-width: 44ch;
+    position: absolute;
+    z-index: 3;
+
+    @container canvas-hero (max-width: #{$bp--large-value * 1rem}) {
+      bottom: 0.75rem;
+      max-width: 85%;
+    }
+  }
+
+  &__title {
+    color: var(--c__white, #fff);
+    font-family: "Roboto Slab", serif;
+    font-size: clamp(2rem, 4cqi, 3.5rem);
+    font-weight: 400;
+    line-height: 1.25;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Wave SVG — absolute bottom; the asset (assets/images/icons/brand-wave.svg)
+  // is a 1972×210 single-swoop curve right-anchored to the banner. We size it
+  // wider than the banner (1972/1440 ≈ 137%) so its native aspect ratio is
+  // preserved at any width — the curve overhangs the LEFT edge and is clipped
+  // by the banner's overflow:hidden, matching Figma's `left: -532px` setup.
+  //
+  // Fill inherits `currentColor`, set here to navy so the solid bottom of the
+  // wave merges seamlessly with the bar below. A 1px negative bottom prevents
+  // sub-pixel hairlines at the seam.
+  // ---------------------------------------------------------------------------
+  &__wave {
+    bottom: -1px;
+    color: var(--c__navy, #293557);
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    width: 137%;
+    z-index: 2;
+
+    svg {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Bottom wave — same SVG flipped vertically, hangs below the navy footer
+  // and overlays the top of whatever section follows. z-index sits BEHIND the
+  // hero stacking so the next section's foreground content (cards, headings)
+  // paints on top of the navy wave; only its (transparent) backgrounds let the
+  // navy show through, producing the wavy bottom edge.
+  // ---------------------------------------------------------------------------
+  &__wave--bottom {
+    bottom: auto;
+    max-width: 2000px;
+    right: -20%;
+    top: 90%;
+    transform: scaleY(-1);
+    z-index: -1;
+
+    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+      display: none;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Bar — full-bleed navy background strip
+  // ---------------------------------------------------------------------------
+  &__bar {
+    background-color: var(--c__navy, #293557);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Bar inner — max-width container; two equal columns: search | icon-links.
+  // Stacks to a single column on narrow containers.
+  //
+  // Uses auto-fit intrinsic grid (not @container) so the responsive collapse
+  // is aggregation-proof — Drupal's CSS optimizer cannot corrupt it.
+  // min(29rem, 100%) ensures each column is at least 29rem wide before a
+  // second column is added; at 1024px viewport this gives 2 columns (≈488px
+  // each), and collapses to 1 column below ≈1000px viewport — close to the
+  // original 62rem / 992px container-query threshold.
+  // ---------------------------------------------------------------------------
+  &__bar-inner {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(29rem, 100%), 1fr));
+    margin: 0 auto;
+    max-width: var(--content-max-width, 86rem);
+    padding: 1.25rem var(--section-sides, 1.5rem);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Search slot wrapper (in bar) — occupies the left column.
+  // The form itself is the white "field shell" (Ocean border, 5px radius);
+  // a left-side search-glass icon, the (transparent) input, and a 60×60 inset
+  // gold submit square sit inside it.
+  // ---------------------------------------------------------------------------
+  &__search {
+    align-items: center;
+    display: flex;
+    min-width: 0;
+
+    > * {
+      width: 100%;
+    }
+  }
+
+  &__search-form {
+    align-items: center;
+    background-color: #fff;
+    border: 2px solid var(--fc__icon__icon-card);
+    border-radius: 5px;
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0.375rem;
+    transition: border-color 0.2s ease;
+    width: 100%;
+
+    &:focus-within {
+      border-color: var(--fc__default__accent);
+    }
+  }
+
+  &__search-icon {
+    color: var(--fc__icon__icon-card);
+    display: block;
+    flex-shrink: 0;
+    height: 3.5rem;
+    width: 3.5rem;
+
+    svg {
+      display: block;
+      fill: currentColor;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__search-input {
+    height: 100%;
+    flex: 1;
+    border: 0;
+    padding-left: 0;
+    width: auto;
+  }
+
+  &__search-submit {
+    background-color: var(--fc__notification__bg);
+    border: 2px solid rgba(255, 255, 255, 0.33);
+    color: var(--fc__notification__link);
+    height: 100%;
+    justify-content: center;
+    padding: 0.25rem;
+    transition: background-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: color-mix(
+        in srgb,
+        var(--fc__notification__bg) 75%,
+        var(--fc__default__accent) 25%
+      );
+      color: var(--fc__notification__link);
+    }
+
+    .qh__icon {
+      display: block;
+      height: 2.75rem;
+      width: 2.75rem;
+
+      svg {
+        display: block;
+        fill: currentColor;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Icon-links grid (in bar) — two-column grid, occupies the right column.
+  // Scale icons and labels up to match the bar's visual weight.
+  // Stacks to a single column on narrow containers (mobile).
+  // ---------------------------------------------------------------------------
+  &__icon-links {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr 1fr;
+
+    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+      grid-template-columns: 1fr;
+    }
+
+    .canvas-icon-link__icon {
+      color: var(--fc__icon__icon-card, #5994cf);
+      height: 3rem;
+      width: 3rem;
+    }
+
+    .canvas-icon-link__title {
+      font-size: 1.4375rem;
+    }
+
+    .canvas-icon-link__divider {
+      display: none;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Footer slot — full-bleed navy strip continuing from the bar above; inner
+  // content is constrained to the max-container width. Intended to host the
+  // tabs component.
+  // ---------------------------------------------------------------------------
+  &__footer {
+    background-color: var(--c__navy, #293557);
+    position: relative;
+  }
+
+  &__footer-inner {
+    margin: 0 auto;
+    max-width: var(--content-max-width, 86rem);
+    padding: 0 var(--section-sides, 1.5rem);
+  }
+
+  h1 {
+    --h1-size-l: 3.5;
+    font-weight: normal;
+  }
+}

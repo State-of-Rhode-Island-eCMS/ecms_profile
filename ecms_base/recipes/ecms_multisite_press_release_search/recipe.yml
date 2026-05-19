@@ -1,0 +1,10 @@
+name: 'eCMS Multisite Press Release Search'
+description: 'Provides a cross-site search page filtered to press_release content type only, sourced from all Acquia Site Factory sites sharing this Solr core. Adds a search page at /multisite-press-releases.'
+type: 'eCMS'
+recipes:
+  - ecms_multisite_search
+config:
+  strict: false
+  import:
+    views:
+      - views.view.ecms_multisite_press_release_search

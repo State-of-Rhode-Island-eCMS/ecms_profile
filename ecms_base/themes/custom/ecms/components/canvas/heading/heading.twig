@@ -1,0 +1,23 @@
+{#
+  Canvas Heading Component
+
+  Emits the chosen heading element with the matching `.qh__h*` class.
+
+  Props:
+    text  - Heading text (required)
+    level - h1 | h2 | h3 | h4 | h5 | h6 (required) — semantic element
+    style - h1 | h2 | h3 | h4 | h5 | h6 (optional) — visual class;
+            falls back to level when unset
+#}
+{% set level_classes = {
+  h1: 'qh__h1',
+  h2: 'qh__h2',
+  h3: 'qh__h3',
+  h4: 'qh__h4',
+  h5: 'qh__h5',
+  h6: 'qh__h6',
+} %}
+{% set style_key = style|default('') ?: level %}
+
+<{{ level }}{{ attributes.addClass(['canvas-heading', level_classes[style_key]|default('qh__h2')]) }}>{{ text }}</{{ level }}>
+

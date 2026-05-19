@@ -1,0 +1,241 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.node.full
+  - field.storage.node.body
+  - field.storage.node.field_basic_page_body
+  - field.storage.node.field_landing_page_body
+  - field.storage.node.field_location_body
+  - field.storage.node.field_press_release_body
+  - search_api.server.acquia_search_server
+  module:
+  - node
+  - search_api_solr
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 3
+      fuzzy: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+      specific_languages: {}
+id: acquia_search_index
+name: Acquia Search Solr Search API Solr index
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: entity:node
+    property_path: body
+    type: solr_text_custom:ngram
+    dependencies:
+      config:
+      - field.storage.node.body
+  field_basic_page_body:
+    label: Intro text
+    datasource_id: entity:node
+    property_path: field_basic_page_body
+    type: solr_text_custom:ngram
+    dependencies:
+      config:
+      - field.storage.node.field_basic_page_body
+  field_landing_page_body:
+    label: Intro text
+    datasource_id: entity:node
+    property_path: field_landing_page_body
+    type: solr_text_custom:ngram
+    dependencies:
+      config:
+      - field.storage.node.field_landing_page_body
+  field_location_body:
+    label: Additional information
+    datasource_id: entity:node
+    property_path: field_location_body
+    type: solr_text_custom:ngram
+    dependencies:
+      config:
+      - field.storage.node.field_location_body
+  field_press_release_body:
+    label: Body
+    datasource_id: entity:node
+    property_path: field_press_release_body
+    type: solr_text_custom:ngram
+    dependencies:
+      config:
+      - field.storage.node.field_press_release_body
+  node_grants:
+    label: Node access information
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: Rendered HTML output
+    property_path: rendered_item
+    type: solr_text_custom:ngram
+    configuration:
+      roles:
+      - anonymous
+      view_mode:
+        entity:node:
+          basic_page: default
+          event: default
+          landing_page: full
+          location: default
+          person: default
+          press_release: default
+          webform: default
+  status:
+    label: status
+    datasource_id: entity:node
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+      - node
+  title:
+    label: Title
+    datasource_id: entity:node
+    property_path: title
+    type: solr_text_custom:ngram
+    boost: 5.0
+    dependencies:
+      module:
+      - node
+  type:
+    label: Content type
+    datasource_id: entity:node
+    property_path: type
+    type: string
+    dependencies:
+      module:
+      - node
+  uid:
+    label: uid
+    datasource_id: entity:node
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+      - node
+datasource_settings:
+  entity:node:
+    bundles:
+      default: false
+      selected:
+      - basic_page
+      - event
+      - landing_page
+      - location
+      - person
+      - press_release
+      - webform
+    languages:
+      default: true
+      selected: {}
+processor_settings:
+  add_url: {}
+  aggregated_field: {}
+  auto_aggregated_fulltext_field: {}
+  content_access:
+    weights:
+      preprocess_query: -30
+  custom_value: {}
+  entity_status: {}
+  entity_type: {}
+  highlight:
+    weights:
+      postprocess_query: 0
+    prefix: <strong>
+    suffix: </strong>
+    excerpt: true
+    excerpt_always: false
+    excerpt_length: 256
+    exclude_fields:
+    - title
+    highlight: always
+    highlight_partial: false
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+    all_fields: true
+    fields:
+    - body
+    - field_basic_page_body
+    - field_landing_page_body
+    - field_location_body
+    - field_press_release_body
+    - rendered_item
+    - title
+    - type
+    title: true
+    alt: true
+    tags:
+      b: 2.0
+      h1: 5.0
+      h2: 3.0
+      h3: 2.0
+      strong: 2.0
+  language_with_fallback: {}
+  rendered_item: {}
+  solr_date_range:
+    weights:
+      preprocess_index: 0
+  type_boost:
+    weights:
+      preprocess_index: 0
+    boosts:
+      entity:node:
+        datasource_boost: 1.0
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  delete_on_fail: true
+  index_directly: false
+  track_changes_in_references: true
+server: acquia_search_server
+

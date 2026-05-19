@@ -1,0 +1,30 @@
+.qh__grid {
+  --grid-min: #{rem(280)};
+  --grid-gap: #{$grid-gap};
+
+  padding-block: 1.5em;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--grid-min)), 1fr)
+  );
+  gap: var(--grid-gap);
+
+  // Max 3 columns (larger cards)
+  &--max-3 {
+    --grid-min: #{rem(320)};
+  }
+
+  // Max 4 columns (smaller cards) - default
+  &--max-4 {
+    --grid-min: #{rem(280)};
+  }
+
+  &__title-cell {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: var(--vertical-rhythm);
+  }
+}

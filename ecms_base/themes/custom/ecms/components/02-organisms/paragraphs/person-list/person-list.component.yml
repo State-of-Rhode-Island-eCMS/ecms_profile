@@ -1,9 +1,14 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Person list - Paragraph
+group: 'ZZ-Incompatible'
+noUi: true
 description: Person list paragraph
 props:
   type: object
-  properties: {}
+  properties:
+    columns:
+      type: string
+      default: 1
 slots:
   list_mode:
     title: The type of list
@@ -11,3 +16,7 @@ slots:
     title: The listing of persons
   photo_list:
     title: The photo listing.
+  title:
+    title: The list title
+  bg_color_class:
+    title: The background color class

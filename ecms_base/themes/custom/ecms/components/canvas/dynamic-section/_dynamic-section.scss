@@ -1,0 +1,270 @@
+// canvas-dynamic-section
+// Full-bleed themed section with a configurable 1–4 column × 1–2 row grid.
+// Background paints edge-to-edge; inner container is clamped via the same
+// qh-content-maxwidth mixin used by the footer, header, and page layout.
+// Theme backgrounds/foregrounds are applied through the theme's existing
+// `qh__t__*` classes (declared in assets/patterns/00-atoms/01-global/_00-themes.scss);
+// this file only owns layout, grid, and alignment.
+
+.canvas-dynamic-section {
+  // Internal token consumed by both the grid gap and the divider positioning.
+  // Gap modifier rules below override this value; the divider pseudo-element
+  // reads it so the line always sits centred in whatever gap is active.
+  --_gap: #{$grid-gap};
+
+  container-name: canvas-dynamic-section;
+  container-type: inline-size;
+  display: block;
+  // Vertical breathing room is decoupled from --_gap so author-driven gap
+  // changes don't shrink the section's top/bottom padding. Horizontal padding
+  // tracks --_gap for symmetry with the grid-cell rhythm.
+  padding-block: 3.75rem; // 60px
+  padding-inline: var(--_gap, #{$general-v-spacing});
+
+  &__inner {
+    @include qh-content-maxwidth();
+  }
+
+  &__header {
+    margin-block-end: var(--_gap, #{$general-v-spacing});
+  }
+
+  // Hide the header wrapper when the slot emits nothing. :where() keeps
+  // specificity at 0 so author overrides can flip it back on.
+  &__header:where(:empty) {
+    display: none;
+  }
+
+  &__grid {
+    display: grid;
+    gap: var(--_gap, #{$grid-gap});
+    grid-template-columns: 1fr;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Column count — equal splits.
+  // Container queries (not media queries) collapse to a single column on
+  // narrow containers so Canvas editor preview and public view behave the
+  // same regardless of iframe scaling (hero.scss convention).
+  // ---------------------------------------------------------------------------
+  &--cols-2 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--cols-3 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    @container canvas-dynamic-section (max-width: #{$bp--medium-value * 1rem}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--cols-4 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
+    grid-template-columns: repeat(4, 1fr);
+
+    @container canvas-dynamic-section (max-width: #{$bp--large-value * 1rem}) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 2-column fractional splits. Modifier overrides the equal split from
+  // &--cols-2 above. Collapse to 1 column on narrow containers regardless.
+  // ---------------------------------------------------------------------------
+  &--2col-50-50 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr; }
+  &--2col-25-75 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 3fr; }
+  &--2col-33-67 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr; }
+  &--2col-75-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 3fr 1fr; }
+  &--2col-67-33 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr; }
+
+  &--2col-50-50,
+  &--2col-25-75,
+  &--2col-33-67,
+  &--2col-75-25,
+  &--2col-67-33 {
+    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
+      @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 3-column fractional splits.
+  // ---------------------------------------------------------------------------
+  &--3col-33-33-33 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 1fr; }
+  &--3col-50-25-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr 1fr; }
+  &--3col-25-50-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr 1fr; }
+  &--3col-25-25-50 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 2fr; }
+
+  &--3col-33-33-33,
+  &--3col-50-25-25,
+  &--3col-25-50-25,
+  &--3col-25-25-50 {
+    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid {
+      @container canvas-dynamic-section (max-width: #{$bp--medium-value * 1rem}) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Cell — flex column so align-x → cross-axis, align-y → main-axis.
+  // Replicates Tailwind's `space-y-4` between direct children: every cell
+  // child after the first gets a 1rem top margin so authors can drop a
+  // Heading + Text + CTA into a cell without each SDC owning its own
+  // outer spacing.
+  // ---------------------------------------------------------------------------
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    > * + * {
+      margin-block-start: 1rem;
+    }
+
+    > .canvas-cta--link + .canvas-cta--link {
+      margin-block-start: 0;
+    }
+  }
+
+  &--align-x-start  > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-start; }
+  &--align-x-center > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: center; }
+  &--align-x-end    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-end; }
+
+  &--align-y-top    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: flex-start; }
+  &--align-y-center > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: center; }
+  &--align-y-bottom > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: flex-end; }
+
+  // ---------------------------------------------------------------------------
+  // Gap — overrides the default spacing between cells. Condensed halves the
+  // default; spacious doubles it. `none` collapses the gap entirely (useful
+  // when a cell divider is the only desired visual separator).
+  // ---------------------------------------------------------------------------
+  &--gap-none { --_gap: 0; }
+  &--gap-condensed { --_gap: calc(#{$grid-gap} / 2); }
+  &--gap-spacious { --_gap: calc(#{$grid-gap} * 2); }
+
+  // ---------------------------------------------------------------------------
+  // Inside a tab panel — the panel's `.canvas-tab__panel-inner` already owns
+  // the outer padding (see _tab.scss), so the section's own padding would
+  // double up. Strip it on the root; the section's `__inner` still handles
+  // max-width clamping and internal grid layout.
+  // ---------------------------------------------------------------------------
+  .canvas-tab__panel & {
+    padding: 0;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Nested dynamic-sections — suppress horizontal padding on the root element.
+  //
+  // container-type: inline-size measures the *content-box* width (padding
+  // excluded). When a dynamic-section sits inside a cell that is already
+  // narrower than the 2-col collapse threshold (e.g. the middle column of a
+  // 3-col parent), the section's own padding-inline shrinks the measured
+  // container width further, triggering the single-column fallback even at
+  // wide desktop widths.
+  //
+  // Removing padding-inline for the nested case ensures the container query
+  // sees the full cell width. Vertical padding is preserved for breathing room,
+  // and the outer grid gap already provides horizontal separation between cells.
+  // ---------------------------------------------------------------------------
+  .canvas-dynamic-section__cell > & {
+    padding-inline: 0;
+
+    // Re-apply the horizontal padding on __inner so the content is visually
+    // inset from the cell edges, while the root element (the container) remains
+    // full-width and the container query sees the unpadded cell width.
+    > .canvas-dynamic-section__inner {
+      padding-inline: var(--_gap);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Cell divider — draws a 1 px line centred in the column gap between every
+  // pair of adjacent cells. Uses `currentColor` so it adapts to any theme.
+  // The line is suppressed for the rightmost cell of each row (determined by
+  // the column-count modifier already applied to the same element) and hidden
+  // entirely when the grid collapses to a single column via container query.
+  // ---------------------------------------------------------------------------
+  &--divider-line > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      // Centre the 1 px line within the gap: move right by half the gap,
+      // then nudge back 0.5 px so the line itself is visually centred.
+      inset-inline-end: calc(var(--_gap) / -2 - 0.5px);
+      width: 1px;
+      background-color: currentColor;
+      opacity: 0.25;
+    }
+
+    // When the grid collapses to a single column the divider would appear on
+    // the trailing edge of every cell — hide it at all single-column breakpoints.
+    @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
+      &::after { display: none; }
+    }
+  }
+
+  // Suppress the line after the last cell in each row. The column-count
+  // modifier (--cols-N) is always co-applied alongside any fractional-split
+  // modifier, so these four rules cover every layout variant.
+  &--divider-line {
+    &.canvas-dynamic-section--cols-1 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell::after {
+      display: none;
+    }
+
+    &.canvas-dynamic-section--cols-2 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(2n)::after {
+      display: none;
+    }
+
+    &.canvas-dynamic-section--cols-3 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(3n)::after {
+      display: none;
+    }
+
+    &.canvas-dynamic-section--cols-4 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(4n)::after {
+      display: none;
+    }
+
+    // 4-col collapses to 2 columns at the large breakpoint before going to 1.
+    // Re-suppress the now-rightmost column so no trailing divider appears.
+    &.canvas-dynamic-section--cols-4 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(2n)::after {
+      @container canvas-dynamic-section (max-width: #{$bp--large-value * 1rem}) {
+        display: none;
+      }
+    }
+  }
+
+  // Stretch: two cases handled via :only-child / :last-child selectors.
+  //
+  // Single child (nested component, image, etc.) — grow to fill the full
+  // cell height so the child's background/content paints edge-to-edge.
+  //
+  // Multiple children (e.g. heading + body + CTA) — pin the last child to
+  // the bottom with margin auto so CTAs align across equal-height columns;
+  // all other children stay their natural height.
+  /* stylelint-disable selector-max-compound-selectors */
+  &--align-y-stretch > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell {
+    > *:only-child {
+      flex: 1;
+      min-height: 0;
+    }
+
+    > *:last-child:not(:only-child) {
+      margin-block-start: auto;
+    }
+  }
+  /* stylelint-enable selector-max-compound-selectors */
+}

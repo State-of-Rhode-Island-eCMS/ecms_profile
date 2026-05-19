@@ -1,6 +1,8 @@
 # Media Item component
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Page title with image
+group: 'ZZ-Incompatible'
+noUi: true
 description: Page title with image block
 props:
   type: object

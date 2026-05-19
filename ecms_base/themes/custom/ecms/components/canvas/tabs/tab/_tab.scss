@@ -1,0 +1,45 @@
+.canvas-tab {
+  // Base tab styles — the active state is handled by a modifier class
+  &__button {
+    &--active,
+    &--active:hover,
+    &--active:focus {
+      background-color: var(--fc__tertiary__bg--dark);
+      border: 2px solid
+        color-mix(in srgb, var(--fc__tertiary__fg) 50%, transparent);
+      color: var(--fc__tertiary__fg);
+    }
+  }
+
+  &__icon {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 2rem; // 28px — matches Figma icon canvas
+    justify-content: center;
+    width: 2rem;
+
+    svg {
+      height: 2rem; // Fill the full 28px canvas
+      width: 2rem;
+    }
+  }
+
+  // Panel — shown/hidden and ARIA-wired by Tab Group JS.
+  &__panel {
+    background-color: hsl(
+      52.5deg 25% 93.73%
+    ); // Coffee milk without transparency since it sits on navy, not white
+    margin-top: -1.625rem; // pulls up behind the tablist row
+    position: relative;
+    z-index: 1;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__panel-inner {
+    padding: 5rem 2rem;
+  }
+}

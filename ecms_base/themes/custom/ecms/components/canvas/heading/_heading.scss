@@ -1,0 +1,46 @@
+// canvas-heading
+// Canvas-only override for the Heading SDC. The global `h2 / .qh__h2`
+// rule in assets/patterns/00-atoms/02-text/_00-typography.scss switches
+// H2 to sans-serif, bold, and the brand text-accent color. Canvas pages
+// follow a different typographic direction (Roboto Slab, regular
+// weight, neutral text color), so we re-assert serif + 400 + default
+// foreground on `.canvas-heading.qh__h2` only — legacy non-Canvas
+// templates keep the existing H2 treatment untouched.
+
+.canvas-heading.qh__h2 {
+  font-family: $font-serif-fallback;
+  font-size: 2.5rem; // 40px
+  font-weight: 400;
+  line-height: 1.15; // 46px at 40px
+  // currentColor lets mini-themes (qh__t__*) repaint via the cascade —
+  // outside any theme this still resolves to the palette default fg.
+  color: currentColor;
+  letter-spacing: 0.02em;
+
+  html:where(.wf-active) & {
+    font-family: $font-serif-static;
+  }
+
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-serif-vf);
+    font-weight: 400;
+  }
+}
+
+.canvas-heading.qh__h3 {
+  font-family: $font-sans-fallback;
+  font-size: 2rem; // 32px
+  line-height: 1.2; // 38px at 32px
+  // currentColor lets mini-themes (qh__t__*) repaint via the cascade —
+  // outside any theme this still resolves to the palette default fg.
+  color: currentColor;
+
+  html:where(.wf-active) & {
+    font-family: $font-sans-static;
+  }
+
+  html:where(.wf-active:not(.novf)) & {
+    font-family: var(--font-sans-vf);
+    font-weight: 400;
+  }
+}

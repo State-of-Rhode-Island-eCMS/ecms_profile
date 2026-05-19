@@ -1,0 +1,41 @@
+{#
+  Canvas Section Title Component
+
+  Composes canvas/heading + canvas/text + canvas/button into a single
+  drop-target. Uses SDC plugin-ID includes (`ecms:<name>`) — the
+  `@canvas` Twig namespace isn't registered in this theme.
+
+  Props:
+    heading_text  - Heading text
+    heading_level - h1–h6
+    body_text     - Body text (HTML, rich-text editor)
+    cta_text      - CTA label
+    cta_link      - CTA URL
+    cta_variant   - primary | secondary | accent | link
+#}
+<div{{ attributes.addClass(['canvas-section-title']) }}>
+  <div class="canvas-section-title__heading">
+    {% include 'ecms:heading' with {
+      text: heading_text,
+      level: heading_level,
+    } only %}
+  </div>
+
+  {% if body_text %}
+    <div class="canvas-section-title__text">
+      {% include 'ecms:text' with {
+        text: body_text,
+      } only %}
+    </div>
+  {% endif %}
+
+  {% if cta_text and cta_link %}
+    <div class="canvas-section-title__cta">
+      {% include 'ecms:button' with {
+        text: cta_text,
+        link: cta_link,
+        variant: cta_variant|default('primary'),
+      } only %}
+    </div>
+  {% endif %}
+</div>

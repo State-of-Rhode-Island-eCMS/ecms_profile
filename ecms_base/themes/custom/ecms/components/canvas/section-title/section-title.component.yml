@@ -1,0 +1,70 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Section Title
+status: stable
+group: RI.Gov
+description: |
+  A heading + body text + CTA packaged as a single SDC. Internally
+  composes the `canvas/heading`, `canvas/text`, and `canvas/button`
+  components — editors fill the fields once instead of dropping three
+  separate SDCs. Mirrors the "Section Title" Figma frame.
+props:
+  type: object
+  required:
+    - heading_text
+    - heading_level
+  properties:
+    heading_text:
+      type: string
+      title: Heading text
+      examples:
+        - Get to Know Rhode Island
+    heading_level:
+      type: string
+      title: Heading level
+      enum:
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+      meta:enum:
+        h1: H1
+        h2: H2
+        h3: H3
+        h4: H4
+        h5: H5
+        h6: H6
+      examples: [ h2 ]
+    body_text:
+      type: string
+      title: Body text
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>'
+    cta_text:
+      type: string
+      title: CTA text
+      examples:
+        - All Municipalities
+    cta_link:
+      type: string
+      title: CTA link
+      format: uri-reference
+      examples:
+        - /municipalities
+    cta_variant:
+      type: string
+      title: CTA variant
+      enum:
+        - primary
+        - secondary
+        - accent
+        - link
+      meta:enum:
+        primary: Primary
+        secondary: Secondary
+        accent: Accent
+        link: Text Link
+      examples: [ primary ]

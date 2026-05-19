@@ -1,0 +1,85 @@
+{#
+  Canvas Hero Component
+  Full-bleed photo banner with a wave bottom edge and an overlaid h1, a navy
+  bar below containing a search form and icon links, and a lower slot
+  (max-container width) intended for the tabs component.
+
+  Props:
+    image - Image object with src, alt, width, height (Canvas image ref)
+    title - Heading text (required)
+
+  Slots:
+    search_box - Search form block (placed in the navy bar)
+    icon_links - One or more canvas/icon-link components (placed in the navy bar)
+    footer     - Slot rendered below the bar, max-width container (e.g. tabs)
+
+  Usage:
+  {% include "@canvas/hero/hero.twig" with {
+    image: { src: "/path/to/marina.jpg", alt: "Newport marina", width: 1440, height: 480 },
+    title: "Welcome to the Ocean State",
+  } %}
+#}
+{% if image %}
+  {% set attributes = attributes.setAttribute('style', '--hero-image: url(\'' ~ image.src ~ '\');') %}
+{% endif %}
+<section {{ attributes.addClass('canvas-hero', 'qh__t__primary') }}>
+  <div class="canvas-hero__banner">
+    {% if image %}
+      <div
+        class="canvas-hero__image"
+        role="img"
+        {% if image.alt %}aria-label="{{ image.alt }}"{% else %}aria-hidden="true"{% endif %}
+      ></div>
+    {% endif %}
+
+    <div class="canvas-hero__banner-inner">
+      <div class="canvas-hero__title-area">
+        <h1>{{ title }}</h1>
+      </div>
+    </div>
+
+    <div class="canvas-hero__wave" aria-hidden="true">
+      {% include '@icons/brand-wave.svg' %}
+    </div>
+  </div>
+
+  <div class="canvas-hero__bar">
+    <div class="canvas-hero__bar-inner">
+      <div class="canvas-hero__search">
+        {# TODO: replace with the live Drupal search block once wired up #}
+        <form class="canvas-hero__search-form" role="search" action="/" method="get">
+          <span class="canvas-hero__search-icon qh__icon" aria-hidden="true">
+            {% include '@icons/sparkles.svg' %}
+          </span>
+          <input
+            class="canvas-hero__search-input"
+            type="search"
+            name="search_input"
+            aria-label="{{ 'Search'|t }}"
+            placeholder="{{ 'How can we help you today?'|t }}"
+          />
+          <button class="canvas-hero__search-submit" type="submit">
+            <span class="qh__icon" aria-hidden="true">
+              {% include '@icons/search-glass.svg' %}
+            </span>
+            <span class="visually-hidden">{{ 'Submit'|t }}</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="canvas-hero__icon-links">
+        {% block icon_links %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-hero__footer">
+    <div class="canvas-hero__footer-inner">
+      {% block footer %}{% endblock %}
+    </div>
+
+    <div class="canvas-hero__wave canvas-hero__wave--bottom" aria-hidden="true">
+      {% include '@icons/brand-wave.svg' %}
+    </div>
+  </div>
+</section>
