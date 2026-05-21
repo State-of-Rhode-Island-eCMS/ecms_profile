@@ -61,10 +61,11 @@
   // `&__cta { margin-top: auto }` to pin the CTA to the bottom while the
   // image stays at the top.
   &--icon {
-    // Icon color uses the per-palette icon-card token. CTA text intentionally
-    // has no override here — global link cascade in _00-themes.scss paints it
-    // per active mini-theme (qh__t__*) or per palette default outside themes.
-    --qh__grid-card__icon-color: var(--fc__icon__icon-card);
+    // Track the active theme via `--computed-icon-color` (set by each
+    // `qh-*-theme` mixin in _00-themes.scss). Falls back to the global
+    // `--fc__icon__icon-card` outside any theme so unthemed icon cards keep
+    // their existing brand-blue glyph.
+    --qh__grid-card__icon-color: var(--computed-icon-color, var(--fc__icon__icon-card));
   }
 
   &--icon &__icon {
