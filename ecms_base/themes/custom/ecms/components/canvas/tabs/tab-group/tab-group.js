@@ -46,6 +46,12 @@
     if (activePanel) {
       activePanel.removeAttribute('hidden');
     }
+
+    // Center the active button horizontally. No-op on desktop where the
+    // tablist has no overflow; on mobile (where _tab-group.scss switches the
+    // tablist to overflow-x: auto) this pulls partially-visible tabs into
+    // view. block: 'nearest' avoids any vertical page scroll.
+    button.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   }
 
   /**
@@ -114,7 +120,9 @@
         if (newIndex !== null) {
           event.preventDefault();
           activateTab(buttons[newIndex], buttons);
-          buttons[newIndex].focus();
+          // preventScroll lets activateTab's smooth scrollIntoView win over
+          // the browser's instant focus-into-view default.
+          buttons[newIndex].focus({ preventScroll: true });
         }
       });
     });
