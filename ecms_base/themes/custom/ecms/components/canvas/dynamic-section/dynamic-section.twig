@@ -14,6 +14,8 @@
     three_column_layout- split option when column_count == 3
     cell_align_x       - default | start | center | end
     cell_align_y       - default | top | center | bottom
+    cells_backdrop     - none | primary | primary-light | secondary | tertiary | coffee-milk
+                         (pseudo-element fill behind cells 2..N; hides on grid collapse)
 
   Slots:
     header            - heading / intro above the grid
@@ -75,6 +77,14 @@
   'line': 'canvas-dynamic-section--divider-line',
 } %}
 
+{% set backdrop_classes = {
+  'primary':       'canvas-dynamic-section--backdrop-primary',
+  'primary-light': 'canvas-dynamic-section--backdrop-primary-light',
+  'secondary':     'canvas-dynamic-section--backdrop-secondary',
+  'tertiary':      'canvas-dynamic-section--backdrop-tertiary',
+  'coffee-milk':   'canvas-dynamic-section--backdrop-coffee-milk',
+} %}
+
 {% set section_classes = [
   'canvas-dynamic-section',
   theme_classes[theme]|default(''),
@@ -85,6 +95,7 @@
   align_y_classes[cell_align_y]|default(''),
   gap_classes[grid_gap]|default(''),
   divider_classes[cell_divider]|default(''),
+  backdrop_classes[cells_backdrop]|default(''),
   additional_classes|default(''),
 ] %}
 

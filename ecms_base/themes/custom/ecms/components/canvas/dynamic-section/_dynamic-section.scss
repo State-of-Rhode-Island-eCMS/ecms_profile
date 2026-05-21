@@ -79,11 +79,31 @@
   // 2-column fractional splits. Modifier overrides the equal split from
   // &--cols-2 above. Collapse to 1 column on narrow containers regardless.
   // ---------------------------------------------------------------------------
-  &--2col-50-50 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr; }
-  &--2col-25-75 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 3fr; }
-  &--2col-33-67 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr; }
-  &--2col-75-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 3fr 1fr; }
-  &--2col-67-33 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr; }
+  &--2col-50-50
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  &--2col-25-75
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 1fr 3fr;
+  }
+  &--2col-33-67
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 1fr 2fr;
+  }
+  &--2col-75-25
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 3fr 1fr;
+  }
+  &--2col-67-33
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 2fr 1fr;
+  }
 
   &--2col-50-50,
   &--2col-25-75,
@@ -100,10 +120,26 @@
   // ---------------------------------------------------------------------------
   // 3-column fractional splits.
   // ---------------------------------------------------------------------------
-  &--3col-33-33-33 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 1fr; }
-  &--3col-50-25-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 2fr 1fr 1fr; }
-  &--3col-25-50-25 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 2fr 1fr; }
-  &--3col-25-25-50 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid { grid-template-columns: 1fr 1fr 2fr; }
+  &--3col-33-33-33
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  &--3col-50-25-25
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  &--3col-25-50-25
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  &--3col-25-25-50
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    grid-template-columns: 1fr 1fr 2fr;
+  }
 
   &--3col-33-33-33,
   &--3col-50-25-25,
@@ -137,22 +173,58 @@
     }
   }
 
-  &--align-x-start  > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-start; }
-  &--align-x-center > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: center; }
-  &--align-x-end    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { align-items: flex-end; }
+  &--align-x-start
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
+    align-items: flex-start;
+  }
+  &--align-x-center
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
+    align-items: center;
+  }
+  &--align-x-end
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
+    align-items: flex-end;
+  }
 
-  &--align-y-top    > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: flex-start; }
-  &--align-y-center > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: center; }
-  &--align-y-bottom > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell { justify-content: flex-end; }
+  &--align-y-top
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
+    justify-content: flex-start;
+  }
+  &--align-y-center
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
+    justify-content: center;
+  }
+  &--align-y-bottom
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
+    justify-content: flex-end;
+  }
 
   // ---------------------------------------------------------------------------
   // Gap — overrides the default spacing between cells. Condensed halves the
   // default; spacious doubles it. `none` collapses the gap entirely (useful
   // when a cell divider is the only desired visual separator).
   // ---------------------------------------------------------------------------
-  &--gap-none { --_gap: 0; }
-  &--gap-condensed { --_gap: calc(#{$grid-gap} / 2); }
-  &--gap-spacious { --_gap: calc(#{$grid-gap} * 2); }
+  &--gap-none {
+    --_gap: 0;
+  }
+  &--gap-condensed {
+    --_gap: calc(#{$grid-gap} / 2);
+  }
+  &--gap-spacious {
+    --_gap: calc(#{$grid-gap} * 2);
+  }
 
   // ---------------------------------------------------------------------------
   // Inside a tab panel — the panel's `.canvas-tab__panel-inner` already owns
@@ -196,11 +268,14 @@
   // the column-count modifier already applied to the same element) and hidden
   // entirely when the grid collapses to a single column via container query.
   // ---------------------------------------------------------------------------
-  &--divider-line > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell {
+  &--divider-line
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       inset-block: 0;
       // Centre the 1 px line within the gap: move right by half the gap,
@@ -214,7 +289,9 @@
     // When the grid collapses to a single column the divider would appear on
     // the trailing edge of every cell — hide it at all single-column breakpoints.
     @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
-      &::after { display: none; }
+      &::after {
+        display: none;
+      }
     }
   }
 
@@ -222,25 +299,40 @@
   // modifier (--cols-N) is always co-applied alongside any fractional-split
   // modifier, so these four rules cover every layout variant.
   &--divider-line {
-    &.canvas-dynamic-section--cols-1 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell::after {
+    &.canvas-dynamic-section--cols-1
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid
+      > .canvas-dynamic-section__cell::after {
       display: none;
     }
 
-    &.canvas-dynamic-section--cols-2 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(2n)::after {
+    &.canvas-dynamic-section--cols-2
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid
+      > .canvas-dynamic-section__cell:nth-child(2n)::after {
       display: none;
     }
 
-    &.canvas-dynamic-section--cols-3 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(3n)::after {
+    &.canvas-dynamic-section--cols-3
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid
+      > .canvas-dynamic-section__cell:nth-child(3n)::after {
       display: none;
     }
 
-    &.canvas-dynamic-section--cols-4 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(4n)::after {
+    &.canvas-dynamic-section--cols-4
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid
+      > .canvas-dynamic-section__cell:nth-child(4n)::after {
       display: none;
     }
 
     // 4-col collapses to 2 columns at the large breakpoint before going to 1.
     // Re-suppress the now-rightmost column so no trailing divider appears.
-    &.canvas-dynamic-section--cols-4 > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell:nth-child(2n)::after {
+    &.canvas-dynamic-section--cols-4
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid
+      > .canvas-dynamic-section__cell:nth-child(2n)::after {
       @container canvas-dynamic-section (max-width: #{$bp--large-value * 1rem}) {
         display: none;
       }
@@ -256,7 +348,10 @@
   // the bottom with margin auto so CTAs align across equal-height columns;
   // all other children stay their natural height.
   /* stylelint-disable selector-max-compound-selectors */
-  &--align-y-stretch > .canvas-dynamic-section__inner > .canvas-dynamic-section__grid > .canvas-dynamic-section__cell {
+  &--align-y-stretch
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid
+    > .canvas-dynamic-section__cell {
     > *:only-child {
       flex: 1;
       min-height: 0;
@@ -264,6 +359,119 @@
 
     > *:last-child:not(:only-child) {
       margin-block-start: auto;
+    }
+  }
+  /* stylelint-enable selector-max-compound-selectors */
+
+  // ---------------------------------------------------------------------------
+  // Cells backdrop — pseudo-element fill painted behind cells 2 through the
+  // last cell. Pairs a title in cell 1 with a "feature" cluster of cards in
+  // the remaining cells against a soft-filled background, without wrapping
+  // those cells in an extra container element. Hidden via container queries
+  // at the same widths the grid collapses, so the decoration disappears on
+  // tablet/mobile and cards revert to their standard appearance.
+  // ---------------------------------------------------------------------------
+  &[class*="--backdrop-"]
+    > .canvas-dynamic-section__inner
+    > .canvas-dynamic-section__grid {
+    position: relative;
+    isolation: isolate;
+    // Breathing room between the backdrop edge and the cards inside it.
+    // Read by the cell padding below; zeroed out by the container queries
+    // further down when the grid collapses and the backdrop is hidden.
+    --_backdrop-pad: 1.5rem;
+
+    // position: absolute is critical — without it, the pseudo participates
+    // in track flow and blocks auto-placement, pushing cells into a new row.
+    // Per CSS Grid spec, an abspos grid item is positioned using grid lines
+    // as its containing block but does NOT consume tracks. The backdrop
+    // aligns exactly to its grid area; visible spacing around the cards
+    // comes from the cells' own padding below.
+    &::before {
+      content: "";
+      position: absolute;
+      grid-column: 2 / -1;
+      grid-row: 1 / -1;
+      inset: calc(var(--_backdrop-pad) * -1);
+      background-color: var(--_backdrop, transparent);
+      border-radius: $brad-md;
+      z-index: 0;
+    }
+
+    > .canvas-dynamic-section__cell {
+      position: relative;
+      z-index: 1;
+    }
+
+    // Block padding on every cell inside the backdrop region — gives the
+    // cards air above and below. Inline padding only on the first and last
+    // backdrop cells so adjacent-card gaps stay at the standard grid-gap.
+    > .canvas-dynamic-section__cell:first-child {
+      margin-right: var(--_backdrop-pad);
+    }
+    // > .canvas-dynamic-section__cell:nth-child(2) {
+    //   padding-inline-start: var(--_backdrop-pad);
+    // }
+    // > .canvas-dynamic-section__cell:last-child:not(:first-child) {
+    //   padding-inline-end: var(--_backdrop-pad);
+    // }
+  }
+
+  &--backdrop-primary {
+    --_backdrop: var(--fc__primary__bg);
+  }
+  &--backdrop-primary-light {
+    --_backdrop: var(--fc__primary--light__bg);
+  }
+  &--backdrop-secondary {
+    --_backdrop: var(--fc__secondary__bg);
+  }
+  &--backdrop-tertiary {
+    --_backdrop: var(--fc__tertiary__bg);
+  }
+  // coffee-milk's section theme uses the trans25 palette token directly
+  // (no functional --fc__coffee-milk__bg exists); mirror that here.
+  &--backdrop-coffee-milk {
+    --_backdrop: var(--c__coffee-milk--trans25);
+  }
+
+  // Hide the backdrop — and zero out its internal padding — at the same
+  // threshold each column count collapses to fewer columns.
+  /* stylelint-disable selector-max-compound-selectors */
+  &[class*="--backdrop-"] {
+    &.canvas-dynamic-section--cols-4
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid {
+      @container canvas-dynamic-section (max-width: #{$bp--large-value * 1rem}) {
+        --_backdrop-pad: 0;
+        &::before {
+          display: none;
+        }
+
+        .canvas-dynamic-section__cell:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &.canvas-dynamic-section--cols-3
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid {
+      @container canvas-dynamic-section (max-width: #{$bp--medium-value * 1rem}) {
+        --_backdrop-pad: 0;
+        &::before {
+          display: none;
+        }
+      }
+    }
+    &.canvas-dynamic-section--cols-2
+      > .canvas-dynamic-section__inner
+      > .canvas-dynamic-section__grid {
+      @container canvas-dynamic-section (max-width: #{$bp--small-value * 1rem}) {
+        --_backdrop-pad: 0;
+        &::before {
+          display: none;
+        }
+      }
     }
   }
   /* stylelint-enable selector-max-compound-selectors */
