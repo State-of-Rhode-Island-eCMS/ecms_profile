@@ -364,3 +364,47 @@ label,
   --font-lh-scaler-value: var(--st-lh-scaler-value);
   font-weight: calc(var(--vf-body-wght) + 50);
 }
+
+// Font-weight utilities — apply with `!important` so they win against
+// element/heading defaults wherever they're used. Static CSS weights are
+// the design baseline; variable-font overrides use this theme's calibrated
+// scale (matching the values in the individual heading rules above).
+.qh__u__fw-light {
+  font-weight: 300 !important;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 275 !important;
+  }
+}
+
+.qh__u__fw-normal {
+  font-weight: normal !important;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: var(--vf-body-wght) !important;
+  }
+}
+
+.qh__u__fw-medium {
+  font-weight: 500 !important;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 475 !important;
+  }
+}
+
+.qh__u__fw-semibold {
+  font-weight: 600 !important;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: 550 !important;
+  }
+}
+
+.qh__u__fw-bold {
+  font-weight: bold !important;
+
+  html:where(.wf-active:not(.novf)) & {
+    font-weight: var(--vf-bold-wght) !important;
+  }
+}
