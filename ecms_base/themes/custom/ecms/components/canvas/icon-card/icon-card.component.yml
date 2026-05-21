@@ -32,6 +32,38 @@ props:
         tertiary: Tertiary
         coffee-milk: Coffee milk
       examples: [ inherit ]
+    background_pattern:
+      title: Background pattern
+      description: |
+        Decorative motif placed in the top-left corner of the card. Tones
+        automatically to the card background via mix-blend-mode, so the same
+        asset works on any theme. Stars renders the windowed 12-star ring;
+        the other options reuse the theme's existing illustration set. Leave
+        unset for a plain card.
+      type: string
+      enum:
+        - none
+        - stars
+        - bridge
+        - lighthouse
+        - lobster
+        - oyster
+        - quahog
+        - seagull
+        - skyline
+        - steamer
+      meta:enum:
+        none: 'None'
+        stars: 'Stars'
+        bridge: 'Bridge'
+        lighthouse: 'Lighthouse'
+        lobster: 'Lobster'
+        oyster: 'Oyster'
+        quahog: 'Quahog'
+        seagull: 'Seagull'
+        skyline: 'Skyline'
+        steamer: 'Steamer'
+      examples: [ none ]
     icon:
       title: Icon
       type: string
