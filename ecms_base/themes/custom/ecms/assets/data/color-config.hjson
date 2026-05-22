@@ -1975,7 +1975,7 @@
           #{ "fnName": "icon__fg--hover", "colorName": "navy" }
         ],
         "default": [
-          #{ "fnName": "fg", "colorName": "quahog" },
+          { "fnName": "fg", "colorName": "navy" },
           #{ "fnName": "bg", "colorName": "white" },
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
           #{ "fnName": "border", "colorName": "quahog--dark--trans15" },
@@ -1995,6 +1995,7 @@
           #{ "fnName": "button--hover__fg", "colorName": "ocean" }
         ],
         "icon": [
+          { "fnName": "icon-card", "colorName": "navy" },
           #{ "fnName": "pdf", "colorName": "rhody-red" },
           #{ "fnName": "word", "colorName": "navy" },
           #{ "fnName": "excel", "colorName": "green-animals" },
@@ -2045,6 +2046,7 @@
           #{ "fnName": "bg", "colorName": "navy" },
           #{ "fnName": "overlay__bg", "colorName": "navy--trans75" },
           { "fnName": "link", "colorName": "white" },
+          { "fnName": "icon-card", "colorName": "white" },
           #{ "fnName": "link--hover", "colorName": "hope-gold" },
           #{ "fnName": "fg--dark", "colorName": "white" },
           #{ "fnName": "bg--dark", "colorName": "navy--trans50" },
@@ -2094,48 +2096,48 @@
       "humanName": "RIGov dark",
       "values": {
         "official": [
-          #{ "fnName": "fg", "colorName": "quahog--light" },
-          #{ "fnName": "bg", "colorName": "quahog--darker" },
-          #{ "fnName": "link", "colorName": "ocean" },
-          #{ "fnName": "link--hover", "colorName": "hope-gold" },
-          #{ "fnName": "link--focus", "colorName": "hope-gold" }
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "quahog--darker" },
+          { "fnName": "link", "colorName": "ocean" },
+          { "fnName": "link--hover", "colorName": "hope-gold" },
+          { "fnName": "link--focus", "colorName": "hope-gold" }
         ],
         "header": [
-          #{ "fnName": "fg", "colorName": "white" },
-          #{ "fnName": "bg", "colorName": "navy--dark" },
-          #{ "fnName": "link", "colorName": "white" },
-          #{ "fnName": "link--hover", "colorName": "ocean" },
-          #{ "fnName": "social__link", "colorName": "ocean" },
-          #{ "fnName": "social__link--hover", "colorName": "hope-gold" }
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--dark" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "ocean" },
+          { "fnName": "social__link", "colorName": "ocean" },
+          { "fnName": "social__link--hover", "colorName": "hope-gold" }
         ],
         "nav-main": [
-          #{ "fnName": "fg", "colorName": "quahog--light" },
-          #{ "fnName": "bg", "colorName": "navy" },
-          #{ "fnName": "link", "colorName": "quahog--light" },
-          #{ "fnName": "link--hover", "colorName": "white" },
-          #{ "fnName": "link--hover__bg", "colorName": "quahog--darker" },
-          #{ "fnName": "link--focus", "colorName": "hope-gold" },
-          #{ "fnName": "link--active", "colorName": "hope-gold" },
-          #{ "fnName": "link__sub--hover__bg", "colorName": "quahog--dark--trans15" },
-          #{ "fnName": "icon__bg", "colorName": "ocean" },
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "navy" },
+          { "fnName": "link", "colorName": "quahog--light" },
+          { "fnName": "link--hover", "colorName": "white" },
+          { "fnName": "link--hover__bg", "colorName": "quahog--darker" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--active", "colorName": "hope-gold" },
+          { "fnName": "link__sub--hover__bg", "colorName": "quahog--dark--trans15" },
+          { "fnName": "icon__bg", "colorName": "ocean" },
           #{ "fnName": "icon__fg", "colorName": "navy" },
-          #{ "fnName": "icon__bg--hover", "colorName": "hope-gold" },
-          #{ "fnName": "icon__fg--hover", "colorName": "navy--dark" }
+          { "fnName": "icon__bg--hover", "colorName": "hope-gold" },
+          { "fnName": "icon__fg--hover", "colorName": "navy--dark" }
         ],
         "default": [
-          #{ "fnName": "fg", "colorName": "coffee-milk--light" },
-          #{ "fnName": "bg", "colorName": "quahog--dark" },
-          #{ "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
-          #{ "fnName": "border", "colorName": "white--trans25" },
-          #{ "fnName": "link", "colorName": "ocean" },
-          #{ "fnName": "link--hover", "colorName": "hope-gold" },
-          #{ "fnName": "link--focus", "colorName": "ocean" },
-          #{ "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
-          #{ "fnName": "link--active", "colorName": "calamari" },
-          #{ "fnName": "hx__fg", "colorName": "coffee-milk" },
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bg", "colorName": "quahog--dark" },
+          { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
+          { "fnName": "border", "colorName": "white--trans25" },
+          { "fnName": "link", "colorName": "ocean" },
+          { "fnName": "link--hover", "colorName": "hope-gold" },
+          { "fnName": "link--focus", "colorName": "ocean" },
+          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
+          { "fnName": "link--active", "colorName": "calamari" },
+          { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
           #{ "fnName": "accent", "colorName": "hope-gold" },
-          #{ "fnName": "text-accent", "colorName": "quahog--light" },
+          { "fnName": "text-accent", "colorName": "quahog--light" }
           #{ "fnName": "button__bg", "colorName": "navy" },
           #{ "fnName": "button__fg", "colorName": "white" },
           #{ "fnName": "button--hover__bg", "colorName": "navy--dark" },
@@ -2143,26 +2145,29 @@
         ],
         "icon": [
           #{ "fnName": "pdf", "colorName": "rhody-red" },
-          #{ "fnName": "word", "colorName": "ocean" },
+          { "fnName": "word", "colorName": "ocean" },
           #{ "fnName": "excel", "colorName": "green-animals" },
-          #{ "fnName": "generic", "colorName": "white--trans33" },
-          #{ "fnName": "download", "colorName": "white--trans33" }
+          { "fnName": "generic", "colorName": "white--trans33" },
+          { "fnName": "download", "colorName": "white--trans33" }
         ],
         "nav-minor": [
-          #{ "fnName": "border", "colorName": "navy" },
-          #{ "fnName": "fg", "colorName": "quahog--light" },
-          #{ "fnName": "bg", "colorName": "navy--trans50" },
-          #{ "fnName": "link", "colorName": "coffee-milk--light" },
-          #{ "fnName": "link__bg", "colorName": "transparent" },
-          #{ "fnName": "link--hover", "colorName": "white" },
-          #{ "fnName": "link--hover__bg", "colorName": "quahog--dark" },
-          #{ "fnName": "link--focus", "colorName": "hope-gold" },
-          #{ "fnName": "link--active", "colorName": "hope-gold" },
-          #{ "fnName": "sub__bg", "colorName": "quahog--dark--trans33" }
+          { "fnName": "border", "colorName": "navy" },
+          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "bg", "colorName": "navy--trans50" },
+          { "fnName": "link", "colorName": "coffee-milk--light" },
+          { "fnName": "link__bg", "colorName": "transparent" },
+          { "fnName": "link--hover", "colorName": "white" },
+          { "fnName": "link--hover__bg", "colorName": "quahog--dark" },
+          { "fnName": "link--focus", "colorName": "hope-gold" },
+          { "fnName": "link--active", "colorName": "hope-gold" },
+          { "fnName": "sub__bg", "colorName": "quahog--dark--trans33" }
         ],
+        #
+        # Notification colors usually fall back to the same palette as the Light theme
+        #
         "notification": [
           #{ "fnName": "fg", "colorName": "navy--dark" },
-          #{ "fnName": "bg", "colorName": "hope-gold" },
+          { "fnName": "bg", "colorName": "hope-gold" }
           #{ "fnName": "icon", "colorName": "navy" },
           #{ "fnName": "link", "colorName": "navy--dark" },
           #{ "fnName": "link--hover", "colorName": "navy--sat" },
@@ -2173,45 +2178,48 @@
           #{ "fnName": "border", "colorName": "quahog--dark--trans33" }
         ],
         "accordion": [
-          #{ "fnName": "icon__fg", "colorName": "quahog--darker" },
-          #{ "fnName": "icon__bg", "colorName": "calamari" }
+          { "fnName": "icon__fg", "colorName": "quahog--darker" },
+          { "fnName": "icon__bg", "colorName": "calamari" }
         ],
         "attention-card": [
-          #{ "fnName": "fg", "colorName": "coffee-milk--light" },
-          #{ "fnName": "bar", "colorName": "navy" },
-          #{ "fnName": "icon", "colorName": "coffee-milk--light" }
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bar", "colorName": "navy" },
+          { "fnName": "icon", "colorName": "coffee-milk--light" }
         ],
         "footer": [
-          #{ "fnName": "border-top", "colorName": "ocean" },
-          #{ "fnName": "fg", "colorName": "white" },
-          #{ "fnName": "bg", "colorName": "quahog" },
-          #{ "fnName": "copyright__bg", "colorName": "quahog--darker" }
+          { "fnName": "border-top", "colorName": "ocean" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "quahog" },
+          { "fnName": "copyright__bg", "colorName": "quahog--darker" }
         ],
+        #
+        # Section sub-themes mirror scarborough--dark when rigov--dark is active
+        #
         "primary": [
-          #{ "fnName": "fg", "colorName": "white" },
-          #{ "fnName": "bg", "colorName": "navy--trans50" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--trans50" },
           #{ "fnName": "overlay__bg", "colorName": "navy--trans75" },
-          #{ "fnName": "link", "colorName": "navy--light" },
-          #{ "fnName": "link--hover", "colorName": "hope-gold" }
+          { "fnName": "link", "colorName": "navy--light" },
+          { "fnName": "link--hover", "colorName": "hope-gold" }
         ],
         "primary--light": [
-          #{ "fnName": "fg", "colorName": "coffee-milk--light" },
-          #{ "fnName": "bg", "colorName": "ocean--trans25" },
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bg", "colorName": "ocean--trans25" },
           #{ "fnName": "overlay__bg", "colorName": "ocean--trans75" },
-          #{ "fnName": "link", "colorName": "white" },
-          #{ "fnName": "link--hover", "colorName": "hope-gold" }
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "hope-gold" }
         ],
         "secondary": [
-          #{ "fnName": "fg", "colorName": "white" },
-          #{ "fnName": "bg", "colorName": "navy--trans75" },
-          #{ "fnName": "link", "colorName": "ocean--light" },
-          #{ "fnName": "link--hover", "colorName": "hope-gold" }
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "navy--trans75" },
+          { "fnName": "link", "colorName": "ocean--light" },
+          { "fnName": "link--hover", "colorName": "hope-gold" }
         ],
         "tertiary": [
-          #{ "fnName": "fg", "colorName": "coffee-milk--light" },
-          #{ "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
-          #{ "fnName": "link", "colorName": "white" },
-          #{ "fnName": "link--hover", "colorName": "cliff-walk" }
+          { "fnName": "fg", "colorName": "coffee-milk--light" },
+          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "link", "colorName": "white" },
+          { "fnName": "link--hover", "colorName": "cliff-walk" }
         ]
       }
     },
