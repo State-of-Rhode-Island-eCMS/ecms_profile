@@ -103,13 +103,14 @@
   // preserved at any width — the curve overhangs the LEFT edge and is clipped
   // by the banner's overflow:hidden, matching Figma's `left: -532px` setup.
   //
-  // Fill inherits `currentColor`, set here to navy so the solid bottom of the
-  // wave merges seamlessly with the bar below. A 1px negative bottom prevents
-  // sub-pixel hairlines at the seam.
+  // Fill inherits `currentColor`, set here to the section's themed background
+  // (`--computed-background-color` from `.qh__t__primary`) so the solid bottom
+  // of the wave merges seamlessly with the bar below. A 1px negative bottom
+  // prevents sub-pixel hairlines at the seam.
   // ---------------------------------------------------------------------------
   &__wave {
     bottom: -1px;
-    color: var(--c__navy, #293557);
+    color: var(--computed-background-color);
     pointer-events: none;
     position: absolute;
     right: 0;
@@ -120,6 +121,16 @@
       display: block;
       height: auto;
       width: 100%;
+    }
+
+    // Beat the unscoped `path { fill: var(--c__quahog--dark--trans15) }`
+    // inline-<style> blocks baked into the illustration SVGs (quahog, lighthouse,
+    // etc.). Those rules are global once Twig inlines the SVG, and they paint
+    // every `<path>` on the page — including this wave — transparent since
+    // the palette rework removed `--c__quahog--dark--trans15`. A scoped
+    // descendant selector (0,1,1) outranks the inline rule (0,0,1).
+    svg path {
+      fill: currentColor;
     }
   }
 
@@ -144,10 +155,11 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Bar — full-bleed navy background strip
+  // Bar — full-bleed themed background strip. Same `--computed-background-color`
+  // the wave fills with, so the top wave merges into the bar seamlessly.
   // ---------------------------------------------------------------------------
   &__bar {
-    background-color: var(--c__navy, #293557);
+    background-color: var(--computed-background-color);
   }
 
   // ---------------------------------------------------------------------------
@@ -294,7 +306,7 @@
   // tabs component.
   // ---------------------------------------------------------------------------
   &__footer {
-    background-color: var(--c__navy, #293557);
+    background-color: var(--computed-background-color);
     position: relative;
   }
 

@@ -1,0 +1,91 @@
+// canvas-icon-card
+//
+// All visual styling for the card surface (border, radius, padding, icon
+// sizing, CTA alignment, click-area expansion) lives in
+// `components/01-molecules/grid-card/_grid-card.scss` under `.qh__grid-card`
+// and its `--icon` modifier — the Canvas SDC is a thin wrapper around that
+// markup. The styles in THIS file own only the optional decorative
+// background-pattern layer added by the `background_pattern` prop; nothing
+// here should touch the card's chrome.
+
+.canvas-icon-card {
+  // Establish a stacking context so the pattern (z-index: -1) stays behind
+  // the icon/CTA but inside the card. `.qh__grid-card` already supplies
+  // `position: relative` and `overflow: hidden`, which the pattern relies on
+  // for cropping.
+  isolation: isolate;
+
+  // Decorative pattern layer. Every shape inside the SVG is force-painted
+  // with `--computed-background-color` (exposed by each `.qh__t__*` theme
+  // in `_00-themes.scss`), and `mix-blend-mode: multiply` then renders the
+  // visible result as bg × bg — a saturated, slightly darker version of
+  // the same hue. That toning happens automatically across all themes
+  // and applies uniformly to stars and the 8 illustrations, ignoring
+  // whatever fill colors the source SVG files declared. White fallback
+  // makes the pattern a no-op on cards without an active theme (multiply
+  // with white is identity).
+  &__pattern {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    color: var(--computed-background-color, #fff);
+
+    svg {
+      display: block;
+    }
+
+    // Beat the inline `<style>path{fill:var(--c__quahog--dark--trans15)}`
+    // declarations baked into the illustration SVGs (specificity 0,0,1)
+    // with a scoped descendant selector (0,1,1). Universal child covers
+    // path / polygon / circle / rect uniformly.
+    svg * {
+      fill: currentColor;
+      stroke: currentColor;
+    }
+  }
+
+  // Single-illustration corner motif. Bridge, lighthouse, lobster, oyster,
+  // quahog, seagull, skyline, and steamer are the existing theme
+  // illustrations (also used as the page-footer motif via the `illustration`
+  // SDC). Their natural fills are overridden by the `&__pattern` rule above
+  // so they tone to the active card bg like stars do.
+  &__pattern {
+    top: -10%;
+    left: -10%;
+    width: 20rem;
+    height: 20rem;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Bridge, lighthouse, and skyline are horizon-style silhouettes whose
+  // visual mass sits low — anchor them to the bottom-left instead so the
+  // structure reads at the base of the card rather than dangling from the
+  // top.
+  &--bg-bridge &__pattern,
+  &--bg-lighthouse &__pattern,
+  &--bg-skyline &__pattern {
+    top: unset;
+    left: unset;
+    bottom: -10%;
+  }
+
+  // Stars is a 12-star ring oversized so only the top arc reads inside the
+  // card window — matches the Figma treatment. Coloring is handled by
+  // `&__pattern` above; this block just owns the windowed positioning.
+  &--bg-stars &__pattern {
+    inset: 0;
+
+    svg {
+      position: absolute;
+      top: 0.5rem;
+      left: -50%;
+      width: 185%;
+      height: auto;
+    }
+  }
+}

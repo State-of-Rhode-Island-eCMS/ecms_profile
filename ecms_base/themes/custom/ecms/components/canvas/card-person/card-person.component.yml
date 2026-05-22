@@ -1,10 +1,32 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Card Person
-group: RI.Gov
-description: Compact person profile card with circular headshot, name, job title, and social media links.
+group: 'RI.Gov'
+status: stable
+description: |
+  Person profile card with a circular headshot, name, job title, and a row of
+  contact icons. Background and text colors match the surrounding section.
 props:
   type: object
   properties:
+    theme:
+      title: Theme
+      type: string
+      description: Background + Text color. Leave as Inherit for no background color.
+      enum:
+        - inherit
+        - primary
+        - primary-light
+        - secondary
+        - tertiary
+        - coffee-milk
+      meta:enum:
+        inherit: Inherit
+        primary: Primary
+        primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
+        coffee-milk: Coffee milk
+      examples: [ inherit ]
     photo:
       title: Headshot image
       type: object
@@ -23,6 +45,44 @@ props:
     last_name:
       title: Last name
       type: string
+    website_url:
+      title: Website URL
+      type: string
+      format: uri-reference
+      description: Shown as a gold-highlighted link icon to draw extra attention.
+    phone:
+      title: Phone number
+      type: string
+      description: Shown as a phone icon. Tapping opens the visitor's phone app to call.
+    email:
+      title: Email address
+      type: string
+      description: Shown as an envelope icon. Tapping opens the visitor's email app.
+    facebook_url:
+      title: Facebook URL
+      type: string
+      format: uri-reference
+    x_url:
+      title: X (Twitter) URL
+      type: string
+      format: uri-reference
+    instagram_url:
+      title: Instagram URL
+      type: string
+      format: uri-reference
+    linkedin_url:
+      title: LinkedIn URL
+      type: string
+      format: uri-reference
+    youtube_url:
+      title: YouTube URL
+      type: string
+      format: uri-reference
+    rss_url:
+      title: RSS feed URL
+      type: string
+      format: uri-reference
 slots:
-  social_links:
-    title: Social link buttons
+  footer:
+    title: Footer
+    description: Optional. Drop any components below the contact row — buttons, callouts, additional links, etc.

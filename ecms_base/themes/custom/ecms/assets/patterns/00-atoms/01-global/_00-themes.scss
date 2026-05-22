@@ -1,7 +1,26 @@
 // Mini-themes: Author selected row/column color overrides
 
+// Each theme exposes its bg / fg / link / icon colors as cascade-friendly
+// `--computed-*` tokens. The global `a {}` rule in `_01-links.scss` and
+// other components consume these tokens, so the closest themed ancestor
+// always wins via custom-property cascade — sidestepping the source-order
+// tie that used to plague nested-theme link colors when per-theme
+// `.qh__t__* a:not(.qh__btn)` rules competed at equal specificity.
+//
+// `#{$all-headers} { color: currentColor }` keeps headers tracking the
+// theme's `color`. `--computed-icon-color` defaults to the single global
+// `--fc__icon__icon-card` and is exposed per-theme so a theme can deviate
+// later without touching consuming components.
+
 // Grouping styles here for Text Card Themes, which use a different class structure
 @mixin qh-primary-theme {
+  --computed-background-color: var(--fc__primary__bg);
+  --computed-foreground-color: var(--fc__primary__fg);
+  --computed-link-color: var(--fc__primary__link, currentColor);
+  --computed-link-color--hover: var(--fc__primary__link--hover, var(--fc__primary__link), currentColor);
+  // Section-scoped icon-card override (e.g., white icon on the navy primary bg)
+  // falls back to the palette-global icon when not defined per section.
+  --computed-icon-color: var(--fc__primary__icon-card, var(--fc__icon__icon-card));
   background-color: var(--fc__primary__bg);
   color: var(--fc__primary__fg);
 
@@ -9,65 +28,33 @@
     color: currentColor;
   }
 
-  a:not(.qh__btn),
-  a:not(.qh__btn):visited {
-    color: var(--fc__primary__link, currentColor);
-  }
-
-  a:not(.qh__btn):hover,
-  a:not(.qh__btn):focus,
-  a:not(.qh__btn):active {
-    color: var(--fc__primary__link--hover, var(--fc__primary__link), currentColor);
-  }
-
-  a:not(.qh__btn):focus {
-    outline-color: var(--fc__primary__link--hover, var(--fc__primary__link), currentColor);
-  }
-
   .dark & {
+    --computed-background-color: var(--fc__primary__bg--dark);
+    --computed-foreground-color: var(--fc__primary__fg--dark);
+    --computed-link-color: var(--fc__primary__link--dark, currentColor);
+    --computed-link-color--hover: var(--fc__primary__link--dark--hover, var(--fc__primary__link), currentColor);
     background-color: var(--fc__primary__bg--dark); // Over the bg, compiles to #2c3243
     color: var(--fc__primary__fg--dark);
-
-    a:not(.qh__btn),
-    a:not(.qh__btn):visited {
-      color: var(--fc__primary__link--dark, currentColor);
-    }
-
-    a:not(.qh__btn):hover,
-    a:not(.qh__btn):focus,
-    a:not(.qh__btn):active {
-      color: var(--fc__primary__link--dark--hover, var(--fc__primary__link), currentColor);
-    }
-
-    a:not(.qh__btn):focus {
-      outline-color: var(--fc__primary--dark__link--hover, var(--fc__primary__link), currentColor);
-    }
   }
 
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
+      --computed-background-color: var(--fc__primary__bg--dark);
+      --computed-foreground-color: var(--fc__primary__fg--dark);
+      --computed-link-color: var(--fc__primary__link--dark, currentColor);
+      --computed-link-color--hover: var(--fc__primary__link--dark--hover, var(--fc__primary__link), currentColor);
       background-color: var(--fc__primary__bg--dark);
       color: var(--fc__primary__fg--dark);
-
-      a:not(.qh__btn),
-      a:not(.qh__btn):visited {
-        color: var(--fc__primary__link--dark, currentColor);
-      }
-
-      a:not(.qh__btn):hover,
-      a:not(.qh__btn):focus,
-      a:not(.qh__btn):active {
-        color: var(--fc__primary__link--dark--hover, var(--fc__primary__link), currentColor);
-      }
-
-      a:not(.qh__btn):focus {
-        outline-color: var(--fc__primary--dark__link--hover, var(--fc__primary__link), currentColor);
-      }
     }
   }
 }
 
 @mixin qh-primary-light-theme {
+  --computed-background-color: var(--fc__primary--light__bg);
+  --computed-foreground-color: var(--fc__primary--light__fg);
+  --computed-link-color: var(--fc__primary--light__link, currentColor);
+  --computed-link-color--hover: var(--fc__primary--light__link--hover, var(--fc__primary--light__link), currentColor);
+  --computed-icon-color: var(--fc__primary--light__icon-card, var(--fc__icon__icon-card));
   background-color: var(--fc__primary--light__bg);
   color: var(--fc__primary--light__fg);
 
@@ -75,65 +62,33 @@
     color: currentColor;
   }
 
-  a:not(.qh__btn),
-  a:not(.qh__btn):visited {
-    color: var(--fc__primary--light__link, currentColor);
-  }
-
-  a:not(.qh__btn):hover,
-  a:not(.qh__btn):focus,
-  a:not(.qh__btn):active {
-    color: var(--fc__primary--light__link--hover, var(--fc__primary--light__link), currentColor);
-  }
-
-  a:not(.qh__btn):focus {
-    outline-color: var(--fc__primary--light__link--hover, var(--fc__primary--light__link), currentColor);
-  }
-
   .dark & {
+    --computed-background-color: var(--fc__primary--light__bg--dark);
+    --computed-foreground-color: var(--fc__primary--light__fg--dark);
+    --computed-link-color: var(--fc__primary--light--dark__link, currentColor);
+    --computed-link-color--hover: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
     background-color: var(--fc__primary--light__bg--dark); // Over the bg, compiles to #47515a
     color: var(--fc__primary--light__fg--dark);
-
-    a:not(.qh__btn),
-    a:not(.qh__btn):visited {
-      color: var(--fc__primary--light--dark__link, currentColor);
-    }
-
-    a:not(.qh__btn):hover,
-    a:not(.qh__btn):focus,
-    a:not(.qh__btn):active {
-      color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
-    }
-
-    a:not(.qh__btn):focus {
-      outline-color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
-    }
   }
 
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
+      --computed-background-color: var(--fc__primary--light__bg--dark);
+      --computed-foreground-color: var(--fc__primary--light__fg--dark);
+      --computed-link-color: var(--fc__primary--light--dark__link, currentColor);
+      --computed-link-color--hover: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
       background-color: var(--fc__primary--light__bg--dark);
       color: var(--fc__primary--light__fg--dark);
-
-      a:not(.qh__btn),
-      a:not(.qh__btn):visited {
-        color: var(--fc__primary--light--dark__link, currentColor);
-      }
-
-      a:not(.qh__btn):hover,
-      a:not(.qh__btn):focus,
-      a:not(.qh__btn):active {
-        color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
-      }
-
-      a:not(.qh__btn):focus {
-        outline-color: var(--fc__primary--light__link--dark--hover, var(--fc__primary--light__link--dark), currentColor);
-      }
     }
   }
 }
 
 @mixin qh-secondary-theme {
+  --computed-background-color: var(--fc__secondary__bg);
+  --computed-foreground-color: var(--fc__secondary__fg);
+  --computed-link-color: var(--fc__secondary__link, currentColor);
+  --computed-link-color--hover: var(--fc__secondary__link--hover, var(--fc__secondary__link), currentColor);
+  --computed-icon-color: var(--fc__secondary__icon-card, var(--fc__icon__icon-card));
   background-color: var(--fc__secondary__bg);
   color: var(--fc__secondary__fg);
 
@@ -141,65 +96,33 @@
     color: currentColor;
   }
 
-  a:not(.qh__btn),
-  a:not(.qh__btn):visited {
-    color: var(--fc__secondary__link, currentColor);
-  }
-
-  a:not(.qh__btn):hover,
-  a:not(.qh__btn):focus,
-  a:not(.qh__btn):active {
-    color: var(--fc__secondary__link--hover, var(--fc__secondary__link), currentColor);
-  }
-
-  a:not(.qh__btn):focus {
-    outline-color: var(--fc__secondary__link--hover, var(--fc__secondary__link), currentColor);
-  }
-
   .dark & {
+    --computed-background-color: var(--fc__secondary__bg--dark);
+    --computed-foreground-color: var(--fc__secondary__fg--dark);
+    --computed-link-color: var(--fc__secondary__link--dark, currentColor);
+    --computed-link-color--hover: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
     background-color: var(--fc__secondary__bg--dark);
     color: var(--fc__secondary__fg--dark);
-
-    a:not(.qh__btn),
-    a:not(.qh__btn):visited {
-      color: var(--fc__secondary__link--dark, currentColor);
-    }
-
-    a:not(.qh__btn):hover,
-    a:not(.qh__btn):focus,
-    a:not(.qh__btn):active {
-      color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
-    }
-
-    a:not(.qh__btn):focus {
-      outline-color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
-    }
   }
 
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
+      --computed-background-color: var(--fc__secondary__bg--dark);
+      --computed-foreground-color: var(--fc__secondary__fg--dark);
+      --computed-link-color: var(--fc__secondary__link--dark, currentColor);
+      --computed-link-color--hover: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
       background-color: var(--fc__secondary__bg--dark);
       color: var(--fc__secondary__fg--dark);
-
-      a:not(.qh__btn),
-      a:not(.qh__btn):visited {
-        color: var(--fc__secondary__link--dark, currentColor);
-      }
-
-      a:not(.qh__btn):hover,
-      a:not(.qh__btn):focus,
-      a:not(.qh__btn):active {
-        color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
-      }
-
-      a:not(.qh__btn):focus {
-        outline-color: var(--fc__secondary__link--dark--hover, var(--fc__secondary__link), currentColor);
-      }
     }
   }
 }
 
 @mixin qh-tertiary-theme {
+  --computed-background-color: var(--fc__tertiary__bg);
+  --computed-foreground-color: var(--fc__tertiary__fg);
+  --computed-link-color: var(--fc__tertiary__link, currentColor);
+  --computed-link-color--hover: var(--fc__tertiary__link--hover, var(--fc__tertiary__link), currentColor);
+  --computed-icon-color: var(--fc__tertiary__icon-card, var(--fc__icon__icon-card));
   background-color: var(--fc__tertiary__bg);
   color: var(--fc__tertiary__fg);
 
@@ -207,60 +130,23 @@
     color: currentColor;
   }
 
-  a:not(.qh__btn),
-  a:not(.qh__btn):visited {
-    color: var(--fc__tertiary__link, currentColor);
-  }
-
-  a:not(.qh__btn):hover,
-  a:not(.qh__btn):focus,
-  a:not(.qh__btn):active {
-    color: var(--fc__tertiary__link--hover, var(--fc__tertiary__link), currentColor);
-  }
-
-  a:not(.qh__btn):focus {
-    outline-color: var(--fc__tertiary__link--hover, var(--fc__tertiary__link), currentColor);
-  }
-
   .dark & {
+    --computed-background-color: var(--fc__tertiary__bg--dark);
+    --computed-foreground-color: var(--fc__tertiary__fg--dark);
+    --computed-link-color: var(--fc__tertiary__link--dark, currentColor);
+    --computed-link-color--hover: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
     background-color: var(--fc__tertiary__bg--dark);
     color: var(--fc__tertiary__fg--dark);
-
-    a:not(.qh__btn),
-    a:not(.qh__btn):visited {
-      color: var(--fc__tertiary__link--dark, currentColor);
-    }
-
-    a:not(.qh__btn):hover,
-    a:not(.qh__btn):focus,
-    a:not(.qh__btn):active {
-      color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
-    }
-
-    a:not(.qh__btn):focus {
-      outline-color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
-    }
   }
 
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
+      --computed-background-color: var(--fc__tertiary__bg--dark);
+      --computed-foreground-color: var(--fc__tertiary__fg--dark);
+      --computed-link-color: var(--fc__tertiary__link--dark, currentColor);
+      --computed-link-color--hover: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
       background-color: var(--fc__tertiary__bg--dark);
       color: var(--fc__tertiary__fg--dark);
-
-      a:not(.qh__btn),
-      a:not(.qh__btn):visited {
-        color: var(--fc__tertiary__link--dark, currentColor);
-      }
-
-      a:not(.qh__btn):hover,
-      a:not(.qh__btn):focus,
-      a:not(.qh__btn):active {
-        color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
-      }
-
-      a:not(.qh__btn):focus {
-        outline-color: var(--fc__tertiary__link--dark--hover, var(--fc__tertiary__link), currentColor);
-      }
     }
   }
 }
@@ -277,7 +163,7 @@
   @include qh-primary-light-theme;
 }
 
-// Declare them again… hate the repetitiveness of it, but we are combating inheritance here
+// Declare them again… hate the repetitiveness of it, but we are combating inheritance here
 .qh__tc__primary {
   @include qh-primary-theme;
 }
@@ -303,6 +189,11 @@
 .qh__t__coffee-milk,
 .qh__collection__coffee-milk-bg .qh__text-card,
 .qh__tc__coffee-milk {
+  --computed-background-color: var(--c__coffee-milk--trans25);
+  --computed-foreground-color: var(--c__quahog--dark);
+  --computed-link-color: var(--c__navy);
+  --computed-link-color--hover: var(--c__quahog--medium);
+  --computed-icon-color: var(--fc__icon__icon-card);
   background-color: var(--c__coffee-milk--trans25);
   color: var(--c__quahog--dark);
 
@@ -310,60 +201,23 @@
     color: currentColor;
   }
 
-  a:not(.qh__btn),
-  a:not(.qh__btn):visited {
-    color: var(--c__navy);
-  }
-
-  a:not(.qh__btn):hover,
-  a:not(.qh__btn):focus,
-  a:not(.qh__btn):active {
-    color: var(--c__quahog--medium);
-  }
-
-  a:not(.qh__btn):focus {
-    outline-color: var(--c__navy);
-  }
-
   .dark & {
+    --computed-background-color: var(--c__coffee-milk--trans25);
+    --computed-foreground-color: var(--c__coffee-milk--light);
+    --computed-link-color: var(--c__white);
+    --computed-link-color--hover: var(--fc__default__accent);
     background-color: var(--c__coffee-milk--trans25); // Over the bg, compiles to #57554f
     color: var(--c__coffee-milk--light);
-
-    a:not(.qh__btn),
-    a:not(.qh__btn):visited {
-      color: var(--c__white);
-    }
-
-    a:not(.qh__btn):hover,
-    a:not(.qh__btn):focus,
-    a:not(.qh__btn):active {
-      color: var(--fc__default__accent);
-    }
-
-    a:not(.qh__btn):focus {
-      outline-color: var(--c__white);
-    }
   }
 
   @media (prefers-color-scheme: dark) {
     html:not(.light) & {
+      --computed-background-color: var(--c__coffee-milk--trans25);
+      --computed-foreground-color: var(--c__coffee-milk--light);
+      --computed-link-color: var(--c__white);
+      --computed-link-color--hover: var(--fc__default__accent);
       background-color: var(--c__coffee-milk--trans25);
       color: var(--c__coffee-milk--light);
-
-      a:not(.qh__btn),
-      a:not(.qh__btn):visited {
-        color: var(--c__white);
-      }
-
-      a:not(.qh__btn):hover,
-      a:not(.qh__btn):focus,
-      a:not(.qh__btn):active {
-        color: var(--fc__default__accent);
-      }
-
-      a:not(.qh__btn):focus {
-        outline-color: var(--c__white);
-      }
     }
   }
 }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="currentColor" aria-hidden="true" focusable="false">
+  <defs>
+    <polygon id="star" points="0,-50 11.23,-15.45 47.55,-15.45 18.17,5.9 29.39,40.45 0,19.1 -29.39,40.45 -18.17,5.9 -47.55,-15.45 -11.23,-15.45"/>
+  </defs>
+  <use href="#star" x="300" y="60"/>
+  <use href="#star" x="420" y="92.15"/>
+  <use href="#star" x="507.85" y="180"/>
+  <use href="#star" x="540" y="300"/>
+  <use href="#star" x="507.85" y="420"/>
+  <use href="#star" x="420" y="507.85"/>
+  <use href="#star" x="300" y="540"/>
+  <use href="#star" x="180" y="507.85"/>
+  <use href="#star" x="92.15" y="420"/>
+  <use href="#star" x="60" y="300"/>
+  <use href="#star" x="92.15" y="180"/>
+  <use href="#star" x="180" y="92.15"/>
+</svg>

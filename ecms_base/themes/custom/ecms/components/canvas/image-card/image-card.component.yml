@@ -1,6 +1,6 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
-name: 'Image Card'
-group: 'RI.Gov'
+name: "Image Card"
+group: "RI.Gov"
 status: stable
 description: |
   Card with an 8:5 image and a CTA link. Thin Canvas wrapper around the existing
@@ -9,25 +9,43 @@ description: |
 props:
   type: object
   required:
-    - image
     - link_url
     - link_text
   properties:
+    theme:
+      title: Theme
+      type: string
+      description: Background + foreground color palette. Maps to the `qh__t__*` theme classes. `inherit` leaves colors up to the surrounding page.
+      enum:
+        - inherit
+        - primary
+        - primary-light
+        - secondary
+        - tertiary
+        - coffee-milk
+      meta:enum:
+        inherit: Inherit
+        primary: Primary
+        primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
+        coffee-milk: Coffee milk
+      examples: [inherit]
     image:
       $ref: json-schema-definitions://canvas.module/image
       type: object
       title: Image
       examples:
-        - src: https://picsum.photos/1200/750
-          alt: 'Placeholder card image'
-          width: 1200
-          height: 750
+        - src: images/placeholder.jpg
+          alt: "Placeholder card image"
+          width: 800
+          height: 500
     link_url:
       type: string
       title: Link URL
       format: uri-reference
-      examples: ['/services']
+      examples: ["/services"]
     link_text:
       type: string
       title: Link text
-      examples: ['Find a Service']
+      examples: ["Find a Service"]

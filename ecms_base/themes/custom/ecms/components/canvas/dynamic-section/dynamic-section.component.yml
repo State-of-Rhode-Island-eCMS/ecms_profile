@@ -154,6 +154,30 @@ props:
         stretch: Stretch (equal-height columns)
       examples: [ default ]
 
+    cells_backdrop:
+      title: Cells backdrop
+      type: string
+      description: |
+        Paints a decorative background behind cell 2 through the last cell —
+        useful for highlighting feature columns alongside a title in cell 1.
+        The backdrop is a pseudo-element (not a wrapping container), so it
+        disappears cleanly when the grid collapses on narrow viewports.
+      enum:
+        - none
+        - primary
+        - primary-light
+        - secondary
+        - tertiary
+        - coffee-milk
+      meta:enum:
+        none: None
+        primary: Primary
+        primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
+        coffee-milk: Coffee milk
+      examples: [ none ]
+
 slots:
   header:
     title: Header

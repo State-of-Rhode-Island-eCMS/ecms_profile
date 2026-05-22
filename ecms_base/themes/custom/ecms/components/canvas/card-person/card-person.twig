@@ -1,4 +1,36 @@
-<article class="qh__card-person">
+{# Theme enum → class lookup (canvas-sdc-AGENTS.md §6.5 — never concatenate). #}
+{% set theme_classes = {
+  'primary':       'qh__t__primary',
+  'primary-light': 'qh__t__primary--light',
+  'secondary':     'qh__t__secondary',
+  'tertiary':      'qh__t__tertiary',
+  'coffee-milk':   'qh__t__coffee-milk',
+} %}
+
+{# Normalize phone/email into href-style entries so they render in the same
+   row as the social/website channels. The global mailto/tel link styles
+   (assets/patterns/00-atoms/02-text/_01-links.scss) auto-attach the
+   envelope/phone glyph via ::before mask, so these channels omit an
+   inline SVG icon. #}
+{% set tel_href = phone ? 'tel:' ~ phone|replace({' ': '', '(': '', ')': '', '-': '', '.': ''}) : null %}
+{% set mail_href = email ? 'mailto:' ~ email : null %}
+
+{# Channel order = render order. Filtered to populated URLs only.
+   `icon: null` channels rely on the global ::before mask icon. #}
+{% set channels = [
+  { key: 'website',   url: website_url,   icon: 'link',             label: 'Website',     is_website: true  },
+  { key: 'phone',     url: tel_href,      icon: null,               label: 'Phone'                          },
+  { key: 'email',     url: mail_href,     icon: null,               label: 'Email'                          },
+  { key: 'facebook',  url: facebook_url,  icon: 'social-facebook',  label: 'Facebook'                       },
+  { key: 'x',         url: x_url,         icon: 'social-twitter',   label: 'X (Twitter)'                    },
+  { key: 'instagram', url: instagram_url, icon: 'social-instagram', label: 'Instagram'                      },
+  { key: 'linkedin',  url: linkedin_url,  icon: 'social-linkedin',  label: 'LinkedIn'                       },
+  { key: 'youtube',   url: youtube_url,   icon: 'social-youtube',   label: 'YouTube'                        },
+  { key: 'rss',       url: rss_url,       icon: 'feed',             label: 'RSS feed'                       },
+] %}
+{% set active_channels = channels|filter(c => c.url) %}
+
+<article {{ attributes.addClass(['qh__card-person', theme_classes[theme]|default('')]) }}>
   <div class="qh__card-person__image-wrapper">
     <div class="qh__card-person__headshot">
       {% if photo and photo.src %}
@@ -6,17 +38,35 @@
       {% endif %}
     </div>
   </div>
+
   <div class="qh__card-person__content">
     <div class="qh__card-person__name">
-      {% if job_title %}
-        <p class="qh__card-person__job-title">{{ job_title }}</p>
-      {% endif %}
-      <p class="qh__card-person__full-name">{{ first_name }} {{ last_name }}</p>
+      {% if job_title %}<p class="qh__card-person__job-title qh__h6 qh__u__fw-medium">{{ job_title }}</p>{% endif %}
+      <p class="qh__card-person__full-name qh__h4 qh__u__fw-semibold">{{ first_name }} {{ last_name }}</p>
     </div>
-    {% if social_links is not empty %}
-      <div class="qh__card-person__social qh__u__no-external">
-        {% block social_links %}{{ social_links }}{% endblock %}
-      </div>
+
+    {% if active_channels|length > 0 %}
+      <ul class="qh__card-person__social-list qh__u__no-external">
+        {% for ch in active_channels %}
+          <li>
+            <a href="{{ ch.url }}"
+               class="qh__card-person__social-link{% if ch.is_website %} qh__card-person__social-link--website{% endif %}"
+               {% if ch.icon and not ch.is_website %}rel="external noopener noreferrer"{% endif %}>
+              {% if ch.icon %}
+                <span class="qh__icon" aria-hidden="true">{% include '@icons/' ~ ch.icon ~ '.svg' %}</span>
+              {% endif %}
+              <span class="visually-hidden">{{ ch.label }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {# Same empty-slot guard as dynamic-section.twig — capture the block
+       output, trim, and only emit the wrapper when there's real content. #}
+    {% set footer_content %}{% block footer %}{{ footer }}{% endblock %}{% endset %}
+    {% if footer_content|trim %}
+      <div class="qh__card-person__footer">{{ footer_content|raw }}</div>
     {% endif %}
   </div>
 </article>
