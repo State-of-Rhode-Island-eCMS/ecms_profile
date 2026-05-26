@@ -1,89 +1,172 @@
 // Facets widget — checkbox style
 // Generic styles targeting Drupal Facets module markup.
 // Applies to all .facets-widget-checkbox blocks across the site.
+//
+// Markup is enhanced by assets/scripts/facets.js, which wraps the body in
+// .facets-widget__body, replaces the <h3> contents with a .facets-widget__toggle
+// button, and (for facets above the threshold) inserts a .facets-widget__search
+// input and a .facets-widget__no-results message.
 
 .facets-widget-checkbox {
-  margin-bottom: 1rem;
-  background: #fff;
-  border: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
-  border-radius: 8px;
-  overflow: hidden;
+  border: $border-sm solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+  border-radius: $input-border-radius;
+  margin-block-end: 1.5rem;
 
-  h3 {
-    background: var(--c__coffee-milk--light, #f0eee5);
-    color: var(--c__navy, #293557);
-    font-size: 1.125rem; // 18px
-    font-weight: 600;
+  // ----- Header -----
+  > h3 {
     margin: 0;
-    padding: 0.75rem 1rem;
   }
 
+  .facets-widget__toggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    font-weight: 625;
+    gap: 0.75rem;
+    justify-content: space-between;
+    padding: 0.875rem 1rem;
+    text-align: start;
+    width: 100%;
+
+    &:focus-visible {
+      outline: $border-sm solid var(--fc__default__violator, currentColor);
+      outline-offset: -#{$border-sm};
+    }
+  }
+
+  // CSS-drawn +/− icon. Two bars form a cross; the vertical bar collapses to
+  // zero when the button reports aria-expanded="true", leaving a minus sign.
+  .facets-widget__toggle-icon {
+    block-size: 1rem;
+    flex-shrink: 0;
+    inline-size: 1rem;
+    position: relative;
+
+    &::before,
+    &::after {
+      background: currentColor;
+      content: '';
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
+      position: absolute;
+      transition: transform 0.15s ease;
+    }
+
+    &::before {
+      block-size: $border-sm * 2;
+      inline-size: 1rem;
+      transform: translate(-50%, -50%);
+    }
+
+    &::after {
+      block-size: 1rem;
+      inline-size: $border-sm * 2;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .facets-widget__toggle[aria-expanded='true'] .facets-widget__toggle-icon::after {
+    transform: translate(-50%, -50%) scaleY(0);
+  }
+
+  // ----- Body (search + list) -----
+  .facets-widget__body {
+    border-block-start: $border-sm solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+    padding: 0.75rem 1rem 1rem;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  // ----- Search input -----
+  .facets-widget__search {
+    position: relative;
+
+    // Inherits all base form-input styles from 00-atoms/05-forms/_00-forms.scss
+    // (--fc__default__bg, --fc__default__border, focus ring, etc.). We only add
+    // the leading-magnifier affordance + spacing tweaks here.
+    input[type='search'] {
+      padding-inline-start: 2.25rem;
+
+      &::-webkit-search-cancel-button {
+        cursor: pointer;
+      }
+    }
+
+    // Magnifier icon — painted via mask so it follows currentColor.
+    &::before {
+      background-color: currentColor;
+      block-size: 1rem;
+      content: '';
+      inline-size: 1rem;
+      inset-block-start: 50%;
+      inset-inline-start: 0.75rem;
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Cpath d='M34.8 34.8l-6.2-6.2h-.9l-.2-.2c1.6-1.9 2.6-4.3 2.6-6.9 0-5.8-4.7-10.6-10.6-10.6S9 15.7 9 21.6s4.7 10.6 10.6 10.6c2.6 0 5.1-1 6.9-2.6l.2.2v.9l6.2 6.2c.2.2.6.2.9 0l1.1-1.1c.2-.4.2-.8-.1-1zm-15.2-5.1c-4.5 0-8.1-3.6-8.1-8.1s3.6-8.1 8.1-8.1 8.1 3.6 8.1 8.1-3.6 8.1-8.1 8.1z'/%3E%3C/svg%3E");
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      opacity: 0.6;
+      pointer-events: none;
+      position: absolute;
+      transform: translateY(-50%);
+    }
+  }
+
+  .facets-widget__no-results {
+    font-size: 0.9375rem;
+    font-style: italic;
+    margin: 0.75rem 0 0;
+    opacity: 0.75;
+  }
+
+  // ----- Checkbox list -----
   .item-list__checkbox {
-    border-left: 8px solid var(--c__coffee-milk--light, #f0eee5);
     list-style: none;
-    margin: 0;
+    margin: 0.75rem 0 0;
     max-height: 20rem;
     overflow-y: auto;
     padding: 0;
   }
 
+  // First child of the body when no search input is present.
+  .facets-widget__body > .item-list__checkbox:first-child {
+    margin-block-start: 0;
+  }
+
   .facet-item {
-    align-items: center;
-    border-top: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+    align-items: flex-start;
     display: flex;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding-block: 0.375rem;
 
-    &:first-child {
-      border-top: none;
+    // [hidden] needs to win over the .facet-item display rule above.
+    // Without this, JS-set el.hidden = true has no visual effect because
+    // class-level display: flex has equal specificity but later source order.
+    &[hidden] {
+      display: none;
+    }
+
+    .facets-checkbox {
+      flex-shrink: 0;
+      margin-block-start: 0.25rem;
     }
 
     label {
-      color: var(--c__navy, #293557);
       cursor: pointer;
-      font-size: 1.125rem; // 18px
-      font-weight: 400;
+      flex: 1 1 0;
       line-height: 1.4;
-    }
-  }
-
-  .facets-checkbox {
-    appearance: none;
-    background: #fff;
-    border: 1.5px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
-    border-radius: 3px;
-    cursor: pointer;
-    flex-shrink: 0;
-    height: 1rem; // 16px
-    position: relative;
-    width: 1rem; // 16px
-
-    &:focus-visible {
-      outline: 2px solid var(--c__ocean--trans25, rgba(149, 189, 223, 0.25));
-      outline-offset: 2px;
+      margin: 0;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
-    &:checked {
-      background: var(--c__navy, #293557);
-      border-color: var(--c__navy, #293557);
-
-      &::after {
-        border: 2px solid #fff;
-        border-left: none;
-        border-top: none;
-        content: '';
-        display: block;
-        height: 0.5rem;
-        left: 0.28rem;
-        position: absolute;
-        top: 0.08rem;
-        transform: rotate(45deg);
-        width: 0.3rem;
-      }
-
-      + label {
-        font-weight: 625;
-      }
+    // Bold-on-checked — matches the design comp.
+    .facets-checkbox:checked + label {
+      font-weight: 625;
     }
   }
 }
