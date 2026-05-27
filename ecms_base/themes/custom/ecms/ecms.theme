@@ -164,6 +164,22 @@ function ecms_preprocess_html(array &$variables): void {
   $theme_settings_provider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
   // Add paletteClass from theme settings form.
   $paletteClass = 'qh__t__' . $theme_settings_provider->getSetting('color_palette');
+
+  // Path-based palette override. If the site has configured an override palette
+  // and the current URL alias matches one of the listed pages, swap the class.
+  // Matches the UX of core's request_path condition (wildcards + <front>).
+  $override_palette = $theme_settings_provider->getSetting('palette_override_palette');
+  $override_pages = $theme_settings_provider->getSetting('palette_override_pages');
+  if (!empty($override_palette) && !empty($override_pages)) {
+    $current_path = \Drupal::service('path.current')->getPath();
+    $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+    /** @var \Drupal\Core\Path\PathMatcherInterface $path_matcher */
+    $path_matcher = \Drupal::service('path.matcher');
+    if ($path_matcher->matchPath($alias, $override_pages) || ($alias !== $current_path && $path_matcher->matchPath($current_path, $override_pages))) {
+      $paletteClass = 'qh__t__' . $override_palette;
+    }
+  }
+
   $variables['palette'] = $paletteClass;
 
   $node = \Drupal::routeMatch()->getParameter('node');

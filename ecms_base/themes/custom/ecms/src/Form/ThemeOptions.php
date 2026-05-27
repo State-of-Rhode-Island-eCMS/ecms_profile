@@ -22,6 +22,7 @@ class ThemeOptions extends EcmsSettingsBase {
     ];
 
     $this->buildColorPaletteField($form, $this->themeManager->getActiveTheme()->getPath());
+    $this->buildPaletteOverrideField($form, $this->themeManager->getActiveTheme()->getPath());
     $this->buildIllustrationField($form, $this->themeManager->getActiveTheme()->getPath());
   }
 
@@ -54,6 +55,57 @@ class ThemeOptions extends EcmsSettingsBase {
       '#default_value' => $this->themeSettingsProvider->getSetting('color_palette'),
       '#options' => $paletteOptions,
       '#description' => $this->t("Select which color palette the site will use."),
+    ];
+  }
+
+  /**
+   * Builds the palette_override fieldset (palette select + pages textarea).
+   *
+   * Mirrors the UX of core's request_path block visibility condition: paths
+   * one per line, "*" wildcard, "<front>" for the front page. When the
+   * override palette is set and the current URL alias matches one of the
+   * listed paths, ecms_preprocess_html() swaps the palette class on <html>.
+   */
+  private function buildPaletteOverrideField(array &$form, string $theme_path): void {
+    $color_config_json_string = file_get_contents("{$theme_path}/assets/data/color-config.json");
+    if (!$color_config_json_string) {
+      return;
+    }
+
+    $json_decoded = json_decode($color_config_json_string, TRUE);
+    if ($json_decoded === NULL) {
+      return;
+    }
+
+    $paletteOptions = ['' => $this->t('- None -')];
+    foreach ($json_decoded['palettes'] as $key => $palette) {
+      if (str_contains($key, '--dark')) {
+        continue;
+      }
+      $paletteOptions[$key] = $palette['humanName'];
+    }
+
+    $form['ecms_theme_options']['palette_override_group'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Path-based palette override'),
+      '#description' => $this->t('Override the site palette on specific paths. Leave the palette unset to disable.'),
+    ];
+
+    $form['ecms_theme_options']['palette_override_group']['palette_override_palette'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Override palette'),
+      '#default_value' => $this->themeSettingsProvider->getSetting('palette_override_palette') ?? '',
+      '#options' => $paletteOptions,
+    ];
+
+    $form['ecms_theme_options']['palette_override_group']['palette_override_pages'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Pages'),
+      '#default_value' => $this->themeSettingsProvider->getSetting('palette_override_pages') ?? '',
+      '#description' => $this->t('Specify pages by using their paths. Enter one path per line. The "*" character is a wildcard. An example path is %user-wildcard for every user page. %front is the front page.', [
+        '%user-wildcard' => '/user/*',
+        '%front' => '<front>',
+      ]),
     ];
   }
 
