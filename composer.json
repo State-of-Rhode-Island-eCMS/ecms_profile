@@ -31,12 +31,13 @@
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
                 "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2025-07-09/drupal-core--2025-07-09--3049332--mr-12460.patch",
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2026-01-22/responsive_image-remove_missing_response_image_width_exception.patch",
-                "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt"
+                "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt",
+                "3008292 - Upload validators (including max_resolution) not applied in media library upload form": "https://www.drupal.org/files/issues/2025-12-29/3008292-14174-11.x.patch"
             },
             "drupal/gtranslate": {
-                "3375925 - TypeError: array_values(): Argument #1 ($array) must be of type array": "https://www.drupal.org/files/issues/2023-08-31/gtranslate-3375925-update-default-config-11.diff",
+                "3375925 - TypeError: array_values(): Argument #1 ($array) must be of type array": "https://gist.githubusercontent.com/pfrilling/46564b443070ee4285cebbcbd5eeeb55/raw/6b04f8cb0823f70ea36abf3e1248f0fb7f405d0e/gistfile1.txt",
                 "3555400: Add schema for gtranslate.settings ": "https://www.drupal.org/files/issues/2025-10-31/3555400-add-schema-gtranslate-6.patch",
-                "RIGA-826: Portuguese Langugage": "https://gist.githubusercontent.com/pfrilling/5b43049ad0f6b78ac882abb27148ff5d/raw/0919102bb4c14f8824beb2396b6483d9395002f8/gtranslate-allow-portuguese.patch"
+                "RIGA-826: Portuguese Langugage": "https://gist.githubusercontent.com/pfrilling/5b43049ad0f6b78ac882abb27148ff5d/raw/43a8807906addaed7e9a31e22825ec9db784ff43/gtranslate-allow-portuguese.patch"
             },
             "drupal/iek": {
                 "3430975 - #7 Drupal 11 upgrade": "https://www.drupal.org/files/issues/2025-04-10/iek.1.x-dev.rector.patch",
@@ -120,7 +121,7 @@
         "drupal/features": "^3.15",
         "drupal/feeds": "^3.0@RC",
         "drupal/feeds_ex": "^1.0@beta",
-        "drupal/field_group": "^3.4",
+        "drupal/field_group": "^3.4 || ^4.0",
         "drupal/file_delete": "^3.0",
         "drupal/focal_point": "^2.0.1",
         "drupal/geocoder": "^4.30",
@@ -169,7 +170,7 @@
         "drupal/paragraphs": "^1.20",
         "drupal/password_policy": "^4.0",
         "drupal/path_redirect_import": "^2.0",
-        "drupal/pathauto": "^1.8",
+        "drupal/pathauto": "1.14",
         "drupal/publishcontent": "^1.3",
         "drupal/purge_file": "^1.2",
         "drupal/quick_node_clone": "^1.16",
