@@ -19,6 +19,7 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
     --font-lh-min-value: var(--h5-lh-s);
     --font-lh-max-value: var(--h5-lh-l);
     --font-lh-scaler-value: var(--h5-lh-scaler-value);
+    color: var(--fc__footer__fg);
     margin-block-start: 0;
   }
 
