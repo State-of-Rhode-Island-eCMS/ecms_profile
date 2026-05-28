@@ -1595,8 +1595,8 @@
       "humanName": "Kids RI orange",
       "values": {
         "official": [
-          { "fnName": "fg", "colorName": "quahog" },
-          { "fnName": "bg", "colorName": "white--trans25" },
+          { "fnName": "fg", "colorName": "quahog--dark" },
+          { "fnName": "bg", "colorName": "quahog--light" },
           { "fnName": "link", "colorName": "quahog" },
           { "fnName": "link--hover", "colorName": "quahog--darker" },
           { "fnName": "link--focus", "colorName": "quahog--darker" }
@@ -1661,7 +1661,7 @@
           #{ "fnName": "link", "colorName": "navy" },
           #{ "fnName": "link__bg", "colorName": "transparent" },
           #{ "fnName": "link--hover", "colorName": "navy--dark" },
-          { "fnName": "link--hover__bg", "colorName": "white--trans25" },
+          { "fnName": "link--hover__bg", "colorName": "quahog--light" },
           { "fnName": "link--focus", "colorName": "navy" },
           { "fnName": "link--active", "colorName": "navy--sat" },
           #{ "fnName": "sub__bg", "colorName": "white--trans25" }
@@ -1725,8 +1725,8 @@
       "humanName": "Kids RI orange dark",
       "values": {
         "official": [
-          { "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "cliff-walk--dark--trans25" },
+          { "fnName": "fg", "colorName": "quahog--dark" },
+          { "fnName": "bg", "colorName": "quahog--light" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "cliff-walk" },
           { "fnName": "link--focus", "colorName": "cliff-walk" }
@@ -1786,9 +1786,9 @@
         ],
         "nav-minor": [
           { "fnName": "border", "colorName": "orange--primary" },
-          { "fnName": "fg", "colorName": "quahog--light" },
+          { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "white--trans25" },
-          { "fnName": "link", "colorName": "quahog--light" },
+          { "fnName": "link", "colorName": "white" },
           #{ "fnName": "link__bg", "colorName": "transparent" },
           { "fnName": "link--hover", "colorName": "white" },
           { "fnName": "link--hover__bg", "colorName": "white--trans15" },
@@ -1846,8 +1846,8 @@
       "humanName": "Kids RI aqua",
       "values": {
         "official": [
-          { "fnName": "fg", "colorName": "quahog" },
-          { "fnName": "bg", "colorName": "white--trans25" },
+          { "fnName": "fg", "colorName": "quahog--dark" },
+          { "fnName": "bg", "colorName": "quahog--light" },
           { "fnName": "link", "colorName": "quahog" },
           { "fnName": "link--hover", "colorName": "quahog--darker" },
           { "fnName": "link--focus", "colorName": "quahog--darker" }
@@ -1975,8 +1975,8 @@
       "humanName": "Kids RI aqua dark",
       "values": {
         "official": [
-          { "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "cliff-walk--dark--trans25" },
+          { "fnName": "fg", "colorName": "quahog--dark" },
+          { "fnName": "bg", "colorName": "quahog--light" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "cliff-walk" },
           { "fnName": "link--focus", "colorName": "cliff-walk" }
