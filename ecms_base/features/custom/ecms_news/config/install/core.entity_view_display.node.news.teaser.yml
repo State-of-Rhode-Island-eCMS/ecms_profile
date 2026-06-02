@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.news.field_agency
+    - field.field.node.news.field_meta_tags_news
+    - field.field.node.news.field_news_body
+    - field.field.node.news.field_news_date
+    - field.field.node.news.field_news_links
+    - field.field.node.news.field_news_paragraphs
+    - field.field.node.news.field_news_promotions
+    - field.field.node.news.field_news_source
+    - field.field.node.news.field_news_topics
+    - node.type.news
+  module:
+    - datetime
+    - text
+    - user
+id: node.news.teaser
+targetEntityType: node
+bundle: news
+mode: teaser
+content:
+  field_news_body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 200
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_news_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_agency: true
+  field_meta_tags_news: true
+  field_news_links: true
+  field_news_paragraphs: true
+  field_news_promotions: true
+  field_news_source: true
+  field_news_topics: true
+  langcode: true
+  links: true
+  search_api_excerpt: true

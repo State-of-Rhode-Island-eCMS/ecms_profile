@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'News Topics'
+vid: news_topics
+description: 'Group news by topics.'
+weight: 0
+new_revision: false

@@ -1,0 +1,6 @@
+name: eCMS News
+type: eCMS
+description: 'Installs the News content type and related configuration.'
+recipes: []
+install:
+  - ecms_news
