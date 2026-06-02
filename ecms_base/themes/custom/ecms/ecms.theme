@@ -171,6 +171,10 @@ function ecms_preprocess_html(array &$variables): void {
   $override_palette = $theme_settings_provider->getSetting('palette_override_palette');
   $override_pages = $theme_settings_provider->getSetting('palette_override_pages');
   if (!empty($override_palette) && !empty($override_pages)) {
+    // The palette class now varies by request path, so the rendered output
+    // must declare the url.path cache context to vary correctly per page.
+    $variables['#cache']['contexts'][] = 'url.path';
+
     $current_path = \Drupal::service('path.current')->getPath();
     $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
     /** @var \Drupal\Core\Path\PathMatcherInterface $path_matcher */
