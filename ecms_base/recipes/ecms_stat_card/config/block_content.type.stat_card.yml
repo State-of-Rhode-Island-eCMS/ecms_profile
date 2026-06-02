@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: stat_card
+label: 'Stat Card'
+revision: false
+description: null

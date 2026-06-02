@@ -65,7 +65,10 @@
     // `qh-*-theme` mixin in _00-themes.scss). Falls back to the global
     // `--fc__icon__icon-card` outside any theme so unthemed icon cards keep
     // their existing brand-blue glyph.
-    --qh__grid-card__icon-color: var(--computed-icon-color, var(--fc__icon__icon-card));
+    --qh__grid-card__icon-color: var(
+      --computed-icon-color,
+      var(--fc__icon__icon-card)
+    );
   }
 
   &--icon &__icon {
@@ -81,6 +84,80 @@
     display: flex;
     align-items: flex-start;
     min-height: 2lh;
+  }
+
+  // Stat variant: one surface holding up to four statistics laid out in
+  // columns, each a large number above a short rich-text description. No media
+  // area, no CTA, and no border. Both the surface and the text defer to the
+  // theme cascade the same way the rest of the card does — the background
+  // tracks `--computed-background-color` (set by each `qh-*-theme` mixin in
+  // _00-themes.scss) and falls back to the ocean-light default when unthemed;
+  // text color is left to inherit from the foreground.
+  //
+  // `container-type: inline-size` scopes the column query below to the card's
+  // OWN width (mirrors canvas-card / dynamic-section), so a stat card in a
+  // narrow region collapses independently of the viewport.
+  &--stat {
+    container-name: stat-card;
+    container-type: inline-size;
+    background-color: var(--computed-background-color, var(--c__ocean--light));
+    border: 0;
+    padding: var(--vertical-rhythm) 1.25em calc(var(--vertical-rhythm) * 1.25);
+  }
+
+  // The stats grid. The column count is derived from the number of stats via
+  // `:has()` + `:nth-child` quantity queries rather than a column-count class,
+  // and scales with the card's own width (container queries). Below the first
+  // breakpoint the stats stack in a single column; each wider breakpoint adds a
+  // column so N stats reach N-across on a wide card (e.g. 4 stats → 4 in a row
+  // on desktop, stepping down to 2-up then stacked as the card narrows).
+  // Breakpoints ascend so the widest matching rule wins via source order.
+  &__stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--vertical-rhythm) calc(#{$general-h-spacing} * 2);
+
+    // 2+ stats → two columns once there's room.
+    @container stat-card (min-width: 28rem) {
+      &:has(.qh__grid-card__stat:nth-child(2)) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    // Exactly three stats → three across (four stays 2-up here, 4-up below).
+    @container stat-card (min-width: 42rem) {
+      &:has(.qh__grid-card__stat:nth-child(3)):not(:has(.qh__grid-card__stat:nth-child(4))) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    // Four stats → four across on a wide card.
+    @container stat-card (min-width: 56rem) {
+      &:has(.qh__grid-card__stat:nth-child(4)) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+
+  &__stat-value {
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+
+  &__stat-label {
+    font-family: var(--font-sans-vf);
+    font-weight: 600;
+    margin-top: 0.5em;
+
+    // Rich-text descriptions may contain a paragraph wrapper and inline links;
+    // keep them flush and let links inherit the themed link color.
+    > :first-child {
+      margin-block-start: 0;
+    }
+
+    > :last-child {
+      margin-block-end: 0;
+    }
   }
 
   &__arrow {

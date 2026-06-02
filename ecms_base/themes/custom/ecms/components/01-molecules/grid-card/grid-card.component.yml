@@ -2,17 +2,18 @@ $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schema
 name: Grid Card
 group: 'ZZ-Incompatible'
 noUi: true
-description: A card for use in grid layouts. Supports either an image or icon in the media area.
+description: A card for use in grid layouts. Supports an image, icon, or stat in the media area.
 props:
   type: object
   properties:
     variant:
       type: string
       title: Card variant
-      description: Either 'image' or 'icon'
+      description: Either 'image', 'icon', or 'stat'
       enum:
         - image
         - icon
+        - stat
       default: image
 slots:
   img:
@@ -21,6 +22,10 @@ slots:
     title: The icon markup (for icon variant)
   media_library_icon:
     title: Whether the icon is from the media library
+  stats:
+    title: Array of stat items (for stat variant), each with value and description
+  theme_class:
+    title: Optional theme class for the card surface (e.g. qh__t__primary)
   link_url:
     title: The URL for the card link
   link_text:

@@ -571,3 +571,14 @@ function ecms_base_update_11214(): void {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Apply recipe for the stat card block type.
+ */
+function ecms_base_update_11215(): void {
+  $recipes = [
+    'ecms_stat_card',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
