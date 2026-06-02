@@ -67,12 +67,13 @@ class FooterSettings extends EcmsSettingsBase {
       '#default_value' => $this->themeSettingsProvider->getSetting('footer_wave', 'default') ?? FALSE,
     ];
 
+    $footer_above = $this->themeSettingsProvider->getSetting('footer_above') ?? [];
     $form['ecms_footer']['footer_above'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Footer: Above columns'),
-      '#format' => $this->themeSettingsProvider->getSetting('footer_above')['format'] ?? 'basic_html',
+      '#format' => $footer_above['format'] ?? 'basic_html',
       '#description' => $this->t('The left column of the footer.'),
-      '#default_value' => $this->themeSettingsProvider->getSetting('footer_above')['value'] ?: '',
+      '#default_value' => $footer_above['value'] ?? '',
     ];
   }
 
