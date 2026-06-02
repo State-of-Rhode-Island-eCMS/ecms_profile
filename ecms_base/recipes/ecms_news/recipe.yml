@@ -4,3 +4,47 @@ description: 'Installs the News content type and related configuration.'
 recipes: []
 install:
   - ecms_news
+config:
+  strict: false
+  import:
+    ecms_news:
+      - field.storage.node.field_meta_tags_news
+      - field.storage.node.field_news_body
+      - field.storage.node.field_news_date
+      - field.storage.node.field_news_links
+      - field.storage.node.field_news_paragraphs
+      - field.storage.node.field_news_promotions
+      - field.storage.node.field_news_source
+      - field.storage.node.field_news_topics
+      - field.field.node.news.field_agency
+      - field.field.node.news.field_meta_tags_news
+      - field.field.node.news.field_news_body
+      - field.field.node.news.field_news_date
+      - field.field.node.news.field_news_links
+      - field.field.node.news.field_news_paragraphs
+      - field.field.node.news.field_news_promotions
+      - field.field.node.news.field_news_source
+      - field.field.node.news.field_news_topics
+      - core.base_field_override.node.news.changed
+      - core.base_field_override.node.news.created
+      - core.base_field_override.node.news.menu_link
+      - core.base_field_override.node.news.moderation_state
+      - core.base_field_override.node.news.path
+      - core.base_field_override.node.news.promote
+      - core.base_field_override.node.news.status
+      - core.base_field_override.node.news.sticky
+      - core.base_field_override.node.news.title
+      - core.base_field_override.node.news.uid
+      - core.base_field_override.taxonomy_term.news_topics.changed
+      - core.base_field_override.taxonomy_term.news_topics.path
+      - core.base_field_override.taxonomy_term.news_topics.status
+      - core.entity_form_display.node.news.default
+      - core.entity_view_display.node.news.default
+      - core.entity_view_display.node.news.teaser
+      - core.entity_view_display.taxonomy_term.news_topics.default
+      - language.content_settings.node.news
+      - pathauto.pattern.news
+      - rabbit_hole.behavior_settings.node_type_news
+      - rabbit_hole.behavior_settings.taxonomy_vocabulary_news_topics
+      - simple_sitemap.bundle_settings.default.node.news
+      - views.view.news
