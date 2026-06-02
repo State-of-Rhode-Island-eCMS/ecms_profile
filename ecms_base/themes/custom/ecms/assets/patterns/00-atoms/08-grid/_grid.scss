@@ -27,4 +27,27 @@
     align-items: flex-end;
     margin-bottom: var(--vertical-rhythm);
   }
+
+  // Smart title column. When the author adds a grid title it renders as the
+  // first cell and, under the default auto-fit tracks, claims an equal share —
+  // so a title alongside a single wide card splits 50/50 (too much for a short
+  // heading). Scoped to grids that actually have a title cell, and gated on a
+  // min-width so narrow screens still stack: cap the title at ~25% and let the
+  // remaining items fill the rest. `:has()` + `:nth-child` quantity queries
+  // special-case the low item counts where an equal split looks too wide
+  // (title + 1 item, title + 2 items); with 3+ items an equal auto-fit track is
+  // already <=25%, so the default grid is left untouched.
+  &:has(.qh__grid__title-cell) {
+    @media (min-width: $bp--medium) {
+      // Title + exactly one item.
+      &:has(> :nth-child(2):last-child) {
+        grid-template-columns: minmax(0, 25%) minmax(0, 1fr);
+      }
+
+      // Title + exactly two items.
+      &:has(> :nth-child(3):last-child) {
+        grid-template-columns: minmax(0, 25%) repeat(2, minmax(0, 1fr));
+      }
+    }
+  }
 }
