@@ -57,14 +57,14 @@ class FooterSettings extends EcmsSettingsBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Footer divider'),
       '#description' => $this->t('Enable the divider between the third and fourth column.'),
-      '#default_value' => $this->themeSettingsProvider->getSetting('footer_divider', 'default') ?? TRUE,
+      '#default_value' => $this->themeSettingsProvider->getSetting('footer_divider') ?? TRUE,
     ];
 
     $form['ecms_footer']['footer_wave'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Footer wave'),
       '#description' => $this->t('Enable a wave effect on the footer.'),
-      '#default_value' => $this->themeSettingsProvider->getSetting('footer_wave', 'default') ?? FALSE,
+      '#default_value' => $this->themeSettingsProvider->getSetting('footer_wave') ?? FALSE,
     ];
 
     $footer_above = $this->themeSettingsProvider->getSetting('footer_above') ?? [];
