@@ -2,13 +2,58 @@ $qh__footer-sm-bp: $bp--small;
 $qh__footer-lg-bp: em(1020);
 // Starting to introduce fluid spacing using these metrics:
 // https://utopia.fyi/space/calculator?c=480,16,1.2,1200,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
-$qh__footer-v-space: clamp(1.5rem, 1rem + 1.6667vw, 2.25rem); // this ends up being doubled in use
+$qh__footer-v-space: clamp(
+  1.5rem,
+  1rem + 1.6667vw,
+  2.25rem
+); // this ends up being doubled in use
 $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
+// Per-column minimum width for the no-divider equal grid, expressed in
+// characters so the column count tracks content width rather than the viewport.
+$qh__footer-col-min: 18ch;
+// Rendered height of the full-bleed wave cap: the SVG is 1440×88 stretched to
+// 100% of the (full-viewport-width) footer, so its height is 88/1440 of 100vw.
+// Used both implicitly by the wave SVG and to reserve matching space above it.
+$qh__footer-wave-height: calc(100vw * 88 / 1440);
 
 .qh__site-footer {
   background-color: var(--fc__footer__bg);
   border-block-start: $border-xl solid var(--fc__footer__border-top);
   color: var(--fc__footer__fg);
+  position: relative;
+
+  // The wave cap stands in for the solid top border, so drop the border when
+  // the wave is enabled to avoid doubling up a top edge.
+  &.has-wave {
+    border-block-start: 0;
+  }
+
+  // Decorative wave that caps the top edge of the footer. It is inlined from
+  // @icons/footer-wave.svg and anchored just above the footer: the SVG's solid
+  // lower band meets the footer background seamlessly while the crest rises
+  // into the section above. Fill follows the footer background and the stroke
+  // reuses the footer's "pop of color" accent (the same var that paints the
+  // non-wave top border), so the wave themes with every palette.
+  &__wave {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 100%;
+    margin-block-end: -2px; // tuck the wave 2px into the footer to close the seam
+    line-height: 0;
+    pointer-events: none;
+    color: var(--fc__footer__bg);
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    svg path {
+      fill: currentColor;
+      stroke: var(--fc__footer__border-top);
+    }
+  }
 
   :where(#{$all-headers}) {
     // There should be heading elements inside the footer, but if there are, we don't want them to look huge
@@ -54,20 +99,114 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
     font-variant-numeric: lining-nums;
   }
 
+  // Outer wrapper: just constrains width and pads the block. The column layout
+  // now lives one level down on &__content so the optional &__above region can
+  // sit above the columns inside the same max-width.
   &__inner {
     @include qh-content-maxwidth();
+    padding-block: $qh__footer-v-space;
+  }
+
+  // Promo line above the columns ("Questions or Feedback? Get In Touch"). The
+  // content comes from a rich-text field, so the type ramp is pinned here to
+  // the design (Work Sans SemiBold 21/1.2) rather than inheriting the default
+  // footer body size, and a hairline rule (footer fg @ 25%) separates it from
+  // the columns to match the divider in the design.
+  &__above {
+    border-block-end: $border-xs solid
+      color-mix(in srgb, var(--fc__footer__fg) 25%, transparent);
+    padding-block-end: rem(32);
+
+    // Match the start gutter the columns pick up on mobile (for the section-nav
+    // sticky button); without it the promo line sits flush to the screen edge.
+    @include breakpoint-down($qh__footer-sm-bp) {
+      padding-inline-start: $qh__footer-h-space;
+    }
+
+    // Pin the type ramp on every top-level element the rich-text field can
+    // emit (p, headings, lists, a bare link, etc.) — not just <p> — since an
+    // author may use any markup. Inline children (a, span, strong) inherit it.
+    // `*` carries no specificity, so qualify with the footer root class;
+    // otherwise the base `.qh__site-footer p` / heading rules (a class + a
+    // type) outrank it and the rich-text keeps its default size.
+    .qh__site-footer & > * {
+      // Use the fluid type ramp for the heading closest to the 21px design
+      // size — h5 scales 18 → 21px — mirroring the footer's own heading
+      // override so the rich text matches a footer heading at any element.
+      // The base typography rule turns these vars into font-size/line-height.
+      --font-size-min-value: var(--h5-size-s);
+      --font-size-max-value: var(--h5-size-l);
+      --font-size-scaler-value: var(--h5-scaler-value);
+      --font-lh-min-value: var(--h5-lh-s);
+      --font-lh-max-value: var(--h5-lh-l);
+      --font-lh-scaler-value: var(--h5-lh-scaler-value);
+      font-weight: 600;
+      letter-spacing: 0.02em; // 0.42px at the 21px max
+    }
+
+    // Sit flush to the top; later blocks keep their own spacing.
+    > :first-child {
+      margin-block-start: 0;
+    }
+
+    // Inline CTA link in the palette's violator accent (gold on the default
+    // palette). Overrides the column links' white + 48px touch-target sizing so
+    // it sits inline in the sentence as designed.
+    a {
+      color: var(--fc__default__violator);
+      display: inline;
+      min-height: 0;
+      font-weight: inherit; // match the surrounding SemiBold rather than the lighter link default
+      text-decoration: none;
+
+      &:visited {
+        color: var(--fc__default__violator);
+      }
+
+      // Keep a hover/focus affordance since the link is distinguished from the
+      // surrounding text by color alone.
+      &:hover,
+      &:focus {
+        color: var(--fc__default__violator);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // The column grid container.
+  &__content {
     display: flex;
     flex-flow: column;
     column-gap: $qh__footer-h-space;
     row-gap: 0;
-    padding-block: $qh__footer-v-space;
 
     @include breakpoint-up($qh__footer-sm-bp) {
       flex-flow: row wrap;
     }
+
+    // When the footer divider is disabled in theme settings (the .no-divider
+    // class sits on &__inner), lay the columns out as an equal-width grid
+    // instead of the 3 + pushed-right fourth column used by the divider
+    // variant — but only at the desktop breakpoint where the 4-across layout
+    // lives. Below that, no-divider falls back to the default flex stacking
+    // (1 column on mobile, 2×2 on tablet) like the divider variant; running the
+    // intrinsic grid at narrow widths overflowed and left ragged row gaps.
+    // Within the desktop range the track count still flexes by container width
+    // and a per-column character-width minimum ($qh__footer-col-min).
+    .qh__site-footer__inner.no-divider & {
+      @include breakpoint-up($qh__footer-lg-bp) {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(min(#{$qh__footer-col-min}, 100%), 1fr)
+        );
+        align-items: start;
+      }
+    }
   }
 
-  &__content {
+  // An individual footer column (flex item / grid track).
+  &__column {
     position: relative;
     margin-block: $qh__footer-v-space;
 
@@ -78,7 +217,7 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
       // Border between each column except the first one
       & + &::before {
         border-block-start: $border-xs solid var(--fc__footer__fg);
-        content: '';
+        content: "";
         opacity: 0.25;
         position: absolute;
         top: 0;
@@ -103,12 +242,31 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
 
         &::before {
           border-inline-start: $border-xs solid var(--fc__footer__fg);
-          content: '';
+          content: "";
           opacity: 0.25;
           position: absolute;
           top: 0;
           left: 0;
           bottom: 0;
+        }
+      }
+    }
+
+    // In the no-divider grid (desktop only) the fourth column is just another
+    // equal track: drop the pushed-right auto margin and the divider line.
+    // Below desktop the default mobile/tablet column rules apply unchanged.
+    .qh__site-footer__inner.no-divider & {
+      @include breakpoint-up($qh__footer-lg-bp) {
+        flex: initial;
+        max-width: none;
+
+        &:last-child {
+          margin-inline-start: 0;
+          padding-inline-start: 0;
+
+          &::before {
+            content: none;
+          }
         }
       }
     }
@@ -149,4 +307,16 @@ $qh__footer-h-space: clamp(1rem, 0.5417rem + 1.5278vw, 1.6875rem);
   @media print {
     display: none;
   }
+}
+
+// Blend the wave into the section above it. The wave crest overhangs the top of
+// the footer and would otherwise cover the bottom of the last content block (on
+// canvas pages the final section is full-bleed and bottom-aligned, so its cards
+// sit exactly where the crest lands). Reserving bottom padding on that block
+// pushes its content up to clear the crest while extending its own background
+// down behind the wave — so the troughs reveal that section's real color
+// (coffee-milk, white, navy, anything) instead of the page background.
+// Scoped with :has() so it only applies when the footer wave is enabled.
+body:has(.qh__site-footer.has-wave) main > :last-child {
+  padding-block-end: calc(#{$qh__footer-wave-height} * 2);
 }

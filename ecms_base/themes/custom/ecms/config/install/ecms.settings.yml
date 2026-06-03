@@ -19,6 +19,8 @@ footer_right:
 footer_state_info:
   value: "<p><strong>State of Rhode Island</strong></p>\r\n\r\n<p><a href=\"http://www.governor.ri.gov/\">Office of the Governor</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/\">RI.gov</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/guide/\">Elected Officials</a></p>\r\n\r\n<p><a href=\"https://www.ri.gov/guide/\">State Agencies (A-Z)</a></p>\r\n"
   format: basic_html
+footer_divider: true
+footer_wave: false
 color_palette: scarborough
 palette_override_palette: ''
 palette_override_pages: ''
