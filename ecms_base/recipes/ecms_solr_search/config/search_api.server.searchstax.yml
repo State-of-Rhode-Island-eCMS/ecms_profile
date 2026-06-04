@@ -30,14 +30,13 @@ dependencies:
   module:
     - search_api_solr
     - searchstax
-    - ecms_multisite_search
-id: ecms_multisite_server
-name: 'eCMS Multisite Search Server'
-description: 'Cross-site search server for the aggregator site. Identical to the per-site SearchStax server but with site_hash disabled so all factory sites content is returned.'
-backend: ecms_acquia_search_solr
+id: searchstax
+name: SearchStax
+description: ''
+backend: search_api_solr
 backend_config:
-  retrieve_data: true
-  highlight_data: true
+  retrieve_data: false
+  highlight_data: false
   site_hash: false
   server_prefix: ''
   domain: generic
