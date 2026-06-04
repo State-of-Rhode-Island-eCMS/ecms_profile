@@ -4,12 +4,14 @@
   bar below containing a search form and icon links, and a lower slot
   (max-container width) intended for the tabs component.
 
-  The hero image and its top-right location label are driven by
-  `hero-images.json` (colocated). The manifest is embedded verbatim as a
-  `<script type="application/json">` block; `hero.js` picks one entry at
+  The hero image and its top-right location label are driven by the
+  `hero_images` manifest defined below (fixed theme branding). It is emitted
+  as a `<script type="application/json">` block; `hero.js` picks one entry at
   random on every page load, sets `--hero-image`, the image's `aria-label`,
   and the location pill text. The page cache stays fully warm — randomness
-  is per page-load, client-side.
+  is per page-load, client-side. (Server-side / BigPipe rotation can't do this
+  for anonymous traffic: those responses are served whole from the page
+  cache/CDN, so the image would freeze until the cache clears.)
 
   Props:
     title - Heading text
@@ -19,7 +21,23 @@
     icon_links - One or more canvas/icon-link components (placed in the navy bar)
     footer     - Slot rendered below the bar, max-width container (e.g. tabs)
 #}
-{% set manifest_json = ecms_read_file('components/canvas/hero/hero-images.json') %}
+{% set hero_images = [
+  {
+    file: 'hero-newport-1.png',
+    alt: 'Sailboats moored in Newport harbor with the Claiborne Pell Bridge in the background',
+    location: 'Newport',
+  },
+  {
+    file: 'hero-newport-2.png',
+    alt: 'Lighthouse in Newport at sunset',
+    location: 'Newport',
+  },
+  {
+    file: 'hero-pvd-1.png',
+    alt: 'Providence skyline reflected on the river',
+    location: 'Providence',
+  },
+] %}
 {% set image_base = '/' ~ active_theme_path() ~ '/components/canvas/hero/images/' %}
 <section
   {{ attributes
@@ -47,8 +65,8 @@
       {% include '@icons/brand-wave.svg' %}
     </div>
 
-    {% if manifest_json %}
-      <script type="application/json" class="canvas-hero__manifest">{{ manifest_json|raw }}</script>
+    {% if hero_images is not empty %}
+      <script type="application/json" class="canvas-hero__manifest">{{ hero_images|json_encode|raw }}</script>
     {% endif %}
   </div>
 

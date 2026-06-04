@@ -1,7 +1,7 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Hero
 group: RI.Gov
-description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs). Image is randomized per page load from hero-images.json; the location label in the top-right travels with the chosen image.
+description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs). Image is randomized client-side per page load from the manifest inlined in hero.twig; the location label in the top-right travels with the chosen image.
 props:
   type: object
   properties:
