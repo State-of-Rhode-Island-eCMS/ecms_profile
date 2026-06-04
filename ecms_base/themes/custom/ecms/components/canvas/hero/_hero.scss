@@ -315,7 +315,7 @@
     }
 
     .canvas-icon-link__icon {
-      color: var(--fc__icon__icon-card, #5994cf);
+      color: var(--computed-icon-color);
       height: 3rem;
       width: 3rem;
     }
