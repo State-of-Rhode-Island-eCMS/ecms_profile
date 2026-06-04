@@ -15,13 +15,6 @@ plugin: system_breadcrumb_block
 settings:
   id: system_breadcrumb_block
   label: Breadcrumbs
-  provider: system
   label_display: '0'
-visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      landing_page: landing_page
-    negate: true
-    context_mapping:
-      node: '@node.node_route_context:node'
+  provider: system
+visibility: {  }

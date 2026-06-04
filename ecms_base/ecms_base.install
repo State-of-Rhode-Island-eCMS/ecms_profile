@@ -547,3 +547,33 @@ function ecms_base_update_11212(): void {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Change visibilty of breadcrumb blocks.
+ */
+function ecms_base_update_11213(): void {
+  // Fix the breadcrumb visibility rules.
+  $config = \Drupal::configFactory()->getEditable('block.block.breadcrumbs');
+
+  $visibility = $config->get('visibility');
+
+  // Check if visibility matches the expected entity_bundle:node configuration.
+  $expected_visibility = [
+    'entity_bundle:node' => [
+      'id' => 'entity_bundle:node',
+      'negate' => TRUE,
+      'context_mapping' => [
+        'node' => '@node.node_route_context:node',
+      ],
+      'bundles' => [
+        'landing_page' => 'landing_page',
+      ],
+    ],
+  ];
+
+  // Only alter the visibilty if it matches the originally installed.
+  if ($visibility === $expected_visibility) {
+    $config->set('visibility', []);
+    $config->save(TRUE);
+  }
+}
