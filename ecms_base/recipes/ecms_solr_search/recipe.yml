@@ -20,3 +20,7 @@ config:
       - search_api.index.acquia_search_index
     views:
       - views.view.acquia_search
+  actions:
+    search_api.index.acquia_search_index:
+      simple_config_update:
+        server: searchstax
