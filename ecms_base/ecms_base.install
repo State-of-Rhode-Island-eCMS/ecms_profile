@@ -16,6 +16,7 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
+use Drupal\search_api\Entity\Index;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
@@ -712,4 +713,53 @@ function ecms_base_update_11221(): string {
   }
 
   return (string) t('The webform export directory could not be created. Submission exports will fail on this site until private://webform_exports exists and is writable by the web server.');
+}
+
+/**
+ * Apply ecms_solr_search for sites with Solr already enabled.
+ */
+function ecms_base_update_11222(): void {
+  $moduleHandler = \Drupal::moduleHandler();
+  $configFactory = \Drupal::configFactory();
+
+  // Only apply searchstax if the solr search was previously enabled.
+  if (!$moduleHandler->moduleExists('search_api_solr')) {
+    \Drupal::logger('ecms_base')
+      ->info('Skipping ecms_solr_search recipe: search_api_solr module is not enabled.');
+    return;
+  }
+
+  // Check if acquia_search_server configuration exists.
+  if (empty($configFactory->get('search_api.server.acquia_search_server')->getRawData())) {
+    \Drupal::logger('ecms_base')
+      ->info('Skipping ecms_solr_search recipe: acquia_search_server configuration not found.');
+    return;
+  }
+
+  // Check if acquia_search_index configuration exists.
+  if (empty($configFactory->get('search_api.index.acquia_search_index')->getRawData())) {
+    \Drupal::logger('ecms_base')
+      ->info('Skipping ecms_solr_search recipe: acquia_search_index configuration not found.');
+    return;
+  }
+
+  // Apply the ecms_solr_search recipe.
+  $recipes = [
+    'ecms_multisite_search',
+    'ecms_solr_search',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+
+  // Mark the acquia_search_index as needing a full re-index.
+  $index = Index::load('acquia_search_index');
+  if ($index instanceof Index) {
+    try {
+      $index->reindex();
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('ecms_base')
+        ->error('Failed to reindex acquia_search_index: @message', ['@message' => $e->getMessage()]);
+    }
+  }
 }
