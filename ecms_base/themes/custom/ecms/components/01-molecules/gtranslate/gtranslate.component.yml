@@ -14,3 +14,7 @@ slots:
 libraryOverrides:
   js:
     gtranslate.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - ecms/global-styling

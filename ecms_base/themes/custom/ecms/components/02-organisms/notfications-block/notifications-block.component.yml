@@ -9,3 +9,11 @@ props:
 slots:
   content:
     title: The block content
+
+libraryOverrides:
+  js:
+    notifications-block.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - ecms/global-styling
