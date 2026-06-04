@@ -25,7 +25,7 @@ jobs:
         include:
           - drupal_core: '~11.3.0'
             experimental: false
-          - drupal_core: '^11.4'
+          - drupal_core: '11.4.0-beta1@beta'
             experimental: true
 
     steps:
