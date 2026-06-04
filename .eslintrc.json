@@ -4,6 +4,18 @@
     "es6": true,
     "node": true
   },
+  "globals": {
+    "Drupal": "readonly",
+    "drupalSettings": "readonly",
+    "once": "readonly",
+    "a11yClick": "readonly",
+    "allMenuCloser": "readonly",
+    "addPageOverlay": "readonly",
+    "activatePageOverlay": "readonly",
+    "deactivatePageOverlay": "readonly",
+    "getCookie": "readonly",
+    "_forEach": "readonly"
+  },
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": 2018,
