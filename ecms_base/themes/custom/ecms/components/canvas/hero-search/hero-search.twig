@@ -1,5 +1,7 @@
 {#
-  Canvas Hero Component
+  Canvas Hero: Search Component
+  Single-page search hero (machine name `hero-search`); a separate default
+  `hero` component is intended for other pages.
   Full-bleed photo banner with a wave bottom edge and an overlaid h1, a navy
   bar below containing a search form and icon links, and a lower slot
   (max-container width) intended for the tabs component.
@@ -38,54 +40,54 @@
     location: 'Providence',
   },
 ] %}
-{% set image_base = '/' ~ active_theme_path() ~ '/components/canvas/hero/images/' %}
+{% set image_base = '/' ~ active_theme_path() ~ '/components/canvas/hero-search/images/' %}
 <section
   {{ attributes
-    .addClass('canvas-hero', 'qh__t__primary')
-    .setAttribute('data-canvas-hero-image-base', image_base)
+    .addClass('canvas-hero-search', 'qh__t__primary')
+    .setAttribute('data-canvas-hero-search-image-base', image_base)
   }}
 >
-  <div class="canvas-hero__banner">
-    <div class="canvas-hero__image" role="img" aria-hidden="true"></div>
+  <div class="canvas-hero-search__banner">
+    <div class="canvas-hero-search__image" role="img" aria-hidden="true"></div>
 
-    <div class="canvas-hero__banner-inner">
-      <div class="canvas-hero__location" data-canvas-hero-location hidden>
+    <div class="canvas-hero-search__banner-inner">
+      <div class="canvas-hero-search__location" data-canvas-hero-search-location hidden>
         <span class="qh__icon" aria-hidden="true">
           {% include '@icons/map-marker.svg' %}
         </span>
-        <span class="canvas-hero__location-text"></span>
+        <span class="canvas-hero-search__location-text"></span>
       </div>
 
-      <div class="canvas-hero__title-area">
+      <div class="canvas-hero-search__title-area">
         <h1>{{ title }}</h1>
       </div>
     </div>
 
-    <div class="canvas-hero__wave" aria-hidden="true">
+    <div class="canvas-hero-search__wave" aria-hidden="true">
       {% include '@icons/brand-wave.svg' %}
     </div>
 
     {% if hero_images is not empty %}
-      <script type="application/json" class="canvas-hero__manifest">{{ hero_images|json_encode|raw }}</script>
+      <script type="application/json" class="canvas-hero-search__manifest">{{ hero_images|json_encode|raw }}</script>
     {% endif %}
   </div>
 
-  <div class="canvas-hero__bar">
-    <div class="canvas-hero__bar-inner">
-      <div class="canvas-hero__search">
+  <div class="canvas-hero-search__bar">
+    <div class="canvas-hero-search__bar-inner">
+      <div class="canvas-hero-search__search">
         {# TODO: replace with the live Drupal search block once wired up #}
-        <form class="canvas-hero__search-form" role="search" action="/" method="get">
-          <span class="canvas-hero__search-icon qh__icon" aria-hidden="true">
+        <form class="canvas-hero-search__search-form" role="search" action="/" method="get">
+          <span class="canvas-hero-search__search-icon qh__icon" aria-hidden="true">
             {% include '@icons/sparkles.svg' %}
           </span>
           <input
-            class="canvas-hero__search-input"
+            class="canvas-hero-search__search-input"
             type="search"
             name="search_input"
             aria-label="{{ 'Search'|t }}"
             placeholder="{{ 'How can we help you today?'|t }}"
           />
-          <button class="canvas-hero__search-submit" type="submit">
+          <button class="canvas-hero-search__search-submit" type="submit">
             <span class="qh__icon" aria-hidden="true">
               {% include '@icons/search-glass.svg' %}
             </span>
@@ -94,18 +96,18 @@
         </form>
       </div>
 
-      <div class="canvas-hero__icon-links">
+      <div class="canvas-hero-search__icon-links">
         {% block icon_links %}{% endblock %}
       </div>
     </div>
   </div>
 
-  <div class="canvas-hero__footer">
-    <div class="canvas-hero__footer-inner">
+  <div class="canvas-hero-search__footer">
+    <div class="canvas-hero-search__footer-inner">
       {% block footer %}{% endblock %}
     </div>
 
-    <div class="canvas-hero__wave canvas-hero__wave--bottom" aria-hidden="true">
+    <div class="canvas-hero-search__wave canvas-hero-search__wave--bottom" aria-hidden="true">
       {% include '@icons/brand-wave.svg' %}
     </div>
   </div>

@@ -1,4 +1,4 @@
-// canvas-hero
+// canvas-hero-search
 // Full-bleed photo banner with a wave bottom edge; navy bar below for
 // search + icon-links; max-width footer slot below that (intended for tabs).
 // Image URL is passed via an inline CSS custom property on the <section>.
@@ -6,8 +6,8 @@
 // Container queries (not viewport queries) are used for layout breakpoints so that
 // edit mode and public view behave identically regardless of Canvas's iframe scaling.
 
-.canvas-hero {
-  container-name: canvas-hero;
+.canvas-hero-search {
+  container-name: canvas-hero-search;
   container-type: inline-size;
   display: flex;
   flex-direction: column;
@@ -33,15 +33,15 @@
     overflow: hidden;
     position: relative;
 
-    @container canvas-hero (max-width: #{$bp--large-value * 1rem}) {
+    @container canvas-hero-search (max-width: #{$bp--large-value * 1rem}) {
       aspect-ratio: 5 / 2;
     }
 
-    @container canvas-hero (max-width: #{$bp--medium-value * 1rem}) {
+    @container canvas-hero-search (max-width: #{$bp--medium-value * 1rem}) {
       aspect-ratio: 16 / 9;
     }
 
-    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
       aspect-ratio: 4 / 3;
     }
   }
@@ -109,7 +109,7 @@
     position: absolute;
     z-index: 3;
 
-    @container canvas-hero (max-width: #{$bp--large-value * 1rem}) {
+    @container canvas-hero-search (max-width: #{$bp--large-value * 1rem}) {
       bottom: 0.75rem;
       max-width: 85%;
     }
@@ -178,7 +178,7 @@
     transform: scaleY(-1);
     z-index: -1;
 
-    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
       display: none;
     }
   }
@@ -310,7 +310,7 @@
     gap: 0;
     grid-template-columns: 1fr 1fr;
 
-    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
       grid-template-columns: 1fr;
     }
 

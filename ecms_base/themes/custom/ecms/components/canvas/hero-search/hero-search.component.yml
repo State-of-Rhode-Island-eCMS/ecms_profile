@@ -1,7 +1,7 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
-name: Hero
+name: 'Hero: Search'
 group: RI.Gov
-description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs). Image is randomized client-side per page load from the manifest inlined in hero.twig; the location label in the top-right travels with the chosen image.
+description: 'Search-bar hero for a single landing page (not the default page hero). Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs). Image is randomized client-side per page load from the manifest inlined in hero-search.twig; the location label in the top-right travels with the chosen image.'
 props:
   type: object
   properties:
@@ -17,7 +17,7 @@ slots:
     title: Footer slot (full-width to max container — intended for tabs)
 libraryOverrides:
   js:
-    hero.js: {}
+    hero-search.js: {}
   dependencies:
     - core/drupal
     - core/once
