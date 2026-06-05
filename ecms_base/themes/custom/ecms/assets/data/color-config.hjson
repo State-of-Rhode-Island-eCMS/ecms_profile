@@ -1620,7 +1620,7 @@
           { "fnName": "link--focus", "colorName": "navy" },
           { "fnName": "link--active", "colorName": "navy" },
           { "fnName": "link__sub--hover__bg", "colorName": "hope-gold" },
-          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__bg", "colorName": "white" },
           { "fnName": "icon__fg", "colorName": "quahog--dark" },
           { "fnName": "icon__bg--hover", "colorName": "white" },
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
@@ -1639,13 +1639,13 @@
           { "fnName": "violator", "colorName": "calamari" },
           # Accent pair, bg and fg
           { "fnName": "accent", "colorName": "orange--primary" },
-          { "fnName": "accent__fg", "colorName": "navy" },
+          { "fnName": "accent__fg", "colorName": "quahog" },
           # text-accent currently used for bullet mark color & H2
           { "fnName": "text-accent", "colorName": "quahog" },
-          { "fnName": "button__bg", "colorName": "cliff-walk" },
-          { "fnName": "button__fg", "colorName": "ocean--dark" },
-          { "fnName": "button--hover__bg", "colorName": "cliff-walk--dark" },
-          { "fnName": "button--hover__fg", "colorName": "quahog--darker" }
+          { "fnName": "button__bg", "colorName": "coffee-milk" },
+          { "fnName": "button__fg", "colorName": "quahog" },
+          { "fnName": "button--hover__bg", "colorName": "quahog" },
+          { "fnName": "button--hover__fg", "colorName": "orange--primary" }
         ],
         "icon": [
           #{ "fnName": "pdf", "colorName": "rhody-red" },
@@ -1725,16 +1725,16 @@
       "humanName": "Kids RI orange dark",
       "values": {
         "official": [
-          { "fnName": "fg", "colorName": "quahog--dark" },
-          { "fnName": "bg", "colorName": "quahog--light" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "cliff-walk" },
           { "fnName": "link--focus", "colorName": "cliff-walk" }
         ],
         "header": [
-          { "fnName": "fg", "colorName": "cliff-walk--light" },
+          { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "quahog--dark" },
-          { "fnName": "link", "colorName": "cliff-walk--light" },
+          { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "quahog--light" },
           { "fnName": "social__link", "colorName": "cliff-walk" },
           { "fnName": "social__link--hover", "colorName": "quahog--light" }
@@ -1750,7 +1750,7 @@
           { "fnName": "link--focus", "colorName": "navy" },
           { "fnName": "link--active", "colorName": "navy" },
           { "fnName": "link__sub--hover__bg", "colorName": "hope-gold" },
-          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__bg", "colorName": "white" },
           { "fnName": "icon__fg", "colorName": "quahog--dark" },
           { "fnName": "icon__bg--hover", "colorName": "white" },
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
@@ -1769,13 +1769,13 @@
           #{ "fnName": "violator", "colorName": "calamari" },
           # Accent pair, bg and fg
           { "fnName": "accent", "colorName": "orange--primary" },
-          { "fnName": "accent__fg", "colorName": "navy" },
+          { "fnName": "accent__fg", "colorName": "quahog" },
           # text-accent currently used for bullet mark color & H2
-          { "fnName": "text-accent", "colorName": "cliff-walk--dark" },
-          { "fnName": "button__bg", "colorName": "cliff-walk--dark" },
-          { "fnName": "button__fg", "colorName": "quahog--darker" },
-          { "fnName": "button--hover__bg", "colorName": "cliff-walk" },
-          { "fnName": "button--hover__fg", "colorName": "ocean--dark" }
+          { "fnName": "text-accent", "colorName": "white" },
+          { "fnName": "button__bg", "colorName": "coffee-milk" },
+          { "fnName": "button__fg", "colorName": "quahog" },
+          { "fnName": "button--hover__bg", "colorName": "quahog" },
+          { "fnName": "button--hover__fg", "colorName": "orange--primary" }
         ],
         "icon": [
           #{ "fnName": "pdf", "colorName": "rhody-red" },
