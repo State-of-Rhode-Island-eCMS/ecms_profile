@@ -7,7 +7,7 @@
       background-color: var(--fc__tertiary__bg--dark);
       border: 2px solid
         color-mix(in srgb, var(--fc__tertiary__fg) 50%, transparent);
-      color: var(--fc__tertiary__fg);
+      color: var(--fc__tertiary__fg--dark);
     }
   }
 
@@ -27,12 +27,31 @@
 
   // Panel — shown/hidden and ARIA-wired by Tab Group JS.
   &__panel {
-    background-color: hsl(
-      52.5deg 25% 93.73%
-    ); // Coffee milk without transparency since it sits on navy, not white
     margin-top: -1.625rem; // pulls up behind the tablist row
     position: relative;
     z-index: 1;
+
+    // Light mode only — the cream fill sits on navy, not white. In dark mode
+    // the panel inherits its surrounding theme instead of this fixed fill.
+    //
+    // Scope mirrors the theme system (_00-themes.scss): cream is the light
+    // default, then cleared in BOTH dark contexts — the explicit `.dark` toggle
+    // and system-dark with no explicit `.light` override. The old
+    // `html:not(.dark)` leaked the cream into system-dark, where no class is
+    // present, so it matched and painted light even though the page was dark.
+    background-color: hsl(
+      52.5deg 25% 93.73%
+    ); // Coffee milk without transparency
+
+    .dark & {
+      background-color: transparent;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.light) & {
+        background-color: transparent;
+      }
+    }
 
     &[hidden] {
       display: none;

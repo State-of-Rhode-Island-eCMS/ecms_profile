@@ -169,13 +169,22 @@
   // hero stacking so the next section's foreground content (cards, headings)
   // paints on top of the navy wave; only its (transparent) backgrounds let the
   // navy show through, producing the wavy bottom edge.
+  //
+  // Anchored to the footer's BOTTOM edge (`bottom: 0`), then pushed down by
+  // ~65% of its own height — the SVG's solid bottom band is ~65% of the asset,
+  // so this lands the curve's inflection exactly on the footer's bottom edge.
+  // Both references (the bottom edge and the wave's own height) are independent
+  // of the footer's content height, so the curve stays aligned no matter how
+  // tall the footer slot grows. (A prior `top: 90%` tied the curve to a
+  // percentage of the footer height, so any change in slot content — e.g. tabs
+  // wrapping to fewer/more lines — shifted the curve and broke the seam.)
   // ---------------------------------------------------------------------------
   &__wave--bottom {
-    bottom: auto;
+    bottom: 0;
     max-width: 2000px;
     right: -20%;
-    top: 90%;
-    transform: scaleY(-1);
+    top: auto;
+    transform: translateY(65%) scaleY(-1);
     z-index: -1;
 
     @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
@@ -229,7 +238,7 @@
 
   &__search-form {
     align-items: center;
-    background-color: #fff;
+    background-color: var(--fc__default__bg);
     border: 2px solid var(--fc__icon__icon-card);
     border-radius: 5px;
     display: flex;
