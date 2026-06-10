@@ -30,6 +30,7 @@ props:
         - file-pdf
         - file-powerpoint
         - file-word
+        - fish
         - globe
         - guillemot-left
         - guillemot-right
@@ -37,6 +38,7 @@ props:
         - home
         - house-chimney
         - icon-ios-share
+        - id-card
         - information
         - link-external
         - map

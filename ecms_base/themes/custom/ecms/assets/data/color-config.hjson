@@ -2618,7 +2618,7 @@
         ],
         "accordion": [
           #{ "fnName": "icon__fg", "colorName": "navy--dark" },
-          #{ "fnName": "icon__bg", "colorName": "calamari" }
+          { "fnName": "icon__bg", "colorName": "white" }
         ],
         "attention-card": [
           #{ "fnName": "fg", "colorName": "navy--dark" },
