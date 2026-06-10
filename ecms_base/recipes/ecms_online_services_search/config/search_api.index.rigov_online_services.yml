@@ -124,6 +124,14 @@ field_settings:
     dependencies:
       module:
         - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - node
   uid:
     label: 'Entity reference'
     datasource_id: 'entity:node'
@@ -184,3 +192,4 @@ options:
   index_directly: true
   track_changes_in_references: true
 server: acquia_search_server
+

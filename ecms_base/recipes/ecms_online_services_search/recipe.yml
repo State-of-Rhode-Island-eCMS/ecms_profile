@@ -12,6 +12,7 @@ install:
   - search_api
   - facets
   - views
+  - better_exposed_filters
 
 config:
   strict: false
