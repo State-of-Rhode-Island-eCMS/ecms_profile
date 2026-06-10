@@ -356,6 +356,12 @@
       "hsl": "hsl(160, 75%, 30%)",
       "needs": "light-text"
     },
+    "cliff-walk--deepest": {
+      "name": "Cliff Walk deepest",
+      "hue": "very dark blue green",
+      "hsl": "hsl(165, 50%, 17%)",
+      "needs": "light-text"
+    },
     "cliff-walk--darkest--trans75": {
       "name": "Cliff Walk darkest 75% transparent",
       "hue": "light blue green",
@@ -660,7 +666,7 @@
           { "fnName": "link", "colorName": "navy" },
           { "fnName": "link--hover", "colorName": "navy--dark" },
           { "fnName": "fg--dark", "colorName": "navy" },
-          { "fnName": "bg--dark", "colorName": "cliff-walk--dark" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
           { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           { "fnName": "link--dark", "colorName": "white" },
           { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
@@ -2633,7 +2639,7 @@
           { "fnName": "icon-card", "colorName": "white" },
           #{ "fnName": "link--hover", "colorName": "hope-gold" },
           #{ "fnName": "fg--dark", "colorName": "white" },
-          #{ "fnName": "bg--dark", "colorName": "navy--trans50" },
+          { "fnName": "bg--dark", "colorName": "navy" },
           #{ "fnName": "overlay__bg--dark", "colorName": "navy--trans75" },
           #{ "fnName": "link--dark", "colorName": "navy--light" },
           #{ "fnName": "link--dark--hover", "colorName": "hope-gold" }
@@ -2668,8 +2674,8 @@
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
           #{ "fnName": "link", "colorName": "navy" },
           #{ "fnName": "link--hover", "colorName": "navy--dark" },
-          #{ "fnName": "fg--dark", "colorName": "coffee-milk--light" },
-          #{ "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "fg--dark", "colorName": "navy" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--dark" },
           #{ "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           #{ "fnName": "link--dark", "colorName": "white" },
           #{ "fnName": "link--dark--hover", "colorName": "cliff-walk" }
@@ -2728,6 +2734,7 @@
           #{ "fnName": "button--hover__fg", "colorName": "ocean" }
         ],
         "icon": [
+          { "fnName": "icon-card", "colorName": "white" },
           #{ "fnName": "pdf", "colorName": "rhody-red" },
           { "fnName": "word", "colorName": "ocean" },
           #{ "fnName": "excel", "colorName": "green-animals" },
@@ -2781,7 +2788,7 @@
         #
         "primary": [
           { "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "navy--trans50" },
+          { "fnName": "bg", "colorName": "navy--dark" },
           #{ "fnName": "overlay__bg", "colorName": "navy--trans75" },
           { "fnName": "link", "colorName": "navy--light" },
           { "fnName": "link--hover", "colorName": "hope-gold" }
@@ -2800,10 +2807,11 @@
           { "fnName": "link--hover", "colorName": "hope-gold" }
         ],
         "tertiary": [
-          { "fnName": "fg", "colorName": "coffee-milk--light" },
-          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "cliff-walk--deepest" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "cliff-walk" }
+          { "fnName": "icon-card", "colorName": "navy--dark" }
         ]
       }
     },

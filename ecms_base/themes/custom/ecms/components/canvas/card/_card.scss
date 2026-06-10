@@ -21,6 +21,22 @@
   &--white {
     background-color: var(--c__white);
     color: var(--c__quahog--dark);
+
+    // Dark mode flips the surface: dark fill, white text. Both dark contexts
+    // are covered to match the theme system (_00-themes.scss): the explicit
+    // `.dark` toggle and system-dark with no explicit `.light` override.
+    // `.dark` alone left the card white in system-dark, where no class is set.
+    .dark & {
+      background-color: var(--c__quahog--dark);
+      color: var(--c__white);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.light) & {
+        background-color: var(--c__quahog--dark);
+        color: var(--c__white);
+      }
+    }
   }
 
   // Outer border — opt-in via `show_border`. Uses `currentColor` so the

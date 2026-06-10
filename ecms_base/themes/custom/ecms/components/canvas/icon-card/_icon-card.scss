@@ -45,6 +45,19 @@
     }
   }
 
+  // Inherit (no theme) cards have no themed surface for the multiply tone to
+  // work against, so the `--computed-background-color` fallback painted the
+  // illustration solid white — invisible on the light page, glaring on the dark
+  // page. For the un-themed case, drop the multiply blend and paint the
+  // illustration as a faint foreground-tinted watermark instead, so it reads
+  // subtly in BOTH light and dark mode (it can't blow out). Themed cards keep
+  // the multiply tone-on-tone treatment from the rule above.
+  &:not([class*="qh__t__"]) &__pattern {
+    mix-blend-mode: normal;
+    color: currentColor;
+    opacity: 0.08;
+  }
+
   // Single-illustration corner motif. Bridge, lighthouse, lobster, oyster,
   // quahog, seagull, skyline, and steamer are the existing theme
   // illustrations (also used as the page-footer motif via the `illustration`
