@@ -5,8 +5,9 @@
  * templates/form/facets-item-list--checkbox.html.twig, so all markup — the
  * toggle and (for long facets) the search input + no-results message — is
  * present on initial load and after every Facets AJAX re-render. JS only adds
- * behavior: flip aria-expanded on the toggle, and filter the list as the user
- * types. No markup is injected here.
+ * behavior: flip aria-expanded on the toggle, toggle `inert` on the panel so a
+ * collapsed facet stays out of the keyboard tab order, and filter the list as
+ * the user types. No markup is injected here.
  *
  * Both behaviors bind via Drupal.behaviors + once() rather than the global
  * `js__expand-collapse` hook (global.js): that handler binds once on
@@ -26,9 +27,32 @@
         '.facets-widget-checkbox .qh__accordion__button',
         context
       ).forEach(function (button) {
+        const panel = document.getElementById(
+          button.getAttribute('aria-controls')
+        );
+
+        // The collapse animation clips the panel visually but the molecule's
+        // long visibility-transition delay leaves its checkboxes, links and
+        // filter input in the keyboard tab order. `inert` removes the whole
+        // subtree from focus and the a11y tree immediately. Driving it from JS
+        // (rather than the Twig template) keeps no-JS users — whose panels open
+        // via the .no-js CSS fallback — from being locked out.
+        function syncInert() {
+          if (!panel) return;
+          if (button.getAttribute('aria-expanded') === 'true') {
+            panel.removeAttribute('inert');
+          } else {
+            panel.setAttribute('inert', '');
+          }
+        }
+
+        // Match the server-rendered initial aria-expanded state.
+        syncInert();
+
         button.addEventListener('click', function () {
           const expanded = button.getAttribute('aria-expanded') === 'true';
           button.setAttribute('aria-expanded', String(!expanded));
+          syncInert();
         });
       });
     },

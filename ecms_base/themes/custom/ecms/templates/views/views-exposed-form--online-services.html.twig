@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Theme override for the Online Services (online_services view) exposed form.
+ *
+ * Renders the keyword filter plus a submit button inside a single rounded
+ * "field shell" that matches the canvas hero-search input (white shell,
+ * transparent input, inset gold submit button) — minus the leading sparkles
+ * icon. The submit is a real <button> (like hero-search) so it can hold the
+ * inline search-glass SVG.
+ *
+ * Styles: assets/patterns/01-molecules/online-service-search.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+<div class="os-search">
+  {{ form.keywords }}
+  <button class="os-search__submit" type="submit" name="op" value="{{ 'Search'|t }}">
+    <span class="qh__icon" aria-hidden="true">
+      {% include '@icons/search-glass.svg' %}
+    </span>
+    <span class="visually-hidden">{{ 'Search'|t }}</span>
+  </button>
+</div>
+{# Reset/Clear only renders when a search is active (#access driven). #}
+{{ form.actions.reset }}
