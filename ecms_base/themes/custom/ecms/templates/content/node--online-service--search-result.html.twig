@@ -21,28 +21,28 @@
 #}
 {% set service_url = node.field_service_url.uri ?: url %}
 
-<article class="os-result">
-  <a class="os-result__link" href="{{ service_url }}"{% if node.field_service_url.uri %} target="_blank" rel="noopener noreferrer"{% endif %}>
-    <div class="os-result__content">
-      <h3 class="os-result__title">{{ label }}</h3>
+<article class="os-result qh__t__tertiary">
+  <div class="os-result__content">
+    <a class="os-result__link" href="{{ service_url }}"{% if node.field_service_url.uri %} target="_blank" rel="noopener noreferrer"{% endif %}>
+      <h3 class="os-result__title qh__u__fw-bold">{{ label.0 }}</h3>
+    </a>
 
-      {% if content.field_agency_or_muni %}
-        <p class="os-result__agency">{{ content.field_agency_or_muni }}</p>
-      {% endif %}
+    {% if content.field_agency_or_muni|default %}
+      <p class="os-result__agency qh__u__fw-medium">{{ content.field_agency_or_muni.0 }}</p>
+    {% endif %}
 
-      {% if search_api_excerpt %}
-        <p class="os-result__excerpt">{{ search_api_excerpt }}</p>
-      {% endif %}
+    {% if content.field_service_description|default %}
+      <p class="os-result__description">{{ content.field_service_description.0 }}</p>
+    {% endif %}
 
-      {% if node.field_service_type is not empty %}
-        <ul class="os-result__tags" aria-label="Service categories">
-          {% for term in node.field_service_type %}
-            <li class="os-result__tag{% if loop.first %} os-result__tag--primary{% endif %}">
-              {{ term.entity.label }}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </div>
-  </a>
+    {% if node.field_service_type is not empty %}
+      <ul class="os-result__tags" aria-label="Service categories">
+        {% for term in node.field_service_type %}
+          <li class="os-result__tag qh__u__fw-medium{% if loop.first %} os-result__tag--primary{% endif %}">
+            {{ term.entity.label }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
 </article>

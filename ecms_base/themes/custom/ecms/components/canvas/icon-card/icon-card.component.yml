@@ -89,6 +89,7 @@ props:
         - file-pdf
         - file-powerpoint
         - file-word
+        - fish
         - globe
         - guillemot-left
         - guillemot-right
@@ -96,6 +97,7 @@ props:
         - home
         - house-chimney
         - icon-ios-share
+        - id-card
         - information
         - link-external
         - map
@@ -125,3 +127,12 @@ props:
       type: string
       title: Link text
       examples: ['Find a Service']
+    description:
+      type: string
+      title: Description
+      description: |
+        Optional plain-text blurb shown beneath the link heading. Plain text
+        only — the entire card is a single clickable link, so it cannot contain
+        nested links or other markup. External URLs (http/https) automatically
+        open in a new window and swap the corner arrow for the external-link
+        icon; no separate setting is needed.

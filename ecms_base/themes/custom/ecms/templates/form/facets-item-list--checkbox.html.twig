@@ -1,0 +1,86 @@
+{#
+/**
+ * @file
+ * Theme override: checkbox facet widget rendered as an accordion.
+ *
+ * Reuses the shared .qh__accordion molecule markup and styles
+ * (assets/patterns/01-molecules/accordion) so the facet toggle matches the
+ * accordion component. Rendering server-side means the markup is present on
+ * initial load and survives every Facets AJAX re-render — no JS injects markup.
+ *
+ * assets/scripts/facets.js only flips `aria-expanded` on click; the accordion
+ * CSS ([aria-expanded='true'] + .qh__accordion__content) does the rest.
+ *
+ * Available variables — see facets/templates/facets-item-list.html.twig.
+ */
+#}
+{% if cache_hash %}
+  <!-- facets cacheable metadata
+    hash: {{ cache_hash }}
+  {% if cache_contexts %}
+    contexts: {{ cache_contexts }}
+  {%- endif %}
+  {% if cache_tags %}
+    tags: {{ cache_tags }}
+  {%- endif %}
+  {% if cache_max_age %}
+    max age: {{ cache_max_age }}
+  {%- endif %}
+  -->
+{%- endif %}
+
+{% set facet_id = 'facet-' ~ facet.id %}
+{% set button_id = facet_id ~ '-button' %}
+{% set panel_id = facet_id ~ '-panel' %}
+{% set heading = title is not empty ? title : facet.label %}
+{# Open by default when the facet has an active selection so applied filters
+   stay visible; otherwise collapsed like a normal accordion. #}
+{% set is_open = facet.activeItems is not empty %}
+{% set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}
+{# Show a client-side filter for long facets; facets.js wires up the behavior. #}
+{% set show_search = items|length > 10 %}
+
+<div class="facets-widget-{{ facet.widget.type }} qh__accordion">
+  {% if items or empty %}
+    <button
+      id="{{ button_id }}"
+      type="button"
+      class="qh__accordion__button qh__fs-base"
+      aria-expanded="{{ is_open ? 'true' : 'false' }}"
+      aria-controls="{{ panel_id }}">
+      <span class="qh__accordion__button__summary">
+        <span class="qh__icon" aria-hidden="true">
+          {% include ('@icons/plus-minus.svg') %}
+        </span>
+        <strong>{{ heading }}</strong>
+      </span>
+    </button>
+
+    <div
+      id="{{ panel_id }}"
+      role="region"
+      aria-labelledby="{{ button_id }}"
+      class="qh__accordion__content js__qh-accordion-panel">
+      <div>
+        {% if show_search %}
+          <div class="facets-widget__search">
+            <input
+              type="search"
+              placeholder="{{ 'Find a @label'|t({'@label': heading}) }}"
+              aria-label="{{ 'Filter @label options'|t({'@label': heading}) }}" />
+          </div>
+          <p class="facets-widget__no-results" role="status" aria-live="polite" hidden>{{ 'No matches.'|t }}</p>
+        {% endif %}
+        {%- if items -%}
+          <{{ list_type }}{{ attributes }}>
+            {%- for item in items -%}
+              <li{{ item.attributes }}>{{ item.value }}</li>
+            {%- endfor -%}
+          </{{ list_type }}>
+        {%- else -%}
+          {{- empty -}}
+        {%- endif -%}
+      </div>
+    </div>
+  {% endif %}
+</div>
