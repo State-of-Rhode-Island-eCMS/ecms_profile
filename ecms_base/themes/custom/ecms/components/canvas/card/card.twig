@@ -10,6 +10,8 @@
     column_count - 1 | 2 | 3
     show_divider - boolean; renders a vertical rule between adjacent columns
     show_border  - boolean; renders a 1px outer border using `currentColor`
+    cell_align_x - default | start | center | end
+    cell_align_y - default | top | center | bottom | stretch
 
   Slots:
     card_1..card_3 - one slot per possible column
@@ -31,10 +33,25 @@
   3: 'canvas-card--cols-3',
 } %}
 
+{% set align_x_classes = {
+  'start':  'canvas-card--align-x-start',
+  'center': 'canvas-card--align-x-center',
+  'end':    'canvas-card--align-x-end',
+} %}
+
+{% set align_y_classes = {
+  'top':     'canvas-card--align-y-top',
+  'center':  'canvas-card--align-y-center',
+  'bottom':  'canvas-card--align-y-bottom',
+  'stretch': 'canvas-card--align-y-stretch',
+} %}
+
 {% set card_classes = [
   'canvas-card',
   theme_classes[theme]|default(''),
   columns_classes[column_count]|default(''),
+  align_x_classes[cell_align_x]|default(''),
+  align_y_classes[cell_align_y]|default(''),
   show_divider ? 'canvas-card--with-divider' : '',
   show_border ? 'canvas-card--with-border' : '',
 ] %}

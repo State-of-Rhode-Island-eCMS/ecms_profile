@@ -57,6 +57,39 @@ props:
       description: Renders a 1px outer border using `currentColor`, matching the grid-card pattern so the border adapts to the active theme.
       examples: [ false ]
 
+    cell_align_x:
+      title: Column horizontal alignment
+      type: string
+      description: Horizontal alignment of content within every column.
+      enum:
+        - default
+        - start
+        - center
+        - end
+      meta:enum:
+        default: Default
+        start: Start
+        center: Center
+        end: End
+      examples: [ default ]
+    cell_align_y:
+      title: Column vertical alignment
+      type: string
+      description: Vertical alignment of content within every column. `stretch` makes all columns equal height by expanding column children to fill the row.
+      enum:
+        - default
+        - top
+        - center
+        - bottom
+        - stretch
+      meta:enum:
+        default: Default
+        top: Top
+        center: Center
+        bottom: Bottom
+        stretch: Stretch (equal-height columns)
+      examples: [ default ]
+
 slots:
   card_1:
     title: Column 1

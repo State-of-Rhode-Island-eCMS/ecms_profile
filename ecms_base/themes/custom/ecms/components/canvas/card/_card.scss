@@ -103,6 +103,47 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Cell alignment — mirrors the `cell_align_x` / `cell_align_y` props on
+  // dynamic-section. The cell is a flex column, so align-x maps to the
+  // cross-axis (align-items) and align-y maps to the main-axis
+  // (justify-content). Applied per column so authors can center a single-column
+  // card's content both ways.
+  // ---------------------------------------------------------------------------
+  &--align-x-start > .canvas-card__grid > .canvas-card__cell {
+    align-items: flex-start;
+  }
+  &--align-x-center > .canvas-card__grid > .canvas-card__cell {
+    align-items: center;
+  }
+  &--align-x-end > .canvas-card__grid > .canvas-card__cell {
+    align-items: flex-end;
+  }
+
+  &--align-y-top > .canvas-card__grid > .canvas-card__cell {
+    justify-content: flex-start;
+  }
+  &--align-y-center > .canvas-card__grid > .canvas-card__cell {
+    justify-content: center;
+  }
+  &--align-y-bottom > .canvas-card__grid > .canvas-card__cell {
+    justify-content: flex-end;
+  }
+
+  // Stretch — equal-height columns. A single child grows to fill the cell
+  // height; with multiple children the last is pinned to the bottom so CTAs
+  // align across columns. Mirrors dynamic-section's stretch handling.
+  &--align-y-stretch > .canvas-card__grid > .canvas-card__cell {
+    > *:only-child {
+      flex: 1;
+      min-height: 0;
+    }
+
+    > *:last-child:not(:only-child) {
+      margin-block-start: auto;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
   // Column divider — opt-in via the `show_divider` prop. 1px vertical rule
   // between adjacent cells; uses an explicit dark-translucent fill
   // (rgba(20, 20, 20, 0.15)) so the rule reads consistently across themes
@@ -138,5 +179,9 @@
         display: none;
       }
     }
+  }
+
+  .canvas-image {
+    margin-inline: 0; // Allow the image to stretch full-bleed to the card edges when placed in a cell.
   }
 }
