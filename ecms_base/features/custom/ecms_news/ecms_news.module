@@ -1,8 +1,0 @@
-<?php
-
-/**
- * @file
- * ecms_news.module
- */
-
-declare(strict_types=1);

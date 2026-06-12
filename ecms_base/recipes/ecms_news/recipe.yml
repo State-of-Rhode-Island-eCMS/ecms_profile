@@ -2,8 +2,6 @@ name: eCMS News
 type: eCMS
 description: 'Installs the News content type and related configuration.'
 recipes: []
-install:
-  - ecms_news
 config:
   strict:
     # Field storages affect database schema - treat strictly.
@@ -16,17 +14,14 @@ config:
     - field.storage.node.field_news_source
     - field.storage.node.field_news_topics
   import:
-    ecms_news:
-      # Entity types imported from module - these define the bundle structure.
-      - node.type.news
-      - taxonomy.vocabulary.news_topics
-      # Pathauto, rabbit hole, sitemap and views imported from module.
-      # These are complex configs with no enforcement actions available.
-      - pathauto.pattern.news
-      - rabbit_hole.behavior_settings.node_type_news
-      - rabbit_hole.behavior_settings.taxonomy_vocabulary_news_topics
-      - simple_sitemap.bundle_settings.default.node.news
-      - views.view.news
+    # All config sourced from recipe config/ directory - no module dependency.
+    - node.type.news
+    - taxonomy.vocabulary.news_topics
+    - pathauto.pattern.news
+    - rabbit_hole.behavior_settings.node_type_news
+    - rabbit_hole.behavior_settings.taxonomy_vocabulary_news_topics
+    - simple_sitemap.bundle_settings.default.node.news
+    - views.view.news
   actions:
     # --- Field instances ---
     field.field.node.news.field_agency:
