@@ -112,9 +112,11 @@
   &--align-x-start > .canvas-card__grid > .canvas-card__cell {
     align-items: flex-start;
   }
+
   &--align-x-center > .canvas-card__grid > .canvas-card__cell {
     align-items: center;
   }
+
   &--align-x-end > .canvas-card__grid > .canvas-card__cell {
     align-items: flex-end;
   }
@@ -122,9 +124,11 @@
   &--align-y-top > .canvas-card__grid > .canvas-card__cell {
     justify-content: flex-start;
   }
+
   &--align-y-center > .canvas-card__grid > .canvas-card__cell {
     justify-content: center;
   }
+
   &--align-y-bottom > .canvas-card__grid > .canvas-card__cell {
     justify-content: flex-end;
   }
@@ -152,7 +156,7 @@
   // ---------------------------------------------------------------------------
   &--with-divider#{&}--cols-2 .canvas-card__cell::after,
   &--with-divider#{&}--cols-3 .canvas-card__cell::after {
-    content: "";
+    content: '';
     position: absolute;
     inset-block: 0;
     inset-inline-end: calc(-1.5rem - 0.5px); // half of the 3rem grid gap

@@ -31,7 +31,7 @@
     // Vertical line
     &::after {
       background-color: var(--fc__nav-minor__border);
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: -($counter-width/2);
@@ -57,7 +57,7 @@
     &::before,
     &::after {
       border-radius: 50%;
-      content: "";
+      content: '';
       height: ($counter-width * 0.75);
       position: absolute;
       top: 1.1875rem;

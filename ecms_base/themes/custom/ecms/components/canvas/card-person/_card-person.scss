@@ -156,8 +156,8 @@
     // (assets/patterns/00-atoms/02-text/_01-links.scss) which auto-injects
     // a mask icon via ::before sized at 0.875em with a trailing margin.
     // Override so the mask glyph matches the SVG icons above.
-    &[href^="tel:"]::before,
-    &[href^="mailto:"]::before {
+    &[href^='tel:']::before,
+    &[href^='mailto:']::before {
       height: 1.125rem;
       margin: 0;
       width: 1.125rem;
@@ -168,7 +168,7 @@
     // glyph sits visibly below the box's true center. Nudge the mask up
     // ~15% of the box height to recenter just the email icon — phone and
     // external-link masks fill their viewBox so they don't need this.
-    &[href^="mailto:"]::before {
+    &[href^='mailto:']::before {
       position: relative;
       top: -2px;
     }

@@ -117,7 +117,7 @@
 
   &__title {
     color: var(--c__white, #fff);
-    font-family: "Roboto Slab", serif;
+    font-family: 'Roboto Slab', serif;
     font-size: clamp(2rem, 4cqi, 3.5rem);
     font-weight: 400;
     line-height: 1.25;
@@ -287,11 +287,9 @@
 
     &:hover,
     &:focus-visible {
-      background-color: color-mix(
-        in srgb,
-        var(--fc__notification__bg) 75%,
-        var(--fc__default__accent) 25%
-      );
+      background-color: color-mix(in srgb,
+      var(--fc__notification__bg) 75%,
+      var(--fc__default__accent) 25%);
       color: var(--fc__notification__link);
     }
 

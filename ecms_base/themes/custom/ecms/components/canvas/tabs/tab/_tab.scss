@@ -39,9 +39,7 @@
     // and system-dark with no explicit `.light` override. The old
     // `html:not(.dark)` leaked the cream into system-dark, where no class is
     // present, so it matched and painted light even though the page was dark.
-    background-color: hsl(
-      52.5deg 25% 93.73%
-    ); // Coffee milk without transparency
+    background-color: hsl(52.5deg 25% 93.73%); // Coffee milk without transparency
 
     .dark & {
       background-color: transparent;

@@ -52,7 +52,7 @@
   // illustration as a faint foreground-tinted watermark instead, so it reads
   // subtly in BOTH light and dark mode (it can't blow out). Themed cards keep
   // the multiply tone-on-tone treatment from the rule above.
-  &:not([class*="qh__t__"]) &__pattern {
+  &:not([class*='qh__t__']) &__pattern {
     mix-blend-mode: normal;
     color: currentColor;
     opacity: 0.08;
