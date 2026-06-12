@@ -549,9 +549,39 @@ function ecms_base_update_11212(): void {
 }
 
 /**
- * Apply recipes for image card, icon card, and person list.
+ * Change visibilty of breadcrumb blocks.
  */
 function ecms_base_update_11213(): void {
+  // Fix the breadcrumb visibility rules.
+  $config = \Drupal::configFactory()->getEditable('block.block.breadcrumbs');
+
+  $visibility = $config->get('visibility');
+
+  // Check if visibility matches the expected entity_bundle:node configuration.
+  $expected_visibility = [
+    'entity_bundle:node' => [
+      'id' => 'entity_bundle:node',
+      'negate' => TRUE,
+      'context_mapping' => [
+        'node' => '@node.node_route_context:node',
+      ],
+      'bundles' => [
+        'landing_page' => 'landing_page',
+      ],
+    ],
+  ];
+
+  // Only alter the visibilty if it matches the originally installed.
+  if ($visibility === $expected_visibility) {
+    $config->set('visibility', []);
+    $config->save(TRUE);
+  }
+}
+
+/**
+ * Apply recipes for image card, icon card, and person list.
+ */
+function ecms_base_update_11214(): void {
   $recipes = [
     'ecms_image_card',
     'ecms_icon_card',
@@ -564,7 +594,7 @@ function ecms_base_update_11213(): void {
 /**
  * Apply recipe to expose landing_page title as a placeable field block.
  */
-function ecms_base_update_11214(): void {
+function ecms_base_update_11215(): void {
   $recipes = [
     'ecms_landing_page_title_block',
   ];
@@ -575,7 +605,7 @@ function ecms_base_update_11214(): void {
 /**
  * Apply recipe for the stat card block type.
  */
-function ecms_base_update_11215(): void {
+function ecms_base_update_11216(): void {
   $recipes = [
     'ecms_stat_card',
   ];

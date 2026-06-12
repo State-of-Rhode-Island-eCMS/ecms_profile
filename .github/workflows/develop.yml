@@ -25,6 +25,8 @@ jobs:
         include:
           - drupal_core: '~11.3.0'
             experimental: false
+          - drupal_core: '11.4.0-beta1@beta'
+            experimental: true
 
     steps:
       - name: Checkout
@@ -96,6 +98,12 @@ jobs:
             experimental: false
           - php_version: '8.4'
             drupal_core: '~11.3.0'
+            experimental: true
+          - php_version: '8.3'
+            drupal_core: '11.4.0-beta1@beta'
+            experimental: true
+          - php_version: '8.4'
+            drupal_core: '11.4.0-beta1@beta'
             experimental: true
     container:
       image: drupalci/php-${{ matrix.php_version }}-ubuntu-apache:production
