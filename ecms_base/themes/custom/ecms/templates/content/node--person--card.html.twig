@@ -1,0 +1,36 @@
+{% if langcode is null %}
+  {% set langcode = 'en' %}
+{% endif %}
+
+{% if node.hasTranslation(langcode) %}
+  {% set translated_node = node.translation(langcode) %}
+{% else %}
+  {% set translated_node = node %}
+{% endif %}
+
+{% set social_markup %}
+  {% if social_links %}
+    <ul class="qh__card-person__social-list">
+      {% for link in social_links %}
+        <li>
+          <a href="{{ link.url }}"
+             class="qh__card-person__social-link{% if link.is_website %} qh__card-person__social-link--website{% endif %}"
+             rel="external noopener noreferrer">
+            <span class="qh__icon" aria-hidden="true">
+              {% include ('@icons/' ~ link.icon ~ '.svg') %}
+            </span>
+            <span class="visually-hidden">{{ link.title ?: link.url }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endset %}
+
+{{ include('ecms:card-person', {
+  photo: photo,
+  job_title: translated_node.field_person_job_title.value,
+  first_name: translated_node.field_person_first_name.value,
+  last_name: translated_node.field_person_last_name.value,
+  social_links: social_markup,
+}, with_context = FALSE) }}

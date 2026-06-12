@@ -1,0 +1,200 @@
+// canvas-hero
+// Default page hero (sibling of canvas-hero-search). A two-row / two-column
+// grid:
+//   Row 1  — the solid navy band (`.qh__t__primary` in markup) holding the
+//            heading + rich-text description in column 1. This is the ONLY
+//            background color. The wave hangs off its bottom edge.
+//   Row 2  — transparent (the white page shows through).
+//   Image  — column 2, spans rows 1→2 so it straddles the wave: top half over
+//            navy, bottom half over white.
+//
+// The text stays inside the solid navy band (never over the wave) so the
+// white-on-navy heading is always readable. Heading/description colors come
+// from the `.qh__t__primary` cascade — no `color:` declarations here.
+//
+// A full-bleed columns track lets the navy band span edge-to-edge while the
+// text + image stay within the content max-width. Container queries (not
+// viewport) so Canvas's scaled edit-mode iframe matches the public view.
+
+.canvas-hero {
+  --hero-half: calc(var(--content-max-width, 86rem) / 2);
+
+  container-name: canvas-hero;
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--section-sides, 1.5rem), 1fr)
+    [content-start] minmax(0, var(--hero-half))
+    [mid] minmax(0, var(--hero-half))
+    [content-end] minmax(var(--section-sides, 1.5rem), 1fr)
+    [full-end];
+  // Clip the wave's horizontal overhang without clipping the y-axis, so the
+  // wave can hang below the band and the image can straddle.
+  overflow-x: clip;
+  margin-bottom: calc(var(--vertical-rhythm) * 5);
+
+  // ---------------------------------------------------------------------------
+  // Band — purely visual navy layer spanning row 1 edge-to-edge. `.qh__t__primary`
+  // paints the navy bg and exposes `--computed-background-color` (used by the
+  // wave fill). Sits behind the content + image.
+  // ---------------------------------------------------------------------------
+  &__band {
+    grid-column: full-start / full-end;
+    grid-row: 1;
+    position: relative;
+    z-index: 0;
+
+    // Stacked: the image drops to row 2, so the navy band must cover both rows
+    // (text + image); the wave then hangs off the bottom of the whole stack.
+    @container canvas-hero (max-width: #{$bp--medium-value * 1rem}) {
+      grid-row: 1 / 3;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Content — heading + description, COLUMN 1 of row 1. The grid track (not a
+  // max-width) keeps it clear of the image, so text can never run into it.
+  // Carries `.qh__t__primary` so its text is painted white by the cascade.
+  // ---------------------------------------------------------------------------
+  &__content {
+    align-self: center;
+    background-color: transparent;
+    grid-column: content-start / mid;
+    grid-row: 1;
+    padding-block: 5rem 1rem;
+    max-width: 60ch;
+    z-index: 2;
+
+    @container canvas-hero (max-width: #{$bp--medium-value * 1rem}) {
+      grid-column: content-start / content-end;
+    }
+  }
+
+  // Heading uses the global h1 type styles (serif, fluid sizing, weight) from
+  // _00-typography.scss. Only the hero's larger max size is fed in via the
+  // typography system's own `--h1-size-l` variable — same approach as
+  // hero-search — so we're not re-declaring font-family/size/weight.
+  &__heading {
+    --h1-size-l: 3.5; // 56px (Figma); global default is 43px
+    margin: 0;
+  }
+
+  // Description is rich text; it inherits the global body/`p` type styles. The
+  // light weight (Figma) comes from the `.qh__u__fw-light` utility on the
+  // element in markup — no custom font rules here.
+  &__description {
+    margin-top: 0.625rem;
+
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Wave — hangs off the band's bottom edge (same asset + technique as
+  // canvas-hero-search's bottom wave: navy-filled, flipped, right-anchored,
+  // width:137% to preserve the native ratio). The solid part overlaps the navy
+  // band (same color → seamless) and the curve drops below into the white,
+  // so the navy ends in a wave. `z-index: -1` keeps it behind the band's text
+  // and any following section's foreground content, with the page white
+  // showing through around the curve. The scoped `svg path` rule beats the
+  // global inlined `path { fill: … }` baked into illustration SVGs.
+  // ---------------------------------------------------------------------------
+  &__wave {
+    bottom: -10px;
+    color: var(--computed-background-color);
+    pointer-events: none;
+    position: absolute;
+    right: -10%;
+    transform: translateY(58%) scaleY(-1);
+    width: 137%;
+    z-index: -1;
+
+    svg {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+
+    svg path {
+      fill: currentColor;
+    }
+
+    @container canvas-hero (max-width: #{$bp--small-value * 1rem}) {
+      // Shrink the overhang on mobile so it does not swamp the short band.
+      transform: translateY(40%) scaleY(-1);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Media — column 2, spans rows 1→2 so the frame straddles the wave. Right
+  // aligned to the content edge, vertically centered across the two rows.
+  // Above everything so the wave never paints over it.
+  // ---------------------------------------------------------------------------
+  &__media {
+    align-self: start;
+    grid-column: mid / content-end;
+    grid-row: 1 / 3;
+    justify-self: end;
+    padding-block-start: 3rem;
+    width: 100%;
+    z-index: 3;
+
+    // Stacked: image drops below the text band (row 2) and tucks up slightly so
+    // its top still straddles the wave. Without this it would overlap the text.
+    @container canvas-hero (max-width: #{$bp--medium-value * 1rem}) {
+      grid-column: content-start / content-end;
+      grid-row: 2 / 3;
+      justify-self: flex-start;
+      margin-top: 0;
+      padding-block: 2rem;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Frame — device look: navy-dark rounded container, top center notch, inset
+  // shadow on the photo. Explicit brand surface (not themed by the cascade).
+  // ---------------------------------------------------------------------------
+  &__frame {
+    background-color: var(--c__navy--dark, #1b243b);
+    border-radius: 8px;
+    margin: 0 0 0 auto;
+    max-width: 36.8rem; // ≈ 588px (Figma)
+    padding: 12px 12px 24px;
+    position: relative;
+
+    @container canvas-hero (max-width: #{$bp--medium-value * 1rem}) {
+      margin: 0;
+    }
+  }
+
+  // Top center notch (Figma 80×16, bottom-rounded).
+  &__notch {
+    background-color: var(--c__navy--dark, #1b243b);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 16px;
+    left: 50%;
+    position: absolute;
+    top: 12px;
+    transform: translateX(-50%);
+    width: 80px;
+    z-index: 1;
+  }
+
+  // Forced 16:9 (560×315). object-fit: cover crops any other source ratio.
+  &__image {
+    aspect-ratio: 16 / 9;
+    border-radius: inherit;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+
+    img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+}

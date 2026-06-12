@@ -1,0 +1,7 @@
+name: 'ECMS Role: Site Admin'
+description: 'Provides the Site Admin user role stub'
+type: 'content'
+install:
+  - user
+config:
+  strict: false

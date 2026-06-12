@@ -1,0 +1,40 @@
+{#
+  Canvas Icon Link Component
+  Linked icon + label with a right-side vertical divider.
+  Renders an <a> when href is provided, a <span> when href is null.
+
+  Props:
+    icon     - Icon filename from the @icons set, without extension (e.g. 'home', 'globe', 'map')
+    href     - Link URL; renders as <span> when null
+    text     - Link label text (alternative to slot)
+    modifier - Optional BEM modifier class
+
+  Slots:
+    title    - Link label text (required)
+
+  Usage:
+  {% include "@canvas/icon-link/icon-link.twig" with {
+    icon: "building",
+    href: "/services",
+  } %}
+  with slot title: "Find a Service"
+#}
+<div {{ attributes.addClass('canvas-icon-link' ~ (modifier ? ' canvas-icon-link--' ~ modifier : '')) }}>
+  {% if href %}
+    <a class="canvas-icon-link__link" href="{{ href }}">
+  {% else %}
+    <span class="canvas-icon-link__link">
+  {% endif %}
+    {% if icon %}
+      <span class="canvas-icon-link__icon qh__icon" aria-hidden="true">
+        {% include '@icons/' ~ icon ~ '.svg' %}
+      </span>
+    {% endif %}
+    <span class="canvas-icon-link__title">{{ text }}</span>
+  {% if href %}
+    </a>
+  {% else %}
+    </span>
+  {% endif %}
+  <span class="canvas-icon-link__divider" aria-hidden="true"></span>
+</div>

@@ -99,6 +99,17 @@
   {% endif %}
 
   <div{{ content_attributes.addClass('node__content') }}>
+
+    {% if render_fallback_title and node.label %}
+      <div class="qh__t__none">
+        <div class="qh-layout-section qh-layout-section--col-count-1 qh-layout-section--col-size-100">
+          <div class="qh-layout-section__col qh-layout-section__col--first">
+            <h1>{{ node.label }}</h1>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
     {{ content }}
 
     {{ modal }}

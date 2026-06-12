@@ -1,0 +1,62 @@
+.canvas-tab {
+  // Base tab styles — the active state is handled by a modifier class
+  &__button {
+    &--active,
+    &--active:hover,
+    &--active:focus {
+      background-color: var(--fc__tertiary__button--hover__bg);
+      color: var(--fc__tertiary__button--hover__fg);
+      border: 2px solid
+        color-mix(in srgb, var(--fc__tertiary__fg) 50%, transparent);
+    }
+  }
+
+  &__icon {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 2rem; // 28px — matches Figma icon canvas
+    justify-content: center;
+    width: 2rem;
+
+    svg {
+      height: 2rem; // Fill the full 28px canvas
+      width: 2rem;
+    }
+  }
+
+  // Panel — shown/hidden and ARIA-wired by Tab Group JS.
+  &__panel {
+    margin-top: -1.625rem; // pulls up behind the tablist row
+    position: relative;
+    z-index: 1;
+
+    // Light mode only — the cream fill sits on navy, not white. In dark mode
+    // the panel inherits its surrounding theme instead of this fixed fill.
+    //
+    // Scope mirrors the theme system (_00-themes.scss): cream is the light
+    // default, then cleared in BOTH dark contexts — the explicit `.dark` toggle
+    // and system-dark with no explicit `.light` override. The old
+    // `html:not(.dark)` leaked the cream into system-dark, where no class is
+    // present, so it matched and painted light even though the page was dark.
+    background-color: hsl(52.5deg 25% 93.73%); // Coffee milk without transparency
+
+    .dark & {
+      background-color: transparent;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.light) & {
+        background-color: transparent;
+      }
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__panel-inner {
+    padding: 5rem 2rem;
+  }
+}

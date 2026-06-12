@@ -24,7 +24,6 @@ body {
   }
 
   a {
-    //display: block;
     transition: $transition-base;
   }
 
@@ -33,7 +32,6 @@ body {
 
   // <div>
   &__wrapper {
-    @include qh-content-maxwidth();
     position: relative;
     overflow: hidden;
     z-index: z(desktop-nav-bar);
@@ -42,11 +40,6 @@ body {
       overflow: visible;
     }
 
-    @include breakpoint-up($bp__show__desktop-nav) {
-      overflow: visible;
-    }
-
-
     // For mobile we need to flex
     @include breakpoint-down($bp__show__desktop-nav) {
       display: flex;
@@ -54,6 +47,11 @@ body {
       align-items: center;
       justify-content: space-between;
       z-index: z(mobile-nav-bar);
+    }
+
+    @include breakpoint-up($bp__show__desktop-nav) {
+      @include qh-content-maxwidth();
+      overflow: visible;
     }
   }
 
@@ -103,29 +101,29 @@ body {
       > span {
         display: block;
         background-color: currentColor;
-        height: rem(2);
+        height: em(2);
         position: absolute;
-        width: rem(20);
+        width: em(20);
       }
 
       // Top bar
       &::before {
         content: '';
-        top: rem(12);
-        left: rem(12);
+        top: em(12);
+        left: em(12);
       }
 
       // Mid bar
       > span {
-        top: rem(21);
-        left: rem(12);
+        top: em(20);
+        left: em(12);
       }
 
       // Bottom bar
       &::after {
         content: '';
-        top: rem(30);
-        left: rem(12);
+        top: em(28);
+        left: em(12);
       }
     } // end .qh__icon__menu
 
@@ -135,11 +133,11 @@ body {
     &:active {
       .qh__icon__menu::before,
       .qh__icon__menu::after {
-        left: rem(10);
+        left: em(10);
       }
 
       .qh__icon__menu > span {
-        left: rem(14);
+        left: em(14);
       }
     }
 
@@ -359,6 +357,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+
     @include breakpoint-down($bp__show__desktop-nav) {
       justify-content: space-between;
     }
@@ -399,7 +398,6 @@ body {
   // Ideally CSS hovers are only present when JS does not load
   .no-js &__link:hover + &__list__sub,
   .no-js &__link:focus + &__list__sub,
-
   &__link[aria-expanded='true'] + &__list__sub {
     opacity: 1;
     transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
@@ -410,7 +408,6 @@ body {
   &__item:not(&__item__sub) > &__link:hover,
   &__item:not(&__item__sub) > &__link:focus,
   &__item:not(&__item__sub):hover > &__link:not(&__link--current):not(&__link--home),
-
   &__link[aria-expanded='true'] {
     background-color: var(--fc__nav-main__link--hover__bg);
     color: var(--fc__nav-main__link--hover);
@@ -444,19 +441,12 @@ body {
   &__link {
     padding: ($nav-a-v-spacing * 0.75) $nav-a-h-spacing--sm $nav-a-v-spacing;
 
-    @include onlyIE() {
-      padding-left: ($nav-a-h-spacing--sm * 0.5);
-      padding-right: ($nav-a-h-spacing--sm * 0.5);
-    }
-
     &,
     &:visited {
       background-color: transparent;
       color: var(--fc__nav-main__link);
       display: block;
-      font-size: clamp(0.875rem, 1.125vw, 1rem);
-      font-weight: 450;
-      line-height: clamp(1.2rem, 3vw, 1.3rem);
+      font-weight: 475;
       text-decoration: none;
       word-break: normal;
 
@@ -488,8 +478,8 @@ body {
       color: var(--fc__nav-main__fg);
       // cursor: default;
       font-weight: 550;
-      padding-top: ($nav-a-v-spacing * 0.75);
-      padding-bottom: $nav-a-v-spacing;
+      padding-block-start: ($nav-a-v-spacing * 0.75);
+      padding-block-end: $nav-a-v-spacing;
       // pointer-events: none;
 
       @include breakpoint-down($bp__show__desktop-nav) {
@@ -522,6 +512,7 @@ body {
 
     // Home button in navbar
     .qh__nav-main__wrapper > &--home {
+
       // Hide for desktop
       @include breakpoint-up($bp__show__desktop-nav) {
         display: none;
@@ -545,21 +536,199 @@ body {
     &--home,
     &--home:visited {
       border-top: 0;
-      padding: em(1);
+      padding: 0.5em 0.25em;
+    }
 
-      &:hover,
-      &:focus {
-        padding: em(1) !important;
-      }
+    // Repeat padding because other anchors change their opadding when hovered, but this one should not
+    &--home:hover,
+    &--home:focus {
+      padding: 0.5em 0.25em !important;
+    }
+  }
+}
 
-      @include onlyIE() {
-        padding-top: 0.5rem;
 
-        &:hover,
-        &:focus {
-          padding-top: 0.5rem !important;
-        }
+// ─── Mega menu variant ────────────────────────────────────────────────────────
+
+.qh__nav-main--megamenu {
+
+  // Top-level items that have a mega panel need position:static so the panel
+  // breaks out of the list item and positions relative to the nav wrapper.
+  .qh__nav-main__has-megamenu {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      position: static;
+    }
+  }
+
+  // The mega panel itself
+  .qh__megamenu {
+    background-color: var(--fc__default__bg);
+
+    // Mobile: hidden by default, revealed below
+    @include breakpoint-down($bp__show__desktop-nav) {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0s linear 1s, visibility 0s linear 0s;
+      visibility: hidden;
+    }
+
+    // Desktop: full-width panel below the nav bar.
+    // Horizontal padding creates the left/right margin for the columns card —
+    // both the panel and the wrapper share qh-content-maxwidth(), so using
+    // padding here (rather than a nested qh-content-maxwidth() on the card)
+    // is the only way to get inset side margins.
+    @include breakpoint-up($bp__show__desktop-nav) {
+      box-shadow: $box-shadow-base;
+      left: 0;
+      opacity: 0;
+      padding: 1.5rem;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      transition: $transition-duration-medium opacity ease 0s, 0s visibility linear $transition-duration-medium;
+      visibility: hidden;
+      z-index: z(drop-down-menu);
+    }
+  }
+
+  // Desktop: reveal on aria-expanded and no-js hover
+  // The + combinator selector must be scoped to this parent so it correctly
+  // selects .qh__megamenu adjacent to the expanded link.
+  .qh__nav-main__link[aria-expanded='true'] + .qh__megamenu {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      opacity: 1;
+      transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
+      visibility: visible;
+    }
+  }
+
+  // Three-column grid — fills the padded panel area, no qh-content-maxwidth()
+  // needed since the panel itself already handles centering via left/right:0.
+  .qh__megamenu__columns {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      border: $border-sm solid var(--fc__default__border);
+      border-radius: $brad-md;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: hidden; // clips column border-left to the card's rounded corners
+    }
+  }
+
+  .qh__megamenu__column {
+    @include breakpoint-up($bp__show__desktop-nav) {
+      padding: 1rem 1.5rem;
+    }
+
+    @include breakpoint-down($bp__show__desktop-nav) {
+      padding: 0;
+    }
+  }
+
+  // Column dividers — pseudo-element so the line is inset from the card's top
+  // and bottom borders rather than running the full height of the column.
+  @include breakpoint-up($bp__show__desktop-nav) {
+    .qh__megamenu__column + .qh__megamenu__column {
+      position: relative;
+
+      &::before {
+        border-left: $border-sm solid var(--fc__default__border);
+        bottom: 1rem;
+        content: '';
+        left: 0;
+        position: absolute;
+        top: 1rem;
       }
     }
+  }
+
+  // Individual child link wrapper
+  .qh__megamenu__item {
+    & + & {
+      border-top: $border-sm solid var(--fc__default__border);
+    }
+  }
+
+  // Child link — sits on a white panel so uses default (not nav) color tokens
+  .qh__megamenu__link {
+    align-items: center;
+    display: flex;
+    font-weight: 600;
+    justify-content: space-between;
+    padding: $nav-a-v-spacing--sm 0;
+    text-decoration: none;
+
+    @include breakpoint-down($bp__show__desktop-nav) {
+      padding: $nav-a-v-spacing--sm $nav-a-h-spacing--sm;
+    }
+
+    &,
+    &:visited {
+      color: var(--fc__default__fg);
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+    }
+
+    &:focus {
+      outline-color: var(--fc__default__link--focus);
+      outline-offset: $border-sm;
+    }
+
+    // Constrain the arrow/external icon — the global qh__icon is em(40) which
+    // is too large for inline use inside a link.
+    .qh__icon {
+      flex: 0 0 em(20);
+      height: em(20);
+      margin-left: 0.75rem;
+      width: em(20);
+    }
+  }
+
+  // Optional subtitle shown below a child link title
+  .qh__megamenu__item__desc {
+    color: var(--fc__default__fg);
+    font-size: rem(14);
+    margin: 0 0 $nav-a-v-spacing--sm;
+    opacity: 0.65;
+
+    @include breakpoint-down($bp__show__desktop-nav) {
+      padding: 0 $nav-a-h-spacing--sm $nav-a-v-spacing--sm;
+      margin: 0;
+    }
+  }
+
+  // Footer row: "All [Section]" overview button — sits below the card
+  .qh__megamenu__footer {
+    padding: 1.5rem;
+    text-align: center;
+
+    @include breakpoint-up($bp__show__desktop-nav) {
+      @include qh-content-maxwidth();
+    }
+  }
+}
+
+// Mobile reveal for mega menu — written outside any nesting because the SCSS
+// adjacent-sibling + & pattern incorrectly includes the parent selector chain.
+// .js is on <html>, so it cannot be a descendant of .qh__nav-main--megamenu.
+@include breakpoint-down($bp__show__desktop-nav) {
+  .js .qh__nav-main--megamenu [aria-expanded='true'] + .qh__megamenu {
+    max-height: unset;
+    transition: max-height 0s linear 500s, visibility 0s linear 0ms;
+    visibility: visible;
+  }
+}
+
+// Desktop no-js hover/focus reveal — written outside .qh__nav-main--megamenu to
+// keep compound-selector count within the 4-selector lint limit.
+// .no-js is on <html> so it cannot be a descendant of .qh__nav-main--megamenu.
+@include breakpoint-up($bp__show__desktop-nav) {
+  .no-js .qh__nav-main__item:hover .qh__nav-main__link + .qh__megamenu,
+  .no-js .qh__nav-main__item:focus-within .qh__nav-main__link + .qh__megamenu {
+    opacity: 1;
+    transition: $transition-duration-medium opacity ease 0s, 0s visibility linear 0s;
+    visibility: visible;
   }
 }

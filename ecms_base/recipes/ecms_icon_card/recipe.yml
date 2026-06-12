@@ -1,0 +1,111 @@
+name: 'eCMS Icon Card Block'
+description: 'Provides the Icon Card block type for displaying icons with links in card format.'
+type: 'eCMS'
+
+install:
+  - block_content
+  - link
+  - ecms_icon_library
+  - language
+  - content_translation
+
+config:
+  strict:
+    - field.storage.block_content.field_icon_library_icon
+    - field.storage.block_content.field_link
+  import:
+    block_content:
+      - block_content.type.icon_card
+  actions:
+    field.field.block_content.icon_card.field_icon_library_icon:
+      ensure_exists:
+        entity_type: block_content
+        bundle: icon_card
+        field_name: field_icon_library_icon
+        field_type: ecms_icon_library
+      setLabel: Icon
+      setRequired: true
+      setTranslatable: false
+
+    field.field.block_content.icon_card.field_link:
+      ensure_exists:
+        entity_type: block_content
+        bundle: icon_card
+        field_name: field_link
+        field_type: link
+      setLabel: Link
+      setRequired: true
+      setTranslatable: false
+
+    core.entity_form_display.block_content.icon_card.default:
+      createIfNotExists:
+        targetEntityType: block_content
+        bundle: icon_card
+        mode: default
+        status: true
+      setComponents:
+        - name: info
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: langcode
+          options:
+            type: language_select
+            weight: 1
+            region: content
+            settings:
+              include_locked: true
+        - name: field_icon_library_icon
+          options:
+            type: ecms_icon_library_widget
+            weight: 2
+            region: content
+            settings: {}
+        - name: field_link
+          options:
+            type: link_default
+            weight: 3
+            region: content
+            settings:
+              placeholder_url: ''
+              placeholder_title: ''
+
+    core.entity_view_display.block_content.icon_card.default:
+      createIfNotExists:
+        targetEntityType: block_content
+        bundle: icon_card
+        mode: default
+        status: true
+      setComponents:
+        - name: field_link
+          options:
+            type: link
+            label: above
+            weight: 1
+            region: content
+            settings:
+              trim_length: 80
+              url_only: false
+              url_plain: false
+              rel: ''
+              target: ''
+        - name: field_icon_library_icon
+          options:
+            type: ecms_icon_library_formatter
+            label: above
+            weight: 2
+            region: content
+            settings: {}
+
+    language.content_settings.block_content.icon_card:
+      ensure_exists:
+        id: block_content.icon_card
+        target_entity_type_id: block_content
+        target_bundle: icon_card
+      setProperties:
+        default_langcode: site_default
+        language_alterable: false

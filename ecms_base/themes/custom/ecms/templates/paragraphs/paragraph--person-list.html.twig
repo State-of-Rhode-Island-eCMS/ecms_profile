@@ -41,8 +41,16 @@
 
 {% set cachebust = content|render %}
 
+{% set bg_color_class = '' %}
+{% if paragraph.field_background_color.value %}
+  {% set bg_color_class = 'qh__tc__' ~ paragraph.field_background_color.value %}
+{% endif %}
+
 {{ include('ecms:person-list', {
   list_mode: list_mode,
   person_listing: person_listing,
-  photo_list: photo_list
+  photo_list: photo_list,
+  title: paragraph.field_list_title.value,
+  bg_color_class: bg_color_class,
+  columns: paragraph.field_columns.value|default("1"),
 }, with_context = FALSE) }}

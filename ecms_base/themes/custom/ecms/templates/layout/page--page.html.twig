@@ -1,0 +1,11 @@
+{% extends "page.html.twig" %}
+
+{% block content_grid %}
+  {# Canvas pages aren't covered by the `tabs` block's node-bundle
+     visibility (block.block.tabs.yml). Render the local_tasks plugin
+     directly here via twig_tweak so editors get View/Edit/Delete tabs
+     on canvas_page routes. #}
+  {{ drupal_block('local_tasks_block') }}
+  {{ page.admin_links }}
+  {{ page.content }}
+{% endblock %}

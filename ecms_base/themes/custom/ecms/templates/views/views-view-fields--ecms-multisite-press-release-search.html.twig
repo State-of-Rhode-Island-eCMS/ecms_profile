@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Renders each multisite press release search result as an ecms:icon-card.
+ *
+ * Fields used (configured in the view, url excluded from display):
+ *   fields.title.content  - Title with link wrapper; stripped to plain text.
+ *   fields.url.content    - Canonical item URL from the originating site.
+ */
+#}
+{% if fields %}
+  {{ include('ecms:icon-card', {
+    icon: 'link-external',
+    link_url: fields.url.raw[0],
+    link_text: fields.title.raw[0],
+  }, with_context = false) }}
+{% endif %}

@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: search_api__views_block__online_services__block_1
+name: 'search_api:views_block__online_services__block_1'
+filter_key: online-service
+url_processor: query_string
+breadcrumb:
+  active: false
+  before: true
+  group: false

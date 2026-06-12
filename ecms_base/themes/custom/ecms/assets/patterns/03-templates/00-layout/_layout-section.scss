@@ -43,18 +43,10 @@
         @include breakpoint-up($bp--small) {
           &--first {
             flex: 1 1 calc(33% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(33% - #{$grid-gap/2});
-            }
           }
 
           &--second {
             flex: 1 1 calc(67% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(67% - #{$grid-gap/2});
-            }
           }
 
           + .qh-layout-section__col {
@@ -65,18 +57,10 @@
         @include breakpoint-up($bp--large) {
           &--first {
             flex: 1 1 calc(25% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(25% - #{$grid-gap/2});
-            }
           }
 
           &--second {
             flex: 1 1 calc(75% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(75% - #{$grid-gap/2});
-            }
           }
         }
 
@@ -98,18 +82,10 @@
         @include breakpoint-up($bp--medium) {
           &--first {
             flex: 1 1 calc(33% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(33% - #{$grid-gap/2});
-            }
           }
 
           &--second {
             flex: 1 1 calc(67% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(67% - #{$grid-gap/2});
-            }
           }
 
           + .qh-layout-section__col {
@@ -135,10 +111,6 @@
         @include breakpoint-up($bp--medium) {
           flex: 1 1 calc(50% - #{$grid-gap});
 
-          @include onlyIE() {
-            width: calc(50% - #{$grid-gap/2});
-          }
-
           + .qh-layout-section__col {
             margin-left: $grid-gap;
           }
@@ -156,18 +128,10 @@
         @include breakpoint-up($bp--medium) {
           &--first {
             flex: 1 1 calc(67% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(67% - #{$grid-gap/2});
-            }
           }
 
           &--second {
             flex: 1 1 calc(33% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(33% - #{$grid-gap/2});
-            }
           }
 
           + .qh-layout-section__col {
@@ -193,18 +157,10 @@
         @include breakpoint-up($bp--small) {
           &--first {
             flex: 1 1 calc(67% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(67% - #{$grid-gap/2});
-            }
           }
 
           &--second {
             flex: 1 1 calc(33% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(33% - #{$grid-gap/2});
-            }
           }
 
           + .qh-layout-section__col {
@@ -215,18 +171,10 @@
         @include breakpoint-up($bp--large) {
           &--first {
             flex: 1 1 calc(75% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(75% - #{$grid-gap/2});
-            }
           }
 
           &--second {
             flex: 1 1 calc(25% - #{$grid-gap});
-
-            @include onlyIE() {
-              width: calc(25% - #{$grid-gap/2});
-            }
           }
         }
 
@@ -250,10 +198,6 @@
         @include breakpoint-up($bp--medium) {
           flex: 1 1 calc(33.3% - #{$grid-gap});
 
-          @include onlyIE() {
-            width: calc(33% - #{($grid-gap * 3)/4});
-          }
-
           + .qh-layout-section__col {
             margin-left: $grid-gap;
           }
@@ -271,10 +215,6 @@
         @include breakpoint-between($bp--small, $bp--xlarge) {
           flex: 1 1 calc(50% - #{$grid-gap});
 
-          @include onlyIE() {
-            flex: 1 1 40%;
-          }
-
           &:nth-child(even) {
             margin-left: $grid-gap;
           }
@@ -282,10 +222,6 @@
 
         @include breakpoint-up($bp--xlarge) {
           flex: 1 1 calc(25% - #{$grid-gap});
-
-          @include onlyIE() {
-            flex: 1 1 20%;
-          }
 
           + .qh-layout-section__col {
             margin-left: $grid-gap;

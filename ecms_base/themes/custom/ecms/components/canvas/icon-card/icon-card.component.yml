@@ -1,0 +1,138 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: 'Icon Card'
+group: 'RI.Gov'
+status: stable
+description: |
+  Card with a 4rem icon (chosen from the `@icons` SVG set) and a CTA link. Thin
+  Canvas wrapper around the existing `.qh__grid-card .qh__grid-card--icon`
+  design-system markup. The whole card is clickable.
+props:
+  type: object
+  required:
+    - icon
+    - link_url
+    - link_text
+  properties:
+    theme:
+      title: Theme
+      type: string
+      description: Background + foreground color palette. Maps to the `qh__t__*` theme classes. `inherit` leaves colors up to the surrounding page.
+      enum:
+        - inherit
+        - primary
+        - primary-light
+        - secondary
+        - tertiary
+        - coffee-milk
+      meta:enum:
+        inherit: Inherit
+        primary: Primary
+        primary-light: Primary — light
+        secondary: Secondary
+        tertiary: Tertiary
+        coffee-milk: Coffee milk
+      examples: [ inherit ]
+    background_pattern:
+      title: Background pattern
+      description: |
+        Decorative motif placed in the top-left corner of the card. Tones
+        automatically to the card background via mix-blend-mode, so the same
+        asset works on any theme. Stars renders the windowed 12-star ring;
+        the other options reuse the theme's existing illustration set. Leave
+        unset for a plain card.
+      type: string
+      enum:
+        - none
+        - stars
+        - bridge
+        - lighthouse
+        - lobster
+        - oyster
+        - quahog
+        - seagull
+        - skyline
+        - steamer
+      meta:enum:
+        none: 'None'
+        stars: 'Stars'
+        bridge: 'Bridge'
+        lighthouse: 'Lighthouse'
+        lobster: 'Lobster'
+        oyster: 'Oyster'
+        quahog: 'Quahog'
+        seagull: 'Seagull'
+        skyline: 'Skyline'
+        steamer: 'Steamer'
+      examples: [ none ]
+    icon:
+      title: Icon
+      type: string
+      enum:
+        - alarm-bell
+        - anchor-small
+        - arrow-right
+        - box-ballot
+        - building-user
+        - bus
+        - capitol-building
+        - chevron-down
+        - chevron-left
+        - chevron-right
+        - city
+        - close-x
+        - cog
+        - default-logo
+        - download
+        - feed
+        - file-excel
+        - file-generic
+        - file-pdf
+        - file-powerpoint
+        - file-word
+        - fish
+        - globe
+        - guillemot-left
+        - guillemot-right
+        - handshake
+        - home
+        - house-chimney
+        - icon-ios-share
+        - id-card
+        - information
+        - link-external
+        - map
+        - map-marker
+        - maple-leaf
+        - plus-minus
+        - ri-state-seal
+        - search-glass
+        - social-blogger
+        - social-blusky
+        - social-facebook
+        - social-flickr
+        - social-instagram
+        - social-linkedin
+        - social-twitter
+        - social-youtube
+        - sparkles
+        - users
+        - users-line
+      examples: ['home']
+    link_url:
+      type: string
+      title: Link URL
+      format: uri-reference
+      examples: ['/services']
+    link_text:
+      type: string
+      title: Link text
+      examples: ['Find a Service']
+    description:
+      type: string
+      title: Description
+      description: |
+        Optional plain-text blurb shown beneath the link heading. Plain text
+        only — the entire card is a single clickable link, so it cannot contain
+        nested links or other markup. External URLs (http/https) automatically
+        open in a new window and swap the corner arrow for the external-link
+        icon; no separate setting is needed.

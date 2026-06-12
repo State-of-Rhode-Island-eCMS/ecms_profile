@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: { }
+id: drupal_admin
+label: 'Drupal Admin'
+weight: 7
+is_admin: true
+permissions: { }

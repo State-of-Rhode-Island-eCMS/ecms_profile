@@ -1,0 +1,65 @@
+// Online Service search result card
+// Used by node--online-service--search-result.html.twig
+//
+// The external link icon comes from the theme's global a[target='_blank']::after
+// rule (an SVG mask). It is overridden here to sit absolutely in the top-right
+// corner of the card. Any extlink-injected child span is hidden to avoid duplication.
+
+.os-result {
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+
+  &__link {
+    text-decoration: none !important; // Remove the default blue underline on the whole card link.
+    position: relative;
+
+    &[target="_blank"]::after {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    &:hover,
+    &:focus {
+      .os-result__title {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__title {
+    padding-inline-end: 2rem;
+  }
+
+  &__agency {
+    margin-block-start: 0.125rem;
+  }
+
+  &__description {
+    margin-block-start: 0.5rem;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    margin-block-start: 1.5rem;
+    list-style: none;
+
+    .os-result__tag {
+      background-color: var(--fc__default__bg);
+      padding: 0.25rem 1rem;
+      color: var(--fc__default__text);
+      border-right: 1px solid var(--fc__default__border);
+      flex: 0 0 auto;
+      max-width: 100%;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Wraps multisite press release search results in a 3-column dynamic section.
+ *
+ * Each row (rendered by views-view-fields--ecms-multisite-press-release-search)
+ * is slotted into a cell of ecms:dynamic-section (3 cols × 2 rows = 6 cells).
+ * Set the view's items_per_page to 6 to match.
+ */
+#}
+{% embed 'ecms:dynamic-section' with {
+  column_count: 3,
+  row_count: 2,
+  cell_align_x: 'default',
+  cell_align_y: 'stretch',
+  grid_gap: 'condensed',
+  theme: 'coffee-milk',
+} %}
+  {% block cell_1 %}{% if rows[0] is defined %}{{ rows[0].content }}{% endif %}{% endblock %}
+  {% block cell_2 %}{% if rows[1] is defined %}{{ rows[1].content }}{% endif %}{% endblock %}
+  {% block cell_3 %}{% if rows[2] is defined %}{{ rows[2].content }}{% endif %}{% endblock %}
+  {% block cell_4 %}{% if rows[3] is defined %}{{ rows[3].content }}{% endif %}{% endblock %}
+  {% block cell_5 %}{% if rows[4] is defined %}{{ rows[4].content }}{% endif %}{% endblock %}
+  {% block cell_6 %}{% if rows[5] is defined %}{{ rows[5].content }}{% endif %}{% endblock %}
+{% endembed %}

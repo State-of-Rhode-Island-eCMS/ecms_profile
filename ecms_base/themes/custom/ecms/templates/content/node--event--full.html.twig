@@ -144,7 +144,7 @@
 
     <div class="qh__single-event__meta">
       <p>
-        <span class="small-text qh__single-event__meta__label">Date: </span>
+        <span class="qh__fs-st qh__single-event__meta__label">Date: </span>
         {% if start_date == end_date and allday %}
           <!-- If a start date and all day -->
           {{ "All day"|t }} <time datetime="{{ datetime_startdate_format }}">{{ start_date }}</time>
@@ -174,7 +174,7 @@
       <!-- If location -->
       {% if location|default %}
         <p>
-          <span class="small-text qh__single-event__meta__label">Location: </span>
+          <span class="qh__fs-st qh__single-event__meta__label">Location: </span>
           <span class="qh__single-event__meta__address">{{ location }}</span>
         </p>
       {% endif %}
@@ -182,7 +182,7 @@
       <!-- If Virtual Meeting URL present (new field) -->
       {% if virtual_link_url %}
         <p>
-          <span class="small-text qh__single-event__meta__label">Virtual Meeting: </span>
+          <span class="qh__fs-st qh__single-event__meta__label">Virtual Meeting: </span>
           <a class="qh__single-event__meta__url" href="{{ virtual_link_url }}">{{ virtual_link_url }}</a>
         </p>
       {% endif %}
@@ -190,7 +190,7 @@
       <!-- If Registration Required URL present (new field) -->
       {% if registration_link_url %}
         <p>
-          <span class="small-text qh__single-event__meta__label">Registration: </span>
+          <span class="qh__fs-st qh__single-event__meta__label">Registration: </span>
           <a class="qh__single-event__meta__url" href="{{ registration_link_url }}">{{ registration_link_url }}</a>
         </p>
       {% endif %}
@@ -216,7 +216,7 @@
       <!-- If Event Type -->
       {% if node.field_event_type.value|default %}
         <p>
-          <span class="small-text qh__single-event__meta__label">Event Type: </span>
+          <span class="qh__fs-st qh__single-event__meta__label">Event Type: </span>
           {{ content.field_event_type }}
         </p>
       {% endif %}
@@ -224,7 +224,7 @@
       <!-- If Contact -->
       {% if node.field_event_contact.value|default %}
         <p>
-          <span class="small-text qh__single-event__meta__label">Contact: </span>
+          <span class="qh__fs-st qh__single-event__meta__label">Contact: </span>
           {{ node.field_event_contact.value }}
         </p>
       {% endif %}

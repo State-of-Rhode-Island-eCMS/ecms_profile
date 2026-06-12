@@ -1,6 +1,8 @@
 # Illustration
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Illustration
+group: 'ZZ-Incompatible'
+noUi: true
 description: Display the theme illustration
 props:
   type: object

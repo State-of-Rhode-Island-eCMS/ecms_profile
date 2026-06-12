@@ -1,0 +1,14 @@
+// canvas-section-title
+// Vertical stack — heading, body, CTA. Uses the same `space-y-4`-style
+// rule as `canvas-dynamic-section__cell` so a Section Title dropped
+// into a cell reads with the same rhythm as a hand-stacked
+// Heading + Text + CTA in that cell.
+
+.canvas-section-title {
+  display: flex;
+  flex-direction: column;
+
+  > * + * {
+    margin-block-start: 1rem;
+  }
+}
