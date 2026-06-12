@@ -3,6 +3,11 @@ type: eCMS
 description: 'Installs the News content type and related configuration.'
 recipes: []
 config:
+  import:
+    node:
+      - node.type.news
+    taxonomy:
+      - taxonomy.vocabulary.news_topics
   strict:
     # Field storages affect database schema - treat strictly.
     - field.storage.node.field_meta_tags_news
@@ -13,16 +18,180 @@ config:
     - field.storage.node.field_news_promotions
     - field.storage.node.field_news_source
     - field.storage.node.field_news_topics
-  import:
-    # All config sourced from recipe config/ directory - no module dependency.
-    - node.type.news
-    - taxonomy.vocabulary.news_topics
-    - pathauto.pattern.news
-    - rabbit_hole.behavior_settings.node_type_news
-    - rabbit_hole.behavior_settings.taxonomy_vocabulary_news_topics
-    - simple_sitemap.bundle_settings.default.node.news
-    - views.view.news
   actions:
+    # --- Field storages ---
+    field.storage.node.field_meta_tags_news:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - metatag
+            - node
+        id: node.field_meta_tags_news
+        field_name: field_meta_tags_news
+        entity_type: node
+        type: metatag
+        settings: {  }
+        module: metatag
+        locked: false
+        cardinality: 1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_body:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - node
+            - text
+        id: node.field_news_body
+        field_name: field_news_body
+        entity_type: node
+        type: text_with_summary
+        settings: {  }
+        module: text
+        locked: false
+        cardinality: 1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_date:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - datetime
+            - node
+        id: node.field_news_date
+        field_name: field_news_date
+        entity_type: node
+        type: datetime
+        settings:
+          datetime_type: datetime
+        module: datetime
+        locked: false
+        cardinality: 1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_links:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - link
+            - node
+        id: node.field_news_links
+        field_name: field_news_links
+        entity_type: node
+        type: link
+        settings: {  }
+        module: link
+        locked: false
+        cardinality: -1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_paragraphs:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - entity_reference_revisions
+            - node
+            - paragraphs
+        id: node.field_news_paragraphs
+        field_name: field_news_paragraphs
+        entity_type: node
+        type: entity_reference_revisions
+        settings:
+          target_type: paragraph
+        module: entity_reference_revisions
+        locked: false
+        cardinality: -1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_promotions:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - node
+        id: node.field_news_promotions
+        field_name: field_news_promotions
+        entity_type: node
+        type: entity_reference
+        settings:
+          target_type: node
+        module: core
+        locked: false
+        cardinality: -1
+        translatable: false
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_source:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - node
+            - text
+        id: node.field_news_source
+        field_name: field_news_source
+        entity_type: node
+        type: text_long
+        settings: {  }
+        module: text
+        locked: false
+        cardinality: 1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
+    field.storage.node.field_news_topics:
+      createIfNotExists:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - node
+            - taxonomy
+        id: node.field_news_topics
+        field_name: field_news_topics
+        entity_type: node
+        type: entity_reference
+        settings:
+          target_type: taxonomy_term
+        module: core
+        locked: false
+        cardinality: -1
+        translatable: true
+        indexes: {  }
+        persist_with_no_fields: false
+        custom_storage: false
+
     # --- Field instances ---
     field.field.node.news.field_agency:
       ensure_exists:
