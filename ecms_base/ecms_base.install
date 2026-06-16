@@ -104,6 +104,7 @@ function ecms_base_apply_default_recipes(): array {
     'ecms_security',
     'ecms_webform',
     'ecms_acquia',
+    'ecms_news',
   ];
   $operations = ecms_base_apply_recipes($recipesToApply, FALSE);
   return $operations;
@@ -608,6 +609,17 @@ function ecms_base_update_11215(): void {
 function ecms_base_update_11216(): void {
   $recipes = [
     'ecms_stat_card',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
+
+/**
+ * Apply recipe for the news content type.
+ */
+function ecms_base_update_11217(): void {
+  $recipes = [
+    'ecms_news',
   ];
 
   ecms_base_apply_recipes($recipes);

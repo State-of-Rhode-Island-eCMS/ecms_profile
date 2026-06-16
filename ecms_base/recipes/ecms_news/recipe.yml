@@ -1,0 +1,436 @@
+name: eCMS News
+type: eCMS
+description: 'Installs the News content type and related configuration.'
+# The agency field originates from the ecms_press_release feature.
+#  Need to declare a dependency on it.
+install:
+  - ecms_press_release
+recipes: []
+config:
+  import:
+    ecms_press_release: '*'
+    node:
+      - node.type.news
+      - core.base_field_override.node.news.changed
+      - core.base_field_override.node.news.created
+      - core.base_field_override.node.news.menu_link
+      - core.base_field_override.node.news.moderation_state
+      - core.base_field_override.node.news.path
+      - core.base_field_override.node.news.promote
+      - core.base_field_override.node.news.status
+      - core.base_field_override.node.news.sticky
+      - core.base_field_override.node.news.title
+      - core.base_field_override.node.news.uid
+    taxonomy:
+      - taxonomy.vocabulary.news_topics
+      - core.base_field_override.taxonomy_term.news_topics.changed
+      - core.base_field_override.taxonomy_term.news_topics.path
+      - core.base_field_override.taxonomy_term.news_topics.status
+  strict:
+    # Field storages affect database schema - treat strictly.
+    - field.storage.node.field_meta_tags_news
+    - field.storage.node.field_news_body
+    - field.storage.node.field_news_date
+    - field.storage.node.field_news_links
+    - field.storage.node.field_news_paragraphs
+    - field.storage.node.field_news_promotions
+    - field.storage.node.field_news_source
+    - field.storage.node.field_news_topics
+  actions:
+    # --- Field instances ---
+    field.field.node.news.field_agency:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_agency
+        field_type: list_string
+      setLabel: Agency
+      setDescription: 'This field is used for the filter criteria on Ri.gov.'
+      setRequired: true
+      setTranslatable: false
+
+    field.field.node.news.field_meta_tags_news:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_meta_tags_news
+        field_type: metatag
+      setLabel: 'Meta Tags News'
+      setRequired: false
+      setTranslatable: true
+
+    field.field.node.news.field_news_body:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_body
+        field_type: text_with_summary
+      setLabel: Body
+      setRequired: true
+      setTranslatable: true
+
+    field.field.node.news.field_news_date:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_date
+        field_type: datetime
+      setLabel: Date
+      setRequired: true
+      setTranslatable: false
+
+    field.field.node.news.field_news_links:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_links
+        field_type: link
+      setLabel: Links
+      setRequired: false
+      setTranslatable: true
+
+    field.field.node.news.field_news_paragraphs:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_paragraphs
+        field_type: entity_reference_revisions
+      setLabel: 'News Content Components'
+      setDescription: 'Add one or more flexible content components.'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.news.field_news_promotions:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_promotions
+        field_type: entity_reference
+      setLabel: 'News Promotions'
+      setDescription: 'Assigned promotions will output below the section navigation and any global promotions.'
+      setRequired: false
+      setTranslatable: false
+
+    field.field.node.news.field_news_source:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_source
+        field_type: text_long
+      setLabel: Source
+      setDescription: 'Optional agency and contact information.'
+      setRequired: false
+      setTranslatable: true
+
+    field.field.node.news.field_news_topics:
+      ensure_exists:
+        entity_type: node
+        bundle: news
+        field_name: field_news_topics
+        field_type: entity_reference
+      setLabel: 'News Topics'
+      setDescription: 'Add topics to group news.'
+      setRequired: false
+      setTranslatable: false
+
+    # --- Language content settings ---
+    language.content_settings.node.news:
+      ensure_exists:
+        target_entity_type_id: node
+        target_bundle: news
+      setProperties:
+        default_langcode: site_default
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+
+    language.content_settings.taxonomy_term.news_topics:
+      createIfNotExists:
+        langcode: en
+        status: true
+        id: taxonomy_term.news_topics
+        target_entity_type_id: taxonomy_term
+        target_bundle: news_topics
+        default_langcode: site_default
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+      setProperties:
+        default_langcode: site_default
+        language_alterable: true
+        third_party_settings:
+          content_translation:
+            enabled: true
+            bundle_settings:
+              untranslatable_fields_hide: '1'
+
+    # --- Entity form display ---
+    core.entity_form_display.node.news.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: news
+        mode: default
+        status: true
+      setComponents:
+        - name: title
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: uid
+          options:
+            type: entity_reference_autocomplete
+            weight: 1
+            region: content
+            settings:
+              match_operator: CONTAINS
+              match_limit: 10
+              size: 60
+              placeholder: ''
+        - name: created
+          options:
+            type: datetime_timestamp
+            weight: 2
+            region: content
+            settings: {}
+        - name: simple_sitemap
+          options:
+            weight: 3
+            region: content
+            settings: {}
+        - name: translation
+          options:
+            weight: 4
+            region: content
+            settings: {}
+        - name: promote
+          options:
+            type: boolean_checkbox
+            weight: 5
+            region: content
+            settings:
+              display_label: true
+        - name: sticky
+          options:
+            type: boolean_checkbox
+            weight: 6
+            region: content
+            settings:
+              display_label: true
+        - name: path
+          options:
+            type: path
+            weight: 7
+            region: content
+            settings: {}
+        - name: url_redirects
+          options:
+            weight: 8
+            region: content
+            settings: {}
+        - name: moderation_state
+          options:
+            type: moderation_state_default
+            weight: 9
+            region: content
+            settings: {}
+        - name: status
+          options:
+            type: boolean_checkbox
+            weight: 10
+            region: content
+            settings:
+              display_label: true
+        - name: field_news_body
+          options:
+            type: text_textarea_with_summary
+            weight: 11
+            region: content
+            settings:
+              rows: 9
+              summary_rows: 3
+              placeholder: ''
+              show_summary: false
+        - name: field_news_date
+          options:
+            type: datetime_default
+            weight: 12
+            region: content
+            settings: {}
+        - name: field_news_links
+          options:
+            type: link_default
+            weight: 13
+            region: content
+            settings:
+              placeholder_url: ''
+              placeholder_title: ''
+        - name: field_news_source
+          options:
+            type: text_textarea
+            weight: 14
+            region: content
+            settings:
+              rows: 5
+              placeholder: ''
+        - name: field_news_paragraphs
+          options:
+            type: entity_reference_paragraphs
+            weight: 15
+            region: content
+            settings:
+              title: 'Content Component'
+              title_plural: 'Content Components'
+              edit_mode: preview
+              add_mode: dropdown
+              form_display_mode: default
+              default_paragraph_type: _none
+        - name: field_meta_tags_news
+          options:
+            type: metatag_firehose
+            weight: 16
+            region: content
+            settings:
+              sidebar: true
+              use_details: true
+        - name: field_agency
+          options:
+            type: options_buttons
+            weight: 17
+            region: content
+            settings: {}
+        - name: publish_on
+          options:
+            type: datetime_timestamp_no_default
+            weight: 30
+            region: content
+            settings: {}
+        - name: unpublish_on
+          options:
+            type: datetime_timestamp_no_default
+            weight: 30
+            region: content
+            settings: {}
+
+    # --- Entity view displays ---
+    core.entity_view_display.node.news.default:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: news
+        mode: default
+        status: true
+      setComponents:
+        - name: content_moderation_control
+          options:
+            weight: 0
+            region: content
+            settings: {}
+        - name: field_news_body
+          options:
+            type: text_default
+            label: above
+            weight: 1
+            region: content
+            settings: {}
+        - name: field_news_date
+          options:
+            type: datetime_default
+            label: above
+            weight: 2
+            region: content
+            settings:
+              timezone_override: ''
+              format_type: medium
+        - name: field_news_links
+          options:
+            type: link
+            label: above
+            weight: 3
+            region: content
+            settings:
+              trim_length: 80
+              url_only: false
+              url_plain: false
+              rel: ''
+              target: ''
+        - name: field_news_source
+          options:
+            type: text_default
+            label: above
+            weight: 4
+            region: content
+            settings: {}
+        - name: field_news_paragraphs
+          options:
+            type: entity_reference_revisions_entity_view
+            label: above
+            weight: 5
+            region: content
+            settings:
+              view_mode: default
+              link: ''
+        - name: field_news_promotions
+          options:
+            type: entity_reference_entity_view
+            label: hidden
+            weight: 7
+            region: content
+            settings:
+              view_mode: teaser
+              link: false
+        - name: field_meta_tags_news
+          options:
+            type: metatag_empty_formatter
+            label: above
+            weight: 8
+            region: content
+            settings: {}
+
+    core.entity_view_display.node.news.teaser:
+      createIfNotExists:
+        targetEntityType: node
+        bundle: news
+        mode: teaser
+        status: true
+      setComponents:
+        - name: field_news_body
+          options:
+            type: text_summary_or_trimmed
+            label: hidden
+            weight: 0
+            region: content
+            settings:
+              trim_length: 200
+        - name: field_news_date
+          options:
+            type: datetime_default
+            label: hidden
+            weight: 1
+            region: content
+            settings:
+              timezone_override: ''
+              format_type: medium
+
+    core.entity_view_display.taxonomy_term.news_topics.default:
+      createIfNotExists:
+        targetEntityType: taxonomy_term
+        bundle: news_topics
+        mode: default
+        status: true
+      setComponents:
+        - name: description
+          options:
+            label: hidden
+            type: text_default
+            weight: 0
+            region: content
+            settings: {}
