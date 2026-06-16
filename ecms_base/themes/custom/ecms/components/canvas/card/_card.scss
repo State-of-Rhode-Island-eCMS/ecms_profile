@@ -21,6 +21,22 @@
   &--white {
     background-color: var(--c__white);
     color: var(--c__quahog--dark);
+
+    // Dark mode flips the surface: dark fill, white text. Both dark contexts
+    // are covered to match the theme system (_00-themes.scss): the explicit
+    // `.dark` toggle and system-dark with no explicit `.light` override.
+    // `.dark` alone left the card white in system-dark, where no class is set.
+    .dark & {
+      background-color: var(--c__quahog--dark);
+      color: var(--c__white);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html:not(.light) & {
+        background-color: var(--c__quahog--dark);
+        color: var(--c__white);
+      }
+    }
   }
 
   // Outer border — opt-in via `show_border`. Uses `currentColor` so the
@@ -87,6 +103,51 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Cell alignment — mirrors the `cell_align_x` / `cell_align_y` props on
+  // dynamic-section. The cell is a flex column, so align-x maps to the
+  // cross-axis (align-items) and align-y maps to the main-axis
+  // (justify-content). Applied per column so authors can center a single-column
+  // card's content both ways.
+  // ---------------------------------------------------------------------------
+  &--align-x-start > .canvas-card__grid > .canvas-card__cell {
+    align-items: flex-start;
+  }
+
+  &--align-x-center > .canvas-card__grid > .canvas-card__cell {
+    align-items: center;
+  }
+
+  &--align-x-end > .canvas-card__grid > .canvas-card__cell {
+    align-items: flex-end;
+  }
+
+  &--align-y-top > .canvas-card__grid > .canvas-card__cell {
+    justify-content: flex-start;
+  }
+
+  &--align-y-center > .canvas-card__grid > .canvas-card__cell {
+    justify-content: center;
+  }
+
+  &--align-y-bottom > .canvas-card__grid > .canvas-card__cell {
+    justify-content: flex-end;
+  }
+
+  // Stretch — equal-height columns. A single child grows to fill the cell
+  // height; with multiple children the last is pinned to the bottom so CTAs
+  // align across columns. Mirrors dynamic-section's stretch handling.
+  &--align-y-stretch > .canvas-card__grid > .canvas-card__cell {
+    > *:only-child {
+      flex: 1;
+      min-height: 0;
+    }
+
+    > *:last-child:not(:only-child) {
+      margin-block-start: auto;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
   // Column divider — opt-in via the `show_divider` prop. 1px vertical rule
   // between adjacent cells; uses an explicit dark-translucent fill
   // (rgba(20, 20, 20, 0.15)) so the rule reads consistently across themes
@@ -95,7 +156,7 @@
   // ---------------------------------------------------------------------------
   &--with-divider#{&}--cols-2 .canvas-card__cell::after,
   &--with-divider#{&}--cols-3 .canvas-card__cell::after {
-    content: "";
+    content: '';
     position: absolute;
     inset-block: 0;
     inset-inline-end: calc(-1.5rem - 0.5px); // half of the 3rem grid gap
@@ -122,5 +183,9 @@
         display: none;
       }
     }
+  }
+
+  .canvas-image {
+    margin-inline: 0; // Allow the image to stretch full-bleed to the card edges when placed in a cell.
   }
 }

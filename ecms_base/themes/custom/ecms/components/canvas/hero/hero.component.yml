@@ -1,26 +1,36 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
-name: Hero
-group: RI.Gov
-description: Full-bleed photo banner with wave bottom, overlaid h1, and a navy bar below for a search form, icon links, and a lower slot (intended for tabs).
+name: 'Hero'
+group: 'RI.Gov'
+status: stable
+description: |
+  Default page hero: a navy banner with an h1 heading and rich-text
+  description on the left and a framed 16:9 image on the right that straddles
+  a wave curve into the section below. The image uses the Canvas image
+  pipeline (media library or URL); its frame mimics a device — navy-dark
+  rounded container, top notch, inset shadow.
 props:
   type: object
+  required:
+    - heading
   properties:
-    image:
-      title: Image
-      type: object
-      $ref: 'json-schema-definitions://canvas.module/image'
-      examples:
-        - src: images/placeholder.webp
-          alt: 'Placeholder image'
-          width: 1400
-          height: 900
-    title:
-      title: Heading text
+    heading:
+      title: Heading
       type: string
-slots:
-  search_box:
-    title: Search form block
-  icon_links:
-    title: Icon link items (one or more canvas/icon-link components)
-  footer:
-    title: Footer slot (full-width to max container — intended for tabs)
+      examples:
+        - 'Online Services'
+    description:
+      title: Description
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: block
+      examples:
+        - '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.</p>'
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+      examples:
+        - src: images/placeholder.png
+          alt: 'Placeholder image'
+          width: 560
+          height: 315

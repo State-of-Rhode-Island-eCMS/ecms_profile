@@ -23,7 +23,7 @@
   ] %}
 
   <div class="{{ inner_classes|join(' ') }}">
-    {% if footer_preprocess_values.footer_above %}
+    {% if footer_preprocess_values.footer_above['#text']|default %}
       <div class='qh__site-footer__above'>
         {{ footer_preprocess_values.footer_above }}
       </div>

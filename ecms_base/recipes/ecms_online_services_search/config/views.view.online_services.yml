@@ -5,6 +5,7 @@ dependencies:
     - field.storage.node.field_agency_or_muni
     - search_api.index.rigov_online_services
   module:
+    - better_exposed_filters
     - options
     - search_api
     - user
@@ -22,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Online Services'
+      title: ''
       fields:
         field_agency_or_muni:
           id: field_agency_or_muni
@@ -118,7 +119,7 @@ display:
             offset_label: Offset
           quantity: 5
       exposed_form:
-        type: basic
+        type: bef
         options:
           submit_button: Search
           reset_button: true
@@ -127,6 +128,27 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
+          text_input_required: 'Select any filter and click on Apply to see results'
+          text_input_required_format: null
+          bef:
+            general:
+              autosubmit: false
+              auto_submit_sort_only: false
+              autosubmit_breakpoint: ''
+              autosubmit_exclude_textfield: false
+              autosubmit_textfield_delay: 500
+              autosubmit_textfield_minimum_length: 3
+              autosubmit_hide: false
+              input_required: false
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              secondary_open: false
+              reset_button_always_show: false
+            sort:
+              plugin_id: default
+            filter:
+              search_api_fulltext:
+                plugin_id: default
       access:
         type: perm
         options:
@@ -148,7 +170,33 @@ display:
             value: '<p>No results were found.</p>'
             format: basic_html
           tokenize: false
-      sorts: {  }
+      sorts:
+        search_api_relevance:
+          id: search_api_relevance
+          table: search_api_index_rigov_online_services
+          field: search_api_relevance
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        title:
+          id: title
+          table: search_api_index_rigov_online_services
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         search_api_fulltext:
@@ -178,7 +226,7 @@ display:
             remember_roles:
               authenticated: authenticated
             expose_fields: false
-            placeholder: ''
+            placeholder: Keyword
             searched_fields_id: search_api_fulltext_searched_fields
             value_maxlength: 128
             value_max_words: null
@@ -224,8 +272,18 @@ display:
           admin_label: ''
           plugin_id: result
           empty: false
-          content: 'Displaying @start - @end of @total'
-      footer: {  }
+          content: '@total results'
+      footer:
+        result_1:
+          id: result_1
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Showing @start-@end of @total'
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -264,3 +322,4 @@ display:
         - 'config:field.storage.node.field_agency_or_muni'
         - 'config:search_api.index.rigov_online_services'
         - 'search_api_list:rigov_online_services'
+

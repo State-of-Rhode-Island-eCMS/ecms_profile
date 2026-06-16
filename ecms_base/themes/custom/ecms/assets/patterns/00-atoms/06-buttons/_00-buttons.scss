@@ -73,8 +73,8 @@ button,
 
     &:hover,
     &:focus {
-      background-color: var(--fc__default__accent);
-      color: var(--c__hope-gold);
+      background-color: var(--fc__default__accent__fg);
+      color: var(--fc__default__accent);
     }
   }
 
@@ -158,10 +158,10 @@ button,
 
     &:hover,
     &:focus {
-      background-color: var(--fc__tertiary__bg--dark);
+      background-color: var(--fc__tertiary__button--hover__bg);
+      color: var(--fc__tertiary__button--hover__fg);
       border: 2px solid
         color-mix(in srgb, var(--fc__tertiary__fg) 50%, transparent);
-      color: var(--fc__tertiary__fg);
     }
 
     // Tighten the start padding when an icon is present so the label sits

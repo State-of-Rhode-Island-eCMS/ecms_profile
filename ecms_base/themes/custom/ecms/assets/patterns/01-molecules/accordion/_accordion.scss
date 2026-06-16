@@ -5,6 +5,12 @@
  * Not all functional requirements can be met, as in arrow up/down, home, or end
  * keys navigating from one accordion header to another because we are not able
  * to put a single wrapper around all accordion elements on a page
+ *
+ * These styles live here (a shared molecule) rather than inside the accordion
+ * SDC so other components can reuse the .qh__accordion markup and look. The
+ * accordion paragraph component (components/02-organisms/paragraphs/accordion)
+ * and the Facets widget enhancement (assets/scripts/facets.js) both render
+ * .qh__accordion markup and pick up these global styles.
  */
 
 .qh__accordion {

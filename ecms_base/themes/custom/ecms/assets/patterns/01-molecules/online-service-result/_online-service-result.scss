@@ -6,175 +6,60 @@
 // corner of the card. Any extlink-injected child span is hidden to avoid duplication.
 
 .os-result {
+  padding: 2rem;
   border-radius: 8px;
-  margin-bottom: 0.75rem;
-  overflow: hidden;
+  position: relative;
 
   &__link {
-    background: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-    color: var(--c__navy, #293557); // controls the ::after mask colour via currentColor
-    display: block;
-    padding: 1.25rem 3.5rem 1.25rem 1.5rem; // right padding reserves space for the icon
+    text-decoration: none !important; // Remove the default blue underline on the whole card link.
     position: relative;
-    text-decoration: none;
+    display: block;
+
+    &[target="_blank"]::after {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 1.5rem;
+      width: 1.5rem;
+    }
 
     &:hover,
-    &:focus-visible {
+    &:focus {
       .os-result__title {
         text-decoration: underline;
       }
     }
-
-    &:focus-visible {
-      outline: 3px solid var(--c__navy, #293557);
-      outline-offset: -3px;
-    }
-
-    // Theme global styles add an inline ::after icon to all a[target='_blank'].
-    // Override to position it in the top-right corner of the card instead.
-    &::after {
-      display: block;
-      height: 1.25rem;
-      margin: 0;
-      position: absolute;
-      right: 1.25rem;
-      top: 1.25rem;
-      width: 1.25rem;
-    }
-
-    // Hide extlink-injected child span — the ::after handles the icon.
-    [data-extlink-placement] {
-      display: none;
-    }
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
   }
 
   &__title {
-    color: var(--c__navy, #293557);
-    font-family: 'Roboto Slab', serif;
-    font-size: 2rem; // 32px
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-    margin: 0;
+    padding-inline-end: 2rem;
   }
 
   &__agency {
-    color: var(--c__quahog, #404040);
-    font-size: 0.875rem; // 14px
-    letter-spacing: 0.02em;
-    line-height: 1.45;
-    margin: 0;
+    margin-block-start: 0.125rem;
   }
 
-  &__excerpt {
-    color: var(--c__quahog, #404040);
-    font-size: 1rem;
-    line-height: 1.5;
-    margin: 0.5rem 0 0.25rem;
+  &__description {
+    margin-block-start: 0.5rem;
   }
 
   &__tags {
     display: flex;
     flex-wrap: wrap;
+    row-gap: 0.5rem;
+    margin-block-start: 1.5rem;
     list-style: none;
-    margin: 0.5rem 0 0;
-    padding: 0;
-  }
 
-  &__tag {
-    align-items: center;
-    background: rgba(255, 255, 255, 0.75);
-    border-left: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
-    color: var(--c__quahog, #404040);
-    display: flex;
-    font-size: 0.9375rem; // 15px
-    font-weight: 400;
-    gap: 0.25rem;
-    line-height: 1.75;
-    padding: 0.25rem 0.5rem;
-    white-space: nowrap;
+    .os-result__tag {
+      background-color: var(--fc__default__bg);
+      padding: 0.25rem 1rem;
+      color: var(--fc__default__text);
+      border-right: 1px solid var(--fc__default__border);
+      flex: 0 0 auto;
+      max-width: 100%;
 
-    &--primary {
-      background: #fff;
-      border-left: none;
-      font-weight: 625;
-    }
-  }
-
-  // Dark mode — explicit class on <html>
-  .dark & {
-    &__link {
-      background: var(--c__cliff-walk--darkest, hsl(160, 75%, 30%));
-
-      &:focus-visible {
-        outline-color: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-      }
-
-      &::after {
-        background-color: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-      }
-    }
-
-    &__title {
-      color: var(--c__white, #fff);
-    }
-
-    &__agency,
-    &__excerpt {
-      color: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-    }
-
-    &__tag {
-      background: rgba(0, 0, 0, 0.25);
-      border-left-color: rgba(255, 255, 255, 0.2);
-      color: var(--c__white, #fff);
-
-      &--primary {
-        background: rgba(0, 0, 0, 0.35);
-        border-left: none;
-      }
-    }
-  }
-
-  // Dark mode — system preference (respects html.light override)
-  @media (prefers-color-scheme: dark) {
-    html:not(.light) & {
-      &__link {
-        background: var(--c__cliff-walk--darkest, hsl(160, 75%, 30%));
-
-        &:focus-visible {
-          outline-color: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-        }
-
-        &::after {
-          background-color: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-        }
-      }
-
-      &__title {
-        color: var(--c__white, #fff);
-      }
-
-      &__agency,
-      &__excerpt {
-        color: var(--c__cliff-walk--light, hsl(160, 75%, 88%));
-      }
-
-      &__tag {
-        background: rgba(0, 0, 0, 0.25);
-        border-left-color: rgba(255, 255, 255, 0.2);
-        color: var(--c__white, #fff);
-
-        &--primary {
-          background: rgba(0, 0, 0, 0.35);
-          border-left: none;
-        }
+      &:last-child {
+        border-right: none;
       }
     }
   }

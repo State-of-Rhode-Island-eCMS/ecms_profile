@@ -45,6 +45,19 @@
     }
   }
 
+  // Inherit (no theme) cards have no themed surface for the multiply tone to
+  // work against, so the `--computed-background-color` fallback painted the
+  // illustration solid white — invisible on the light page, glaring on the dark
+  // page. For the un-themed case, drop the multiply blend and paint the
+  // illustration as a faint foreground-tinted watermark instead, so it reads
+  // subtly in BOTH light and dark mode (it can't blow out). Themed cards keep
+  // the multiply tone-on-tone treatment from the rule above.
+  &:not([class*='qh__t__']) &__pattern {
+    mix-blend-mode: normal;
+    color: currentColor;
+    opacity: 0.08;
+  }
+
   // Single-illustration corner motif. Bridge, lighthouse, lobster, oyster,
   // quahog, seagull, skyline, and steamer are the existing theme
   // illustrations (also used as the page-footer motif via the `illustration`
@@ -87,5 +100,38 @@
       width: 185%;
       height: auto;
     }
+  }
+
+  // CTA copy column: the link heading and the optional plain-text description
+  // stack vertically, while the parent `.qh__grid-card__cta a` flex row keeps
+  // the corner arrow beside them (exactly two flex children: copy + arrow).
+  &__copy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Optional plain-text blurb beneath the link heading. Sizing/weight come from
+  // the `.qh__fs-st` small-text utility (14–15px) in the markup; here we only
+  // zero the inherited block margins and add a little breathing room under the
+  // heading. Color is left to the theme cascade (no color declarations here).
+  &__description {
+    margin: 0.5em 0 0;
+  }
+
+  // `link-external.svg` (unlike `arrow-right.svg`) ships without a baked-in
+  // `fill="currentColor"`, so force the swapped external icon to inherit the
+  // link color. `fill` inherits and the icon's paths carry no fill attribute,
+  // so this also leaves arrow-right untouched.
+  .qh__grid-card__arrow svg {
+    fill: currentColor;
+  }
+
+  // The external glyph sits in a 44×44 viewBox with generous padding, so at the
+  // shared 1.5rem arrow box it reads noticeably smaller than the arrow. Bump it
+  // up so it carries the same visual weight. Scoped to the extlink class, so
+  // the internal arrow keeps its `_grid-card.scss` size.
+  .qh__grid-card__arrow .qh__icon__extlink {
+    width: 2rem;
+    height: 2rem;
   }
 }

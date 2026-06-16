@@ -45,7 +45,7 @@
 
       // Support hovering entire card.
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
       }
@@ -65,10 +65,8 @@
     // `qh-*-theme` mixin in _00-themes.scss). Falls back to the global
     // `--fc__icon__icon-card` outside any theme so unthemed icon cards keep
     // their existing brand-blue glyph.
-    --qh__grid-card__icon-color: var(
-      --computed-icon-color,
-      var(--fc__icon__icon-card)
-    );
+    --qh__grid-card__icon-color: var(--computed-icon-color,
+    var(--fc__icon__icon-card));
   }
 
   &--icon &__icon {

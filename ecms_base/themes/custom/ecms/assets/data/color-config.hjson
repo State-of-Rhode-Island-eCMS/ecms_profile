@@ -356,6 +356,12 @@
       "hsl": "hsl(160, 75%, 30%)",
       "needs": "light-text"
     },
+    "cliff-walk--deepest": {
+      "name": "Cliff Walk deepest",
+      "hue": "very dark blue green",
+      "hsl": "hsl(165, 50%, 17%)",
+      "needs": "light-text"
+    },
     "cliff-walk--darkest--trans75": {
       "name": "Cliff Walk darkest 75% transparent",
       "hue": "light blue green",
@@ -659,11 +665,15 @@
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
           { "fnName": "link", "colorName": "navy" },
           { "fnName": "link--hover", "colorName": "navy--dark" },
-          { "fnName": "fg--dark", "colorName": "navy" },
-          { "fnName": "bg--dark", "colorName": "cliff-walk--dark" },
+          { "fnName": "fg--dark", "colorName": "white" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--deepest" },
           { "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           { "fnName": "link--dark", "colorName": "white" },
-          { "fnName": "link--dark--hover", "colorName": "cliff-walk" }
+          { "fnName": "link--dark--hover", "colorName": "cliff-walk" },
+          { "fnName": "button__bg", "colorName": "cliff-walk--light" },
+          { "fnName": "button__fg", "colorName": "navy" },
+          { "fnName": "button--hover__bg", "colorName": "cliff-walk" },
+          { "fnName": "button--hover__fg", "colorName": "navy" }
         ]
       }
     },
@@ -1620,7 +1630,7 @@
           { "fnName": "link--focus", "colorName": "navy" },
           { "fnName": "link--active", "colorName": "navy" },
           { "fnName": "link__sub--hover__bg", "colorName": "hope-gold" },
-          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__bg", "colorName": "white" },
           { "fnName": "icon__fg", "colorName": "quahog--dark" },
           { "fnName": "icon__bg--hover", "colorName": "white" },
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
@@ -1639,13 +1649,13 @@
           { "fnName": "violator", "colorName": "calamari" },
           # Accent pair, bg and fg
           { "fnName": "accent", "colorName": "orange--primary" },
-          { "fnName": "accent__fg", "colorName": "navy" },
+          { "fnName": "accent__fg", "colorName": "quahog" },
           # text-accent currently used for bullet mark color & H2
           { "fnName": "text-accent", "colorName": "quahog" },
-          { "fnName": "button__bg", "colorName": "cliff-walk" },
-          { "fnName": "button__fg", "colorName": "ocean--dark" },
-          { "fnName": "button--hover__bg", "colorName": "cliff-walk--dark" },
-          { "fnName": "button--hover__fg", "colorName": "quahog--darker" }
+          { "fnName": "button__bg", "colorName": "coffee-milk" },
+          { "fnName": "button__fg", "colorName": "quahog" },
+          { "fnName": "button--hover__bg", "colorName": "quahog" },
+          { "fnName": "button--hover__fg", "colorName": "orange--primary" }
         ],
         "icon": [
           #{ "fnName": "pdf", "colorName": "rhody-red" },
@@ -1725,16 +1735,16 @@
       "humanName": "Kids RI orange dark",
       "values": {
         "official": [
-          { "fnName": "fg", "colorName": "quahog--dark" },
-          { "fnName": "bg", "colorName": "quahog--light" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "cliff-walk" },
           { "fnName": "link--focus", "colorName": "cliff-walk" }
         ],
         "header": [
-          { "fnName": "fg", "colorName": "cliff-walk--light" },
+          { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "quahog--dark" },
-          { "fnName": "link", "colorName": "cliff-walk--light" },
+          { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "quahog--light" },
           { "fnName": "social__link", "colorName": "cliff-walk" },
           { "fnName": "social__link--hover", "colorName": "quahog--light" }
@@ -1750,7 +1760,7 @@
           { "fnName": "link--focus", "colorName": "navy" },
           { "fnName": "link--active", "colorName": "navy" },
           { "fnName": "link__sub--hover__bg", "colorName": "hope-gold" },
-          { "fnName": "icon__bg", "colorName": "cliff-walk" },
+          { "fnName": "icon__bg", "colorName": "white" },
           { "fnName": "icon__fg", "colorName": "quahog--dark" },
           { "fnName": "icon__bg--hover", "colorName": "white" },
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
@@ -1769,13 +1779,13 @@
           #{ "fnName": "violator", "colorName": "calamari" },
           # Accent pair, bg and fg
           { "fnName": "accent", "colorName": "orange--primary" },
-          { "fnName": "accent__fg", "colorName": "navy" },
+          { "fnName": "accent__fg", "colorName": "quahog" },
           # text-accent currently used for bullet mark color & H2
-          { "fnName": "text-accent", "colorName": "cliff-walk--dark" },
-          { "fnName": "button__bg", "colorName": "cliff-walk--dark" },
-          { "fnName": "button__fg", "colorName": "quahog--darker" },
-          { "fnName": "button--hover__bg", "colorName": "cliff-walk" },
-          { "fnName": "button--hover__fg", "colorName": "ocean--dark" }
+          { "fnName": "text-accent", "colorName": "white" },
+          { "fnName": "button__bg", "colorName": "coffee-milk" },
+          { "fnName": "button__fg", "colorName": "quahog" },
+          { "fnName": "button--hover__bg", "colorName": "quahog" },
+          { "fnName": "button--hover__fg", "colorName": "orange--primary" }
         ],
         "icon": [
           #{ "fnName": "pdf", "colorName": "rhody-red" },
@@ -2579,7 +2589,7 @@
           #{ "fnName": "button--hover__fg", "colorName": "ocean" }
         ],
         "icon": [
-          { "fnName": "icon-card", "colorName": "navy" },
+          { "fnName": "icon-card", "colorName": "ocean--medium" },
           #{ "fnName": "pdf", "colorName": "rhody-red" },
           #{ "fnName": "word", "colorName": "navy" },
           #{ "fnName": "excel", "colorName": "green-animals" },
@@ -2612,7 +2622,7 @@
         ],
         "accordion": [
           #{ "fnName": "icon__fg", "colorName": "navy--dark" },
-          #{ "fnName": "icon__bg", "colorName": "calamari" }
+          { "fnName": "icon__bg", "colorName": "white" }
         ],
         "attention-card": [
           #{ "fnName": "fg", "colorName": "navy--dark" },
@@ -2630,10 +2640,10 @@
           #{ "fnName": "bg", "colorName": "navy" },
           #{ "fnName": "overlay__bg", "colorName": "navy--trans75" },
           { "fnName": "link", "colorName": "white" },
-          { "fnName": "icon-card", "colorName": "white" },
           #{ "fnName": "link--hover", "colorName": "hope-gold" },
+          { "fnName": "icon-card", "colorName": "white" },
           #{ "fnName": "fg--dark", "colorName": "white" },
-          #{ "fnName": "bg--dark", "colorName": "navy--trans50" },
+          { "fnName": "bg--dark", "colorName": "navy" },
           #{ "fnName": "overlay__bg--dark", "colorName": "navy--trans75" },
           #{ "fnName": "link--dark", "colorName": "navy--light" },
           #{ "fnName": "link--dark--hover", "colorName": "hope-gold" }
@@ -2644,6 +2654,7 @@
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
           { "fnName": "link", "colorName": "navy" },
           #{ "fnName": "link--hover", "colorName": "quahog--darker" },
+          { "fnName": "icon-card", "colorName": "navy" },
           #{ "fnName": "fg--dark", "colorName": "coffee-milk--light" },
           #{ "fnName": "bg--dark", "colorName": "ocean--trans25" },
           #{ "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
@@ -2656,6 +2667,7 @@
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
           #{ "fnName": "link", "colorName": "ocean--dark" },
           #{ "fnName": "link--hover", "colorName": "navy--dark" },
+          { "fnName": "icon-card", "colorName": "navy" },
           #{ "fnName": "fg--dark", "colorName": "white" },
           #{ "fnName": "bg--dark", "colorName": "navy--trans75" },
           #{ "fnName": "overlay__bg--dark", "colorName": "navy--trans75" },
@@ -2668,8 +2680,9 @@
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
           #{ "fnName": "link", "colorName": "navy" },
           #{ "fnName": "link--hover", "colorName": "navy--dark" },
-          #{ "fnName": "fg--dark", "colorName": "coffee-milk--light" },
-          #{ "fnName": "bg--dark", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "icon-card", "colorName": "navy" },
+          { "fnName": "fg--dark", "colorName": "white" },
+          { "fnName": "bg--dark", "colorName": "cliff-walk--deepest" },
           #{ "fnName": "overlay__bg--dark", "colorName": "quahog--dark--trans75" },
           #{ "fnName": "link--dark", "colorName": "white" },
           #{ "fnName": "link--dark--hover", "colorName": "cliff-walk" }
@@ -2728,6 +2741,7 @@
           #{ "fnName": "button--hover__fg", "colorName": "ocean" }
         ],
         "icon": [
+          { "fnName": "icon-card", "colorName": "white" },
           #{ "fnName": "pdf", "colorName": "rhody-red" },
           { "fnName": "word", "colorName": "ocean" },
           #{ "fnName": "excel", "colorName": "green-animals" },
@@ -2781,10 +2795,11 @@
         #
         "primary": [
           { "fnName": "fg", "colorName": "white" },
-          { "fnName": "bg", "colorName": "navy--trans50" },
+          { "fnName": "bg", "colorName": "navy--dark" },
           #{ "fnName": "overlay__bg", "colorName": "navy--trans75" },
           { "fnName": "link", "colorName": "navy--light" },
           { "fnName": "link--hover", "colorName": "hope-gold" }
+          { "fnName": "icon-card", "colorName": "white" },
         ],
         "primary--light": [
           { "fnName": "fg", "colorName": "coffee-milk--light" },
@@ -2792,18 +2807,21 @@
           #{ "fnName": "overlay__bg", "colorName": "ocean--trans75" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "hope-gold" }
+          { "fnName": "icon-card", "colorName": "white" },
         ],
         "secondary": [
           { "fnName": "fg", "colorName": "white" },
           { "fnName": "bg", "colorName": "navy--trans75" },
           { "fnName": "link", "colorName": "ocean--light" },
           { "fnName": "link--hover", "colorName": "hope-gold" }
+          { "fnName": "icon-card", "colorName": "white" },
         ],
         "tertiary": [
-          { "fnName": "fg", "colorName": "coffee-milk--light" },
-          { "fnName": "bg", "colorName": "cliff-walk--darkest--trans15" },
+          { "fnName": "fg", "colorName": "white" },
+          { "fnName": "bg", "colorName": "cliff-walk--deepest" },
           { "fnName": "link", "colorName": "white" },
           { "fnName": "link--hover", "colorName": "cliff-walk" }
+          { "fnName": "icon-card", "colorName": "white" },
         ]
       }
     },
