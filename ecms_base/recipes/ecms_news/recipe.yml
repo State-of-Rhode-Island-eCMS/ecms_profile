@@ -11,8 +11,21 @@ config:
     ecms_press_release: '*'
     node:
       - node.type.news
+      - core.base_field_override.node.news.changed
+      - core.base_field_override.node.news.created
+      - core.base_field_override.node.news.menu_link
+      - core.base_field_override.node.news.moderation_state
+      - core.base_field_override.node.news.path
+      - core.base_field_override.node.news.promote
+      - core.base_field_override.node.news.status
+      - core.base_field_override.node.news.sticky
+      - core.base_field_override.node.news.title
+      - core.base_field_override.node.news.uid
     taxonomy:
       - taxonomy.vocabulary.news_topics
+      - core.base_field_override.taxonomy_term.news_topics.changed
+      - core.base_field_override.taxonomy_term.news_topics.path
+      - core.base_field_override.taxonomy_term.news_topics.status
   strict:
     # Field storages affect database schema - treat strictly.
     - field.storage.node.field_meta_tags_news
@@ -118,113 +131,6 @@ config:
       setLabel: 'News Topics'
       setDescription: 'Add topics to group news.'
       setRequired: false
-      setTranslatable: false
-
-    # --- Base field overrides: node.news ---
-    core.base_field_override.node.news.changed:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: changed
-      setLabel: Changed
-      setTranslatable: false
-
-    core.base_field_override.node.news.created:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: created
-      setLabel: 'Authored on'
-      setTranslatable: false
-
-    core.base_field_override.node.news.menu_link:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: menu_link
-      setLabel: 'Menu link'
-      setTranslatable: true
-
-    core.base_field_override.node.news.moderation_state:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: moderation_state
-      setLabel: 'Moderation state'
-      setTranslatable: true
-
-    core.base_field_override.node.news.path:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: path
-      setLabel: 'URL alias'
-      setTranslatable: false
-
-    core.base_field_override.node.news.promote:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: promote
-      setLabel: 'Promoted to front page'
-      setTranslatable: false
-
-    core.base_field_override.node.news.status:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: status
-      setLabel: Published
-      setTranslatable: true
-
-    core.base_field_override.node.news.sticky:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: sticky
-      setLabel: 'Sticky at top of lists'
-      setTranslatable: false
-
-    core.base_field_override.node.news.title:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: title
-      setLabel: Title
-      setRequired: true
-      setTranslatable: true
-
-    core.base_field_override.node.news.uid:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: uid
-      setLabel: 'Authored by'
-      setTranslatable: false
-
-    # --- Base field overrides: taxonomy_term.news_topics ---
-    core.base_field_override.taxonomy_term.news_topics.changed:
-      ensure_exists:
-        entity_type: taxonomy_term
-        bundle: news_topics
-        field_name: changed
-      setLabel: Changed
-      setTranslatable: false
-
-    core.base_field_override.taxonomy_term.news_topics.path:
-      ensure_exists:
-        entity_type: taxonomy_term
-        bundle: news_topics
-        field_name: path
-      setLabel: 'URL alias'
-      setTranslatable: false
-
-    core.base_field_override.taxonomy_term.news_topics.status:
-      ensure_exists:
-        entity_type: taxonomy_term
-        bundle: news_topics
-        field_name: status
-      setLabel: Published
       setTranslatable: false
 
     # --- Language content settings ---
