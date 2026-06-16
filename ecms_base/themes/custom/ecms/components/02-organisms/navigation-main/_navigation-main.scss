@@ -217,7 +217,12 @@ body {
         opacity: 0;
         position: absolute;
         top: 100%;
-        right: calc((100vw - var(--content-max-width)) * -0.5);
+        // The drawer's containing block (.qh__nav-main__wrapper) is full
+        // viewport width, so pin straight to the right edge. (A prior calc
+        // tried to offset a centered-container gutter that doesn't exist here,
+        // which pushed the drawer off-screen once --content-max-width was
+        // capped at 93vw.)
+        right: 0;
         transform: translateX(100vw);
         transition:
           opacity $transition-duration-medium $transition-timing-base 0ms,
