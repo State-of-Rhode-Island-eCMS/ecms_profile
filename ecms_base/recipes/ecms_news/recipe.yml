@@ -1,9 +1,14 @@
 name: eCMS News
 type: eCMS
 description: 'Installs the News content type and related configuration.'
+# The agency field originates from the ecms_press_release feature.
+#  Need to declare a dependency on it.
+install:
+  - ecms_press_release
 recipes: []
 config:
   import:
+    ecms_press_release: '*'
     node:
       - node.type.news
     taxonomy:
