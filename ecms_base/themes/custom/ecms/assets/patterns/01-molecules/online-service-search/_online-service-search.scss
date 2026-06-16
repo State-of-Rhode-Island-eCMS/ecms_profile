@@ -16,8 +16,20 @@
     gap: 1rem;
   }
 
-  .qh__pagination {
+  .os-results-foot {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 1rem;
     margin-block-start: 1.5rem;
+  }
+
+  .qh__pagination {
+    margin: 0;
+  }
+
+  .view-footer {
+    margin-inline-start: auto;
   }
 }
 
