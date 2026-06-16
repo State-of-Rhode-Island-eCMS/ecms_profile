@@ -3,12 +3,12 @@ figure {
   padding: 0;
 
   p + & {
-    margin-top: var(--body-text-spacer);
+    margin-top: var(--vertical-rhythm);
   }
 }
 
 figcaption {
-  @extend .small-text;
+  @extend .qh__fs-st !optional;
 }
 
 img {

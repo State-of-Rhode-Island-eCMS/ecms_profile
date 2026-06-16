@@ -1,6 +1,8 @@
 # Audiences list.
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Events latest
+group: 'ZZ-Incompatible'
+noUi: true
 description: Latest events component.
 props:
   type: object

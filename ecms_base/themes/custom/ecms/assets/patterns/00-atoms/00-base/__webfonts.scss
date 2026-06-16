@@ -1,5 +1,6 @@
-/* Static Fonts */
+// Static Fonts
 
+// Can we safely remove non-variable fallback fonts?
 @font-face {
   font-family: 'Roboto Slab';
   font-weight: normal;
@@ -83,7 +84,7 @@ $font-sans-vf: 'Work Sans VF', var(--font-sans-fallback);
 $font-serif-static: 'Roboto Slab', var(--font-serif-fallback);
 $font-serif-vf: 'Roboto Slab VF', var(--font-serif-fallback);
 
-body {
+:root {
   --font-sans-fallback: #{$font-sans-fallback};
   --font-serif-fallback: #{$font-serif-fallback};
   --font-sans-static: #{$font-sans-static};

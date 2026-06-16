@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * ecms_distribution.install
+ */
+
+declare(strict_types=1);
+
+/**
+ * Ensure user roles have uuid and is_admin set in active config.
+ *
+ * Roles missing these values cause recipe config actions (e.g.
+ * grantPermissions) to fail validation with "This value should not be null."
+ */
+function ecms_distribution_update_8001(): void {
+  $roles = [
+    'content_author' => FALSE,
+    'content_publisher' => FALSE,
+    'site_admin' => FALSE,
+    'drupal_admin' => TRUE,
+  ];
+
+  $uuid_generator = \Drupal::service('uuid');
+  $config_factory = \Drupal::configFactory();
+
+  foreach ($roles as $role_id => $is_admin) {
+    $config = $config_factory->getEditable('user.role.' . $role_id);
+
+    if ($config->isNew()) {
+      continue;
+    }
+
+    $changed = FALSE;
+
+    if ($config->get('uuid') === NULL) {
+      $config->set('uuid', $uuid_generator->generate());
+      $changed = TRUE;
+    }
+
+    if ($config->get('is_admin') === NULL) {
+      $config->set('is_admin', $is_admin);
+      $changed = TRUE;
+    }
+
+    if ($changed) {
+      $config->save(TRUE);
+    }
+  }
+}

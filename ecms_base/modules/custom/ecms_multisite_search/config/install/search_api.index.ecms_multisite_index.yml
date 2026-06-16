@@ -1,0 +1,163 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.server.ecms_multisite_server
+  module:
+    - search_api_solr
+    - ecms_multisite_search
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 3
+      fuzzy: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+      specific_languages: {  }
+id: ecms_multisite_index
+name: 'eCMS Multisite Search Index'
+description: 'Cross-site search index for the aggregator site. Reads all factory sites content from the shared Solr core via the solr_multisite_all datasource.'
+read_only: true
+field_settings:
+  title:
+    label: Title
+    datasource_id: ecms_multisite_all
+    # tcngramm_X3b_und_title is the encoded form of tcngramm;und_title — the
+    # language-neutral Solr field name. MultisiteQuerySubscriber substitutes
+    # the run-time language code for 'und' at query time.
+    property_path: tcngramm_X3b_und_title
+    type: text
+    boost: 5.0
+  rendered_item:
+    label: 'Rendered HTML output'
+    datasource_id: ecms_multisite_all
+    property_path: tcngramm_X3b_und_rendered_item
+    type: text
+  status:
+    label: Status
+    datasource_id: ecms_multisite_all
+    property_path: bs_status
+    type: boolean
+  type:
+    label: 'Content type'
+    datasource_id: ecms_multisite_all
+    property_path: ss_type
+    type: string
+  url:
+    label: URL
+    datasource_id: ecms_multisite_all
+    # ss_url is the canonical item URL stored by the add_url processor on
+    # acquia_search_index. Requires a full re-index of acquia_search_index
+    # after that config deploys. Used to link search results to the item's
+    # path on the originating site.
+    property_path: ss_url
+    type: string
+  site:
+    label: 'Site URL'
+    datasource_id: ecms_multisite_all
+    # The base URL of the originating site (e.g. https://tax.example.com/).
+    # Used to filter search results by origin site.
+    property_path: site
+    type: string
+  created:
+    label: Created
+    datasource_id: ecms_multisite_all
+    # ds_created is the standard Search API Solr date field for node created timestamp.
+    property_path: ds_created
+    type: date
+  changed:
+    label: Updated
+    datasource_id: ecms_multisite_all
+    # ds_changed is the standard Search API Solr date field for node changed timestamp.
+    property_path: ds_changed
+    type: date
+datasource_settings:
+  ecms_multisite_all:
+    id_field: id
+    label_field: ''
+    language_field: ss_search_api_language
+    url_field: ss_url
+    request_handler: ''
+    default_query: '*:*'
+    target_index: acquia_search_index
+    target_index_machine_name: acquia_search_index
+    target_hash: ''
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  auto_aggregated_fulltext_field: {  }
+  highlight:
+    weights:
+      postprocess_query: 0
+    prefix: '<strong>'
+    suffix: '</strong>'
+    excerpt: true
+    excerpt_always: false
+    excerpt_length: 256
+    exclude_fields:
+      - title
+    highlight: always
+    highlight_partial: false
+  html_filter:
+    weights:
+      preprocess_index: -15
+      preprocess_query: -15
+    all_fields: true
+    fields:
+      - rendered_item
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  language_with_fallback: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  delete_on_fail: true
+  index_directly: false
+  track_changes_in_references: true
+server: ecms_multisite_server

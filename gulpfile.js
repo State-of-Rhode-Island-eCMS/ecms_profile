@@ -27,9 +27,14 @@ const eslint = require('gulp-eslint');
 // Source directories to search for SCSS / JS files to compile.
 // By default, node-sass does not compile files that begin with _.
 const scssSourcePaths = [
-  // "./assets/patterns/**/*.scss",
   "ecms_base/themes/custom/ecms/assets/styles/*.scss",
   "ecms_base/themes/custom/ecms/components/**/*.scss",
+];
+
+// Watch paths include partials that trigger rebuilds but aren't compiled directly.
+const scssWatchPaths = [
+  ...scssSourcePaths,
+  "ecms_base/themes/custom/ecms/assets/patterns/**/*.scss",
 ];
 
 const javascriptSourcePaths = [
@@ -113,7 +118,7 @@ gulp.task('watch:js', () => {
 });
 
 gulp.task('watch:sass', () => {
-  return gulp.watch(scssSourcePaths, gulp.series('build:sass'));
+  return gulp.watch(scssWatchPaths, gulp.series('build:sass'));
 });
 
 gulp.task('watch', gulp.parallel('watch:js', 'watch:sass'));

@@ -1,9 +1,15 @@
 $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
 name: Navigation - Main
+group: 'ZZ-Incompatible'
+noUi: true
 description: Main navigation component.
 props:
   type: object
-  properties: {}
+  properties:
+    mega_menu:
+      type: boolean
+      title: Mega menu
+      description: When true, renders child links in a three-column mega panel instead of a standard dropdown.
 slots:
   items:
     title: The menu items

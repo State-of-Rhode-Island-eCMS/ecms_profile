@@ -48,7 +48,7 @@
   {% set bg_color_class = 'qh__tc__' ~ paragraph.field_background_color.value %}
 {% endif %}
 
-{{ include('ecms:card', {
+{{ include('ecms:paragraph-card', {
   rendered_components: rendered_components,
   title: paragraph.field_card_title.value,
   bg_color_class: bg_color_class,

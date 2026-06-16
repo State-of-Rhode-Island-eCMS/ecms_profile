@@ -1,0 +1,3 @@
+services:
+  Drupal\ecms_layout\LandingPageTitleDetector:
+    autowire: true

@@ -1,0 +1,74 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_agency_or_muni
+field_name: field_agency_or_muni
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: division_of_taxation
+      label: 'Division of Taxation'
+    -
+      value: secretary_of_state
+      label: 'Secretary of State'
+    -
+      value: department_of_motor_vehicles
+      label: 'Department of Motor Vehicles'
+    -
+      value: board_of_elections
+      label: 'Board of Elections'
+    -
+      value: department_of_environmental_management
+      label: 'Department of Environmental Management'
+    -
+      value: department_of_business_regulation
+      label: 'Department of Business Regulation'
+    -
+      value: department_of_corrections
+      label: 'Department of Corrections'
+    -
+      value: department_of_human_services
+      label: 'Department of Human Services'
+    -
+      value: department_of_labor_and_training
+      label: 'Department of Labor and Training'
+    -
+      value: department_of_administration
+      label: 'Department of Administration'
+    -
+      value: department_of_transportation
+      label: 'Department of Transportation'
+    -
+      value: department_of_public_utilities
+      label: 'Department of Public Utilities'
+    -
+      value: executive_office_of_health_and_human_services
+      label: 'Executive Office of Health and Human Services'
+    -
+      value: ethics_commission
+      label: 'Ethics Commission'
+    -
+      value: historical_preservation_heritage_commission
+      label: 'Historical Preservation & Heritage Commission'
+    -
+      value: rhode_island_state_police
+      label: 'Rhode Island State Police'
+    -
+      value: fire_safety_code
+      label: 'Fire Safety Code'
+    -
+      value: university_of_rhode_island
+      label: 'University of Rhode Island'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

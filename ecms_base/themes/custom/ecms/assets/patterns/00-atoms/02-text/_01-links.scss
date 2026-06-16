@@ -1,30 +1,37 @@
 a {
-  color: var(--fc__default__link);
+  // Consume the active theme's `--computed-link-color` tokens (set per theme
+  // in _00-themes.scss). Custom-property cascade resolves to the nearest
+  // ancestor's definition, so a themed card nested inside a differently-
+  // themed section reads its own theme's value — sidestepping the
+  // source-order tie that used to plague the per-theme `a:not(.qh__btn)`
+  // rules. Falls back to `--fc__default__link` outside any theme.
+  color: var(--computed-link-color, var(--fc__default__link));
   text-decoration: underline;
   text-decoration-thickness: 0.05em;
   text-underline-offset: 0.075em;
   text-decoration-skip-ink: auto;
   transition: $transition-base;
 
-
   &:hover,
   &:focus {
-    color: var(--fc__default__link--hover);
+    color: var(--computed-link-color--hover, var(--fc__default__link--hover));
   }
 
   // Global keyboard focus style
   &:focus {
-    outline: $border-sm solid var(--fc__default__link--focus);
+    outline: $border-sm solid var(--computed-link-color--hover, var(--fc__default__link--focus));
     outline-offset: $border-sm;
   }
 
-  // Not crazy about setting these globally. If we do, we have to reset all of them when the theme changes
+  // :visited and :active reuse the theme's base link color since no theme
+  // currently defines distinct tokens for those states; the global default
+  // tokens remain the outside-theme fallback.
   &:visited {
-    color: var(--fc__default__link--visited);
+    color: var(--computed-link-color, var(--fc__default__link--visited));
   }
 
   &:active {
-    color: var(--fc__default__link--active);
+    color: var(--computed-link-color--hover, var(--fc__default__link--active));
   }
 
   // Grouped properties for the following
@@ -38,10 +45,6 @@ a {
       height: 0.875em;
       vertical-align: baseline;
       width: 0.875em;
-
-      @include onlyIE() {
-        display: none;
-      }
     }
 
     &:hover::before,
@@ -90,11 +93,20 @@ a {
       display: none;
     }
   }
+  // Removing the icons in specific scenarios
+  .qh__media-item &[target='_blank']:has(img) {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
 }
 
 p,
-ul {
-  a {
+li,
+dt,
+dd {
+  html:where(.wf-active:not(.novf)) & a {
     font-weight: calc(var(--p-font-wght) * 1.25);
   }
 }

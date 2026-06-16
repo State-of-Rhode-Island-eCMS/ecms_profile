@@ -1,0 +1,71 @@
+{#
+  Canvas Icon Card
+  Thin wrapper around `.qh__grid-card .qh__grid-card--icon`. The whole card is
+  clickable via the qh__cta pattern; the existing `_grid-card.scss` partial
+  paints all visual styling.
+
+  Props:
+    theme              - inherit | primary | primary-light | secondary | tertiary | coffee-milk
+    icon               - SVG filename (without extension) from @icons/
+    link_url           - URL the card links to. Absolute http(s)/protocol-relative
+                         URLs are treated as external: the card opens in a new
+                         window and the arrow becomes the external-link icon.
+    link_text          - Visible CTA text rendered as h5
+    description        - Optional plain-text blurb under the heading (no markup —
+                         the whole card is one clickable anchor)
+    background_pattern - none | stars | bridge | lighthouse | lobster | oyster
+                         | quahog | seagull | skyline | steamer
+#}
+{# Enum → class lookup (never concatenate — canvas-sdc-AGENTS.md §3.4). #}
+{% set theme_classes = {
+  'primary':       'qh__t__primary',
+  'primary-light': 'qh__t__primary--light',
+  'secondary':     'qh__t__secondary',
+  'tertiary':      'qh__t__tertiary',
+  'coffee-milk':   'qh__t__coffee-milk',
+} %}
+
+{% set bg_pattern = background_pattern|default('none') %}
+{% set bg_class = bg_pattern != 'none' ? 'canvas-icon-card--bg-' ~ bg_pattern : '' %}
+
+{# Derive external-ness from the URL itself (same heuristic as Drupal's extlink):
+   absolute http(s) or protocol-relative links open in a new window and swap the
+   corner arrow for the external-link icon. Internal links keep the arrow. #}
+{% set is_external = link_url starts with 'http://'
+  or link_url starts with 'https://'
+  or link_url starts with '//' %}
+
+<article {{ attributes.addClass(['qh__grid-card', 'qh__grid-card--icon', 'canvas-icon-card', bg_class, theme_classes[theme]|default('')]) }}>
+  {% if bg_pattern != 'none' %}
+    <div class="canvas-icon-card__pattern" aria-hidden="true">
+      {{ source('@ecms/assets/images/illustrations/' ~ bg_pattern ~ '.svg') }}
+    </div>
+  {% endif %}
+
+  <div class="qh__grid-card__icon">
+    {% include '@icons/' ~ icon ~ '.svg' %}
+  </div>
+
+  {% if link_url %}
+    <div class="qh__grid-card__cta qh__u__no-external">
+      <a class="qh__h5 qh__cta__link" href="{{ link_url }}"{% if is_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+        <span class="canvas-icon-card__copy">
+          <span class="qh__grid-card__text">{{ link_text }}</span>
+          {% if description %}
+            {# Plain text only — the whole card is a single anchor, so nested
+               links/markup aren't allowed. Rendered as <p> so global typography
+               resets it from the h5 heading size to body size. #}
+            <p class="canvas-icon-card__description qh__fs-st">{{ description }}</p>
+          {% endif %}
+        </span>
+        <span class="qh__grid-card__arrow" aria-hidden="true">
+          {% if is_external %}
+            {% include '@icons/link-external.svg' %}
+          {% else %}
+            {% include '@icons/arrow-right.svg' %}
+          {% endif %}
+        </span>
+      </a>
+    </div>
+  {% endif %}
+</article>

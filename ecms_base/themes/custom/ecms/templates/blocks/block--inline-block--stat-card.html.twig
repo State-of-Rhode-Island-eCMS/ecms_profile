@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a stat card inline block.
+ *
+ * Renders a single card holding up to four statistics, each a large number
+ * (field_stat_value_N) with a rich-text description (field_stat_description_N).
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules.
+ * - title_prefix: Additional output populated by modules.
+ * - title_suffix: Additional output populated by modules.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set cachebust = content|render %}
+
+{% set bc = content['#block_content'] %}
+
+{% if langcode is null %}
+  {% set langcode = 'en' %}
+{% endif %}
+
+{% if bc.hasTranslation(langcode) %}
+  {% set bc = bc.translation(langcode) %}
+{% endif %}
+
+{# Collect up to four stat pairs; skip any whose number is empty. #}
+{% set stats = [] %}
+{% for i in 1..4 %}
+  {% set value = attribute(bc, 'field_stat_value_' ~ i).value %}
+  {% if value %}
+    {% set stats = stats|merge([{
+      value: value,
+      description: attribute(bc, 'field_stat_description_' ~ i).0.processed,
+    }]) %}
+  {% endif %}
+{% endfor %}
+
+{# Map the selected background color to its theme class (same vocabulary as the
+   Cards canvas component / Dynamic Section). Empty = default light-blue surface. #}
+{% set theme_class = '' %}
+{% if bc.field_stat_bg_color.value %}
+  {% set theme_class = 'qh__t__' ~ bc.field_stat_bg_color.value %}
+{% endif %}
+
+<div{{ attributes }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {# Add block translate link manually for now until core contextual links issue is resolved.
+     @see: https://www.drupal.org/node/3020876
+  #}
+  {% if logged_in and current_node_has_translation %}
+    <a href="/block/{{ elements.content['#block_content'].id() }}/translations">{{ 'Translate Block'|t }}</a>
+  {% endif %}
+
+  {{ include('ecms:grid-card', {
+    variant: 'stat',
+    stats: stats,
+    theme_class: theme_class,
+  }, with_context = FALSE) }}
+</div>

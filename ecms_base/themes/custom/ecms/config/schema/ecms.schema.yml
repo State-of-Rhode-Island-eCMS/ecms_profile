@@ -74,9 +74,39 @@ ecms.settings:
         format:
           type: string
           label: 'State information text format'
+    footer_above:
+      type: mapping
+      mapping:
+        value:
+          type: text
+          label: 'Above-columns footer text'
+        format:
+          type: string
+          label: 'Above-columns footer text format'
+    footer_divider:
+      type: boolean
+      label: 'Display divider between third and fourth footer columns'
+    footer_wave:
+      type: boolean
+      label: 'Display footer wave effect'
+    logo_only:
+      type: boolean
+      label: 'Display logo only without header text'
+    mega_menu:
+      type: boolean
+      label: 'Display main menu as a mega menu'
+    illustration_option:
+      type: string
+      label: 'Page illustration option'
     color_palette:
       type: string
       label: 'Color palette'
+    palette_override_palette:
+      type: string
+      label: 'Override palette machine name'
+    palette_override_pages:
+      type: text
+      label: 'Pages where the override applies'
     header_top_line:
       type: text
       label: 'Top line of the header'

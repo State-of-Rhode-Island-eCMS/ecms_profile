@@ -1,0 +1,76 @@
+// canvas-cta
+// Keeps the button at its natural inline-block width when it's a
+// direct child of a flex column (e.g. dropped straight into a
+// `canvas-dynamic-section__cell`). Without this, `align-items: stretch`
+// blockifies the `<a>` and stretches it across the cell's cross-axis,
+// so an unwrapped CTA looks wider than one rendered through
+// `canvas-section-title` (where it sits inside a wrapper div).
+
+.canvas-cta {
+  align-self: flex-start;
+
+  &--link {
+    align-items: center;
+    align-self: stretch;
+    color: var(--fc__default__link);
+    display: flex;
+    font-size: 1.3125rem; // 21px
+    font-weight: 600;
+    gap: $input-v-spacing; // 0.75em ≈ 12px
+    justify-content: space-between;
+    letter-spacing: 0.02em; // ~0.42px at 21px
+    line-height: 1.2;
+    padding-block: 1.1875rem; // 19px — fixed regardless of font-size
+    padding-inline: 0;
+    text-decoration: none;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+      text-decoration: none;
+
+      .canvas-cta__label {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.125em;
+      }
+
+      .canvas-cta__icon {
+        transform: translateX(4px);
+      }
+    }
+  }
+
+  &--text {
+    color: var(--fc__default__link);
+    display: block;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.125em;
+
+    &:hover,
+    &:focus {
+      color: var(--fc__default__link--hover);
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  &__label {
+    text-decoration: none;
+  }
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+    height: 1.5625rem; // ~25px
+    transition: $transition-base;
+    width: 1.5625rem;
+
+    svg {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

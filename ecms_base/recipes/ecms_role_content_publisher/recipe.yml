@@ -1,0 +1,7 @@
+name: 'ECMS Role: Content Publisher'
+description: 'Provides the Content Publisher user role stub'
+type: 'content'
+install:
+  - user
+config:
+  strict: false

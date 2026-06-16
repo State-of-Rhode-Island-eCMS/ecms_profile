@@ -1,0 +1,226 @@
+name: 'eCMS Stat Card Block'
+description: 'Provides the Stat Card block type: a single card displaying up to four statistics (a large number with a rich-text description).'
+type: 'eCMS'
+
+install:
+  - block_content
+  - options
+  - text
+  - language
+  - content_translation
+
+config:
+  strict:
+    - field.storage.block_content.field_stat_value_1
+    - field.storage.block_content.field_stat_value_2
+    - field.storage.block_content.field_stat_value_3
+    - field.storage.block_content.field_stat_value_4
+    - field.storage.block_content.field_stat_description_1
+    - field.storage.block_content.field_stat_description_2
+    - field.storage.block_content.field_stat_description_3
+    - field.storage.block_content.field_stat_description_4
+    - field.storage.block_content.field_stat_bg_color
+  import:
+    block_content:
+      - block_content.type.stat_card
+  actions:
+    # Stat 1 (required — a card must have at least one stat).
+    field.field.block_content.stat_card.field_stat_value_1:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_value_1
+        field_type: string
+      setLabel: 'Stat 1'
+      setRequired: true
+      setTranslatable: false
+    field.field.block_content.stat_card.field_stat_description_1:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_description_1
+        field_type: text_long
+      setLabel: 'Stat 1 description'
+      setRequired: true
+      setTranslatable: true
+
+    # Stat 2 (optional).
+    field.field.block_content.stat_card.field_stat_value_2:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_value_2
+        field_type: string
+      setLabel: 'Stat 2'
+      setRequired: false
+      setTranslatable: false
+    field.field.block_content.stat_card.field_stat_description_2:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_description_2
+        field_type: text_long
+      setLabel: 'Stat 2 description'
+      setRequired: false
+      setTranslatable: true
+
+    # Stat 3 (optional).
+    field.field.block_content.stat_card.field_stat_value_3:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_value_3
+        field_type: string
+      setLabel: 'Stat 3'
+      setRequired: false
+      setTranslatable: false
+    field.field.block_content.stat_card.field_stat_description_3:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_description_3
+        field_type: text_long
+      setLabel: 'Stat 3 description'
+      setRequired: false
+      setTranslatable: true
+
+    # Stat 4 (optional).
+    field.field.block_content.stat_card.field_stat_value_4:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_value_4
+        field_type: string
+      setLabel: 'Stat 4'
+      setRequired: false
+      setTranslatable: false
+    field.field.block_content.stat_card.field_stat_description_4:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_description_4
+        field_type: text_long
+      setLabel: 'Stat 4 description'
+      setRequired: false
+      setTranslatable: true
+
+    # Card background color.
+    field.field.block_content.stat_card.field_stat_bg_color:
+      ensure_exists:
+        entity_type: block_content
+        bundle: stat_card
+        field_name: field_stat_bg_color
+        field_type: list_string
+      setLabel: 'Background color'
+      setDescription: '(Optional) Select a background color for the card. Leave empty for the default light-blue surface.'
+      setRequired: false
+      setTranslatable: false
+
+    core.entity_form_display.block_content.stat_card.default:
+      createIfNotExists:
+        targetEntityType: block_content
+        bundle: stat_card
+        mode: default
+        status: true
+      setComponents:
+        - name: info
+          options:
+            type: string_textfield
+            weight: 0
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: langcode
+          options:
+            type: language_select
+            weight: 1
+            region: content
+            settings:
+              include_locked: true
+        - name: field_stat_value_1
+          options:
+            type: string_textfield
+            weight: 2
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: field_stat_description_1
+          options:
+            type: text_textarea
+            weight: 3
+            region: content
+            settings:
+              rows: 3
+              placeholder: ''
+        - name: field_stat_value_2
+          options:
+            type: string_textfield
+            weight: 4
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: field_stat_description_2
+          options:
+            type: text_textarea
+            weight: 5
+            region: content
+            settings:
+              rows: 3
+              placeholder: ''
+        - name: field_stat_value_3
+          options:
+            type: string_textfield
+            weight: 6
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: field_stat_description_3
+          options:
+            type: text_textarea
+            weight: 7
+            region: content
+            settings:
+              rows: 3
+              placeholder: ''
+        - name: field_stat_value_4
+          options:
+            type: string_textfield
+            weight: 8
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+        - name: field_stat_description_4
+          options:
+            type: text_textarea
+            weight: 9
+            region: content
+            settings:
+              rows: 3
+              placeholder: ''
+        - name: field_stat_bg_color
+          options:
+            type: options_select
+            weight: 10
+            region: content
+            settings: {}
+
+    core.entity_view_display.block_content.stat_card.default:
+      createIfNotExists:
+        targetEntityType: block_content
+        bundle: stat_card
+        mode: default
+        status: true
+
+    language.content_settings.block_content.stat_card:
+      ensure_exists:
+        id: block_content.stat_card
+        target_entity_type_id: block_content
+        target_bundle: stat_card
+      setProperties:
+        default_langcode: site_default
+        language_alterable: false

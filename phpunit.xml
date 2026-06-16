@@ -42,6 +42,7 @@
       <testsuite name="kernel">
         <directory>./*/modules/custom/*/tests/src/Kernel</directory>
         <directory>./*/features/custom/*/tests/src/Kernel</directory>
+        <directory>./*/themes/custom/*/tests/src/Kernel</directory>
       </testsuite>
         <testsuite name="existing">
           <!-- Assumes tests are namespaced as \Drupal\Tests\custom_foo\ExistingSite. -->

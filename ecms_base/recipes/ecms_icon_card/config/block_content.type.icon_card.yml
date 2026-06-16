@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: icon_card
+label: 'Icon Card'
+revision: false
+description: null
