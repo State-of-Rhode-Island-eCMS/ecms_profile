@@ -13,6 +13,7 @@
   &__link {
     text-decoration: none !important; // Remove the default blue underline on the whole card link.
     position: relative;
+    display: block;
 
     &[target="_blank"]::after {
       position: absolute;

@@ -273,7 +273,17 @@ display:
           plugin_id: result
           empty: false
           content: '@total results'
-      footer: {  }
+      footer:
+        result_1:
+          id: result_1
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Showing @start-@end of @total'
       display_extenders: {  }
     cache_metadata:
       max-age: -1
