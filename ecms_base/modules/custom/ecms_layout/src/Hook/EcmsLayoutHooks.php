@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\ecms_layout\Hook;
 
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\ecms_layout\LandingPageTitleDetector;
 
@@ -37,7 +38,12 @@ class EcmsLayoutHooks {
    */
   #[Hook('entity_bundle_field_info_alter')]
   public function entityBundleFieldInfoAlter(array &$fields, EntityTypeInterface $entity_type, string $bundle): void {
-    if ($entity_type->id() === 'node' && $bundle === 'landing_page' && isset($fields['title'])) {
+    if (
+      $entity_type->id() === 'node' &&
+      $bundle === 'landing_page' &&
+      isset($fields['title']) &&
+      $fields['title'] instanceof BaseFieldDefinition
+    ) {
       $fields['title']->setDisplayConfigurable('view', TRUE);
     }
   }
