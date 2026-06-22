@@ -624,3 +624,20 @@ function ecms_base_update_11217(): void {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Hide breadcrumb block on the home page.
+ */
+function ecms_base_update_11218(): void {
+  $config = \Drupal::configFactory()->getEditable('block.block.breadcrumbs');
+
+  $config->set('visibility', [
+    'request_path' => [
+      'id' => 'request_path',
+      'negate' => TRUE,
+      'pages' => '<front>',
+    ],
+  ]);
+
+  $config->save(TRUE);
+}
