@@ -9,6 +9,14 @@ recipes: []
 config:
   import:
     ecms_press_release: '*'
+    views:
+      - views.view.news
+    pathauto:
+      - pathauto.pattern.news
+    simple_sitemap:
+      - simple_sitemap.bundle_settings.default.node.news
+    rabbit_hole:
+      - rabbit_hole.behavior_settings.node_type_news
     node:
       - node.type.news
       - core.base_field_override.node.news.changed
