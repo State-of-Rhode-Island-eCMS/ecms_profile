@@ -547,3 +547,10 @@ function ecms_base_update_11212(): void {
 
   ecms_base_apply_recipes($recipes);
 }
+
+/**
+ * Install the cache_control_override module.
+ */
+function ecms_base_update_11213(): void {
+  \Drupal::service('module_installer')->install(['cache_control_override']);
+}
