@@ -100,26 +100,28 @@ body {
   word-spacing: var(--word-spacing);
 }
 
-.node,
-.qh__accordion__content > div,
-.qh__numbered-step__content,
-.qh__single-event__content,
-.qh__content-components-block,
-.qh__icon-card__content,
-.field--name-field-emergency-message {
+/* `.qh__prose` is the opt-in vertical-rhythm region.
+ * Add this class to any container whose direct children should flow with the
+ * theme's vertical rhythm (paragraphs, headings, lists, etc.). It replaces the
+ * old hardcoded container list — templates now declare where rhythm applies by
+ * carrying `.qh__prose` on their existing root element (node, content blocks,
+ * accordion/step/event/card content, fields-based view rows, …). Site builders
+ * can opt a custom container or a View in via the Views UI "CSS class" field.
+ */
+.qh__prose {
   // Set up ideal character max-widths in content
   :where(p, li, dt, dd) {
     max-width: $max-line-length-ch;
   }
 
   // Set up vertical rhythm inside main content containers
-  > :where(:not(h4, .qh__h4, h5, .qh__h5, h6, .qh__h6, .qh__accordion, hr)) {
+  > :where(:not(h5, .qh__h5, h6, .qh__h6, .qh__accordion, hr)) {
     /*
       A LH unit changes with the size of the element’s font-size and line height
       It also collapses when used on the margin property.
       Therefore, we should achieve a balanced rhythm with only a few simple declarations.
       */
-    margin-block-end: var(--vertical-rhythm);
+    margin-block-end: calc(var(--vertical-rhythm) * 0.875);
   }
 
   // Add space to certain elements when we are inside nodes that want vertical rhythm
@@ -137,13 +139,19 @@ body {
    */
   > h2:not(:first-child),
   > .qh__h2:not(:first-child) {
-    margin-block-start: calc(var(--vertical-rhythm) * 1.25);
+    margin-block-start: var(--vertical-rhythm);
     margin-block-end: calc(var(--vertical-rhythm) * 0.625);
   }
 
   > h3:not(:first-child),
   > .qh__h3:not(:first-child) {
     margin-block-start: calc(var(--vertical-rhythm) * 0.875);
+  }
+
+  > h4:not(:first-child),
+  > .qh__h4:not(:first-child) {
+    margin-block-start: calc(var(--vertical-rhythm) * 0.5);
+    margin-block-end: calc(var(--vertical-rhythm) * 0.5);
   }
 
   > :where(.qh__accordion + *:not(.qh__accordion)),
@@ -160,6 +168,54 @@ body {
   // MAY BREAK THE WAY SOME AUTHORS CONTROL SPACING ON THEIR SITES
   p:empty {
     display: none;
+  }
+}
+
+/* Systematic catch-all for nested content headings.
+ *
+ * The rhythm rules above only reach DIRECT children of `.qh__prose`. Drupal
+ * subsystems (Views grouping/`item-list`, view headers, Layout Builder blocks,
+ * list paragraphs, …) wrap content in their own elements, so headings rendered
+ * inside them sit deeper and get no spacing. They are, however, always
+ * descendants of the node's `.qh__prose`.
+ *
+ * Bare, unclassed headings are the structural/content headings (a Views group
+ * title "Flyers", a view header "Information For", a section "Special
+ * Instructions"). Component titles always carry a class (`.qh__*__title`,
+ * `.qh__hX`) and so are excluded by `:not([class])` — they manage their own
+ * spacing. `:where(:not(.qh__prose))` requires an intermediate ancestor, which
+ * limits this to NESTED headings and leaves the direct-child rhythm above
+ * untouched. The symmetric value matches the legacy global heading spacing.
+ */
+.qh__prose
+  :where(:not(.qh__prose))
+  :where(h1, h2, h3, h4, h5, h6):not([class]) {
+  margin-block-start: ($text-spacer-fallback-value * 0.75);
+  margin-block-end: ($text-spacer-fallback-value * 0.75);
+}
+
+/* `.qh__prose--headings-only` is a lighter prose variant: it spaces only
+ * headings (symmetric top + bottom margin) and leaves every other element at
+ * its natural spacing. Use it where full child-by-child rhythm is too much or
+ * unpredictable — chiefly fields-based View rows, whose field order and markup
+ * (flat siblings vs. `<ul><li>`) vary per view. This mirrors the legacy
+ * behaviour where global heading margins (top + bottom) provided the rhythm.
+ * Standalone — do NOT combine with `.qh__prose`.
+ */
+.qh__prose--headings-only {
+  // View field text renders as bare <div>/<a>/<time>, which fall outside
+  // `$all-typography-block` and so inherit the tight body `line-height: 1lh`
+  // (~1.16) instead of the comfortable paragraph value. Restore readable
+  // leading for wrapped dates/links/summary text. Headings keep their own
+  // line-height (set on the element), so this only affects the body text.
+  line-height: $line-height-normal;
+
+  // Symmetric top + bottom margin, matching the legacy global heading spacing.
+  // A fixed rem (not 1lh) keeps the gap consistent regardless of heading size —
+  // 1lh would resolve to the heading's own large line-height and over-space.
+  :where(#{$all-headers}, .qh__h1, .qh__h2, .qh__h3, .qh__h4, .qh__h5, .qh__h6) {
+    margin-block-start: ($text-spacer-fallback-value * 0.75);
+    margin-block-end: ($text-spacer-fallback-value * 0.75);
   }
 }
 
@@ -244,7 +300,6 @@ h4,
   --font-lh-scaler-value: var(--h4-lh-scaler-value);
 
   letter-spacing: $kerning-base;
-  margin-block-end: calc(var(--vertical-rhythm) * 0.5);
 
   html:where(.wf-active:not(.novf)) & {
     font-weight: 500;
