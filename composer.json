@@ -50,6 +50,7 @@
                 "3288638 - Automated Drupal 11 compatibility fixes": "https://gist.githubusercontent.com/pfrilling/0c65512c56ade5d240d7af025ae4938a/raw/0c2b363a9ab493ffccf10ce10c6ade1215b689e0/gistfile1.txt"
             },
             "drupal/paragraphs": {
+                "3090200 - Paragraph access check uses default revision instead of referencing revision": "https://www.drupal.org/files/issues/2026-07-06/paragraphs-parent-access-block-content-skip-3090200-97.patch",
                 "2887353 - Paragraph Translation Sync": "https://gist.githubusercontent.com/pfrilling/87798df963feab76fbef5f4abe65fa10/raw/76c8f8cd06574b16b7da71ea2a0c1708d6d21871/paragraphs-translation-sync-2887353-60.patch"
             },
             "drupal/seckit": {
