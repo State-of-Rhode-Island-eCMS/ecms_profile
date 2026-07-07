@@ -220,6 +220,15 @@ function ecms_preprocess_node(array &$variables): void {
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['langcode'] = $language;
 
+  // Mark the node as a vertical-rhythm region. `.qh__prose` is the single hook
+  // the typography system uses to space block-level content (see
+  // assets/patterns/00-atoms/02-text/_00-typography.scss). This renders on
+  // every template that prints {{ attributes }} (the default node.html.twig and
+  // the *--full templates) — i.e. the full content views that previously
+  // relied on the bare `.node` selector. Custom templates that hardcode their
+  // <article> (event, speech, location, …) opt in via their own `.qh__prose`.
+  $variables['attributes']['class'][] = 'qh__prose';
+
   if ($variables['node']->bundle() === 'promotions') {
     // Define img variables.
     $img_uri = NULL;
@@ -825,6 +834,17 @@ function ecms_preprocess_paragraph__file_list_by_tag(array &$variables): void {
  * Implements hook_preprocess_block().
  */
 function ecms_preprocess_block(array &$variables): void {
+  // The page content-components field is rendered as a Layout Builder field
+  // block whose content (paragraphs, headings, accordions) sits directly inside
+  // it. Tag it as a vertical-rhythm region so that content picks up spacing —
+  // Layout Builder nests this block well below the node's `.qh__prose`, so the
+  // direct-child rhythm can't reach it otherwise. The inline-block variant is
+  // already covered via the content-components-block SDC.
+  $plugin_id = $variables['elements']['#plugin_id'] ?? '';
+  if (str_ends_with($plugin_id, 'field_page_content_components')) {
+    $variables['attributes']['class'][] = 'qh__prose';
+  }
+
   // Block labels are not translated properly.
   // @see: https://www.drupal.org/project/drupal/issues/2810457#comment-12625567
   if ($variables['elements']['#base_plugin_id'] === 'inline_block' || $variables['elements']['#base_plugin_id'] === 'block_content') {
