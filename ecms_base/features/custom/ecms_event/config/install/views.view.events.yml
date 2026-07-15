@@ -26,8 +26,12 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
-        options: {  }
+        type: time
+        options:
+          results_lifespan: 3600
+          results_lifespan_custom: 0
+          output_lifespan: 3600
+          output_lifespan_custom: 0
       query:
         type: views_query
         options:
@@ -287,7 +291,7 @@ display:
       link_url: ''
       link_display: page_1
     cache_metadata:
-      max-age: -1
+      max-age: 3600
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -317,7 +321,7 @@ display:
       use_more_always: true
       use_more_text: 'All events'
     cache_metadata:
-      max-age: -1
+      max-age: 3600
       contexts:
         - 'languages:language_interface'
         - 'user.node_grants:view'
@@ -342,7 +346,7 @@ display:
         page_1: page_1
       rendering_language: '***LANGUAGE_entity_translation***'
     cache_metadata:
-      max-age: -1
+      max-age: 3600
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -360,7 +364,7 @@ display:
       rendering_language: '***LANGUAGE_language_interface***'
       display_description: ''
     cache_metadata:
-      max-age: -1
+      max-age: 3600
       contexts:
         - 'languages:language_interface'
         - url.query_args
@@ -541,7 +545,7 @@ display:
           granularity: second
           plugin_id: date
     cache_metadata:
-      max-age: -1
+      max-age: 3600
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

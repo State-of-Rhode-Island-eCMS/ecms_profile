@@ -13,6 +13,7 @@ dependencies:
   - block
   - block_content
   - breakpoint
+  - cache_control_override
   - ckeditor5
   - components
   - config
