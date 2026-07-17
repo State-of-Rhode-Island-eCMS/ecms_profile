@@ -550,9 +550,16 @@ function ecms_base_update_11212(): void {
 }
 
 /**
- * Change visibilty of breadcrumb blocks.
+ * Install the cache_control_override module.
  */
 function ecms_base_update_11213(): void {
+  \Drupal::service('module_installer')->install(['cache_control_override']);
+}
+
+/**
+ * Change visibilty of breadcrumb blocks.
+ */
+function ecms_base_update_11214(): void {
   // Fix the breadcrumb visibility rules.
   $config = \Drupal::configFactory()->getEditable('block.block.breadcrumbs');
 
@@ -582,7 +589,7 @@ function ecms_base_update_11213(): void {
 /**
  * Apply recipes for image card, icon card, and person list.
  */
-function ecms_base_update_11214(): void {
+function ecms_base_update_11215(): void {
   $recipes = [
     'ecms_image_card',
     'ecms_icon_card',
@@ -595,7 +602,7 @@ function ecms_base_update_11214(): void {
 /**
  * Apply recipe to expose landing_page title as a placeable field block.
  */
-function ecms_base_update_11215(): void {
+function ecms_base_update_11216(): void {
   $recipes = [
     'ecms_landing_page_title_block',
   ];
@@ -606,7 +613,7 @@ function ecms_base_update_11215(): void {
 /**
  * Apply recipe for the stat card block type.
  */
-function ecms_base_update_11216(): void {
+function ecms_base_update_11217(): void {
   $recipes = [
     'ecms_stat_card',
   ];
@@ -617,7 +624,7 @@ function ecms_base_update_11216(): void {
 /**
  * Apply recipe for the news content type.
  */
-function ecms_base_update_11217(): void {
+function ecms_base_update_11218(): void {
   $recipes = [
     'ecms_news',
   ];
@@ -628,7 +635,7 @@ function ecms_base_update_11217(): void {
 /**
  * Hide breadcrumb block on the home page.
  */
-function ecms_base_update_11218(): void {
+function ecms_base_update_11219(): void {
   $config = \Drupal::configFactory()->getEditable('block.block.breadcrumbs');
 
   $config->set('visibility', [
