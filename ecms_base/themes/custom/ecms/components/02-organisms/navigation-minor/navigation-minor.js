@@ -1,24 +1,41 @@
-document.addEventListener('DOMContentLoaded', function() {
+/**
+ * @file Mobile toggle for the minor (section) navigation.
+ *
+ * Different than the global expand/collapse in that we toggle a class on the
+ * parent, and it hooks into the global page overlay actions.
+ *
+ * Bound via Drupal.behaviors + once so it also attaches when the navigation is
+ * delivered after initial page load. For authenticated users Drupal streams the
+ * minor navigation in via BigPipe after DOMContentLoaded has fired, so a
+ * one-time DOMContentLoaded binding would never wire up the toggle.
+ *
+ * a11yClick / allMenuCloser / activatePageOverlay / deactivatePageOverlay are
+ * global helpers defined in the theme's global.js (ecms/global-styling).
+ */
 
-  // Toggle button for mobile menu
-  // Different than the global in that we toggle a class on the parent
-  // Also needs to hook into global Page Overlay actions
-  var qh_toggle_btn = document.getElementById('js__minor-toggle');
-  var qh_nav_minor = document.getElementById('js__minor-menu');
-  if (qh_toggle_btn !== null && qh_toggle_btn !== undefined) {
-    qh_toggle_btn.addEventListener('click', function(event) {
-      // a11yClick function restricts keypress to spacebar or enter
-      if (a11yClick(event) === true) {
-        event.preventDefault();
-        if (qh_nav_minor.classList.contains('qh__nav-minor--expanded')) {
-          qh_nav_minor.classList.remove('qh__nav-minor--expanded');
-          deactivatePageOverlay();
-        } else {
-          allMenuCloser();
-          activatePageOverlay();
-          qh_nav_minor.classList.add('qh__nav-minor--expanded');
-        }
-      }
-    });
-  }
-});
+(function (Drupal, once) {
+  'use strict';
+
+  Drupal.behaviors.ecmsNavigationMinor = {
+    attach: function (context) {
+      once('ecms-nav-minor-toggle', '#js__minor-toggle', context).forEach(function (qh_toggle_btn) {
+        var qh_nav_minor = document.getElementById('js__minor-menu');
+
+        qh_toggle_btn.addEventListener('click', function (event) {
+          // a11yClick function restricts keypress to spacebar or enter
+          if (a11yClick(event) === true) {
+            event.preventDefault();
+            if (qh_nav_minor.classList.contains('qh__nav-minor--expanded')) {
+              qh_nav_minor.classList.remove('qh__nav-minor--expanded');
+              deactivatePageOverlay();
+            } else {
+              allMenuCloser();
+              activatePageOverlay();
+              qh_nav_minor.classList.add('qh__nav-minor--expanded');
+            }
+          }
+        });
+      });
+    }
+  };
+})(Drupal, once);

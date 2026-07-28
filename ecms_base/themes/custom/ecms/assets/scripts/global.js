@@ -1,4 +1,11 @@
-// Global functions
+// Global helper functions
+//
+// Shared utilities used across the theme's behaviors and component scripts.
+// These are intentionally global (not wrapped in a behavior) so that other
+// scripts can call them. The behaviors that use them live in their own files
+// (page-init.js, expand-collapse.js, responsive-tables.js) and are bound via
+// Drupal.behaviors so they re-run for content added after initial page load
+// (e.g. BigPipe placeholders streamed in for authenticated users, or AJAX).
 
 // Missing forEach on NodeList for IE11
 // SCRIPT438: Object does not support property or method forEach
@@ -99,92 +106,3 @@ function getCookie(name) {
   var parts = value.split('; ' + name + '=');
   if (parts.length == 2) return parts.pop().split(';').shift();
 }
-
-// Responsive Tables
-// Adds data-th attributes to table cells based on their column headers
-// Wraps table in container div for container queries
-// This enables CSS-based responsive table layouts
-function initResponsiveTables() {
-  var tables = document.querySelectorAll('table');
-
-  tables.forEach(function(table) {
-    var headerCells = table.querySelectorAll('thead th');
-
-    // Skip tables without thead or already processed
-    if (headerCells.length === 0 || table.parentElement.classList.contains('qh__table-container')) {
-      return;
-    }
-
-    // Get header text for each column
-    var headers = [];
-    headerCells.forEach(function(th) {
-      headers.push(th.textContent.trim());
-    });
-
-    // Apply data-th to each td in tbody
-    var bodyRows = table.querySelectorAll('tbody tr');
-    bodyRows.forEach(function(row) {
-      var cells = row.querySelectorAll('td');
-      cells.forEach(function(td, index) {
-        if (headers[index]) {
-          td.setAttribute('data-th', headers[index]);
-        }
-      });
-    });
-
-    // Wrap table in container div for container queries
-    var wrapper = document.createElement('div');
-    wrapper.classList.add('qh__table-container');
-    table.parentNode.insertBefore(wrapper, table);
-    wrapper.appendChild(table);
-
-    // Mark table as processed for responsive styling
-    table.classList.add('qh__table');
-  });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  // If JS is loaded, change the no-js class
-  document.documentElement.classList.remove('no-js');
-  document.documentElement.classList.add('js');
-
-  // Add an empty element that is styled when a menu is open
-  addPageOverlay();
-
-  // Initialize responsive tables
-  initResponsiveTables();
-
-
-  // Expand / Collapse utility
-  //
-  //Minimum expected markup:
-  //<div>
-  //  <div>
-  //    <button id="summaryId" class="js__expand-collapse" aria-expanded="false" aria-controls="targetId">See More</button>
-  //  </div>
-  //  <div id="targetId" aria-labelledby="summaryId" class="">Content to reveal here</div>
-  //</div>
-  //
-  // This function ONLY toggles a show/hide class on the target and toggles aria-expanded
-  // Any other functionality (like swapping the text content if true/false) needs to be in the component JS
-  document.querySelectorAll('.js__expand-collapse').forEach(function(toggle_element) {
-    toggle_element.addEventListener('click', function(event) {
-      event.preventDefault();
-      if (a11yClick(event) === true) {
-        var expanded = toggle_element.getAttribute('aria-expanded');
-        var target_id = toggle_element.getAttribute('aria-controls');
-        var target_element = document.getElementById(target_id);
-
-        if (expanded == 'true') {
-          toggle_element.setAttribute('aria-expanded', 'false');
-          target_element.classList.remove('js__aria-expanded');
-        } else {
-          toggle_element.setAttribute('aria-expanded', 'true');
-          target_element.classList.add('js__aria-expanded');
-        }
-      }
-    });
-  });
-
-});

@@ -21,6 +21,8 @@ slots:
     title: The icon to display
 libraryOverrides:
   dependencies:
+    - core/drupal
+    - core/once
     - ecms/modal
   js:
     modal.js: {}
