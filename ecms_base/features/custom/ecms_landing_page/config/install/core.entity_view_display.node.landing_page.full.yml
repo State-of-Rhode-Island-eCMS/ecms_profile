@@ -105,6 +105,7 @@ third_party_settings:
         'Chaos Tools': {  }
         'Content fields':
           - 'field_block:node:landing_page:field_add_modal'
+          - 'field_block:node:landing_page:title'
           - 'field_block:user:user:changed'
         Forms: {  }
         Help: {  }
