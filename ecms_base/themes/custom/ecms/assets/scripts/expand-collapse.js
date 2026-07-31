@@ -13,6 +13,13 @@
  * Any other functionality (like swapping the text content if true/false) needs
  * to live in the relevant component JS.
  *
+ * After each toggle the trigger dispatches a bubbling `ecms:expand-collapse`
+ * event carrying the resulting state. Component JS that needs to react to a
+ * toggle must listen for that event rather than adding its own `click` handler:
+ * a second click handler reads whatever `aria-expanded` happens to be at the
+ * moment it runs, which depends on listener registration order and silently
+ * inverts if the load order of the two scripts ever changes.
+ *
  * Bound via Drupal.behaviors + once so the handler also attaches to triggers
  * delivered after initial page load. For authenticated users Drupal streams
  * parts of the page (e.g. the minor/section navigation) via BigPipe after
@@ -42,6 +49,14 @@
               toggle_element.setAttribute('aria-expanded', 'true');
               target_element.classList.add('js__aria-expanded');
             }
+
+            toggle_element.dispatchEvent(new CustomEvent('ecms:expand-collapse', {
+              bubbles: true,
+              detail: {
+                expanded: expanded != 'true',
+                target: target_element
+              }
+            }));
           }
         });
       });

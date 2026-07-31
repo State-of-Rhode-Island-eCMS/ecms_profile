@@ -6,13 +6,17 @@
  * actual aria-expanded toggle is handled by the global expand-collapse behavior;
  * this only layers the persistence on top.
  *
- * Bound via Drupal.behaviors + once. Previously this ran at top-level script
- * evaluation, so it executed before its target existed (and never re-ran for
- * content streamed in via BigPipe for authenticated users), leaving the
- * persistence unbound.
+ * The persistence listens for the `ecms:expand-collapse` event the global
+ * behavior dispatches after it toggles, NOT for `click`. Two click handlers on
+ * the same trigger race: whichever registered first sees the pre-toggle value of
+ * aria-expanded, so reading the attribute here would flip meaning depending on
+ * script load order.
  *
- * a11yClick is a global helper defined in the theme's global.js
- * (ecms/global-styling).
+ * Note that `.notifications-hidden` on <html> (set by the inline head script in
+ * html.html.twig) is an anti-flash measure only. It applies `display: none`,
+ * which outranks the `.js__aria-expanded` visibility toggle, so it must be
+ * cleared as soon as the collapsed state has been applied to the elements
+ * themselves — otherwise re-expanding the block leaves it invisible.
  */
 
 (function (Drupal, once) {
@@ -21,30 +25,26 @@
   Drupal.behaviors.ecmsNotificationsBlock = {
     attach: function (context) {
       once('ecms-notifications-block', '#summary-notifications', context).forEach(function (notificationsToggle) {
+        var detailsElement = document.getElementById('details-notifications');
 
         // Restore collapsed state if it was hidden in a previous view.
         if (sessionStorage.getItem('siteNotificationsHidden')) {
           notificationsToggle.setAttribute('aria-expanded', 'false');
-          var detailsElement = document.getElementById('details-notifications');
           if (detailsElement !== null && detailsElement !== undefined) {
             detailsElement.classList.remove('js__aria-expanded');
           }
         }
 
-        // Persist the state when the visitor toggles the block.
-        notificationsToggle.addEventListener('click', function (event) {
-          if (a11yClick(event) === true) {
-            var expanded = notificationsToggle.getAttribute('aria-expanded');
+        // The collapsed state now lives on the elements, so hand visibility back
+        // to the .js__aria-expanded styling.
+        document.documentElement.classList.remove('notifications-hidden');
 
-            if (expanded == 'true') {
-              // Optimization for Repeat Views
-              sessionStorage.setItem('siteNotificationsHidden', true);
-              document.documentElement.classList.add("notifications-hidden");
-            } else {
-              // Optimization for Repeat Views
-              sessionStorage.removeItem('siteNotificationsHidden');
-              document.documentElement.classList.remove("notifications-hidden");
-            }
+        // Persist the state when the visitor toggles the block.
+        notificationsToggle.addEventListener('ecms:expand-collapse', function (event) {
+          if (event.detail.expanded) {
+            sessionStorage.removeItem('siteNotificationsHidden');
+          } else {
+            sessionStorage.setItem('siteNotificationsHidden', true);
           }
         });
       });
