@@ -93,7 +93,8 @@
     }
 
     p {
-      max-width: $max-line-length-ch;
+      // Commented out until opt-in is implemented and we can test the max-width of the notification block.
+      // max-width: $max-line-length-ch;
 
       & + p {
         margin-top: var(--vertical-rhythm);
