@@ -111,7 +111,8 @@ body {
 .qh__prose {
   // Set up ideal character max-widths in content
   :where(p, li, dt, dd) {
-    max-width: $max-line-length-ch;
+    // Disabling this for this now. Will add an opt out flag.
+    // max-width: $max-line-length-ch;
   }
 
   // Set up vertical rhythm inside main content containers
