@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Theme override for the emergency message field.
+ *
+ * Keeps Drupal's standard field wrapper (so the existing
+ * `.field--name-field-emergency-message` hook is preserved) and adds the
+ * `.qh__prose` vertical-rhythm class, replacing the old hardcoded selector in
+ * assets/patterns/00-atoms/02-text/_00-typography.scss.
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'qh__prose',
+    label_display == 'inline' ? 'clearfix',
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{% if label_hidden %}
+  <div{{ attributes.addClass(classes) }}>
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  </div>
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% for item in items %}
+      {{ item.content }}
+    {% endfor %}
+  </div>
+{% endif %}

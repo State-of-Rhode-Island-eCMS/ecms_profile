@@ -42,11 +42,12 @@
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
-    <h1>{{ title }}</h1>
+    {% set title_tag = view.display_handler.getPluginId() == 'page' ? 'h1' : 'h2' %}
+    <{{ title_tag }}>{{ title }}</{{ title_tag }}>
   {% endif %}
   {{ title_suffix }}
   {% if header %}
-    <div class="view-header">
+    <div class="view-header qh__prose--headings-only">
       {{ header }}
     </div>
   {% endif %}
@@ -66,7 +67,7 @@
       {{ rows }}
     </div>
   {% elseif empty %}
-    <div class="view-empty">
+    <div class="view-empty qh__prose--headings-only">
       {{ empty }}
     </div>
   {% endif %}
@@ -83,7 +84,7 @@
     {{ more }}
   {% endif %}
   {% if footer %}
-    <div class="view-footer">
+    <div class="view-footer qh__prose--headings-only">
       {{ footer }}
     </div>
   {% endif %}

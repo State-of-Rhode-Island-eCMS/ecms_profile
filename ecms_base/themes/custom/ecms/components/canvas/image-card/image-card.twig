@@ -1,0 +1,42 @@
+{#
+  Canvas Image Card
+  Thin wrapper around `.qh__grid-card .qh__grid-card--image`. The whole card is
+  clickable via the qh__cta pattern; the existing `_grid-card.scss` partial
+  paints all visual styling.
+
+  Props:
+    theme     - inherit | primary | primary-light | secondary | tertiary | coffee-milk
+    image     - Canvas image object: { src, alt, width, height, … }
+    link_url  - URL the card links to
+    link_text - Visible CTA text rendered as h5
+#}
+{# Enum → class lookup (never concatenate — canvas-sdc-AGENTS.md §3.4). #}
+{% set theme_classes = {
+  'primary':       'qh__t__primary',
+  'primary-light': 'qh__t__primary--light',
+  'secondary':     'qh__t__secondary',
+  'tertiary':      'qh__t__tertiary',
+  'coffee-milk':   'qh__t__coffee-milk',
+} %}
+
+<article {{ attributes.addClass(['qh__grid-card', 'qh__grid-card--image', theme_classes[theme]|default('')]) }}>
+  {% if image.src %}
+    <div class="qh__grid-card__image">
+      {% include 'canvas:image' with image|merge({
+        alt: image.alt|default(''),
+        loading: 'lazy',
+      }) only %}
+    </div>
+  {% endif %}
+
+  {% if link_url %}
+    <div class="qh__grid-card__cta qh__u__no-external">
+      <a class="qh__h5 qh__cta__link" href="{{ link_url }}">
+        <span class="qh__grid-card__text">{{ link_text }}</span>
+        <span class="qh__grid-card__arrow" aria-hidden="true">
+          {% include '@icons/arrow-right.svg' %}
+        </span>
+      </a>
+    </div>
+  {% endif %}
+</article>

@@ -1,0 +1,185 @@
+// Person cards view — 4-column grid with the view title as the first cell.
+// .view-content uses display:contents so its <article> children flow
+// directly into this grid alongside the heading.
+.view-person-cards {
+  align-items: stretch;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  position: relative;
+
+  // Contextual admin edit links — removed from grid flow
+  > .contextual {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  // Flatten view-content so articles are direct grid children
+  > .view-content {
+    display: contents;
+  }
+
+  // Title occupies the first grid cell — typography from the default h2.
+  > h2 {
+    align-self: end;
+    margin: 0;
+  }
+
+  @include breakpoint-up($bp--small) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint-up($bp--medium) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include breakpoint-up($bp--large) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.qh__card-person {
+  // Typography, border, and link colors are driven by the surrounding
+  // .qh__t__* cascade (or the card's own theme class). Hardcoded brand
+  // colors live only on the social-row buttons, which are deliberate
+  // accents in the Figma design.
+  border: 1px solid;
+  border-color: color-mix(in srgb, currentColor 15%, transparent);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  padding: 24px;
+
+  &__headshot {
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__headshot-img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  // Typography on job-title and full-name is driven by the .qh__h6 / .qh__h4
+  // utility classes applied in the twig; only structural margin and the
+  // sans-serif override (Figma) live here.
+  &__job-title,
+  &__full-name {
+    font-family: $font-sans-fallback;
+    margin: 0;
+
+    html:where(.wf-active) & {
+      font-family: $font-sans-static;
+    }
+
+    html:where(.wf-active:not(.novf)) & {
+      font-family: var(--font-sans-vf);
+    }
+  }
+
+  &__social-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__social-link {
+    align-items: center;
+    background-color: var(--c__coffee-milk--light, hsl(47, 27%, 92%));
+    border-radius: 5px;
+    color: var(--c__quahog--dark, #2e2e2e);
+    display: inline-flex;
+    height: 34px;
+    justify-content: center;
+    padding: 0;
+    transition: background-color 0.2s ease;
+    width: 34px;
+
+    // Repeat color on hover/focus so the global `a:hover` rule
+    // (which pulls --computed-link-color--hover from the section theme,
+    // e.g. hope-gold on primary) can't override the social row's
+    // deliberately-static quahog/navy glyph color.
+    &:hover,
+    &:focus {
+      background-color: var(--c__coffee-milk, hsl(47, 26%, 76%));
+      color: var(--c__quahog--dark, #2e2e2e);
+    }
+
+    &--website {
+      background-color: var(--c__hope-gold, hsl(46, 95%, 61%));
+      color: var(--c__navy, #293557);
+
+      &:hover,
+      &:focus {
+        background-color: var(--c__hope-gold--bright, hsl(46, 95%, 70%));
+        color: var(--c__navy, #293557);
+      }
+    }
+
+    .qh__icon {
+      height: auto;
+      width: auto;
+
+      svg {
+        display: block;
+        fill: currentColor;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+
+    // Phone & email rely on the global mailto/tel link styling
+    // (assets/patterns/00-atoms/02-text/_01-links.scss) which auto-injects
+    // a mask icon via ::before sized at 0.875em with a trailing margin.
+    // Override so the mask glyph matches the SVG icons above.
+    &[href^='tel:']::before,
+    &[href^='mailto:']::before {
+      height: 1.125rem;
+      margin: 0;
+      width: 1.125rem;
+    }
+
+    // The mailto mask SVG draws its envelope in the lower portion of a
+    // 16×16 viewBox (y=5.8→15), so with default `mask-position: center` the
+    // glyph sits visibly below the box's true center. Nudge the mask up
+    // ~15% of the box height to recenter just the email icon — phone and
+    // external-link masks fill their viewBox so they don't need this.
+    &[href^='mailto:']::before {
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+    width: 100%;
+  }
+}

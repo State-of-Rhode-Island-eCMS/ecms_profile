@@ -1,0 +1,41 @@
+.canvas-tab-group {
+  container-name: canvas-tab-group;
+  container-type: inline-size;
+  padding: 5rem 0 2.5rem;
+
+  // Tablist injected by JS above the panels.
+  &__tablist {
+    align-items: flex-end;
+    display: flex;
+    gap: 1.25rem;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+
+    // On narrow containers the flex row would crush button labels into vertical
+    // letter stacks. Switch to a horizontal scroll with snap; JS centers the
+    // active button via scrollIntoView on activation.
+    @container canvas-tab-group (max-width: #{$bp--small-value * 1rem}) {
+      // Break out of the parent gutter so the off-stage buttons scroll off the
+      // actual viewport edge rather than getting hard-clipped at the content
+      // gutter line. The existing `padding: 0 2rem` (inherited from the base
+      // rule above) supplies the inset breathing room at scroll extents.
+      margin-inline: calc(50% - 50vw);
+      width: 100vw;
+      overflow-x: auto;
+      padding-block: 0.5rem; // breathing room so focus rings aren't clipped
+      scroll-padding-inline: 50%; // lets scrollIntoView center cleanly at edges
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      [role='tab'] {
+        flex-shrink: 0;
+        scroll-snap-align: center;
+      }
+    }
+  }
+}

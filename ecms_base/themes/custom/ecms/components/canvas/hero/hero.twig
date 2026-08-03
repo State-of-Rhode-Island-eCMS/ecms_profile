@@ -1,0 +1,51 @@
+{#
+  Canvas Hero (default page hero; sibling of hero-search).
+  A two-row / two-column grid with three direct children:
+    - `__band`    — purely visual navy background (`.qh__t__primary`) spanning
+                    all columns of row 1, with the wave hanging off its bottom.
+    - `__content` — heading + rich-text description, placed in COLUMN 1 only, so
+                    it can never run into the image. Carries `.qh__t__primary`
+                    too so the cascade paints the white-on-navy text.
+    - `__media`   — the framed 16:9 image in column 2, spanning rows 1→2 so it
+                    straddles the wave (top half over navy, bottom over white).
+
+  Heading/description colors come from the `.qh__t__primary` cascade on
+  `__content` — no `color:` rules here.
+
+  Props:
+    heading     - h1 text (required)
+    description - rich-text HTML (minimal editor)
+    image       - Canvas image object: { src, alt, width, height, srcset, ... }
+#}
+<section {{ attributes.addClass('canvas-hero') }}>
+  <div class="canvas-hero__band qh__t__primary" aria-hidden="true">
+    <div class="canvas-hero__wave">
+      {% include '@icons/brand-wave.svg' %}
+    </div>
+  </div>
+
+  <div class="canvas-hero__content qh__t__primary">
+    <h1 class="canvas-hero__heading qh__u__fw-normal">{{ heading }}</h1>
+    {% if description %}
+      <div class="canvas-hero__description qh__u__fw-light">{{ description|raw }}</div>
+    {% endif %}
+  </div>
+
+  <div class="canvas-hero__media">
+    <figure class="canvas-hero__frame">
+      <span class="canvas-hero__notch" aria-hidden="true"></span>
+      <div class="canvas-hero__image">
+        {% if image and image.src %}
+          <img
+            src="{{ image.src }}"
+            alt="{{ image.alt|default('') }}"
+            {% if image.width %}width="{{ image.width }}"{% endif %}
+            {% if image.height %}height="{{ image.height }}"{% endif %}
+            loading="lazy"
+            {% if image.srcset %}srcset="{{ image.srcset }}"{% endif %}
+          />
+        {% endif %}
+      </div>
+    </figure>
+  </div>
+</section>

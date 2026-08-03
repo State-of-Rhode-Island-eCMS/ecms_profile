@@ -10,63 +10,65 @@
     </div>
 
     <div class="qh__teaser-person__content">
-      <p class="qh__teaser-person__name"><strong>{{ last_name }}, {{ first_name }}</strong></p>
-
-      <div class="qh__teaser-person__meta{% if additional_fields %} multicol{% endif %}">
-        <div class="qh__teaser-person__contact">
+      <div class="qh__teaser-person__header">
+        <p class="qh__teaser-person__name"><strong>{{ last_name }}, {{ first_name }}</strong></p>
+        {% if job_title or categories %}
           <div class="qh__teaser-person__job-details">
-            <span class="qh__teaser-person__title">{{ job_title }}</span>
-            <span class="qh__teaser-person__category">{{ categories }}</span>
-          </div>
-
-          <div class="qh__teaser-person__phone-numbers">
-            {% if phone %}
-              <span class="qh__teaser-person__phone">
-                <span class="qh__teaser-person__contact-label">Phone: </span>
-                <a href="tel:+1{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
-              </span>
+            {% if job_title %}
+              <span class="qh__teaser-person__title"><em>{{ job_title }}</em></span>
             {% endif %}
-
-            {% if mobile %}
-              <span class="qh__teaser-person__phone">
-                <span class="qh__teaser-person__contact-label">Mobile: </span>
-                <a href="tel:+1{{ mobile }}">{{ mobile }}</a>
-              </span>
-            {% endif %}
-
-            {% if fax %}
-              <span class="qh__teaser-person__phone">
-                <span class="qh__teaser-person__contact-label">Fax: </span>
-                <a href="tel:+1{{ fax }}">{{ fax }}</a>
-              </span>
+            {% if categories %}
+              <span class="qh__teaser-person__category">{{ categories }}</span>
             {% endif %}
           </div>
+        {% endif %}
+      </div>
+
+      {% if phone or mobile or fax or email %}
+        <div class="qh__teaser-person__contact">
+          {% if phone %}
+            <span class="qh__teaser-person__phone">
+              <span class="qh__teaser-person__contact-label">Phone: </span>
+              <a href="tel:+1{{ phone }}{{ extension ? 'p' ~ extension }}">{{ phone }}{{ extension ? ' ext. ' ~ extension}}</a>
+            </span>
+          {% endif %}
+
+          {% if mobile %}
+            <span class="qh__teaser-person__phone">
+              <span class="qh__teaser-person__contact-label">Mobile: </span>
+              <a href="tel:+1{{ mobile }}">{{ mobile }}</a>
+            </span>
+          {% endif %}
+
+          {% if fax %}
+            <span class="qh__teaser-person__phone">
+              <span class="qh__teaser-person__contact-label">Fax: </span>
+              <a href="tel:+1{{ fax }}">{{ fax }}</a>
+            </span>
+          {% endif %}
 
           {% if email %}
             <span class="qh__teaser-person__email">
               <span class="qh__teaser-person__contact-label">Email: </span>
-              <a href="mailto:{{ email }}">{{ email }}</a></span>
+              <a href="mailto:{{ email }}">{{ email }}</a>
             </span>
           {% endif %}
         </div>
+      {% endif %}
 
-         {% if additional_fields %}
-           {{ additional_fields|cache_metadata }}
-            <div class="qh__teaser-person__additional-fields">
-              {% if additional_fields %}
-                {% for field in additional_fields|children %}
-                  <div class="qh__teaser-person__additional-field">
-                    {% if field.label['#access'] %}
-                      <span
-                        class="qh__teaser-person__additional-field-label">{{ field.label }}: </span>
-                    {% endif %}
-                    {{ field.value }}
-                  </div>
-                {% endfor %}
+      {% if additional_fields %}
+        {{ additional_fields|cache_metadata }}
+        <div class="qh__teaser-person__additional-fields">
+          {% for field in additional_fields|children %}
+            <div class="qh__teaser-person__additional-field">
+              {% if field.label['#access'] %}
+                <span class="qh__teaser-person__additional-field-label">{{ field.label }}: </span>
               {% endif %}
+              {{ field.value }}
             </div>
-         {% endif %}
-      </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   </article>
 </li>

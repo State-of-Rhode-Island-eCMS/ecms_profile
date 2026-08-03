@@ -1,0 +1,20 @@
+name: 'eCMS Solr Search'
+description: 'Provides an Acquia Search Solr-driven site search with a Views-based search page at /search. Replaces the ecms_solr_search feature module.'
+type: 'eCMS'
+recipes: []
+install:
+  - acquia_search
+  - search_api
+  - search_api_solr
+  - ecms_basic_page
+  - ecms_landing_page
+  - ecms_location
+  - ecms_press_release
+config:
+  strict: false
+  import:
+    search_api:
+      - search_api.server.acquia_search_server
+      - search_api.index.acquia_search_index
+    views:
+      - views.view.acquia_search

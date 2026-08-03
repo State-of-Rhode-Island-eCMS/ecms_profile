@@ -1,0 +1,140 @@
+// Pager — .qh__pagination
+// Matches the Online Services pager Figma design.
+// Page numbers are grouped into a single bordered box;
+// first/prev/next/last are standalone pill buttons.
+
+// Shorthand for the four nav modifier classes
+$_nav: '.qh__pagination__link--first, .qh__pagination__link--prev, .qh__pagination__link--next, .qh__pagination__link--last';
+
+.qh__pagination {
+  &__list {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem; // 12px
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex; // override any global inline-block rule
+  }
+
+  // ── Base link shell ────────────────────────────────────────────────────────
+
+  &__link {
+    align-items: center;
+    color: var(--c__quahog, #404040);
+    display: flex;
+    font-size: 0.9375rem; // 15px
+    font-weight: 400;
+    height: 2.25rem; // 36px
+    justify-content: center;
+    line-height: 1.75;
+    min-width: 2.125rem; // 34px — expands for multi-digit numbers
+    padding-inline: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+
+    svg {
+      flex-shrink: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  // ── Nav buttons: first / prev / next / last ────────────────────────────────
+
+  &__link:is(#{$_nav}) {
+    border-radius: 5px;
+
+    .qh__icon__path {
+      fill: var(--c__navy, #293557);
+    }
+
+    // Active state
+    &:not(.qh__pagination__link--disabled) {
+      background: #fff;
+      border: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+
+      &:hover {
+        background: var(--c__coffee-milk--light, #f0eee5);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--c__navy, #293557);
+        outline-offset: 2px;
+      }
+    }
+
+    // Disabled state — hidden entirely
+    &.qh__pagination__link--disabled {
+      display: none;
+    }
+  }
+
+  // ── Page number items — collapsed into a single grouped box ────────────────
+  //
+  // All page number li items share one outer border. Adjacent items collapse
+  // their shared border via margin-left: -1px (border overlap).
+  //
+  // First page item  = li directly after the prev-button li
+  // Last page item   = li directly before the next-button li
+  //   (selected via :has(+ li:has(--next)))
+
+  &__item:not(:has(:is(#{$_nav}))) {
+    // Bring adjacent page items together (cancel the flex gap + overlap borders)
+    + .qh__pagination__item:not(:has(:is(#{$_nav}))) {
+      margin-left: calc(-0.75rem - 1px);
+    }
+
+    .qh__pagination__link {
+      background: rgba(255, 255, 255, 0.75);
+      border-bottom: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+      border-left: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+      border-right: none; // right side provided by next item's left border
+      border-top: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+      border-radius: 0;
+      color: var(--c__quahog, #404040);
+      font-weight: 400;
+      position: relative; // needed for z-index stacking
+      z-index: 0;
+
+      &:hover:not(.qh__pagination__link--disabled) {
+        background: var(--c__coffee-milk--light, #f0eee5);
+        z-index: 1;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--c__navy, #293557);
+        outline-offset: -2px;
+        z-index: 2;
+      }
+
+      // Current page — must live here to beat the base rule above
+      &.qh__pagination__link--current {
+        background: var(--c__coffee-milk--trans25, rgba(210, 203, 178, 0.25));
+        color: var(--c__navy, #293557);
+        font-weight: 625;
+        z-index: 1;
+      }
+    }
+  }
+
+  // First page item in group — left radius + left border already present
+  &__item:has(.qh__pagination__link--prev) + &__item:not(:has(:is(#{$_nav}))) {
+    .qh__pagination__link {
+      border-radius: 5px 0 0 5px;
+    }
+  }
+
+  // Last page item in group — close the right side and add right radius
+  &__item:not(:has(:is(#{$_nav}))):has(+ &__item:has(.qh__pagination__link--next)) {
+    .qh__pagination__link {
+      border-radius: 0 5px 5px 0;
+      border-right: 1px solid var(--c__quahog--dark--trans15, rgba(20, 20, 20, 0.15));
+    }
+  }
+
+}

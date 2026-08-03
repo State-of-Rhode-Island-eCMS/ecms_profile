@@ -15,13 +15,10 @@ plugin: system_breadcrumb_block
 settings:
   id: system_breadcrumb_block
   label: Breadcrumbs
-  provider: system
   label_display: '0'
+  provider: system
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      landing_page: landing_page
+  request_path:
+    id: request_path
     negate: true
-    context_mapping:
-      node: '@node.node_route_context:node'
+    pages: '<front>'

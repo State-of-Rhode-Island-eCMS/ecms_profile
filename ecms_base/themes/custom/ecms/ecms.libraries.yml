@@ -7,6 +7,8 @@ global-styling:
     assets/scripts/scripts-compiled-min.js: { preprocess: true, minified: true }
   dependencies:
     - core/drupal
+    - core/once
+    - classy/base
 
 header-scripts:
   version: 2.0.4
