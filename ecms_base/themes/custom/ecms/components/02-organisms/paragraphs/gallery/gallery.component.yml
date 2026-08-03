@@ -15,6 +15,8 @@ slots:
     title: The raw slides
 libraryOverrides:
   dependencies:
+    - core/drupal
+    - core/once
     - ecms/tiny-slider
   js:
     gallery.js: { }

@@ -21,3 +21,11 @@ slots:
     title: Drupal attributes.
   level_one_link:
     title: The first link
+
+libraryOverrides:
+  js:
+    navigation-main.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - ecms/global-styling

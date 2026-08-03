@@ -41,6 +41,8 @@ slots:
 
 libraryOverrides:
   dependencies:
+    - core/drupal
+    - core/once
     - ecms/rrule-js
   js:
     teaser-event.js: {}

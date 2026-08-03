@@ -1,3 +1,19 @@
+/**
+ * @file Main (primary) navigation behavior.
+ *
+ * Handles the responsive relocation of search/social into the mobile drawer,
+ * the mobile menu toggle, and the desktop dropdown toggles.
+ *
+ * Bound via Drupal.behaviors + once so the handlers also attach when the
+ * navigation is delivered after initial page load. For authenticated users
+ * Drupal streams the primary navigation in via BigPipe after DOMContentLoaded
+ * has fired, so a one-time DOMContentLoaded binding never wires up the dropdown
+ * toggles — leaving their real hrefs in place, so clicking just navigates.
+ *
+ * a11yClick / allMenuCloser / activatePageOverlay / deactivatePageOverlay are
+ * global helpers defined in the theme's global.js (ecms/global-styling).
+ */
+
 // There are custom properties that track what breakpoint the site is using
 function getQhNavState() {
   // NOTE: Strings from CSS get returned exactly as written
@@ -109,73 +125,78 @@ function moveSearchAndSocial() {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+(function (Drupal, once) {
+  'use strict';
 
-  // Declare the viewport state globally
-  window.qh_viewport = '';
+  Drupal.behaviors.ecmsNavigationMain = {
+    attach: function (context) {
 
-  // Call on page ready
-  moveSearchAndSocial();
+      // Responsive search/social relocation. Keyed on the primary menu so it
+      // sets up once when the nav is present (initial load or BigPipe stream).
+      once('qh-nav-responsive', '#js__primary-menu', context).forEach(function () {
+        // Declare the viewport state globally
+        window.qh_viewport = '';
 
-  // Call again on resize or orientation change
-  // With a debounced window resize handler
-  var qh_window_timeout = false;
-  window.addEventListener('resize', function() {
-    clearTimeout(qh_window_timeout);
-    qh_window_timeout = setTimeout(moveSearchAndSocial, 250);
-  });
-  window.addEventListener('orientationchange', moveSearchAndSocial);
+        // Call on page ready
+        moveSearchAndSocial();
 
-
-  // Toggle button for mobile menu
-  // Activates/deactivates page overlay
-  // Also open/close off canvas menu
-  // NOT globalized because of page overlay actions
-  var qh_toggle_btn = document.getElementById('js__toggle-nav');
-  if (qh_toggle_btn !== null && qh_toggle_btn !== undefined) {
-    qh_toggle_btn.addEventListener('click', function(event) {
-      // a11yClick function restricts keypress to spacebar or enter
-      if (a11yClick(event) === true) {
-        var expanded = qh_toggle_btn.getAttribute('aria-expanded');
-        if (expanded == 'true') {
-          qh_toggle_btn.setAttribute('aria-expanded', 'false');
-          qh_toggle_btn.parentElement.classList.remove('open');
-          deactivatePageOverlay();
-        } else {
-          allMenuCloser();
-          qh_toggle_btn.setAttribute('aria-expanded', 'true');
-          qh_toggle_btn.parentElement.classList.add('open');
-          activatePageOverlay();
-        }
-      }
-    });
-  }
-
-
-  // Listen to mouse press, spacebar key press, and enter key press on Drop Down menu parents
-  // Toggle the value of aria-expanded but also remove the content of href on parent
-  var qh_dd_btns = document.querySelectorAll('.js__qh-dd-toggle');
-  if (qh_dd_btns !== null && qh_dd_btns !== undefined) {
-    //console.log('qh_dd_btns is not null or undefined');
-    qh_dd_btns.forEach(function(toggle_element) {
-      // Remove the contents of the href from this parent button
-      toggle_element.setAttribute('href', '#');
-      toggle_element.addEventListener('click', function(event) {
-        // a11yClick function restricts keypress to spacebar or enter
-        if (a11yClick(event) === true) {
-          event.preventDefault();
-          var expanded = toggle_element.getAttribute('aria-expanded');
-          // Close all
-          qh_dd_btns.forEach(function(btn) {
-            btn.setAttribute('aria-expanded', 'false');
-          });
-          // Open the one that was pressed
-          if (expanded == 'false') {
-            toggle_element.setAttribute('aria-expanded', 'true');
-          }
-        }
+        // Call again on resize or orientation change
+        // With a debounced window resize handler
+        var qh_window_timeout = false;
+        window.addEventListener('resize', function () {
+          clearTimeout(qh_window_timeout);
+          qh_window_timeout = setTimeout(moveSearchAndSocial, 250);
+        });
+        window.addEventListener('orientationchange', moveSearchAndSocial);
       });
-    });
-  }
 
-});
+
+      // Toggle button for mobile menu
+      // Activates/deactivates page overlay
+      // Also open/close off canvas menu
+      // NOT globalized because of page overlay actions
+      once('qh-toggle-nav', '#js__toggle-nav', context).forEach(function (qh_toggle_btn) {
+        qh_toggle_btn.addEventListener('click', function (event) {
+          // a11yClick function restricts keypress to spacebar or enter
+          if (a11yClick(event) === true) {
+            var expanded = qh_toggle_btn.getAttribute('aria-expanded');
+            if (expanded == 'true') {
+              qh_toggle_btn.setAttribute('aria-expanded', 'false');
+              qh_toggle_btn.parentElement.classList.remove('open');
+              deactivatePageOverlay();
+            } else {
+              allMenuCloser();
+              qh_toggle_btn.setAttribute('aria-expanded', 'true');
+              qh_toggle_btn.parentElement.classList.add('open');
+              activatePageOverlay();
+            }
+          }
+        });
+      });
+
+
+      // Listen to mouse press, spacebar key press, and enter key press on Drop Down menu parents
+      // Toggle the value of aria-expanded but also remove the content of href on parent
+      once('qh-dd-toggle', '.js__qh-dd-toggle', context).forEach(function (toggle_element) {
+        // Remove the contents of the href from this parent button
+        toggle_element.setAttribute('href', '#');
+        toggle_element.addEventListener('click', function (event) {
+          // a11yClick function restricts keypress to spacebar or enter
+          if (a11yClick(event) === true) {
+            event.preventDefault();
+            var expanded = toggle_element.getAttribute('aria-expanded');
+            // Close all
+            document.querySelectorAll('.js__qh-dd-toggle').forEach(function (btn) {
+              btn.setAttribute('aria-expanded', 'false');
+            });
+            // Open the one that was pressed
+            if (expanded == 'false') {
+              toggle_element.setAttribute('aria-expanded', 'true');
+            }
+          }
+        });
+      });
+
+    }
+  };
+})(Drupal, once);
