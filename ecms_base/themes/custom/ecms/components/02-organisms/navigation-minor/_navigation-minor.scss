@@ -26,6 +26,8 @@
     // --qh-scrollbar-comp) because vw includes the scrollbar but the grid
     // centers inside the scrollbar-less width. The old 1.125em + bare 3.5vw
     // overshot by up to ~9px and clipped the tab + open drawer offscreen.
+    // The var() fallback needs its unit: calc() length math rejects a bare 0
+    // stylelint-disable-next-line length-zero-no-unit
     left: calc((1rem + 3.5vw - var(--qh-scrollbar-comp, 0px)) * -1);
     min-width: unset;
     width: em(320 - $button-trigger-height);
