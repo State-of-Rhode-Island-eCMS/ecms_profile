@@ -469,9 +469,11 @@ body {
       // See lines above that group the LI:hover with the A:hover
     }
 
-    &:focus {
-      outline-color: var(--fc__nav-main__link--focus);
-      outline-offset: -2px;
+    // Two-tone ring, inset because the nav bar/drawer clip overflow.
+    // The white hover/focus bg swap above is now an enhancement only —
+    // the ring carries the focus indication (RIGA-891).
+    &:focus-visible {
+      @include qh-focus-ring--inset;
     }
 
     &:active {
@@ -676,9 +678,8 @@ body {
       color: var(--fc__default__link--hover);
     }
 
-    &:focus {
-      outline-color: var(--fc__default__link--focus);
-      outline-offset: $border-sm;
+    &:focus-visible {
+      @include qh-focus-ring;
     }
 
     // Constrain the arrow/external icon — the global qh__icon is em(40) which

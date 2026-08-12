@@ -84,9 +84,8 @@
       color: var(--fc__notification__link--hover, var(--fc__defauilt__link--hover));
     }
 
-    a:focus {
-      outline-color: var(--fc__notification__link--focus, var(--fc__defauilt__link--focus));
-    }
+    // Keyboard focus ring comes from the global two-tone :focus-visible
+    // mechanism (RIGA-891) — no per-region outline color override.
 
     a:active {
       color: var(--fc__notification__link--active, var(--fc__defauilt__link--active));

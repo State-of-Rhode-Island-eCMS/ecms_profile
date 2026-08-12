@@ -35,6 +35,28 @@
   Drupal.behaviors.ecmsExpandCollapse = {
     attach: function (context) {
       once('ecms-expand-collapse', '.js__expand-collapse', context).forEach(function (toggle_element) {
+
+        // Keep collapsed panels out of the keyboard tab order and the a11y
+        // tree (RIGA-891). The CSS hides them visually (max-height +
+        // visibility), but `inert` removes the whole subtree from focus
+        // immediately, regardless of transitions. Same pattern as facets.js.
+        // Driving it from JS keeps no-JS users — whose panels are open via
+        // the .no-js CSS fallback — from being locked out.
+        function syncInert() {
+          var target_element = document.getElementById(toggle_element.getAttribute('aria-controls'));
+          if (target_element === null) {
+            return;
+          }
+          if (toggle_element.getAttribute('aria-expanded') === 'true') {
+            target_element.removeAttribute('inert');
+          } else {
+            target_element.setAttribute('inert', '');
+          }
+        }
+
+        // Match the server-rendered initial aria-expanded state.
+        syncInert();
+
         toggle_element.addEventListener('click', function (event) {
           event.preventDefault();
           if (a11yClick(event) === true) {
@@ -49,6 +71,8 @@
               toggle_element.setAttribute('aria-expanded', 'true');
               target_element.classList.add('js__aria-expanded');
             }
+
+            syncInert();
 
             toggle_element.dispatchEvent(new CustomEvent('ecms:expand-collapse', {
               bubbles: true,

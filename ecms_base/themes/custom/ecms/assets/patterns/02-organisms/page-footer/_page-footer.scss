@@ -74,9 +74,15 @@ $qh__footer-wave-height: calc(100vw * 88 / 1440);
     align-items: center;
     min-height: rem(48);
 
-    &:hover,
-    &:focus {
+    &:hover {
       text-decoration: none;
+      color: var(--fc__footer__fg);
+    }
+
+    // Keep the underline on keyboard focus (RIGA-891): dropping it removed
+    // the only focus cue the footer had. The ring itself comes from the
+    // global two-tone :focus-visible mechanism.
+    &:focus {
       color: var(--fc__footer__fg);
     }
 

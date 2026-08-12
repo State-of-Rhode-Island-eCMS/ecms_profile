@@ -47,9 +47,8 @@ button,
     color: var(--fc__default__button--hover__fg);
   }
 
-  &:focus {
-    outline: $border-sm solid var(--fc__default__link--focus);
-    outline-offset: $border-sm;
+  &:focus-visible {
+    @include qh-focus-ring;
   }
 
   &:disabled {

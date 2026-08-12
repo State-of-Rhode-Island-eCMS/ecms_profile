@@ -31,10 +31,8 @@
       &:active {
         color: var(--fc__header__link--hover);
       }
-
-      &:focus {
-        outline-color: var(--fc__header__link);
-      }
+      // Keyboard focus ring comes from the global two-tone :focus-visible
+      // mechanism (RIGA-891) — no per-region outline color override.
     }
   }
 

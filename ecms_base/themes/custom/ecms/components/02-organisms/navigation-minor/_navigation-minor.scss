@@ -20,8 +20,13 @@
     $button-trigger-height: 28;
 
     position: absolute;
-    // This calc replicates the spacing variable to negate it, and push the button trigger over to the edge of the viewport
-    left: calc((1.125em + 3.5vw) * -1);
+    // Negate the page gutter so the rotated tab hugs the viewport edge:
+    // 1rem = the layout grid's padding-inline, 3.5vw = the centered grid's
+    // margin — minus half the scrollbar width (page-init.js publishes
+    // --qh-scrollbar-comp) because vw includes the scrollbar but the grid
+    // centers inside the scrollbar-less width. The old 1.125em + bare 3.5vw
+    // overshot by up to ~9px and clipped the tab + open drawer offscreen.
+    left: calc((1rem + 3.5vw - var(--qh-scrollbar-comp, 0px)) * -1);
     min-width: unset;
     width: em(320 - $button-trigger-height);
     transform: translateX(- em(320 - $button-trigger-height));
@@ -29,7 +34,23 @@
 
     > ul {
       transform: translateX(- em(48));
-      transition: transform $transition-duration-base $transition-timing-base ($transition-duration-base/2);
+      transition:
+        transform $transition-duration-base $transition-timing-base ($transition-duration-base/2),
+        visibility $transition-duration-base $transition-timing-base $transition-duration-base;
+      // Needed to keep the collapsed rail's links from being keyboard
+      // tabbable — transform only moves it offscreen visually (RIGA-891
+      // callout 8). Mirrors the mobile drawer in _navigation-main.scss.
+      visibility: hidden;
+    }
+
+    // Expanded accordion panels inside the drawer explicitly re-show
+    // themselves (`.js [aria-expanded='true'] + .qh__accordion__content`
+    // sets visibility: visible, which beats the inherited hidden above), so
+    // force them hidden again while the drawer is collapsed. Same
+    // specificity as the accordion rule — this wins on source order
+    // (components compile after patterns).
+    &:not(#{&}--expanded) > ul .qh__accordion__content {
+      visibility: hidden;
     }
 
     &#{&}--expanded {
@@ -37,6 +58,10 @@
 
       > ul {
         transform: translateX(0);
+        transition:
+          transform $transition-duration-base $transition-timing-base ($transition-duration-base/2),
+          visibility 0s linear 0s;
+        visibility: visible;
       }
     }
   }
@@ -238,9 +263,11 @@
       color: var(--fc__nav-minor__link--hover);
     }
 
-    &:focus {
-      outline-color: var(--fc__nav-main__link--focus);
-      outline-offset: -2px;
+    // Two-tone ring, inset because the list clips overflow. Replaces a ring
+    // that consumed the wrong token (nav-main's yellow on this light-blue
+    // panel — RIGA-891 callout 7).
+    &:focus-visible {
+      @include qh-focus-ring--inset;
     }
 
     &:active {
@@ -282,6 +309,12 @@
 
   // Treat the Minor Nav like a breadcrumb trail at the top of the first page
   @media print {
+    // The collapsed-drawer visibility:hidden above is width-based and can
+    // also match the print page width — don't let it hide the breadcrumb
+    > ul {
+      visibility: visible;
+    }
+
     // Only allow the current page link to show
     a:not(#{&}__link--current):not([href='/']) {
       display: none;

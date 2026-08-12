@@ -17,10 +17,9 @@ a {
     color: var(--computed-link-color--hover, var(--fc__default__link--hover));
   }
 
-  // Global keyboard focus style
-  &:focus {
-    outline: $border-sm solid var(--computed-link-color--hover, var(--fc__default__link--focus));
-    outline-offset: $border-sm;
+  // Global keyboard focus style: two-tone ring, visible on any background
+  &:focus-visible {
+    @include qh-focus-ring;
   }
 
   // :visited and :active reuse the theme's base link color since no theme
@@ -127,6 +126,10 @@ dd {
 
   &:focus {
     color: var(--fc__default__link--hover);
-    outline-offset: - ($border-sm * 2);
+  }
+
+  // Sits at the very top edge of the viewport, so keep the ring inset
+  &:focus-visible {
+    @include qh-focus-ring--inset;
   }
 }

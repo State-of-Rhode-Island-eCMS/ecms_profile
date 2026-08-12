@@ -33,6 +33,13 @@ nav ol {
   @include qh-list-reset;
 }
 
+// Two-tone keyboard focus indicator (RIGA-891): a ring + halo pair emitted
+// per palette, visible on any background in light and dark mode. This is the
+// catch-all; components inside clipping containers re-apply the inset variant.
+:focus-visible {
+  @include qh-focus-ring;
+}
+
 // Remove visible focus for mouse users only
 :focus:not(:focus-visible) {
   border: 0;
@@ -45,6 +52,7 @@ nav ol {
   Credit: https://github.com/suitcss/base
   */
 [tabindex='-1']:focus {
+  box-shadow: none !important; // also suppress the qh-focus-ring halo
   outline: 0 !important;
 }
 
