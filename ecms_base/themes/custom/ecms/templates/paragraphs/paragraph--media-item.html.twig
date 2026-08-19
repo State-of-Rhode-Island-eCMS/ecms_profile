@@ -92,7 +92,7 @@
 {% endif %}
 
 {% if media_type == 'video' %}
-  {% set video_source = content.field_media_item|render|striptags("<iframe>") %}
+  {% set video_source = content.field_media_item|render|striptags("<iframe>")|replace({'&amp;': '&'}) %}
   {{ include ("ecms:media-item", {
     content: content,
     type: media_type,
