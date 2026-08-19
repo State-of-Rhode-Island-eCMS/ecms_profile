@@ -648,3 +648,14 @@ function ecms_base_update_11219(): void {
 
   $config->save(TRUE);
 }
+
+/**
+ * Apply recipes for person list.
+ */
+function ecms_base_update_11220(): void {
+  $recipes = [
+    'ecms_person_list',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
