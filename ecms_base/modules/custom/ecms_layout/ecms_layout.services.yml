@@ -1,3 +1,12 @@
 services:
   Drupal\ecms_layout\LandingPageTitleDetector:
     autowire: true
+
+  # Replace Layout Builder's sample entity generator so that "Manage layout"
+  # pages for a default display no longer populate the placeholder entity with
+  # generated sample values. See EcmsSampleEntityGenerator for the cascade this
+  # prevents.
+  ecms_layout.sample_entity_generator:
+    class: Drupal\ecms_layout\EcmsSampleEntityGenerator
+    decorates: layout_builder.sample_entity_generator
+    arguments: ['@tempstore.shared', '@entity_type.manager']

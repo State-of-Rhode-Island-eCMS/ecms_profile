@@ -691,9 +691,20 @@ function ecms_base_update_11219(): void {
 }
 
 /**
+ * Apply recipes for person list.
+ */
+function ecms_base_update_11220(): void {
+  $recipes = [
+    'ecms_person_list',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
+
+/**
  * Create the webform submission export directory on existing sites.
  */
-function ecms_base_update_11220(): string {
+function ecms_base_update_11221(): string {
   if (ecms_base_prepare_webform_export_directory()) {
     return (string) t('Webform exports will be written to @directory.', [
       '@directory' => \Drupal::service('file_system')->realpath('private://webform_exports'),
