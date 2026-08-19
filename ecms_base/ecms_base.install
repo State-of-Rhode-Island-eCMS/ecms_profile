@@ -13,6 +13,7 @@ declare(strict_types=1);
  */
 
 use Drupal\Core\Batch\BatchBuilder;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\shortcut\Entity\Shortcut;
@@ -69,6 +70,8 @@ function ecms_base_install() {
   $config->set('mail', 'ecms@notification.ri.gov');
   $config->save();
 
+  // Create the directory webform writes its exports to.
+  ecms_base_prepare_webform_export_directory();
 }
 
 /**
@@ -184,6 +187,44 @@ function ecms_base_apply_workflows() {
       $workflowBundleCreate->addTaxonomyTypePermissions($taxonomy);
     }
   }
+}
+
+/**
+ * Ensure the webform submission export directory exists and is writable.
+ *
+ * Webform passes its export directory straight to fopen() without creating it
+ * first, so exporting to a missing directory fails with a stream of
+ * "fwrite(): Argument #1 must be of type resource, bool given" errors. The
+ * directory lives in the private file system so that a batched export can be
+ * resumed by any node in the ACSF cluster.
+ *
+ * Every site in the factory uses the same location, so this deliberately does
+ * not read webform's configuration: the directory can be created before
+ * webform itself is installed, and the settings override that points webform
+ * at this directory resolves to the same path on disk.
+ *
+ * @return bool
+ *   TRUE if the directory exists and is writable, FALSE otherwise.
+ *
+ * @see \Drupal\webform\Plugin\WebformExporter\FileHandleTraitWebformExporter::createExport()
+ * @see \Drupal\webform\Plugin\WebformExporterBase::getExportFilePath()
+ */
+function ecms_base_prepare_webform_export_directory(): bool {
+  $directory = 'private://webform_exports';
+
+  $prepared = \Drupal::service('file_system')->prepareDirectory(
+    $directory,
+    FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS
+  );
+
+  if (!$prepared) {
+    \Drupal::logger('ecms_base')->error(
+      'Unable to create the webform export directory at @directory. Webform submission exports will fail until it exists and is writable.',
+      ['@directory' => $directory]
+    );
+  }
+
+  return $prepared;
 }
 
 /**
@@ -658,4 +699,17 @@ function ecms_base_update_11220(): void {
   ];
 
   ecms_base_apply_recipes($recipes);
+}
+
+/**
+ * Create the webform submission export directory on existing sites.
+ */
+function ecms_base_update_11221(): string {
+  if (ecms_base_prepare_webform_export_directory()) {
+    return (string) t('Webform exports will be written to @directory.', [
+      '@directory' => \Drupal::service('file_system')->realpath('private://webform_exports'),
+    ]);
+  }
+
+  return (string) t('The webform export directory could not be created. Submission exports will fail on this site until private://webform_exports exists and is writable by the web server.');
 }
