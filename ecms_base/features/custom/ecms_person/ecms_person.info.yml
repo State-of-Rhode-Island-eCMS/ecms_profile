@@ -20,6 +20,7 @@ dependencies:
   - 'drupal:telephone'
   - 'drupal:user'
   - 'drupal:views'
+  - 'ecms_paragraphs:ecms_paragraphs'
   - 'ecms_promotions:ecms_promotions'
   - 'ecms_workflow:ecms_workflow'
   - 'entity_reference_revisions:entity_reference_revisions'

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_images
+    - paragraphs.paragraphs_type.person_list
+id: paragraph.person_list.field_display_images
+field_name: field_display_images
+entity_type: paragraph
+bundle: person_list
+label: 'Display Images?'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
