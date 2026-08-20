@@ -2,13 +2,32 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.person_list.field_background_color
+    - field.field.paragraph.person_list.field_columns
     - field.field.paragraph.person_list.field_department_category
+    - field.field.paragraph.person_list.field_display_images
+    - field.field.paragraph.person_list.field_list_title
     - paragraphs.paragraphs_type.person_list
+  module:
+    - options
 id: paragraph.person_list.default
 targetEntityType: paragraph
 bundle: person_list
 mode: default
 content:
+  field_background_color:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_columns:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_department_category:
     weight: 1
     settings:
@@ -18,6 +37,21 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_display_images:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_list_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
 hidden:
   created: true

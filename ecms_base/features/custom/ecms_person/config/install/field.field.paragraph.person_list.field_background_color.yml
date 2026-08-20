@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color
+    - paragraphs.paragraphs_type.person_list
+  module:
+    - options
+id: paragraph.person_list.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+bundle: person_list
+label: 'Background color'
+description: '(Optional) Select a background color for the person list.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

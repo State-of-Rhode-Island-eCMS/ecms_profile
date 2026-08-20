@@ -2,20 +2,43 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.person_list.field_background_color
+    - field.field.paragraph.person_list.field_columns
     - field.field.paragraph.person_list.field_department_category
+    - field.field.paragraph.person_list.field_display_images
+    - field.field.paragraph.person_list.field_list_title
     - paragraphs.paragraphs_type.person_list
+  module:
+    - options
 id: paragraph.person_list.default
 targetEntityType: paragraph
 bundle: person_list
 mode: default
 content:
-  field_department_category:
+  field_background_color:
     weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_department_category:
+    weight: 2
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_list_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
 hidden:
+  field_columns: true
+  field_display_images: true
   search_api_excerpt: true
