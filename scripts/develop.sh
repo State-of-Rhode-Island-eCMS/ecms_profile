@@ -48,6 +48,8 @@ ddev exec 'rm -Rf develop'
 
 # Create the Drupal project.
 ddev exec "composer create-project drupal/recommended-project:${DRUPAL_CORE} develop --no-install"
+# Create the private file directory.
+ddev exec 'mkdir -p develop/private'
 # Delete the lock file to add the profile's dependencies.
 ddev exec 'rm -f develop/composer.lock'
 
@@ -99,6 +101,9 @@ $DDEV_CONFIG
 
 ## Add MySQL 57 settings requirement to the default prior to site install.
 ddev exec 'echo "require DRUPAL_ROOT . \"/modules/contrib/mysql57/settings.inc\";" >> $DDEV_DOCROOT/sites/default/settings.ddev.php'
+
+## Set the private file path.
+ddev exec 'chmod +w develop/web/sites/default develop/web/sites/default/settings.php && echo "\$settings['\''file_private_path'\''] = '\''../private'\'';" >> develop/web/sites/default/settings.php'
 
 ## Install the site profile.
 ddev exec 'drush site:install ecms_base --yes'

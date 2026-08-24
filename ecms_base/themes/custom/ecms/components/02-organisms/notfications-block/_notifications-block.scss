@@ -73,6 +73,12 @@
     .notifications-hidden & {
       display: none;
     }
+
+    // Restyle all headings in case this bg color can not support the default colors
+    #{$all-headers} {
+      color: currentColor;
+    }
+
     // Restyle all anchors in case this bg color can not support the default colors
     a,
     a:visited {
