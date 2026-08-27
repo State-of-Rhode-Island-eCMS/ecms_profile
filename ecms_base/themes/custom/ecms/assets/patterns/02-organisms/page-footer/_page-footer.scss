@@ -85,10 +85,6 @@ $qh__footer-wave-height: calc(100vw * 88 / 1440);
     &:focus {
       color: var(--fc__footer__fg);
     }
-
-    &:visited {
-      color: var(--fc__footer__fg);
-    }
   }
 
   p {
@@ -164,10 +160,6 @@ $qh__footer-wave-height: calc(100vw * 88 / 1440);
       min-height: 0;
       font-weight: inherit; // match the surrounding SemiBold rather than the lighter link default
       text-decoration: none;
-
-      &:visited {
-        color: var(--fc__default__violator);
-      }
 
       // Keep a hover/focus affordance since the link is distinguished from the
       // surrounding text by color alone.

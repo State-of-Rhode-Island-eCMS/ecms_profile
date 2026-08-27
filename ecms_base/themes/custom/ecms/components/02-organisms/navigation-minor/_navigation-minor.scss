@@ -251,13 +251,9 @@
   // <a> & <button> colors
   .qh__accordion__button,
   &__link {
-    &,
-    &:visited {
-      // Remove visited styles by declaring them the same as static anchor styles
-      background-color: var(--fc__nav-minor__link__bg);
-      color: var(--fc__nav-minor__link);
-      text-decoration: none;
-    }
+    background-color: var(--fc__nav-minor__link__bg);
+    color: var(--fc__nav-minor__link);
+    text-decoration: none;
 
     &:not([aria-current]):hover,
     &:not([aria-current]):focus {
@@ -291,7 +287,6 @@
     &[aria-current],
     &[aria-current]:hover,
     &[aria-current]:focus,
-    &[aria-current]:visited,
     .js &[aria-current].qh__accordion__button[aria-expanded='true'] {
       background-color: var(--fc__nav-minor__link--hover__bg);
       color: var(--fc__nav-minor__fg);
@@ -302,7 +297,6 @@
     &__sub[aria-current],
     &__sub[aria-current]:hover,
     &__sub[aria-current]:focus,
-    &__sub[aria-current]:visited,
     .js &__sub[aria-current].qh__accordion__button[aria-expanded='true'] {
       background-color: var(--fc__nav-minor__sub__bg);
       color: var(--fc__nav-minor__fg);

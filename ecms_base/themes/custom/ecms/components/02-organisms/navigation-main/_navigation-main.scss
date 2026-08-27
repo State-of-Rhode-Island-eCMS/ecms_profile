@@ -64,11 +64,8 @@ body {
     justify-content: space-between;
     padding: 0 $nav-a-h-spacing 0 ($nav-a-h-spacing/2);
 
-    &,
-    &:visited {
-      color: var(--fc__nav-main__link);
-      background-color: transparent;
-    }
+    color: var(--fc__nav-main__link);
+    background-color: transparent;
 
     &:hover,
     &:focus {
@@ -333,8 +330,7 @@ body {
       padding: ($nav-a-v-spacing * 0.5) ($nav-a-h-spacing * 0.5);
 
       // Specifically set these colors, otherwise, header colors are used
-      .qh__social-links a.qh__social-links__link,
-      .qh__social-links a.qh__social-links__link:visited {
+      .qh__social-links a.qh__social-links__link {
         color: var(--fc__nav-main__link);
       }
 
@@ -444,24 +440,20 @@ body {
 
   // <a>
   &__link {
+    background-color: transparent;
+    color: var(--fc__nav-main__link);
+    display: block;
+    font-weight: 475;
     padding: ($nav-a-v-spacing * 0.75) $nav-a-h-spacing--sm $nav-a-v-spacing;
+    text-decoration: none;
+    word-break: normal;
 
-    &,
-    &:visited {
-      background-color: transparent;
-      color: var(--fc__nav-main__link);
-      display: block;
-      font-weight: 475;
-      text-decoration: none;
-      word-break: normal;
-
-      @include breakpoint-up($bp__show__desktop-nav) {
-        border-top: ($nav-a-v-spacing * 0.25) solid var(--fc__nav-main__bg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-      }
+    @include breakpoint-up($bp__show__desktop-nav) {
+      border-top: ($nav-a-v-spacing * 0.25) solid var(--fc__nav-main__bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
 
     &:hover,
@@ -540,8 +532,7 @@ body {
       margin: 0;
     }
 
-    &--home,
-    &--home:visited {
+    &--home {
       border-top: 0;
       padding: 0.5em 0.25em;
     }
@@ -668,10 +659,7 @@ body {
       padding: $nav-a-v-spacing--sm $nav-a-h-spacing--sm;
     }
 
-    &,
-    &:visited {
-      color: var(--fc__default__fg);
-    }
+    color: var(--fc__default__fg);
 
     &:hover,
     &:focus {

@@ -21,10 +21,7 @@
     }
 
     a {
-      &,
-      &:visited {
-        color: var(--fc__header__link);
-      }
+      color: var(--fc__header__link);
 
       &:hover,
       &:focus,

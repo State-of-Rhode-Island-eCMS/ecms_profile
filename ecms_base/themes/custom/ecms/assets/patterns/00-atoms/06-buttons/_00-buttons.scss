@@ -15,31 +15,26 @@
 button,
 .qh__btn,
 .button {
+  // Primary color theme (highlight, more colorful)
+  background-color: var(--fc__default__button__bg);
+  background-image: linear-gradient(
+    rgba(#fff, 0.125) 10%,
+    rgba(#fff, 0) 50%,
+    rgba(#000, 0) 80%,
+    rgba(#000, 0.125) 100%
+  );
   border: 0;
   border-radius: $button-border-radius;
+  color: var(--fc__default__button__fg);
   display: inline-block;
   font-weight: 500;
   letter-spacing: $kerning-base;
   overflow: hidden;
   padding: $button-v-spacing $button-h-spacing;
+  text-decoration: none;
   transition: $transition-base;
   user-select: none;
   vertical-align: middle;
-
-  // Primary color theme (highlight, more colorful)
-  // :visited on a <button> is not a thing but most of the time these may be <a>s
-  &,
-  &:visited {
-    background-color: var(--fc__default__button__bg);
-    background-image: linear-gradient(
-      rgba(#fff, 0.125) 10%,
-      rgba(#fff, 0) 50%,
-      rgba(#000, 0) 80%,
-      rgba(#000, 0.125) 100%
-    );
-    color: var(--fc__default__button__fg);
-    text-decoration: none;
-  }
 
   &:hover,
   &:focus {
@@ -64,11 +59,8 @@ button,
 .qh__btn {
   // Uses the default accent colors. Inverses on hover.
   &--accent {
-    &,
-    &:visited {
-      background-color: var(--fc__default__accent);
-      color: var(--fc__default__accent__fg);
-    }
+    background-color: var(--fc__default__accent);
+    color: var(--fc__default__accent__fg);
 
     &:hover,
     &:focus {
@@ -79,11 +71,8 @@ button,
 
   // More subdued color theme based on primary--light
   &--secondary {
-    &,
-    &:visited {
-      background-color: var(--fc__primary--light__bg);
-      color: var(--fc__primary--light__fg);
-    }
+    background-color: var(--fc__primary--light__bg);
+    color: var(--fc__primary--light__fg);
 
     &:hover,
     &:focus {
@@ -97,11 +86,8 @@ button,
     }
 
     html:where(:not(.light)) {
-      &,
-      &:visited {
-        background-color: var(--fc__primary--light__bg--dark);
-        color: var(--fc__primary--light__fg--dark);
-      }
+      background-color: var(--fc__primary--light__bg--dark);
+      color: var(--fc__primary--light__fg--dark);
 
       &:hover,
       &:focus {
@@ -112,11 +98,8 @@ button,
 
     @media (prefers-color-scheme: dark) {
       html:where(:not(.light)) {
-        &,
-        &:visited {
-          background-color: var(--fc__primary--light__bg--dark);
-          color: var(--fc__primary--light__fg--dark);
-        }
+        background-color: var(--fc__primary--light__bg--dark);
+        color: var(--fc__primary--light__fg--dark);
 
         &:hover,
         &:focus {
@@ -145,15 +128,12 @@ button,
     letter-spacing: 0.05em; // ~0.9px at 18px
     text-transform: uppercase;
 
-    &,
-    &:visited {
-      background-color: var(
-        --fc__tertiary__button__bg,
-        var(--fc__tertiary__bg)
-      );
-      background-image: none;
-      color: var(--fc__tertiary__button__fg, var(--fc__tertiary__fg));
-    }
+    background-color: var(
+      --fc__tertiary__button__bg,
+      var(--fc__tertiary__bg)
+    );
+    background-image: none;
+    color: var(--fc__tertiary__button__fg, var(--fc__tertiary__fg));
 
     &:hover,
     &:focus {
@@ -261,22 +241,14 @@ button,
   user-select: auto;
   white-space: normal;
 
-  &,
-  &:visited,
+  background-color: transparent;
+  background-image: none;
+  color: var(--fc__default__link);
+
   &:hover,
   &:focus {
     background-color: transparent;
     background-image: none;
-    color: var(--fc__default__link);
-  }
-
-  &,
-  &:visited {
-    color: var(--fc__default__link);
-  }
-
-  &:hover,
-  &:focus {
     color: var(--fc__default__link--hover);
   }
 

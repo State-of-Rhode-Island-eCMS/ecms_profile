@@ -46,10 +46,7 @@
   .qh__language-menu__toggle {
     text-decoration: none;
 
-    &,
-    &:visited {
-      color: var(--fc__official__link);
-    }
+    color: var(--fc__official__link);
 
     &:hover,
     &:focus {
