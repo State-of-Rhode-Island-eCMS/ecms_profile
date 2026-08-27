@@ -91,6 +91,21 @@
           }
         });
 
+        // Close the settings menu when keyboard focus leaves it or on Escape
+        // (RIGA-891). The parent wrapper contains both the toggle and the
+        // panel list.
+        qhMenuFocusDismiss(
+          qh_usersettings_btn.parentElement,
+          qh_usersettings_btn,
+          function () {
+            return qh_usersettings_btn.getAttribute('aria-expanded') === 'true';
+          },
+          function () {
+            qh_usersettings_btn.setAttribute('aria-expanded', 'false');
+            deactivatePageOverlay();
+          }
+        );
+
         // Language toggle.
         var qh_userlanguage_btn = document.getElementById('js__user-language__toggle');
         if (qh_userlanguage_btn !== null && qh_userlanguage_btn !== undefined) {
@@ -108,6 +123,20 @@
               }
             }
           });
+
+          // Close the language menu when keyboard focus leaves it or on
+          // Escape (RIGA-891).
+          qhMenuFocusDismiss(
+            qh_userlanguage_btn.parentElement,
+            qh_userlanguage_btn,
+            function () {
+              return qh_userlanguage_btn.getAttribute('aria-expanded') === 'true';
+            },
+            function () {
+              qh_userlanguage_btn.setAttribute('aria-expanded', 'false');
+              deactivatePageOverlay();
+            }
+          );
         }
 
         // Light mode settings

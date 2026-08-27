@@ -8,9 +8,8 @@
     align-items: center;
     margin-top: $general-v-spacing;
 
-    &:focus {
-      outline: 2px solid var(--fc__default__link--focus);
-      outline-offset: -2px;
+    &:focus-visible {
+      @include qh-focus-ring--inset;
     }
 
     .qh__gallery__button--prev {
@@ -97,8 +96,7 @@
         padding: ($general-v-spacing * 1) ($general-h-spacing * 2);
         color: var(--c__white);
 
-        a,
-        a:visited {
+        a {
           color: var(--c__white);
         }
 

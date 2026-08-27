@@ -34,6 +34,21 @@
           }
         });
 
+        // Close the language popup when keyboard focus leaves it or on
+        // Escape (RIGA-891). The parent wrapper contains both the toggle and
+        // the popup list.
+        qhMenuFocusDismiss(
+          qh_gtranslate_btn.parentElement,
+          qh_gtranslate_btn,
+          function () {
+            return qh_gtranslate_btn.getAttribute("aria-expanded") === "true";
+          },
+          function () {
+            qh_gtranslate_btn.setAttribute("aria-expanded", "false");
+            deactivatePageOverlay();
+          }
+        );
+
         // Close popup when a language is selected.
         if (qh_gtranslate_list !== null && qh_gtranslate_list !== undefined) {
           // Listen for clicks on quick language links
