@@ -7,6 +7,9 @@
 
 declare(strict_types=1);
 
+use Drupal\search_api\Entity\Server;
+use Drupal\search_api\ServerInterface;
+
 /**
  * Restore the drupal_find_theme_functions method.
  *
@@ -62,4 +65,58 @@ function ecms_base_find_theme_functions($cache, $prefixes) {
     }
   }
   return $implementations;
+}
+
+/**
+ * Batch callback to point every Solr index at the SearchStax server.
+ *
+ * This lives in the profile file rather than ecms_base.install so that the
+ * callback is available when the batch runs, which may be in a separate
+ * request or process from the update hook that queued it.
+ *
+ * @see ecms_base_update_11223()
+ */
+function ecms_base_searchstax_migrate_indexes(): void {
+  $searchstax = Server::load('searchstax');
+
+  if (!$searchstax instanceof ServerInterface) {
+    \Drupal::logger('ecms_base')
+      ->warning('Skipping the search index migration: the searchstax server could not be loaded.');
+    return;
+  }
+
+  // The recipe only repoints acquia_search_index, so move any other index that
+  // is still attached to the Acquia server. Indexes on other servers, such as
+  // the multisite Solr core or the database backend, are left alone. The
+  // indexes are loaded dynamically so that site specific indexes are included.
+  $acquiaServer = Server::load('acquia_search_server');
+
+  if ($acquiaServer instanceof ServerInterface) {
+    foreach ($acquiaServer->getIndexes() as $index) {
+      try {
+        $index->setServer($searchstax)->save();
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('ecms_base')
+          ->error('Failed to move @index to the searchstax server: @message', [
+            '@index' => $index->id(),
+            '@message' => $e->getMessage(),
+          ]);
+      }
+    }
+  }
+
+  // Mark every index on the searchstax server as needing a full re-index.
+  foreach ($searchstax->getIndexes() as $index) {
+    try {
+      $index->reindex();
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('ecms_base')
+        ->error('Failed to reindex @index: @message', [
+          '@index' => $index->id(),
+          '@message' => $e->getMessage(),
+        ]);
+    }
+  }
 }
