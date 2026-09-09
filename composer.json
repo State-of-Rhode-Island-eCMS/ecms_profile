@@ -56,9 +56,6 @@
             "drupal/seckit": {
                 "3536611 - Add support for the Cross-Origin-Opener-Policy (COOP) header": "https://gist.githubusercontent.com/pfrilling/9e27b66ee95c85ae510c1a8fcb24593b/raw/49e4da0b175fa1064b5827f9bd76242596212bc9/gistfile1.txt"
             },
-            "drupal/smart_date": {
-                "3591184 - SmartDateItemNormalizer::normalize() return type incompatible with TimestampItemNormalizer in Drupal 11.4+": "https://git.drupalcode.org/project/smart_date/-/merge_requests/204.diff"
-            },
             "drupal/path_redirect_import": {
                 "3395257 - #3 - Change CSV file upload location to private.": "https://www.drupal.org/files/issues/2023-10-19/3395257-change-csv-file-3_0.patch"
             }
@@ -192,7 +189,7 @@
         "drupal/simple_menu_permissions": "^3.0.1",
         "drupal/simple_oauth": "^6.0",
         "drupal/simple_sitemap": "^4.2",
-        "drupal/smart_date": "^4.2",
+        "drupal/smart_date": "^4.3",
         "drupal/stable": "^2.0",
         "drupal/svg_image": "^3.2",
         "drupal/token": "^1.12",
