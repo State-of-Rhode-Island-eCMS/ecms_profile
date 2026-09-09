@@ -16,8 +16,6 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
-use Drupal\search_api\Entity\Server;
-use Drupal\search_api\ServerInterface;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
@@ -751,28 +749,27 @@ function ecms_base_update_11222(): void {
   ];
 
   ecms_base_apply_recipes($recipes);
+}
 
-  // Mark every index attached to the Searchstax server as needing a full
-  // re-index. The indexes are loaded dynamically so that any index a site has
-  // pointed at the server, not just acquia_search_index, is queued.
-  $server = Server::load('searchstax');
-
-  if (!$server instanceof ServerInterface) {
+/**
+ * Point the indexes the recipe does not cover at the SearchStax server.
+ */
+function ecms_base_update_11223(): void {
+  if (!\Drupal::moduleHandler()->moduleExists('search_api_solr')) {
     \Drupal::logger('ecms_base')
-      ->warning('Skipping re-index: the searchstax server could not be loaded.');
+      ->info('Skipping the search index migration: search_api_solr module is not enabled.');
     return;
   }
 
-  foreach ($server->getIndexes() as $index) {
-    try {
-      $index->reindex();
-    }
-    catch (\Exception $e) {
-      \Drupal::logger('ecms_base')
-        ->error('Failed to reindex @index: @message', [
-          '@index' => $index->id(),
-          '@message' => $e->getMessage(),
-        ]);
-    }
-  }
+  // The recipes in ecms_base_update_11222() are applied in a batch that only
+  // runs once every update hook has returned, so the indexes cannot be moved
+  // inline here: on a site that has not run 11222 yet, the searchstax server
+  // would not exist. Queue the migration as its own batch set instead, which
+  // core appends after the recipe set, so it runs once the recipe operations
+  // have completed.
+  // @see _batch_append_set()
+  $batch = new BatchBuilder();
+  $batch->setTitle(t('Moving the search indexes to the SearchStax server.'));
+  $batch->addOperation('ecms_base_searchstax_migrate_indexes');
+  batch_set($batch->toArray());
 }
