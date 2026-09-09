@@ -16,7 +16,8 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
-use Drupal\search_api\Entity\Index;
+use Drupal\search_api\Entity\Server;
+use Drupal\search_api\ServerInterface;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
@@ -751,15 +752,27 @@ function ecms_base_update_11222(): void {
 
   ecms_base_apply_recipes($recipes);
 
-  // Mark the acquia_search_index as needing a full re-index.
-  $index = Index::load('acquia_search_index');
-  if ($index instanceof Index) {
+  // Mark every index attached to the Searchstax server as needing a full
+  // re-index. The indexes are loaded dynamically so that any index a site has
+  // pointed at the server, not just acquia_search_index, is queued.
+  $server = Server::load('searchstax');
+
+  if (!$server instanceof ServerInterface) {
+    \Drupal::logger('ecms_base')
+      ->warning('Skipping re-index: the searchstax server could not be loaded.');
+    return;
+  }
+
+  foreach ($server->getIndexes() as $index) {
     try {
       $index->reindex();
     }
     catch (\Exception $e) {
       \Drupal::logger('ecms_base')
-        ->error('Failed to reindex acquia_search_index: @message', ['@message' => $e->getMessage()]);
+        ->error('Failed to reindex @index: @message', [
+          '@index' => $index->id(),
+          '@message' => $e->getMessage(),
+        ]);
     }
   }
 }
