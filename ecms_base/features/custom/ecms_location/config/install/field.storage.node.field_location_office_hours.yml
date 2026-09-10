@@ -17,6 +17,11 @@ settings:
   valhrs: false
   limit_start: ''
   limit_end: ''
+  required_start: false
+  required_end: false
+  all_day: false
+  exceptions: false
+  seasons: false
 module: office_hours
 locked: false
 cardinality: -1
