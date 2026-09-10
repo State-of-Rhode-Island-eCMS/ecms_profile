@@ -9,7 +9,7 @@ field_name: field_person_phone_extension
 entity_type: node
 bundle: person
 label: 'Phone extension'
-description: '(Optional) Provide an extension for the person''s phone number.'
+description: "(Optional) Provide an extension for the person's phone number."
 required: false
 translatable: false
 default_value: {  }
