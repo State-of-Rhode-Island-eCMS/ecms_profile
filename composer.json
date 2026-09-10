@@ -29,9 +29,9 @@
             },
             "drupal/core": {
                 "2794431 - [META] Formalize translations support (#102)": "https://www.drupal.org/files/issues/2020-09-29/jsonapi_add_and_update_translations_support-2794431-102.patch",
-                "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2025-07-09/drupal-core--2025-07-09--3049332--mr-12460.patch",
+                "3049332 - #134 - PHP message: Error: Call to a member function getEntityTypeId() on null (Layout Builder)": "https://www.drupal.org/files/issues/2026-07-03/3049332-inline-block-153.patch",
                 "2827921 - Exception thrown by responsive srcset images when the image is not yet in the file system (such as with Stage File Proxy)": "https://www.drupal.org/files/issues/2026-01-22/responsive_image-remove_missing_response_image_width_exception.patch",
-                "2741187 - 39 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/pfrilling/91262eb9ca72ec66704027344ebc0e56/raw/cba7ef0284684d1db59c193e5a06968a36b73a02/gistfile1.txt",
+                "2741187 - Allow usage of WYSIWYG in views text area fields": "https://gist.githubusercontent.com/juniabiswas/af2389d5b05d0b7f6e3d8f8d61dd816c/raw/cb8a28c888025b4fad89ef2dc9378f18e2bd1596/WYSIWYG-in-views.diff",
                 "3008292 - Upload validators (including max_resolution) not applied in media library upload form": "https://www.drupal.org/files/issues/2025-12-29/3008292-14174-11.x.patch"
             },
             "drupal/gtranslate": {
@@ -114,7 +114,7 @@
         "drupal/consumers": "^1.20",
         "drupal/content_moderation_notifications": "^3.2",
         "drupal/core-recommended": "^11.2",
-        "drupal/easy_breadcrumb": "2.0.9",
+        "drupal/easy_breadcrumb": "^2.0",
         "drupal/entity_print": "^2.18",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
@@ -189,7 +189,7 @@
         "drupal/simple_menu_permissions": "^3.0.1",
         "drupal/simple_oauth": "^6.0",
         "drupal/simple_sitemap": "^4.2",
-        "drupal/smart_date": "^4.2",
+        "drupal/smart_date": "^4.3",
         "drupal/stable": "^2.0",
         "drupal/svg_image": "^3.2",
         "drupal/token": "^1.12",
