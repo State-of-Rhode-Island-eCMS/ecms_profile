@@ -7,9 +7,6 @@ dependencies:
   module:
     - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats: {  }
 id: node.basic_page.field_basic_page_body
 field_name: field_basic_page_body
 entity_type: node
