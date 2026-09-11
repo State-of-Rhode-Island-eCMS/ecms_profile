@@ -322,13 +322,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              drupal_admin: '0'
-              content_author: '0'
-              embed_author: '0'
-              form_author: '0'
-              content_publisher: '0'
-              site_admin: '0'
             placeholder: ''
           is_grouped: false
           group_info:
