@@ -133,7 +133,7 @@ content:
         markerZoomAnimation: true
         inertiaDeceleration: 3000
         easeLinearity: 0.2
-        maxBoundsViscosity: !!float 0
+        maxBoundsViscosity: 0.0
         keyboard: true
         keyboardPanDelta: 80
         scrollWheelZoom: true
@@ -696,6 +696,9 @@ content:
     type: metatag_empty_formatter
     region: content
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   langcode: true
   links: true
   search_api_excerpt: true

@@ -12,28 +12,28 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.icon_card.preview
 targetEntityType: paragraph
 bundle: icon_card
 mode: preview
 content:
   field_list_title:
-    weight: 1
+    type: string
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_text:
-    weight: 2
+    type: text_trimmed
     label: hidden
     settings:
       trim_length: 55
     third_party_settings: {  }
-    type: text_trimmed
+    weight: 2
     region: content
 hidden:
   field_icon: true

@@ -10,8 +10,8 @@ dependencies:
     - paragraphs
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.column_container.preview
 targetEntityType: paragraph
 bundle: column_container
@@ -19,10 +19,10 @@ mode: preview
 content:
   field_components:
     type: paragraph_summary
-    weight: 0
     label: inline
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   search_api_excerpt: true

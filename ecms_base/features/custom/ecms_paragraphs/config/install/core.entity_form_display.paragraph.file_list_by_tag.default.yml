@@ -10,11 +10,11 @@ bundle: file_list_by_tag
 mode: default
 content:
   field_file_tag:
+    type: options_select
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
 hidden:
   created: true
   status: true

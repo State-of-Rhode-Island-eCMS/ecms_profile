@@ -14,6 +14,7 @@ content:
   field_gallery_items:
     type: entity_reference_paragraphs
     weight: 0
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -22,14 +23,13 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   status:
+    type: boolean_checkbox
     weight: 14
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   translation:
     weight: 10
     region: content
