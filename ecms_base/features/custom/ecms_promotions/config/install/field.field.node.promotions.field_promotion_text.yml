@@ -7,10 +7,6 @@ dependencies:
   module:
     - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - paragraph_text
 id: node.promotions.field_promotion_text
 field_name: field_promotion_text
 entity_type: node
@@ -21,5 +17,7 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - paragraph_text
 field_type: text_long
