@@ -5,3 +5,4 @@ name: 'Publication Audience'
 vid: publication_audience
 description: 'The target audience groups of the publication.'
 weight: 0
+new_revision: false
