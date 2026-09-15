@@ -7,10 +7,6 @@ dependencies:
   module:
     - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - paragraph_text
 id: block_content.text_card_collection.field_collection_description
 field_name: field_collection_description
 entity_type: block_content
@@ -21,5 +17,7 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - paragraph_text
 field_type: text_long
