@@ -5,3 +5,4 @@ name: 'Location categories'
 vid: location_categories
 description: 'Group locations by categories.'
 weight: 0
+new_revision: false

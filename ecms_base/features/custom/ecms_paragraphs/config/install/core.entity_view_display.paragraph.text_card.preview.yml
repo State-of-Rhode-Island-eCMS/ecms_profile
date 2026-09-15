@@ -11,28 +11,28 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.text_card.preview
 targetEntityType: paragraph
 bundle: text_card
 mode: preview
 content:
   field_card_title:
-    weight: 0
+    type: string
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
   field_text:
-    weight: 1
+    type: text_trimmed
     label: hidden
     settings:
       trim_length: 55
     third_party_settings: {  }
-    type: text_trimmed
+    weight: 1
     region: content
 hidden:
   search_api_excerpt: true

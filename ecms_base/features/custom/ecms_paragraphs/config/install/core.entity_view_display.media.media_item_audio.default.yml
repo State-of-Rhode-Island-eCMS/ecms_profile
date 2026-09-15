@@ -13,20 +13,20 @@ mode: default
 content:
   field_media_item_audio_file:
     type: file_default
-    weight: 1
-    region: content
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
+    weight: 1
+    region: content
   name:
     type: string
-    weight: 0
-    region: content
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   created: true
   langcode: true
