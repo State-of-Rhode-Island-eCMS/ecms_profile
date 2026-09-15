@@ -5,3 +5,4 @@ name: 'Event categories'
 vid: event_taxonomy
 description: 'Group events by categories.'
 weight: 0
+new_revision: false

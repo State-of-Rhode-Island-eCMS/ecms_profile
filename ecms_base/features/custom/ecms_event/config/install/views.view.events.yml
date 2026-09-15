@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.rss
     - core.entity_view_mode.node.teaser
     - node.type.event
   module:
     - node
+    - smart_date
     - user
 id: events
 label: Events
