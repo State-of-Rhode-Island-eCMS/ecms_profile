@@ -36,6 +36,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_person_social_links:
+    type: link_default
+    weight: 23
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_meta_tags_person:
     weight: 24
     settings:
@@ -219,5 +227,4 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  field_person_social_links: true
+hidden: {  }
