@@ -5,3 +5,4 @@ name: 'Staff / Department'
 vid: person_taxonomy
 description: 'Categorize people by staff/department etc.'
 weight: 0
+new_revision: false

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.card
     - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_additional_fields
     - field.field.node.person.field_person_category
@@ -19,105 +19,72 @@ dependencies:
     - field.field.node.person.field_person_social_links
     - node.type.person
   module:
-    - entity_reference_revisions
+    - link
     - user
-id: node.person.teaser
+id: node.person.card
 targetEntityType: node
 bundle: person
-mode: teaser
+mode: card
 content:
-  content_moderation_control:
-    weight: 9
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_person_additional_fields:
-    type: entity_reference_revisions_entity_view
-    weight: 7
-    region: content
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-  field_person_category:
-    type: entity_reference_label
-    weight: 2
-    region: content
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-  field_person_email:
-    type: basic_string
-    weight: 4
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
   field_person_first_name:
     type: string
-    weight: 0
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_person_job_title:
     type: string
-    weight: 3
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_person_last_name:
-    type: string
     weight: 1
     region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_person_phone:
+  field_person_last_name:
     type: string
-    weight: 5
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_person_phone_extension:
-    type: number_integer
-    weight: 6
+    weight: 3
     region: content
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
   field_person_photo:
     type: entity_reference_entity_view
-    weight: 8
-    region: content
     label: hidden
     settings:
-      link: true
       view_mode: default
+      link: false
     third_party_settings: {  }
-  links:
-    weight: 10
+    weight: 0
     region: content
-    settings: {  }
+  field_person_social_links:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
     third_party_settings: {  }
+    weight: 4
+    region: content
 hidden:
+  content_moderation_control: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_meta_tags_person: true
+  field_person_additional_fields: true
+  field_person_category: true
+  field_person_email: true
   field_person_fax: true
   field_person_list_weight: true
   field_person_mobile: true
-  field_person_social_links: true
+  field_person_phone: true
+  field_person_phone_extension: true
   langcode: true
+  links: true
   search_api_excerpt: true
