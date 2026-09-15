@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.person.field_meta_tags_person
     - field.field.node.person.field_person_additional_fields
+    - field.field.node.person.field_person_social_links
     - field.field.node.person.field_person_category
     - field.field.node.person.field_person_email
     - field.field.node.person.field_person_fax
@@ -34,6 +35,14 @@ content:
     weight: 16
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_person_social_links:
+    type: link_default
+    weight: 23
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_meta_tags_person:
     weight: 24
