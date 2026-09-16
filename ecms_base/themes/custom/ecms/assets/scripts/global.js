@@ -37,10 +37,22 @@ function allMenuCloser() {
     qh_toggle_btn.setAttribute('aria-expanded', 'false');
   }
 
+  // Close any open primary-nav drop downs (RIGA-891 — these were previously
+  // left open by this closer)
+  document.querySelectorAll('.js__qh-dd-toggle[aria-expanded="true"]').forEach(function (dd_toggle) {
+    dd_toggle.setAttribute('aria-expanded', 'false');
+  });
+
   // Close sidebar nav
   var qh_nav_minor = document.getElementById('js__minor-menu');
   if (qh_nav_minor !== null) {
     qh_nav_minor.classList.remove('qh__nav-minor--expanded');
+  }
+
+  // Keep the sidebar nav toggle's ARIA state in sync (RIGA-891)
+  var qh_minor_toggle = document.getElementById('js__minor-toggle');
+  if (qh_minor_toggle !== null) {
+    qh_minor_toggle.setAttribute('aria-expanded', 'false');
   }
 
   // Close settings nav
@@ -60,6 +72,42 @@ function allMenuCloser() {
   if (qh_gtranslate_btn !== null) {
     qh_gtranslate_btn.setAttribute('aria-expanded', 'false');
   }
+}
+
+// Close a menu when keyboard focus leaves it, and on Escape (RIGA-891).
+// Menus previously stayed open when a keyboard user tabbed past them, leaving
+// an expanded panel floating over the page with no way to dismiss it.
+//
+// container - element wrapping BOTH the toggle and the panel (focus moving
+//             between them must not count as leaving)
+// toggle    - the button that opens the menu; receives focus again on Escape
+// isOpen    - function returning whether the menu is currently open; nothing
+//             happens while closed (so Escape elsewhere never steals focus)
+// closeFn   - function that actually closes the menu
+function qhMenuFocusDismiss(container, toggle, isOpen, closeFn) {
+  if (container === null || container === undefined) {
+    return;
+  }
+
+  container.addEventListener('focusout', function (event) {
+    // relatedTarget is null when focus leaves the document (e.g. window blur);
+    // keep the menu open in that case.
+    if (isOpen() && event.relatedTarget !== null && !container.contains(event.relatedTarget)) {
+      closeFn();
+    }
+  });
+
+  container.addEventListener('keydown', function (event) {
+    if ((event.key === 'Escape' || event.key === 'Esc') && isOpen()) {
+      // Only close the innermost open menu (e.g. a drop down inside the
+      // mobile drawer) — a second Escape closes the next level up.
+      event.stopPropagation();
+      closeFn();
+      if (toggle !== null && toggle !== undefined) {
+        toggle.focus();
+      }
+    }
+  });
 }
 
 // Add screen overlay

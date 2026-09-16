@@ -110,10 +110,7 @@
     z-index: z(mobile-nav-bar);
 
     // Link & hover colors in global-header.scss
-    &,
-    &:visited {
-      text-decoration: none;
-    }
+    text-decoration: none;
 
     &:hover,
     &:focus {
@@ -184,19 +181,14 @@
     }
 
     .qh__u__btn-as-text {
-      &,
-      &:visited {
-        color: var(--fc__official__link);
-      }
+      color: var(--fc__official__link);
 
       &:hover,
       &:focus {
         color: var(--fc__official__link--hover);
       }
-
-      &:focus {
-        outline-color: var(--fc__official__link);
-      }
+      // Keyboard focus ring comes from the global two-tone :focus-visible
+      // mechanism (RIGA-891) — no per-region outline color override.
     }
 
     // specifically the language menu <ul>

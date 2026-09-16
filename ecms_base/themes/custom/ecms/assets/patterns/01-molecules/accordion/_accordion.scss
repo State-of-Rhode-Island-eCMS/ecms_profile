@@ -38,7 +38,6 @@
     display: block;
     font-weight: calc(var(--p-font-wght) * 1.25);
     max-width: none;
-    outline: none;
     padding: $nav-a-v-spacing $nav-a-h-spacing;
     text-align: left;
     transition: $transition-base;
@@ -51,12 +50,11 @@
       color: var(--fc__default__fg);
     }
 
-    // Accordion titles are required to look focused
-    &:focus {
-      .qh__accordion__button__summary {
-        outline: $border-sm solid var(--fc__default__link--focus);
-        outline-offset: 3px;
-      }
+    // Accordion titles are required to look focused. Inset two-tone ring on
+    // the button itself (accordions also render inside the section menu's
+    // overflow-clipped list) — RIGA-891.
+    &:focus-visible {
+      @include qh-focus-ring--inset;
     }
 
     &__summary {
@@ -114,7 +112,11 @@
       max-height: 0;
       overflow: hidden;
       padding-inline: $general-h-spacing;
-      transition: max-height 250ms ease-in-out 250ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500s;
+      // visibility delay waits for the max-height collapse (250 + 250ms) to
+      // finish. Was `500s` — a typo that left collapsed panels focusable for
+      // ~8 minutes (RIGA-891); expand-collapse.js also sets `inert` so links
+      // leave the tab order immediately.
+      transition: max-height 250ms ease-in-out 250ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500ms;
       visibility: hidden;
 
       > div {
@@ -140,7 +142,7 @@
       .js & {
         height: calc-size(auto);
         max-height: unset;
-        transition: height 500ms ease-in-out 0ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500s;
+        transition: height 500ms ease-in-out 0ms, padding 500ms ease-in-out 0ms, visibility 0s linear 500ms;
       }
 
       .js [aria-expanded='true'] + & {

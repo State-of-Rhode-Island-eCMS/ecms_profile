@@ -57,6 +57,28 @@
   }
 }
 
+// Two-tone keyboard focus indicator (RIGA-891)
+// Consumes the palette-emitted pair (focus__ring / focus__halo in
+// color-config.hjson). Ring and halo always contrast strongly with each
+// other, so the indicator is visible on any background color in light and
+// dark mode — no per-region focus color tuning needed. Apply on
+// :focus-visible only; the :focus:not(:focus-visible) reset in _00-html.scss
+// keeps mouse focus quiet.
+@mixin qh-focus-ring() {
+  box-shadow: 0 0 0 rem(4) var(--fc__default__focus__halo);
+  outline: rem(2) solid var(--fc__default__focus__ring);
+  outline-offset: 0;
+}
+
+// Inset variant for elements inside clipping containers (nav bars, drawers,
+// accordion lists with overflow: hidden) where an outward ring would be cut
+// off: halo band inside the edge, ring inside the halo.
+@mixin qh-focus-ring--inset() {
+  box-shadow: inset 0 0 0 rem(4) var(--fc__default__focus__halo);
+  outline: rem(2) solid var(--fc__default__focus__ring);
+  outline-offset: rem(-4);
+}
+
 @mixin qh-fw-bold() {
   font-weight: bold;
 

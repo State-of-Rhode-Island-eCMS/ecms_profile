@@ -32,8 +32,7 @@
 
     &:is(a):focus-visible {
       border-radius: 4px;
-      outline: 2px solid var(--c__hope-gold, hsl(46, 95%, 61%));
-      outline-offset: 2px;
+      @include qh-focus-ring;
     }
   }
 
