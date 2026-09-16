@@ -5,7 +5,6 @@ dependencies:
     - field.storage.paragraph.field_gallery_item_caption
     - paragraphs.paragraphs_type.gallery_item
   module:
-    - allowed_formats
     - text
 id: paragraph.gallery_item.field_gallery_item_caption
 field_name: field_gallery_item_caption
