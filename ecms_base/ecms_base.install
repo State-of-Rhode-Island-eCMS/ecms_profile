@@ -742,10 +742,11 @@ function ecms_base_update_11222(): void {
     return;
   }
 
-  // Apply the ecms_solr_search recipe.
+  // ecms_multisite_search declares ecms_solr_search as a nested recipe, so
+  // applying it also applies every ecms_solr_search operation. Queueing both
+  // here would run the solr search operations twice.
   $recipes = [
     'ecms_multisite_search',
-    'ecms_solr_search',
   ];
 
   ecms_base_apply_recipes($recipes);

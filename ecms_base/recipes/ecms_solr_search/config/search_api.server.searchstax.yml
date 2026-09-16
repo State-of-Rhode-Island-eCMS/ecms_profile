@@ -35,9 +35,9 @@ name: SearchStax
 description: ''
 backend: search_api_solr
 backend_config:
-  retrieve_data: false
-  highlight_data: false
-  site_hash: false
+  retrieve_data: true
+  highlight_data: true
+  site_hash: true
   server_prefix: ''
   domain: generic
   environment: default

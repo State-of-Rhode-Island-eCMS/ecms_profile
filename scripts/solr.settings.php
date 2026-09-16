@@ -42,7 +42,10 @@ $config['search_api.server.searchstax']['backend_config']['connector_config']['p
 // --- ecms_multisite_server (used by ecms_multisite_index) ---
 
 // DDEV local Solr override — remove or comment out to use SearchStax directly.
-$config['search_api.server.ecms_multisite_server']['backend'] = 'search_api_solr';
+// Only the connector is overridden: the stored ecms_acquia_search_solr backend
+// is what teaches Search API Solr about the solr_multisite_all datasource, so
+// swapping it for the generic search_api_solr backend breaks local cross-site
+// search.
 $config['search_api.server.ecms_multisite_server']['backend_config']['connector'] = 'solr_cloud_basic_auth';
 $config['search_api.server.ecms_multisite_server']['backend_config']['connector_config']['scheme'] = 'http';
 $config['search_api.server.ecms_multisite_server']['backend_config']['connector_config']['host'] = 'solr';

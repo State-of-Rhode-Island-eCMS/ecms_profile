@@ -22,5 +22,5 @@ config:
       - views.view.acquia_search
   actions:
     search_api.index.acquia_search_index:
-      simple_config_update:
+      simpleConfigUpdate:
         server: searchstax
