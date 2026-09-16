@@ -15,10 +15,12 @@ dependencies:
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_photo
+    - field.field.node.person.field_person_social_links
     - node.type.person
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - link
     - media_library
     - metatag
     - paragraphs
@@ -34,6 +36,14 @@ content:
     weight: 16
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_person_social_links:
+    type: link_default
+    weight: 23
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_meta_tags_person:
     weight: 24
@@ -165,6 +175,11 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   status:
     type: boolean_checkbox
     settings:

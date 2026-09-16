@@ -1,2 +1,4 @@
 bundle: ecms
 required: true
+excluded:
+  - filter.format.basic_html

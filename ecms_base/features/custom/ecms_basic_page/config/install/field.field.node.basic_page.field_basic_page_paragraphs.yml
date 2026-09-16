@@ -22,11 +22,11 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
     target_bundles:
       gallery_item: gallery_item
       text_card: text_card
       person_additional_fields: person_additional_fields
+    negate: 1
     target_bundles_drag_drop:
       accordion_builder:
         weight: 14
@@ -53,8 +53,8 @@ settings:
         weight: 20
         enabled: false
       gallery_item:
-        enabled: true
         weight: 21
+        enabled: true
       icon_button:
         weight: 29
         enabled: false
@@ -71,8 +71,8 @@ settings:
         weight: 33
         enabled: false
       person_additional_fields:
-        enabled: true
         weight: 34
+        enabled: true
       person_list:
         weight: 35
         enabled: false
@@ -83,6 +83,6 @@ settings:
         weight: 25
         enabled: false
       text_card:
-        enabled: true
         weight: 26
+        enabled: true
 field_type: entity_reference_revisions
