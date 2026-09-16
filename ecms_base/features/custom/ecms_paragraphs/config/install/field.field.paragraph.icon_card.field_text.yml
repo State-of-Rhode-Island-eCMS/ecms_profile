@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_text
+    - filter.format.basic_html
     - paragraphs.paragraphs_type.icon_card
   module:
     - text

@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.header_image_action
     - field.storage.block_content.field_hia_text
+    - filter.format.minimal
   module:
     - text
 id: block_content.header_image_action.field_hia_text

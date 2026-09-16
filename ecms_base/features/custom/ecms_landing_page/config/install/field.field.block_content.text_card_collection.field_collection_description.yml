@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.text_card_collection
     - field.storage.block_content.field_collection_description
+    - filter.format.paragraph_text
   module:
     - text
 id: block_content.text_card_collection.field_collection_description

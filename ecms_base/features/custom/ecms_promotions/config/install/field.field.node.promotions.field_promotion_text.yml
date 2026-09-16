@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_promotion_text
+    - filter.format.paragraph_text
     - node.type.promotions
   module:
     - text

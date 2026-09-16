@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_embed_content
+    - filter.format.embed
     - paragraphs.paragraphs_type.embed
   module:
     - text
