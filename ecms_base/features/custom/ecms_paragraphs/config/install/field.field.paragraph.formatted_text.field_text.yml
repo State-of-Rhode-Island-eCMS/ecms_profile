@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_text
-    - filter.format.paragraph_text
     - paragraphs.paragraphs_type.formatted_text
   module:
     - text

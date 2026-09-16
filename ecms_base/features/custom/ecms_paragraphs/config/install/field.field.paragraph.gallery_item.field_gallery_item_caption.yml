@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_gallery_item_caption
-    - filter.format.paragraph_text
     - paragraphs.paragraphs_type.gallery_item
   module:
     - text
