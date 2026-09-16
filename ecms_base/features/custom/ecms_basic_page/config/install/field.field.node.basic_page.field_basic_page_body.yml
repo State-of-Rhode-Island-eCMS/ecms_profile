@@ -5,7 +5,6 @@ dependencies:
     - field.storage.node.field_basic_page_body
     - node.type.basic_page
   module:
-    - allowed_formats
     - text
 id: node.basic_page.field_basic_page_body
 field_name: field_basic_page_body

@@ -5,7 +5,6 @@ dependencies:
     - field.storage.node.field_notification_text
     - node.type.notification
   module:
-    - allowed_formats
     - text
 id: node.notification.field_notification_text
 field_name: field_notification_text

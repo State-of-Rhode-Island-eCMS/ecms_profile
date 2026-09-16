@@ -5,7 +5,6 @@ dependencies:
     - field.storage.node.field_vacsite_spec_instructions
     - node.type.vaccination_site
   module:
-    - allowed_formats
     - text
 id: node.vaccination_site.field_vacsite_spec_instructions
 field_name: field_vacsite_spec_instructions
