@@ -20,6 +20,7 @@ dependencies:
     - workflows.workflow.editorial
   module:
     - content_moderation
+    - link
     - media_library
     - metatag
     - paragraphs
