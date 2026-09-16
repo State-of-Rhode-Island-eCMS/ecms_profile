@@ -8,7 +8,7 @@ dependencies:
   - field.storage.node.field_landing_page_body
   - field.storage.node.field_location_body
   - field.storage.node.field_press_release_body
-  - search_api.server.acquia_search_server
+  - search_api.server.searchstax
   module:
   - node
   - search_api_solr
@@ -237,5 +237,5 @@ options:
   delete_on_fail: true
   index_directly: false
   track_changes_in_references: true
-server: acquia_search_server
+server: searchstax
 
