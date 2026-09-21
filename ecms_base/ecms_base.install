@@ -16,6 +16,7 @@ use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
+use Drupal\Core\Utility\UpdateException;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
@@ -773,4 +774,59 @@ function ecms_base_update_11223(): void {
   $batch->setTitle(t('Moving the search indexes to the SearchStax server.'));
   $batch->addOperation('ecms_base_searchstax_migrate_indexes');
   batch_set($batch->toArray());
+}
+
+/**
+ * Re-run the SearchStax index migration for sites features:import reverted.
+ */
+function ecms_base_update_11224(): ?string {
+  if (!\Drupal::moduleHandler()->moduleExists('search_api_solr')) {
+    \Drupal::logger('ecms_base')
+      ->info('Skipping the search index migration: search_api_solr module is not enabled.');
+    return NULL;
+  }
+
+  // The ACSF deployment runs `drush updatedb` and then `features:import`. Until
+  // this release the ecms_solr_search feature still shipped
+  // search_api.index.acquia_search_index with server: acquia_search_server, so
+  // that import reverted the work ecms_base_update_11223() had just done. The
+  // feature now points at searchstax, but 11223 is already recorded as run on
+  // those sites, so the migration has to be driven again from here.
+  $searchstaxExists = !empty(
+    \Drupal::configFactory()->get('search_api.server.searchstax')->getRawData()
+  );
+
+  // On a site that has not reached 11222 yet, that update queued the recipe
+  // which creates the searchstax server, and recipe batches only run once every
+  // update hook has returned. The server genuinely does not exist yet, so the
+  // migration has to be queued as its own batch set, which core appends after
+  // the recipe set.
+  // @see _batch_append_set()
+  if (!$searchstaxExists) {
+    $batch = new BatchBuilder();
+    $batch->setTitle(t('Moving the search indexes to the SearchStax server.'));
+    $batch->addOperation('ecms_base_searchstax_migrate_indexes');
+    batch_set($batch->toArray());
+
+    return (string) t('Queued the SearchStax index migration to run after the ecms_multisite_search recipe.');
+  }
+
+  // The server is already there, which is the case for every site that ran
+  // 11222 in an earlier deployment. Run the migration inline rather than in a
+  // batch: core records the schema version as soon as an update hook returns,
+  // so work queued in a batch is marked as completed before it has run and is
+  // lost for good if that batch aborts. Running inline means an exception here
+  // leaves 11224 unrecorded and the next deployment retries it.
+  // @see update_do_one()
+  $remaining = ecms_base_searchstax_migrate_indexes();
+
+  if ($remaining === NULL) {
+    throw new UpdateException('The search index migration could not run: the searchstax server could not be loaded. Check that the ecms_multisite_search recipe applied cleanly.');
+  }
+
+  if (!empty($remaining)) {
+    throw new UpdateException(sprintf('The search index migration is incomplete: %s could not be moved off the Acquia server. See the ecms_base log for the underlying errors.', implode(', ', $remaining)));
+  }
+
+  return (string) t('Moved the search indexes to the SearchStax server and disabled the Acquia server.');
 }
