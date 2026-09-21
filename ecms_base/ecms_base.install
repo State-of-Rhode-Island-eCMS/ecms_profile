@@ -792,32 +792,32 @@ function ecms_base_update_11224(): ?string {
   // that import reverted the work ecms_base_update_11223() had just done. The
   // feature now points at searchstax, but 11223 is already recorded as run on
   // those sites, so the migration has to be driven again from here.
-  $searchstaxExists = !empty(
-    \Drupal::configFactory()->get('search_api.server.searchstax')->getRawData()
-  );
+  $configFactory = \Drupal::configFactory();
 
-  // On a site that has not reached 11222 yet, that update queued the recipe
-  // which creates the searchstax server, and recipe batches only run once every
-  // update hook has returned. The server genuinely does not exist yet, so the
-  // migration has to be queued as its own batch set, which core appends after
-  // the recipe set.
-  // @see _batch_append_set()
-  if (!$searchstaxExists) {
-    $batch = new BatchBuilder();
-    $batch->setTitle(t('Moving the search indexes to the SearchStax server.'));
-    $batch->addOperation('ecms_base_searchstax_migrate_indexes');
-    batch_set($batch->toArray());
-
-    return (string) t('Queued the SearchStax index migration to run after the ecms_multisite_search recipe.');
+  // Sites that never had the Acquia server have nothing to migrate.
+  // ecms_base_update_11222() skips the recipe on exactly these sites, so the
+  // searchstax server is never created there and there is nothing to verify.
+  // Without this the update below would throw on every deployment forever.
+  if (empty($configFactory->get('search_api.server.acquia_search_server')->getRawData())) {
+    \Drupal::logger('ecms_base')
+      ->info('Skipping the search index migration: acquia_search_server configuration not found.');
+    return (string) t('No Acquia search server is configured, so there are no indexes to migrate.');
   }
 
-  // The server is already there, which is the case for every site that ran
-  // 11222 in an earlier deployment. Run the migration inline rather than in a
-  // batch: core records the schema version as soon as an update hook returns,
-  // so work queued in a batch is marked as completed before it has run and is
-  // lost for good if that batch aborts. Running inline means an exception here
-  // leaves 11224 unrecorded and the next deployment retries it.
+  // This update never queues a batch. Core records the schema version as soon
+  // as an update hook returns, and a batch only runs once every hook has
+  // returned, so anything queued here would be recorded as applied before it
+  // ran and its result could not be observed: a failed migration would look
+  // like a successful update, and the features:import that follows would then
+  // disable the Acquia server while indexes were still attached to it.
+  // Everything below therefore runs inline, where an exception leaves 11224
+  // unrecorded and the next deployment retries it.
   // @see update_do_one()
+  // @see _batch_process()
+  if (empty($configFactory->get('search_api.server.searchstax')->getRawData())) {
+    throw new UpdateException('The searchstax server does not exist yet, so the search index migration could not be verified. The ecms_multisite_search recipe queued by ecms_base_update_11222() only runs after every update hook has returned; re-run `drush updatedb` to complete and verify the migration. If it still fails, apply the ecms_multisite_search recipe manually and check the ecms_base log.');
+  }
+
   $remaining = ecms_base_searchstax_migrate_indexes();
 
   if ($remaining === NULL) {
