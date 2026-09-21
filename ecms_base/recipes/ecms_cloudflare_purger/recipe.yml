@@ -1,0 +1,16 @@
+name: 'ECMS Cloudflare Purger'
+description: 'Configures Cloudflare cache tag purging via the Purge framework.'
+type: 'Site'
+recipes: []
+install:
+  - cloudflare_purger
+  - key
+config:
+  strict: false
+  import:
+    key:
+      - key.key.cloudflare_api_token
+    cloudflare_purger:
+      - cloudflare_purger.settings
+    purge:
+      - purge.plugins

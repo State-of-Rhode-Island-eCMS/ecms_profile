@@ -107,6 +107,7 @@ function ecms_base_apply_default_recipes(): array {
     'ecms_security',
     'ecms_webform',
     'ecms_acquia',
+    'ecms_cloudflare_purger',
     'ecms_news',
   ];
   $operations = ecms_base_apply_recipes($recipesToApply, FALSE);
@@ -712,4 +713,12 @@ function ecms_base_update_11221(): string {
   }
 
   return (string) t('The webform export directory could not be created. Submission exports will fail on this site until private://webform_exports exists and is writable by the web server.');
+}
+
+/**
+ * Apply the ecms_cloudflare_purger recipe to existing sites.
+ */
+function ecms_base_update_11222(): void {
+  $recipes = ['ecms_cloudflare_purger'];
+  ecms_base_apply_recipes($recipes);
 }
