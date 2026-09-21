@@ -67,11 +67,6 @@ ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_DOCROOT}/profiles/contrib
 # Symlink the drush directory to the ddev environment.
 ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_APPROOT}/develop drush) $DDEV_APPROOT/develop/drush'
 
-# Symlink the patches directory to the ddev environment. cweagans/composer-patches
-# resolves a local patch path with file_exists(), which is relative to the composer
-# root, and here that root is develop/ rather than the repository root.
-ddev exec 'ln -s -f $(realpath -s --relative-to=${DDEV_APPROOT}/develop patches) $DDEV_APPROOT/develop/patches'
-
 ## Merge the profile's composer into Drupal's default.
 ddev exec "test -f develop/composer.lock || (generate-composer > develop/merge.composer.json)"
 
