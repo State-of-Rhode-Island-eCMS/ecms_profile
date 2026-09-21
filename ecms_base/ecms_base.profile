@@ -81,7 +81,8 @@ function ecms_base_find_theme_functions($cache, $prefixes) {
  * Acquia server.
  *
  * @return string[]|null
- *   The IDs of the indexes that are still attached to the Acquia server, so an
+ *   The IDs of the indexes the migration could not finish: those still attached
+ *   to the Acquia server, and those that could not be queued for a re-index. An
  *   empty array means the migration is complete. NULL if the migration could
  *   not run at all because the SearchStax server is missing. Batch runs ignore
  *   the return value; ecms_base_update_11224() uses it to decide whether to
@@ -144,11 +145,14 @@ function ecms_base_searchstax_migrate_indexes(): ?array {
     ? $moved
     : $searchstax->getIndexes();
 
+  $reindexFailed = [];
+
   foreach ($toReindex as $index) {
     try {
       $index->reindex();
     }
     catch (\Exception $e) {
+      $reindexFailed[] = $index->id();
       $logger->error('Failed to reindex @index: @message', [
         '@index' => $index->id(),
         '@message' => $e->getMessage(),
@@ -156,7 +160,13 @@ function ecms_base_searchstax_migrate_indexes(): ?array {
     }
   }
 
-  $state->set('ecms_base.searchstax_migrated', TRUE);
+  // Only record the first run once every index was queued for a re-index.
+  // Setting this regardless would downgrade the next run to "re-index what
+  // moved", and an index that failed here moved on an earlier run, so nothing
+  // would ever queue its content again.
+  if (empty($reindexFailed)) {
+    $state->set('ecms_base.searchstax_migrated', TRUE);
+  }
 
   // Nothing should be left on the Acquia server once the move succeeds, so
   // disable it. Leaving it enabled lets an editor re-attach an index to a
@@ -194,10 +204,11 @@ function ecms_base_searchstax_migrate_indexes(): ?array {
     }
   }
 
-  $logger->info('SearchStax index migration complete. Moved: @moved. Failed: @failed.', [
+  $logger->info('SearchStax index migration complete. Moved: @moved. Failed to move: @failed. Failed to reindex: @reindex.', [
     '@moved' => $moved ? implode(', ', array_keys($moved)) : 'none',
     '@failed' => $failed ? implode(', ', $failed) : 'none',
+    '@reindex' => $reindexFailed ? implode(', ', $reindexFailed) : 'none',
   ]);
 
-  return $remaining;
+  return array_values(array_unique(array_merge($remaining, $reindexFailed)));
 }

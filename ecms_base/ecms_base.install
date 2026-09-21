@@ -825,7 +825,7 @@ function ecms_base_update_11224(): ?string {
   }
 
   if (!empty($remaining)) {
-    throw new UpdateException(sprintf('The search index migration is incomplete: %s could not be moved off the Acquia server. See the ecms_base log for the underlying errors.', implode(', ', $remaining)));
+    throw new UpdateException(sprintf('The search index migration is incomplete: %s could not be moved off the Acquia server or could not be queued for a re-index. See the ecms_base log for the underlying errors.', implode(', ', $remaining)));
   }
 
   return (string) t('Moved the search indexes to the SearchStax server and disabled the Acquia server.');
