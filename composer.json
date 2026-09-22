@@ -24,6 +24,9 @@
     },
     "extra": {
         "patches": {
+            "drupal/acquia_search": {
+                "Endpoint::$options must be typed array for solarium/solarium 7": "patches/acquia_search-solarium7-typed-options-3554806.patch"
+            },
             "drupal/address_phonenumber": {
                 "3428745 - Drupal 11 Support": "https://www.drupal.org/files/issues/2024-03-16/address_phonenumber.10.0.0.rector.patch"
             },

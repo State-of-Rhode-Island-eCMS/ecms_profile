@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
   - core.entity_view_mode.node.full
-  - field.storage.node.body
   - field.storage.node.field_basic_page_body
   - field.storage.node.field_landing_page_body
   - field.storage.node.field_location_body
@@ -59,14 +58,6 @@ name: Acquia Search Solr Search API Solr index
 description: ''
 read_only: false
 field_settings:
-  body:
-    label: Body
-    datasource_id: entity:node
-    property_path: body
-    type: solr_text_custom:ngram
-    dependencies:
-      config:
-      - field.storage.node.body
   field_basic_page_body:
     label: Intro text
     datasource_id: entity:node
@@ -202,7 +193,6 @@ processor_settings:
       preprocess_query: -15
     all_fields: true
     fields:
-    - body
     - field_basic_page_body
     - field_landing_page_body
     - field_location_body

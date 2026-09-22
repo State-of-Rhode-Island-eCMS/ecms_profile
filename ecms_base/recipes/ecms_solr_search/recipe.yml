@@ -20,7 +20,68 @@ config:
       - search_api.index.acquia_search_index
     views:
       - views.view.acquia_search
+    # Solr field types, caches and request handlers that both servers declare
+    # in dependencies.config. On a fresh site nothing else creates them:
+    # RecipeRunner::installModules() sets the config installer to syncing, and
+    # ConfigInstaller::createConfiguration() skips config entities while
+    # syncing, so search_api_solr's own config/install and config/optional are
+    # never processed by a recipe. They used to arrive only because the
+    # ecms_solr_search feature module re-exported them, which a recipe-built
+    # site never installs. This is that same set, plus everything
+    # search_api_solr ships as required config.
+    search_api_solr:
+      - search_api_solr.solr_cache.cache_document_default_7_0_0
+      - search_api_solr.solr_cache.cache_document_default_9_0_0
+      - search_api_solr.solr_cache.cache_fieldvalue_default_7_0_0
+      - search_api_solr.solr_cache.cache_fieldvalue_default_9_0_0
+      - search_api_solr.solr_cache.cache_filter_default_7_0_0
+      - search_api_solr.solr_cache.cache_filter_default_9_0_0
+      - search_api_solr.solr_cache.cache_persegfilter_default_7_0_0
+      - search_api_solr.solr_cache.cache_persegfilter_default_9_0_0
+      - search_api_solr.solr_cache.cache_queryresult_default_7_0_0
+      - search_api_solr.solr_cache.cache_queryresult_default_9_0_0
+      - search_api_solr.solr_field_type.text_ar_6_0_0
+      - search_api_solr.solr_field_type.text_ar_7_0_0
+      - search_api_solr.solr_field_type.text_edge_und_6_0_0
+      - search_api_solr.solr_field_type.text_edge_und_7_0_0
+      - search_api_solr.solr_field_type.text_edgestring_und_6_0_0
+      - search_api_solr.solr_field_type.text_en_6_0_0
+      - search_api_solr.solr_field_type.text_en_7_0_0
+      - search_api_solr.solr_field_type.text_es_6_0_0
+      - search_api_solr.solr_field_type.text_es_7_0_0
+      - search_api_solr.solr_field_type.text_fr_6_0_0
+      - search_api_solr.solr_field_type.text_fr_7_0_0
+      - search_api_solr.solr_field_type.text_ngram_und_6_0_0
+      - search_api_solr.solr_field_type.text_ngram_und_7_0_0
+      - search_api_solr.solr_field_type.text_ngramstring_und_6_0_0
+      - search_api_solr.solr_field_type.text_phonetic_en_7_0_0
+      - search_api_solr.solr_field_type.text_phonetic_es_7_0_0
+      - search_api_solr.solr_field_type.text_phonetic_fr_7_0_0
+      - search_api_solr.solr_field_type.text_phonetic_und_7_0_0
+      - search_api_solr.solr_field_type.text_pt-pt_7_0_0
+      - search_api_solr.solr_field_type.text_string_und_6_0_0
+      - search_api_solr.solr_field_type.text_und_6_0_0
+      - search_api_solr.solr_field_type.text_und_7_0_0
+      - search_api_solr.solr_field_type.text_zh-hans_7_0_0
+      - search_api_solr.solr_request_dispatcher.request_dispatcher_httpcaching_default_7_0_0
+      - search_api_solr.solr_request_dispatcher.request_dispatcher_httpcachingnever_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_autocomplete_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_elevate_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_extract_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_mlt_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_query_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_replicationmaster_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_replicationslave_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_select_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_spell_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_suggest_default_7_0_0
+      - search_api_solr.solr_request_handler.request_handler_tvrh_default_7_0_0
   actions:
+    # setProperties goes through the entity API, so saving the index also
+    # recalculates its dependencies. simpleConfigUpdate writes raw config and
+    # would leave search_api.server.acquia_search_server behind in
+    # dependencies.config, which then cascades into the index when the Acquia
+    # server is disabled or removed.
     search_api.index.acquia_search_index:
-      simpleConfigUpdate:
+      setProperties:
         server: searchstax
