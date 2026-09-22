@@ -54,7 +54,7 @@ third_party_settings:
       include_language_independent: true
       specific_languages: {}
 id: acquia_search_index
-name: Acquia Search Solr Search API Solr index
+name: 'eCMS Site Search Index'
 description: ''
 read_only: false
 field_settings:
