@@ -17,8 +17,8 @@ dependencies:
     - options
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.media_item.preview
 targetEntityType: paragraph
 bundle: media_item
@@ -26,23 +26,21 @@ mode: preview
 content:
   field_alignment:
     type: list_default
-    weight: 3
-    region: content
     label: inline
     settings: {  }
     third_party_settings: {  }
+    weight: 3
+    region: content
   field_caption:
     type: string
-    weight: 1
-    region: content
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_link:
     type: link
-    weight: 2
-    region: content
     label: inline
     settings:
       trim_length: 80
@@ -51,21 +49,23 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_media_item:
     type: media_thumbnail
-    weight: 0
     label: hidden
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
     third_party_settings: {  }
+    weight: 0
     region: content
   field_size:
     type: list_default
-    weight: 4
-    region: content
     label: inline
     settings: {  }
     third_party_settings: {  }
+    weight: 4
+    region: content
 hidden:
   search_api_excerpt: true

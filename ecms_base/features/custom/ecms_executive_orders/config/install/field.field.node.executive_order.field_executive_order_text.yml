@@ -5,12 +5,7 @@ dependencies:
     - field.storage.node.field_executive_order_text
     - node.type.executive_order
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - basic_html
 id: node.executive_order.field_executive_order_text
 field_name: field_executive_order_text
 entity_type: node
@@ -24,4 +19,6 @@ default_value_callback: ''
 settings:
   display_summary: true
   required_summary: false
+  allowed_formats:
+    - basic_html
 field_type: text_with_summary

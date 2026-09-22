@@ -12,5 +12,6 @@ dependencies:
   - 'drupal:views'
   - 'search_api:search_api'
   - 'search_api_solr:search_api_solr'
+  - 'searchstax:searchstax'
 version: 9.x-1.1
 package: eCMS

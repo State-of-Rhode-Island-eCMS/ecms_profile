@@ -60,8 +60,10 @@ select {
   }
 
   &:focus {
+    // Border color change stays as an enhancement; the keyboard focus ring
+    // now comes from the global two-tone :focus-visible mechanism (RIGA-891),
+    // so no longer suppress the outline here.
     border-color: var(--fc__default__violator);
-    outline: 0;
   }
 
   // Spacing from label elements
@@ -266,16 +268,10 @@ input[type="range"] {
         @include range-thumb;
       }
 
-      &:focus {
-        outline: $border-sm solid var(--fc__official__link--focus, currentColor);
-        outline-offset: ($border-sm * 2);
+      &:focus-visible {
+        @include qh-focus-ring;
       }
 
-      // Repeating… because "focus-within" will break IE11 and invalidate the entire block
-      &:focus-within {
-        outline: $border-sm solid var(--fc__official__link--focus, currentColor);
-        outline-offset: ($border-sm * 2);
-      }
     }
   }
 }

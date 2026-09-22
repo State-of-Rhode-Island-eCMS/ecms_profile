@@ -14,18 +14,18 @@ bundle: promotional_image
 mode: media_library
 content:
   field_promotion_image:
+    type: image_image
     weight: -50
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
-    region: content
   translation:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   langcode: true

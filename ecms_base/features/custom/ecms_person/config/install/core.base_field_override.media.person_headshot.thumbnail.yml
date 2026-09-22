@@ -10,8 +10,8 @@ third_party_settings:
   content_translation:
     translation_sync:
       file: file
-      alt: 0
-      title: 0
+      alt: '0'
+      title: '0'
 id: media.person_headshot.thumbnail
 field_name: thumbnail
 entity_type: media
@@ -23,21 +23,21 @@ translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
+  handler: default
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
   alt_field: true
   alt_field_required: true
   title_field: false
   title_field_required: false
-  max_resolution: ''
-  min_resolution: ''
   default_image:
     uuid: null
     alt: ''
     title: ''
     width: null
     height: null
-  file_directory: '[date:custom:Y]-[date:custom:m]'
-  max_filesize: ''
-  handler: default
-  handler_settings: {  }
 field_type: image

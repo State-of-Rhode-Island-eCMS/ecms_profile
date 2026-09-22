@@ -233,8 +233,14 @@
 
   // Column elements
   &__col {
+    // flow-root + min-width keep what `overflow: auto` provided — float
+    // containment (rich-text images) and the flex item's ability to shrink
+    // below its content width — without clipping the keyboard focus
+    // ring + halo on links flush with the column edge (RIGA-891). Wide
+    // tables scroll via their own .qh__table-container.
+    display: flow-root;
     margin-bottom: $general-v-spacing;
-    overflow: auto;
+    min-width: 0;
 
     .block:first-child:last-child {
       display: flex;

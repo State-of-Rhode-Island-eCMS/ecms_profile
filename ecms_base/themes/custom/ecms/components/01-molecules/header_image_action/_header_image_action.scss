@@ -95,8 +95,7 @@ $hia-gutter--xxlarge: calc((100vw - #{$content-max-large-screen}) / 2);
 
         // If a button is present, it will likely be primary color over primary color
         // Let's flip them
-        .qh__btn,
-        .qh__btn:visited {
+        .qh__btn {
           background-color: var(--fc__default__button__fg);
           color: var(--fc__default__button__bg);
         }

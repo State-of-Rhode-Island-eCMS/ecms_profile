@@ -5,3 +5,4 @@ name: 'Person additional fields'
 vid: person_additional_fields
 description: 'Houses site specific person field labels.'
 weight: 0
+new_revision: false

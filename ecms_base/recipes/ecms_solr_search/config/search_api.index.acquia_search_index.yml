@@ -3,12 +3,11 @@ status: true
 dependencies:
   config:
   - core.entity_view_mode.node.full
-  - field.storage.node.body
   - field.storage.node.field_basic_page_body
   - field.storage.node.field_landing_page_body
   - field.storage.node.field_location_body
   - field.storage.node.field_press_release_body
-  - search_api.server.acquia_search_server
+  - search_api.server.searchstax
   module:
   - node
   - search_api_solr
@@ -55,18 +54,10 @@ third_party_settings:
       include_language_independent: true
       specific_languages: {}
 id: acquia_search_index
-name: Acquia Search Solr Search API Solr index
+name: 'eCMS Site Search Index'
 description: ''
 read_only: false
 field_settings:
-  body:
-    label: Body
-    datasource_id: entity:node
-    property_path: body
-    type: solr_text_custom:ngram
-    dependencies:
-      config:
-      - field.storage.node.body
   field_basic_page_body:
     label: Intro text
     datasource_id: entity:node
@@ -159,6 +150,12 @@ field_settings:
     dependencies:
       module:
       - node
+  url:
+    label: URI
+    property_path: search_api_url
+    type: string
+    configuration:
+      absolute: true
 datasource_settings:
   entity:node:
     bundles:
@@ -202,7 +199,6 @@ processor_settings:
       preprocess_query: -15
     all_fields: true
     fields:
-    - body
     - field_basic_page_body
     - field_landing_page_body
     - field_location_body
@@ -237,5 +233,5 @@ options:
   delete_on_fail: true
   index_directly: false
   track_changes_in_references: true
-server: acquia_search_server
+server: searchstax
 
