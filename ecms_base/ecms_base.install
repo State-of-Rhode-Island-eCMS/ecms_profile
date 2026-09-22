@@ -830,3 +830,41 @@ function ecms_base_update_11224(): ?string {
 
   return (string) t('Moved the search indexes to the SearchStax server and disabled the Acquia server.');
 }
+
+/**
+ * Add the URI field the multisite index reads to acquia_search_index.
+ */
+function ecms_base_update_11225(): ?string {
+  if (!\Drupal::moduleHandler()->moduleExists('search_api_solr')) {
+    \Drupal::logger('ecms_base')
+      ->info('Skipping the search URI field: search_api_solr module is not enabled.');
+    return NULL;
+  }
+
+  // ecms_multisite_index maps its url field to ss_url, which only exists in
+  // Solr if acquia_search_index has a field called url. The multisite search
+  // recipe adds it, but ecms_base_update_11222() is the only thing applying
+  // that recipe, and update hooks run once: sites that ran 11222 before the
+  // action was added never got the field, and on the ones that did the
+  // features:import that follows `drush updatedb` stripped it off again. The
+  // ecms_solr_search feature now ships the field, which fixes the import, and
+  // this covers everything already deployed.
+  //
+  // This runs inline rather than in a batch for the same reason as
+  // ecms_base_update_11224(): core records the schema version as soon as an
+  // update hook returns, and a batch only runs once every hook has returned, so
+  // a batched failure would be recorded as a completed update. Throwing here
+  // leaves 11225 unrecorded and the next deployment retries it.
+  // @see update_do_one()
+  $added = ecms_base_searchstax_add_url_field();
+
+  if ($added === NULL) {
+    return (string) t('No Acquia search index is configured, so there is no URI field to add.');
+  }
+
+  if ($added === FALSE) {
+    throw new UpdateException('The URI field could not be added to acquia_search_index, so multisite search results cannot link back to their originating site. See the ecms_base log for the underlying error.');
+  }
+
+  return (string) t('The acquia_search_index URI field is in place. Content is queued for a re-index so that ss_url is written to Solr.');
+}
