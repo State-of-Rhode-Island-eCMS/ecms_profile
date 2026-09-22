@@ -7,7 +7,9 @@
 
 declare(strict_types=1);
 
+use Drupal\search_api\Entity\Index;
 use Drupal\search_api\Entity\Server;
+use Drupal\search_api\IndexInterface;
 use Drupal\search_api\ServerInterface;
 
 /**
@@ -211,4 +213,98 @@ function ecms_base_searchstax_migrate_indexes(): ?array {
   ]);
 
   return array_values(array_unique(array_merge($remaining, $reindexFailed)));
+}
+
+/**
+ * Adds the URI field that the multisite index reads to acquia_search_index.
+ *
+ * The search_api_solr backend writes only id, index_id, hash, site and
+ * timestamp into every document by itself, so the ss_url field that
+ * ecms_multisite_index maps its url field to exists only if
+ * acquia_search_index carries a field whose machine name is literally 'url'.
+ * The add_url processor indexes nothing on its own: it is hidden and locked,
+ * and only exposes the search_api_url property, which
+ * AddURL::addFieldValues() writes a value for solely when a field points
+ * at it.
+ *
+ * The ecms_multisite_search recipe adds the field, but that recipe is applied
+ * once, by ecms_base_update_11222(), so sites that ran that update before the
+ * action was added never received it. The ACSF deployment then runs
+ * `drush updatedb` followed by `features:import`, and until this release the
+ * ecms_solr_search feature shipped acquia_search_index without the field, so
+ * that import stripped it straight back off the sites that did get it. This is
+ * the same trap ecms_base_update_11224() documents for the server key.
+ *
+ * Like ecms_base_searchstax_migrate_indexes(), this lives in the profile file
+ * and is idempotent so that a later update hook can call it again.
+ *
+ * @return bool|null
+ *   TRUE if the field is on the index, FALSE if it could not be added or the
+ *   re-index could not be queued. NULL if acquia_search_index does not exist,
+ *   which is the case on sites that never had Solr search.
+ *
+ * @see \Drupal\search_api\Plugin\search_api\processor\AddURL::addFieldValues()
+ * @see ecms_base_update_11225()
+ */
+function ecms_base_searchstax_add_url_field(): ?bool {
+  $logger = \Drupal::logger('ecms_base');
+  $index = Index::load('acquia_search_index');
+
+  if (!$index instanceof IndexInterface) {
+    $logger->info('Skipping the search URI field: acquia_search_index could not be loaded.');
+    return NULL;
+  }
+
+  // The recipe, an earlier run or the features:import that follows
+  // `drush updatedb` may have got here first.
+  if (!$index->getField('url')) {
+    try {
+      $field = \Drupal::service('search_api.fields_helper')
+        ->createField($index, 'url', [
+          'label' => 'URI',
+          'property_path' => 'search_api_url',
+          'type' => 'string',
+          // The aggregator links results to the site they came from, so the
+          // stored URL has to carry the originating site's host.
+          'configuration' => ['absolute' => TRUE],
+        ]);
+      $index->addField($field)->save();
+    }
+    catch (\Exception $e) {
+      $logger->error('Failed to add the URI field to acquia_search_index: @message', [
+        '@message' => $e->getMessage(),
+      ]);
+      return FALSE;
+    }
+
+    $logger->info('Added the URI field to acquia_search_index.');
+  }
+
+  // Every document already in the core was written without the field, so the
+  // multisite index cannot link to any of them until the content is sent
+  // again. This is keyed off state rather than off whether this run added the
+  // field: whichever of the recipe, features:import and this function lands it
+  // first, the stale documents are the same, and a run that found the field
+  // already there would otherwise leave them stale forever. The flag is what
+  // keeps a later call from queueing a full re-index on every deployment.
+  $state = \Drupal::state();
+
+  if ($state->get('ecms_base.search_url_field_reindexed')) {
+    return TRUE;
+  }
+
+  try {
+    $index->reindex();
+  }
+  catch (\Exception $e) {
+    $logger->error('The acquia_search_index URI field is in place but the re-index could not be queued: @message', [
+      '@message' => $e->getMessage(),
+    ]);
+    return FALSE;
+  }
+
+  $state->set('ecms_base.search_url_field_reindexed', TRUE);
+  $logger->info('Queued a re-index of acquia_search_index so that ss_url is written to Solr.');
+
+  return TRUE;
 }
