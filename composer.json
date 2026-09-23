@@ -202,7 +202,7 @@
         "drupal/ultimate_cron": "^2.0@beta",
         "drupal/vbo_export": "^4.1",
         "drupal/views_database_connector": "^2.0",
-        "drupal/webform": "6.3.x-dev",
+        "drupal/webform": "^6.3",
         "drupal/webform_encrypt": "^2.0@alpha",
         "drupal/webform_views": "^5.0@beta",
         "drush/drush": "^12 || ^13",
