@@ -12,13 +12,5 @@ config:
       - key.key.cloudflare_api_token
     cloudflare_purger:
       - cloudflare_purger.settings
-  actions:
-    purge.plugins:
-      simpleConfigUpdate:
-        purgers:
-          - order_index: 2
-            instance_id: acb63ea301
-            plugin_id: acquia_purge
-          - order_index: 3
-            instance_id: cloudflare01
-            plugin_id: cloudflare
+    purge:
+      - purge.plugins
