@@ -832,6 +832,25 @@ function ecms_base_update_11224(): ?string {
 }
 
 /**
+ * Remove the News Content Components field (field_news_paragraphs) from news.
+ *
+ * Runs with RIGA-844.
+ */
+function ecms_base_update_11226(): void {
+  // Delete the field instance first.
+  $field_config = \Drupal\field\Entity\FieldConfig::loadByName('node', 'news', 'field_news_paragraphs');
+  if ($field_config) {
+    $field_config->delete();
+  }
+
+  // Delete the field storage.
+  $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_news_paragraphs');
+  if ($field_storage) {
+    $field_storage->delete();
+  }
+}
+
+/**
  * Add the URI field the multisite index reads to acquia_search_index.
  */
 function ecms_base_update_11225(): ?string {
