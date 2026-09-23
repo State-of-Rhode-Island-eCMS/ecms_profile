@@ -40,7 +40,6 @@ config:
     - field.storage.node.field_news_body
     - field.storage.node.field_news_date
     - field.storage.node.field_news_links
-    - field.storage.node.field_news_paragraphs
     - field.storage.node.field_news_promotions
     - field.storage.node.field_news_source
     - field.storage.node.field_news_topics
@@ -99,17 +98,6 @@ config:
       setLabel: Links
       setRequired: false
       setTranslatable: true
-
-    field.field.node.news.field_news_paragraphs:
-      ensure_exists:
-        entity_type: node
-        bundle: news
-        field_name: field_news_paragraphs
-        field_type: entity_reference_revisions
-      setLabel: 'News Content Components'
-      setDescription: 'Add one or more flexible content components.'
-      setRequired: false
-      setTranslatable: false
 
     field.field.node.news.field_news_promotions:
       ensure_exists:
@@ -293,18 +281,6 @@ config:
             settings:
               rows: 5
               placeholder: ''
-        - name: field_news_paragraphs
-          options:
-            type: entity_reference_paragraphs
-            weight: 15
-            region: content
-            settings:
-              title: 'Content Component'
-              title_plural: 'Content Components'
-              edit_mode: preview
-              add_mode: dropdown
-              form_display_mode: default
-              default_paragraph_type: _none
         - name: field_meta_tags_news
           options:
             type: metatag_firehose
@@ -380,15 +356,6 @@ config:
             weight: 4
             region: content
             settings: {}
-        - name: field_news_paragraphs
-          options:
-            type: entity_reference_revisions_entity_view
-            label: above
-            weight: 5
-            region: content
-            settings:
-              view_mode: default
-              link: ''
         - name: field_news_promotions
           options:
             type: entity_reference_entity_view
