@@ -63,8 +63,7 @@ $_nav: '.qh__pagination__link--first, .qh__pagination__link--prev, .qh__paginati
       }
 
       &:focus-visible {
-        outline: 2px solid var(--c__navy, #293557);
-        outline-offset: 2px;
+        @include qh-focus-ring;
       }
     }
 
@@ -107,8 +106,7 @@ $_nav: '.qh__pagination__link--first, .qh__pagination__link--prev, .qh__paginati
       }
 
       &:focus-visible {
-        outline: 2px solid var(--c__navy, #293557);
-        outline-offset: -2px;
+        @include qh-focus-ring--inset;
         z-index: 2;
       }
 

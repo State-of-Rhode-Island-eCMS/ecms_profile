@@ -16,21 +16,21 @@ bundle: icon_button
 mode: default
 content:
   field_button_color:
-    weight: 2
+    type: list_key
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 2
     region: content
   field_icon_library_icon:
-    weight: 1
+    type: ecms_icon_library_formatter
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: ecms_icon_library_formatter
+    weight: 1
     region: content
   field_link:
-    weight: 0
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -39,7 +39,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 0
     region: content
 hidden:
   search_api_excerpt: true

@@ -5,8 +5,8 @@ type: 'eCMS'
 recipes:
   - ecms_online_services
 
-# Requires: The Acquia Search server (search_api.server.acquia_search_server)
-# must also be configured in the target environment.
+# Requires: The SearchStax server (search_api.server.searchstax), provided by
+# the ecms_solr_search recipe, must also be configured in the target environment.
 
 install:
   - search_api

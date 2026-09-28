@@ -10,20 +10,20 @@ dependencies:
     - text
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.formatted_text.preview
 targetEntityType: paragraph
 bundle: formatted_text
 mode: preview
 content:
   field_text:
-    weight: 0
+    type: text_trimmed
     label: hidden
     settings:
       trim_length: 155
     third_party_settings: {  }
-    type: text_trimmed
+    weight: 0
     region: content
 hidden:
   search_api_excerpt: true

@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: { }
+dependencies:
+  config:
+    - taxonomy.vocabulary.location_categories
 id: taxonomy_vocabulary_location_categories
 entity_type_id: taxonomy_vocabulary
 entity_id: location_categories

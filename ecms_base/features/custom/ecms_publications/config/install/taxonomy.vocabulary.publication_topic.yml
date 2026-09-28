@@ -5,3 +5,4 @@ name: 'Publication Topic'
 vid: publication_topic
 description: 'The topics covered by the publication.'
 weight: 0
+new_revision: false

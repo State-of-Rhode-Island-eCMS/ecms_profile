@@ -110,16 +110,20 @@ jobs:
     services:
       mysql:
         image: mysql:8
-        ports:
-          - 33306:3306
         env:
           MYSQL_RANDOM_ROOT_PASSWORD: yes
           MYSQL_DATABASE: drupal
           MYSQL_USER: drupal
           MYSQL_PASSWORD: drupal
-        options: --network-alias=database
+        options: >-
+          --network-alias=database
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -udrupal -pdrupal"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+          --health-start-period=10s
     env:
-      SIMPLETEST_DB: mysql://drupal:drupal@database/drupal
+      SIMPLETEST_DB: mysql://drupal:drupal@database:3306/drupal
       SIMPLETEST_BASE_URL: http://localhost
       DTT_BASE_URL: http://localhost
       DRUPAL_DIRECTORY: /var/www/develop/web
@@ -157,6 +161,19 @@ jobs:
 
       - name: Start Apache
         run: service apache2 start
+
+      - name: Wait for MySQL to accept connections.
+        run: |
+          for i in $(seq 1 60); do
+            if php -r 'try { new PDO("mysql:host=database;port=3306;dbname=drupal", "drupal", "drupal", [PDO::ATTR_TIMEOUT => 2]); exit(0); } catch (Throwable $e) { exit(1); }'; then
+              echo "MySQL is ready."
+              exit 0
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
+          echo "MySQL did not become ready in time."
+          exit 1
 
       - name: Set the encryption private key variable.
         run: echo "ENCRYPTION_PRIVATE_KEY=$( dd if=/dev/urandom bs=32 count=1 | base64 -i - )" >> $GITHUB_ENV

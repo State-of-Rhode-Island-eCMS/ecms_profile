@@ -6,7 +6,7 @@ dependencies:
     - field.storage.node.field_service_description
     - field.storage.node.field_service_type
     - field.storage.node.field_service_url
-    - search_api.server.acquia_search_server
+    - search_api.server.searchstax
   module:
     - node
     - search_api_solr
@@ -191,5 +191,5 @@ options:
   delete_on_fail: true
   index_directly: true
   track_changes_in_references: true
-server: acquia_search_server
+server: searchstax
 

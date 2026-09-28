@@ -44,11 +44,8 @@
     .qh__btn {
       margin-left: auto;
 
-      &,
-      &:visited {
-        background-color: var(--fc__notification__button__bg);
-        color: var(--fc__notification__button__fg);
-      }
+      background-color: var(--fc__notification__button__bg);
+      color: var(--fc__notification__button__fg);
 
       &:hover,
       &:focus {
@@ -80,8 +77,7 @@
     }
 
     // Restyle all anchors in case this bg color can not support the default colors
-    a,
-    a:visited {
+    a {
       color: var(--fc__notification__link, var(--fc__defauilt__link));
     }
 
@@ -90,9 +86,8 @@
       color: var(--fc__notification__link--hover, var(--fc__defauilt__link--hover));
     }
 
-    a:focus {
-      outline-color: var(--fc__notification__link--focus, var(--fc__defauilt__link--focus));
-    }
+    // Keyboard focus ring comes from the global two-tone :focus-visible
+    // mechanism (RIGA-891) — no per-region outline color override.
 
     a:active {
       color: var(--fc__notification__link--active, var(--fc__defauilt__link--active));

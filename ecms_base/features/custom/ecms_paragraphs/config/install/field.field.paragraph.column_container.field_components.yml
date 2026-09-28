@@ -22,12 +22,12 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 1
     target_bundles:
       column_container: column_container
       gallery_item: gallery_item
       numbered_step_item: numbered_step_item
       text_card: text_card
+    negate: 1
     target_bundles_drag_drop:
       accordion_builder:
         weight: 8
@@ -36,8 +36,8 @@ settings:
         weight: 16
         enabled: false
       column_container:
-        enabled: true
         weight: 9
+        enabled: true
       embed:
         weight: 10
         enabled: false
@@ -51,8 +51,8 @@ settings:
         weight: 21
         enabled: false
       gallery_item:
-        enabled: true
         weight: 22
+        enabled: true
       icon_card:
         weight: 13
         enabled: false
@@ -60,8 +60,8 @@ settings:
         weight: 14
         enabled: false
       numbered_step_item:
-        enabled: true
         weight: 25
+        enabled: true
       promotion_reference:
         weight: 26
         enabled: false
@@ -69,6 +69,6 @@ settings:
         weight: 27
         enabled: false
       text_card:
-        enabled: true
         weight: 28
+        enabled: true
 field_type: entity_reference_revisions

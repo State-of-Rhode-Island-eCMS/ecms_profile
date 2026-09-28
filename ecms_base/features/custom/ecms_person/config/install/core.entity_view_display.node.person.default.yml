@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_phone_extension
     - field.field.node.person.field_person_photo
+    - field.field.node.person.field_person_social_links
     - node.type.person
   module:
     - entity_reference_revisions
@@ -128,7 +129,11 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   field_person_photo: true
+  field_person_social_links: true
   langcode: true
   links: true
   search_api_excerpt: true

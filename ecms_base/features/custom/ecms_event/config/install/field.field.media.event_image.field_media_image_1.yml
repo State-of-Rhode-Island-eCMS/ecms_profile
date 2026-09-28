@@ -29,7 +29,7 @@ settings:
   alt_field_required: true
   title_field: false
   title_field_required: false
-  max_resolution: '4000x4000'
+  max_resolution: 4000x4000
   min_resolution: ''
   default_image:
     uuid: null

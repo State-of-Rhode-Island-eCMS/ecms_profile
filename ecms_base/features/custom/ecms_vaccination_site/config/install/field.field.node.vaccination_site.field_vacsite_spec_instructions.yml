@@ -5,12 +5,7 @@ dependencies:
     - field.storage.node.field_vacsite_spec_instructions
     - node.type.vaccination_site
   module:
-    - allowed_formats
     - text
-third_party_settings:
-  allowed_formats:
-    allowed_formats:
-      - basic_html
 id: node.vaccination_site.field_vacsite_spec_instructions
 field_name: field_vacsite_spec_instructions
 entity_type: node
@@ -21,5 +16,7 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats:
+    - basic_html
 field_type: text_long

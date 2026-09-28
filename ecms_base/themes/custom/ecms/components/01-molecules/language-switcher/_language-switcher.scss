@@ -16,31 +16,28 @@
   }
 
   a {
-    &:link,
-    &:visited {
-      &.is-active {
-        font-weight: bold;
-        text-decoration: none;
-        @supports (font-variation-settings: normal) {
-          html:not(.novf) & {
-            font-weight: 575;
-          }
-
-          html:not(.novf).wf-inactive & {
-            font-family: $font-sans-fallback;
-            font-variant-numeric: lining-nums;
-            font-weight: bold;
-            letter-spacing: 0.035em;
-          }
+    &.is-active {
+      font-weight: bold;
+      text-decoration: none;
+      @supports (font-variation-settings: normal) {
+        html:not(.novf) & {
+          font-weight: 575;
         }
 
-        &::before {
-          content: '[';
+        html:not(.novf).wf-inactive & {
+          font-family: $font-sans-fallback;
+          font-variant-numeric: lining-nums;
+          font-weight: bold;
+          letter-spacing: 0.035em;
         }
+      }
 
-        &::after {
-          content: ']';
-        }
+      &::before {
+        content: '[';
+      }
+
+      &::after {
+        content: ']';
       }
     }
   }

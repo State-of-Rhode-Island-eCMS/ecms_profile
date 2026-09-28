@@ -17,19 +17,14 @@ a {
     color: var(--computed-link-color--hover, var(--fc__default__link--hover));
   }
 
-  // Global keyboard focus style
-  &:focus {
-    outline: $border-sm solid var(--computed-link-color--hover, var(--fc__default__link--focus));
-    outline-offset: $border-sm;
+  // Global keyboard focus style: two-tone ring, visible on any background
+  &:focus-visible {
+    @include qh-focus-ring;
   }
 
-  // :visited and :active reuse the theme's base link color since no theme
-  // currently defines distinct tokens for those states; the global default
-  // tokens remain the outside-theme fallback.
-  &:visited {
-    color: var(--computed-link-color, var(--fc__default__link--visited));
-  }
-
+  // Visited links are deliberately unstyled — they render like unvisited
+  // links everywhere. :active reuses the theme's hover color since no theme
+  // defines a distinct token for it.
   &:active {
     color: var(--computed-link-color--hover, var(--fc__default__link--active));
   }
@@ -113,6 +108,7 @@ dd {
 
 // Assumed to be any of class list 'visually-hidden focusable skip-link'
 .skip-link {
+  color: var(--fc__default__link--hover);
   display: block;
   margin: 0 auto;
   padding: 0.625rem 1.25rem;
@@ -120,13 +116,12 @@ dd {
   text-decoration: none;
   width: 100%;
 
-  &,
-  &:visited {
+  &:focus {
     color: var(--fc__default__link--hover);
   }
 
-  &:focus {
-    color: var(--fc__default__link--hover);
-    outline-offset: - ($border-sm * 2);
+  // Sits at the very top edge of the viewport, so keep the ring inset
+  &:focus-visible {
+    @include qh-focus-ring--inset;
   }
 }

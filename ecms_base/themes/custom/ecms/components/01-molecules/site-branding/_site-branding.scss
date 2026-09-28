@@ -10,10 +10,7 @@
     display: flex;
     align-items: center;
 
-    &,
-    &:visited {
-      text-decoration: none;
-    }
+    text-decoration: none;
   }
 
   &__logo {

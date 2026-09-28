@@ -10,20 +10,20 @@ dependencies:
     - layout_builder
 third_party_settings:
   layout_builder:
-    allow_custom: false
     enabled: false
+    allow_custom: false
 id: paragraph.accordion_builder.preview
 targetEntityType: paragraph
 bundle: accordion_builder
 mode: preview
 content:
   field_item_text:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
 hidden:
   field_item_flexible_text: true

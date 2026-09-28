@@ -27,14 +27,33 @@
             event.preventDefault();
             if (qh_nav_minor.classList.contains('qh__nav-minor--expanded')) {
               qh_nav_minor.classList.remove('qh__nav-minor--expanded');
+              // Keep ARIA state in sync — this was hardcoded "false" forever
+              // (RIGA-891 callout 8)
+              qh_toggle_btn.setAttribute('aria-expanded', 'false');
               deactivatePageOverlay();
             } else {
               allMenuCloser();
               activatePageOverlay();
               qh_nav_minor.classList.add('qh__nav-minor--expanded');
+              qh_toggle_btn.setAttribute('aria-expanded', 'true');
             }
           }
         });
+
+        // Close the drawer when keyboard focus leaves it or on Escape
+        // (RIGA-891). The <nav> contains both the toggle and the list.
+        qhMenuFocusDismiss(
+          qh_nav_minor,
+          qh_toggle_btn,
+          function () {
+            return qh_nav_minor.classList.contains('qh__nav-minor--expanded');
+          },
+          function () {
+            qh_nav_minor.classList.remove('qh__nav-minor--expanded');
+            qh_toggle_btn.setAttribute('aria-expanded', 'false');
+            deactivatePageOverlay();
+          }
+        );
       });
     }
   };

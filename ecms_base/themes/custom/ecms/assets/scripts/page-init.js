@@ -25,6 +25,21 @@
       once('ecms-page-overlay', 'body', context).forEach(function () {
         addPageOverlay();
       });
+
+      // Publish half the scrollbar width as a custom property. vw units
+      // include the scrollbar but the page grid centers inside the
+      // scrollbar-less width, so any CSS that mirrors the page gutter with
+      // 3.5vw (e.g. the section-menu edge tab in _navigation-minor.scss)
+      // overshoots by this much when classic scrollbars are on. 0 for
+      // overlay scrollbars, so the CSS fallback of 0px matches no-JS.
+      once('ecms-scrollbar-comp', 'html', context).forEach(function (html) {
+        function setScrollbarComp() {
+          var comp = (window.innerWidth - html.clientWidth) / 2;
+          html.style.setProperty('--qh-scrollbar-comp', comp + 'px');
+        }
+        setScrollbarComp();
+        window.addEventListener('resize', setScrollbarComp);
+      });
     }
   };
 })(Drupal, once);

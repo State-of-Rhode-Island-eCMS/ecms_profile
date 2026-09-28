@@ -8,8 +8,6 @@ dependencies:
     - field.field.paragraph.person_list.field_display_images
     - field.field.paragraph.person_list.field_list_title
     - paragraphs.paragraphs_type.person_list
-  module:
-    - options
 id: paragraph.person_list.default
 targetEntityType: paragraph
 bundle: person_list

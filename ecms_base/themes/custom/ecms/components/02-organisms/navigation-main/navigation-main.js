@@ -172,6 +172,22 @@ function moveSearchAndSocial() {
             }
           }
         });
+
+        // Close the drawer when keyboard focus leaves it or on Escape
+        // (RIGA-891). The parent wrapper contains both the toggle and the
+        // drawer list.
+        qhMenuFocusDismiss(
+          qh_toggle_btn.parentElement,
+          qh_toggle_btn,
+          function () {
+            return qh_toggle_btn.getAttribute('aria-expanded') === 'true';
+          },
+          function () {
+            qh_toggle_btn.setAttribute('aria-expanded', 'false');
+            qh_toggle_btn.parentElement.classList.remove('open');
+            deactivatePageOverlay();
+          }
+        );
       });
 
 
@@ -195,6 +211,20 @@ function moveSearchAndSocial() {
             }
           }
         });
+
+        // Close the drop down when keyboard focus leaves it or on Escape
+        // (RIGA-891). The parent <li> contains both the toggle link and its
+        // sub menu / mega menu panel.
+        qhMenuFocusDismiss(
+          toggle_element.parentElement,
+          toggle_element,
+          function () {
+            return toggle_element.getAttribute('aria-expanded') === 'true';
+          },
+          function () {
+            toggle_element.setAttribute('aria-expanded', 'false');
+          }
+        );
       });
 
     }

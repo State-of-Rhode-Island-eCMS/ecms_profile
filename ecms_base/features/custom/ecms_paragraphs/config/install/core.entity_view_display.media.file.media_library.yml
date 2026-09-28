@@ -42,6 +42,9 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   field_file: true
   field_file_description: true
   field_file_link_behavior: true

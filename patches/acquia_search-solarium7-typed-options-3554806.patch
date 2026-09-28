@@ -1,0 +1,24 @@
+Fatal error: Type of Drupal\acquia_search\Client\Solarium\Endpoint::$options
+must be array (as in class Solarium\Core\Client\Endpoint).
+
+search_api_solr 4.3.14 bumped solarium/solarium from ^6.3.7 to ^7.0.0.
+Solarium 7 added a native `array` type to Solarium\Core\Configurable::$options
+(and therefore to Solarium\Core\Client\Endpoint::$options). PHP requires a
+redeclared property in a child class to carry the identical type, so the
+untyped redeclaration in acquia_search fatals as soon as the class is loaded.
+
+Adding the `array` type keeps the empty-array default (which intentionally
+overrides Solarium's built-in host/port/path defaults) while satisfying the
+covariance check.
+
+--- a/src/Client/Solarium/Endpoint.php
++++ b/src/Client/Solarium/Endpoint.php
+@@ -31,7 +31,7 @@
+    *
+    * @var array
+    */
+-  protected $options = [];
++  protected array $options = [];
+
+   /**
+    * {@inheritdoc}

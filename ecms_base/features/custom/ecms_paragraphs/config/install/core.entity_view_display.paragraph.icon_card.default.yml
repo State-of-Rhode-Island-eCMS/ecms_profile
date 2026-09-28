@@ -15,26 +15,26 @@ bundle: icon_card
 mode: default
 content:
   field_icon:
-    weight: 3
+    type: ecms_icon_library_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: ecms_icon_library_formatter
+    weight: 3
     region: content
   field_list_title:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_text:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
 hidden:
   search_api_excerpt: true

@@ -526,6 +526,12 @@
           { "fnName": "icon__fg--hover", "colorName": "navy" }
         ],
         "default": [
+          # Two-tone keyboard focus indicator (RIGA-891)
+          # Ring + halo always contrast with each other, so the pair is
+          # visible on ANY background color. Light palettes: near-black
+          # ring with a white halo. Dark palettes: the inverse.
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           { "fnName": "fg", "colorName": "quahog" },
           { "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -533,7 +539,6 @@
           { "fnName": "link", "colorName": "navy--sat" },
           { "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           { "fnName": "link--focus", "colorName": "navy" },
-          { "fnName": "link--visited", "colorName": "navy--warm" },
           { "fnName": "link--active", "colorName": "calamari" },
           # ALL headers get this color
           { "fnName": "hx__fg", "colorName": "quahog--medium" },
@@ -719,6 +724,9 @@
           { "fnName": "icon__fg--hover", "colorName": "navy--dark" }
         ],
         "default": [
+          # Two-tone focus pair, inverted for dark mode (RIGA-891)
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -726,7 +734,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -861,6 +868,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--darker" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           #{ "fnName": "fg", "colorName": "quahog" },
           { "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -868,7 +877,6 @@
           #{ "fnName": "link", "colorName": "navy--sat" },
           #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           #{ "fnName": "link--active", "colorName": "calamari" },
           #{ "fnName": "hx__fg", "colorName": "quahog--medium" },
           { "fnName": "violator", "colorName": "calamari" },
@@ -999,6 +1007,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           #{ "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -1006,7 +1016,6 @@
           #{ "fnName": "link", "colorName": "ocean" },
           #{ "fnName": "link--hover", "colorName": "hope-gold" },
           #{ "fnName": "link--focus", "colorName": "ocean" },
-          #{ "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           #{ "fnName": "link--active", "colorName": "calamari" },
           #{ "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -1119,6 +1128,8 @@
           { "fnName": "icon__fg--hover", "colorName": "white" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           #{ "fnName": "fg", "colorName": "quahog" },
           { "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -1126,7 +1137,6 @@
           #{ "fnName": "link", "colorName": "navy--sat" },
           #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           { "fnName": "link--active", "colorName": "green-animals" },
           { "fnName": "hx__fg", "colorName": "green-animals--dark" },
           { "fnName": "violator", "colorName": "calamari" },
@@ -1251,6 +1261,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--darker" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -1258,7 +1270,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "green-animals" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -1375,6 +1386,8 @@
           #{ "fnName": "icon__fg--hover", "colorName": "navy" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           { "fnName": "fg", "colorName": "quahog" },
           { "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -1382,7 +1395,6 @@
           #{ "fnName": "link", "colorName": "navy--sat" },
           #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           { "fnName": "link--active", "colorName": "rhody-red" },
           { "fnName": "hx__fg", "colorName": "navy--sat-lgt" },
           { "fnName": "violator", "colorName": "rhody-red" },
@@ -1510,6 +1522,8 @@
           { "fnName": "icon__fg--hover", "colorName": "navy" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -1517,7 +1531,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "rhody-red" },
@@ -1636,6 +1649,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           #{ "fnName": "fg", "colorName": "quahog" },
           #{ "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -1643,7 +1658,6 @@
           #{ "fnName": "link", "colorName": "navy--sat" },
           #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           #{ "fnName": "link--active", "colorName": "calamari" },
           #{ "fnName": "hx__fg", "colorName": "quahog--medium" },
           { "fnName": "violator", "colorName": "calamari" },
@@ -1766,6 +1780,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -1773,7 +1789,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -1887,6 +1902,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           #{ "fnName": "fg", "colorName": "quahog" },
           #{ "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -1894,7 +1911,6 @@
           #{ "fnName": "link", "colorName": "navy--sat" },
           #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           #{ "fnName": "link--active", "colorName": "calamari" },
           #{ "fnName": "hx__fg", "colorName": "quahog--medium" },
           { "fnName": "violator", "colorName": "calamari" },
@@ -2016,6 +2032,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -2023,7 +2041,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -2142,6 +2159,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           #{ "fnName": "fg", "colorName": "quahog" },
           #{ "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -2149,7 +2168,6 @@
           #{ "fnName": "link", "colorName": "navy--sat" },
           #{ "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           #{ "fnName": "link--active", "colorName": "calamari" },
           #{ "fnName": "hx__fg", "colorName": "quahog--medium" },
           { "fnName": "violator", "colorName": "calamari" },
@@ -2276,6 +2294,8 @@
           { "fnName": "icon__fg--hover", "colorName": "quahog--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -2283,7 +2303,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -2400,6 +2419,8 @@
           { "fnName": "icon__fg--hover", "colorName": "navy" },
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           { "fnName": "fg", "colorName": "quahog" },
           { "fnName": "bg", "colorName": "white" },
           { "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -2407,7 +2428,6 @@
           { "fnName": "link", "colorName": "navy--sat" },
           { "fnName": "link--hover", "colorName": "navy--sat-lgt" },
           { "fnName": "link--focus", "colorName": "navy--sat-lgt" },
-          { "fnName": "link--visited", "colorName": "navy--warm" },
           { "fnName": "link--active", "colorName": "navy--sat-lgt" },
           # ALL headers get this color
           { "fnName": "hx__fg", "colorName": "quahog--dark" },
@@ -2569,6 +2589,8 @@
           #{ "fnName": "icon__fg--hover", "colorName": "navy" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "quahog--darker" },
+          { "fnName": "focus__halo", "colorName": "white" },
           { "fnName": "fg", "colorName": "navy" },
           #{ "fnName": "bg", "colorName": "white" },
           #{ "fnName": "overlay__bg", "colorName": "white--trans75" },
@@ -2576,7 +2598,6 @@
           { "fnName": "link", "colorName": "navy" },
           { "fnName": "link--hover", "colorName": "navy--sat" },
           #{ "fnName": "link--focus", "colorName": "navy" },
-          #{ "fnName": "link--visited", "colorName": "navy--warm" },
           #{ "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "navy" },
           #{ "fnName": "violator", "colorName": "hope-gold" },
@@ -2722,6 +2743,8 @@
           { "fnName": "icon__fg--hover", "colorName": "navy--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -2729,7 +2752,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           #{ "fnName": "violator", "colorName": "calamari" },
@@ -2862,6 +2884,8 @@
           { "fnName": "icon__fg--hover", "colorName": "navy--dark" }
         ],
         "default": [
+          { "fnName": "focus__ring", "colorName": "white" },
+          { "fnName": "focus__halo", "colorName": "quahog--darker" },
           { "fnName": "fg", "colorName": "coffee-milk--light" },
           { "fnName": "bg", "colorName": "quahog--dark" },
           { "fnName": "overlay__bg", "colorName": "quahog--dark--trans75" },
@@ -2869,7 +2893,6 @@
           { "fnName": "link", "colorName": "ocean" },
           { "fnName": "link--hover", "colorName": "hope-gold" },
           { "fnName": "link--focus", "colorName": "ocean" },
-          { "fnName": "link--visited", "colorName": "navy--wrm-lgt" },
           { "fnName": "link--active", "colorName": "calamari" },
           { "fnName": "hx__fg", "colorName": "coffee-milk" },
           { "fnName": "violator", "colorName": "calamari" },
