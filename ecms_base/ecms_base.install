@@ -108,6 +108,7 @@ function ecms_base_apply_default_recipes(): array {
     'ecms_security',
     'ecms_webform',
     'ecms_acquia',
+    'ecms_cloudflare_purger',
     'ecms_news',
   ];
   $operations = ecms_base_apply_recipes($recipesToApply, FALSE);
@@ -867,4 +868,12 @@ function ecms_base_update_11225(): ?string {
   }
 
   return (string) t('The acquia_search_index URI field is in place. Content is queued for a re-index so that ss_url is written to Solr.');
+}
+
+/**
+ * Apply the ecms_cloudflare_purger recipe to existing sites.
+ */
+function ecms_base_update_11226(): void {
+  $recipes = ['ecms_cloudflare_purger'];
+  ecms_base_apply_recipes($recipes);
 }
