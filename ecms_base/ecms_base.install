@@ -17,6 +17,8 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\Core\Utility\UpdateException;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
@@ -829,6 +831,25 @@ function ecms_base_update_11224(): ?string {
   }
 
   return (string) t('Moved the search indexes to the SearchStax server and disabled the Acquia server.');
+}
+
+/**
+ * Remove the News Content Components field (field_news_paragraphs) from news.
+ *
+ * Runs with RIGA-844.
+ */
+function ecms_base_update_11226(): void {
+  // Delete the field instance first.
+  $field_config = FieldConfig::loadByName('node', 'news', 'field_news_paragraphs');
+  if ($field_config) {
+    $field_config->delete();
+  }
+
+  // Delete the field storage.
+  $field_storage = FieldStorageConfig::loadByName('node', 'field_news_paragraphs');
+  if ($field_storage) {
+    $field_storage->delete();
+  }
 }
 
 /**
