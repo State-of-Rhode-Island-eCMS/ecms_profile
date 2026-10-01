@@ -49,108 +49,60 @@ config:
     # The Agency options. field_agency comes from the ecms_press_release
     # feature, and the deployment runs features:import after updatedb, so this
     # list must match that feature's field.storage.node.field_agency.yml or the
-    # import will revert it.
+    # import will revert it. The options are written as key: label pairs, the
+    # format the field uses at runtime, because setProperties saves them as-is.
     field.storage.node.field_agency:
       setProperties:
         settings.allowed_values:
-          - value: administration_department_of
-            label: 'Administration, Department of'
-          - value: attorney_general_office_of
-            label: 'Attorney General, Office of'
-          - value: attorney_general_consumer_news_and_alerts
-            label: 'Attorney General: Consumer News and Alerts'
-          - value: attorney_general_grand_jury_reports
-            label: 'Attorney General: Grand Jury Reports'
-          - value: attorney_general_open_government
-            label: 'Attorney General: Open Government'
-          - value: board_of_elections
-            label: 'Board of Elections'
-          - value: business_regulation_department_of
-            label: 'Business Regulation, Department of'
-          - value: child_advocate_office_of_the
-            label: 'Child Advocate, Office of the'
-          - value: contractor_registration_board
-            label: 'Contractor Registration Board'
-          - value: department_of_children_youth_and_families
-            label: 'Department of Children, Youth and Families'
-          - value: department_of_corrections
-            label: 'Department of Corrections'
-          - value: department_of_housing
-            label: 'Department of Housing'
-          - value: department_of_human_services
-            label: 'Department of Human Services'
-          - value: department_of_labor_and_training
-            label: 'Department of Labor and Training'
-          - value: division_of_elderly_affairs
-            label: 'Division of Elderly Affairs'
-          - value: division_of_municipal_finance
-            label: 'Division of Municipal Finance'
-          - value: economic_recovery_and_reinvestment_office_of
-            label: 'Economic Recovery and Reinvestment, Office of'
-          - value: emergency_management_agency
-            label: 'Emergency Management Agency'
-          - value: en_espanol
-            label: 'En Espanol'
-          - value: energy_resources_office_of
-            label: 'Energy Resources, Office of'
-          - value: environmental_management_department_of
-            label: 'Environmental Management, Department of'
-          - value: ethics_commission
-            label: 'Ethics Commission'
-          - value: general_treasurer_office_of_the
-            label: 'General Treasurer, Office of the'
-          - value: governor_mckee_executive_orders
-            label: 'Governor McKee Executive Orders'
-          - value: governor_mckee_speeches
-            label: 'Governor McKee Speeches'
-          - value: governor_office_of_the
-            label: 'Governor, Office of the'
-          - value: health_and_human_services_executive_office_of
-            label: 'Health and Human Services, Executive Office of'
-          - value: health_department_of
-            label: 'Health, Department of'
-          - value: health_department_of_beach_monitoring
-            label: 'Health, Department of: Beach Monitoring'
-          - value: health_department_of_drinking_water
-            label: 'Health, Department of: Drinking Public Notice'
-          - value: health_department_of_drinking_water_state_revolving_loan_fund
-            label: 'Health, Department of: Drinking Water State Revolving Loan Fund'
-          - value: historical_preservation_and_heritage_commission
-            label: 'Historical Preservation and Heritage Commission'
-          - value: labor_and_training_department_of
-            label: 'Labor and Training, Department of'
-          - value: lt_governor_office_of_the
-            label: 'LT. Governor, Office of the'
-          - value: minority_business_enterprise
-            label: 'Minority Business Enterprise'
-          - value: motor_vehicles_division_of
-            label: 'Motor Vehicles, Division of'
-          - value: office_of_diversity_equity_opportunity
-            label: 'Office of Diversity, Equity & Opportunity'
-          - value: office_or_the_health_insurance_commissioner
-            label: 'Office or the Health Insurance Commissioner'
-          - value: public_safety_department_of
-            label: 'Public Safety, Department of'
-          - value: revenue_department_of
-            label: 'Revenue, Department of'
-          - value: rhode_island_state_council_on_the_arts
-            label: 'Rhode Island State Council on the Arts'
-          - value: ri_commerce_corporation
-            label: 'RI Commerce Corporation'
-          - value: ri_higher_education_assistance_authority
-            label: 'RI Higher Education Assistance Authority'
-          - value: secretary_of_state_office_of_the
-            label: 'Secretary of State, Office of the'
-          - value: state_police_of_rhode_island
-            label: 'State Police of Rhode Island'
-          - value: taxation_division_of
-            label: 'Taxation, Division of'
-          - value: transportation_department_of
-            label: 'Transportation, Department of'
-          - value: water_resources_board
-            label: 'Water Resources Board'
-          - value: other
-            label: 'Other'
+          administration_department_of: 'Administration, Department of'
+          attorney_general_office_of: 'Attorney General, Office of'
+          attorney_general_consumer_news_and_alerts: 'Attorney General: Consumer News and Alerts'
+          attorney_general_grand_jury_reports: 'Attorney General: Grand Jury Reports'
+          attorney_general_open_government: 'Attorney General: Open Government'
+          board_of_elections: 'Board of Elections'
+          business_regulation_department_of: 'Business Regulation, Department of'
+          child_advocate_office_of_the: 'Child Advocate, Office of the'
+          contractor_registration_board: 'Contractor Registration Board'
+          department_of_children_youth_and_families: 'Department of Children, Youth and Families'
+          department_of_corrections: 'Department of Corrections'
+          department_of_housing: 'Department of Housing'
+          department_of_human_services: 'Department of Human Services'
+          department_of_labor_and_training: 'Department of Labor and Training'
+          division_of_elderly_affairs: 'Division of Elderly Affairs'
+          division_of_municipal_finance: 'Division of Municipal Finance'
+          economic_recovery_and_reinvestment_office_of: 'Economic Recovery and Reinvestment, Office of'
+          emergency_management_agency: 'Emergency Management Agency'
+          en_espanol: 'En Espanol'
+          energy_resources_office_of: 'Energy Resources, Office of'
+          environmental_management_department_of: 'Environmental Management, Department of'
+          ethics_commission: 'Ethics Commission'
+          general_treasurer_office_of_the: 'General Treasurer, Office of the'
+          governor_mckee_executive_orders: 'Governor McKee Executive Orders'
+          governor_mckee_speeches: 'Governor McKee Speeches'
+          governor_office_of_the: 'Governor, Office of the'
+          health_and_human_services_executive_office_of: 'Health and Human Services, Executive Office of'
+          health_department_of: 'Health, Department of'
+          health_department_of_beach_monitoring: 'Health, Department of: Beach Monitoring'
+          health_department_of_drinking_water: 'Health, Department of: Drinking Public Notice'
+          health_department_of_drinking_water_state_revolving_loan_fund: 'Health, Department of: Drinking Water State Revolving Loan Fund'
+          historical_preservation_and_heritage_commission: 'Historical Preservation and Heritage Commission'
+          labor_and_training_department_of: 'Labor and Training, Department of'
+          lt_governor_office_of_the: 'LT. Governor, Office of the'
+          minority_business_enterprise: 'Minority Business Enterprise'
+          motor_vehicles_division_of: 'Motor Vehicles, Division of'
+          office_of_diversity_equity_opportunity: 'Office of Diversity, Equity & Opportunity'
+          office_or_the_health_insurance_commissioner: 'Office or the Health Insurance Commissioner'
+          public_safety_department_of: 'Public Safety, Department of'
+          revenue_department_of: 'Revenue, Department of'
+          rhode_island_state_council_on_the_arts: 'Rhode Island State Council on the Arts'
+          ri_commerce_corporation: 'RI Commerce Corporation'
+          ri_higher_education_assistance_authority: 'RI Higher Education Assistance Authority'
+          secretary_of_state_office_of_the: 'Secretary of State, Office of the'
+          state_police_of_rhode_island: 'State Police of Rhode Island'
+          taxation_division_of: 'Taxation, Division of'
+          transportation_department_of: 'Transportation, Department of'
+          water_resources_board: 'Water Resources Board'
+          other: 'Other'
 
     # --- Field instances ---
     field.field.node.news.field_agency:
