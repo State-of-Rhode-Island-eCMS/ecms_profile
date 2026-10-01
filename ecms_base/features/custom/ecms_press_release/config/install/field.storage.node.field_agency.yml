@@ -99,7 +99,10 @@ settings:
       label: 'Health, Department of: Beach Monitoring'
     -
       value: health_department_of_drinking_water
-      label: 'Health, Department of: Drinking Water'
+      label: 'Health, Department of: Drinking Public Notice'
+    -
+      value: health_department_of_drinking_water_state_revolving_loan_fund
+      label: 'Health, Department of: Drinking Water State Revolving Loan Fund'
     -
       value: historical_preservation_and_heritage_commission
       label: 'Historical Preservation and Heritage Commission'
