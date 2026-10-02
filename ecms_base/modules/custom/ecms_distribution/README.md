@@ -20,6 +20,7 @@ The ecms_distribution.module was used to manage the social navigation required
 alterations. See: RIG-142.
 
 The menu link form is being form altered to show a pre-defined list of social
-navigation that the ecms_patternlab theme defines. This will replace the
-title field of the `social-navigation` menu items and will add attributes
-to the links in that menu which will relate to icons that the theme provides.
+navigation options sourced from the active theme's `assets/data/social-config.json`.
+This will replace the title field of the `social-navigation` menu items and will
+add attributes to the links in that menu which will relate to icons that the theme
+provides.
