@@ -15,7 +15,7 @@ You can set two values there:
 Upon form submission, this also updates the `processor_settings.highlight.excerpt_length`
 value of `search_api.index.acquia_search_index` config.
 
-- Character Limit: A maximum length imposed by the Twig template `ecms_patternlab/source/_patterns/01-molecules/teaser-article/teaser-article.twig`
+- Character Limit: A maximum length imposed by the Twig template for the teaser-article component in the ecms theme
 
 When the `acquia_search` view is rendered, it gets the current `character_limit` value
 from this module's config, and passes as a variable to twig template using theme hook

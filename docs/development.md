@@ -15,9 +15,6 @@ the `web/profiles/custom/ecms_profile` directory.
 This new environment will live inside the project, with the webroot in
 `./develop/web`
 
-## Pattern Lab & Profile Development
-Pattern lab will be included as a dependecy and pull the `dev-master` branch.
-
 ## Adding dependencies
 This is the installation profile and does not contain Lando, therefore, you
 shouldn’t prefix any terminal commands with "ddev" within this repo.
@@ -97,14 +94,6 @@ point to your feature branch.
 This will be the case if you update any requirements, such as a new module. Composer
 won't be aware of the changes unless it's looking at the updated dependencies.
 
-Example: A feature branch named `RIG-37/pattern-lab-integration`
-
-```json
-"require": {
-        "rhodeislandecms/ecms_profile": "dev-RIG-37/pattern-lab-integration",
-    },
-```
-
 #### Steps to update local environment
  * Checkout your feature branch
  * Run `./scripts/develop.sh`
@@ -122,5 +111,5 @@ ddev drush site-install ecms_base --verbose --yes --site-name="State of Rhode Is
 Certain configuration should be managed with the Features module.
 [Additional features documentation is available here](./features.md).
 
-## Custom theme and Pattern Lab Integration
+## Custom theme
 [Additional documentation is available here](./theming.md).
