@@ -20,3 +20,12 @@ value of `search_api.index.acquia_search_index` config.
 When the `acquia_search` view is rendered, it gets the current `character_limit` value
 from this module's config, and passes as a variable to twig template using theme hook
 `ecms_preprocess_views_view_fields`.
+
+## Solr highlighting
+
+`SolrHighlightSubscriber` adds `hl.offsetSource=ANALYSIS` to any Solr query
+that requests highlighting (server option "Retrieve highlighting"). The shared
+SearchStax schema stores offsets only for `text_en` and `text_und`, so without
+this the highlighter returns a 500 on Spanish and other non-English fields and
+the whole search fails. Offsets are computed from the stored text instead, so
+no schema change or reindex is needed.
