@@ -868,3 +868,14 @@ function ecms_base_update_11225(): ?string {
 
   return (string) t('The acquia_search_index URI field is in place. Content is queued for a re-index so that ss_url is written to Solr.');
 }
+
+/**
+ * Re-apply the news recipe to update the Agency list options.
+ */
+function ecms_base_update_11226(): void {
+  $recipes = [
+    'ecms_news',
+  ];
+
+  ecms_base_apply_recipes($recipes);
+}
