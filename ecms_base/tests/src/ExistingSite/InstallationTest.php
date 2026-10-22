@@ -89,6 +89,14 @@ class InstallationTest extends AllProfileInstallationTestsAbstract {
   }
 
   /**
+   * Test whether the embed_author role has its permissions.
+   */
+  #[Group("ecms_paragraphs")]
+  public function testEnsureEmbedAuthorPermissions(): void {
+    $this->ensureEmbedAuthorPermissions();
+  }
+
+  /**
    * Test whether the ecms_moderation_notification feature installed properly.
    */
   public function testEnsureModerationNotificationInstall(): void {

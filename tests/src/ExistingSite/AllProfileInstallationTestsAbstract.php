@@ -8,6 +8,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
+use Drupal\user\Entity\Role;
 use weitzman\DrupalTestTraits\ExistingSiteBase;
 
 /**
@@ -332,6 +333,21 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
     $this->assertSession()->statusCodeEquals(200);
     $this->assertSession()->checkboxChecked('edit-site-admin-unpublish-any-content');
     $this->drupalLogout();
+  }
+
+  /**
+   * Ensure the embed_author role can use the embed text format.
+   */
+  protected function ensureEmbedAuthorPermissions(): void {
+    $role = Role::load('embed_author');
+    $this->assertNotNull($role, 'The embed_author role exists.');
+
+    // This permission was dropped by a config re-export once already. The
+    // features:import on every deployment then stripped it from all sites.
+    $this->assertTrue(
+      $role->hasPermission('use text format embed'),
+      'The embed_author role has the "use text format embed" permission.'
+    );
   }
 
   /**
