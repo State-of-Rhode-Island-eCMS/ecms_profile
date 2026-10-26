@@ -10,3 +10,13 @@ services:
     class: Drupal\ecms_layout\EcmsSampleEntityGenerator
     decorates: layout_builder.sample_entity_generator
     arguments: ['@tempstore.shared', '@entity_type.manager']
+
+  # Replace core's active trail so a disabled menu link can still be the active
+  # link, as it could before Drupal 11.4. Per-section sidebar menus depend on
+  # it. See EcmsMenuActiveTrail.
+  ecms_layout.menu_active_trail:
+    class: Drupal\ecms_layout\EcmsMenuActiveTrail
+    decorates: menu.active_trail
+    arguments: ['@plugin.manager.menu.link', '@current_route_match', '@cache.menu', '@lock', '@path.matcher']
+    tags:
+      - { name: needs_destruction }
