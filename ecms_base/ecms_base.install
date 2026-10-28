@@ -17,6 +17,8 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
 use Drupal\Core\Utility\UpdateException;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
@@ -867,4 +869,27 @@ function ecms_base_update_11225(): ?string {
   }
 
   return (string) t('The acquia_search_index URI field is in place. Content is queued for a re-index so that ss_url is written to Solr.');
+}
+
+/**
+ * Re-apply the news recipe to update the Agency list options.
+ */
+function ecms_base_update_11226(): void {
+  // Delete the field instance first.
+  $field_config = FieldConfig::loadByName('node', 'news', 'field_news_paragraphs');
+  if ($field_config) {
+    $field_config->delete();
+  }
+
+  // Delete the field storage.
+  $field_storage = FieldStorageConfig::loadByName('node', 'field_news_paragraphs');
+  if ($field_storage) {
+    $field_storage->delete();
+  }
+
+  $recipes = [
+    'ecms_news',
+  ];
+
+  ecms_base_apply_recipes($recipes);
 }

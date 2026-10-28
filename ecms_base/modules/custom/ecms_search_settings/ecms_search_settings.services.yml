@@ -1,0 +1,5 @@
+services:
+  ecms_search_settings.solr_highlight_subscriber:
+    class: Drupal\ecms_search_settings\EventSubscriber\SolrHighlightSubscriber
+    tags:
+      - { name: event_subscriber }
