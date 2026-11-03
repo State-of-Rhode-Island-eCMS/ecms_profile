@@ -25,8 +25,6 @@ dependencies:
   - 'entity_reference_revisions:entity_reference_revisions'
   - 'metatag:metatag'
   - 'moderation_dashboard:moderation_dashboard'
-  - 'page_manager:page_manager'
-  - 'panels:panels'
   - 'paragraphs:paragraphs'
   - 'pathauto:pathauto'
   - 'rabbit_hole:rabbit_hole'
