@@ -897,16 +897,16 @@ function ecms_base_update_11226(): void {
 }
 
 /**
- * Uninstall Page Manager and Panels.
- *
- * Page Manager defines a page_variant entity type that collides with the one
- * Canvas provides, which breaks the Canvas editor with "The
- * Drupal\canvas\Entity\PageVariant class does not correspond to an entity
- * type."
+ * Uninstall Page Manager and Panels, and install Canvas page variants.
  */
 function ecms_base_update_11227(): string {
   $messages = [];
 
+  // Page Manager defines a page_variant entity type that collides with the one
+  // Canvas provides, which breaks the Canvas editor with "The
+  // Drupal\canvas\Entity\PageVariant class does not correspond to an entity
+  // type."
+  //
   // Dependents go first so each module is uninstalled after anything that
   // requires it. Uninstalling removes the config entities they provide,
   // including the old moderation_dashboard page and its Panels variant.
