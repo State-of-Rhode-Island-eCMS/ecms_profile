@@ -17,6 +17,13 @@
   // wave can still hang below the footer.
   overflow-x: clip;
 
+  // How far the title drops below its banner-bottom anchor, and how much extra
+  // top padding the bar gets to keep the title→search gap. The wave scales
+  // with the container width, so the clearance between the title and the
+  // curve does too: this restores the ~45px (at 1920w) the title had under the
+  // taller original wave. Resolved in descendants, so `cqi` is this container.
+  --hero-search-title-drop: 2.1cqi;
+
   // ---------------------------------------------------------------------------
   // Banner — the full-width photo section. Height is driven by aspect-ratio
   // (not a fixed pixel value) so the photo scales with the container width.
@@ -30,7 +37,9 @@
   // ---------------------------------------------------------------------------
   &__banner {
     aspect-ratio: 3 / 1;
-    overflow: hidden;
+    // Clip x only: the title hangs slightly below the banner onto the
+    // same-color bar (see --hero-search-title-drop).
+    overflow-x: clip;
     position: relative;
 
     @container canvas-hero-search (max-width: #{$bp--large-value * 1rem}) {
@@ -41,8 +50,15 @@
       aspect-ratio: 16 / 9;
     }
 
+    // Mobile: the title wraps to several lines and must never sit over the
+    // photo, so it drops into normal flow BELOW the photo + wave. The banner
+    // loses its aspect-ratio; the top padding reserves the 4/3 photo area
+    // (image + wave are pinned to it below) and the navy background shows
+    // behind the title.
     @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: auto;
+      background-color: var(--computed-background-color);
+      padding-block-start: 75cqi;
     }
   }
 
@@ -55,6 +71,11 @@
     background-size: cover;
     inset: 0;
     position: absolute;
+
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
+      bottom: auto;
+      height: 75cqi;
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -68,6 +89,13 @@
     padding: 0 var(--section-sides, 1.5rem);
     position: relative;
     width: 100%;
+
+    // Mobile: in-flow (below the photo). `static` hands the location pill's
+    // containing block to the banner, so the pill stays on the photo.
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
+      height: auto;
+      position: static;
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -103,15 +131,24 @@
   // Heading — absolute lower-left of the banner inner container
   // ---------------------------------------------------------------------------
   &__title-area {
-    bottom: 1.25rem;
+    bottom: calc(1.25rem - var(--hero-search-title-drop));
     left: var(--section-sides, 1.5rem);
     max-width: 44ch;
     position: absolute;
     z-index: 3;
 
     @container canvas-hero-search (max-width: #{$bp--large-value * 1rem}) {
-      bottom: 0.75rem;
+      bottom: calc(0.75rem - var(--hero-search-title-drop));
       max-width: 85%;
+    }
+
+    // Mobile: in flow below the photo + wave, never overlapping them.
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
+      bottom: auto;
+      left: auto;
+      max-width: none;
+      padding-block-end: 0.75rem;
+      position: relative;
     }
   }
 
@@ -127,10 +164,10 @@
 
   // ---------------------------------------------------------------------------
   // Wave SVG — absolute bottom; the asset (assets/images/icons/brand-wave.svg)
-  // is a 1972×210 single-swoop curve right-anchored to the banner. We size it
+  // is a 1972×162 single-swoop curve right-anchored to the banner. We size it
   // wider than the banner (1972/1440 ≈ 137%) so its native aspect ratio is
   // preserved at any width — the curve overhangs the LEFT edge and is clipped
-  // by the banner's overflow:hidden, matching Figma's `left: -532px` setup.
+  // by the banner's overflow-x:clip, matching Figma's `left: -532px` setup.
   //
   // Fill inherits `currentColor`, set here to the section's themed background
   // (`--computed-background-color` from `.qh__t__primary`) so the solid bottom
@@ -161,6 +198,14 @@
     svg path {
       fill: currentColor;
     }
+
+    // Mobile: pin the wave's bottom to the bottom of the photo area rather
+    // than the (now taller) banner.
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
+      bottom: auto;
+      top: calc(75cqi + 1px);
+      transform: translateY(-100%);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -171,7 +216,7 @@
   // navy show through, producing the wavy bottom edge.
   //
   // Anchored to the footer's BOTTOM edge (`bottom: 0`), then pushed down by
-  // ~65% of its own height — the SVG's solid bottom band is ~65% of the asset,
+  // ~55% of its own height — the curve (above the solid band) is ~55% of the asset,
   // so this lands the curve's inflection exactly on the footer's bottom edge.
   // Both references (the bottom edge and the wave's own height) are independent
   // of the footer's content height, so the curve stays aligned no matter how
@@ -184,7 +229,7 @@
     max-width: 2000px;
     right: -20%;
     top: auto;
-    transform: translateY(65%) scaleY(-1);
+    transform: translateY(55%) scaleY(-1);
     z-index: -1;
 
     @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
@@ -218,6 +263,12 @@
     margin: 0 auto;
     max-width: var(--content-max-width, 86rem);
     padding: 1.25rem var(--section-sides, 1.5rem);
+    padding-block-start: calc(1.25rem + var(--hero-search-title-drop));
+
+    // Mobile: the title is in flow (no drop to compensate for).
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
+      padding-block-start: 1.25rem;
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -272,11 +323,15 @@
     height: 100%;
     flex: 1;
     border: 0;
+    // Inputs default to a ~20ch intrinsic min-width; without this the input
+    // refuses to shrink on narrow screens and squeezes the submit button.
+    min-width: 0;
     padding-left: 0;
     width: auto;
   }
 
   &__search-submit {
+    flex-shrink: 0;
     background-color: var(--fc__notification__bg);
     border: 2px solid rgba(255, 255, 255, 0.33);
     color: var(--fc__notification__link);
@@ -350,6 +405,14 @@
     margin: 0 auto;
     max-width: var(--content-max-width, 86rem);
     padding: 0 var(--section-sides, 1.5rem);
+
+    // The tab group's standalone 5rem top padding stacks on the bar's own
+    // bottom padding, leaving a ~100px hole above the tabs on phones.
+    @container canvas-hero-search (max-width: #{$bp--small-value * 1rem}) {
+      > .canvas-tab-group {
+        padding-block-start: 1.5rem;
+      }
+    }
   }
 
   h1 {
