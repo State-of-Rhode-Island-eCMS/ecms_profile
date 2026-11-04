@@ -370,7 +370,7 @@ abstract class AllProfileInstallationTestsAbstract extends ExistingSiteBase {
     $this->drupalLogin($account);
 
     // Ensure the dashboard loads.
-    $this->drupalGet("user/{$account->id()}/moderation/dashboard");
+    $this->drupalGet("user/{$account->id()}/moderation-dashboard");
     $this->assertSession()->statusCodeEquals(200);
   }
 
