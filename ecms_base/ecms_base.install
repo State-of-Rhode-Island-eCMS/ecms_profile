@@ -12,6 +12,8 @@ declare(strict_types=1);
  * Install, update and uninstall functions for the ecms_base profile.
  */
 
+use Drupal\canvas\Entity\PageVariant;
+use Drupal\canvas\PageVariantMigration;
 use Drupal\Core\Batch\BatchBuilder;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
@@ -892,4 +894,64 @@ function ecms_base_update_11226(): void {
   ];
 
   ecms_base_apply_recipes($recipes);
+}
+
+/**
+ * Uninstall Page Manager and Panels, and install Canvas page variants.
+ */
+function ecms_base_update_11227(): string {
+  $messages = [];
+
+  // Page Manager defines a page_variant entity type that collides with the one
+  // Canvas provides, which breaks the Canvas editor with "The
+  // Drupal\canvas\Entity\PageVariant class does not correspond to an entity
+  // type."
+  //
+  // Dependents go first so each module is uninstalled after anything that
+  // requires it. Uninstalling removes the config entities they provide,
+  // including the old moderation_dashboard page and its Panels variant.
+  $candidates = [
+    'metatag_page_manager',
+    'panels_ipe',
+    'page_manager_ui',
+    'panels',
+    'page_manager',
+  ];
+  $module_handler = \Drupal::moduleHandler();
+  $modules_to_uninstall = array_values(array_filter($candidates, [$module_handler, 'moduleExists']));
+
+  if ($modules_to_uninstall !== []) {
+    \Drupal::service('module_installer')->uninstall($modules_to_uninstall, FALSE);
+    $messages[] = (string) t('Uninstalled: @modules.', ['@modules' => implode(', ', $modules_to_uninstall)]);
+  }
+
+  if (!$module_handler->moduleExists('canvas')) {
+    return implode(' ', $messages);
+  }
+
+  // While Page Manager owned the page_variant ID, canvas_post_update_0028 saw
+  // an installed page_variant type and skipped installing Canvas's, and 0029
+  // could not migrate the theme regions into a variant. Repeat both now that
+  // the ID is free. Each step is a no-op when it has already been done.
+  // @see canvas_post_update_0028_install_page_variants()
+  // @see canvas_post_update_0029_migrate_page_regions_to_variants()
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+  if ($update_manager->getEntityType(PageVariant::ENTITY_TYPE_ID) === NULL) {
+    $update_manager->installEntityType(\Drupal::entityTypeManager()->getDefinition(PageVariant::ENTITY_TYPE_ID));
+    $messages[] = (string) t('Installed the Canvas page_variant entity type.');
+  }
+
+  PageVariantMigration::ensurePageContentMarker();
+
+  $settings = \Drupal::configFactory()->getEditable('canvas.settings');
+  if ($settings->isNew()) {
+    $settings->set(PageVariant::DEFAULT_SETTING, NULL)->save();
+  }
+
+  $variant = PageVariantMigration::migrateDefaultTheme();
+  if ($variant !== NULL) {
+    $messages[] = (string) t('Migrated the default theme regions into the @id page variant.', ['@id' => $variant->id()]);
+  }
+
+  return implode(' ', $messages);
 }

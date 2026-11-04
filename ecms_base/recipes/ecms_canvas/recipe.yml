@@ -9,6 +9,7 @@ recipes:
 install:
   - canvas
   - image
+  - views
   - user
   - system
 config:
@@ -23,6 +24,10 @@ config:
       - filter.format.canvas_html_inline
       - image.style.canvas_avatar
       - image.style.canvas_parametrized_width
+      # Canvas ships this view in config/optional and recipes only import the
+      # module config they list. Without it, /admin/content/pages falls back to
+      # the bare entity list builder, which shows no page titles.
+      - views.view.canvas_pages
   actions:
     canvas.component.sdc.*.*:
       setStatus: false
