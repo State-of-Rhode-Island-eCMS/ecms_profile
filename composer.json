@@ -118,6 +118,7 @@
         "drupal/content_moderation_notifications": "^3.2",
         "drupal/core-recommended": "^11.2",
         "drupal/easy_breadcrumb": "^2.0",
+        "drupal/editoria11y": "^3.0",
         "drupal/entity_print": "^2.18",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/extlink": "^2.0",
