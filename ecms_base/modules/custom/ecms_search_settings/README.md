@@ -29,3 +29,27 @@ SearchStax schema stores offsets only for `text_en` and `text_und`, so without
 this the highlighter returns a 500 on Spanish and other non-English fields and
 the whole search fails. Offsets are computed from the stored text instead, so
 no schema change or reindex is needed.
+
+## Failed searches stay cacheable
+
+When Solr errors or times out, search_api_solr sets max-age 0 on the query.
+That makes the whole page `no-cache, private`, so Drupal, Varnish and
+Cloudflare all miss and every request waits for the Solr timeout again.
+
+`SearchFailureCacheSubscriber` notes each Search API query in a request. If one
+was aborted, the anonymous `GET` response gets a short `max-age` and a matching
+`Expires` header instead, and the header `X-Ecms-Search-Failed: 1` is added.
+The internal page cache uses `Expires`, so the error page expires on its own
+and isn't kept until the next cache tag invalidation. Logged-in requests are
+unchanged.
+
+The lifetime defaults to 60 seconds. Override it in `settings.php`
+(`0` turns this off):
+
+```php
+$settings['ecms_search_failure_max_age'] = 60;
+```
+
+The page shows no messages only when `system.logging:error_level` is `hide`,
+as it is in production. With visible errors (local DDEV), the error message
+switches off the page cache for that request.
