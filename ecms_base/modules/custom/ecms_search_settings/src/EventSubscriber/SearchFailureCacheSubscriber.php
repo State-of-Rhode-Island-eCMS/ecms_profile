@@ -8,7 +8,6 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Cache\CacheableResponseInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\search_api\Event\QueryPreExecuteEvent;
-use Drupal\search_api\Event\SearchApiEvents;
 use Drupal\search_api\Query\QueryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -61,7 +60,10 @@ class SearchFailureCacheSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents(): array {
     return [
-      SearchApiEvents::QUERY_PRE_EXECUTE => 'onQueryPreExecute',
+      // Same value as SearchApiEvents::QUERY_PRE_EXECUTE. Reading that
+      // constant autoloads the class, which fails when the container is built
+      // before search_api is enabled (e.g. during the profile install).
+      'search_api.query_pre_execute' => 'onQueryPreExecute',
       // Run before FinishResponseSubscriber (priority 0), which turns a
       // max-age 0 response into "no-cache, private".
       KernelEvents::RESPONSE => ['onResponse', 10],
