@@ -154,6 +154,7 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
    * then pass trivially, so this test is what keeps them meaningful.
    */
   public function testCoreActiveTrailSkipsTheDisabledSectionLink(): void {
+    $this->skipBeforeDrupal114();
     $this->setCurrentRoute(['user' => '1']);
 
     $active_link = $this->coreActiveTrail()->getActiveLink('main');
@@ -169,20 +170,28 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
 
   /**
    * A page whose only link is disabled still resolves to that link.
-   *
-   * Core finds no active link for such a page, so a level 2 menu block renders
-   * nothing and the sidebar disappears.
    */
   public function testOnlyDisabledLinkIsTheActiveLink(): void {
-    $hidden_section = $this->createLink('Hidden section', 'entity:user/7', FALSE, 0);
-    $this->createLink('Hidden section page', 'entity:user/8', TRUE, 0, $hidden_section);
+    $hidden_section = $this->createOnlyDisabledLinkSection();
     $this->setCurrentRoute(['user' => '7']);
 
-    $this->assertNull($this->coreActiveTrail()->getActiveLink('main'));
     $this->assertSame(
       [$this->pluginId($hidden_section), ''],
       array_keys($this->activeTrail()->getActiveTrailIds('main'))
     );
+  }
+
+  /**
+   * Documents that core finds no active link when the only link is disabled.
+   *
+   * A level 2 menu block then renders nothing, so the sidebar disappears.
+   */
+  public function testCoreActiveTrailFindsNoLinkWhenTheOnlyLinkIsDisabled(): void {
+    $this->skipBeforeDrupal114();
+    $this->createOnlyDisabledLinkSection();
+    $this->setCurrentRoute(['user' => '7']);
+
+    $this->assertNull($this->coreActiveTrail()->getActiveLink('main'));
   }
 
   /**
@@ -266,6 +275,26 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
    */
   private function activeTrail(): MenuActiveTrailInterface {
     return $this->container->get('menu.active_trail');
+  }
+
+  /**
+   * Skips a test of core behavior that only exists from Drupal 11.4.
+   */
+  private function skipBeforeDrupal114(): void {
+    if (version_compare(\Drupal::VERSION, '11.4', '<')) {
+      $this->markTestSkipped('Core returns disabled links before Drupal 11.4.');
+    }
+  }
+
+  /**
+   * Creates a section whose landing page has only a disabled link.
+   *
+   * The landing page is user/7, with one page, user/8, in the section.
+   */
+  private function createOnlyDisabledLinkSection(): MenuLinkContentInterface {
+    $section = $this->createLink('Hidden section', 'entity:user/7', FALSE, 0);
+    $this->createLink('Hidden section page', 'entity:user/8', TRUE, 0, $section);
+    return $section;
   }
 
   /**
