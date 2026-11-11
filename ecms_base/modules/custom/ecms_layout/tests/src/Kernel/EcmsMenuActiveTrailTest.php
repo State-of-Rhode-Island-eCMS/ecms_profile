@@ -8,6 +8,7 @@ use Drupal\Core\Menu\MenuActiveTrail;
 use Drupal\Core\Menu\MenuActiveTrailInterface;
 use Drupal\Core\Routing\RouteObjectInterface;
 use Drupal\ecms_layout\EcmsMenuActiveTrail;
+use Drupal\ecms_layout\ProxyClass\EcmsMenuActiveTrail as EcmsMenuActiveTrailProxy;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\menu_link_content\MenuLinkContentInterface;
@@ -90,16 +91,34 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
   }
 
   /**
-   * The decorator replaces core's active trail service.
+   * Core's active trail service uses EcmsMenuActiveTrail and stays lazy.
    */
-  public function testDecoratorReplacesCoreActiveTrail(): void {
+  public function testServiceUsesEcmsActiveTrail(): void {
+    $this->assertInstanceOf(
+      EcmsMenuActiveTrailProxy::class,
+      $this->container->get('menu.active_trail'),
+      'menu.active_trail must be the lazy proxy of EcmsMenuActiveTrail. ' .
+      'Without it, section pages lose their sidebar menu.'
+    );
     $this->assertInstanceOf(
       EcmsMenuActiveTrail::class,
-      $this->container->get('menu.active_trail'),
-      'ecms_layout.menu_active_trail must decorate menu.active_trail. Without ' .
-      'the decoration, section landing pages resolve to their enabled ' .
-      'shortcut and lose their sidebar menu.'
+      $this->container->get('drupal.proxy_original_service.menu.active_trail')
     );
+  }
+
+  /**
+   * The lazy proxy forwards every public method of EcmsMenuActiveTrail.
+   *
+   * When this fails, regenerate the proxy from the docroot with
+   * core/scripts/generate-proxy-class.php, as its file header shows.
+   */
+  public function testProxyClassIsCurrent(): void {
+    $missing = array_diff(
+      get_class_methods(EcmsMenuActiveTrail::class),
+      get_class_methods(EcmsMenuActiveTrailProxy::class),
+    );
+
+    $this->assertSame([], array_values($missing), 'The proxy class is out of date.');
   }
 
   /**
@@ -128,24 +147,16 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
   }
 
   /**
-   * Documents the core behaviour the decorator exists to prevent.
+   * Documents the core behavior the override exists to prevent.
    *
    * If this test starts failing, core went back to selecting disabled links
-   * and the decorator may no longer be needed. The assertions above would
+   * and the override may no longer be needed. The assertions above would
    * then pass trivially, so this test is what keeps them meaningful.
    */
   public function testCoreActiveTrailSkipsTheDisabledSectionLink(): void {
     $this->setCurrentRoute(['user' => '1']);
 
-    $core_trail = new MenuActiveTrail(
-      $this->container->get('plugin.manager.menu.link'),
-      $this->container->get('current_route_match'),
-      $this->container->get('cache.menu'),
-      $this->container->get('lock'),
-      $this->container->get('path.matcher'),
-    );
-
-    $active_link = $core_trail->getActiveLink('main');
+    $active_link = $this->coreActiveTrail()->getActiveLink('main');
 
     $this->assertNotNull($active_link);
     $this->assertSame(
@@ -153,6 +164,24 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
       $active_link->getPluginId(),
       'Since Drupal 11.4, core returns the first enabled link, which is the ' .
       'shortcut rather than the section.'
+    );
+  }
+
+  /**
+   * A page whose only link is disabled still resolves to that link.
+   *
+   * Core finds no active link for such a page, so a level 2 menu block renders
+   * nothing and the sidebar disappears.
+   */
+  public function testOnlyDisabledLinkIsTheActiveLink(): void {
+    $hidden_section = $this->createLink('Hidden section', 'entity:user/7', FALSE, 0);
+    $this->createLink('Hidden section page', 'entity:user/8', TRUE, 0, $hidden_section);
+    $this->setCurrentRoute(['user' => '7']);
+
+    $this->assertNull($this->coreActiveTrail()->getActiveLink('main'));
+    $this->assertSame(
+      [$this->pluginId($hidden_section), ''],
+      array_keys($this->activeTrail()->getActiveTrailIds('main'))
     );
   }
 
@@ -237,6 +266,19 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
    */
   private function activeTrail(): MenuActiveTrailInterface {
     return $this->container->get('menu.active_trail');
+  }
+
+  /**
+   * Returns an instance of core's own active trail, without the override.
+   */
+  private function coreActiveTrail(): MenuActiveTrailInterface {
+    return new MenuActiveTrail(
+      $this->container->get('plugin.manager.menu.link'),
+      $this->container->get('current_route_match'),
+      $this->container->get('cache.menu'),
+      $this->container->get('lock'),
+      $this->container->get('path.matcher'),
+    );
   }
 
   /**
