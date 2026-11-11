@@ -8,3 +8,11 @@ recipes:
   - ecms_online_services
   - ecms_online_services_search
   - ecms_multisite_press_release_search
+
+# The statewide search page lives on RI.gov only. Other sites have the
+# multisite module from ecms_base_update_11222(), but must not host the page.
+config:
+  strict: false
+  import:
+    ecms_multisite_search:
+      - views.view.ecms_multisite_search

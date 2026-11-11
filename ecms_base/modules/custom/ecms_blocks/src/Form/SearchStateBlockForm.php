@@ -24,14 +24,19 @@ class SearchStateBlockForm extends FormBase {
   public const MULTISITE_SEARCH_ROUTE = 'view.ecms_multisite_search.page_1';
 
   /**
-   * The statewide search page, for sites that do not host multisite search.
-   */
-  public const STATE_SEARCH_URL = 'https://www.ri.gov/search-rhode-island';
-
-  /**
    * The query parameter the multisite search view reads its keywords from.
    */
-  public const SEARCH_PARAMETER = 'search_api_fulltext';
+  public const MULTISITE_SEARCH_PARAMETER = 'search_api_fulltext';
+
+  /**
+   * The statewide search page, for sites that do not host multisite search.
+   */
+  public const STATE_SEARCH_URL = 'https://www.ri.gov/search/result.php';
+
+  /**
+   * The query parameter the statewide search page reads its keywords from.
+   */
+  public const STATE_SEARCH_PARAMETER = 'q';
 
   /**
    * The route provider.
@@ -52,9 +57,9 @@ class SearchStateBlockForm extends FormBase {
   /**
    * Builds the URL of the statewide search results for the given keywords.
    *
-   * The site that hosts the multisite search view (RI.gov) links to its own
-   * page, so searches stay on the site and work behind the reverse proxy.
-   * Every other site links to the RI.gov page.
+   * Only RI.gov has the multisite search view (the ecms_rigov recipe installs
+   * it), so searches there stay on the site and work behind the reverse proxy.
+   * Every other site sends them to the RI.gov statewide search page.
    *
    * @param string $keys
    *   The search keywords.
@@ -65,15 +70,15 @@ class SearchStateBlockForm extends FormBase {
    *   The search results URL.
    */
   public static function buildSearchUrl(string $keys, RouteProviderInterface $route_provider): Url {
-    $options = [
-      'query' => [self::SEARCH_PARAMETER => $keys],
-    ];
-
     if (!empty($route_provider->getRoutesByNames([self::MULTISITE_SEARCH_ROUTE]))) {
-      return Url::fromRoute(self::MULTISITE_SEARCH_ROUTE, [], $options);
+      return Url::fromRoute(self::MULTISITE_SEARCH_ROUTE, [], [
+        'query' => [self::MULTISITE_SEARCH_PARAMETER => $keys],
+      ]);
     }
 
-    return Url::fromUri(self::STATE_SEARCH_URL, $options);
+    return Url::fromUri(self::STATE_SEARCH_URL, [
+      'query' => [self::STATE_SEARCH_PARAMETER => $keys],
+    ]);
   }
 
   /**

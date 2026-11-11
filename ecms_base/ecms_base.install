@@ -959,21 +959,30 @@ function ecms_base_update_11227(): string {
 }
 
 /**
- * Create the multisite search view at /search-rhode-island.
+ * Create the statewide search view at /search-rhode-island on RI.gov.
  */
 function ecms_base_update_11228(): ?string {
   if (!\Drupal::moduleHandler()->moduleExists('ecms_multisite_search')) {
     return NULL;
   }
 
+  $storage = \Drupal::entityTypeManager()->getStorage('view');
+
+  // Every site with Solr search has ecms_multisite_search, from
+  // ecms_base_update_11222(), but only RI.gov hosts the statewide search page:
+  // SearchStateBlockForm keeps searches on any site that has it. The press
+  // release search view is only installed by the ecms_rigov recipe, so it marks
+  // the RI.gov site.
+  if ($storage->load('ecms_multisite_press_release_search') === NULL) {
+    return NULL;
+  }
+
   // The recipe runner installs modules in config-syncing mode, which skips the
-  // config entities in config/install, and the ecms_multisite_search recipe
-  // did not import the view. Sites that applied the recipe have the module but
-  // no view, so the search page has no route. The recipe imports the view now;
-  // this covers the sites it already ran on.
+  // config entities in config/install, and no recipe imported the view, so
+  // RI.gov has the module but no search page. The ecms_rigov recipe imports
+  // the view now; this covers the site it already ran on.
   $view_id = 'ecms_multisite_search';
   $path = 'search-rhode-island';
-  $storage = \Drupal::entityTypeManager()->getStorage('view');
 
   /** @var \Drupal\views\ViewEntityInterface|null $view */
   $view = $storage->load($view_id);

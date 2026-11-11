@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Route;
 class SearchStateBlockFormTest extends UnitTestCase {
 
   /**
-   * The site hosting multisite search links to its own search page.
+   * RI.gov, which hosts multisite search, links to its own search page.
    */
   public function testSearchUrlWithMultisiteSearchRoute(): void {
     $route_provider = $this->createMock(RouteProviderInterface::class);
@@ -37,7 +37,7 @@ class SearchStateBlockFormTest extends UnitTestCase {
   }
 
   /**
-   * Sites without multisite search link to the RI.gov search page.
+   * Other sites link to the RI.gov statewide search page.
    */
   public function testSearchUrlWithoutMultisiteSearchRoute(): void {
     $route_provider = $this->createMock(RouteProviderInterface::class);
@@ -46,8 +46,8 @@ class SearchStateBlockFormTest extends UnitTestCase {
     $url = SearchStateBlockForm::buildSearchUrl('dmv hours', $route_provider);
 
     $this->assertTrue($url->isExternal());
-    $this->assertSame('https://www.ri.gov/search-rhode-island', $url->getUri());
-    $this->assertSame(['search_api_fulltext' => 'dmv hours'], $url->getOption('query'));
+    $this->assertSame('https://www.ri.gov/search/result.php', $url->getUri());
+    $this->assertSame(['q' => 'dmv hours'], $url->getOption('query'));
   }
 
 }
