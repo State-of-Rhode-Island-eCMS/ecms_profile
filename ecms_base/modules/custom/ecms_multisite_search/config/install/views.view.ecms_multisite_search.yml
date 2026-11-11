@@ -23,7 +23,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: search_api_tag
         options: {  }
       query:
         type: views_query
@@ -440,7 +440,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: multisite-search
+      path: search-rhode-island
       exposed_block: true
     cache_metadata:
       max-age: -1

@@ -15,6 +15,8 @@ declare(strict_types=1);
 use Drupal\canvas\Entity\PageVariant;
 use Drupal\canvas\PageVariantMigration;
 use Drupal\Core\Batch\BatchBuilder;
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Config\InstallStorage;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
@@ -954,4 +956,45 @@ function ecms_base_update_11227(): string {
   }
 
   return implode(' ', $messages);
+}
+
+/**
+ * Create the multisite search view at /search-rhode-island.
+ */
+function ecms_base_update_11228(): ?string {
+  if (!\Drupal::moduleHandler()->moduleExists('ecms_multisite_search')) {
+    return NULL;
+  }
+
+  // The recipe runner installs modules in config-syncing mode, which skips the
+  // config entities in config/install, and the ecms_multisite_search recipe
+  // did not import the view. Sites that applied the recipe have the module but
+  // no view, so the search page has no route. The recipe imports the view now;
+  // this covers the sites it already ran on.
+  $view_id = 'ecms_multisite_search';
+  $path = 'search-rhode-island';
+  $storage = \Drupal::entityTypeManager()->getStorage('view');
+
+  /** @var \Drupal\views\ViewEntityInterface|null $view */
+  $view = $storage->load($view_id);
+  if ($view === NULL) {
+    $module_path = \Drupal::service('extension.list.module')->getPath('ecms_multisite_search');
+    $source = new FileStorage($module_path . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
+    $data = $source->read('views.view.' . $view_id);
+    if ($data === FALSE) {
+      throw new UpdateException('The ecms_multisite_search view config could not be read from the module, so the statewide search page could not be created.');
+    }
+    $storage->createFromStorageRecord($data)->save();
+    return (string) t('Created the multisite search view at /@path.', ['@path' => $path]);
+  }
+
+  // A site may have imported the view by hand while it still used the old path.
+  $display = &$view->getDisplay('page_1');
+  if (($display['display_options']['path'] ?? NULL) === 'multisite-search') {
+    $display['display_options']['path'] = $path;
+    $view->save();
+    return (string) t('Moved the multisite search view to /@path.', ['@path' => $path]);
+  }
+
+  return NULL;
 }
