@@ -57,10 +57,6 @@ class SearchStateBlockForm extends FormBase {
   /**
    * Builds the URL of the statewide search results for the given keywords.
    *
-   * Only RI.gov has the multisite search view (the ecms_rigov recipe installs
-   * it), so searches there stay on the site and work behind the reverse proxy.
-   * Every other site sends them to the RI.gov statewide search page.
-   *
    * @param string $keys
    *   The search keywords.
    * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
@@ -120,7 +116,12 @@ class SearchStateBlockForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state): void {
     $url = static::buildSearchUrl((string) $form_state->getValue('search_input'), $this->routeProvider);
 
-    $response = new TrustedRedirectResponse($url->setAbsolute()->toString());
+    if (!$url->isExternal()) {
+      $form_state->setRedirectUrl($url);
+      return;
+    }
+
+    $response = new TrustedRedirectResponse($url->toString());
 
     $metadata = $response->getCacheableMetadata();
     $metadata->setCacheMaxAge(0);
