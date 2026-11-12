@@ -30,6 +30,7 @@ dependencies:
   - ecms_publications
   - 'ecms_promotions:ecms_promotions'
   - editor
+  - editoria11y
   - entity_print
   - entity_reference_revisions
   - extlink

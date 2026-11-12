@@ -23,6 +23,7 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
+use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
 
@@ -77,6 +78,9 @@ function ecms_base_install() {
 
   // Create the directory webform writes its exports to.
   ecms_base_prepare_webform_export_directory();
+
+  // Editoria11y is installed with the profile but ships turned off.
+  ecms_base_editoria11y_turn_off();
 }
 
 /**
@@ -954,4 +958,58 @@ function ecms_base_update_11227(): string {
   }
 
   return implode(' ', $messages);
+}
+
+/**
+ * Install Editoria11y with the checker turned off.
+ */
+function ecms_base_update_11228(): string {
+  // Leave sites that already have the module alone; their role permissions
+  // may have been set on purpose.
+  if (\Drupal::moduleHandler()->moduleExists('editoria11y')) {
+    return (string) t('Editoria11y is already installed; permissions left unchanged.');
+  }
+
+  \Drupal::service('module_installer')->install(['editoria11y']);
+  $roles = ecms_base_editoria11y_turn_off();
+
+  return (string) t('Installed Editoria11y with the checker turned off. Permissions removed from: @roles.', [
+    '@roles' => $roles ? implode(', ', $roles) : t('no roles'),
+  ]);
+}
+
+/**
+ * Removes the Editoria11y permissions its installer grants.
+ *
+ * The module's install hook gives "view editoria11y checker" and "mark as
+ * hidden in editoria11y" to every role that can edit content, which turns the
+ * checker on for editors. eCMS ships it turned off: a site turns it on by
+ * granting "Run Editoria11y checker" to a role. Roles with is_admin
+ * (drupal_admin) still see it, because they have every permission.
+ *
+ * @see editoria11y_install()
+ *
+ * @return string[]
+ *   The IDs of the roles that were changed.
+ */
+function ecms_base_editoria11y_turn_off(): array {
+  $permissions = [
+    'view editoria11y checker',
+    'mark as hidden in editoria11y',
+  ];
+
+  $changed = [];
+  foreach (Role::loadMultiple() as $role) {
+    $granted = array_intersect($permissions, $role->getPermissions());
+    if ($granted === []) {
+      continue;
+    }
+    foreach ($granted as $permission) {
+      $role->revokePermission($permission);
+    }
+    $role->save();
+    $changed[] = $role->id();
+  }
+
+  return $changed;
 }
