@@ -6,9 +6,9 @@ namespace Drupal\Tests\ecms_layout\Kernel;
 
 use Drupal\Core\Menu\MenuActiveTrail;
 use Drupal\Core\Menu\MenuActiveTrailInterface;
+use Drupal\Core\ProxyClass\Menu\MenuActiveTrail as MenuActiveTrailProxy;
 use Drupal\Core\Routing\RouteObjectInterface;
 use Drupal\ecms_layout\EcmsMenuActiveTrail;
-use Drupal\ecms_layout\ProxyClass\EcmsMenuActiveTrail as EcmsMenuActiveTrailProxy;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\menu_link_content\MenuLinkContentInterface;
@@ -91,34 +91,45 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
   }
 
   /**
-   * Core's active trail service uses EcmsMenuActiveTrail and stays lazy.
+   * Core's lazy proxy stays in front of EcmsMenuActiveTrail.
    */
   public function testServiceUsesEcmsActiveTrail(): void {
     $this->assertInstanceOf(
-      EcmsMenuActiveTrailProxy::class,
+      MenuActiveTrailProxy::class,
       $this->container->get('menu.active_trail'),
-      'menu.active_trail must be the lazy proxy of EcmsMenuActiveTrail. ' .
-      'Without it, section pages lose their sidebar menu.'
+      'menu.active_trail must stay core\'s lazy proxy.'
     );
     $this->assertInstanceOf(
       EcmsMenuActiveTrail::class,
-      $this->container->get('drupal.proxy_original_service.menu.active_trail')
+      $this->container->get('drupal.proxy_original_service.menu.active_trail'),
+      'Without EcmsMenuActiveTrail, section pages lose their sidebar menu.'
     );
   }
 
   /**
-   * The lazy proxy forwards every public method of EcmsMenuActiveTrail.
+   * Core's proxy forwards everything EcmsMenuActiveTrail offers.
    *
-   * When this fails, regenerate the proxy from the docroot with
-   * core/scripts/generate-proxy-class.php, as its file header shows.
+   * When this fails, EcmsMenuActiveTrail gained a public method or interface
+   * that core's proxy does not forward. Move the change out of the subclass,
+   * or give the module its own proxy class.
    */
-  public function testProxyClassIsCurrent(): void {
-    $missing = array_diff(
-      get_class_methods(EcmsMenuActiveTrail::class),
-      get_class_methods(EcmsMenuActiveTrailProxy::class),
+  public function testCoreProxyCoversEcmsActiveTrail(): void {
+    $this->assertSame(
+      [],
+      array_values(array_diff(
+        get_class_methods(EcmsMenuActiveTrail::class),
+        get_class_methods(MenuActiveTrailProxy::class),
+      )),
+      'Core\'s proxy is missing public methods of EcmsMenuActiveTrail.'
     );
-
-    $this->assertSame([], array_values($missing), 'The proxy class is out of date.');
+    $this->assertSame(
+      [],
+      array_values(array_diff(
+        class_implements(EcmsMenuActiveTrail::class),
+        class_implements(MenuActiveTrailProxy::class),
+      )),
+      'Core\'s proxy is missing interfaces of EcmsMenuActiveTrail.'
+    );
   }
 
   /**
@@ -268,6 +279,31 @@ class EcmsMenuActiveTrailTest extends KernelTestBase {
 
     $this->assertNotNull($active_link);
     $this->assertSame('Home', $active_link->getTitle());
+  }
+
+  /**
+   * On the front page, links to the route come before links to <front>.
+   */
+  public function testFrontPagePrefersRouteLinksOverFrontLinks(): void {
+    $this->container->get('router.builder')->rebuild();
+    $this->config('system.site')->set('page.front', '/user/6')->save();
+    $this->createLink('Home', 'internal:/', TRUE, -50);
+    $this->createLink('Front page route', 'entity:user/6', FALSE, 0);
+    $this->setCurrentRoute(['user' => '6']);
+
+    $this->assertSame('Front page route', $this->activeTrail()->getActiveLink('main')->getTitle());
+  }
+
+  /**
+   * A request without a route, such as core's default 403 page, has no link.
+   */
+  public function testRequestWithoutRouteHasNoActiveLink(): void {
+    $request_stack = $this->container->get('request_stack');
+    $request = Request::create('/no-route');
+    $request->setSession($request_stack->getCurrentRequest()->getSession());
+    $request_stack->push($request);
+
+    $this->assertNull($this->activeTrail()->getActiveLink('main'));
   }
 
   /**
