@@ -400,6 +400,23 @@ class SearchFailureCacheSubscriberTest extends UnitTestCase {
   }
 
   /**
+   * Test that the request being handled is checked, not the stack's first.
+   *
+   * When a container handles several requests (e.g. kernel tests), the
+   * request stack's main request can be an earlier, cacheable request.
+   */
+  public function testHandledRequestIsChecked(): void {
+    // The stack's main request is a cacheable GET; the handled one is a POST.
+    $kernel = $this->createMock(HttpKernelInterface::class);
+    $handled = Request::create('/search?keys=test', 'POST');
+    $this->subscriber->onRequest(new RequestEvent($kernel, $handled, HttpKernelInterface::MAIN_REQUEST));
+
+    $query = $this->addQuery(TRUE);
+    $this->subscriber->applyFailureMaxAge();
+    $this->assertSame(0, $query->getCacheMaxAge());
+  }
+
+  /**
    * Test that a response without cacheability metadata is ignored.
    */
   public function testNonCacheableResponse(): void {

@@ -11,6 +11,7 @@ use Drupal\Core\Site\Settings;
 use Drupal\search_api\Event\QueryPreExecuteEvent;
 use Drupal\search_api\Query\Query;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -60,6 +61,15 @@ class SearchFailureCacheSubscriber implements EventSubscriberInterface {
   protected bool $searchFailed = FALSE;
 
   /**
+   * The main request being handled.
+   *
+   * The request stack's main request is not always this one: when a container
+   * handles several requests (e.g. kernel tests), the first request pushed
+   * stays at the bottom of the stack.
+   */
+  protected ?Request $request = NULL;
+
+  /**
    * Constructs a SearchFailureCacheSubscriber.
    *
    * @param \Drupal\Component\Datetime\TimeInterface $time
@@ -94,13 +104,14 @@ class SearchFailureCacheSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Forgets the queries of a previous request.
+   * Notes the main request and forgets the queries of a previous one.
    *
    * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   The request event.
    */
   public function onRequest(RequestEvent $event): void {
     if ($event->isMainRequest()) {
+      $this->request = $event->getRequest();
       $this->queries = [];
       $this->searchFailed = FALSE;
     }
@@ -186,7 +197,7 @@ class SearchFailureCacheSubscriber implements EventSubscriberInterface {
    *   (anonymous, no session).
    */
   protected function isRequestCacheable(): bool {
-    $request = $this->requestStack->getMainRequest();
+    $request = $this->request ?? $this->requestStack->getMainRequest();
     return $request
       && $request->isMethodCacheable()
       && $this->pageCacheRequestPolicy->check($request) === RequestPolicyInterface::ALLOW;

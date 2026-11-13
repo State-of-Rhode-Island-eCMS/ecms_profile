@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\ecms_search_settings\Kernel;
 
+use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\ecms_search_settings\EventSubscriber\SearchFailureCacheSubscriber;
 use Drupal\ecms_search_settings_test\TestTime;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\Tests\user\Traits\UserCreationTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -90,6 +92,18 @@ class SearchFailureCacheTest extends KernelTestBase {
 
     $this->setTime(1794268800);
     $this->container->get('state')->set('ecms_search_settings_test.fail', TRUE);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function register(ContainerBuilder $container) {
+    parent::register($container);
+    // On Drupal 11.3, KernelTestBase::register() replaces datetime.time with a
+    // Time service that has no request stack, overriding the test module's
+    // service. Put the test time service back.
+    $container->register('datetime.time', TestTime::class)
+      ->addArgument(new Reference('request_stack'));
   }
 
   /**
