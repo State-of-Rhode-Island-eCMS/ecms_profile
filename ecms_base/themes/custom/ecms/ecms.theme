@@ -14,6 +14,7 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
+use Drupal\ecms_blocks\Form\SearchStateBlockForm;
 use Drupal\ecms\Form\FilesSettings;
 use Drupal\ecms\Form\FooterSettings;
 use Drupal\ecms\Form\HeaderSettings;
@@ -519,8 +520,9 @@ function ecms_preprocess_views_view_unformatted(array &$variables): void {
   $view = $variables['view'];
 
   if ($variables['view']->id() === "acquia_search") {
-    $variables['search_link'] = "https://www.ri.gov/search/result.php?q=" . \Drupal::request()->query
-      ->get('search_api_fulltext');
+    $keys = (string) \Drupal::request()->query->get('search_api_fulltext', '');
+    $variables['search_link'] = SearchStateBlockForm::buildSearchUrl($keys, \Drupal::service('router.route_provider'))
+      ->toString();
   }
 }
 
