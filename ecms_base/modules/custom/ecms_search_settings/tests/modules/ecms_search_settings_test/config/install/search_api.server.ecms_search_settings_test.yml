@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ecms_search_settings_test
+id: ecms_search_settings_test
+name: 'eCMS test server'
+description: ''
+backend: ecms_search_settings_test_failing
+backend_config: {  }

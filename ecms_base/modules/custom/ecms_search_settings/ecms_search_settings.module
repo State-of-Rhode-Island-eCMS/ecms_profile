@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the eCMS Search Settings module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_post_execute().
+ */
+function ecms_search_settings_views_post_execute(ViewExecutable $view): void {
+  // Give a failed Search API query a short max-age before the view's
+  // cacheability is added to its render array.
+  // @see \Drupal\ecms_search_settings\EventSubscriber\SearchFailureCacheSubscriber
+  \Drupal::service('ecms_search_settings.search_failure_cache_subscriber')
+    ->applyFailureMaxAge();
+}

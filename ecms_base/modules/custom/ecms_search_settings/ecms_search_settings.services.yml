@@ -5,6 +5,6 @@ services:
       - { name: event_subscriber }
   ecms_search_settings.search_failure_cache_subscriber:
     class: Drupal\ecms_search_settings\EventSubscriber\SearchFailureCacheSubscriber
-    arguments: ['@datetime.time']
+    arguments: ['@datetime.time', '@request_stack', '@page_cache_request_policy']
     tags:
       - { name: event_subscriber }

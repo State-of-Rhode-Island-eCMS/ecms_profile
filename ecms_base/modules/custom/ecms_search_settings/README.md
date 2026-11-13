@@ -36,12 +36,18 @@ When Solr errors or times out, search_api_solr sets max-age 0 on the query.
 That makes the whole page `no-cache, private`, so Drupal, Varnish and
 Cloudflare all miss and every request waits for the Solr timeout again.
 
-`SearchFailureCacheSubscriber` notes each Search API query in a request. If one
-was aborted, the anonymous `GET` response gets a short `max-age` and a matching
-`Expires` header instead, and the header `X-Ecms-Search-Failed: 1` is added.
-The internal page cache uses `Expires`, so the error page expires on its own
-and isn't kept until the next cache tag invalidation. Logged-in requests are
-unchanged.
+`SearchFailureCacheSubscriber` notes each Search API query in a request. After
+a view executes (`hook_views_post_execute()`), each aborted query with max-age
+0 gets a short max-age instead. This happens before the view's cacheability
+bubbles into the page, so only the failed search is affected: if anything else
+on the page has max-age 0, the page stays uncacheable. `cache_control_override`
+then sends the bubbled max-age as `Cache-Control`.
+
+If the page ends up cacheable, the response also gets a matching `Expires`
+header and `X-Ecms-Search-Failed: 1`. The internal page cache uses `Expires`,
+so the error page expires on its own and isn't kept until the next cache tag
+invalidation. This only applies to requests the page cache may serve
+(anonymous `GET`/`HEAD`); logged-in requests are unchanged.
 
 The lifetime defaults to 60 seconds. Override it in `settings.php`
 (`0` turns this off):
