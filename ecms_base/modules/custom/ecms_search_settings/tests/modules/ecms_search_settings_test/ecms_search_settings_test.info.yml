@@ -1,0 +1,9 @@
+name: 'eCMS Search Settings test'
+type: module
+description: 'Test support for ecms_search_settings: a failing search backend and a search view.'
+package: Testing
+hidden: true
+core_version_requirement: ^10 || ^11
+dependencies:
+  - search_api:search_api
+  - drupal:views

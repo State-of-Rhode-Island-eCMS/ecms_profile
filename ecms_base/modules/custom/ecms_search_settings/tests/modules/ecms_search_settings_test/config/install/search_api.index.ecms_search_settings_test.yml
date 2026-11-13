@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.server.ecms_search_settings_test
+  module:
+    - user
+id: ecms_search_settings_test
+name: 'eCMS test index'
+description: ''
+read_only: true
+field_settings: {  }
+datasource_settings:
+  'entity:user': {  }
+processor_settings: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: false
+  track_changes_in_references: false
+server: ecms_search_settings_test

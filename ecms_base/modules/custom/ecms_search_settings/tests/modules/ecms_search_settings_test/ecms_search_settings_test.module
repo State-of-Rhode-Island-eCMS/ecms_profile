@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the eCMS Search Settings test module.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_page_top().
+ *
+ * With ?uncacheable=1, adds content to the page that must never be cached.
+ * Also shows who is logged in.
+ */
+function ecms_search_settings_test_page_top(array &$page_top): void {
+  if (\Drupal::request()->query->get('uncacheable')) {
+    $page_top['ecms_search_settings_test_uncacheable'] = [
+      '#markup' => 'Uncacheable content',
+      '#cache' => ['max-age' => 0],
+    ];
+  }
+  $account = \Drupal::currentUser();
+  if ($account->isAuthenticated()) {
+    $page_top['ecms_search_settings_test_user'] = [
+      '#markup' => 'Logged in as ' . $account->getAccountName(),
+      '#cache' => ['contexts' => ['user']],
+    ];
+  }
+}
