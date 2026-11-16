@@ -124,8 +124,11 @@ class SearchFailureCacheTest extends KernelTestBase {
     $this->now = $time;
     TestTime::$requestTime = $time;
     // The page cache middleware reads the time from the request (see
-    // ::get()), and the render cache from the test's own main request.
-    $this->container->get('request_stack')->getMainRequest()->server->set('REQUEST_TIME', $time);
+    // ::get()). The render cache (VariationCache) reads it from the request
+    // stack's main request, which is KernelTestBase's boot request, not the
+    // one being handled. Without this, render cache entries would expire by
+    // the real clock instead of the simulated one.
+    $this->container->get('request_stack')->getMainRequest()?->server->set('REQUEST_TIME', $time);
   }
 
   /**
