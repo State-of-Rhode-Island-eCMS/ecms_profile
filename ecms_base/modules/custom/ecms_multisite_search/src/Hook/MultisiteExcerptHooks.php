@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\ecms_multisite_search\Hook;
 
 use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\Xss;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\Markup;
 use Drupal\search_api\Item\ItemInterface;
@@ -163,7 +164,10 @@ class MultisiteExcerptHooks {
 
     $window = $this->balanceMarkers(trim($window));
     $html = str_replace([self::OPEN, self::CLOSE], ['<strong>', '</strong>'], Html::escape($window));
-    return Markup::create(($start > 0 ? '… ' : '') . $html . ($end < $length ? '…' : ''));
+    $excerpt = ($start > 0 ? '… ' : '') . $html . ($end < $length ? '…' : '');
+    // The text is already escaped; the filter makes sure <strong> stays the
+    // only markup even if the steps above change.
+    return Markup::create(Xss::filter($excerpt, ['strong']));
   }
 
   /**
