@@ -301,6 +301,17 @@ display:
           use_highlighting: false
           multi_type: separator
           multi_separator: ', '
+        # Not displayed. Retrieving it makes Solr return highlighted snippets
+        # of the body text, which become the result excerpt
+        # (see \Drupal\ecms_multisite_search\Hook\MultisiteExcerptHooks).
+        rendered_item:
+          id: rendered_item
+          table: search_api_index_ecms_multisite_index
+          field: rendered_item
+          plugin_id: search_api_text
+          label: ''
+          exclude: true
+          element_default_classes: false
       filters:
         search_api_fulltext:
           id: search_api_fulltext
@@ -403,8 +414,28 @@ display:
             field_identifier: created
           exposed: true
       title: 'Multisite Search'
-      header: {  }
-      footer: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: '@total results'
+      footer:
+        result_1:
+          id: result_1
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Showing @start-@end of @total'
       empty:
         area_text_custom:
           id: area_text_custom
@@ -460,6 +491,11 @@ display:
       display_extenders: {  }
       block_description: 'Multisite Search: Card'
       block_category: 'eCMS'
+      exposed_block: true
+      # The card is placed under a page hero, so it carries no heading.
+      title: ''
+      defaults:
+        title: false
     cache_metadata:
       max-age: -1
       contexts:

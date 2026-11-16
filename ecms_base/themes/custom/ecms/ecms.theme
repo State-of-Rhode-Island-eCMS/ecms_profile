@@ -1245,4 +1245,15 @@ function ecms_preprocess_views_view_fields(&$variables) {
     }
     $variables['character_limit'] = $current_character_limit ?? $default_character_limit;
   }
+
+  // Multisite search results: flag results from this site so they open in
+  // the same window instead of a new one. Used by
+  // views-view-fields--ecms-multisite-search.html.twig.
+  if ($view_id === 'ecms_multisite_search') {
+    $item = $variables['row']->_item ?? NULL;
+    $url = $item?->getField('url', FALSE)?->getValues()[0] ?? '';
+    $host = parse_url((string) $url, PHP_URL_HOST);
+    $variables['is_local'] = !$host || strcasecmp($host, \Drupal::request()->getHost()) === 0;
+    $variables['#cache']['contexts'][] = 'url.site';
+  }
 }
