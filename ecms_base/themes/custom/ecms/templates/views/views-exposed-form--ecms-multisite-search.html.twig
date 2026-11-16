@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for the multisite search (ecms_multisite_search view) exposed
+ * form.
+ *
+ * Reuses the Online Services search shell (.os-search): the keyword field and
+ * an inset icon submit button in one rounded field, so the button lines up
+ * with the input. The site filter and sort widgets are not rendered; they
+ * still work as URL query arguments.
+ *
+ * Styles: assets/patterns/01-molecules/online-service-search.
+ *
+ * @see views-exposed-form--online-services.html.twig
+ */
+#}
+<div class="os-search">
+  {{ form.search_api_fulltext }}
+  <button class="os-search__submit" type="submit" name="op" value="{{ 'Search'|t }}">
+    <span class="qh__icon" aria-hidden="true">
+      {% include '@icons/search-glass.svg' %}
+    </span>
+    <span class="visually-hidden">{{ 'Search'|t }}</span>
+  </button>
+</div>
