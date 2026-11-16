@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Drupal\ecms_multisite_search\Hook;
 
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\Markup;
 use Drupal\search_api\Item\ItemInterface;
@@ -36,6 +35,21 @@ class MultisiteExcerptHooks {
    * Maximum excerpt length, in characters, before markup is added.
    */
   protected const MAX_LENGTH = 256;
+
+  /**
+   * Visible characters kept before the first highlight.
+   */
+  protected const LEAD_LENGTH = 60;
+
+  /**
+   * Placeholder for Solr's [HIGHLIGHT] marker while the excerpt is cut.
+   */
+  protected const OPEN = "\u{E000}";
+
+  /**
+   * Placeholder for Solr's [/HIGHLIGHT] marker while the excerpt is cut.
+   */
+  protected const CLOSE = "\u{E001}";
 
   /**
    * Implements hook_search_api_results_alter().
@@ -102,6 +116,12 @@ class MultisiteExcerptHooks {
   /**
    * Joins Solr snippets into a short, safe excerpt with <strong> highlights.
    *
+   * The index sets Solr's fragsize to 0, so a snippet can be a whole field.
+   * The excerpt is therefore a window of visible text around the first
+   * highlight (or the start of the text when nothing is highlighted). The
+   * [HIGHLIGHT] markers are swapped for single placeholder characters first,
+   * so they never count towards the length and a cut can never split one.
+   *
    * @param string[] $snippets
    *   Plain-text snippets with [HIGHLIGHT] markers from Solr.
    *
@@ -110,17 +130,72 @@ class MultisiteExcerptHooks {
    */
   protected function buildExcerpt(array $snippets): Markup {
     $text = implode(' … ', array_map('trim', $snippets));
-    $text = Unicode::truncate($text, self::MAX_LENGTH, TRUE, TRUE);
-    // An unterminated marker can be left behind by the truncation.
-    if (substr_count($text, '[HIGHLIGHT]') > substr_count($text, '[/HIGHLIGHT]')) {
-      $text .= '[/HIGHLIGHT]';
+    // Remove any placeholder characters already in the text before swapping
+    // the markers for them, so only the markers become highlights.
+    $text = str_replace([self::OPEN, self::CLOSE], '', $text);
+    $text = str_replace(['[HIGHLIGHT]', '[/HIGHLIGHT]'], [self::OPEN, self::CLOSE], $text);
+
+    $chars = mb_str_split($text);
+    $visible = array_keys(array_filter($chars, fn($char) => $char !== self::OPEN && $char !== self::CLOSE));
+    $length = count($visible);
+
+    // Start a little before the first highlight, at a word boundary.
+    $start = 0;
+    $first = array_search(self::OPEN, $chars, TRUE);
+    if ($first !== FALSE && $length > self::MAX_LENGTH) {
+      $visible_before = count(array_filter($visible, fn($index) => $index < $first));
+      $start = max(0, min($visible_before - self::LEAD_LENGTH, $length - self::MAX_LENGTH));
     }
-    $text = str_replace(
-      ['[HIGHLIGHT]', '[/HIGHLIGHT]'],
-      ['<strong>', '</strong>'],
-      Html::escape($text),
-    );
-    return Markup::create($text);
+    $end = min($length, $start + self::MAX_LENGTH);
+
+    // Map the visible-character window back onto the marked-up characters.
+    $from = $start > 0 ? $visible[$start] : 0;
+    $to = $end < $length ? $visible[$end] : count($chars);
+    $window = implode('', array_slice($chars, $from, $to - $from));
+
+    // Keep whole words at both cut edges.
+    if ($start > 0) {
+      $window = preg_replace('/^\S*\s+/u', '', $window, 1);
+    }
+    if ($end < $length) {
+      $window = preg_replace('/\s+\S*$/u', '', $window, 1);
+    }
+
+    $window = $this->balanceMarkers(trim($window));
+    $html = str_replace([self::OPEN, self::CLOSE], ['<strong>', '</strong>'], Html::escape($window));
+    return Markup::create(($start > 0 ? '… ' : '') . $html . ($end < $length ? '…' : ''));
+  }
+
+  /**
+   * Drops unmatched closing markers and closes an unterminated highlight.
+   *
+   * A window can start inside a highlight or end before it closes.
+   *
+   * @param string $text
+   *   Text with placeholder highlight markers.
+   *
+   * @return string
+   *   The text with every highlight opened and closed exactly once.
+   */
+  protected function balanceMarkers(string $text): string {
+    $balanced = '';
+    $open = FALSE;
+    foreach (mb_str_split($text) as $char) {
+      if ($char === self::OPEN) {
+        if ($open) {
+          continue;
+        }
+        $open = TRUE;
+      }
+      elseif ($char === self::CLOSE) {
+        if (!$open) {
+          continue;
+        }
+        $open = FALSE;
+      }
+      $balanced .= $char;
+    }
+    return $open ? $balanced . self::CLOSE : $balanced;
   }
 
 }

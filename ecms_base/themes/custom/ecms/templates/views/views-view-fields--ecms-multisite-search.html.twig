@@ -8,7 +8,7 @@
  * Values are read from the Search API result item (row._item) because the
  * url and rendered_item fields are excluded from display, so they are not in
  * `fields`.
- *   title   - fields.title.content, stripped to plain text.
+ *   title   - The item title (plain text; printed once, so it is escaped once).
  *   url     - Canonical item URL on the originating site.
  *   excerpt - Highlighted excerpt built by MultisiteExcerptHooks (markup with
  *             <strong> highlights, already escaped).
@@ -25,11 +25,12 @@
 {% set site = item.getField('site') ? item.getField('site').getValues()|first : '' %}
 {% set site_label = site|replace({'https://': '', 'http://': ''})|trim('/') %}
 {% set excerpt = item.getExcerpt() %}
+{% set title = item.getField('title') ? item.getField('title').getValues()|first : '' %}
 
 <article class="os-result qh__t__tertiary">
   <div class="os-result__content">
     <a class="os-result__link" href="{{ item_url }}"{% if not is_local %} target="_blank" rel="noopener noreferrer"{% endif %}>
-      <h3 class="os-result__title qh__u__fw-bold">{{ fields.title.content|striptags|trim }}</h3>
+      <h3 class="os-result__title qh__u__fw-bold">{{ title|trim }}</h3>
     </a>
 
     {% if excerpt %}

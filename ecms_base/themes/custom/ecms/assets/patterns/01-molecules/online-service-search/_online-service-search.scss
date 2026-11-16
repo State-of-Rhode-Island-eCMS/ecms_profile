@@ -5,9 +5,10 @@
 // Tokens mirror canvas/hero-search so the two inputs read identically.
 // Markup: templates/views/views-exposed-form--online-services.html.twig
 
-// Also used by the multisite search results (ecms_multisite_search, card).
+// Also used by the multisite search results (every ecms_multisite_search
+// display: the Canvas card block and the routed page).
 .block-views-blockonline-services-block-1,
-.block-views-blockecms-multisite-search-card {
+.view-id-ecms_multisite_search {
   .view-header {
     margin-block-end: 1.5rem;
   }

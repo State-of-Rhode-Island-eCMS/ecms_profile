@@ -6,8 +6,9 @@
  *
  * Reuses the Online Services search shell (.os-search): the keyword field and
  * an inset icon submit button in one rounded field, so the button lines up
- * with the input. The site filter and sort widgets are not rendered; they
- * still work as URL query arguments.
+ * with the input. The site filter and sort widgets are kept in the form but
+ * hidden, so a search opened with e.g. ?site=https://tax.ri.gov/ keeps that
+ * filter (and the sort) when new keywords are submitted.
  *
  * Styles: assets/patterns/01-molecules/online-service-search.
  *
@@ -22,4 +23,10 @@
     </span>
     <span class="visually-hidden">{{ 'Search'|t }}</span>
   </button>
+</div>
+{# Hidden, not omitted: their current values must still be submitted. #}
+<div hidden>
+  {{ form.site }}
+  {{ form.sort_by }}
+  {{ form.sort_order }}
 </div>
