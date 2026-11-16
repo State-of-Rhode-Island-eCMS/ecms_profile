@@ -15,6 +15,7 @@ declare(strict_types=1);
 use Drupal\canvas\Entity\PageVariant;
 use Drupal\canvas\PageVariantMigration;
 use Drupal\Core\Batch\BatchBuilder;
+use Drupal\Core\Config\FileStorage;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Recipe\Recipe;
 use Drupal\Core\Recipe\RecipeRunner;
@@ -25,6 +26,7 @@ use Drupal\shortcut\Entity\Shortcut;
 use Drupal\simple_oauth\Entity\Oauth2ScopeEntityInterface;
 use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
+use Drupal\views\Entity\View;
 
 /**
  * Implements hook_install().
@@ -954,4 +956,30 @@ function ecms_base_update_11227(): string {
   }
 
   return implode(' ', $messages);
+}
+
+/**
+ * Re-import the multisite search view from the module's install config.
+ */
+function ecms_base_update_11228(): string {
+  // Only RI.gov has the view: the ecms_rigov recipe imports it, and agency
+  // sites, which have the module from ecms_base_update_11222(), must not get
+  // the statewide search page. So update the view where it exists and never
+  // create it.
+  $view = View::load('ecms_multisite_search');
+  if (!$view) {
+    return (string) t('Skipped: the ecms_multisite_search view does not exist on this site.');
+  }
+
+  $install_path = \Drupal::service('extension.list.module')->getPath('ecms_multisite_search') . '/config/install';
+  $source = (new FileStorage($install_path))->read('views.view.ecms_multisite_search');
+  if (!$source) {
+    throw new UpdateException('The ecms_multisite_search view install config could not be read, so the multisite search view was not updated.');
+  }
+
+  /** @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface $storage */
+  $storage = \Drupal::entityTypeManager()->getStorage('view');
+  $storage->updateFromStorageRecord($view, $source)->save();
+
+  return (string) t('Re-imported the ecms_multisite_search view from its install config.');
 }

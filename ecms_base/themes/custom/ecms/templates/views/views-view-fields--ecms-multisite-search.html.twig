@@ -13,6 +13,9 @@
  *   excerpt - Highlighted excerpt built by MultisiteExcerptHooks (markup with
  *             <strong> highlights, already escaped).
  *   site    - Base URL of the originating site, shown without the scheme.
+ *   is_local - TRUE when the result is on this site (set in
+ *             ecms_preprocess_views_view_fields()); local results open in the
+ *             same window, others in a new one.
  *
  * Styles: assets/patterns/01-molecules/online-service-result.
  */
@@ -25,7 +28,7 @@
 
 <article class="os-result qh__t__tertiary">
   <div class="os-result__content">
-    <a class="os-result__link" href="{{ item_url }}" target="_blank" rel="noopener noreferrer">
+    <a class="os-result__link" href="{{ item_url }}"{% if not is_local %} target="_blank" rel="noopener noreferrer"{% endif %}>
       <h3 class="os-result__title qh__u__fw-bold">{{ fields.title.content|striptags|trim }}</h3>
     </a>
 
