@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.ecms_search_settings_test
+  module:
+    - search_api
+id: ecms_search_settings_test
+label: 'eCMS search failure test'
+module: views
+description: ''
+tag: ''
+base_table: search_api_index_ecms_search_settings_test
+base_field: search_api_id
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Search test'
+      fields: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 10
+          offset: 0
+      exposed_form:
+        type: basic
+        options: {  }
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: search_api_tag
+        options: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          plugin_id: text_custom
+          empty: true
+          content: 'No search results'
+      sorts: {  }
+      arguments: {  }
+      filters: {  }
+      style:
+        type: default
+      row:
+        type: fields
+      query:
+        type: search_api_query
+        options: {  }
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts: {  }
+      tags: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      path: ecms-search-failure-test
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts: {  }
+      tags: {  }

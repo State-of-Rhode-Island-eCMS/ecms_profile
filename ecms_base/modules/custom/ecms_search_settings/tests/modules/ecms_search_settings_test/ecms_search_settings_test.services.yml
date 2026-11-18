@@ -1,0 +1,18 @@
+services:
+  datetime.time:
+    class: Drupal\ecms_search_settings_test\TestTime
+    arguments: ['@request_stack']
+  # Kernel tests run on the command line, which the default policy never
+  # caches. Keep the other rules (no session, safe methods only).
+  page_cache_request_policy:
+    class: Drupal\ecms_search_settings_test\PageCache\TestRequestPolicy
+    arguments: ['@session_configuration']
+    tags:
+      - { name: service_collector, tag: page_cache_request_policy, call: addPolicy }
+  # Kernel tests have no real sessions. Treat a session cookie whose value is
+  # a user ID as that user's session.
+  ecms_search_settings_test.authentication:
+    class: Drupal\ecms_search_settings_test\Authentication\SessionCookieProvider
+    arguments: ['@session_configuration', '@entity_type.manager']
+    tags:
+      - { name: authentication_provider, provider_id: ecms_search_settings_test, priority: 100, global: TRUE }
