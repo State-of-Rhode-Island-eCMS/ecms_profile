@@ -6,15 +6,76 @@ namespace Drupal\ecms_blocks\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a custom site search form.
+ * Provides the statewide search form that searches every RI.gov site.
  *
  * @package Drupal\ecms_blocks\Form
  */
 class SearchStateBlockForm extends FormBase {
+
+  /**
+   * The route of the multisite search page provided by ecms_multisite_search.
+   */
+  public const MULTISITE_SEARCH_ROUTE = 'view.ecms_multisite_search.page_1';
+
+  /**
+   * The query parameter the multisite search view reads its keywords from.
+   */
+  public const MULTISITE_SEARCH_PARAMETER = 'search_api_fulltext';
+
+  /**
+   * The statewide search page, for sites that do not host multisite search.
+   */
+  public const STATE_SEARCH_URL = 'https://www.ri.gov/search/result.php';
+
+  /**
+   * The query parameter the statewide search page reads its keywords from.
+   */
+  public const STATE_SEARCH_PARAMETER = 'q';
+
+  /**
+   * The route provider.
+   *
+   * @var \Drupal\Core\Routing\RouteProviderInterface
+   */
+  protected RouteProviderInterface $routeProvider;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): static {
+    $instance = parent::create($container);
+    $instance->routeProvider = $container->get('router.route_provider');
+    return $instance;
+  }
+
+  /**
+   * Builds the URL of the statewide search results for the given keywords.
+   *
+   * @param string $keys
+   *   The search keywords.
+   * @param \Drupal\Core\Routing\RouteProviderInterface $route_provider
+   *   The route provider.
+   *
+   * @return \Drupal\Core\Url
+   *   The search results URL.
+   */
+  public static function buildSearchUrl(string $keys, RouteProviderInterface $route_provider): Url {
+    if (!empty($route_provider->getRoutesByNames([self::MULTISITE_SEARCH_ROUTE]))) {
+      return Url::fromRoute(self::MULTISITE_SEARCH_ROUTE, [], [
+        'query' => [self::MULTISITE_SEARCH_PARAMETER => $keys],
+      ]);
+    }
+
+    return Url::fromUri(self::STATE_SEARCH_URL, [
+      'query' => [self::STATE_SEARCH_PARAMETER => $keys],
+    ]);
+  }
 
   /**
    * {@inheritdoc}
@@ -53,12 +114,14 @@ class SearchStateBlockForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $input = $form_state->getValue('search_input');
-    $params['query'] = [
-      'q' => $input,
-    ];
+    $url = static::buildSearchUrl((string) $form_state->getValue('search_input'), $this->routeProvider);
 
-    $response = new TrustedRedirectResponse(Url::fromUri("https://www.ri.gov/search/result.php", $params)->toString());
+    if (!$url->isExternal()) {
+      $form_state->setRedirectUrl($url);
+      return;
+    }
+
+    $response = new TrustedRedirectResponse($url->toString());
 
     $metadata = $response->getCacheableMetadata();
     $metadata->setCacheMaxAge(0);

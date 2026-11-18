@@ -1,17 +1,46 @@
 {#
 /**
  * @file
- * Renders each multisite search result row as an ecms:icon-card component.
+ * Renders each multisite search result as an Online Services style result
+ * card (.os-result): title linking to the item, excerpt, and the originating
+ * site as a tag.
  *
- * Fields used (configured in the view, url excluded from display):
- *   fields.title.content  - Title with link wrapper; stripped to plain text.
- *   fields.url.content    - Canonical item URL from the originating site.
+ * Values are read from the Search API result item (row._item) because the
+ * url and rendered_item fields are excluded from display, so they are not in
+ * `fields`.
+ *   title   - The item title (plain text; printed once, so it is escaped once).
+ *   url     - Canonical item URL on the originating site.
+ *   excerpt - Highlighted excerpt built by MultisiteExcerptHooks (markup with
+ *             <strong> highlights, already escaped).
+ *   site    - Base URL of the originating site, shown without the scheme.
+ *   is_local - TRUE when the result is on this site (set in
+ *             ecms_preprocess_views_view_fields()); local results open in the
+ *             same window, others in a new one.
+ *
+ * Styles: assets/patterns/01-molecules/online-service-result.
  */
 #}
-{% if fields %}
-  {{ include('ecms:icon-card', {
-    icon: 'link-external',
-    link_url: fields.url.content|striptags|trim,
-    link_text: fields.title.content|striptags|trim,
-  }, with_context = false) }}
-{% endif %}
+{% set item = row._item %}
+{% set item_url = item.getField('url') ? item.getField('url').getValues()|first : '' %}
+{% set site = item.getField('site') ? item.getField('site').getValues()|first : '' %}
+{% set site_label = site|replace({'https://': '', 'http://': ''})|trim('/') %}
+{% set excerpt = item.getExcerpt() %}
+{% set title = item.getField('title') ? item.getField('title').getValues()|first : '' %}
+
+<article class="os-result qh__t__tertiary">
+  <div class="os-result__content">
+    <a class="os-result__link" href="{{ item_url }}"{% if not is_local %} target="_blank" rel="noopener noreferrer"{% endif %}>
+      <h3 class="os-result__title qh__u__fw-bold">{{ title|trim }}</h3>
+    </a>
+
+    {% if excerpt %}
+      <p class="os-result__description">{{ excerpt }}</p>
+    {% endif %}
+
+    {% if site_label %}
+      <ul class="os-result__tags" aria-label="{{ 'Site'|t }}">
+        <li class="os-result__tag qh__u__fw-medium os-result__tag--primary">{{ site_label }}</li>
+      </ul>
+    {% endif %}
+  </div>
+</article>

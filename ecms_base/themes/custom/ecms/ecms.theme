@@ -14,6 +14,7 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\media\MediaInterface;
 use Drupal\node\NodeInterface;
+use Drupal\ecms_blocks\Form\SearchStateBlockForm;
 use Drupal\ecms\Form\FilesSettings;
 use Drupal\ecms\Form\FooterSettings;
 use Drupal\ecms\Form\HeaderSettings;
@@ -519,8 +520,9 @@ function ecms_preprocess_views_view_unformatted(array &$variables): void {
   $view = $variables['view'];
 
   if ($variables['view']->id() === "acquia_search") {
-    $variables['search_link'] = "https://www.ri.gov/search/result.php?q=" . \Drupal::request()->query
-      ->get('search_api_fulltext');
+    $keys = (string) \Drupal::request()->query->get('search_api_fulltext', '');
+    $variables['search_link'] = SearchStateBlockForm::buildSearchUrl($keys, \Drupal::service('router.route_provider'))
+      ->toString();
   }
 }
 
@@ -1242,5 +1244,16 @@ function ecms_preprocess_views_view_fields(&$variables) {
       $current_character_limit = $search_settings_config->get('character_limit');
     }
     $variables['character_limit'] = $current_character_limit ?? $default_character_limit;
+  }
+
+  // Multisite search results: flag results from this site so they open in
+  // the same window instead of a new one. Used by
+  // views-view-fields--ecms-multisite-search.html.twig.
+  if ($view_id === 'ecms_multisite_search') {
+    $item = $variables['row']->_item ?? NULL;
+    $url = $item?->getField('url', FALSE)?->getValues()[0] ?? '';
+    $host = parse_url((string) $url, PHP_URL_HOST);
+    $variables['is_local'] = !$host || strcasecmp($host, \Drupal::request()->getHost()) === 0;
+    $variables['#cache']['contexts'][] = 'url.site';
   }
 }
